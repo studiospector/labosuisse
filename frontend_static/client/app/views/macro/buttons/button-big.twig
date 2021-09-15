@@ -1,0 +1,25 @@
+
+{%- macro buttonBig(config = {}) -%}
+  {% from 'macro/buttons/button.twig' import button %}
+  {%- set config = config|merge({
+    baseClass: "ButtonBig",
+    labelClasses: "ButtonLabelBig"
+  } ) -%}
+
+  {{ button(config) }}
+{%- endmacro -%}
+
+{%- macro buttonPrimaryBig(config = {}) -%}
+  {%- set config = config|merge({
+    theme: "ButtonPrimary"
+  } ) -%}
+
+  {{ _self.buttonBig(config) }}
+{%- endmacro -%}
+
+{%- macro buttonSecondaryBig(config = {}) -%}
+  {%- set config = config|merge({
+    theme: "ButtonSecondary"
+  } ) -%}
+  {{ _self.buttonBig(config) }}
+{%- endmacro -%}

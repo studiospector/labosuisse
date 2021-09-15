@@ -1,0 +1,68 @@
+{
+    "name": "frontend_bundler_client-labo-website-2021",
+    "version": "1.0.0",
+    "description": "An awesome caffeina project",
+    "main": "gulpfile.js",
+    "scripts": {
+        "clean": "gulp clean",
+        "dev": "gulp dev",
+        "build": "gulp build",
+        "test": "jest"
+    },
+    "author": "Alberto Parziale <alberto.parziale@caffeina.com>",
+    "license": "MIT",
+    "browserslist": [
+        "last 3 Safari major versions",
+        "last 3 iOS major versions",
+        "last 3 Chrome major versions",
+        "last 3 Firefox major versions",
+        "last 3 Edge major versions",
+        "Explorer 11"
+    ],
+    "dependencies": {
+        "@babel/core": "^7.10.2",
+        "@babel/plugin-proposal-class-properties": "^7.10.1",
+        "@babel/plugin-proposal-decorators": "^7.10.1",
+        "@babel/plugin-syntax-dynamic-import": "^7.8.3",
+        "@babel/preset-env": "^7.10.2",
+        "autoprefixer": "^9.8.0",
+        "babel-loader": "^8.1.0",
+        "core-js": "^3.6.5",
+        "del": "^5.1.0",
+        "globby": "^11.0.1",
+        "golc": "^1.1.0",
+        "gulp": "^4.0.2",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-if": "^3.0.0",
+        "gulp-load-plugins": "^2.0.3",
+        "gulp-plumber": "^1.2.1",
+        "gulp-postcss": "^8.0.0",
+        "gulp-rev": "^9.0.0",
+        "gulp-sass": "^4.1.0",
+        "gulp-size": "^3.0.0",
+        "gulp-sourcemaps": "^2.6.5",
+        "lazypipe": "^1.0.2",
+        "lazysizes": "^5.2.2",
+        "lodash.clonedeep": "^4.5.0",
+        "node-fetch": "^2.6.0",
+        "node-sass": "^4.14.1",
+        "raw-loader": "^4.0.1",
+        "sass-mq": "^5.0.1",
+        "webpack": "^4.43.0",
+        "webpack-bundle-analyzer": "^4.4.0",
+        "webpack-dev-middleware": "^3.7.2",
+        "webpack-hot-middleware": "^2.25.0",
+        "yargs": "^15.3.1",
+        "worker-loader": "^3.0.8",
+        "jest": "^26.6.3"
+    },
+    "jest": {
+        "verbose": true,
+        "roots": [
+            "<rootDir>/scripts/"
+        ]
+    },
+    "contributors": [
+        "Stefano Iachetta <stefano.iachetta@hotmail.it>"
+    ]
+}

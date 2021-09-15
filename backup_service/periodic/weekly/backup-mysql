@@ -1,0 +1,9 @@
+#!/bin/sh
+
+TIMESTAMP=$(date +"%F")
+
+/usr/bin/mysqldump -u ${MYSQL_USER} --password=${MYSQL_PASSWORD} -h ${MYSQL_HOST} --all-databases > ${TIMESTAMP}.sql
+
+aws s3 cp ./${TIMESTAMP}.sql s3://${AWS_S3_BUCKET}/${TIMESTAMP}.sql
+
+rm ${TIMESTAMP}.sql

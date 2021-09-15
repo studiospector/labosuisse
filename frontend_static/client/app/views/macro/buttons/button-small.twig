@@ -1,0 +1,23 @@
+
+{%- macro buttonSmall(config = {}) -%}
+  {% from 'macro/buttons/button.twig' import button %}
+  {%- set config = config|extendDefault( {
+    baseClass: "ButtonSmall",
+    labelClasses: "ButtonLabelSmall"
+  } ) -%}
+  {{ button(config) }}
+{%- endmacro -%}
+
+{%- macro buttonPrimarySmall(config = {}) -%}
+  {%- set config = config|extendDefault( {
+    theme: "ButtonPrimary"
+  } ) -%}
+  {{ _self.buttonSmall(config) }}
+{%- endmacro -%}
+
+{%- macro buttonSecondarySmall(config = {}) -%}
+  {%- set config = config|extendDefault( {
+    theme: "ButtonSecondary"
+  } ) -%}
+  {{ _self.buttonSmall(config) }}
+{%- endmacro -%}

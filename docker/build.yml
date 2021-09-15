@@ -1,0 +1,74 @@
+version: '3'
+services:
+  backend_nginx:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backend_nginx'
+    build:
+      context: ..
+      dockerfile: ./backend_wordpress/nginx/docker/Dockerfile
+    environment:
+      WITH_WORDPRESS: 1
+  backend_wordpress:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backend_wordpress'
+    build:
+      context: ..
+      dockerfile: ./backend_wordpress/wordpress/docker/Dockerfile
+  backup_service:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backup_service'
+    build:
+      context: ..
+      dockerfile: ./backup_service/docker/Dockerfile
+  frontend_bundler:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+    build:
+      context: ..
+      dockerfile: ./frontend_bundler/client/docker/Dockerfile
+  frontend_static:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_static'
+    build:
+      context: ..
+      dockerfile: ./frontend_static/client/docker/Dockerfile
+      args:
+        CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+        CI_REGISTRY: '${CI_REGISTRY}'
+        CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+    depends_on:
+      - frontend_bundler
+  frontend_static_nginx:
+    image: >-
+      ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_static_nginx
+    build:
+      context: ..
+      dockerfile: ./frontend_static/nginx/docker/Dockerfile
+      args:
+        CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+        CI_REGISTRY: '${CI_REGISTRY}'
+        CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+    depends_on:
+      - frontend_static
+  frontend_storybook_nginx:
+    image: >-
+      ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
+    build:
+      context: ..
+      dockerfile: ./frontend_storybook/nginx/docker/Dockerfile
+      args:
+        CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+        CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+    depends_on:
+      - frontend_storybook
+  frontend_storybook:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_storybook'
+    build:
+      context: ..
+      dockerfile: ./frontend_storybook/storybook/docker/Dockerfile
+      args:
+        CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+        CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+        CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
+    depends_on:
+      - frontend_static
+  storage_mysql:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/storage_mysql'
+    build:
+      context: ..
+      dockerfile: ./storage_mysql/docker/Dockerfile

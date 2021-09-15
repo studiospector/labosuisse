@@ -1,0 +1,11 @@
+version: '3'
+services:
+  frontend_bundler:
+    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+    volumes:
+      - '../frontend_bundler/client/app:/app'
+    command:
+      - build
+    environment:
+      NODE_ENV: production
+      ANALYZE: 1

@@ -1,0 +1,29 @@
+version: '3'
+services:
+  frontend_static:
+    tty: true
+    command:
+      - build
+    environment:
+      NODE_ENV: production
+      ENABLE_ROBOTS: 1
+    volumes:
+      - '../frontend_static/client/app:/app'
+      - '../frontend_bundler/client/app/dist/public:/app/dist/bundle'
+  frontend_bundler:
+    environment:
+      NODE_ENV: production
+    command:
+      - build
+    volumes:
+      - '../frontend_bundler/client/app:/app'
+  frontend_storybook:
+    command:
+      - build
+    volumes:
+      - '../frontend_storybook/storybook/app:/app'
+      - '../frontend_static/client/app/views:/app/views'
+      - '../frontend_static/client/app/fixtures:/app/fixtures'
+      - '../frontend_bundler/client/app/scripts:/app/scripts'
+      - '../frontend_bundler/client/app/styles:/app/styles'
+      - '../frontend_bundler/tommy/optimized:/app/public/assets'
