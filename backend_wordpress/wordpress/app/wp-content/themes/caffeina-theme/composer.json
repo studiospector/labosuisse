@@ -1,0 +1,9 @@
+{
+  "name": "caffeina-labo/wordpress",
+  "description": "Wordpress features",
+  "type": "library",
+  "require": {
+      "twig/twig": "^3.0"
+  },
+  "license": "MIT"
+}
