@@ -15,6 +15,8 @@ services:
       VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}.localhost'
     depends_on:
       - backend_wordpress
+      - frontend_bundler
+      - frontend_static
     volumes:
       - 'backend_wordpress:/var/www/html'
       - 'backend_media:/uploads'
@@ -24,10 +26,18 @@ services:
         ../backend_wordpress/wordpress/app/wp-content/plugins:/var/www/html/wp-content-custom/plugins
       - >-
         ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
+      - >-
+        ../frontend_bundler/client/app/dist/public:/var/www/html/wp-content-custom/themes/caffeina-theme/static
+      - >-
+        ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
+      - >-
+        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views/static
   backend_wordpress:
     restart: unless-stopped
     depends_on:
       - storage_mysql
+      - frontend_bundler
+      - frontend_static
     volumes:
       - 'backend_wordpress:/var/www/html'
       - 'backend_media:/uploads'
@@ -37,6 +47,12 @@ services:
         ../backend_wordpress/wordpress/app/wp-content/plugins:/var/www/html/wp-content-custom/plugins
       - >-
         ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
+      - >-
+        ../frontend_bundler/client/app/dist/public:/var/www/html/wp-content-custom/themes/caffeina-theme/static
+      - >-
+        ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
+      - >-
+        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views/static
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
@@ -63,7 +79,7 @@ services:
     networks:
       - labo-website-2021
   backup_service:
-    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backup_service'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_USER: '${MYSQL_USER}'
@@ -78,7 +94,7 @@ services:
   frontend_browser-sync:
     restart: always
     image: >-
-      ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_browser-sync
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_browser-sync
     build:
       context: ..
       dockerfile: ./frontend_bundler/browser-sync/docker/Dockerfile
@@ -95,7 +111,7 @@ services:
       PROXY: frontend_static_nginx
   frontend_bundler:
     tty: true
-    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
     volumes:
       - '../frontend_bundler/client/app:/app'
       - '../frontend_bundler/client/docker/entrypoint.sh:/usr/bin/entrypoint'

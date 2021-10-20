@@ -5,7 +5,7 @@ networks:
     name: front-tier
 services:
   backend_nginx:
-    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backend_nginx'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_nginx'
     restart: unless-stopped
     volumes:
       - 'backend_media:/uploads'
@@ -20,7 +20,7 @@ services:
       LETSENCRYPT_HOST: 'cms.${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
   backend_wordpress:
-    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backend_wordpress'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_wordpress'
     restart: unless-stopped
     volumes:
       - 'backend_media:/uploads'
@@ -51,7 +51,7 @@ services:
     networks:
       - labo-website-2021
   backup_service:
-    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/backup_service'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_USER: '${MYSQL_USER}'
@@ -65,7 +65,7 @@ services:
     restart: on-failure
   frontend_static_nginx:
     image: >-
-      ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_static_nginx
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static_nginx
     restart: unless-stopped
     networks:
       - front-tier
@@ -76,7 +76,7 @@ services:
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
   frontend_storybook_nginx:
     image: >-
-      ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
     restart: unless-stopped
     networks:
       - front-tier
@@ -88,7 +88,7 @@ services:
     depends_on:
         - frontend_static_nginx  
   storage_mysql:
-    image: '${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/storage_mysql'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/storage_mysql'
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_USER: '${MYSQL_USER}'

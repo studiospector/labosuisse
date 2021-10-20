@@ -1,6 +1,8 @@
+ARG CI_REGISTRY
+ARG CI_PROJECT_PATH
 ARG CI_COMMIT_REF_NAME
-ARG CI_REGISTRY_IMAGE
-FROM ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_storybook:latest AS frontend_storybook
+
+FROM ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook:latest AS frontend_storybook
 FROM nginx:alpine
 
 COPY ./frontend_storybook/nginx/config /etc/config

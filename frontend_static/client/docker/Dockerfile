@@ -1,6 +1,8 @@
+ARG CI_REGISTRY
+ARG CI_PROJECT_PATH
 ARG CI_COMMIT_REF_NAME
-ARG CI_REGISTRY_IMAGE
-FROM ${CI_REGISTRY_IMAGE}/${CI_COMMIT_REF_NAME}/frontend_bundler:latest AS frontend_bundler
+
+FROM ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler:latest AS frontend_bundler
 
 FROM node:12-alpine AS modules
 WORKDIR /app
