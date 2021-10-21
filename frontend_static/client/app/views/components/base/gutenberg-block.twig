@@ -1,0 +1,6 @@
+{% set id = conf.id %}
+{% set classes = conf.classes %}
+
+<div {{ id ? 'id=' ~ id ~ '' : '' }}{{ classes ? ' class=' ~ classes ~ '' : '' }}>
+    {% block blockContent %}{% endblock %}
+</div>

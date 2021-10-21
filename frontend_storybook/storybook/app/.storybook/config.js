@@ -7,6 +7,7 @@ import { useEffect } from '@storybook/client-api'
 import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 import { qs } from '@okiba/dom'
 import Component from '@okiba/component'
+import renderSymbols from '../views/components/symbols.twig'
 
 import Code from './components/Code'
 
@@ -26,6 +27,14 @@ addParameters({
     viewports: INITIAL_VIEWPORTS,
     defaultViewport: 'responsive'
   }
+})
+
+addDecorator(storyFn => {
+  const div = document.createElement('div')
+  const symbols = renderSymbols()
+  div.innerHTML = symbols
+  document.body.appendChild(div)
+  return storyFn()
 })
 
 addDecorator(storyFn => {
@@ -55,4 +64,12 @@ addDecorator(storyFn => {
     </div>
   `
   return section
+})
+
+// add simple support for lazyload background images
+document.addEventListener('lazybeforeunveil', function(e) {
+  var bg = e.target.getAttribute('data-bg')
+  if(bg) {
+    e.target.style.backgroundImage = 'url(' + bg + ')'
+  }
 })

@@ -1,0 +1,22 @@
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h3 {
+        font-size: 45px;
+        transform: translateX(50%);
+    }
+
+    .hero-image {
+        width: 100%;
+        min-height: 500px;
+        background-position: center;
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+#hero-block_61701f0a9a3c4 {
+    background: #ddb271;
+}

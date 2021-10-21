@@ -1,5 +1,5 @@
 {
-  "name": "caffeina-labo/wordpress",
+  "name": "caffeina/wordpress",
   "description": "Wordpress features",
   "type": "library",
   "require": {

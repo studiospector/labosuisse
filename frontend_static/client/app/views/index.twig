@@ -3,57 +3,62 @@
 
 {% block main %}
 
-  <h1>Hello World! I'm TWIG from FRONTEND_COMMON, Hiii!</h1>
-  <hr>
-  {% if withTranslation %}
-    <h3>This is coming from a translation PO file</h3>
-    <p>{{ __('PO_KEY') }}</p>
+  <div id="js-application">
+
+    <h1>Hello World! I'm TWIG from FRONTEND_COMMON, Hiii!</h1>
+    <hr>
+    {% if withTranslation %}
+      <h3>This is coming from a translation PO file</h3>
+      <p>{{ __('PO_KEY') }}</p>
+      <hr>
+
+      <h3>This is coming from POs using keys from fixtures JSON files:</h3>
+      <ul>
+          {% for item in readme.slides %}
+              <li>{{ __(item.title) }}: {{ __(item.url) }}</li>
+          {% endfor %}
+      </ul>
+    <hr>
+    {% else %}
+      <h3>Translation via PO file is deactivated</h3>
+      <hr>
+    {% endif %}
+
+    <h3>This is coming from fixtures JSON files:</h3>
+    <p>{{readme._comment}}</p>
+    <p>{{readme._comment2}}</p>
+    <a href="{{readme.link.url}}">{{readme.link.label}}</a>
     <hr>
 
-    <h3>This is coming from POs using keys from fixtures JSON files:</h3>
-    <ul>
-        {% for item in readme.slides %}
-            <li>{{ __(item.title) }}: {{ __(item.url) }}</li>
-        {% endfor %}
-    </ul>
-  <hr>
-  {% else %}
-    <h3>Translation via PO file is deactivated</h3>
-    <hr>
-  {% endif %}
+    <h3>This is an example of usage of the image macro</h3>
+    {{ image( '/assets/okiba', 'jpeg', 'Mind Control', [[600], [300,300]], true, true ) }}
 
-  <h3>This is coming from fixtures JSON files:</h3>
-  <p>{{readme._comment}}</p>
-  <p>{{readme._comment2}}</p>
-  <a href="{{readme.link.url}}">{{readme.link.label}}</a>
-  <hr>
+    <style>
+      .row [class^=col-]{
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+        background-color: rgba(86,61,124,.15);
+        border: 1px solid rgba(86,61,124,.2);
+      }
+    </style>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-8">.col-12 .col-md-8</div>
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+      </div>
 
-  <h3>This is an example of usage of the image macro</h3>
-  {{ image( '/assets/okiba', 'jpeg', 'Mind Control', [[600], [300,300]], true, true ) }}
+      <div class="row">
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+      </div>
 
-  <style>
-    .row [class^=col-]{
-      padding-top: .75rem;
-      padding-bottom: .75rem;
-      background-color: rgba(86,61,124,.15);
-      border: 1px solid rgba(86,61,124,.2);
-    }
-  </style>
-  <div class="container">
-    <div class="row">
-      <div class="col-12 col-md-8">.col-12 .col-md-8</div>
-      <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+      <div class="row">
+        <div class="col-6">.col-6</div>
+        <div class="col-6">.col-6</div>
+      </div>
     </div>
-
-    <div class="row">
-      <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-      <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-      <div class="col-6 col-md-4">.col-6 .col-md-4</div>
-    </div>
-
-    <div class="row">
-      <div class="col-6">.col-6</div>
-      <div class="col-6">.col-6</div>
-    </div>
+    
   </div>
+
 {% endblock %}

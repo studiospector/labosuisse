@@ -65,9 +65,9 @@ function api_getAllMenus()
     return (object) $menus;
 }
 
-add_action('rest_api_init', function () {
-    register_rest_route('/v1', '/menus', array(
-        'methods' => 'GET',
-        'callback' => 'api_getAllMenus',
-    ));
-});
+// add_action('rest_api_init', function () {
+//     register_rest_route('/v1', '/menus', array(
+//         'methods' => 'GET',
+//         'callback' => 'api_getAllMenus',
+//     ));
+// });

@@ -1,0 +1,46 @@
+.lb-icon {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  & > svg {
+    width: 10px;
+    height: 10px;
+    fill: currentColor;
+  }
+
+  &[class^="Icon-sort"] > svg,
+  &[class*="Icon-sort"] > svg {
+    color: map-get($colors, "primary");
+    fill: map-get($colors, "grey-3");
+  }
+
+  p > &,
+  .p > &,
+  [class^="p-"]>&,
+  [class*="p-"]>& {
+    vertical-align: text-top;
+  }
+
+  p > &,
+  .p > & {
+    height: rem(22px);
+  }
+
+  .p-small > & {
+    height: rem(18px);
+  }
+
+  .p-big > & {
+    height: rem(30px);
+  }
+}
+
+.lb-icon-big {
+  font-size: rem(44px);
+
+  @include mq(lg) {
+    font-size: rem(50px);
+  }
+}

@@ -1,12 +1,114 @@
-$font-family-base: "Helvetica", sans;
-// $fonts: (
-//   regular: (
-//     src: "fonts/Modelica-Caffeina/Modelica-Caffeina-Regular",
-//     family: "Modelica-Caffeina",
-//     style: normal,
-//     weight: 400
-//   )
-// );
+$font-family-base: "SuisseIntl Regular", sans;
+$fonts: (
+  suisseIntlThin: (
+    src: "fonts/SuisseIntl/SuisseIntl-Thin",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 100
+  ),
+  suisseIntlThinItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-ThinItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 100
+  ),
+  suisseIntlUltralight: (
+    src: "fonts/SuisseIntl/SuisseIntl-Ultralight",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 200
+  ),
+  suisseIntlUltralightItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-UltralightItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 200
+  ),
+  suisseIntlLight: (
+    src: "fonts/SuisseIntl/SuisseIntl-Light",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 300
+  ),
+  suisseIntlLightItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-LightItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 300
+  ),
+  suisseIntlRegular: (
+    src: "fonts/SuisseIntl/SuisseIntl-Regular",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 400
+  ),
+  suisseIntlRegularItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-RegularItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 400
+  ),
+  suisseIntlMedium: (
+    src: "fonts/SuisseIntl/SuisseIntl-Medium",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 500
+  ),
+  suisseIntlMediumItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-MediumItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 500
+  ),
+  // suisseIntlBook: (
+  //   src: "fonts/SuisseIntl/SuisseIntl-Book",
+  //   family: "Suisse Intl",
+  //   style: normal,
+  //   weight: 400
+  // ),
+  // suisseIntlBookItalic: (
+  //   src: "fonts/SuisseIntl/SuisseIntl-BookItalic",
+  //   family: "Suisse Intl",
+  //   style: italic,
+  //   weight: 400
+  // ),
+  suisseIntlSemiBold: (
+    src: "fonts/SuisseIntl/SuisseIntl-SemiBold",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 600
+  ),
+  suisseIntlSemiBoldItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-SemiBoldItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 600
+  ),
+  suisseIntlBold: (
+    src: "fonts/SuisseIntl/SuisseIntl-Bold",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 700
+  ),
+  suisseIntlBoldItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-BoldItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 700
+  ),
+  suisseIntlBlack: (
+    src: "fonts/SuisseIntl/SuisseIntl-Black",
+    family: "Suisse Intl",
+    style: normal,
+    weight: 900
+  ),
+  suisseIntlBlackItalic: (
+    src: "fonts/SuisseIntl/SuisseIntl-BlackItalic",
+    family: "Suisse Intl",
+    style: italic,
+    weight: 900
+  ),
+);
 $typographyVariablesToCSSClasses: (
   "h1": "h1, .h1",
   "h2": "h2, .h2",
@@ -17,12 +119,14 @@ $typographyVariablesToCSSClasses: (
   "p-small": "small, .p-small",
   "p-regular": "p, .p",
   "p-big": ".p-big",
-  "btn-label-small": ".ButtonLabelSmall",
-  "btn-label-medium": ".ButtonLabel",
-  "btn-label-big": ".ButtonLabelBig",
+  "btn-label-small": ".button__label--small",
+  "btn-label-medium": ".button__label",
+  "btn-label-big": ".button__label--big",
   "link-regular": "link",
   "link-small": "link-small",
   "link-big": "link-big",
+  "input-big": "input-big",
+  "input-small": "input-small",
 );
 $typographyPropertyList: (
   "font-family",

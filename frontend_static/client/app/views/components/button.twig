@@ -1,0 +1,25 @@
+{% set tag = href ? 'a' : 'button' %}
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['button-' ~ variant]) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+<{{ tag }}
+  {{ tag == 'button' ? ' type="' ~ type|default('button') ~ '"' : '' }}
+  class="button{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
+  {{ href ? ' href="' ~ href ~ '" target="' ~ target|default('_self') ~ '"' : '' }}
+  {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
+>
+  {% if iconStart %}
+    {% include './icon.twig' with iconStart only %}
+  {% endif %}
+  {% if label %}
+    <span class="button__label">{{ label }}</span>
+  {% endif %}
+  {% if iconEnd %}
+    {% include './icon.twig' with iconEnd only %}
+  {% endif %}
+</{{ tag }}>

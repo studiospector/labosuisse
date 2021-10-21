@@ -1,54 +1,68 @@
 $border-radius: rem(5px);
 $button-padding: rem(16px 24px);
-$buttonSmall-padding: rem(8px 16px);
-$buttonBig-padding: rem(24px 32px);
+$button-small-padding: rem(8px 16px);
+$button-big-padding: rem(24px 32px);
 
 // UI KIT VARIABLES
 $buttonsVariablesToCSSClasses: (
-  "btn-primary-default": ".ButtonPrimary",
-  "btn-primary-hover": ".ButtonPrimary:hover",
-  "btn-primary-disabled": ".ButtonPrimary:disabled",
+  "btn-primary-default": ".button-primary",
+  "btn-primary-hover": ".button-primary:hover",
+  "btn-primary-disabled": ".button-primary:disabled",
 
-  "btn-secondary-default": ".ButtonSecondary",
-  "btn-secondary-hover": ".ButtonSecondary:hover",
-  "btn-secondary-disabled": ".ButtonSecondary:disabled",
+  "btn-secondary-default": ".button-secondary",
+  "btn-secondary-hover": ".button-secondary:hover",
+  "btn-secondary-disabled": ".button-secondary:disabled",
 
-  "btn-tertiary-default": ".ButtonTertiary",
-  "btn-tertiary-hover": ".ButtonTertiary:hover",
-  "btn-tertiary-disabled": ".ButtonTertiary:disabled",
+  "btn-tertiary-default": ".button-tertiary",
+  "btn-tertiary-hover": ".button-tertiary:hover",
+  "btn-tertiary-disabled": ".button-tertiary:disabled",
+
+  "btn-quaternary-default": ".button-quaternary",
+  "btn-quaternary-hover": ".button-quaternary:hover",
+  "btn-quaternary-disabled": ".button-quaternary:disabled",
 );
 $buttonsPropertyList: (
   "background-color",
   "border-radius",
   "border",
   "color",
-  "padding"
+  // "padding",
+  // "opacity"
+  "text-transform"
 );
 
 // END UI KIT VARIABLES
 
-.Button,
-.ButtonSmall,
-.ButtonBig {
+.button,
+.button-small,
+.button-big {
   @include reset-button();
 
+  display: inline-flex;
   transition: background 0.2s;
+  text-decoration: none;
+  cursor: pointer;
+
   &:disabled {
-    cursor: no-drop;
+    cursor: not-allowed;
     pointer-events: none;
+  }
+
+  .lb-icon {
+    margin-left: 10px;
   }
 }
 
-.Button {
+.button {
   padding: $button-padding;
 }
 
-.ButtonSmall {
-  padding: $buttonSmall-padding;
+.button-small {
+  padding: $button-small-padding;
 }
 
-.ButtonBig {
-  padding: $buttonBig-padding;
+.button-big {
+  padding: $button-big-padding;
 }
 
 @include generate-rules($buttonsVariablesToCSSClasses, $buttonsPropertyList, $componentsVariables);

@@ -3,10 +3,13 @@
 // VARIABLES
 @import "variables/main";
 // VENDORS AND MIXINS
-@import "node_modules/sass-mq/mq";
+@import "../node_modules/sass-mq/mq";
+@import '../node_modules/swiper/swiper-bundle';
 
 // FULL GRID
 @include generate-grid();
 
 // COMPONENTS
 @import "components/buttons";
+@import "components/block-launch-two-images";
+@import "components/hero";

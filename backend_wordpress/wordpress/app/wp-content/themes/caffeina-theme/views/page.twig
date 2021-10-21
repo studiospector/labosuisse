@@ -1,9 +1,13 @@
 {% extends 'templates/_default.twig' %}
 
-{% set bodyClass = 'page primary' %}
+{% set bodyClass = 'page' %}
 
 {% block main %}
 
-  {{test}}
+  <h1>{{title}}</h1>
+
+  <section class="container">
+    {{content|raw}}
+  </section>
 
 {% endblock %}

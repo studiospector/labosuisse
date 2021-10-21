@@ -57,7 +57,7 @@
 
     {% block head %}{% endblock %}
   </head>
-  <body class="{{ bodyClass ? bodyClass|raw : '' }}">
+  <body id="js-application" class="{{ bodyClass ? bodyClass|raw : '' }}">
     {# {% include 'components/symbols.twig' %} #}
     <main id="content">
       {% block main %}{% endblock %}

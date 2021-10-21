@@ -6,11 +6,11 @@
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'reference' => NULL,
-        'name' => 'caffeina-labo/wordpress',
+        'name' => 'caffeina/wordpress',
         'dev' => true,
     ),
     'versions' => array(
-        'caffeina-labo/wordpress' => array(
+        'caffeina/wordpress' => array(
             'pretty_version' => '1.0.0+no-version-set',
             'version' => '1.0.0.0',
             'type' => 'library',

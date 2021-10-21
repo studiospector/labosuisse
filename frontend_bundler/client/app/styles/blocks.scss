@@ -1,0 +1,96 @@
+// Components
+@import "components/hero";
+
+
+
+#editor {
+
+    .edit-post-layout {
+
+        // Styling content elements
+        .interface-interface-skeleton__content {
+            padding-bottom: 10px;
+            background: #f3f4f5;
+
+            // Font content
+            .editor-styles-wrapper {
+                // font-family: 'Lato', 'sans-serif';
+
+                // Title
+                .editor-post-title {
+
+                    &__input {
+                        // font-family: 'Lato', 'sans-serif';
+                        text-rendering: optimizelegibility;
+                        font-weight: 800;
+                    }
+                }
+            }
+
+            // Style metaboxes container down the content
+            .edit-post-layout__metaboxes {
+
+                &:not(:empty) {
+                    background: #f3f4f5;
+                    padding: 10px 10px 0 10px !important;
+                    border-top: 5px solid #ddd !important;
+                }
+
+                // Style metaboxes down the content
+                #poststuff {
+
+                    .postbox-container {
+                        border: 1px solid #ddd;
+                    }
+            
+                    .postbox-header {
+                        background-color: #eaeaea;
+                    }
+                }
+            }
+        }
+
+        // Styling sidebar elements
+        .interface-interface-skeleton__sidebar {
+
+            .components-panel {
+
+                &__body {
+                    margin: 10px 0;
+                    border-color: #ddd;
+                    border-bottom: 0;
+                }
+
+                &__body-toggle {
+
+                    &.components-button {
+                        background-color: #eaeaea;
+                    }
+                }
+
+                .postbox-header {
+                    background-color: #eaeaea;
+                    border-top: 1px solid #ddd;
+                    border-bottom: 0;
+                }
+
+                .abbrivio-field {
+                    margin-top: 10px;
+                }
+            }
+		}
+    }
+}
+
+
+
+@media (min-width: 782px) {
+
+    #editor {
+
+        .interface-interface-skeleton__sidebar {
+            border-left: 5px solid #ddd;
+        }
+    }
+
+}

@@ -1,18 +1,8 @@
 <?php
 
-// $data = 'Malini is not active';
-// if (function_exists('malini')) {
-//     $data = malini_post()
-//       ->decorate('post', [
-//         'filter' => ['title'],
-//       ])
-//       ->toArray();
-// }
-
-// jsonResponse('index', $data);
-
 $context = [
-    'test'   => 'aaaa',
+    'title' => get_the_title(),
+    'content' => apply_filters( 'the_content', get_the_content() ),
 ];
 
 echo $twig->render('page.twig', $context);

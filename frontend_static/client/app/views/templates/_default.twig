@@ -47,6 +47,9 @@
       data-deferStart="true"
       data-modernsrc="/{{ mainJsModern }}"
       data-src="/{{ mainJs }}" defer></script>
+
+    {% include '../components/symbols.twig' %}
+
     {% if production %}
         <script type="text/javascript">{{criticalScript|raw}}</script>
     {% else %}

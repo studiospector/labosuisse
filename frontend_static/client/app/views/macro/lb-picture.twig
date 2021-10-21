@@ -1,0 +1,17 @@
+{% macro lbPicture(images) %}
+
+  {% set classes = [] %}
+  {% for variant in images.variants|default([]) %}
+    {% set classes = classes|merge(['lb-picture--' ~ variant]) %}
+  {% endfor %}
+  {% if class %}
+    {% set classes = classes|merge([class]) %}
+  {% endif %}
+
+  <picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+    <source media="(min-width: 801px) and (max-width: 1050px)" data-srcset="{{images.large}}" class="lazyload">
+    <source media="(min-width: 401px) and (max-width: 800px)" data-srcset="{{images.medium}}" class="lazyload">
+    <source media="(max-width: 400px)" data-srcset="{{images.small}}" class="lazyload">
+    <img data-src="{{images.original}}" class="lazyload">
+  </picture>
+{% endmacro %}

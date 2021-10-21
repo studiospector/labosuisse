@@ -1,0 +1,26 @@
+.infobox {
+
+    &__tagline {
+        font-size: rem(16);
+        font-weight: 400;
+        color: map-get($colors, "secondary");
+    }
+
+    &__title {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    &__subtitle {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    &__cta {
+        margin-top: 40px;
+
+        @include mq($until: md) {
+            margin-top: 20px;
+        }
+    }
+}

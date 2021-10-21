@@ -1,0 +1,14 @@
+{% embed './static/components/base/gutenberg-block.twig' %}
+  {% block blockContent %}
+    <h3>{{ text }}</h3>
+
+    <div class="hero-image" style="background-image: url({{ img }});"></div>
+
+    <style type="text/css">
+      #{{ conf.id }} {
+          background: {{ bgColor }};
+      }
+      {# {{ '#' ~ conf.id ~ ' { background: ' ~ bgColor ~ '; }' }} #}
+    </style>
+  {% endblock %}
+{% endembed %}
