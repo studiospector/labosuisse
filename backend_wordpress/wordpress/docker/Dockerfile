@@ -17,3 +17,5 @@ COPY --from=frontend_bundler /app/dist/public /root/src/wp-content/themes/caffei
 COPY ./frontend_bundler/tommy/optimized /root/src/wp-content/themes/caffeina-theme/assets
 
 RUN cd /root/src/wp-content/themes/caffeina-theme && composer install
+
+COPY ./frontend_static/client/app/views /root/src/wp-content/themes/caffeina-theme/views/static
