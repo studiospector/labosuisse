@@ -1,115 +1,52 @@
 $hero-carousel-height-desk: 700px;
 $hero-carousel-height-mobile: 460px;
 
-.lb-carousel {
+.carousel-hero {
+    
+    @include mq($until: md) {
+        margin-bottom: 55px;
+        overflow: unset !important;
+    }
 
-    &__slide {
+    &.swiper {
+        .swiper-pagination {
+            &.swiper-pagination-bullets {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 12px;
 
-        &__img {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-
-            @include mq($until: md) {
-                position: relative;
-                min-height: $hero-carousel-height-mobile;
-            }
-        }
-
-        &__infobox {
-            width: 100%;
-            z-index: 1;
-
-            @include mq($until: md) {
-                padding: 20px 0;
-
-                .infobox {
-                    display: flex;
-                    flex-direction: column;
-                    text-align: center;
-
-                    // &__cta {
-                    //     @include mq($until: md) {
-                    //         background-color: map-get($colors, "white");
-                    //     }
-                    // }
-
-                    &__tagline {
-                        font-size: rem(12);
-                    }
-                
-                    &__title {
-                        font-size: rem(24);
-                    }
-                
-                    &__paragraph {
-                        font-size: rem(13);
+                @include mq($until: md) {
+                    bottom: -35px;
+                }
+    
+                .swiper-pagination-bullet {
+                    margin: 0 6px;
+                    background: map-get($colors, "grey-2");
+                    opacity: 1;
+                    transform: scale(0.63);
+        
+                    &.swiper-pagination-bullet-active {
+                        background: map-get($colors, "secondary");
+                        transform: scale(1.5);
+                        transition: $transition-base;
                     }
                 }
             }
         }
     }
 
-    &__slide-content {
-        height: 100%;
-        min-height: $hero-carousel-height-desk;
-        position: relative;
-        display: flex;
-        align-items: center;
-        background-position: center;
-        background-size: cover;
-        background-repeat: no-repeat;
-
-        @include mq($until: md) {
-            // min-height: $hero-carousel-height-mobile;
-            flex-direction: column;
-            // justify-content: space-between;
-        }
-
-        .lb-picture {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
+    &__slide {
+        @include mq($until: md){
             overflow: hidden;
-            will-change: transform;
-
-            img {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                object-fit: cover;
-                object-position: 50% 50%;
-            }
         }
-    }
-}
 
-.swiper {
-
-    .swiper-pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 12px;
-
-        &.swiper-pagination-bullets {
-
-            .swiper-pagination-bullet {
-                margin: 0 6px;
-                background: map-get($colors, "white");
-                opacity: 1;
-                transform: scale(0.63);
-    
-                &.swiper-pagination-bullet-active {
-                    background: map-get($colors, "secondary");
-                    transform: scale(1.5);
-                    transition: $transition-base;
+        .hero {
+            min-height: $hero-carousel-height-desk;
+        
+            &__img {
+                @include mq($until: md) {
+                    min-height: $hero-carousel-height-mobile;
                 }
             }
         }

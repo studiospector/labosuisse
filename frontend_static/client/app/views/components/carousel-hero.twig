@@ -1,31 +1,9 @@
-{% from '../macro/lb-picture.twig' import lbPicture %}
-
-<section class="lb-carousel swiper js-carousel">
-
+<section class="carousel-hero swiper js-carousel-hero">
   <div class="swiper-wrapper">
     {% for slide in slides|default([]) %}
-      <div class="lb-carousel__slide swiper-slide">
-        {# <div class="lb-carousel__slide-content lazyload" data-bg="{{slide.images.original}}"> #}
-        <div class="lb-carousel__slide-content">
-
-          {% if slide.infobox %}
-            {% set infoboxSide = slide.infobox.side == 'left' ? '' : 'offset-md-6' %}
-            <div class="lb-carousel__slide__infobox">
-              <div class="container">
-                <div class="row">
-                  <div class="col-12 col-md-6{{ ' ' ~ infoboxSide }}">
-                    {% include './infobox.twig' with slide.infobox only %}
-                  </div>
-                </div>
-              </div>
-            </div>
-          {% endif %}
-          
-          <div class="lb-carousel__slide__img">
-            {{ lbPicture(slide.images) }}
-          </div>
-
-        </div>
+      <div class="carousel-hero__slide swiper-slide">
+        {# <div class="carousel-hero__slide-content lazyload" data-bg="{{slide.images.original}}"> #}
+        {% include './hero.twig' with slide only %}
       </div>
     {% endfor %}
   </div>

@@ -5,7 +5,7 @@ import Component from '@okiba/component'
 import lazySizes from 'lazysizes'
 
 import renderCarouselHero from '../../views/components/carousel-hero.twig'
-import Carousel from '../../scripts/components/Carousel/default'
+import CarouselHero from '../../scripts/components/CarouselHero'
 
 const dataDefault = {
   slides: [
@@ -108,8 +108,8 @@ storiesOf('Components|Carousel Hero', module)
         el: document.body,
         components: [
           {
-            selector: '.js-carousel',
-            type: Carousel
+            selector: '.js-carousel-hero',
+            type: CarouselHero
           }
         ]
       })

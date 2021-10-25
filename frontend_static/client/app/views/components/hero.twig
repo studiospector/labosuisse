@@ -1,14 +1,20 @@
-{% embed './static/components/base/gutenberg-block.twig' %}
-  {% block blockContent %}
-    <h3>{{ text }}</h3>
+{% from '../macro/lb-picture.twig' import lbPicture %}
 
-    <div class="hero-image" style="background-image: url({{ img }});"></div>
-
-    <style type="text/css">
-      #{{ conf.id }} {
-          background: {{ bgColor }};
-      }
-      {# {{ '#' ~ conf.id ~ ' { background: ' ~ bgColor ~ '; }' }} #}
-    </style>
-  {% endblock %}
-{% endembed %}
+<section class="hero">
+  {% if infobox %}
+    {% set infoboxSide = infobox.side == 'left' ? '' : 'offset-md-6' %}
+    <div class="hero__infobox">
+      <div class="container">
+        {# <div class="row"> #}
+          <div class="h-100 col-12 col-md-6{{ ' ' ~ infoboxSide }}">
+            {% include './infobox.twig' with infobox only %}
+          </div>
+        {# </div> #}
+      </div>
+    </div>
+  {% endif %}
+  
+  <div class="hero__img">
+    {{ lbPicture(images) }}
+  </div>
+</section>

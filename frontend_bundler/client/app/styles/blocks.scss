@@ -1,4 +1,15 @@
-// Components
+// MIXINS
+@import "mixins/index";
+// VARIABLES
+@import "variables/main";
+// VENDORS AND MIXINS
+@import "../node_modules/sass-mq/mq";
+@import '../node_modules/swiper/swiper-bundle';
+
+// FULL GRID
+@include generate-grid();
+
+// COMPONENTS
 @import "components/hero";
 
 
@@ -24,6 +35,11 @@
                         text-rendering: optimizelegibility;
                         font-weight: 800;
                     }
+                }
+
+                .wp-block-separator {
+                    margin-top: 60px;
+                    margin-bottom: 60px;
                 }
             }
 

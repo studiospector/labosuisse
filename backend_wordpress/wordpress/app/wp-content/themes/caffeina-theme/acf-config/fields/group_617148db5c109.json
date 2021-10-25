@@ -1,55 +1,12 @@
 {
     "key": "group_617148db5c109",
-    "title": "Campi personalizzati: Block - Hero",
+    "title": "Campi personalizzati: Block - Carousel Hero",
     "fields": [
         {
-            "key": "field_617149048e148",
-            "label": "Image",
-            "name": "cf_block_hero_img",
-            "type": "image",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "url",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
-        },
-        {
-            "key": "field_6171492d8e149",
-            "label": "Text",
-            "name": "cf_block_hero_text",
-            "type": "textarea",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "br"
-        },
-        {
-            "key": "field_6171494c8e14a",
-            "label": "Button",
-            "name": "cf_block_hero_button",
-            "type": "link",
+            "key": "field_6175def456d7e",
+            "label": "Carousel",
+            "name": "lb_block_carousel_hero",
+            "type": "repeater",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -58,24 +15,214 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "array"
-        },
-        {
-            "key": "field_617149708e14b",
-            "label": "Background Color",
-            "name": "cf_block_hero_background",
-            "type": "color_picker",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "enable_opacity": 0,
-            "return_format": "string"
+            "wpml_cf_preferences": 2,
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "row",
+            "button_label": "Aggiungi Slide",
+            "sub_fields": [
+                {
+                    "key": "field_6175e4eb0d225",
+                    "label": "Infobox side",
+                    "name": "lb_block_carousel_hero_side",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "choices": {
+                        "right": "Right",
+                        "left": "Left"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_6175e4eb0d225",
+                    "label": "Infobox side",
+                    "name": "lb_block_carousel_hero_side",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "choices": {
+                        "right": "Right",
+                        "left": "Left"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                },
+                {
+                    "key": "field_617149048e148",
+                    "label": "Image",
+                    "name": "lb_block_carousel_hero_img",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_6175e07156d81",
+                    "label": "Tagline",
+                    "name": "lb_block_carousel_hero_tagline",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_6171492d8e149",
+                    "label": "Title",
+                    "name": "lb_block_carousel_hero_title",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_6175e04356d7f",
+                    "label": "Subtitle",
+                    "name": "lb_block_carousel_hero_subtitle",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_6175e05656d80",
+                    "label": "Paragraph",
+                    "name": "lb_block_carousel_hero_paragraph",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_6171494c8e14a",
+                    "label": "Button",
+                    "name": "lb_block_carousel_hero_btn",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "return_format": "array"
+                },
+                {
+                    "key": "field_6175e1b156d82",
+                    "label": "Button variants",
+                    "name": "lb_block_carousel_hero_btn_variants",
+                    "type": "checkbox",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "choices": {
+                        "primary": "Primary",
+                        "secondary": "Secondary",
+                        "tertiary": "Tertiary",
+                        "quaternary": "Quaternary"
+                    },
+                    "allow_custom": 0,
+                    "default_value": [],
+                    "layout": "vertical",
+                    "toggle": 0,
+                    "return_format": "value",
+                    "save_custom": 0
+                }
+            ]
         }
     ],
     "location": [
@@ -83,7 +230,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/cf-hero"
+                "value": "acf\/lb-carousel-hero"
             }
         ]
     ],
@@ -95,5 +242,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1634814948
+    "modified": 1635168321
 }

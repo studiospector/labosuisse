@@ -80,24 +80,32 @@ include __DIR__.'/functions/setup/theme-assets.php';
 // ACF Config JSON save point
 add_filter('acf/settings/save_json', 'labo_acf_json_save_point');
 function labo_acf_json_save_point( $path ) {
-	// remove original path
     unset($paths[0]);
-    // update path
     $path = get_stylesheet_directory() . '/acf-config/fields';
-
     return $path;
 }
 
 // ACF Config JSON load point
 add_filter('acf/settings/load_json', 'labo_acf_json_load_point');
 function labo_acf_json_load_point( $path ) {
-   // remove original path
    unset($path[0]);
-   // update path
    $path = get_stylesheet_directory() . '/acf-config/fields';
-
    return $path;
 }
 
 // ACF Blocks
-include __DIR__.'/acf-config/blocks/acf-block-hero.php';
+include __DIR__.'/acf-config/blocks/acf-block-carousel-hero.php';
+
+// Add custom category for components to Gutenberg editor
+add_action( 'block_categories_all', 'labo_gutenberg_block_categories', 10, 2 );
+function labo_gutenberg_block_categories( $categories ) {
+	return array_merge(
+		$categories,
+		[
+			[
+				'slug'  => 'caffeina-theme',
+				'title' => 'Caffeina Theme Components',
+			],
+		]
+	);
+}
