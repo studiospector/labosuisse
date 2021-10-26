@@ -49,32 +49,6 @@
                     "placeholder": ""
                 },
                 {
-                    "key": "field_6175e4eb0d225",
-                    "label": "Infobox side",
-                    "name": "lb_block_carousel_hero_side",
-                    "type": "select",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "wpml_cf_preferences": 2,
-                    "choices": {
-                        "right": "Right",
-                        "left": "Left"
-                    },
-                    "default_value": false,
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "ui": 1,
-                    "ajax": 0,
-                    "return_format": "value",
-                    "placeholder": ""
-                },
-                {
                     "key": "field_617149048e148",
                     "label": "Image",
                     "name": "lb_block_carousel_hero_img",
@@ -199,7 +173,7 @@
                     "key": "field_6175e1b156d82",
                     "label": "Button variants",
                     "name": "lb_block_carousel_hero_btn_variants",
-                    "type": "checkbox",
+                    "type": "radio",
                     "instructions": "",
                     "required": 0,
                     "conditional_logic": 0,
@@ -208,19 +182,19 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 2,
                     "choices": {
                         "primary": "Primary",
                         "secondary": "Secondary",
                         "tertiary": "Tertiary",
                         "quaternary": "Quaternary"
                     },
-                    "allow_custom": 0,
-                    "default_value": [],
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
                     "layout": "vertical",
-                    "toggle": 0,
                     "return_format": "value",
-                    "save_custom": 0
+                    "wpml_cf_preferences": 2,
+                    "save_other_choice": 0
                 }
             ]
         }
@@ -242,5 +216,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1635168321
+    "modified": 1635234596
 }

@@ -19,6 +19,30 @@ if( !empty($block['align']) ) {
     $className .= ' align' . $block['align'];
 }
 
+// Carousel data
+if( have_rows('lb_block_carousel_hero') ) {
+    $slides = [];
+    while( have_rows('lb_block_carousel_hero') ) : the_row();
+        $slides[] = [
+            'images' => [
+                'original' => get_sub_field('lb_block_carousel_hero_img'),
+                'large' => get_sub_field('lb_block_carousel_hero_img'),
+                'medium' => get_sub_field('lb_block_carousel_hero_img'),
+                'small' => get_sub_field('lb_block_carousel_hero_img')
+            ],
+            'infobox' => [
+                'side' => get_sub_field('lb_block_carousel_hero_side'),
+                'tagline' => get_sub_field('lb_block_carousel_hero_tagline'),
+                'title' => get_sub_field('lb_block_carousel_hero_title'),
+                'subtitle' => get_sub_field('lb_block_carousel_hero_subtitle'),
+                'paragraph' => get_sub_field('lb_block_carousel_hero_paragraph'),
+                'button' => get_sub_field('lb_block_carousel_hero_btn'),
+                'buttonVariants' => get_sub_field('lb_block_carousel_hero_btn_variants')
+            ]
+        ];
+    endwhile;
+}
+
 // Payload
 $context = [
     'block' => 'carousel-hero',
@@ -27,25 +51,7 @@ $context = [
             'id' => esc_attr($id),
             'classes' => esc_attr($className)
         ],
-        'slides' => [
-            [
-                'images' => [
-                    'original' => '/assets/images/carousel-hero-img-2.jpg',
-                    'large' => '/assets/images/carousel-hero-img-2.jpg',
-                    'medium' => '/assets/images/carousel-hero-img-2.jpg',
-                    'small' => '/assets/images/carousel-hero-img-2.jpg'
-                ],
-                'infobox' => [
-                    'side' => get_field('lb_block_carousel_hero_side'),
-                    'tagline' => get_field('lb_block_carousel_hero_tagline'),
-                    'title' => get_field('lb_block_carousel_hero_title'),
-                    'subtitle' => get_field('lb_block_carousel_hero_subtitle'),
-                    'paragraph' => get_field('lb_block_carousel_hero_paragraph'),
-                    'button' => get_field('lb_block_carousel_hero_btn'),
-                    'buttonVariants' => get_field('lb_block_carousel_hero_btn_variants')
-                ]
-            ]
-        ]
+        'slides' => $slides
     ]
 ];
 
