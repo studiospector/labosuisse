@@ -69,32 +69,32 @@ function cf_register_admin_styles()
  */
 function cf_enqueue_editor_assets()
 {
-    // $asset_config_file = sprintf('%s/assets.php', untrailingslashit(get_template_directory()) . '/gutenberg');
+    $asset_config_file = sprintf('%s/assets.php', untrailingslashit(get_template_directory()) . '/gutenberg');
 
-    // if (!file_exists($asset_config_file)) {
-    //     return;
-    // }
+    if (!file_exists($asset_config_file)) {
+        return;
+    }
 
-    // $asset_config = require_once $asset_config_file;
+    $asset_config = require_once $asset_config_file;
 
-    // if (empty($asset_config['js/editor.js'])) {
-    //     return;
-    // }
+    if (empty($asset_config['js/editor.js'])) {
+        return;
+    }
 
-    // $editor_asset    = $asset_config['js/editor.js'];
-    // $js_dependencies = (!empty($editor_asset['dependencies'])) ? $editor_asset['dependencies'] : [];
-    // $version         = (!empty($editor_asset['version'])) ? $editor_asset['version'] : filemtime($asset_config_file);
+    $editor_asset    = $asset_config['js/editor.js'];
+    $js_dependencies = (!empty($editor_asset['dependencies'])) ? $editor_asset['dependencies'] : [];
+    $version         = (!empty($editor_asset['version'])) ? $editor_asset['version'] : filemtime($asset_config_file);
 
-    // // Theme Gutenberg blocks JS
-    // if (is_admin()) {
-    //     wp_enqueue_script(
-    //         'cf-blocks-js',
-    //         CF_BUILD_JS_URI . '/blocks.js',
-    //         $js_dependencies,
-    //         $version,
-    //         true
-    //     );
-    // }
+    // Theme Gutenberg blocks JS
+    if (is_admin()) {
+        wp_enqueue_script(
+            'cf-blocks-js',
+            CF_BUILD_JS_URI . '/blocks.js',
+            $js_dependencies,
+            $version,
+            true
+        );
+    }
 
     // Theme Gutenberg blocks CSS
     $css_dependencies = [

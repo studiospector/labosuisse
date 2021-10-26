@@ -2,15 +2,25 @@
 @import "mixins/index";
 // VARIABLES
 @import "variables/main";
-// VENDORS AND MIXINS
+// VENDORS
 @import "../node_modules/sass-mq/mq";
 @import '../node_modules/swiper/swiper-bundle';
 
-// FULL GRID
+// BASE STYLE
+@import "base/lb-picture";
+@import "base/lb-icon";
+@import "base/helpers";
+
+// TYPOGRAPHY
+// @include generate-font-face();
+// @include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+
+// CRITICAL GRID
 @include generate-grid();
 
 // COMPONENTS
 @import "components/hero";
+@import "components/carousel-hero";
 
 
 
@@ -106,6 +116,10 @@
 
         .interface-interface-skeleton__sidebar {
             border-left: 5px solid #ddd;
+
+            .interface-complementary-area {
+                width: auto;
+            }
         }
     }
 
