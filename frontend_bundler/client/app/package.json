@@ -55,7 +55,7 @@
         "npm": "^7.24.1",
         "raw-loader": "^4.0.1",
         "sass-mq": "^5.0.1",
-        "swiper": "^7.0.6",
+        "swiper": "^7.1.0",
         "webpack": "^4.43.0",
         "webpack-bundle-analyzer": "^4.4.0",
         "webpack-dev-middleware": "^3.7.2",

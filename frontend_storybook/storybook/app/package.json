@@ -33,7 +33,7 @@
         "sass-loader": "^8.0.2",
         "sass-mq": "^5.0.1",
         "style-loader": "^1.2.1",
-        "swiper": "^7.0.6",
+        "swiper": "^7.1.0",
         "twig": "^1.15.4",
         "twig-loader": "^0.5.5"
     },
