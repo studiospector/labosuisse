@@ -1,6 +1,6 @@
 import Component from '@okiba/component'
 import {qs, on, off} from '@okiba/dom'
-// import Swiper, { Pagination } from 'swiper'
+
 import Swiper, { Pagination } from 'swiper/swiper-bundle';
 
 const defaults = {
@@ -10,10 +10,6 @@ const defaults = {
 const ui = {
   slides: {
     selector: '.carousel-hero__slide',
-    asArray: true
-  },
-  textWrap: {
-    selector: '.js-infobox-text',
     asArray: true
   },
   pagination: '.swiper-pagination'
