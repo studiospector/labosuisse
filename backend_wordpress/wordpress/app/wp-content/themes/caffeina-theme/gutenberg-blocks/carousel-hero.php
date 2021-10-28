@@ -67,4 +67,4 @@ if ( isset($block['data']['is_preview']) && $block['data']['is_preview'] == true
 }
 
 // Render component
-echo $twig->render('./static/components/base/gutenberg-block-switcher.twig', $context);
+echo $twig->render('./components/base/gutenberg-block-switcher.twig', $context);

@@ -3,10 +3,9 @@
     {% for slide in slides|default([]) %}
       <div class="carousel-hero__slide swiper-slide">
         {# <div class="carousel-hero__slide-content lazyload" data-bg="{{slide.images.original}}"> #}
-        {% include './hero.twig' with slide only %}
+        {% include '@PathViews/components/hero.twig' with slide only %}
       </div>
     {% endfor %}
   </div>
-
   <div class="swiper-pagination"></div>
 </section>

@@ -1,4 +1,4 @@
-{% from '../macro/lb-picture.twig' import lbPicture %}
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
 <section class="hero">
   {% if infobox %}
@@ -7,7 +7,7 @@
       <div class="container">
         {# <div class="row"> #}
           <div class="h-100 col-12 col-md-6{{ ' ' ~ infoboxSide }}">
-            {% include './infobox.twig' with infobox only %}
+            {% include '@PathViews/components/infobox.twig' with infobox only %}
           </div>
         {# </div> #}
       </div>

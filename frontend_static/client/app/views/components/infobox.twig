@@ -17,11 +17,11 @@
   </div>
   {% if cta %}
     <div class="infobox__cta">
-      {% if cta.type == 'link' %}
-        {% include './link.twig' with cta only %}
-      {% else %}
-        {% include './button.twig' with cta only %}
-      {% endif %}
+      {# {% if cta.type == 'link' %}
+        {% include '@PathViews/components/link.twig' with cta only %}
+      {% else %} #}
+        {% include '@PathViews/components/button.twig' with cta only %}
+      {# {% endif %} #}
     </div>
   {% endif %}
 </div>
