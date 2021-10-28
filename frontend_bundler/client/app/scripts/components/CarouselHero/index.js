@@ -1,7 +1,7 @@
 import Component from '@okiba/component'
 import {qs, on, off} from '@okiba/dom'
 
-import Swiper, { Pagination } from 'swiper/swiper-bundle';
+import Swiper from 'swiper/bundle';
 
 const defaults = {
   speed: 400

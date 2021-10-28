@@ -7,6 +7,7 @@
 @import '../node_modules/swiper/swiper-bundle';
 
 // BASE STYLE
+@import "base/lb-symbols";
 @import "base/lb-picture";
 @import "base/lb-icon";
 @import "base/helpers";
@@ -19,6 +20,9 @@
 @include generate-grid();
 
 // COMPONENTS
+@import "components/infobox";
+@import "components/buttons";
+@import "components/block-launch-two-images";
 @import "components/hero";
 @import "components/carousel-hero";
 

@@ -1,3 +1,5 @@
+import 'lazysizes'
+
 import Application from '~/components/app'
 
 window.addEventListener('load', (event) => {
