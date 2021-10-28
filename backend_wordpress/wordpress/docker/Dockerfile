@@ -18,4 +18,4 @@ COPY ./frontend_bundler/tommy/optimized /root/src/wp-content/themes/caffeina-the
 
 RUN cd /root/src/wp-content/themes/caffeina-theme && composer install
 
-COPY ./frontend_static/client/app/views /root/src/wp-content/themes/caffeina-theme/views/static
+COPY ./frontend_static/client/app/views /root/src/wp-content/themes/caffeina-theme/views

@@ -31,7 +31,7 @@ services:
       - >-
         ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
-        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views/static
+        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
   backend_wordpress:
     restart: unless-stopped
     depends_on:
@@ -52,7 +52,7 @@ services:
       - >-
         ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
-        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views/static
+        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
