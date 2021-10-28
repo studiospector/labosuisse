@@ -15,6 +15,7 @@ $assets_path = get_stylesheet_directory_uri() . "/assets";
 
 $loader = new FilesystemLoader($template_dir . '/views');
 $loader->addPath($bundle_path, 'static');
+$loader->addPath($template_dir . '/views', 'PathViews');
 
 $twig = new Environment($loader, [
     'debug' => true,
