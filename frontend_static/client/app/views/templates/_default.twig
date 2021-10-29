@@ -1,64 +1,72 @@
-{% set mainCss = revisions['css/main.css'] ? revisions['css/main.css'] : 'css/main.css' %}
+{% set criticalCss = revisions('css/critical.css') %}
+{% set criticalCssProd = '/css/critical.css' %}
+{% set mainCss = revisions('css/main.css') %}
+{% set criticalJs = '/js/critical.js' %}
+{% set criticalJsModern = revisions('js/critical.modern.js') %}
+{% set mainJs = revisions('js/main.js') %}
+{% set mainJsModern = revisions('js/main.modern.js') %}
 
-{% set mainJs = revisions['js/main.js'] ? revisions['js/main.js'] : 'js/main.js' %}
-{% set mainJsModern = revisions['js/main.modern.js'] ? revisions['js/main.modern.js'] : 'js/main.modern.js' %}
-
-{% set lazysizesModern = revisions['js/independent/lazysizes.modern.js'] ? revisions['js/independent/lazysizes.modern.js'] : 'js/independent/lazysizes.modern.js' %}
-{% set lazysizes = revisions['js/independent/lazysizes.js'] ? revisions['js/independent/lazysizes.js'] : 'js/independent/lazysizes.js' %}
+{% set lazysizesModern = revisions('/js/independent/lazysizes.modern.js') %}
+{% set lazysizes = revisions('/js/independent/lazysizes.js') %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="">
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>{{ pageTitle }}</title>
-    <meta name="description" content="{{ metaDescription }}" />
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{ page.data.title }}</title>
+    <meta name="description" content="{{ metaDescription }}">
+
     {% block meta %}{% endblock %}
 
-    <link rel="shortcut icon" href="/assets/images/favicon.ico" type="image/x-icon" />
+    {# <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{assets}}/favicon/57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{assets}}/favicon/14x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{assets}}/favicon/72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{assets}}/favicon/144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{assets}}/favicon/120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{assets}}/favicon/152x152.png" />
+    <link rel="icon" type="image/png" href="{{assets}}/favicon/32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{assets}}/favicon/16x16.png" sizes="16x16" /> #}
 
     <!-- mobile meta (hooray!) -->
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="MobileOptimized" content="320" />
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
     <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link rel="preload" as="style" href="/{{ mainCss }}" />
-    <link rel="preload" as="script" href="/{{ mainJsModern }}" />
+    {{ custom_wp_head() }}
 
-    {% if production %}
-        <style> {{ criticalCss|raw }} </style>
-    {% else %}
-        <link rel="stylesheet" href="/css/critical.css">
-    {% endif %}
-
-    <link rel="stylesheet" data-deferStart="true" data-href="/{{ mainCss }}" media="none" onload="if(media!='all')media='all'" />
-
-    {% block head %}
-    {% endblock %}
-
-</head>
-<body class="{{ bodyClass ? bodyClass|raw : '' }}">
-
-    {% block main %}
-    {% endblock %}
-
-    <script
-      data-deferStart="true"
-      data-modernsrc="/{{ mainJsModern }}"
-      data-src="/{{ mainJs }}" defer></script>
-
-    {% include '../components/symbols.twig' %}
+    <link rel="preload" as="style" href="{{ mainCss }}">
+    <link rel="preload" as="script" href="{{ mainJsModern }}">
 
     {% if production %}
-        <script type="text/javascript">{{criticalScript|raw}}</script>
+      <style>{{source('@bundle' ~ criticalCssProd)}}</style>
     {% else %}
-        <script src="/js/critical.modern.js"></script>
+      <link rel="stylesheet" href="{{ criticalCss }}">
     {% endif %}
-    <script
-      data-modernsrc="/{{ lazysizesModern }}"
-      data-src="/{{ lazysizes }}"
-      defer
-    ></script>
-</body>
+
+    <link rel="stylesheet" data-deferStart="true" data-href="{{ mainCss }}" media="none" onload="if(media!='all')media='all'">
+
+    {% block head %}{% endblock %}
+  </head>
+  <body class="{{ bodyClass ? bodyClass|raw : '' }}">
+
+    {% include 'components/symbols.twig' %}
+
+    <main id="content">
+      {% block main %}{% endblock %}
+    </main>
+
+    <script data-deferStart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" defer></script>
+
+    {% if production %}
+      <script type="text/javascript">{{source('@bundle' ~ criticalJs)}}</script>
+    {% else %}
+      <script src="{{ criticalJsModern }}"></script>
+    {% endif %}
+
+    <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
+
+    {{ custom_wp_footer() }}
+  </body>
 </html>

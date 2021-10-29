@@ -5,7 +5,7 @@ add_action('wp_enqueue_scripts', 'cf_register_scripts');
 // Enqueue site style
 add_action('wp_enqueue_scripts', 'cf_register_styles');
 // Enqueue admin style
-// add_action('admin_enqueue_scripts', 'cf_register_admin_styles');
+add_action('admin_enqueue_scripts', 'cf_register_admin_styles');
 /**
  * The 'enqueue_block_assets' hook includes styles and scripts both in editor and frontend
  * except when is_admin() is used to include them conditionally
@@ -46,6 +46,10 @@ function cf_register_styles()
     // wp_enqueue_style('slick-css');
     // // wp_enqueue_style('slick-theme-css');
     // wp_enqueue_style('cf-main-css');
+
+    wp_dequeue_style('wp-block-library');
+    wp_dequeue_style('wp-block-library-theme');
+    wp_dequeue_style( 'wp-block-library-css' );
 }
 
 

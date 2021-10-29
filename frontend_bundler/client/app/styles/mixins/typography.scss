@@ -25,8 +25,8 @@
 @mixin generate-font-face($fontList: $fonts) {
   @each $fontID, $font in $fontList {
     $font: defaultTo($font,(
-    style: normal,
-    weight: normal
+      style: normal,
+      weight: normal
     ));
     $src: map-get($font, "src");
     $family: map-get($font, "family");
@@ -39,9 +39,9 @@
       font-style: $style;
 
       font-display: swap;
-      src: url("/assets/#{$src}.woff") format("woff"), // standards
-      url("/assets/#{$src}.ttf") format("truetype"), // Safari, Android, iOS
-      url("/assets/#{$src}.svg##{$family}") format("svg"); // legacy iOS
+      src: url("#{$assetsBasePath}/#{$src}.woff") format("woff"), // standards
+      url("#{$assetsBasePath}/#{$src}.ttf") format("truetype"), // Safari, Android, iOS
+      url("#{$assetsBasePath}/#{$src}.svg##{$family}") format("svg"); // legacy iOS
     }
   }
 }

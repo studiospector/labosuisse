@@ -1,34 +1,32 @@
 // MIXINS
 @import "mixins/index";
 // VARIABLES
-@import "variables/main";
+@import "variables/blocks";
 // VENDORS
 @import "../node_modules/sass-mq/mq";
 @import '../node_modules/swiper/swiper-bundle';
 
 // BASE STYLE
-@import "base/lb-symbols";
-@import "base/lb-picture";
-@import "base/lb-icon";
 @import "base/helpers";
+@import "base/lb-symbols";
+@import "base/lb-icon";
+@import "base/lb-picture";
 
 // TYPOGRAPHY
-// @include generate-font-face();
-// @include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+@include generate-font-face();
+@include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
 
 // CRITICAL GRID
 @include generate-grid();
 
-// COMPONENTS
-@import "components/infobox";
-@import "components/buttons";
-@import "components/block-launch-two-images";
-@import "components/hero";
-@import "components/carousel-hero";
-
-
 
 #editor {
+    // COMPONENTS
+    @import "components/buttons";
+    @import "components/infobox";
+    @import "components/block-launch-two-images";
+    @import "components/hero";
+    @import "components/carousel-hero";
 
     .edit-post-layout {
 
@@ -37,7 +35,7 @@
             padding-bottom: 10px;
             background: #f3f4f5;
 
-            // Font content
+            // Content
             .editor-styles-wrapper {
                 // font-family: 'Lato', 'sans-serif';
 
@@ -51,9 +49,15 @@
                     }
                 }
 
+                // Separator
                 .wp-block-separator {
                     margin-top: 60px;
                     margin-bottom: 60px;
+                }
+
+                // ACF Blocks
+                .acf-block-component {
+                    
                 }
             }
 

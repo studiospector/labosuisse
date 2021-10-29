@@ -35,12 +35,10 @@ function setup_theme()
     );
 
     // Gutenberg theme support
-
     add_theme_support('wp-block-styles');
-
     add_theme_support('align-wide');
-
     add_theme_support('editor-styles');
+
     /**
      *
      * Path to our custom editor style
