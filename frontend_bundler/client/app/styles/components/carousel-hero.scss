@@ -2,10 +2,28 @@ $hero-carousel-height-desk: 700px;
 $hero-carousel-height-mobile: 460px;
 
 .carousel-hero {
-    
+    position: relative;
+    overflow: hidden;
+
     @include mq($until: md) {
         margin-bottom: 55px;
         overflow: unset !important;
+    }
+
+    &__slide {
+        @include mq($until: md){
+            overflow: hidden;
+        }
+
+        .hero {
+            min-height: $hero-carousel-height-desk;
+        
+            &__img {
+                @include mq($until: md) {
+                    min-height: $hero-carousel-height-mobile;
+                }
+            }
+        }
     }
 
     &.swiper {
@@ -31,22 +49,6 @@ $hero-carousel-height-mobile: 460px;
                         transform: scale(1.5);
                         transition: $transition-base;
                     }
-                }
-            }
-        }
-    }
-
-    &__slide {
-        @include mq($until: md){
-            overflow: hidden;
-        }
-
-        .hero {
-            min-height: $hero-carousel-height-desk;
-        
-            &__img {
-                @include mq($until: md) {
-                    min-height: $hero-carousel-height-mobile;
                 }
             }
         }

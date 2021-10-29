@@ -5,11 +5,9 @@
     {% set infoboxSide = infobox.side == 'left' ? '' : 'offset-md-6' %}
     <div class="hero__infobox">
       <div class="container">
-        {# <div class="row"> #}
-          <div class="h-100 col-12 col-md-6{{ ' ' ~ infoboxSide }}">
-            {% include '@PathViews/components/infobox.twig' with infobox only %}
-          </div>
-        {# </div> #}
+        <div class="h-100 col-12 col-md-6{{ ' ' ~ infoboxSide }}">
+          {% include '@PathViews/components/infobox.twig' with infobox only %}
+        </div>
       </div>
     </div>
   {% endif %}
