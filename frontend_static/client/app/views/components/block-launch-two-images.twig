@@ -1,4 +1,4 @@
-{% from '../macro/lb-picture.twig' import lbPicture %}
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
 <section class="block-launch-two-images">
   <div class="container">
@@ -15,5 +15,5 @@
       </div>
     </div>
   </div>
-  {% include './infobox.twig' with infobox only %}
+  {% include '@PathViews/components/infobox.twig' with infobox only %}
 </section>
