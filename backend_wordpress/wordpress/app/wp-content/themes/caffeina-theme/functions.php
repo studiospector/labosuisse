@@ -95,7 +95,7 @@ function labo_acf_json_load_point( $path ) {
 
 // ACF Blocks
 include __DIR__.'/acf-config/blocks/acf-block-carousel-hero.php';
-include __DIR__.'/acf-config/blocks/acf-block-cta.php';
+include __DIR__.'/acf-config/blocks/block-launch-two-images.php';
 
 // Add custom category for components to Gutenberg editor
 add_action( 'block_categories_all', 'labo_gutenberg_block_categories', 10, 2 );
