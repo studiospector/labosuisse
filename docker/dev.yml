@@ -9,10 +9,10 @@ services:
     networks:
       labo-website-2021:
         aliases:
-          - '${VIRTUAL_HOST}.localhost'
+          - 'cms.${VIRTUAL_HOST}.localhost'
       front-tier: null
     environment:
-      VIRTUAL_HOST: '${VIRTUAL_HOST}.localhost'
+      VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}.localhost'
     depends_on:
       - backend_wordpress
       - frontend_bundler
@@ -58,7 +58,7 @@ services:
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
       MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
       MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
-      ADMIN_URL: '${VIRTUAL_HOST}.localhost'
+      ADMIN_URL: 'cms.${VIRTUAL_HOST}.localhost'
       SINK_AWS_REGION: '${BACKEND_WP_SINK_AWS_REGION}'
       SINK_AWS_BUCKET: '${BACKEND_WP_SINK_AWS_BUCKET}'
       SINK_AWS_ACCESS_ID: '${BACKEND_WP_SINK_AWS_ACCESS_ID}'
