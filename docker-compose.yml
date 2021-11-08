@@ -13,11 +13,11 @@ services:
     networks:
       labo-website-2021:
         aliases:
-          - 'cms.${VIRTUAL_HOST}'
+          - '${VIRTUAL_HOST}'
       front-tier: null
     environment:
-      VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}'
-      LETSENCRYPT_HOST: 'cms.${VIRTUAL_HOST}'
+      VIRTUAL_HOST: '${VIRTUAL_HOST}'
+      LETSENCRYPT_HOST: '{VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
   backend_wordpress:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_wordpress'
@@ -30,7 +30,7 @@ services:
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
       MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
       MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
-      ADMIN_URL: 'cms.${VIRTUAL_HOST}'
+      ADMIN_URL: '${VIRTUAL_HOST}'
       SINK_AWS_REGION: '${BACKEND_WP_SINK_AWS_REGION}'
       SINK_AWS_BUCKET: '${BACKEND_WP_SINK_AWS_BUCKET}'
       SINK_AWS_ACCESS_ID: '${BACKEND_WP_SINK_AWS_ACCESS_ID}'
@@ -86,7 +86,7 @@ services:
       LETSENCRYPT_HOST: 'storybook.${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
     depends_on:
-        - frontend_static_nginx  
+        - frontend_static_nginx
   storage_mysql:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/storage_mysql'
     environment:
