@@ -1,8 +1,9 @@
-version: '3'
+version: '3.8'
 networks:
   labo-website-2021: null
   front-tier:
-    name: front-tier
+    external:
+      name: front-tier
 services:
   backend_nginx:
     restart: unless-stopped
@@ -18,7 +19,6 @@ services:
       - frontend_bundler
       - frontend_static
     volumes:
-      - 'backend_wordpress:/var/www/html'
       - 'backend_media:/uploads'
       - >-
         ../backend_wordpress/wordpress/app/wp-content/themes:/var/www/html/wp-content-custom/themes
@@ -32,14 +32,16 @@ services:
         ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
         ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
+
   backend_wordpress:
+    build:
+      target: development
     restart: unless-stopped
     depends_on:
       - storage_mysql
       - frontend_bundler
       - frontend_static
     volumes:
-      - 'backend_wordpress:/var/www/html'
       - 'backend_media:/uploads'
       - >-
         ../backend_wordpress/wordpress/app/wp-content/themes:/var/www/html/wp-content-custom/themes
@@ -53,6 +55,7 @@ services:
         ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
         ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
+
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
@@ -205,6 +208,5 @@ services:
     networks:
       - labo-website-2021
 volumes:
-  backend_wordpress: null
   backend_media: null
   storage_mysql: null

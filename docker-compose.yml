@@ -1,15 +1,15 @@
-version: '3'
+version: '3.8'
 networks:
   labo-website-2021: null
   front-tier:
-    name: front-tier
+    external:
+      name: front-tier
 services:
   backend_nginx:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_nginx'
     restart: unless-stopped
     volumes:
       - 'backend_media:/uploads'
-      - 'backend_wordpress:/var/www/html'
     networks:
       labo-website-2021:
         aliases:
@@ -24,7 +24,6 @@ services:
     restart: unless-stopped
     volumes:
       - 'backend_media:/uploads'
-      - 'backend_wordpress:/var/www/html'
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
@@ -86,7 +85,7 @@ services:
       LETSENCRYPT_HOST: 'storybook.${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
     depends_on:
-        - frontend_static_nginx  
+        - frontend_static_nginx
   storage_mysql:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/storage_mysql'
     environment:
@@ -108,6 +107,5 @@ services:
     networks:
       - labo-website-2021
 volumes:
-  backend_wordpress: null
   backend_media: null
   storage_mysql: null

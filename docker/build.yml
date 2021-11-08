@@ -1,10 +1,11 @@
-version: '3'
+version: '3.8'
 services:
   backend_nginx:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_nginx'
     build:
       context: ..
-      dockerfile: ./backend_wordpress/nginx/docker/Dockerfile
+      dockerfile: ./backend_wordpress/wordpress/docker/Dockerfile
+      target: nginx
     environment:
       WITH_WORDPRESS: 1
   backend_wordpress:
