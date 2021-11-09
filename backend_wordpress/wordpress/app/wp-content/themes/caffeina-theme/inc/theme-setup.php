@@ -104,6 +104,17 @@ class ThemeSetup extends Timber\Site
         remove_theme_support('core-block-patterns');
 
         /**
+         * WooCommerce
+         */
+        add_theme_support('woocommerce', [
+            'product_grid' => ['default_columns' => 4],
+            'single_image_width' => 480,
+        ]);
+        add_theme_support('wc-product-gallery-zoom');
+        add_theme_support('wc-product-gallery-lightbox');
+        add_theme_support('wc-product-gallery-slider');
+
+        /**
          * Set the maximum allowed width for any content in the theme
          * like oEmbeds and images added to posts
          */
@@ -177,7 +188,7 @@ class ThemeSetup extends Timber\Site
     }
 
     /**
-     * Twig Loade setup
+     * Twig Load setup
      */
     public function lb_add_to_twig_loader($loader)
     {
@@ -262,4 +273,15 @@ function labo_gutenberg_block_categories($categories)
             ],
         ]
     );
+}
+
+
+
+/**
+ * Assign global $product object in Timber
+ */
+function timber_set_product($post)
+{
+    global $product;
+    $product = isset($post->product) ? $post->product : wc_get_product($post->ID);
 }

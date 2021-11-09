@@ -1,0 +1,22 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'page' %}
+
+{% block main %}
+
+    {% do action('woocommerce_before_main_content') %}
+
+    <div class="before-shop-loop">
+        {% do action('woocommerce_before_shop_loop') %}
+    </div>
+
+    <div class="loop">
+        {% for post in products %}
+            {% include ["@PathViews/woo/partials/tease-product.twig"] %}
+        {% endfor %}
+    </div>
+
+    {% do action('woocommerce_after_shop_loop') %}
+    {% do action('woocommerce_after_main_content') %}
+
+{% endblock %}
