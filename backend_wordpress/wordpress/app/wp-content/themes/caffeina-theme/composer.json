@@ -3,7 +3,7 @@
   "description": "Wordpress features",
   "type": "library",
   "require": {
-      "twig/twig": "^3.0"
+    "timber/timber": "^1.19.1"
   },
   "license": "MIT"
 }

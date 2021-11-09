@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f
+class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
@@ -15,11 +15,16 @@ class ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f
         'T' => 
         array (
             'Twig\\' => 5,
+            'Timber\\' => 7,
         ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
+        ),
+        'C' => 
+        array (
+            'Composer\\Installers\\' => 20,
         ),
     );
 
@@ -27,6 +32,10 @@ class ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f
         'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
+        'Timber\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/timber/timber/lib',
         ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
@@ -36,18 +45,46 @@ class ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
+        'Composer\\Installers\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+    );
+
+    public static $fallbackDirsPsr4 = array (
+        0 => __DIR__ . '/..' . '/twig/cache-extension/lib',
+    );
+
+    public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
+        'R' => 
+        array (
+            'Routes' => 
+            array (
+                0 => __DIR__ . '/..' . '/upstatement/routes',
+            ),
+        ),
     );
 
     public static $classMap = array (
+        'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInita0b0d5f6e66b965677b8a2b6c5c90c4f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc08cdc79322c86844d553c52c6a6250b::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc08cdc79322c86844d553c52c6a6250b::$prefixDirsPsr4;
+            $loader->fallbackDirsPsr4 = ComposerStaticInitc08cdc79322c86844d553c52c6a6250b::$fallbackDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc08cdc79322c86844d553c52c6a6250b::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitc08cdc79322c86844d553c52c6a6250b::$classMap;
 
         }, null, ClassLoader::class);
     }
