@@ -1,21 +1,21 @@
-{% set criticalCss = revisions('css/critical.css') %}
+{% set criticalCss = fn(['ThemeSetup', 'revision_files'], 'css/critical.css') %}
 {% set criticalCssProd = '/css/critical.css' %}
-{% set mainCss = revisions('css/main.css') %}
+{% set mainCss = fn(['ThemeSetup', 'revision_files'], 'css/main.css') %}
 {% set criticalJs = '/js/critical.js' %}
-{% set criticalJsModern = revisions('js/critical.modern.js') %}
-{% set mainJs = revisions('js/main.js') %}
-{% set mainJsModern = revisions('js/main.modern.js') %}
+{% set criticalJsModern = fn(['ThemeSetup', 'revision_files'], 'js/critical.modern.js') %}
+{% set mainJs = fn(['ThemeSetup', 'revision_files'], 'js/main.js') %}
+{% set mainJsModern = fn(['ThemeSetup', 'revision_files'], 'js/main.modern.js') %}
 
-{% set lazysizesModern = revisions('/js/independent/lazysizes.modern.js') %}
-{% set lazysizes = revisions('/js/independent/lazysizes.js') %}
+{% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %}
+{% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %}
 
 <!DOCTYPE html>
 <html class="no-js" lang="">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ page.data.title }}</title>
-    <meta name="description" content="{{ metaDescription }}">
+    {# <title>{{ page.data.title }}</title> #}
+    {# <meta name="description" content="{{ metaDescription }}"> #}
 
     {% block meta %}{% endblock %}
 
@@ -34,7 +34,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {{ custom_wp_head() }}
+    {{ fn('wp_head') }}
 
     <link rel="preload" as="style" href="{{ mainCss }}">
     <link rel="preload" as="script" href="{{ mainJsModern }}">
@@ -67,6 +67,6 @@
 
     <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
 
-    {{ custom_wp_footer() }}
+    {{ fn('wp_footer') }}
   </body>
 </html>

@@ -1,7 +1,5 @@
 <?php
 
-include get_template_directory() . '/inc/composer-packages.php';
-
 /**
  * Hero Block Template
  */
@@ -57,7 +55,7 @@ $context = [
 
 // Preview in editor
 if ( isset($block['data']['is_preview']) && $block['data']['is_preview'] == true ) {
-    echo $twig->render('gutenberg-preview.twig', [
+    Timber::render('@PathViews/gutenberg-preview.twig', [
         'base_url' => get_site_url(),
         'name' => 'Carousel Hero',
         'img' => 'block-two-images',
@@ -67,4 +65,4 @@ if ( isset($block['data']['is_preview']) && $block['data']['is_preview'] == true
 }
 
 // Render component
-echo $twig->render('./components/base/gutenberg-block-switcher.twig', $context);
+Timber::render('@PathViews/components/base/gutenberg-block-switcher.twig', $context);

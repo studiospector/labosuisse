@@ -5,4 +5,4 @@ $context = [
     'content' => apply_filters( 'the_content', get_the_content() ),
 ];
 
-echo $twig->render('page.twig', $context);
+Timber::render('@PathViews/page.twig', $context);

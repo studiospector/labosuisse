@@ -48,7 +48,6 @@ if (!defined('LB_BUILD_LIB_URI')) {
 /**
  * Includes
  */
-include __DIR__ . '/inc/composer-packages.php';
 include __DIR__ . '/inc/theme-setup.php';
 include __DIR__ . '/inc/theme-assets.php';
 

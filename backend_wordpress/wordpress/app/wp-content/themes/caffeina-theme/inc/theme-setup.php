@@ -1,62 +1,226 @@
 <?php
 
+$composer_autoload = __DIR__ . '/../vendor/autoload.php';
+if (file_exists($composer_autoload)) {
+    require_once $composer_autoload;
+    $timber = new Timber\Timber();
+}
+
 /**
- * Setup theme
+ * This ensures that Timber is loaded and available as a PHP class.
+ * If not, it gives an error message to help direct developers on where to activate
  */
-add_action('after_setup_theme', 'setup_theme');
-function setup_theme()
-{
-    // load_theme_textdomain( 'abbrivio', ABBRIVIO_DIR_PATH . '/languages' );
+if (!class_exists('Timber')) {
 
-    add_theme_support('title-tag');
-
-    add_theme_support('post-thumbnails');
-
-    add_theme_support('post-formats', array('aside', 'gallery'));
-
-    add_image_size('cf-large', 1260, 600, true);
-    add_image_size('cf-medium', 650, 470, true);
-    add_image_size('cf-small', 400, 345, true);
-
-
-    add_theme_support('customize-selective-refresh-widgets');
-
-    add_theme_support(
-        'html5',
-        [
-            'search-form',
-            'comment-form',
-            'comment-list',
-            'gallery',
-            'caption',
-            'script',
-            'style',
-        ]
+    add_action(
+        'admin_notices',
+        function () {
+            echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url(admin_url('plugins.php#timber')) . '">' . esc_url(admin_url('plugins.php')) . '</a></p></div>';
+        }
     );
 
-    // Gutenberg theme support
-    add_theme_support('wp-block-styles');
-    add_theme_support('align-wide');
-    add_theme_support('editor-styles');
+    // add_filter(
+    // 	'template_include',
+    // 	function( $template ) {
+    // 		return get_stylesheet_directory() . '/static/no-timber.html';
+    // 	}
+    // );
+
+    return;
+}
+
+/**
+ * Sets the directories (inside your theme) to find .twig files
+ */
+Timber::$dirname = ['views'];
+
+/**
+ * By default, Timber does NOT autoescape values. Want to enable Twig's autoescape?
+ * No prob! Just set this value to true
+ */
+Timber::$autoescape = false;
+
+
+/**
+ * We're going to configure our theme inside of a subclass of Timber\Site
+ * You can move this to its own file and include here via php's include("MySite.php")
+ */
+class ThemeSetup extends Timber\Site
+{
+
+    public function __construct()
+    {
+        add_action('after_setup_theme', array($this, 'theme_supports'));
+        // add_filter( 'timber/context', array( $this, 'add_to_context' ) );
+        add_filter('timber/twig', array($this, 'lb_add_to_twig'));
+        add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
+        parent::__construct();
+    }
 
     /**
-     * Path to our custom editor style
-     * It allows you to link a custom stylesheet file to the TinyMCE editor within the post edit screen
+     * Add supports
      */
-    // add_editor_style('gutenberg/editor.css');
+    public function theme_supports()
+    {
+        // load_theme_textdomain( 'labo-suisse-theme', LB_DIR_PATH . '/languages' );
 
-    // Remove the core block patterns
-    remove_theme_support('core-block-patterns');
+        add_theme_support('title-tag');
+
+        add_theme_support('post-thumbnails');
+
+        add_theme_support('post-formats', array('aside', 'gallery'));
+
+        add_image_size('lb-large', 1260, 600, true);
+        add_image_size('lb-medium', 650, 470, true);
+        add_image_size('lb-small', 400, 345, true);
+
+        add_theme_support('customize-selective-refresh-widgets');
+
+        add_theme_support(
+            'html5',
+            [
+                'search-form',
+                'comment-form',
+                'comment-list',
+                'gallery',
+                'caption',
+                'script',
+                'style',
+            ]
+        );
+
+        // Gutenberg theme support
+        add_theme_support('wp-block-styles');
+        add_theme_support('align-wide');
+        add_theme_support('editor-styles');
+
+        /**
+         * Path to our custom editor style
+         * It allows you to link a custom stylesheet file to the TinyMCE editor within the post edit screen
+         */
+        // add_editor_style('gutenberg/editor.css');
+
+        // Remove the core block patterns
+        remove_theme_support('core-block-patterns');
+
+        /**
+         * Set the maximum allowed width for any content in the theme
+         * like oEmbeds and images added to posts
+         */
+        global $content_width;
+        if (!isset($content_width)) {
+            $content_width = 1240;
+        }
+    }
 
     /**
-     * Set the maximum allowed width for any content in the theme
-     * like oEmbeds and images added to posts
+     * This is where you add some context
      */
-    global $content_width;
-    if (!isset($content_width)) {
-        $content_width = 1240;
+    // public function add_to_context( $context ) {
+    // 	$context['foo']   = 'bar';
+    // 	$context['stuff'] = 'I am a value set in your functions.php file';
+    // 	$context['notes'] = 'These values are available everytime you call Timber::context();';
+    // 	$context['menu']  = new Timber\Menu();
+    // 	$context['site']  = $this;
+    // 	return $context;
+    // }
+
+    /**
+     * Twig setup
+     */
+    public function lb_add_to_twig($twig)
+    {
+        $template_dir = get_template_directory();
+        $assets_path = get_stylesheet_directory_uri() . "/assets";
+
+        // Add Extensions
+        $twig->addExtension(new Twig\Extension\StringLoaderExtension());
+
+        // Global Variables
+        $twig->addGlobal('theme', $template_dir);
+        $twig->addGlobal('assets', $assets_path);
+
+        /**
+         * Add Custom Functions
+         */
+        $twig->addFunction(new Timber\Twig_Function('revision_files', [$this, 'revision_files']));
+
+        $twig->addFunction(new Timber\Twig_Function('current_url', function () {
+            return Timber\URLHelper::get_current_url();
+        }));
+
+        /**
+         * Add Custom Filters
+         */
+        $twig->addFilter(new Timber\Twig_Filter('trans', function ($value, $params = [], $lang = false) {
+            if ($lang) {
+                global $sitepress;
+                $current_lang = $sitepress->get_current_language();
+                $sitepress->switch_lang($lang);
+                $value = __($value, 'labo-suisse-theme');
+                $sitepress->switch_lang($current_lang);
+            } else {
+                $value = __($value, 'labo-suisse-theme');
+            }
+            if (count($params)) {
+                return vsprintf($value, $params);
+            } else {
+                return $value;
+            }
+        }));
+
+        $twig->addFilter(new Timber\Twig_Filter('is_current_url', function ($link) {
+            return (Timber\URLHelper::get_current_url() == $link) ? true : false;
+        }));
+
+        return $twig;
+    }
+
+    /**
+     * Twig Loade setup
+     */
+    public function lb_add_to_twig_loader($loader)
+    {
+        $template_dir = get_template_directory();
+        $bundle_folder = 'static';
+        $bundle_path = $template_dir . "/$bundle_folder";
+
+        // Global Paths
+        $loader->addPath($bundle_path, 'static');
+
+        // Namespaces
+        $loader->addPath($template_dir . '/views', 'PathViews');
+
+        return $loader;
+    }
+
+    /**
+     * Twig Function
+     * Get paths to static files
+     */
+    public static function revision_files($file, $manifest_name = 'rev-manifest.json')
+    {
+        $bundle_folder = 'static';
+        $manifest_path = __DIR__ . "/../../$bundle_folder/" . $manifest_name;
+
+        $theme_path = get_template_directory_uri();
+
+        if (file_exists($manifest_path)) {
+            // die($manifest_path);
+            $manifest = json_decode(file_get_contents($manifest_path), true);
+
+            if (!isset($manifest[$file])) {
+                throw new \InvalidArgumentException("File {$file} not defined in asset manifest.");
+            }
+
+            return "$theme_path/$bundle_folder/$manifest[$file]";
+        }
+
+        return "$theme_path/$bundle_folder/$file";
     }
 }
+
+new ThemeSetup();
 
 
 
