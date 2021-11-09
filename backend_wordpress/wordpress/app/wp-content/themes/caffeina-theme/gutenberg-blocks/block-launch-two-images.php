@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__.'/baseBlock.php');
-include get_template_directory() . '/functions/setup/composer-packages.php';
+include get_template_directory() . '/inc/composer-packages.php';
 use gutenbergBlocks\BaseBlock;
 $block_launch_two_images = new BaseBlock($block,$twig);
 $payload = [

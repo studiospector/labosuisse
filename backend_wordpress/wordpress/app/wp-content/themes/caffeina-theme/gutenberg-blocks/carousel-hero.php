@@ -1,6 +1,6 @@
 <?php
 
-include get_template_directory() . '/functions/setup/composer-packages.php';
+include get_template_directory() . '/inc/composer-packages.php';
 
 /**
  * Hero Block Template
