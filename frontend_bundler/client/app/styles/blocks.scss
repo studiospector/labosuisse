@@ -14,19 +14,13 @@
 
 // TYPOGRAPHY
 @include generate-font-face();
-@include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
 
 // CRITICAL GRID
 @include generate-grid();
 
 
+
 #editor {
-    // COMPONENTS
-    @import "components/buttons";
-    @import "components/infobox";
-    @import "components/block-launch-two-images";
-    @import "components/hero";
-    @import "components/carousel-hero";
 
     .edit-post-layout {
 
@@ -37,7 +31,15 @@
 
             // Content
             .editor-styles-wrapper {
-                // font-family: 'Lato', 'sans-serif';
+                // TYPOGRAPHY
+                @include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+
+                // COMPONENTS
+                @import "components/buttons";
+                @import "components/infobox";
+                @import "components/block-launch-two-images";
+                @import "components/hero";
+                @import "components/carousel-hero";
 
                 // Title
                 .editor-post-title {
@@ -56,9 +58,9 @@
                 }
 
                 // ACF Blocks
-                .acf-block-component {
+                // .acf-block-component {
                     
-                }
+                // }
             }
 
             // Style metaboxes container down the content
@@ -127,6 +129,7 @@
 
             .interface-complementary-area {
                 width: auto;
+                max-width: 540px;
             }
         }
     }
