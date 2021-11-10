@@ -75,7 +75,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/block-launch-two-images"
+                "value": "acf\/lb-launch-two-images"
             }
         ]
     ],
@@ -87,5 +87,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636490238
+    "modified": 1636541365
 }

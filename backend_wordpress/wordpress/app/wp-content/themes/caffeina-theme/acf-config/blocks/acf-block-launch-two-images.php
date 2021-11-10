@@ -6,7 +6,7 @@ function lb_init_block_launch_two_images() {
     if( function_exists('acf_register_block_type') ) {
 
         acf_register_block_type(array(
-            'name'              => 'block-launch-two-images',
+            'name'              => 'lb-launch-two-images',
             'title'             => __('block-launch-two-images'),
             'description'       => __('A custom block-launch-two-images block.'),
             'render_template'   => 'gutenberg-blocks/block-launch-two-images.php',

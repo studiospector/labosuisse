@@ -13,7 +13,7 @@ class BaseBlock {
   public function __construct($block)
   {
     $this->block = $block;
-    $this->name = str_replace("acf/","",$this->block['name']);
+    $this->name = str_replace("acf/lb-","",$this->block['name']);
     $this->id = $this->name . $block['id'];
     // $this->id = "hero-" . $this->block['id'];
     if( !empty($this->block['anchor']) ) {
@@ -43,11 +43,13 @@ class BaseBlock {
   public function addInfobox(){
       $infobox = [
             'infobox' => [
+                'side' => get_field('lb_block_infobox_side'),
                 'tagline' => get_field('lb_block_infobox_tagline'),
                 'title' => get_field('lb_block_infobox_title'),
                 'subtitle' => get_field('lb_block_infobox_subtitle'),
                 'paragraph' => get_field('lb_block_infobox_paragraph'),
-                'button' => get_field('lb_block_infobox_btn')
+                'button' => get_field('lb_block_infobox_btn'),
+                'buttonVariants' => get_field('lb_block_infobox_btn_variants')
             ]
         ];
 
@@ -65,6 +67,9 @@ class BaseBlock {
 
   }
   public function render(){
+    //   echo "<pre>";
+    //   var_dump( $this->context);
+    //   die;
    // Preview in editor
     if ( isset($this->block['data']['is_preview']) && $this->block['data']['is_preview'] == true ) {
         \Timber::render('@PathViews/gutenberg-preview.twig', [
