@@ -1,0 +1,27 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'page' %}
+
+{% block main %}
+
+    <h1>ESIGENZA</h1>
+
+    <div class="container">
+        {% for res in results|default([]) %}
+            <div class="row">
+                <div class="col-4">
+                    <h2>{{ res.brand.name }}</h2>
+                </div>
+                {% for product in res.products|default([]) %}
+                    <div class="col-4">
+                        <h4><a href="{{ fn('get_permalink', product.ID) }}">{{ product.post_title }}</a></h4>
+                    </div>
+                 {% endfor %}
+                 <div class="col-12">
+                    <hr style="width: 100%; border-bottom: 5px solid red;" />
+                 </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
