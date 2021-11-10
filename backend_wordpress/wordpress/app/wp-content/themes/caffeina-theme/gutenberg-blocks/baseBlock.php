@@ -40,9 +40,28 @@ class BaseBlock {
     ];
   }
 
+  public function addInfobox(){
+      $infobox = [
+            'infobox' => [
+                'tagline' => get_field('lb_block_infobox_tagline'),
+                'title' => get_field('lb_block_infobox_title'),
+                'subtitle' => get_field('lb_block_infobox_subtitle'),
+                'paragraph' => get_field('lb_block_infobox_paragraph'),
+                'button' => get_field('lb_block_infobox_btn')
+            ]
+        ];
+
+     $this->context['data'] = array_merge($this->context['data'],$infobox);
+     // echo "<pre>";
+    // var_dump( $this->context);
+    //die;
+  }
 
   public function setContext($payload){
     $this->context['data'] = array_merge($this->context['data'],$payload);
+//     echo "<pre>";
+// var_dump($this->context);
+// die;
 
   }
   public function render(){

@@ -40,18 +40,13 @@ if( have_rows('lb_block_carousel_hero') ) {
         ];
     endwhile;
 }
+$payload= [
+    'slides' => $slides
 
-// Payload
-$context = [
-    'block' => 'carousel-hero',
-    'data' => [
-        'conf' => [
-            'id' => esc_attr($id),
-            'classes' => esc_attr($className)
-        ],
-        'slides' => $slides
-    ]
 ];
+// $this->context['data'] = array_merge($this->context['data'],$infobox);
+$block_carousel_hero->setContext($payload);
+$block_carousel_hero->render();
 
 // Preview in editor
 if ( isset($block['data']['is_preview']) && $block['data']['is_preview'] == true ) {
