@@ -7,13 +7,35 @@
     <h1>ESIGENZA</h1>
 
     <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="tipologie">Tipologie:</label>
+                <select name="tipologie" id="tipologie">
+                    {% for typology in tipologie|default([]) %}
+                        <option value="{{ typology.slug }}">{{ typology.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-4">
+                <label for="brands">Brands:</label>
+                <select name="brands" id="brands">
+                    {% for brand in brands|default([]) %}
+                        <option value="{{ brand.slug }}">{{ brand.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <hr style="width: 100%; margin: 40px 0; border-bottom: 5px solid green;" />
+    </div>
+
+    <div class="container">
         {% for res in results|default([]) %}
             <div class="row">
-                <div class="col-4">
+                <div class="col-12 col-md-4">
                     <h2>{{ res.brand.name }}</h2>
                 </div>
                 {% for product in res.products|default([]) %}
-                    <div class="col-4">
+                    <div class="col-12 col-md-4">
                         <h4><a href="{{ fn('get_permalink', product.ID) }}">{{ product.post_title }}</a></h4>
                     </div>
                  {% endfor %}

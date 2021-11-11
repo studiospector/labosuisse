@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Template for displaying products in a product category. Simply includes the archive template
  *
@@ -15,135 +16,147 @@
  * @version     4.7.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly.
 }
 
-function get_category_parents_custom( $category_id ) {
 
+
+function get_category_parents_custom($category_id)
+{
     $args = array(
         'separator' => ',',
         'link'      => false,
         'format'    => 'slug',
     );
 
-    return substr_count(get_term_parents_list( $category_id, 'product_cat', $args ),',');
+    $parent_terms = get_term_parents_list($category_id, 'product_cat', $args);
+
+    return substr_count($parent_terms, ',');
 }
-//Search taxonomy current category
-$term = get_term_by( 'slug', get_query_var('term'), get_query_var('taxonomy') );
-//Search taxonomy current parents category
-$level = get_category_parents_custom( $term->term_id );
+// Current term
+$term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
+// Direct parents of current taxonomy
+$level = get_category_parents_custom($term->term_id);
 
 $context = [];
 
-// echo "<pre>";
-// var_dump($term,$level);
-// die;
+
+
 switch ($level) {
-  case 1:
-    //echo "macro";
-    $children = get_terms( array(
-        'taxonomy' => 'product_cat',
-        'hide_empty' => false,
-        'parent' => $term->term_id
-    ) );
-    // echo '<pre>';
-    // var_dump( $children  );
-    // die;
-    $context = [
-      'level' => 'macro',
-      'data' => [
-          'terms' => $children
-      ]
-    ];
-    Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
-  break;
-  case 2:
-     //echo "macro";
-     $children = get_terms( array(
-        'taxonomy' => 'product_cat',
-        'hide_empty' => false,
-        'parent' => $term->term_id
-    ) );
-    // echo '<pre>';
-    // var_dump( $children  );
-    // die;
-    $context = [
-      'level' => 'zona',
-      'data' => [
-          'terms' => $children
-      ]
-    ];
+    // Macro
+    case 1:
+        $product_cat_parents = get_terms(array(
+            'taxonomy' => 'product_cat',
+            'hide_empty' => false,
+            'parent' => $term->term_id
+        ));
 
-    Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
-  break;
-  case 3:
-    $res = [];
-    $brands_arr = [];
+        $context = [
+            'level' => 'macro',
+            'data' => [
+                'terms' => $product_cat_parents
+            ]
+        ];
 
-    $tipologie = get_terms( array(
-        'taxonomy' => 'product_cat',
-        'hide_empty' => false,
-        'parent' => $term->term_id,
-        'fields' => 'slugs',
-    ) );
+        Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+        break;
 
-    $brands = get_terms( array(
-      'taxonomy' => 'lb-brand',
-      'hide_empty' => false
-    ) );
 
-    foreach ($brands as $brand) {
-      $the_query = new WP_Query( array(
-        'post_type' => 'product',
-        'tax_query' => array(
-            'relation' => 'AND',
-            array (
-              'taxonomy' => 'product_cat',
-              'field' => 'slug',
-              'terms' => $tipologie,
-            ),
-            array (
-              'taxonomy' => 'lb-brand',
-              'field' => 'slug',
-              'terms' => $brand->slug,
-            )
-          ),
-      ));
+    // Zona
+    case 2:
+        $product_cat_parents = get_terms(array(
+            'taxonomy' => 'product_cat',
+            'hide_empty' => false,
+            'parent' => $term->term_id
+        ));
 
-      $brands_arr[] = $brand;
+        $context = [
+            'level' => 'zona',
+            'data' => [
+                'terms' => $product_cat_parents
+            ]
+        ];
 
-      $res_arr = [
-        'brand' => $brand,
-        'products' => $the_query->posts,
-      ];
-      $res[] = $res_arr;
-    }
+        Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+        break;
 
-    wp_reset_postdata();
 
-    $context = [
-      'level' => 'esigenza',
-      'data' => [
-        'brand' => $brands_arr,
-        'tipologie' => $tipologie,
-        'results' => $res
-      ],
-    ];
-    // echo '<pre>';
-    // var_dump($context  );
-    // die;
-    Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
-  break;
-  case 4:
-    echo "tipologia";
-    $context = [
-      'level' => 'tipologia',
-      'data' => []
-    ];
-    Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
-  break;
-  default:
-    echo "Level others";
+    // Esigenza
+    case 3:
+        $res = [];
+        $brands_arr = [];
+
+        $tipologie = get_terms(array(
+            'taxonomy' => 'product_cat',
+            'hide_empty' => false,
+            'parent' => $term->term_id,
+            // 'fields' => 'slugs',
+        ));
+
+        // Get only slugs
+        $tipologie_slugs = array_map(function($obj) { return $obj->slug;}, $tipologie);
+
+        $brands = get_terms(array(
+            'taxonomy' => 'lb-brand',
+            'hide_empty' => false
+        ));
+
+        foreach ($brands as $brand) {
+            $the_query = new WP_Query(array(
+                'post_type' => 'product',
+                'posts_per_page' => -1,
+                'tax_query' => array(
+                    'relation' => 'AND',
+                    array(
+                        'taxonomy' => 'product_cat',
+                        'field' => 'slug',
+                        'terms' => $tipologie_slugs,
+                    ),
+                    array(
+                        'taxonomy' => 'lb-brand',
+                        'field' => 'slug',
+                        'terms' => $brand->slug,
+                    )
+                ),
+            ));
+
+            if (count($the_query->posts) > 0) {
+                $brands_arr[] = $brand;
+                $res[] = [
+                    'brand' => $brand,
+                    'products' => $the_query->posts,
+                ];
+            }
+        }
+
+        wp_reset_postdata();
+
+        $context = [
+            'level' => 'esigenza',
+            'data' => [
+                'brands' => $brands_arr,
+                'tipologie' => $tipologie,
+                'results' => $res
+            ],
+        ];
+
+        Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+        break;
+
+
+    // Tipologia
+    case 4:
+        echo "Tipologia";
+        // $context = [
+        //     'level' => 'tipologia',
+        //     'data' => []
+        // ];
+        // Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+        break;
+
+
+    // Default
+    default:
+        echo "Level others";
 }
-
