@@ -55,6 +55,7 @@ switch ($level) {
         $context = [
             'level' => 'macro',
             'data' => [
+                'termName' => $term->name,
                 'terms' => $product_cat_parents
             ]
         ];
@@ -74,6 +75,7 @@ switch ($level) {
         $context = [
             'level' => 'zona',
             'data' => [
+                'termName' => $term->name,
                 'terms' => $product_cat_parents
             ]
         ];
@@ -135,6 +137,7 @@ switch ($level) {
         $context = [
             'level' => 'esigenza',
             'data' => [
+                'termName' => $term->name,
                 'brands' => $brands_arr,
                 'tipologie' => $tipologie,
                 'results' => $res
