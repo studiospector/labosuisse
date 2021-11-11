@@ -35,11 +35,7 @@
                 @include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
 
                 // COMPONENTS
-                @import "components/buttons";
-                @import "components/infobox";
-                @import "components/block-launch-two-images";
-                @import "components/hero";
-                @import "components/carousel-hero";
+                @import "components/index";
 
                 // Title
                 .editor-post-title {

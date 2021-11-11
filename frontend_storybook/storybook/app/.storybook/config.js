@@ -1,6 +1,5 @@
 import 'prismjs/themes/prism.css'
-import '../styles/critical.scss'
-import '../styles/main.scss'
+import '../styles/storybook.scss'
 
 import { configure, addParameters, addDecorator } from '@storybook/html'
 import { useEffect } from '@storybook/client-api'

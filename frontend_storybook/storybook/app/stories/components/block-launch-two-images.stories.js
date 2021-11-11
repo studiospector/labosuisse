@@ -4,8 +4,7 @@ import Component from '@okiba/component'
 
 import lazySizes from 'lazysizes'
 
-import renderLaunchTwoImages from '../../views/components/block-launch-two-images.twig'
-// import Carousel from '../../scripts/components/Carousel/default'
+import renderLaunchTwoImages from '../../views/components/launch-two-images.twig'
 
 const data = {
   imagesLeft: {
@@ -37,19 +36,4 @@ const data = {
 }
 
 storiesOf('Components|Block Launch two Images', module)
-  // .addDecorator(storyFn => {
-  //   useEffect(() => {
-  //     const app = new Component({
-  //       el: document.body,
-  //       components: [{
-  //         selector: '.js-block-launch-two-images',
-  //         type: Carousel
-  //       }]
-  //     })
-
-  //     return () => app.destroy()
-  //   }, [])
-
-  //   return storyFn()
-  // })
   .add('Default', () => renderLaunchTwoImages(data))

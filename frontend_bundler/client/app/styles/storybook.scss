@@ -1,0 +1,23 @@
+// MIXINS
+@import "mixins/index";
+// VARIABLES
+@import "variables/critical";
+// VENDORS
+@import "../node_modules/sass-mq/mq";
+@import '../node_modules/swiper/swiper-bundle';
+
+// BASE STYLE
+@import "base/index";
+
+// ASSETS BASE PATH STORYBOOK
+$assetsBasePath: '/assets';
+
+// TYPOGRAPHY
+@include generate-font-face();
+@include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+
+// CRITICAL GRID
+@include generate-grid();
+
+// CRITICAL COMPONENTS
+@import "components/index";
