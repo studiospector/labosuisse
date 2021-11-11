@@ -1,5 +1,10 @@
+// Storybook API
 import { storiesOf } from '@storybook/html'
+import { useEffect } from '@storybook/client-api'
+// Okiba API
+import Component from '@okiba/component'
 
+// Components
 import renderInfobox from '../../views/components/infobox.twig'
 
 const data = {
@@ -8,12 +13,11 @@ const data = {
     subtitle: 'Labo suisse: ricerca e innovazione',
     paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
     cta: {
-        type: 'button',
-        label: 'Scopri la linea',
         href: '#',
+        label: 'Scopri la linea',
         variants: ['primary']
     }
 }
 
 storiesOf('Components|Infobox', module)
-  .add('Default', () => renderInfobox(data))
+    .add('Default', () => renderInfobox(data))

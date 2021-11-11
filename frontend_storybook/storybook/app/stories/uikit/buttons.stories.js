@@ -1,19 +1,26 @@
+// Storybook API
 import { storiesOf } from '@storybook/html'
+import { useEffect } from '@storybook/client-api'
+// Okiba API
+import Component from '@okiba/component'
+
+// Components
 import renderButton from '../../views/components/button.twig'
 
 storiesOf('UIKit|Buttons', module)
-  .add('Primary', () => renderButton({ label: 'Lorem ipsum', variants: ['primary'] }))
-  .add('Primary Disabled', () => renderButton({ label: 'Lorem ipsum', variants: ['primary'], attributes: ['disabled'] }))
-  .add('Secondary', () => renderButton({ label: 'Lorem ipsum', variants: ['secondary'] }))
-  .add('Secondary Disabled', () => renderButton({ label: 'Lorem ipsum', variants: ['secondary'], attributes: ['disabled'] }))
-  .add('Tertiary', () => renderButton({ label: 'Lorem ipsum', variants: ['tertiary'] }))
-  .add('Tertiary Disabled', () => renderButton({ label: 'Lorem ipsum', variants: ['tertiary'], attributes: ['disabled'] }))
-
-  // .add('Negative', () => renderButton({ label: 'Lorem ipsum', variants: ['negative'] }))
-  // .add('Dark', () => renderButton({ label: 'Lorem ipsum', variants: ['dark'] }))
-  // .add('Outline', () => renderButton({ label: 'Lorem ipsum', variants: ['outline'] }))
-  // .add('Small', () => renderButton({ label: 'Lorem ipsum', variants: ['small'] }))
-  // .add('Only icon', () => renderButton({ variants: ['iconOnly'], label: 'Lorem ipsum', iconStart: { name: "edit" } }))
-  // .add('With icon (start)', () => renderButton({ label: 'Lorem ipsum', iconStart: { name: "edit" } }))
-  // .add('With icon (end)', () => renderButton({ label: 'Lorem ipsum', iconEnd: { name: "chevron-right" } }))
-  // .add('Loading', () => renderButton({ label: 'Lorem ipsum', variants: ['loading'] }))
+    // Primary
+    .add('Primary', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['primary'] }))
+    .add('Primary Disabled', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['primary'], attributes: ['disabled'] }))
+    .add('Primary with Icon', () => renderButton({ href: '#', label: 'Lorem ipsum', iconEnd: { name: 'arrow-right' }, variants: ['primary'] }))
+    // Secondary
+    .add('Secondary', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['secondary'] }))
+    .add('Secondary Disabled', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['secondary'], attributes: ['disabled'] }))
+    .add('Secondary with Icon', () => renderButton({ href: '#', label: 'Lorem ipsum', iconEnd: { name: 'arrow-right' }, variants: ['secondary'] }))
+    // Tertiary
+    .add('Tertiary', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['tertiary'] }))
+    .add('Tertiary Disabled', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['tertiary'], attributes: ['disabled'] }))
+    .add('Tertiary with Icon', () => renderButton({ href: '#', label: 'Lorem ipsum', iconEnd: { name: 'arrow-right' }, variants: ['tertiary'] }))
+    // Quaternary
+    .add('Quaternary', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['quaternary'] }))
+    .add('Quaternary Disabled', () => renderButton({ href: '#', label: 'Lorem ipsum', variants: ['quaternary'], attributes: ['disabled'] }))
+    .add('Quaternary with Icon', () => renderButton({ href: '#', label: 'Lorem ipsum', iconEnd: { name: 'arrow-right' }, variants: ['quaternary'] }))

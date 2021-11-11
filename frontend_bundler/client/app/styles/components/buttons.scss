@@ -39,9 +39,10 @@ $buttonsPropertyList: (
   @include reset-button();
 
   display: inline-flex;
-  transition: background 0.2s;
+  align-items: center;
   text-decoration: none;
   cursor: pointer;
+  transition: background 0.2s;
 
   &:disabled {
     cursor: not-allowed;
