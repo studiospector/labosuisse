@@ -1,0 +1,21 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['card--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+    <div class="card-img">
+        {{ lbPicture(images) }}
+        {% if ('type-3' in variants) or ('type-4' in variants) %}
+            <div class="card-date">{{ date }}</div>
+        {% endif %}
+    </div>
+    <div class="card-infobox">
+        {% include '@PathViews/components/infobox.twig' with infobox only %}
+    </div>
+</article>

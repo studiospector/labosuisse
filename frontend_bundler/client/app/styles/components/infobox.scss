@@ -1,5 +1,10 @@
 .infobox {
 
+    img {
+        width: auto;
+        margin-bottom: 20px;
+    }
+
     &__tagline {
         font-size: rem(16);
         font-weight: 400;

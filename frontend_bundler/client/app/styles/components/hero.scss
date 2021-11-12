@@ -3,9 +3,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+    overflow: hidden;
 
     @include mq($until: md) {
         flex-direction: column;
@@ -20,26 +18,6 @@
         
         @include mq($until: md) {
             position: absolute;
-        }
-
-        .lb-picture {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-            overflow: hidden;
-            will-change: transform;
-    
-            img {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                object-fit: cover;
-                object-position: 50% 50%;
-            }
         }
     }
 
@@ -74,6 +52,30 @@
                 &__paragraph {
                     font-size: rem(13);
                 }
+            }
+        }
+    }
+
+    &--large {
+        min-height: 700px;
+    }
+
+    &--medium {
+        min-height: 520px;
+    }
+
+    &--small {
+        min-height: 420px;
+    }
+
+    &--infobox-bottom {
+        align-items: flex-end;
+
+        .infobox {
+            margin-bottom: 80px;
+
+            @include mq($until: md) {
+                margin-bottom: 0;
             }
         }
     }

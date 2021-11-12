@@ -66,4 +66,24 @@ $buttonsPropertyList: (
   padding: $button-big-padding;
 }
 
+.button-quaternary {
+    padding-left: 0;
+    padding-right: 0;
+    
+    .button__label {
+        font-weight: 600;
+    }
+    
+    .lb-icon {
+        transition: all 0.2s;
+    }
+
+    &:hover {
+        .lb-icon {
+            transform: translateX(10px);
+            transition: all 0.2s;
+        }
+    }
+}
+
 @include generate-rules($buttonsVariablesToCSSClasses, $buttonsPropertyList, $componentsVariables);

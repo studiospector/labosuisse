@@ -8,6 +8,7 @@ import Component from '@okiba/component'
 import renderInfobox from '../../views/components/infobox.twig'
 
 const data = {
+    image: '/assets/images/crescina-logo.png',
     tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
     title: 'Favorisce la crescita<br>fisiologica dei capelli',
     subtitle: 'Labo suisse: ricerca e innovazione',

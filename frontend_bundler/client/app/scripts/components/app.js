@@ -1,10 +1,16 @@
 import Component from '@okiba/component'
 import CarouselHero from './CarouselHero'
+import Hero from './Hero'
 
 const components = {
   carouselHero: {
     selector: '.js-carousel-hero',
     type: CarouselHero,
+    optional: true
+  },
+  hero: {
+    selector: '.js-hero',
+    type: Hero,
     optional: true
   },
 }
