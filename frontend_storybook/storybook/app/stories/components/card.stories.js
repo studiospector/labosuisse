@@ -7,6 +7,7 @@ import Component from '@okiba/component'
 // Components
 import renderCard from '../../views/components/card.twig'
 
+// Lifting
 const dataCardType1 = {
     images: {
         original: '/assets/images/card-img-4.jpg',
@@ -27,27 +28,8 @@ const dataCardType1 = {
     variants: ['type-1']
 }
 
+// News
 const dataCardType2 = {
-    images: {
-        original: '/assets/images/card-img-5.jpg',
-        large: '/assets/images/card-img-5.jpg',
-        medium: '/assets/images/card-img-5.jpg',
-        small: '/assets/images/card-img-5.jpg'
-    },
-    infobox: {
-        subtitle: 'Magnetic Eyes',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        cta: {
-            href: '#',
-            label: 'Scopri di più',
-            iconEnd: { name: 'arrow-right' },
-            variants: ['quaternary']
-        }
-    },
-    variants: ['type-2']
-}
-
-const dataCardType3 = {
     images: {
         original: '/assets/images/card-img-6.jpg',
         large: '/assets/images/card-img-6.jpg',
@@ -65,10 +47,32 @@ const dataCardType3 = {
             variants: ['quaternary']
         }
     },
+    variants: ['type-2']
+}
+
+// Trattamenti
+const dataCardType3 = {
+    images: {
+        original: '/assets/images/card-img-5.jpg',
+        large: '/assets/images/card-img-5.jpg',
+        medium: '/assets/images/card-img-5.jpg',
+        small: '/assets/images/card-img-5.jpg'
+    },
+    infobox: {
+        subtitle: 'Magnetic Eyes',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        cta: {
+            href: '#',
+            label: 'Scopri di più',
+            iconEnd: { name: 'arrow-right' },
+            variants: ['quaternary']
+        }
+    },
     variants: ['type-3']
 }
 
-const dataCardType4 = {
+// Magazine
+const dataCardType6 = {
     images: {
         original: '/assets/images/card-img-6.jpg',
         large: '/assets/images/card-img-6.jpg',
@@ -86,11 +90,33 @@ const dataCardType4 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-4']
+    variants: ['type-6']
+}
+
+// Magazine
+const dataCardType8 = {
+    color: '#E6D4B0',
+    infobox: {
+        subtitle: 'LABO TRANSDERMIC',
+        paragraph: 'Una nuova generazione di skincare routine grazie alla Tecnologia Transdermica, innovazione mondiale che punta sulla penetrazione profonda dei principi attivi.',
+        cta: {
+            href: '#',
+            label: 'Scopri il brand',
+            iconEnd: { name: 'arrow-right' },
+            variants: ['quaternary']
+        }
+    },
+    variants: ['type-8']
 }
 
 storiesOf('Components|Cards', module)
-    .add('Type 1', () => renderCard(dataCardType1))
-    .add('Type 2', () => renderCard(dataCardType2))
-    .add('Type 3', () => renderCard(dataCardType3))
-    .add('Type 4', () => renderCard(dataCardType4))
+    // Lifting
+    .add('Type 1 --- Lifting', () => renderCard(dataCardType1))
+    // News
+    .add('Type 2 --- News', () => renderCard(dataCardType2))
+    // Trattamenti
+    .add('Type 3 --- Trattamenti', () => renderCard(dataCardType3))
+    // Magazine
+    .add('Type 6 --- Magazine', () => renderCard(dataCardType6))
+    // Colored
+    .add('Type 8 --- Colored', () => renderCard(dataCardType8))

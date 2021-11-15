@@ -89,7 +89,12 @@ const dataCenterInfobox = {
     infobox: {
         tagline: 'LABEL',
         title: 'Linea Lifting',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+        cta: {
+            href: '#',
+            label: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['large']

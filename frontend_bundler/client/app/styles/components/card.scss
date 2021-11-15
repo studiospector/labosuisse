@@ -18,9 +18,16 @@
         color: map-get($colors, "primary-dark-1");
     }
 
+
+
     &--type-1 {
         .card-img {
-            min-height: 340px;
+            height: 340px;
+
+            @include mq($until: md) {
+                height: 200px;
+                margin-bottom: 0;
+            }
         }
     
         .infobox {
@@ -37,27 +44,67 @@
         }
     }
 
-    &--type-2 {
+
+
+    &--type-3 {
         .card-img {
-            min-height: 400px;
+            height: 400px;
+
+            @include mq($until: md) {
+                height: 230px;
+            }
         }
     
+        .card-infobox {
+            @include mq($until: md) {
+                margin: 0 20px;
+                text-align: center;
+                border-bottom: 1px solid map-get($colors, "grey-2");
+            }
+        }
+
         .infobox {
             &__subtitle {
                 margin-bottom: 20px;
             }
+
+            &__cta {
+                @include mq($until: md) {
+                    margin-bottom: 20px;
+                }
+            }
         }
     }
 
-    &--type-3 {
+
+
+    &--type-2 {
         .card-img {
-            min-height: 270px;
+            height: 270px;
             margin-bottom: 0;
+            background-color: map-get($colors, "white");
+
+            @include mq($until: md) {
+                height: 148px;
+                padding: 20px 20px 0 20px;
+
+                .lb-picture {
+                    position: relative;
+                }
+
+                .card-date {
+                    margin: 10px 30px;
+                }
+            }
         }
 
         .card-infobox {
-            padding: 20px 30px;
-            background-color: map-get($colors, "white")
+            padding: 20px;
+            background-color: map-get($colors, "white");
+
+            @include mq($until: md) {
+                text-align: center;
+            }
         }
     
         .infobox {
@@ -71,9 +118,22 @@
         }
     }
 
-    &--type-4 {
+
+
+    &--type-6 {
         .card-img {
-            min-height: 305px;
+            height: 305px;
+
+            @include mq($until: md) {
+                height: 185px;
+            }
+        }
+
+        .card-infobox {
+            @include mq($until: md) {
+                margin: 0 20px;
+                text-align: center;
+            }
         }
     
         .infobox {
@@ -88,6 +148,19 @@
             &__paragraph {
                 font-weight: 300;
                 color: map-get($colors, "primary-dark-1");
+            }
+        }
+    }
+
+
+
+    &--type-8 {
+        padding: 30px 30px 10px;
+
+        .infobox {
+            &__text-wrap {
+                height: 100%;
+                margin-bottom: 70px;
             }
         }
     }

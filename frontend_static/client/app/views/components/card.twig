@@ -6,16 +6,28 @@
   {% set classes = classes|merge([class]) %}
 {% endif %}
 
+{% set type_1 = ('type-1' in variants) ? true : false %}
+{% set type_2_6 = ('type-2' in variants) or ('type-6' in variants) ? true : false %}
+{% set type_8 = ('type-8' in variants) ? true : false %}
+
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
-    <div class="card-img">
-        {{ lbPicture(images) }}
-        {% if ('type-3' in variants) or ('type-4' in variants) %}
-            <div class="card-date">{{ date }}</div>
+<article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ type_8 ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
+    <div class="row{{ type_1 ? ' mobile-min-gutters' : '' }}">
+        {% if images|length > 0 %}
+            <div class="{{ type_1 ? 'col-6 col-md-12' : 'col-12' }}">
+                <div class="card-img">
+                    {{ lbPicture(images) }}
+                    {% if type_2_6 %}
+                        <div class="card-date">{{ date }}</div>
+                    {% endif %}
+                </div>
+            </div>
         {% endif %}
-    </div>
-    <div class="card-infobox">
-        {% include '@PathViews/components/infobox.twig' with infobox only %}
+        <div class="{{ type_1 ? 'col-6 col-md-12' : 'col-12' }}">
+            <div class="card-infobox">
+                {% include '@PathViews/components/infobox.twig' with infobox only %}
+            </div>
+        </div>
     </div>
 </article>
