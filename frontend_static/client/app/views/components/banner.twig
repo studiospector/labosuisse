@@ -1,0 +1,32 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['banner--' ~ variant]) %}
+    {% if variant == 'right' and not infobox.cta %}
+        {% set classes = classes|merge(['without-cta']) %}
+    {% endif %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% if infobox %}
+	{% set _infoboxTextAlignment = (infoboxTextAlignment == 'left') ? '' : (infoboxTextAlignment == 'center' ? ' text-center' : ' text-right') %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="banner container{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+	{% if infobox %}
+		<div class="banner__infobox">
+			<div class="container">
+				<div class="h-100 col-12{{ _infoboxTextAlignment }}">
+					{% include '@PathViews/components/infobox.twig' with infobox only %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="banner__img">
+		{{ lbPicture(images) }}
+	</div>
+</section>

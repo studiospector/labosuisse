@@ -1,0 +1,139 @@
+.banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    @include mq($until: md) {
+        height: auto;
+        flex-direction: column;
+        padding: 30px 0;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        @include mq($until: md) {
+            position: absolute;
+        }
+    }
+
+    &__infobox {
+        width: 100%;
+        display: flex;
+        z-index: 1;
+
+        @include mq($until: md) {
+            height: 100%;
+            flex: 1 1 100%;
+            padding: 20px 0;
+        }
+
+        .infobox {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 70px 40px;
+
+            @include mq($until: md) {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                margin: 0;
+    
+                &__tagline {
+                    font-size: rem(12);
+                }
+            
+                &__title {
+                    font-size: rem(24);
+                }
+            
+                &__paragraph {
+                    font-size: rem(13);
+                }
+            }
+
+            &__text-wrap {
+                flex: 0 1 42.5%;
+                padding: 30px;
+                background-color: map-get($colors, "white");
+
+                @include mq($until: md) {
+                    flex: 0;
+                }
+
+                .js-infobox-text :last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            &__cta {
+                display: flex;
+                flex: 0 1 42.5%;
+                justify-content: right;
+                align-items: flex-end;
+                
+                @include mq($until: md) {
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+
+    &--right {
+        .infobox {
+            &__text-wrap {
+                order: 1;
+
+                @include mq($until: md) {
+                    order: 0;
+                }
+            }
+
+            &__cta {
+                justify-content: flex-start;
+                order: 0;
+
+                @include mq($until: md) {
+                    justify-content: center;
+                    order: 1;
+                }
+            }
+        }
+
+        &.without-cta {
+            .infobox {
+                justify-content: flex-end;
+
+                @include mq($until: md) {
+                    justify-content: center;
+                }
+            }
+        }
+    }
+
+    &--center {
+        .infobox {
+            width: 40%;
+            flex-direction: column;
+            margin-left: auto;
+            margin-right: auto;
+
+            @include mq($until: md) {
+                width: 100%;
+            }
+
+            &__cta {
+                justify-content: center;
+            }
+        }
+    }
+}
