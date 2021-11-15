@@ -280,7 +280,7 @@ $componentsVariables: (
 
 
 
-"btn-quaternary-default-mobile-background-color": map-get($colors, "white"),
+"btn-quaternary-default-mobile-background-color": transparent,
 "btn-quaternary-default-mobile-border": none,
 "btn-quaternary-default-mobile-border-radius": rem(50px),
 "btn-quaternary-default-mobile-color": map-get($colors, "secondary"),
@@ -289,10 +289,10 @@ $componentsVariables: (
 "btn-quaternary-default-mobile-text-transform": none,
 
 "btn-quaternary-disabled-mobile-color": map-get($colors, "secondary-light-1"),
-"btn-quaternary-disabled-mobile-background-color": map-get($colors, "white"),
-"btn-quaternary-disabled-mobile-border": 1px solid transparent,
+"btn-quaternary-disabled-mobile-background-color": transparent,
+"btn-quaternary-disabled-mobile-border": transparent,
 
-"btn-quaternary-hover-mobile-background-color": map-get($colors, "white"),
+"btn-quaternary-hover-mobile-background-color": transparent,
 
 
 
