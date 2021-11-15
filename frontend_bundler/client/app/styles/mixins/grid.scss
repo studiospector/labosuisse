@@ -116,5 +116,15 @@
         padding-left: 0;
       }
     }
+
+    .mobile-min-gutters {
+        @include mq($until: md) {
+            > .col,
+            > [class*="col-"] {
+              padding-right: rem(9);
+              padding-left: rem(9);
+            }
+        }
+      }
   }
 }
