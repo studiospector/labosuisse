@@ -25,32 +25,4 @@ $hero-carousel-height-mobile: 460px;
             }
         }
     }
-
-    &.swiper {
-        .swiper-pagination {
-            &.swiper-pagination-bullets {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 12px;
-
-                @include mq($until: md) {
-                    bottom: -35px;
-                }
-    
-                .swiper-pagination-bullet {
-                    margin: 0 6px;
-                    background: map-get($colors, "grey-2");
-                    opacity: 1;
-                    transform: scale(0.63);
-        
-                    &.swiper-pagination-bullet-active {
-                        background: map-get($colors, "secondary");
-                        transform: scale(1.5);
-                        transition: $transition-base;
-                    }
-                }
-            }
-        }
-    }
 }

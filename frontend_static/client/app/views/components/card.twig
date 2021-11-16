@@ -12,8 +12,8 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ type_8 ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
-    <div class="row{{ type_1 ? ' mobile-min-gutters' : '' }}">
+<article class="card h-100{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ (type_8 and color) ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
+    <div class="row h-100{{ type_1 ? ' mobile-min-gutters' : '' }}{{ type_2_6 ? ' no-gutters' : '' }}">
         {% if images|length > 0 %}
             <div class="{{ type_1 ? 'col-6 col-md-12' : 'col-12' }}">
                 <div class="card-img">
@@ -24,8 +24,8 @@
                 </div>
             </div>
         {% endif %}
-        <div class="{{ type_1 ? 'col-6 col-md-12' : 'col-12' }}">
-            <div class="card-infobox">
+        <div class="{{ type_1 ? 'col-6 col-md-12 ' : 'col-12 ' }}h-100">
+            <div class="card-infobox h-100">
                 {% include '@PathViews/components/infobox.twig' with infobox only %}
             </div>
         </div>

@@ -1,0 +1,100 @@
+.carousel-posts {
+    .carousel-posts {
+        &__card {
+            height: 100%;
+            padding-right: 30px;
+            z-index: 2;
+
+            @include mq($until: md) {
+                padding-right: 0;
+            }
+
+            .card {
+                padding: 70px;
+
+                @include mq($until: md) {
+                    padding: 30px;
+                    padding-bottom: 0;
+                    text-align: center;
+                }
+            }
+        }
+    
+        &__slider {
+            z-index: 1;
+
+            @include mq($until: md) {
+                padding: 20px;
+                padding-bottom: 70px;
+                background-color: map-get($colors, "primary-light-1");
+            }
+
+            .swiper {
+                @include mq($until: md) {
+                    overflow: hidden;
+                }
+
+                .swiper-pagination {
+                    bottom: 28px;
+
+                    @include mq(md) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &--one-post {
+        .carousel-posts {
+            &__slider {
+                .swiper {
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+
+    &--two-posts {
+        .carousel-posts {
+            &__card {
+                background-color: map-get($colors, "primary-light-1");
+
+                .card {
+                    padding-right: 0;
+                    
+                    @include mq($until: lg) {
+                        padding: 30px;
+                    }
+
+                    @include mq($until: md) {
+                        padding-bottom: 0;
+                    }
+                }
+
+                .infobox {
+                    justify-content: center;
+                }
+            }
+            
+            &__slider {
+                padding: 40px;
+                padding-right: 70px;
+                padding-left: 0;
+                background-color: map-get($colors, "primary-light-1");
+
+                @include mq($until: lg) {
+                    padding: 20px;
+                }
+
+                @include mq($until: md) {
+                    padding-bottom: 70px;
+                }
+
+                .swiper {
+                    overflow: hidden;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{% set classes = [] %}
+{% set dataVariants = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['carousel-posts--' ~ variant]) %}
+  {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% set variatTwoPosts = ('two-posts' in variants) ? true : false %}
+
+<section class="carousel-posts{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+    <div class="row no-gutters">
+        <div class="col-12{{ variatTwoPosts ? ' col-md-4' : ' col-md-5' }}">
+            <div class="carousel-posts__card">
+                {% include '@PathViews/components/card.twig' with leftCard only %}
+            </div>
+        </div>
+        <div class="col-12{{ variatTwoPosts ? ' col-md-8' : ' col-md-7' }}">
+            <div class="carousel-posts__slider">
+                <div class="swiper js-carousel-posts"{{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}>
+                    <div class="swiper-wrapper">
+                        {% for item in items|default([]) %}
+                            <div class="carousel-posts__slide swiper-slide">
+                                {% include '@PathViews/components/card.twig' with item only %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
