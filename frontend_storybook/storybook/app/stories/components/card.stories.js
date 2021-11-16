@@ -93,7 +93,7 @@ const dataCardType6 = {
     variants: ['type-6']
 }
 
-// Magazine
+// Colored
 const dataCardType8 = {
     color: '#E6D4B0',
     infobox: {

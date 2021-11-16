@@ -1,23 +1,25 @@
 <div class="infobox">
-	<div class="infobox__text-wrap">
-		<div class="js-infobox-text">
-			{% if image %}
-				<img src="{{ image }}">
-			{% endif %}
-			{% if tagline %}
-				<h6 class="infobox__tagline">{{ tagline }}</h6>
-			{% endif %}
-			{% if title %}
-				<h2 class="infobox__title">{{ title }}</h2>
-			{% endif %}
-			{% if subtitle %}
-				<h4 class="infobox__subtitle">{{ subtitle }}</h4>
-			{% endif %}
-			{% if paragraph %}
-				<p class="infobox__paragraph">{{ paragraph|raw }}</p>
-			{% endif %}
-		</div>
-	</div>
+    {% if image or tagline or title or subtitle or paragraph %}
+        <div class="infobox__text-wrap">
+            <div class="js-infobox-text">
+                {% if image %}
+                    <img src="{{ image }}">
+                {% endif %}
+                {% if tagline %}
+                    <h6 class="infobox__tagline">{{ tagline }}</h6>
+                {% endif %}
+                {% if title %}
+                    <h2 class="infobox__title">{{ title }}</h2>
+                {% endif %}
+                {% if subtitle %}
+                    <h4 class="infobox__subtitle">{{ subtitle }}</h4>
+                {% endif %}
+                {% if paragraph %}
+                    <p class="infobox__paragraph">{{ paragraph|raw }}</p>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
 	{% if cta %}
 		<div class="infobox__cta">
             {% include '@PathViews/components/button.twig' with cta only %}

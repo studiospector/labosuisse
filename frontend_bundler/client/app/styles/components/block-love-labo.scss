@@ -1,0 +1,22 @@
+.lovelabo {
+
+    .lovelabo {
+        &__infobox {
+            margin-bottom: 70px;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+            }
+        }
+
+        &__img {
+            height: 160px;
+
+            @include mq($until: md) {
+                &:nth-child(n+3) {
+                    display: none;
+                }
+            }
+        }
+    }
+}

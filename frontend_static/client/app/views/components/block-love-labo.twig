@@ -1,0 +1,29 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+{% if infobox %}
+    {% set cta = { cta: infobox.cta } %}
+{% endif %}
+
+<section class="lovelabo container">
+	{% if infobox %}
+        <div class="lovelabo__infobox text-center">
+            {% include '@PathViews/components/infobox.twig' with infobox|merge({cta: null}) only %}
+        </div>
+	{% endif %}
+
+	{% if items %}
+        <div class="row">
+            {% for image in items|default([]) %}
+                <div class="lovelabo__img col-6 col-md-2">
+                    {{ lbPicture(image) }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if cta %}
+        <div class="text-center">
+            {% include '@PathViews/components/infobox.twig' with cta only %}
+        </div>
+	{% endif %}
+</section>

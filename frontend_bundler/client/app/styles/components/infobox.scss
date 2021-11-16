@@ -9,6 +9,7 @@
         font-size: rem(16);
         font-weight: 400;
         color: map-get($colors, "secondary");
+        text-transform: uppercase;
     }
 
     &__title {
