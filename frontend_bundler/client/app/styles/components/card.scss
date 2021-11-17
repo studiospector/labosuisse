@@ -120,6 +120,24 @@
 
 
 
+    &--type-5 {
+        .card-img {
+            height: 410px;
+
+            @include mq($until: md) {
+                height: 300px;
+            }
+        }
+
+        .infobox {
+            @include mq($until: md) {
+                text-align: center;
+            }
+        }
+    }
+
+
+
     &--type-6 {
         .card-img {
             height: 305px;

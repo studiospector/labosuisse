@@ -71,6 +71,21 @@ const dataCardType3 = {
     variants: ['type-3']
 }
 
+// About
+const dataCardType5 = {
+    images: {
+        original: '/assets/images/card-img-7.jpg',
+        large: '/assets/images/card-img-7.jpg',
+        medium: '/assets/images/card-img-7.jpg',
+        small: '/assets/images/card-img-7.jpg'
+    },
+    infobox: {
+        subtitle: '1989: il primo lancio',
+        paragraph: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
+    },
+    variants: ['type-5']
+}
+
 // Magazine
 const dataCardType6 = {
     images: {
@@ -116,6 +131,8 @@ storiesOf('Components|Cards', module)
     .add('Type 2 --- News', () => renderCard(dataCardType2))
     // Trattamenti
     .add('Type 3 --- Trattamenti', () => renderCard(dataCardType3))
+    // About
+    .add('Type 5 --- About', () => renderCard(dataCardType5))
     // Magazine
     .add('Type 6 --- Magazine', () => renderCard(dataCardType6))
     // Colored
