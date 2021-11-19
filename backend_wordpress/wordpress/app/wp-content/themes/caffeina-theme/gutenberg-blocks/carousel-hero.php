@@ -10,19 +10,21 @@ if( have_rows('lb_block_carousel_hero') ) {
     while( have_rows('lb_block_carousel_hero') ) : the_row();
         $slides[] = [
             'images' => [
-                'original' => get_sub_field('lb_block_carousel_hero_img'),
-                'large' => get_sub_field('lb_block_carousel_hero_img'),
-                'medium' => get_sub_field('lb_block_carousel_hero_img'),
-                'small' => get_sub_field('lb_block_carousel_hero_img')
+                'original' => get_sub_field('lb_block_hero_img'),
+                'large' => get_sub_field('lb_block_hero_img'),
+                'medium' => get_sub_field('lb_block_hero_img'),
+                'small' => get_sub_field('lb_block_hero_img')
             ],
+            'infoboxPosX' => get_sub_field('lb_block_hero_infoboxposx'),
+            'infoboxPosY' => get_sub_field('lb_block_hero_infoboxposy'),
+            'container' => get_sub_field('lb_block_hero_container'),
+            'variants' => get_sub_field('lb_block_hero_variants'),
             'infobox' => [
-                'side' => get_sub_field('lb_block_infobox_side'),
                 'tagline' => get_sub_field('lb_block_infobox_tagline'),
                 'title' => get_sub_field('lb_block_infobox_title'),
                 'subtitle' => get_sub_field('lb_block_infobox_subtitle'),
                 'paragraph' => get_sub_field('lb_block_infobox_paragraph'),
-                'button' => get_sub_field('lb_block_infobox_btn'),
-                'buttonVariants' => get_sub_field('lb_block_infobox_btn_variants')
+                'cta' => array_merge( get_sub_field('lb_block_infobox_btn'),['buttonVariants' => [get_sub_field('lb_block_infobox_btn_variants')]])
             ]
         ];
     endwhile;

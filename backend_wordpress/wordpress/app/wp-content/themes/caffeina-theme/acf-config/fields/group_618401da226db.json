@@ -150,6 +150,20 @@
                 "operator": "==",
                 "value": "acf\/lb-launch-two-images"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/lb-block-love-labo"
+            }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/lb-hero"
+            }
         ]
     ],
     "menu_order": 0,
@@ -160,5 +174,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636541480
+    "modified": 1637332665
 }
