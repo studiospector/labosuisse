@@ -17,6 +17,9 @@ $typographyVariablesToCSSClasses: ()!default;
 $fonts: ()!default;
 $font-size-default: 16px;
 
+// TRANSITIONS
+$transition__base: all .5s cubic-bezier(.25,1.7,.35,.8);
+
 @import "./uikit";
 @import "./layout";
 @import "./colors";

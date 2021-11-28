@@ -1,0 +1,20 @@
+{% set dataVariants = [] %}
+{% for variant in variants|default([]) %}
+    {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}
+{% endfor %}
+
+<select
+    name="{{ id }}" id="{{ id }}"
+    class="js-custom-select"
+    {{ multiple ? ' multiple="multiple"' : '' }}
+    {{ disabled ? ' disabled="disabled"' : '' }}
+    {{ required ? ' required="required"' : '' }}
+    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
+    {{ label ? ' data-label="' ~ label ~ '"' : '' }}
+    {{ confirmBtnLabel ? ' data-btn-confirm="' ~ confirmBtnLabel ~ '"' : '' }}
+>
+    <option value>{{ placeholder }}</option>
+    {% for option in options|default([]) %}
+        <option value="{{ option.value }}">{{ option.label }}</option>
+    {% endfor %}
+</select>
