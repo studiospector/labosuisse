@@ -67,7 +67,16 @@ addDecorator(storyFn => {
     }, [])
 
     const section = document.createElement('section')
-    section.innerHTML = `${storyFn()}<div class="sb-code-block"><button class="sb-code-copy">Copy code</button><pre class="language-html"><code>${storyFn()}</code></pre></div>`
+    section.innerHTML = `
+    ${storyFn()}
+        <div class="sb-code-block">
+            <button class="sb-code-copy">Copy code</button>
+            <pre class="language-html"><code>
+                ${storyFn()}
+            </code></pre>
+        </div>
+    `
+    
     return section
 })
 
