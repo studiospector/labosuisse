@@ -1,10 +1,16 @@
 import Component from '@okiba/component'
+import LBCustomInput from './CustomInput'
 import LBCustomSelect from './CustomSelect'
 import CarouselHero from './CarouselHero'
 import CarouselPosts from './CarouselPosts'
 import Hero from './Hero'
 
 const components = {
+    customInput: {
+        selector: '.js-custom-input',
+        type: LBCustomInput,
+        optional: true
+    },
     customSelect: {
         selector: '.js-custom-select',
         type: LBCustomSelect,

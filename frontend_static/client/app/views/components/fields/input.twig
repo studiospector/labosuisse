@@ -1,0 +1,16 @@
+{% set dataVariants = [] %}
+{% for variant in variants|default([]) %}
+    {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}
+{% endfor %}
+
+<input 
+    type="{{ type|default('text') }}"
+    id="{{ name }}"
+    name="{{ name }}"
+    value="{{ value }}"
+    {{ disabled ? ' disabled="disabled"' : '' }}
+    {{ required ? ' required="required"' : '' }}
+    placeholder="{{ label }}"
+    class="js-custom-input"
+    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
+/>

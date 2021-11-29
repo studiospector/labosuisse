@@ -1,0 +1,370 @@
+.custom-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+
+    input {
+        position: relative;
+        padding: 16.5px;
+        background-color: map-get($colors, "white");
+        border: 1px solid map-get($colors, "black");
+        border-radius: 4px;
+        font-size: rem(13);
+        font-weight: 400;
+
+        &::-webkit-input-placeholder {
+            /* WebKit browsers */
+            color: transparent;
+        }
+        &:-moz-placeholder {
+            /* Mozilla Firefox 4 to 18 */
+            color: transparent;
+        }
+        &::-moz-placeholder {
+            /* Mozilla Firefox 19+ */
+            color: transparent;
+        }
+        &:-ms-input-placeholder {
+            /* Internet Explorer 10+ */
+            color: transparent;
+        }
+    }
+
+    input[type="search"]::-webkit-search-decoration,
+    input[type="search"]::-webkit-search-cancel-button,
+    input[type="search"]::-webkit-search-results-button,
+    input[type="search"]::-webkit-search-results-decoration {
+        appearance: none;
+        -webkit-appearance:none;
+    }
+
+    .custom-input-label {
+        margin-bottom: 5px;
+        margin-left: 17px;
+        font-size: rem(11);
+        color: map-get($colors, "grey-3");
+    }
+
+    &__icon {
+        height: 100%;
+        position: absolute;
+        cursor: pointer;
+        z-index: 1;
+
+        .lb-icon {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        &--next {
+            right: 0;
+            margin-right: 16.5px;
+        }
+
+        &--prev {
+            left: 0;
+            margin-left: 16.5px;
+        }
+    }
+
+    &--icon-prev {
+        input {
+            padding-left: 50px;
+        }
+
+        .custom-input-label {
+            margin-left: 50px !important;
+        }
+    }
+
+
+
+    &--disabled {
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+
+
+
+    &--primary {
+
+        .custom-input-label {
+            position: absolute;
+            top: 50%;
+            margin-bottom: 0;
+            margin-left: 17px;
+            font-size: rem(13);
+            line-height: 1;
+            color: map-get($colors, "black");
+            cursor: text;
+            user-select: none;
+            z-index: 1;
+            transform: translateY(-50%);
+            transition: $transition__base-1;
+        }
+
+        &.is-focus {
+            input {
+                padding-top: 25px;
+                padding-bottom: 8px;
+            }
+
+            .custom-input-label {
+                font-size: rem(11);
+                margin-top: 10px;
+                top: 0;
+                transform: translateY(0);
+                transition: $transition__base-1;
+            }
+        }
+    }
+}
+
+
+
+
+// @mixin input {
+//     @include placeholder {
+//       color: transparent !important;
+  
+//       user-select: none;
+//     }
+  
+//     position: relative;
+//     z-index: 1;
+  
+//     width: 100%;
+//     margin: 0;
+//     padding: rem(28px 16px 10px);
+  
+//     transition-duration: 0.2s;
+//     transition-property: background-color, border-color, color;
+  
+//     border: solid 1px $color-border;
+//     border-radius: rem(4);
+//     outline: none;
+//     background-color: map-get($colors, "white");
+//     background-position: calc(100% - #{rem(16px)}) 56% !important;
+  
+//     font-size: inherit;
+//     line-height: 1;
+  
+//     appearance: none;
+  
+//     .Field:focus-within & {
+//       border-color: map-get($colors, "primary-light-1");
+//     }
+  
+//     .Field.focus-within & {
+//       border-color: map-get($colors, "primary-light-1");
+//     }
+  
+//     .Field-dark & {
+//       color: map-get($colors, "white");
+//       border-color: currentColor;
+//       background-color: map-get($colors, "grey-dark");
+//     }
+  
+//     .Field-primary & {
+//       color: map-get($colors, "white");
+//       border-color: map-get($colors, "primary-light-1");
+//       background-color: map-get($colors, "primary");
+//     }
+  
+//     .Field-primary:focus-within & {
+//       border-color: currentColor;
+//     }
+  
+//     .Field-primary.focus-within & {
+//       border-color: currentColor;
+//     }
+  
+//     .Field-disabled & {
+//       color: map-get($colors, "grey-light");
+//       background-color: map-get($colors, "white-dirty");
+//     }
+  
+//     .Field-error & {
+//       border-color: map-get($colors, "status-error");
+//     }
+  
+//     &:not(:placeholder-shown) {
+//       border-color: currentColor;
+//     }
+  
+//     &:not(:-ms-input-placeholder) {
+//       border-color: currentColor;
+//     }
+//   }
+  
+//   .Field {
+//     position: relative;
+  
+//     display: block;
+  
+//     margin-bottom: rem(8px);
+  
+//     outline: none;
+  
+//     font-size: rem(16px);
+  
+//     [class^="col-"] > & {
+//       margin-bottom: rem(32px);
+//     }
+//   }
+  
+//   .Field_info {
+//     margin-top: rem(16);
+//     font-size: rem(14);
+//     color: map-get($colors, "grey");
+//   }
+  
+//   .Field-primary {
+//     color: map-get($colors, "white");
+//   }
+  
+//   .Field-disabled {
+//     pointer-events: none;
+//   }
+  
+//   .Field-error {
+//     z-index: 0;
+  
+//     margin-bottom: rem(32px);
+//   }
+  
+//   .Field_icon {
+//     position: absolute;
+//     z-index: 3;
+//     top: 0;
+//     left: 0;
+  
+//     width: rem(48px);
+//     height: 100%;
+  
+//     font-size: rem(20px);
+//   }
+  
+//   .Field_input {
+//     @include input();
+  
+//     min-height: rem(58px);
+  
+//     .Field_icon ~ & {
+//       padding-left: rem(48px);
+//     }
+//   }
+  
+//   .Field_label,
+//   .Field_error {
+//     position: absolute;
+//     left: 0;
+  
+//     width: 100%;
+//     padding: rem(0 16px);
+  
+//     line-height: rem(16px);
+//   }
+  
+//   .Field_label {
+//     z-index: 2;
+//     top: rem(10px);
+  
+//     transition: transform 0.2s;
+//     transform: translate3d(0, #{rem(10px)}, 0);
+//     transform-origin: 0 0;
+//     pointer-events: none;
+  
+//     .Field:focus-within & {
+//       transform: none;
+//       & > sup,
+//       & > span {
+//         transform: scale(0.875);
+  
+//         color: map-get($colors, "grey-light");
+//       }
+//     }
+  
+//     .Field.focus-within & {
+//       transform: none;
+//       & > sup,
+//       & > span {
+//         transform: scale(0.875);
+  
+//         color: map-get($colors, "grey-light");
+//       }
+//     }
+  
+//     .Field_input:not(:placeholder-shown) ~ & {
+//       transform: none;
+//       & > sup,
+//       & > span {
+//         transform: scale(0.875);
+  
+//         color: map-get($colors, "grey-light");
+//       }
+//     }
+  
+//     .Field_input:not(:-ms-input-placeholder) ~ & {
+//       transform: none;
+  
+//       & > sup,
+//       & > span {
+//         transform: scale(0.875);
+  
+//         color: map-get($colors, "grey-light");
+//       }
+//     }
+  
+//     .Field-primary:focus-within & > span {
+//       color: map-get($colors, "primary-light-3");
+//     }
+//     .Field-primary.focus-within & > span {
+//       color: map-get($colors, "primary-light-3");
+//     }
+  
+//     .Field-primary .Field_input:not(:placeholder-shown) ~ & > span {
+//       color: map-get($colors, "primary-light-3");
+//     }
+  
+//     .Field-primary .Field_input:not(:-ms-input-placeholder) ~ & > span {
+//       color: map-get($colors, "primary-light-3");
+//     }
+  
+//     .Field_icon ~ & {
+//       padding-left: rem(48px);
+//     }
+  
+//     & > sup,
+//     & > span {
+//       display: inline-block;
+  
+//       transition-duration: 0.2s;
+//       transition-property: transform, color;
+//       transform-origin: 0 0;
+//     }
+  
+//     sup {
+//       color: map-get($colors, 'primary')!important;
+//     }
+//   }
+  
+//   .Field_error {
+//     bottom: 0;
+  
+//     padding: rem(8px 16px);
+  
+//     transform: translateY(100%);
+  
+//     color: map-get($colors, "status-error");
+  
+//     font-size: rem(14px);
+//   }
+  
+//   div[id^="__lpform"] {
+//     transform: translateX(#{rem(-48px)});
+//   }
+  

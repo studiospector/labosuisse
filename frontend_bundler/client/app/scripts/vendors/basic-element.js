@@ -64,15 +64,14 @@ class BasicElement {
         const nodeList = [];
 
         // The snippet is called on a single HTMLElement
-        if (element && element instanceof HTMLElement && element.tagName.toUpperCase() === 'SELECT') {
+        if (element && element instanceof HTMLElement && this.validateElement(element)) {
             nodeList.push(element)
 
             // The snippet is called on a selector
         } else if (element && typeof element === 'string') {
             const elementsList = document.querySelectorAll(element);
             for (let i = 0, l = elementsList.length; i < l; ++i) {
-                if (elementsList[i] instanceof HTMLElement
-                    && elementsList[i].tagName.toUpperCase() === 'SELECT') {
+                if (elementsList[i] instanceof HTMLElement && this.validateElement(elementsList[i])) {
                     nodeList.push(elementsList[i])
                 }
             }
@@ -80,14 +79,25 @@ class BasicElement {
             // The snippet is called on any HTMLElements list (NodeList, HTMLCollection, Array, etc.)
         } else if (element && element.length) {
             for (let i = 0, l = element.length; i < l; ++i) {
-                if (element[i] instanceof HTMLElement
-                    && element[i].tagName.toUpperCase() === 'SELECT') {
+                if (element[i] instanceof HTMLElement && this.validateElement(element[i])) {
                     nodeList.push(element[i])
                 }
             }
         }
 
         return nodeList
+    }
+
+
+
+    /**
+     * Validate element for only <input> and <select>
+     * @param {HTMLElement} elem Element to check
+     * @returns isValid
+     */
+    validateElement(elem) {
+        const isValid = elem.tagName.toUpperCase() === 'INPUT' || elem.tagName.toUpperCase() === 'SELECT'
+        return isValid
     }
 }
 

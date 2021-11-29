@@ -26,6 +26,10 @@ body {
   font-family: $font-family-base;
 }
 
+* {
+    outline: none !important;
+}
+
 *,
 *:before,
 *:after {
