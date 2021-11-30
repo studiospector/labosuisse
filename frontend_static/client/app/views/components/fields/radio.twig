@@ -6,24 +6,28 @@
     {% set classes = classes|merge([class]) %}
 {% endif %}
 
-<div class="custom-radio{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
+<div class="custom-radio{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
     {% if label %}
         <p class="custom-radio__title">{{ label|raw }}</p>
     {% endif %}
-    <div class="custom-radio__options">
-        {% for option in options|default([]) %}
-            <label for="{{ name }}-{{ loop.index }}-{{ option.value }}">
-                <input
-                    type="radio"
-                    name="{{ name }}"
-                    id="{{ name }}-{{ loop.index }}-{{ option.value }}"
-                    value="{{ option.value }}"
-                    {{ option.checked ? ' checked="checked"' : '' }}
-                    {{ option.disabled ? ' disabled="disabled"' : '' }}
-                    {{ option.class ? ' class="' ~ option.class ~ '"' : '' }}
-                />
-                <span>{{ option.label|raw }}</span>
-            </label>
-        {% endfor %}
-    </div>
+    {% if options|default([])|length > 1 %}
+        <div class="custom-radio__options">
+            {% for option in options|default([]) %}
+                <label for="{{ name }}-{{ loop.index }}-{{ option.value }}">
+                    <input
+                        type="radio"
+                        name="{{ name }}"
+                        id="{{ name }}-{{ loop.index }}-{{ option.value }}"
+                        value="{{ option.value }}"
+                        {{ option.checked ? ' checked="checked"' : '' }}
+                        {{ option.disabled ? ' disabled="disabled"' : '' }}
+                        {{ option.class ? ' class="' ~ option.class ~ '"' : '' }}
+                    />
+                    {% if option.label %}
+                        <span>{{ option.label|raw }}</span>
+                    {% endif %}
+                </label>
+            {% endfor %}
+        </div>
+    {% endif %}
 </div>
