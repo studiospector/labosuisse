@@ -75,7 +75,12 @@ $buttonsPropertyList: (
     }
     
     .lb-icon {
+        color: map-get($colors, "secondary");
         transition: all 0.2s;
+
+        svg {
+            height: 10px;
+        }
     }
 
     &:hover {
