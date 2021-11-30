@@ -1,5 +1,5 @@
 {% set classes = [] %}
-{% for variant in variants|default([]) %}
+{% for variant in variants|default(['vertical']) %}
     {% set classes = classes|merge(['custom-radio--' ~ variant]) %}
 {% endfor %}
 {% if class %}
