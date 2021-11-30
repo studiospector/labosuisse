@@ -40,9 +40,9 @@ class BaseBlock {
     ];
   }
 
-  public function addInfobox(){
+  public function addInfobox(&$context = null){
       //creare cta
-      $infobox = [
+    $infobox = [
             'infobox' => [
                 'tagline' => get_field('lb_block_infobox_tagline'),
                 'title' => get_field('lb_block_infobox_title'),
@@ -50,9 +50,15 @@ class BaseBlock {
                 'paragraph' => get_field('lb_block_infobox_paragraph'),
                 'cta' => array_merge( get_field('lb_block_infobox_btn'),['buttonVariants' => [get_field('lb_block_infobox_btn_variants')]])
             ]
-        ];
+    ];
+    if (!empty($context) ){
+        $this->context['data'] = array_merge($this->context['data'],$infobox);
+    }else{
+        $context = array_merge( $context,$infobox);
+    }
 
-     $this->context['data'] = array_merge($this->context['data'],$infobox);
+
+
   }
 
   public function setContext($payload){
@@ -60,9 +66,7 @@ class BaseBlock {
 
   }
   public function render(){
-    //   echo '<pre>';
-    //   var_dump($this->context  );
-    //   die;
+
     if ( isset($this->block['data']['is_preview']) && $this->block['data']['is_preview'] == true ) {
         \Timber::render('@PathViews/gutenberg-preview.twig', [
             'base_url' => get_site_url(),
@@ -72,7 +76,9 @@ class BaseBlock {
         ]);
         return;
     }
-
+    // echo '<pre>';
+    // var_dump($this->context  );
+    // die;
     \Timber::render('@PathViews/components/base/gutenberg-block-switcher.twig', $this->context);
 
   }
