@@ -164,6 +164,13 @@
                 "operator": "==",
                 "value": "acf\/lb-hero"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/lb-carousel-posts"
+            }
         ]
     ],
     "menu_order": 0,
@@ -174,5 +181,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1637332665
+    "modified": 1638184838
 }
