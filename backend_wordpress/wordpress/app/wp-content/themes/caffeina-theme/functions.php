@@ -121,8 +121,7 @@ add_filter( 'wpcf7_form_tag', function ( $tag ) {
         }
     }
     if ( ! empty( $datas ) ) {
-        $name = $tag['name'];
-        $tag['name'] = $id = uniqid('wpcf');
+        $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
         add_filter( 'wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
             return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" ". wpcf7_format_atts($datas), $content));
         });
