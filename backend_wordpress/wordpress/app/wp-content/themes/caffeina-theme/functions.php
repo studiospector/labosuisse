@@ -104,3 +104,28 @@ function lb_brand_tax_init() {
 	register_taxonomy( 'lb-brand', array('product'), $args );
 }
 add_action( 'init', 'lb_brand_tax_init' );
+
+
+
+/**
+ * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
+ */
+add_filter( 'wpcf7_form_tag', function ( $tag ) {
+    $datas = [];
+    foreach ( (array)$tag['options'] as $option ) {
+        if ( strpos( $option, 'data-' ) === 0 ) {
+            $option = explode( ':', $option, 2 );
+            $data_attribute = $option[0];
+            $data_value = str_replace('|', ' ', $option[1]);
+            $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
+        }
+    }
+    if ( ! empty( $datas ) ) {
+        $name = $tag['name'];
+        $tag['name'] = $id = uniqid('wpcf');
+        add_filter( 'wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
+            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" ". wpcf7_format_atts($datas), $content));
+        });
+    }
+    return $tag;
+} );
