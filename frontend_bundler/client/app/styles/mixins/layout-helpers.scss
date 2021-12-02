@@ -144,3 +144,27 @@
         }
     }
 }
+
+@mixin checkboxVariantVertical {
+    flex: 0 1 20%;
+
+    &:nth-child(n+6) {
+        margin-top: 15px;
+    }
+
+    @include mq($until: md) {
+        flex: 0 1 30%;
+
+        &:nth-child(n+4) {
+            margin-top: 15px;
+        }
+    }
+
+    @include mq($until: xs) {
+        flex: 0 1 100%;
+
+        &:not(:first-child) {
+            margin-top: 15px;
+        }
+    }
+}
