@@ -35,7 +35,7 @@ class CustomInput extends BasicElement {
             this.currInputElemLength = this.currInputElem.length
 
             // MAIN CONTAINER
-            this.mainContainer = this.createDOMElement('LABEL', ['custom-input'], null, null, {pos: 'beforebegin', elem: this.cs[i]})
+            this.mainContainer = this.createDOMElement('LABEL', ['custom-field', 'custom-input'], null, null, {pos: 'beforebegin', elem: this.cs[i]})
             this.mainContainer.setAttribute('for', this.cs[i].getAttribute('id'))
 
             // DISABLED <input>

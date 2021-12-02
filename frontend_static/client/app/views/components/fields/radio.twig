@@ -6,7 +6,7 @@
     {% set classes = classes|merge([class]) %}
 {% endif %}
 
-<div class="custom-radio{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+<div class="custom-field custom-radio{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
     {% if label %}
         <p class="custom-radio__title">{{ label|raw }}</p>
     {% endif %}
