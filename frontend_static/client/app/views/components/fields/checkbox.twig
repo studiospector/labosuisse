@@ -1,23 +1,24 @@
 {% set classes = [] %}
 {% for variant in variants|default(['vertical']) %}
-    {% set classes = classes|merge(['custom-radio--' ~ variant]) %}
+	{% set classes = classes|merge(['custom-checkbox--' ~ variant]) %}
 {% endfor %}
 {% if class %}
-    {% set classes = classes|merge([class]) %}
+	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-<div class="custom-field custom-radio{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
-    {% if label %}
-        <p class="custom-radio__title">{{ label|raw }}</p>
-    {% endif %}
+<div class="custom-field custom-checkbox{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+	{% if label %}
+		<p class="custom-checkbox__title">{{ label|raw }}</p>
+	{% endif %}
     {% if options|default([])|length > 1 %}
-        <div class="custom-radio__options">
+        <div class="custom-checkbox__options">
             {% for option in options|default([]) %}
-                <label for="{{ name }}-{{ loop.index }}-{{ option.value }}">
+                {% set name = option.name|default(option.label|striptags|lower|replace({ ' ': '-' })) %}
+                <label for="{{ name }}">
                     <input
-                        type="radio"
+                        type="checkbox"
                         name="{{ name }}"
-                        id="{{ name }}-{{ loop.index }}-{{ option.value }}"
+                        id="{{ name }}"
                         value="{{ option.value }}"
                         {{ option.checked ? ' checked="checked"' : '' }}
                         {{ option.disabled ? ' disabled="disabled"' : '' }}

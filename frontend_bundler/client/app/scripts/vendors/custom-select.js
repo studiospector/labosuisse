@@ -39,7 +39,7 @@ class CustomSelect extends BasicElement {
             this.currSelectElemLength = this.currSelectElem.length
 
             // MAIN CONTAINER
-            this.mainContainer = this.createDOMElement('DIV', ['custom-select'], null, null, {pos: 'beforebegin', elem: this.cs[i]})
+            this.mainContainer = this.createDOMElement('DIV', ['custom-field', 'custom-select'], null, null, {pos: 'beforebegin', elem: this.cs[i]})
 
             // VARIANT
             this.selectVariant = this.cs[i].getAttribute('data-variant')

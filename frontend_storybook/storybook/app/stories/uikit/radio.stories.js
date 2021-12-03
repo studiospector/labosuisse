@@ -11,13 +11,11 @@ import renderRadio from '../../views/components/fields/radio.twig'
 const dataVertical = {
     name: "lorem-ipsum",
     label: "Lorem Ipsum",
-    disabled: false,
     options: [
-        { label: "Lorem", value: "lorem", checked: true },
-        { label: "Ipsum", value: "ipsum" },
-        { label: "Dolor", value: "dolor" },
-        { label: "Sit", value: "sit" },
-        { label: "Amet", value: "amet" },
+        { label: "Option 1", value: "option-1", checked: true },
+        { label: "Option 2", value: "option-2" },
+        { label: "Option 3", value: "option-3" },
+        { label: "Option 4", value: "option-4" },
     ],
     variants: ['vertical'],
 }
@@ -26,13 +24,11 @@ const dataVertical = {
 const dataHorizontal = {
     name: "lorem-ipsum",
     label: "Lorem Ipsum",
-    disabled: false,
     options: [
-        { label: "Lorem", value: "lorem", checked: true },
-        { label: "Ipsum", value: "ipsum" },
-        { label: "Dolor", value: "dolor" },
-        { label: "Sit", value: "sit" },
-        { label: "Amet", value: "amet" },
+        { label: "Option 1", value: "option-1", checked: true },
+        { label: "Option 2", value: "option-2" },
+        { label: "Option 3", value: "option-3" },
+        { label: "Option 4", value: "option-4" },
     ],
     variants: ['horizontal'],
 }
@@ -42,11 +38,10 @@ const dataDisabled = {
     name: "lorem-ipsum",
     label: "Lorem Ipsum",
     options: [
-        { label: "Lorem", value: "lorem" },
-        { label: "Ipsum", value: "ipsum" },
-        { label: "Dolor", value: "dolor", disabled: true },
-        { label: "Sit", value: "sit", disabled: true },
-        { label: "Amet", value: "amet" },
+        { label: "Option 1", value: "option-1" },
+        { label: "Option 2", value: "option-2", disabled: true },
+        { label: "Option 3", value: "option-3", disabled: true },
+        { label: "Option 4", value: "option-4" },
     ],
     variants: ['vertical'],
 }
