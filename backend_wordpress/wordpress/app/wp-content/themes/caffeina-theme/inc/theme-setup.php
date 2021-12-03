@@ -242,7 +242,7 @@ new ThemeSetup();
 add_filter('acf/settings/save_json', 'labo_acf_json_save_point');
 function labo_acf_json_save_point($path)
 {
-    unset($paths[0]);
+    unset($path[0]);
     $path = get_stylesheet_directory() . '/acf-config/fields';
     return $path;
 }
