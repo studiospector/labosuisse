@@ -12,8 +12,8 @@ const data = {
         title: '#lovelabo',
         paragraph: 'Segui i profili social di Labo Suisse, interagisci e condividi le tue esperienze con<br>la community online.',
         cta: {
-            href: '#',
-            label: 'Vai al profilo instagram',
+            url: '#',
+            title: 'Vai al profilo instagram',
             variants: ['tertiary']
         }
     },

@@ -16,8 +16,8 @@ const dataFull = {
             subtitle: 'Titolo di due righe come massimo',
             paragraph: 'Nella sezione News, puoi trovare i nostri contenuti editoriali: sfoglia gli articoli, prendi ispirazione e lasciati guidare dal team Labo.',
             cta: {
-                href: '#',
-                label: 'Vai a news',
+                url: '#',
+                title: 'Vai a news',
                 variants: ['secondary']
             }
         },
@@ -36,8 +36,8 @@ const dataFull = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -56,8 +56,8 @@ const dataFull = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -76,8 +76,8 @@ const dataFull = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -95,8 +95,8 @@ const dataOnePost = {
             subtitle: 'Titolo di due righe come massimo',
             paragraph: 'Nella sezione News, puoi trovare i nostri contenuti editoriali: sfoglia gli articoli, prendi ispirazione e lasciati guidare dal team Labo.',
             cta: {
-                href: '#',
-                label: 'Vai a news',
+                url: '#',
+                title: 'Vai a news',
                 variants: ['secondary']
             }
         },
@@ -115,8 +115,8 @@ const dataOnePost = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -135,8 +135,8 @@ const dataOnePost = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -155,8 +155,8 @@ const dataOnePost = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -173,8 +173,8 @@ const dataTwoPosts = {
         infobox: {
             subtitle: 'Titolo di due righe come massimo',
             cta: {
-                href: '#',
-                label: 'Vai a news',
+                url: '#',
+                title: 'Vai a news',
                 variants: ['secondary']
             }
         },
@@ -193,8 +193,8 @@ const dataTwoPosts = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -213,8 +213,8 @@ const dataTwoPosts = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
@@ -233,8 +233,8 @@ const dataTwoPosts = {
                 subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
                 paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
                 cta: {
-                    href: '#',
-                    label: 'Leggi l’articolo',
+                    url: '#',
+                    title: 'Leggi l’articolo',
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }

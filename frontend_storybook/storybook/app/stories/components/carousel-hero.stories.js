@@ -25,8 +25,8 @@ const dataRightInfobox = {
                 tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
                 title: 'Favorisce la crescita<br>fisiologica dei capelli',
                 cta: {
-                    href: '#',
-                    label: 'Scopri la linea',
+                    url: '#',
+                    title: 'Scopri la linea',
                     variants: ['secondary']
                 }
             },
@@ -47,8 +47,8 @@ const dataRightInfobox = {
                 title: 'Favorisce la crescita<br>fisiologica dei capelli',
                 paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
                 cta: {
-                    href: '#',
-                    label: 'Scopri la linea',
+                    url: '#',
+                    title: 'Scopri la linea',
                     variants: ['secondary']
                 }
             },
@@ -74,8 +74,8 @@ const dataLeftInfobox = {
                 title: 'Favorisce la crescita<br>fisiologica dei capelli',
                 paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
                 cta: {
-                    href: '#',
-                    label: 'Scopri la linea',
+                    url: '#',
+                    title: 'Scopri la linea',
                     variants: ['secondary']
                 }
             },
@@ -95,8 +95,8 @@ const dataLeftInfobox = {
                 tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
                 title: 'Favorisce la crescita<br>fisiologica dei capelli',
                 cta: {
-                    href: '#',
-                    label: 'Scopri la linea',
+                    url: '#',
+                    title: 'Scopri la linea',
                     variants: ['secondary']
                 }
             },

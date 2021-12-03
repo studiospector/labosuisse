@@ -19,8 +19,8 @@ const dataCardType1 = {
         tagline: 'TRATTAMENTO FACCIALE',
         subtitle: 'Lifting facciale: primo terzo del viso, sottomento e collo',
         cta: {
-            href: '#',
-            label: 'Scopri di più',
+            url: '#',
+            title: 'Scopri di più',
             iconEnd: { name: 'arrow-right' },
             variants: ['quaternary']
         }
@@ -41,8 +41,8 @@ const dataCardType2 = {
         subtitle: 'Titolo del contenuto editoriale che andrà nella sezione News',
         paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
         cta: {
-            href: '#',
-            label: 'Leggi l’articolo',
+            url: '#',
+            title: 'Leggi l’articolo',
             iconEnd: { name: 'arrow-right' },
             variants: ['quaternary']
         }
@@ -62,8 +62,8 @@ const dataCardType3 = {
         subtitle: 'Magnetic Eyes',
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         cta: {
-            href: '#',
-            label: 'Scopri di più',
+            url: '#',
+            title: 'Scopri di più',
             iconEnd: { name: 'arrow-right' },
             variants: ['quaternary']
         }
@@ -99,8 +99,8 @@ const dataCardType6 = {
         image: '/assets/images/crescina-logo.png',
         paragraph: 'Corriere della sera - Il Giorno - La Repubblica - Il Messaggero - Il Sole 24 Ore - Grazia',
         cta: {
-            href: '#',
-            label: 'Visualizza',
+            url: '#',
+            title: 'Visualizza',
             iconEnd: { name: 'arrow-right' },
             variants: ['quaternary']
         }
@@ -115,8 +115,8 @@ const dataCardType8 = {
         subtitle: 'LABO TRANSDERMIC',
         paragraph: 'Una nuova generazione di skincare routine grazie alla Tecnologia Transdermica, innovazione mondiale che punta sulla penetrazione profonda dei principi attivi.',
         cta: {
-            href: '#',
-            label: 'Scopri il brand',
+            url: '#',
+            title: 'Scopri il brand',
             iconEnd: { name: 'arrow-right' },
             variants: ['quaternary']
         }

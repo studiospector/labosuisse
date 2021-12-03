@@ -14,8 +14,8 @@ const data = {
     subtitle: 'Labo suisse: ricerca e innovazione',
     paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
     cta: {
-        href: '#',
-        label: 'Scopri la linea',
+        url: '#',
+        title: 'Scopri la linea',
         variants: ['primary']
     }
 }

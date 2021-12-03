@@ -36,8 +36,8 @@ const dataLeftInfoboxCTA = {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
         paragraph: 'Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit, sed do eiusmod tempor incididunt<br>ut labore et dolore magna. ',
         cta: {
-            href: '#',
-            label: 'CALL TO ACTION',
+            url: '#',
+            title: 'CALL TO ACTION',
             variants: ['secondary']
         }
     },
@@ -73,8 +73,8 @@ const dataRightInfoboxCTA = {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
         paragraph: 'Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit, sed do eiusmod tempor incididunt<br>ut labore et dolore magna.',
         cta: {
-            href: '#',
-            label: 'CALL TO ACTION',
+            url: '#',
+            title: 'CALL TO ACTION',
             variants: ['secondary']
         }
     },
@@ -110,8 +110,8 @@ const dataCenterInfoboxCTA = {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
         paragraph: 'Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit, sed do eiusmod tempor incididunt<br>ut labore et dolore magna.',
         cta: {
-            href: '#',
-            label: 'CALL TO ACTION',
+            url: '#',
+            title: 'CALL TO ACTION',
             variants: ['secondary']
         }
     },
