@@ -1,0 +1,80 @@
+import Component from '@okiba/component'
+import { qs, on, off } from '@okiba/dom'
+
+export default class Header extends Component {
+    constructor({ options, ...props }) {
+        super({ ...props })
+        
+        this.curScroll = null
+        this.prevScroll = window.scrollY
+        this.direction = 0
+        this.prevDirection = 0
+        this.firstUp = false
+        this.tempScrollUp = null
+        
+        // On scroll trigger with Locomotive
+        const customScrollbar = window.getCustomScrollbar
+        customScrollbar.on('scroll', this.checkScroll)
+
+        this.adjustMainContent()
+        on(window, 'resize', this.adjustMainContent)
+    }
+
+
+    checkScroll = (instance) => {
+        /**
+         * Find the direction of scroll:
+         * 0 - initial
+         * 1 - up
+         * 2 - down
+         */
+        this.curScroll = instance.scroll.y
+
+        // Scrolled up
+        if (this.curScroll > this.prevScroll) {
+            this.direction = 2
+            if (this.direction != this.prevDirection) {
+                this.toggleHeader(this.direction, this.curScroll)
+            }
+            this.firstUp = false
+
+        // Scrolled down
+        } else if (this.curScroll < this.prevScroll) {
+            this.direction = 1
+
+            if (this.firstUp == false) {
+                this.firstUp = true
+                this.tempScrollUp = this.curScroll - 100
+            }
+            
+            if (this.firstUp == true && (this.curScroll < this.tempScrollUp)) {
+                if (this.direction != this.prevDirection) {
+                    this.toggleHeader(this.direction, this.curScroll)
+                }
+            } else {
+                return
+            }
+        }
+
+        this.prevScroll = this.curScroll
+    }
+
+
+    toggleHeader(direction, curScroll) {
+        const headerHeight = this.el.getBoundingClientRect().height
+        if (direction === 2 && curScroll > headerHeight) {
+            this.el.classList.add('hide')
+            this.prevDirection = direction
+        } else if (direction === 1) {
+            this.el.classList.remove('hide')
+            this.prevDirection = direction
+        }
+    }
+
+
+    adjustMainContent = () => {
+        const headerHeight = this.el.getBoundingClientRect().height
+        const mainContent = qs('#content')
+        mainContent.style.paddingTop = `${headerHeight}px`
+    }
+}

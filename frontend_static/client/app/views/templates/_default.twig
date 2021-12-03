@@ -11,62 +11,69 @@
 
 <!DOCTYPE html>
 <html class="no-js" lang="">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    {# <title>{{ page.data.title }}</title> #}
-    {# <meta name="description" content="{{ metaDescription }}"> #}
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		{# <title>{{ page.data.title }}</title> #}
+		{# <meta name="description" content="{{ metaDescription }}"> #}
 
-    {% block meta %}{% endblock %}
+        {% block meta %}{% endblock %}
 
-    {# <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{assets}}/favicon/57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{assets}}/favicon/14x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{assets}}/favicon/72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{assets}}/favicon/144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{assets}}/favicon/120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{assets}}/favicon/152x152.png" />
-    <link rel="icon" type="image/png" href="{{assets}}/favicon/32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="{{assets}}/favicon/16x16.png" sizes="16x16" /> #}
+		{# <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{assets}}/favicon/57x57.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{assets}}/favicon/14x114.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{assets}}/favicon/72x72.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{assets}}/favicon/144x144.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{assets}}/favicon/120x120.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{assets}}/favicon/152x152.png" />
+        <link rel="icon" type="image/png" href="{{assets}}/favicon/32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="{{assets}}/favicon/16x16.png" sizes="16x16" /> #}
 
-    <!-- mobile meta (hooray!) -->
-    <meta name="HandheldFriendly" content="True">
-    <meta name="MobileOptimized" content="320">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- mobile meta (hooray!) -->
+		<meta name="HandheldFriendly" content="True">
+        <meta name="MobileOptimized" content="320">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    {{ fn('wp_head') }}
+		{{ fn('wp_head') }}
 
-    <link rel="preload" as="style" href="{{ mainCss }}">
-    <link rel="preload" as="script" href="{{ mainJsModern }}">
+		<link rel="preload" as="style" href="{{ mainCss }}">
+		<link rel="preload" as="script" href="{{ mainJsModern }}">
 
-    {% if production %}
-      <style>{{source('@bundle' ~ criticalCssProd)}}</style>
-    {% else %}
-      <link rel="stylesheet" href="{{ criticalCss }}">
-    {% endif %}
+		{% if production %}
+			<style>{{source('@bundle' ~ criticalCssProd)}}</style>
+		{% else %}
+			<link rel="stylesheet" href="{{ criticalCss }}">
+		{% endif %}
 
-    <link rel="stylesheet" data-deferStart="true" data-href="{{ mainCss }}" media="none" onload="if(media!='all')media='all'">
+		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="none" onload="if(media!='all')media='all'">
+        
+        {% block head %}{% endblock %}
+    </head>
+    <body class="{{ bodyClass ? bodyClass|raw : '' }}">
 
-    {% block head %}{% endblock %}
-  </head>
-  <body class="{{ bodyClass ? bodyClass|raw : '' }}">
+        <div class="js-scrollbar" data-scroll-container>
+            <!-- Header -->
+            {% include 'layout/header.twig' %}
+            <!-- Main content -->
+            <main id="content" data-scroll-section>
+                {% block main %}{% endblock %}
+            </main>
+            <!-- Footer -->
+            {% include 'layout/footer.twig' %}
+        </div>
 
-    {% include 'components/symbols.twig' %}
+        {% include 'components/symbols.twig' %}
 
-    <main id="content">
-      {% block main %}{% endblock %}
-    </main>
+        <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" defer></script>
 
-    <script data-deferStart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" defer></script>
+        {% if production %}
+            <script type="text/javascript">{{ source('@bundle' ~ criticalJs) }}</script>
+        {% else %}
+            <script src="{{ criticalJsModern }}"></script>
+        {% endif %}
 
-    {% if production %}
-      <script type="text/javascript">{{source('@bundle' ~ criticalJs)}}</script>
-    {% else %}
-      <script src="{{ criticalJsModern }}"></script>
-    {% endif %}
+        <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
 
-    <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
-
-    {{ fn('wp_footer') }}
-  </body>
+        {{ fn('wp_footer') }}
+    </body>
 </html>

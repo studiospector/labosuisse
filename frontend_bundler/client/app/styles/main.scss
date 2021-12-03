@@ -4,10 +4,14 @@
 @import "variables/main";
 // VENDORS AND MIXINS
 @import "../node_modules/sass-mq/mq";
+@import '../node_modules/locomotive-scroll/dist/locomotive-scroll';
 @import '../node_modules/swiper/swiper-bundle';
 
 // FULL GRID
 @include generate-grid();
+
+// LAYOUT
+@import "layout/index";
 
 // COMPONENTS
 @import "components/index";
