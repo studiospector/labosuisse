@@ -25,6 +25,7 @@ $payload = [
 ];
 $block_launch_two_images->setContext($payload);
 $block_launch_two_images->addInfobox();
+
 $block_launch_two_images->render();
 
 

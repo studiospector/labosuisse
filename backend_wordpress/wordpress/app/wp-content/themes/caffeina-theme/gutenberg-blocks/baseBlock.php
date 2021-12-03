@@ -42,6 +42,7 @@ class BaseBlock {
 
   public function addInfobox(&$context = null){
       //creare cta
+
     $infobox = [
             'infobox' => [
                 'tagline' => get_field('lb_block_infobox_tagline'),
@@ -51,18 +52,23 @@ class BaseBlock {
                 'cta' => array_merge( get_field('lb_block_infobox_btn'),['buttonVariants' => [get_field('lb_block_infobox_btn_variants')]])
             ]
     ];
-    if (!empty($context) ){
-        $this->context['data'] = array_merge($this->context['data'],$infobox);
-    }else{
-        $context = array_merge( $context,$infobox);
-    }
 
+    if (!is_null($context) ){
+
+       $context = array_merge($context,$infobox);
+    }else{
+        $this->context['data'] = array_merge( $this->context['data'],$infobox);
+    }
+    // echo '<pre>';
+    // var_dump( $infobox );
+    // die;
 
 
   }
 
   public function setContext($payload){
     $this->context['data'] = array_merge($this->context['data'],$payload);
+
 
   }
   public function render(){
@@ -76,9 +82,7 @@ class BaseBlock {
         ]);
         return;
     }
-    // echo '<pre>';
-    // var_dump($this->context  );
-    // die;
+
     \Timber::render('@PathViews/components/base/gutenberg-block-switcher.twig', $this->context);
 
   }
