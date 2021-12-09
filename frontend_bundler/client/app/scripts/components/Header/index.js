@@ -1,5 +1,5 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { qsa, qs, on, off } from '@okiba/dom'
 
 export default class Header extends Component {
     constructor({ options, ...props }) {
@@ -18,6 +18,9 @@ export default class Header extends Component {
 
         this.adjustMainContent()
         on(window, 'resize', this.adjustMainContent)
+
+        this.adjustMenu()
+        on(window, 'resize', this.adjustMenu)
     }
 
 
@@ -69,6 +72,15 @@ export default class Header extends Component {
             this.el.classList.remove('hide')
             this.prevDirection = direction
         }
+    }
+
+
+    adjustMenu = () => {
+        const headerHeight = this.el.getBoundingClientRect().height
+        const elems = qsa('.lb-menu__background, .lb-menu__overlay, lb-menu--desktop .lb-menu__submenu')
+        elems.forEach(elem => {
+            elem.style.top = `${headerHeight}px`
+        })
     }
 
 

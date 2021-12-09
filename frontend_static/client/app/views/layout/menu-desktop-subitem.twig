@@ -1,0 +1,22 @@
+<li class="lb-menu__item">
+
+	{% if type == 'link' %}
+		<a class="lb-menu__link lb-h6" href="{{href}}" tabindex="0">{{label}}</a>
+	{% endif %}
+
+
+	{% if type == 'image' %}
+		image
+	{% endif %}
+
+
+	{% if type == 'submenu' %}
+		<h6 class="lb-menu__header">{{label}}</h6>
+		<ul>
+			{% for item in children %}
+				{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+</li>

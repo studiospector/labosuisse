@@ -1,0 +1,111 @@
+{% set classes = ['lb-menu__item'] %}
+{% set main = false %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-menu__item--' ~ variant]) %}
+	{% if variant == 'main' %}
+		{% set main = true %}
+	{% endif %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+
+
+<li class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
+
+	{% if type == 'link' %}
+		<a class="lb-menu__link {{main ? 'lb-h5' : 'lb-p--big'}}" href="{{href}}">
+			{% if icon or badge %}
+				<span class="lb-menu__item-icon">
+					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
+				</span>
+			{% endif %}
+			<span>{{label}}</span>
+			{% if selected %}
+				{% include '@PathViews/components/icon.twig' with {name: 'check', variants: ['-right']} only %}
+			{% endif %}
+		</a>
+	{% endif %}
+
+
+	{% if type == 'submenu' %}
+		<button class="lb-menu__button lb-button {% if button is defined %} lb-button--{{ button }}{% endif %}">
+			<span class="{{main ? 'lb-h5' : 'lb-p--big'}}">
+				{% if icon %}
+					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+				{% endif %}
+				<span>{{label}}</span>
+			</span>
+			{% include "@PathViews/components/icon.twig" with {name: 'arrow-right'} only %}
+		</button>
+		<div class="lb-menu__submenu">
+			<div class="lb-menu__item lb-menu__header">
+				<button class="lb-menu__button lb-menu__back lb-button">
+					{% include "@PathViews/components/icon.twig" with {name: 'arrow-left'} only %}
+					<span class="lb-h5">{{label}}</span>
+				</button>
+			</div>
+			<div class="lb-menu-scroller">
+				<ul body-scroll-lock-ignore class="lb-menu__main">
+					{% for subitem in children %}
+						{% include "@PathViews/layout/menu-mobile-item.twig" with subitem only %}
+					{% endfor %}
+				</ul>
+				<ul class="lb-menu__fixed">
+					{% for item in fixed %}
+						{% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% endif %}
+
+
+	{% if type == 'small-submenu' %}
+		<button class="lb-menu__button lb-menu__button--small lb-button">
+			{% if icon %}
+				{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+			{% endif %}
+			<span>{{label}}</span>
+		</button>
+		<div class="lb-menu__submenu">
+			<div class="lb-menu__item lb-menu__header">
+				<button class="lb-menu__button lb-menu__back lb-button">
+					{% include "@PathViews/components/icon.twig" with {name: 'arrow', variants: ['-left']}  only  %}
+					<span class="lb-h5">{{label}}</span>
+				</button>
+			</div>
+			<div class="lb-menu-scroller">
+				<ul body-scroll-lock-ignore class="lb-menu__main">
+					{% for subitem in children %}
+						{% include "@PathViews/layout/menu-mobile-item.twig" with subitem only %}
+					{% endfor %}
+				</ul>
+				<ul class="lb-menu__fixed">
+					{% for item in fixed %}
+						{% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	{% endif %}
+
+
+	{% if type == 'small-link' %}
+		<a class="lb-menu__link lb-menu__link--small" href="{{href}}">
+			{% if icon or badge %}
+				<span class="lb-menu__item-icon">
+					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
+				</span>
+			{% endif %}
+			<span>{{label}}</span>
+			{% if selected %}
+				{% include '@PathViews/components/icon.twig' with {name: 'check', variants: ['-right']} only %}
+			{% endif %}
+		</a>
+	{% endif %}
+    
+</li>

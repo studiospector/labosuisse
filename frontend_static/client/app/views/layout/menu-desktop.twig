@@ -1,0 +1,92 @@
+{% set variant = variant|default(1) %}
+
+{% set props = [
+    {
+        type: 'link',
+        label: 'Link Normal'
+    },
+    {
+        type: 'submenu',
+        label: 'Submenu',
+        children: [
+            {
+                type: 'submenu',
+                label: 'Lorem',
+                children: [
+                    {type: 'link', label: 'link 1'},
+                    {type: 'link', label: 'link 2'},
+                    {type: 'link', label: 'link 3'},
+                    {type: 'link', label: 'link 4'},
+                ]
+            },
+            {
+                type: 'submenu',
+                label: 'Ipsum',
+                children: [
+                    {type: 'link', label: 'link 1'},
+                    {type: 'link', label: 'link 2'},
+                    {type: 'link', label: 'link 3'},
+                    {type: 'link', label: 'link 4'},
+                ]
+            },
+        ],
+        fixed: [
+            {
+                type: 'image', 
+                label: 'Fixed', 
+                href: 'https://google.it', 
+                variants: ['small'], 
+                images: ['']
+            },
+        ]
+    },
+    {
+        type: 'submenu',
+        label: 'Personalize',
+        fixed: [
+            {type: 'image', label: 'Lorem', href: 'https://google.it', images: ['']},
+            {type: 'image', label: 'Ipsum', href: 'https://google.it', images: ['']},
+        ]
+    },
+    {
+        type: 'submenu',
+        label: 'Lookbook',
+        fixed: [
+            {type: 'image', label: 'Knitwear', href: 'https://google.it', images: ['', '']},
+            {type: 'image', label: 'Knitwear', href: 'https://google.it', images: ['', '']},
+        ]
+    },
+    {
+        type: 'submenu',
+        label: 'World',
+        children: [
+            {
+                type: 'submenu',
+                label: 'Excellences',
+                children: [
+                    {type: 'link', label: 'link 1'},
+                    {type: 'link', label: 'link 2'},
+                    {type: 'link', label: 'link 3'},
+                    {type: 'link', label: 'link 4'},
+                ]
+            },
+        ],
+        fixed: [
+            {type: 'image', label: 'link 1', href: 'https://google.it', images: ['']},
+            {type: 'image', label: 'link 2', href: 'https://google.it', images: ['']},
+            {type: 'image', label: 'link 3', href: 'https://google.it', images: ['']},
+        ]
+    },
+] -%}
+
+
+
+<nav class="lb-menu lb-menu--desktop">
+    <div class="lb-menu__overlay"></div>
+    <div class="lb-menu__background"></div>
+    <ul class="lb-menu__main">
+        {% for menu in props %}
+            {% include '@PathViews/layout/menu-desktop-item.twig' with menu %}
+        {% endfor %}
+    </ul>
+</nav>

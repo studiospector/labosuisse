@@ -1,6 +1,9 @@
 import Component from '@okiba/component'
 
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import Scrollbar from './Scrollbar'
+import Menu from './Menu';
 import Header from './Header'
 import LBCustomInput from './CustomInput'
 import LBCustomSelect from './CustomSelect'
@@ -13,6 +16,11 @@ const components = {
         selector: '.js-scrollbar',
         type: Scrollbar,
         optional: true
+    },
+    menu: {
+        selector: '.js-menu',
+        type: Menu,
+        optional: true,
     },
     header: {
         selector: '.js-header',
@@ -56,7 +64,16 @@ export default class Application extends Component {
          * Locomotive scroll calculates page height on initialization.
          * Some content may have not finished to load and change page height afterwards (for example image loading).
          * So we update scroll also after first initialization to prevent hidden sections.
+         * N.B. This is only for Front-end and not for admin WP area.
          */
-        window.getCustomScrollbar.update()
+        if (!document.querySelector('body').classList.contains('wp-admin')) {
+            window.getCustomScrollbar.update()
+
+            // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+            ScrollTrigger.addEventListener("refresh", () => window.getCustomScrollbar.update());
+
+            // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+            ScrollTrigger.refresh();
+        }
     }
 }

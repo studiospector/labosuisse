@@ -11,7 +11,8 @@
 @include generate-grid();
 
 // LAYOUT
-@import "layout/index";
+@import "layout/main-content";
+@import "layout/footer";
 
 // COMPONENTS
 @import "components/index";

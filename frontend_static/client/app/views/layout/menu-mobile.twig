@@ -1,0 +1,120 @@
+{% set props = {
+    children: [
+        {
+            type: 'link', label: 'Link Normal'
+        },
+        {
+            type: 'submenu', 
+            label: 'Lorem', 
+            children: [
+                {
+                    type: 'submenu', 
+                    label: 'Ipsum 1', 
+                    children: [
+                        {type: 'link', label: 'link 1'},
+                        {type: 'link', label: 'link 2'},
+                        {type: 'link', label: 'link 3'},
+                    ]
+                },
+                {
+                    type: 'submenu', 
+                    label: 'Ipsum 2', 
+                    children: [
+                        {type: 'link', label: 'link 1'},
+                        {type: 'link', label: 'link 2'},
+                        {type: 'link', label: 'link 3'},
+                    ]
+                }
+            ]
+        },
+        {
+            type: 'submenu', 
+            label: 'Submenu',
+            children: [
+                {
+                    type: 'submenu',
+                    label: 'Lorem Ipsum',
+                    children: [
+                        {type: 'link', label: 'link 1'},
+                        {type: 'link', label: 'link 2'},
+                        {type: 'link', label: 'link 3'},
+                        {type: 'link', label: 'link 4'},
+                    ]
+                },
+                {
+                    type: 'submenu', 
+                    label: 'Lorem'
+                },
+                {
+                    type: 'submenu', 
+                    label: 'Ipsum'
+                },
+            ]
+        }
+    ],
+    fixed: [
+        {
+            type: 'small-submenu', 
+            label: 'My Account', 
+            icon: 'profile', 
+            children: [
+                {type: 'link', label: 'Logout' },
+            ]
+        },
+        {
+            type: 'small-link', 
+            label: 'Whishlist', 
+            icon: 'wishlist-off', 
+            badge: 10
+        },
+        {
+            type: 'small-submenu', 
+            label: 'Language', 
+            icon: 'language', 
+            note: 'ENG', 
+            children: [
+                {type: 'link', label: 'Italian', selected: true },
+                {type: 'link', label: 'English', selected: false },
+            ]
+        },
+        {
+            type: 'small-submenu',
+            label: 'Shipping to', 
+            icon: 'globe', 
+            note: 'ITA (eur)', 
+            children: [
+                {
+                    type: 'submenu', 
+                    label: 'Europe', 
+                    children: [
+                        {type: 'link', label: 'Austria', selected: true },
+                        {type: 'link', label: 'Belgio', selected: false },
+                    ]
+                },
+                {type: 'submenu', label: 'America'},
+                {type: 'submenu', label: 'Asia'},
+            ]
+        },
+    ]
+} -%}
+
+
+
+<nav class="lb-menu lb-menu--mobile">
+	<div class="lb-menu__wrapper">
+        <div class="lb-menu-scroller">
+            <ul body-scroll-lock-ignore class="lb-menu__main">
+                {% for item in props.children %}
+                    {% include "@PathViews/layout/menu-mobile-item.twig" with item|merge({variants: ['main']}) only %}
+                {% endfor %}
+            </ul>
+            <ul class="lb-menu__fixed">
+                <div class="lb-menu__service">
+                    {% for item in props.fixed %}
+                        {% include "@PathViews/layout/menu-mobile-item.twig" with item|merge({variants: ['accent', 'main']}) only %}
+                    {% endfor %}
+                </div>
+            </ul>
+        </div>
+	</div>
+</nav>

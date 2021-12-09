@@ -1,3 +1,34 @@
-<div class="header bg-light navbar-light home js-header" id="header">
-    <div class="sticky-header">HEADER</div>
-</div>
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-header--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+
+
+<header class="lb-header lb-header js-header js-menu {{classes|length ? ' ' ~ classes|join(' ') : '' }}">
+
+    <div class="lb-header__top container">
+        <div class="b-header__top__shield">SHIELD</div>
+        <div class="b-header__top__logo">LOGO</div>
+        <div class="b-header__top__icons">ICONS</div>
+    </div>
+
+	<div class="lb-header__bottom container">
+        <!-- Menu Desktop -->
+		<div class="lb-header__wrapper lb-header__wrapper--desktop">
+			{% include '@PathViews/layout/menu-desktop.twig' with {variant: variant} only %}
+		</div>
+        <!-- Menu Mobile -->
+		<div class="lb-header__wrapper lb-header__wrapper--mobile">
+            <a class="lb-header__hamburger">
+                <span></span>
+                <span></span>
+            </a>
+		</div>
+		{% include "@PathViews/layout/menu-mobile.twig" %}
+	</div>
+
+</header>

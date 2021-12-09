@@ -9,7 +9,7 @@
         "release": "npm run build && gulp zip-release"
     },
     "contributors": [
-        "Stefano Iachetta <stefano.iachetta@hotmail.it>"
+        "Stefano Iachetta <stefano.iachetta@caffeina.com>"
     ],
     "license": "MIT",
     "dependencies": {

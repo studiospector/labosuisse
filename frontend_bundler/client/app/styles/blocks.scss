@@ -42,12 +42,17 @@
                 @import "components/index";
 
                 // Title
-                .editor-post-title {
+                .edit-post-visual-editor__post-title-wrapper {
+                    background-color: #f3f4f5;
 
-                    &__input {
-                        // font-family: 'Lato', 'sans-serif';
-                        text-rendering: optimizelegibility;
-                        font-weight: 800;
+                    .editor-post-title {
+                        margin-top: 0;
+    
+                        &__input {
+                            // font-family: 'Lato', 'sans-serif';
+                            text-rendering: optimizelegibility;
+                            font-weight: 800;
+                        }
                     }
                 }
 
@@ -125,10 +130,11 @@
     #editor {
 
         .interface-interface-skeleton__sidebar {
-            border-left: 5px solid #ddd;
+            // border-left: 5px solid #ddd;
 
             .interface-complementary-area {
                 width: auto;
+                min-width: 360px;
                 max-width: 540px;
             }
         }

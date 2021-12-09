@@ -20,8 +20,11 @@ $assetsBasePath: '/assets';
 @include generate-font-face();
 @include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
 
-// CRITICAL GRID
+// GRID
 @include generate-grid();
 
-// CRITICAL COMPONENTS
+// LAYOUT
+@import "layout/index";
+
+// COMPONENTS
 @import "components/index";
