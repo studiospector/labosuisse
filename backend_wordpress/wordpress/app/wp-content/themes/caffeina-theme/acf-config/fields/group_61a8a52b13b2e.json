@@ -104,6 +104,13 @@
                 "operator": "==",
                 "value": "acf\/lb-banner"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
         ]
     ],
     "menu_order": 0,
@@ -114,5 +121,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1638442478
+    "modified": 1639059132
 }

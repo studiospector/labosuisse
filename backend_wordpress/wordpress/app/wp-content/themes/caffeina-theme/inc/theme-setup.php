@@ -242,7 +242,8 @@ new ThemeSetup();
 add_filter('acf/settings/save_json', 'labo_acf_json_save_point');
 function labo_acf_json_save_point($path)
 {
-    unset($path[0]);
+    // var_dump($path);die; 
+    // unset($path[0]);
     $path = get_stylesheet_directory() . '/acf-config/fields';
     return $path;
 }
@@ -251,7 +252,7 @@ function labo_acf_json_save_point($path)
 add_filter('acf/settings/load_json', 'labo_acf_json_load_point');
 function labo_acf_json_load_point($path)
 {
-    unset($path[0]);
+    // unset($path[0]);
     $path = get_stylesheet_directory() . '/acf-config/fields';
     return $path;
 }

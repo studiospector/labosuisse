@@ -1,5 +1,9 @@
 <?php
 
+require_once(__DIR__.'/pages/macro.php');
+require_once(__DIR__.'/pages/zona.php');
+require_once(__DIR__.'/pages/esigenza.php');
+
 /**
  * The Template for displaying products in a product category. Simply includes the archive template
  *
@@ -39,127 +43,43 @@ $term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 // Direct parents of current taxonomy
 $level = get_category_parents_custom($term->term_id);
 
-$context = [];
-
-
+//$context = [];
 
 switch ($level) {
     // Macro
     case 1:
-        $product_cat_parents = get_terms(array(
-            'taxonomy' => 'product_cat',
-            'hide_empty' => false,
-            'parent' => $term->term_id
-        ));
-
-        $context = [
-            'level' => 'macro',
-            'data' => [
-                'termName' => $term->name,
-                'terms' => $product_cat_parents
-            ]
-        ];
-
-        Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+    
+        $macro = new macro('macro',$term);
+        $macro->render();
         break;
 
 
     // Zona
     case 2:
-        $product_cat_parents = get_terms(array(
-            'taxonomy' => 'product_cat',
-            'hide_empty' => false,
-            'parent' => $term->term_id
-        ));
-
-        $context = [
-            'level' => 'zona',
-            'data' => [
-                'termName' => $term->name,
-                'terms' => $product_cat_parents
-            ]
-        ];
-
-        Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+ 
+        $zona = new zona('zona',$term);
+        $zona->render();
         break;
 
 
     // Esigenza
     case 3:
-        $res = [];
-        $brands_arr = [];
-
-        $tipologie = get_terms(array(
-            'taxonomy' => 'product_cat',
-            'hide_empty' => false,
-            'parent' => $term->term_id,
-            // 'fields' => 'slugs',
-        ));
-
-        // Get only slugs
-        $tipologie_slugs = array_map(function($obj) { return $obj->slug;}, $tipologie);
-
-        $brands = get_terms(array(
-            'taxonomy' => 'lb-brand',
-            'hide_empty' => false
-        ));
-
-        foreach ($brands as $brand) {
-            $the_query = new WP_Query(array(
-                'post_type' => 'product',
-                'posts_per_page' => -1,
-                'tax_query' => array(
-                    'relation' => 'AND',
-                    array(
-                        'taxonomy' => 'product_cat',
-                        'field' => 'slug',
-                        'terms' => $tipologie_slugs,
-                    ),
-                    array(
-                        'taxonomy' => 'lb-brand',
-                        'field' => 'slug',
-                        'terms' => $brand->slug,
-                    )
-                ),
-            ));
-
-            if (count($the_query->posts) > 0) {
-                $brands_arr[] = $brand;
-                $res[] = [
-                    'brand' => $brand,
-                    'products' => $the_query->posts,
-                ];
-            }
-        }
-
-        wp_reset_postdata();
-
-        $context = [
-            'level' => 'esigenza',
-            'data' => [
-                'termName' => $term->name,
-                'brands' => $brands_arr,
-                'tipologie' => $tipologie,
-                'results' => $res
-            ],
-        ];
-
-        Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+        
+        $esigenza = new esigenza('esigenza',$term);
+        $esigenza->render();
         break;
 
 
     // Tipologia
     case 4:
         echo "Tipologia";
-        // $context = [
-        //     'level' => 'tipologia',
-        //     'data' => []
-        // ];
-        // Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
         break;
 
 
     // Default
     default:
         echo "Level others";
+
 }
+
+
