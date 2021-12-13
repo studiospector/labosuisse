@@ -1,0 +1,21 @@
+{% set classes = [] %}
+{% set dataVariants = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['banner-alternate--' ~ variant]) %}
+    {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-banner-alternate"{{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}>
+    <div class="banner-alternate__img">
+		{{ lbPicture(images) }}
+	</div>
+
+    <div class="banner-alternate__infobox">
+        {% include '@PathViews/components/infobox.twig' with infobox only %}
+    </div>
+</section>

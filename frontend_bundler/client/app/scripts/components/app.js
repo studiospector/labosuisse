@@ -10,6 +10,7 @@ import LBCustomSelect from './CustomSelect'
 import CarouselHero from './CarouselHero'
 import CarouselPosts from './CarouselPosts'
 import Hero from './Hero'
+import BannerAlternate from './BannerAlternate'
 
 const components = {
     scrollbar: {
@@ -50,6 +51,11 @@ const components = {
     hero: {
         selector: '.js-hero',
         type: Hero,
+        optional: true
+    },
+    bannerAlternate: {
+        selector: '.js-banner-alternate',
+        type: BannerAlternate,
         optional: true
     },
 }
