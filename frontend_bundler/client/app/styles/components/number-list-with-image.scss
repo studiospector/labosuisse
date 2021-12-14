@@ -23,6 +23,10 @@
 
         .lb-picture {
             min-height: 420px;
+
+            @include mq($until: md) {
+                min-height: 200px;
+            }
         }
     }
 }
