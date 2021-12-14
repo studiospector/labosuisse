@@ -6,7 +6,7 @@
   {% set classes = classes|merge([class]) %}
 {% endif %}
 
-<section class="number-list{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+<section class="number-list{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }}">
     {% if title %}
         <h3 class="number-list__title">{{ title }}</h3>
     {% endif %}

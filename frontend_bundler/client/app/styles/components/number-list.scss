@@ -1,7 +1,7 @@
 .number-list {
 
     &__title {
-        margin-bottom: 50px;
+        margin-bottom: 40px;
         text-transform: uppercase;
 
         @include mq($until: lg) {
