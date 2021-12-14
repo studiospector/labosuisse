@@ -1,0 +1,25 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['number-list--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+<section class="number-list{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+    {% if title %}
+        <h3 class="number-list__title">{{ title }}</h3>
+    {% endif %}
+    {% if list %}
+        <ol class="number-list__list">
+            {% for item in list|default([]) %}
+                <li>
+                    <div class="number-list__list__item">
+                        {% if item.title %}<h5>{{ item.title }}</h5>{% endif %}
+                        {% if item.text %}<p class="p-small">{{ item.text }}</p>{% endif %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+	{% endif %} 
+</section>

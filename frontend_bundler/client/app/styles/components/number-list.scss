@@ -1,0 +1,121 @@
+.number-list {
+
+    &__title {
+        margin-bottom: 50px;
+        text-transform: uppercase;
+
+        @include mq($until: lg) {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+    }
+
+    ol {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: lbListCounter;
+
+        @include mq($until: lg) {
+            text-align: center;
+        }
+
+        li {
+            display: flex;
+            counter-increment: lbListCounter;
+
+            @include mq($until: lg) {
+                &:not(:last-child) {
+                    padding-bottom: 30px;
+                    margin-bottom: 30px;
+                    border-bottom: 1px solid map-get($colors, "grey-2");
+                }
+            }
+
+            &::before {
+                content: counter(lbListCounter)".";
+                min-width: 65px;
+                margin-right: 15px;
+                font-size: rem(56);
+                font-weight: 600;
+                line-height: 1;
+                color: map-get($colors, "secondary");
+
+                @include mq($until: md) {
+                    margin-right: 0;
+                    font-size: rem(40);
+                }
+            }
+
+            h5 {
+                text-transform: uppercase;
+            }
+        }
+    }
+
+    &--horizontal {
+        ol {
+            flex-direction: row;
+
+            @include mq($until: lg) {
+                column-gap: 0;
+            }
+
+            li {
+                flex: 0 1 25%;
+                flex-direction: column;
+                align-items: flex-start;
+
+                @include mq($until: lg) {
+                    align-items: center;
+                    flex: 1 1 100%;
+                }
+
+                h5 {
+                    margin-top: 10px;
+                }
+
+                .number-list__list__item {
+                    padding-right: 90px;
+
+                    @include mq($until: lg) {
+                        padding-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    &--vertical {
+        ol {
+            flex-direction: column;
+            row-gap: 20px;
+
+            @include mq($until: lg) {
+                row-gap: 0;
+            }
+
+            li {
+                flex: 1;
+                flex-direction: row;
+                align-items: flex-start;
+
+                @include mq($until: lg) {
+                    flex-direction: column;
+                    align-items: center;
+
+                    &::before {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                p {
+                    line-height: 24px;
+                }
+            }
+        }
+    }
+}
+
