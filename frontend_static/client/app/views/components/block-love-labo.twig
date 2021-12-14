@@ -1,10 +1,18 @@
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['lovelabo--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
 {% if infobox %}
     {% set cta = { cta: infobox.cta } %}
 {% endif %}
 
-<section class="lovelabo container">
+<section class="lovelabo{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-love-labo">
 	{% if infobox %}
         <div class="lovelabo__infobox text-center">
             {% include '@PathViews/components/infobox.twig' with infobox|merge({cta: null}) only %}
@@ -12,12 +20,17 @@
 	{% endif %}
 
 	{% if items %}
-        <div class="row">
-            {% for image in items|default([]) %}
-                <div class="lovelabo__img col-6 col-md-2">
-                    {{ lbPicture(image) }}
-                </div>
-            {% endfor %}
+        <div class="lovelabo__grid">
+            <div class="row">
+                {% for item in items|default([]) %}
+                    <div class="lovelabo__img col-6 col-md-2">
+                        {{ lbPicture(item.images) }}
+                        {% if item.text %}
+                            <p class="p-small">{{ item.text }}</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     {% endif %}
 

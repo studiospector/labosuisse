@@ -9,12 +9,50 @@
             }
         }
 
-        &__img {
-            height: 160px;
+        &__grid {
+            position: relative;
+        }
 
-            @include mq($until: md) {
-                &:nth-child(n+3) {
-                    display: none;
+        &__img {
+            .lb-picture {
+                height: 160px;
+            }
+
+            .p-small {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    &--default {
+        .lovelabo {
+            &__img {
+                @include mq($until: md) {
+                    &:nth-child(n+3) {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
+    &--full {
+        .lovelabo {
+            &__grid {
+                .row {
+                    @include mq($until: md) {
+                        flex-wrap: nowrap;
+                        overflow-x: scroll;
+                        white-space: nowrap;
+                        touch-action: pan-x;
+                        cursor: grab;
+                    }
+                }
+            }
+
+            &__img {
+                .p-small {
+                    white-space: initial;
                 }
             }
         }

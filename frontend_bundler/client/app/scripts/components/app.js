@@ -11,6 +11,7 @@ import CarouselHero from './CarouselHero'
 import CarouselPosts from './CarouselPosts'
 import Hero from './Hero'
 import BannerAlternate from './BannerAlternate'
+import BlockLoveLabo from './BlockLoveLabo'
 
 const components = {
     scrollbar: {
@@ -56,6 +57,11 @@ const components = {
     bannerAlternate: {
         selector: '.js-banner-alternate',
         type: BannerAlternate,
+        optional: true
+    },
+    blockLoveLabo: {
+        selector: '.js-love-labo',
+        type: BlockLoveLabo,
         optional: true
     },
 }
