@@ -28,6 +28,26 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_61b9bf75883ef",
+            "label": "text 1",
+            "name": "lb_block_love_labo_text_1",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_61963b87c9a42",
             "label": "image 2",
             "name": "lb_block_love_labo_img_2",
@@ -50,6 +70,26 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61b9bf99883f0",
+            "label": "text 2",
+            "name": "lb_block_love_labo_text_2",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
             "wpml_cf_preferences": 2
         },
         {
@@ -78,6 +118,26 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_61b9bf9b883f1",
+            "label": "text 3",
+            "name": "lb_block_love_labo_text_3",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_61963b96c9a44",
             "label": "image 4",
             "name": "lb_block_love_labo_img_4",
@@ -100,6 +160,26 @@
             "max_height": "",
             "max_size": "",
             "mime_types": "",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61b9bf9f883f2",
+            "label": "text 4",
+            "name": "lb_block_love_labo_text_4",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
             "wpml_cf_preferences": 2
         },
         {
@@ -128,6 +208,26 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_61b9bfa1883f3",
+            "label": "text 5",
+            "name": "lb_block_love_labo_text_5",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_61963b99c9a46",
             "label": "image 6",
             "name": "lb_block_love_labo_img_6",
@@ -151,6 +251,26 @@
             "max_size": "",
             "mime_types": "",
             "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61b9bfa4883f4",
+            "label": "text 6",
+            "name": "lb_block_love_labo_text_6",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
         }
     ],
     "location": [
@@ -170,5 +290,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1637332603
+    "modified": 1639563389
 }

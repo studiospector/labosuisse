@@ -49,7 +49,7 @@ class BaseBlock {
                 'title' => get_field('lb_block_infobox_title'),
                 'subtitle' => get_field('lb_block_infobox_subtitle'),
                 'paragraph' => get_field('lb_block_infobox_paragraph'),
-                'cta' => array_merge( get_field('lb_block_infobox_btn'),['variants' => [get_field('lb_block_infobox_btn_variants')]])
+                'cta' => array_merge( is_array(get_field('lb_block_infobox_btn')) ? get_field('lb_block_infobox_btn') : [] ,['variants' => [get_field('lb_block_infobox_btn_variants')]])
             ]
     ];
 
@@ -72,7 +72,8 @@ class BaseBlock {
 
   }
   public function render(){
-
+//       echo "<pre>";
+// var_dump($this->context);die;
     if ( isset($this->block['data']['is_preview']) && $this->block['data']['is_preview'] == true ) {
         \Timber::render('@PathViews/gutenberg-preview.twig', [
             'base_url' => get_site_url(),
