@@ -1,0 +1,29 @@
+.lb-separator {
+    min-height: 1px;
+    margin: 0 !important;
+    border: 0 !important;
+
+    &--big {
+        padding: 60px 0;
+
+        @include mq($until: md) {
+            padding: 50px 0;
+        }
+    }
+
+    &--medium {
+        padding: 30px 0;
+
+        @include mq($until: md) {
+            padding: 15px 0;
+        }
+    }
+
+    &--small {
+        padding: 15px 0;
+
+        @include mq($until: md) {
+            padding: 10px 0;
+        }
+    }
+}

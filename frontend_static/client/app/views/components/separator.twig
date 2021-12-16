@@ -1,0 +1,14 @@
+{% set classes = [] %}
+{% set dataVariants = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['lb-separator--' ~ variant]) %}
+  {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+<hr
+    class="lb-separator{{ classes|length ? ' ' ~ classes|join(' ') : '' }}" 
+    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
+/>
