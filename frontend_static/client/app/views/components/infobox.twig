@@ -13,6 +13,9 @@
                 {% if image %}
                     <img src="{{ image }}">
                 {% endif %}
+                {% if date %}
+                    <p class="infobox__date">{{ date }}</p>
+                {% endif %}
                 {% if tagline %}
                     <h6 class="infobox__tagline">{{ tagline }}</h6>
                 {% endif %}

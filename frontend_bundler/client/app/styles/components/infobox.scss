@@ -5,6 +5,14 @@
         margin-bottom: 20px;
     }
 
+    &__date {
+        font-size: rem(16);
+        font-weight: 300;
+        color: map-get($colors, "primary-dark-1");
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
     &__tagline {
         font-size: rem(16);
         font-weight: 400;

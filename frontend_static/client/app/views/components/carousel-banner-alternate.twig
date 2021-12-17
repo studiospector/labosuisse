@@ -1,0 +1,10 @@
+<section class="carousel-banner-alternate container swiper js-carousel-banner-alternate">
+    <div class="swiper-wrapper">
+        {% for slide in slides|default([]) %}
+            <div class="carousel-banner-alternate__slide swiper-slide">
+                {% include '@PathViews/components/banner-alternate.twig' with slide only %}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="swiper-pagination"></div>
+</section>
