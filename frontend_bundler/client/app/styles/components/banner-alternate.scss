@@ -151,4 +151,30 @@
     &--infobox-centered {
         align-items: center;
     }
+
+    &--infobox-bottom {
+        align-items: flex-end;
+    }
+
+    &--image-big {
+        flex-wrap: nowrap;
+
+        .banner-alternate {
+            &__infobox {
+                flex: 0 1 30%;
+            }
+
+            &__img {
+                flex: 0 1 70%;
+
+                .lb-picture {
+                    min-height: 560px;
+
+                    @include mq($until: md) {
+                        min-height: 420px;
+                    }
+                }
+            }
+        }
+    }
 }

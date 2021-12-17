@@ -7,6 +7,9 @@
 {% if class %}
 	{% set classes = classes|merge([class]) %}
 {% endif %}
+{% if imageBig %}
+	{% set classes = classes|merge(['banner-alternate--image-big']) %}
+{% endif %}
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 

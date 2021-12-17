@@ -28,7 +28,8 @@ const dataRightInfoboxFullHeight = {
         },
         variants: ['alternate'],
     },
-    variants: ['infobox-right', 'infobox-fullheight'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered
+    imageBig: false,
+    variants: ['infobox-right', 'infobox-fullheight'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
 const dataLeftInfoboxFullHeight = {
@@ -50,7 +51,8 @@ const dataLeftInfoboxFullHeight = {
         },
         variants: ['alternate'],
     },
-    variants: ['infobox-left', 'infobox-fullheight'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered
+    imageBig: false,
+    variants: ['infobox-left', 'infobox-fullheight'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
 const dataRightInfoboxCentered = {
@@ -65,7 +67,8 @@ const dataRightInfoboxCentered = {
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         variants: ['alternate'],
     },
-    variants: ['infobox-right', 'infobox-centered'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered
+    imageBig: false,
+    variants: ['infobox-right', 'infobox-centered'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
 const dataLeftInfoboxCentered = {
@@ -80,7 +83,52 @@ const dataLeftInfoboxCentered = {
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.<br>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         variants: ['alternate'],
     },
-    variants: ['infobox-left', 'infobox-centered'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered
+    imageBig: false,
+    variants: ['infobox-left', 'infobox-centered'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
+}
+
+const dataRightImageBig = {
+    images: {
+        original: '/assets/images/banner-img.jpg',
+        large: '/assets/images/banner-img.jpg',
+        medium: '/assets/images/banner-img.jpg',
+        small: '/assets/images/banner-img.jpg'
+    },
+    infobox: {
+        tagline: 'Lorem Ipsum',
+        subtitle: 'Linea Solari',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        cta: {
+            url: '#',
+            title: 'Scopri di più',
+            variants: ['tertiary']
+        },
+        variants: ['alternate'],
+    },
+    imageBig: true,
+    variants: ['infobox-left', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
+}
+
+const dataLeftImageBig = {
+    images: {
+        original: '/assets/images/banner-img.jpg',
+        large: '/assets/images/banner-img.jpg',
+        medium: '/assets/images/banner-img.jpg',
+        small: '/assets/images/banner-img.jpg'
+    },
+    infobox: {
+        tagline: 'Lorem Ipsum',
+        subtitle: 'Linea Solari',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        cta: {
+            url: '#',
+            title: 'Scopri di più',
+            variants: ['tertiary']
+        },
+        variants: ['alternate'],
+    },
+    imageBig: true,
+    variants: ['infobox-right', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
 storiesOf('Components|Banner Alternate', module)
@@ -105,3 +153,5 @@ storiesOf('Components|Banner Alternate', module)
     .add('Left Infobox --- Full Height', () => renderBannerAlternate(dataLeftInfoboxFullHeight))
     .add('Right Infobox --- Centered', () => renderBannerAlternate(dataRightInfoboxCentered))
     .add('Left Infobox --- Centered', () => renderBannerAlternate(dataLeftInfoboxCentered))
+    .add('Right Infobox --- Image big', () => renderBannerAlternate(dataRightImageBig))
+    .add('Left Infobox --- Image big', () => renderBannerAlternate(dataLeftImageBig))
