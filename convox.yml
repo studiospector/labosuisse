@@ -1,0 +1,32 @@
+resources:
+  database:
+    type: mariadb
+    options:
+      storage: 10
+  queue:
+    type: redis
+
+services:
+  website:
+    build:
+      manifest: ./production/Dockerfile
+      # command: bin/api
+    environment:
+      - APP_KEY
+    health: /fpm-ping
+    internal: false
+    port: 80
+    resources:
+      - database
+      - queue
+    termination:
+      grace: 45
+    test: make test
+    timeout: 120
+    deployment:
+      minimum: 50
+      maximum: 200
+    scale:
+      count: 1
+      cpu: 128
+      memory: 256
