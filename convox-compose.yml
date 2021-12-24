@@ -1,4 +1,5 @@
-version: '3.8'
+# Da doc di convox si parla di versione 1 e 2
+version: '2'
 networks:
   labo-website-2021: null
   front-tier:
@@ -7,7 +8,7 @@ networks:
 services:
   website:
     build:
-      context: ..
+      context: .
       dockerfile: ./backend_wordpress/wordpress/docker/Dockerfile
       target: nginx
       args:
@@ -24,9 +25,9 @@ services:
           - 'cms.${VIRTUAL_HOST}'
       front-tier: null
     depends_on:
-      - frontend_bundler
+      - frontend-bundler
     environment:
-      MYSQL_HOST: storage_mysql
+      MYSQL_HOST: storage-mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
       MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
       MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
@@ -52,7 +53,7 @@ services:
       LETSENCRYPT_HOST: 'cms.${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
 
-  storage_mysql:
+  storage-mysql:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/storage_mysql'
     environment:
       MYSQL_HOST: storage_mysql
@@ -67,21 +68,21 @@ services:
     networks:
       - labo-website-2021
     restart: on-failure
-  storage_redis:
+  storage-redis:
     image: redis
     restart: unless-stopped
     networks:
       - labo-website-2021
 
-  frontend_bundler:
+  frontend-bundler:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
     build:
-      context: ..
+      context: .
       dockerfile: ./frontend_bundler/client/docker/Dockerfile
-  frontend_static:
+  frontend-static:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static'
     build:
-      context: ..
+      context: .
       dockerfile: ./frontend_static/client/docker/Dockerfile
       args:
         CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
@@ -89,7 +90,7 @@ services:
         CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
         CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
     depends_on:
-      - frontend_bundler
+      - frontend-bundler
 
 volumes:
   backend_media: null
