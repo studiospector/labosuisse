@@ -26,12 +26,7 @@ services:
     deployment:
       minimum: 50
       maximum: 200
-    # Da capire la best practice per prod
-    # cpu e memory NON sono scalabili da CLI
     scale:
-      count: 1-2
+      count: 1
       cpu: 128
       memory: 256
-      targets:
-        cpu: 70
-        memory: 90
