@@ -1,20 +1,13 @@
-version: '3.8'
+# Convox supports up to version 2
+version: '2'
 networks:
   labo-website-2021: null
   front-tier:
     external:
       name: front-tier
 services:
-  website:
-    build:
-      context: ..
-      dockerfile: ./backend_wordpress/wordpress/docker/Dockerfile
-      target: nginx
-      args:
-          CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
-          CI_REGISTRY: '${CI_REGISTRY}'
-          CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
-          CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+  backend-nginx:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_nginx'
     restart: unless-stopped
     volumes:
       - 'backend_media:/uploads'
@@ -23,8 +16,15 @@ services:
         aliases:
           - 'cms.${VIRTUAL_HOST}'
       front-tier: null
-    depends_on:
-      - frontend_bundler
+    environment:
+      VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}'
+      LETSENCRYPT_HOST: 'cms.${VIRTUAL_HOST}'
+      LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
+  backend-wordpress:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_wordpress'
+    restart: unless-stopped
+    volumes:
+      - 'backend_media:/uploads'
     environment:
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
@@ -48,11 +48,46 @@ services:
       POSTINO_CAFF_MAIL_SENDER: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER}'
       POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
       WITH_REDIS: 1
-      VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}'
-      LETSENCRYPT_HOST: 'cms.${VIRTUAL_HOST}'
+    networks:
+      - labo-website-2021
+  backup-service:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
+    environment:
+      MYSQL_HOST: storage_mysql
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      AWS_DEFAULT_REGION: '${BACKUP_AWS_DEFAULT_REGION}'
+      AWS_SECRET_ACCESS_KEY: '${BACKUP_AWS_SECRET_ACCESS_KEY}'
+      AWS_ACCESS_KEY_ID: '${BACKUP_AWS_ACCESS_KEY_ID}'
+      AWS_S3_BUCKET: '${BACKUP_AWS_S3_BUCKET}'
+    networks:
+      - labo-website-2021
+    restart: on-failure
+  frontend-static-nginx:
+    image: >-
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static_nginx
+    restart: unless-stopped
+    networks:
+      - front-tier
+    environment:
+      VIRTUAL_HOST: '${VIRTUAL_HOST}'
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: '${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
-
-  storage_mysql:
+  frontend-storybook-nginx:
+    image: >-
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
+    restart: unless-stopped
+    networks:
+      - front-tier
+    environment:
+      VIRTUAL_HOST: 'storybook.${VIRTUAL_HOST}'
+      VIRTUAL_PORT: 80
+      LETSENCRYPT_HOST: 'storybook.${VIRTUAL_HOST}'
+      LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
+    depends_on:
+        - frontend_static_nginx
+  storage-mysql:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/storage_mysql'
     environment:
       MYSQL_HOST: storage_mysql
@@ -67,30 +102,11 @@ services:
     networks:
       - labo-website-2021
     restart: on-failure
-  storage_redis:
+  storage-redis:
     image: redis
     restart: unless-stopped
     networks:
       - labo-website-2021
-
-  frontend_bundler:
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
-    build:
-      context: ..
-      dockerfile: ./frontend_bundler/client/docker/Dockerfile
-  frontend_static:
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static'
-    build:
-      context: ..
-      dockerfile: ./frontend_static/client/docker/Dockerfile
-      args:
-        CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
-        CI_REGISTRY: '${CI_REGISTRY}'
-        CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
-        CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
-    depends_on:
-      - frontend_bundler
-
 volumes:
   backend_media: null
   storage_mysql: null
