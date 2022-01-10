@@ -1,6 +1,6 @@
 {
     "key": "group_61b9ca43cdf0d",
-    "title": "Campi personalizzati: Blocco – Numeri (copia)",
+    "title": "Campi personalizzati: Blocco – Numeri con immagine",
     "fields": [
         {
             "key": "field_61b9ca4403c17",
@@ -159,5 +159,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639566976
+    "modified": 1639735458
 }

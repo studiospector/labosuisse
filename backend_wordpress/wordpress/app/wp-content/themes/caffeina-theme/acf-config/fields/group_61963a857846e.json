@@ -271,6 +271,32 @@
             "rows": "",
             "new_lines": "br",
             "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61c30be0e3318",
+            "label": "variants",
+            "name": "lb_block_love_labo_variants",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "dafault": "dafault",
+                "full": "full"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 0,
+            "return_format": "value",
+            "wpml_cf_preferences": 1,
+            "ajax": 0,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -290,5 +316,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639563389
+    "modified": 1640172587
 }

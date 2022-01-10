@@ -88,31 +88,35 @@ $block_carousel_posts = new BaseBlock($block);
 if( have_rows('lb_block_carousel_posts') ) {
     $items = [];
     while( have_rows('lb_block_carousel_posts') ) : the_row();
+    $cf_postid = get_sub_field('lb_block_infobox_btn');
+    $cf_post = get_post($cf_postid);
+    if (! is_null($cf_post)){
+        var_dump($cf_post);
         $items[] = [
             'images' => [
-                'original' => get_sub_field('lb_block_carousel_posts_img'),
-                'large' => get_sub_field('lb_block_carousel_posts_img'),
-                'medium' => get_sub_field('lb_block_carousel_posts_img'),
-                'small' => get_sub_field('lb_block_carousel_posts_img')
+                'original' => "",
+                'large' => "",
+                'medium' => "",
+                'small' => ""
             ],
-            'date'=> get_sub_field('lb_block_carousel_posts_date'),
-          //  'infoboxPosX' => get_sub_field('lb_block_carousel_posts_infoboxposx'),
-          //  'infoboxPosY' => get_sub_field('lb_block_carousel_posts_infoboxposy'),
-           // 'container' => get_sub_field('lb_block_carousel_posts_container'),
+            'date'=> $cf_post->post_date,
             'variants' => ['type-2'],
             'infobox' => [
-                'tagline' => get_sub_field('lb_block_infobox_tagline'),
-                'title' => get_sub_field('lb_block_infobox_title'),
-                'subtitle' => get_sub_field('lb_block_infobox_subtitle'),
-                'paragraph' => get_sub_field('lb_block_infobox_paragraph'),
+                'subtitle' => $cf_post->title,
+                'paragraph' => "",
                 'cta' => [
-                    'title' =>  'test',
-                    'url' => get_permalink(get_sub_field('lb_block_infobox_btn')),
-                    'target' => '',
-                    'buttonVariants' => [get_sub_field('lb_block_infobox_btn_variants')]
+                    'title' => "leggi articolo",
+                    'iconEnd'=> [
+                        'name' => 'arrow-right'
+                    ],
+                    'url' => get_permalink($cf_postid),
+                    'variants' => ['quaternary']
                 ]
             ]
         ];
+    }
+   // die;
+        
 
     endwhile;
 }

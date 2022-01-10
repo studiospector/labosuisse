@@ -61,10 +61,7 @@ include __DIR__ . '/inc/theme-assets.php';
  foreach ( $files as $file ) {
     include_once $file;
  }
-// include __DIR__ . '/acf-config/blocks/acf-block-carousel-hero.php';
-// include __DIR__ . '/acf-config/blocks/acf-block-launch-two-images.php';
-// include __DIR__ . '/acf-config/blocks/acf-block-hero.php';
-// include __DIR__ . '/acf-config/blocks/acf-block-love-labo.php';
+
 
 
 
