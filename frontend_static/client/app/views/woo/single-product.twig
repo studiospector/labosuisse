@@ -4,28 +4,53 @@
 
 {% block main %}
 
+    {% do action('woocommerce_before_main_content') %}
+
     {% do action('woocommerce_before_single_product') %}
 
-    <article itemscope itemtype="http://schema.org/Product" class="single-product-details {{ post.class }}">
+    <article itemscope itemtype="http://schema.org/Product" {{ product_classes }}>
+        <div class="row">
+            <div class="single-product-details__images col-12 col-md-6">
+                {% do action('woocommerce_before_single_product_summary') %}
+                {# <img src="{{ post.thumbnail.src('shop_single') }}" /> #}
+            </div>
 
-        <div class="entry-images">
-            {% do action('woocommerce_before_single_product_summary') %}
+            <div class="single-product-details__summary col-12 col-md-6">
+                {% do action('woocommerce_single_product_summary') %}
+            </div>
 
-            <img src="{{ post.thumbnail.src('shop_single') }}" />
+            {# {% do action('woocommerce_after_single_product_summary') %} #}
+
+            {# <meta itemprop="url" content="{{ post.link }}" /> #}
         </div>
-
-        <div class="summary entry-summary">
-            {% do action('woocommerce_single_product_summary') %}
-        </div>
-
-        {% do action('woocommerce_after_single_product_summary') %}
-
-        <meta itemprop="url" content="{{ post.link }}" />
-
     </article>
 
-    {% include ["woo/partials/tease-product.twig"] with { products: related_products } %}
+    {# {% include ["woo/partials/tease-product.twig"] with { products: related_products } %} #}
 
     {% do action('woocommerce_after_single_product') %}
+
+    {% do action('woocommerce_after_main_content') %}
+
+    <hr class="lb-separator lb-separator--big" data-variant="big" />
+
+    {% if banner %}
+        {% include '@PathViews/components/banner.twig' with banner only %}
+        <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% endif %}
+
+    {% if banner_alternate %}
+        {% include '@PathViews/components/banner-alternate.twig' with banner_alternate only %}
+        <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% endif %}
+
+    {% if number_list %}
+        {% include '@PathViews/components/number-list-with-image.twig' with number_list only %}
+        <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% endif %}
+
+    {% if miniatures %}
+        {% include '@PathViews/components/block-love-labo.twig' with miniatures only %}
+        <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% endif %}
 
 {% endblock %}

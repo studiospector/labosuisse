@@ -11,7 +11,8 @@ export const wrapperTimeline = (el) => {
 
 
 const backgroundHeight = () => {
-    return window.innerWidth > breakpoints.xl ? '522px' : '395px';
+    // return window.innerWidth > breakpoints.xl ? '522px' : '395px';
+    return window.innerWidth > breakpoints.xl ? '100%' : '100%';
 }
 
 export const backgroundTimeline = (el) => {

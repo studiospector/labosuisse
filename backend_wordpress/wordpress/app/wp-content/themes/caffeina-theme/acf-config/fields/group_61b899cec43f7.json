@@ -25,7 +25,7 @@
             "name": "lb_block_image_card_image_left",
             "type": "image",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -67,7 +67,7 @@
             "name": "lb_block_image_card_image_right",
             "type": "image",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -111,5 +111,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639489431
+    "modified": 1639994029
 }

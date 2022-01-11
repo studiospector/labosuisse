@@ -29,6 +29,7 @@ $payload = [
         'medium' => get_field('lb_block_banner_img'),
         'small' => get_field('lb_block_banner_img')
     ],
+    'infoboxBgColorTransparent' => get_field('lb_block_banner_bg_color'),
     'infoboxTextAlignment' => get_field('lb_block_banner_infoboxtextalignment'),
     'variants' => get_field('lb_block_banner_variants'),
 

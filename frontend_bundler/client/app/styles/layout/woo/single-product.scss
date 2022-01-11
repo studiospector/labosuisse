@@ -1,0 +1,89 @@
+.single-product-details {
+
+    &__images {
+
+    }
+
+    &__summary {
+        &__brand {
+            margin-bottom: 20px;
+
+            @include mq($until: md) {
+                margin-bottom: 10px;
+            }
+        }
+
+        &__product-title {
+            margin-bottom: 40px;
+            font-size: rem(30);
+            font-weight: 600;
+            text-transform: uppercase;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+                font-size: rem(24);
+                text-align: center;
+            }
+        }
+
+        &__benefits {
+            margin-bottom: 60px;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+            }
+
+            &__item {
+                display: flex;
+                align-items: center;
+                font-weight: 300;
+
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+                }
+
+                .lb-icon {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        &__short-description {
+            margin-bottom: 40px;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+            }
+        }
+
+        .price {
+            margin-bottom: 40px;
+            font-size: rem(26);
+            letter-spacing: 0.02em;
+            
+            @include mq($until: md) {
+                margin-bottom: 30px;
+                font-size: rem(18);
+            }
+
+            bdi {
+                font-weight: 600;
+                color: map-get($colors, "black");
+            }
+        }
+
+        &__variations {
+            .lb-product-variations {
+                margin-bottom: 60px;
+    
+                @include mq($until: md) {
+                    margin-bottom: 40px;
+                }
+            }
+        }
+
+        &__product-meta {
+            
+        }
+    }
+}

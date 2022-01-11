@@ -15,12 +15,12 @@
   {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
 >
   {% if iconStart %}
-    {% include './icon.twig' with iconStart only %}
+    {% include '@PathViews/components/icon.twig' with iconStart only %}
   {% endif %}
   {% if title %}
     <span class="button__label">{{ title }}</span>
   {% endif %}
   {% if iconEnd %}
-    {% include './icon.twig' with iconEnd only %}
+    {% include '@PathViews/components/icon.twig' with iconEnd only %}
   {% endif %}
 </{{ tag }}>

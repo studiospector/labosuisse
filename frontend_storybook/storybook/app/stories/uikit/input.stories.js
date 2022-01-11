@@ -75,6 +75,16 @@ const dataSearch = {
     variants: ['primary'],
 }
 
+// Search Secondary
+const dataSearchSecondary = {
+    type: 'search',
+    name: "search",
+    label: "Search",
+    disabled: false,
+    required: false,
+    variants: ['secondary'],
+}
+
 storiesOf('UIKit|Input', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -107,3 +117,5 @@ storiesOf('UIKit|Input', module)
     .add('Password', () => renderInput(dataPassword))
     // Search
     .add('Search', () => renderInput(dataSearch))
+     // Search Secondary
+     .add('Search --- Secondary', () => renderInput(dataSearchSecondary))

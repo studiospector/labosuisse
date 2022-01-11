@@ -1,0 +1,21 @@
+{# Brand Logo #}
+{% if brand_logo %}
+    <div class="single-product-details__summary__brand">
+        <img src="{{ brand_logo }}" alt="{{ brand.name }}">
+    </div>
+{% endif %}
+
+{# Product Title #}
+{{ fn('the_title', '<h1 class="single-product-details__summary__product-title product_title entry-title">', '</h1>') }}
+
+{# Benefits #}
+{% if benefits %}
+    <ul class="single-product-details__summary__benefits">
+        {% for benefits_item in benefits %}
+            <li class="single-product-details__summary__benefits__item">
+                {% include '@PathViews/components/icon.twig' with {name: 'check'} only %}
+                <span>{{ benefits_item }}</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

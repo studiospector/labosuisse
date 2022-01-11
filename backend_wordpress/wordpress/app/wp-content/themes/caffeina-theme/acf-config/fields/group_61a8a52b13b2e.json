@@ -45,11 +45,48 @@
             "mime_types": ""
         },
         {
+            "key": "field_61dc56f7b21b5",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_61dc5717b21b6",
+            "label": "Sfondo trasparente",
+            "name": "lb_block_banner_bg_color",
+            "type": "true_false",
+            "instructions": "Sfondo trasparente del box testo.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_61a8a52b2fd2c",
-            "label": "infoboxTextAlignment",
+            "label": "Allineamento testo",
             "name": "lb_block_banner_infoboxtextalignment",
             "type": "radio",
-            "instructions": "",
+            "instructions": "Allineamento testo all'interno del box.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -59,9 +96,9 @@
             },
             "wpml_cf_preferences": 1,
             "choices": {
-                "right": "Right",
-                "left": "Left",
-                "center": "Center"
+                "right": "Destra",
+                "left": "Sinistra",
+                "center": "Centro"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -72,7 +109,7 @@
         },
         {
             "key": "field_61a8a52b2fe8d",
-            "label": "variants",
+            "label": "Variante",
             "name": "lb_block_banner_variants",
             "type": "radio",
             "instructions": "",
@@ -85,9 +122,9 @@
             },
             "wpml_cf_preferences": 1,
             "choices": {
-                "right": "Right",
-                "left": "Left",
-                "center": "Center"
+                "right": "Destra",
+                "left": "Sinistra",
+                "center": "Centro"
             },
             "allow_null": 0,
             "other_choice": 0,
@@ -121,5 +158,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639059132
+    "modified": 1641830502
 }

@@ -14,6 +14,7 @@ const dataLeftInfobox = {
         medium: '/assets/images/banner-img.jpg',
         small: '/assets/images/banner-img.jpg'
     },
+    infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -30,6 +31,7 @@ const dataLeftInfoboxCTA = {
         medium: '/assets/images/banner-img.jpg',
         small: '/assets/images/banner-img.jpg'
     },
+    infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -51,6 +53,7 @@ const dataRightInfobox = {
         medium: '/assets/images/banner-img.jpg',
         small: '/assets/images/banner-img.jpg'
     },
+    infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -67,6 +70,7 @@ const dataRightInfoboxCTA = {
         medium: '/assets/images/banner-img.jpg',
         small: '/assets/images/banner-img.jpg'
     },
+    infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -88,6 +92,7 @@ const dataCenterInfobox = {
         medium: '/assets/images/banner-img.jpg',
         small: '/assets/images/banner-img.jpg'
     },
+    infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -104,6 +109,7 @@ const dataCenterInfoboxCTA = {
         medium: '/assets/images/banner-img.jpg',
         small: '/assets/images/banner-img.jpg'
     },
+    infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -118,6 +124,23 @@ const dataCenterInfoboxCTA = {
     variants: ['center'], // left, right, center
 }
 
+const dataTransparentInfobox = {
+    images: {
+        original: '/assets/images/banner-img.jpg',
+        large: '/assets/images/banner-img.jpg',
+        medium: '/assets/images/banner-img.jpg',
+        small: '/assets/images/banner-img.jpg'
+    },
+    infoboxBgColorTransparent: true, // true, false
+    infoboxTextAlignment: 'left', // left, right, center
+    infobox: {
+        tagline: 'LOREM IPSUM',
+        subtitle: 'Lorem ipsum dolor sit amet, consectetur',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit, sed do eiusmod tempor incididunt<br>ut labore et dolore magna.',
+    },
+    variants: ['left'], // left, right, center
+}
+
 storiesOf('Components|Banner', module)
     .add('Left Infobox', () => renderBanner(dataLeftInfobox))
     .add('Left Infobox with CTA', () => renderBanner(dataLeftInfoboxCTA))
@@ -128,3 +151,4 @@ storiesOf('Components|Banner', module)
     .add('Infobox with Text left', () => renderBanner({...dataLeftInfoboxCTA, ...{infoboxTextAlignment: 'left'}}))
     .add('Infobox with Text right', () => renderBanner({...dataLeftInfoboxCTA, ...{infoboxTextAlignment: 'right'}}))
     .add('Infobox with Text center', () => renderBanner({...dataLeftInfoboxCTA, ...{infoboxTextAlignment: 'center'}}))
+    .add('Transparent Infobox', () => renderBanner(dataTransparentInfobox))

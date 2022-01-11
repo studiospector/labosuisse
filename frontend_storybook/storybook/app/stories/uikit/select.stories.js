@@ -237,6 +237,31 @@ const dataSecondaryDisabled = {
     variants: ['secondary']
 }
 
+// Tertiary
+const dataTertiary = {
+    id: 'test-select',
+    label: 'Test label',
+    placeholder: 'Test placeholder',
+    multiple: false,
+    required: false,
+    disabled: false,
+    options: [
+        {
+            value: 'aaa',
+            label: 'AAA',
+        },
+        {
+            value: 'bbb',
+            label: 'BBB',
+        },
+        {
+            value: 'ccc',
+            label: 'CCC',
+        },
+    ],
+    variants: ['tertiary']
+}
+
 storiesOf('UIKit|Select', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -273,3 +298,5 @@ storiesOf('UIKit|Select', module)
     .add('Secondary --- Multiple', () => renderSelect(dataSecondaryMultiple))
     // Secondary Multiple
     .add('Secondary --- Disabled', () => renderSelect(dataSecondaryDisabled))
+    // Tertiary
+    .add('Tertiary', () => renderSelect(dataTertiary))

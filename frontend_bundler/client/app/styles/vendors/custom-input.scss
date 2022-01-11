@@ -89,8 +89,8 @@
 
 
 
-    &--primary {
-
+    &--primary,
+    &--secondary {
         .custom-input-label {
             position: absolute;
             top: 50%;
@@ -119,6 +119,17 @@
                 transform: translateY(0);
                 transition: $transition__base-1;
             }
+        }
+    }
+
+    &--secondary {
+        .custom-input-label {
+            font-style: italic;
+            color: map-get($colors, "grey-3");
+        }
+
+        input {
+            border: 1px solid map-get($colors, "grey-2");
         }
     }
 }

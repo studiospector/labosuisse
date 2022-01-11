@@ -42,7 +42,7 @@
             "name": "lb_block_launch_two_cards_image_left",
             "type": "image",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -207,7 +207,7 @@
             "name": "lb_block_launch_two_cards_image_right",
             "type": "image",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -374,5 +374,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639481480
+    "modified": 1641819816
 }

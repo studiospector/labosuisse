@@ -1,0 +1,19 @@
+.woocommerce-breadcrumb {
+    margin-top: 30px;
+    margin-bottom: 60px;
+    font-size: 10px;
+    font-weight: 700;
+    color: map-get($colors, "black");
+    text-transform: uppercase;
+
+    a {
+        font-weight: 300;
+        color: map-get($colors, "black");
+        opacity: 0.5;
+        text-decoration: none;
+    }
+
+    &__separator {
+        margin: 0 10px;
+    }
+}

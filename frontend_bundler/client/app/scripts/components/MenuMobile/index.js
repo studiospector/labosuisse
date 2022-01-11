@@ -36,6 +36,7 @@ class MenuMobile extends Component {
         this.master = gsap.timeline();
         this.stack = [];
         this.isOpen = false;
+        this.opt = options
 
         this.updateNavigation = this.updateNavigation.bind(this)
         window.updateMobileNavigation = this.updateNavigation
@@ -107,6 +108,7 @@ class MenuMobile extends Component {
     }
 
     open = () => {
+        qs(this.opt.hamburgerElement).classList.add('lb-header__hamburger--is-open')
         this.reset = this.close;
         this.isOpen = true;
         this.master.clear();
@@ -126,6 +128,7 @@ class MenuMobile extends Component {
                 this.stack = [];
                 this.slide();
                 this.updateNavigation()
+                qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
             }
         })
     }

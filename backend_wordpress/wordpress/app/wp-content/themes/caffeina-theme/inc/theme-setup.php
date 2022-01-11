@@ -286,3 +286,253 @@ function timber_set_product($post)
     global $product;
     $product = isset($post->product) ? $post->product : wc_get_product($post->ID);
 }
+
+
+
+/**
+ * Get header and menu
+ */
+function lb_header() {
+
+    $menu_desktop = array(
+        [
+            'type' => 'link',
+            'label' => 'Link Normal'
+        ],
+        [
+            'type' => 'submenu',
+            'label' => 'Submenu',
+            'children' => [
+                [
+                    'type' => 'submenu',
+                    'label' => 'Per Zona',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
+                    ]
+                ],
+                [
+                    'type' => 'submenu',
+                    'label' => 'Per Esigenza',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+                    ]
+                ],
+            ],
+            'fixed' => [
+                [
+                    'type' => 'card',
+                    'data' => [
+                        'images' => [
+                            'original' => '/assets/images/card-img-5.jpg',
+                            'large' => '/assets/images/card-img-5.jpg',
+                            'medium' => '/assets/images/card-img-5.jpg',
+                            'small' => '/assets/images/card-img-5.jpg'
+                        ],
+                        'infobox' => [
+                            'subtitle' => 'Magnetic Eyes',
+                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            'cta' => [
+                                'url' => '#',
+                                'title' => 'Scopri di più',
+                                'iconEnd' => [ 'name' => 'arrow-right' ],
+                                'variants' => ['quaternary']
+                            ]
+                        ],
+                        'variants' => ['type-3']
+                    ],
+                ],
+            ]
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Personalize',
+            'href' => '#',
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Lookbook',
+            'href' => '#',
+        ],
+        [
+            'type' => 'submenu',
+            'label' => 'World',
+            'children' => [
+                [
+                    'type' => 'submenu',
+                    'label' => 'Excellences',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
+                    ]
+                ],
+                [
+                    'type' => 'submenu',
+                    'label' => 'Lorem Ipsum',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
+                    ]
+                ],
+            ],
+        ],
+        [
+            'type' => 'separator',
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Tutti i Brand',
+            'href' => '#',
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Scopri Labo',
+            'href' => '#',
+        ],
+        [
+            'type' => 'separator',
+        ],
+        [
+            'type' => 'icon',
+            'icon' => [
+                'name' => 'heart'
+            ],
+            'href' => 'https://google.it'
+        ],
+        [
+            'type' => 'icon',
+            'icon' => [
+                'name' => 'cart'
+            ],
+            'href' => wc_get_cart_url()
+        ],
+        [
+            'type' => 'icon',
+            'icon' => [
+                'name' => 'user'
+            ],
+            'href' => 'https://google.it'
+        ],
+    );
+
+    $menu_mobile = [
+        'children' => [
+            [
+                'type' => 'link',
+                'label' => 'Link Normal'
+            ],
+            [
+                'type' => 'submenu', 
+                'label' => 'Lorem', 
+                'children' => [
+                    [
+                        'type' => 'submenu', 
+                        'label' => 'Ipsum 1', 
+                        'children' => [
+                            ['type' => 'link', 'label' => 'link 1'],
+                            ['type' => 'link', 'label' => 'link 2'],
+                            ['type' => 'link', 'label' => 'link 3'],
+                        ]
+                    ],
+                    [
+                        'type' => 'submenu', 
+                        'label' => 'Ipsum 2', 
+                        'children' => [
+                            ['type' => 'link', 'label' => 'link 1'],
+                            ['type' => 'link', 'label' => 'link 2'],
+                            ['type' => 'link', 'label' => 'link 3'],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'type' => 'submenu', 
+                'label' => 'Submenu',
+                'children' => [
+                    [
+                        'type' => 'submenu',
+                        'label' => 'Per Zona',
+                        'children' => [
+                            ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
+                        ]
+                    ],
+                    [
+                        'type' => 'submenu',
+                        'label' => 'Per Esigenza',
+                        'children' => [
+                            ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+                        ]
+                    ],
+                ],
+            ]
+        ],
+        'fixed' => [
+            [
+                'type' => 'card',
+                'data' => [
+                    'images' => [
+                        'original' => '/assets/images/card-img-5.jpg',
+                        'large' => '/assets/images/card-img-5.jpg',
+                        'medium' => '/assets/images/card-img-5.jpg',
+                        'small' => '/assets/images/card-img-5.jpg'
+                    ],
+                    'infobox' => [
+                        'subtitle' => 'Magnetic Eyes',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'cta' => [
+                            'url' => '#',
+                            'title' => 'Scopri di più',
+                            'iconEnd' => ['name' => 'arrow-right'],
+                            'variants' => ['quaternary']
+                        ]
+                    ],
+                    'variants' => ['type-1']
+                ],
+            ],
+            [
+                'type' => 'small-link', 
+                'label' => 'Hai bisogno di aiuto?', 
+                'icon' => 'comments',
+            ],
+            [
+                'type' => 'small-link',
+                'label' => 'Italia',
+                'icon' => 'earth',
+            ],
+        ]
+    ];
+
+    return array(
+        'menu_desktop' => ['items' => $menu_desktop],
+        'menu_mobile' => ['items' => $menu_mobile],
+    );
+}

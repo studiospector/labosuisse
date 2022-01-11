@@ -1,25 +1,33 @@
-<li class="lb-menu__item">
+{% if type == 'separator' %}
+    <li class="lb-menu__item lb-menu__item--separator"></li>
+{% else %}
+    <li class="lb-menu__item">
+        {% if type == 'icon' %}
+            <a href="{{href}}" class="lb-menu__link lb-menu__link--icon" tabindex="0">
+                {% include '@PathViews/components/icon.twig' with icon only %}
+            </a>
+        {% endif %}
 
-    {% if type == 'link' %}
-		<a class="lb-menu__link lb-menu__link--main lb-h6" tabindex="0">{{label}}</a>
-	{% endif %}
+        {% if type == 'link' %}
+            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</a>
+        {% endif %}
 
-	{% if type == 'submenu' %}
-		<a class="lb-menu__link lb-menu__link--main lb-h6" tabindex="0">{{label}}</a>
-		<ul class="lb-menu__submenu">
-			<div class="lb-menu__wrapper">
-				{% for item in children %}
-					{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
-				{% endfor %}
-				{% if fixed|default([])|length > 0 %}
-					<div class="lb-menu__images">
-						{% for item in fixed %}
-							{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
-						{% endfor %}
-					</div>
-				{% endif %}
-			</div>
-		</ul>
-	{% endif %}
-    
-</li>
+        {% if type == 'submenu' %}
+            <a class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</a>
+            <ul class="lb-menu__submenu container">
+                <div class="lb-menu__wrapper">
+                    {% for item in children %}
+                        {% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
+                    {% endfor %}
+                    {% if fixed|default([])|length > 0 %}
+                        <div class="lb-menu__images">
+                            {% for item in fixed %}
+                                {% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+            </ul>
+        {% endif %}
+    </li>
+{% endif %}

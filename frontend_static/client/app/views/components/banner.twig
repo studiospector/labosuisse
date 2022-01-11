@@ -1,4 +1,7 @@
 {% set classes = [] %}
+{% if infoboxBgColorTransparent %}
+    {% set variants = variants|merge(['bg-transparent']) %}
+{% endif %}
 {% for variant in variants|default([]) %}
 	{% set classes = classes|merge(['banner--' ~ variant]) %}
     {% if variant == 'right' and not infobox.cta %}
@@ -15,7 +18,7 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<section class="banner container{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+<section class="banner container{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
 	{% if infobox %}
 		<div class="banner__infobox">
 			<div class="container">

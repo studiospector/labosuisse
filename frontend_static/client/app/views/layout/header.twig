@@ -6,28 +6,64 @@
 	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-
-
 <header class="lb-header lb-header js-header js-menu {{classes|length ? ' ' ~ classes|join(' ') : '' }}">
 
     <div class="lb-header__top container">
-        <div class="b-header__top__shield">SHIELD</div>
-        <div class="b-header__top__logo">LOGO</div>
-        <div class="b-header__top__icons">ICONS</div>
+        <div class="lb-header__top__shield">
+            {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
+        </div>
+        <div class="lb-header__top__logo">
+            {% include '@PathViews/components/icon.twig' with {name: 'logo'} only %}
+        </div>
+        <div class="lb-header__top__icons">
+            <div class="lb-header__top__icons__item lb-header__top__icons__item--lang">
+                {% do action('wpml_add_language_selector') %}
+                {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
+            </div>
+            <div class="lb-header__top__icons__item lb-header__top__icons__item--faq">
+                <a href="">
+                    {% include '@PathViews/components/icon.twig' with {name: 'comments'} only %}
+                </a>
+            </div>
+            <div class="lb-header__top__icons__item">
+                <a href="">
+                    {% include '@PathViews/components/icon.twig' with {name: 'pin'} only %}
+                </a>
+            </div>
+            <div class="lb-header__top__icons__item lb-header__top__icons__item--search">
+                <a href="">
+                    {% include '@PathViews/components/icon.twig' with {name: 'icon-search'} only %}
+                </a>
+            </div>
+            <!-- Btn Menu Mobile -->
+            <div class="lb-header__top__icons__item lb-header__top__icons__item--btn-menu">
+                <a class="lb-header__hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </a>
+            </div>
+        </div>
     </div>
 
 	<div class="lb-header__bottom container">
         <!-- Menu Desktop -->
 		<div class="lb-header__wrapper lb-header__wrapper--desktop">
-			{% include '@PathViews/layout/menu-desktop.twig' with {variant: variant} only %}
+            {% if header.menu_desktop %}
+                {% include '@PathViews/layout/menu-desktop.twig' with header.menu_desktop only %}
+            {% endif %}
 		</div>
         <!-- Menu Mobile -->
-		<div class="lb-header__wrapper lb-header__wrapper--mobile">
-            <a class="lb-header__hamburger">
-                <span></span>
-                <span></span>
-            </a>
-		</div>
+        <div class="lb-header__wrapper lb-header__wrapper--mobile">
+            {% include '@PathViews/components/fields/input.twig' with {
+                type: 'search',
+                name: "search",
+                label: "Cerca un prodotto, una linea,...",
+                disabled: false,
+                required: false,
+                variants: ['secondary'],
+            } only %}
+        </div>
 		{% include "@PathViews/layout/menu-mobile.twig" %}
 	</div>
 

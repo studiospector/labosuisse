@@ -12,5 +12,5 @@
     {{ required ? ' required="required"' : '' }}
     placeholder="{{ label }}"
     class="js-custom-input"
-    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
+    {{ dataVariants|length > 0 ? ' ' ~ dataVariants|join(' ') : '' }}
 />

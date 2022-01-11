@@ -86,7 +86,7 @@ class CustomSelect extends BasicElement {
                 this.optionItemValue = this.createDOMElement('SPAN', ['custom-select-items__item__value'], null, this.currSelectElem.options[j].innerHTML, {pos: 'afterbegin', elem: this.optionItem})
                 
                 // Check icon only for 'primary' variant
-                if (this.selectVariant == 'primary' || this.selectVariant == 'secondary') {
+                if (this.selectVariant == 'primary' || this.selectVariant == 'secondary' || this.selectVariant == 'tertiary') {
                     this.createDOMElement('DIV', ['custom-select-items__item__check'], null, null, {pos: 'afterbegin', elem: this.optionItem})
                 }
 
@@ -120,6 +120,10 @@ class CustomSelect extends BasicElement {
 
             // Add option list to main container
             this.mainContainer.appendChild(this.optionsList)
+
+            if (this.selectVariant == 'tertiary') {
+                this.tertiaryVariantAlignment()
+            }
         }
     }
 
@@ -272,6 +276,28 @@ class CustomSelect extends BasicElement {
                 items[j].classList.add('custom-select-items--hide')
             }
         }
+    }
+
+
+
+    tertiaryVariantAlignment() {
+        const items = this.mainContainer.querySelectorAll('.custom-select-items .custom-select-items__item')
+        const labelWidth = this.getFullWidth( this.mainContainer.querySelector('.custom-select-label') ) + 16.5 - 26
+
+        items.forEach(elem => {
+            elem.style.paddingLeft = `${labelWidth}px`
+        })
+    }
+
+
+
+    getFullWidth(el) {
+        let elWidth = el.offsetWidth
+
+        elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-left'))
+        elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-right'))
+
+        return elWidth
     }
 
 

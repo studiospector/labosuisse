@@ -50,17 +50,17 @@ if (!defined('LB_BUILD_LIB_URI')) {
  */
 include __DIR__ . '/inc/theme-setup.php';
 include __DIR__ . '/inc/theme-assets.php';
+include __DIR__ . '/inc/woocommerce-setup.php';
 
 
 
 /**
  * ACF Blocks autoload
  */
-
- $files = list_files(__DIR__ . '/acf-config/blocks');
- foreach ( $files as $file ) {
+$files = list_files(__DIR__ . '/acf-config/blocks');
+foreach ( $files as $file ) {
     include_once $file;
- }
+}
 
 
 
