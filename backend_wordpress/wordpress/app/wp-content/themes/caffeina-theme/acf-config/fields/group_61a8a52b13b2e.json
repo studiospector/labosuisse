@@ -45,8 +45,60 @@
             "mime_types": ""
         },
         {
-            "key": "field_61dc56f7b21b5",
-            "label": "Impostazioni",
+            "key": "field_61a8a52b2fd2c",
+            "label": "infoboxTextAlignment",
+            "name": "lb_block_banner_infoboxtextalignment",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "right": "Right",
+                "left": "Left",
+                "center": "Center"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_61a8a52b2fe8d",
+            "label": "variants",
+            "name": "lb_block_banner_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "choices": {
+                "right": "Right",
+                "left": "Left",
+                "center": "Center"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_61dd53e56f509",
+            "label": "Infobox",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -62,56 +114,10 @@
             "wpml_cf_preferences": 1
         },
         {
-            "key": "field_61dc5717b21b6",
-            "label": "Sfondo trasparente",
-            "name": "lb_block_banner_bg_color",
-            "type": "true_false",
-            "instructions": "Sfondo trasparente del box testo.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
-        },
-        {
-            "key": "field_61a8a52b2fd2c",
-            "label": "Allineamento testo",
-            "name": "lb_block_banner_infoboxtextalignment",
-            "type": "radio",
-            "instructions": "Allineamento testo all'interno del box.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "choices": {
-                "right": "Destra",
-                "left": "Sinistra",
-                "center": "Centro"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_61a8a52b2fe8d",
-            "label": "Variante",
-            "name": "lb_block_banner_variants",
-            "type": "radio",
+            "key": "field_61dd54286f50a",
+            "label": "Tagline",
+            "name": "lb_block_infobox_tagline",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -120,18 +126,88 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
-            "choices": {
-                "right": "Destra",
-                "left": "Sinistra",
-                "center": "Centro"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
             "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd545e6f50b",
+            "label": "Title",
+            "name": "lb_block_infobox_title",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd54806f50c",
+            "label": "Subtitle",
+            "name": "lb_block_infobox_subtitle",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd55316f50d",
+            "label": "Paragraph",
+            "name": "lb_block_infobox_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd55b56f50e",
+            "label": "Button",
+            "name": "lb_block_infobox_btn",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "wpml_cf_preferences": 2
         }
     ],
     "location": [
@@ -158,5 +234,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641830502
+    "modified": 1641895395
 }
