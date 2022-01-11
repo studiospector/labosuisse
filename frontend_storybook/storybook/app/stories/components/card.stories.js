@@ -108,6 +108,28 @@ const dataCardType6 = {
     variants: ['type-6']
 }
 
+// FAQ
+const dataCardType7 = {
+    images: {
+        original: '/assets/images/card-img-6.jpg',
+        large: '/assets/images/card-img-6.jpg',
+        medium: '/assets/images/card-img-6.jpg',
+        small: '/assets/images/card-img-6.jpg'
+    },
+    infobox: {
+        image: '/assets/images/crescina-logo.png',
+        subtitle: 'La tecnologia dietro l’efficacia',
+        paragraph: 'Grazie alla Tecnologia Transdermica (Swiss Patent CH 711 466) – ispirata alla metodologia della medicina estetica e brevettata nel 2015 – Labo supera le frontiere della scienza dermo-cosmetica divenendo la prima azienda a sviluppare una nuova tecnica di penetrazione dei principi attivi, senza iniezioni, attraverso epidermide e derma.',
+        cta: {
+            url: '#',
+            title: 'Scopri di più',
+            iconEnd: { name: 'arrow-right' },
+            variants: ['quaternary']
+        }
+    },
+    variants: ['type-7']
+}
+
 // Colored
 const dataCardType8 = {
     color: '#E6D4B0',
@@ -135,5 +157,7 @@ storiesOf('Components|Cards', module)
     .add('Type 5 --- About', () => renderCard(dataCardType5))
     // Magazine
     .add('Type 6 --- Magazine', () => renderCard(dataCardType6))
+    // Magazine
+    .add('Type 7 --- FAQ', () => renderCard(dataCardType7))
     // Colored
     .add('Type 8 --- Colored', () => renderCard(dataCardType8))
