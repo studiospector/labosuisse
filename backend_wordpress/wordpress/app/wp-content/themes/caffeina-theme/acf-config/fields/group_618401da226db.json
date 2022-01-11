@@ -148,21 +148,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/lb-block-love-labo"
-            }
-        ],
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "acf\/lb-hero"
-            }
-        ],
-        [
-            {
-                "param": "block",
-                "operator": "==",
-                "value": "acf\/lb-carousel-posts"
+                "value": "acf\/lb-infobox"
             }
         ]
     ],
@@ -174,5 +160,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641896754
+    "modified": 1641900240
 }
