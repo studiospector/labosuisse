@@ -12,7 +12,7 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<article class="card h-100{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ (type_8 and color) ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
+<article class="card h-100{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ (type_8 and color) ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
     <div class="row h-100{{ type_1 ? ' mobile-min-gutters' : '' }}{{ type_2_6 ? ' no-gutters' : '' }}">
         {% if images|length > 0 %}
             <div class="card-img-wrapper{{ type_1 ? ' col-6 col-md-12' : ' col-12' }}">
