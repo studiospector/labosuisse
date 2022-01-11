@@ -129,6 +129,7 @@
         }
 
         input {
+            background-color: transparent;
             border: 1px solid map-get($colors, "grey-2");
         }
     }

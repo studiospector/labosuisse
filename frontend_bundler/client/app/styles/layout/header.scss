@@ -27,32 +27,14 @@
             padding: 20px 0;
         }
 
-        &__shield {
-            svg {
-                width: 165px;
-                height: 54px;
-
-                @include mq($until: lg) {
-                    width: 86px;
-                    height: 30px;
-                }
-            }
-        }
+        // &__shield {
+            
+        // }
 
         &__logo {
             position: absolute;
             left: 50%;
             transform: translate(-50%, 0);
-
-            svg {
-                width: 182px;
-                height: 58px;
-
-                @include mq($until: lg) {
-                    width: 94px;
-                    height: 30px;
-                }
-            }
         }
 
         &__icons {

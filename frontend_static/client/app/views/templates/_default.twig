@@ -61,7 +61,8 @@
             </main>
             <!-- Footer -->
             {% block footer %}
-                {% include 'layout/footer.twig' %}
+                {% set footer = fn('lb_footer') %}
+                {% include 'layout/footer.twig' with footer only %}
             {% endblock %}
         </div>
 
