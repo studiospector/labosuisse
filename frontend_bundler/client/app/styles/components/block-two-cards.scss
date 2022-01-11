@@ -1,0 +1,23 @@
+.block-two-cards {
+    &__cards {
+        margin-top: 40px;
+        
+        .card {
+            width: 100%;
+
+            .lb-picture {
+                min-height: 310px;
+    
+                @include mq($until: md) {
+                    min-height: 250px;
+                }
+            }
+    
+            .infobox {
+                &__cta {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+}

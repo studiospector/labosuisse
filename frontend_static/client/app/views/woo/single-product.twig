@@ -43,6 +43,11 @@
         <hr class="lb-separator lb-separator--big" data-variant="big" />
     {% endif %}
 
+    {% if two_cards %}
+        {% include '@PathViews/components/block-two-cards.twig' with two_cards only %}
+        <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% endif %}
+
     {% if number_list %}
         {% include '@PathViews/components/number-list-with-image.twig' with number_list only %}
         <hr class="lb-separator lb-separator--big" data-variant="big" />

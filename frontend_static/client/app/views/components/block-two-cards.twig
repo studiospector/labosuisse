@@ -1,0 +1,24 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['block-two-cards--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="block-two-cards{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+    <div class="block-two-cards__infobox text-center">
+        {% include '@PathViews/components/infobox.twig' with infobox only %}
+    </div>
+    <div class="block-two-cards__cards text-center">
+        <div class="row">
+            {% for item in cards %}
+                <div class="col-12 col-md-6">
+                    {% include '@PathViews/components/card.twig' with item only %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>

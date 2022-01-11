@@ -168,4 +168,48 @@ $context['miniatures'] = [
     'variants' =>['full'], // default, full
 ];
 
+// Miniatures
+$context['two_cards'] = [
+    'infobox' => [
+        'subtitle' => 'Individua il trattamento adatto a te',
+        'paragraph' => 'Per conoscere il tuo grado di diradamento e il dosaggio più indicato per te,<br>consulta la tabella.',
+    ],
+    'cards' => [
+        [
+            'images' => [
+                'original' => '/assets/images/banner-img.jpg',
+                'large' => '/assets/images/banner-img.jpg',
+                'medium' => '/assets/images/banner-img.jpg',
+                'small' => '/assets/images/banner-img.jpg'
+            ],
+            'infobox' => [
+                'subtitle' => 'Scala di diradamento uomo',
+                'cta' => [
+                    'url' => '#',
+                    'title' => 'Visualizza la scala',
+                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'variants' => ['quaternary']
+                ]
+            ]
+        ],
+        [
+            'images' => [
+                'original' => '/assets/images/banner-img.jpg',
+                'large' => '/assets/images/banner-img.jpg',
+                'medium' => '/assets/images/banner-img.jpg',
+                'small' => '/assets/images/banner-img.jpg'
+            ],
+            'infobox' => [
+                'subtitle' => 'Scala di diradamento donna',
+                'cta' => [
+                    'url' => '#',
+                    'title' => 'Visualizza la scala',
+                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'variants' => ['quaternary']
+                ]
+            ]
+        ]
+    ]
+];
+
 Timber::render('@PathViews/woo/single-product.twig', $context);
