@@ -91,13 +91,13 @@ if( have_rows('lb_block_carousel_posts') ) {
     $cf_postid = get_sub_field('lb_block_infobox_btn');
     $cf_post = get_post($cf_postid);
     if (! is_null($cf_post)){
-        var_dump($cf_post);
+       // var_dump($cf_post);
         $items[] = [
             'images' => [
-                'original' => "",
-                'large' => "",
-                'medium' => "",
-                'small' => ""
+                'original' => wp_get_attachment_url( get_post_thumbnail_id($cf_post->ID) ),
+                'large' => wp_get_attachment_url( get_post_thumbnail_id($cf_post->ID) ),
+                'medium' => wp_get_attachment_url( get_post_thumbnail_id($cf_post->ID) ),
+                'small' => wp_get_attachment_url( get_post_thumbnail_id($cf_post->ID) )
             ],
             'date'=> $cf_post->post_date,
             'variants' => ['type-2'],
