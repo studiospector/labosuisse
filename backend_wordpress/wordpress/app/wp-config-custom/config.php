@@ -100,12 +100,6 @@ define('WITH_REDIS', getenv('WITH_REDIS') === '1' ? 1 : 0);
 define('WP_CONTENT_DIR', getenv('WP_CONTENT_CUSTOM_DIR'));
 define('WP_DEFAULT_THEME', 'caffeina-starter');
 
-define('SINK_AWS_REGION', getenv('SINK_AWS_REGION'));
-define('SINK_AWS_BUCKET', getenv('SINK_AWS_BUCKET'));
-define('SINK_AWS_ACCESS_ID', getenv('SINK_AWS_ACCESS_ID'));
-define('SINK_AWS_SECRET', getenv('SINK_AWS_SECRET'));
-define('SINK_AWS_UPLOADS_PATH', getenv('SINK_AWS_UPLOADS_PATH'));
-
 define('POSTINO_CAFF_SMTP_SECURE', 'tls');
 define('POSTINO_CAFF_SMTP_PORT', 25);
 define('POSTINO_CAFF_SMTP_SERVER', 'email-smtp.eu-west-1.amazonaws.com');
@@ -118,3 +112,10 @@ define('POSTINO_CAFF_MAIL_SENDER_NAME', getenv('POSTINO_CAFF_MAIL_SENDER_NAME'))
 define('WP_POST_REVISIONS', 4);
 
 define('WP_ALLOW_MULTISITE', true);
+
+// Offload Media lite plugin settings
+define( 'AS3CF_SETTINGS', serialize( array(
+    'provider' => 'aws',
+    'access-key-id' => getenv('OFFLOAD_AWS_ACCESS_ID'),
+    'secret-access-key' => getenv('OFFLOAD_AWS_SECRET'),
+)));

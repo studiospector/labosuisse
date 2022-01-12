@@ -6,3 +6,4 @@ coverage
 uploads
 .php_cs.cache
 .initialized
+backend_wordpress/wordpress/app/wp-content/plugins/cf7-ace-syntax-highlighting

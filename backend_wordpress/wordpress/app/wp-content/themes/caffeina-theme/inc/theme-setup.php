@@ -336,10 +336,10 @@ function lb_header() {
                     'type' => 'card',
                     'data' => [
                         'images' => [
-                            'original' => '/assets/images/card-img-5.jpg',
-                            'large' => '/assets/images/card-img-5.jpg',
-                            'medium' => '/assets/images/card-img-5.jpg',
-                            'small' => '/assets/images/card-img-5.jpg'
+                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
                         ],
                         'infobox' => [
                             'subtitle' => 'Magnetic Eyes',
@@ -500,10 +500,10 @@ function lb_header() {
                 'type' => 'card',
                 'data' => [
                     'images' => [
-                        'original' => '/assets/images/card-img-5.jpg',
-                        'large' => '/assets/images/card-img-5.jpg',
-                        'medium' => '/assets/images/card-img-5.jpg',
-                        'small' => '/assets/images/card-img-5.jpg'
+                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
                     ],
                     'infobox' => [
                         'subtitle' => 'Magnetic Eyes',

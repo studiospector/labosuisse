@@ -32,6 +32,6 @@ if( have_rows('lb_product_benefits') ) {
 }
 
 $context['brand'] = $brands[0];
-$context['brand_color'] = $brand_logo;
+$context['brand_logo'] = $brand_logo;
 
 Timber::render('@PathViews/woo/single-product/title.twig', $context);

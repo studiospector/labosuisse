@@ -1,0 +1,18 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['block-image-card--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+    <div class="block-image-card__img">
+        {{ lbPicture(images) }}
+    </div>
+    <div class="block-image-card__card">
+        {% include '@PathViews/components/card.twig' with card only %}
+    </div>
+</section>

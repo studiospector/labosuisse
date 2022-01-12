@@ -37,10 +37,10 @@ $context['related_products'] = Timber::get_posts($related_ids);
 // Banner
 $context['banner'] = [
     'images' => [
-        'original' => '/assets/images/banner-img.jpg',
-        'large' => '/assets/images/banner-img.jpg',
-        'medium' => '/assets/images/banner-img.jpg',
-        'small' => '/assets/images/banner-img.jpg'
+        'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
     ],
     'infoboxBgColorTransparent' => true, // true, false
     'infoboxTextAlignment' => 'left', // left, right, center
@@ -55,10 +55,10 @@ $context['banner'] = [
 // Banner alternate
 $context['banner_alternate'] = [
     'images' => [
-        'original' => '/assets/images/banner-img.jpg',
-        'large' => '/assets/images/banner-img.jpg',
-        'medium' => '/assets/images/banner-img.jpg',
-        'small' => '/assets/images/banner-img.jpg'
+        'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
     ],
     'infobox' => [
         'tagline' => 'Dosaggi e formati',
@@ -73,10 +73,10 @@ $context['banner_alternate'] = [
 // Number List
 $context['number_list'] = [
     'images' => [
-        'original' => '/assets/images/carousel-hero-img-2.jpg',
-        'large' => '/assets/images/carousel-hero-img-2.jpg',
-        'medium' => '/assets/images/carousel-hero-img-2.jpg',
-        'small' => '/assets/images/carousel-hero-img-2.jpg'
+        'original' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
+        'large' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
+        'medium' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
+        'small' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg'
     ],
     'numbersList' => [
         'title' => 'Tre consigli utili',
@@ -112,60 +112,133 @@ $context['miniatures'] = [
     'items' =>[
         [
             'images' =>[
-                'original' =>'/assets/images/love-labo-img-1.jpg',
-                'large' =>'/assets/images/love-labo-img-1.jpg',
-                'medium' =>'/assets/images/love-labo-img-1.jpg',
-                'small' =>'/assets/images/love-labo-img-1.jpg'
+                'original' =>get_template_directory_uri() . '/assets/images/love-labo-img-1.jpg',
+                'large' =>get_template_directory_uri() . '/assets/images/love-labo-img-1.jpg',
+                'medium' =>get_template_directory_uri() . '/assets/images/love-labo-img-1.jpg',
+                'small' =>get_template_directory_uri() . '/assets/images/love-labo-img-1.jpg'
             ],
             'text' =>'Prendere dall’alloggio l’apposito rompifiala in plastica rigida incluso nella confezione.'
         ],
         [
             'images' =>[
-                'original' =>'/assets/images/love-labo-img-2.jpg',
-                'large' =>'/assets/images/love-labo-img-2.jpg',
-                'medium' =>'/assets/images/love-labo-img-2.jpg',
-                'small' =>'/assets/images/love-labo-img-2.jpg'
+                'original' =>get_template_directory_uri() . '/assets/images/love-labo-img-2.jpg',
+                'large' =>get_template_directory_uri() . '/assets/images/love-labo-img-2.jpg',
+                'medium' =>get_template_directory_uri() . '/assets/images/love-labo-img-2.jpg',
+                'small' =>get_template_directory_uri() . '/assets/images/love-labo-img-2.jpg'
             ],
             'text' =>'Inserire il rompifiala sulla fiala, semplicemente appoggiandolo. Stringere tra le dita il rompifiala e rompere la parte alta della fiala facendo una leggera ma decisa pressione.'
         ],
         [
             'images' =>[
-                'original' =>'/assets/images/love-labo-img-3.jpg',
-                'large' =>'/assets/images/love-labo-img-3.jpg',
-                'medium' =>'/assets/images/love-labo-img-3.jpg',
-                'small' =>'/assets/images/love-labo-img-3.jpg'
+                'original' =>get_template_directory_uri() . '/assets/images/love-labo-img-3.jpg',
+                'large' =>get_template_directory_uri() . '/assets/images/love-labo-img-3.jpg',
+                'medium' =>get_template_directory_uri() . '/assets/images/love-labo-img-3.jpg',
+                'small' =>get_template_directory_uri() . '/assets/images/love-labo-img-3.jpg'
             ],
             'text' =>'Prendere dall’alloggio il dosatore con beccuccio.'
         ],
         [
             'images' =>[
-                'original' =>'/assets/images/love-labo-img-4.jpg',
-                'large' =>'/assets/images/love-labo-img-4.jpg',
-                'medium' =>'/assets/images/love-labo-img-4.jpg',
-                'small' =>'/assets/images/love-labo-img-4.jpg'
+                'original' =>get_template_directory_uri() . '/assets/images/love-labo-img-4.jpg',
+                'large' =>get_template_directory_uri() . '/assets/images/love-labo-img-4.jpg',
+                'medium' =>get_template_directory_uri() . '/assets/images/love-labo-img-4.jpg',
+                'small' =>get_template_directory_uri() . '/assets/images/love-labo-img-4.jpg'
             ],
             'text' =>'Inserire l’apposito dosatore con beccuccio sulla fiala aperta.'
         ],
         [
             'images' =>[
-                'original' =>'/assets/images/love-labo-img-5.jpg',
-                'large' =>'/assets/images/love-labo-img-5.jpg',
-                'medium' =>'/assets/images/love-labo-img-5.jpg',
-                'small' =>'/assets/images/love-labo-img-5.jpg'
+                'original' =>get_template_directory_uri() . '/assets/images/love-labo-img-5.jpg',
+                'large' =>get_template_directory_uri() . '/assets/images/love-labo-img-5.jpg',
+                'medium' =>get_template_directory_uri() . '/assets/images/love-labo-img-5.jpg',
+                'small' =>get_template_directory_uri() . '/assets/images/love-labo-img-5.jpg'
             ],
             'text' =>'Togliere il cappuccio del dosatore.'
         ],
         [
             'images' =>[
-                'original' =>'/assets/images/love-labo-img-6.jpg',
-                'large' =>'/assets/images/love-labo-img-6.jpg',
-                'medium' =>'/assets/images/love-labo-img-6.jpg',
-                'small' =>'/assets/images/love-labo-img-6.jpg'
+                'original' =>get_template_directory_uri() . '/assets/images/love-labo-img-6.jpg',
+                'large' =>get_template_directory_uri() . '/assets/images/love-labo-img-6.jpg',
+                'medium' =>get_template_directory_uri() . '/assets/images/love-labo-img-6.jpg',
+                'small' =>get_template_directory_uri() . '/assets/images/love-labo-img-6.jpg'
             ],
             'text' =>'Applicare il preparato sul cuoio capelluto pulito e asciutto, riga per riga, insistendo sulle zone più diradate, facendo attenzione a non farlo colare sul viso. Far penetrare con leggero massaggio.'
         ],
     ],
     'variants' =>['full'], // default, full
+];
+
+// Two cards
+$context['two_cards'] = [
+    'infobox' => [
+        'subtitle' => 'Individua il trattamento adatto a te',
+        'paragraph' => 'Per conoscere il tuo grado di diradamento e il dosaggio più indicato per te,<br>consulta la tabella.',
+    ],
+    'cards' => [
+        [
+            'images' => [
+                'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+                'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+                'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+                'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+            ],
+            'infobox' => [
+                'subtitle' => 'Scala di diradamento uomo',
+                'cta' => [
+                    'url' => '#',
+                    'title' => 'Visualizza la scala',
+                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'variants' => ['quaternary']
+                ]
+            ]
+        ],
+        [
+            'images' => [
+                'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+                'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+                'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+                'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+            ],
+            'infobox' => [
+                'subtitle' => 'Scala di diradamento donna',
+                'cta' => [
+                    'url' => '#',
+                    'title' => 'Visualizza la scala',
+                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'variants' => ['quaternary']
+                ]
+            ]
+        ]
+    ]
+];
+
+// Image and card
+$context['image_and_card'] = [
+    'images' => [
+        'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+        'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+    ],
+    'card' => [
+        'images' => [
+            'original' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
+            'large' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
+            'medium' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
+            'small' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg'
+        ],
+        'infobox' => [
+            'subtitle' => 'La tecnologia dietro l’efficacia',
+            'paragraph' => 'Grazie alla Tecnologia Transdermica (Swiss Patent CH 711 466) - ispirata alla metodologia della medicina estetica e brevettata nel 2015 - Labo supera le frontiere della scienza dermo-cosmetica divenendo la prima azienda a sviluppare una nuova tecnica di penetrazione dei principi attivi, senza iniezioni, attraverso epidermide e derma.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Scopri di più',
+                'iconEnd' => [ 'name' => 'arrow-right' ],
+                'variants' => ['quaternary']
+            ]
+        ],
+        'variants' => ['type-7']
+    ]
 ];
 
 Timber::render('@PathViews/woo/single-product.twig', $context);
