@@ -536,3 +536,181 @@ function lb_header() {
         'menu_mobile' => ['items' => $menu_mobile],
     );
 }
+
+
+
+/**
+ * Get footer and prefooter
+ */
+function lb_footer() {
+
+    $prefooter = [
+        'block_1' => [
+            'title' => 'Hai delle domande?',
+            'text' => 'Scegli il tuo canale di comunicazione preferito dalla pagina di assistenza e mettiti in contatto con un esperto.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Vai all’assistenza',
+                'iconEnd' => [ 'name' => 'arrow-right' ],
+                // Variants is static
+                'variants' => ['quaternary']
+            ],
+        ],
+        'block_2' => [
+            'title' => 'Trova un punto vendita',
+            'text' => 'Inserisci un CAP, una città o un indirizzo per scoprire i rivenditori vicinot a te.',
+            'input' => [
+                // The only parameter to manage in options is label
+                'type' => 'search',
+                'name' => "lb-search-store-prefooter",
+                'label' => "Inserisci città, provincia, CAP,...",
+                'disabled' => false,
+                'required' => false,
+                'variants' => ['secondary'],
+            ],
+        ],
+        'block_3' => [
+            'title' => 'Iscriviti alla newsletter',
+            'text' => 'Inserisci i tuoi dati e ricevi direttamente sulla tua mail aggiornamenti e promozioni dal mondo Labo.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Procedi e iscriviti',
+                'iconEnd' => [ 'name' => 'arrow-right' ],
+                // Variants is static
+                'variants' => ['quaternary']
+            ],
+        ],
+    ];
+
+    $footer = [
+        'discover' => [
+            'title' => 'SCOPRI LABO',
+            'items' => [
+                [
+                    'url' => '#',
+                    'title' => 'Labo Magazine',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Labo nel Mondo',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Lavora con noi',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Diventa farmacia concessonaria',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Consulenza personalizzata',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Privacy Policy',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+            ],
+        ],
+        'support' => [
+            'title' => 'ASSISTENZA',
+            'items' => [
+                [
+                    'url' => '#',
+                    'title' => 'FAQ',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Contatti',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Traccia un ordine',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+            ], 
+        ],
+        'search' => [
+            'title' => 'TROVA UNA FARMACIA CONCESSIONARIA ',
+            'input' => [
+                // The only parameter to manage in options is label
+                'type' => 'search',
+                'name' => "lb-search-store-footer",
+                'label' => "Inserisci città, provincia, CAP,...",
+                'disabled' => false,
+                'required' => false,
+                'variants' => ['secondary'],
+            ],
+        ],
+        'newsletter' => [ 
+            'title' => 'ISCRIVITI ALLA NEWSLETTER',
+            'text' => 'Ricevi aggiornamenti e promozioni<br>direttamente sulla tua mail.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Procedi e iscriviti',
+                // Variants is static
+                'variants' => ['secondary']
+            ],
+        ],
+        'social' => [
+            'title' => 'SEGUICI',
+            'items' => [
+                [
+                    'url' => '#',
+                    'icon' => 'instagram',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'facebook',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'twitter',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'youtube',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'linkedin',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'whatsapp',
+                ],
+            ]
+        ],
+    ];
+
+    return array(
+        'footer' => $footer,
+        'prefooter' => $prefooter,
+    );
+}

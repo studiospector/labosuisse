@@ -1,3 +1,84 @@
-<footer class="footer" data-scroll-section>
-    FOOTER
+<footer data-scroll-section>
+    <div class="prefooter">
+        <div class="prefooter--desktop container">
+            <div class="row">
+                <div class="prefooter__box col-12 col-md-4">
+                    {% include '@PathViews/components/infobox.twig' with {
+                        subtitle: prefooter.block_1.title,
+                        paragraph: prefooter.block_1.text,
+                        cta: prefooter.block_1.cta,
+                    } only %}
+                </div>
+                <div class="prefooter__box col-12 col-md-4">
+                    {% include '@PathViews/components/infobox.twig' with {
+                        subtitle: prefooter.block_2.title,
+                        paragraph: prefooter.block_2.text,
+                    } only %}
+                    {% include '@PathViews/components/fields/input.twig' with prefooter.block_2.input only %}
+                </div>
+                <div class="prefooter__box col-12 col-md-4">
+                    {% include '@PathViews/components/infobox.twig' with {
+                        subtitle: prefooter.block_3.title,
+                        paragraph: prefooter.block_3.text,
+                        cta: prefooter.block_3.cta,
+                    } only %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="footer__top">
+                <div class="footer__top__shield lb-shield">
+                    {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
+                </div>
+                <div class="footer__top__logo lb-logo">
+                    {% include '@PathViews/components/icon.twig' with {name: 'logo'} only %}
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <div class="footer__bottom__item">
+                    <h6 class="infobox__tagline">{{ footer.discover.title }}</h6>
+                    <ul class="footer__menu">
+                        {% for item in footer.discover.items %}
+                            <li class="footer__menu__item">
+                                {% include '@PathViews/components/button.twig' with item only %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="footer__bottom__item">
+                    <h6 class="infobox__tagline">{{ footer.support.title }}</h6>
+                    <ul class="footer__menu">
+                        {% for item in footer.support.items %}
+                            <li class="footer__menu__item">
+                                {% include '@PathViews/components/button.twig' with item only %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="footer__bottom__item">
+                    <h6 class="infobox__tagline">{{ footer.search.title }}</h6>
+                    {% include '@PathViews/components/fields/input.twig' with footer.search.input only %}
+                </div>
+                <div class="footer__bottom__item">
+                    <h6 class="infobox__tagline">{{ footer.newsletter.title }}</h6>
+                    <p class="infobox__paragraph">{{ footer.newsletter.text }}</p>
+                    {% include '@PathViews/components/button.twig' with footer.newsletter.cta only %}
+                </div>
+                <div class="footer__bottom__item">
+                    <h6 class="infobox__tagline">{{ footer.social.title }}</h6>
+                    <ul class="footer__menu-icon">
+                        {% for item in footer.social.items %}
+                            <li class="footer__menu-icon__item">
+                                <a href="{{ item.url }}" target="_blank">
+                                    {% include '@PathViews/components/icon.twig' with {name: item.icon} only %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </footer>

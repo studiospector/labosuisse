@@ -9,10 +9,10 @@
 <header class="lb-header lb-header js-header js-menu {{classes|length ? ' ' ~ classes|join(' ') : '' }}">
 
     <div class="lb-header__top container">
-        <div class="lb-header__top__shield">
+        <div class="lb-header__top__shield lb-shield">
             {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
         </div>
-        <div class="lb-header__top__logo">
+        <div class="lb-header__top__logo lb-logo">
             {% include '@PathViews/components/icon.twig' with {name: 'logo'} only %}
         </div>
         <div class="lb-header__top__icons">
