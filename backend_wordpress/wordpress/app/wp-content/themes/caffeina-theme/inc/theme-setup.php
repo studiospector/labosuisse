@@ -290,6 +290,17 @@ function timber_set_product($post)
 
 
 /**
+ * Add symbols.twig to WP admin area
+ */
+add_action( 'admin_footer', 'lb_add_symbols_to_admin' );
+function lb_add_symbols_to_admin()
+{
+    Timber::render('@PathViews/components/symbols.twig');
+}
+
+
+
+/**
  * Get header and menu
  */
 function lb_header() {
