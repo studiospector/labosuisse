@@ -6,7 +6,7 @@
   {% set classes = classes|merge([class]) %}
 {% endif %}
 
-<div class="infobox{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+<div class="infobox{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
     {% if image or tagline or title or subtitle or paragraph %}
         <div class="infobox__text-wrap">
             <div class="js-infobox-text">
