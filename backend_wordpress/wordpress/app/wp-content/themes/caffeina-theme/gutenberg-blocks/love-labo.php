@@ -22,13 +22,8 @@ for ($i = 1; $i <= 6; $i++) {
 $payload = [
     'items' => $items,
     'variants' => get_field('lb_block_love_labo_variants')
-
 ];
 // $this->context['data'] = array_merge($this->context['data'],$infobox);
 $block_love_labo->setContext($payload);
 $block_love_labo->addInfobox();
 $block_love_labo->render();
-
-
-
-

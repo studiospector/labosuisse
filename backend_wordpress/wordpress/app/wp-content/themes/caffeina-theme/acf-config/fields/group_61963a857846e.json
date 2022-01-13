@@ -3,8 +3,25 @@
     "title": "Campi personalizzati: Blocco – Love",
     "fields": [
         {
+            "key": "field_61e0579fd9546",
+            "label": "Items",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_61963b00c9a3f",
-            "label": "image 1",
+            "label": "Immagine 1",
             "name": "lb_block_love_labo_img_1",
             "type": "image",
             "instructions": "",
@@ -15,6 +32,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -24,12 +42,11 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61b9bf75883ef",
-            "label": "text 1",
+            "label": "Testo 1",
             "name": "lb_block_love_labo_text_1",
             "type": "textarea",
             "instructions": "",
@@ -40,16 +57,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61963b87c9a42",
-            "label": "image 2",
+            "label": "Immagine 2",
             "name": "lb_block_love_labo_img_2",
             "type": "image",
             "instructions": "",
@@ -60,6 +77,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -69,12 +87,11 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61b9bf99883f0",
-            "label": "text 2",
+            "label": "Testo 2",
             "name": "lb_block_love_labo_text_2",
             "type": "textarea",
             "instructions": "",
@@ -85,16 +102,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61963b91c9a43",
-            "label": "image 3",
+            "label": "Immagine 3",
             "name": "lb_block_love_labo_img_3",
             "type": "image",
             "instructions": "",
@@ -105,6 +122,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -114,12 +132,11 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61b9bf9b883f1",
-            "label": "text 3",
+            "label": "Testo 3",
             "name": "lb_block_love_labo_text_3",
             "type": "textarea",
             "instructions": "",
@@ -130,16 +147,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61963b96c9a44",
-            "label": "image 4",
+            "label": "Immagine 4",
             "name": "lb_block_love_labo_img_4",
             "type": "image",
             "instructions": "",
@@ -150,6 +167,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -159,12 +177,11 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61b9bf9f883f2",
-            "label": "text 4",
+            "label": "Testo 4",
             "name": "lb_block_love_labo_text_4",
             "type": "textarea",
             "instructions": "",
@@ -175,16 +192,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61963b98c9a45",
-            "label": "image 5",
+            "label": "Immagine 5",
             "name": "lb_block_love_labo_img_5",
             "type": "image",
             "instructions": "",
@@ -195,6 +212,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -204,12 +222,11 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61b9bfa1883f3",
-            "label": "text 5",
+            "label": "Testo 5",
             "name": "lb_block_love_labo_text_5",
             "type": "textarea",
             "instructions": "",
@@ -220,16 +237,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61963b99c9a46",
-            "label": "image 6",
+            "label": "Immagine 6",
             "name": "lb_block_love_labo_img_6",
             "type": "image",
             "instructions": "",
@@ -240,6 +257,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -249,12 +267,11 @@
             "max_width": "",
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61b9bfa4883f4",
-            "label": "text 6",
+            "label": "Testo 6",
             "name": "lb_block_love_labo_text_6",
             "type": "textarea",
             "instructions": "",
@@ -265,16 +282,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61c30be0e3318",
-            "label": "variants",
+            "label": "Variante",
             "name": "lb_block_love_labo_variants",
             "type": "select",
             "instructions": "",
@@ -285,6 +302,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "choices": {
                 "dafault": "dafault",
                 "full": "full"
@@ -294,7 +312,6 @@
             "multiple": 0,
             "ui": 0,
             "return_format": "value",
-            "wpml_cf_preferences": 1,
             "ajax": 0,
             "placeholder": ""
         },
@@ -456,5 +473,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641898614
+    "modified": 1642092624
 }
