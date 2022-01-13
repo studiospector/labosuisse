@@ -35,21 +35,21 @@ $related_ids = wc_get_related_products($context['post']->id, $related_limit);
 $context['related_products'] = Timber::get_posts($related_ids);
 
 // Banner
-$context['banner'] = [
+$context['hero'] = [
     'images' => [
-        'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-        'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-        'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-        'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+        'original' => get_template_directory_uri() . '/assets/images/hero-crescina-right.jpg',
+        'large' => get_template_directory_uri() . '/assets/images/hero-crescina-right.jpg',
+        'medium' => get_template_directory_uri() . '/assets/images/hero-crescina-right.jpg',
+        'small' => get_template_directory_uri() . '/assets/images/hero-crescina-right.jpg'
     ],
-    'infoboxBgColorTransparent' => true, // true, false
-    'infoboxTextAlignment' => 'left', // left, right, center
+    'infoboxPosX' => 'left',
+    'infoboxPosY' => 'center',
     'infobox' => [
-        'tagline' => 'LOREM IPSUM',
-        'subtitle' => 'Lorem ipsum dolor sit amet, consectetur',
-        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur<br>adipiscing elit, sed do eiusmod tempor incididunt<br>ut labore et dolore magna.',
+        'subtitle' => 'La risposta specifica al problema del diradamento',
+        'paragraph' => 'Un concentrato di innovazione dedicata alla Ri-Crescita naturale dei capelli.',
     ],
-    'variants' => ['left'], // left, right, center
+    'container' => true,
+    'variants' => ['small']
 ];
 
 // Banner alternate
@@ -65,6 +65,12 @@ $context['banner_alternate'] = [
         'subtitle' => 'Sappiamo bene che ogni persona è unica',
         'paragraph' => 'Per questo, abbiamo studiato formule specifiche - per uomo e per donna - in concentrazioni diversificate dei principi attivi adatte a trattare i differenti gradi di diradamento, da quello iniziale a quello avanzato di calvizie, anche dovuto ad Alopecia Androgenetica.',
         'variants' => ['alternate'],
+        'cta' =>[
+            'url' =>'#',
+            'title' =>'Lorem Ipsum',
+            'iconEnd' => [ 'name' => 'arrow-right' ],
+            'variants' =>['quaternary']
+        ]
     ],
     'imageBig' => false,
     'variants' => ['infobox-right', 'infobox-centered'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
@@ -238,6 +244,25 @@ $context['image_and_card'] = [
             ]
         ],
         'variants' => ['type-7']
+    ]
+];
+
+// Routine
+$context['routine'] = [
+    'title' => 'Scopri la migliore routine crescina',
+    'items' => [
+        [
+            'text' => 'Inizia con il trattamento per agire sulla struttura stessa del capello lorem ipsum',
+            'product' => Timber::get_post(148),
+        ],
+        [
+            'text' => 'Continua con il trattamento agendo anche durante la detersione lorem ipsum',
+            'product' => Timber::get_post(263),
+        ],
+        [
+            'text' => 'Affronta il problema da dentro e aggiungi alla tua dieta equilibrata gli integratori lorem ipsum',
+            'product' => Timber::get_post(148),
+        ],
     ]
 ];
 

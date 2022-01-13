@@ -1,23 +1,70 @@
 .single-product-details {
 
+    @include mq($until: md) {
+        margin-top: 20px;
+    }
+
     &__wrapper {
         flex-wrap: nowrap;
         column-gap: 60px;
+
+        @include mq($until: md) {
+            flex-wrap: wrap;
+            column-gap: 0;
+        }
     }
 
     &__images {
         flex-shrink: 1;
 
-        .flex-control-nav {
-            display: flex;
-            flex-wrap: wrap;
-            column-gap: 30px;
-            row-gap: 30px;
+        @include mq($until: md) {
+            display: none;
+            flex-shrink: 0;
+        }
+
+        // .flex-control-nav {
+        //     display: flex;
+        //     flex-wrap: wrap;
+        //     column-gap: 30px;
+        //     row-gap: 30px;
+        //     margin-top: 30px;
+
+        //     li {
+        //         display: block;
+        //         flex: 0 0 47.2%;
+        //     }
+        // }
+    }
+
+    .lb-product-gallery {
+        position: relative;
+        overflow: hidden;
+
+        @include mq($until: md) {
+            padding-bottom: 60px;
+            // margin-bottom: 30px;
+        }
+
+        .lb-product-gallery-thumb {
             margin-top: 30px;
 
-            li {
+            @include mq($until: md) {
+                margin-top: 10px;
+            }
+        }
+
+        &__image {
+            overflow: hidden;
+        }
+
+        .swiper-pagination.swiper-pagination-bullets {
+            @include mq($from: md) {
+                display: none;
+            }
+
+            @include mq($until: md) {
                 display: block;
-                flex: 0 0 47.37%;
+                bottom: 22px;
             }
         }
     }
@@ -25,15 +72,27 @@
     &__summary {
         flex-shrink: 1;
 
+        @include mq($until: md) {
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .lb-product-gallery {
+            @include mq($from: md) {
+                display: none;
+            }
+        }
+
         &__brand {
             margin-bottom: 20px;
 
-            @include mq($until: md) {
-                margin-bottom: 10px;
-            }
-
             img {
                 width: auto;
+                height: auto;
+
+                @include mq($until: md) {
+                    height: 16px;
+                }
             }
         }
 
@@ -54,6 +113,7 @@
             margin-bottom: 60px;
 
             @include mq($until: md) {
+                display: inline-block;
                 margin-bottom: 30px;
             }
 
@@ -61,6 +121,10 @@
                 display: flex;
                 align-items: center;
                 font-weight: 300;
+
+                @include mq($until: md) {
+                    font-size: rem(13);
+                }
 
                 &:not(:last-child) {
                     margin-bottom: 20px;
@@ -78,6 +142,10 @@
 
             @include mq($until: md) {
                 margin-bottom: 30px;
+
+                p {
+                    font-size: rem(13);
+                }
             }
         }
 
@@ -89,6 +157,7 @@
             @include mq($until: md) {
                 margin-bottom: 30px;
                 font-size: rem(18);
+                text-align: left;
             }
 
             bdi {
@@ -103,6 +172,14 @@
     
                 @include mq($until: md) {
                     margin-bottom: 40px;
+                    text-align: left;
+                }
+            }
+
+            @include mq($until: md) {
+                .button {
+                    width: 100%;
+                    justify-content: center;
                 }
             }
         }

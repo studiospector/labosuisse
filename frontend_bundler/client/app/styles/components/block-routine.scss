@@ -1,0 +1,46 @@
+.block-routine {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: map-get($colors, "grey-1");
+
+    .infobox__title {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    &__list {
+        li {
+            @include mq($until: md) {
+                padding: 0 !important;
+            }
+
+            &:not(:last-child) {
+                @include mq($until: md) {
+                    margin-bottom: 40px;
+                }
+            }
+
+            &::before {
+                position: absolute;
+                top: 0;
+                left: 15px;
+                font-size: rem(40);
+            }
+        }
+
+        &__item {
+            p {
+                padding-left: 60px;
+                margin: 11px 0;
+
+                @include mq($until: md) {
+                    margin: 2px 0;
+                }
+            }
+
+            .lb-product-card {
+                margin-top: 25px;
+            }
+        }
+    }
+}

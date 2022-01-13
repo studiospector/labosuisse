@@ -14,10 +14,22 @@
             }
     
             .infobox {
+                &__subtitle {
+                    @include mq($until: md) {
+                        font-size: rem(18);
+                    }
+                }
+
                 &__cta {
                     margin-top: 0;
                 }
             }
+        }
+    }
+
+    &__card-item {
+        &:not(:last-child) {
+            margin-bottom: 60px;
         }
     }
 }

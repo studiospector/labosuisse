@@ -33,8 +33,8 @@
 
     <hr class="lb-separator lb-separator--big" data-variant="big" />
 
-    {% if banner %}
-        {% include '@PathViews/components/banner.twig' with banner only %}
+    {% if hero %}
+        {% include '@PathViews/components/hero.twig' with hero only %}
         <hr class="lb-separator lb-separator--big" data-variant="big" />
     {% endif %}
 
@@ -60,7 +60,13 @@
 
     {% if miniatures %}
         {% include '@PathViews/components/block-love-labo.twig' with miniatures only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% if routine %}
+            <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% endif %}
+    {% endif %}
+
+    {% if routine %}
+        {% include '@PathViews/components/block-routine.twig' with routine only %}
     {% endif %}
 
 {% endblock %}

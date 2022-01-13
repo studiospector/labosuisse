@@ -1,0 +1,25 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['block-routine--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="block-routine{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+    <div class="container">
+        <h3 class="infobox__title">{{ title }}</h3>
+        <ol class="block-routine__list row">
+            {% for post in items|default([]) %}
+                <li class="col-12 col-md-4">
+                    <div class="block-routine__list__item">
+                        {% if post.text %}<p class="p-small">{{ post.text }}</p>{% endif %}
+                        {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post.product} only %}
+                    </div>
+                </li>
+            {% endfor %}
+        </ol>
+    </div>
+</section>

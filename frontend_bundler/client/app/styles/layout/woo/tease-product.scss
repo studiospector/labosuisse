@@ -1,0 +1,65 @@
+.lb-product-card {
+    text-align: center;
+    
+    &__content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        // img {
+        //     max-height: 340px;
+        //     min-height: 340px;
+
+        //     @include mq($until: md) {
+        //         max-height: 200px;
+        //         min-height: 200px;
+        //     }
+        // }
+
+        .onsale {
+            display: none;
+        }
+    }
+
+    &__title {
+        margin: 20px 0;
+        font-size: rem(20);
+        line-height: 25px;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+
+        @include mq($until: md) {
+            font-size: rem(13);
+        }
+
+        a {
+            color: map-get($colors, "black");
+            text-decoration: none;
+        }
+    }
+
+    &__price {
+        margin-bottom: 8px;
+
+        &__desc {
+            font-size: rem(14);
+            font-weight: 300;
+            color: map-get($colors, "primary-dark-1");
+
+            @include mq($until: md) {
+                font-size: rem(11);
+            }
+        }
+
+        .amount {
+            font-size: rem(18);
+            font-weight: 300;
+            color: map-get($colors, "primary-dark-1");
+
+            @include mq($until: md) {
+                font-size: rem(13);
+            }
+        }
+    }
+}

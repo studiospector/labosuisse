@@ -10,6 +10,7 @@ import LBCustomSelect from './CustomSelect'
 import CarouselHero from './CarouselHero'
 import CarouselBannerAlternate from './CarouselBannerAlternate'
 import CarouselPosts from './CarouselPosts'
+import CarouselProductImage from './CarouselProductImage'
 import Hero from './Hero'
 import BannerAlternate from './BannerAlternate'
 import BlockLoveLabo from './BlockLoveLabo'
@@ -53,6 +54,11 @@ const components = {
     carouselPosts: {
         selector: '.js-carousel-posts',
         type: CarouselPosts,
+        optional: true
+    },
+    carouselProductImage: {
+        selector: '.js-lb-product-gallery',
+        type: CarouselProductImage,
         optional: true
     },
     hero: {

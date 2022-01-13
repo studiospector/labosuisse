@@ -6,6 +6,10 @@
     color: map-get($colors, "black");
     text-transform: uppercase;
 
+    @include mq($until: md) {
+        display: none;
+    }
+
     a {
         font-weight: 300;
         color: map-get($colors, "black");
