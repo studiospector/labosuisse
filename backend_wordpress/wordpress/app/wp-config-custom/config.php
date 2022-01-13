@@ -119,3 +119,6 @@ define( 'AS3CF_SETTINGS', serialize( array(
     'access-key-id' => getenv('OFFLOAD_AWS_ACCESS_ID'),
     'secret-access-key' => getenv('OFFLOAD_AWS_SECRET'),
 )));
+
+// Memory limit
+define('WP_MEMORY_LIMIT', '256M');
