@@ -67,7 +67,7 @@ if( have_rows('lb_block_carousel_banner_alternate') ) {
                 'title' => get_sub_field('lb_block_infobox_title'),
                 'subtitle' => get_sub_field('lb_block_infobox_subtitle'),
                 'paragraph' => get_sub_field('lb_block_infobox_paragraph'),
-                'cta' => array_merge( get_sub_field('lb_block_infobox_btn'),['buttonVariants' => [get_sub_field('lb_block_infobox_btn_variants')]])
+                'cta' => array_merge( get_sub_field('lb_block_infobox_btn'),['variants' => [get_sub_field('lb_block_infobox_btn_variants')]])
             ],
             'variants' => [get_sub_field('lb_block_banner_alternate_variants_lr'),get_sub_field('lb_block_banner_alternate_variants_hcb')],
         ];
