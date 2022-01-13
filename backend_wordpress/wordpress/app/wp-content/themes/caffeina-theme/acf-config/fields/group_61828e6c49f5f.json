@@ -20,9 +20,9 @@
             "endpoint": 0
         },
         {
-            "key": "field_6183ab3b56000",
-            "label": "Image left",
-            "name": "lb_block_launch_two_images_image_left",
+            "key": "field_6183accfdd061",
+            "label": "Immagine di Destra",
+            "name": "lb_block_launch_two_images_image_right",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -45,9 +45,9 @@
             "mime_types": ""
         },
         {
-            "key": "field_6183accfdd061",
-            "label": "Image right",
-            "name": "lb_block_launch_two_images_image_right",
+            "key": "field_6183ab3b56000",
+            "label": "Immagine di Sinistra",
+            "name": "lb_block_launch_two_images_image_left",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -227,5 +227,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641896609
+    "modified": 1642079185
 }
