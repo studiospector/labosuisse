@@ -461,7 +461,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "acf\/lb-block-love-labo"
+                "value": "acf\/lb-love-labo"
             }
         ]
     ],
@@ -473,5 +473,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642092625
+    "modified": 1642523497
 }

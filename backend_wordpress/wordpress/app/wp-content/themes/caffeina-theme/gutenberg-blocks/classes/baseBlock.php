@@ -5,6 +5,7 @@ namespace gutenbergBlocks;
 class BaseBlock {
   public $id ;
   public $name;
+  public $acfName;
   public $className;
   public $payload;
   protected $block;
@@ -46,6 +47,8 @@ class BaseBlock {
             ],
         ]
     ];
+    $this->acfName = 'lb_block_'.str_replace("-","_",$this->name);
+    var_dump($this->acfName);
   }
 
   public function addInfobox(&$context = null){
@@ -53,11 +56,11 @@ class BaseBlock {
 
     $infobox = [
             'infobox' => [
-                'tagline' => get_field('lb_block_infobox_tagline'),
-                'title' => get_field('lb_block_infobox_title'),
-                'subtitle' => get_field('lb_block_infobox_subtitle'),
-                'paragraph' => get_field('lb_block_infobox_paragraph'),
-                'cta' => array_merge( is_array(get_field('lb_block_infobox_btn')) ? get_field('lb_block_infobox_btn') : [] ,['variants' => [get_field('lb_block_infobox_btn_variants')]])
+                'tagline' => get_field($this->acfName.'_infobox_tagline'),
+                'title' => get_field($this->acfName.'_infobox_title'),
+                'subtitle' => get_field($this->acfName.'_infobox_subtitle'),
+                'paragraph' => get_field($this->acfName.'_infobox_paragraph'),
+                'cta' => array_merge( is_array(get_field($this->acfName.'_infobox_btn')) ? get_field($this->acfName.'_infobox_btn') : [] ,['variants' => [get_field($this->acfName.'_infobox_btn_variants')]])
             ]
     ];
 

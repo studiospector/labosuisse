@@ -4,7 +4,7 @@ use gutenbergBlocks\BaseBlock;
 class Hero extends BaseBlock {
     public function __construct( $block , $name ) {
 		parent::__construct( $block , $name );
-                
+              
         $payload = [
             'images' => [
                 'original' => get_field('lb_block_hero_img'),
