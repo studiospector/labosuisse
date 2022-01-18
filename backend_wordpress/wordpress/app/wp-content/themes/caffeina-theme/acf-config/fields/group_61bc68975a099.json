@@ -135,7 +135,7 @@
         {
             "key": "field_61dd5fb7fff64",
             "label": "Tagline",
-            "name": "lb_block_infobox_tagline",
+            "name": "lb_block_banner_alternate_infobox_tagline",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -155,7 +155,7 @@
         {
             "key": "field_61dd5fdefff65",
             "label": "Title",
-            "name": "lb_block_infobox_title",
+            "name": "lb_block_banner_alternate_infobox_title",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -175,7 +175,7 @@
         {
             "key": "field_61dd6007fff66",
             "label": "Subtitle",
-            "name": "lb_block_infobox_subtitle",
+            "name": "lb_block_banner_alternate_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -195,7 +195,7 @@
         {
             "key": "field_61dd6026fff67",
             "label": "Paragraph",
-            "name": "lb_block_infobox_paragraph",
+            "name": "lb_block_banner_alternate_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -215,7 +215,7 @@
         {
             "key": "field_61dd604bfff68",
             "label": "Button",
-            "name": "lb_block_infobox_btn",
+            "name": "lb_block_banner_alternate_infobox_btn",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -231,7 +231,7 @@
         {
             "key": "field_61dd606efff69",
             "label": "Button variants",
-            "name": "lb_block_infobox_btn_variants",
+            "name": "lb_block_banner_alternate_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -280,5 +280,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641898143
+    "modified": 1641898145
 }

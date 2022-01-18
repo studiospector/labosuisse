@@ -3,32 +3,40 @@
 namespace gutenbergBlocks;
 
 class BaseBlock {
-  public $id;
+  public $id ;
   public $name;
   public $className;
+  public $payload;
   protected $block;
   private $context;
   private $field_names = ['block_id', 'block_className'];
 
-  public function __construct($block)
+  public function __construct($block = null, $name = null)
   {
-    $this->block = $block;
-    $this->name = str_replace("acf/lb-","",$this->block['name']);
-    $this->id = $this->name . $block['id'];
-    // $this->id = "hero-" . $this->block['id'];
-    if( !empty($this->block['anchor']) ) {
-        $id = $this->block['anchor'];
+    if ($block != null){
+        $this->block = $block;
+        $this->name = str_replace("acf/lb-","",$this->block['name']);
+        $this->id = $this->name . $block['id'];
+        // $this->id = "hero-" . $this->block['id'];
+        if( !empty($this->block['anchor']) ) {
+            $id = $this->block['anchor'];
+        }
+        //?
+        $className = $this->name;
+        // $this->className = 'hero';
+        if( !empty($this->block['className']) ) {
+            $this->className .= ' ' . $this->block['className'];
+        }
+        if( !empty($this->block['align']) ) {
+            $this->className.= ' align' . $this->block['align'];
+        }
+    
+       
+    }else{
+        $this->name = $name;
+        $this->id = 0;
+        $this->className = "";
     }
-    //?
-    $className = $this->name;
-    // $this->className = 'hero';
-    if( !empty($this->block['className']) ) {
-        $this->className .= ' ' . $this->block['className'];
-    }
-    if( !empty($this->block['align']) ) {
-        $this->className.= ' align' . $this->block['align'];
-    }
-
     $this->context = [
         'block' => $this->name,
         'data' => [
@@ -58,6 +66,7 @@ class BaseBlock {
        $context = array_merge($context,$infobox);
     }else{
         $this->context['data'] = array_merge( $this->context['data'],$infobox);
+        $this->payload = array_merge( $this->payload,$infobox);
     }
     // echo '<pre>';
     // var_dump( $infobox );
@@ -67,7 +76,8 @@ class BaseBlock {
   }
 
   public function setContext($payload){
-    $this->context['data'] = array_merge($this->context['data'],$payload);
+      $this->payload = $payload;
+      $this->context['data'] = array_merge($this->context['data'],$payload);
 
 
   }

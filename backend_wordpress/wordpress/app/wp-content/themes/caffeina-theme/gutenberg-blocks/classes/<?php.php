@@ -1,4 +1,7 @@
 <?php
+  
+// // var_dump($payl);
+// die;
 /**
  * The Template for displaying all single products
  *
@@ -35,6 +38,10 @@ $related_ids = wc_get_related_products($context['post']->id, $related_limit);
 $context['related_products'] = Timber::get_posts($related_ids);
 
 // Banner
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/hero.php');
+$block_hero = new Hero(null,'hero');
+
+$context['hero'] = $block_hero->payload;
 // $context['hero'] = [
 //     'images' => [
 //         'original' => get_template_directory_uri() . '/assets/images/hero-crescina-right.jpg',
@@ -51,10 +58,6 @@ $context['related_products'] = Timber::get_posts($related_ids);
 //     'container' => true,
 //     'variants' => ['small']
 // ];
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/hero.php');
-$block_hero = new Hero(null,'hero');
-
-$context['hero'] = $block_hero->payload;
 
 // Banner alternate
 // $context['banner_alternate'] = [
@@ -85,32 +88,37 @@ $block_banner_alternate = new BannerAlternate(null,'banner_alternate');
 $context['banner_alternate'] = $block_banner_alternate->payload;
 
 // Number List
-$context['number_list'] = [
-    'images' => [
-        'original' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
-        'large' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
-        'medium' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
-        'small' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg'
-    ],
-    'numbersList' => [
-        'title' => 'Tre consigli utili',
-        'list' => [
-            [
-                'title' => '',
-                'text' => 'Si consiglia un trattamento di almeno 2 mesi.<br>Può essere ripetuto più volte l’anno.',
-            ],
-            [
-                'title' => '',
-                'text' => 'Utilizza Crescina sul cuoio capelluto<br>completamente integro, senza escoriazioni.',
-            ],
-            [
-                'title' => '',
-                'text' => 'Regola le tue abitudini di detersione:<br>lava i capelli almeno due volte a settimana.',
-            ],
-        ],
-        'variants' => ['vertical']
-    ]
-];
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/numberList.php');
+$block_number_list = new NumberList(null,'number_list');
+
+$context['number_list'] = $block_number_list->payload;
+
+// $context['number_list'] = [
+//     'images' => [
+//         'original' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
+//         'large' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
+//         'medium' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg',
+//         'small' => get_template_directory_uri() . '/assets/images/carousel-hero-img-2.jpg'
+//     ],
+//     'numbersList' => [
+//         'title' => 'Tre consigli utili',
+//         'list' => [
+//             [
+//                 'title' => '',
+//                 'text' => 'Si consiglia un trattamento di almeno 2 mesi.<br>Può essere ripetuto più volte l’anno.',
+//             ],
+//             [
+//                 'title' => '',
+//                 'text' => 'Utilizza Crescina sul cuoio capelluto<br>completamente integro, senza escoriazioni.',
+//             ],
+//             [
+//                 'title' => '',
+//                 'text' => 'Regola le tue abitudini di detersione:<br>lava i capelli almeno due volte a settimana.',
+//             ],
+//         ],
+//         'variants' => ['vertical']
+//     ]
+// ];
 
 // Miniatures
 $context['miniatures'] = [
@@ -182,81 +190,87 @@ $context['miniatures'] = [
     'variants' =>['full'], // default, full
 ];
 
-//Two cards
-$context['two_cards'] = [
-    'infobox' => [
-        'subtitle' => 'Individua il trattamento adatto a te',
-        'paragraph' => 'Per conoscere il tuo grado di diradamento e il dosaggio più indicato per te,<br>consulta la tabella.',
-    ],
-    'cards' => [
-        [
-            'images' => [
-                'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-                'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-                'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-                'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
-            ],
-            'infobox' => [
-                'subtitle' => 'Scala di diradamento uomo',
-                'cta' => [
-                    'url' => '#',
-                    'title' => 'Visualizza la scala',
-                    'iconEnd' => [ 'name' => 'arrow-right' ],
-                    'variants' => ['quaternary']
-                ]
-            ]
-        ],
-        [
-            'images' => [
-                'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-                'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-                'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-                'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
-            ],
-            'infobox' => [
-                'subtitle' => 'Scala di diradamento donna',
-                'cta' => [
-                    'url' => '#',
-                    'title' => 'Visualizza la scala',
-                    'iconEnd' => [ 'name' => 'arrow-right' ],
-                    'variants' => ['quaternary']
-                ]
-            ]
-        ]
-    ]
-];
-// require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/launchTwoCards.php');
-// $block_two_cards = new LaunchTwoCards(null,'two_cards');
+// Two cards
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/launchTwoCards.php');
+$block_two_cards = new LaunchTwoCards(null,'two_cards');
 
-// $context['two_cards'] = $block_two_cards->payload;
+$context['two_cards'] = $block_two_cards->payload;
+
+// $context['two_cards'] = [
+//     'infobox' => [
+//         'subtitle' => 'Individua il trattamento adatto a te',
+//         'paragraph' => 'Per conoscere il tuo grado di diradamento e il dosaggio più indicato per te,<br>consulta la tabella.',
+//     ],
+//     'cards' => [
+//         [
+//             'images' => [
+//                 'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//                 'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//                 'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//                 'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+//             ],
+//             'infobox' => [
+//                 'subtitle' => 'Scala di diradamento uomo',
+//                 'cta' => [
+//                     'url' => '#',
+//                     'title' => 'Visualizza la scala',
+//                     'iconEnd' => [ 'name' => 'arrow-right' ],
+//                     'variants' => ['quaternary']
+//                 ]
+//             ]
+//         ],
+//         [
+//             'images' => [
+//                 'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//                 'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//                 'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//                 'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+//             ],
+//             'infobox' => [
+//                 'subtitle' => 'Scala di diradamento donna',
+//                 'cta' => [
+//                     'url' => '#',
+//                     'title' => 'Visualizza la scala',
+//                     'iconEnd' => [ 'name' => 'arrow-right' ],
+//                     'variants' => ['quaternary']
+//                 ]
+//             ]
+//         ]
+//     ]
+// ];
+
 // Image and card
-$context['image_and_card'] = [
-    'images' => [
-        'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-        'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-        'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
-        'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
-    ],
-    'card' => [
-        'images' => [
-            'original' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
-            'large' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
-            'medium' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
-            'small' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg'
-        ],
-        'infobox' => [
-            'subtitle' => 'La tecnologia dietro l’efficacia',
-            'paragraph' => 'Grazie alla Tecnologia Transdermica (Swiss Patent CH 711 466) - ispirata alla metodologia della medicina estetica e brevettata nel 2015 - Labo supera le frontiere della scienza dermo-cosmetica divenendo la prima azienda a sviluppare una nuova tecnica di penetrazione dei principi attivi, senza iniezioni, attraverso epidermide e derma.',
-            'cta' => [
-                'url' => '#',
-                'title' => 'Scopri di più',
-                'iconEnd' => [ 'name' => 'arrow-right' ],
-                'variants' => ['quaternary']
-            ]
-        ],
-        'variants' => ['type-7']
-    ]
-];
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/imageCard.php');
+$block_image_and_card = new ImageCard(null,'image_and_card');
+
+$context['image_and_card'] = $block_image_and_card->payload;
+// $context['image_and_card'] = [
+//     'images' => [
+//         'original' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//         'large' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//         'medium' => get_template_directory_uri() . '/assets/images/banner-img.jpg',
+//         'small' => get_template_directory_uri() . '/assets/images/banner-img.jpg'
+//     ],
+//     'card' => [
+//         'images' => [
+//             'original' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
+//             'large' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
+//             'medium' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg',
+//             'small' => get_template_directory_uri() . '/assets/images/carousel-hero-img.jpg'
+//         ],
+//         'infobox' => [
+//             'subtitle' => 'La tecnologia dietro l’efficacia',
+//             'paragraph' => 'Grazie alla Tecnologia Transdermica (Swiss Patent CH 711 466) - ispirata alla metodologia della medicina estetica e brevettata nel 2015 - Labo supera le frontiere della scienza dermo-cosmetica divenendo la prima azienda a sviluppare una nuova tecnica di penetrazione dei principi attivi, senza iniezioni, attraverso epidermide e derma.',
+//             'cta' => [
+//                 'url' => '#',
+//                 'title' => 'Scopri di più',
+//                 'iconEnd' => [ 'name' => 'arrow-right' ],
+//                 'variants' => ['quaternary']
+//             ]
+//         ],
+//         'variants' => ['type-7']
+//     ]
+// ];
 
 // Routine
 $context['routine'] = [

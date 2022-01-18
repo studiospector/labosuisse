@@ -121,4 +121,4 @@ define( 'AS3CF_SETTINGS', serialize( array(
 )));
 
 // Memory limit
-define('WP_MEMORY_LIMIT', '256M');
+define('WP_MEMORY_LIMIT', '456M');

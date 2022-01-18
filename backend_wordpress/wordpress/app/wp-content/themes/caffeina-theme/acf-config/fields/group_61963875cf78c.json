@@ -64,7 +64,7 @@
         {
             "key": "field_61dd62d90c83e",
             "label": "Tagline",
-            "name": "lb_block_infobox_tagline",
+            "name": "lb_block_hero_infobox_tagline",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -84,7 +84,7 @@
         {
             "key": "field_61dd62f30c83f",
             "label": "Title",
-            "name": "lb_block_infobox_title",
+            "name": "lb_block_hero_infobox_title",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -104,7 +104,7 @@
         {
             "key": "field_61dd63130c840",
             "label": "Subtitle",
-            "name": "lb_block_infobox_subtitle",
+            "name": "lb_block_hero_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -124,7 +124,7 @@
         {
             "key": "field_61dd634c0c841",
             "label": "Paragraph",
-            "name": "lb_block_infobox_paragraph",
+            "name": "lb_block_hero_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -144,7 +144,7 @@
         {
             "key": "field_61dd636b0c842",
             "label": "Button",
-            "name": "lb_block_infobox_btn",
+            "name": "lb_block_hero_infobox_btn",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -160,7 +160,7 @@
         {
             "key": "field_61dd63860c843",
             "label": "Button variants",
-            "name": "lb_block_infobox_btn_variants",
+            "name": "lb_block_hero_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -307,6 +307,13 @@
                 "operator": "==",
                 "value": "acf\/lb-hero"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
         ]
     ],
     "menu_order": 0,
@@ -317,5 +324,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642081239
+    "modified": 1642503952
 }

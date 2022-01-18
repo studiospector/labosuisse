@@ -335,7 +335,7 @@
         {
             "key": "field_61dd6142c28d0",
             "label": "Tagline",
-            "name": "lb_block_infobox_tagline",
+            "name": "lb_block_love_labo_infobox_tagline",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -355,7 +355,7 @@
         {
             "key": "field_61dd618cc28d1",
             "label": "Title",
-            "name": "lb_block_infobox_title",
+            "name": "lb_block_love_labo_infobox_title",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -375,7 +375,7 @@
         {
             "key": "field_61dd61c2c28d2",
             "label": "Subtitle",
-            "name": "lb_block_infobox_subtitle",
+            "name": "lb_block_love_labo_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -395,7 +395,7 @@
         {
             "key": "field_61dd61dfc28d3",
             "label": "Paragraph",
-            "name": "lb_block_infobox_paragraph",
+            "name": "lb_block_love_labo_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -415,7 +415,7 @@
         {
             "key": "field_61dd6221c28d4",
             "label": "Button",
-            "name": "lb_block_infobox_btn",
+            "name": "lb_block_love_labo_infobox_btn",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -431,7 +431,7 @@
         {
             "key": "field_61dd6245c28d5",
             "label": "Button variants",
-            "name": "lb_block_infobox_btn_variants",
+            "name": "lb_block_love_labo_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -473,5 +473,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642092624
+    "modified": 1642092625
 }
