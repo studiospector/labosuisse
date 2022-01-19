@@ -84,7 +84,7 @@
         {
             "key": "field_61dd65f06483c",
             "label": "Tagline",
-            "name": "lb_block_infobox_tagline",
+            "name": "lb_block_carousel_posts_infobox_tagline",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -104,7 +104,7 @@
         {
             "key": "field_61dd67fc6483d",
             "label": "Title",
-            "name": "lb_block_infobox_title",
+            "name": "lb_block_carousel_posts_infobox_title",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -124,7 +124,7 @@
         {
             "key": "field_61dd681d6483e",
             "label": "Subtitle",
-            "name": "lb_block_infobox_subtitle",
+            "name": "lb_block_carousel_posts_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -144,7 +144,7 @@
         {
             "key": "field_61dd68506483f",
             "label": "Paragraph",
-            "name": "lb_block_infobox_paragraph",
+            "name": "lb_block_carousel_posts_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -164,7 +164,7 @@
         {
             "key": "field_61dd686b64840",
             "label": "Button",
-            "name": "lb_block_infobox_btn",
+            "name": "lb_block_carousel_posts_infobox_btn",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -180,7 +180,7 @@
         {
             "key": "field_61dd689264841",
             "label": "Button variants",
-            "name": "lb_block_infobox_btn_variants",
+            "name": "lb_block_carousel_posts_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -222,5 +222,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642085498
+    "modified": 1642085499
 }

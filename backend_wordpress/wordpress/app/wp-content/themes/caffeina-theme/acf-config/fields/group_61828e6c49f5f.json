@@ -89,7 +89,7 @@
         {
             "key": "field_61dd599637498",
             "label": "Tagline",
-            "name": "lb_block_infobox_tagline",
+            "name": "lb_block_launch_two_images_infobox_tagline",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -109,7 +109,7 @@
         {
             "key": "field_61dd59b637499",
             "label": "Title",
-            "name": "lb_block_infobox_tagline",
+            "name": "lb_block_launch_two_images_infobox_tagline",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -129,7 +129,7 @@
         {
             "key": "field_61dd59e33749a",
             "label": "Subtitle",
-            "name": "lb_block_infobox_subtitle",
+            "name": "lb_block_launch_two_images_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -149,7 +149,7 @@
         {
             "key": "field_61dd59ff3749b",
             "label": "Paragraph",
-            "name": "lb_block_infobox_paragraph",
+            "name": "lb_block_launch_two_images_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -169,7 +169,7 @@
         {
             "key": "field_61dd5a3b3749c",
             "label": "Button",
-            "name": "lb_block_infobox_btn",
+            "name": "lb_block_launch_two_images_infobox_btn",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -185,7 +185,7 @@
         {
             "key": "field_61dd5a5e3749d",
             "label": "Button variants",
-            "name": "lb_block_infobox_btn_variants",
+            "name": "lb_block_launch_two_images_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -227,5 +227,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642079185
+    "modified": 1642079186
 }

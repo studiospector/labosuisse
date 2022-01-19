@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/baseBlock.php');
+require_once(__DIR__.'/classes/baseBlock.php');
 
 use gutenbergBlocks\BaseBlock;
 

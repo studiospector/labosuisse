@@ -42,7 +42,7 @@
                 {
                     "key": "field_61828eb05dd2f",
                     "label": "Tagline",
-                    "name": "lb_block_infobox_tagline",
+                    "name": "lb_block_carousel_hero_infobox_tagline",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -62,7 +62,7 @@
                 {
                     "key": "field_6182a6615dd30",
                     "label": "Title",
-                    "name": "lb_block_infobox_title",
+                    "name": "lb_block_carousel_hero_infobox_title",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -82,7 +82,7 @@
                 {
                     "key": "field_6182a6d25dd31",
                     "label": "Subtitle",
-                    "name": "lb_block_infobox_subtitle",
+                    "name": "lb_block_carousel_hero_infobox_subtitle",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -102,7 +102,7 @@
                 {
                     "key": "field_6182a7105dd32",
                     "label": "Paragraph",
-                    "name": "lb_block_infobox_paragraph",
+                    "name": "lb_block_carousel_hero_infobox_paragraph",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -122,7 +122,7 @@
                 {
                     "key": "field_6182a99f5dd33",
                     "label": "Button",
-                    "name": "lb_block_infobox_btn",
+                    "name": "lb_block_carousel_hero_infobox_btn",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -138,7 +138,7 @@
                 {
                     "key": "field_6175e1b156d82",
                     "label": "Button variants",
-                    "name": "lb_block_infobox_btn_variants",
+                    "name": "lb_block_carousel_hero_infobox_btn_variants",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -224,5 +224,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642074891
+    "modified": 1642074892
 }

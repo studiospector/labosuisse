@@ -6,7 +6,7 @@ function lb_init_block_love_labo() {
     if( function_exists('acf_register_block_type') ) {
 
         acf_register_block_type(array(
-            'name'              => 'lb-block-love-labo',
+            'name'              => 'lb-love-labo',
             'title'             => __('Love'),
             'description'       => __('A custom  love labo block.'),
             'render_template'   => 'gutenberg-blocks/love-labo.php',

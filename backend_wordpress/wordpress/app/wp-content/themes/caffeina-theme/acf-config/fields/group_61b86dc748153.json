@@ -3,23 +3,6 @@
     "title": "Campi personalizzati: Blocco – Due Card",
     "fields": [
         {
-            "key": "field_61b86dc791028",
-            "label": "Immagini",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_61b874cf49933",
             "label": "left card",
             "name": "",
@@ -374,5 +357,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641819816
+    "modified": 1642523559
 }
