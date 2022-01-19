@@ -1,4 +1,4 @@
 #!/bin/sh
 ./cmd/base.sh \
-  -f ./docker-compose.yml \
+  -f ./docker-compose.prod.yml \
   up $@
