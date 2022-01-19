@@ -1,4 +1,7 @@
 {% set classes = [] %}
+{% if container %}
+    {% set variants = variants|merge(['containerized']) %}
+{% endif %}
 {% for variant in variants|default([]) %}
 	{% set classes = classes|merge(['hero--' ~ variant]) %}
 {% endfor %}
