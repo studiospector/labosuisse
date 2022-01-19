@@ -48,7 +48,7 @@ class BaseBlock {
         ]
     ];
     $this->acfName = 'lb_block_'.str_replace("-","_",$this->name);
-    var_dump($this->acfName);
+   // var_dump($this->acfName);
   }
 
   public function addInfobox(&$context = null){
