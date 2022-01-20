@@ -3,8 +3,8 @@ resources:
     type: mariadb
     options:
       storage: 10
-  queue:
-    type: redis
+  #queue:
+  #  type: redis
 
 services:
   website:
@@ -12,13 +12,13 @@ services:
       manifest: ./production/Dockerfile
       # command: bin/api
     environment:
-      - APP_KEY
-    health: /fpm-ping
+    #  - APP_KEY
+    health: /
     internal: false
-    port: 80
+    port: 8080
     resources:
       - database
-      - queue
+    # - queue
     termination:
       grace: 45
     test: make test

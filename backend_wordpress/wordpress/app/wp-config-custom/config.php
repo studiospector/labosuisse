@@ -16,18 +16,13 @@
  * @see https://codex.wordpress.org/Editing_wp-config.php
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', getenv('MYSQL_DATABASE'));
+$dsn = (object) parse_url(getenv('DATABASE_URL'));
 
-/* MySQL database username */
-define('DB_USER', getenv('MYSQL_USER'));
+define('DB_NAME', substr($dsn->path, 1));
+define('DB_USER', $dsn->user);
+define('DB_PASSWORD', isset($dsn->pass) ? $dsn->pass : null);
+define('DB_HOST', isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
 
-/* MySQL database password */
-define('DB_PASSWORD', getenv('MYSQL_PASSWORD'));
-
-/* MySQL hostname */
-define('DB_HOST', getenv('MYSQL_HOST'));
 
 /* Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

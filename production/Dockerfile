@@ -1,22 +1,42 @@
 # Frontend stage
 
-ARG CI_REGISTRY
-ARG CI_PROJECT_PATH
-ARG CI_COMMIT_REF_NAME
+FROM node:12-alpine as frontend_bundler
+WORKDIR /app
+RUN apk add --no-cache git --update
 
-FROM ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler:latest AS frontend_bundler
+# Install dependencies
+COPY ./frontend_bundler/client/app/package.json ./
+COPY ./frontend_bundler/client/app/package-lock.json ./
+RUN npm install
+
+COPY ./frontend_bundler/client/app/ ./
+
+ENV NODE_ENV=production
+RUN npm run build
 
 
-# WordPress stage
-FROM registry.caffeina.co/devops/nador-images/wordpress-base/no_volume/backend_wordpress:latest AS wordpress
+# WORDPRESS STAGE
+FROM wordpress:5-php7.4-fpm-alpine AS wordpress-base
+
+WORKDIR /wordpress_dir
+RUN cp -r /var/www/html /wordpress_dir
+RUN cp /bin/sh /usr/local/sbin/php-fpm
+RUN /usr/local/bin/docker-entrypoint.sh php-fpm || true
+
+FROM wordpress:5-php7.4-fpm-alpine AS wordpress
+
+ENV WP_CORE_DIR="/var/www/html"
+ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
+
+COPY --from=wordpress-base /wordpress_dir $WP_CORE_DIR
+COPY ./backend_wordpress/wordpress/app/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+COPY ./backend_wordpress/wordpress/app/wp-content ${WP_CONTENT_CUSTOM_DIR}
+COPY ./backend_wordpress/wordpress/app/wp-config-custom ${WP_CORE_DIR}/wp-config-custom
+COPY ./backend_wordpress/wordpress/app/wp-config.php ${WP_CORE_DIR}/wp-config.php
 
 RUN set -xe && curl -sS https://getcomposer.org/installer | php \
   && mv composer.phar /usr/local/bin/composer \
   && chmod +x /usr/local/bin/composer
-
-COPY ./backend_wordpress/wordpress/app/wp-content ${WP_CONTENT_CUSTOM_DIR}
-COPY ./backend_wordpress/wordpress/app/wp-config-custom ${WP_CORE_DIR}/wp-config-custom
-
 
 COPY --from=frontend_bundler /app/dist/public ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/static
 COPY ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/assets
@@ -24,7 +44,6 @@ COPY ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 RUN cd ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme && composer install
 
 COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/views
-
 
 
 # trafex stage (wrap it)
