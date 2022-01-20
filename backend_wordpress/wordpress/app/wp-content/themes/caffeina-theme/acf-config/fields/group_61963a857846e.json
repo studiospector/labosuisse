@@ -463,6 +463,13 @@
                 "operator": "==",
                 "value": "acf\/lb-love-labo"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
         ]
     ],
     "menu_order": 0,
@@ -473,5 +480,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642523497
+    "modified": 1642603895
 }
