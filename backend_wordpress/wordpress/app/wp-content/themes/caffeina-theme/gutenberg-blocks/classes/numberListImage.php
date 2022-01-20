@@ -27,6 +27,7 @@ class NumberListImage extends BaseBlock {
             'numbersList' => [
                 'title' => get_field('lb_block_numbers_title'),
                 'list' => $list,
+                'variants' => [get_field('lb_block_numbers_variants')]
             ]
         ];
         

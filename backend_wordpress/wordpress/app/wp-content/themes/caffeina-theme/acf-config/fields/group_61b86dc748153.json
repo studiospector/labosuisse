@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_61b874cf49933",
-            "label": "left card",
+            "label": "Card Sinistra",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -15,9 +15,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 2
+            "endpoint": 0
         },
         {
             "key": "field_61b86dc791191",
@@ -169,7 +169,7 @@
         },
         {
             "key": "field_61b879e79ad6e",
-            "label": "right card",
+            "label": "Card Destra",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -497,5 +497,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642600595
+    "modified": 1642692798
 }

@@ -18,9 +18,7 @@ class ImageCard extends BaseBlock {
                     'medium' => get_field('lb_block_image_card_image_right'),
                     'small' => get_field('lb_block_image_card_image_right')
                 ],
-                'variants' => ['type-8']
-        
-                
+                'variants' => ['type-7']
             ],
         ];
         $this->addInfobox($payload['card']);
