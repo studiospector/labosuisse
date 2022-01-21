@@ -72,6 +72,7 @@ class MenuDesktop extends Component {
                 disableBodyScroll(this.el, {
                     reserveScrollBarGap: true,
                 });
+                window.getCustomScrollbar.stop()
                 if (scrollBarGap > 0 && this.header && !this.mainLink && !this.previousHeaderPaddingRight) {
                     const computedHeaderPaddingRight = parseInt(window.getComputedStyle(this.header).getPropertyValue('padding-right'), 10);
                     this.previousHeaderPaddingRight = this.header.style.paddingRight;
@@ -108,6 +109,7 @@ class MenuDesktop extends Component {
             .to(this.activeMenuTL, { progress: 0, duration: this.activeMenuTL.duration() })
             .to(this.commonTimeline, { progress: 0, duration: this.commonTimeline.duration() }, "-=0.1")
             .call(() => enableBodyScroll(this.el))
+            .call(() => window.getCustomScrollbar.start())
             .call(() => {
                 if (this.previousHeaderPaddingRight) {
                     this.header.style.paddingRight = `${this.previousHeaderPaddingRight}`;

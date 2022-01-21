@@ -114,12 +114,14 @@ class MenuMobile extends Component {
         this.master.clear();
         this.master.to(this.tl, { progress: 1, duration: this.tl.duration() });
         disableBodyScroll(this.ui.main, { allowTouchMove });
+        window.getCustomScrollbar.stop()
         document.body.style.overflow = 'hidden';
     }
 
     close = () => {
         this.isOpen = false;
         enableBodyScroll(this.ui.main);
+        window.getCustomScrollbar.start()
         document.body.style.overflow = 'auto';
         this.master.to(this.tl, {
             progress: 0, duration: this.tl.duration(), onComplete: () => {

@@ -18,9 +18,9 @@
             bottom: 0;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05) inset;
         
-            .lb-header--scrolled & {
-                top: 74px;
-            }
+            // .lb-header--scrolled & {
+            //     top: 74px;
+            // }
         }
 
 
@@ -33,9 +33,9 @@
             opacity: 0;
             background: #000000;
         
-            .lb-header--scrolled & {
-                top: 74px;
-            }
+            // .lb-header--scrolled & {
+            //     top: 74px;
+            // }
         }
 
 
@@ -68,9 +68,9 @@
             //     height: rem(375px);
             // }
 
-            .lb-header--scrolled & {
-                top: 74px;
-            }
+            // .lb-header--scrolled & {
+            //     top: 74px;
+            // }
 
             .lb-menu {
                 &__wrapper {
@@ -113,8 +113,6 @@
             justify-content: center;
             align-items: flex-start;
             flex-basis: 20%;
-            // padding: 2rem;
-            padding-top: 90px;
             opacity: 0;
 
             &>*:not(:last-child) {
@@ -124,6 +122,16 @@
             &>.lb-menu__item {
                 line-height: 0;
                 flex: 1 0 0%;
+            }
+
+            .card {
+                .card-img {
+                    margin: 0;
+                }
+
+                .infobox__cta {
+                    margin-top: 20px;
+                }
             }
         }
 
