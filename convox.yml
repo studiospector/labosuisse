@@ -15,7 +15,7 @@ services:
       - ADMIN_URL
       - WP_CONTENT_CUSTOM_DIR
       - DEBUG
-    health: /
+    health: /test.html
     internal: false
     port: 8080
     resources:
@@ -30,5 +30,5 @@ services:
       maximum: 200
     scale:
       count: 1
-      cpu: 128
-      memory: 256
+      cpu: 512
+      memory: 512
