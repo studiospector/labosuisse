@@ -10,7 +10,7 @@
 
 <section class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
     <div class="block-image-card__img">
-        {{ lbPicture(images) }}
+        {{ lbPicture(images, true) }}
     </div>
     <div class="block-image-card__card">
         {% include '@PathViews/components/card.twig' with card only %}

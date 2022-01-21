@@ -2,12 +2,18 @@
     width: 100%;
     height: 100%;
     // position: absolute;
-    display: block;
+    display: flex;
     position: relative;
-    left: 0;
-    top: 0;
+    // left: 0;
+    // top: 0;
     overflow: hidden;
-    will-change: transform;
+
+    &__wrapper {
+        width: 100%;
+        height: initial;
+        position: relative;
+        will-change: transform;
+    }
 
     img {
         // width: 100%;
@@ -29,6 +35,11 @@
     }
 
     &--parallax {
-        position: relative;
+
+        img {
+            height: initial;
+            // position: initial;
+            transform: translate(-50%, -50%) scale(1.1);
+        }
     }
 }
