@@ -16,13 +16,16 @@
  * @see https://codex.wordpress.org/Editing_wp-config.php
  */
 
+
+define('WP_DEBUG', getenv('DEBUG') === 'true');
+define('WP_DEBUG_LOG', getenv('DEBUG') === 'true');
+
 $dsn = (object) parse_url(getenv('DATABASE_URL'));
 
 define('DB_NAME', substr($dsn->path, 1));
 define('DB_USER', $dsn->user);
 define('DB_PASSWORD', isset($dsn->pass) ? $dsn->pass : null);
 define('DB_HOST', isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
-
 
 /* Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
@@ -79,7 +82,6 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
     $is_https = true;
     $protocol = 'https://';
 }
-define('WP_DEBUG', !$is_https);
 
 /* SSL */
 define('FORCE_SSL_LOGIN', $is_https);
