@@ -51,3 +51,7 @@ COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 FROM trafex/php-nginx:latest
 
 COPY --from=wordpress --chown=nobody /var/www/html /var/www/html
+
+USER root
+RUN sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php8/php.ini
+USER nobody
