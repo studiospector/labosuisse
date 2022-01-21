@@ -91,4 +91,15 @@ $buttonsPropertyList: (
     }
 }
 
+.button-link {
+
+}
+
+.button-thin {
+    .button__label {
+        font-weight: 300;
+        font-size: rem(13);
+    }
+}
+
 @include generate-rules($buttonsVariablesToCSSClasses, $buttonsPropertyList, $componentsVariables);

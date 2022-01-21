@@ -5,12 +5,10 @@
 {% set criticalJsModern = fn(['ThemeSetup', 'revision_files'], 'js/critical.modern.js') %}
 {% set mainJs = fn(['ThemeSetup', 'revision_files'], 'js/main.js') %}
 {% set mainJsModern = fn(['ThemeSetup', 'revision_files'], 'js/main.modern.js') %}
-
 {% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %}
 {% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %}
-
 <!DOCTYPE html>
-<html class="no-js" lang="">
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,17 +47,23 @@
         
         {% block head %}{% endblock %}
     </head>
-    <body class="{{ bodyClass ? bodyClass|raw : '' }}">
+    <body {{ fn('body_class', bodyClass) }}>
 
         <div class="js-scrollbar" data-scroll-container>
             <!-- Header -->
-            {% include 'layout/header.twig' %}
+            {% block header %}
+                {% set header = fn('lb_header') %}
+                {% include 'layout/header.twig' with {header: header} only %}
+            {% endblock %}
             <!-- Main content -->
             <main id="content" data-scroll-section>
                 {% block main %}{% endblock %}
             </main>
             <!-- Footer -->
-            {% include 'layout/footer.twig' %}
+            {% block footer %}
+                {% set footer = fn('lb_footer') %}
+                {% include 'layout/footer.twig' with footer only %}
+            {% endblock %}
         </div>
 
         {% include 'components/symbols.twig' %}

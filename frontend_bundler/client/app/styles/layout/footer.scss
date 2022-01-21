@@ -1,4 +1,161 @@
+.prefooter {
+    background-color: map-get($colors, "white");
+    padding-top: 100px;
+    padding-bottom: 100px;
+
+    @include mq($until: md) {
+        padding-top: 80px;
+        padding-bottom: 80px;
+    }
+
+    &--desktop {
+        @include mq($until: md) {
+            display: none;
+        }
+
+        .prefooter__box {
+            &:first-child {
+                padding-right: 60px;
+            }
+
+            &:nth-child(2) {
+                padding-right: 40px;
+                padding-left: 40px;
+            }
+
+            &:last-child {
+                padding-left: 60px;
+            }
+        }
+
+        .infobox {
+            &__subtitle {
+                font-size: rem(20);
+            }
+        }
+
+        .custom-field {
+            margin-top: 30px;
+        }
+    }
+}
+
+
+
 .footer {
-    padding: 50px;
-    background-color: red;
+    padding-top: 60px;
+    padding-bottom: 40px;
+    background-color: map-get($colors, "primary-light-1");
+
+    @include mq($until: md) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    &__top {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: relative;
+        margin-bottom: 60px;
+
+        @include mq($until: md) {
+            margin-bottom: 40px;
+        }
+
+        &__logo {
+            position: absolute;
+            left: 50%;
+            transform: translate(-50%, 0);
+        }
+    }
+
+    &__bottom {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+
+        &__item {
+            flex: 1 1 auto;
+
+            @include mq($until: md) {
+                flex: 1 1 100%;
+            }
+            
+            &:not(:last-child) {
+                padding-right: 30px;
+
+                @include mq($until: md) {
+                    padding-right: 0;
+                    margin-bottom: 40px;
+                }
+            }
+
+            .infobox__tagline {
+                font-size: rem(12);
+                margin-bottom: 20px;
+
+                @include mq($until: md) {
+                    margin-bottom: 12px;
+                }
+            }
+
+            .infobox__paragraph {
+                font-size: rem(13);
+                line-height: 18px;
+                margin-bottom: 20px;
+            }
+
+            .button {
+                &__label {
+                    font-size: rem(15);
+                }
+            }
+        }
+    }
+
+    &__menu {
+        &__item {
+            &:first-child {
+                .button {
+                    padding-top: 0;
+                }
+            }
+
+            .button {
+                padding-left: 0;
+            }
+        }
+    }
+
+    &__menu-icon {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin: 0;
+
+        @include mq($until: md) {
+            justify-content: flex-start;
+        }
+
+        &__item {
+            flex: 0 0 30%;
+            margin-bottom: 15px;
+
+            @include mq($until: md) {
+                flex: 1;
+                margin-bottom: 0;
+            }
+
+            .lb-icon  {
+                svg {
+                    width: 26px;
+                    height: 26px;
+                }
+            }
+        }
+    }
 }

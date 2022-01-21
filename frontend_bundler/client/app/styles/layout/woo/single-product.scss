@@ -1,0 +1,191 @@
+.single-product-details {
+
+    @include mq($until: md) {
+        margin-top: 20px;
+    }
+
+    &__wrapper {
+        flex-wrap: nowrap;
+        column-gap: 60px;
+
+        @include mq($until: md) {
+            flex-wrap: wrap;
+            column-gap: 0;
+        }
+    }
+
+    &__images {
+        flex-shrink: 1;
+
+        @include mq($until: md) {
+            display: none;
+            flex-shrink: 0;
+        }
+
+        // .flex-control-nav {
+        //     display: flex;
+        //     flex-wrap: wrap;
+        //     column-gap: 30px;
+        //     row-gap: 30px;
+        //     margin-top: 30px;
+
+        //     li {
+        //         display: block;
+        //         flex: 0 0 47.2%;
+        //     }
+        // }
+    }
+
+    .lb-product-gallery {
+        position: relative;
+        overflow: hidden;
+
+        @include mq($until: md) {
+            padding-bottom: 60px;
+            // margin-bottom: 30px;
+        }
+
+        .lb-product-gallery-thumb {
+            margin-top: 30px;
+
+            @include mq($until: md) {
+                margin-top: 10px;
+            }
+        }
+
+        &__image {
+            overflow: hidden;
+        }
+
+        .swiper-pagination.swiper-pagination-bullets {
+            @include mq($from: md) {
+                display: none;
+            }
+
+            @include mq($until: md) {
+                display: block;
+                bottom: 22px;
+            }
+        }
+    }
+
+    &__summary {
+        flex-shrink: 1;
+
+        @include mq($until: md) {
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .lb-product-gallery {
+            @include mq($from: md) {
+                display: none;
+            }
+        }
+
+        &__brand {
+            margin-bottom: 20px;
+
+            img {
+                width: auto;
+                height: auto;
+
+                @include mq($until: md) {
+                    height: 16px;
+                }
+            }
+        }
+
+        &__product-title {
+            margin-bottom: 40px;
+            font-size: rem(30);
+            font-weight: 600;
+            text-transform: uppercase;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+                font-size: rem(24);
+                text-align: center;
+            }
+        }
+
+        &__benefits {
+            margin-bottom: 60px;
+
+            @include mq($until: md) {
+                display: inline-block;
+                margin-bottom: 30px;
+            }
+
+            &__item {
+                display: flex;
+                align-items: center;
+                font-weight: 300;
+
+                @include mq($until: md) {
+                    font-size: rem(13);
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+                }
+
+                .lb-icon {
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        &__short-description {
+            margin-bottom: 40px;
+            letter-spacing: 0.02em;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+
+                p {
+                    font-size: rem(13);
+                }
+            }
+        }
+
+        .price {
+            margin-bottom: 40px;
+            font-size: rem(26);
+            letter-spacing: 0.02em;
+            
+            @include mq($until: md) {
+                margin-bottom: 30px;
+                font-size: rem(18);
+                text-align: left;
+            }
+
+            bdi {
+                font-weight: 600;
+                color: map-get($colors, "black");
+            }
+        }
+
+        &__variations {
+            .lb-product-variations {
+                margin-bottom: 60px;
+    
+                @include mq($until: md) {
+                    margin-bottom: 40px;
+                    text-align: left;
+                }
+            }
+
+            @include mq($until: md) {
+                .button {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+
+        // &__product-meta {
+            
+        // }
+    }
+}

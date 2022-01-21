@@ -1,0 +1,35 @@
+.block-two-cards {
+    &__cards {
+        margin-top: 40px;
+        
+        .card {
+            width: 100%;
+
+            .lb-picture {
+                min-height: 310px;
+    
+                @include mq($until: md) {
+                    min-height: 250px;
+                }
+            }
+    
+            .infobox {
+                &__subtitle {
+                    @include mq($until: md) {
+                        font-size: rem(18);
+                    }
+                }
+
+                &__cta {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    &__card-item {
+        &:not(:last-child) {
+            margin-bottom: 60px;
+        }
+    }
+}

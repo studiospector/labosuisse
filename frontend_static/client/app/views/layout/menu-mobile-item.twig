@@ -15,7 +15,7 @@
 <li class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
 
 	{% if type == 'link' %}
-		<a class="lb-menu__link {{main ? 'lb-h5' : 'lb-p--big'}}" href="{{href}}">
+		<a class="lb-menu__link" href="{{href}}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
 					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
@@ -23,16 +23,13 @@
 				</span>
 			{% endif %}
 			<span>{{label}}</span>
-			{% if selected %}
-				{% include '@PathViews/components/icon.twig' with {name: 'check', variants: ['-right']} only %}
-			{% endif %}
 		</a>
 	{% endif %}
 
 
 	{% if type == 'submenu' %}
-		<button class="lb-menu__button lb-button {% if button is defined %} lb-button--{{ button }}{% endif %}">
-			<span class="{{main ? 'lb-h5' : 'lb-p--big'}}">
+		<button class="lb-menu__button">
+			<span>
 				{% if icon %}
 					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
 				{% endif %}
@@ -42,7 +39,7 @@
 		</button>
 		<div class="lb-menu__submenu">
 			<div class="lb-menu__item lb-menu__header">
-				<button class="lb-menu__button lb-menu__back lb-button">
+				<button class="lb-menu__button lb-menu__back">
 					{% include "@PathViews/components/icon.twig" with {name: 'arrow-left'} only %}
 					<span class="lb-h5">{{label}}</span>
 				</button>
@@ -64,7 +61,7 @@
 
 
 	{% if type == 'small-submenu' %}
-		<button class="lb-menu__button lb-menu__button--small lb-button">
+		<button class="lb-menu__button lb-menu__button--small">
 			{% if icon %}
 				{% include '@PathViews/components/icon.twig' with {name: icon} only %}
 			{% endif %}
@@ -72,9 +69,9 @@
 		</button>
 		<div class="lb-menu__submenu">
 			<div class="lb-menu__item lb-menu__header">
-				<button class="lb-menu__button lb-menu__back lb-button">
+				<button class="lb-menu__button lb-menu__back">
 					{% include "@PathViews/components/icon.twig" with {name: 'arrow', variants: ['-left']}  only  %}
-					<span class="lb-h5">{{label}}</span>
+					<span>{{label}}</span>
 				</button>
 			</div>
 			<div class="lb-menu-scroller">
@@ -106,6 +103,10 @@
 				{% include '@PathViews/components/icon.twig' with {name: 'check', variants: ['-right']} only %}
 			{% endif %}
 		</a>
+	{% endif %}
+
+    {% if type == 'card' %}
+		{% include '@PathViews/components/card.twig' with data only %}
 	{% endif %}
     
 </li>

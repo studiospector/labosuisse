@@ -172,6 +172,24 @@
 
 
 
+    &--type-7 {
+        .card-img {
+            height: 160px;
+
+            @include mq($until: md) {
+                height: 120px;
+            }
+        }
+
+        .infobox {
+            &__paragraph {
+                opacity: 0.7;
+            }
+        }
+    }
+
+
+
     &--type-8 {
         padding: 30px;
         background-color: map-get($colors, "primary-light-1");

@@ -10,6 +10,7 @@ import LBCustomSelect from './CustomSelect'
 import CarouselHero from './CarouselHero'
 import CarouselBannerAlternate from './CarouselBannerAlternate'
 import CarouselPosts from './CarouselPosts'
+import CarouselProductImage from './CarouselProductImage'
 import Hero from './Hero'
 import BannerAlternate from './BannerAlternate'
 import BlockLoveLabo from './BlockLoveLabo'
@@ -55,6 +56,11 @@ const components = {
         type: CarouselPosts,
         optional: true
     },
+    carouselProductImage: {
+        selector: '.js-lb-product-gallery',
+        type: CarouselProductImage,
+        optional: true
+    },
     hero: {
         selector: '.js-hero',
         type: Hero,
@@ -93,5 +99,43 @@ export default class Application extends Component {
             // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
             ScrollTrigger.refresh();
         }
+
+        this.selectTertiaryVariantAlignment()
+    }
+
+
+    selectTertiaryVariantAlignment = () => {
+        const groupedSelect = document.querySelectorAll('.custom-select-group')
+
+        if (groupedSelect.length > 0) {
+            groupedSelect.forEach(elem => {
+                const labels = elem.querySelectorAll('.custom-select-label')
+                let labelsWidth = []
+                let labelsFullWidth = []
+                labels.forEach( el => {
+                    labelsWidth.push(el.offsetWidth)
+                    labelsFullWidth.push(this.getFullWidth(el))
+                })
+
+                labels.forEach(elem => {
+                    elem.style.minWidth = `${Math.max(...labelsWidth)}px`
+                })
+
+                const items = elem.querySelectorAll('.custom-select-items .custom-select-items__item')
+
+                items.forEach(elem => {
+                    elem.style.paddingLeft = `${Math.max(...labelsFullWidth) + 16.5 - 26}px`
+                })
+            })
+        }
+    }
+
+    getFullWidth(el) {
+        let elWidth = el.offsetWidth
+
+        elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-left'))
+        elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-right'))
+
+        return elWidth
     }
 }

@@ -12,8 +12,8 @@ export const hamburgerTimeline = (el) => {
     const top = `${el}>span:first-child`
     const bottom = `${el}>span:last-child`
     const tl = gsap.timeline();
-    tl.add(spanTimeline(top, 4), 0)
-    tl.add(spanTimeline(bottom, -4), 0);
+    tl.add(spanTimeline(top, 1), 0)
+    tl.add(spanTimeline(bottom, -7), 0);
     return tl;
 }
 
@@ -40,7 +40,9 @@ export const searchTimeline = (el) => {
 export const stickyHeader = (header, logo, statusbar, translate = true) => {
     const tl = gsap.timeline();
     if (translate) {
-        tl.fromTo(header, { top: 0 }, { top: -32 }, 0)
+        tl.fromTo(header, { top: 0 }, { top: -64 }, 0)
+        tl.fromTo(header, { height: 70 }, { height: 0 }, 0)
+        tl.fromTo(header, { paddingBottom: 20 }, { paddingBottom: 0 }, 0)
     }
     return tl;
 }
@@ -50,7 +52,7 @@ export const openMenu = ({ menuElement, hamburgerElement, headerElement, logoEle
     const tl = gsap.timeline({ paused: true });
     tl.call(() => header.classList.remove('lb-header--hover'), 0)
     tl.call(() => header.classList.add('lb-header--hover'))
-    tl.add(stickyHeader(header, logoElement).duration(.4), 0);
+    tl.add(stickyHeader(qs('.lb-header__wrapper--mobile', header), logoElement).duration(.4), 0);
     tl.add(searchTimeline(searchElement).duration(.4), 0);
     tl.add(hamburgerTimeline(hamburgerElement).duration(.4), 0);
     tl.add(menuTimeline(menuElement).duration(.4), .4);
@@ -60,7 +62,7 @@ export const openMenu = ({ menuElement, hamburgerElement, headerElement, logoEle
 
 
 export const stickyHeaderScroll = (header, logo) => {
-    const tl = stickyHeader(header, logo);
+    const tl = stickyHeader(qs('.lb-header__wrapper--mobile', header), logo);
     return gsap.timeline({
         scrollTrigger: {
             trigger: document.body,

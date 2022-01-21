@@ -68,9 +68,10 @@ class CustomInput extends BasicElement {
             // SEARCH
             this.currInputType = this.cs[i].getAttribute('type')
             if (this.currInputType == 'search') {
-                this.addIconPrev('close')
-                this.addIconNext('search-icon')
-                this.inputIconPrev.addEventListener('click', this.showHidePassword)
+                if (this.inputVariant == 'primary') {
+                    this.addIconPrev('close')
+                }
+                this.addIconNext('icon-search')
             }
 
             // Events on <input> focus

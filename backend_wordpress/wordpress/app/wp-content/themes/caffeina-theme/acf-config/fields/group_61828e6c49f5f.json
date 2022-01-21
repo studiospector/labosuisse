@@ -20,8 +20,33 @@
             "endpoint": 0
         },
         {
+            "key": "field_6183accfdd061",
+            "label": "Immagine di Destra",
+            "name": "lb_block_launch_two_images_image_right",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
             "key": "field_6183ab3b56000",
-            "label": "Image left",
+            "label": "Immagine di Sinistra",
             "name": "lb_block_launch_two_images_image_left",
             "type": "image",
             "instructions": "",
@@ -45,29 +70,144 @@
             "mime_types": ""
         },
         {
-            "key": "field_6183accfdd061",
-            "label": "Image right",
-            "name": "lb_block_launch_two_images_image_right",
-            "type": "image",
+            "key": "field_61dd58bf37497",
+            "label": "Infobox",
+            "name": "",
+            "type": "tab",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 2,
-            "return_format": "url",
-            "preview_size": "medium",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": ""
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd599637498",
+            "label": "Tagline",
+            "name": "lb_block_launch_two_images_infobox_tagline",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd59b637499",
+            "label": "Title",
+            "name": "lb_block_launch_two_images_infobox_tagline",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd59e33749a",
+            "label": "Subtitle",
+            "name": "lb_block_launch_two_images_infobox_subtitle",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd59ff3749b",
+            "label": "Paragraph",
+            "name": "lb_block_launch_two_images_infobox_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd5a3b3749c",
+            "label": "Button",
+            "name": "lb_block_launch_two_images_infobox_btn",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd5a5e3749d",
+            "label": "Button variants",
+            "name": "lb_block_launch_two_images_infobox_btn_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "tertiary": "Tertiary",
+                "quaternary": "Quaternary"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 1,
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -87,5 +227,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1636541365
+    "modified": 1642079186
 }

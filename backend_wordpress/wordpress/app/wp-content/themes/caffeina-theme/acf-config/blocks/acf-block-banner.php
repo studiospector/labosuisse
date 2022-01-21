@@ -23,3 +23,4 @@ function lb_init_block_banner() {
         ));
     }
 }
+

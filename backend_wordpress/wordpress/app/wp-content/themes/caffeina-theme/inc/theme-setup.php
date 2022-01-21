@@ -286,3 +286,442 @@ function timber_set_product($post)
     global $product;
     $product = isset($post->product) ? $post->product : wc_get_product($post->ID);
 }
+
+
+
+/**
+ * Add symbols.twig to WP admin area
+ */
+add_action( 'admin_footer', 'lb_add_symbols_to_admin' );
+function lb_add_symbols_to_admin()
+{
+    Timber::render('@PathViews/components/symbols.twig');
+}
+
+
+
+/**
+ * Get header and menu
+ */
+function lb_header() {
+
+    $menu_desktop = array(
+        [
+            'type' => 'link',
+            'label' => 'Link Normal'
+        ],
+        [
+            'type' => 'submenu',
+            'label' => 'Submenu',
+            'children' => [
+                [
+                    'type' => 'submenu',
+                    'label' => 'Per Zona',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
+                    ]
+                ],
+                [
+                    'type' => 'submenu',
+                    'label' => 'Per Esigenza',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+                    ]
+                ],
+            ],
+            'fixed' => [
+                [
+                    'type' => 'card',
+                    'data' => [
+                        'images' => [
+                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                        ],
+                        'infobox' => [
+                            'subtitle' => 'Magnetic Eyes',
+                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                            'cta' => [
+                                'url' => '#',
+                                'title' => 'Scopri di più',
+                                'iconEnd' => [ 'name' => 'arrow-right' ],
+                                'variants' => ['quaternary']
+                            ]
+                        ],
+                        'variants' => ['type-3']
+                    ],
+                ],
+            ]
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Personalize',
+            'href' => '#',
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Lookbook',
+            'href' => '#',
+        ],
+        [
+            'type' => 'submenu',
+            'label' => 'World',
+            'children' => [
+                [
+                    'type' => 'submenu',
+                    'label' => 'Excellences',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
+                    ]
+                ],
+                [
+                    'type' => 'submenu',
+                    'label' => 'Lorem Ipsum',
+                    'children' => [
+                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
+                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
+                    ]
+                ],
+            ],
+        ],
+        [
+            'type' => 'separator',
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Tutti i Brand',
+            'href' => '#',
+        ],
+        [
+            'type' => 'link',
+            'label' => 'Scopri Labo',
+            'href' => '#',
+        ],
+        [
+            'type' => 'separator',
+        ],
+        [
+            'type' => 'icon',
+            'icon' => [
+                'name' => 'heart'
+            ],
+            'href' => 'https://google.it'
+        ],
+        [
+            'type' => 'icon',
+            'icon' => [
+                'name' => 'cart'
+            ],
+            'href' => wc_get_cart_url()
+        ],
+        [
+            'type' => 'icon',
+            'icon' => [
+                'name' => 'user'
+            ],
+            'href' => 'https://google.it'
+        ],
+    );
+
+    $menu_mobile = [
+        'children' => [
+            [
+                'type' => 'link',
+                'label' => 'Link Normal'
+            ],
+            [
+                'type' => 'submenu', 
+                'label' => 'Lorem', 
+                'children' => [
+                    [
+                        'type' => 'submenu', 
+                        'label' => 'Ipsum 1', 
+                        'children' => [
+                            ['type' => 'link', 'label' => 'link 1'],
+                            ['type' => 'link', 'label' => 'link 2'],
+                            ['type' => 'link', 'label' => 'link 3'],
+                        ]
+                    ],
+                    [
+                        'type' => 'submenu', 
+                        'label' => 'Ipsum 2', 
+                        'children' => [
+                            ['type' => 'link', 'label' => 'link 1'],
+                            ['type' => 'link', 'label' => 'link 2'],
+                            ['type' => 'link', 'label' => 'link 3'],
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'type' => 'submenu', 
+                'label' => 'Submenu',
+                'children' => [
+                    [
+                        'type' => 'submenu',
+                        'label' => 'Per Zona',
+                        'children' => [
+                            ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
+                        ]
+                    ],
+                    [
+                        'type' => 'submenu',
+                        'label' => 'Per Esigenza',
+                        'children' => [
+                            ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+                        ]
+                    ],
+                ],
+            ]
+        ],
+        'fixed' => [
+            [
+                'type' => 'card',
+                'data' => [
+                    'images' => [
+                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                    ],
+                    'infobox' => [
+                        'subtitle' => 'Magnetic Eyes',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'cta' => [
+                            'url' => '#',
+                            'title' => 'Scopri di più',
+                            'iconEnd' => ['name' => 'arrow-right'],
+                            'variants' => ['quaternary']
+                        ]
+                    ],
+                    'variants' => ['type-1']
+                ],
+            ],
+            [
+                'type' => 'small-link', 
+                'label' => 'Hai bisogno di aiuto?', 
+                'icon' => 'comments',
+            ],
+            [
+                'type' => 'small-link',
+                'label' => 'Italia',
+                'icon' => 'earth',
+            ],
+        ]
+    ];
+
+    return array(
+        'menu_desktop' => ['items' => $menu_desktop],
+        'menu_mobile' => ['items' => $menu_mobile],
+    );
+}
+
+
+
+/**
+ * Get footer and prefooter
+ */
+function lb_footer() {
+
+    $prefooter = [
+        'block_1' => [
+            'title' => 'Hai delle domande?',
+            'text' => 'Scegli il tuo canale di comunicazione preferito dalla pagina di assistenza e mettiti in contatto con un esperto.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Vai all’assistenza',
+                'iconEnd' => [ 'name' => 'arrow-right' ],
+                // Variants is static
+                'variants' => ['quaternary']
+            ],
+        ],
+        'block_2' => [
+            'title' => 'Trova un punto vendita',
+            'text' => 'Inserisci un CAP, una città o un indirizzo per scoprire i rivenditori vicinot a te.',
+            'input' => [
+                // The only parameter to manage in options is label
+                'type' => 'search',
+                'name' => "lb-search-store-prefooter",
+                'label' => "Inserisci città, provincia, CAP,...",
+                'disabled' => false,
+                'required' => false,
+                'variants' => ['secondary'],
+            ],
+        ],
+        'block_3' => [
+            'title' => 'Iscriviti alla newsletter',
+            'text' => 'Inserisci i tuoi dati e ricevi direttamente sulla tua mail aggiornamenti e promozioni dal mondo Labo.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Procedi e iscriviti',
+                'iconEnd' => [ 'name' => 'arrow-right' ],
+                // Variants is static
+                'variants' => ['quaternary']
+            ],
+        ],
+    ];
+
+    $footer = [
+        'discover' => [
+            'title' => 'SCOPRI LABO',
+            'items' => [
+                [
+                    'url' => '#',
+                    'title' => 'Labo Magazine',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Labo nel Mondo',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Lavora con noi',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Diventa farmacia concessonaria',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Consulenza personalizzata',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Privacy Policy',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+            ],
+        ],
+        'support' => [
+            'title' => 'ASSISTENZA',
+            'items' => [
+                [
+                    'url' => '#',
+                    'title' => 'FAQ',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Contatti',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+                [
+                    'url' => '#',
+                    'title' => 'Traccia un ordine',
+                    'target' => '_self',
+                    // Variants is static
+                    'variants' => ['link', 'thin', 'small']
+                ],
+            ], 
+        ],
+        'search' => [
+            'title' => 'TROVA UNA FARMACIA CONCESSIONARIA ',
+            'input' => [
+                // The only parameter to manage in options is label
+                'type' => 'search',
+                'name' => "lb-search-store-footer",
+                'label' => "Inserisci città, provincia, CAP,...",
+                'disabled' => false,
+                'required' => false,
+                'variants' => ['secondary'],
+            ],
+        ],
+        'newsletter' => [ 
+            'title' => 'ISCRIVITI ALLA NEWSLETTER',
+            'text' => 'Ricevi aggiornamenti e promozioni<br>direttamente sulla tua mail.',
+            'cta' => [
+                'url' => '#',
+                'title' => 'Procedi e iscriviti',
+                // Variants is static
+                'variants' => ['secondary']
+            ],
+        ],
+        'social' => [
+            'title' => 'SEGUICI',
+            'items' => [
+                [
+                    'url' => '#',
+                    'icon' => 'instagram',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'facebook',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'twitter',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'youtube',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'linkedin',
+                ],
+                [
+                    'url' => '#',
+                    'icon' => 'whatsapp',
+                ],
+            ]
+        ],
+    ];
+
+    return array(
+        'footer' => $footer,
+        'prefooter' => $prefooter,
+    );
+}

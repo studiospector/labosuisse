@@ -50,6 +50,7 @@ if (!defined('LB_BUILD_LIB_URI')) {
  */
 include __DIR__ . '/inc/theme-setup.php';
 include __DIR__ . '/inc/theme-assets.php';
+include __DIR__ . '/inc/woocommerce-setup.php';
 
 
 
@@ -61,11 +62,8 @@ include __DIR__ . '/inc/theme-assets.php';
  #$files = list_files(__DIR__ . '/acf-config/blocks');
  foreach ( $files as $file ) {
     include_once $file;
- }
-// include __DIR__ . '/acf-config/blocks/acf-block-carousel-hero.php';
-// include __DIR__ . '/acf-config/blocks/acf-block-launch-two-images.php';
-// include __DIR__ . '/acf-config/blocks/acf-block-hero.php';
-// include __DIR__ . '/acf-config/blocks/acf-block-love-labo.php';
+}
+
 
 
 

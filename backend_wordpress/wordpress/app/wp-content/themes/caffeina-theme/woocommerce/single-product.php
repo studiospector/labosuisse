@@ -25,9 +25,63 @@ $context['post'] = Timber::get_post();
 $product = wc_get_product($context['post']->ID);
 $context['product'] = $product;
 
+ob_start();
+wc_product_class( 'single-product-details container', $product );
+$context['product_classes'] = ob_get_clean();
+
 // Get related products
 $related_limit = wc_get_loop_prop('columns');
 $related_ids = wc_get_related_products($context['post']->id, $related_limit);
 $context['related_products'] = Timber::get_posts($related_ids);
+
+// Banner -> hero
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/hero.php');
+$block_hero = new Hero(null,'hero');
+$context['hero'] = $block_hero->payload;
+
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/bannerAlternate.php');
+$block_banner_alternate = new BannerAlternate(null,'banner_alternate');
+
+$context['banner_alternate'] = $block_banner_alternate->payload;
+
+// Number List
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/numberListImage.php');
+$block_numbers = new NumberListImage(null, 'number-list-with-image');
+$context['number_list'] = $block_numbers->payload;
+
+// Miniatures -> love labo
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/loveLabo.php');
+$block_love_labo = new LoveLabo(null, "block-love-labo");
+$context['miniatures'] = $block_love_labo->payload;
+
+//Two cards
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/launchTwoCards.php');
+$block_launch_two_cards = new LaunchTwoCards(null, "block-two-cards");
+$context['two_cards'] = $block_launch_two_cards->payload;
+
+// Image and card
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/imageCard.php');
+$block_image_card = new ImageCard(null,'block-image-card');
+$context['image_and_card'] = $block_image_card->payload;
+
+
+// Routine
+$context['routine'] = [
+    'title' => 'Scopri la migliore routine crescina',
+    'items' => [
+        [
+            'text' => 'Inizia con il trattamento per agire sulla struttura stessa del capello lorem ipsum',
+            'product' => Timber::get_post(148),
+        ],
+        [
+            'text' => 'Continua con il trattamento agendo anche durante la detersione lorem ipsum',
+            'product' => Timber::get_post(263),
+        ],
+        [
+            'text' => 'Affronta il problema da dentro e aggiungi alla tua dieta equilibrata gli integratori lorem ipsum',
+            'product' => Timber::get_post(148),
+        ],
+    ]
+];
 
 Timber::render('@PathViews/woo/single-product.twig', $context);

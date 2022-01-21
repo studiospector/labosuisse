@@ -3,8 +3,8 @@
     "title": "Campi personalizzati: Blocco – Due Card",
     "fields": [
         {
-            "key": "field_61b86dc791028",
-            "label": "Immagini",
+            "key": "field_61b874cf49933",
+            "label": "Card Sinistra",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -15,26 +15,9 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 0,
+            "wpml_cf_preferences": 2,
             "placement": "top",
             "endpoint": 0
-        },
-        {
-            "key": "field_61b874cf49933",
-            "label": "left card",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 2
         },
         {
             "key": "field_61b86dc791191",
@@ -42,7 +25,7 @@
             "name": "lb_block_launch_two_cards_image_left",
             "type": "image",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -186,7 +169,7 @@
         },
         {
             "key": "field_61b879e79ad6e",
-            "label": "right card",
+            "label": "Card Destra",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -207,7 +190,7 @@
             "name": "lb_block_launch_two_cards_image_right",
             "type": "image",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -348,6 +331,146 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_61e81712f3c0e",
+            "label": "Infobox",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e8172af3c0f",
+            "label": "Tagline",
+            "name": "lb_block_launch_two_cards_infobox_tagline",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e81769f3c10",
+            "label": "Title",
+            "name": "lb_block_launch_two_cards_infobox_title",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e817d3f3c11",
+            "label": "Subtitle",
+            "name": "lb_block_launch_two_cards_infobox_subtitle",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e817f6f3c12",
+            "label": "Paragraph",
+            "name": "lb_block_launch_two_cards_infobox_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e81823f3c13",
+            "label": "Button",
+            "name": "lb_block_launch_two_cards_infobox_btn",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e81866f3c14",
+            "label": "Button variants",
+            "name": "lb_block_launch_two_cards_infobox_btn_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "tertiary": "Tertiary",
+                "quaternary": "Quaternary"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 2,
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -374,5 +497,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639481480
+    "modified": 1642692798
 }

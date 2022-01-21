@@ -1,14 +1,11 @@
 <li class="lb-menu__item">
-
 	{% if type == 'link' %}
-		<a class="lb-menu__link lb-h6" href="{{href}}" tabindex="0">{{label}}</a>
+		<a class="lb-menu__link" href="{{href}}" tabindex="0">{{label}}</a>
 	{% endif %}
 
-
-	{% if type == 'image' %}
-		image
+	{% if type == 'card' %}
+		{% include '@PathViews/components/card.twig' with data only %}
 	{% endif %}
-
 
 	{% if type == 'submenu' %}
 		<h6 class="lb-menu__header">{{label}}</h6>
@@ -18,5 +15,4 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
-
 </li>

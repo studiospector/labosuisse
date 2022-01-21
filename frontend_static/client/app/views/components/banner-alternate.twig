@@ -14,8 +14,8 @@
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
 <section 
-    class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }} js-banner-alternate"
-    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
+    class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }} js-banner-alternate"
+    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
 >
     <div class="banner-alternate__img">
 		{{ lbPicture(images) }}

@@ -1,3 +1,51 @@
-// #content {
-//     padding-top: 100px;
-// }
+.lb-logo {
+    svg {
+        width: 182px;
+        height: 58px;
+
+        @include mq($until: lg) {
+            width: 94px;
+            height: 30px;
+        }
+    }
+}
+
+.lb-shield {
+    svg {
+        width: 165px;
+        height: 54px;
+
+        @include mq($until: lg) {
+            width: 86px;
+            height: 30px;
+        }
+    }
+}
+
+
+
+ol:not(.flex-control-nav) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: lbListCounter;
+
+    li {
+        counter-increment: lbListCounter;
+
+        &::before {
+            content: counter(lbListCounter)".";
+            min-width: 65px;
+            margin-right: 15px;
+            font-size: rem(56);
+            font-weight: 600;
+            line-height: 1;
+            color: map-get($colors, "secondary");
+
+            @include mq($until: md) {
+                margin-right: 0;
+                font-size: rem(40);
+            }
+        }
+    }
+}

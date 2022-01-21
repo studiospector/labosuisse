@@ -25,9 +25,9 @@ if( have_rows('lb_block_carousel_hero') ) {
                 'subtitle' => get_sub_field('lb_block_infobox_subtitle'),
                 'paragraph' => get_sub_field('lb_block_infobox_paragraph'),
                 'cta' => array_merge( 
-                    (get_sub_field('lb_block_infobox_btn') ?? []),
+                    ((array)get_sub_field('lb_block_infobox_btn') ?? []),
                     ['buttonVariants' => [
-                        get_sub_field('lb_block_infobox_btn_variants')
+                        get_sub_field('lb_block_infobox_btn_variants') ?? []
                     ]]
                 )
             ]

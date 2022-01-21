@@ -136,4 +136,10 @@
             }
         }
     }
+
+    &--bg-transparent {
+        .infobox__text-wrap {
+            background-color: transparent;
+        }
+    }
 }

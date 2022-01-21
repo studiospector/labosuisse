@@ -24,6 +24,7 @@
     &__infobox {
         width: 100%;
         display: flex;
+        padding: 0 150px;
         z-index: 1;
 
         @include mq($until: md) {
@@ -77,6 +78,12 @@
             @include mq($until: md) {
                 margin-bottom: 0;
             }
+        }
+    }
+
+    &--containerized {
+        &__infobox {
+            padding: 0 70px;
         }
     }
 }

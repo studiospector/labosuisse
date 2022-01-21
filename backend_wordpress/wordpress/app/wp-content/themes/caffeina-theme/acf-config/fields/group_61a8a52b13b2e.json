@@ -15,13 +15,13 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "endpoint": 0
         },
         {
             "key": "field_61a8a52b2fd0b",
-            "label": "Image",
+            "label": "Immagine",
             "name": "lb_block_banner_img",
             "type": "image",
             "instructions": "",
@@ -45,8 +45,165 @@
             "mime_types": ""
         },
         {
+            "key": "field_61dd53e56f509",
+            "label": "Infobox",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_61dd54286f50a",
+            "label": "Tagline",
+            "name": "lb_block_banner_infobox_tagline",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd545e6f50b",
+            "label": "Title",
+            "name": "lb_block_banner_infobox_title",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd54806f50c",
+            "label": "Subtitle",
+            "name": "lb_block_banner_infobox_subtitle",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd55316f50d",
+            "label": "Paragraph",
+            "name": "lb_block_banner_infobox_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd55b56f50e",
+            "label": "Button",
+            "name": "lb_block_banner_infobox_btn",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61dd5ae4437aa",
+            "label": "Button variants",
+            "name": "lb_block_banner_infobox_btn_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "tertiary": "Tertiary",
+                "quaternary": "Quaternary"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 2,
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_61e034d9588ff",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_61a8a52b2fd2c",
-            "label": "infoboxTextAlignment",
+            "label": "Allineamento testo Infobox",
             "name": "lb_block_banner_infoboxtextalignment",
             "type": "radio",
             "instructions": "",
@@ -72,7 +229,7 @@
         },
         {
             "key": "field_61a8a52b2fe8d",
-            "label": "variants",
+            "label": "Variante",
             "name": "lb_block_banner_variants",
             "type": "radio",
             "instructions": "",
@@ -104,13 +261,6 @@
                 "operator": "==",
                 "value": "acf\/lb-banner"
             }
-        ],
-        [
-            {
-                "param": "post_type",
-                "operator": "==",
-                "value": "product"
-            }
         ]
     ],
     "menu_order": 0,
@@ -121,5 +271,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1639059132
+    "modified": 1642503475
 }

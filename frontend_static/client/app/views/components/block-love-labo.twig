@@ -12,7 +12,7 @@
     {% set cta = { cta: infobox.cta } %}
 {% endif %}
 
-<section class="lovelabo{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-love-labo">
+<section class="lovelabo{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-love-labo">
 	{% if infobox %}
         <div class="lovelabo__infobox text-center">
             {% include '@PathViews/components/infobox.twig' with infobox|merge({cta: null}) only %}
