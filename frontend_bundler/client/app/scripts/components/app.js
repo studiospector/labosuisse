@@ -89,6 +89,8 @@ export default class Application extends Component {
     constructor() {
         super({ el: document.body, components })
 
+        this.components.offsetNavs = OffsetNavSystem.get()
+
         this.el.classList.add('ready')
 
         /**

@@ -1,0 +1,44 @@
+.block-offset-navs {
+    &__infobox {
+        @include mq($until: md) {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .p-small {
+            margin-top: 40px;
+
+            @include mq($until: md) {
+                margin-top: 20px;
+            }
+        }
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: column;
+
+        .button {
+            justify-content: space-between;
+            padding-left: 10px;
+            padding-right: 10px;
+            color: map-get($colors, "black");
+            border-bottom: 1px solid map-get($colors, "grey-2");
+            border-radius: 0;
+
+            &__label {
+                font-weight: 300;
+            }
+
+            &:first-child {
+                border-top: 1px solid map-get($colors, "grey-2");
+            }
+
+            .lb-icon {
+                svg {
+                    color: map-get($colors, "primary-dark-1");
+                }
+            }
+        }
+    }
+}

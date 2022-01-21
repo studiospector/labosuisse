@@ -1,0 +1,33 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['block-offset-navs--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="block-offset-navs{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+	<div class="container">
+		<div class="row">
+            <div class="block-offset-navs__infobox col-12 col-md-6">
+                <h4 class="infobox__subtitle">{{ title }}</h4>
+                <p class="infobox__paragraph p-big">{{ subtitle }}</p>
+                <p class="infobox__paragraph p-small">{{ paragraph }}</p>
+            </div>
+            <div class="block-offset-navs__links col-12 col-md-6">
+                {% for item in items %}
+                    {% if item.active %}
+                        {% include '@PathViews/components/button.twig' with {
+                            title: item.title,
+                            attributes: ['data-target-offset-nav="' ~ item.id ~ '"'],
+                            class: 'js-open-offset-nav',
+                            variants: ['quaternary'],
+                        } only %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+	</div>
+</section>

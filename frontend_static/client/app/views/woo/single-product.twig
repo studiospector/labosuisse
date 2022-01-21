@@ -38,6 +38,11 @@
         <hr class="lb-separator lb-separator--big" data-variant="big" />
     {% endif %}
 
+    {% if offset_navs %}
+        {% include '@PathViews/components/block-offset-navs.twig' with offset_navs only %}
+        <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% endif %}
+
     {% if banner_alternate %}
         {% include '@PathViews/components/banner-alternate.twig' with banner_alternate only %}
         <hr class="lb-separator lb-separator--big" data-variant="big" />
@@ -69,4 +74,15 @@
         {% include '@PathViews/components/block-routine.twig' with routine only %}
     {% endif %}
 
+{% endblock %}
+
+
+{% block offsetNavs %}
+    {% if offset_navs.items %}
+        {% for item in offset_navs.items %}
+            {% if item.active %}
+                {% include '@PathViews/components/offset-nav/default.twig' with item only %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}

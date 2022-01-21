@@ -1,0 +1,45 @@
+{% embed '@PathViews/components/offset-nav.twig' %}
+	{% block offsetNavContent %}
+
+        {% for item in data %}
+            <div class="lb-offset-nav__content__item lb-offset-nav__content__item--{{ item.type }}">
+                {% if item.type == 'text' %}
+                    {% if item.data.title %}
+                        <h4 class="infobox__subtitle">{{ item.data.title }}</h4>
+                    {% endif %}
+                    {% if item.data.subtitle %}
+                        <p class="infobox__paragraph p p-big">{{ item.data.subtitle }}</p>
+                    {% endif %}
+                    {% if item.data.text %}
+                        <p class="infobox__paragraph p-small">{{ item.data.text }}</p>
+                    {% endif %}
+                {% elseif item.type == 'table' %}
+                    {% if item.data.title %}
+                        <h4 class="infobox__subtitle">{{ item.data.title }}</h4>
+                    {% endif %}
+                    {% if item.data.subtitle %}
+                        <p class="infobox__paragraph p p-big">{{ item.data.subtitle }}</p>
+                    {% endif %}
+                    {% if item.data.text %}
+                        <p class="infobox__paragraph p-small">{{ item.data.text }}</p>
+                    {% endif %}
+                    {% if item.data.table %}
+                        <div class="lb-offset-nav__table">
+                            {% for tableItem in item.data.table %}
+                                <div class="row">
+                                    <div class="col-10 col-md-11">
+                                        <p class="p-small">{{ tableItem.title }}</p>
+                                    </div>
+                                    <div class="col-2 col-md-1">
+                                        <p class="p-small">{{ tableItem.value }}%</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        {% endfor %}
+
+	{% endblock %}
+{% endembed %}
