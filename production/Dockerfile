@@ -50,10 +50,21 @@ COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
 FROM trafex/php-nginx:latest
 
-COPY --from=wordpress --chown=nobody /var/www/html /var/www/html
+# :poop:
+USER root
+RUN apk --no-cache add \
+  php8-exif \
+  php8-fileinfo \
+  php8-zip \
+  php8-iconv \
+  php8-pecl-imagick \
+  php8-simplexml \
+  php8-xmlwriter
+USER nobody
+
+# overrides for nginx conf
 COPY ./production/config/php.ini /etc/php8/conf.d/custom.ini
 COPY ./production/nginx /etc/nginx
 
-#USER root
-#RUN sed -i 's/memory_limit = .*/memory_limit = 256M/' /etc/php8/php.ini
-#USER nobody
+# copy final code
+COPY --from=wordpress --chown=nobody /var/www/html /var/www/html
