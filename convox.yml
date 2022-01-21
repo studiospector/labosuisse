@@ -12,7 +12,8 @@ services:
       manifest: ./production/Dockerfile
       # command: bin/api
     environment:
-    #  - APP_KEY
+      - ADMIN_URL
+      - WP_CONTENT_CUSTOM_DIR
     health: /
     internal: false
     port: 8080
