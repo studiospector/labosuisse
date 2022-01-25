@@ -22,11 +22,11 @@ class MenuDesktop extends Component {
         this.header = qs('.lb-header__wrapper--desktop');
 
 
-        on(this.ui.hovers || [], 'mouseenter', this.onEnter);
-        on(this.ui.hovers || [], 'focusin', this.onEnter);
-        on(this.ui.overlay || [], 'mouseenter', this.onLeave);
-        on(qsa('.lb-header__end'), 'mouseenter', this.onLeave);
-        on(qsa('.lb-header__logo'), 'mouseenter', this.onLeave);
+        on(this.ui.hovers || [], 'click', this.onEnter); // mouseenter, focusin
+        // on(this.ui.overlay || [], 'mouseenter', this.onLeave);
+        // on(qsa('.lb-header__end'), 'mouseenter', this.onLeave);
+        // on(qsa('.lb-header__logo'), 'mouseenter', this.onLeave);
+        on(qsa('.js-close-menu'), 'click', this.onLeave);
 
         // on(qs('.lb-header'), 'mouseenter', this.onHoverEnter);
         // on(qs('.lb-header'), 'mouseleave', this.onHoverLeave);
