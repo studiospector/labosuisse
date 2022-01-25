@@ -16,6 +16,8 @@ export default class Header extends Component {
         const customScrollbar = window.getCustomScrollbar
         customScrollbar.on('scroll', this.checkScroll)
 
+        console.log(this.el);
+
         this.adjustMainContent()
         on(window, 'resize', this.adjustMainContent)
 
@@ -66,10 +68,10 @@ export default class Header extends Component {
     toggleHeader(direction, curScroll) {
         const headerHeight = this.el.getBoundingClientRect().height
         if (direction === 2 && curScroll > headerHeight) {
-            this.el.classList.add('hide')
+            this.el.classList.add('lb-header--hide')
             this.prevDirection = direction
         } else if (direction === 1) {
-            this.el.classList.remove('hide')
+            this.el.classList.remove('lb-header--hide')
             this.prevDirection = direction
         }
     }

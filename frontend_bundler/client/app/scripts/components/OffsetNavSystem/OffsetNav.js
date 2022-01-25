@@ -28,8 +28,6 @@ class OffsetNav extends Component {
     constructor({ options = {}, ...props }) {
         super({ ...props, ui, components: options.initComponents ? components : null })
 
-        this.adjustContent()
-
         this.ui.closeTriggers.forEach(trigger => on(trigger, 'click', this.close))
     }
 
@@ -39,11 +37,14 @@ class OffsetNav extends Component {
     }
 
     open = () => {
+        qs('.lb-header').classList.add('lb-header--offsetnav-open')
+        this.adjustContent()
         this.el.classList.add('is-open')
     }
 
     close = () => {
         this.el.classList.remove('is-open')
+        qs('.lb-header').classList.remove('lb-header--offsetnav-open')
     }
 
     onDestroy() {
