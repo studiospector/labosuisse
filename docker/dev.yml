@@ -55,6 +55,8 @@ services:
         ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
         ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
+      - >-
+        ../backend_wordpress/wordpress/app/wp-content/languages:/var/www/html/wp-content-custom/languages
 
     environment:
       MYSQL_HOST: storage_mysql
