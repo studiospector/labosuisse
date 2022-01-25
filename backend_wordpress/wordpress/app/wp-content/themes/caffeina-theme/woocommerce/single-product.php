@@ -66,23 +66,27 @@ $context['image_and_card'] = $block_image_card->payload;
 
 
 // Routine
-$context['routine'] = [
-    'title' => 'Scopri la migliore routine crescina',
-    'items' => [
-        [
-            'text' => 'Inizia con il trattamento per agire sulla struttura stessa del capello lorem ipsum',
-            'product' => Timber::get_post(148),
-        ],
-        [
-            'text' => 'Continua con il trattamento agendo anche durante la detersione lorem ipsum',
-            'product' => Timber::get_post(263),
-        ],
-        [
-            'text' => 'Affronta il problema da dentro e aggiungi alla tua dieta equilibrata gli integratori lorem ipsum',
-            'product' => Timber::get_post(148),
-        ],
-    ]
-];
+require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/routine.php');
+$block_routine = new Routine(null,'block-routine');
+$context['routine'] = $block_routine->payload;
+
+// $context['routine'] = [
+//     'title' => 'Scopri la migliore routine crescina',
+//     'items' => [
+//         [
+//             'text' => 'Inizia con il trattamento per agire sulla struttura stessa del capello lorem ipsum',
+//             'product' => Timber::get_post(148),
+//         ],
+//         [
+//             'text' => 'Continua con il trattamento agendo anche durante la detersione lorem ipsum',
+//             'product' => Timber::get_post(263),
+//         ],
+//         [
+//             'text' => 'Affronta il problema da dentro e aggiungi alla tua dieta equilibrata gli integratori lorem ipsum',
+//             'product' => Timber::get_post(148),
+//         ],
+//     ]
+// ];
 
 
 
