@@ -1,0 +1,45 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+  {% set classes = classes|merge(['focus-numbers--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+<section class="focus-numbers{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }}">
+    <div class="row">
+        {% if shield or image or subtitle or text %}
+            <div class="focus-numbers__info col-12 col-md-8">
+                {% if shield %}
+                    <img src="{{ shield }}" class="focus-numbers__shield">
+                {% endif %}
+                {% if image %}
+                    <img src="{{ image }}" class="focus-numbers__image">
+                {% endif %}
+                {% if subtitle %}
+                    <p class="p-big">{{ subtitle }}</p>
+                {% endif %}
+                {% if text %}
+                    <p class="p-small">{{ text }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+        {% if focuses|length > 0 %}
+            <div class="col-12">
+                <div class="focus-numbers__items">
+                    {% for item in focuses %}
+                        <div class="focus-numbers__focus">
+                            <div class="focus-numbers__focus__top">
+                                <div class="focus-numbers__focus__number">{{ item.number }}</div>
+                                <div class="focus-numbers__focus__title">{{ item.title }}</div>
+                            </div>
+                            <div class="focus-numbers__focus__bottom">
+                                <div class="focus-numbers__focus__text">{{ item.text }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</section>
