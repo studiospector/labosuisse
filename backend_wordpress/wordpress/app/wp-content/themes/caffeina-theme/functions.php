@@ -57,11 +57,11 @@ include __DIR__ . '/inc/woocommerce-setup.php';
 /**
  * ACF Blocks autoload
  */
-$files = list_files(__DIR__ . '/acf-config/blocks');
-foreach ( $files as $file ) {
+$files = glob(__DIR__ . '/acf-config/blocks/*');
+ #$files = list_files(_DIR_ . '/acf-config/blocks');
+ foreach ( $files as $file ) {
     include_once $file;
 }
-
 
 
 
