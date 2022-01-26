@@ -10,4 +10,7 @@ function init() {
 }
 
 if (!window.APP) window.APP = {}
-window.APP.init = init
+
+window.addEventListener('load', (event) => {
+    window.APP.init = init
+})

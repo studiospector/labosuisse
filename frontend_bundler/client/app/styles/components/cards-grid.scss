@@ -1,0 +1,25 @@
+.cards-grid {
+    padding-top: 60px;
+    padding-bottom: 60px;
+
+    .infobox__title {
+        margin-bottom: 40px;
+        text-align: center;
+    }
+
+    &__cta {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    &__list {
+        &__item {
+            &:not(:last-child) {
+                @include mq($until: xl) {
+                    margin-bottom: 40px;
+                }
+            }
+        }
+    }
+}

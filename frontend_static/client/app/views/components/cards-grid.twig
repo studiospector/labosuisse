@@ -1,0 +1,29 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['cards-grid--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="cards-grid{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-cards-grid">
+    <div class="container">
+        {% if title %}
+            <h3 class="infobox__title">{{ title }}</h3>
+        {% endif %}
+        <div class="cards-grid__list row">
+            {% for post in items|default([]) %}
+                <div class="cards-grid__list__item col-6 col-xl-3">
+                    {% include '@PathViews/components/card.twig' with post only %}
+                </div>
+            {% endfor %}
+        </div>
+        {% if cta %}
+            <div class="cards-grid__cta">
+                {% include '@PathViews/components/button.twig' with cta only %}
+            </div>
+        {% endif %}
+    </div>
+</section>

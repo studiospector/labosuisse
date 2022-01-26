@@ -17,6 +17,7 @@ import BannerAlternate from './BannerAlternate'
 import BlockLoveLabo from './BlockLoveLabo'
 import OffsetNavSystem from './OffsetNavSystem'
 import AnimationParallax from './AnimationParallax'
+import CardsGrid from './CardsGrid'
 
 const components = {
     scrollbar: {
@@ -87,6 +88,11 @@ const components = {
     animationParallax: {
         selector: '.js-parallax',
         type: AnimationParallax,
+        optional: true
+    },
+    cardsGrid: {
+        selector: '.js-cards-grid',
+        type: CardsGrid,
         optional: true
     },
 }
