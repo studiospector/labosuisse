@@ -16,9 +16,11 @@ $layers: (
 
 // Grid
 $grid-breakpoints: (
+  xs: map-get($mq-breakpoints, xs),
+  sm: map-get($mq-breakpoints, sm),
   md: map-get($mq-breakpoints, md),
   lg: map-get($mq-breakpoints, lg),
-  // xl: map-get($mq-breakpoints, xl),
+  xl: map-get($mq-breakpoints, xl),
 )!default;
 
 $container-max-widths: (
