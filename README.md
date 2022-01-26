@@ -42,12 +42,22 @@ Questo avvierà l'intero stack di sviluppo definito dai servizi scelti durante l
 
 > **Tip**: per lanciare comandi `npm` puoi usare il comando `/cmd/npm.sh <service> <args>`.
 
+##### Local problems
+
+Se hai problemi con `max_allowed_packet` segui i passaggi sotto:
+- `docker exec -it labo-website-2021_storage_mysql_1 sh`
+- `apt-get update`
+- `apt-get install nano`
+- `cd etc`
+- `cd mysql`
+- `nano my.cnf`
+- aggiungi al file la riga `max_allowed_packet=500M` con il valore che serve
+- salva il file
+- riavvia il container
+
 #### Deploy
 
 Inserire la variabile **n2_env** per la CI in Gitlab copiando al suo interno tutte le variabili presenti nel tuo **.env** in locale.
 
 Per mettere un progetto online ti basterà inviare un commit.
 Una pipeline di CI partirà automaticamente.
-
-
-
