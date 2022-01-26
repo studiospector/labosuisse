@@ -1,0 +1,20 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="carousel-centered">
+    <h4 class="carousel-centered__title infobox__title">{{ title }}</h4>
+    <div class="carousel-centered__slider swiper js-carousel-centered">
+        <div class="swiper-wrapper">
+            {% for slide in items|default([]) %}
+                <div class="carousel-centered__slide swiper-slide">
+                    <div class="carousel-centered__slide__img">
+                        {{ lbPicture(slide.images) }}
+                    </div>
+                    <h5 class="infobox__subtitle">{{ slide.subtitle }}</h5>
+                    <p class="p-small">{{ slide.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</section>

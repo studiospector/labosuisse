@@ -8,6 +8,7 @@ import Header from './Header'
 import LBCustomInput from './CustomInput'
 import LBCustomSelect from './CustomSelect'
 import CarouselHero from './CarouselHero'
+import CarouselCentered from './CarouselCentered'
 import CarouselBannerAlternate from './CarouselBannerAlternate'
 import CarouselPosts from './CarouselPosts'
 import CarouselProductImage from './CarouselProductImage'
@@ -46,6 +47,11 @@ const components = {
     carouselHero: {
         selector: '.js-carousel-hero',
         type: CarouselHero,
+        optional: true
+    },
+    carouselCentered: {
+        selector: '.js-carousel-centered',
+        type: CarouselCentered,
         optional: true
     },
     carouselBannerAlternate: {

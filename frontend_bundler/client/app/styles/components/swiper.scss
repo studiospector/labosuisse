@@ -24,4 +24,12 @@
             }
         }
     }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        &::after {
+            font-size: rem(22);
+            color: map-get($colors, "black");
+        }
+    }
 }
