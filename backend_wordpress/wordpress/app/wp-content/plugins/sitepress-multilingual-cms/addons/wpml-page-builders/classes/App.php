@@ -7,6 +7,8 @@ class App {
 	public static function run() {
 		global $sitepress, $wpdb;
 
+		LegacyIntegration::load();
+
 		if (
 			$sitepress->is_setup_complete()
 			&& has_action( 'wpml_before_init', 'load_wpml_st_basics' )
@@ -23,7 +25,7 @@ class App {
 			$app = new \WPML_Page_Builders_App( new \WPML_Page_Builders_Defined() );
 			$app->add_hooks();
 
-			new \WPML_PB_Loader( $sitepress, $wpdb, new \WPML_ST_Settings() );
+			new \WPML_PB_Loader( new \WPML_ST_Settings() );
 		}
 	}
 

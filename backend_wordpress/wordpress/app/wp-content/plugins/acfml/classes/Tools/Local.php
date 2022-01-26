@@ -16,7 +16,9 @@ class Local extends Transfer {
 	public function init() {
 		if ( ! $this->isImportFromFile() ) {
 			add_filter( 'acf/prepare_field_group_for_import', [ $this, 'unsetTranslated' ] );
-			add_filter( 'acf/prepare_fields_for_import', [ $this, 'syncTranslationPreferences' ] );
+			if ( is_admin() && $this->shouldScan() ) {
+				add_filter( 'acf/prepare_fields_for_import', [ $this, 'syncTranslationPreferences' ] );
+			}
 		}
 	}
 
@@ -37,7 +39,7 @@ class Local extends Transfer {
 
 		return $fieldGroup;
 	}
-	
+
 	/**
 	 * @param array $fields
 	 *
@@ -52,5 +54,14 @@ class Local extends Transfer {
 
 	private function isImportFromFile() {
 		return isset( $_FILES['acf_import_file'] );
+	}
+
+	/**
+	 * Scan should happen if user not defined constant or constant is set to boolean true.
+	 *
+	 * @return bool
+	 */
+	private function shouldScan() {
+		return ! defined( 'ACFML_SCAN_LOCAL_FIELDS' ) || constant( 'ACFML_SCAN_LOCAL_FIELDS' );
 	}
 }

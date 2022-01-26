@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'ACFML\\Convertable\\LinkFieldData' => $baseDir . '/classes/Convertable/LinkFieldData.php',
+    'ACFML\\FieldPreferences\\TranslationJobs' => $baseDir . '/classes/FieldPreferences/TranslationJobs.php',
     'ACFML\\FieldReferenceAdjuster' => $baseDir . '/classes/class-wpml-acf-field-reference-adjuster.php',
     'ACFML\\FieldState' => $baseDir . '/classes/class-wpml-acf-field-state.php',
     'ACFML\\MigrateBlockPreferences' => $baseDir . '/classes/class-wpml-acf-migrate-block-preferences.php',

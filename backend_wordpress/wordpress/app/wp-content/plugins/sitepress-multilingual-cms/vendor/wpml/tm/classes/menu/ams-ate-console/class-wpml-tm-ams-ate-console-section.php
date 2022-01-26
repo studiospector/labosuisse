@@ -163,7 +163,7 @@ class WPML_TM_AMS_ATE_Console_Section implements IWPML_TM_Admin_Section {
 				[
 					Widget::QUERY_VAR_ATE_WIDGET_SCRIPT => Widget::SCRIPT_NAME,
 				],
-				\site_url()
+				\trailingslashit( \site_url() )
 			);
 
 			\wp_enqueue_script( self::ATE_APP_ID, $script_url, [], WPML_TM_VERSION, true );

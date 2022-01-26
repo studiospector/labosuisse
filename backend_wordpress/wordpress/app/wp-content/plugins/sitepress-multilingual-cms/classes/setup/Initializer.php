@@ -90,7 +90,7 @@ class Initializer {
 					'domains'       => LanguageNegotiation::getDomains() ?: [],
 					'gotUrlRewrite' => got_url_rewrite(),
 				],
-				'isTMAllowed'          => Option::isTMAllowed() === true,
+				'isTMAllowed'              => Option::isTMAllowed() === true,
 				'isTMDisabled'             => Option::isTMAllowed() === false,
 				'ateBaseUrl'               => self::getATEBaseUrl(),
 				'whenFinishedUrlLanguages' => admin_url( UIPage::getLanguages() ),

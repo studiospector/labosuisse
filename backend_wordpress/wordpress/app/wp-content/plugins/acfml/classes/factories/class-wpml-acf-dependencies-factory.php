@@ -1,5 +1,6 @@
 <?php
 
+use \ACFML\FieldPreferences\TranslationJobs;
 use \ACFML\Group_Scanner;
 use \ACFML\MigrateBlockPreferences;
 use \ACFML\Repeater\Shuffle\Strategy;
@@ -18,6 +19,8 @@ class WPML_ACF_Dependencies_Factory {
 	private $worker;
 	private $duplicated_post;
 	private $custom_fields_sync;
+	/** @var TranslationJobs|void */
+	private $field_translation_jobs;
 	private $location_rules;
 	private $attachments;
 	private $field_settings;
@@ -115,6 +118,16 @@ class WPML_ACF_Dependencies_Factory {
 		}
 
 		return $this->custom_fields_sync;
+	}
+	
+	/**
+	 * @return TranslationJobs
+	 */
+	public function create_field_translation_jobs() {
+		if ( ! $this->field_translation_jobs ) {
+			$this->field_translation_jobs = new TranslationJobs();
+		}
+		return $this->field_translation_jobs;
 	}
 	
 	/**

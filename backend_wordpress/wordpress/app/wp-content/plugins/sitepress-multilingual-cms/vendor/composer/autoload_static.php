@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit0065339333060c4ac29eb46bad04752c
+class ComposerStaticInit7055fa79abfb5469edcc36666efd698d
 {
     public static $files = array (
         '5f5b8f7c1db2e892006e8805f0ed573c' => __DIR__ . '/..' . '/wpml/collect/src/Illuminate/Support/helpers.php',
@@ -143,27 +143,12 @@ class ComposerStaticInit0065339333060c4ac29eb46bad04752c
         'WPML\\CLI\\Core\\Commands\\ICommand' => __DIR__ . '/../..' . '/classes/wp-cli/commands/ICommand.php',
         'WPML\\CLI\\Core\\Commands\\IWPML_Command_Factory' => __DIR__ . '/../..' . '/classes/wp-cli/factories/IWPML_Command_Factory.php',
         'WPML\\CLI\\Core\\Commands\\IWPML_Core' => __DIR__ . '/../..' . '/classes/wp-cli/IWPML_Core.php',
-        'WPML\\Compatibility\\BaseDynamicContent' => __DIR__ . '/../..' . '/compatibility/abstracts/BaseDynamicContent.php',
-        'WPML\\Compatibility\\Divi\\Builder' => __DIR__ . '/../..' . '/compatibility/divi/builder.php',
-        'WPML\\Compatibility\\Divi\\DiviOptionsEncoding' => __DIR__ . '/../..' . '/compatibility/divi/divi-options-encoding.php',
         'WPML\\Compatibility\\Divi\\DoubleQuotes' => __DIR__ . '/../..' . '/compatibility/divi/DoubleQuotes.php',
-        'WPML\\Compatibility\\Divi\\DynamicContent' => __DIR__ . '/../..' . '/compatibility/divi/dynamic-content.php',
-        'WPML\\Compatibility\\Divi\\Hooks\\Editor' => __DIR__ . '/../..' . '/compatibility/divi/Hooks/Editor.php',
-        'WPML\\Compatibility\\Divi\\Search' => __DIR__ . '/../..' . '/compatibility/divi/search.php',
-        'WPML\\Compatibility\\Divi\\ThemeBuilder' => __DIR__ . '/../..' . '/compatibility/divi/theme-builder.php',
-        'WPML\\Compatibility\\Divi\\ThemeBuilderFactory' => __DIR__ . '/../..' . '/compatibility/divi/theme-builder-factory.php',
-        'WPML\\Compatibility\\Divi\\TinyMCE' => __DIR__ . '/../..' . '/compatibility/divi/TinyMCE.php',
-        'WPML\\Compatibility\\FusionBuilder\\Backend\\Hooks' => __DIR__ . '/../..' . '/compatibility/fusion_builder/backend/Hooks.php',
-        'WPML\\Compatibility\\FusionBuilder\\BaseHooks' => __DIR__ . '/../..' . '/compatibility/fusion_builder/abstracts/BaseHooks.php',
-        'WPML\\Compatibility\\FusionBuilder\\DynamicContent' => __DIR__ . '/../..' . '/compatibility/fusion_builder/DynamicContent.php',
-        'WPML\\Compatibility\\FusionBuilder\\FormContent' => __DIR__ . '/../..' . '/compatibility/fusion_builder/FormContent.php',
-        'WPML\\Compatibility\\FusionBuilder\\Frontend\\Hooks' => __DIR__ . '/../..' . '/compatibility/fusion_builder/frontend/Hooks.php',
-        'WPML\\Compatibility\\FusionBuilder\\Hooks\\Editor' => __DIR__ . '/../..' . '/compatibility/fusion_builder/Hooks/Editor.php',
         'WPML\\Compatibility\\GoogleSiteKit\\Hooks' => __DIR__ . '/../..' . '/compatibility/GoogleSiteKit/Hooks.php',
-        'WPML\\Compatibility\\WPBakery\\Styles' => __DIR__ . '/../..' . '/compatibility/visual_composer/Styles.php',
         'WPML\\Container\\Config' => __DIR__ . '/../..' . '/classes/container/class-config.php',
         'WPML\\Container\\Container' => __DIR__ . '/../..' . '/classes/container/class-wpml-container.php',
         'WPML\\Core\\BackgroundTask' => __DIR__ . '/..' . '/wpml/core-api/core/utility/BackgroundTask.php',
+        'WPML\\Core\\ISitePress' => __DIR__ . '/../..' . '/classes/ISitePress.php',
         'WPML\\Core\\LanguageNegotiation' => __DIR__ . '/../..' . '/classes/LanguageNegotiation.php',
         'WPML\\Core\\Menu\\Translate' => __DIR__ . '/../..' . '/inc/wp-nav-menus/TranslateMenu.php',
         'WPML\\Core\\REST\\RewriteRules' => __DIR__ . '/../..' . '/classes/REST/RewriteRules.php',
@@ -927,16 +912,9 @@ class ComposerStaticInit0065339333060c4ac29eb46bad04752c
         'WPML_Compatibility_2017' => __DIR__ . '/../..' . '/compatibility/twentyseventeen/class-wpml-compatibility-2017.php',
         'WPML_Compatibility_Disqus' => __DIR__ . '/../..' . '/compatibility/disqus/wpml-compatibility-disqus.php',
         'WPML_Compatibility_Disqus_Factory' => __DIR__ . '/../..' . '/compatibility/disqus/wpml-compatibility-disqus-factory.php',
-        'WPML_Compatibility_Divi' => __DIR__ . '/../..' . '/compatibility/divi/class-wpml-compatibility-divi.php',
-        'WPML_Compatibility_Divi_Notice' => __DIR__ . '/../..' . '/compatibility/divi/class-wpml-compatiblity-divi-notice.php',
         'WPML_Compatibility_Factory' => __DIR__ . '/../..' . '/compatibility/wpml-compatibility-factory.php',
         'WPML_Compatibility_Gutenberg' => __DIR__ . '/../..' . '/compatibility/gutenberg/wpml-compatibility-gutenberg.php',
         'WPML_Compatibility_Jetpack' => __DIR__ . '/../..' . '/compatibility/jetpack/class-wpml-compatibility-jetpack.php',
-        'WPML_Compatibility_Plugin_Fusion_Global_Element_Hooks' => __DIR__ . '/../..' . '/compatibility/fusion_builder/wpml-compatibility-plugin-fusion-global-element-hooks.php',
-        'WPML_Compatibility_Plugin_Fusion_Hooks_Factory' => __DIR__ . '/../..' . '/compatibility/fusion_builder/wpml-compatibility-plugin-fusion-hooks-factory.php',
-        'WPML_Compatibility_Plugin_Visual_Composer' => __DIR__ . '/../..' . '/compatibility/visual_composer/class-wpml-compatibility-plugin-visual-composer.php',
-        'WPML_Compatibility_Plugin_Visual_Composer_Grid_Hooks' => __DIR__ . '/../..' . '/compatibility/visual_composer/class-wpml-compatibility-plugin-visual-composer-grid-hooks.php',
-        'WPML_Compatibility_Theme_Enfold' => __DIR__ . '/../..' . '/compatibility/enfold/class-wpml-compatibility-theme-enfold.php',
         'WPML_Compatibility_Tiny_Compress_Images' => __DIR__ . '/../..' . '/compatibility/tiny-compress-images/class-wpml-compatibility-tiny-compress-images.php',
         'WPML_Compatibility_Tiny_Compress_Images_Factory' => __DIR__ . '/../..' . '/compatibility/tiny-compress-images/class-wpml-compatibility-tiny-compress-images-factory.php',
         'WPML_Config' => __DIR__ . '/../..' . '/classes/xml-config/class-wpml-config.php',
@@ -1919,9 +1897,9 @@ class ComposerStaticInit0065339333060c4ac29eb46bad04752c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit0065339333060c4ac29eb46bad04752c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit0065339333060c4ac29eb46bad04752c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit0065339333060c4ac29eb46bad04752c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit7055fa79abfb5469edcc36666efd698d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit7055fa79abfb5469edcc36666efd698d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit7055fa79abfb5469edcc36666efd698d::$classMap;
 
         }, null, ClassLoader::class);
     }

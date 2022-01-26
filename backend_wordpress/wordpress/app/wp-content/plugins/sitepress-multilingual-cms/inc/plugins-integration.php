@@ -1,7 +1,5 @@
 <?php
 
-use function WPML\Container\make;
-
 $action_filter_loader = new WPML_Action_Filter_Loader();
 $action_filter_loader->load(
 	array(
@@ -17,6 +15,8 @@ add_action( 'plugins_loaded', 'wpml_plugins_integration_setup', 10 );
 function wpml_plugins_integration_setup() {
 	global $sitepress, $wpdb;
 
+	$factories_to_load = [];
+
 	// bbPress integration.
 	if ( class_exists( 'bbPress' ) ) {
 		$wpml_bbpress_api     = new WPML_BBPress_API();
@@ -30,31 +30,9 @@ function wpml_plugins_integration_setup() {
 		require_once WPML_PLUGIN_PATH . '/inc/plugin-integration-nextgen.php';
 	}
 
-	// WPBakery Page Builder (a.k.a. Visual Composer).
-	if ( defined( 'WPB_VC_VERSION' ) ) {
-		$wpml_visual_composer = new WPML_Compatibility_Plugin_Visual_Composer( new WPML_Debug_BackTrace( null, 12 ) );
-		$wpml_visual_composer->add_hooks();
-
-		$wpml_visual_composer_grid = new WPML_Compatibility_Plugin_Visual_Composer_Grid_Hooks(
-			$sitepress,
-			new WPML_Translation_Element_Factory( $sitepress )
-		);
-		$wpml_visual_composer_grid->add_hooks();
-
-		make( WPML\Compatibility\WPBakery\Styles::class )->add_hooks();
-	}
-
 	if ( class_exists( 'GoogleSitemapGeneratorLoader' ) ) {
 		$wpml_google_sitemap_generator = new WPML_Google_Sitemap_Generator( $wpdb, $sitepress );
 		$wpml_google_sitemap_generator->init_hooks();
-	}
-
-	$factories_to_load = array();
-
-	if ( defined( 'FUSION_BUILDER_VERSION' ) ) {
-		$factories_to_load[] = 'WPML_Compatibility_Plugin_Fusion_Hooks_Factory';
-		$factories_to_load[] = '\WPML\Compatibility\FusionBuilder\Frontend\Hooks';
-		$factories_to_load[] = '\WPML\Compatibility\FusionBuilder\Backend\Hooks';
 	}
 
 	if ( class_exists( 'Tiny_Plugin' ) ) {
@@ -88,32 +66,6 @@ function wpml_themes_integration_setup() {
 	if ( function_exists( 'twentyseventeen_panel_count' ) && ! function_exists( 'twentyseventeen_translate_panel_id' ) ) {
 		$wpml_twentyseventeen = new WPML_Compatibility_2017();
 		$wpml_twentyseventeen->init_hooks();
-	}
-
-	if ( function_exists( 'avia_lang_setup' ) ) {
-		// phpcs:disable WordPress.NamingConventions.ValidVariableName
-		global $iclTranslationManagement;
-		$enfold = new WPML_Compatibility_Theme_Enfold( $iclTranslationManagement );
-		// phpcs:enable
-		$enfold->init_hooks();
-	}
-
-	if ( defined( 'ET_BUILDER_THEME' ) || defined( 'ET_BUILDER_PLUGIN_VERSION' ) ) {
-		$actions[] = WPML_Compatibility_Divi::class;
-		$actions[] = WPML\Compatibility\Divi\DynamicContent::class;
-		$actions[] = WPML\Compatibility\Divi\Search::class;
-		$actions[] = WPML\Compatibility\Divi\DiviOptionsEncoding::class;
-		$actions[] = WPML\Compatibility\Divi\ThemeBuilderFactory::class;
-		$actions[] = WPML\Compatibility\Divi\Builder::class;
-		$actions[] = WPML\Compatibility\Divi\TinyMCE::class;
-		$actions[] = WPML\Compatibility\Divi\DoubleQuotes::class;
-		$actions[] = WPML\Compatibility\Divi\Hooks\Editor::class;
-	}
-
-	if ( defined( 'FUSION_BUILDER_VERSION' ) ) {
-		$actions[] = WPML\Compatibility\FusionBuilder\DynamicContent::class;
-		$actions[] = WPML\Compatibility\FusionBuilder\FormContent::class;
-		$actions[] = WPML\Compatibility\FusionBuilder\Hooks\Editor::class;
 	}
 
 	$action_filter_loader = new WPML_Action_Filter_Loader();

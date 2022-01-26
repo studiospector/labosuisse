@@ -1,2 +1,2 @@
 === Advanced Custom Fields Multilingual ===
-Stable tag: 1.9.3
+Stable tag: 1.9.5

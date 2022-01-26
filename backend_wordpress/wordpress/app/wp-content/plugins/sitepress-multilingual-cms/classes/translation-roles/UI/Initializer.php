@@ -10,6 +10,7 @@ use WPML\FP\Obj;
 use WPML\FP\Relation;
 use WPML\FP\Wrapper;
 use WPML\LIB\WP\User;
+use WPML\Setup\Option;
 use WPML\TranslationRoles\FindAvailableByRole;
 use WPML\TranslationRoles\GetManagerRecords;
 use WPML\TranslationRoles\GetTranslatorRecords;
@@ -63,7 +64,7 @@ class Initializer {
 
 	public static function getTranslationData( callable $userExtra = null ) {
 		$currentUser = User::getCurrent();
-		$service     = \TranslationProxy::get_current_service();
+		$service     = Option::isTMAllowed() ? \TranslationProxy::get_current_service() : null;
 
 		return [
 			'canManageOptions' => $currentUser->has_cap( 'manage_options' ),

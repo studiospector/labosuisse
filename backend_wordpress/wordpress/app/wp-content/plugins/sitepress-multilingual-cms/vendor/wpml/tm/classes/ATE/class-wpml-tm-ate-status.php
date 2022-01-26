@@ -1,5 +1,7 @@
 <?php
 
+use WPML\Setup\Option;
+
 /**
  * @author OnTheGo Systems
  */
@@ -15,9 +17,11 @@ class WPML_TM_ATE_Status {
 	}
 
 	public static function is_active() {
-		$ams_data = get_option( WPML_TM_ATE_Authentication::AMS_DATA_KEY, array() );
-		if ( $ams_data && array_key_exists( 'status', $ams_data ) ) {
-			return $ams_data['status'] === WPML_TM_ATE_Authentication::AMS_STATUS_ACTIVE;
+		if ( Option::isTMAllowed() ) {
+			$ams_data = get_option( WPML_TM_ATE_Authentication::AMS_DATA_KEY, array() );
+			if ( $ams_data && array_key_exists( 'status', $ams_data ) ) {
+				return $ams_data['status'] === WPML_TM_ATE_Authentication::AMS_STATUS_ACTIVE;
+			}
 		}
 
 		return false;

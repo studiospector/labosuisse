@@ -4,10 +4,11 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf1803c06aaa83a74c0880ad070f9fb7f
+class ComposerStaticInite9d260715bd8e737bedcab287c0bf410
 {
     public static $classMap = array (
         'ACFML\\Convertable\\LinkFieldData' => __DIR__ . '/../..' . '/classes/Convertable/LinkFieldData.php',
+        'ACFML\\FieldPreferences\\TranslationJobs' => __DIR__ . '/../..' . '/classes/FieldPreferences/TranslationJobs.php',
         'ACFML\\FieldReferenceAdjuster' => __DIR__ . '/../..' . '/classes/class-wpml-acf-field-reference-adjuster.php',
         'ACFML\\FieldState' => __DIR__ . '/../..' . '/classes/class-wpml-acf-field-state.php',
         'ACFML\\MigrateBlockPreferences' => __DIR__ . '/../..' . '/classes/class-wpml-acf-migrate-block-preferences.php',
@@ -58,7 +59,7 @@ class ComposerStaticInitf1803c06aaa83a74c0880ad070f9fb7f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitf1803c06aaa83a74c0880ad070f9fb7f::$classMap;
+            $loader->classMap = ComposerStaticInite9d260715bd8e737bedcab287c0bf410::$classMap;
 
         }, null, ClassLoader::class);
     }

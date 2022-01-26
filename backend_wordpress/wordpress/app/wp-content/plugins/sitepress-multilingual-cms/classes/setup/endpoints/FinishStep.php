@@ -34,9 +34,6 @@ class FinishStep implements IHandler {
 			make( \WPML_Translation_Manager_Records::class )->delete_all();
 		}
 
-		if ( ! Lst::includes( 'service', $translationMode ) ) {
-			make( Deactivate::class )->run( wpml_collect( [] ) );
-		}
 
 		if ( Lst::includes( 'myself', $translationMode ) ) {
 			self::setCurrentUserToTranslateAllLangs();
@@ -44,7 +41,12 @@ class FinishStep implements IHandler {
 
 		Option::setTranslateEverythingDefault();
 
-		make( EnableATE::class )->run( wpml_collect( [] ) );
+		if ( Option::isTMAllowed( ) ) {
+			if ( ! Lst::includes( 'service', $translationMode ) ) {
+				make( Deactivate::class )->run( wpml_collect( [] ) );
+			}
+			make( EnableATE::class )->run( wpml_collect( [] ) );
+		}
 
 		return Right::of( true );
 	}

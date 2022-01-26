@@ -2,9 +2,6 @@
 
 use WPML\TM\Menu\TranslationServices\Troubleshooting\RefreshServicesFactory;
 use WPML\API\Version;
-use WPML\TM\Upgrade\Commands\AddReviewStatusColumnToTranslationStatus;
-use WPML\TM\Upgrade\Commands\AddAteCommunicationRetryColumnToTranslationStatus;
-use WPML\TM\Upgrade\Commands\AddAteSyncCountToTranslationJob;
 
 class WPML_TM_Upgrade_Loader implements IWPML_Action {
 
@@ -62,9 +59,6 @@ class WPML_TM_Upgrade_Loader implements IWPML_Action {
 				array( 'admin' )
 			),
 
-			$this->factory->create_command_definition( 'WPML_TM_Add_TP_ID_Column_To_Translation_Status', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Translation_Status', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
-			$this->factory->create_command_definition( 'WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Core_Status', array( $this->upgrade_schema ), array( 'admin', 'ajax', 'front-end' ) ),
 			$this->factory->create_command_definition( 'WPML_TM_Upgrade_WPML_Site_ID_ATE', array( $this->upgrade_schema ), array( 'admin' ) ),
 			$this->factory->create_command_definition(
 				'WPML_TM_Upgrade_Cancel_Orphan_Jobs',
@@ -95,32 +89,9 @@ class WPML_TM_Upgrade_Loader implements IWPML_Action {
 				[ 'admin' ]
 			),
 			$this->factory->create_command_definition(
-				AddReviewStatusColumnToTranslationStatus::class,
-				[ $this->upgrade_schema ],
-				[
-					'admin',
-					'ajax',
-					'front-end',
-				]
-			),
-			$this->factory->create_command_definition(
 				WPML\TM\Upgrade\Commands\ATEProxyUpdateRewriteRules::class,
 				[],
 				[ \WPML_Upgrade::SCOPE_ADMIN ]
-			),
-			$this->factory->create_command_definition( AddAteCommunicationRetryColumnToTranslationStatus::class,
-				[ $this->upgrade_schema ],
-				[
-					'admin',
-					'ajax'
-				]
-			),
-			$this->factory->create_command_definition( AddAteSyncCountToTranslationJob::class,
-				[ $this->upgrade_schema ],
-				[
-					'admin',
-					'ajax'
-				]
 			),
 		);
 

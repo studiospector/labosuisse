@@ -125,9 +125,14 @@ class SitePress_EditLanguages {
 		$transientStorage->delete( CachedATEAPI::CACHE_OPTION );
 	}
 
-	public static function getLanguagesAvailableInATE() {
-		if ( ! self::$languages_available_in_ate ) {
-			self::$languages_available_in_ate = LanguageMappings::getAvailable();
+	/**
+	 * @param bool $clearCache
+	 *
+	 * @return array
+	 */
+	public static function getLanguagesAvailableInATE( $clearCache = false ) {
+		if ( ! self::$languages_available_in_ate || $clearCache ) {
+			self::$languages_available_in_ate = Option::isTMAllowed() ? LanguageMappings::getAvailable() : [];
 		}
 
 		return self::$languages_available_in_ate;

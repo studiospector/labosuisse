@@ -15,6 +15,9 @@ use WPML\Upgrade\Commands\DropCodeLocaleIndexFromLocaleMap;
 use WPML\Upgrade\Commands\AddPrimaryKeyToLocaleMap;
 use WPML\Upgrade\Commands\AddCountryColumnToLanguages;
 use WPML\Upgrade\Commands\AddAutomaticColumnToIclTranslateJob;
+use WPML\TM\Upgrade\Commands\AddReviewStatusColumnToTranslationStatus;
+use WPML\TM\Upgrade\Commands\AddAteCommunicationRetryColumnToTranslationStatus;
+use WPML\TM\Upgrade\Commands\AddAteSyncCountToTranslationJob;
 
 /**
  * Class WPML_Upgrade_Loader
@@ -127,6 +130,12 @@ class WPML_Upgrade_Loader implements IWPML_Action {
 			$this->factory->create_command_definition( AddAutomaticColumnToIclTranslateJob::class, [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
 			$this->factory->create_command_definition( AddTMAllowedOption::class, [], [ 'admin', 'ajax', 'front-end' ] ),
 			$this->factory->create_command_definition( AddTranslationManagerCapToAdmin::class, [], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( AddReviewStatusColumnToTranslationStatus::class, [ $this->upgrade_schema ], [ 'admin', 'ajax', 'front-end' ] ),
+			$this->factory->create_command_definition( AddAteCommunicationRetryColumnToTranslationStatus::class, [ $this->upgrade_schema ], [ 'admin', 'ajax' ] ),
+			$this->factory->create_command_definition( AddAteSyncCountToTranslationJob::class, [ $this->upgrade_schema ], [ 'admin', 'ajax' ] ),
+			$this->factory->create_command_definition( 'WPML_TM_Add_TP_ID_Column_To_Translation_Status', [ $this->upgrade_schema ], array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( 'WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Translation_Status', [ $this->upgrade_schema ], array( 'admin', 'ajax', 'front-end' ) ),
+			$this->factory->create_command_definition( 'WPML_TM_Add_TP_Revision_And_TS_Status_Columns_To_Core_Status', [ $this->upgrade_schema ], array( 'admin', 'ajax', 'front-end' ) ),
 		];
 
 		$upgrade = new WPML_Upgrade( $commands, $this->sitepress, $this->factory );

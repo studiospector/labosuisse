@@ -12,9 +12,11 @@ class Functions {
 	 * @return bool
 	 */
 	public static function isAnalyticsPage() {
+		// phpcs:disable WordPress.Security.NonceVerification.Recommended
 		return is_admin()
 			&& 'wc-admin' === Obj::prop( 'page', $_GET )
 			&& 0 === strpos( sanitize_text_field( wp_unslash( Obj::prop( 'path', $_GET ) ) ), '/analytics/' );
+		// phpcs:enable WordPress.Security.NonceVerification.Recommended
 	}
 
 	/**
@@ -48,7 +50,7 @@ class Functions {
 		}
 
 		$restPrefix = trailingslashit( rest_get_url_prefix() );
-		if ( preg_match( "@" . $restPrefix . "wc/v([0-9]+)/@i", $_SERVER['REQUEST_URI'], $matches ) ) {
+		if ( preg_match( '@' . $restPrefix . 'wc/v([0-9]+)/@i', $_SERVER['REQUEST_URI'], $matches ) ) {
 			$version = intval( $matches[1] );
 		}
 

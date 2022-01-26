@@ -48,6 +48,7 @@ class WPML_ACF {
 				$this->init_custom_fields_synchronisation_handler();
 				$this->init_acf_repeater_shuffle();
 			}
+			$this->init_field_translation_jobs();
 			$this->initOptionsPageMigrationString();
 			$this->initBlockPreferencesMigration();
 			$this->init_options_page();
@@ -129,6 +130,10 @@ class WPML_ACF {
 	private function init_custom_fields_synchronisation_handler() {
 		$WPML_ACF_Custom_Fields_Sync = $this->dependencies_factory->create_custom_fields_sync( $this->shuffle_strategy );
 		$WPML_ACF_Custom_Fields_Sync->register_hooks();
+	}
+	
+	private function init_field_translation_jobs() {
+		$this->dependencies_factory->create_field_translation_jobs()->add_hooks();
 	}
 
 	private function init_acf_location_rules() {

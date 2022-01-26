@@ -26,6 +26,16 @@ use WPML\Collect\Support\Arr;
  * @method static callable|array flattenToDepth( ...$depth, ...$array ) - Curried :: int → [[a]] → [a]
  * @method static callable|array flatten( ...$array ) - Curried :: [[a]] → [a]
  * @method static callable|bool includes( ...$val, ...$array ) - Curried :: a → [a] → bool
+ * @method static callable|bool includesAll( ...$values, ...$array ) - Curried :: [a] → [a] → bool
+ *
+ * Determines if all the values are in the given array
+ *
+ * ```
+ * $includes10and20 = Lst::includesAll( [ 10, 20 ] );
+ *
+ * $this->assertTrue( $includes10and20( [ 5, 10, 15, 20 ] ) );
+ * $this->assertFalse( $includes10and20( [ 5, 15, 20 ] ) );
+ * ```
  * @method static callable|bool nth( ...$n, ...$array ) - Curried :: int → [a] → a | null
  * @method static callable|bool last( ...$array ) - Curried :: [a] → a | null
  * @method static callable|int length( ...$array ) - Curried :: [a] → int
@@ -182,6 +192,15 @@ class Lst {
 
 		self::macro( 'includes', curryN( 2, function ( $val, $array ) {
 			return in_array( $val, $array, true );
+		} ) );
+
+		self::macro( 'includesAll', curryN( 2, function ( $values, $array ) {
+			foreach ( $values as $val ) {
+				if ( ! in_array( $val, $array, true ) ) {
+					return false;
+				}
+			}
+			return true;
 		} ) );
 
 		self::macro( 'nth', curryN( 2, function ( $n, $array ) {

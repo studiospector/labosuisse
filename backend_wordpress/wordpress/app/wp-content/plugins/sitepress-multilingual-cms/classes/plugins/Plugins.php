@@ -9,15 +9,15 @@ use WPML\FP\Relation;
 use WPML\Setup\Option;
 
 class Plugins {
-	const WPML_TM_PLUGIN = 'wpml-translation-management/plugin.php';
-	const WPML_CORE_PLUGIN = 'sitepress-multilingual-cms/sitepress.php';
+	const WPML_TM_PLUGIN              = 'wpml-translation-management/plugin.php';
+	const WPML_CORE_PLUGIN            = 'sitepress-multilingual-cms/sitepress.php';
 	const WPML_SUBSCRIPTION_TYPE_BLOG = 6718;
-	const AFTER_INSTALLER = 999;
+	const AFTER_INSTALLER             = 999;
 
 	public static function loadCoreFirst() {
 		$plugins = get_option( 'active_plugins' );
 
-		$isSitePress = function( $value ) {
+		$isSitePress = function ( $value ) {
 			return $value === WPML_PLUGIN_BASENAME;
 		};
 
@@ -64,13 +64,13 @@ class Plugins {
 			add_action( "otgs_installer_clean_plugins_update_cache", [ self::class, 'updateTMAllowedOption' ] );
 
 			$isTMAllowed = Option::isTMAllowed();
-			if( $isTMAllowed === null ) {
+			if ( $isTMAllowed === null ) {
 				add_action( 'after_setup_theme', [ self::class, 'updateTMAllowedOption' ], self::AFTER_INSTALLER );
 			}
 			if ( ! $isSetupComplete || $isTMAllowed ) {
 				if ( defined( 'WPML_TM_PATH' ) ||
-					( Relation::propEq( 'action', 'activate-selected', $_POST )
-					&& Lst::includes( self::WPML_CORE_PLUGIN, Obj::propOr( [], 'checked', $_POST ) ))
+				     ( Relation::propEq( 'action', 'activate-selected', $_POST )
+				       && Lst::includes( self::WPML_CORE_PLUGIN, Obj::propOr( [], 'checked', $_POST ) ) )
 				) {
 					// This can happen when a blog has 4.5 active and TM is activate as network plugin, which
 					// is possible when 4.5 is only active on a blog but not as network plugin.
@@ -79,6 +79,7 @@ class Plugins {
 						$networkPlugins = get_site_option( 'active_sitewide_plugins', array() );
 						self::deactivateTm( $networkPlugins );
 					}
+
 					return;
 				}
 				require_once WPML_PLUGIN_PATH . '/vendor/wpml/tm/plugin.php';
@@ -101,7 +102,7 @@ class Plugins {
 
 		deactivate_plugins( self::WPML_TM_PLUGIN );
 
-		if ( ! ( defined( 'WP_CLI' ) && WP_CLI ) && wp_redirect( $_SERVER['REQUEST_URI'], 302, 'WPML' ) ) {
+		if ( ! wpml_is_cli() && ! wpml_is_ajax() && wp_redirect( $_SERVER['REQUEST_URI'], 302, 'WPML' ) ) {
 			exit;
 		}
 
@@ -111,6 +112,14 @@ class Plugins {
 	private static function stopPluginActivation( $pluginSlug ) {
 		if ( Relation::propEq( 'action', 'activate', $_GET ) && Relation::propEq( 'plugin', $pluginSlug, $_GET ) ) {
 			unset( $_GET['plugin'], $_GET['action'] );
+		}
+
+		if ( wpml_is_cli() ) {
+			if ( Lst::includesAll( [ 'plugin', 'activate', 'wpml-translation-management' ], $_SERVER['argv'] ) ) {
+				\WP_CLI::warning(
+					__( 'WPML Translation Management is now included in WPML Multilingual CMS.', 'sitepress' )
+				);
+			}
 		}
 
 		if (
@@ -131,10 +140,10 @@ class Plugins {
 					<p>
 						<?php
 						echo _e(
-							'Since WPML 4.5.0, the Translation Management plugin is part of WPML core. Please uninstall this plugin and delete it from your plugins folder.',
+							'This plugin has been deactivated as it is now part of the WPML Multilingual CMS plugin. You can safely delete it.',
 							'sitepress'
 						);
-						$readMoreLink = 'https://wpml.org/changelog/2021/09/wpml-4-5-translate-all-of-your-sites-content-with-one-click/';
+						$readMoreLink = 'https://wpml.org/changelog/2021/10/wpml-4-5-translate-all-of-your-sites-content-with-one-click/?utm_source=plugin&utm_medium=gui&utm_campaign=wpmlcore#fewer-plugins-to-manage';
 						?>
 						<a href="<?php echo $readMoreLink; ?>" target="_blank" class="wpml-external-link">
 							<?php _e( 'Read more', 'sitepress' ); ?>
