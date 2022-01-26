@@ -17,7 +17,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.5.5
+ * @version 6.1.0
  */
 
 defined('ABSPATH') || exit;
@@ -38,24 +38,6 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
         <p class="stock out-of-stock"><?php echo esc_html(apply_filters('woocommerce_out_of_stock_message', __('This product is currently out of stock and unavailable.', 'woocommerce'))); ?></p>
     <?php else : ?>
         <div class="variations lb-product-variations custom-select-group">
-
-            <!-- <div class="custom-field custom-select custom-select--tertiary">
-                <div class="custom-select-label">Test label</div><select name="test-select" id="test-select" class="js-custom-select" data-variant="tertiary" data-label="Test label">
-                    <option value="">Test placeholder</option>
-                    <option value="aaa">AAA</option>
-                    <option value="bbb">BBB</option>
-                    <option value="ccc">CCC</option>
-                </select>
-                <div class="custom-select-container"><span class="custom-select-value">Test placeholder</span>
-                    <div class="custom-select-arrow"><span class="custom-select-arrow__line custom-select-arrow__line--left"></span><span class="custom-select-arrow__line custom-select-arrow__line--right"></span></div>
-                </div>
-                <div class="custom-select-items custom-select-items--hide">
-                    <div class="custom-select-items__item"><span class="custom-select-items__item__value">AAA</span></div>
-                    <div class="custom-select-items__item"><span class="custom-select-items__item__value">BBB</span></div>
-                    <div class="custom-select-items__item"><span class="custom-select-items__item__value">CCC</span></div>
-                </div>
-            </div> -->
-
             <?php foreach ($attributes as $attribute_name => $options) : ?>
                 <div class="lb-product-variations__item">
                     <?php
@@ -77,7 +59,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 			<tbody>
 				<?php foreach ( $attributes as $attribute_name => $options ) : ?>
 					<tr>
-						<td class="label"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></label></td>
+						<th class="label"><label for="<?php echo esc_attr( sanitize_title( $attribute_name ) ); ?>"><?php echo wc_attribute_label( $attribute_name ); // WPCS: XSS ok. ?></label></th>
 						<td class="value">
 							<?php
 								wc_dropdown_variation_attribute_options(
@@ -95,6 +77,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 			</tbody>
 		</table>
         */ ?>
+        <?php do_action( 'woocommerce_after_variations_table' ); ?>
 
         <div class="single_variation_wrap">
             <?php
