@@ -7,7 +7,7 @@ function lb_init_block_infobox() {
 
         acf_register_block_type(array(
             'name'              => 'lb-infobox',
-            'title'             => __('infobox'),
+            'title'             => __('Infobox'),
             'description'       => __('A custom infobox block.'),
             'render_template'   => 'gutenberg-blocks/infobox.php',
             'category'          => 'caffeina-theme',

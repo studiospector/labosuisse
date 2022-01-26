@@ -3,23 +3,6 @@
     "title": "Campi personalizzati: Blocco - Infobox",
     "fields": [
         {
-            "key": "field_618adafd58aa2",
-            "label": "Infobox",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 0,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
             "key": "field_618adb0458aa3",
             "label": "Tagline",
             "name": "lb_block_infobox_tagline",
@@ -41,7 +24,7 @@
         },
         {
             "key": "field_618adb0958aa4",
-            "label": "Title",
+            "label": "Titolo",
             "name": "lb_block_infobox_title",
             "type": "textarea",
             "instructions": "",
@@ -61,7 +44,7 @@
         },
         {
             "key": "field_618adb1758aa5",
-            "label": "Subtitle",
+            "label": "Sottotitolo",
             "name": "lb_block_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
@@ -81,7 +64,7 @@
         },
         {
             "key": "field_618adb1b58aa6",
-            "label": "Paragraph",
+            "label": "Testo",
             "name": "lb_block_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
@@ -97,11 +80,11 @@
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": ""
+            "new_lines": "br"
         },
         {
             "key": "field_618adb1f58aa7",
-            "label": "Button",
+            "label": "Bottone",
             "name": "lb_block_infobox_btn",
             "type": "link",
             "instructions": "",
@@ -117,7 +100,7 @@
         },
         {
             "key": "field_618adb3c58aa8",
-            "label": "Button variants",
+            "label": "Variante Bottone",
             "name": "lb_block_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
@@ -160,5 +143,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1641900240
+    "modified": 1643207192
 }
