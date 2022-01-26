@@ -122,3 +122,6 @@ define( 'AS3CF_SETTINGS', serialize( array(
 
 // Memory limit
 define('WP_MEMORY_LIMIT', '456M');
+
+// Disable auto updates
+define('WP_AUTO_UPDATE_CORE', false);
