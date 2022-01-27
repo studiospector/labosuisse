@@ -203,6 +203,121 @@
                     "max_height": "",
                     "max_size": "",
                     "mime_types": ""
+                },
+                {
+                    "key": "field_61f27afd4b20b",
+                    "label": "Impostazioni",
+                    "name": "",
+                    "type": "tab",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "placement": "top",
+                    "endpoint": 0,
+                    "wpml_cf_preferences": 1
+                },
+                {
+                    "key": "field_61f27b164b20c",
+                    "label": "Allineamento Orizzontale Infobox",
+                    "name": "lb_block_carousel_hero_infoboxposx",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "right": "Right",
+                        "left": "Left",
+                        "center": "Center"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
+                    "layout": "vertical",
+                    "return_format": "value",
+                    "wpml_cf_preferences": 1,
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_61f27b7a4b20d",
+                    "label": "Allineamento Verticale Infobox",
+                    "name": "lb_block_carousel_hero_infoboxposy",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "top": "Top",
+                        "bottom": "Bottom",
+                        "center": "Center"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
+                    "layout": "vertical",
+                    "return_format": "value",
+                    "wpml_cf_preferences": 1,
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_61f27be64b20e",
+                    "label": "Container",
+                    "name": "lb_block_carousel_hero_container",
+                    "type": "true_false",
+                    "instructions": "Se si vuole la Hero all'interno di un container.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 0,
+                    "wpml_cf_preferences": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_61f27c474b20f",
+                    "label": "Varianti",
+                    "name": "lb_block_carousel_hero_variants",
+                    "type": "radio",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "small": "Small",
+                        "medium": "Medium",
+                        "large": "Large"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
+                    "layout": "vertical",
+                    "return_format": "value",
+                    "wpml_cf_preferences": 1,
+                    "save_other_choice": 0
                 }
             ]
         }
@@ -224,5 +339,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642074892
+    "show_in_rest": 0,
+    "modified": 1643281517
 }
