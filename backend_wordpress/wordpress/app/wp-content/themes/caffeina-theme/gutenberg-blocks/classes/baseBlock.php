@@ -61,10 +61,15 @@ class BaseBlock {
                 'title' => get_field($this->acfName.'_infobox_title'),
                 'subtitle' => get_field($this->acfName.'_infobox_subtitle'),
                 'paragraph' => get_field($this->acfName.'_infobox_paragraph'),
-                'cta' => array_merge( is_array(get_field($this->acfName.'_infobox_btn')) ? get_field($this->acfName.'_infobox_btn') : [] ,['variants' => [get_field($this->acfName.'_infobox_btn_variants')]])
+              //  'cta' => array_merge( get_field($this->acfName.'_infobox_btn') == "" ? [] : [get_field($this->acfName.'_infobox_btn')] ,['variants' => [get_field($this->acfName.'_infobox_btn_variants')]])
             ]
     ];
-
+    if (get_field($this->acfName.'_infobox_btn') != "") {
+        $infobox['infobox']['cta'] = array_merge (  (array)get_field($this->acfName.'_infobox_btn') ,['variants' => [get_field($this->acfName.'_infobox_btn_variants')]]);
+        
+    }
+   
+   
     if (!is_null($context) ){
 
        $context = array_merge($context,$infobox);

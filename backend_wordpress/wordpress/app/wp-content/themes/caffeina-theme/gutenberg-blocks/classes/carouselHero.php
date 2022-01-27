@@ -24,14 +24,8 @@ class carouselHero extends BaseBlock {
                         'title' => get_sub_field('lb_block_carousel_hero_infobox_title'),
                         'subtitle' => get_sub_field('lb_block_carousel_hero_infobox_subtitle'),
                         'paragraph' => get_sub_field('lb_block_carousel_hero_infobox_paragraph'),
-                        'cta' => array_merge(
-                            (array)get_sub_field('lb_block_carousel_hero_infobox_btn'),
-                            [
-                                'variants' => [
-                                    get_sub_field('lb_block_carousel_hero_infobox_btn_variants')
-                                ]
-                            ]
-                        )
+                        //'cta' => array_merge((array)get_sub_field('lb_block_carousel_hero_infobox_btn'),['variants' => [get_sub_field('lb_block_carousel_hero_infobox_btn_variants')]])
+                        'cta' => array_merge( get_field('lb_block_carousel_hero_infobox_btn') == "" ? [] : [get_field('lb_block_carousel_hero_infobox_btn')] ,['variants' => [get_field('lb_block_carousel_hero_infobox_btn_variants')]])
                     ]
                 ];
             endwhile;

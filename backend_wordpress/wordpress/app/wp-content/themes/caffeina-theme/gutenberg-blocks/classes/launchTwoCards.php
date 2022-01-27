@@ -18,7 +18,7 @@ class LaunchTwoCards extends BaseBlock {
                         'title' => get_field('lb_block_launch_two_cards_title_left'),
                         'subtitle' => get_field('lb_block_launch_two_cards_subtitle_left'),
                         'paragraph' => get_field('lb_block_launch_two_cards_paragraph_left'),
-                        'cta' => array_merge( get_field('lb_block_launch_two_cards_btn_left') == "" ? [] : [get_field('lb_block_launch_two_cards_btn_left')] ,['variants' => [get_field('lb_block_launch_two_cards_btn_variants_left')]])
+                        // 'cta' => array_merge( get_field('lb_block_launch_two_cards_btn_left') == "" ? [] : [get_field('lb_block_launch_two_cards_btn_left')] ,['variants' => [get_field('lb_block_launch_two_cards_btn_variants_left')]])
                     ]
                    
                 ],
@@ -34,13 +34,19 @@ class LaunchTwoCards extends BaseBlock {
                         'title' => get_field('lb_block_launch_two_cards_title_right'),
                         'subtitle' => get_field('lb_block_launch_two_cards_subtitle_right'),
                         'paragraph' => get_field('lb_block_launch_two_cards_paragraph_right'),
-                        'cta' => array_merge( get_field('lb_block_launch_two_cards_btn_right') == "" ? [] : [get_field('lb_block_launch_two_cards_btn_right')],['variants' => [get_field('lb_block_launch_two_cards_btn_variants_right')]])
+                        // 'cta' => array_merge( get_field('lb_block_launch_two_cards_btn_right') == "" ? [] : [get_field('lb_block_launch_two_cards_btn_right')],['variants' => [get_field('lb_block_launch_two_cards_btn_variants_right')]])
                     ]
                     
                 ]
 
             ]
         ];
+        if (get_field('lb_block_launch_two_cards_btn_left') != "") {
+             $payload['cards'][0]['infobox']['cta'] = array_merge (  (array)get_field('lb_block_launch_two_cards_btn_left') ,['variants' => [get_field('lb_block_launch_two_cards_btn_left_variants')]]);  
+        }
+        if (get_field('lb_block_launch_two_cards_btn_right') != "") {
+            $payload['cards'][1]['infobox']['cta'] = array_merge (  (array)get_field('lb_block_launch_two_cards_btn_right') ,['variants' => [get_field('lb_block_launch_two_cards_btn_right_variants')]]);  
+       }
         $this->setContext($payload);
         $this->addInfobox();      
     }
