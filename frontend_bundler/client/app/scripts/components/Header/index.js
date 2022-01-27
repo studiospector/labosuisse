@@ -16,8 +16,6 @@ export default class Header extends Component {
         const customScrollbar = window.getCustomScrollbar
         customScrollbar.on('scroll', this.checkScroll)
 
-        console.log(this.el);
-
         this.adjustMainContent()
         on(window, 'resize', this.adjustMainContent)
 
