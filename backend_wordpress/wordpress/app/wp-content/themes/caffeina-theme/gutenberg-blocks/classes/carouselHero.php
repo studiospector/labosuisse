@@ -20,15 +20,15 @@ class carouselHero extends BaseBlock {
                     'container' => get_sub_field('lb_block_hero_container'),
                     'variants' => get_sub_field('lb_block_hero_variants'),
                     'infobox' => [
-                        'tagline' => get_sub_field('lb_block_infobox_tagline'),
-                        'title' => get_sub_field('lb_block_infobox_title'),
-                        'subtitle' => get_sub_field('lb_block_infobox_subtitle'),
-                        'paragraph' => get_sub_field('lb_block_infobox_paragraph'),
+                        'tagline' => get_sub_field('lb_block_carousel_hero_infobox_tagline'),
+                        'title' => get_sub_field('lb_block_carousel_hero_infobox_title'),
+                        'subtitle' => get_sub_field('lb_block_carousel_hero_infobox_subtitle'),
+                        'paragraph' => get_sub_field('lb_block_carousel_hero_infobox_paragraph'),
                         'cta' => array_merge(
-                            (array)get_sub_field('lb_block_infobox_btn'),
+                            (array)get_sub_field('lb_block_carousel_hero_infobox_btn'),
                             [
                                 'variants' => [
-                                    get_sub_field('lb_block_infobox_btn_variants')
+                                    get_sub_field('lb_block_carousel_hero_infobox_btn_variants')
                                 ]
                             ]
                         )
