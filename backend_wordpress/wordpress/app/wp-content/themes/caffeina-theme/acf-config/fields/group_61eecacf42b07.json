@@ -80,230 +80,6 @@
             "wpml_cf_preferences": 1
         },
         {
-            "key": "field_61eecabb9594d",
-            "label": "Contenuto (copia5)",
-            "name": "lb_block_offsetnav_reviews_content_copia5",
-            "type": "flexible_content",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 3,
-            "layouts": {
-                "layout_61e9b3b44ee80": {
-                    "key": "layout_61e9b3b44ee80",
-                    "name": "text",
-                    "label": "Blocco Testo",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_61eecabb9594e",
-                            "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_title",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "default_value": "",
-                            "placeholder": "",
-                            "maxlength": "",
-                            "rows": 5,
-                            "new_lines": "br"
-                        },
-                        {
-                            "key": "field_61eecabb9594f",
-                            "label": "Sottotitolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_subtitle",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "default_value": "",
-                            "placeholder": "",
-                            "maxlength": "",
-                            "rows": 5,
-                            "new_lines": "br"
-                        },
-                        {
-                            "key": "field_61eecabb95950",
-                            "label": "Testo",
-                            "name": "lb_block_offsetnav_reviews_content_text_paragraph",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "default_value": "",
-                            "placeholder": "",
-                            "maxlength": "",
-                            "rows": 5,
-                            "new_lines": "br"
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                },
-                "layout_61e9b589eef35": {
-                    "key": "layout_61e9b589eef35",
-                    "name": "table",
-                    "label": "Blocco Tabella",
-                    "display": "block",
-                    "sub_fields": [
-                        {
-                            "key": "field_61eecabb95951",
-                            "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_table_title",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "default_value": "",
-                            "placeholder": "",
-                            "maxlength": "",
-                            "rows": "",
-                            "new_lines": ""
-                        },
-                        {
-                            "key": "field_61eecabb95952",
-                            "label": "Sottotitolo",
-                            "name": "lb_block_offsetnav_reviews_content_table_subtitle",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "default_value": "",
-                            "placeholder": "",
-                            "maxlength": "",
-                            "rows": 5,
-                            "new_lines": "br"
-                        },
-                        {
-                            "key": "field_61eecabb95953",
-                            "label": "Testo",
-                            "name": "lb_block_offsetnav_reviews_content_table_paragraph",
-                            "type": "textarea",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "default_value": "",
-                            "placeholder": "",
-                            "maxlength": "",
-                            "rows": 5,
-                            "new_lines": "br"
-                        },
-                        {
-                            "key": "field_61eecabb95954",
-                            "label": "Tabella",
-                            "name": "lb_block_offsetnav_reviews_content_table_item",
-                            "type": "repeater",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "wpml_cf_preferences": "",
-                            "collapsed": "",
-                            "min": 0,
-                            "max": 0,
-                            "layout": "",
-                            "button_label": "",
-                            "sub_fields": [
-                                {
-                                    "key": "field_61eecabb95955",
-                                    "label": "Titolo",
-                                    "name": "lb_block_offsetnav_reviews_content_table_item_title",
-                                    "type": "text",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "wpml_cf_preferences": "",
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "",
-                                    "maxlength": ""
-                                },
-                                {
-                                    "key": "field_61eecabb95956",
-                                    "label": "Valore",
-                                    "name": "lb_block_offsetnav_reviews_content_table_item_value",
-                                    "type": "number",
-                                    "instructions": "",
-                                    "required": 0,
-                                    "conditional_logic": 0,
-                                    "wrapper": {
-                                        "width": "",
-                                        "class": "",
-                                        "id": ""
-                                    },
-                                    "wpml_cf_preferences": "",
-                                    "default_value": "",
-                                    "placeholder": "",
-                                    "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
-                                }
-                            ]
-                        }
-                    ],
-                    "min": "",
-                    "max": ""
-                }
-            },
-            "button_label": "Aggiungi Blocco",
-            "min": "",
-            "max": ""
-        },
-        {
             "key": "field_61e98b01840fe",
             "label": "Descrizione e inci",
             "name": "",
@@ -341,9 +117,9 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_61eecab195943",
-            "label": "Contenuto (copia4)",
-            "name": "lb_block_offsetnav_reviews_content_copia4",
+            "key": "field_61f00a7f9d08d",
+            "label": "Contenuto",
+            "name": "lb_block_offsetnav_description_content",
             "type": "flexible_content",
             "instructions": "",
             "required": 0,
@@ -362,9 +138,9 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_61eecab195944",
+                            "key": "field_61f00a7f9d08e",
                             "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_title",
+                            "name": "lb_block_offsetnav_description_content_text_title",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -374,7 +150,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -382,9 +158,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecab195945",
+                            "key": "field_61f00a7f9d08f",
                             "label": "Sottotitolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_subtitle",
+                            "name": "lb_block_offsetnav_description_content_text_subtitle",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -394,7 +170,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -402,9 +178,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecab195946",
+                            "key": "field_61f00a7f9d090",
                             "label": "Testo",
-                            "name": "lb_block_offsetnav_reviews_content_text_paragraph",
+                            "name": "lb_block_offsetnav_description_content_text_paragraph",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -414,7 +190,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -432,9 +208,9 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_61eecab195947",
+                            "key": "field_61f00a7f9d091",
                             "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_table_title",
+                            "name": "lb_block_offsetnav_description_content_table_title",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -444,7 +220,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -452,9 +228,9 @@
                             "new_lines": ""
                         },
                         {
-                            "key": "field_61eecab195948",
+                            "key": "field_61f00a809d092",
                             "label": "Sottotitolo",
-                            "name": "lb_block_offsetnav_reviews_content_table_subtitle",
+                            "name": "lb_block_offsetnav_description_content_table_subtitle",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -464,7 +240,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -472,9 +248,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecab195949",
+                            "key": "field_61f00a809d093",
                             "label": "Testo",
-                            "name": "lb_block_offsetnav_reviews_content_table_paragraph",
+                            "name": "lb_block_offsetnav_description_content_table_paragraph",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -484,7 +260,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -492,9 +268,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecab19594a",
+                            "key": "field_61f00a809d094",
                             "label": "Tabella",
-                            "name": "lb_block_offsetnav_reviews_content_table_item",
+                            "name": "lb_block_offsetnav_description_content_table_item",
                             "type": "repeater",
                             "instructions": "",
                             "required": 0,
@@ -504,17 +280,17 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 3,
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
-                            "layout": "",
+                            "layout": "row",
                             "button_label": "",
                             "sub_fields": [
                                 {
-                                    "key": "field_61eecab19594b",
+                                    "key": "field_61f00a809d095",
                                     "label": "Titolo",
-                                    "name": "lb_block_offsetnav_reviews_content_table_item_title",
+                                    "name": "lb_block_offsetnav_description_content_table_item_title",
                                     "type": "text",
                                     "instructions": "",
                                     "required": 0,
@@ -524,7 +300,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": "",
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
@@ -532,9 +308,9 @@
                                     "maxlength": ""
                                 },
                                 {
-                                    "key": "field_61eecab19594c",
+                                    "key": "field_61f00a809d096",
                                     "label": "Valore",
-                                    "name": "lb_block_offsetnav_reviews_content_table_item_value",
+                                    "name": "lb_block_offsetnav_description_content_table_item_value",
                                     "type": "number",
                                     "instructions": "",
                                     "required": 0,
@@ -544,7 +320,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": "",
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
@@ -602,9 +378,9 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_61eecaa995939",
-            "label": "Contenuto (copia3)",
-            "name": "lb_block_offsetnav_reviews_content_copia3",
+            "key": "field_61f0095610542",
+            "label": "Contenuto",
+            "name": "lb_block_offsetnav_technology_content",
             "type": "flexible_content",
             "instructions": "",
             "required": 0,
@@ -623,9 +399,9 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_61eecaa99593a",
+                            "key": "field_61f0095610543",
                             "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_title",
+                            "name": "lb_block_offsetnav_technology_content_text_title",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -635,7 +411,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -643,9 +419,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecaa99593b",
+                            "key": "field_61f0095610544",
                             "label": "Sottotitolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_subtitle",
+                            "name": "lb_block_offsetnav_technology_content_text_subtitle",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -655,7 +431,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -663,9 +439,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecaa99593c",
+                            "key": "field_61f0095610545",
                             "label": "Testo",
-                            "name": "lb_block_offsetnav_reviews_content_text_paragraph",
+                            "name": "lb_block_offsetnav_technology_content_text_paragraph",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -675,7 +451,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -693,9 +469,9 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_61eecaa99593d",
+                            "key": "field_61f0095610546",
                             "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_table_title",
+                            "name": "lb_block_offsetnav_technology_content_table_title",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -705,7 +481,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -713,9 +489,9 @@
                             "new_lines": ""
                         },
                         {
-                            "key": "field_61eecaa99593e",
+                            "key": "field_61f0095610547",
                             "label": "Sottotitolo",
-                            "name": "lb_block_offsetnav_reviews_content_table_subtitle",
+                            "name": "lb_block_offsetnav_technology_content_table_subtitle",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -725,7 +501,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -733,9 +509,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecaa99593f",
+                            "key": "field_61f0095610548",
                             "label": "Testo",
-                            "name": "lb_block_offsetnav_reviews_content_table_paragraph",
+                            "name": "lb_block_offsetnav_technology_content_table_paragraph",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
@@ -745,7 +521,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -753,9 +529,9 @@
                             "new_lines": "br"
                         },
                         {
-                            "key": "field_61eecaa995940",
+                            "key": "field_61f0095610549",
                             "label": "Tabella",
-                            "name": "lb_block_offsetnav_reviews_content_table_item",
+                            "name": "lb_block_offsetnav_technology_content_table_item",
                             "type": "repeater",
                             "instructions": "",
                             "required": 0,
@@ -765,17 +541,17 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 3,
                             "collapsed": "",
                             "min": 0,
                             "max": 0,
-                            "layout": "",
+                            "layout": "row",
                             "button_label": "",
                             "sub_fields": [
                                 {
-                                    "key": "field_61eecaa995941",
+                                    "key": "field_61f009561054a",
                                     "label": "Titolo",
-                                    "name": "lb_block_offsetnav_reviews_content_table_item_title",
+                                    "name": "lb_block_offsetnav_technology_content_table_item_title",
                                     "type": "text",
                                     "instructions": "",
                                     "required": 0,
@@ -785,7 +561,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": "",
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
@@ -793,9 +569,9 @@
                                     "maxlength": ""
                                 },
                                 {
-                                    "key": "field_61eecaa995942",
+                                    "key": "field_61f009561054b",
                                     "label": "Valore",
-                                    "name": "lb_block_offsetnav_reviews_content_table_item_value",
+                                    "name": "lb_block_offsetnav_technology_content_table_item_value",
                                     "type": "number",
                                     "instructions": "",
                                     "required": 0,
@@ -805,7 +581,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": "",
+                                    "wpml_cf_preferences": 1,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
@@ -863,6 +639,230 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_61f0071ae1ee0",
+            "label": "Contenuto",
+            "name": "lb_block_offsetnav_usecases_content",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "layouts": {
+                "layout_61e9b3b44ee80": {
+                    "key": "layout_61e9b3b44ee80",
+                    "name": "text",
+                    "label": "Blocco Testo",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_61f0071ae1ee1",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_usecases_content_text_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0071ae1ee2",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_usecases_content_text_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0071ae1ee3",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_usecases_content_text_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_61e9b589eef35": {
+                    "key": "layout_61e9b589eef35",
+                    "name": "table",
+                    "label": "Blocco Tabella",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_61f0071ae1ee4",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_usecases_content_table_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_61f0071ae1ee5",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_usecases_content_table_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0071ae1ee6",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_usecases_content_table_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0071ae1ee7",
+                            "label": "Tabella",
+                            "name": "lb_block_offsetnav_usecases_content_table_item",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "row",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_61f0071ae1ee8",
+                                    "label": "Titolo",
+                                    "name": "lb_block_offsetnav_usecases_content_table_item_title",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_61f0071ae1ee9",
+                                    "label": "Valore",
+                                    "name": "lb_block_offsetnav_usecases_content_table_item_value",
+                                    "type": "number",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "%",
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Aggiungi Blocco",
+            "min": "",
+            "max": ""
+        },
+        {
             "key": "field_61e9a277ebc20",
             "label": "Domande frequenti",
             "name": "",
@@ -900,30 +900,13 @@
             "ui_off_text": ""
         },
         {
-            "key": "field_61e9a26aebc1f",
-            "label": "Brevetti",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 1,
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_61eeca9595925",
-            "label": "Contenuto (copia)",
-            "name": "lb_block_offsetnav_reviews_content_copia",
+            "key": "field_61f003873a68a",
+            "label": "Contenuto",
+            "name": "lb_block_offsetnav_faq_content",
             "type": "flexible_content",
             "instructions": "",
             "required": 0,
-            "conditional_logic": false,
+            "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -938,19 +921,59 @@
                     "display": "block",
                     "sub_fields": [
                         {
-                            "key": "field_61eeca9595926",
+                            "key": "field_61f003873a68b",
                             "label": "Titolo",
-                            "name": "lb_block_offsetnav_reviews_content_text_title",
+                            "name": "lb_block_offsetnav_faq_content_text_title",
                             "type": "textarea",
                             "instructions": "",
                             "required": 0,
-                            "conditional_logic": false,
+                            "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
                                 "class": "",
                                 "id": ""
                             },
-                            "wpml_cf_preferences": "",
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f003873a68c",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_faq_content_text_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f003873a68d",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_faq_content_text_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
                             "default_value": "",
                             "placeholder": "",
                             "maxlength": "",
@@ -960,15 +983,149 @@
                     ],
                     "min": "",
                     "max": ""
+                },
+                "layout_61e9b589eef35": {
+                    "key": "layout_61e9b589eef35",
+                    "name": "table",
+                    "label": "Blocco Tabella",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_61f003873a68e",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_faq_content_table_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_61f003873a68f",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_faq_content_table_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f003873a690",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_faq_content_table_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f003873a691",
+                            "label": "Tabella",
+                            "name": "lb_block_offsetnav_faq_content_table_item",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "row",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_61f003873a692",
+                                    "label": "Titolo",
+                                    "name": "lb_block_offsetnav_faq_content_table_item_title",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_61f003873a693",
+                                    "label": "Valore",
+                                    "name": "lb_block_offsetnav_faq_content_table_item_value",
+                                    "type": "number",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "%",
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
                 }
             },
+            "button_label": "Aggiungi Blocco",
             "min": "",
-            "max": "",
-            "button_label": "Aggiungi Riga"
+            "max": ""
         },
         {
-            "key": "field_61e9a27febc21",
-            "label": "Recensioni",
+            "key": "field_61e9a26aebc1f",
+            "label": "Brevetti",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -1002,6 +1159,247 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_61f0059890c98",
+            "label": "Contenuto",
+            "name": "lb_block_offsetnav_patents_content",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "layouts": {
+                "layout_61e9b3b44ee80": {
+                    "key": "layout_61e9b3b44ee80",
+                    "name": "text",
+                    "label": "Blocco Testo",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_61f0059990c99",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_patents_content_text_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0059990c9a",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_patents_content_text_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0059990c9b",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_patents_content_text_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_61e9b589eef35": {
+                    "key": "layout_61e9b589eef35",
+                    "name": "table",
+                    "label": "Blocco Tabella",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_61f0059990c9c",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_patents_content_table_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_61f0059990c9d",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_patents_content_table_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0059990c9e",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_patents_content_table_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 1,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_61f0059990c9f",
+                            "label": "Tabella",
+                            "name": "lb_block_offsetnav_patents_content_table_item",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "row",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_61f0059990ca0",
+                                    "label": "Titolo",
+                                    "name": "lb_block_offsetnav_patents_content_table_item_title",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_61f0059990ca1",
+                                    "label": "Valore",
+                                    "name": "lb_block_offsetnav_patents_content_table_item_value",
+                                    "type": "number",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 1,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "%",
+                                    "min": "",
+                                    "max": "",
+                                    "step": ""
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Aggiungi Blocco",
+            "min": "",
+            "max": ""
+        },
+        {
+            "key": "field_61e9a27febc21",
+            "label": "Recensioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_61e9a325ebc27",
@@ -1253,7 +1651,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "post"
+                "value": "product"
             }
         ]
     ],
@@ -1265,5 +1663,5 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1643039672
+    "modified": 1643185558
 }
