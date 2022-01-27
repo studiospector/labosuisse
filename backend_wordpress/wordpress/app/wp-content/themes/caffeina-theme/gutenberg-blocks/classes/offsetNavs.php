@@ -3,10 +3,10 @@ require_once(__DIR__.'/baseBlock.php');
 use gutenbergBlocks\BaseBlock;
 class OffsetNavs extends BaseBlock {
     private function filldata($name){
-        $item = [];
+        $offsetnav_content = [];
         if (have_rows('lb_block_offsetnav_'.$name.'_content')) {
-            $offsetnav_content = [];
             while (have_rows('lb_block_offsetnav_'.$name.'_content')) : the_row();
+                $item = [];
                 if (get_row_layout() == 'text') {
                     $item['type'] = 'text';
                     $item['data']['title'] = get_sub_field('lb_block_offsetnav_'.$name.'_content_text_title');
@@ -29,10 +29,10 @@ class OffsetNavs extends BaseBlock {
                     }
                 }
         
-              
+                $offsetnav_content[] = $item;
             endwhile;
         }
-        return $item;
+        return $offsetnav_content;
     }
 
     public function __construct( $block , $name ) {
