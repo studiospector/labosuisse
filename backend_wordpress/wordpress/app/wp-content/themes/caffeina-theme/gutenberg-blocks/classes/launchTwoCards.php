@@ -42,10 +42,10 @@ class LaunchTwoCards extends BaseBlock {
             ]
         ];
         if (get_field('lb_block_launch_two_cards_btn_left') != "") {
-             $payload['cards'][0]['infobox']['cta'] = array_merge (  (array)get_field('lb_block_launch_two_cards_btn_left') ,['variants' => [get_field('lb_block_launch_two_cards_btn_left_variants')]]);  
+             $payload['cards'][0]['infobox']['cta'] = array_merge (  (array)get_field('lb_block_launch_two_cards_btn_left') ,['variants' => [get_field('lb_block_launch_two_cards_btn_variants_left')]]);  
         }
         if (get_field('lb_block_launch_two_cards_btn_right') != "") {
-            $payload['cards'][1]['infobox']['cta'] = array_merge (  (array)get_field('lb_block_launch_two_cards_btn_right') ,['variants' => [get_field('lb_block_launch_two_cards_btn_right_variants')]]);  
+            $payload['cards'][1]['infobox']['cta'] = array_merge (  (array)get_field('lb_block_launch_two_cards_btn_right') ,['variants' => [get_field('lb_block_launch_two_cards_btn_variants_right')]]);  
        }
         $this->setContext($payload);
         $this->addInfobox();      

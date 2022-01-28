@@ -8,10 +8,10 @@ class Routine extends BaseBlock {
         // Carousel data
         if (have_rows('lb_block_routine_carousel')) {
             $items = [];
-            while (have_rows('lb_block_routine_carousel')) : the_row();
+            while (have_rows('lb_block_routine_carousel')) : the_row();   
                 $cf_post = get_sub_field('lb_block_routine_carousel_product');
-               
-                if (!$cf_post && !is_null($cf_post)) {
+                if ( !is_null($cf_post)) {
+                 
                     $items[] = [
                         'text' => get_sub_field('lb_block_routine_carousel_text'),
                         'product' => \Timber::get_post($cf_post->ID)

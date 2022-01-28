@@ -56,7 +56,7 @@ $context['miniatures'] = $block_love_labo->payload;
 
 //Two cards
 require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/launchTwoCards.php');
-$block_launch_two_cards = new LaunchTwoCards(null, "block-two-cards");
+$block_launch_two_cards = new LaunchTwoCards(null, "block-launch-two-cards");
 $context['two_cards'] = $block_launch_two_cards->payload;
 
 // Image and card
