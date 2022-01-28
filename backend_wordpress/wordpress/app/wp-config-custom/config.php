@@ -16,18 +16,16 @@
  * @see https://codex.wordpress.org/Editing_wp-config.php
  */
 
-// ** MySQL settings - You can get this info from your web host ** //
-/** The name of the database for WordPress */
-define('DB_NAME', getenv('MYSQL_DATABASE'));
 
-/* MySQL database username */
-define('DB_USER', getenv('MYSQL_USER'));
+define('WP_DEBUG', getenv('DEBUG') === 'true');
+define('WP_DEBUG_LOG', getenv('DEBUG') === 'true');
 
-/* MySQL database password */
-define('DB_PASSWORD', getenv('MYSQL_PASSWORD'));
+$dsn = (object) parse_url(getenv('DATABASE_URL'));
 
-/* MySQL hostname */
-define('DB_HOST', getenv('MYSQL_HOST'));
+define('DB_NAME', substr($dsn->path, 1));
+define('DB_USER', $dsn->user);
+define('DB_PASSWORD', isset($dsn->pass) ? $dsn->pass : null);
+define('DB_HOST', isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
 
 /* Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
@@ -84,7 +82,6 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
     $is_https = true;
     $protocol = 'https://';
 }
-define('WP_DEBUG', !$is_https);
 
 /* SSL */
 define('FORCE_SSL_LOGIN', $is_https);
@@ -121,7 +118,5 @@ define( 'AS3CF_SETTINGS', serialize( array(
 )));
 
 // Memory limit
-define('WP_MEMORY_LIMIT', '456M');
-
-// Disable auto updates
+define('WP_MEMORY_LIMIT', '512M');
 define('WP_AUTO_UPDATE_CORE', false);

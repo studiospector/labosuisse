@@ -1,0 +1,97 @@
+# Da doc di convox si parla di versione 1 e 2
+version: '2'
+networks:
+  labo-website-2021: null
+  front-tier:
+    external:
+      name: front-tier
+services:
+  website:
+    build:
+      context: .
+      dockerfile: ./backend_wordpress/wordpress/docker/Dockerfile
+      target: nginx
+      args:
+          CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+          CI_REGISTRY: '${CI_REGISTRY}'
+          CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
+          CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+    restart: unless-stopped
+    volumes:
+      - 'backend_media:/uploads'
+    networks:
+      labo-website-2021:
+        aliases:
+          - 'cms.${VIRTUAL_HOST}'
+      front-tier: null
+    depends_on:
+      - frontend-bundler
+    environment:
+      MYSQL_HOST: storage-mysql
+      MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
+      MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
+      MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
+      ADMIN_URL: 'cms.${VIRTUAL_HOST}'
+      SINK_AWS_REGION: '${BACKEND_WP_SINK_AWS_REGION}'
+      SINK_AWS_BUCKET: '${BACKEND_WP_SINK_AWS_BUCKET}'
+      SINK_AWS_ACCESS_ID: '${BACKEND_WP_SINK_AWS_ACCESS_ID}'
+      SINK_AWS_SECRET: '${BACKEND_WP_SINK_AWS_SECRET}'
+      SINK_AWS_UPLOADS_PATH: '${BACKEND_WP_SINK_AWS_UPLOADS_PATH}'
+      SINK_KEEP_SITE_DOMAIN: '${BACKEND_WP_SINK_KEEP_SITE_DOMAIN}'
+      SINK_CDN_ENDPOINT: '${BACKEND_WP_SINK_CDN_ENDPOINT}'
+      SINK_HTTP_PROXY_URL: '${BACKEND_WP_SINK_HTTP_PROXY_URL}'
+      SINK_HTTP_PROXY_PORT: '${BACKEND_WP_SINK_HTTP_PROXY_PORT}'
+      POSTINO_CAFF_SMTP_SECURE: '${BACKEND_WP_POSTINO_CAFF_SMTP_SECURE}'
+      POSTINO_CAFF_SMTP_PORT: '${BACKEND_WP_POSTINO_CAFF_SMTP_PORT}'
+      POSTINO_CAFF_SMTP_SERVER: '${BACKEND_WP_POSTINO_CAFF_SMTP_SERVER}'
+      POSTINO_CAFF_SMTP_USER: '${BACKEND_WP_POSTINO_CAFF_SMTP_USER}'
+      POSTINO_CAFF_SMTP_PASSWORD: '${BACKEND_WP_POSTINO_CAFF_SMTP_PASSWORD}'
+      POSTINO_CAFF_MAIL_SENDER: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER}'
+      POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
+      WITH_REDIS: 1
+      VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}'
+      LETSENCRYPT_HOST: 'cms.${VIRTUAL_HOST}'
+      LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
+
+  storage-mysql:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/storage_mysql'
+    environment:
+      MYSQL_HOST: storage_mysql
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      BACKEND_WORDPRESS_MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
+      BACKEND_WORDPRESS_MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
+      BACKEND_WORDPRESS_MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
+    volumes:
+      - 'storage_mysql:/var/lib/mysql:rw'
+    networks:
+      - labo-website-2021
+    restart: on-failure
+  storage-redis:
+    image: redis
+    restart: unless-stopped
+    networks:
+      - labo-website-2021
+
+  frontend-bundler:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+    build:
+      context: .
+      dockerfile: ./frontend_bundler/client/docker/Dockerfile
+  frontend-static:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static'
+    build:
+      context: .
+      dockerfile: ./frontend_static/client/docker/Dockerfile
+      args:
+        CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+        CI_REGISTRY: '${CI_REGISTRY}'
+        CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
+        CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+    depends_on:
+      - frontend-bundler
+
+volumes:
+  backend_media: null
+  storage_mysql: null
