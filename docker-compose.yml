@@ -25,6 +25,7 @@ services:
     volumes:
       - 'backend_media:/uploads'
     environment:
+      DATABASE_URL: '${DATABASE_URL}'
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
       MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
