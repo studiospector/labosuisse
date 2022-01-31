@@ -1,5 +1,84 @@
-.single-product-details {
+.single-product {
+    .woocommerce-notices-wrapper {
+        width: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 60px;
+        padding-right: rem(15);
+        padding-left: rem(15);
 
+        @include mq($from: md) {
+            max-width: 720px;
+        }
+
+        @include mq($from: lg) {
+            max-width: 992px;
+        }
+
+        @include mq($from: xl) {
+            max-width: 1200px;
+        }
+
+        .woocommerce-error,
+        .woocommerce-info,
+        .woocommerce-message {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0;
+            // padding-top: 5px;
+            // padding-bottom: 5px;
+            background-color: map-get($colors, "grey-1");
+            color: map-get($colors, "black");
+            font-weight: 300;
+
+            &::before {
+                top: auto;
+            }
+
+            &::after {
+                content: none;
+            }
+
+            li {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            a {
+                order: 1;
+                float: none;
+                background-color: #b52a2d;
+                border-radius: 3.125rem;
+                border: 1px solid #b52a2d;
+                color: #ffffff;
+                text-transform: uppercase;
+                padding: 0.5rem 1rem;
+                font-size: rem(12);
+
+                &:hover {
+                    background-color: #ffffff;
+                    border: 0.0625rem solid #a43534;
+                    color: #b52a2d;
+                }
+            }
+        }
+
+        .woocommerce-error {
+            border-top-color: map-get($colors, "secondary");
+
+            &::before {
+                color: map-get($colors, "secondary");
+            }
+        }
+    }
+}
+
+
+
+.single-product-details {
     @include mq($until: md) {
         margin-top: 20px;
     }
@@ -83,7 +162,8 @@
             }
         }
 
-        &__brand {
+        &__brand,
+        &__patent {
             margin-bottom: 20px;
 
             img {
@@ -92,6 +172,14 @@
 
                 @include mq($until: md) {
                     height: 16px;
+                }
+            }
+        }
+
+        &__patent {
+            img {
+                @include mq($until: md) {
+                    height: 20px;
                 }
             }
         }

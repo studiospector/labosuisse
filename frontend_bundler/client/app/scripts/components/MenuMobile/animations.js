@@ -76,8 +76,8 @@ export const stickyHeaderScroll = (header, logo) => {
     })
     .add(
         gsap.timeline()
-            .call(() => header.classList.remove('lb-header--scrolled'), 0)
+            // .call(() => header.classList.remove('lb-header--scrolled'), 0)
             .add(tl)
-            .call(() => header.classList.add('lb-header--scrolled'))
+            // .call(() => header.classList.add('lb-header--scrolled'))
     )
 }

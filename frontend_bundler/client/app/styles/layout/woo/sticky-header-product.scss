@@ -1,0 +1,22 @@
+.lb-header-sticky-product {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    background-color: map-get($colors, "white");
+    border-bottom: 1px solid map-get($colors, "grey-2");
+    z-index: 98;
+    transition: $transition__base-1;
+
+    &__img {
+        img {
+            max-width: 100px;
+            max-height: 80px;
+        }
+    }
+
+    // &--scrolled {
+    //     transform: translateY(100%);
+    // }
+}

@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Scrollbar from './Scrollbar'
 import Menu from './Menu';
 import Header from './Header'
+import HeaderProduct from './HeaderProduct'
 import LBCustomInput from './CustomInput'
 import LBCustomSelect from './CustomSelect'
 import CarouselHero from './CarouselHero'
@@ -33,6 +34,11 @@ const components = {
     header: {
         selector: '.js-header',
         type: Header,
+        optional: true,
+    },
+    headerProduct: {
+        selector: '.js-header-sticky-product',
+        type: HeaderProduct,
         optional: true,
     },
     customInput: {

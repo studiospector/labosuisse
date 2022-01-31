@@ -2,6 +2,29 @@
 
 {% set bodyClass = 'single-product' %}
 
+{% block header %}
+    {{ parent() }}
+
+    {% set stickyHeaderImage = fn('get_field', 'lb_product_stickyheader_img') %}
+    <!-- Header Sticky Product -->
+    <div class="lb-header-sticky-product js-header-sticky-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    {% if stickyHeaderImage %}
+                        <div class="lb-header-sticky-product__img">
+                            <img data-src="{{ stickyHeaderImage }}" class="lazyload"/>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-12 col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock header %}
+
 {% block main %}
 
     {% do action('woocommerce_before_main_content') %}
@@ -30,6 +53,8 @@
     {% do action('woocommerce_after_single_product') %}
 
     {% do action('woocommerce_after_main_content') %}
+
+    <div class="js-single-product-details"></div>
 
     <hr class="lb-separator lb-separator--big" data-variant="big" />
 
@@ -74,7 +99,7 @@
         {% include '@PathViews/components/block-routine.twig' with routine only %}
     {% endif %}
 
-{% endblock %}
+{% endblock main %}
 
 
 {% block offsetNavs %}
@@ -85,4 +110,4 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-{% endblock %}
+{% endblock offsetNavs %}

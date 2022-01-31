@@ -5,6 +5,13 @@
     </div>
 {% endif %}
 
+{# Patent #}
+{% if patent %}
+    <div class="single-product-details__summary__patent">
+        <img src="{{ patent }}">
+    </div>
+{% endif %}
+
 {# Product Title #}
 {{ fn('the_title', '<h1 class="single-product-details__summary__product-title product_title entry-title">', '</h1>') }}
 

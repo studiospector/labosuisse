@@ -22,6 +22,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Brand
 $brands = get_the_terms( get_the_ID(), 'lb-brand' );
 $brand_logo = get_field('lb_brand_logo', $brands[0]);
+$context['brand'] = $brands[0];
+$context['brand_logo'] = $brand_logo;
+
+// Patent
+$context['patent'] = get_field('lb_product_patent');
 
 // Benefits
 $context['benefits'] = [];
@@ -30,8 +35,5 @@ if( have_rows('lb_product_benefits') ) {
         $context['benefits'][] = get_sub_field('lb_product_benefit_item');
     endwhile;
 }
-
-$context['brand'] = $brands[0];
-$context['brand_logo'] = $brand_logo;
 
 Timber::render('@PathViews/woo/single-product/title.twig', $context);
