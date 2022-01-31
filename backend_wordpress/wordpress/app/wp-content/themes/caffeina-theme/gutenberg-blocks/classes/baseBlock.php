@@ -7,7 +7,7 @@ class BaseBlock {
   public $name;
   public $acfName;
   public $className;
-  public $payload;
+  public $payload = [];
   protected $block;
   public $context;
   private $field_names = ['block_id', 'block_className'];
@@ -90,9 +90,19 @@ class BaseBlock {
 
 
   }
+  public function getPayload(){
+     $active = is_null(get_field($this->acfName.'_visibility'))? true :get_field($this->acfName.'_visibility');
+   
+      $retPayload = [];
+      if ($active){
+        $retPayload = $this->payload;
+      }
+    //   var_dump($this->acfName.'_visibility');
+    //   var_dump($active);
+      return $retPayload;
+  }
   public function render(){
-//       echo "<pre>";
-// var_dump($this->context);
+    $active = is_null(get_field($this->acfName.'_visibility')) ? true : get_field($this->acfName.'_visibility');
     if ( isset($this->block['data']['is_preview']) && $this->block['data']['is_preview'] == true ) {
         \Timber::render('@PathViews/gutenberg-preview.twig', [
             'base_url' => get_site_url(),
@@ -102,8 +112,11 @@ class BaseBlock {
         ]);
         return;
     }
-
-    \Timber::render('@PathViews/components/base/gutenberg-block-switcher.twig', $this->context);
+    $contextRet = $this->context;
+    if (!$active){
+        $contextRet['data'] = [];
+    }
+     \Timber::render('@PathViews/components/base/gutenberg-block-switcher.twig', $contextRet);
 
   }
 
