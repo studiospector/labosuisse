@@ -13,6 +13,7 @@
     class="button{{ classes ? ' ' ~ classes : '' }}"
     {{ url ? ' href="' ~ url ~ '" target="' ~ target|default('_self') ~ '"' : '' }}
     {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
+    {{ form ? ' form="' ~ form ~ '"' : '' }}
 >
     {% if iconStart %}
         {% include '@PathViews/components/icon.twig' with iconStart only %}

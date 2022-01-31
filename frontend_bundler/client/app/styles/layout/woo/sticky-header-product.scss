@@ -1,6 +1,6 @@
 .lb-header-sticky-product {
     position: fixed;
-    top: 0;
+    top: -100%;
     left: 0;
     right: 0;
     padding: 10px 0;
@@ -9,11 +9,65 @@
     z-index: 98;
     transition: $transition__base-1;
 
+    @include mq($until: md) {
+        top: auto;
+        bottom: -100%;
+        background-color: rgba(map-get($colors, "white"), 0.9);
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        @include mq($until: md) {
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    }
+
+    &__info {
+        margin-left: 20px;
+
+        @include mq($until: md) {
+            margin-left: 0;
+        }
+
+        &__title {
+            font-size: rem(16);
+            font-weight: 400;
+            line-height: rem(19);
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+    }
+
     &__img {
+        @include mq($until: md) {
+            display: none;
+        }
+
         img {
             max-width: 100px;
             max-height: 80px;
         }
+    }
+
+    &__price {
+        font-size: rem(20);
+        font-weight: 600;
+        line-height: rem(28);
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        margin-right: 40px;
     }
 
     // &--scrolled {

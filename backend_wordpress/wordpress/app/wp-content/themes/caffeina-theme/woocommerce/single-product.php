@@ -25,6 +25,10 @@ $context['post'] = Timber::get_post();
 $product = wc_get_product($context['post']->ID);
 $context['product'] = $product;
 
+// Sticky Header
+$context['stickyHeader']['price'] = $product->get_price_html();
+$context['stickyHeader']['cartUrlLabel'] = __('Aggiungi al carrello', 'labo-suisse-theme');
+
 ob_start();
 wc_product_class( 'single-product-details container', $product );
 $context['product_classes'] = ob_get_clean();
