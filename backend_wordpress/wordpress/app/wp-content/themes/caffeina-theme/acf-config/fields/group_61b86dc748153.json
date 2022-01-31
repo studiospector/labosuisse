@@ -3,6 +3,43 @@
     "title": "Campi personalizzati: Blocco – Due Card",
     "fields": [
         {
+            "key": "field_61f81550678c7",
+            "label": "Visibilitá",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61f81565678c8",
+            "label": "Visibile",
+            "name": "lb_block_launch_two_cards_visibility",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "wpml_cf_preferences": 1
+        },
+        {
             "key": "field_61b874cf49933",
             "label": "Card Sinistra",
             "name": "",
@@ -498,5 +535,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643377826
+    "modified": 1643648411
 }

@@ -3,6 +3,43 @@
     "title": "Campi personalizzati: Blocco - Banner alternate",
     "fields": [
         {
+            "key": "field_61f7f492d308d",
+            "label": "Visibilitá",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61f7f4aed308e",
+            "label": "Visibile",
+            "name": "lb_block_banner_alternate_visibility",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_61bc68978e8e7",
             "label": "Immagine",
             "name": "",
@@ -280,5 +317,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642523652
+    "show_in_rest": 0,
+    "modified": 1643646958
 }
