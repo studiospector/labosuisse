@@ -5,7 +5,7 @@ import { useEffect } from '@storybook/client-api'
 import Component from '@okiba/component'
 
 // Components
-import renderBlock from '../../views/components/block-two-cards.twig'
+import renderBlock from '../../views/components/block-launch-two-cards.twig'
 
 const dataDefault = {
     infobox: {
