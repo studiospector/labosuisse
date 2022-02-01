@@ -41,6 +41,9 @@
                 // COMPONENTS
                 @import "components/index";
 
+                // LAYOUT
+                @import "layout/main-content";
+
                 // Title
                 .edit-post-visual-editor__post-title-wrapper {
                     background-color: #f3f4f5;
