@@ -240,7 +240,7 @@
         },
         {
             "key": "field_61bc68978f15c",
-            "label": "Posizione Immagine",
+            "label": "Posizione Infobox",
             "name": "lb_block_banner_alternate_variants_lr",
             "type": "radio",
             "instructions": "",
@@ -258,7 +258,7 @@
             },
             "allow_null": 0,
             "other_choice": 0,
-            "default_value": "",
+            "default_value": "infobox-left",
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
@@ -284,7 +284,7 @@
             },
             "allow_null": 0,
             "other_choice": 0,
-            "default_value": "",
+            "default_value": "infobox-centered",
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
@@ -335,5 +335,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643717239
+    "modified": 1643724585
 }
