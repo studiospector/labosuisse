@@ -40,8 +40,148 @@
             "wpml_cf_preferences": 1
         },
         {
+            "key": "field_61e81712f3c0e",
+            "label": "Infobox",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e8172af3c0f",
+            "label": "Tagline",
+            "name": "lb_block_launch_two_cards_infobox_tagline",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61e81769f3c10",
+            "label": "Titolo",
+            "name": "lb_block_launch_two_cards_infobox_title",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_61e817d3f3c11",
+            "label": "Sottotitolo",
+            "name": "lb_block_launch_two_cards_infobox_subtitle",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_61e817f6f3c12",
+            "label": "Paragrafo",
+            "name": "lb_block_launch_two_cards_infobox_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_61e81823f3c13",
+            "label": "Bottone",
+            "name": "lb_block_launch_two_cards_infobox_btn",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "array"
+        },
+        {
+            "key": "field_61e81866f3c14",
+            "label": "Variante bottone",
+            "name": "lb_block_launch_two_cards_infobox_btn_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "tertiary": "Tertiary",
+                "quaternary": "Quaternary"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_61b874cf49933",
-            "label": "Card Sinistra",
+            "label": "Card di Sinistra",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -58,7 +198,7 @@
         },
         {
             "key": "field_61b86dc791191",
-            "label": "Image",
+            "label": "Immagine",
             "name": "lb_block_launch_two_cards_image_left",
             "type": "image",
             "instructions": "",
@@ -103,7 +243,7 @@
         },
         {
             "key": "field_61b875a049935",
-            "label": "Title",
+            "label": "Titolo",
             "name": "lb_block_launch_two_cards_title_left",
             "type": "textarea",
             "instructions": "",
@@ -114,16 +254,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 1,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "",
-            "wpml_cf_preferences": 1
+            "new_lines": ""
         },
         {
             "key": "field_61b875c749936",
-            "label": "Subtitle",
+            "label": "Sottotitolo",
             "name": "lb_block_launch_two_cards_subtitle_left",
             "type": "textarea",
             "instructions": "",
@@ -134,16 +274,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61b8762e49937",
-            "label": "Paragraph",
+            "label": "Paragrafo",
             "name": "lb_block_launch_two_cards_paragraph_left",
             "type": "textarea",
             "instructions": "",
@@ -154,16 +294,16 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
+            "new_lines": "br"
         },
         {
             "key": "field_61b876b049938",
-            "label": "Button",
+            "label": "Bottone",
             "name": "lb_block_launch_two_cards_btn_left",
             "type": "link",
             "instructions": "",
@@ -179,7 +319,7 @@
         },
         {
             "key": "field_61b8794c49939",
-            "label": "Button variants",
+            "label": "Variante bottone",
             "name": "lb_block_launch_two_cards_btn_variants_left",
             "type": "radio",
             "instructions": "",
@@ -190,6 +330,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "choices": {
                 "primary": "Primary",
                 "secondary": "Secondary",
@@ -201,12 +342,11 @@
             "default_value": "",
             "layout": "vertical",
             "return_format": "value",
-            "wpml_cf_preferences": 2,
             "save_other_choice": 0
         },
         {
             "key": "field_61b879e79ad6e",
-            "label": "Card Destra",
+            "label": "Card di Destra",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -223,7 +363,7 @@
         },
         {
             "key": "field_61b87a089ad6f",
-            "label": "Image",
+            "label": "Immagine",
             "name": "lb_block_launch_two_cards_image_right",
             "type": "image",
             "instructions": "",
@@ -268,7 +408,7 @@
         },
         {
             "key": "field_61b87a2d9ad71",
-            "label": "Title",
+            "label": "Titolo",
             "name": "lb_block_launch_two_cards_title_right",
             "type": "textarea",
             "instructions": "",
@@ -288,7 +428,7 @@
         },
         {
             "key": "field_61b87a349ad72",
-            "label": "Subtitle",
+            "label": "Sottotitolo",
             "name": "lb_block_launch_two_cards_subtitle_right",
             "type": "textarea",
             "instructions": "",
@@ -308,7 +448,7 @@
         },
         {
             "key": "field_61b87a3c9ad73",
-            "label": "Paragraph",
+            "label": "Paragrafo",
             "name": "lb_block_launch_two_cards_paragraph_right",
             "type": "textarea",
             "instructions": "",
@@ -328,7 +468,7 @@
         },
         {
             "key": "field_61b87a439ad74",
-            "label": "Button",
+            "label": "Bottone",
             "name": "lb_block_launch_two_cards_btn_right",
             "type": "link",
             "instructions": "",
@@ -344,7 +484,7 @@
         },
         {
             "key": "field_61b87a4c9ad75",
-            "label": "Button variants",
+            "label": "Variante bottone",
             "name": "lb_block_launch_two_cards_btn_variants_right",
             "type": "radio",
             "instructions": "",
@@ -367,146 +507,6 @@
             "default_value": "",
             "layout": "vertical",
             "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_61e81712f3c0e",
-            "label": "Infobox",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 2
-        },
-        {
-            "key": "field_61e8172af3c0f",
-            "label": "Tagline",
-            "name": "lb_block_launch_two_cards_infobox_tagline",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
-        },
-        {
-            "key": "field_61e81769f3c10",
-            "label": "Title",
-            "name": "lb_block_launch_two_cards_infobox_title",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
-        },
-        {
-            "key": "field_61e817d3f3c11",
-            "label": "Subtitle",
-            "name": "lb_block_launch_two_cards_infobox_subtitle",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
-        },
-        {
-            "key": "field_61e817f6f3c12",
-            "label": "Paragraph",
-            "name": "lb_block_launch_two_cards_infobox_paragraph",
-            "type": "textarea",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 2
-        },
-        {
-            "key": "field_61e81823f3c13",
-            "label": "Button",
-            "name": "lb_block_launch_two_cards_infobox_btn",
-            "type": "link",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "array",
-            "wpml_cf_preferences": 2
-        },
-        {
-            "key": "field_61e81866f3c14",
-            "label": "Button variants",
-            "name": "lb_block_launch_two_cards_infobox_btn_variants",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "primary": "Primary",
-                "secondary": "Secondary",
-                "tertiary": "Tertiary",
-                "quaternary": "Quaternary"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "wpml_cf_preferences": 2,
             "save_other_choice": 0
         }
     ],
@@ -535,5 +535,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643648411
+    "modified": 1643718612
 }

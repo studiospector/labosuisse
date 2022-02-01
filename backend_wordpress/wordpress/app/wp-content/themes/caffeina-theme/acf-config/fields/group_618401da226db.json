@@ -100,7 +100,7 @@
         },
         {
             "key": "field_618adb3c58aa8",
-            "label": "Variante Bottone",
+            "label": "Variante bottone",
             "name": "lb_block_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
@@ -143,5 +143,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1643207192
+    "show_in_rest": 0,
+    "modified": 1643718234
 }

@@ -1,10 +1,10 @@
 {
     "key": "group_61f7c987df2cc",
-    "title": "Campi personalizzati: Blocco - Focus Numbers",
+    "title": "Campi personalizzati: Blocco - Focus Numeri",
     "fields": [
         {
             "key": "field_61f7c9b1b236a",
-            "label": "Shield",
+            "label": "Scudetto",
             "name": "lb_block_focus_numbers_shield",
             "type": "image",
             "instructions": "",
@@ -15,17 +15,17 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
             "min_height": "",
             "min_size": "",
-            "max_width": "",
+            "max_width": 400,
             "max_height": "",
             "max_size": "",
-            "mime_types": "",
-            "wpml_cf_preferences": 2
+            "mime_types": ""
         },
         {
             "key": "field_61f7ca0bb236b",
@@ -193,5 +193,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643630280
+    "modified": 1643718128
 }

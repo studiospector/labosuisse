@@ -1,6 +1,6 @@
 {
     "key": "group_61bc68975a099",
-    "title": "Campi personalizzati: Blocco - Banner alternate",
+    "title": "Campi personalizzati: Blocco - Banner Alternate",
     "fields": [
         {
             "key": "field_61f7f492d308d",
@@ -58,7 +58,7 @@
         },
         {
             "key": "field_61bc68978eebe",
-            "label": "Image",
+            "label": "Immagine",
             "name": "lb_block_banner_alternate_img",
             "type": "image",
             "instructions": "",
@@ -80,77 +80,6 @@
             "max_height": "",
             "max_size": "",
             "mime_types": ""
-        },
-        {
-            "key": "field_61bc68978f15c",
-            "label": "variants lr",
-            "name": "lb_block_banner_alternate_variants_lr",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 2,
-            "choices": {
-                "infobox-left": "left",
-                "infobox-right": "right"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_61c3009e68603",
-            "label": "variants hcb",
-            "name": "lb_block_banner_alternate_variants_hcb",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 2,
-            "choices": {
-                "infobox-fullheight": "fullheight",
-                "infobox-centered": "centered",
-                "infobox-bottom": "bottom"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
-        },
-        {
-            "key": "field_61c2ffd25c998",
-            "label": "imageBig",
-            "name": "lb_block_banner_alternate_img_big",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 0,
-            "wpml_cf_preferences": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
         },
         {
             "key": "field_61dd5f79fff63",
@@ -191,7 +120,7 @@
         },
         {
             "key": "field_61dd5fdefff65",
-            "label": "Title",
+            "label": "Titolo",
             "name": "lb_block_banner_alternate_infobox_title",
             "type": "textarea",
             "instructions": "",
@@ -211,7 +140,7 @@
         },
         {
             "key": "field_61dd6007fff66",
-            "label": "Subtitle",
+            "label": "Sottotitolo",
             "name": "lb_block_banner_alternate_infobox_subtitle",
             "type": "textarea",
             "instructions": "",
@@ -231,7 +160,7 @@
         },
         {
             "key": "field_61dd6026fff67",
-            "label": "Paragraph",
+            "label": "Paragrafo",
             "name": "lb_block_banner_alternate_infobox_paragraph",
             "type": "textarea",
             "instructions": "",
@@ -251,7 +180,7 @@
         },
         {
             "key": "field_61dd604bfff68",
-            "label": "Button",
+            "label": "Bottone",
             "name": "lb_block_banner_alternate_infobox_btn",
             "type": "link",
             "instructions": "",
@@ -267,7 +196,7 @@
         },
         {
             "key": "field_61dd606efff69",
-            "label": "Button variants",
+            "label": "Variante bottone",
             "name": "lb_block_banner_alternate_infobox_btn_variants",
             "type": "radio",
             "instructions": "",
@@ -291,6 +220,94 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_61f921c727674",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_61bc68978f15c",
+            "label": "Posizione Immagine",
+            "name": "lb_block_banner_alternate_variants_lr",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "infobox-left": "Sinistra",
+                "infobox-right": "Destra"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_61c3009e68603",
+            "label": "Altezza Infobox",
+            "name": "lb_block_banner_alternate_variants_hcb",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "infobox-fullheight": "Full height",
+                "infobox-centered": "Centrato",
+                "infobox-bottom": "bottom"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_61c2ffd25c998",
+            "label": "Immagine grande",
+            "name": "lb_block_banner_alternate_img_big",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -318,5 +335,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643646958
+    "modified": 1643717239
 }

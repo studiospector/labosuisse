@@ -78,7 +78,7 @@
         },
         {
             "key": "field_61ee783f807af",
-            "label": "Product",
+            "label": "Prodotti",
             "name": "lb_block_routine_carousel",
             "type": "repeater",
             "instructions": "",
@@ -89,7 +89,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 2,
+            "wpml_cf_preferences": 3,
             "collapsed": "",
             "min": 3,
             "max": 3,
@@ -98,7 +98,7 @@
             "sub_fields": [
                 {
                     "key": "field_61ee78cf807b0",
-                    "label": "text",
+                    "label": "Testo",
                     "name": "lb_block_routine_carousel_text",
                     "type": "textarea",
                     "instructions": "",
@@ -118,7 +118,7 @@
                 },
                 {
                     "key": "field_61ee7917807b1",
-                    "label": "product",
+                    "label": "Prodotto",
                     "name": "lb_block_routine_carousel_product",
                     "type": "post_object",
                     "instructions": "",
@@ -160,5 +160,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643705275
+    "modified": 1643718337
 }

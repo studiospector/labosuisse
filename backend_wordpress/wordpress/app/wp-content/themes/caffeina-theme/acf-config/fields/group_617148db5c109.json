@@ -61,7 +61,7 @@
                 },
                 {
                     "key": "field_6182a6615dd30",
-                    "label": "Title",
+                    "label": "Titolo",
                     "name": "lb_block_carousel_hero_infobox_title",
                     "type": "textarea",
                     "instructions": "",
@@ -81,7 +81,7 @@
                 },
                 {
                     "key": "field_6182a6d25dd31",
-                    "label": "Subtitle",
+                    "label": "Sottotitolo",
                     "name": "lb_block_carousel_hero_infobox_subtitle",
                     "type": "textarea",
                     "instructions": "",
@@ -101,7 +101,7 @@
                 },
                 {
                     "key": "field_6182a7105dd32",
-                    "label": "Paragraph",
+                    "label": "Paragrafo",
                     "name": "lb_block_carousel_hero_infobox_paragraph",
                     "type": "textarea",
                     "instructions": "",
@@ -121,7 +121,7 @@
                 },
                 {
                     "key": "field_6182a99f5dd33",
-                    "label": "Button",
+                    "label": "Bottone",
                     "name": "lb_block_carousel_hero_infobox_btn",
                     "type": "link",
                     "instructions": "",
@@ -137,7 +137,7 @@
                 },
                 {
                     "key": "field_6175e1b156d82",
-                    "label": "Button variants",
+                    "label": "Variante bottone",
                     "name": "lb_block_carousel_hero_infobox_btn_variants",
                     "type": "radio",
                     "instructions": "",
@@ -181,11 +181,11 @@
                 },
                 {
                     "key": "field_617149048e148",
-                    "label": "Image",
+                    "label": "Immagine",
                     "name": "lb_block_carousel_hero_img",
                     "type": "image",
                     "instructions": "",
-                    "required": 1,
+                    "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
                         "width": "",
@@ -278,7 +278,7 @@
                     "label": "Container",
                     "name": "lb_block_carousel_hero_container",
                     "type": "true_false",
-                    "instructions": "Se si vuole la Hero all'interno di un container.",
+                    "instructions": "Se si vuole la Hero all'interno di un container e non full-width.",
                     "required": 0,
                     "conditional_logic": 0,
                     "wrapper": {
@@ -286,16 +286,16 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "message": "",
                     "default_value": 0,
                     "ui": 0,
-                    "wpml_cf_preferences": 1,
                     "ui_on_text": "",
                     "ui_off_text": ""
                 },
                 {
                     "key": "field_61f27c474b20f",
-                    "label": "Varianti",
+                    "label": "Variante",
                     "name": "lb_block_carousel_hero_variants",
                     "type": "radio",
                     "instructions": "",
@@ -306,6 +306,7 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "choices": {
                         "small": "Small",
                         "medium": "Medium",
@@ -316,7 +317,6 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "wpml_cf_preferences": 1,
                     "save_other_choice": 0
                 }
             ]
@@ -340,5 +340,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643281517
+    "modified": 1643717858
 }
