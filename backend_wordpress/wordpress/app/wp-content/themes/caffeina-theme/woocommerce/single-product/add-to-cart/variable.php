@@ -34,11 +34,11 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
                                                                                                                                                                                                                                                                                             ?>">
     <?php do_action('woocommerce_before_variations_form'); ?>
 
-    <?php if (empty($available_variations) && false !== $available_variations) : ?>
+    <?php if (!$product->is_in_stock()) : ?>
         <a href="#" class="button button-tertiary">
             <span class="button__label"><?php echo __('Trova una farmacia concessionaria', 'labo-suisse-theme'); ?></span>
         </a>
-        <!-- <p class="stock out-of-stock"><?php // echo esc_html(apply_filters('woocommerce_out_of_stock_message', __('This product is currently out of stock and unavailable.', 'woocommerce'))); ?></p> -->
+        <?php /* <p class="stock out-of-stock"><?php echo esc_html(apply_filters('woocommerce_out_of_stock_message', __('This product is currently out of stock and unavailable.', 'woocommerce'))); ?></p> */ ?>
     <?php else : ?>
         <div class="variations lb-product-variations custom-select-group">
             <?php foreach ($attributes as $attribute_name => $options) : ?>

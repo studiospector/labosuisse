@@ -5,7 +5,7 @@
 {% block header %}
     {{ parent() }}
 
-    {% if stickyHeader.variations %}
+    {% if isInStock %}
         {% set stickyHeaderImage = fn('get_field', 'lb_product_stickyheader_img') %}
         <!-- Header Sticky Product -->
         <div class="lb-header-sticky-product js-header-sticky-product">
