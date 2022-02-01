@@ -12,20 +12,20 @@ export default class HeaderProduct extends Component {
 
         this.elemHeight = this.el.getBoundingClientRect().height
 
-        const observer = new MutationObserver( (event) => {
-            let classes = event[0].target.classList
-            setTimeout(() => {
-                // if (classes.contains('lb-header--hide')) {
-                    this.adjustElement(0, false, classes.contains('lb-header--hide'))
-                // }
-            }, 300);
-        })
-        observer.observe(qs('.lb-header'), {
-            attributes: true, 
-            attributeFilter: ['class'],
-            childList: false, 
-            characterData: false
-        })
+        // const observer = new MutationObserver( (event) => {
+        //     let classes = event[0].target.classList
+        //     setTimeout(() => {
+        //         // if (classes.contains('lb-header--hide')) {
+        //             this.adjustElement(0, false, classes.contains('lb-header--hide'))
+        //         // }
+        //     }, 300);
+        // })
+        // observer.observe(qs('.lb-header'), {
+        //     attributes: true, 
+        //     attributeFilter: ['class'],
+        //     childList: false, 
+        //     characterData: false
+        // })
 
         this.animation()
     }
@@ -39,13 +39,13 @@ export default class HeaderProduct extends Component {
                 // end: "+=100%",
                 onEnter: () => {
                     this.adjustElement(0, true)
-                    this.el.classList.add('lb-header-sticky-product--scrolled')
+                    // this.el.classList.add('lb-header-sticky-product--scrolled')
                 },
                 // onLeave: () => this.el.classList.add('lb-header-sticky-product--scrolled'),
                 onEnterBack: () => {
                     setTimeout(() => {
                         this.adjustElement(qs('.lb-header').getBoundingClientRect().height, true)
-                        this.el.classList.remove('lb-header-sticky-product--scrolled')
+                        // this.el.classList.remove('lb-header-sticky-product--scrolled')
                     }, 300);
                 },
                 // onLeaveBack: () => this.el.classList.remove('lb-header-sticky-product--scrolled'),

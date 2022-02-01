@@ -11,6 +11,8 @@ export default class Header extends Component {
         this.prevDirection = 0
         this.firstUp = false
         this.tempScrollUp = null
+
+        this.headerProduct = qs('.lb-header-sticky-product')
         
         // On scroll trigger with Locomotive
         const customScrollbar = window.getCustomScrollbar
@@ -67,9 +69,15 @@ export default class Header extends Component {
         const headerHeight = this.el.getBoundingClientRect().height
         if (direction === 2 && curScroll > headerHeight) {
             this.el.classList.add('lb-header--hide')
+            if (this.headerProduct) {
+                this.headerProduct.classList.remove('lb-header-sticky-product--adjust')
+            }
             this.prevDirection = direction
         } else if (direction === 1) {
             this.el.classList.remove('lb-header--hide')
+            if (this.headerProduct) {
+                this.headerProduct.classList.add('lb-header-sticky-product--adjust')
+            }
             this.prevDirection = direction
         }
     }
