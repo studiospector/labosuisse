@@ -7,12 +7,11 @@ function lb_init_block_launch_two_cards() {
 
         acf_register_block_type(array(
             'name'              => 'lb-launch-two-cards',
-            'title'             => __('block-launch-two-cards'),
-            'description'       => __('A custom block-launch-two-cards block.'),
+            'title'             => __('Lancio Due Card'),
+            'description'       => __('Caffeina Block - Lancio Due Card.'),
             'render_template'   => 'gutenberg-blocks/block-launch-two-cards.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('block-launch-two-cards'),
+            'keywords'          => array('lancio', 'card', 'due card'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

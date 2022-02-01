@@ -8,11 +8,10 @@ function lb_init_block_carousel_hero() {
         acf_register_block_type(array(
             'name'              => 'lb-carousel-hero',
             'title'             => __('Carousel Hero'),
-            'description'       => __('A custom Carousel Hero block.'),
+            'description'       => __('Caffeina Block - Carousel Hero.'),
             'render_template'   => 'gutenberg-blocks/carousel-hero.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('carousel', 'hero'),
+            'keywords'          => array('carousel', 'hero', 'carousel hero'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

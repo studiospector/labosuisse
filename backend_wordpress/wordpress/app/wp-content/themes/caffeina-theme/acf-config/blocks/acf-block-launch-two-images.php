@@ -7,12 +7,11 @@ function lb_init_block_launch_two_images() {
 
         acf_register_block_type(array(
             'name'              => 'lb-launch-two-images',
-            'title'             => __('block-launch-two-images'),
-            'description'       => __('A custom block-launch-two-images block.'),
+            'title'             => __('Lancio Due Immagini'),
+            'description'       => __('Caffeina Block - Lancio Due Immagini.'),
             'render_template'   => 'gutenberg-blocks/block-launch-two-images.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('block-launch-two-images'),
+            'keywords'          => array('lancio', 'due immagini'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

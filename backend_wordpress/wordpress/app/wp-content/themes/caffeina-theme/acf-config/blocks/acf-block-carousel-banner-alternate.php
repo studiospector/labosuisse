@@ -7,12 +7,11 @@ function lb_init_block_carousel_banner_alternate() {
 
         acf_register_block_type(array(
             'name'              => 'lb-carousel-banner-alternate',
-            'title'             => __('Carousel banner alternate'),
-            'description'       => __('A custom Carousel banner alternate block.'),
+            'title'             => __('Carousel Banner Alternate'),
+            'description'       => __('Caffeina Block - Carousel Banner Alternate.'),
             'render_template'   => 'gutenberg-blocks/carousel-banner-alternate.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('carousel', 'banner-alternate'),
+            'keywords'          => array('carousel', 'banner', 'alternate', 'banner alternate', 'carousel banner alternate'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

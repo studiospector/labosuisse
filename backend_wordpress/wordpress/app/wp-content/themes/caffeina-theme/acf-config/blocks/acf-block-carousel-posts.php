@@ -7,12 +7,11 @@ function lb_init_block_carousel_post() {
 
         acf_register_block_type(array(
             'name'              => 'lb-carousel-posts',
-            'title'             => __('Carousel Posts'),
-            'description'       => __('A custom Carousel Posts block.'),
+            'title'             => __('Carousel Articoli'),
+            'description'       => __('Caffeina Block - Carousel Articoli.'),
             'render_template'   => 'gutenberg-blocks/carousel-posts.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('carousel', 'posts'),
+            'keywords'          => array('carousel', 'articoli', 'carousel posts', 'carousel articoli'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

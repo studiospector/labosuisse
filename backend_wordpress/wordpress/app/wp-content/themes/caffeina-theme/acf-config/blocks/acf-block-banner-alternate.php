@@ -7,12 +7,11 @@ function lb_init_block_banner_alternate() {
 
         acf_register_block_type(array(
             'name'              => 'lb-banner-alternate',
-            'title'             => __('Banner alternate'),
-            'description'       => __('A custom banner alternate block.'),
+            'title'             => __('Banner Alternate'),
+            'description'       => __('Caffeina Block - Banner Alternate.'),
             'render_template'   => 'gutenberg-blocks/banner-alternate.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('banner'),
+            'keywords'          => array('banner', 'alternate', 'banner alternate'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(
@@ -23,4 +22,3 @@ function lb_init_block_banner_alternate() {
         ));
     }
 }
-

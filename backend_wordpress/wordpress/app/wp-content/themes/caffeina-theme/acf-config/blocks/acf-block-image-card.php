@@ -7,12 +7,11 @@ function lb_init_block_image_card() {
 
         acf_register_block_type(array(
             'name'              => 'lb-image-card',
-            'title'             => __('block-image-card'),
-            'description'       => __('A custom block-image-card block.'),
+            'title'             => __('Immagine e Card'),
+            'description'       => __('Caffeina Block - Immagine e Card.'),
             'render_template'   => 'gutenberg-blocks/block-image-card.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('block-image-card'),
+            'keywords'          => array('immagine', 'card', 'immagine e card'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

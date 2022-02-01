@@ -8,11 +8,10 @@ function lb_init_block_love_labo() {
         acf_register_block_type(array(
             'name'              => 'lb-love-labo',
             'title'             => __('Love'),
-            'description'       => __('A custom  love labo block.'),
+            'description'       => __('Caffeina Block - Love.'),
             'render_template'   => 'gutenberg-blocks/love-labo.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('love', 'love'),
+            'keywords'          => array('love'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

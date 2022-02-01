@@ -8,10 +8,9 @@ function lb_init_block_banner() {
         acf_register_block_type(array(
             'name'              => 'lb-banner',
             'title'             => __('Banner'),
-            'description'       => __('A custom banner block.'),
+            'description'       => __('Caffeina Block - Banner.'),
             'render_template'   => 'gutenberg-blocks/banner.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
             'keywords'          => array('banner'),
             'example'  => array(
                 'attributes' => array(

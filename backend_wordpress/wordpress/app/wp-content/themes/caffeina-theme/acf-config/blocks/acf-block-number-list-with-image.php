@@ -7,12 +7,11 @@ function lb_init_block_number_list_with_image() {
 
         acf_register_block_type(array(
             'name'              => 'lb-number-list-with-image',
-            'title'             => __('block-number-list-with-image'),
-            'description'       => __('A custom block-number-list-with-image block.'),
+            'title'             => __('Lista Numeri e Immagine'),
+            'description'       => __('Caffeina Block - Lista Numeri e Immagine.'),
             'render_template'   => 'gutenberg-blocks/block-number-list-with-image.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('block-number-list-with-image'),
+            'keywords'          => array('lista', 'numeri', 'lista numeri e immagine'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

@@ -7,12 +7,11 @@ function lb_init_block_hero() {
 
         acf_register_block_type(array(
             'name'              => 'lb-hero',
-            'title'             => __(' Hero'),
-            'description'       => __('A custom  Hero block.'),
+            'title'             => __('Hero'),
+            'description'       => __('Caffeina Block - Hero.'),
             'render_template'   => 'gutenberg-blocks/hero.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('hero', 'hero'),
+            'keywords'          => array('hero'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

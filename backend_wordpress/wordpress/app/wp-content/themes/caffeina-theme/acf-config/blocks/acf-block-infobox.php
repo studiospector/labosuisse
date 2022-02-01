@@ -8,10 +8,9 @@ function lb_init_block_infobox() {
         acf_register_block_type(array(
             'name'              => 'lb-infobox',
             'title'             => __('Infobox'),
-            'description'       => __('A custom infobox block.'),
+            'description'       => __('Caffeina Block - Infobox.'),
             'render_template'   => 'gutenberg-blocks/infobox.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
             'keywords'          => array('infobox'),
             'example'  => array(
                 'attributes' => array(

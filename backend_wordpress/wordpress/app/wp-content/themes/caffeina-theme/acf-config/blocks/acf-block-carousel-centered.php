@@ -7,12 +7,11 @@ function lb_init_block_carousel_centered() {
 
         acf_register_block_type(array(
             'name'              => 'lb-carousel-centered',
-            'title'             => __('Carousel centered'),
-            'description'       => __('A custom Carousel centered block.'),
+            'title'             => __('Carousel Centered'),
+            'description'       => __('Caffeina Block - Carousel Centered.'),
             'render_template'   => 'gutenberg-blocks/carousel-centered.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('carousel', 'centered'),
+            'keywords'          => array('carousel', 'centered', 'carousel centered'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(

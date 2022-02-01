@@ -7,12 +7,11 @@ function lb_init_block_number_list() {
 
         acf_register_block_type(array(
             'name'              => 'lb-number-list',
-            'title'             => __('block-number-list'),
-            'description'       => __('A custom block-number-list block.'),
+            'title'             => __('Lista Numeri'),
+            'description'       => __('Caffeina Block - Lista Numeri.'),
             'render_template'   => 'gutenberg-blocks/block-number-list.php',
             'category'          => 'caffeina-theme',
-            'icon'              => 'admin-comments',
-            'keywords'          => array('block-number-list'),
+            'keywords'          => array('lista', 'numeri', 'lista numeri'),
             'example'  => array(
                 'attributes' => array(
                     'data' => array(
