@@ -5,36 +5,38 @@
 {% block header %}
     {{ parent() }}
 
-    {% set stickyHeaderImage = fn('get_field', 'lb_product_stickyheader_img') %}
-    <!-- Header Sticky Product -->
-    <div class="lb-header-sticky-product js-header-sticky-product">
-        <div class="container">
-            <div class="row">
-                <div class="lb-header-sticky-product__left col-12 col-md-7">
-                    {% if stickyHeaderImage %}
-                        <div class="lb-header-sticky-product__img">
-                            <img data-src="{{ stickyHeaderImage }}" class="lazyload"/>
+    {% if stickyHeader.variations %}
+        {% set stickyHeaderImage = fn('get_field', 'lb_product_stickyheader_img') %}
+        <!-- Header Sticky Product -->
+        <div class="lb-header-sticky-product js-header-sticky-product">
+            <div class="container">
+                <div class="row">
+                    <div class="lb-header-sticky-product__left col-12 col-md-7">
+                        {% if stickyHeaderImage %}
+                            <div class="lb-header-sticky-product__img">
+                                <img data-src="{{ stickyHeaderImage }}" class="lazyload"/>
+                            </div>
+                        {% endif %}
+                        <div class="lb-header-sticky-product__info">
+                            <h5 class="lb-header-sticky-product__info__title">{{ fn('get_the_title') }}</h5>
+                            <p class="p-small">Trattamento donna, 20 fiale, 200ml</p>
                         </div>
-                    {% endif %}
-                    <div class="lb-header-sticky-product__info">
-                        <h5 class="lb-header-sticky-product__info__title">{{ fn('get_the_title') }}</h5>
-                        <p class="p-small">Trattamento donna, 20 fiale, 200ml</p>
                     </div>
-                </div>
-                <div class="lb-header-sticky-product__right col-12 col-md-5">
-                    <div class="lb-header-sticky-product__price">
-                        {{ stickyHeader.price }}
+                    <div class="lb-header-sticky-product__right col-12 col-md-5">
+                        <div class="lb-header-sticky-product__price">
+                            {{ stickyHeader.price }}
+                        </div>
+                        {% include '@PathViews/components/button.twig' with {
+                            type: 'submit',
+                            form: 'lb-product-add-to-cart',
+                            title: stickyHeader.cartUrlLabel,
+                            variants: ['primary'],
+                        } only %}
                     </div>
-                    {% include '@PathViews/components/button.twig' with {
-                        type: 'submit',
-                        form: 'lb-product-add-to-cart',
-                        title: stickyHeader.cartUrlLabel,
-                        variants: ['primary'],
-                    } only %}
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock header %}
 
 {% block main %}

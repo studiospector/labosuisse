@@ -50,7 +50,7 @@ export default class HeaderProduct extends Component {
                 },
                 // onLeaveBack: () => this.el.classList.remove('lb-header-sticky-product--scrolled'),
                 // onUpdate() {
-                    // console.log("Update")
+                //     console.log("Update")
                 // }
             }
         })
@@ -59,7 +59,8 @@ export default class HeaderProduct extends Component {
 
     adjustElement = (elemHeight, height, isHide) => {
         let matchMedia = window.matchMedia("screen and (max-width: 768px)")
-        if (height || (isHide === undefined || isHide === false)) {
+        // if (height || (isHide === undefined || isHide === false)) {
+        if (height || (isHide === undefined || isHide === false || isHide === true)) {
             if (matchMedia.matches) {
                 const bottom = (elemHeight <= 0) ? 0 : '-100%'
                 this.el.style.bottom = bottom

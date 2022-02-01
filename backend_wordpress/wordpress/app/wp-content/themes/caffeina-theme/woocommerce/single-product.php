@@ -28,6 +28,7 @@ $context['product'] = $product;
 // Sticky Header
 $context['stickyHeader']['price'] = $product->get_price_html();
 $context['stickyHeader']['cartUrlLabel'] = __('Aggiungi al carrello', 'labo-suisse-theme');
+$context['stickyHeader']['variations'] = $product->get_available_variations();
 
 ob_start();
 wc_product_class( 'single-product-details container', $product );

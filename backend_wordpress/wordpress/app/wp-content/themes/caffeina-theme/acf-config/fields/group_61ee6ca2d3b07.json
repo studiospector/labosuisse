@@ -40,6 +40,23 @@
             "wpml_cf_preferences": 1
         },
         {
+            "key": "field_61f854714cb46",
+            "label": "Contenuto",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
             "key": "field_61ee6d17807ae",
             "label": "Titolo",
             "name": "lb_block_routine_title",
@@ -143,5 +160,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643648319
+    "modified": 1643664516
 }

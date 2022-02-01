@@ -19,6 +19,7 @@ import BlockLoveLabo from './BlockLoveLabo'
 import OffsetNavSystem from './OffsetNavSystem'
 import AnimationParallax from './AnimationParallax'
 import CardsGrid from './CardsGrid'
+import ScrollTo from './ScrollTo'
 
 const components = {
     scrollbar: {
@@ -99,6 +100,11 @@ const components = {
     cardsGrid: {
         selector: '.js-cards-grid',
         type: CardsGrid,
+        optional: true
+    },
+    scrollTo: {
+        selector: '.js-scroll-to',
+        type: ScrollTo,
         optional: true
     },
 }
