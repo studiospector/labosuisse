@@ -10,10 +10,10 @@ class CarouselBannerAlternate extends BaseBlock {
             while( have_rows('lb_block_carousel_banner_alternate') ) : the_row();
                 $slides[] = [
                     'images' => [
-                        'original' => get_sub_field('lb_block_banner_alternate_img'),
-                        'large' => get_sub_field('lb_block_banner_alternate_img'),
-                        'medium' => get_sub_field('lb_block_banner_alternate_img'),
-                        'small' => get_sub_field('lb_block_banner_alternate_img')
+                        'original' => get_sub_field('lb_block_carousel_banner_alternate_img'),
+                        'large' => get_sub_field('lb_block_carousel_banner_alternate_img'),
+                        'medium' => get_sub_field('lb_block_carousel_banner_alternate_img'),
+                        'small' => get_sub_field('lb_block_carousel_banner_alternate_img')
                     ],
                     'noContainer' => true,
                     'infobox' => [
