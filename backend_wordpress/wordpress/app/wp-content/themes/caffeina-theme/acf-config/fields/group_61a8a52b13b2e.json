@@ -222,7 +222,7 @@
             },
             "allow_null": 0,
             "other_choice": 0,
-            "default_value": "",
+            "default_value": "left",
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
@@ -248,7 +248,7 @@
             },
             "allow_null": 0,
             "other_choice": 0,
-            "default_value": "",
+            "default_value": "left",
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
@@ -272,5 +272,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643716886
+    "modified": 1643724289
 }
