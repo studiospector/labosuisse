@@ -12,7 +12,7 @@ class Routine extends BaseBlock {
                 $cf_post = get_sub_field('lb_block_routine_carousel_product');
                 // echo "<pre>";
                 // var_dump($cf_post);
-                if ( !is_null($cf_post) && !cf_post) {
+                if ( !is_null($cf_post) && !$cf_post) {
                  
                     $items[] = [
                         'text' => get_sub_field('lb_block_routine_carousel_text'),
