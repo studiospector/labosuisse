@@ -98,7 +98,7 @@
     
     .swiper-button-next {
         top: 36%;
-        right: calc(50% - 360px);
+        right: calc(50% - 320px);
 
         @include mq($until: md) {
             right: 10px;
@@ -107,7 +107,7 @@
 
     .swiper-button-prev {
         top: 36%;
-        left: calc(50% - 360px);
+        left: calc(50% - 320px);
 
         @include mq($until: md) {
             left: 10px;

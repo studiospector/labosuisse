@@ -9,8 +9,12 @@
                     <div class="carousel-centered__slide__img">
                         {{ lbPicture(slide.images) }}
                     </div>
-                    <h5 class="infobox__subtitle">{{ slide.subtitle }}</h5>
-                    <p class="p-small">{{ slide.text }}</p>
+                    {% if slide.subtitle %}
+                        <h5 class="infobox__subtitle">{{ slide.subtitle }}</h5>
+                    {% endif %}
+                    {% if slide.text %}
+                        <p class="p-small">{{ slide.text }}</p>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
