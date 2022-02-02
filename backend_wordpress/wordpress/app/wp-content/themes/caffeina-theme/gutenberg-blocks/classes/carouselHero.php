@@ -8,6 +8,10 @@ class carouselHero extends BaseBlock {
         if( have_rows('lb_block_carousel_hero') ) {
             $slides = [];
             while( have_rows('lb_block_carousel_hero') ) : the_row();
+            $cta = [];
+            if (get_sub_field('lb_block_carousel_hero_infobox_btn') != "") {
+                $cta = array_merge (  (array)get_sub_field('lb_block_carousel_hero_infobox_btn') ,['variants' => [get_sub_field('lb_block_carousel_hero_infobox_btn_variants')]]);  
+            }
                 $slides[] = [
                     'images' => [
                         'original' => get_sub_field('lb_block_carousel_hero_img'),
@@ -25,14 +29,17 @@ class carouselHero extends BaseBlock {
                         'subtitle' => get_sub_field('lb_block_carousel_hero_infobox_subtitle'),
                         'paragraph' => get_sub_field('lb_block_carousel_hero_infobox_paragraph'),
                         //'cta' => array_merge((array)get_sub_field('lb_block_carousel_hero_infobox_btn'),['variants' => [get_sub_field('lb_block_carousel_hero_infobox_btn_variants')]])
-                        'cta' => array_merge( get_field('lb_block_carousel_hero_infobox_btn') == "" ? [] : [get_field('lb_block_carousel_hero_infobox_btn')] ,['variants' => [get_field('lb_block_carousel_hero_infobox_btn_variants')]])
+                         'cta' => $cta
                     ]
                 ];
+               
+               
             endwhile;
         }
         $payload= [
             'slides' => $slides
         ];
+       
         // $this->context['data'] = array_merge($this->context['data'],$infobox);
         $this->setContext($payload);  
     }

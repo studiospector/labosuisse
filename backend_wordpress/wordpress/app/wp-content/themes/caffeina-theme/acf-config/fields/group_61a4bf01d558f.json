@@ -203,6 +203,49 @@
                     "ui": 1
                 }
             ]
+        },
+        {
+            "key": "field_61fa62aab972f",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_61fa62bfb9730",
+            "label": "Variante",
+            "name": "lb_block_carousel_posts_variant",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "full": "Full",
+                "one-post": "1 articolo",
+                "two-posts": "2 articoli"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -223,5 +266,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643717978
+    "modified": 1643799466
 }

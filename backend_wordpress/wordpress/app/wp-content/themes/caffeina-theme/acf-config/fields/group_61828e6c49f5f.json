@@ -109,7 +109,7 @@
         {
             "key": "field_61dd59b637499",
             "label": "Titolo",
-            "name": "lb_block_launch_two_images_infobox_tagline",
+            "name": "lb_block_launch_two_images_infobox_title",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -228,5 +228,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643720285
+    "modified": 1643800059
 }

@@ -8,6 +8,10 @@ class CarouselBannerAlternate extends BaseBlock {
         if( have_rows('lb_block_carousel_banner_alternate') ) {
             $slides = [];
             while( have_rows('lb_block_carousel_banner_alternate') ) : the_row();
+                $cta = [];
+                if (get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') != "") {
+                    $cta = array_merge (  (array)get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') ,['variants' => [get_sub_field('lb_block_carousel_banner_alternate_infobox_btn_variants')]]);  
+                }
                 $slides[] = [
                     'images' => [
                         'original' => get_sub_field('lb_block_carousel_banner_alternate_img'),
@@ -20,14 +24,14 @@ class CarouselBannerAlternate extends BaseBlock {
                         'tagline' => get_sub_field('lb_block_carousel_banner_alternate_infobox_tagline'),
                         'title' => get_sub_field('lb_block_carousel_banner_alternate_infobox_title'),
                         'subtitle' => get_sub_field('lb_block_carousel_banner_alternate_infobox_subtitle'),
-                        'paragraph' => get_sub_field('lb_block_carousel_banner_alternate_infobox_paragraph')
+                        'paragraph' => get_sub_field('lb_block_carousel_banner_alternate_infobox_paragraph'),
+                        'cta' => $cta
                     ],
                     'imageBig' => get_sub_field('lb_block_carousel_banner_alternate_img_big'),
                     'variants' => [get_sub_field('lb_block_carousel_banner_alternate_variants_lr'),get_sub_field('lb_block_carousel_banner_alternate_variants_hcb')],
+                    
                 ];
-                if (get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') != "") {
-                    $slides['infobox']['cta'] = array_merge (  (array)get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') ,['variants' => [get_sub_field('lb_block_carousel_banner_alternate_infobox_btn_variants')]]);  
-                }
+                
             endwhile;
         }
         

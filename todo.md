@@ -21,13 +21,13 @@ STEFANO
 
 
 BUGFIX
-- carousel banner alternate fields
-- carousel banner alternate immagini
-- bottone in carousel hero
-- varianti in carousel articoli
+√ - carousel banner alternate fields 
+√ - carousel banner alternate immagini
+√ - bottone in carousel hero
+√ - varianti in carousel articoli
 
-- lancio due immagini campi tagline e titolo invertiti e uno dei due non si vede
-- aggiustare blocco infobox
+√ - lancio due immagini campi tagline e titolo invertiti e uno dei due non si vede
+√ - aggiustare blocco infobox
 
 
 
