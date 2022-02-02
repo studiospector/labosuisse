@@ -224,7 +224,7 @@
                 {
                     "key": "field_61c31331a4b43",
                     "label": "Posizione Infobox",
-                    "name": "lb_block_banner_alternate_variants_lr",
+                    "name": "lb_block_carousel_banner_alternate_variants_lr",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -234,6 +234,7 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "choices": {
                         "infobox-left": "Sinistra",
                         "infobox-right": "Destra"
@@ -243,13 +244,12 @@
                     "default_value": "infobox-left",
                     "layout": "vertical",
                     "return_format": "value",
-                    "wpml_cf_preferences": 1,
                     "save_other_choice": 0
                 },
                 {
                     "key": "field_61c31354a4b44",
                     "label": "Altezza Infobox",
-                    "name": "lb_block_banner_alternate_variants_hcb",
+                    "name": "lb_block_carousel_banner_alternate_variants_hcb",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -259,6 +259,7 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "choices": {
                         "infobox-fullheight": "Full height",
                         "infobox-centered": "Centrato",
@@ -269,13 +270,12 @@
                     "default_value": "infobox-centered",
                     "layout": "vertical",
                     "return_format": "value",
-                    "wpml_cf_preferences": 1,
                     "save_other_choice": 0
                 },
                 {
                     "key": "field_61f923679185b",
                     "label": "Immagine grande",
-                    "name": "lb_block_banner_alternate_img_big",
+                    "name": "lb_block_carousel_banner_alternate_img_big",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -285,12 +285,12 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 1,
                     "message": "",
                     "default_value": 0,
                     "ui": 1,
                     "ui_on_text": "",
-                    "ui_off_text": "",
-                    "wpml_cf_preferences": 1
+                    "ui_off_text": ""
                 }
             ]
         }
@@ -313,5 +313,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643725495
+    "modified": 1643797224
 }

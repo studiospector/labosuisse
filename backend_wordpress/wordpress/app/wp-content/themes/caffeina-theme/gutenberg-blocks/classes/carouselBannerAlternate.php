@@ -22,7 +22,8 @@ class CarouselBannerAlternate extends BaseBlock {
                         'subtitle' => get_sub_field('lb_block_carousel_banner_alternate_infobox_subtitle'),
                         'paragraph' => get_sub_field('lb_block_carousel_banner_alternate_infobox_paragraph')
                     ],
-                    'variants' => [get_sub_field('lb_block_banner_alternate_variants_lr'),get_sub_field('lb_block_banner_alternate_variants_hcb')],
+                    'imageBig' => get_sub_field('lb_block_carousel_banner_alternate_img_big'),
+                    'variants' => [get_sub_field('lb_block_carousel_banner_alternate_variants_lr'),get_sub_field('lb_block_carousel_banner_alternate_variants_hcb')],
                 ];
                 if (get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') != "") {
                     $slides['infobox']['cta'] = array_merge (  (array)get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') ,['variants' => [get_sub_field('lb_block_carousel_banner_alternate_infobox_btn_variants')]]);  
@@ -35,6 +36,7 @@ class CarouselBannerAlternate extends BaseBlock {
         
         ];
         // $this->context['data'] = array_merge($this->context['data'],$infobox);
-        $this->setContext($payload);        
+        $this->setContext($payload);       
+        //var_dump($this->payload);
     }
 }
