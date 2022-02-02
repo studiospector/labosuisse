@@ -75,6 +75,10 @@
                 .wp-block {
                     max-width: 1200px;
                 }
+
+                .block-editor__container img {
+                    max-width: none !important;
+                }
             }
 
             // Style metaboxes container down the content

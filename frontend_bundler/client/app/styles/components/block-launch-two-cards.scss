@@ -32,4 +32,26 @@
             margin-bottom: 60px;
         }
     }
+
+
+
+    &--vertical {
+        .block-two-cards__cards {
+            margin-top: 60px;
+            
+            .card {
+                .lb-picture {
+                    min-height: 460px;
+        
+                    @include mq($until: md) {
+                        min-height: 300px;
+                    }
+                }
+    
+                .card-img-wrapper {
+                    order: 1;
+                }
+            }
+        }
+    }
 }
