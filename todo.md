@@ -11,6 +11,7 @@ GIUSEPPE
 STEFANO
 - rename campi
 - link scrollto section blocchi prodotto
+- variante verticale del blocco lancio due card - template 4
 - archivi
 
 
