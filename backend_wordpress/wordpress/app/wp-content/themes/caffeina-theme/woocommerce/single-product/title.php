@@ -21,9 +21,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Brand
 $brands = get_the_terms( get_the_ID(), 'lb-brand' );
-$brand_logo = get_field('lb_brand_logo', $brands[0]);
-$context['brand'] = $brands[0];
-$context['brand_logo'] = $brand_logo;
+if ($brands) {
+    $brand_logo = get_field('lb_brand_logo', $brands[0]);
+    $context['brand'] = $brands[0];
+    $context['brand_logo'] = $brand_logo;
+}
 
 // Patent
 $context['patent'] = get_field('lb_product_patent');
