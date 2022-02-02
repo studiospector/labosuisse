@@ -77,4 +77,8 @@
             transform: translateY(0);
         }
     }
+
+    &--offsetnav-open {
+        transform: translateY(-100%);
+    }
 }

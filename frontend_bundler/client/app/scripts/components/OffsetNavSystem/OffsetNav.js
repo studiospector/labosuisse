@@ -38,6 +38,7 @@ class OffsetNav extends Component {
 
     open = () => {
         qs('.lb-header').classList.add('lb-header--offsetnav-open')
+        qs('.lb-header-sticky-product').classList.add('lb-header-sticky-product--offsetnav-open')
         this.adjustContent()
         this.el.classList.add('is-open')
     }
@@ -45,6 +46,7 @@ class OffsetNav extends Component {
     close = () => {
         this.el.classList.remove('is-open')
         qs('.lb-header').classList.remove('lb-header--offsetnav-open')
+        qs('.lb-header-sticky-product').classList.remove('lb-header-sticky-product--offsetnav-open')
     }
 
     onDestroy() {
