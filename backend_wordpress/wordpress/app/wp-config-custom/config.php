@@ -108,7 +108,7 @@ define('POSTINO_CAFF_MAIL_SENDER_NAME', getenv('POSTINO_CAFF_MAIL_SENDER_NAME'))
 /* Keep only the last 4 versions of posts */
 define('WP_POST_REVISIONS', 4);
 
-define('WP_ALLOW_MULTISITE', true);
+// define('WP_ALLOW_MULTISITE', true);
 
 // Offload Media lite plugin settings
 define( 'AS3CF_SETTINGS', serialize( array(
