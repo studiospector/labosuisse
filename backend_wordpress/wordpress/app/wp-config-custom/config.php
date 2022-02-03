@@ -17,8 +17,8 @@
  */
 
 
-define('WP_DEBUG', getenv('DEBUG') === 'true');
-define('WP_DEBUG_LOG', getenv('DEBUG') === 'true');
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
 
 $dsn = (object) parse_url(getenv('DATABASE_URL'));
 
@@ -120,3 +120,4 @@ define( 'AS3CF_SETTINGS', serialize( array(
 // Memory limit
 define('WP_MEMORY_LIMIT', '512M');
 define('WP_AUTO_UPDATE_CORE', false);
+define('AUTOMATIC_UPDATER_DISABLED', true);
