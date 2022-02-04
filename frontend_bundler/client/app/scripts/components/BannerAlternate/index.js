@@ -15,7 +15,7 @@ export default class BannerAlternate extends Component {
         this.variant = this.el.getAttribute('data-variant')
 
         // Adjust images on resize for only mobile
-        if (this.variant == 'infobox-right') {
+        if (this.variant == 'infobox-right' && !this.el.classList.contains('banner-alternate--infobox-centered')) {
             setTimeout(() => {
                 this.adjustImageOffsetDispatcher()
             }, 100);
@@ -30,16 +30,27 @@ export default class BannerAlternate extends Component {
 
     adjustImageOffset = (e) => {
         if (e.matches) {
-            if (this.ui.infoboxParagraph) {
+            let textWrapHeight = 0, ctaWrapHeight = 0
+
+            if (this.ui.infoboxParagraph && this.ui.infoboxCTA) {
                 this.ui.infoboxCTA.insertAdjacentElement('afterbegin', this.ui.infoboxParagraph)
             }
-            let textWrapHeight = this.getFullHeight(this.ui.infoboxText) + 40
-            let ctaWrapHeight = this.getFullHeight(this.ui.infoboxCTA) + 20
-            this.ui.image.style.marginTop = `${textWrapHeight}px`
-            this.ui.image.style.marginBottom = `${ctaWrapHeight}px`
-            this.ui.image.style.height = `calc(100% - ${textWrapHeight + ctaWrapHeight}px)`
+
+            if (this.ui.infoboxText) {
+                let textWrapHeight = this.getFullHeight(this.ui.infoboxText) + 40
+                this.ui.image.style.marginTop = `${textWrapHeight}px`
+            }
+
+            if (this.ui.infoboxCTA) {
+                let ctaWrapHeight = this.getFullHeight(this.ui.infoboxCTA) + 20
+                this.ui.image.style.marginBottom = `${ctaWrapHeight}px`
+            }
+            
+            if (textWrapHeight && ctaWrapHeight) {
+                this.ui.image.style.height = `calc(100% - ${textWrapHeight + ctaWrapHeight}px)`
+            }
         } else {
-            if (this.ui.infoboxParagraph) {
+            if (this.ui.infoboxParagraph && this.ui.infoboxText) {
                 this.ui.infoboxText.insertAdjacentElement('afterend', this.ui.infoboxParagraph)
             }
             this.ui.image.style.marginTop = `0px`

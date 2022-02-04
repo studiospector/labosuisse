@@ -150,6 +150,14 @@
 
     &--infobox-centered {
         align-items: center;
+
+        .banner-alternate {
+            &__infobox {
+                @include mq($until: md) {
+                    position: relative;
+                }
+            }
+        }
     }
 
     &--infobox-bottom {
