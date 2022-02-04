@@ -55,3 +55,51 @@ ol:not(.flex-control-nav) {
         }
     }
 }
+
+// zoom in/out classes
+// pswp pswp--open pswp--no-mouse-drag pswp--custom-bg pswp--has_mouse pswp--zoom-allowed pswp--click-to-zoom pswp--ui-visible
+// pswp pswp--open pswp--no-mouse-drag pswp--custom-bg pswp--has_mouse pswp--zoom-allowed pswp--click-to-zoom pswp--ui-visible pswp--zoomed-in
+
+.pswp {
+    &__bg {
+        background-color: #f6f5f3;
+    }
+
+    &__counter {
+        height: auto;
+        padding: 20px;
+        margin: 0;
+        line-height: 1.4;
+        text-shadow: none;
+        color: map-get($colors, "black");
+        background-color: map-get($colors, "white");
+        box-shadow: 1px 1px #eae8e4;
+        opacity: 1;
+    }
+
+    &__button {
+        &--zoom,
+        &--close {
+            width: auto;
+            height: auto;
+            margin: 0;
+            padding: 20px;
+            background-color: map-get($colors, "white");
+            box-shadow: -1px 1px #eae8e4;
+            opacity: 1;
+
+            &:hover {
+                padding: 20px;
+                background-color: map-get($colors, "white");
+                box-shadow: -1px 1px #eae8e4;
+                opacity: 1;
+            }
+        }
+
+        &--zoom {
+            svg {
+                transform: rotate(45deg);
+            }
+        }
+    }
+}

@@ -100,19 +100,6 @@
             display: none;
             flex-shrink: 0;
         }
-
-        // .flex-control-nav {
-        //     display: flex;
-        //     flex-wrap: wrap;
-        //     column-gap: 30px;
-        //     row-gap: 30px;
-        //     margin-top: 30px;
-
-        //     li {
-        //         display: block;
-        //         flex: 0 0 47.2%;
-        //     }
-        // }
     }
 
     .lb-product-gallery {
@@ -121,30 +108,34 @@
 
         @include mq($until: md) {
             padding-bottom: 60px;
-            // margin-bottom: 30px;
         }
 
-        .lb-product-gallery-thumb {
-            margin-top: 30px;
-
+        &__desktop {
             @include mq($until: md) {
-                margin-top: 10px;
+                display: none;
             }
         }
 
-        &__image {
-            overflow: hidden;
-        }
+        &__mobile {
+            position: relative;
 
-        .swiper-pagination.swiper-pagination-bullets {
             @include mq($from: md) {
                 display: none;
             }
 
-            @include mq($until: md) {
+            .swiper-pagination.swiper-pagination-bullets {
                 display: block;
-                bottom: 22px;
+                bottom: 0;
             }
+        }
+
+        a {
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        &__image {
+            overflow: hidden;
         }
     }
 

@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * WC Support
+ */
+add_action( 'init', 'lb_wc_support' );	 	 
+function lb_wc_support() {	 	 
+   remove_theme_support( 'wc-product-gallery-lightbox' );	 	 
+}
+
+
+
+/**
  * Remove classes from body_class function
  */
 add_filter('body_class', 'lb_set_wc_custom_body_classes');
