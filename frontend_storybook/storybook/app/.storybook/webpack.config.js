@@ -78,7 +78,13 @@ module.exports = async ({ config, mode }) => {
 
   config.module.rules.push({
     test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
+    loaders: ['style-loader', 'css-loader', {
+      loader: "sass-loader",
+      options: {
+        // Prefer `dart-sass`
+        implementation: require("sass"),
+      },
+    }],
     include: path.resolve(__dirname, '../'),
   });
 
