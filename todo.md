@@ -1,4 +1,5 @@
-GIUSEPPE 
+GIUSEPPE
+
 - namespaces
 - menu
 
@@ -17,9 +18,9 @@ GIUSEPPE
 
 STEFANO
 
-2 FEBBRAIO 2022
 - √ rename campi
 - link scrollto section blocchi prodotto
+- √ photoswipe gallery desktop + mobile
 - √ variante verticale del blocco lancio due card - template 4
 - archivi
 
@@ -31,7 +32,6 @@ STEFANO
 
 BUGFIX
 
-2 FEBBRAIO 2022
 - √ carousel banner alternate fields 
 - √ carousel banner alternate immagini
 - √ bottone in carousel hero
@@ -47,8 +47,17 @@ BUGFIX
 
 
 COMPONENTI DA TERMINARE
+
 - card grid linea lifting - template 1
 - card grid trattamenti make-up - template 1
 - card grid ultimi post - template 5
 - √ variante verticale del blocco lancio due card - template 4
 - routine diventa anche blocco
+
+
+
+PAGINA PRODOTTO
+
+- √ photoswipe gallery desktop + mobile
+- gestione offset nav del blocco due card e tecnologia
+- sticky header dinamico
