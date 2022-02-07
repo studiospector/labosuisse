@@ -137,8 +137,6 @@ class cardsGrid extends BaseBlock {
             'cta' => $ctaCards,
             'items' => $items,
         ];
-        echo "<pre>";
-        var_dump(",adonna troia");
         $this->setContext($payload);
     }
 
