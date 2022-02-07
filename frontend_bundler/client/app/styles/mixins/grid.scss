@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @mixin generate-grid() {
   @include generate-base-style();
   @include make-grid-columns();
@@ -7,8 +9,8 @@
   width: 100%;
   margin-right: auto;
   margin-left: auto;
-  padding-right: rem($grid-gutter-width/2);
-  padding-left: rem($grid-gutter-width/2);
+  padding-right: rem($grid-gutter-width*0.5);
+  padding-left: rem($grid-gutter-width*0.5);
 }
 
 // For each breakpoint, define the maximum width of the container in a media query
@@ -25,18 +27,18 @@
 
   flex-wrap: wrap;
 
-  margin-right: rem($grid-gutter-width / -2);
-  margin-left: rem($grid-gutter-width / -2);
+  margin-right: rem(math.div($grid-gutter-width, -2));
+  margin-left: rem(math.div($grid-gutter-width, -2));
 }
 
 @mixin make-col($size, $columns: $grid-size-columns) {
-  flex: 0 0 percentage($size / $columns);
+  flex: 0 0 percentage(math.div($size, $columns));
 
-  max-width: percentage($size / $columns);
+  max-width: percentage(math.div($size, $columns));
 }
 
 @mixin make-col-offset($size, $columns: $grid-size-columns) {
-  $num: $size / $columns;
+  $num: math.div($size, $columns);
 
   margin-left: if($num == 0, 0, percentage($num));
 }
@@ -45,8 +47,8 @@
 @mixin make-grid-columns($columns: $grid-size-columns, $gutter: $grid-gutter-width, $breakpoints: $grid-breakpoints) {
   @if ($gutter != $grid-gutter-width) {
     .row [class*="col-"] {
-      padding-right: rem($gutter / 2);
-      padding-left: rem($gutter / 2);
+      padding-right: rem($gutter * 0.5);
+      padding-left: rem($gutter * 0.5);
     }
   }
 
@@ -102,8 +104,8 @@
 
       width: 100%;
       min-height: 1px; // Prevent columns from collapsing when empty
-      padding-right: rem($grid-gutter-width / 2);
-      padding-left: rem($grid-gutter-width / 2);
+      padding-right: rem($grid-gutter-width * 0.5);
+      padding-left: rem($grid-gutter-width * 0.5);
     }
 
     .no-gutters {

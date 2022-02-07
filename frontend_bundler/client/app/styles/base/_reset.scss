@@ -1,7 +1,9 @@
+@use "sass:math";
+
 html {
   box-sizing: border-box;
 
-  font-size: percentage($font-size-default / 16px); //16px
+  font-size: percentage(math.div($font-size-default, 16px)); //16px
 
   @include mq(md,lg) {
     font-size: 90%;
