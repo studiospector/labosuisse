@@ -149,6 +149,13 @@
                 "operator": "==",
                 "value": "product"
             }
+        ],
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "acf\/lb-routine"
+            }
         ]
     ],
     "menu_order": 0,
@@ -160,5 +167,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643718337
+    "modified": 1643983463
 }
