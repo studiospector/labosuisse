@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @mixin generate-rules($rules) {
   @each $property, $value in $rules {
     #{$property}: #{$value};
@@ -40,7 +42,7 @@
   @if(index("rem", unit($pixels)) != null) {
     @return $pixels;
   }
-  @return #{$pixels / $font-size-default}rem;
+  @return #{math.div($pixels, $font-size-default)}rem;
 }
 
 @function to-number($value) {
@@ -67,7 +69,7 @@
       $result: $result * 10 + map-get($numbers, $character);
     } @else {
       $digits: $digits * 10;
-      $result: $result + map-get($numbers, $character) / $digits;
+      $result: $result + math.div(map-get($numbers, $character), $digits);
     }
   }
 
