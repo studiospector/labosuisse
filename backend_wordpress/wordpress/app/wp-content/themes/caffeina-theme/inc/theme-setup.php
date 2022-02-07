@@ -301,6 +301,41 @@ function lb_add_symbols_to_admin()
 
 
 /**
+ * Unregister taxonomies
+ */
+add_action('init', 'lb_unregister_taxonomies', 999);
+function lb_unregister_taxonomies() {
+    register_taxonomy('category', []);
+    register_taxonomy('post_tag', []);
+}
+
+
+
+/**
+ * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
+ */
+add_filter( 'wpcf7_form_tag', function ( $tag ) {
+    $datas = [];
+    foreach ( (array)$tag['options'] as $option ) {
+        if ( strpos( $option, 'data-' ) === 0 ) {
+            $option = explode( ':', $option, 2 );
+            $data_attribute = $option[0];
+            $data_value = str_replace('|', ' ', $option[1]);
+            $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
+        }
+    }
+    if ( ! empty( $datas ) ) {
+        $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
+        add_filter( 'wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
+            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" ". wpcf7_format_atts($datas), $content));
+        });
+    }
+    return $tag;
+} );
+
+
+
+/**
  * Get header and menu
  */
 function lb_header() {

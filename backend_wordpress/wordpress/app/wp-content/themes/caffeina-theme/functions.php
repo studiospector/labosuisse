@@ -50,6 +50,7 @@ if (!defined('LB_BUILD_LIB_URI')) {
  */
 include __DIR__ . '/inc/theme-setup.php';
 include __DIR__ . '/inc/theme-assets.php';
+include __DIR__ . '/inc/cpt-tax.php';
 include __DIR__ . '/inc/woocommerce-setup.php';
 
 
@@ -63,66 +64,3 @@ include __DIR__ . '/inc/woocommerce-setup.php';
  foreach ( $files as $file ) {
     include_once $file;
 }
-
-
-
-
-
-/**
- * Registers the lb-brand taxonomy
- */
-function lb_brand_tax_init() {
-
-	$args = array(
-		'labels' => array(
-            'name'              => _x( 'Brands', 'taxonomy general name', 'lb-brand-tax' ),
-            'singular_name'     => _x( 'Brand', 'taxonomy singular name', 'lb-brand-tax' ),
-            'search_items'      => __( 'Search Brands', 'lb-brand-tax' ),
-            'all_items'         => __( 'All Brands', 'lb-brand-tax' ),
-            'parent_item'       => __( 'Parent Brand', 'lb-brand-tax' ),
-            'parent_item_colon' => __( 'Parent Brand:', 'lb-brand-tax' ),
-            'edit_item'         => __( 'Edit Brand', 'lb-brand-tax' ),
-            'update_item'       => __( 'Update Brand', 'lb-brand-tax' ),
-            'add_new_item'      => __( 'Add New Brand', 'lb-brand-tax' ),
-            'new_item_name'     => __( 'New Brand Name', 'lb-brand-tax' ),
-            'menu_name'         => __( 'Brand', 'lb-brand-tax' ),
-        ),
-		'description' => __( '', 'lb-brand-tax' ),
-		'hierarchical' => true,
-		'public' => true,
-		'publicly_queryable' => true,
-		'show_ui' => true,
-		'show_in_menu' => true,
-		'show_in_nav_menus' => true,
-		'show_tagcloud' => true,
-		'show_in_quick_edit' => true,
-		'show_admin_column' => false,
-		'show_in_rest' => true,
-	);
-	register_taxonomy( 'lb-brand', array('product'), $args );
-}
-add_action( 'init', 'lb_brand_tax_init' );
-
-
-
-/**
- * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
- */
-add_filter( 'wpcf7_form_tag', function ( $tag ) {
-    $datas = [];
-    foreach ( (array)$tag['options'] as $option ) {
-        if ( strpos( $option, 'data-' ) === 0 ) {
-            $option = explode( ':', $option, 2 );
-            $data_attribute = $option[0];
-            $data_value = str_replace('|', ' ', $option[1]);
-            $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
-        }
-    }
-    if ( ! empty( $datas ) ) {
-        $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
-        add_filter( 'wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
-            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" ". wpcf7_format_atts($datas), $content));
-        });
-    }
-    return $tag;
-} );
