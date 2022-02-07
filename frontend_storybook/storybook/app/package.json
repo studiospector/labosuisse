@@ -33,7 +33,7 @@
         "raw-loader": "^4.0.1",
         "sass": "^1.49.7",
         "sass-loader": "^8.0.2",
-        "sass-mq": "^5.0.1",
+        "sass-mq": "^6.0.0",
         "style-loader": "^1.2.1",
         "swiper": "^6.8.4",
         "twig": "^1.15.4",
