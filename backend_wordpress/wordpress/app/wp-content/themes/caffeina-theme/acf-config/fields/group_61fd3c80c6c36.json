@@ -69,7 +69,7 @@
             "key": "field_61fd3d92e2189",
             "label": "Variante cards",
             "name": "lb_block_cards_grid_cards_variants",
-            "type": "radio",
+            "type": "select",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -79,21 +79,22 @@
                 "id": ""
             },
             "choices": {
-                "type-1": "type-1",
-                "type-2": "type-2",
-                "type-3": "type-3",
-                "type-5": "type-5",
-                "type-6": "type-6",
-                "type-7": "type-7",
-                "type-8": "type-8"
+                "type-1": "Tipo 1",
+                "type-2": "Tipo 2",
+                "type-3": "Tipo 3",
+                "type-5": "Tipo 5",
+                "type-6": "Tipo 6",
+                "type-7": "Tipo 7",
+                "type-8": "Tipo 8"
             },
+            "default_value": false,
             "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "",
-            "layout": "vertical",
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
             "return_format": "value",
-            "wpml_cf_preferences": 1,
-            "save_other_choice": 0
+            "wpml_cf_preferences": 2,
+            "placeholder": ""
         },
         {
             "key": "field_61fd3c8116d7d",
@@ -318,5 +319,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643986741
+    "modified": 1644281239
 }
