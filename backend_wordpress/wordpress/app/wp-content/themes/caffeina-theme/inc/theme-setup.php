@@ -68,7 +68,7 @@ class ThemeSetup extends Timber\Site
 
         add_theme_support('post-thumbnails');
 
-        add_theme_support('post-formats', array('aside', 'gallery'));
+        // add_theme_support('post-formats', array('aside', 'gallery'));
 
         add_image_size('lb-large', 1260, 600, true);
         add_image_size('lb-medium', 650, 470, true);
@@ -332,6 +332,70 @@ add_filter( 'wpcf7_form_tag', function ( $tag ) {
     }
     return $tag;
 } );
+
+
+
+/**
+ * Get posts archive years
+ */
+function lb_get_post_typologies()
+{
+    $items = [];
+    $typologies = get_terms([
+        'taxonomy' => 'lb-post-typology',
+        'hide_empty' => false,
+    ]);
+
+    foreach ($typologies as $typology) {
+        $items[] = [
+            'label' => $typology->name,
+            'value' => $typology->term_id,
+        ];
+    }
+
+    return $items;
+}
+
+
+
+/**
+ * Get posts archive years
+ */
+function lb_get_posts_archive_years()
+{
+    $years = array();
+    $years_args = array(
+        'type' => 'yearly',
+        'format' => 'custom',
+        'before' => '',
+        'after' => '|',
+        'echo' => false,
+        'post_type' => 'post',
+    );
+
+    // Get Years
+    $years_content = wp_get_archives($years_args);
+    if (!empty($years_content)) {
+        $years_arr = explode('|', $years_content);
+        $years_arr = array_filter($years_arr, function ($item) {
+            return trim($item) !== '';
+        }); // Remove empty whitespace item from array
+
+        foreach ($years_arr as $year_item) {
+            $year_row = trim($year_item);
+            preg_match('/href=["\']?([^"\'>]+)["\']>(.+)<\/a>/', $year_row, $year_vars);
+
+            if (!empty($year_vars)) {
+                $years[] = array(
+                    'label' => $year_vars[2],
+                    'value' => $year_vars[2]
+                );
+            }
+        }
+    }
+
+    return $years;
+}
 
 
 

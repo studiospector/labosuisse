@@ -1,0 +1,58 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'magazine' %}
+
+{% block main %}
+
+    {{ content|raw }}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-post-typology',
+                    label: '',
+                    placeholder: 'Tipologia',
+                    multiple: true,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: postTypologiesTax,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-post-archive-years',
+                    label: '',
+                    placeholder: 'Riferimento anno',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: years,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="col-12 col-md-4 offset-md-4">
+                {% include '@PathViews/components/fields/input.twig' with {
+                    type: 'search',
+                    name: "lb-post-search",
+                    label: "Cerca",
+                    disabled: false,
+                    required: false,
+                    variants: ['secondary'],
+                } only %}
+            </div>
+        </div>
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        <div class="row">
+            {% for item in posts %}
+                <div class="col-12 col-md-3">
+                    {% include '@PathViews/components/card.twig' with item only %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
