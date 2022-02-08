@@ -2,6 +2,12 @@
 {% for variant in variants|default([]) %}
   {% set classes = classes|merge(['infobox--' ~ variant]) %}
 {% endfor %}
+{% if textAlign %}
+  {% set classes = classes|default([])|merge(['text-' ~ textAlign]) %}
+{% endif %}
+{% if container %}
+  {% set classes = classes|default([])|merge(['container']) %}
+{% endif %}
 {% if class %}
   {% set classes = classes|merge([class]) %}
 {% endif %}

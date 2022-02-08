@@ -124,6 +124,32 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_6201a9c9af56e",
+            "label": "Allineamento testo",
+            "name": "lb_block_infobox_text_align",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "left": "Sinistra",
+                "center": "Centro",
+                "right": "Destra"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "left",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 2,
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -144,5 +170,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643718234
+    "modified": 1644276264
 }
