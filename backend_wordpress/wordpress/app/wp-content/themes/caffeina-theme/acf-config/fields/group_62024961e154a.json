@@ -1,0 +1,125 @@
+{
+    "key": "group_62024961e154a",
+    "title": "Campi personalizzati: Blocco - Articolo",
+    "fields": [
+        {
+            "key": "field_62024a5f9296a",
+            "label": "Tipo di Articolo",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_62024ac29296c",
+            "label": "Tipo",
+            "name": "lb_post_typology",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "generic_news": "News generica",
+                "press": "Comunicato stampa"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "generic_news",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 2,
+            "save_other_choice": 0
+        },
+        {
+            "key": "field_62024a829296b",
+            "label": "Comunicato stampa",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_62024ac29296c",
+                        "operator": "==",
+                        "value": "press"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_6202497d92968",
+            "label": "Logo",
+            "name": "lb_post_press_logo",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_62024ac29296c",
+                        "operator": "==",
+                        "value": "press"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1644317847
+}

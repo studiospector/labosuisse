@@ -2,42 +2,48 @@
 
 $page_for_posts = get_option('page_for_posts');
 
-if ( !isset( $paged ) || !$paged ) {
-    $paged = 1;
-}
-
-$args = array(
-    'posts_per_page' => 10,
-    'paged' => $paged,
-    'post_type' => get_post_type(),
-    // 'orderby'  => array('meta_value' => 'DESC'),
-);
-
-$posts = get_posts();
 $items = [];
 
-foreach ($posts as $item) {
-    $items[] = [
-        'images' => [
-            'original' => wp_get_attachment_url(get_post_thumbnail_id($item->ID)),
-            'large' => wp_get_attachment_url(get_post_thumbnail_id($item->ID)),
-            'medium' => wp_get_attachment_url(get_post_thumbnail_id($item->ID)),
-            'small' => wp_get_attachment_url(get_post_thumbnail_id($item->ID))
-        ],
-        'date' => date("d/m/Y", strtotime($item->post_date)),
-        'variants' => ['type-2'],
-        'infobox' => [
-            'subtitle' => $item->post_title,
-            'paragraph' => $item->post_excerpt,
-            'cta' => [
-                'title' => __("Leggi l'articolo","labo-suisse-theme"),
-                'url' => get_permalink($item->ID),
-                'iconEnd' => ['name' => 'arrow-right'],
-                'variants' => ['quaternary']
-            ]
-        ],
-    ];
-}
+if ( have_posts() ) :
+    while ( have_posts() ) :
+        the_post();
+
+        $variant = 'type-2';
+        $image = null;
+        $cta_title = __("Leggi l'articolo","labo-suisse-theme");
+
+        $typology = get_field('lb_post_typology');
+        if ($typology == 'press') {
+            $variant = 'type-6';
+            $image = get_field('lb_post_press_logo');
+            $cta_title = __("Visualizza","labo-suisse-theme");
+        }
+
+        $items[] = [
+            'images' => [
+                'original' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() )),
+                'large' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() )),
+                'medium' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() )),
+                'small' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() ))
+            ],
+            'date' => get_the_date("d/m/Y"),
+            'variants' => [$variant],
+            'infobox' => [
+                'image' => $image,
+                'subtitle' => get_the_title(),
+                'paragraph' => get_the_excerpt(),
+                'cta' => [
+                    'title' => $cta_title,
+                    'url' => get_permalink( get_the_ID() ),
+                    'iconEnd' => ['name' => 'arrow-right'],
+                    'variants' => ['quaternary']
+                ]
+            ],
+        ];
+    endwhile;
+endif;
+
+wp_reset_postdata();
 
 $context = [
     'title' => get_the_title($page_for_posts),
@@ -45,10 +51,7 @@ $context = [
     'postTypologiesTax' => lb_get_post_typologies(),
     'years' => lb_get_posts_archive_years(),
     'posts' => $items,
+    'pagination' => lb_pagination(),
 ];
-
-// echo '<pre>';
-// var_dump( $context['years'] );
-// die;
 
 Timber::render('@PathViews/home.twig', $context);

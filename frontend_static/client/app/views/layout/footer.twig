@@ -1,31 +1,33 @@
 <footer data-scroll-section>
-    <div class="prefooter">
-        <div class="prefooter--desktop container">
-            <div class="row">
-                <div class="prefooter__box col-12 col-md-4">
-                    {% include '@PathViews/components/infobox.twig' with {
-                        subtitle: prefooter.block_1.title,
-                        paragraph: prefooter.block_1.text,
-                        cta: prefooter.block_1.cta,
-                    } only %}
-                </div>
-                <div class="prefooter__box col-12 col-md-4">
-                    {% include '@PathViews/components/infobox.twig' with {
-                        subtitle: prefooter.block_2.title,
-                        paragraph: prefooter.block_2.text,
-                    } only %}
-                    {% include '@PathViews/components/fields/input.twig' with prefooter.block_2.input only %}
-                </div>
-                <div class="prefooter__box col-12 col-md-4">
-                    {% include '@PathViews/components/infobox.twig' with {
-                        subtitle: prefooter.block_3.title,
-                        paragraph: prefooter.block_3.text,
-                        cta: prefooter.block_3.cta,
-                    } only %}
+    {% if prefooter %}
+        <div class="prefooter">
+            <div class="prefooter--desktop container">
+                <div class="row">
+                    <div class="prefooter__box col-12 col-md-4">
+                        {% include '@PathViews/components/infobox.twig' with {
+                            subtitle: prefooter.block_1.title,
+                            paragraph: prefooter.block_1.text,
+                            cta: prefooter.block_1.cta,
+                        } only %}
+                    </div>
+                    <div class="prefooter__box col-12 col-md-4">
+                        {% include '@PathViews/components/infobox.twig' with {
+                            subtitle: prefooter.block_2.title,
+                            paragraph: prefooter.block_2.text,
+                        } only %}
+                        {% include '@PathViews/components/fields/input.twig' with prefooter.block_2.input only %}
+                    </div>
+                    <div class="prefooter__box col-12 col-md-4">
+                        {% include '@PathViews/components/infobox.twig' with {
+                            subtitle: prefooter.block_3.title,
+                            paragraph: prefooter.block_3.text,
+                            cta: prefooter.block_3.cta,
+                        } only %}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    {% endif %}
     <div class="footer">
         <div class="container">
             <div class="footer__top">
