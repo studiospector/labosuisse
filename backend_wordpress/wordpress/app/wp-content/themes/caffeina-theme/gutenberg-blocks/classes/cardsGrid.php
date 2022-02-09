@@ -133,7 +133,9 @@ class cardsGrid extends BaseBlock {
             
         }
         $payload = [
+            'tagline' =>  get_field('lb_block_cards_grid_tagline'),
             'title' =>  get_field('lb_block_cards_grid_title'),
+            'paragraph' =>  get_field('lb_block_cards_grid_paragraph'),
             'cta' => $ctaCards,
             'items' => $items,
         ];

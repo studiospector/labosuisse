@@ -1,12 +1,12 @@
 {
     "key": "group_61fd3c80c6c36",
-    "title": "Campi personalizzati: Blocco - Cards grid",
+    "title": "Campi personalizzati: Blocco - Cards Grid",
     "fields": [
         {
-            "key": "field_61fd3cf2e2186",
-            "label": "Titolo",
-            "name": "lb_block_cards_grid_title",
-            "type": "text",
+            "key": "field_6203a4cc9cc49",
+            "label": "Tagline",
+            "name": "lb_block_cards_grid_tagline",
+            "type": "textarea",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -15,12 +15,52 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61fd3cf2e2186",
+            "label": "Titolo",
+            "name": "lb_block_cards_grid_title",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_6203a4e29cc4a",
+            "label": "Paragrafo",
+            "name": "lb_block_cards_grid_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
         },
         {
             "key": "field_61fd3d2ce2187",
@@ -67,7 +107,7 @@
         },
         {
             "key": "field_61fd3d92e2189",
-            "label": "Variante cards",
+            "label": "Variante Cards",
             "name": "lb_block_cards_grid_cards_variants",
             "type": "select",
             "instructions": "",
@@ -78,6 +118,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "choices": {
                 "type-1": "Tipo 1",
                 "type-2": "Tipo 2",
@@ -93,12 +134,11 @@
             "ui": 1,
             "ajax": 0,
             "return_format": "value",
-            "wpml_cf_preferences": 2,
             "placeholder": ""
         },
         {
             "key": "field_61fd3c8116d7d",
-            "label": "Cards grid",
+            "label": "Cards Grid",
             "name": "lb_block_cards_grid_carousel",
             "type": "repeater",
             "instructions": "",
@@ -319,5 +359,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644281239
+    "modified": 1644406042
 }
