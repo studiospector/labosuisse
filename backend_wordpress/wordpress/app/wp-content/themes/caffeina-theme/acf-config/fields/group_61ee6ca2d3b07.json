@@ -77,6 +77,49 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_6202b8cf22d94",
+            "label": "Bottone",
+            "name": "lb_block_routine_btn",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_6202b97422d95",
+            "label": "Variante bottone",
+            "name": "lb_block_routine_btn_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "primary": "Primary",
+                "secondary": "Secondary",
+                "tertiary": "Tertiary",
+                "quaternary": "Quaternary"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "primary",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_61ee783f807af",
             "label": "Prodotti",
             "name": "lb_block_routine_carousel",
@@ -140,6 +183,48 @@
                     "ui": 1
                 }
             ]
+        },
+        {
+            "key": "field_6202b659f87fa",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6202b610f87f9",
+            "label": "Variante",
+            "name": "lb_block_routine_variants",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "default": "Default",
+                "full": "Full"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "full",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -167,5 +252,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643983463
+    "modified": 1644345879
 }

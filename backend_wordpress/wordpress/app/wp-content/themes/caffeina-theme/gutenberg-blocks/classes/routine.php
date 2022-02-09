@@ -10,8 +10,6 @@ class Routine extends BaseBlock {
             $items = [];
             while (have_rows('lb_block_routine_carousel')) : the_row();   
                 $cf_post = get_sub_field('lb_block_routine_carousel_product');
-                // echo "<pre>";
-                // var_dump($cf_post);
                 if ( !empty($cf_post) ) {
                  
                     $items[] = [
@@ -24,9 +22,10 @@ class Routine extends BaseBlock {
 
         $payload = [
             'title' =>  get_field('lb_block_routine_title'),
+            'cta' => array_merge( (array)get_field('lb_block_routine_btn'), ['variants' => [get_field('lb_block_routine_btn_variants')]]),
             'items' => $items,
+            'variants' => [get_field('lb_block_routine_variants')],
         ];
         $this->setContext($payload);
     }
 }
-

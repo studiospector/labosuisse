@@ -43,4 +43,27 @@
             }
         }
     }
+
+    &--default {
+        text-align: center;
+        background-color: map-get($colors, "white");
+
+        .block-routine {
+            &__list {
+                li::before {
+                    content: none !important;
+                }
+
+                &__item {
+                    .lb-product-card {
+                        margin-top: 0;
+                    }
+                }
+            }
+
+            &__button {
+                margin-top: 60px;
+            }
+        }
+    }
 }
