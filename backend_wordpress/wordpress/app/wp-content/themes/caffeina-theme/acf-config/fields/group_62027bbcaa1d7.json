@@ -1,6 +1,6 @@
 {
     "key": "group_62027bbcaa1d7",
-    "title": "Blocco - Ultime News",
+    "title": "Campi personalizzati: Blocco - Ultimi Articoli",
     "fields": [
         {
             "key": "field_62027bfb08891",
@@ -41,5 +41,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644330101
+    "modified": 1644399648
 }

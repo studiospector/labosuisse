@@ -24,6 +24,7 @@ class LatestNews extends BaseBlock
                     'medium' => get_the_post_thumbnail_url(),
                     'small' => get_the_post_thumbnail_url(),
                 ],
+                'date' => get_the_date("d/m/Y"),
                 'infobox' => [
                     'subtitle' =>  get_the_title(),
                     'paragraph' => get_the_excerpt(),
