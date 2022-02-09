@@ -114,7 +114,7 @@ function lb_brand_page_cpt_init()
         'menu_icon' => 'dashicons-media-default',
         'supports' => array('title', 'editor', 'thumbnail'),
         'taxonomies' => array(),
-        'public' => false,
+        'public' => true,
         'show_ui' => true,
         'show_in_menu' => true,
         'menu_position' => 5,
@@ -123,10 +123,11 @@ function lb_brand_page_cpt_init()
         'can_export' => true,
         'has_archive' => false,
         'hierarchical' => false,
-        'exclude_from_search' => false,
+        'exclude_from_search' => true,
         'show_in_rest' => true,
-        'publicly_queryable' => false,
+        'publicly_queryable' => true,
         'capability_type' => 'page',
+        'rewrite' => array('slug' => 'brand-page'),
     );
     register_post_type('lb-brand-page', $args);
 }
