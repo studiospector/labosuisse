@@ -1,0 +1,13 @@
+{
+    "name": "caffeina/labo-swiss-blocks",
+    "description": "Labo Swiss custom blocks",
+    "version": "1.0.0",
+    "minimum-stability": "dev",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "Caffeina\\LaboSwissBlocks\\": "src/"
+        }
+    },
+    "require": {}
+  }

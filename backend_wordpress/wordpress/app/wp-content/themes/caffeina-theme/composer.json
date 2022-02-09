@@ -3,7 +3,22 @@
   "description": "Wordpress features",
   "type": "library",
   "require": {
-    "timber/timber": "^1.19.1"
+    "timber/timber": "^1.19.1",
+    "caffeina/labo-swiss-blocks":"@dev"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "repositories": {
+    "caffeina/labo-swiss-blocks": {
+      "type": "path",
+      "url": "../../packages/caffeina/labo-swiss-blocks",
+      "options": {
+        "symlink": true
+      }
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/installers": false
+    }
+  }
 }

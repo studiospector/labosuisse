@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The base configuration for WordPress.
  *
@@ -17,8 +18,11 @@
  */
 
 
-define('WP_DEBUG', getenv('DEBUG') === 'true');
-define('WP_DEBUG_LOG', getenv('DEBUG') === 'true');
+// define('WP_DEBUG', getenv('DEBUG') === 'true');
+// define('WP_DEBUG_LOG', getenv('DEBUG') === 'true');
+
+define('WP_DEBUG', true);
+define('WP_DEBUG_LOG', true);
 
 $dsn = (object) parse_url(getenv('DATABASE_URL'));
 
@@ -87,8 +91,8 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
 define('FORCE_SSL_LOGIN', $is_https);
 define('FORCE_SSL_ADMIN', $is_https);
 
-define('WP_SITEURL', $protocol.getenv('ADMIN_URL'));
-define('WP_HOME', $protocol.(getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEND_URL') : getenv('ADMIN_URL')));
+define('WP_SITEURL', $protocol . getenv('ADMIN_URL'));
+define('WP_HOME', $protocol . (getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEND_URL') : getenv('ADMIN_URL')));
 
 define('ADMIN_URL', getenv('ADMIN_URL'));
 define('FRONTEND_URL', getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEND_URL') : getenv('ADMIN_URL'));
@@ -111,7 +115,7 @@ define('WP_POST_REVISIONS', 4);
 // define('WP_ALLOW_MULTISITE', true);
 
 // Offload Media lite plugin settings
-define( 'AS3CF_SETTINGS', serialize( array(
+define('AS3CF_SETTINGS', serialize(array(
     'provider' => 'aws',
     'access-key-id' => getenv('OFFLOAD_AWS_ACCESS_ID'),
     'secret-access-key' => getenv('OFFLOAD_AWS_SECRET'),

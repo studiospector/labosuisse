@@ -48,6 +48,8 @@ services:
       - >-
         ../backend_wordpress/wordpress/app/wp-content/plugins:/var/www/html/wp-content-custom/plugins
       - >-
+        ../backend_wordpress/wordpress/app/wp-content/packages:/var/www/html/wp-content-custom/packages
+      - >-
         ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
       - >-
         ../frontend_bundler/client/app/dist/public:/var/www/html/wp-content-custom/themes/caffeina-theme/static

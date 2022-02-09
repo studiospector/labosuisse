@@ -7,6 +7,7 @@ namespace Composer\Autoload;
 class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
 {
     public static $files = array (
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
     );
@@ -19,12 +20,14 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
         ),
         'S' => 
         array (
+            'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
         'C' => 
         array (
             'Composer\\Installers\\' => 20,
+            'Caffeina\\LaboSwissBlocks\\' => 25,
         ),
     );
 
@@ -37,6 +40,10 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
         array (
             0 => __DIR__ . '/..' . '/timber/timber/lib',
         ),
+        'Symfony\\Polyfill\\Php72\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -48,6 +55,10 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
         'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
+        ),
+        'Caffeina\\LaboSwissBlocks\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/caffeina/labo-swiss-blocks/src',
         ),
     );
 
