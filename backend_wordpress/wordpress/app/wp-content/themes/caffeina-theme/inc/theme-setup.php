@@ -432,33 +432,58 @@ function lb_header() {
         ],
         [
             'type' => 'submenu',
-            'label' => 'Submenu',
+            'label' => 'Viso',
             'children' => [
                 [
                     'type' => 'submenu',
                     'label' => 'Per Zona',
                     'children' => [
                         ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
+                        [
+                            'type' => 'submenu-link',
+                            'label' => 'Volto',
+                            'trigger' => '12345',
+                        ],
+                        [
+                            'type' => 'submenu-link',
+                            'label' => 'Occhi e sguardo',
+                            'trigger' => '67890',
+                        ],
                         ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
                         ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
                     ]
                 ],
                 [
-                    'type' => 'submenu',
-                    'label' => 'Per Esigenza',
+                    'type' => 'submenu-second',
                     'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+                        [
+                            'type' => 'submenu',
+                            'label' => 'Per Esigenza',
+                            'trigger' => '12345',
+                            'children' => [
+                                ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+                            ]
+                        ],
+                        [
+                            'type' => 'submenu',
+                            'label' => 'Per Esigenza',
+                            'trigger' => '67890',
+                            'children' => [
+                                ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                                ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+                            ]
+                        ],
                     ]
                 ],
             ],
