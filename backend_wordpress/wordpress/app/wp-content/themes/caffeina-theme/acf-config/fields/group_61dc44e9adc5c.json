@@ -43,6 +43,29 @@
             "max_height": "",
             "max_size": "",
             "mime_types": ""
+        },
+        {
+            "key": "field_6202a29773100",
+            "label": "Pagina Brand",
+            "name": "lb_brand_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "lb-brand-page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "wpml_cf_preferences": 2,
+            "ui": 1
         }
     ],
     "location": [
@@ -63,5 +86,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643720971
+    "modified": 1644339943
 }
