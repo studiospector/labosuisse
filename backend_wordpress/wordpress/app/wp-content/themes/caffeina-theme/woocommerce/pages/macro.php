@@ -16,7 +16,7 @@ class macro extends basePage
     {
         parent::__construct('macro', $term);
 
-        $level = get_category_parents_custom($term->term_id);
+        $level = get_category_parents_custom($term->term_id, 'product_cat');
 
         $payload =  get_terms([
             'taxonomy' => 'product_cat',
@@ -43,7 +43,7 @@ class macro extends basePage
         $menu = [];
         foreach ($items as $i => $item) {
 
-            $level = get_category_parents_custom($item->term_id);
+            $level = get_category_parents_custom($item->term_id, 'product_cat');
 
             $menu[$i] = [
                 'type' => 'link',

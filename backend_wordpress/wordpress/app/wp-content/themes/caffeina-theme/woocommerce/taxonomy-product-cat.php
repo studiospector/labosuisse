@@ -26,22 +26,10 @@ if (!defined('ABSPATH')) {
 
 
 
-function get_category_parents_custom($category_id)
-{
-    $args = array(
-        'separator' => ',',
-        'link'      => false,
-        'format'    => 'slug',
-    );
-
-    $parent_terms = get_term_parents_list($category_id, 'product_cat', $args);
-
-    return substr_count($parent_terms, ',');
-}
 // Current term
 $term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 // Direct parents of current taxonomy
-$level = get_category_parents_custom($term->term_id);
+$level = get_category_parents_custom($term->term_id, 'product_cat');
 
 //$context = [];
 
