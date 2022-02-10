@@ -9,6 +9,7 @@
 {% set type_1 = ('type-1' in variants) ? true : false %}
 {% set type_2_6 = ('type-2' in variants) or ('type-6' in variants) ? true : false %}
 {% set type_8 = ('type-8' in variants) ? true : false %}
+{% set type_10 = ('type-10' in variants) ? true : false %}
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
@@ -24,10 +25,17 @@
                 </div>
             </div>
         {% endif %}
-        <div class="{{ type_1 ? 'col-6 col-md-12' : 'col-12' }}{{ type_8 ? ' h-100' : '' }}">
+        <div class="{{ type_1 ? 'col-6 col-md-12' : 'col-12' }}{{ type_8 ? ' h-100' : '' }}{{ type_10 ? ' card-infobox-hover' : '' }}">
             <div class="card-infobox{{ type_8 ? ' h-100' : '' }}">
-                {% include '@PathViews/components/infobox.twig' with infobox only %}
+                {% include '@PathViews/components/infobox.twig' with (type_10 ? infobox|merge({subtitle: ''}) : infobox) only %}
             </div>
         </div>
+        {% if type_10 %}
+            <div class="col-12">
+                <div class="card-infobox">
+                    {% include '@PathViews/components/infobox.twig' with {subtitle: infobox.subtitle} only %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 </article>

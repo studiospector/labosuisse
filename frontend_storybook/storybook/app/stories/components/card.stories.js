@@ -146,6 +146,26 @@ const dataCardType8 = {
     variants: ['type-8']
 }
 
+// Brand
+const dataCardType10 = {
+    images: {
+        original: '/assets/images/card-img-6.jpg',
+        large: '/assets/images/card-img-6.jpg',
+        medium: '/assets/images/card-img-6.jpg',
+        small: '/assets/images/card-img-6.jpg'
+    },
+    infobox: {
+        subtitle: 'Labo Transdermic',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nunc felis. Sed at ligula diam.',
+        cta: {
+            url: '#',
+            title: 'Vai al brand',
+            variants: ['quaternary']
+        }
+    },
+    variants: ['type-10']
+}
+
 storiesOf('Components|Cards', module)
     // Lifting
     .add('Type 1 --- Lifting', () => renderCard(dataCardType1))
@@ -161,3 +181,5 @@ storiesOf('Components|Cards', module)
     .add('Type 7 --- FAQ', () => renderCard(dataCardType7))
     // Colored
     .add('Type 8 --- Colored', () => renderCard(dataCardType8))
+    // Brand
+    .add('Type 10 --- Brand', () => renderCard(dataCardType10))
