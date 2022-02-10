@@ -15,9 +15,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "endpoint": 0
         },
         {
             "key": "field_61f8162b04d15",
@@ -32,12 +32,12 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "message": "",
             "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
-            "ui_off_text": "",
-            "wpml_cf_preferences": 1
+            "ui_off_text": ""
         },
         {
             "key": "field_61b899cf0505d",
@@ -272,5 +272,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643718750
+    "modified": 1644485892
 }

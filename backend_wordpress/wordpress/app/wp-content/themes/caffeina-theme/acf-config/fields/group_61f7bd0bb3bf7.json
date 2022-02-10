@@ -15,12 +15,12 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "default_value": "",
             "placeholder": "",
             "maxlength": "",
             "rows": "",
-            "new_lines": "br",
-            "wpml_cf_preferences": 1
+            "new_lines": "br"
         },
         {
             "key": "field_61f7bd0bd9701",
@@ -80,12 +80,12 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 2,
                     "default_value": "",
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br",
-                    "wpml_cf_preferences": 1
+                    "new_lines": "br"
                 },
                 {
                     "key": "field_61f7beceddd68",
@@ -100,12 +100,12 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 2,
                     "default_value": "",
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br",
-                    "wpml_cf_preferences": 1
+                    "new_lines": "br"
                 }
             ]
         }
@@ -128,5 +128,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643627817
+    "modified": 1644485436
 }

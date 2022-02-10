@@ -1,6 +1,6 @@
 {
     "key": "group_61dc44e9adc5c",
-    "title": "Campi personalizzati: Tassonomia – Brand",
+    "title": "Campi personalizzati: Tassonomia - Brand",
     "fields": [
         {
             "key": "field_61dc45aea02fb",
@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 0,
             "placement": "top",
             "endpoint": 0
         },
@@ -32,7 +32,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -86,5 +86,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644339943
+    "modified": 1644487891
 }

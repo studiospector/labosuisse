@@ -234,7 +234,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 2,
                     "choices": {
                         "infobox-left": "Sinistra",
                         "infobox-right": "Destra"
@@ -259,7 +259,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 2,
                     "choices": {
                         "infobox-fullheight": "Full height",
                         "infobox-centered": "Centrato",
@@ -285,7 +285,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 2,
                     "message": "",
                     "default_value": 0,
                     "ui": 1,
@@ -313,5 +313,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643797224
+    "modified": 1644485367
 }

@@ -82,9 +82,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 2
+            "endpoint": 0
         },
         {
             "key": "field_61dd599637498",
@@ -195,7 +195,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "choices": {
                 "primary": "Primary",
                 "secondary": "Secondary",
@@ -228,5 +228,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643800059
+    "modified": 1644485942
 }

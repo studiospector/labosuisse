@@ -15,9 +15,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "endpoint": 0
         },
         {
             "key": "field_61f81704d138b",
@@ -32,7 +32,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "message": "",
             "default_value": 0,
             "ui": 1,
@@ -52,7 +52,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 0,
             "placement": "top",
             "endpoint": 0
         },
@@ -69,7 +69,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "choices": {
                 "horizontal": "Horizontal",
                 "vertical": "Vertical"
@@ -114,7 +114,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "return_format": "url",
             "preview_size": "medium",
             "library": "all",
@@ -128,7 +128,7 @@
         },
         {
             "key": "field_61b9ca4403d57",
-            "label": "Items",
+            "label": "Lista Numeri",
             "name": "lb_block_numbers_list",
             "type": "repeater",
             "instructions": "",
@@ -214,5 +214,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643720814
+    "modified": 1644486026
 }
