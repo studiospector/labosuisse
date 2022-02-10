@@ -4,6 +4,32 @@
 
 {% block main %}
 
-    {{ content|raw }}
+    {# Info #}
+    <div class="taxonomy-lb-brand__info container text-center">
+        <div class="infobox">
+            {% if brand.name %}
+                <h1 class="infobox__subtitle h2">{{ brand.name }}</h1>
+            {% endif %}
+            {% if brand.description %}
+                <p class="infobox__paragraph">{{ fn('nl2br', brand.description) }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    {# Numbers of posts #}
+    <div class="container">
+        <div class="taxonomy-lb-brand__results">{{ num_posts }}</div>
+    </div>
+
+    {# Posts Grig #}
+    <div class="container">
+        <div class="row">
+            {% for post in items %}
+                <div class="col-12 col-md-4">
+                    {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post.product} only %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}
