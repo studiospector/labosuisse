@@ -23,3 +23,13 @@
         }
     }
 }
+
+
+
+.cards-grid-ordered {
+    &__row {
+        &:not(:first-child) {
+            margin-top: 80px;
+        }
+    }
+}

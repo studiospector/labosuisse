@@ -6,10 +6,10 @@
 
     {{ content|raw }}
 
-    <div class="container">
+    <div class="lb-filters container">
         {# Filters #}
         <div class="row">
-            <div class="col-12 col-md-3">
+            <div class="lb-filters__item col-12 col-md-3">
                 {% include '@PathViews/components/fields/select.twig' with {
                     id: 'lb-post-typology',
                     label: '',
@@ -22,7 +22,7 @@
                     variants: ['primary']
                 } only %}
             </div>
-            <div class="col-12 col-md-3">
+            <div class="lb-filters__item col-12 col-md-3">
                 {% include '@PathViews/components/fields/select.twig' with {
                     id: 'lb-post-archive-years',
                     label: '',
@@ -35,7 +35,7 @@
                     variants: ['primary']
                 } only %}
             </div>
-            <div class="col-12 col-md-4 offset-md-2">
+            <div class="lb-filters__item col-12 col-md-4 offset-md-2">
                 {% include '@PathViews/components/fields/input.twig' with {
                     type: 'search',
                     name: "lb-post-search",
@@ -47,6 +47,9 @@
             </div>
         </div>
         <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    </div>
+
+    <div class="container">
         {# Posts Grig #}
         <div class="row">
             {% for item in posts %}
