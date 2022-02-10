@@ -24,7 +24,6 @@
     &__infobox {
         width: 100%;
         display: flex;
-        padding: 0 150px;
         z-index: 1;
 
         @include mq($until: md) {
