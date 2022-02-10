@@ -20,6 +20,47 @@
             "endpoint": 0
         },
         {
+            "key": "field_6202a29773100",
+            "label": "Pagina Brand",
+            "name": "lb_brand_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "lb-brand-page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "id",
+            "wpml_cf_preferences": 2,
+            "ui": 1
+        },
+        {
+            "key": "field_6204ee9562485",
+            "label": "Colore Brand",
+            "name": "lb_brand_color",
+            "type": "color_picker",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "enable_opacity": 0,
+            "return_format": "string",
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_61dc456d74af3",
             "label": "Logo Brand",
             "name": "lb_brand_logo",
@@ -45,10 +86,10 @@
             "mime_types": ""
         },
         {
-            "key": "field_6202a29773100",
-            "label": "Pagina Brand",
-            "name": "lb_brand_page",
-            "type": "post_object",
+            "key": "field_62054fab201a4",
+            "label": "Immagine Brand",
+            "name": "lb_brand_image",
+            "type": "image",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -57,15 +98,17 @@
                 "class": "",
                 "id": ""
             },
-            "post_type": [
-                "lb-brand-page"
-            ],
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 0,
-            "return_format": "id",
-            "wpml_cf_preferences": 2,
-            "ui": 1
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "wpml_cf_preferences": 2
         }
     ],
     "location": [
@@ -86,5 +129,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644487891
+    "modified": 1644515309
 }
