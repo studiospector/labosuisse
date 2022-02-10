@@ -15,6 +15,10 @@ services:
       - ADMIN_URL
       - WP_CONTENT_CUSTOM_DIR
       - DEBUG
+      - OFFLOAD_AWS_REGION
+      - OFFLOAD_AWS_BUCKET
+      - OFFLOAD_AWS_ACCESS_ID
+      - OFFLOAD_AWS_SECRET
     health: /test.html
     internal: false
     port: 8080
