@@ -1,0 +1,23 @@
+.edit-tags-php {
+    #posts-filter {
+        .wp-list-table {
+            .level-0 {
+                // position: relative;
+    
+                // &::after {
+                //     content: '';
+                //     width: 100%;
+                //     height: 1px;
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                //     border-top: 5px solid #1d2327;
+                // }
+    
+                th, td {
+                    border-top: 3px solid #1d2327;
+                }
+            }
+        }
+    }
+}
