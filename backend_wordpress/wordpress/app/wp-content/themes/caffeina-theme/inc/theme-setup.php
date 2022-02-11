@@ -63,7 +63,7 @@ class ThemeSetup extends Timber\Site
      */
     public function theme_supports()
     {
-        // load_theme_textdomain( 'labo-suisse-theme', LB_DIR_PATH . '/languages' );
+        load_theme_textdomain( 'labo-suisse-theme', LB_DIR_PATH . '/languages' );
 
         add_theme_support('title-tag');
 
