@@ -63,7 +63,7 @@ class ThemeSetup extends Timber\Site
      */
     public function theme_supports()
     {
-        load_theme_textdomain( 'labo-suisse-theme', LB_DIR_PATH . '/languages' );
+        load_theme_textdomain('labo-suisse-theme', LB_DIR_PATH . '/languages');
 
         add_theme_support('title-tag');
 
@@ -467,7 +467,38 @@ function lb_get_posts_archive_years()
 function lb_header()
 {
 
-    $menu_desktop = macro::getAll();
+    $menu_desktop = array_merge(
+        macro::getAll(),
+        [['type' => 'separator']],
+        get_brands_menu(),
+        [[
+            'type' => 'link',
+            'label' => 'Scopri Labo',
+            'href' => '#',
+        ]],
+    );
+
+    if (is_woocommerce()) {
+        $menu_desktop = array_merge($menu_desktop, [
+            ['type' => 'separator'],
+            [
+                'type' => 'icon',
+                'icon' => ['name' => 'heart'],
+                'href' => 'https://google.it'
+            ],
+            [
+                'type' => 'icon',
+                'icon' => ['name' => 'cart'],
+                'href' => wc_get_cart_url()
+            ],
+            [
+                'type' => 'icon',
+                'icon' => ['name' => 'user'],
+                'href' => get_permalink(get_option('woocommerce_myaccount_page_id'))
+            ]
+        ]);
+    }
+
     // $menu_desktop = array(
     //     [
     //         'type' => 'link',

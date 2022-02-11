@@ -60,11 +60,89 @@ function get_category_parents_custom($category_id, $tax)
 
 function get_brands_menu()
 {
-    $payload =  get_terms(array(
+    $menu = [
+        'type' => 'submenu',
+        'label' => 'tutti i brand',
+        'children' => [
+            [
+                'type' => 'submenu',
+                'label' => 'Per Brand',
+                'children' => [
+                    ['type' => 'link', 'label' => 'Tutti i brand', 'href' =>  '#']
+                ]
+            ],
+            [
+                'type' => 'submenu-second',
+                'children' => []
+            ]
+        ],
+        'fixed' => [
+            [
+                'type' => 'card',
+                'data' => [
+                    'images' => [
+                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                    ],
+                    'infobox' => [
+                        'subtitle' => 'Magnetic Eyes',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'cta' => [
+                            'url' => '#',
+                            'title' => 'Scopri di più',
+                            'iconEnd' => ['name' => 'arrow-right'],
+                            'variants' => ['quaternary']
+                        ]
+                    ],
+                    'variants' => ['type-3']
+                ],
+            ],
+        ]
+    ];
+
+    $brands =  get_terms(array(
         'taxonomy' => 'lb-brand',
         'hide_empty' => false,
         'parent' => null
     ));
 
-    // die(json_encode($payload, JSON_PRETTY_PRINT));
+    foreach ($brands as $i => $brand) {
+        $menu['children'][0]['children'][] = [
+            'type' => 'submenu-link',
+            'label' => $brand->name,
+            'trigger' => md5($brand->slug),
+        ];
+
+        $menu['children'][1]['children'][$i] = [
+            'type' => 'submenu',
+            'label' => 'Per linea di prodotto',
+            'trigger' => md5($brand->slug),
+            'children' => get_brands_menu_product_line($brand)
+        ];
+    }
+
+    return [$menu];
+}
+
+function get_brands_menu_product_line($brand)
+{
+    $lines =  get_terms(array(
+        'taxonomy' => 'lb-brand',
+        'hide_empty' => false,
+        'parent' => $brand->term_id
+    ));
+
+    $items = [['type' => 'link', 'label' => 'scopri la linea', 'href' => get_permalink(get_field('lb_brand_page', $brand))]];
+
+    foreach ($lines as $line) {
+        $items[] = [
+            'type' => 'link',
+            'label' => $line->name,
+            'href' => get_term_link($line),
+        ];
+    }
+
+    return $items;
 }
