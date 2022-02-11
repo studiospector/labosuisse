@@ -2,10 +2,12 @@
 
 namespace Pages;
 
-class basePage {
+class basePage
+{
     private $context;
     public $name;
-    public function __construct($name, $term){
+    public function __construct($name, $term)
+    {
         $this->name = $name;
 
         $this->context = [
@@ -16,16 +18,23 @@ class basePage {
         ];
     }
 
-  public function setContext($payload){
-    $this->context['data'] = array_merge($this->context['data'],$payload);
-
-
-  }
-    public function render(){
-    
-        \Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $this->context);
-    
+    public function setContext($payload)
+    {
+        $this->context['data'] = array_merge($this->context['data'], $payload);
     }
 
-    
+    public function render()
+    {
+
+        \Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $this->context);
+    }
+
+    public static function getProductCategory($parent = null)
+    {
+        return get_terms([
+            'taxonomy' => 'product_cat',
+            'hide_empty' => false,
+            'parent' => ($parent) ? $parent->term_id : null,
+        ]);
+    }
 }

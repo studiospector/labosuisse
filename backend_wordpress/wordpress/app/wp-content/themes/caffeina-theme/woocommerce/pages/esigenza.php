@@ -1,10 +1,14 @@
 <?php
-require_once(__DIR__.'/basePage.php');
+require_once(__DIR__ . '/basePage.php');
+
 use pages\basePage;
-class esigenza extends basePage  {
- 
-    public function __construct($name, $term){
-        parent::__construct('esigenza',$term);
+
+class esigenza extends basePage
+{
+
+    public function __construct($name, $term)
+    {
+        parent::__construct('esigenza', $term);
 
 
         $res = [];
@@ -18,7 +22,9 @@ class esigenza extends basePage  {
         ));
 
         // Get only slugs
-        $tipologie_slugs = array_map(function($obj) { return $obj->slug;}, $tipologie);
+        $tipologie_slugs = array_map(function ($obj) {
+            return $obj->slug;
+        }, $tipologie);
 
         $brands = get_terms(array(
             'taxonomy' => 'lb-brand',
@@ -56,18 +62,31 @@ class esigenza extends basePage  {
         wp_reset_postdata();
 
         $payload = [
-          
-                'termName' => $term->name,
-                'brands' => $brands_arr,
-                'tipologie' => $tipologie,
-                'results' => $res
-            ];
-    
+
+            'termName' => $term->name,
+            'brands' => $brands_arr,
+            'tipologie' => $tipologie,
+            'results' => $res
+        ];
+
         $this->setContext($payload);
         //$this->macro->render();
-    }   
+    }
+
+    public static function getAll($parent)
+    {
+        $needs =  self::getProductCategory($parent);
+
+        $items = [['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => get_term_link($parent)]];
+
+        foreach ($needs as $need) {
+            $items[] = [
+                'type' => 'link',
+                'label' => $need->name,
+                'href' => get_term_link($need),
+            ];
+        }
+
+        return $items;
+    }
 }
-
-
-
-
