@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . '/../woocommerce/pages/macro.php');
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -242,7 +243,7 @@ new ThemeSetup();
 add_filter('acf/settings/save_json', 'labo_acf_json_save_point');
 function labo_acf_json_save_point($path)
 {
-    // var_dump($path);die; 
+    // var_dump($path);die;
     // unset($path[0]);
     $path = get_stylesheet_directory() . '/acf-config/fields';
     return $path;
@@ -292,7 +293,7 @@ function timber_set_product($post)
 /**
  * Add symbols.twig to WP admin area
  */
-add_action( 'admin_footer', 'lb_add_symbols_to_admin' );
+add_action('admin_footer', 'lb_add_symbols_to_admin');
 function lb_add_symbols_to_admin()
 {
     Timber::render('@PathViews/components/symbols.twig');
@@ -303,13 +304,14 @@ function lb_add_symbols_to_admin()
 /**
  * Custom pagination
  */
-function lb_pagination() {
+function lb_pagination()
+{
     $pagination_html = null;
 
     $pagination = get_the_posts_pagination([
         'mid_size' => 2,
-        'prev_text' => __( '<', 'labo-suisse-theme' ),
-        'next_text' => __( '>', 'labo-suisse-theme' ),
+        'prev_text' => __('<', 'labo-suisse-theme'),
+        'next_text' => __('>', 'labo-suisse-theme'),
     ]);
 
     if ($pagination) {
@@ -325,7 +327,8 @@ function lb_pagination() {
  * Unregister taxonomies
  */
 add_action('init', 'lb_unregister_taxonomies', 999);
-function lb_unregister_taxonomies() {
+function lb_unregister_taxonomies()
+{
     register_taxonomy('category', []);
     register_taxonomy('post_tag', []);
 }
@@ -335,24 +338,24 @@ function lb_unregister_taxonomies() {
 /**
  * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
  */
-add_filter( 'wpcf7_form_tag', function ( $tag ) {
+add_filter('wpcf7_form_tag', function ($tag) {
     $datas = [];
-    foreach ( (array)$tag['options'] as $option ) {
-        if ( strpos( $option, 'data-' ) === 0 ) {
-            $option = explode( ':', $option, 2 );
+    foreach ((array)$tag['options'] as $option) {
+        if (strpos($option, 'data-') === 0) {
+            $option = explode(':', $option, 2);
             $data_attribute = $option[0];
             $data_value = str_replace('|', ' ', $option[1]);
             $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
         }
     }
-    if ( ! empty( $datas ) ) {
+    if (!empty($datas)) {
         $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
-        add_filter( 'wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
-            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" ". wpcf7_format_atts($datas), $content));
+        add_filter('wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
+            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" " . wpcf7_format_atts($datas), $content));
         });
     }
     return $tag;
-} );
+});
 
 
 
@@ -423,169 +426,171 @@ function lb_get_posts_archive_years()
 /**
  * Get header and menu
  */
-function lb_header() {
+function lb_header()
+{
 
-    $menu_desktop = array(
-        [
-            'type' => 'link',
-            'label' => 'Link Normal'
-        ],
-        [
-            'type' => 'submenu',
-            'label' => 'Viso',
-            'children' => [
-                [
-                    'type' => 'submenu',
-                    'label' => 'Per Zona',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
-                        [
-                            'type' => 'submenu-link',
-                            'label' => 'Volto',
-                            'trigger' => '12345',
-                        ],
-                        [
-                            'type' => 'submenu-link',
-                            'label' => 'Occhi e sguardo',
-                            'trigger' => '67890',
-                        ],
-                        ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
-                    ]
-                ],
-                [
-                    'type' => 'submenu-second',
-                    'children' => [
-                        [
-                            'type' => 'submenu',
-                            'label' => 'Per Esigenza',
-                            'trigger' => '12345',
-                            'children' => [
-                                ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
-                            ]
-                        ],
-                        [
-                            'type' => 'submenu',
-                            'label' => 'Per Esigenza',
-                            'trigger' => '67890',
-                            'children' => [
-                                ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
-                                ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
-                            ]
-                        ],
-                    ]
-                ],
-            ],
-            'fixed' => [
-                [
-                    'type' => 'card',
-                    'data' => [
-                        'images' => [
-                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
-                        ],
-                        'infobox' => [
-                            'subtitle' => 'Magnetic Eyes',
-                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            'cta' => [
-                                'url' => '#',
-                                'title' => 'Scopri di più',
-                                'iconEnd' => [ 'name' => 'arrow-right' ],
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-3']
-                    ],
-                ],
-            ]
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Personalize',
-            'href' => '#',
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Lookbook',
-            'href' => '#',
-        ],
-        [
-            'type' => 'submenu',
-            'label' => 'World',
-            'children' => [
-                [
-                    'type' => 'submenu',
-                    'label' => 'Excellences',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
-                    ]
-                ],
-                [
-                    'type' => 'submenu',
-                    'label' => 'Lorem Ipsum',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
-                    ]
-                ],
-            ],
-        ],
-        [
-            'type' => 'separator',
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Tutti i Brand',
-            'href' => '#',
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Scopri Labo',
-            'href' => '#',
-        ],
-        [
-            'type' => 'separator',
-        ],
-        [
-            'type' => 'icon',
-            'icon' => [
-                'name' => 'heart'
-            ],
-            'href' => 'https://google.it'
-        ],
-        [
-            'type' => 'icon',
-            'icon' => [
-                'name' => 'cart'
-            ],
-            'href' => wc_get_cart_url()
-        ],
-        [
-            'type' => 'icon',
-            'icon' => [
-                'name' => 'user'
-            ],
-            'href' => 'https://google.it'
-        ],
-    );
+    $menu_desktop = macro::getAll();
+    // $menu_desktop = array(
+    //     [
+    //         'type' => 'link',
+    //         'label' => 'Link Normal'
+    //     ],
+    //     [
+    //         'type' => 'submenu',
+    //         'label' => 'Viso',
+    //         'children' => [
+    //             [
+    //                 'type' => 'submenu',
+    //                 'label' => 'Per Zona',
+    //                 'children' => [
+    //                     ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
+    //                     [
+    //                         'type' => 'submenu-link',
+    //                         'label' => 'Volto',
+    //                         'trigger' => '12345',
+    //                     ],
+    //                     [
+    //                         'type' => 'submenu-link',
+    //                         'label' => 'Occhi e sguardo',
+    //                         'trigger' => '67890',
+    //                     ],
+    //                     ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
+    //                 ]
+    //             ],
+    //             [
+    //                 'type' => 'submenu-second',
+    //                 'children' => [
+    //                     [
+    //                         'type' => 'submenu',
+    //                         'label' => 'Per Esigenza',
+    //                         'trigger' => '12345',
+    //                         'children' => [
+    //                             ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
+    //                         ]
+    //                     ],
+    //                     [
+    //                         'type' => 'submenu',
+    //                         'label' => 'Per Esigenza',
+    //                         'trigger' => '67890',
+    //                         'children' => [
+    //                             ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+    //                             ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
+    //                         ]
+    //                     ],
+    //                 ]
+    //             ],
+    //         ],
+    //         'fixed' => [
+    //             [
+    //                 'type' => 'card',
+    //                 'data' => [
+    //                     'images' => [
+    //                         'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+    //                         'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+    //                         'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+    //                         'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+    //                     ],
+    //                     'infobox' => [
+    //                         'subtitle' => 'Magnetic Eyes',
+    //                         'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    //                         'cta' => [
+    //                             'url' => '#',
+    //                             'title' => 'Scopri di più',
+    //                             'iconEnd' => [ 'name' => 'arrow-right' ],
+    //                             'variants' => ['quaternary']
+    //                         ]
+    //                     ],
+    //                     'variants' => ['type-3']
+    //                 ],
+    //             ],
+    //         ]
+    //     ],
+    //     [
+    //         'type' => 'link',
+    //         'label' => 'Personalize',
+    //         'href' => '#',
+    //     ],
+    //     [
+    //         'type' => 'link',
+    //         'label' => 'Lookbook',
+    //         'href' => '#',
+    //     ],
+    //     [
+    //         'type' => 'submenu',
+    //         'label' => 'World',
+    //         'children' => [
+    //             [
+    //                 'type' => 'submenu',
+    //                 'label' => 'Excellences',
+    //                 'children' => [
+    //                     ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
+    //                 ]
+    //             ],
+    //             [
+    //                 'type' => 'submenu',
+    //                 'label' => 'Lorem Ipsum',
+    //                 'children' => [
+    //                     ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
+    //                     ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
+    //                 ]
+    //             ],
+    //         ],
+    //     ],
+    //     [
+    //         'type' => 'separator',
+    //     ],
+    //     [
+    //         'type' => 'link',
+    //         'label' => 'Tutti i Brand',
+    //         'href' => '#',
+    //     ],
+    //     [
+    //         'type' => 'link',
+    //         'label' => 'Scopri Labo',
+    //         'href' => '#',
+    //     ],
+    //     [
+    //         'type' => 'separator',
+    //     ],
+    //     [
+    //         'type' => 'icon',
+    //         'icon' => [
+    //             'name' => 'heart'
+    //         ],
+    //         'href' => 'https://google.it'
+    //     ],
+    //     [
+    //         'type' => 'icon',
+    //         'icon' => [
+    //             'name' => 'cart'
+    //         ],
+    //         'href' => wc_get_cart_url()
+    //     ],
+    //     [
+    //         'type' => 'icon',
+    //         'icon' => [
+    //             'name' => 'user'
+    //         ],
+    //         'href' => 'https://google.it'
+    //     ],
+    // );
 
     $menu_mobile = [
         'children' => [
@@ -594,12 +599,12 @@ function lb_header() {
                 'label' => 'Link Normal'
             ],
             [
-                'type' => 'submenu', 
-                'label' => 'Lorem', 
+                'type' => 'submenu',
+                'label' => 'Lorem',
                 'children' => [
                     [
-                        'type' => 'submenu', 
-                        'label' => 'Ipsum 1', 
+                        'type' => 'submenu',
+                        'label' => 'Ipsum 1',
                         'children' => [
                             ['type' => 'link', 'label' => 'link 1'],
                             ['type' => 'link', 'label' => 'link 2'],
@@ -607,8 +612,8 @@ function lb_header() {
                         ]
                     ],
                     [
-                        'type' => 'submenu', 
-                        'label' => 'Ipsum 2', 
+                        'type' => 'submenu',
+                        'label' => 'Ipsum 2',
                         'children' => [
                             ['type' => 'link', 'label' => 'link 1'],
                             ['type' => 'link', 'label' => 'link 2'],
@@ -618,7 +623,7 @@ function lb_header() {
                 ]
             ],
             [
-                'type' => 'submenu', 
+                'type' => 'submenu',
                 'label' => 'Submenu',
                 'children' => [
                     [
@@ -675,8 +680,8 @@ function lb_header() {
                 ],
             ],
             [
-                'type' => 'small-link', 
-                'label' => 'Hai bisogno di aiuto?', 
+                'type' => 'small-link',
+                'label' => 'Hai bisogno di aiuto?',
                 'icon' => 'comments',
             ],
             [
@@ -698,12 +703,13 @@ function lb_header() {
 /**
  * Get footer and prefooter
  */
-function lb_footer() {
+function lb_footer()
+{
 
     $prefooter = null;
     $footer = null;
 
-    if ( !is_home() ) {
+    if (!is_home()) {
         $prefooter = [
             'block_1' => [
                 'title' => 'Hai delle domande?',
@@ -711,7 +717,7 @@ function lb_footer() {
                 'cta' => [
                     'url' => '#',
                     'title' => 'Vai all’assistenza',
-                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'iconEnd' => ['name' => 'arrow-right'],
                     // Variants is static
                     'variants' => ['quaternary']
                 ],
@@ -735,7 +741,7 @@ function lb_footer() {
                 'cta' => [
                     'url' => '#',
                     'title' => 'Procedi e iscriviti',
-                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'iconEnd' => ['name' => 'arrow-right'],
                     // Variants is static
                     'variants' => ['quaternary']
                 ],
@@ -815,7 +821,7 @@ function lb_footer() {
                     // Variants is static
                     'variants' => ['link', 'thin', 'small']
                 ],
-            ], 
+            ],
         ],
         'search' => [
             'title' => 'TROVA UNA FARMACIA CONCESSIONARIA ',
@@ -829,7 +835,7 @@ function lb_footer() {
                 'variants' => ['secondary'],
             ],
         ],
-        'newsletter' => [ 
+        'newsletter' => [
             'title' => 'ISCRIVITI ALLA NEWSLETTER',
             'text' => 'Ricevi aggiornamenti e promozioni<br>direttamente sulla tua mail.',
             'cta' => [

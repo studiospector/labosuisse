@@ -48,7 +48,7 @@ COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 
 # trafex stage (wrap it)
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
-FROM trafex/php-nginx:latest
+FROM trafex/php-nginx:2.4.0
 
 # :poop:
 USER root
