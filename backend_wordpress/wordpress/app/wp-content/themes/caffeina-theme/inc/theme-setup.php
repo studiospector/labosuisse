@@ -291,6 +291,44 @@ function timber_set_product($post)
 
 
 /**
+ * Filter main query
+ */
+add_action('pre_get_posts', 'lb_post_filters');
+function lb_post_filters($query)
+{
+    // "Brand" and "Linea di Prodotto" Archive pages
+    if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+        $query->set('posts_per_page', -1);
+    }
+
+    // Posts page
+    // if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
+    //     $query->set('posts_per_page', 10);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+
+    // Archive page
+    // if (is_archive() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+    //     $query->set('posts_per_page', 12);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+
+    // Tag page
+    // if (is_tag() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+    //     $query->set('posts_per_page', 12);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+
+    // Search page
+    // if (is_search() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page() && !is_archive()) {
+    //     $query->set('posts_per_page', 12);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+}
+
+
+
+/**
  * Add symbols.twig to WP admin area
  */
 add_action('admin_footer', 'lb_add_symbols_to_admin');

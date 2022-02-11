@@ -22,14 +22,12 @@
     </div>
 
     {# Posts Grig #}
-    <div class="container">
-        <div class="row">
-            {% for post in items %}
-                <div class="col-12 col-md-4">
-                    {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post.product} only %}
-                </div>
-            {% endfor %}
-        </div>
+    <div class="taxonomy-lb-brand__grid container">
+        {% if grid_type == 'default' %}
+            {% include '@PathViews/components/cards-grid-product-default.twig' with { items: items } only %}
+        {% elseif grid_type == 'ordered' %}
+            {% include '@PathViews/components/cards-grid-product-ordered.twig' with { items: items } only %}
+        {% endif %}
     </div>
 
 {% endblock %}
