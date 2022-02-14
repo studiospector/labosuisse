@@ -30,7 +30,7 @@ function lb_brand_tax_init()
         'show_in_quick_edit' => true,
         'show_admin_column' => true,
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'brands', 'with_front' => true)
+        'rewrite' => array('slug' => 'brands', 'with_front' => true, 'hierarchical' => true)
     );
     register_taxonomy('lb-brand', array('product'), $args);
 }
