@@ -491,11 +491,11 @@ function lb_header()
     if (is_woocommerce()) {
         $menu_desktop = array_merge($menu_desktop, [
             ['type' => 'separator'],
-            [
-                'type' => 'icon',
-                'icon' => ['name' => 'heart'],
-                'href' => 'https://google.it'
-            ],
+            // [
+            //     'type' => 'icon',
+            //     'icon' => ['name' => 'heart'],
+            //     'href' => 'https://google.it'
+            // ],
             [
                 'type' => 'icon',
                 'icon' => ['name' => 'cart'],
@@ -516,10 +516,10 @@ function lb_header()
                 'type' => 'card',
                 'data' => [
                     'images' => [
-                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                        'original' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'large' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'medium' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'small' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg'
                     ],
                     'infobox' => [
                         'subtitle' => 'Magnetic Eyes',

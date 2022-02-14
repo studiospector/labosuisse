@@ -17,6 +17,11 @@
             &__top {
                 padding-top: 30px;
                 padding-bottom: 30px;
+
+                @include mq($until: lg) {
+                    padding-top: 20px;
+                    padding-bottom: 20px;
+                }
             }
 
             &__wrapper--desktop {

@@ -62,11 +62,11 @@ function get_brands_menu()
 {
     $menu = [
         'type' => 'submenu',
-        'label' => 'tutti i brand',
+        'label' => __('Tutti i Brand', 'labo-suisse-theme'),
         'children' => [
             [
                 'type' => 'submenu',
-                'label' => 'Per Brand',
+                'label' => __('Per Brand', 'labo-suisse-theme'),
                 'children' => [
                     ['type' => 'link', 'label' => 'Tutti i brand', 'href' =>  '#']
                 ]
@@ -91,8 +91,7 @@ function get_brands_menu()
                         'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                         'cta' => [
                             'url' => '#',
-                            'title' => 'Scopri di più',
-                            'iconEnd' => ['name' => 'arrow-right'],
+                            'title' => __('Scopri di più', 'labo-suisse-theme'),
                             'variants' => ['quaternary']
                         ]
                     ],
@@ -117,7 +116,7 @@ function get_brands_menu()
 
         $menu['children'][1]['children'][$i] = [
             'type' => 'submenu',
-            'label' => 'Per linea di prodotto',
+            'label' => __('Per linea di prodotto', 'labo-suisse-theme'),
             'trigger' => md5($brand->slug),
             'children' => get_brands_menu_product_line($brand)
         ];
@@ -134,7 +133,10 @@ function get_brands_menu_product_line($brand)
         'parent' => $brand->term_id
     ));
 
-    $items = [['type' => 'link', 'label' => 'scopri la linea', 'href' => get_permalink(get_field('lb_brand_page', $brand))]];
+    $items = [
+        ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))],
+        ['type' => 'link', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)],
+    ];
 
     foreach ($lines as $line) {
         $items[] = [
