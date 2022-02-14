@@ -21,14 +21,14 @@ class macro extends basePage
         // $this->macro->render();
     }
 
-    public static function getAll()
+    public static function getAll($withCard = true)
     {
         $macro = self::getProductCategory();
 
         $items = [];
 
         foreach ($macro as $item) {
-            $items[] = zona::getAll($item);
+            $items[] = zona::getAll($item, $withCard);
         }
 
         return $items;

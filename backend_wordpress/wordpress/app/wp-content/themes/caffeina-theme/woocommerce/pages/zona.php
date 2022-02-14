@@ -20,7 +20,7 @@ class zona extends basePage
         //$this->macro->render();
     }
 
-    public static function getAll($parent)
+    public static function getAll($parent, $withCard = true)
     {
         $areas = self::getProductCategory($parent);
 
@@ -40,8 +40,11 @@ class zona extends basePage
                     'type' => 'submenu-second',
                     'children' => []
                 ]
-            ],
-            'fixed' => [
+            ]
+        ];
+
+        if ($withCard) {
+            $items['fixed'] = [
                 [
                     'type' => 'card',
                     'data' => [
@@ -64,8 +67,8 @@ class zona extends basePage
                         'variants' => ['type-3']
                     ],
                 ],
-            ]
-        ];
+            ];
+        }
 
         foreach ($areas as $i => $zone) {
             $items['children'][0]['children'][] = [
