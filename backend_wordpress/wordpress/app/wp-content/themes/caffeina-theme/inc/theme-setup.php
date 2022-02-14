@@ -1,5 +1,6 @@
 <?php
-require_once(__DIR__ . '/../woocommerce/pages/macro.php');
+
+require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -55,6 +56,7 @@ class ThemeSetup extends Timber\Site
         // add_filter( 'timber/context', array( $this, 'add_to_context' ) );
         add_filter('timber/twig', array($this, 'lb_add_to_twig'));
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
+        add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
         parent::__construct();
     }
 
@@ -229,6 +231,13 @@ class ThemeSetup extends Timber\Site
         }
 
         return "$theme_path/$bundle_folder/$file";
+    }
+
+    /**
+     * Change Yoat SEO Bradcrumbs separator
+     */
+    public function lb_yoast_breadcrumb_separator($sep) {
+        return '<span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span>';
     }
 }
 

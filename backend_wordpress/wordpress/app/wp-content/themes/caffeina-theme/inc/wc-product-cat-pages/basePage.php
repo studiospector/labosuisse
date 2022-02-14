@@ -6,6 +6,7 @@ class basePage
 {
     private $context;
     public $name;
+
     public function __construct($name, $term)
     {
         $this->name = $name;
@@ -13,7 +14,9 @@ class basePage
         $this->context = [
             'level' => $this->name,
             'data' => [
-                'termName' => $term->name,
+                'term_name' => $term->name,
+                'term_description' => $term->description,
+                'term_image' => get_field('lb_product_cat_image', $term),
             ]
         ];
     }
@@ -25,7 +28,6 @@ class basePage
 
     public function render()
     {
-
         \Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $this->context);
     }
 
