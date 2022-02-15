@@ -10,18 +10,18 @@ class zona extends basePage
     public function __construct($name, $term)
     {
         parent::__construct('zona', $term);
-        
+
         $sub_terms = get_terms([
             'taxonomy' => 'product_cat',
             'hide_empty' => false,
             'parent' => $term->term_id,
         ]);
- 
+
         $payload['terms'] = [];
         foreach ($sub_terms as $item) {
             // Term Thumb
             $thumbnail_id = get_term_meta($item->term_id, 'thumbnail_id', true);
-            $image = wp_get_attachment_url( $thumbnail_id );
+            $image = wp_get_attachment_url($thumbnail_id);
 
             $payload['terms'][] = [
                 'images' => [
@@ -47,10 +47,9 @@ class zona extends basePage
         //$this->macro->render();
     }
 
-    public static function getAll($parent, $withCard = true)
+    public static function getDesktopItems($parent)
     {
         $areas = self::getProductCategory($parent);
-
 
         $items = [
             'type' => 'submenu',
@@ -67,11 +66,8 @@ class zona extends basePage
                     'type' => 'submenu-second',
                     'children' => []
                 ]
-            ]
-        ];
-
-        if ($withCard) {
-            $items['fixed'] = [
+            ],
+            'fixed' => [
                 [
                     'type' => 'card',
                     'data' => [
@@ -94,8 +90,8 @@ class zona extends basePage
                         'variants' => ['type-3']
                     ],
                 ],
-            ];
-        }
+            ]
+        ];
 
         foreach ($areas as $i => $zone) {
             $items['children'][0]['children'][] = [
@@ -110,6 +106,32 @@ class zona extends basePage
                 'trigger' => md5($zone->slug),
                 'children' => esigenza::getAll($zone)
 
+            ];
+        }
+
+        return $items;
+    }
+
+    public static function getMobileItems($parent)
+    {
+        $areas = self::getProductCategory($parent);
+
+        $items = [
+            'type' => 'submenu',
+            'label' => $parent->name,
+            'subLabel' => 'Per zona',
+            'children' => [
+                ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($parent->name), 'href' =>  get_term_link($parent)]
+            ]
+
+        ];
+
+        foreach ($areas as $i => $zone) {
+            $items['children'][] = [
+                'type' => 'submenu',
+                'label' => $zone->name,
+                'subLabel' => 'Per esigenza',
+                'children' => esigenza::getAll($zone)
             ];
         }
 
