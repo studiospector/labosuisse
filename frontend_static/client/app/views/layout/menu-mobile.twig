@@ -1,64 +1,24 @@
 {% set props = {
     children: [
         {
-            type: 'link',
-            label: 'Link Normal'
-        },
-        {
             type: 'submenu', 
-            label: 'Lorem', 
+            label: 'Viso',
+            subLabel: 'Per zona',
             children: [
+                {type: 'link', label: 'Tutte le zone viso', href: '#'},
                 {
-                    type: 'submenu', 
-                    label: 'Ipsum 1', 
+                    type: 'submenu',
+                    label: 'Volto',
+                    subLabel: 'Per esigenza',
                     children: [
-                        {type: 'link', label: 'link 1'},
-                        {type: 'link', label: 'link 2'},
-                        {type: 'link', label: 'link 3'},
+                        {type: 'link', label: 'Tutte le esigenze', href: '#'},
+                        {type: 'link', label: 'Anti età', href: '#'},
+                        {type: 'link', label: 'Effetto riempitivo', href: '#'},
                     ]
                 },
-                {
-                    type: 'submenu', 
-                    label: 'Ipsum 2', 
-                    children: [
-                        {type: 'link', label: 'link 1'},
-                        {type: 'link', label: 'link 2'},
-                        {type: 'link', label: 'link 3'},
-                    ]
-                }
-            ]
-        },
-        {
-            type: 'submenu', 
-            label: 'Submenu',
-            'children': [
-                {
-                    'type': 'submenu',
-                    'label': 'Per Zona',
-                    'children': [
-                        {'type': 'link', 'label': 'Tutte le zone volto', 'href': '#'},
-                        {'type': 'link', 'label': 'Volto', 'href': '#'},
-                        {'type': 'link', 'label': 'Occhi e sguardo', 'href': '#'},
-                        {'type': 'link', 'label': 'Labbra', 'href': '#'},
-                        {'type': 'link', 'label': 'Collo e decolleté', 'href': '#'},
-                    ]
-                },
-                {
-                    'type': 'submenu',
-                    'label': 'Per Esigenza',
-                    'children': [
-                        {'type': 'link', 'label': 'Tutte le esigenze', 'href': '#'},
-                        {'type': 'link', 'label': 'Anti-età', 'href': '#'},
-                        {'type': 'link', 'label': 'Effetto riempitivo', 'href': '#'},
-                        {'type': 'link', 'label': 'Lifting', 'href': '#'},
-                        {'type': 'link', 'label': 'Pelle sensibile', 'href': '#'},
-                        {'type': 'link', 'label': 'Illuminare e uniformare', 'href': '#'},
-                        {'type': 'link', 'label': 'Nutrire', 'href': '#'},
-                        {'type': 'link', 'label': 'Ri-ossigenare', 'href': '#'},
-                        {'type': 'link', 'label': 'Detergere', 'href': '#'},
-                        {'type': 'link', 'label': 'Trattamento personalizzato', 'href': '#'},
-                    ]
-                },
+                {type: 'link', label: 'Occhi e sguardo', href: '#'},
+                {type: 'link', label: 'Labbra', href: '#'},
+                {type: 'link', label: 'Collo e decolleté', href: '#'},
             ],
         }
     ],

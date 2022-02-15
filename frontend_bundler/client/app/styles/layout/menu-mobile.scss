@@ -4,7 +4,7 @@
     right: 0;
     left: 0;
     bottom: 0;
-    top: 105px;
+    top: 80px;
     background: map-get($colors, 'white');
     overflow: hidden;
     z-index: 100;
@@ -106,6 +106,17 @@
                 }
             }
 
+            &--sublabel {
+                .lb-menu__link {
+                    font-weight: 700;
+                    text-transform: uppercase !important;
+                    
+                    &::after {
+                        content: none;
+                    }
+                }
+            }
+
             .lb-icon {
                 svg {
                     width: 10px;
@@ -183,6 +194,13 @@
             &--active {
                 visibility: visible;
                 z-index: 200;
+            }
+
+            .lb-menu__main {
+                .lb-menu__link,
+                .lb-menu__button {
+                    text-transform: unset;
+                }
             }
         }
 
