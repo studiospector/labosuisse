@@ -510,7 +510,36 @@ function lb_header()
     }
 
     $menu_mobile = [
-        'children' => macro::getAll(false),
+        // 'children' => macro::getAll(false),
+        'children' => [
+            [
+                'type' => 'submenu', 
+                'label' => 'Viso',
+                'subLabel' => 'Per zona',
+                'children' => [
+                    ['type' => 'link', 'label' => 'Tutte le zone viso', 'href' => '#'],
+                    [
+                        'type' => 'submenu',
+                        'label' => 'Volto',
+                        'subLabel' => 'Per esigenza',
+                        'children' => [
+                            ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Anti età', 'href' => '#'],
+                            ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
+                        ]
+                    ],
+                    ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
+                    ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
+                    ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
+                ],
+            ],
+            ['type' => 'link', 'label' => 'Lorem Ipsum 1', 'href' => '#'],
+            ['type' => 'link', 'label' => 'Lorem Ipsum 2', 'href' => '#'],
+            ['type' => 'link', 'label' => 'Lorem Ipsum 3', 'href' => '#'],
+            ['type' => 'link', 'label' => 'Lorem Ipsum 4', 'href' => '#'],
+            ['type' => 'link', 'label' => 'Lorem Ipsum 5', 'href' => '#'],
+            ['type' => 'link', 'label' => 'Lorem Ipsum 6', 'href' => '#'],
+        ],
         'fixed' => [
             [
                 'type' => 'card',
@@ -522,12 +551,11 @@ function lb_header()
                         'small' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg'
                     ],
                     'infobox' => [
-                        'subtitle' => 'Magnetic Eyes',
-                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'subtitle' => 'AFTER MASK',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
                         'cta' => [
                             'url' => '#',
-                            'title' => 'Scopri di più',
-                            'iconEnd' => ['name' => 'arrow-right'],
+                            'title' => 'Scopri la linea',
                             'variants' => ['quaternary']
                         ]
                     ],
@@ -535,12 +563,18 @@ function lb_header()
                 ],
             ],
             [
-                'type' => 'small-link',
-                'label' => 'Hai bisogno di aiuto?',
+                'type' => 'link',
+                'label' => __('Profilo', 'labo-suisse-theme'),
+                'icon' => 'user',
+                'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+            ],
+            [
+                'type' => 'link',
+                'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),
                 'icon' => 'comments',
             ],
             [
-                'type' => 'small-link',
+                'type' => 'link',
                 'label' => 'Italia',
                 'icon' => 'earth',
             ],

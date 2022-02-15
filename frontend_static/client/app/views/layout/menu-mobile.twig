@@ -1,74 +1,14 @@
-{% set props = {
-    children: [
-        {
-            type: 'submenu', 
-            label: 'Viso',
-            subLabel: 'Per zona',
-            children: [
-                {type: 'link', label: 'Tutte le zone viso', href: '#'},
-                {
-                    type: 'submenu',
-                    label: 'Volto',
-                    subLabel: 'Per esigenza',
-                    children: [
-                        {type: 'link', label: 'Tutte le esigenze', href: '#'},
-                        {type: 'link', label: 'Anti età', href: '#'},
-                        {type: 'link', label: 'Effetto riempitivo', href: '#'},
-                    ]
-                },
-                {type: 'link', label: 'Occhi e sguardo', href: '#'},
-                {type: 'link', label: 'Labbra', href: '#'},
-                {type: 'link', label: 'Collo e decolleté', href: '#'},
-            ],
-        }
-    ],
-    fixed: [
-        {
-            type: 'card',
-            data: {
-                images: {
-                    original: '/assets/images/card-img-5.jpg',
-                    large: '/assets/images/card-img-5.jpg',
-                    medium: '/assets/images/card-img-5.jpg',
-                    small: '/assets/images/card-img-5.jpg'
-                },
-                infobox: {
-                    subtitle: 'Magnetic Eyes',
-                    paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                    cta: {
-                        url: '#',
-                        title: 'Scopri di più',
-                        iconEnd: { name: 'arrow-right' },
-                        variants: ['quaternary']
-                    }
-                },
-                variants: ['type-1']
-            },
-        },
-        {
-            type: 'small-link', 
-            label: 'Hai bisogno di aiuto?', 
-            icon: 'comments',
-        },
-        {
-            type: 'small-link',
-            label: 'Italia',
-            icon: 'earth',
-        },
-    ]
-} -%}
-
 <nav class="lb-menu lb-menu--mobile">
 	<div class="lb-menu__wrapper">
         <div class="lb-menu-scroller">
             <ul body-scroll-lock-ignore class="lb-menu__main">
-                {% for item in props.children %}
+                {% for item in items.children %}
                     {% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
                 {% endfor %}
             </ul>
             <ul class="lb-menu__fixed">
                 <div class="lb-menu__service">
-                    {% for item in props.fixed %}
+                    {% for item in items.fixed %}
                         {% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
                     {% endfor %}
                 </div>
