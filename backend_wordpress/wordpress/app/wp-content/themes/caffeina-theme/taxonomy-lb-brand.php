@@ -14,28 +14,13 @@ if ( have_posts() ) :
         $num_posts++;
 
         if ($level == 1) {
-            $grid_type = 'ordered';
+            $grid_type = 'default';
 
             $terms = get_the_terms( get_the_ID(), 'lb-brand' );
             
             foreach ($terms as $term) {
                 if ( $term->parent != 0 ) {
-                    $items[$term->term_id]['brand_card'] = [
-                        'color' => get_field('lb_brand_color', $term),
-                        'infobox' => [
-                            'subtitle' => $term->name,
-                            'paragraph' => $term->description,
-                            'cta' => [
-                                'url' => get_term_link($term),
-                                'title' => __('Scopri il brand', 'labo-suisse-theme'),
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-8']
-                    ];
-                    $items[$term->term_id]['products'][] = \Timber::get_post( get_the_ID() );
-                    
-                    // $products[] = \Timber::get_post( get_the_ID() );
+                    $items[] = \Timber::get_post( get_the_ID() );
                 }
             }
 
