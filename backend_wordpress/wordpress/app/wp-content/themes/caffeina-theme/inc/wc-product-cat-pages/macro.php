@@ -16,12 +16,12 @@ class macro extends basePage
             'hide_empty' => false,
             'parent' => $term->term_id,
         ]);
- 
+
         $payload['terms'] = [];
         foreach ($sub_terms as $item) {
             // Term Thumb
             $thumbnail_id = get_term_meta($item->term_id, 'thumbnail_id', true);
-            $image = wp_get_attachment_url( $thumbnail_id );
+            $image = wp_get_attachment_url($thumbnail_id);
 
             $payload['terms'][] = [
                 'images' => [
@@ -47,14 +47,23 @@ class macro extends basePage
         // $this->macro->render();
     }
 
-    public static function getAll($withCard = true)
+    public static function getTheMenuTree($device = 'desktop')
     {
         $macro = self::getProductCategory();
-
         $items = [];
 
         foreach ($macro as $item) {
-            $items[] = zona::getAll($item, $withCard);
+            $zona = [];
+            switch ($device) {
+                case 'desktop':
+                    $zona = zona::getDesktopItems($item);
+                    break;
+                case 'mobile':
+                    $zona = zona::getMobileItems($item);
+                    break;
+            }
+
+            $items[] = $zona;
         }
 
         return $items;

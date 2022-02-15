@@ -236,7 +236,8 @@ class ThemeSetup extends Timber\Site
     /**
      * Change Yoat SEO Bradcrumbs separator
      */
-    public function lb_yoast_breadcrumb_separator($sep) {
+    public function lb_yoast_breadcrumb_separator($sep)
+    {
         return '<span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span>';
     }
 }
@@ -477,7 +478,7 @@ function lb_header()
 {
 
     $menu_desktop = array_merge(
-        macro::getAll(),
+        macro::getTheMenuTree(),
         [['type' => 'separator']],
         get_brands_menu(),
         [[
@@ -510,36 +511,7 @@ function lb_header()
     }
 
     $menu_mobile = [
-        // 'children' => macro::getAll(false),
-        'children' => [
-            [
-                'type' => 'submenu', 
-                'label' => 'Viso',
-                'subLabel' => 'Per zona',
-                'children' => [
-                    ['type' => 'link', 'label' => 'Tutte le zone viso', 'href' => '#'],
-                    [
-                        'type' => 'submenu',
-                        'label' => 'Volto',
-                        'subLabel' => 'Per esigenza',
-                        'children' => [
-                            ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Anti età', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
-                        ]
-                    ],
-                    ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
-                    ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
-                    ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
-                ],
-            ],
-            ['type' => 'link', 'label' => 'Lorem Ipsum 1', 'href' => '#'],
-            ['type' => 'link', 'label' => 'Lorem Ipsum 2', 'href' => '#'],
-            ['type' => 'link', 'label' => 'Lorem Ipsum 3', 'href' => '#'],
-            ['type' => 'link', 'label' => 'Lorem Ipsum 4', 'href' => '#'],
-            ['type' => 'link', 'label' => 'Lorem Ipsum 5', 'href' => '#'],
-            ['type' => 'link', 'label' => 'Lorem Ipsum 6', 'href' => '#'],
-        ],
+        'children' => macro::getTheMenuTree('mobile'),
         'fixed' => [
             [
                 'type' => 'card',
