@@ -8,11 +8,30 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
+{# Offset Nav links payload #}
+{% set navLink = {} %}
+{% if offsetNav %}
+    {% if offsetNav.active %}
+        {% set navLink = navLink|merge({
+            attributes: ['data-target-offset-nav="' ~ offsetNav.id ~ '"'],
+            class: 'js-open-offset-nav',
+            url: null
+        }) %}
+    {% endif %}
+{% endif %}
+
 <section class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
     <div class="block-image-card__img">
         {{ lbPicture(images, true) }}
     </div>
     <div class="block-image-card__card">
+        {% if navLink %}
+            {% set ctaCurr = card.infobox.cta %}
+            {% set infoboxCurr = card.infobox %}
+            {% set ctaNew = ctaCurr|merge(navLink) %}
+            {% set infoboxNew = infoboxCurr|merge({'cta': ctaNew}) %}
+            {% set card = card|merge({'infobox': infoboxNew}) %}
+        {% endif %}
         {% include '@PathViews/components/card.twig' with card only %}
     </div>
 </section>

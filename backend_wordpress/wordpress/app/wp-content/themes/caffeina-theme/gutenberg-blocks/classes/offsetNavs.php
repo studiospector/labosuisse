@@ -80,6 +80,20 @@ class OffsetNavs extends BaseBlock {
                     'title' => __('Recensioni', 'labo-suisse-theme'),
                     'data' => $this->filldata('reviews')
                 ]
+            ],
+            'items_two_cards' => [
+                'left' => [
+                    'active' => get_field('lb_block_offsetnav_state_cardleft'), // true, false
+                    'id' => 'lb-cardleft-product-offsetnav',
+                    'title' => get_field('lb_block_offsetnav_cardleft_title'),
+                    'data' => $this->filldata('cardleft')
+                ],
+                'right' => [
+                    'active' => get_field('lb_block_offsetnav_state_cardright'), // true, false
+                    'id' => 'lb-cardright-product-offsetnav',
+                    'title' => get_field('lb_block_offsetnav_cardright_title'),
+                    'data' => $this->filldata('cardright')
+                ],
             ]
         ];      
         $this->setContext($payload);
