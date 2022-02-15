@@ -13,30 +13,27 @@ services:
           - '${VIRTUAL_HOST}.localhost'
       front-tier: null
     environment:
+      DEBUG: '${DEBUG}'
+      WP_CONTENT_CUSTOM_DIR: '${WP_CONTENT_CUSTOM_DIR}'
       VIRTUAL_HOST: '${VIRTUAL_HOST}.localhost'
-    depends_on:
-      - backend_wordpress
-      - frontend_bundler
-      - frontend_static
-    volumes:
-      - 'backend_media:/uploads'
-      - >-
-        ../backend_wordpress/wordpress/app/wp-content/themes:/var/www/html/wp-content-custom/themes
-      - >-
-        ../backend_wordpress/wordpress/app/wp-content/plugins:/var/www/html/wp-content-custom/plugins
-      - >-
-        ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
-      - >-
-        ../frontend_bundler/client/app/dist/public:/var/www/html/wp-content-custom/themes/caffeina-theme/static
-      - >-
-        ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
-      - >-
-        ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
-
-  backend_wordpress:
-    build:
-      target: development
-    restart: unless-stopped
+      DATABASE_URL: '${DATABASE_URL}'
+      MYSQL_HOST: storage_mysql
+      MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
+      MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
+      MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
+      ADMIN_URL: '${VIRTUAL_HOST}.localhost'
+      OFFLOAD_AWS_REGION: '${AWS_REGION}'
+      OFFLOAD_AWS_BUCKET: '${AWS_BUCKET}'
+      OFFLOAD_AWS_ACCESS_ID: '${AWS_ACCESS_ID}'
+      OFFLOAD_AWS_SECRET: '${AWS_SECRET}'
+      POSTINO_CAFF_SMTP_SECURE: '${BACKEND_WP_POSTINO_CAFF_SMTP_SECURE}'
+      POSTINO_CAFF_SMTP_PORT: '${BACKEND_WP_POSTINO_CAFF_SMTP_PORT}'
+      POSTINO_CAFF_SMTP_SERVER: '${BACKEND_WP_POSTINO_CAFF_SMTP_SERVER}'
+      POSTINO_CAFF_SMTP_USER: '${BACKEND_WP_POSTINO_CAFF_SMTP_USER}'
+      POSTINO_CAFF_SMTP_PASSWORD: '${BACKEND_WP_POSTINO_CAFF_SMTP_PASSWORD}'
+      POSTINO_CAFF_MAIL_SENDER: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER}'
+      POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
+      WITH_REDIS: 1
     depends_on:
       - storage_mysql
       - frontend_bundler
@@ -58,27 +55,6 @@ services:
       - >-
         ../backend_wordpress/wordpress/app/wp-content/languages:/var/www/html/wp-content-custom/languages
 
-    environment:
-      DATABASE_URL: '${DATABASE_URL}'
-      MYSQL_HOST: storage_mysql
-      MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
-      MYSQL_USER: '${BACKEND_WORDPRESS_MYSQL_USER}'
-      MYSQL_PASSWORD: '${BACKEND_WORDPRESS_MYSQL_PASSWORD}'
-      ADMIN_URL: '${VIRTUAL_HOST}.localhost'
-      OFFLOAD_AWS_REGION: '${AWS_REGION}'
-      OFFLOAD_AWS_BUCKET: '${AWS_BUCKET}'
-      OFFLOAD_AWS_ACCESS_ID: '${AWS_ACCESS_ID}'
-      OFFLOAD_AWS_SECRET: '${AWS_SECRET}'
-      POSTINO_CAFF_SMTP_SECURE: '${BACKEND_WP_POSTINO_CAFF_SMTP_SECURE}'
-      POSTINO_CAFF_SMTP_PORT: '${BACKEND_WP_POSTINO_CAFF_SMTP_PORT}'
-      POSTINO_CAFF_SMTP_SERVER: '${BACKEND_WP_POSTINO_CAFF_SMTP_SERVER}'
-      POSTINO_CAFF_SMTP_USER: '${BACKEND_WP_POSTINO_CAFF_SMTP_USER}'
-      POSTINO_CAFF_SMTP_PASSWORD: '${BACKEND_WP_POSTINO_CAFF_SMTP_PASSWORD}'
-      POSTINO_CAFF_MAIL_SENDER: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER}'
-      POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
-      WITH_REDIS: 1
-    networks:
-      - labo-website-2021
   backup_service:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
     environment:
