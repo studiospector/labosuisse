@@ -82,8 +82,10 @@
     }
 
     &--containerized {
-        &__infobox {
-            padding: 0 70px;
+        .hero {
+            &__infobox {
+                padding: 0 70px;
+            }
         }
     }
 }
