@@ -23,6 +23,7 @@ class CarouselPostBannerAlternate extends BaseBlock
                         'medium' => wp_get_attachment_url(get_post_thumbnail_id($cf_post->ID)),
                         'small' => wp_get_attachment_url(get_post_thumbnail_id($cf_post->ID))
                     ],
+                    'noContainer' => true,
                     'infobox' => [
                         'date' => date("d/m/Y", strtotime($cf_post->post_date)),
                         'subtitle' => $cf_post->post_title,
