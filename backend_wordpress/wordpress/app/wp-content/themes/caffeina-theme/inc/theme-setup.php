@@ -535,18 +535,18 @@ function lb_header()
                 ],
             ],
             [
-                'type' => 'link',
+                'type' => 'small-link',
                 'label' => __('Profilo', 'labo-suisse-theme'),
                 'icon' => 'user',
                 'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
             ],
             [
-                'type' => 'link',
+                'type' => 'small-link',
                 'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),
                 'icon' => 'comments',
             ],
             [
-                'type' => 'link',
+                'type' => 'small-link',
                 'label' => 'Italia',
                 'icon' => 'earth',
             ],

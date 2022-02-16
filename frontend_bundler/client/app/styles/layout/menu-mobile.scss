@@ -147,6 +147,10 @@
             color: map-get($colors, "black");
             background-color: map-get($colors, "white");
             border: 0;
+
+            &--small {
+                padding: 1rem 1.5rem;
+            }
         }
 
 
