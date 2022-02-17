@@ -20,7 +20,7 @@
 	{% if infobox %}
 		<div class="hero__infobox container">
 			{# <div class="container"> #}
-				<div class="h-100 col-12 col-md-5{{ _infoboxPosX }}">
+				<div class="h-100 col-12 col-md-{{ infoboxPosX == 'center' ? '6' : '5' }}{{ _infoboxPosX }}">
 					{% include '@PathViews/components/infobox.twig' with infobox only %}
 				</div>
 			{# </div> #}
