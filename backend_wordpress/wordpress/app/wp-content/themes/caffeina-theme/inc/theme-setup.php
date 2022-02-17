@@ -97,6 +97,26 @@ class ThemeSetup extends Timber\Site
         add_theme_support('align-wide');
         add_theme_support('editor-styles');
 
+        // Register Menus
+        register_nav_menus( array(
+            'lb_discover_labo' => 'Scopri Labo',
+        ));
+
+        // Theme Options page
+        acf_add_options_page( array(
+            'page_title' => 'Impostazioni Generali Tema',
+            'menu_title' => 'Impostazioni Tema',
+            'menu_slug' => 'lb-theme-general-settings',
+            'capability' => 'edit_posts',
+            'redirect' => false
+        ));
+        
+        acf_add_options_sub_page( array(
+            'page_title' => 'Impostazioni Header',
+            'menu_title' => 'Header',
+            'parent_slug' => 'lb-theme-general-settings',
+        ));
+
         /**
          * Path to our custom editor style
          * It allows you to link a custom stylesheet file to the TinyMCE editor within the post edit screen
