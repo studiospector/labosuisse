@@ -4,10 +4,13 @@ MATTEO
 - √ card grid linea lifting - template 1
 - √ card grid trattamenti make-up - template 1
 - √ card grid ultimi post - template 5
+- √ blocco stcky news archivio news(magazine)
 
 - namespaces
 - menu
 - gestione thumbnails
+- pagina opzioni(Header links, etc...)
+- menu "Scopri Labo"
 
 
 
@@ -26,11 +29,12 @@ STEFANO
 - √ check card grids
 - √ archivio Brands - T2
 - √ archivi
+- √ ACF Fields translations
+- √ blocco novità in archivio esigenza
+- √ aggiungere altre due offset navs(relative alle scale di diradamento)
+- √ aggiungere link all'offset nav nel blocco "immagine e card" realativa a "Tecnologia"
 
-- blocco novità in archivio esigenza 
-- blocco stcky news archivio news(magazine)
-- aggiungere altre due offset navs(relative alle scale di diradamento)
-- sticky header dinamico
+- sticky header dinamico pagina prodotto
 - gestione thumbnails
 
 
@@ -48,19 +52,3 @@ BUGFIX
 - √ lancio due immagini campi tagline e titolo invertiti e uno dei due non si vede
 - √ aggiustare blocco infobox
 - √ apertura offset nav con sticky header product
-
-
-
-----------
-
-
-
-COMPONENTI DA TERMINARE
-
-
-
-PAGINA PRODOTTO
-
-- √ photoswipe gallery desktop + mobile
-- gestione offset nav del blocco due card e tecnologia
-- sticky header dinamico
