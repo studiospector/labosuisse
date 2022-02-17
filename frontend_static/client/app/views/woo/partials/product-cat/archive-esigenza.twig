@@ -13,7 +13,7 @@
     <div class="container text-center">
         <div class="infobox">
             {% if term_name %}
-                <h1 class="infobox__subtitle h2">ESIGENZA - {{ term_name }}</h1>
+                <h1 class="infobox__subtitle h2">{{ term_name }}</h1>
             {% endif %}
             {% if term_description %}
                 <p class="infobox__paragraph">{{ fn('nl2br', term_description) }}</p>
