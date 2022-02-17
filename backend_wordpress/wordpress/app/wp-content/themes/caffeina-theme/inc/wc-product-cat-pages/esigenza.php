@@ -107,17 +107,41 @@ class esigenza extends basePage
                 // ];
             }
         }
-
         wp_reset_postdata();
 
         $payload = [
-            'termName' => $term->name,
             'brands_filter' => $brands_arr,
             'tipologie_filter' => $tipologie_arr,
             'order_filter' => $order_filter,
             'grid_type' => 'ordered',
-            'items' => $items,
             'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $count_posts . '</span>',
+            'items' => $items,
+            'block_announcements' => (!get_field('lb_product_cat_announcements_state', $term)) ? null : [
+                'infobox' => [
+                    'title' => get_field('lb_product_cat_announcements_title', $term),
+                ],
+                'cards' =>[
+                    [
+                        'images' =>[
+                            'original' => get_field('lb_product_cat_announcements_cardleft_image', $term),
+                            'large' => get_field('lb_product_cat_announcements_cardleft_image', $term),
+                            'medium' => get_field('lb_product_cat_announcements_cardleft_image', $term),
+                            'small' => get_field('lb_product_cat_announcements_cardleft_image', $term)
+                        ],
+                        'infobox' => $this->getCardByType(get_field('lb_product_cat_announcements_cardleft_item_type', $term), 'left', $term)
+                    ],
+                    [
+                        'images' =>[
+                            'original' => get_field('lb_product_cat_announcements_cardright_image', $term),
+                            'large' => get_field('lb_product_cat_announcements_cardright_image', $term),
+                            'medium' => get_field('lb_product_cat_announcements_cardright_image', $term),
+                            'small' => get_field('lb_product_cat_announcements_cardright_image', $term)
+                        ],
+                        'infobox' => $this->getCardByType(get_field('lb_product_cat_announcements_cardright_item_type', $term), 'right', $term)
+                    ]
+                ],
+                'variants' => ['horizontal'],
+            ]
         ];
 
         $this->setContext($payload);
@@ -139,5 +163,31 @@ class esigenza extends basePage
         }
 
         return $items;
+    }
+
+    protected function getCardByType($type, $card, $term)
+    {
+        $payload = [
+            'subtitle' => '',
+            'cta' => [
+                'url' => '',
+                'title' => __('Scopri di più', 'labo-suisse-theme'),
+                'variants' => ['quaternary'],
+            ]
+        ];
+
+        if ($type == 'lb_type_post') {
+            $obj = get_field('lb_product_cat_announcements_card' . $card . '_item_post', $term);
+            $payload['subtitle'] = $obj->post_title;
+            $payload['cta']['url'] = get_permalink($obj->ID);
+        }
+        elseif ($type == 'lb_type_tax') {
+            $obj = get_field('lb_product_cat_announcements_card' . $card . '_item_tax', $term);
+
+            $payload['subtitle'] = $obj->name;
+            $payload['cta']['url'] = get_term_link($obj->term_id);
+        }
+        
+        return $payload;
     }
 }

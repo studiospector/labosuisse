@@ -1,6 +1,6 @@
 {% extends '@PathViews/templates/_default.twig' %}
 
-{% set bodyClass = 'page' %}
+{% set bodyClass = 'lb-archive-esigenza' %}
 
 {% block main %}
 
@@ -92,5 +92,12 @@
             {% include '@PathViews/components/cards-grid-product-ordered.twig' with { items: items } only %}
         {% endif %}
     </div>
+
+    {# Block Announcements #}
+    {% if block_announcements %}
+        <div class="lb-archive-esigenza__announcements">
+            {% include '@PathViews/components/block-launch-two-cards.twig' with block_announcements only %}
+        </div>
+    {% endif %}
 
 {% endblock %}
