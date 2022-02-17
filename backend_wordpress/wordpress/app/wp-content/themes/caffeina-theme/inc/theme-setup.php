@@ -104,8 +104,8 @@ class ThemeSetup extends Timber\Site
 
         // Theme Options page
         acf_add_options_page( array(
-            'page_title' => 'Impostazioni Generali Tema',
-            'menu_title' => 'Impostazioni Tema',
+            'page_title' => 'Impostazioni Tema - Generali',
+            'menu_title' => 'Opzioni Tema',
             'menu_slug' => 'lb-theme-general-settings',
             'capability' => 'edit_posts',
             'update_button' => 'Aggiorna',
@@ -114,8 +114,8 @@ class ThemeSetup extends Timber\Site
         ));
         
         acf_add_options_sub_page( array(
-            'page_title' => 'Impostazioni Header',
-            'menu_title' => 'Header',
+            'page_title' => 'Impostazioni Tema - Header e Menu',
+            'menu_title' => 'Header e Menu',
             'parent_slug' => 'lb-theme-general-settings',
             'update_button' => 'Aggiorna',
             'updated_message' => 'Impostazioni aggiornate.',

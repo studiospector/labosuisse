@@ -1,6 +1,6 @@
 {
     "key": "group_620e5171446b7",
-    "title": "Impostazioni Generali Tema - Generali",
+    "title": "Impostazioni Tema - Generali",
     "fields": [
         {
             "key": "field_620e518232ff8",
@@ -44,5 +44,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645105575
+    "modified": 1645106604
 }
