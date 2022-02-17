@@ -108,6 +108,8 @@ class ThemeSetup extends Timber\Site
             'menu_title' => 'Impostazioni Tema',
             'menu_slug' => 'lb-theme-general-settings',
             'capability' => 'edit_posts',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
             'redirect' => false
         ));
         
@@ -115,6 +117,8 @@ class ThemeSetup extends Timber\Site
             'page_title' => 'Impostazioni Header',
             'menu_title' => 'Header',
             'parent_slug' => 'lb-theme-general-settings',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
         ));
 
         /**
