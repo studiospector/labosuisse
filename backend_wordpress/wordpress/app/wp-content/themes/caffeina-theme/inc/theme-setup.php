@@ -1,6 +1,7 @@
 <?php
 
 require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
+require_once(LB_DIR_PATH . '/inc/Options.php');
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -99,12 +100,12 @@ class ThemeSetup extends Timber\Site
         add_theme_support('editor-styles');
 
         // Register Menus
-        register_nav_menus( array(
+        register_nav_menus(array(
             'lb_discover_labo' => 'Scopri Labo',
         ));
 
         // Theme Options page
-        acf_add_options_page( array(
+        acf_add_options_page(array(
             'page_title' => 'Impostazioni Tema - Generali',
             'menu_title' => 'Opzioni Tema',
             'menu_slug' => 'lb-theme-general-settings',
@@ -113,8 +114,8 @@ class ThemeSetup extends Timber\Site
             'updated_message' => 'Impostazioni aggiornate.',
             'redirect' => false
         ));
-        
-        acf_add_options_sub_page( array(
+
+        acf_add_options_sub_page(array(
             'page_title' => 'Impostazioni Tema - Header e Menu',
             'menu_title' => 'Header e Menu',
             'parent_slug' => 'lb-theme-general-settings',
@@ -506,34 +507,15 @@ function lb_header()
         macro::getTheMenuTree(),
         [['type' => 'separator']],
         get_brands_menu(),
-        [[
-            'type' => 'link',
-            'label' => 'Scopri Labo',
-            'href' => '#',
-        ]],
+        get_discover_labo_menu_items(),
     );
 
-
-    if (is_woocommerce()) {
-        $menu_desktop = array_merge($menu_desktop, [
-            ['type' => 'separator'],
-            // [
-            //     'type' => 'icon',
-            //     'icon' => ['name' => 'heart'],
-            //     'href' => 'https://google.it'
-            // ],
-            [
-                'type' => 'icon',
-                'icon' => ['name' => 'cart'],
-                'href' => wc_get_cart_url()
-            ],
-            [
-                'type' => 'icon',
-                'icon' => ['name' => 'user'],
-                'href' => get_permalink(get_option('woocommerce_myaccount_page_id'))
-            ]
-        ]);
-    }
+    // if (is_woocommerce()) {
+    //     $menu_desktop = array_merge(
+    //         $menu_desktop,
+    //         (new Option())->getLShopLinks()
+    //     );
+    // }
 
     $menu_mobile = [
         'children' => macro::getTheMenuTree('mobile'),
@@ -579,7 +561,10 @@ function lb_header()
         ]
     ];
 
+    get_discover_labo_menu_items();
+
     return array(
+        'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'menu_desktop' => ['items' => $menu_desktop],
         'menu_mobile' => ['items' => $menu_mobile],
     );

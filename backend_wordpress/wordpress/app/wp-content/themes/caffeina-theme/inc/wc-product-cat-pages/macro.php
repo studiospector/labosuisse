@@ -40,9 +40,10 @@ class macro extends basePage
 
     public static function getTheMenuTree($device = 'desktop')
     {
-        $macro = self::getProductCategory();
-        $items = [];
+        $args = ['exclude' => get_option('default_product_cat')];
 
+        $macro = self::getProductCategory(null, $args);
+        $items = [];
         foreach ($macro as $item) {
             $zona = [];
             switch ($device) {

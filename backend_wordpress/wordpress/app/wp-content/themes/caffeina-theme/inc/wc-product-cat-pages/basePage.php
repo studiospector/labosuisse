@@ -31,12 +31,12 @@ class basePage
         \Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $this->context);
     }
 
-    public static function getProductCategory($parent = null)
+    public static function getProductCategory($parent = null, $args = [])
     {
-        return get_terms([
-            'taxonomy' => 'product_cat',
-            'hide_empty' => false,
-            'parent' => ($parent) ? $parent->term_id : null,
-        ]);
+        $args['taxonomy'] = 'product_cat';
+        $args['hide_empty'] = false;
+        $args['parent'] = ($parent) ? $parent->term_id : null;
+
+        return get_terms($args);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+require_once(__DIR__ . '/Options.php');
+
 /**
  * Get Images array
  */
@@ -81,7 +83,7 @@ function get_brands_menu()
                 'type' => 'submenu',
                 'label' => __('Per Brand', 'labo-suisse-theme'),
                 'children' => [
-                    ['type' => 'link', 'label' => 'Tutti i brand', 'href' =>  '#']
+                    ['type' => 'link', 'label' => 'Tutti i brand', 'href' => (new Option())->getArchiveBrandLink()]
                 ]
             ],
             [
@@ -161,4 +163,55 @@ function get_brands_menu_product_line($brand)
     }
 
     return $items;
+}
+
+function get_discover_labo_menu_items()
+{
+    $items = wp_get_nav_menu_items('lb-discover-labo');
+
+    $menu = [
+        'type' => 'submenu',
+        'label' => __('Scopri Labo', 'labo-suisse-theme'),
+        'children' => [
+            [
+                'type' => 'submenu',
+                'label' => '',
+                'children' => []
+            ],
+        ],
+        'fixed' => [
+            [
+                'type' => 'card',
+                'data' => [
+                    'images' => [
+                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                    ],
+                    'infobox' => [
+                        'subtitle' => 'Magnetic Eyes',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'cta' => [
+                            'url' => '#',
+                            'title' => __('Scopri di più', 'labo-suisse-theme'),
+                            'variants' => ['quaternary']
+                        ]
+                    ],
+                    'variants' => ['type-3']
+                ],
+            ],
+        ]
+    ];
+
+    foreach ($items as $item) {
+        $menu['children'][0]['children'][] = [
+            'type' => 'link',
+            'label' => $item->title,
+            'href' => $item->url,
+        ];
+    }
+
+
+    return [$menu];
 }
