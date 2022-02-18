@@ -15,9 +15,10 @@ const dataRightInfobox = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             infoboxPosX: 'right',
             infoboxPosY: 'center',
@@ -36,9 +37,10 @@ const dataRightInfobox = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             infoboxPosX: 'right',
             infoboxPosY: 'center',
@@ -63,9 +65,10 @@ const dataLeftInfobox = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img-2.jpg',
-                large: '/assets/images/carousel-hero-img-2.jpg',
-                medium: '/assets/images/carousel-hero-img-2.jpg',
-                small: '/assets/images/carousel-hero-img-2.jpg'
+                lg: '/assets/images/carousel-hero-img-2.jpg',
+                md: '/assets/images/carousel-hero-img-2.jpg',
+                sm: '/assets/images/carousel-hero-img-2.jpg',
+                xs: '/assets/images/carousel-hero-img-2.jpg'
             },
             infoboxPosX: 'left',
             infoboxPosY: 'center',
@@ -85,9 +88,10 @@ const dataLeftInfobox = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img-2.jpg',
-                large: '/assets/images/carousel-hero-img-2.jpg',
-                medium: '/assets/images/carousel-hero-img-2.jpg',
-                small: '/assets/images/carousel-hero-img-2.jpg'
+                lg: '/assets/images/carousel-hero-img-2.jpg',
+                md: '/assets/images/carousel-hero-img-2.jpg',
+                sm: '/assets/images/carousel-hero-img-2.jpg',
+                xs: '/assets/images/carousel-hero-img-2.jpg'
             },
             infoboxPosX: 'left',
             infoboxPosY: 'center',

@@ -10,16 +10,18 @@ import renderBlock from '../../views/components/block-image-card.twig'
 const dataDefault = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     card: {
         images: {
             original: '/assets/images/carousel-hero-img.jpg',
-            large: '/assets/images/carousel-hero-img.jpg',
-            medium: '/assets/images/carousel-hero-img.jpg',
-            small: '/assets/images/carousel-hero-img.jpg'
+            lg: '/assets/images/carousel-hero-img.jpg',
+            md: '/assets/images/carousel-hero-img.jpg',
+            sm: '/assets/images/carousel-hero-img.jpg',
+            xs: '/assets/images/carousel-hero-img.jpg'
         },
         infobox: {
             subtitle: 'La tecnologia dietro l’efficacia',

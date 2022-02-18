@@ -10,9 +10,10 @@ import renderBanner from '../../views/components/banner.twig'
 const dataLeftInfobox = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
@@ -27,9 +28,10 @@ const dataLeftInfobox = {
 const dataLeftInfoboxCTA = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
@@ -49,9 +51,10 @@ const dataLeftInfoboxCTA = {
 const dataRightInfobox = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
@@ -66,9 +69,10 @@ const dataRightInfobox = {
 const dataRightInfoboxCTA = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
@@ -105,9 +109,10 @@ const dataCenterInfobox = {
 const dataCenterInfoboxCTA = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infoboxBgColorTransparent: false, // true, false
     infoboxTextAlignment: 'left', // left, right, center
@@ -127,9 +132,10 @@ const dataCenterInfoboxCTA = {
 const dataTransparentInfobox = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infoboxBgColorTransparent: true, // true, false
     infoboxTextAlignment: 'left', // left, right, center

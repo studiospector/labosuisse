@@ -19,17 +19,8 @@ class zona extends basePage
 
         $payload['terms'] = [];
         foreach ($sub_terms as $item) {
-            // Term Thumb
-            $thumbnail_id = get_term_meta($item->term_id, 'thumbnail_id', true);
-            $image = wp_get_attachment_url($thumbnail_id);
-
             $payload['terms'][] = [
-                'images' => [
-                    'original' => $image,
-                    'large' => $image,
-                    'medium' => $image,
-                    'small' => $image
-                ],
+                'images' => lb_get_images(get_term_meta($item->term_id, 'thumbnail_id', true)),
                 'infobox' => [
                     'subtitle' => $item->name,
                     'paragraph' => $item->description,
@@ -73,9 +64,10 @@ class zona extends basePage
                     'data' => [
                         'images' => [
                             'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                            'lg' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'md' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'sm' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                            'xs' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
                         ],
                         'infobox' => [
                             'subtitle' => 'Magnetic Eyes',

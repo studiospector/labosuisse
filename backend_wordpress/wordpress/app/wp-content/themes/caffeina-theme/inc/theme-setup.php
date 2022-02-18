@@ -73,9 +73,10 @@ class ThemeSetup extends Timber\Site
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
-        add_image_size('lb-large', 1260, 600, true);
-        add_image_size('lb-medium', 650, 470, true);
-        add_image_size('lb-small', 400, 345, true);
+        add_image_size('lb-img-size-lg', 1300, 700, true);
+        add_image_size('lb-img-size-md', 700, 400, true);
+        add_image_size('lb-img-size-sm', 400, 400, true);
+        add_image_size('lb-img-size-xs', 200, 200, true);
 
         add_theme_support('customize-selective-refresh-widgets');
 
@@ -542,9 +543,10 @@ function lb_header()
                 'data' => [
                     'images' => [
                         'original' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'large' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'medium' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'small' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg'
+                        'lg' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'md' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'sm' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'xs' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
                     ],
                     'infobox' => [
                         'subtitle' => 'AFTER MASK',

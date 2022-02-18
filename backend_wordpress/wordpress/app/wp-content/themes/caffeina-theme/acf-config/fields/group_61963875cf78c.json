@@ -70,7 +70,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -362,5 +362,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644485596
+    "modified": 1645120832
 }

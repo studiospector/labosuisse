@@ -11,12 +11,7 @@
 
     {# Hero #}
     {% include '@PathViews/components/hero.twig' with {
-        images: {
-            original: term_image,
-            large: term_image,
-            medium: term_image,
-            small: term_image
-        },
+        images: fn('lb_get_images', term_image),
         infoboxPosX: 'left',
         infoboxPosY: 'center',
         infobox: {

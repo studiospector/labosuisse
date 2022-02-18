@@ -13,12 +13,7 @@ class carouselHero extends BaseBlock {
                 $cta = array_merge (  (array)get_sub_field('lb_block_carousel_hero_infobox_btn') ,['variants' => [get_sub_field('lb_block_carousel_hero_infobox_btn_variants')]]);  
             }
                 $slides[] = [
-                    'images' => [
-                        'original' => get_sub_field('lb_block_carousel_hero_img'),
-                        'large' => get_sub_field('lb_block_carousel_hero_img'),
-                        'medium' => get_sub_field('lb_block_carousel_hero_img'),
-                        'small' => get_sub_field('lb_block_carousel_hero_img')
-                    ],
+                    'images' => lb_get_images(get_sub_field('lb_block_carousel_hero_img')),
                     'infoboxPosX' => get_sub_field('lb_block_carousel_hero_infoboxposx'),
                     'infoboxPosY' => get_sub_field('lb_block_carousel_hero_infoboxposy'),
                     'container' => get_sub_field('lb_block_carousel_hero_container'),

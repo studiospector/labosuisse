@@ -7,14 +7,8 @@ class LoveLabo extends BaseBlock {
         $items = [];
         for ($i = 1; $i <= 6; $i++) {
             $items[] = [
-                    'images' =>[
-                        'original' => get_field('lb_block_love_labo_img_'.$i),
-                        'large' => get_field('lb_block_love_labo_img_'.$i),
-                        'medium' => get_field('lb_block_love_labo_img_'.$i),
-                        'small' => get_field('lb_block_love_labo_img_'.$i)
-                    ],
-                    'text' => get_field('lb_block_love_labo_text_'.$i)
-                    
+                'images' => lb_get_images(get_field('lb_block_love_labo_img_'.$i)),
+                'text' => get_field('lb_block_love_labo_text_'.$i)
             ];
         }
 

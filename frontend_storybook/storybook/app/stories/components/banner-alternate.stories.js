@@ -12,9 +12,10 @@ import BannerAlternate from '../../scripts/components/BannerAlternate'
 const dataRightInfoboxFullHeight = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -35,9 +36,10 @@ const dataRightInfoboxFullHeight = {
 const dataLeftInfoboxFullHeight = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -58,9 +60,10 @@ const dataLeftInfoboxFullHeight = {
 const dataRightInfoboxCentered = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infobox: {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
@@ -74,9 +77,10 @@ const dataRightInfoboxCentered = {
 const dataLeftInfoboxCentered = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infobox: {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
@@ -90,9 +94,10 @@ const dataLeftInfoboxCentered = {
 const dataRightImageBig = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infobox: {
         tagline: 'Lorem Ipsum',
@@ -112,9 +117,10 @@ const dataRightImageBig = {
 const dataLeftImageBig = {
     images: {
         original: '/assets/images/banner-img.jpg',
-        large: '/assets/images/banner-img.jpg',
-        medium: '/assets/images/banner-img.jpg',
-        small: '/assets/images/banner-img.jpg'
+        lg: '/assets/images/banner-img.jpg',
+        md: '/assets/images/banner-img.jpg',
+        sm: '/assets/images/banner-img.jpg',
+        xs: '/assets/images/banner-img.jpg'
     },
     infobox: {
         tagline: 'Lorem Ipsum',
