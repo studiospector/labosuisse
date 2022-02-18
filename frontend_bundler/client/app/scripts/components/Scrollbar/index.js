@@ -1,4 +1,5 @@
 import Component from '@okiba/component'
+import { on } from '@okiba/dom';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,7 +13,7 @@ class Scrollbar extends Component {
     constructor({ options, ...props }) {
         super({ ...props })
 
-        const defaultOptions = {
+        this.defaultOptions = {
             el: this.el,
             smooth: true,
             // getSpeed: true,
@@ -20,8 +21,12 @@ class Scrollbar extends Component {
             // reloadOnContextChange: true
         }
 
+        this.init()
+    }
+
+    init = () => {
         // Init Locomotive Scroll
-        const scrollbar = new LocomotiveScroll(defaultOptions)
+        const scrollbar = new LocomotiveScroll(this.defaultOptions)
 
         // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
         scrollbar.on("scroll", ScrollTrigger.update);
