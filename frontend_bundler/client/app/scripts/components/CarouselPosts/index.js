@@ -1,5 +1,5 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { qs, on } from '@okiba/dom'
 
 import Swiper from 'swiper/bundle';
 
@@ -7,7 +7,8 @@ const ui = {
     pagination: '.swiper-pagination'
 }
 
-export default class CarouselPosts extends Component {
+class CarouselPosts extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
@@ -86,3 +87,5 @@ export default class CarouselPosts extends Component {
         this.swiper.destroy()
     }
 }
+
+export default CarouselPosts

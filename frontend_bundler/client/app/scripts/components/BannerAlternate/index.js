@@ -1,5 +1,5 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { on } from '@okiba/dom'
 
 const ui = {
     image: '.banner-alternate__img',
@@ -8,7 +8,8 @@ const ui = {
     infoboxParagraph: '.infobox__paragraph',
 }
 
-export default class BannerAlternate extends Component {
+class BannerAlternate extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
@@ -45,7 +46,7 @@ export default class BannerAlternate extends Component {
                 let ctaWrapHeight = this.getFullHeight(this.ui.infoboxCTA) + 20
                 this.ui.image.style.marginBottom = `${ctaWrapHeight}px`
             }
-            
+
             if (textWrapHeight && ctaWrapHeight) {
                 this.ui.image.style.height = `calc(100% - ${textWrapHeight + ctaWrapHeight}px)`
             }
@@ -68,3 +69,5 @@ export default class BannerAlternate extends Component {
         return elHeight
     }
 }
+
+export default BannerAlternate

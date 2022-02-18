@@ -1,10 +1,15 @@
 import Component from "@okiba/component";
 import { on, off, qs } from '@okiba/dom'
+
 import { gsap } from "gsap";
+
 import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+
 import ClassNamePlugin from "../../plugin/ClassNamePlugin";
-import { openMenu } from './animations';
+
 import { allowTouchMove } from "../../utils/touchmove";
+
+import { openMenu } from './animations';
 
 gsap.registerPlugin(ClassNamePlugin);
 
@@ -17,10 +22,7 @@ const ui = {
     items: '.lb-menu__item--main>*:first-child'
 }
 
-
-
 class MenuMobile extends Component {
-
 
     constructor({ el, options = {
         hamburgerElement: '.lb-header__hamburger',

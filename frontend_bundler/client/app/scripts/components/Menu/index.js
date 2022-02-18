@@ -1,12 +1,10 @@
 import Component from '@okiba/component';
 import { on } from '@okiba/dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
 import MenuDesktop from '../MenuDesktop';
 import MenuMobile from '../MenuMobile';
+
 import { stickyHeader, stickyHeaderScroll } from '../MenuMobile/animations';
-
-
 
 const ui = {
     hamburger: '.lb-header__hamburger',
@@ -20,7 +18,6 @@ const components = {
     mobileMenu: { selector: '.lb-menu--mobile', type: MenuMobile },
     desktopMenu: { selector: '.lb-menu--desktop', type: MenuDesktop }
 }
-
 
 class Menu extends Component {
 

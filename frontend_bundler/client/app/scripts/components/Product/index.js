@@ -1,7 +1,8 @@
 import Component from '@okiba/component'
-import { qsa, qs, on, off } from '@okiba/dom'
+import { qsa } from '@okiba/dom'
 
 class Product extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props })
 
@@ -16,7 +17,7 @@ class Product extends Component {
                 const labels = qsa('.custom-select-label', elem)
                 let labelsWidth = []
                 let labelsFullWidth = []
-                labels.forEach( el => {
+                labels.forEach(el => {
                     labelsWidth.push(el.offsetWidth)
                     labelsFullWidth.push(this.getFullWidth(el))
                 })

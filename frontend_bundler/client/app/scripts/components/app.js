@@ -17,7 +17,6 @@ import Hero from './Hero'
 import BannerAlternate from './BannerAlternate'
 import BlockLoveLabo from './BlockLoveLabo'
 import OffsetNavSystem from './OffsetNavSystem'
-import AnimationParallax from './AnimationParallax'
 import CardsGrid from './CardsGrid'
 import ScrollTo from './ScrollTo'
 import Product from './Product'
@@ -91,11 +90,6 @@ const components = {
     blockLoveLabo: {
         selector: '.js-love-labo',
         type: BlockLoveLabo,
-        optional: true
-    },
-    animationParallax: {
-        selector: '.js-parallax',
-        type: AnimationParallax,
         optional: true
     },
     cardsGrid: {

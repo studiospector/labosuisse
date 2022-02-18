@@ -1,11 +1,12 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { on } from '@okiba/dom'
 
 const ui = {
     textWrap: '.js-infobox-text',
 }
 
-export default class CardsGrid extends Component {
+class CardsGrid extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
@@ -24,12 +25,12 @@ export default class CardsGrid extends Component {
         if (e.matches) {
             this.ui.textWrap.filter(el => {
                 let tempMax = el.offsetHeight
-    
+
                 if (tempMax > this.maxHeight) {
                     this.maxHeight = tempMax
                 }
             })
-    
+
             this.ui.textWrap.forEach(el => {
                 el.style.height = `${this.maxHeight}px`
             })
@@ -40,3 +41,5 @@ export default class CardsGrid extends Component {
         }
     }
 }
+
+export default CardsGrid

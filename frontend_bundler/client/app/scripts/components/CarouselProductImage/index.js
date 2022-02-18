@@ -1,9 +1,7 @@
 import Component from '@okiba/component'
-import { qsa, qs, on, off } from '@okiba/dom'
 
 import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js'
-
 
 import Swiper from 'swiper/bundle'
 
@@ -14,14 +12,15 @@ const ui = {
     pagination: '.swiper-pagination',
 }
 
-export default class CarouselProductImage extends Component {
+class CarouselProductImage extends Component {
+    
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
         // Lightbox default params
         this.defaultParams = {
             mainClass: 'pswp--custom-bg',
-            
+
             children: 'a',
 
             closeOnVerticalDrag: true,
@@ -98,3 +97,5 @@ export default class CarouselProductImage extends Component {
         this.slider.destroy()
     }
 }
+
+export default CarouselProductImage
