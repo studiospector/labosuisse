@@ -5,7 +5,8 @@ require_once(__DIR__ . '/Options.php');
 /**
  * Get Images array
  */
-function lb_get_images($id) {
+function lb_get_images($id)
+{
     return ($id) ? [
         'original' => wp_get_attachment_url($id),
         'lg' => wp_get_attachment_image_src($id, 'lb-img-size-lg')[0],
@@ -167,7 +168,11 @@ function get_brands_menu_product_line($brand)
 
 function get_discover_labo_menu_items()
 {
-    $items = wp_get_nav_menu_items('lb-discover-labo');
+    $items = [];
+    if (($locations = get_nav_menu_locations()) && isset($locations['lb_discover_labo'])) {
+        $menu_obj = wp_get_nav_menu_object($locations['lb_discover_labo']);
+        $items = wp_get_nav_menu_items($menu_obj->term_id);
+    }
 
     $menu = [
         'type' => 'submenu',
