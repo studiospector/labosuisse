@@ -122,21 +122,11 @@ class esigenza extends basePage
                 ],
                 'cards' =>[
                     [
-                        'images' =>[
-                            'original' => get_field('lb_product_cat_announcements_cardleft_image', $term),
-                            'large' => get_field('lb_product_cat_announcements_cardleft_image', $term),
-                            'medium' => get_field('lb_product_cat_announcements_cardleft_image', $term),
-                            'small' => get_field('lb_product_cat_announcements_cardleft_image', $term)
-                        ],
+                        'images' => lb_get_images(get_field('lb_product_cat_announcements_cardleft_image', $term)),
                         'infobox' => $this->getCardByType(get_field('lb_product_cat_announcements_cardleft_item_type', $term), 'left', $term)
                     ],
                     [
-                        'images' =>[
-                            'original' => get_field('lb_product_cat_announcements_cardright_image', $term),
-                            'large' => get_field('lb_product_cat_announcements_cardright_image', $term),
-                            'medium' => get_field('lb_product_cat_announcements_cardright_image', $term),
-                            'small' => get_field('lb_product_cat_announcements_cardright_image', $term)
-                        ],
+                        'images' => lb_get_images(get_field('lb_product_cat_announcements_cardright_image', $term)),
                         'infobox' => $this->getCardByType(get_field('lb_product_cat_announcements_cardright_item_type', $term), 'right', $term)
                     ]
                 ],

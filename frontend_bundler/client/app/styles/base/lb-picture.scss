@@ -2,32 +2,25 @@
     width: 100%;
     height: 100%;
     // position: absolute;
-    display: flex;
+    // display: flex;
     position: relative;
     // left: 0;
     // top: 0;
-    overflow: hidden;
-
-    &__wrapper {
-        width: 100%;
-        height: initial;
-        position: relative;
-        will-change: transform;
-    }
+    // overflow: hidden;
 
     img {
         // width: 100%;
-        // height: 100%;
+        width: inherit;
         height: inherit;
         // height: initial;
-        position: absolute;
+        // position: absolute;
         // top: 0;
         // left: 0;
-        left: 50%;
-        top: 50%;
-        object-fit: cover;
-        object-position: 50% 50%;
-        transform: translate(-50%, -50%);
+        // left: 50%;
+        // top: 50%;
+        // object-fit: cover;
+        // object-position: 50% 50%;
+        // transform: translate(-50%, -50%);
 
         // @include mq($until: md) {
         //     height: inherit;
@@ -35,11 +28,31 @@
     }
 
     &--parallax {
+        will-change: transform;
 
         img {
-            height: initial;
+            width: inherit;
+            height: auto;
+            // height: auto;
+            // height: initial;
             // position: initial;
-            transform: translate(-50%, -50%) scale(1.1);
+            // left: 0;
+            // top: 0;
+            transform: scale(1.2);
         }
     }
+}
+
+
+
+.lb-picture-wrapper {
+    width: 100%;
+    height: 100%;
+    // display: flex;
+    position: relative;
+    overflow: hidden;
+
+    // .lb-picture {
+    //     will-change: transform;
+    // }
 }

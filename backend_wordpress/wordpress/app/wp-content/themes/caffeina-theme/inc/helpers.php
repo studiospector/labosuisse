@@ -3,6 +3,19 @@
 require_once(__DIR__ . '/Options.php');
 
 /**
+ * Get Images array
+ */
+function lb_get_images($id) {
+    return ($id) ? [
+        'original' => wp_get_attachment_url($id),
+        'lg' => wp_get_attachment_image_src($id, 'lb-img-size-lg')[0],
+        'md' => wp_get_attachment_image_src($id, 'lb-img-size-md')[0],
+        'sm' => wp_get_attachment_image_src($id, 'lb-img-size-sm')[0],
+        'xs' => wp_get_attachment_image_src($id, 'lb-img-size-xs')[0]
+    ] : null;
+}
+
+/**
  * Get all Brands
  */
 function lb_get_brands()
@@ -84,9 +97,10 @@ function get_brands_menu()
                 'data' => [
                     'images' => [
                         'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                        'lg' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'md' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'sm' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'xs' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
                     ],
                     'infobox' => [
                         'subtitle' => 'Magnetic Eyes',

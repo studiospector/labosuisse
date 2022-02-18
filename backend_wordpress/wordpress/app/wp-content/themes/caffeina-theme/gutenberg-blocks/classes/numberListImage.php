@@ -18,12 +18,7 @@ class NumberListImage extends BaseBlock {
         }
         
         $payload= [
-            'images' => [
-                'original' => get_field('lb_block_numbers_image'),
-                'large' => get_field('lb_block_numbers_image'),
-                'medium' => get_field('lb_block_numbers_image'),
-                'small' => get_field('lb_block_numbers_image')
-            ],
+            'images' => lb_get_images(get_field('lb_block_numbers_image')),
             'numbersList' => [
                 'title' => get_field('lb_block_numbers_title'),
                 'list' => $list,

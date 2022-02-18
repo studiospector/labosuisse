@@ -13,12 +13,7 @@ class CarouselBannerAlternate extends BaseBlock {
                     $cta = array_merge (  (array)get_sub_field('lb_block_carousel_banner_alternate_infobox_btn') ,['variants' => [get_sub_field('lb_block_carousel_banner_alternate_infobox_btn_variants')]]);  
                 }
                 $slides[] = [
-                    'images' => [
-                        'original' => get_sub_field('lb_block_carousel_banner_alternate_img'),
-                        'large' => get_sub_field('lb_block_carousel_banner_alternate_img'),
-                        'medium' => get_sub_field('lb_block_carousel_banner_alternate_img'),
-                        'small' => get_sub_field('lb_block_carousel_banner_alternate_img')
-                    ],
+                    'images' => lb_get_images(get_sub_field('lb_block_carousel_banner_alternate_img')),
                     'noContainer' => true,
                     'infobox' => [
                         'tagline' => get_sub_field('lb_block_carousel_banner_alternate_infobox_tagline'),

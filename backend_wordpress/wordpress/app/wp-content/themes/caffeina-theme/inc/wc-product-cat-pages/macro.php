@@ -19,17 +19,8 @@ class macro extends basePage
 
         $payload['terms'] = [];
         foreach ($sub_terms as $item) {
-            // Term Thumb
-            $thumbnail_id = get_term_meta($item->term_id, 'thumbnail_id', true);
-            $image = wp_get_attachment_url($thumbnail_id);
-
             $payload['terms'][] = [
-                'images' => [
-                    'original' => $image,
-                    'large' => $image,
-                    'medium' => $image,
-                    'small' => $image
-                ],
+                'images' => lb_get_images(get_term_meta($item->term_id, 'thumbnail_id', true)),
                 'infobox' => [
                     'subtitle' => $item->name,
                     'paragraph' => $item->description,
