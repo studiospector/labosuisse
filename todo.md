@@ -8,7 +8,6 @@ MATTEO
 
 - namespaces
 - menu
-- gestione thumbnails
 - pagina opzioni(Header links, etc...)
 - menu "Scopri Labo"
 
@@ -33,9 +32,9 @@ STEFANO
 - √ blocco novità in archivio esigenza
 - √ aggiungere altre due offset navs(relative alle scale di diradamento)
 - √ aggiungere link all'offset nav nel blocco "immagine e card" realativa a "Tecnologia"
+- √ gestione thumbnails
 
 - sticky header dinamico pagina prodotto
-- gestione thumbnails
 
 
 
