@@ -1,7 +1,9 @@
 // MIXINS
 @import "mixins/index";
+
 // VARIABLES
 @import "variables/blocks";
+
 // VENDORS
 @import "../node_modules/sass-mq/mq";
 @import '../node_modules/swiper/swiper-bundle';
@@ -42,7 +44,7 @@
                 @import "components/index";
 
                 // LAYOUT
-                @import "layout/main-content";
+                @import "layout/base/main-content";
 
                 // Title
                 .edit-post-visual-editor__post-title-wrapper {

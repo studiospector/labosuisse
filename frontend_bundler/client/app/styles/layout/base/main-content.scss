@@ -56,9 +56,7 @@ ol:not(.flex-control-nav) {
     }
 }
 
-// zoom in/out classes
-// pswp pswp--open pswp--no-mouse-drag pswp--custom-bg pswp--has_mouse pswp--zoom-allowed pswp--click-to-zoom pswp--ui-visible
-// pswp pswp--open pswp--no-mouse-drag pswp--custom-bg pswp--has_mouse pswp--zoom-allowed pswp--click-to-zoom pswp--ui-visible pswp--zoomed-in
+
 
 .pswp {
     &__bg {
@@ -102,4 +100,15 @@ ol:not(.flex-control-nav) {
             }
         }
     }
+}
+
+
+
+.lazyload,
+.lazyloading {
+	opacity: 0;
+}
+.lazyloaded {
+	opacity: 1;
+	transition: opacity 300ms;
 }
