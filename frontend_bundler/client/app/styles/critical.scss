@@ -18,10 +18,11 @@
 @include generate-grid();
 
 // CRITICAL COMPONENTS
-// @import "components/infobox";
-// @import "components/carousel-hero";
+@import "components/infobox";
+@import "components/hero";
+@import "components/carousel-hero";
 
 // CRITICAL LAYOUT
-// @import "layout/header";
-// @import "layout/menu-desktop";
-// @import "layout/menu-mobile";
+@import "layout/base/header";
+@import "layout/base/menu-desktop";
+@import "layout/base/menu-mobile";

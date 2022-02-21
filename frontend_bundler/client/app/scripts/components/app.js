@@ -117,6 +117,12 @@ export default class Application extends Component {
 
         this.el.classList.add('ready')
 
+        window.addEventListener('load', () => {setTimeout(() => {
+            this.scrollbarUpdate()
+        }, 1000)})
+    }
+
+    scrollbarUpdate = () => {
         /**
          * Locomotive scroll calculates page height on initialization.
          * Some content may have not finished to load and change page height afterwards (for example image loading).
@@ -133,4 +139,5 @@ export default class Application extends Component {
             ScrollTrigger.refresh();
         }
     }
+
 }
