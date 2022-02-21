@@ -7,9 +7,9 @@ MATTEO
 - √ blocco stcky news archivio news(magazine)
 
 - namespaces
-- menu
-- pagina opzioni(Header links, etc...)
-- menu "Scopri Labo"
+- √ menu
+- √ pagina opzioni(Header links, etc...)
+- √ menu "Scopri Labo"
 
 
 
@@ -44,7 +44,7 @@ STEFANO
 
 BUGFIX
 
-- √ carousel banner alternate fields 
+- √ carousel banner alternate fields
 - √ carousel banner alternate immagini
 - √ bottone in carousel hero
 - √ varianti in carousel articoli
