@@ -46,13 +46,15 @@
         justify-content: space-between;
         align-items: center;
         position: relative;
-        padding: 48px 0;
+        padding-top: 48px;
+        padding-bottom: 48px;
         background-color: map-get($colors, "white");
         z-index: 10;
         transition: $transition__base-1;
 
         @include mq($until: lg) {
-            padding: 20px 0;
+            padding-top: 20px;
+            padding-bottom: 20px;
         }
 
         // &__shield {
