@@ -10,9 +10,10 @@ import renderNumberList from '../../views/components/number-list-with-image.twig
 const dataDefault = {
     images: {
         original: '/assets/images/carousel-hero-img-2.jpg',
-        large: '/assets/images/carousel-hero-img-2.jpg',
-        medium: '/assets/images/carousel-hero-img-2.jpg',
-        small: '/assets/images/carousel-hero-img-2.jpg'
+        lg: '/assets/images/carousel-hero-img-2.jpg',
+        md: '/assets/images/carousel-hero-img-2.jpg',
+        sm: '/assets/images/carousel-hero-img-2.jpg',
+        xs: '/assets/images/carousel-hero-img-2.jpg'
     },
     numbersList: {
         title: 'Tre consigli utili',

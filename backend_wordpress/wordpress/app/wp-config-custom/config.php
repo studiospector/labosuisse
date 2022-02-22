@@ -123,5 +123,9 @@ define('AS3CF_SETTINGS', serialize(array(
 
 // Memory limit
 define('WP_MEMORY_LIMIT', '512M');
+@ini_set('post_max_size' , '512M' );
+@ini_set('upload_max_size' , '512M' );
+
+// Disable Auto Updates
 define('WP_AUTO_UPDATE_CORE', false);
 define('AUTOMATIC_UPDATER_DISABLED', true);

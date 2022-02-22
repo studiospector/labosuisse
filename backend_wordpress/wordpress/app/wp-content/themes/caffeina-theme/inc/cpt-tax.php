@@ -19,7 +19,6 @@ function lb_brand_tax_init()
             'new_item_name'     => __('Nuovo nome Brand', 'lb-brand-tax'),
             'menu_name'         => __('Brand', 'lb-brand-tax'),
         ),
-        'description' => '',
         'hierarchical' => true,
         'public' => true,
         'publicly_queryable' => true,
@@ -30,7 +29,7 @@ function lb_brand_tax_init()
         'show_in_quick_edit' => true,
         'show_admin_column' => true,
         'show_in_rest' => true,
-        'rewrite' => array('slug' => 'brands', 'with_front' => true)
+        'rewrite' => array('slug' => 'brands', 'with_front' => true, 'hierarchical' => true)
     );
     register_taxonomy('lb-brand', array('product'), $args);
 }
@@ -57,7 +56,6 @@ function lb_post_typology_tax_init()
             'new_item_name'     => __('Nuovo nome Tipologia', 'lb-post-typology-tax'),
             'menu_name'         => __('Tipologia', 'lb-post-typology-tax'),
         ),
-        'description' => '',
         'hierarchical' => true,
         'public' => true,
         'publicly_queryable' => true,
@@ -114,7 +112,7 @@ function lb_brand_page_cpt_init()
         'menu_icon' => 'dashicons-media-default',
         'supports' => array('title', 'editor', 'thumbnail'),
         'taxonomies' => array(),
-        'public' => false,
+        'public' => true,
         'show_ui' => true,
         'show_in_menu' => true,
         'menu_position' => 5,
@@ -123,10 +121,11 @@ function lb_brand_page_cpt_init()
         'can_export' => true,
         'has_archive' => false,
         'hierarchical' => false,
-        'exclude_from_search' => false,
+        'exclude_from_search' => true,
         'show_in_rest' => true,
-        'publicly_queryable' => false,
+        'publicly_queryable' => true,
         'capability_type' => 'page',
+        'rewrite' => array('slug' => 'brand-page'),
     );
     register_post_type('lb-brand-page', $args);
 }

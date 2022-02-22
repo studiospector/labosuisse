@@ -4,13 +4,30 @@
 
 {% block main %}
 
-    <h1>MACRO{{ ' - ' ~ termName }}</h1>
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs lb-breadcrumbs--fixed"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Hero #}
+    {% include '@PathViews/components/hero.twig' with {
+        images: fn('lb_get_images', term_image),
+        infoboxPosX: 'left',
+        infoboxPosY: 'center',
+        infobox: {
+            title: term_name,
+            paragraph: term_description,
+        },
+        container: false,
+        variants: ['medium']
+    } only %}
+    <hr class="lb-separator lb-separator--big" data-variant="big" />
 
     <div class="container">
         <div class="row">
             {% for term in terms|default([]) %}
-                <div class="col-4">
-                    <h4><a href="{{ fn('get_term_link', term.term_id) }}">{{ term.name }}</a></h4>
+                <div class="col-12 col-md-3">
+                    {% include '@PathViews/components/card.twig' with term only %}
                 </div>
             {% endfor %}
         </div>

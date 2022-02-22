@@ -8,14 +8,26 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
+{% set col = (items|length == 2) ? 6 : (items|length == 3) ? 4 : (items|length == 4) ? 3 : (items|length > 4) ? 4 : 3 %}
+
 <section class="cards-grid{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-cards-grid">
     <div class="container">
-        {% if title %}
-            <h3 class="infobox__title">{{ title }}</h3>
+        {% if tagline or title or paragraph %}
+            <div class="cards-grid__infobox">
+                {% if tagline %}
+                    <h6 class="infobox__tagline">{{ tagline }}</h6>
+                {% endif %}
+                {% if title %}
+                    <h3 class="infobox__title">{{ title }}</h3>
+                {% endif %}
+                {% if paragraph %}
+                    <p class="infobox__paragraph">{{ paragraph }}</p>
+                {% endif %}
+            </div>
         {% endif %}
         <div class="cards-grid__list row">
             {% for post in items|default([]) %}
-                <div class="cards-grid__list__item col-6 col-xl-3">
+                <div class="cards-grid__list__item col-12 col-md-6 col-xl-{{col}}">
                     {% include '@PathViews/components/card.twig' with post only %}
                 </div>
             {% endfor %}

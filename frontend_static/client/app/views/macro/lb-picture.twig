@@ -14,12 +14,12 @@
 		{% set classes = classes|merge([class]) %}
 	{% endif %}
 
-	<picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
-        {% if isParallax %}<div class="lb-picture__wrapper" data-scroll data-scroll-speed=".8" data-scroll-delay="0.1">{% endif %}
-            <source media="(min-width: 801px) and (max-width: 1050px)" data-srcset="{{images.large}}" class="lazyload">
-            <source media="(min-width: 401px) and (max-width: 800px)" data-srcset="{{images.medium}}" class="lazyload">
-            <source media="(max-width: 400px)" data-srcset="{{images.small}}" class="lazyload">
+    {% if isParallax %}<div class="lb-picture-wrapper">{% endif %}
+	    <picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ (isParallax) ? ' data-scroll data-scroll-speed="1" data-scroll-delay="0.1"' : '' }}>
+            <source media="(min-width: 801px) and (max-width: 1050px)" data-srcset="{{images.lg}}">
+            <source media="(min-width: 401px) and (max-width: 800px)" data-srcset="{{images.md}}">
+            <source media="(max-width: 400px)" data-srcset="{{images.sm}}">
             <img data-src="{{images.original}}" class="lazyload"/>
-        {% if isParallax %}</div>{% endif %}
-	</picture>
+	    </picture>
+    {% if isParallax %}</div>{% endif %}
 {% endmacro %}

@@ -20,12 +20,7 @@ if ( have_posts() ) :
         }
 
         $items[] = [
-            'images' => [
-                'original' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() )),
-                'large' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() )),
-                'medium' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() )),
-                'small' => wp_get_attachment_url(get_post_thumbnail_id( get_the_ID() ))
-            ],
+            'images' => lb_get_images(get_post_thumbnail_id(get_the_ID())),
             'date' => get_the_date("d/m/Y"),
             'variants' => [$variant],
             'infobox' => [

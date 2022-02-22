@@ -4,8 +4,60 @@
 
 {% block main %}
 
-    {{ title }}
-    
-    {# {{ content|raw }} #}
+    {{ content|raw }}
+
+    <div class="lb-filters container">
+        {# Filters #}
+        <div class="row">
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-cat-zona',
+                    label: '',
+                    placeholder: 'Zona',
+                    multiple: true,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: null,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-cat-esigenza',
+                    label: '',
+                    placeholder: 'Esigenza',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: null,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-4 offset-md-4">
+                {% include '@PathViews/components/fields/input.twig' with {
+                    type: 'search',
+                    name: "lb-brand-search",
+                    label: "Cerca",
+                    disabled: false,
+                    required: false,
+                    variants: ['secondary'],
+                } only %}
+            </div>
+        </div>
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    </div>
+
+    <div class="container">
+        {# Posts Grig #}
+        <div class="row">
+            {% for brand in items %}
+                <div class="col-12 col-md-4">
+                    {% include '@PathViews/components/card.twig' with brand only %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 
 {% endblock %}

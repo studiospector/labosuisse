@@ -1,5 +1,4 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
 
 import Swiper from 'swiper/bundle';
 
@@ -8,7 +7,8 @@ const ui = {
     prevElement: '.swiper-button-prev',
 }
 
-export default class CarouselCentered extends Component {
+class CarouselCentered extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
@@ -39,3 +39,5 @@ export default class CarouselCentered extends Component {
         this.swiper.destroy()
     }
 }
+
+export default CarouselCentered

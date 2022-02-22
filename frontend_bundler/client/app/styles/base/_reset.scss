@@ -103,6 +103,11 @@ picture {
   max-width: 100%;
 }
 
+a.reset-link {
+    text-decoration: none;
+    color: initial;
+}
+
 .wp-block-separator {
   margin-top: 60px;
   margin-bottom: 60px;

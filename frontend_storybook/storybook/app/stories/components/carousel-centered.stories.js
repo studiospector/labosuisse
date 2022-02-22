@@ -14,9 +14,10 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             subtitle: '1989: il primo lancio',
             text: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
@@ -24,9 +25,10 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             subtitle: '1989: il primo lancio',
             text: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
@@ -34,9 +36,10 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             subtitle: '1989: il primo lancio',
             text: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
@@ -44,9 +47,10 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             subtitle: '1989: il primo lancio',
             text: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
@@ -54,9 +58,10 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             subtitle: '1989: il primo lancio',
             text: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
@@ -64,9 +69,10 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/carousel-hero-img.jpg',
-                large: '/assets/images/carousel-hero-img.jpg',
-                medium: '/assets/images/carousel-hero-img.jpg',
-                small: '/assets/images/carousel-hero-img.jpg'
+                lg: '/assets/images/carousel-hero-img.jpg',
+                md: '/assets/images/carousel-hero-img.jpg',
+                sm: '/assets/images/carousel-hero-img.jpg',
+                xs: '/assets/images/carousel-hero-img.jpg'
             },
             subtitle: '1989: il primo lancio',
             text: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',

@@ -48,6 +48,7 @@ if (!defined('LB_BUILD_LIB_URI')) {
 /**
  * Includes
  */
+include __DIR__ . '/inc/helpers.php';
 include __DIR__ . '/inc/theme-setup.php';
 include __DIR__ . '/inc/theme-assets.php';
 include __DIR__ . '/inc/cpt-tax.php';

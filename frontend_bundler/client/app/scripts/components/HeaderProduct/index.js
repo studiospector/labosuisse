@@ -1,12 +1,13 @@
 import Component from '@okiba/component'
-import { qsa, qs, on, off } from '@okiba/dom'
+import { qs } from '@okiba/dom'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default class HeaderProduct extends Component {
+class HeaderProduct extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props })
 
@@ -55,7 +56,7 @@ export default class HeaderProduct extends Component {
             }
         })
         // tl.fromTo(this.el, { backgroundColor: "#000" }, { backgroundColor: "#28a92b" })
-    } 
+    }
 
     adjustElement = (elemHeight, height, isHide) => {
         let matchMedia = window.matchMedia("screen and (max-width: 768px)")
@@ -71,3 +72,5 @@ export default class HeaderProduct extends Component {
         }
     }
 }
+
+export default HeaderProduct

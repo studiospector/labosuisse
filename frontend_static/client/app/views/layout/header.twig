@@ -13,7 +13,9 @@
             {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
         </div>
         <div class="lb-header__top__logo lb-logo">
-            {% include '@PathViews/components/icon.twig' with {name: 'logo'} only %}
+            <a href="{{ fn('home_url') }}">
+                {% include '@PathViews/components/icon.twig' with {name: 'logo'} only %}
+            </a>
         </div>
         <div class="lb-header__top__icons">
             <div class="lb-header__top__icons__item lb-header__top__icons__item--lang">
@@ -64,7 +66,9 @@
                 variants: ['secondary'],
             } only %}
         </div>
-		{% include "@PathViews/layout/menu-mobile.twig" %}
+        {% if header.menu_mobile %}
+		    {% include "@PathViews/layout/menu-mobile.twig" with header.menu_mobile only %}
+        {% endif %}
 	</div>
 
 </header>

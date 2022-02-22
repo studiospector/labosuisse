@@ -1,7 +1,9 @@
 // MIXINS
 @import "mixins/index";
+
 // VARIABLES
 @import "variables/blocks";
+
 // VENDORS
 @import "../node_modules/sass-mq/mq";
 @import '../node_modules/swiper/swiper-bundle';
@@ -40,9 +42,12 @@
 
                 // COMPONENTS
                 @import "components/index";
+                @import "components/infobox";
+                @import "components/hero";
+                @import "components/carousel-hero";
 
                 // LAYOUT
-                @import "layout/main-content";
+                @import "layout/base/main-content";
 
                 // Title
                 .edit-post-visual-editor__post-title-wrapper {
@@ -66,6 +71,9 @@
 
                 .lb-separator {
                     background-color: #f3f4f5;
+                    min-height: 1px;
+                    margin: 0 !important;
+                    border: 0 !important;
                 }
 
                 // ACF Blocks

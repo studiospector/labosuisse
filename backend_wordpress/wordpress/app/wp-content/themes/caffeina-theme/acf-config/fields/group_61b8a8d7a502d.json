@@ -35,7 +35,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "choices": {
                 "horizontal": "Horizontal",
                 "vertical": "Vertical"
@@ -49,7 +49,7 @@
         },
         {
             "key": "field_61b8ab134a9ad",
-            "label": "Items",
+            "label": "Lista Numeri",
             "name": "lb_block_numbers_list",
             "type": "repeater",
             "instructions": "",
@@ -128,5 +128,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643720670
+    "modified": 1644485985
 }

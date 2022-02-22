@@ -1,13 +1,11 @@
 // MIXINS
 @import "mixins/index";
+
 // VARIABLES
 @import "variables/critical";
+
 // VENDORS
 @import "node_modules/sass-mq/mq";
-@import "vendors/custom-input";
-@import "vendors/custom-radio";
-@import "vendors/custom-checkbox";
-@import "vendors/custom-select";
 
 // BASE STYLE
 @import "base/index";
@@ -21,9 +19,10 @@
 
 // CRITICAL COMPONENTS
 @import "components/infobox";
+@import "components/hero";
 @import "components/carousel-hero";
 
 // CRITICAL LAYOUT
-@import "layout/header";
-@import "layout/menu-desktop";
-@import "layout/menu-mobile";
+@import "layout/base/header";
+@import "layout/base/menu-desktop";
+@import "layout/base/menu-mobile";

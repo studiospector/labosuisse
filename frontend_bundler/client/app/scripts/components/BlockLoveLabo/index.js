@@ -1,7 +1,4 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
-
-import Swiper from 'swiper/bundle';
 
 const ui = {
     scroller: '.lovelabo__grid .row',
@@ -11,7 +8,8 @@ const ui = {
     },
 }
 
-export default class BlockLoveLabo extends Component {
+class BlockLoveLabo extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
@@ -26,3 +24,5 @@ export default class BlockLoveLabo extends Component {
         this.ui.scroller.scrollLeft = secondItemsCoordinates.left / 2
     }
 }
+
+export default BlockLoveLabo

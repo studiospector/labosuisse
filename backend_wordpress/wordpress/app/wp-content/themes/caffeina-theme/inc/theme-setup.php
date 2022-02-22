@@ -1,5 +1,8 @@
 <?php
 
+require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
+require_once(LB_DIR_PATH . '/inc/Options.php');
+
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
     require_once $composer_autoload;
@@ -54,6 +57,7 @@ class ThemeSetup extends Timber\Site
         // add_filter( 'timber/context', array( $this, 'add_to_context' ) );
         add_filter('timber/twig', array($this, 'lb_add_to_twig'));
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
+        add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
         parent::__construct();
     }
 
@@ -62,7 +66,7 @@ class ThemeSetup extends Timber\Site
      */
     public function theme_supports()
     {
-        // load_theme_textdomain( 'labo-suisse-theme', LB_DIR_PATH . '/languages' );
+        load_theme_textdomain('labo-suisse-theme', LB_DIR_PATH . '/languages');
 
         add_theme_support('title-tag');
 
@@ -70,9 +74,10 @@ class ThemeSetup extends Timber\Site
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
-        add_image_size('lb-large', 1260, 600, true);
-        add_image_size('lb-medium', 650, 470, true);
-        add_image_size('lb-small', 400, 345, true);
+        add_image_size('lb-img-size-lg', 1300, 700, true);
+        add_image_size('lb-img-size-md', 700, 400, true);
+        add_image_size('lb-img-size-sm', 400, 400, true);
+        add_image_size('lb-img-size-xs', 200, 200, true);
 
         add_theme_support('customize-selective-refresh-widgets');
 
@@ -93,6 +98,30 @@ class ThemeSetup extends Timber\Site
         add_theme_support('wp-block-styles');
         add_theme_support('align-wide');
         add_theme_support('editor-styles');
+
+        // Register Menus
+        register_nav_menus(array(
+            'lb_discover_labo' => 'Scopri Labo',
+        ));
+
+        // Theme Options page
+        acf_add_options_page(array(
+            'page_title' => 'Impostazioni Tema - Generali',
+            'menu_title' => 'Opzioni Tema',
+            'menu_slug' => 'lb-theme-general-settings',
+            'capability' => 'edit_posts',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
+            'redirect' => false
+        ));
+
+        acf_add_options_sub_page(array(
+            'page_title' => 'Impostazioni Tema - Header e Menu',
+            'menu_title' => 'Header e Menu',
+            'parent_slug' => 'lb-theme-general-settings',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
+        ));
 
         /**
          * Path to our custom editor style
@@ -229,6 +258,14 @@ class ThemeSetup extends Timber\Site
 
         return "$theme_path/$bundle_folder/$file";
     }
+
+    /**
+     * Change Yoat SEO Bradcrumbs separator
+     */
+    public function lb_yoast_breadcrumb_separator($sep)
+    {
+        return '<span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span>';
+    }
 }
 
 new ThemeSetup();
@@ -242,7 +279,7 @@ new ThemeSetup();
 add_filter('acf/settings/save_json', 'labo_acf_json_save_point');
 function labo_acf_json_save_point($path)
 {
-    // var_dump($path);die; 
+    // var_dump($path);die;
     // unset($path[0]);
     $path = get_stylesheet_directory() . '/acf-config/fields';
     return $path;
@@ -290,9 +327,47 @@ function timber_set_product($post)
 
 
 /**
+ * Filter main query
+ */
+add_action('pre_get_posts', 'lb_post_filters');
+function lb_post_filters($query)
+{
+    // "Brand" and "Linea di Prodotto" Archive pages
+    if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+        $query->set('posts_per_page', -1);
+    }
+
+    // Posts page
+    // if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
+    //     $query->set('posts_per_page', 10);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+
+    // Archive page
+    // if (is_archive() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+    //     $query->set('posts_per_page', 12);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+
+    // Tag page
+    // if (is_tag() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+    //     $query->set('posts_per_page', 12);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+
+    // Search page
+    // if (is_search() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page() && !is_archive()) {
+    //     $query->set('posts_per_page', 12);
+    //     $query->set('ignore_sticky_posts', 1);
+    // }
+}
+
+
+
+/**
  * Add symbols.twig to WP admin area
  */
-add_action( 'admin_footer', 'lb_add_symbols_to_admin' );
+add_action('admin_footer', 'lb_add_symbols_to_admin');
 function lb_add_symbols_to_admin()
 {
     Timber::render('@PathViews/components/symbols.twig');
@@ -303,13 +378,14 @@ function lb_add_symbols_to_admin()
 /**
  * Custom pagination
  */
-function lb_pagination() {
+function lb_pagination()
+{
     $pagination_html = null;
 
     $pagination = get_the_posts_pagination([
         'mid_size' => 2,
-        'prev_text' => __( '<', 'labo-suisse-theme' ),
-        'next_text' => __( '>', 'labo-suisse-theme' ),
+        'prev_text' => __('<', 'labo-suisse-theme'),
+        'next_text' => __('>', 'labo-suisse-theme'),
     ]);
 
     if ($pagination) {
@@ -325,7 +401,8 @@ function lb_pagination() {
  * Unregister taxonomies
  */
 add_action('init', 'lb_unregister_taxonomies', 999);
-function lb_unregister_taxonomies() {
+function lb_unregister_taxonomies()
+{
     register_taxonomy('category', []);
     register_taxonomy('post_tag', []);
 }
@@ -335,24 +412,24 @@ function lb_unregister_taxonomies() {
 /**
  * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
  */
-add_filter( 'wpcf7_form_tag', function ( $tag ) {
+add_filter('wpcf7_form_tag', function ($tag) {
     $datas = [];
-    foreach ( (array)$tag['options'] as $option ) {
-        if ( strpos( $option, 'data-' ) === 0 ) {
-            $option = explode( ':', $option, 2 );
+    foreach ((array)$tag['options'] as $option) {
+        if (strpos($option, 'data-') === 0) {
+            $option = explode(':', $option, 2);
             $data_attribute = $option[0];
             $data_value = str_replace('|', ' ', $option[1]);
             $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
         }
     }
-    if ( ! empty( $datas ) ) {
+    if (!empty($datas)) {
         $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
-        add_filter( 'wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
-            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" ". wpcf7_format_atts($datas), $content));
+        add_filter('wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
+            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" " . wpcf7_format_atts($datas), $content));
         });
     }
     return $tag;
-} );
+});
 
 
 
@@ -423,226 +500,42 @@ function lb_get_posts_archive_years()
 /**
  * Get header and menu
  */
-function lb_header() {
+function lb_header()
+{
 
-    $menu_desktop = array(
-        [
-            'type' => 'link',
-            'label' => 'Link Normal'
-        ],
-        [
-            'type' => 'submenu',
-            'label' => 'Submenu',
-            'children' => [
-                [
-                    'type' => 'submenu',
-                    'label' => 'Per Zona',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
-                    ]
-                ],
-                [
-                    'type' => 'submenu',
-                    'label' => 'Per Esigenza',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
-                    ]
-                ],
-            ],
-            'fixed' => [
-                [
-                    'type' => 'card',
-                    'data' => [
-                        'images' => [
-                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
-                        ],
-                        'infobox' => [
-                            'subtitle' => 'Magnetic Eyes',
-                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            'cta' => [
-                                'url' => '#',
-                                'title' => 'Scopri di più',
-                                'iconEnd' => [ 'name' => 'arrow-right' ],
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-3']
-                    ],
-                ],
-            ]
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Personalize',
-            'href' => '#',
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Lookbook',
-            'href' => '#',
-        ],
-        [
-            'type' => 'submenu',
-            'label' => 'World',
-            'children' => [
-                [
-                    'type' => 'submenu',
-                    'label' => 'Excellences',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
-                    ]
-                ],
-                [
-                    'type' => 'submenu',
-                    'label' => 'Lorem Ipsum',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'link 1', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 2', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 3', 'href' => '#'],
-                        ['type' => 'link', 'label' => 'link 4', 'href' => '#'],
-                    ]
-                ],
-            ],
-        ],
-        [
-            'type' => 'separator',
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Tutti i Brand',
-            'href' => '#',
-        ],
-        [
-            'type' => 'link',
-            'label' => 'Scopri Labo',
-            'href' => '#',
-        ],
-        [
-            'type' => 'separator',
-        ],
-        [
-            'type' => 'icon',
-            'icon' => [
-                'name' => 'heart'
-            ],
-            'href' => 'https://google.it'
-        ],
-        [
-            'type' => 'icon',
-            'icon' => [
-                'name' => 'cart'
-            ],
-            'href' => wc_get_cart_url()
-        ],
-        [
-            'type' => 'icon',
-            'icon' => [
-                'name' => 'user'
-            ],
-            'href' => 'https://google.it'
-        ],
+    $menu_desktop = array_merge(
+        macro::getTheMenuTree(),
+        [['type' => 'separator']],
+        get_brands_menu(),
+        get_discover_labo_menu_items(),
     );
 
+    // if (is_woocommerce()) {
+    //     $menu_desktop = array_merge(
+    //         $menu_desktop,
+    //         (new Option())->getLShopLinks()
+    //     );
+    // }
+
     $menu_mobile = [
-        'children' => [
-            [
-                'type' => 'link',
-                'label' => 'Link Normal'
-            ],
-            [
-                'type' => 'submenu', 
-                'label' => 'Lorem', 
-                'children' => [
-                    [
-                        'type' => 'submenu', 
-                        'label' => 'Ipsum 1', 
-                        'children' => [
-                            ['type' => 'link', 'label' => 'link 1'],
-                            ['type' => 'link', 'label' => 'link 2'],
-                            ['type' => 'link', 'label' => 'link 3'],
-                        ]
-                    ],
-                    [
-                        'type' => 'submenu', 
-                        'label' => 'Ipsum 2', 
-                        'children' => [
-                            ['type' => 'link', 'label' => 'link 1'],
-                            ['type' => 'link', 'label' => 'link 2'],
-                            ['type' => 'link', 'label' => 'link 3'],
-                        ]
-                    ]
-                ]
-            ],
-            [
-                'type' => 'submenu', 
-                'label' => 'Submenu',
-                'children' => [
-                    [
-                        'type' => 'submenu',
-                        'label' => 'Per Zona',
-                        'children' => [
-                            ['type' => 'link', 'label' => 'Tutte le zone volto', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Volto', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Occhi e sguardo', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Labbra', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Collo e decolleté', 'href' => '#'],
-                        ]
-                    ],
-                    [
-                        'type' => 'submenu',
-                        'label' => 'Per Esigenza',
-                        'children' => [
-                            ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Anti-età', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Effetto riempitivo', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Lifting', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Pelle sensibile', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Illuminare e uniformare', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Nutrire', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Ri-ossigenare', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Detergere', 'href' => '#'],
-                            ['type' => 'link', 'label' => 'Trattamento personalizzato', 'href' => '#'],
-                        ]
-                    ],
-                ],
-            ]
-        ],
+        'children' => macro::getTheMenuTree('mobile'),
         'fixed' => [
             [
                 'type' => 'card',
                 'data' => [
                     'images' => [
-                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                        'original' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'lg' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'md' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'sm' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'xs' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
                     ],
                     'infobox' => [
-                        'subtitle' => 'Magnetic Eyes',
-                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'subtitle' => 'AFTER MASK',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
                         'cta' => [
                             'url' => '#',
-                            'title' => 'Scopri di più',
-                            'iconEnd' => ['name' => 'arrow-right'],
+                            'title' => 'Scopri la linea',
                             'variants' => ['quaternary']
                         ]
                     ],
@@ -650,8 +543,14 @@ function lb_header() {
                 ],
             ],
             [
-                'type' => 'small-link', 
-                'label' => 'Hai bisogno di aiuto?', 
+                'type' => 'small-link',
+                'label' => __('Profilo', 'labo-suisse-theme'),
+                'icon' => 'user',
+                'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+            ],
+            [
+                'type' => 'small-link',
+                'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),
                 'icon' => 'comments',
             ],
             [
@@ -662,7 +561,10 @@ function lb_header() {
         ]
     ];
 
+    get_discover_labo_menu_items();
+
     return array(
+        'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'menu_desktop' => ['items' => $menu_desktop],
         'menu_mobile' => ['items' => $menu_mobile],
     );
@@ -673,12 +575,13 @@ function lb_header() {
 /**
  * Get footer and prefooter
  */
-function lb_footer() {
+function lb_footer()
+{
 
     $prefooter = null;
     $footer = null;
 
-    if ( !is_home() ) {
+    if (!is_home()) {
         $prefooter = [
             'block_1' => [
                 'title' => 'Hai delle domande?',
@@ -686,7 +589,7 @@ function lb_footer() {
                 'cta' => [
                     'url' => '#',
                     'title' => 'Vai all’assistenza',
-                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'iconEnd' => ['name' => 'arrow-right'],
                     // Variants is static
                     'variants' => ['quaternary']
                 ],
@@ -710,7 +613,7 @@ function lb_footer() {
                 'cta' => [
                     'url' => '#',
                     'title' => 'Procedi e iscriviti',
-                    'iconEnd' => [ 'name' => 'arrow-right' ],
+                    'iconEnd' => ['name' => 'arrow-right'],
                     // Variants is static
                     'variants' => ['quaternary']
                 ],
@@ -790,7 +693,7 @@ function lb_footer() {
                     // Variants is static
                     'variants' => ['link', 'thin', 'small']
                 ],
-            ], 
+            ],
         ],
         'search' => [
             'title' => 'TROVA UNA FARMACIA CONCESSIONARIA ',
@@ -804,7 +707,7 @@ function lb_footer() {
                 'variants' => ['secondary'],
             ],
         ],
-        'newsletter' => [ 
+        'newsletter' => [
             'title' => 'ISCRIVITI ALLA NEWSLETTER',
             'text' => 'Ricevi aggiornamenti e promozioni<br>direttamente sulla tua mail.',
             'cta' => [

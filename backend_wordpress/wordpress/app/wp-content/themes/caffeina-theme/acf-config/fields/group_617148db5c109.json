@@ -193,7 +193,7 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 2,
-                    "return_format": "url",
+                    "return_format": "id",
                     "preview_size": "medium",
                     "library": "all",
                     "min_width": "",
@@ -217,9 +217,9 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 0,
                     "placement": "top",
-                    "endpoint": 0,
-                    "wpml_cf_preferences": 1
+                    "endpoint": 0
                 },
                 {
                     "key": "field_61f27b164b20c",
@@ -234,6 +234,7 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 2,
                     "choices": {
                         "right": "Right",
                         "left": "Left",
@@ -244,7 +245,6 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "wpml_cf_preferences": 1,
                     "save_other_choice": 0
                 },
                 {
@@ -260,6 +260,7 @@
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 2,
                     "choices": {
                         "top": "Top",
                         "bottom": "Bottom",
@@ -270,7 +271,6 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "wpml_cf_preferences": 1,
                     "save_other_choice": 0
                 },
                 {
@@ -286,7 +286,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 2,
                     "message": "",
                     "default_value": 0,
                     "ui": 0,
@@ -306,7 +306,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 1,
+                    "wpml_cf_preferences": 2,
                     "choices": {
                         "small": "Small",
                         "medium": "Medium",
@@ -340,5 +340,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643717858
+    "modified": 1645120832
 }

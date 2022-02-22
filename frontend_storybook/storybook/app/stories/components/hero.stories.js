@@ -12,9 +12,10 @@ import Hero from '../../scripts/components/Hero'
 const dataLeftInfobox = {
     images: {
         original: '/assets/images/hero-face-right.jpg',
-        large: '/assets/images/hero-face-right.jpg',
-        medium: '/assets/images/hero-face-right.jpg',
-        small: '/assets/images/hero-face-right.jpg'
+        lg: '/assets/images/hero-face-right.jpg',
+        md: '/assets/images/hero-face-right.jpg',
+        sm: '/assets/images/hero-face-right.jpg',
+        xs: '/assets/images/hero-face-right.jpg'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
@@ -29,9 +30,10 @@ const dataLeftInfobox = {
 const dataLeftBottomInfobox = {
     images: {
         original: '/assets/images/hero-face-right.jpg',
-        large: '/assets/images/hero-face-right.jpg',
-        medium: '/assets/images/hero-face-right.jpg',
-        small: '/assets/images/hero-face-right.jpg'
+        lg: '/assets/images/hero-face-right.jpg',
+        md: '/assets/images/hero-face-right.jpg',
+        sm: '/assets/images/hero-face-right.jpg',
+        xs: '/assets/images/hero-face-right.jpg'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'bottom',
@@ -46,9 +48,10 @@ const dataLeftBottomInfobox = {
 const dataRightInfobox = {
     images: {
         original: '/assets/images/hero-face-left.jpg',
-        large: '/assets/images/hero-face-left.jpg',
-        medium: '/assets/images/hero-face-left.jpg',
-        small: '/assets/images/hero-face-left.jpg'
+        lg: '/assets/images/hero-face-left.jpg',
+        md: '/assets/images/hero-face-left.jpg',
+        sm: '/assets/images/hero-face-left.jpg',
+        xs: '/assets/images/hero-face-left.jpg'
     },
     infoboxPosX: 'right',
     infoboxPosY: 'center',
@@ -63,9 +66,10 @@ const dataRightInfobox = {
 const dataRightBottomInfobox = {
     images: {
         original: '/assets/images/hero-face-left.jpg',
-        large: '/assets/images/hero-face-left.jpg',
-        medium: '/assets/images/hero-face-left.jpg',
-        small: '/assets/images/hero-face-left.jpg'
+        lg: '/assets/images/hero-face-left.jpg',
+        md: '/assets/images/hero-face-left.jpg',
+        sm: '/assets/images/hero-face-left.jpg',
+        xs: '/assets/images/hero-face-left.jpg'
     },
     infoboxPosX: 'right',
     infoboxPosY: 'bottom',
@@ -80,9 +84,10 @@ const dataRightBottomInfobox = {
 const dataCenterInfobox = {
     images: {
         original: '/assets/images/carousel-hero-img-2.jpg',
-        large: '/assets/images/carousel-hero-img-2.jpg',
-        medium: '/assets/images/carousel-hero-img-2.jpg',
-        small: '/assets/images/carousel-hero-img-2.jpg'
+        lg: '/assets/images/carousel-hero-img-2.jpg',
+        md: '/assets/images/carousel-hero-img-2.jpg',
+        sm: '/assets/images/carousel-hero-img-2.jpg',
+        xs: '/assets/images/carousel-hero-img-2.jpg'
     },
     infoboxPosX: 'center',
     infoboxPosY: 'center',
@@ -103,9 +108,10 @@ const dataCenterInfobox = {
 const dataCenterBottomInfobox = {
     images: {
         original: '/assets/images/carousel-hero-img-2.jpg',
-        large: '/assets/images/carousel-hero-img-2.jpg',
-        medium: '/assets/images/carousel-hero-img-2.jpg',
-        small: '/assets/images/carousel-hero-img-2.jpg'
+        lg: '/assets/images/carousel-hero-img-2.jpg',
+        md: '/assets/images/carousel-hero-img-2.jpg',
+        sm: '/assets/images/carousel-hero-img-2.jpg',
+        xs: '/assets/images/carousel-hero-img-2.jpg'
     },
     infoboxPosX: 'center',
     infoboxPosY: 'bottom',
@@ -121,9 +127,10 @@ const dataCenterBottomInfobox = {
 const dataImageInfobox = {
     images: {
         original: '/assets/images/hero-crescina-right.jpg',
-        large: '/assets/images/hero-crescina-right.jpg',
-        medium: '/assets/images/hero-crescina-right.jpg',
-        small: '/assets/images/hero-crescina-right.jpg'
+        lg: '/assets/images/hero-crescina-right.jpg',
+        md: '/assets/images/hero-crescina-right.jpg',
+        sm: '/assets/images/hero-crescina-right.jpg',
+        xs: '/assets/images/hero-crescina-right.jpg'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
@@ -138,9 +145,10 @@ const dataImageInfobox = {
 const dataHeroContainer = {
     images: {
         original: '/assets/images/hero-crescina-right.jpg',
-        large: '/assets/images/hero-crescina-right.jpg',
-        medium: '/assets/images/hero-crescina-right.jpg',
-        small: '/assets/images/hero-crescina-right.jpg'
+        lg: '/assets/images/hero-crescina-right.jpg',
+        md: '/assets/images/hero-crescina-right.jpg',
+        sm: '/assets/images/hero-crescina-right.jpg',
+        xs: '/assets/images/hero-crescina-right.jpg'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',

@@ -1,6 +1,6 @@
 {
     "key": "group_61963a857846e",
-    "title": "Campi personalizzati: Blocco – Love",
+    "title": "Campi personalizzati: Blocco - Love",
     "fields": [
         {
             "key": "field_61f816870892f",
@@ -15,9 +15,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 2
+            "endpoint": 0
         },
         {
             "key": "field_61f8169b08930",
@@ -32,12 +32,12 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "message": "",
             "default_value": 0,
             "ui": 1,
             "ui_on_text": "",
-            "ui_off_text": "",
-            "wpml_cf_preferences": 1
+            "ui_off_text": ""
         },
         {
             "key": "field_61dd6120c28cf",
@@ -52,9 +52,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "endpoint": 0
         },
         {
             "key": "field_61dd6142c28d0",
@@ -192,7 +192,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 0,
             "placement": "top",
             "endpoint": 0
         },
@@ -210,7 +210,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -255,7 +255,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -300,7 +300,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -345,7 +345,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -390,7 +390,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -435,7 +435,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 2,
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "all",
             "min_width": "",
@@ -479,9 +479,9 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 0,
             "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 1
+            "endpoint": 0
         },
         {
             "key": "field_61c30be0e3318",
@@ -496,7 +496,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 2,
             "choices": {
                 "dafault": "dafault",
                 "full": "full"
@@ -535,5 +535,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1643720587
+    "modified": 1645120832
 }

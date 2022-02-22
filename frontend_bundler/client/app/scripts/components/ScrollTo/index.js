@@ -1,6 +1,8 @@
 import Component from '@okiba/component';
 import { on, qs } from '@okiba/dom';
+
 import { gsap } from 'gsap';
+
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollToPlugin);
@@ -16,9 +18,9 @@ class ScrollTo extends Component {
 
         const header = qs('.lb-header')
         const headerProduct = qs('.lb-header-sticky-product')
-        
+
         this.fullHeaderHeight = (header ? header.getBoundingClientRect().height : 0) + (headerProduct ? headerProduct.getBoundingClientRect().height : 0)
-        
+
         on(this.el, 'click', this.scrollTo)
     }
 

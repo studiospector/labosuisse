@@ -1,0 +1,14 @@
+<div class="cards-grid-ordered">
+    {% for item in items %}
+        <div class="cards-grid-ordered__row row">
+            <div class="col-12 col-md-4">
+                {% include '@PathViews/components/card.twig' with item.brand_card only %}
+            </div>
+            {% for post in item.products %}
+                <div class="col-12 col-md-4">
+                    {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post} only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>

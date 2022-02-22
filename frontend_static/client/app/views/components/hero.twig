@@ -10,7 +10,7 @@
 {% endif %}
 
 {% if infobox %}
-	{% set _infoboxPosX = (infoboxPosX == 'left') ? '' : (infoboxPosX == 'center' ? ' offset-md-3 text-center' : ' offset-md-6') %}
+	{% set _infoboxPosX = (infoboxPosX == 'left') ? '' : (infoboxPosX == 'center' ? ' offset-md-3 text-center' : ' offset-md-7') %}
 	{% set _infoboxPosY = (infoboxPosY == 'center') ? '' : (infoboxPosY == 'bottom' ? ' hero--infobox-' ~ infoboxPosY : '') %}
 {% endif %}
 
@@ -18,9 +18,9 @@
 
 <section class="hero{{ container ? ' container' : '' }}{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ _infoboxPosY }} js-hero">
 	{% if infobox %}
-		<div class="hero__infobox">
+		<div class="hero__infobox container">
 			{# <div class="container"> #}
-				<div class="h-100 col-12 col-md-6{{ _infoboxPosX }}">
+				<div class="h-100 col-12 col-md-{{ infoboxPosX == 'center' ? '6' : '5' }}{{ _infoboxPosX }}">
 					{% include '@PathViews/components/infobox.twig' with infobox only %}
 				</div>
 			{# </div> #}

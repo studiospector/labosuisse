@@ -4,6 +4,37 @@
 
 {% block main %}
 
-    {{ content|raw }}
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="taxonomy-lb-brand__info container text-center">
+        <div class="infobox">
+            {% if brand.name %}
+                <h1 class="infobox__subtitle h2">{{ brand.name }}</h1>
+            {% endif %}
+            {% if brand.description %}
+                <p class="infobox__paragraph">{{ fn('nl2br', brand.description) }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Numbers of posts #}
+    <div class="container">
+        <div class="lb-posts-count">{{ num_posts }}</div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Posts Grig #}
+    <div class="taxonomy-lb-brand__grid container">
+        {% if grid_type == 'default' %}
+            {% include '@PathViews/components/cards-grid-product-default.twig' with { items: items } only %}
+        {% elseif grid_type == 'ordered' %}
+            {% include '@PathViews/components/cards-grid-product-ordered.twig' with { items: items } only %}
+        {% endif %}
+    </div>
 
 {% endblock %}

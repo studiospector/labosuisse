@@ -1,6 +1,6 @@
 {
     "key": "group_61e0621073c50",
-    "title": "Campi personalizzati: Blocco – Separatore",
+    "title": "Campi personalizzati: Blocco - Separatore",
     "fields": [
         {
             "key": "field_61e0623b2c4e3",
@@ -15,6 +15,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "choices": {
                 "big": "Big",
                 "medium": "Medium",
@@ -25,7 +26,6 @@
             "default_value": "",
             "layout": "vertical",
             "return_format": "value",
-            "wpml_cf_preferences": 1,
             "save_other_choice": 0
         }
     ],
@@ -46,5 +46,6 @@
     "hide_on_screen": "",
     "active": true,
     "description": "",
-    "modified": 1642095288
+    "show_in_rest": 0,
+    "modified": 1644487883
 }

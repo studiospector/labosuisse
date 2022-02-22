@@ -20,9 +20,10 @@ const data = {
         {
             images: {
                 original: '/assets/images/card-img-6.jpg',
-                large: '/assets/images/card-img-6.jpg',
-                medium: '/assets/images/card-img-6.jpg',
-                small: '/assets/images/card-img-6.jpg'
+                lg: '/assets/images/card-img-6.jpg',
+                md: '/assets/images/card-img-6.jpg',
+                sm: '/assets/images/card-img-6.jpg',
+                xs: '/assets/images/card-img-6.jpg'
             },
             date: '00/00/00',
             infobox: {
@@ -40,9 +41,10 @@ const data = {
         {
             images: {
                 original: '/assets/images/card-img-6.jpg',
-                large: '/assets/images/card-img-6.jpg',
-                medium: '/assets/images/card-img-6.jpg',
-                small: '/assets/images/card-img-6.jpg'
+                lg: '/assets/images/card-img-6.jpg',
+                md: '/assets/images/card-img-6.jpg',
+                sm: '/assets/images/card-img-6.jpg',
+                xs: '/assets/images/card-img-6.jpg'
             },
             date: '00/00/00',
             infobox: {
@@ -60,9 +62,10 @@ const data = {
         {
             images: {
                 original: '/assets/images/card-img-6.jpg',
-                large: '/assets/images/card-img-6.jpg',
-                medium: '/assets/images/card-img-6.jpg',
-                small: '/assets/images/card-img-6.jpg'
+                lg: '/assets/images/card-img-6.jpg',
+                md: '/assets/images/card-img-6.jpg',
+                sm: '/assets/images/card-img-6.jpg',
+                xs: '/assets/images/card-img-6.jpg'
             },
             date: '00/00/00',
             infobox: {
@@ -80,9 +83,10 @@ const data = {
         {
             images: {
                 original: '/assets/images/card-img-6.jpg',
-                large: '/assets/images/card-img-6.jpg',
-                medium: '/assets/images/card-img-6.jpg',
-                small: '/assets/images/card-img-6.jpg'
+                lg: '/assets/images/card-img-6.jpg',
+                md: '/assets/images/card-img-6.jpg',
+                sm: '/assets/images/card-img-6.jpg',
+                xs: '/assets/images/card-img-6.jpg'
             },
             date: '00/00/00',
             infobox: {

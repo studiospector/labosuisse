@@ -18,12 +18,7 @@ class LatestNews extends BaseBlock
             $query->the_post();
 
             $items[] = [
-                'images' => [
-                    'original' => get_the_post_thumbnail_url(),
-                    'large' => get_the_post_thumbnail_url(),
-                    'medium' => get_the_post_thumbnail_url(),
-                    'small' => get_the_post_thumbnail_url(),
-                ],
+                'images' => lb_get_images(get_post_thumbnail_id()),
                 'date' => get_the_date("d/m/Y"),
                 'infobox' => [
                     'subtitle' =>  get_the_title(),

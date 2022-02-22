@@ -56,7 +56,7 @@
                 {% include 'layout/header.twig' with {header: header} only %}
             {% endblock %}
             <!-- Main content -->
-            <main id="content" data-scroll-section>
+            <main id="content"{{ mainClass ? ' class="' ~ mainClass ~ '" ' : ' ' }}data-scroll-section>
                 {% block main %}{% endblock %}
             </main>
             <!-- Footer -->

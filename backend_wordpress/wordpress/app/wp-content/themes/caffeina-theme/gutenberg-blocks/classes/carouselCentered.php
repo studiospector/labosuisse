@@ -9,12 +9,7 @@ class carouselCentered extends BaseBlock {
         if( have_rows('lb_block_carousel_centered') ) {
             while( have_rows('lb_block_carousel_centered') ) : the_row();
                 $items[] = [
-                    'images' => [
-                        'original' => get_sub_field('lb_block_carousel_centered_img'),
-                        'large' => get_sub_field('lb_block_carousel_centered_img'),
-                        'medium' => get_sub_field('lb_block_carousel_centered_img'),
-                        'small' => get_sub_field('lb_block_carousel_centered_img')
-                    ],
+                    'images' => lb_get_images(get_sub_field('lb_block_carousel_centered_img')),
                     'subtitle' => get_sub_field('lb_block_carousel_centered_subtitle'),
                     'text' => get_sub_field('lb_block_carousel_centered_text')
                 ];

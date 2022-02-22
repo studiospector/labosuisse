@@ -17,9 +17,9 @@ import Hero from './Hero'
 import BannerAlternate from './BannerAlternate'
 import BlockLoveLabo from './BlockLoveLabo'
 import OffsetNavSystem from './OffsetNavSystem'
-import AnimationParallax from './AnimationParallax'
 import CardsGrid from './CardsGrid'
 import ScrollTo from './ScrollTo'
+import Product from './Product'
 
 const components = {
     scrollbar: {
@@ -92,11 +92,6 @@ const components = {
         type: BlockLoveLabo,
         optional: true
     },
-    animationParallax: {
-        selector: '.js-parallax',
-        type: AnimationParallax,
-        optional: true
-    },
     cardsGrid: {
         selector: '.js-cards-grid',
         type: CardsGrid,
@@ -105,6 +100,11 @@ const components = {
     scrollTo: {
         selector: '.js-scroll-to',
         type: ScrollTo,
+        optional: true
+    },
+    product: {
+        selector: '.js-lb-product',
+        type: Product,
         optional: true
     },
 }
@@ -117,6 +117,12 @@ export default class Application extends Component {
 
         this.el.classList.add('ready')
 
+        window.addEventListener('load', () => {setTimeout(() => {
+            this.scrollbarUpdate()
+        }, 1000)})
+    }
+
+    scrollbarUpdate = () => {
         /**
          * Locomotive scroll calculates page height on initialization.
          * Some content may have not finished to load and change page height afterwards (for example image loading).
@@ -132,43 +138,6 @@ export default class Application extends Component {
             // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
             ScrollTrigger.refresh();
         }
-
-        this.selectTertiaryVariantAlignment()
     }
 
-
-    selectTertiaryVariantAlignment = () => {
-        const groupedSelect = document.querySelectorAll('.custom-select-group')
-
-        if (groupedSelect.length > 0) {
-            groupedSelect.forEach(elem => {
-                const labels = elem.querySelectorAll('.custom-select-label')
-                let labelsWidth = []
-                let labelsFullWidth = []
-                labels.forEach( el => {
-                    labelsWidth.push(el.offsetWidth)
-                    labelsFullWidth.push(this.getFullWidth(el))
-                })
-
-                labels.forEach(elem => {
-                    elem.style.minWidth = `${Math.max(...labelsWidth)}px`
-                })
-
-                const items = elem.querySelectorAll('.custom-select-items .custom-select-items__item')
-
-                items.forEach(elem => {
-                    elem.style.paddingLeft = `${Math.max(...labelsFullWidth) + 16.5 - 26}px`
-                })
-            })
-        }
-    }
-
-    getFullWidth(el) {
-        let elWidth = el.offsetWidth
-
-        elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-left'))
-        elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-right'))
-
-        return elWidth
-    }
 }

@@ -1,6 +1,8 @@
 import Component from '@okiba/component'
 import { on, off, qs } from '@okiba/dom'
+
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
+
 import OffsetNav from './OffsetNav'
 
 class OffsetNavSystem extends Component {

@@ -1,0 +1,99 @@
+#adminmenu {
+
+    #toplevel_page_lb-theme-general-settings {
+        &.opensub,
+        &:hover {
+            .wp-menu-image::before {
+                color: #fff;
+            }
+        }
+
+        &.opensub > a,
+        > a {
+            background-color: #b52a2d;
+            color: #fff;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+
+.edit-tags-php {
+    #posts-filter {
+        .wp-list-table {
+            .level-0 {
+                // position: relative;
+    
+                // &::after {
+                //     content: '';
+                //     width: 100%;
+                //     height: 1px;
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                //     border-top: 5px solid #1d2327;
+                // }
+    
+                th, td {
+                    border-top: 3px solid #1d2327;
+                }
+            }
+        }
+    }
+}
+
+.post-type-product.taxonomy-product_cat {
+    .wp-list-table {
+        .thumb {
+            img {
+                display: none;
+            }
+        }
+
+        .level-0 {
+            .thumb {
+                &::before {
+                    content: 'Macro';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+
+        .level-1 {
+            .thumb {
+                &::before {
+                    content: 'Zona';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+
+        .level-2 {
+            .thumb {
+                &::before {
+                    content: 'Esigenza';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+
+        .level-3 {
+            .thumb {
+                &::before {
+                    content: 'Tipologia';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}

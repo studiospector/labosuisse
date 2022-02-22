@@ -1,18 +1,23 @@
 import Component from "@okiba/component";
 import { on, qsa, qs } from '@okiba/dom';
+
 import { gsap } from "gsap"
+
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+
 import { openBackgroundTimeline, openSubmenuTimeline, submenuTimeline } from './animations';
 import { stickyHeader } from "../MenuMobile/animations";
-
 
 const ui = {
     hovers: '.lb-menu__main>.lb-menu__item>.lb-menu__link',
     submenus: '.lb-menu__submenu',
     background: '.lb-menu__background',
     overlay: '.lb-menu__overlay',
+    submenuLinks: {
+        selector: '.lb-menu__submenu-link',
+        asArray: true
+    },
 }
-
 
 class MenuDesktop extends Component {
 
@@ -21,6 +26,7 @@ class MenuDesktop extends Component {
         this.isOpen = false;
         this.header = qs('.lb-header__wrapper--desktop');
 
+        on(this.ui.submenuLinks, 'click', this.openSubmenu)
 
         on(this.ui.hovers || [], 'click', this.onEnter); // mouseenter, focusin
         // on(this.ui.overlay || [], 'mouseenter', this.onLeave);
@@ -117,6 +123,19 @@ class MenuDesktop extends Component {
                     this.previousHeaderPaddingRight = null;
                 }
             })
+    }
+
+    openSubmenu = (el) => {
+        const triggerLink = el.target.getAttribute('data-submenu-trigger')
+
+        qsa('li.lb-menu__item.lb-menu__item--subitem').forEach(el => {
+            const trigger = el.getAttribute('data-submenu-trigger')
+            if (trigger == triggerLink) {
+                el.classList.add('is-visible')
+            } else {
+                el.classList.remove('is-visible')
+            }
+        })
     }
 }
 

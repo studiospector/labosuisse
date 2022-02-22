@@ -1,7 +1,8 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { qs, on } from '@okiba/dom'
 
-export default class Hero extends Component {
+class Hero extends Component {
+
     constructor({ options, ...props }) {
         super({ ...props })
 
@@ -37,3 +38,5 @@ export default class Hero extends Component {
         return elHeight
     }
 }
+
+export default Hero

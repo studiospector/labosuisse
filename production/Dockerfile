@@ -16,14 +16,14 @@ RUN npm run build
 
 
 # WORDPRESS STAGE
-FROM wordpress:5-php7.4-fpm-alpine AS wordpress-base
+FROM wordpress:5.8.0-php7.4-fpm-alpine AS wordpress-base
 
 WORKDIR /wordpress_dir
 RUN cp -r /var/www/html /wordpress_dir
 RUN cp /bin/sh /usr/local/sbin/php-fpm
 RUN /usr/local/bin/docker-entrypoint.sh php-fpm || true
 
-FROM wordpress:5-php7.4-fpm-alpine AS wordpress
+FROM wordpress:5.8.0-php7.4-fpm-alpine AS wordpress
 
 ENV WP_CORE_DIR="/var/www/html"
 ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
@@ -48,7 +48,7 @@ COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 
 # trafex stage (wrap it)
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
-FROM trafex/php-nginx:latest
+FROM trafex/php-nginx:2.4.0
 
 # :poop:
 USER root
