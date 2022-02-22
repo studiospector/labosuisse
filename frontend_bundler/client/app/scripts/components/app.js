@@ -20,6 +20,7 @@ import OffsetNavSystem from './OffsetNavSystem'
 import CardsGrid from './CardsGrid'
 import ScrollTo from './ScrollTo'
 import Product from './Product'
+import Accordion from './Accordion'
 
 const components = {
     scrollbar: {
@@ -105,6 +106,11 @@ const components = {
     product: {
         selector: '.js-lb-product',
         type: Product,
+        optional: true
+    },
+    accordion: {
+        selector: '.js-accordion',
+        type: Accordion,
         optional: true
     },
 }
