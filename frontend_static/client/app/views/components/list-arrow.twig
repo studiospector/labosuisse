@@ -1,0 +1,8 @@
+<ul class="lb-arrow-list">
+    {% for item in items %}
+        <li>
+            {% include '@PathViews/components/icon.twig' with {name: 'arrow-right'} only %}
+            <span class="lb-arrow-list__text">{{ item }}</span>
+        </li>
+    {% endfor %}
+</ul>

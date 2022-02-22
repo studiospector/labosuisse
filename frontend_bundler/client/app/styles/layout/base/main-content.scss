@@ -58,6 +58,40 @@ ol:not(.flex-control-nav) {
 
 
 
+ul.lb-arrow-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        .lb-icon {
+            margin-top: 4px;
+
+            svg {
+                width: 6px;
+                height: 8px;
+            }
+        }
+
+        .lb-arrow-list__text {
+            margin-left: 10px;
+            font-size: rem(14);
+            font-weight: 300;
+            line-height: 19px;
+        }
+    }
+}
+
+
+
 .pswp {
     &__bg {
         background-color: #f6f5f3;

@@ -125,7 +125,12 @@ const dataCardType7 = {
     infobox: {
         image: '/assets/images/crescina-logo.png',
         subtitle: 'La tecnologia dietro l’efficacia',
-        paragraph: 'Grazie alla Tecnologia Transdermica (Swiss Patent CH 711 466) – ispirata alla metodologia della medicina estetica e brevettata nel 2015 – Labo supera le frontiere della scienza dermo-cosmetica divenendo la prima azienda a sviluppare una nuova tecnica di penetrazione dei principi attivi, senza iniezioni, attraverso epidermide e derma.',
+        items: [
+            'Il trattamento Fillerina può essere utilizzato anche per le rughe del labbro superiore della bocca?',
+            'Si possono effettuare pulizia viso o lampade solari durante il trattamento?',
+            'Ci si può esporre al sole durante il trattamento?',
+            'Si può utilizzare Fillerina nei periodi di gravidanza o in allattamento?',
+        ],
         cta: {
             url: '#',
             title: 'Scopri di più',
@@ -184,7 +189,7 @@ storiesOf('Components|Cards', module)
     .add('Type 5 --- About', () => renderCard(dataCardType5))
     // Magazine
     .add('Type 6 --- Magazine', () => renderCard(dataCardType6))
-    // Magazine
+    // FAQ
     .add('Type 7 --- FAQ', () => renderCard(dataCardType7))
     // Colored
     .add('Type 8 --- Colored', () => renderCard(dataCardType8))
