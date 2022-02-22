@@ -130,3 +130,64 @@ function lb_brand_page_cpt_init()
     register_post_type('lb-brand-page', $args);
 }
 add_action('init', 'lb_brand_page_cpt_init', 0);
+
+
+
+/**
+ * Register Custom Post Type FAQ
+ */
+function lb_faq_cpt_init()
+{
+    $args = array(
+        'label' => __('FAQ', 'lb-faq-cpt'),
+        'labels' => array(
+            'name' => _x('FAQ', 'Post Type General Name', 'lb-faq-cpt'),
+            'singular_name' => _x('FAQ', 'Post Type Singular Name', 'lb-faq-cpt'),
+            'menu_name' => _x('FAQ', 'Admin Menu text', 'lb-faq-cpt'),
+            'name_admin_bar' => _x('FAQ', 'Add New on Toolbar', 'lb-faq-cpt'),
+            'archives' => __('Archivi FAQ', 'lb-faq-cpt'),
+            'attributes' => __('Attributi delle FAQ', 'lb-faq-cpt'),
+            'parent_item_colon' => __('Genitori FAQ:', 'lb-faq-cpt'),
+            'all_items' => __('Tutte le FAQ', 'lb-faq-cpt'),
+            'add_new_item' => __('Aggiungi nuova FAQ', 'lb-faq-cpt'),
+            'add_new' => __('Nuova', 'lb-faq-cpt'),
+            'new_item' => __('FAQ redigere', 'lb-faq-cpt'),
+            'edit_item' => __('Modifica FAQ', 'lb-faq-cpt'),
+            'update_item' => __('Aggiorna FAQ', 'lb-faq-cpt'),
+            'view_item' => __('Visualizza FAQ', 'lb-faq-cpt'),
+            'view_items' => __('Visualizza le FAQ', 'lb-faq-cpt'),
+            'search_items' => __('Cerca FAQ', 'lb-faq-cpt'),
+            'not_found' => __('Nessuna FAQ trovata.', 'lb-faq-cpt'),
+            'not_found_in_trash' => __('Nessuna FAQ trovata nel cestino.', 'lb-faq-cpt'),
+            'featured_image' => __('Immagine in evidenza', 'lb-faq-cpt'),
+            'set_featured_image' => __('Imposta immagine in evidenza', 'lb-faq-cpt'),
+            'remove_featured_image' => __('Rimuovi immagine in evidenza', 'lb-faq-cpt'),
+            'use_featured_image' => __('Usa come immagine in evidenza', 'lb-faq-cpt'),
+            'insert_into_item' => __('Inserisci nelle FAQ', 'lb-faq-cpt'),
+            'uploaded_to_this_item' => __('Caricato in questo FAQ', 'lb-faq-cpt'),
+            'items_list' => __('Elenco delle FAQ', 'lb-faq-cpt'),
+            'items_list_navigation' => __('Navigazione elenco FAQ', 'lb-faq-cpt'),
+            'filter_items_list' => __('Filtra elenco FAQ', 'lb-faq-cpt'),
+        ),
+        'menu_icon' => 'dashicons-testimonial',
+        'supports' => array('title', 'editor', 'thumbnail'),
+        'taxonomies' => array(),
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'can_export' => true,
+        'has_archive' => true,
+        'hierarchical' => true,
+        'exclude_from_search' => false,
+        'show_in_rest' => true,
+        'publicly_queryable' => true,
+        'map_meta_cap' => true,
+        'capability_type' => array( 'lb-faq', 'lb-faqs' ),
+        'rewrite' => array('slug' => 'faq'),
+    );
+    register_post_type('lb-faq', $args);
+}
+add_action('init', 'lb_faq_cpt_init', 0);
