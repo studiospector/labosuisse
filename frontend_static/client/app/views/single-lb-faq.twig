@@ -1,0 +1,47 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'single-lb-faq' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if image %}
+                <img src="{{ image }}">
+            {% endif %}
+            {% if title %}
+                <h1 class="infobox__subtitle h2">{{ title }}</h1>
+            {% endif %}
+            {% if description %}
+                <p class="infobox__paragraph">{{ fn('nl2br', description) }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# FAQs Accordion #}
+    {% if faq %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-8 offset-md-2">
+                    {% include '@PathViews/components/accordion.twig' with faq only %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {# FAQs Accordion #}
+    {% if infobox %}
+        <hr class="lb-separator lb-separator--big" data-variant="big">
+        <div class="container text-center">
+            {% include '@PathViews/components/infobox.twig' with infobox only %}
+        </div>
+    {% endif %}
+
+{% endblock %}

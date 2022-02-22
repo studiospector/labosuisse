@@ -1,0 +1,53 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'archive-lb-faq' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if title %}
+                <h1 class="infobox__subtitle h2">{{ title }}</h1>
+            {% endif %}
+            {% if description %}
+                <p class="infobox__paragraph">{{ description }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Search #}
+    <div class="lb-filters container">
+        <div class="row">
+            <div class="lb-filters__item col-12 col-md-4 offset-md-4">
+                {% include '@PathViews/components/fields/input.twig' with {
+                    type: 'search',
+                    name: "lb-faq-search",
+                    label: "Cerca un argomento, un prodotto, una linea, ...",
+                    disabled: false,
+                    required: false,
+                    variants: ['secondary'],
+                } only %}
+            </div>
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Posts Grig #}
+    <div class="container">
+        <div class="row">
+            {% for post in items %}
+                <div class="col-12 col-md-4">
+                    {% include '@PathViews/components/card.twig' with post only %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
