@@ -36,6 +36,9 @@ STEFANO
 
 - sticky header dinamico pagina prodotto
 
+- √ accordion
+- √ FAQ T7
+
 
 
 ----------
