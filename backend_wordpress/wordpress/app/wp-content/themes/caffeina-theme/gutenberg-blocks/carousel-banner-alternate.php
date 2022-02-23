@@ -1,12 +1,6 @@
-
-
 <?php
-require_once(__DIR__.'/classes/carouselBannerAlternate.php');
-use gutenbergBlocks\BaseBlock;
-$block_carousel_banner_alternate = new CarouselBannerAlternate($block, null);
 
-$block_carousel_banner_alternate->render();
+use Caffeina\LaboSwiss\Blocks\CarouselBannerAlternate;
 
-
-
-
+$blockCarouselBannerAlternate = (new CarouselBannerAlternate($block, null))
+    ->render();

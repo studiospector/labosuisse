@@ -7,9 +7,9 @@ namespace Composer\Autoload;
 class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
 {
     public static $files = array (
-        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '25072dd6e2470089de65ae7bf11d3109' => __DIR__ . '/..' . '/symfony/polyfill-php72/bootstrap.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -27,7 +27,7 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
         'C' => 
         array (
             'Composer\\Installers\\' => 20,
-            'Caffeina\\LaboSwissBlocks\\' => 25,
+            'Caffeina\\LaboSwiss\\' => 19,
         ),
     );
 
@@ -56,9 +56,9 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
-        'Caffeina\\LaboSwissBlocks\\' => 
+        'Caffeina\\LaboSwiss\\' => 
         array (
-            0 => __DIR__ . '/..' . '/caffeina/labo-swiss-blocks/src',
+            0 => __DIR__ . '/..' . '/caffeina/labo-swiss/src',
         ),
     );
 

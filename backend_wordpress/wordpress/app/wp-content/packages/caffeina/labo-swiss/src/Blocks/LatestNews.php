@@ -1,7 +1,6 @@
 <?php
 
-namespace Caffeina\LaboSwissBlocks;
-
+namespace Caffeina\LaboSwiss\Blocks;
 
 class LatestNews extends BaseBlock
 {
@@ -10,13 +9,7 @@ class LatestNews extends BaseBlock
         parent::__construct($block, $name);
         $items = [];
 
-        // $test = new Test('ciao');
-
-        // die(print($test->getTitle()));
-
-        $query = new \WP_Query([
-            'posts_per_page' => 4
-        ]);
+        $query = new \WP_Query(['posts_per_page' => 4]);
 
         while ($query->have_posts()) {
             $query->the_post();

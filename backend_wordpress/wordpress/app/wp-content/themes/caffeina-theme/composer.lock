@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2238ac55e5f3172f29a9bad43e46ad67",
+    "content-hash": "958e0a629c58f56f335ba581bf9fd57d",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -67,17 +67,17 @@
             "time": "2020-03-09T08:34:59+00:00"
         },
         {
-            "name": "caffeina/labo-swiss-blocks",
+            "name": "caffeina/labo-swiss",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../packages/caffeina/labo-swiss-blocks",
-                "reference": "aa0eb09de8873b63604c0b773839b199cf139150"
+                "url": "../../packages/caffeina/labo-swiss",
+                "reference": "ba6b2303cf8384d24d786dccf3b603db8f230a3a"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Caffeina\\LaboSwissBlocks\\": "src/"
+                    "Caffeina\\LaboSwiss\\": "src/"
                 }
             },
             "transport-options": {
@@ -352,12 +352,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Mbstring\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Mbstring\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -761,7 +761,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "caffeina/labo-swiss-blocks": 20
+        "caffeina/labo-swiss": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

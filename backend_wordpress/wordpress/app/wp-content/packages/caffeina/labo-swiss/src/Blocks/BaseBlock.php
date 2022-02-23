@@ -1,6 +1,6 @@
 <?php
 
-namespace Caffeina\LaboSwissBlocks;
+namespace Caffeina\LaboSwiss\Blocks;
 
 class BaseBlock
 {

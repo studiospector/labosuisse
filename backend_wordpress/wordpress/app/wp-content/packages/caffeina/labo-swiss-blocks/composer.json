@@ -1,9 +1,0 @@
-{
-    "name": "caffeina/labo-swiss-blocks",
-    "autoload": {
-        "psr-4": {
-            "Caffeina\\LaboSwissBlocks\\": "src/"
-        }
-    },
-    "require": {}
-}

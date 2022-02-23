@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The Template for displaying all single products
  *
@@ -15,8 +16,17 @@
  * @version     1.6.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+use Caffeina\LaboSwiss\Blocks\Hero;
+use Caffeina\LaboSwiss\Blocks\ImageCard;
+use Caffeina\LaboSwiss\Blocks\LaunchTwoCards;
+use Caffeina\LaboSwiss\Blocks\BannerAlternate;
+use Caffeina\LaboSwiss\Blocks\LoveLabo;
+use Caffeina\LaboSwiss\Blocks\NumberListImage;
+use Caffeina\LaboSwiss\Blocks\OffsetNavs;
+use Caffeina\LaboSwiss\Blocks\Routine;
+
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
 }
 
 $context = Timber::context();
@@ -35,7 +45,7 @@ $context['stickyHeader']['cartUrlLabel'] = __('Aggiungi al carrello', 'labo-suis
 
 // Post classes
 ob_start();
-wc_product_class( 'single-product-details container', $product );
+wc_product_class('single-product-details container', $product);
 $context['product_classes'] = ob_get_clean();
 
 // Get related products
@@ -44,43 +54,35 @@ $context['product_classes'] = ob_get_clean();
 // $context['related_products'] = Timber::get_posts($related_ids);
 
 // Hero
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/hero.php');
-$block_hero = new Hero(null,'hero');
+$block_hero = new Hero(null, 'hero');
 $context['hero'] = $block_hero->getPayload();
 
 // Offset Navs
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/offsetNavs.php');
-$block_offsetNavs = new OffsetNavs(null,'block-offset-navs');
+$block_offsetNavs = new OffsetNavs(null, 'block-offset-navs');
 $context['offset_navs'] = $block_offsetNavs->getPayload();
 
 // Banner alternate
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/bannerAlternate.php');
-$block_banner_alternate = new BannerAlternate(null,'banner_alternate');
+$block_banner_alternate = new BannerAlternate(null, 'banner_alternate');
 $context['banner_alternate'] = $block_banner_alternate->getPayload();
 
 // Two Cards
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/launchTwoCards.php');
 $block_launch_two_cards = new LaunchTwoCards(null, "block-launch-two-cards");
 $context['two_cards'] = $block_launch_two_cards->getPayload();
 
 // Image and Card
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/imageCard.php');
-$block_image_card = new ImageCard(null,'block-image-card');
+$block_image_card = new ImageCard(null, 'block-image-card');
 $context['image_and_card'] = $block_image_card->getPayload();
 
 // Numbers List
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/numberListImage.php');
 $block_numbers = new NumberListImage(null, 'number-list-with-image');
 $context['number_list'] = $block_numbers->getPayload();
 
 // Love labo
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/loveLabo.php');
 $block_love_labo = new LoveLabo(null, "block-love-labo");
 $context['miniatures'] = $block_love_labo->getPayload();
 
 // Routine
-require_once(WP_CONTENT_DIR.'/themes/caffeina-theme/gutenberg-blocks/classes/routine.php');
-$block_routine = new Routine(null,'block-routine');
+$block_routine = new Routine(null, 'block-routine');
 $context['routine'] = $block_routine->getPayload();
 
 

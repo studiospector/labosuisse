@@ -64,26 +64,26 @@
             "install-path": "../altorouter/altorouter"
         },
         {
-            "name": "caffeina/labo-swiss-blocks",
+            "name": "caffeina/labo-swiss",
             "version": "dev-main",
             "version_normalized": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../packages/caffeina/labo-swiss-blocks",
-                "reference": "aa0eb09de8873b63604c0b773839b199cf139150"
+                "url": "../../packages/caffeina/labo-swiss",
+                "reference": "ba6b2303cf8384d24d786dccf3b603db8f230a3a"
             },
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Caffeina\\LaboSwissBlocks\\": "src/"
+                    "Caffeina\\LaboSwiss\\": "src/"
                 }
             },
             "transport-options": {
                 "symlink": true,
                 "relative": true
             },
-            "install-path": "../caffeina/labo-swiss-blocks"
+            "install-path": "../caffeina/labo-swiss"
         },
         {
             "name": "composer/installers",

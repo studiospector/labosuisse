@@ -1,13 +1,9 @@
 {
     "name": "caffeina/labo-swiss",
-    "description": "Labo Swiss",
-    "version": "1.0.0",
-    "minimum-stability": "dev",
-    "type": "library",
     "autoload": {
         "psr-4": {
             "Caffeina\\LaboSwiss\\": "src/"
         }
     },
     "require": {}
-  }
+}
