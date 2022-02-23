@@ -86,33 +86,14 @@ n3-wipe-data-and-stop:
     name: ${CI_COMMIT_REF_NAME}
     action: stop
 
-deploy-aws:
-  stage: deploy
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:up-to-date-compose
+deploy-preprod:
+  stage: push
+  image: registry.caffeina.co/devops/convox-gitlab-ci:latest
   variables:
-    DOCKER_TLS_VERIFY: "1"
-    DOCKER_HOST: ${PROD_DOCKER_HOST}
-    DOCKER_CERT_PATH: ${N3_DOCKER_CERT_PATH}
-    VIRTUAL_HOST: "${PROD_VIRTUAL_HOST}"
-    COMPOSE_PROJECT_NAME: ${CI_PROJECT_NAME}_${CI_COMMIT_REF_NAME}
-    DC_FILE: "docker-compose.yml"
+    CONVOX_APP_NAME: ${PROJECT_NAME}
+    CONVOX_RACK: ${PREPROD_CONVOX_RACK}
   script:
-    # Env
-    - printenv $(echo "n3_env_${CI_COMMIT_REF_NAME}") > ./.env
-    # Certs
-    - mkdir -p ${DOCKER_CERT_PATH}
-    - echo "${PROD_DOCKER_MACHINE_CA}" > ${DOCKER_CERT_PATH}/ca.pem
-    - echo "${PROD_DOCKER_CLIENT_CERT}" > ${DOCKER_CERT_PATH}/cert.pem
-    - echo "${PROD_DOCKER_CLIENT_KEY}" > ${DOCKER_CERT_PATH}/key.pem
-    # Deploy
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-    - docker-compose -f ${DC_FILE} pull
-    - docker-compose -f ${DC_FILE} up -d --remove-orphans
-    # Cleanup
-    - rm -rf ${DOCKER_CERT_PATH}
-  environment:
-    name: ${CI_COMMIT_REF_NAME}
-    url: "http://${PROD_VIRTUAL_HOST}"
-  when: manual
+    - echo "APP NAME IS: $CONVOX_APP_NAME"
+    - convox deploy -a $CONVOX_APP_NAME
   only:
-    - master
+    - preprod
