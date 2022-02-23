@@ -1,8 +1,6 @@
 import Component from '@okiba/component'
 import { on, off, qs } from '@okiba/dom'
 
-import { stickyHeader } from '../MenuMobile/animations';
-
 // import Select from '../Select'
 // import AsyncSearch from '../AsyncSearch'
 // import Accordion from '../Accordion'
@@ -25,6 +23,7 @@ const components = [
 ]
 
 class OffsetNav extends Component {
+    
     constructor({ options = {}, ...props }) {
         super({ ...props, ui, components: options.initComponents ? components : null })
 

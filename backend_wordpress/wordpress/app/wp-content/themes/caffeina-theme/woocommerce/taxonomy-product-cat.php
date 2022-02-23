@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__.'/pages/macro.php');
-require_once(__DIR__.'/pages/zona.php');
-require_once(__DIR__.'/pages/esigenza.php');
+require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
+require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/zona.php');
+require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/esigenza.php');
 
 /**
  * The Template for displaying products in a product category. Simply includes the archive template
@@ -67,7 +67,4 @@ switch ($level) {
     // Default
     default:
         echo "Level others";
-
 }
-
-

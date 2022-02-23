@@ -11,9 +11,10 @@ import renderCard from '../../views/components/card.twig'
 const dataCardType1 = {
     images: {
         original: '/assets/images/card-img-4.jpg',
-        large: '/assets/images/card-img-4.jpg',
-        medium: '/assets/images/card-img-4.jpg',
-        small: '/assets/images/card-img-4.jpg'
+        lg: '/assets/images/card-img-4.jpg',
+        md: '/assets/images/card-img-4.jpg',
+        sm: '/assets/images/card-img-4.jpg',
+        xs: '/assets/images/card-img-4.jpg'
     },
     infobox: {
         tagline: 'TRATTAMENTO FACCIALE',
@@ -32,9 +33,10 @@ const dataCardType1 = {
 const dataCardType2 = {
     images: {
         original: '/assets/images/card-img-6.jpg',
-        large: '/assets/images/card-img-6.jpg',
-        medium: '/assets/images/card-img-6.jpg',
-        small: '/assets/images/card-img-6.jpg'
+        lg: '/assets/images/card-img-6.jpg',
+        md: '/assets/images/card-img-6.jpg',
+        sm: '/assets/images/card-img-6.jpg',
+        xs: '/assets/images/card-img-6.jpg'
     },
     date: '00/00/00',
     infobox: {
@@ -54,9 +56,10 @@ const dataCardType2 = {
 const dataCardType3 = {
     images: {
         original: '/assets/images/card-img-5.jpg',
-        large: '/assets/images/card-img-5.jpg',
-        medium: '/assets/images/card-img-5.jpg',
-        small: '/assets/images/card-img-5.jpg'
+        lg: '/assets/images/card-img-5.jpg',
+        md: '/assets/images/card-img-5.jpg',
+        sm: '/assets/images/card-img-5.jpg',
+        xs: '/assets/images/card-img-5.jpg'
     },
     infobox: {
         subtitle: 'Magnetic Eyes',
@@ -75,9 +78,10 @@ const dataCardType3 = {
 const dataCardType5 = {
     images: {
         original: '/assets/images/card-img-7.jpg',
-        large: '/assets/images/card-img-7.jpg',
-        medium: '/assets/images/card-img-7.jpg',
-        small: '/assets/images/card-img-7.jpg'
+        lg: '/assets/images/card-img-7.jpg',
+        md: '/assets/images/card-img-7.jpg',
+        sm: '/assets/images/card-img-7.jpg',
+        xs: '/assets/images/card-img-7.jpg'
     },
     infobox: {
         subtitle: '1989: il primo lancio',
@@ -90,9 +94,10 @@ const dataCardType5 = {
 const dataCardType6 = {
     images: {
         original: '/assets/images/card-img-6.jpg',
-        large: '/assets/images/card-img-6.jpg',
-        medium: '/assets/images/card-img-6.jpg',
-        small: '/assets/images/card-img-6.jpg'
+        lg: '/assets/images/card-img-6.jpg',
+        md: '/assets/images/card-img-6.jpg',
+        sm: '/assets/images/card-img-6.jpg',
+        xs: '/assets/images/card-img-6.jpg'
     },
     date: '00/00/00',
     infobox: {
@@ -112,9 +117,10 @@ const dataCardType6 = {
 const dataCardType7 = {
     images: {
         original: '/assets/images/card-img-6.jpg',
-        large: '/assets/images/card-img-6.jpg',
-        medium: '/assets/images/card-img-6.jpg',
-        small: '/assets/images/card-img-6.jpg'
+        lg: '/assets/images/card-img-6.jpg',
+        md: '/assets/images/card-img-6.jpg',
+        sm: '/assets/images/card-img-6.jpg',
+        xs: '/assets/images/card-img-6.jpg'
     },
     infobox: {
         image: '/assets/images/crescina-logo.png',
@@ -150,9 +156,10 @@ const dataCardType8 = {
 const dataCardType10 = {
     images: {
         original: '/assets/images/card-img-6.jpg',
-        large: '/assets/images/card-img-6.jpg',
-        medium: '/assets/images/card-img-6.jpg',
-        small: '/assets/images/card-img-6.jpg'
+        lg: '/assets/images/card-img-6.jpg',
+        md: '/assets/images/card-img-6.jpg',
+        sm: '/assets/images/card-img-6.jpg',
+        xs: '/assets/images/card-img-6.jpg'
     },
     infobox: {
         subtitle: 'Labo Transdermic',

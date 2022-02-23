@@ -23,54 +23,60 @@ const dataDefault = {
         {
             images: {
                 original: '/assets/images/love-labo-img-1.jpg',
-                large: '/assets/images/love-labo-img-1.jpg',
-                medium: '/assets/images/love-labo-img-1.jpg',
-                small: '/assets/images/love-labo-img-1.jpg'
+                lg: '/assets/images/love-labo-img-1.jpg',
+                md: '/assets/images/love-labo-img-1.jpg',
+                sm: '/assets/images/love-labo-img-1.jpg',
+                xs: '/assets/images/love-labo-img-1.jpg'
             },
             text: ''
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-2.jpg',
-                large: '/assets/images/love-labo-img-2.jpg',
-                medium: '/assets/images/love-labo-img-2.jpg',
-                small: '/assets/images/love-labo-img-2.jpg'
+                lg: '/assets/images/love-labo-img-2.jpg',
+                md: '/assets/images/love-labo-img-2.jpg',
+                sm: '/assets/images/love-labo-img-2.jpg',
+                xs: '/assets/images/love-labo-img-2.jpg'
             },
             text: ''
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-3.jpg',
-                large: '/assets/images/love-labo-img-3.jpg',
-                medium: '/assets/images/love-labo-img-3.jpg',
-                small: '/assets/images/love-labo-img-3.jpg'
+                lg: '/assets/images/love-labo-img-3.jpg',
+                md: '/assets/images/love-labo-img-3.jpg',
+                sm: '/assets/images/love-labo-img-3.jpg',
+                xs: '/assets/images/love-labo-img-3.jpg'
             },
             text: ''
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-4.jpg',
-                large: '/assets/images/love-labo-img-4.jpg',
-                medium: '/assets/images/love-labo-img-4.jpg',
-                small: '/assets/images/love-labo-img-4.jpg'
+                lg: '/assets/images/love-labo-img-4.jpg',
+                md: '/assets/images/love-labo-img-4.jpg',
+                sm: '/assets/images/love-labo-img-4.jpg',
+                xs: '/assets/images/love-labo-img-4.jpg'
             },
             text: ''
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-5.jpg',
-                large: '/assets/images/love-labo-img-5.jpg',
-                medium: '/assets/images/love-labo-img-5.jpg',
-                small: '/assets/images/love-labo-img-5.jpg'
+                lg: '/assets/images/love-labo-img-5.jpg',
+                md: '/assets/images/love-labo-img-5.jpg',
+                sm: '/assets/images/love-labo-img-5.jpg',
+                xs: '/assets/images/love-labo-img-5.jpg'
             },
             text: ''
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-6.jpg',
-                large: '/assets/images/love-labo-img-6.jpg',
-                medium: '/assets/images/love-labo-img-6.jpg',
-                small: '/assets/images/love-labo-img-6.jpg'
+                lg: '/assets/images/love-labo-img-6.jpg',
+                md: '/assets/images/love-labo-img-6.jpg',
+                sm: '/assets/images/love-labo-img-6.jpg',
+                xs: '/assets/images/love-labo-img-6.jpg'
             },
             text: ''
         },
@@ -92,54 +98,60 @@ const dataFull = {
         {
             images: {
                 original: '/assets/images/love-labo-img-1.jpg',
-                large: '/assets/images/love-labo-img-1.jpg',
-                medium: '/assets/images/love-labo-img-1.jpg',
-                small: '/assets/images/love-labo-img-1.jpg'
+                lg: '/assets/images/love-labo-img-1.jpg',
+                md: '/assets/images/love-labo-img-1.jpg',
+                sm: '/assets/images/love-labo-img-1.jpg',
+                xs: '/assets/images/love-labo-img-1.jpg'
             },
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu metus velit.'
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-2.jpg',
-                large: '/assets/images/love-labo-img-2.jpg',
-                medium: '/assets/images/love-labo-img-2.jpg',
-                small: '/assets/images/love-labo-img-2.jpg'
+                lg: '/assets/images/love-labo-img-2.jpg',
+                md: '/assets/images/love-labo-img-2.jpg',
+                sm: '/assets/images/love-labo-img-2.jpg',
+                xs: '/assets/images/love-labo-img-2.jpg'
             },
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu metus velit.'
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-3.jpg',
-                large: '/assets/images/love-labo-img-3.jpg',
-                medium: '/assets/images/love-labo-img-3.jpg',
-                small: '/assets/images/love-labo-img-3.jpg'
+                lg: '/assets/images/love-labo-img-3.jpg',
+                md: '/assets/images/love-labo-img-3.jpg',
+                sm: '/assets/images/love-labo-img-3.jpg',
+                xs: '/assets/images/love-labo-img-3.jpg'
             },
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu metus velit.'
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-4.jpg',
-                large: '/assets/images/love-labo-img-4.jpg',
-                medium: '/assets/images/love-labo-img-4.jpg',
-                small: '/assets/images/love-labo-img-4.jpg'
+                lg: '/assets/images/love-labo-img-4.jpg',
+                md: '/assets/images/love-labo-img-4.jpg',
+                sm: '/assets/images/love-labo-img-4.jpg',
+                xs: '/assets/images/love-labo-img-4.jpg'
             },
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu metus velit.'
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-5.jpg',
-                large: '/assets/images/love-labo-img-5.jpg',
-                medium: '/assets/images/love-labo-img-5.jpg',
-                small: '/assets/images/love-labo-img-5.jpg'
+                lg: '/assets/images/love-labo-img-5.jpg',
+                md: '/assets/images/love-labo-img-5.jpg',
+                sm: '/assets/images/love-labo-img-5.jpg',
+                xs: '/assets/images/love-labo-img-5.jpg'
             },
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu metus velit.'
         },
         {
             images: {
                 original: '/assets/images/love-labo-img-6.jpg',
-                large: '/assets/images/love-labo-img-6.jpg',
-                medium: '/assets/images/love-labo-img-6.jpg',
-                small: '/assets/images/love-labo-img-6.jpg'
+                lg: '/assets/images/love-labo-img-6.jpg',
+                md: '/assets/images/love-labo-img-6.jpg',
+                sm: '/assets/images/love-labo-img-6.jpg',
+                xs: '/assets/images/love-labo-img-6.jpg'
             },
             text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla eu metus velit.'
         },

@@ -1,5 +1,21 @@
 <?php
 
+require_once(__DIR__ . '/Options.php');
+
+/**
+ * Get Images array
+ */
+function lb_get_images($id)
+{
+    return ($id) ? [
+        'original' => wp_get_attachment_url($id),
+        'lg' => wp_get_attachment_image_src($id, 'lb-img-size-lg')[0],
+        'md' => wp_get_attachment_image_src($id, 'lb-img-size-md')[0],
+        'sm' => wp_get_attachment_image_src($id, 'lb-img-size-sm')[0],
+        'xs' => wp_get_attachment_image_src($id, 'lb-img-size-xs')[0]
+    ] : null;
+}
+
 /**
  * Get all Brands
  */
@@ -62,13 +78,13 @@ function get_brands_menu()
 {
     $menu = [
         'type' => 'submenu',
-        'label' => 'tutti i brand',
+        'label' => __('Tutti i Brand', 'labo-suisse-theme'),
         'children' => [
             [
                 'type' => 'submenu',
-                'label' => 'Per Brand',
+                'label' => __('Per Brand', 'labo-suisse-theme'),
                 'children' => [
-                    ['type' => 'link', 'label' => 'Tutti i brand', 'href' =>  '#']
+                    ['type' => 'link', 'label' => 'Tutti i brand', 'href' => (new Option())->getArchiveBrandLink()]
                 ]
             ],
             [
@@ -82,17 +98,17 @@ function get_brands_menu()
                 'data' => [
                     'images' => [
                         'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                        'lg' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'md' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'sm' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'xs' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
                     ],
                     'infobox' => [
                         'subtitle' => 'Magnetic Eyes',
                         'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                         'cta' => [
                             'url' => '#',
-                            'title' => 'Scopri di più',
-                            'iconEnd' => ['name' => 'arrow-right'],
+                            'title' => __('Scopri di più', 'labo-suisse-theme'),
                             'variants' => ['quaternary']
                         ]
                     ],
@@ -117,7 +133,7 @@ function get_brands_menu()
 
         $menu['children'][1]['children'][$i] = [
             'type' => 'submenu',
-            'label' => 'Per linea di prodotto',
+            'label' => __('Per linea di prodotto', 'labo-suisse-theme'),
             'trigger' => md5($brand->slug),
             'children' => get_brands_menu_product_line($brand)
         ];
@@ -134,7 +150,10 @@ function get_brands_menu_product_line($brand)
         'parent' => $brand->term_id
     ));
 
-    $items = [['type' => 'link', 'label' => 'scopri la linea', 'href' => get_permalink(get_field('lb_brand_page', $brand))]];
+    $items = [
+        ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))],
+        ['type' => 'link', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)],
+    ];
 
     foreach ($lines as $line) {
         $items[] = [
@@ -145,4 +164,59 @@ function get_brands_menu_product_line($brand)
     }
 
     return $items;
+}
+
+function get_discover_labo_menu_items()
+{
+    $items = [];
+    if (($locations = get_nav_menu_locations()) && isset($locations['lb_discover_labo'])) {
+        $menu_obj = wp_get_nav_menu_object($locations['lb_discover_labo']);
+        $items = wp_get_nav_menu_items($menu_obj->term_id);
+    }
+
+    $menu = [
+        'type' => 'submenu',
+        'label' => __('Scopri Labo', 'labo-suisse-theme'),
+        'children' => [
+            [
+                'type' => 'submenu',
+                'label' => '',
+                'children' => []
+            ],
+        ],
+        'fixed' => [
+            [
+                'type' => 'card',
+                'data' => [
+                    'images' => [
+                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                    ],
+                    'infobox' => [
+                        'subtitle' => 'Magnetic Eyes',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'cta' => [
+                            'url' => '#',
+                            'title' => __('Scopri di più', 'labo-suisse-theme'),
+                            'variants' => ['quaternary']
+                        ]
+                    ],
+                    'variants' => ['type-3']
+                ],
+            ],
+        ]
+    ];
+
+    foreach ($items as $item) {
+        $menu['children'][0]['children'][] = [
+            'type' => 'link',
+            'label' => $item->title,
+            'href' => $item->url,
+        ];
+    }
+
+
+    return [$menu];
 }

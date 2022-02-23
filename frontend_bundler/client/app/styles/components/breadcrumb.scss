@@ -1,0 +1,43 @@
+.lb-breadcrumbs {
+    width: 100%;
+    font-size: rem(10);
+    font-weight: 300;
+    text-transform: uppercase;
+    color: map-get($colors, "black");
+    background-color: transparent;
+    padding-top: 30px;
+    padding-bottom: 30px;
+
+    @include mq($until: md) {
+        display: none;
+    }
+
+    span {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    a {
+        color: map-get($colors, "black");
+        opacity: 0.5;
+        text-decoration: none;
+    }
+
+    .lb-icon {
+        margin: 0 10px; 
+
+        svg {
+            height: 0.8em;
+        }
+    }
+
+    [aria-current] {
+        font-weight: 700;
+    }
+
+    &--fixed {
+        position: absolute;
+        z-index: 1;
+    }
+}

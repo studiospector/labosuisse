@@ -11,16 +11,18 @@ const data = {
     imagesLeft: {
         variants: ["parallax"],
         original: '/assets/images/launch-img-1.jpg',
-        large: '/assets/images/launch-img-1.jpg',
-        medium: '/assets/images/launch-img-1.jpg',
-        small: '/assets/images/launch-img-1.jpg'
+        lg: '/assets/images/launch-img-1.jpg',
+        md: '/assets/images/launch-img-1.jpg',
+        sm: '/assets/images/launch-img-1.jpg',
+        xs: '/assets/images/launch-img-1.jpg'
     },
     imagesRight: {
         variants: ["parallax"],
         original: '/assets/images/launch-img-2.jpg',
-        large: '/assets/images/launch-img-2.jpg',
-        medium: '/assets/images/launch-img-2.jpg',
-        small: '/assets/images/launch-img-2.jpg'
+        lg: '/assets/images/launch-img-2.jpg',
+        md: '/assets/images/launch-img-2.jpg',
+        sm: '/assets/images/launch-img-2.jpg',
+        xs: '/assets/images/launch-img-2.jpg'
     },
     infobox: {
         tagline: 'CHI SIAMO',

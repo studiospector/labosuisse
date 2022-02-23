@@ -1,5 +1,7 @@
 <?php
-require_once(__DIR__ . '/../woocommerce/pages/macro.php');
+
+require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
+require_once(LB_DIR_PATH . '/inc/Options.php');
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -55,6 +57,7 @@ class ThemeSetup extends Timber\Site
         // add_filter( 'timber/context', array( $this, 'add_to_context' ) );
         add_filter('timber/twig', array($this, 'lb_add_to_twig'));
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
+        add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
         parent::__construct();
     }
 
@@ -71,9 +74,10 @@ class ThemeSetup extends Timber\Site
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
-        add_image_size('lb-large', 1260, 600, true);
-        add_image_size('lb-medium', 650, 470, true);
-        add_image_size('lb-small', 400, 345, true);
+        add_image_size('lb-img-size-lg', 1300, 700, true);
+        add_image_size('lb-img-size-md', 700, 400, true);
+        add_image_size('lb-img-size-sm', 400, 400, true);
+        add_image_size('lb-img-size-xs', 200, 200, true);
 
         add_theme_support('customize-selective-refresh-widgets');
 
@@ -94,6 +98,30 @@ class ThemeSetup extends Timber\Site
         add_theme_support('wp-block-styles');
         add_theme_support('align-wide');
         add_theme_support('editor-styles');
+
+        // Register Menus
+        register_nav_menus(array(
+            'lb_discover_labo' => 'Scopri Labo',
+        ));
+
+        // Theme Options page
+        acf_add_options_page(array(
+            'page_title' => 'Impostazioni Tema - Generali',
+            'menu_title' => 'Opzioni Tema',
+            'menu_slug' => 'lb-theme-general-settings',
+            'capability' => 'edit_posts',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
+            'redirect' => false
+        ));
+
+        acf_add_options_sub_page(array(
+            'page_title' => 'Impostazioni Tema - Header e Menu',
+            'menu_title' => 'Header e Menu',
+            'parent_slug' => 'lb-theme-general-settings',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
+        ));
 
         /**
          * Path to our custom editor style
@@ -229,6 +257,14 @@ class ThemeSetup extends Timber\Site
         }
 
         return "$theme_path/$bundle_folder/$file";
+    }
+
+    /**
+     * Change Yoat SEO Bradcrumbs separator
+     */
+    public function lb_yoast_breadcrumb_separator($sep)
+    {
+        return '<span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span>';
     }
 }
 
@@ -468,57 +504,38 @@ function lb_header()
 {
 
     $menu_desktop = array_merge(
-        macro::getAll(),
+        macro::getTheMenuTree(),
         [['type' => 'separator']],
         get_brands_menu(),
-        [[
-            'type' => 'link',
-            'label' => 'Scopri Labo',
-            'href' => '#',
-        ]],
+        get_discover_labo_menu_items(),
     );
 
-
-    if (is_woocommerce()) {
-        $menu_desktop = array_merge($menu_desktop, [
-            ['type' => 'separator'],
-            [
-                'type' => 'icon',
-                'icon' => ['name' => 'heart'],
-                'href' => 'https://google.it'
-            ],
-            [
-                'type' => 'icon',
-                'icon' => ['name' => 'cart'],
-                'href' => wc_get_cart_url()
-            ],
-            [
-                'type' => 'icon',
-                'icon' => ['name' => 'user'],
-                'href' => get_permalink(get_option('woocommerce_myaccount_page_id'))
-            ]
-        ]);
-    }
+    // if (is_woocommerce()) {
+    //     $menu_desktop = array_merge(
+    //         $menu_desktop,
+    //         (new Option())->getLShopLinks()
+    //     );
+    // }
 
     $menu_mobile = [
-        'children' => macro::getAll(false),
+        'children' => macro::getTheMenuTree('mobile'),
         'fixed' => [
             [
                 'type' => 'card',
                 'data' => [
                     'images' => [
-                        'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'large' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'medium' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'small' => get_template_directory_uri() . '/assets/images/card-img-5.jpg'
+                        'original' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'lg' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'md' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'sm' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
+                        'xs' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
                     ],
                     'infobox' => [
-                        'subtitle' => 'Magnetic Eyes',
-                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+                        'subtitle' => 'AFTER MASK',
+                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
                         'cta' => [
                             'url' => '#',
-                            'title' => 'Scopri di più',
-                            'iconEnd' => ['name' => 'arrow-right'],
+                            'title' => 'Scopri la linea',
                             'variants' => ['quaternary']
                         ]
                     ],
@@ -527,7 +544,13 @@ function lb_header()
             ],
             [
                 'type' => 'small-link',
-                'label' => 'Hai bisogno di aiuto?',
+                'label' => __('Profilo', 'labo-suisse-theme'),
+                'icon' => 'user',
+                'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+            ],
+            [
+                'type' => 'small-link',
+                'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),
                 'icon' => 'comments',
             ],
             [
@@ -538,7 +561,10 @@ function lb_header()
         ]
     ];
 
+    get_discover_labo_menu_items();
+
     return array(
+        'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'menu_desktop' => ['items' => $menu_desktop],
         'menu_mobile' => ['items' => $menu_mobile],
     );

@@ -10,8 +10,6 @@
 	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-
-
 <li class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
 
 	{% if type == 'link' %}
@@ -46,6 +44,13 @@
 			</div>
 			<div class="lb-menu-scroller">
 				<ul body-scroll-lock-ignore class="lb-menu__main">
+                    {% if subLabel %}
+                        <li class="lb-menu__item lb-menu__item--sublabel">
+                            <div class="lb-menu__link">
+                                <span class="lb-h5">{{subLabel}}</span>
+                            </div>
+                        </li>
+                    {% endif %}
 					{% for subitem in children %}
 						{% include "@PathViews/layout/menu-mobile-item.twig" with subitem only %}
 					{% endfor %}

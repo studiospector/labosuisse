@@ -12,12 +12,7 @@ class CarouselPosts extends BaseBlock {
                 $cf_post = get_sub_field('lb_block_carousel_posts_item');
                 if (!empty($cf_post)) {
                     $items[] = [
-                        'images' => [
-                            'original' => wp_get_attachment_url(get_post_thumbnail_id($cf_post->ID)),
-                            'large' => wp_get_attachment_url(get_post_thumbnail_id($cf_post->ID)),
-                            'medium' => wp_get_attachment_url(get_post_thumbnail_id($cf_post->ID)),
-                            'small' => wp_get_attachment_url(get_post_thumbnail_id($cf_post->ID))
-                        ],
+                        'images' => lb_get_images(get_post_thumbnail_id($cf_post->ID)),
                         'date' => date("d/m/Y", strtotime($cf_post->post_date)),
                         'variants' => ['type-2'],
                         'infobox' => [

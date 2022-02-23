@@ -1,49 +1,103 @@
 {% extends '@PathViews/templates/_default.twig' %}
 
-{% set bodyClass = 'page' %}
+{% set bodyClass = 'lb-archive-esigenza' %}
 
 {% block main %}
 
-    <h1>ESIGENZA{{ ' - ' ~ termName }}</h1>
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
 
-    <div class="container">
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if term_name %}
+                <h1 class="infobox__subtitle h2">{{ term_name }}</h1>
+            {% endif %}
+            {% if term_description %}
+                <p class="infobox__paragraph">{{ fn('nl2br', term_description) }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium" />
+
+    {# Filters #}
+    <div class="lb-filters container">  
         <div class="row">
-            <div class="col-12 col-md-4">
-                <label for="tipologie">Tipologie:</label>
-                <select name="tipologie" id="tipologie">
-                    {% for typology in tipologie|default([]) %}
-                        <option value="{{ typology.slug }}">{{ typology.name }}</option>
-                    {% endfor %}
-                </select>
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-brands',
+                    label: '',
+                    placeholder: 'Brand',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: brands_filter,
+                    variants: ['primary']
+                } only %}
             </div>
-            <div class="col-12 col-md-4">
-                <label for="brands">Brands:</label>
-                <select name="brands" id="brands">
-                    {% for brand in brands|default([]) %}
-                        <option value="{{ brand.slug }}">{{ brand.name }}</option>
-                    {% endfor %}
-                </select>
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-cat-typology',
+                    label: '',
+                    placeholder: 'Tipi di prodotto',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: tipologie_filter,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-order',
+                    label: 'Ordina per',
+                    placeholder: 'Scegli...',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: order_filter,
+                    variants: ['secondary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-4 offset-md-2">
+                {% include '@PathViews/components/fields/input.twig' with {
+                    type: 'search',
+                    name: "lb-product-search",
+                    label: "Cerca",
+                    disabled: false,
+                    required: false,
+                    variants: ['secondary'],
+                } only %}
             </div>
         </div>
-        <hr style="width: 100%; margin: 40px 0; border-bottom: 5px solid green;" />
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Numbers of posts #}
+    <div class="container">
+        <div class="lb-posts-count">{{ num_posts }}</div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Posts Grig #}
+    <div class="container">
+        {% if grid_type == 'default' %}
+            {% include '@PathViews/components/cards-grid-product-default.twig' with { items: items } only %}
+        {% elseif grid_type == 'ordered' %}
+            {% include '@PathViews/components/cards-grid-product-ordered.twig' with { items: items } only %}
+        {% endif %}
     </div>
 
-    <div class="container">
-        {% for res in results|default([]) %}
-            <div class="row">
-                <div class="col-12 col-md-4">
-                    <h2>{{ res.brand.name }}</h2>
-                </div>
-                {% for product in res.products|default([]) %}
-                    <div class="col-12 col-md-4">
-                        <h4><a href="{{ fn('get_permalink', product.ID) }}">{{ product.post_title }}</a></h4>
-                    </div>
-                 {% endfor %}
-                 <div class="col-12">
-                    <hr style="width: 100%; border-bottom: 5px solid red;" />
-                 </div>
-            </div>
-        {% endfor %}
-    </div>
+    {# Block Announcements #}
+    {% if block_announcements %}
+        <div class="lb-archive-esigenza__announcements">
+            {% include '@PathViews/components/block-launch-two-cards.twig' with block_announcements only %}
+        </div>
+    {% endif %}
 
 {% endblock %}

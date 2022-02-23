@@ -7,12 +7,7 @@ $brand_terms = lb_get_brands();
 
 foreach ($brand_terms as $term) {
     $brands[] = [
-        'images' => [
-            'original' => get_field('lb_brand_image', $term),
-            'large' => get_field('lb_brand_image', $term),
-            'medium' => get_field('lb_brand_image', $term),
-            'small' => get_field('lb_brand_image', $term)
-        ],
+        'images' => lb_get_images(get_field('lb_brand_image', $term)),
         'infobox' => [
             'subtitle' => $term->name,
             'paragraph' => $term->description,

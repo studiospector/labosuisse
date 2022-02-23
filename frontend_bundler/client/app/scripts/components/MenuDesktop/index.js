@@ -1,10 +1,12 @@
 import Component from "@okiba/component";
 import { on, qsa, qs } from '@okiba/dom';
+
 import { gsap } from "gsap"
+
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+
 import { openBackgroundTimeline, openSubmenuTimeline, submenuTimeline } from './animations';
 import { stickyHeader } from "../MenuMobile/animations";
-
 
 const ui = {
     hovers: '.lb-menu__main>.lb-menu__item>.lb-menu__link',
@@ -16,7 +18,6 @@ const ui = {
         asArray: true
     },
 }
-
 
 class MenuDesktop extends Component {
 

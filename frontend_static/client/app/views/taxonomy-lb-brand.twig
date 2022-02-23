@@ -4,6 +4,11 @@
 
 {% block main %}
 
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
     {# Info #}
     <div class="taxonomy-lb-brand__info container text-center">
         <div class="infobox">
@@ -15,11 +20,13 @@
             {% endif %}
         </div>
     </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
 
     {# Numbers of posts #}
     <div class="container">
-        <div class="taxonomy-lb-brand__results">{{ num_posts }}</div>
+        <div class="lb-posts-count">{{ num_posts }}</div>
     </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
 
     {# Posts Grig #}
     <div class="taxonomy-lb-brand__grid container">

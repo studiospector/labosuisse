@@ -1,0 +1,229 @@
+{
+    "key": "group_620e475fcc91b",
+    "title": "Impostazioni Tema - Header e Menu",
+    "fields": [
+        {
+            "key": "field_620e4910072dc",
+            "label": "Header",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_620e4e3d072e2",
+            "label": "Links",
+            "name": "lb_header_links",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "wpml_cf_preferences": 3,
+            "sub_fields": [
+                {
+                    "key": "field_620e49a7072dd",
+                    "label": "Link",
+                    "name": "lb_header_links_link",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "post_type": [
+                        "page"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "wpml_cf_preferences": 2,
+                    "ui": 1
+                },
+                {
+                    "key": "field_620e4e72072e3",
+                    "label": "Icona",
+                    "name": "lb_header_links_icon",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "eye-on": "Occhio aperto",
+                        "eye-off": "Occhio chiuso",
+                        "icon-search": "Cerca",
+                        "check": "Check",
+                        "earth": "Earth",
+                        "comments": "Message",
+                        "pin": "Pin",
+                        "heart": "Cuore",
+                        "cart": "Carrello",
+                        "user": "Utente",
+                        "youtube": "Youtube",
+                        "instagram": "Instagram",
+                        "twitter": "Twitter",
+                        "facebook": "Facebook",
+                        "whatsapp": "Whatsapp",
+                        "linkedin": "LinkedIn"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "wpml_cf_preferences": 2,
+                    "placeholder": ""
+                }
+            ]
+        },
+        {
+            "key": "field_620e4ad7072df",
+            "label": "Menu",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_620e500434111",
+            "label": "Links Shop",
+            "name": "lb_menu_shop_links",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_620e500434112",
+                    "label": "Link",
+                    "name": "lb_menu_shop_links_link",
+                    "type": "post_object",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "post_type": [
+                        "page"
+                    ],
+                    "taxonomy": "",
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "return_format": "object",
+                    "ui": 1
+                },
+                {
+                    "key": "field_620e500434113",
+                    "label": "Icona",
+                    "name": "lb_menu_shop_links_icon",
+                    "type": "select",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "choices": {
+                        "eye-on": "Occhio aperto",
+                        "eye-off": "Occhio chiuso",
+                        "icon-search": "Cerca",
+                        "check": "Check",
+                        "earth": "Earth",
+                        "comments": "Message",
+                        "pin": "Pin",
+                        "heart": "Cuore",
+                        "cart": "Carrello",
+                        "user": "Utente",
+                        "youtube": "Youtube",
+                        "instagram": "Instagram",
+                        "twitter": "Twitter",
+                        "facebook": "Facebook",
+                        "whatsapp": "Whatsapp",
+                        "linkedin": "LinkedIn"
+                    },
+                    "default_value": false,
+                    "allow_null": 0,
+                    "multiple": 0,
+                    "ui": 1,
+                    "ajax": 0,
+                    "return_format": "value",
+                    "placeholder": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-header-e-menu"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1645106608
+}

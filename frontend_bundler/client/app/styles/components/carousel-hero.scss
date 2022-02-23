@@ -7,7 +7,7 @@ $hero-carousel-height-mobile: 460px;
 
     @include mq($until: md) {
         margin-bottom: 55px;
-        overflow: unset !important;
+        overflow: hidden !important;
     }
 
     &__slide {

@@ -6,12 +6,7 @@ class Hero extends BaseBlock {
 		parent::__construct( $block , $name );
               
         $payload = [
-            'images' => [
-                'original' => get_field('lb_block_hero_img'),
-                'large' => get_field('lb_block_hero_img'),
-                'medium' => get_field('lb_block_hero_img'),
-                'small' => get_field('lb_block_hero_img')
-            ],
+            'images' => lb_get_images(get_field('lb_block_hero_img')),
             'infoboxPosX' => get_field('lb_block_hero_infoboxposx'),
             'infoboxPosY' => get_field('lb_block_hero_infoboxposy'),
             'container' => get_field('lb_block_hero_container'),

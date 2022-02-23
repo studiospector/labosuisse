@@ -22,7 +22,7 @@ class Routine extends BaseBlock {
 
         $payload = [
             'title' =>  get_field('lb_block_routine_title'),
-            'cta' => array_merge( (array)get_field('lb_block_routine_btn'), ['variants' => [get_field('lb_block_routine_btn_variants')]]),
+            'cta' => (get_field('lb_block_routine_btn')) ? array_merge( (array)get_field('lb_block_routine_btn'), ['variants' => [get_field('lb_block_routine_btn_variants')]]) : null,
             'items' => $items,
             'variants' => [get_field('lb_block_routine_variants')],
         ];
