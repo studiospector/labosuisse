@@ -5,7 +5,7 @@ networks:
     external:
       name: front-tier
 services:
-  backend_nginx:
+  backend_wordpress:
     restart: unless-stopped
     networks:
       labo-website-2021:
