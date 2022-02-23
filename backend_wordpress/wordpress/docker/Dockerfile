@@ -1,18 +1,42 @@
-ARG CI_REGISTRY
-ARG CI_PROJECT_PATH
-ARG CI_COMMIT_REF_NAME
+# Frontend stage
 
-FROM ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler:latest AS frontend_bundler
+FROM node:12-alpine as frontend_bundler
+WORKDIR /app
+RUN apk add --no-cache git --update
 
-FROM registry.caffeina.co/devops/nador-images/wordpress-base/no_volume/backend_wordpress:latest AS wordpress
+# Install dependencies
+COPY ./frontend_bundler/client/app/package.json ./
+COPY ./frontend_bundler/client/app/package-lock.json ./
+RUN npm install
+
+COPY ./frontend_bundler/client/app/ ./
+
+ENV NODE_ENV=production
+RUN npm run build
+
+
+# WORDPRESS STAGE
+FROM wordpress:5.8.0-php7.4-fpm-alpine AS wordpress-base
+
+WORKDIR /wordpress_dir
+RUN cp -r /var/www/html /wordpress_dir
+RUN cp /bin/sh /usr/local/sbin/php-fpm
+RUN /usr/local/bin/docker-entrypoint.sh php-fpm || true
+
+FROM wordpress:5.8.0-php7.4-fpm-alpine AS wordpress
+
+ENV WP_CORE_DIR="/var/www/html"
+ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
+
+COPY --from=wordpress-base /wordpress_dir $WP_CORE_DIR
+COPY ./backend_wordpress/wordpress/app/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
+COPY ./backend_wordpress/wordpress/app/wp-content ${WP_CONTENT_CUSTOM_DIR}
+COPY ./backend_wordpress/wordpress/app/wp-config-custom ${WP_CORE_DIR}/wp-config-custom
+COPY ./backend_wordpress/wordpress/app/wp-config.php ${WP_CORE_DIR}/wp-config.php
 
 RUN set -xe && curl -sS https://getcomposer.org/installer | php \
   && mv composer.phar /usr/local/bin/composer \
   && chmod +x /usr/local/bin/composer
-
-COPY ./backend_wordpress/wordpress/app/wp-content ${WP_CONTENT_CUSTOM_DIR}
-COPY ./backend_wordpress/wordpress/app/wp-config-custom ${WP_CORE_DIR}/wp-config-custom
-
 
 COPY --from=frontend_bundler /app/dist/public ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/static
 COPY ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/assets
@@ -21,27 +45,32 @@ RUN cd ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme && composer install
 
 COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/views
 
-FROM registry.caffeina.co/devops/nador-images/nginx-base/master/nginx:latest AS nginx
 
-## Copy same files as wordpress image
-COPY --from=wordpress /var/www/html /var/www/html
+# trafex stage (wrap it)
+# FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
+FROM trafex/php-nginx:2.4.0
 
-COPY ./backend_wordpress/nginx/config/sites-enabled/wordpress.conf /etc/nginx/sites-enabled/
-COPY ./backend_wordpress/nginx/config/nginx.conf /etc/nginx/
+ENV WP_CORE_DIR="/var/www/html"
+ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
 
-# Development layer
-FROM wordpress AS development
+# :poop:
+USER root
+RUN apk --no-cache add \
+  php8-exif \
+  php8-fileinfo \
+  php8-zip \
+  php8-iconv \
+  php8-pecl-imagick \
+  php8-simplexml \
+  php8-xmlwriter
+USER nobody
 
-RUN apk --no-cache add pcre-dev ${PHPIZE_DEPS} && pecl install xdebug
+# overrides for nginx conf
+COPY ./backend_wordpress/config/php.ini /etc/php8/conf.d/custom.ini
+# COPY ./production/config/php.ini /etc/php8/conf.d/custom.ini
+COPY ./backend_wordpress/nginx /etc/nginx
+# COPY ./production/nginx /etc/nginx
 
-RUN echo "zend_extension=xdebug" > /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
-RUN echo -e "\n\
-xdebug.mode = debug\n\
-xdebug.start_with_request = yes\n\
-xdebug.client_port = 9003\n\
-xdebug.client_host=localhost\n\
-" >> /usr/local/etc/php/php.ini
-
-# Default layer
-FROM wordpress
+# copy final code
+COPY --from=wordpress --chown=nobody /var/www/html /var/www/html

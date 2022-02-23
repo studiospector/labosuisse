@@ -1,0 +1,15 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-accordion-' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+<div class="lb-accordion{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-accordion">
+	{% block items %}
+		{% for item in items %}
+			{% include '@PathViews/components/accordion-item.twig' with item only %}
+		{% endfor %}
+	{% endblock %}
+</div>

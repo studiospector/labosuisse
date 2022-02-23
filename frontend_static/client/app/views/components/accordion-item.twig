@@ -1,0 +1,28 @@
+<div class="lb-accordion__item{{ class ? ' ' ~ class : '' }}">
+	<div class="lb-accordion__header">
+		<div class="lb-accordion__header__title">
+			{% block accordion%}
+				{% if title is defined %}
+					<h6 class="p">{{ title }}</h6>
+				{% endif %}
+			{% endblock %}
+		</div>
+		{% if actions is iterable %}
+			{% for action in actions %}
+				<div class="lb-accordion__header__action">
+					{% include '@PathViews/components/button.twig' with action only %}
+				</div>
+			{% endfor %}
+		{% endif %}
+		<span class="lb-accordion__toggler">
+			{% include '@PathViews/components/icon.twig' with {name: 'arrow-down'} %}
+		</span>
+	</div>
+	<div class="lb-accordion__content">
+		{% block accordionContent %}
+			{% if content %}
+				{{ content|raw }}
+			{% endif %}
+		{% endblock %}
+	</div>
+</div>

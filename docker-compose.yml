@@ -5,26 +5,15 @@ networks:
     external:
       name: front-tier
 services:
-  backend_nginx:
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_nginx'
-    restart: unless-stopped
-    volumes:
-      - 'backend_media:/uploads'
-    networks:
-      labo-website-2021:
-        aliases:
-          - '${VIRTUAL_HOST}'
-      front-tier: null
-    environment:
-      VIRTUAL_HOST: '${VIRTUAL_HOST}'
-      LETSENCRYPT_HOST: '${VIRTUAL_HOST}'
-      LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
   backend_wordpress:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_wordpress'
     restart: unless-stopped
     volumes:
       - 'backend_media:/uploads'
     environment:
+      VIRTUAL_HOST: '${VIRTUAL_HOST}'
+      LETSENCRYPT_HOST: '${VIRTUAL_HOST}'
+      LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
       DATABASE_URL: '${DATABASE_URL}'
       MYSQL_HOST: storage_mysql
       MYSQL_DATABASE: '${BACKEND_WORDPRESS_MYSQL_DATABASE}'
@@ -44,7 +33,10 @@ services:
       POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
       WITH_REDIS: 1
     networks:
-      - labo-website-2021
+      labo-website-2021:
+        aliases:
+          - '${VIRTUAL_HOST}'
+      front-tier: null
   backup_service:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
     environment:

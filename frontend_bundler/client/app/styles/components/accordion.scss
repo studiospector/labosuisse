@@ -1,0 +1,116 @@
+.lb-accordion {
+
+    &__item {
+        height: 60px;
+        position: relative;
+        background-color: map-get($colors, "white");
+        transition: box-shadow 0.2s;
+        overflow: hidden;
+
+        &:last-child {
+            border-bottom: 1px solid map-get($colors, "grey-2");
+        }
+    
+        &.default-open,
+        &.is-open {
+            height: auto;
+    
+            // @include mq(lg) {
+            //     box-shadow: 0 rem(4px) rem(10px) rgba(97, 97, 97, 0.1);
+            // }
+        }
+    }
+    
+
+    &__header {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        position: relative;
+        padding: 0 40px 0 0;
+        border-top: 1px solid map-get($colors, "grey-2");
+        overflow: hidden;
+        cursor: pointer;
+    
+        @include mq(lg) {
+            padding: 0 60px 0 0;
+        }
+    
+        // .lb-accordion.default-open &,
+        // .lb-accordion.is-open & {
+        // }
+
+        &__item {
+            display: none;
+            align-items: center;
+        
+            @include mq(lg) {
+                display: flex;
+                white-space: nowrap;
+                word-break: keep-all;
+            }
+        }
+
+        &__title {
+            h6 {
+                margin: 0;
+                font-weight: 500;
+                letter-spacing: 0.02em;
+
+                @include mq($until: md) {
+                    font-size: rem(13);
+                }
+            }
+        }
+
+        // &__action {
+        // }
+    }
+
+
+    &__toggler {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transition: transform 0.2s;
+        transform: translate(-50%, -50%);
+        will-change: transform;
+    
+        @include mq(lg) {
+            cursor: pointer;
+        }
+
+        @include mq($until: md) {
+            right: 10px;
+        }
+    
+        svg {
+            width: 10px;
+            height: 10px;
+        }
+    
+        .default-open &,
+        .is-opening &,
+        .is-open & {
+            transform: translate(-50%, -50%) scaleY(-1);
+        }
+    }
+
+
+    &__content {
+        position: relative;
+        margin-top: -2px;
+        padding: 0 60px 20px 0;
+        background-color: map-get($colors, "white");
+        font-weight: 300;
+        line-height: 24px;
+        letter-spacing: 0.02em;
+    
+        @include mq($until: md) {
+            padding: 0 40px 15px 0;
+            font-size: rem(13);
+            line-height: 20px;
+        }
+    }
+}

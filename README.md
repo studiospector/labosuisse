@@ -61,3 +61,47 @@ Inserire la variabile **n2_env** per la CI in Gitlab copiando al suo interno tut
 
 Per mettere un progetto online ti basterà inviare un commit.
 Una pipeline di CI partirà automaticamente.
+
+
+## Branches
+
+- MASTER: deploys on *aws production*
+- PREPROD: deploys on *aws preproduction*
+- DEVELOP: deploys on *n3 stage*
+
+Branch produzione: master
+Hotfix partono da: master
+Feature partono da: preprod
+Release partono da: preprod
+
+Develop: branch che contiene feature non complete e altre cose WIP. Questo branch è "sporco", **NON** deve essere mergiato dentro altri branch e può essere eliminato in ogni momento perché il codice che contiene esiste anche in altri branch (features/master/preprod).
+
+#### Branch Protections:
+Protezione branch abilitata per:
+- master
+- preprod
+
+### Release Flow
+1. Crea nuovo branch `release/` partendo da `preprod`
+2. Fai fix dell'ultimo minuto (eg bump del numero di versione)
+3. Crea tag di versione
+4. Chiudi la release facendo merge in `preprod` e `master`
+5. Cancella branch di release
+6. _bonus_: usa `git flow release start` e  `git flow release finish` per ottimizzare il processo dei punti precedenti.
+#### Posso fare il merge della mia feature dentro `preprod`?
+Sì, ma solo se è finita ed è stata testata (dai tester e/o PM)
+
+#### Posso fare il merge di `preprod` nella mia feature?
+Sì.
+
+#### La mia feature è terminata e deve essere testata:
+Fai il merge del branch dentro a `develop` e sposta il task in `Ready for Test` nella kanban.
+
+#### Posso fare il merge di `develop` nel mio branch?
+NO.
+
+#### Posso fare il merge di `develop` in `master`?
+ASSOLUTAMENTE NO.
+
+#### Posso fare il merge di `develop` in `preprod`?
+NO.
