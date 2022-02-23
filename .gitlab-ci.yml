@@ -93,7 +93,7 @@ deploy-preprod:
     CONVOX_APP_NAME: ${PROJECT_NAME}
     CONVOX_RACK: ${PREPROD_CONVOX_RACK}
   script:
-    - echo "APP NAME IS: $CONVOX_APP_NAME"
+    - 'echo APP NAME IS: $CONVOX_APP_NAME"'
     - convox deploy -a $CONVOX_APP_NAME
   only:
     - preprod
