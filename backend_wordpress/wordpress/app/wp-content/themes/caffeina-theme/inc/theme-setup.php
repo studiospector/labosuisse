@@ -1,5 +1,7 @@
 <?php
 
+use Caffeina\LaboSwiss\Menu\Product\Macro;
+
 require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
 require_once(LB_DIR_PATH . '/inc/Options.php');
 
@@ -502,9 +504,9 @@ function lb_get_posts_archive_years()
  */
 function lb_header()
 {
-
     $menu_desktop = array_merge(
-        macro::getTheMenuTree(),
+        (new Macro())->get(),
+        // macro::getTheMenuTree(),
         [['type' => 'separator']],
         get_brands_menu(),
         get_discover_labo_menu_items(),
@@ -518,7 +520,7 @@ function lb_header()
     // }
 
     $menu_mobile = [
-        'children' => macro::getTheMenuTree('mobile'),
+        'children' => (new Macro())->get('mobile'),
         'fixed' => [
             [
                 'type' => 'card',

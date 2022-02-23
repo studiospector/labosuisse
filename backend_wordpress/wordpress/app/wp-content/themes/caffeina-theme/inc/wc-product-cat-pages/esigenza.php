@@ -75,7 +75,7 @@ class esigenza extends basePage
                 ),
             ));
 
-            
+
             if (count($the_query->posts) > 0) {
                 $brands_arr[] = [
                     'value' => $brand->slug,
@@ -97,7 +97,7 @@ class esigenza extends basePage
                 ];
 
                 foreach ($the_query->posts as $product) {
-                    $items[$brand->term_id]['products'][] = \Timber::get_post( $product->ID );
+                    $items[$brand->term_id]['products'][] = \Timber::get_post($product->ID);
                     $count_posts++;
                 }
 
@@ -120,7 +120,7 @@ class esigenza extends basePage
                 'infobox' => [
                     'title' => get_field('lb_product_cat_announcements_title', $term),
                 ],
-                'cards' =>[
+                'cards' => [
                     [
                         'images' => lb_get_images(get_field('lb_product_cat_announcements_cardleft_image', $term)),
                         'infobox' => $this->getCardByType(get_field('lb_product_cat_announcements_cardleft_item_type', $term), 'left', $term)
@@ -170,14 +170,13 @@ class esigenza extends basePage
             $obj = get_field('lb_product_cat_announcements_card' . $card . '_item_post', $term);
             $payload['subtitle'] = $obj->post_title;
             $payload['cta']['url'] = get_permalink($obj->ID);
-        }
-        elseif ($type == 'lb_type_tax') {
+        } elseif ($type == 'lb_type_tax') {
             $obj = get_field('lb_product_cat_announcements_card' . $card . '_item_tax', $term);
 
             $payload['subtitle'] = $obj->name;
             $payload['cta']['url'] = get_term_link($obj->term_id);
         }
-        
+
         return $payload;
     }
 }
