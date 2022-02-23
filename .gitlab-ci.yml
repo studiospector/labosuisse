@@ -17,7 +17,7 @@ build:
   script:
     - docker-compose -f ./docker/build.yml build
   only:
-    - master
+    - develop
 
 push:
   stage: push
@@ -27,7 +27,7 @@ push:
   script:
     - docker-compose -f ./docker/build.yml push
   only:
-    - master
+    - develop
 
 deploy-n3:
   stage: deploy
@@ -58,7 +58,7 @@ deploy-n3:
     url: "http://${CI_COMMIT_REF_NAME}.${CI_PROJECT_NAME}.${N3_DOCKER_MACHINE_NAME}/"
   #when: manual
   only:
-    - master
+    - develop
 
 n3-wipe-data-and-stop:
   stage: destroy
