@@ -6,14 +6,17 @@ resources:
   #queue:
   #  type: redis
 
+environment:
+  - ADMIN_URL
+
 services:
   website:
+    domain: ${ADMIN_URL}
     build:
       manifest: ./production/Dockerfile
       # command: bin/api
     environment:
       - ADMIN_URL
-      - WP_CONTENT_CUSTOM_DIR
       - DEBUG
       - OFFLOAD_AWS_REGION
       - OFFLOAD_AWS_BUCKET
