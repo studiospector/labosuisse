@@ -1,27 +1,35 @@
 <?php
 
+use Automattic\WooCommerce\Admin\API\Options;
+
+require_once(__DIR__ . '/inc/Options.php');
+
 $items = [];
 
-if ( have_posts() ) :
-    while ( have_posts() ) :
+if (have_posts()) :
+    while (have_posts()) :
         the_post();
 
         $image = (get_field('lb_faq_logo')) ? get_field('lb_faq_logo') : null;
+
+        $questions = [];
+
+        while (have_rows('lb_faq_items')) {
+            the_row();
+            $questions[] = get_sub_field('lb_faq_item_question');
+        }
+
+        $questions = array_slice($questions, -4);
 
         $items[] = [
             'images' => lb_get_images(get_post_thumbnail_id(get_the_ID())),
             'infobox' => [
                 'image' => $image,
                 'subtitle' => ($image) ? null : get_the_title(),
-                'items' => [
-                    'Il trattamento Fillerina può essere utilizzato anche per le rughe del labbro superiore della bocca?',
-                    'Si possono effettuare pulizia viso o lampade solari durante il trattamento?',
-                    'Ci si può esporre al sole durante il trattamento?',
-                    'Si può utilizzare Fillerina nei periodi di gravidanza o in allattamento?',
-                ],
+                'items' => $questions,
                 'cta' => [
                     'title' => __('Vedi tutto', 'labo-suisse-theme'),
-                    'url' => get_permalink( get_the_ID() ),
+                    'url' => get_permalink(get_the_ID()),
                     'variants' => ['quaternary']
                 ]
             ],
@@ -32,9 +40,12 @@ endif;
 
 wp_reset_postdata();
 
+$options = (new Option())
+    ->getFaqOptions();
+
 $context = [
-    'title' => 'Le domande frequenti',
-    'description' => 'Sfoglia tra le categorie di domande o cerca il tuo<br>argomento per trovare la soluzione più adatta a te.',
+    'title' => $options['title'],
+    'description' => $options['description'],
     'items' => $items,
 ];
 
