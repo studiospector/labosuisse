@@ -50,6 +50,9 @@ COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
 FROM trafex/php-nginx:2.4.0
 
+ENV WP_CORE_DIR="/var/www/html"
+ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
+
 # :poop:
 USER root
 RUN apk --no-cache add \
