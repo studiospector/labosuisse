@@ -1,0 +1,23 @@
+.lb-template-support {
+    .cards-grid {
+        .card {
+            &--type-8 {
+                .infobox {
+                    &__tagline {
+                        color: map-get($colors, "black");
+                    }
+
+                    &__paragraph {
+                        margin-top: 10px;
+                        font-size: rem(14);
+                        line-height: rem(18.53);
+                    }
+
+                    .button {
+                        padding-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
