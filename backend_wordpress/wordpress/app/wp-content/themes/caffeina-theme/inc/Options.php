@@ -43,6 +43,21 @@ class Option
         return $items;
     }
 
+    public function getFaqOptions()
+    {
+        return [
+            'title' => $this->getOption('lb_faq_title_option'),
+            'description' => $this->getOption('lb_faq_description_option'),
+            'infobox' => [
+                'title' => $this->getOption('lb_faq_infobox_subtitle_option'),
+                'paragraph' => $this->getOption('lb_faq_infobox_paragraph_option'),
+                'cta' => [
+                    'url' => $this->getOption('lb_faq_infobox_cta_link_option'),
+                    'title' => $this->getOption('lb_faq_infobox_cta_label_option'),
+                ]
+            ]
+        ];
+    }
 
     private function getOption($name)
     {
