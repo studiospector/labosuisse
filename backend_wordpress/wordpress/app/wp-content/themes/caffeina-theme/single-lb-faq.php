@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__ . '/inc/Options.php');
 
 $image = (get_field('lb_faq_logo')) ? get_field('lb_faq_logo') : null;
 
@@ -12,6 +13,8 @@ if (have_rows('lb_faq_items')) {
     endwhile;
 }
 
+$options = (new Option())->getFaqOptions();
+
 $context = [
     'image' => $image,
     'title' => ($image) ? null : get_the_title(),
@@ -20,11 +23,11 @@ $context = [
         'items' => $items
     ],
     'infobox' => [
-        'subtitle' => 'Hai altri dubbi?',
-        'paragraph' => 'Contatta un esperto Labo e ut perspiciatis unde omnis<br>iste natus error sit voluptatem accusantium doloremque.',
+        'subtitle' => $options['infobox']['title'],
+        'paragraph' => $options['infobox']['paragraph'],
         'cta' => [
-            'url' => '#',
-            'title' => 'Contatta un esperto',
+            'url' => $options['infobox']['cta']['url'],
+            'title' => $options['infobox']['cta']['title'],
             'variants' => ['tertiary']
         ],
     ]
