@@ -1,5 +1,6 @@
 <?php
-require_once(__DIR__ . '/inc/Options.php');
+
+use Caffeina\LaboSwiss\Option\Option;
 
 $image = (get_field('lb_faq_logo')) ? get_field('lb_faq_logo') : null;
 

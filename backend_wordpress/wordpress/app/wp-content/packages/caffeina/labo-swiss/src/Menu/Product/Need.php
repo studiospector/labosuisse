@@ -2,10 +2,12 @@
 
 namespace Caffeina\LaboSwiss\Menu\Product;
 
-use Caffeina\LaboSwiss\Menu\Menu;
+use Caffeina\LaboSwiss\Menu\Traits\HasGetTerms;
 
-class Need extends Menu
+class Need
 {
+    use HasGetTerms;
+
     private $needs = [];
     private $parent;
 

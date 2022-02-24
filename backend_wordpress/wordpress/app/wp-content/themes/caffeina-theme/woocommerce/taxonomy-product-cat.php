@@ -1,8 +1,8 @@
 <?php
 
-require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
-require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/zona.php');
-require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/esigenza.php');
+use Caffeina\LaboSwiss\WCProductCategoryPages\Esigenza;
+use Caffeina\LaboSwiss\WCProductCategoryPages\Macro;
+use Caffeina\LaboSwiss\WCProductCategoryPages\Zona;
 
 /**
  * The Template for displaying products in a product category. Simply includes the archive template
@@ -34,37 +34,35 @@ $level = get_category_parents_custom($term->term_id, 'product_cat');
 //$context = [];
 
 switch ($level) {
-    // Macro
+        // Macro
     case 1:
-    
-        $macro = new macro('macro',$term);
+        $macro = new Macro('macro', $term);
         $macro->render();
         break;
 
 
-    // Zona
+        // Zona
     case 2:
- 
-        $zona = new zona('zona',$term);
+        $zona = new Zona('zona', $term);
         $zona->render();
         break;
 
 
-    // Esigenza
+        // Esigenza
     case 3:
-        
-        $esigenza = new esigenza('esigenza',$term);
+
+        $esigenza = new Esigenza('esigenza', $term);
         $esigenza->render();
         break;
 
 
-    // Tipologia
+        // Tipologia
     case 4:
         echo "Tipologia";
         break;
 
 
-    // Default
+        // Default
     default:
         echo "Level others";
 }

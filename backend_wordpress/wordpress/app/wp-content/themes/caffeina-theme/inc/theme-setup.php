@@ -1,9 +1,7 @@
 <?php
 
-use Caffeina\LaboSwiss\Menu\Product\Macro;
-
-require_once(LB_DIR_PATH . '/inc/wc-product-cat-pages/macro.php');
-require_once(LB_DIR_PATH . '/inc/Options.php');
+use Caffeina\LaboSwiss\Menu\Menu;
+use Caffeina\LaboSwiss\Option\Option;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -504,71 +502,10 @@ function lb_get_posts_archive_years()
  */
 function lb_header()
 {
-    $menu_desktop = array_merge(
-        (new Macro())->get(),
-        // macro::getTheMenuTree(),
-        [['type' => 'separator']],
-        get_brands_menu(),
-        get_discover_labo_menu_items(),
-    );
-
-    // if (is_woocommerce()) {
-    //     $menu_desktop = array_merge(
-    //         $menu_desktop,
-    //         (new Option())->getLShopLinks()
-    //     );
-    // }
-
-    $menu_mobile = [
-        'children' => (new Macro())->get('mobile'),
-        'fixed' => [
-            [
-                'type' => 'card',
-                'data' => [
-                    'images' => [
-                        'original' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'lg' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'md' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'sm' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        'xs' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                    ],
-                    'infobox' => [
-                        'subtitle' => 'AFTER MASK',
-                        'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-                        'cta' => [
-                            'url' => '#',
-                            'title' => 'Scopri la linea',
-                            'variants' => ['quaternary']
-                        ]
-                    ],
-                    'variants' => ['type-1']
-                ],
-            ],
-            [
-                'type' => 'small-link',
-                'label' => __('Profilo', 'labo-suisse-theme'),
-                'icon' => 'user',
-                'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
-            ],
-            [
-                'type' => 'small-link',
-                'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),
-                'icon' => 'comments',
-            ],
-            [
-                'type' => 'small-link',
-                'label' => 'Italia',
-                'icon' => 'earth',
-            ],
-        ]
-    ];
-
-    get_discover_labo_menu_items();
-
     return array(
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
-        'menu_desktop' => ['items' => $menu_desktop],
-        'menu_mobile' => ['items' => $menu_mobile],
+        'menu_desktop' => ['items' => Menu::desktop()],
+        'menu_mobile' => ['items' => Menu::mobile()],
     );
 }
 

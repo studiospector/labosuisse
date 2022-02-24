@@ -1,11 +1,9 @@
 <?php
 
+namespace Caffeina\LaboSwiss\Option;
+
 class Option
 {
-    public function __construct()
-    {
-    }
-
     public function getArchiveBrandLink()
     {
         return get_permalink($this->getOption('lb_archive_brand_link'));

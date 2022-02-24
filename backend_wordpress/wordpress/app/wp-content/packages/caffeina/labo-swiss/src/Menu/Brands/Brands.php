@@ -1,45 +1,38 @@
 <?php
 
-namespace Caffeina\LaboSwiss\Menu\Product;
+namespace Caffeina\LaboSwiss\Menu\Brands;
 
 use Caffeina\LaboSwiss\Menu\Traits\HasGetTerms;
+use Caffeina\LaboSwiss\Option\Option;
 
-class Area
+class Brands
 {
     use HasGetTerms;
 
-    private $areas = [];
-    private $parent;
-    private $device;
+    private $brands = [];
 
-    public function __construct($parent, $device)
+    private $option = null;
+
+    public function __construct()
     {
-        $this->parent = $parent;
-        $this->device = $device;
-
-        $this->areas = $this->getTerms('product_cat', [
-            'parent' => $parent->term_id
+        $this->brands = $this->getTerms('lb-brand', [
+            'parent' => null
         ]);
+
+        $this->option = new Option();
     }
 
     public function get()
     {
-        return ($this->device == 'desktop')
-            ? $this->desktop()
-            : $this->mobile();
-    }
-
-    private function desktop()
-    {
-        $items = [
+        $menu = [
             'type' => 'submenu',
-            'label' => $this->parent->name,
+            'label' => __('Tutti i Brand', 'labo-suisse-theme'),
             'children' => [
                 [
                     'type' => 'submenu',
-                    'label' => 'Per Zona',
+                    'label' => __('Per Brand', 'labo-suisse-theme'),
                     'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)]
+                        ['type' => 'link', 'label' => 'Tutti i brand', 'href' => $this->option->getArchiveBrandLink()]
                     ]
                 ],
                 [
@@ -63,8 +56,7 @@ class Area
                             'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
                             'cta' => [
                                 'url' => '#',
-                                'title' => 'Scopri di più',
-                                'iconEnd' => ['name' => 'arrow-right'],
+                                'title' => __('Scopri di più', 'labo-suisse-theme'),
                                 'variants' => ['quaternary']
                             ]
                         ],
@@ -74,42 +66,42 @@ class Area
             ]
         ];
 
-        foreach ($this->areas as $i => $area) {
-            $items['children'][0]['children'][] = [
+        foreach ($this->brands as $i => $brand) {
+            $menu['children'][0]['children'][] = [
                 'type' => 'submenu-link',
-                'label' => $area->name,
-                'trigger' => md5($area->slug),
+                'label' => $brand->name,
+                'trigger' => md5($brand->slug),
             ];
 
-            $items['children'][1]['children'][$i] = [
+            $menu['children'][1]['children'][$i] = [
                 'type' => 'submenu',
-                'label' => 'Per Esigenza',
-                'trigger' => md5($area->slug),
-                'children' => (new Need($area))->get()
+                'label' => __('Per linea di prodotto', 'labo-suisse-theme'),
+                'trigger' => md5($brand->slug),
+                'children' => $this->getProductLines($brand)
             ];
         }
 
-        return $items;
+        return [$menu];
     }
 
-    private function mobile()
+    private function getProductLines($brand)
     {
-        $items = [
-            'type' => 'submenu',
-            'label' => $this->parent->name,
-            'subLabel' => 'Per zona',
-            'children' => [
-                ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)]
-            ]
+        $lines =  get_terms(array(
+            'taxonomy' => 'lb-brand',
+            'hide_empty' => false,
+            'parent' => $brand->term_id
+        ));
 
+        $items = [
+            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))],
+            ['type' => 'link', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)],
         ];
 
-        foreach ($this->areas as $i => $area) {
-            $items['children'][] = [
-                'type' => 'submenu',
-                'label' => $area->name,
-                'subLabel' => 'Per esigenza',
-                'children' => (new Need($area))->get()
+        foreach ($lines as $line) {
+            $items[] = [
+                'type' => 'link',
+                'label' => $line->name,
+                'href' => get_term_link($line),
             ];
         }
 

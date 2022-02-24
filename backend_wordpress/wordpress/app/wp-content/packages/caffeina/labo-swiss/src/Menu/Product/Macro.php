@@ -2,10 +2,12 @@
 
 namespace Caffeina\LaboSwiss\Menu\Product;
 
-use Caffeina\LaboSwiss\Menu\Menu;
+use Caffeina\LaboSwiss\Menu\Traits\HasGetTerms;
 
-class Macro extends Menu
+class Macro
 {
+    use HasGetTerms;
+
     private $macro = [];
 
     public function __construct()
