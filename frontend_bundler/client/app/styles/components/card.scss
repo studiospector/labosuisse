@@ -230,6 +230,40 @@
 
 
 
+    &--type-9 {
+        padding: 20px;
+        border: 1px solid map-get($colors, "grey-2");
+
+        .infobox {
+            &__subtitle {
+                font-size: rem(16);
+                font-weight: 400;
+                line-height: 1;
+                margin-bottom: 20px;
+            }
+
+            &__scope {
+                margin-bottom: 20px;
+            }
+
+            &__scope,
+            &__paragraph {
+                font-size: rem(14);
+                line-height: 1;
+            }
+
+            &__cta {
+                margin-top: 20px;
+
+                .button {
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+
+
+
     &--type-10 {
         .card-img {
             height: 400px;

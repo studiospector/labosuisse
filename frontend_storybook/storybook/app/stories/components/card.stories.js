@@ -157,6 +157,21 @@ const dataCardType8 = {
     variants: ['type-8']
 }
 
+// Job
+const dataCardType9 = {
+    infobox: {
+        subtitle: 'Agenti mono o plurimandatari (farmacie)',
+        scope: '<span>Ambito:</span> Ampliare la propria storica divisione commercale',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nunc felis. Sed at ligula diam.',
+        cta: {
+            url: '#',
+            title: 'Leggi di più',
+            variants: ['quaternary']
+        }
+    },
+    variants: ['type-9']
+}
+
 // Brand
 const dataCardType10 = {
     images: {
@@ -193,5 +208,7 @@ storiesOf('Components|Cards', module)
     .add('Type 7 --- FAQ', () => renderCard(dataCardType7))
     // Colored
     .add('Type 8 --- Colored', () => renderCard(dataCardType8))
+    // Job
+    .add('Type 9 --- Job', () => renderCard(dataCardType9))
     // Brand
     .add('Type 10 --- Brand', () => renderCard(dataCardType10))

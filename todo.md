@@ -33,11 +33,13 @@ STEFANO
 - √ aggiungere altre due offset navs(relative alle scale di diradamento)
 - √ aggiungere link all'offset nav nel blocco "immagine e card" realativa a "Tecnologia"
 - √ gestione thumbnails
-
-- sticky header dinamico pagina prodotto
-
 - √ accordion
 - √ FAQ T7
+
+- sticky header dinamico pagina prodotto
+- sezione FAQ prodotto
+
+- card Job
 
 
 
