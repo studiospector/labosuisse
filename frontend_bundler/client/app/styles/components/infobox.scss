@@ -34,6 +34,15 @@
         letter-spacing: 0.02em;
     }
 
+    &__scope {
+        letter-spacing: 0.02em;
+
+        span {
+            text-transform: uppercase;
+            color: map-get($colors, "secondary");
+        }
+    }
+
     &__cta {
         margin-top: 40px;
 

@@ -31,6 +31,9 @@
                 {% if subtitle %}
                     <h4 class="infobox__subtitle">{{ subtitle }}</h4>
                 {% endif %}
+                {% if scope %}
+                    <p class="infobox__scope">{{ scope|raw }}</p>
+                {% endif %}
                 {% if items is iterable %}
                     {% include '@PathViews/components/list-arrow.twig' with {items: items} only %}
                 {% endif %}
