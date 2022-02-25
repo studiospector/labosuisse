@@ -2,8 +2,6 @@
 
 namespace Caffeina\LaboSwiss\Blocks;
 
-use Caffeina\LaboSwissBlocks\BaseBlock;
-
 class CarouselPostBannerAlternate extends BaseBlock
 {
     public function __construct($block, $name)
