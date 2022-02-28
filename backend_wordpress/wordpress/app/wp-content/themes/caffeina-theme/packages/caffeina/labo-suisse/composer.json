@@ -1,0 +1,9 @@
+{
+    "name": "caffeina/labo-suisse",
+    "autoload": {
+        "psr-4": {
+            "Caffeina\\LaboSuisse\\": "src/"
+        }
+    },
+    "require": {}
+}

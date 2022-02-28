@@ -1,8 +1,8 @@
 <?php
 
-use Caffeina\LaboSwiss\WCProductCategoryPages\Esigenza;
-use Caffeina\LaboSwiss\WCProductCategoryPages\Macro;
-use Caffeina\LaboSwiss\WCProductCategoryPages\Zona;
+use Caffeina\LaboSuisse\WCProductCategoryPages\Esigenza;
+use Caffeina\LaboSuisse\WCProductCategoryPages\Macro;
+use Caffeina\LaboSuisse\WCProductCategoryPages\Zona;
 
 /**
  * The Template for displaying products in a product category. Simply includes the archive template

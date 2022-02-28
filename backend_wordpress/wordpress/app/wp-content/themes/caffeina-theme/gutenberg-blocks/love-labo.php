@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\LoveLabo;
+use Caffeina\LaboSuisse\Blocks\LoveLabo;
 
 $blockLoveLabo = (new LoveLabo($block, 'block-love-labo'))
     ->render();

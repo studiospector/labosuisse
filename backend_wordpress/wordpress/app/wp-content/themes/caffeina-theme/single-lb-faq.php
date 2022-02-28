@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Option\Option;
+use Caffeina\LaboSuisse\Option\Option;
 
 $image = (get_field('lb_faq_logo')) ? get_field('lb_faq_logo') : null;
 

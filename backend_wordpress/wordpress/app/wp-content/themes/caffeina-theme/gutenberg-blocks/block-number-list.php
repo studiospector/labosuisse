@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\NumberList;
+use Caffeina\LaboSuisse\Blocks\NumberList;
 
 $blockNumbers = (new NumberList($block, null))
     ->render();

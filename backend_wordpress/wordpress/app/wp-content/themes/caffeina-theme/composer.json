@@ -4,13 +4,13 @@
   "type": "library",
   "require": {
     "timber/timber": "^1.19.1",
-    "caffeina/labo-swiss":"@dev"
+    "caffeina/labo-suisse":"@dev"
   },
   "license": "MIT",
   "repositories": {
-    "caffeina/labo-swiss": {
+    "caffeina/labo-suisse": {
       "type": "path",
-      "url": "../../packages/caffeina/labo-swiss",
+      "url": "./packages/caffeina/labo-suisse",
       "options": {
         "symlink": true
       }

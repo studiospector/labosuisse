@@ -19,11 +19,11 @@
             'reference' => 'f6fede4f94ced7c22ba63a9b8af0bf2dc38e3cb2',
             'dev_requirement' => false,
         ),
-        'caffeina/labo-swiss' => array(
+        'caffeina/labo-suisse' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'type' => 'library',
-            'install_path' => __DIR__ . '/../caffeina/labo-swiss',
+            'install_path' => __DIR__ . '/../caffeina/labo-suisse',
             'aliases' => array(),
             'reference' => 'ba6b2303cf8384d24d786dccf3b603db8f230a3a',
             'dev_requirement' => false,

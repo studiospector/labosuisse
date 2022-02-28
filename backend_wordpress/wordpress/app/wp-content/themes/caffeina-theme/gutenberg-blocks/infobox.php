@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\Infobox;
+use Caffeina\LaboSuisse\Blocks\Infobox;
 
 $block_infobox = new Infobox($block, null);
 

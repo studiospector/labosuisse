@@ -1,8 +1,8 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\BaseBlock as LaboSwissBlocksBaseBlock;
+use Caffeina\LaboSuisse\Blocks\BaseBlock as LaboSuisseBlocksBaseBlock;
 
-$separator = new LaboSwissBlocksBaseBlock($block);
+$separator = new LaboSuisseBlocksBaseBlock($block);
 
 $separator->setContext([
     'variants' => [get_field('lb_block_separator_variants')],

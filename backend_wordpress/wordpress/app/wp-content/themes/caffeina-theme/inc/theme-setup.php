@@ -1,7 +1,7 @@
 <?php
 
-use Caffeina\LaboSwiss\Menu\Menu;
-use Caffeina\LaboSwiss\Option\Option;
+use Caffeina\LaboSuisse\Menu\Menu;
+use Caffeina\LaboSuisse\Option\Option;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {

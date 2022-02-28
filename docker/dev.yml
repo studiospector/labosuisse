@@ -45,7 +45,7 @@ services:
       - >-
         ../backend_wordpress/wordpress/app/wp-content/plugins:/var/www/html/wp-content-custom/plugins
       - >-
-        ../backend_wordpress/wordpress/app/wp-content/packages:/var/www/html/wp-content-custom/packages
+        ../backend_wordpress/wordpress/app/wp-content/themes/caffeina-theme/packages:/var/www/html/wp-content-custom/themes/caffeina-theme/packages
       - >-
         ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
       - >-

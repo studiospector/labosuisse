@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\FocusNumbers;
+use Caffeina\LaboSuisse\Blocks\FocusNumbers;
 
 $blockFocusNumbers = (new FocusNumbers($block, null))
     ->render();

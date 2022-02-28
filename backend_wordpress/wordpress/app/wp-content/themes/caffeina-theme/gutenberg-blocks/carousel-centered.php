@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\CarouselCentered;
+use Caffeina\LaboSuisse\Blocks\CarouselCentered;
 
 $blockCarouselCentered = (new CarouselCentered($block, null))
     ->render();

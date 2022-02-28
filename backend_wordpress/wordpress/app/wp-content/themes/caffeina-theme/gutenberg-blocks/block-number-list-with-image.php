@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\NumberListImage;
+use Caffeina\LaboSuisse\Blocks\NumberListImage;
 
 $blockNumbers = (new NumberListImage($block, null))
     ->render();

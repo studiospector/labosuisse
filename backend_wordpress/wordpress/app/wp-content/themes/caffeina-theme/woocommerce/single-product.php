@@ -16,14 +16,14 @@
  * @version     1.6.4
  */
 
-use Caffeina\LaboSwiss\Blocks\Hero;
-use Caffeina\LaboSwiss\Blocks\ImageCard;
-use Caffeina\LaboSwiss\Blocks\LaunchTwoCards;
-use Caffeina\LaboSwiss\Blocks\BannerAlternate;
-use Caffeina\LaboSwiss\Blocks\LoveLabo;
-use Caffeina\LaboSwiss\Blocks\NumberListImage;
-use Caffeina\LaboSwiss\Blocks\OffsetNavs;
-use Caffeina\LaboSwiss\Blocks\Routine;
+use Caffeina\LaboSuisse\Blocks\Hero;
+use Caffeina\LaboSuisse\Blocks\ImageCard;
+use Caffeina\LaboSuisse\Blocks\LaunchTwoCards;
+use Caffeina\LaboSuisse\Blocks\BannerAlternate;
+use Caffeina\LaboSuisse\Blocks\LoveLabo;
+use Caffeina\LaboSuisse\Blocks\NumberListImage;
+use Caffeina\LaboSuisse\Blocks\OffsetNavs;
+use Caffeina\LaboSuisse\Blocks\Routine;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly

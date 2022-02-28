@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Option\Option;
+use Caffeina\LaboSuisse\Option\Option;
 
 $items = [];
 

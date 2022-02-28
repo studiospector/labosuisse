@@ -64,26 +64,26 @@
             "install-path": "../altorouter/altorouter"
         },
         {
-            "name": "caffeina/labo-swiss",
+            "name": "caffeina/labo-suisse",
             "version": "dev-main",
             "version_normalized": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../packages/caffeina/labo-swiss",
+                "url": "../../packages/caffeina/labo-suisse",
                 "reference": "ba6b2303cf8384d24d786dccf3b603db8f230a3a"
             },
             "type": "library",
             "installation-source": "dist",
             "autoload": {
                 "psr-4": {
-                    "Caffeina\\LaboSwiss\\": "src/"
+                    "Caffeina\\LaboSuisse\\": "src/"
                 }
             },
             "transport-options": {
                 "symlink": true,
                 "relative": true
             },
-            "install-path": "../caffeina/labo-swiss"
+            "install-path": "../caffeina/labo-suisse"
         },
         {
             "name": "composer/installers",

@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\LaunchTwoImages;
+use Caffeina\LaboSuisse\Blocks\LaunchTwoImages;
 
 $blockLaunchTwoImages = (new LaunchTwoImages($block, null))
     ->render();

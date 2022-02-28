@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\Hero;
+use Caffeina\LaboSuisse\Blocks\Hero;
 
 $blockHero = (new Hero($block, null))
     ->render();

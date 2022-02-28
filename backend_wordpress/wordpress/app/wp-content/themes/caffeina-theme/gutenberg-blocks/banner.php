@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\Banner;
+use Caffeina\LaboSuisse\Blocks\Banner;
 
 $blockBanner = (new Banner($block, null))
     ->render();

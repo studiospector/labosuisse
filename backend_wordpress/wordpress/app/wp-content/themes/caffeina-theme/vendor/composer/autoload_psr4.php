@@ -12,6 +12,6 @@ return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Polyfill\\Ctype\\' => array($vendorDir . '/symfony/polyfill-ctype'),
     'Composer\\Installers\\' => array($vendorDir . '/composer/installers/src/Composer/Installers'),
-    'Caffeina\\LaboSwiss\\' => array($vendorDir . '/caffeina/labo-swiss/src'),
+    'Caffeina\\LaboSuisse\\' => array($vendorDir . '/caffeina/labo-suisse/src'),
     '' => array($vendorDir . '/twig/cache-extension/lib'),
 );

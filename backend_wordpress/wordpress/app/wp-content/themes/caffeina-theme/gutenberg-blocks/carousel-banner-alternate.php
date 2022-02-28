@@ -1,6 +1,6 @@
 <?php
 
-use Caffeina\LaboSwiss\Blocks\CarouselBannerAlternate;
+use Caffeina\LaboSuisse\Blocks\CarouselBannerAlternate;
 
 $blockCarouselBannerAlternate = (new CarouselBannerAlternate($block, null))
     ->render();

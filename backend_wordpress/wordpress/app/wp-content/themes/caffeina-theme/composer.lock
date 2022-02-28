@@ -67,17 +67,17 @@
             "time": "2020-03-09T08:34:59+00:00"
         },
         {
-            "name": "caffeina/labo-swiss",
+            "name": "caffeina/labo-suisse",
             "version": "dev-main",
             "dist": {
                 "type": "path",
-                "url": "../../packages/caffeina/labo-swiss",
+                "url": "./packages/caffeina/labo-suisse",
                 "reference": "ba6b2303cf8384d24d786dccf3b603db8f230a3a"
             },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Caffeina\\LaboSwiss\\": "src/"
+                    "Caffeina\\LaboSuisse\\": "src/"
                 }
             },
             "transport-options": {
@@ -761,7 +761,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "caffeina/labo-swiss": 20
+        "caffeina/labo-suisse": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
