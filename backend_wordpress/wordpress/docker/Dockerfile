@@ -67,7 +67,7 @@ RUN apk --no-cache add \
 RUN \
  curl -L https://download.newrelic.com/php_agent/release/newrelic-php5-9.18.1.303-linux-musl.tar.gz | tar -C /tmp -zx && \
    NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_SILENT=1 /tmp/newrelic-php5-*/newrelic-install install
-COPY ./wordpress/docker/newrelic.ini /etc/php8/conf.d/newrelic.ini
+COPY ./backend_wordpress/wordpress/docker/newrelic.ini /etc/php8/conf.d/newrelic.ini
 
 USER nobody
 
