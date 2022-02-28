@@ -22,6 +22,9 @@ services:
       - OFFLOAD_AWS_BUCKET
       - OFFLOAD_AWS_ACCESS_ID
       - OFFLOAD_AWS_SECRET
+      # NEW RELIC
+      - NEW_RELIC_APP_NAME
+      - NEW_RELIC_LICENSE_KEY
     health: /test.html
     internal: false
     port: 8080
