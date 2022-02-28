@@ -63,6 +63,12 @@ RUN apk --no-cache add \
   php8-pecl-imagick \
   php8-simplexml \
   php8-xmlwriter
+
+RUN \
+ curl -L https://download.newrelic.com/php_agent/release/newrelic-php5-9.18.1.303-linux-musl.tar.gz | tar -C /tmp -zx && \
+   NR_INSTALL_USE_CP_NOT_LN=1 NR_INSTALL_SILENT=1 /tmp/newrelic-php5-*/newrelic-install install
+COPY ./wordpress/docker/newrelic.ini /etc/php8/conf.d/newrelic.ini
+
 USER nobody
 
 # overrides for nginx conf
