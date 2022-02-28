@@ -20,12 +20,12 @@
             'dev_requirement' => false,
         ),
         'caffeina/labo-suisse' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../caffeina/labo-suisse',
             'aliases' => array(),
-            'reference' => 'ba6b2303cf8384d24d786dccf3b603db8f230a3a',
+            'reference' => '5fd3c51d8d2444820e782a667944cc39c4c1eca2',
             'dev_requirement' => false,
         ),
         'caffeina/wordpress' => array(

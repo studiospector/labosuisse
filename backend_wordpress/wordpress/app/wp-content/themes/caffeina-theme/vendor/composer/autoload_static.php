@@ -13,50 +13,50 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
     );
 
     public static $prefixLengthsPsr4 = array (
-        'T' =>
+        'T' => 
         array (
             'Twig\\' => 5,
             'Timber\\' => 7,
         ),
-        'S' =>
+        'S' => 
         array (
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Polyfill\\Ctype\\' => 23,
         ),
-        'C' =>
+        'C' => 
         array (
             'Composer\\Installers\\' => 20,
-            'Caffeina\\LaboSuisse\\' => 19,
+            'Caffeina\\LaboSuisse\\' => 20,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Twig\\' =>
+        'Twig\\' => 
         array (
             0 => __DIR__ . '/..' . '/twig/twig/src',
         ),
-        'Timber\\' =>
+        'Timber\\' => 
         array (
             0 => __DIR__ . '/..' . '/timber/timber/lib',
         ),
-        'Symfony\\Polyfill\\Php72\\' =>
+        'Symfony\\Polyfill\\Php72\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-php72',
         ),
-        'Symfony\\Polyfill\\Mbstring\\' =>
+        'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
         ),
-        'Symfony\\Polyfill\\Ctype\\' =>
+        'Symfony\\Polyfill\\Ctype\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-ctype',
         ),
-        'Composer\\Installers\\' =>
+        'Composer\\Installers\\' => 
         array (
             0 => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers',
         ),
-        'Caffeina\\LaboSuisse\\' =>
+        'Caffeina\\LaboSuisse\\' => 
         array (
             0 => __DIR__ . '/..' . '/caffeina/labo-suisse/src',
         ),
@@ -67,16 +67,16 @@ class ComposerStaticInitc08cdc79322c86844d553c52c6a6250b
     );
 
     public static $prefixesPsr0 = array (
-        'T' =>
+        'T' => 
         array (
-            'Twig_' =>
+            'Twig_' => 
             array (
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
-        'R' =>
+        'R' => 
         array (
-            'Routes' =>
+            'Routes' => 
             array (
                 0 => __DIR__ . '/..' . '/upstatement/routes',
             ),

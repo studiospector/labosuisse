@@ -65,12 +65,12 @@
         },
         {
             "name": "caffeina/labo-suisse",
-            "version": "dev-main",
-            "version_normalized": "dev-main",
+            "version": "1.0.0",
+            "version_normalized": "1.0.0.0",
             "dist": {
                 "type": "path",
-                "url": "../../packages/caffeina/labo-suisse",
-                "reference": "ba6b2303cf8384d24d786dccf3b603db8f230a3a"
+                "url": "./packages/caffeina/labo-suisse",
+                "reference": "5fd3c51d8d2444820e782a667944cc39c4c1eca2"
             },
             "type": "library",
             "installation-source": "dist",
@@ -79,6 +79,7 @@
                     "Caffeina\\LaboSuisse\\": "src/"
                 }
             },
+            "description": "Labo Suisse",
             "transport-options": {
                 "symlink": true,
                 "relative": true
