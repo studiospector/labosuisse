@@ -38,4 +38,4 @@ services:
     scale:
       count: 1
       cpu: 512
-      memory: 512
+      memory: 1024
