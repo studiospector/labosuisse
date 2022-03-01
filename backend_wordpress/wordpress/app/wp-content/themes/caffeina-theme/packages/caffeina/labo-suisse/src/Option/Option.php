@@ -16,6 +16,7 @@ class Option
         foreach ($links as $i => $link) {
             $items[] = [
                 'type' => 'icon',
+                'mobile' => $link['lb_header_links_mobile'],
                 'icon' => ['name' => $link['lb_header_links_icon']],
                 'href' => get_permalink($link['lb_header_links_link']->ID)
             ];

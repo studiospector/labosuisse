@@ -18,21 +18,20 @@
             </a>
         </div>
         <div class="lb-header__top__icons">
-            <div class="lb-header__top__icons__item lb-header__top__icons__item--lang">
+            <div class="lb-header__top__icons__item lb-header__top__icons__item--lang lb-header__top__icons__item--mobile-hide">
                 {% do action('wpml_add_language_selector') %}
                 {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
             </div>
-            <div class="lb-header__top__icons__item lb-header__top__icons__item--faq">
-                <a href="">
-                    {% include '@PathViews/components/icon.twig' with {name: 'comments'} only %}
-                </a>
-            </div>
-            <div class="lb-header__top__icons__item">
-                <a href="">
-                    {% include '@PathViews/components/icon.twig' with {name: 'pin'} only %}
-                </a>
-            </div>
-            <div class="lb-header__top__icons__item lb-header__top__icons__item--search">
+            {% if header.header_links.items %}
+                {% for link in header.header_links.items %}
+                    <div class="lb-header__top__icons__item{{ link.mobile ? ' lb-header__top__icons__item--mobile-hide' : '' }}">
+                        <a href="{{ link.href }}">
+                            {% include '@PathViews/components/icon.twig' with link.icon only %}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            <div class="lb-header__top__icons__item lb-header__top__icons__item--search lb-header__top__icons__item--mobile-hide">
                 <a href="">
                     {% include '@PathViews/components/icon.twig' with {name: 'icon-search'} only %}
                 </a>
