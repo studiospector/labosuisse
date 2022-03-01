@@ -48,7 +48,7 @@ COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina
 
 # trafex stage (wrap it)
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
-FROM trafex/php-nginx:2.4.0
+FROM trafex/php-nginx:2.4.0 AS production
 
 ENV WP_CORE_DIR="/var/www/html"
 ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
@@ -74,3 +74,20 @@ COPY ./backend_wordpress/nginx /etc/nginx
 
 # copy final code
 COPY --from=wordpress --chown=nobody /var/www/html /var/www/html
+
+FROM production AS dev
+
+USER root
+
+RUN set -xe && curl -sS https://getcomposer.org/installer | php \
+  && mv composer.phar /usr/local/bin/composer \
+  && chmod +x /usr/local/bin/composer
+
+COPY ./backend_wordpress/wordpress/docker/dev-entrypoint.sh /dev-entrypoint.sh
+
+USER nobody
+
+ENTRYPOINT ["/dev-entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
+
+FROM production
