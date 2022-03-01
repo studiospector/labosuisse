@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "958e0a629c58f56f335ba581bf9fd57d",
+    "content-hash": "6b7ffeee19bd40a596a209df20ebbb71",
     "packages": [
         {
             "name": "altorouter/altorouter",
@@ -68,11 +68,11 @@
         },
         {
             "name": "caffeina/labo-suisse",
-            "version": "dev-main",
+            "version": "1.0.0",
             "dist": {
                 "type": "path",
                 "url": "./packages/caffeina/labo-suisse",
-                "reference": "ba6b2303cf8384d24d786dccf3b603db8f230a3a"
+                "reference": "5fd3c51d8d2444820e782a667944cc39c4c1eca2"
             },
             "type": "library",
             "autoload": {
@@ -80,6 +80,7 @@
                     "Caffeina\\LaboSuisse\\": "src/"
                 }
             },
+            "description": "Labo Suisse",
             "transport-options": {
                 "symlink": true,
                 "relative": true
@@ -270,12 +271,12 @@
                 }
             },
             "autoload": {
-                "psr-4": {
-                    "Symfony\\Polyfill\\Ctype\\": ""
-                },
                 "files": [
                     "bootstrap.php"
-                ]
+                ],
+                "psr-4": {
+                    "Symfony\\Polyfill\\Ctype\\": ""
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

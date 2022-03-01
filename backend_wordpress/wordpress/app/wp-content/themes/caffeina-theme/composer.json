@@ -18,7 +18,7 @@
   },
   "config": {
     "allow-plugins": {
-      "composer/installers": false
+      "composer/installers": true
     }
   }
 }

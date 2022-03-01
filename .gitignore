@@ -10,3 +10,5 @@ frontend_bundler/client/app/dist
 frontend_static/client/app/dist
 backend_wordpress/wordpress/app/wp-content/plugins/cf7-ace-syntax-highlighting
 backend_wordpress/wordpress/app/wp-content/plugins/loco-translate
+/backend_wordpress/wordpress/app/wp-content/themes/caffeina-theme/vendor/
+/backend_wordpress/wordpress/app/wp-content/themes/caffeina-theme/composer.lock
