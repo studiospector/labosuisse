@@ -35,11 +35,12 @@ STEFANO
 - √ gestione thumbnails
 - √ accordion
 - √ FAQ T7
+- √ card Job
+- √ header links
 
 - sticky header dinamico pagina prodotto
 - sezione FAQ prodotto
-
-- card Job
+- logo brand in pagina prodotto
 
 
 
