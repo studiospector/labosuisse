@@ -41,7 +41,7 @@ RUN set -xe && curl -sS https://getcomposer.org/installer | php \
 COPY --from=frontend_bundler /app/dist/public ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/static
 COPY ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/assets
 
-RUN cd ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme && composer install && composer update
+RUN cd ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme && composer install -n
 
 COPY ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/views
 
