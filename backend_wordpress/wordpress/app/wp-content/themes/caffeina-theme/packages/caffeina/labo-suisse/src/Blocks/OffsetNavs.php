@@ -41,7 +41,7 @@ class OffsetNavs extends BaseBlock
                     'active' => get_field('lb_block_offsetnav_state_faq'), // true, false
                     'id' => 'lb-offsetnav-product-faq',
                     'title' => __('Domande frequenti', 'labo-suisse-theme'),
-                    'data' => $this->filldata('faq')
+                    'data' => $this->fillDataFAQ(get_field('lb_block_offsetnav_faq'))
                 ],
                 'reviews' => [
                     'active' => get_field('lb_block_offsetnav_state_reviews'), // true, false
@@ -102,5 +102,25 @@ class OffsetNavs extends BaseBlock
         }
 
         return $offsetnav_content;
+    }
+
+    private function fillDataFAQ($faq_id)
+    {
+        $items = [];
+        if (have_rows('lb_faq_items', $faq_id)) {
+            while (have_rows('lb_faq_items', $faq_id)) : the_row();
+                $items[] = [
+                    'title' => get_sub_field('lb_faq_item_question', $faq_id),
+                    'content' => get_sub_field('lb_faq_item_answer', $faq_id)
+                ];
+            endwhile;
+        }
+
+        return [
+            [
+                'type' => 'faq',
+                'items' => $items
+            ]
+        ];
     }
 }
