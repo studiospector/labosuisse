@@ -6,7 +6,7 @@ MATTEO
 - √ card grid ultimi post - template 5
 - √ blocco stcky news archivio news(magazine)
 
-- namespaces
+- √ namespaces
 - √ menu
 - √ pagina opzioni(Header links, etc...)
 - √ menu "Scopri Labo"

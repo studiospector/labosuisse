@@ -1,8 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/classes/infobox.php');
-
-use gutenbergBlocks\BaseBlock;
+use Caffeina\LaboSuisse\Blocks\Infobox;
 
 $block_infobox = new Infobox($block, null);
 
