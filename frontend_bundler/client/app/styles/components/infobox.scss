@@ -35,11 +35,15 @@
     }
 
     &__scope {
+        display: flex;
+        font-size: rem(14);
         letter-spacing: 0.02em;
 
-        span {
+        &__label {
+            margin-right: 5px;
             text-transform: uppercase;
             color: map-get($colors, "secondary");
+            white-space: nowrap;
         }
     }
 

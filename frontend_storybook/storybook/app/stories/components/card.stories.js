@@ -165,7 +165,10 @@ const dataCardType9 = {
             isHeadquarter: true,
             label: 'Headquarter (Padova)',
         },
-        scope: '<span>Ambito:</span> Ampliare la propria storica divisione commercale',
+        scope: {
+            label: 'Ambito:',
+            value: 'Ampliare la propria storica divisione commercale'
+        },
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nunc felis. Sed at ligula diam.',
         cta: {
             url: '#',
