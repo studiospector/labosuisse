@@ -71,3 +71,35 @@ function get_category_parents_custom($category_id, $tax)
 
     return substr_count($parent_terms, ',');
 }
+
+
+function lb_get_job_location_options()
+{
+    return lb_get_job_options('lb-job-location');
+}
+
+function lb_get_job_department_options()
+{
+    return lb_get_job_options('lb-job-department');
+}
+
+function lb_get_job_options($type)
+{
+    $items = get_terms([
+        'taxonomy' => $type,
+        'hide_empty' => false,
+    ]);
+
+    $options = [];
+
+    foreach ($items as $item) {
+        $options[] = [
+            'value' => $item->term_id,
+            'label' => $item->name,
+        ];
+    }
+
+    return $options;
+}
+
+

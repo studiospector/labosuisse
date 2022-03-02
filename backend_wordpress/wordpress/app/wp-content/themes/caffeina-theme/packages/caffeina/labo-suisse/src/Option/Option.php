@@ -59,6 +59,22 @@ class Option
         ];
     }
 
+    public function geJobsOptions()
+    {
+        return [
+            'title' => $this->getOption('lb_jobs_title_option'),
+            'description' => $this->getOption('lb_jobs_description_option'),
+            'infobox' => [
+                'title' => $this->getOption('lb_jobs_infobox_subtitle_option'),
+                'paragraph' => $this->getOption('lb_jobs_infobox_paragraph_option'),
+                'cta' => [
+                    'url' => $this->getOption('lb_jobs_infobox_cta_link_option'),
+                    'title' => $this->getOption('lb_jobs_infobox_cta_label_option'),
+                ]
+            ]
+        ];
+    }
+
     private function prepareLinks($name)
     {
         $links = $this->getOption($name);
