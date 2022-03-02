@@ -37,10 +37,10 @@ STEFANO
 - √ FAQ T7
 - √ card Job
 - √ header links
+- √ sezione FAQ prodotto
+- √ logo brand in pagina prodotto
 
 - sticky header dinamico pagina prodotto
-- sezione FAQ prodotto
-- logo brand in pagina prodotto
 
 
 
