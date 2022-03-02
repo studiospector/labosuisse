@@ -26,4 +26,46 @@
             padding: 10px 0;
         }
     }
+
+    &--line {
+        border-bottom: 1px solid map-get($colors, "grey-2");
+
+        &.lb-separator {
+            &--big {
+                padding-top: 60px;
+                padding-bottom: 0;
+                margin-bottom: 60px;
+        
+                @include mq($until: md) {
+                    padding-top: 50px;
+                    padding-bottom: 0;
+                    margin-bottom: 50px;
+                }
+            }
+        
+            &--medium {
+                padding-top: 30px;
+                padding-bottom: 0;
+                margin-bottom: 30px;
+        
+                @include mq($until: md) {
+                    padding-top: 15px;
+                    padding-bottom: 0;
+                    margin-bottom: 15px;
+                }
+            }
+        
+            &--small {
+                padding-top: 15px;
+                padding-bottom: 0;
+                margin-bottom: 15px;
+        
+                @include mq($until: md) {
+                    padding-top: 10px;
+                    padding-bottom: 0;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
 }
