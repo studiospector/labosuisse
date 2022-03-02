@@ -4,10 +4,20 @@
         width: 100%;
         height: 100%;
         display: flex;
+        flex-direction: column;
         align-items: flex-end;
 
         .wpcf7-form-control {
             width: 100%;
+        }
+
+        .wpcf7-not-valid-tip {
+            position: absolute;
+            bottom: 0;
+            font-size: rem(11);
+            font-weight: 300;
+            color: map-get($colors, "secondary");
+            transform: translateY(-100%);
         }
     }
 
