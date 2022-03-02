@@ -31,6 +31,12 @@
                 {% if subtitle %}
                     <h4 class="infobox__subtitle">{{ subtitle }}</h4>
                 {% endif %}
+                {% if location %}
+                    <p class="infobox__location">
+                        {% include '@PathViews/components/icon.twig' with {name: (location.isHeadquarter) ? 'shield-icon' : 'pin'} only %}
+                        <span class="infobox__location__label">{{ location.label }}</span>
+                    </p>
+                {% endif %}       
                 {% if scope %}
                     <p class="infobox__scope">{{ scope|raw }}</p>
                 {% endif %}

@@ -233,6 +233,7 @@
     &--type-9 {
         padding: 20px;
         border: 1px solid map-get($colors, "grey-2");
+        border-radius: 3px;
 
         .infobox {
             &__subtitle {
@@ -242,14 +243,30 @@
                 margin-bottom: 20px;
             }
 
+            &__location {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px;
+
+                &__label {
+                    margin-left: 8px;
+                }
+            }
+
             &__scope {
                 margin-bottom: 20px;
             }
 
+            &__location,
             &__scope,
             &__paragraph {
                 font-size: rem(14);
                 line-height: 1;
+            }
+
+            &__location,
+            &__paragraph {
+                color: map-get($colors, "primary-dark-1");
             }
 
             &__cta {
