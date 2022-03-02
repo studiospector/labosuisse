@@ -267,6 +267,7 @@
             &__location,
             &__paragraph {
                 color: map-get($colors, "primary-dark-1");
+                line-height: rem(19);
             }
 
             &__cta {
