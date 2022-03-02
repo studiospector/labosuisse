@@ -62,7 +62,9 @@ RUN apk --no-cache add \
   php8-iconv \
   php8-pecl-imagick \
   php8-simplexml \
-  php8-xmlwriter
+  php8-xmlwriter \
+  # required by NR agent
+  pcre
 
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
