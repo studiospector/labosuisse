@@ -11,8 +11,9 @@ class Option
 
     public function getHeaderLinks()
     {
-        $links = $this->getOption('lb_header_links');
+        $links = $this->prepareLinks('lb_header_links');
 
+        $items = [];
         foreach ($links as $i => $link) {
             $items[] = [
                 'type' => 'icon',
@@ -26,7 +27,7 @@ class Option
 
     public function getLShopLinks()
     {
-        $links = $this->getOption('lb_menu_shop_links');
+        $links = $this->prepareLinks('lb_menu_shop_links');
 
         $items[] = ['type' => 'separator'];
 
@@ -55,6 +56,17 @@ class Option
                 ]
             ]
         ];
+    }
+
+    private function prepareLinks($name)
+    {
+        $links = $this->getOption($name);
+
+        if(empty($links)) {
+            $links = [];
+        }
+
+        return $links;
     }
 
     private function getOption($name)

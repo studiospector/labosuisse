@@ -18,9 +18,9 @@ class Menu
             (new DiscoverLabo())->get()
         );
 
-        // if (is_woocommerce()) {
-        //     $desktop = array_merge($desktop, (new Option())->getLShopLinks());
-        // }
+//         if (is_woocommerce()) {
+//             $desktop = array_merge($desktop, (new Option())->getLShopLinks());
+//         }
 
         return $desktop;
     }

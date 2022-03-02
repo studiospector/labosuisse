@@ -62,6 +62,8 @@ class DiscoverLabo
 
     private function getItems()
     {
+        $items = [];
+
         if (($locations = get_nav_menu_locations()) && isset($locations['lb_discover_labo'])) {
             $menu_obj = wp_get_nav_menu_object($locations['lb_discover_labo']);
             $items = wp_get_nav_menu_items($menu_obj->term_id);
