@@ -21,6 +21,26 @@
             "rows": 5,
             "new_lines": "br",
             "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_621f80dc30814",
+            "label": "Tipologia di Contratto",
+            "name": "lb_job_contract_typology",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br"
         }
     ],
     "location": [
@@ -41,5 +61,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646224291
+    "modified": 1646231808
 }

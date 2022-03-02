@@ -39,11 +39,21 @@
         font-size: rem(14);
         letter-spacing: 0.02em;
 
+        @include mq($until: md) {
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
         &__label {
             margin-right: 5px;
             text-transform: uppercase;
             color: map-get($colors, "secondary");
             white-space: nowrap;
+
+            @include mq($until: md) {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
         }
     }
 
