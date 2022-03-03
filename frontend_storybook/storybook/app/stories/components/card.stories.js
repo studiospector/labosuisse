@@ -161,7 +161,14 @@ const dataCardType8 = {
 const dataCardType9 = {
     infobox: {
         subtitle: 'Agenti mono o plurimandatari (farmacie)',
-        scope: '<span>Ambito:</span> Ampliare la propria storica divisione commercale',
+        location: {
+            isHeadquarter: true,
+            label: 'Headquarter (Padova)',
+        },
+        scope: {
+            label: 'Ambito:',
+            value: 'Ampliare la propria storica divisione commercale'
+        },
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque quis nunc felis. Sed at ligula diam.',
         cta: {
             url: '#',

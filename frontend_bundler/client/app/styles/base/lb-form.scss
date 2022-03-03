@@ -1,0 +1,20 @@
+.lb-form {
+    font-weight: 300;
+    
+    fieldset {
+        margin-bottom: 40px;
+
+        legend {
+            font-size: rem(16);
+            font-weight: 400;
+            line-height: rem(19);
+            color: map-get($colors, "black");
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+    }
+
+    .wpcf7-list-item {
+        margin-left: 0;
+    }
+}

@@ -1,0 +1,28 @@
+.single-lb-job {
+
+    &__company,
+    &__content {
+        h6 {
+            font-size: rem(20);
+            font-weight: 500;
+            line-height: 1;
+            letter-spacing: 0.02em;
+            color: map-get($colors, "black");
+            margin-bottom: 12px;
+        }
+    }
+
+    &__form {
+        .lb-form {
+            margin-top: 40px;
+            font-weight: 300;
+        }
+    }
+
+    &__section-content {
+        font-size: rem(14);
+        line-height: rem(19);
+        color: map-get($colors, "black");
+        margin: 0;
+    }
+}
