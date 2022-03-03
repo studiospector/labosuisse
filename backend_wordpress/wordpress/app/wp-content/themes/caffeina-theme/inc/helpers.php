@@ -102,4 +102,31 @@ function lb_get_job_options($type)
     return $options;
 }
 
+function get_job_location()
+{
+    $isHeadquarter = false;
+    $job_location_links = null;
+
+    $job_location_terms = get_the_terms(get_the_ID(), 'lb-job-location');
+
+    if ($job_location_terms && !is_wp_error($job_location_terms)) {
+        $job_location_draught_links = [];
+
+        foreach ($job_location_terms as $term) {
+            if (get_field('lb_job_location_headquarter', $term)) {
+                $isHeadquarter = true;
+            }
+
+            $job_location_draught_links[] = $term->name;
+        }
+
+        $job_location_links = join(", ", $job_location_draught_links);
+    }
+
+    return [
+        'jobLocationLinks' => esc_html($job_location_links),
+        'isHeadquarter' => $isHeadquarter
+    ];
+}
+
 

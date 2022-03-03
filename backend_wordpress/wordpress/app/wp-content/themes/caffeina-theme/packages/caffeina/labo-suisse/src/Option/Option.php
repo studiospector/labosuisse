@@ -56,7 +56,7 @@ class Option
         ];
     }
 
-    public function geJobsOptions()
+    public function getJobsOptions()
     {
         return [
             'title' => $this->getOption('lb_jobs_title_option'),
@@ -65,6 +65,11 @@ class Option
                 'title' => $this->getOption('lb_jobs_infobox_subtitle_option'),
                 'paragraph' => $this->getOption('lb_jobs_infobox_paragraph_option'),
                 'cta' => array_merge($this->getOption('lb_jobs_infobox_cta'), ['variants' => ['tertiary']])
+            ],
+
+            'content' => [
+                'company' => $this->getOption('lb_jobs_company_content'),
+                'application' => $this->getOption('lb_jobs_application_content'),
             ]
         ];
     }
