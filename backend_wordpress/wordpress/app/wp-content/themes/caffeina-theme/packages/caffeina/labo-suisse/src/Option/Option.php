@@ -51,7 +51,7 @@ class Option
             'infobox' => [
                 'title' => $this->getOption('lb_faq_infobox_subtitle_option'),
                 'paragraph' => $this->getOption('lb_faq_infobox_paragraph_option'),
-                'cta' => $this->getOption('lb_faq_infobox_cta')
+                'cta' => array_merge($this->getOption('lb_faq_infobox_cta'), ['variants' => ['tertiary']])
             ]
         ];
     }
@@ -64,7 +64,7 @@ class Option
             'infobox' => [
                 'title' => $this->getOption('lb_jobs_infobox_subtitle_option'),
                 'paragraph' => $this->getOption('lb_jobs_infobox_paragraph_option'),
-                'cta' => $this->getOption('lb_jobs_infobox_cta')
+                'cta' => array_merge($this->getOption('lb_jobs_infobox_cta'), ['variants' => ['tertiary']])
             ]
         ];
     }

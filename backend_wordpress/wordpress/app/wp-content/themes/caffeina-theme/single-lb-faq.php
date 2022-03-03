@@ -26,11 +26,7 @@ $context = [
     'infobox' => [
         'subtitle' => $options['infobox']['title'],
         'paragraph' => $options['infobox']['paragraph'],
-        'cta' => [
-            'url' => $options['infobox']['cta']['url'],
-            'title' => $options['infobox']['cta']['title'],
-            'variants' => ['tertiary']
-        ],
+        'cta' => $options['infobox']['cta']
     ]
 ];
 
