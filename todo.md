@@ -39,6 +39,9 @@ STEFANO
 - √ header links
 - √ sezione FAQ prodotto
 - √ logo brand in pagina prodotto
+- √ archive jobs
+- √ single jobs
+- √ template candidatura spontanea
 
 - sticky header dinamico pagina prodotto
 
