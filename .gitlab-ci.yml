@@ -15,7 +15,7 @@ build:
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
-    - docker-compose -f ./docker/build.yml build
+    - docker-compose -f ./docker/build.yml build --pull
   only:
     - develop
 
