@@ -24,24 +24,14 @@
         <div class="row">
             <div class="col-12 col-lg-8 offset-lg-2">
                 <div class="infobox">
-                    {% if info.location.value %}
-                        <p class="infobox__scope">
-                            <span class="infobox__scope__label">{{ info.location.label }}</span>
-                            <span class="infobox__scope__value">{{ info.location.value }}</span>
-                        </p>
-                    {% endif %}
-                    {% if info.contract.value %}
-                        <p class="infobox__scope">
-                            <span class="infobox__scope__label">{{ info.contract.label }}</span>
-                            <span class="infobox__scope__value">{{ info.contract.value }}</span>
-                        </p>
-                    {% endif %}
-                    {% if info.description.value %}
-                        <p class="infobox__scope">
-                            <span class="infobox__scope__label">{{ info.description.label }}</span>
-                            <span class="infobox__scope__value">{{ info.description.value }}</span>
-                        </p>
-                    {% endif %}
+                    {% for item in info %}
+                        {% if item.value %}
+                            <p class="infobox__scope">
+                                <span class="infobox__scope__label">{{ item.label }}</span>
+                                <span class="infobox__scope__value">{{ item.value }}</span>
+                            </p>
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

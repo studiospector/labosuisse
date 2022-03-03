@@ -4,15 +4,15 @@
 $context = [
     'title' => get_the_title(),
     'info' => [
-        'location' => [
+        [
             'label' =>  __('Location:', 'labo-suisse-theme'),
             'value' => 'Non specificata',
         ],
-        'contract' => [
+        [
             'label' =>  __('Tipologia di contratto:', 'labo-suisse-theme'),
             'value' => get_field('lb_job_contract_typology'),
         ],
-        'description' => [
+        [
             'label' =>  __('Descrizione del ruolo:', 'labo-suisse-theme'),
             'value' => get_the_excerpt(),
         ],
@@ -40,7 +40,7 @@ $context = [
                     <br><br>
                     I presenti annunci sono rivolti ad entrambi i sessi, ai sensi delle leggi 903/77 e 125/91, e a persone di tutte le nazionalità, 
                     ai sensi dei decreti legislativi 215/03 e 216/03. ",
-        'shortcode' => '[contact-form-7 id="1218"]',
+        'shortcode' => get_field('lb_jobs_form_application_shortcode', 'option'),
     ]
 ];
 
