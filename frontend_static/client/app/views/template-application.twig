@@ -1,0 +1,45 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-template-application' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if title %}
+                <h1 class="infobox__subtitle h3">{{ title }}</h1>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Content #}
+    <div class="lb-template-application__content container">
+        <div class="row">
+            <div class="lb-post-elements-formatted lb-post-elements-formatted--small col-12 col-lg-8 offset-lg-2">
+                {{ content|raw }}
+            </div>
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Form #}
+    {% if form_shortcode %}
+        <div class="lb-template-application__form container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    <div class="lb-form">
+                        {{ fn('do_shortcode', form_shortcode) }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -66,9 +66,11 @@
                 <hr class="lb-separator lb-separator--big lb-separator--line" data-variant="big">
                 <h4 class="infobox__subtitle text-center">{{ application.title }}</h4>
                 <p class="single-lb-job__section-content">{{ application.content }}</p>
-                <div class="lb-form">
-                    {{ fn('do_shortcode', application.shortcode) }}
-                </div>
+                {% if application.shortcode %}
+                    <div class="lb-form">
+                        {{ fn('do_shortcode', application.shortcode) }}
+                    </div>
+                {% endif %}
             </div>
         </div>
     </div>
