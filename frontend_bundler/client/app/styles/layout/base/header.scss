@@ -100,9 +100,7 @@
                     }
                 }
 
-                &--lang,
-                &--search,
-                &--faq {
+                &--mobile-hide {
                     @include mq($until: lg) {
                         display: none;
                     }

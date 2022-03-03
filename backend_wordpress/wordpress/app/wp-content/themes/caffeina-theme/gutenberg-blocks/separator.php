@@ -1,15 +1,11 @@
 <?php
 
-require_once(__DIR__.'/classes/baseBlock.php');
+use Caffeina\LaboSuisse\Blocks\BaseBlock as LaboSuisseBlocksBaseBlock;
 
-use gutenbergBlocks\BaseBlock;
+$separator = new LaboSuisseBlocksBaseBlock($block);
 
-$separator = new BaseBlock($block);
-
-$payload = [
+$separator->setContext([
     'variants' => [get_field('lb_block_separator_variants')],
-];
-
-$separator->setContext($payload);
+]);
 
 $separator->render();

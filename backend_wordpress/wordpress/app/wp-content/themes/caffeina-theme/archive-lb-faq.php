@@ -1,8 +1,6 @@
 <?php
 
-use Automattic\WooCommerce\Admin\API\Options;
-
-require_once(__DIR__ . '/inc/Options.php');
+use Caffeina\LaboSuisse\Option\Option;
 
 $items = [];
 

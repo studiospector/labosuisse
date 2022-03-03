@@ -1,0 +1,61 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'archive-lb-job' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if title %}
+                <h1 class="infobox__subtitle h2">{{ title }}</h1>
+            {% endif %}
+            {% if description %}
+                <p class="infobox__paragraph">{{ description }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Filters #}
+    <div class="lb-filters container">
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2">
+                <div class="row">
+                    <div class="lb-filters__item col-12 col-md-3">
+                        {% include '@PathViews/components/fields/select.twig' with job_location only %}
+                    </div>
+                    <div class="lb-filters__item col-12 col-md-3">
+                        {% include '@PathViews/components/fields/select.twig' with job_department only %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Posts Grid #}
+    <div class="lb-card-grid container">
+        <div class="row">
+            <div class="col-12 col-lg-8 offset-lg-2">
+                {% for post in items %}
+                    {% include '@PathViews/components/card.twig' with post only %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {# Info #}
+    {% if infobox %}
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        <div class="container text-center">
+            {% include '@PathViews/components/infobox.twig' with infobox only %}
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -6,7 +6,7 @@ MATTEO
 - √ card grid ultimi post - template 5
 - √ blocco stcky news archivio news(magazine)
 
-- namespaces
+- √ namespaces
 - √ menu
 - √ pagina opzioni(Header links, etc...)
 - √ menu "Scopri Labo"
@@ -35,11 +35,15 @@ STEFANO
 - √ gestione thumbnails
 - √ accordion
 - √ FAQ T7
+- √ card Job
+- √ header links
+- √ sezione FAQ prodotto
+- √ logo brand in pagina prodotto
+- √ archive jobs
+- √ single jobs
+- √ template candidatura spontanea
 
 - sticky header dinamico pagina prodotto
-- sezione FAQ prodotto
-
-- card Job
 
 
 

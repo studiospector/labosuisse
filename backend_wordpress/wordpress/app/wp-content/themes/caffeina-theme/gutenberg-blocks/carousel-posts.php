@@ -1,8 +1,6 @@
 <?php
-require_once(__DIR__.'/classes/carouselPosts.php');
 
-use gutenbergBlocks\BaseBlock;
+use Caffeina\LaboSuisse\Blocks\CarouselPosts;
 
-$block_carousel_posts = new CarouselPosts($block, null);
-
-$block_carousel_posts->render();
+$blockCarouselPost = (new CarouselPosts($block, null))
+    ->render();

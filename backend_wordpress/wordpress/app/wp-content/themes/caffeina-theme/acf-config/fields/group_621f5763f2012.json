@@ -1,0 +1,62 @@
+{
+    "key": "group_621f5763f2012",
+    "title": "Campi personalizzati: Tassonomia – Job Location",
+    "fields": [
+        {
+            "key": "field_621f579d319e2",
+            "label": "Campi personalizzati",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_621f57b9319e3",
+            "label": "Headquarter",
+            "name": "lb_job_location_headquarter",
+            "type": "true_false",
+            "instructions": "Lo scopo del campo è semplicemente aggiungere l'icona dello \"scudetto\" accanto alla Location al posto del \"pin\" di default.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "wpml_cf_preferences": 2
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "taxonomy",
+                "operator": "==",
+                "value": "lb-job-location"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1646221387
+}

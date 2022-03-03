@@ -1,0 +1,40 @@
+.lb-post-elements-formatted {
+
+    .no-spaces {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    p:empty {
+        display: none;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, ol, ul {
+        margin-bottom: rem(20);
+    }
+
+    ul {
+        font-weight: 300;
+
+        li {
+            padding-left: 15px;
+
+            &::before {
+                content: '-';
+                position: absolute;
+                transform: translateX(-15px);
+            }
+        }
+    }
+
+    &--small {
+        h1, h2, h3, h4, h5, h6, p, ol, ul {
+            font-size: rem(14);
+            line-height: rem(19);
+        }
+    }
+
+    & > *:last-child {
+        margin-bottom: 0;
+    }
+}

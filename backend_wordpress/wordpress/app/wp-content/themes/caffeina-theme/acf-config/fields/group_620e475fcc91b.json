@@ -48,10 +48,11 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "33",
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 2,
                     "post_type": [
                         "page"
                     ],
@@ -59,7 +60,6 @@
                     "allow_null": 0,
                     "multiple": 0,
                     "return_format": "object",
-                    "wpml_cf_preferences": 2,
                     "ui": 1
                 },
                 {
@@ -71,10 +71,11 @@
                     "required": 1,
                     "conditional_logic": 0,
                     "wrapper": {
-                        "width": "50",
+                        "width": "35",
                         "class": "",
                         "id": ""
                     },
+                    "wpml_cf_preferences": 2,
                     "choices": {
                         "eye-on": "Occhio aperto",
                         "eye-off": "Occhio chiuso",
@@ -99,8 +100,27 @@
                     "ui": 1,
                     "ajax": 0,
                     "return_format": "value",
-                    "wpml_cf_preferences": 2,
                     "placeholder": ""
+                },
+                {
+                    "key": "field_621e43ad5343d",
+                    "label": "Mobile Hide",
+                    "name": "lb_header_links_mobile",
+                    "type": "true_false",
+                    "instructions": "Non mostrare il link in Mobile.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "30",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
                 }
             ]
         },
@@ -225,5 +245,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645106608
+    "modified": 1646150715
 }
