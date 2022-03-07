@@ -1,11 +1,11 @@
 {
-    "key": "group_62208a9a41e2e",
-    "title": "Campi personalizzati: Template – Application",
+    "key": "group_6225f06a3eaa1",
+    "title": "Campi personalizzati: Template – Concessionaria",
     "fields": [
         {
-            "key": "field_62208ab149833",
-            "label": "Shortcode Modulo di Candidatura",
-            "name": "lb_template_application_form_shortcode",
+            "key": "field_6225f06a518b7",
+            "label": "Shortcode Modulo di richiesta",
+            "name": "lb_template_dealer_form_shortcode",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -28,7 +28,7 @@
             {
                 "param": "page_template",
                 "operator": "==",
-                "value": "template-application.php"
+                "value": "template-dealer.php"
             }
         ]
     ],
@@ -41,5 +41,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646653654
+    "modified": 1646653616
 }
