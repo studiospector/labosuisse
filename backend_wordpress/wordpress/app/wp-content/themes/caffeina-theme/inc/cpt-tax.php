@@ -1,5 +1,7 @@
 <?php
 
+use Caffeina\LaboSuisse\Option\Option;
+
 /**
  * Register Custom Post Type Brand page
  */
@@ -384,3 +386,11 @@ function lb_stores_cpt_init()
     register_post_type('lb-store', $args);
 }
 add_action('init', 'lb_stores_cpt_init', 0);
+
+
+// Register Services API Key
+function lb_set_services_api_key() {
+    //Google
+    acf_update_setting('google_api_key', (new Option())->getApiKey('lb_api_key_google_maps'));
+}
+add_action('acf/init', 'lb_set_services_api_key');
