@@ -324,3 +324,63 @@ function lb_job_department_tax_init()
     register_taxonomy('lb-job-department', array('lb-job'), $args);
 }
 add_action('init', 'lb_job_department_tax_init');
+
+
+/**
+ * Register Custom Post Type Stores
+ */
+function lb_stores_cpt_init()
+{
+    $args = array(
+        'label' => __('Stores', 'lb-store-cpt'),
+        'labels' => array(
+            'name' => _x('Stores', 'Post Type General Name', 'lb-store-cpt'),
+            'singular_name' => _x('Store', 'Post Type Singular Name', 'lb-store-cpt'),
+            'menu_name' => _x('Stores', 'Admin Menu text', 'lb-store-cpt'),
+            'name_admin_bar' => _x('Store', 'Add New on Toolbar', 'lb-store-cpt'),
+            'archives' => __('Archivi Stores', 'lb-store-cpt'),
+            'attributes' => __('Attributi degli Stores', 'lb-store-cpt'),
+            'parent_item_colon' => __('Genitori Stores:', 'lb-store-cpt'),
+            'all_items' => __('Tutti gli Stores', 'lb-store-cpt'),
+            'add_new_item' => __('Aggiungi nuovo Store', 'lb-store-cpt'),
+            'add_new' => __('Nuovo', 'lb-store-cpt'),
+            'new_item' => __('Stores redigere', 'lb-store-cpt'),
+            'edit_item' => __('Modifica Store', 'lb-store-cpt'),
+            'update_item' => __('Aggiorna Store', 'lb-store-cpt'),
+            'view_item' => __('Visualizza Store', 'lb-store-cpt'),
+            'view_items' => __('Visualizza gli Stores', 'lb-store-cpt'),
+            'search_items' => __('Cerca Stores', 'lb-store-cpt'),
+            'not_found' => __('Nessun Store trovato.', 'lb-store-cpt'),
+            'not_found_in_trash' => __('Nessun Store trovato nel cestino.', 'lb-store-cpt'),
+            'featured_image' => __('Immagine in evidenza', 'lb-store-cpt'),
+            'set_featured_image' => __('Imposta immagine in evidenza', 'lb-store-cpt'),
+            'remove_featured_image' => __('Rimuovi immagine in evidenza', 'lb-store-cpt'),
+            'use_featured_image' => __('Usa come immagine in evidenza', 'lb-store-cpt'),
+            'insert_into_item' => __('Inserisci nello Store', 'lb-store-cpt'),
+            'uploaded_to_this_item' => __('Caricato in questo Store', 'lb-store-cpt'),
+            'items_list' => __('Elenco degli Stores', 'lb-store-cpt'),
+            'items_list_navigation' => __('Navigazione elenco Stores', 'lb-store-cpt'),
+            'filter_items_list' => __('Filtra elenco Stores', 'lb-store-cpt'),
+        ),
+        'menu_icon' => 'dashicons-store',
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'taxonomies' => array(),
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'can_export' => true,
+        'has_archive' => true,
+        'hierarchical' => true,
+        'exclude_from_search' => false,
+        'show_in_rest' => true,
+        'publicly_queryable' => true,
+        'map_meta_cap' => true,
+        'capability_type' => array( 'lb-store', 'lb-stores' ),
+        'rewrite' => array('slug' => 'store'),
+    );
+    register_post_type('lb-store', $args);
+}
+add_action('init', 'lb_stores_cpt_init', 0);
