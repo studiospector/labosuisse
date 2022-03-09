@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-02-04 14:16:16+0000\n"
+"PO-Revision-Date: 2022-02-17 14:53:45+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,22 @@ msgstr ""
 "X-Generator: GlotPress/3.0.0-alpha.2\n"
 "Language: it\n"
 "Project-Id-Version: Plugins - Yoast SEO - Stable (latest release)\n"
+
+#: src/integrations/admin/import-integration.php:149
+msgid "Import failed with the following error:"
+msgstr "L'importazione è fallita con il seguente errore:"
+
+#: src/integrations/admin/import-integration.php:109
+msgid "No data found from other SEO plugins."
+msgstr "Non è stato trovato alcun dato dagli altri plugin SEO."
+
+#: src/integrations/admin/import-integration.php:108
+msgid "Select SEO plugin"
+msgstr "Seleziona il plugin SEO"
+
+#: src/integrations/admin/import-integration.php:107
+msgid "The import can take a long time depending on your site's size."
+msgstr "L'importazione può richiedere molto tempo a seconda delle dimensioni del tuo sito"
 
 #: src/integrations/admin/installation-success-integration.php:101
 msgid "Installation Successful"
