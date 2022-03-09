@@ -53,6 +53,7 @@ include __DIR__ . '/inc/theme-setup.php';
 include __DIR__ . '/inc/theme-assets.php';
 include __DIR__ . '/inc/cpt-tax.php';
 include __DIR__ . '/inc/woocommerce-setup.php';
+include __DIR__ . '/inc/api.php';
 
 
 
