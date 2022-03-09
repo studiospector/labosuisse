@@ -74,6 +74,11 @@ class Option
         ];
     }
 
+    public function getApiKey($service)
+    {
+        return $this->getOption($service);
+    }
+
     private function prepareLinks($name)
     {
         $links = $this->getOption($name);
