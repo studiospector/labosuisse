@@ -74,6 +74,23 @@ class Option
         ];
     }
 
+    public function getStoresOptions()
+    {
+        return [
+            'title' => $this->getOption('lb_stores_title_option'),
+            'description' => $this->getOption('lb_stores_description_option'),
+            'infobox' => [
+                'image' => lb_get_images($this->getOption('lb_stores_infobox_image')),
+                'tagline' => $this->getOption('lb_stores_infobox_tagline'),
+                'title' => $this->getOption('_lb_stores_infobox_title'),
+                'subtitle' => $this->getOption('_lb_stores_infobox_subtitle'),
+                'paragraph' => $this->getOption('_lb_stores_infobox_paragraph'),
+                'cta' => []
+            ]
+
+        ];
+    }
+
     public function getApiKey($service)
     {
         return $this->getOption($service);
