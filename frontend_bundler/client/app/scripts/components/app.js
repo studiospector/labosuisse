@@ -21,6 +21,8 @@ import CardsGrid from './CardsGrid'
 import ScrollTo from './ScrollTo'
 import Product from './Product'
 import Accordion from './Accordion'
+import StoreLocatorCaffeina from './StoreLocatorCaffeina'
+import StoreLocator from './StoreLocator'
 
 const components = {
     scrollbar: {
@@ -111,6 +113,16 @@ const components = {
     accordion: {
         selector: '.js-accordion',
         type: Accordion,
+        optional: true
+    },
+    storeLocatorCaffeina: {
+        selector: '.js-caffeina-store-locator',
+        type: StoreLocatorCaffeina,
+        optional: true
+    },
+    storeLocator: {
+        selector: '.js-store-locator',
+        type: StoreLocator,
         optional: true
     },
 }

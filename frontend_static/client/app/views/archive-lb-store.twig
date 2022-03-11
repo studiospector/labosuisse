@@ -1,0 +1,56 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'archive-lb-store' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if title %}
+                <h1 class="infobox__subtitle h2">{{ title }}</h1>
+            {% endif %}
+            {% if description %}
+                <p class="infobox__paragraph">{{ description }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Store locator #}
+    <div class="lb-store-locator caffeina-store-locator js-caffeina-store-locator js-store-locator">
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <div class="lb-store-locator__filter">
+                    <div class="lb-store-locator__filter__search">
+                        {% include '@PathViews/components/fields/input.twig' with store_locator.search only %}
+                    </div>
+                    <div class="lb-store-locator__filter__geolocation js-caffeina-store-locator-geolocation">
+                        {% include '@PathViews/components/icon.twig' with {name: 'geolocation'} %}
+                    </div>
+                </div>
+                <div class="caffeina-store-locator__list-wrapper">
+                    <div class="caffeina-store-locator__notfound js-caffeina-store-locator-notfound">Nessuno Store trovato</div>
+                    <div class="lb-store-locator__list caffeina-store-locator__list js-caffeina-store-locator-list"></div>
+                    <div class="caffeina-store-locator__infowindows js-caffeina-store-locator-infowindows"></div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-8">
+                <div class="lb-store-locator__map-wrapper">
+                    <div class="lb-store-locator__map js-caffeina-store-locator-map" data-map-country="{{ store_locator.map_country }}" data-map-lang="{{ store_locator.map_lang }}"></div>
+                    <div class="lb-store-locator__card">
+                        {% include '@PathViews/components/card.twig' with card only %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="caffeina-store-locator__loader caffeina-store-locator__loader--loading js-caffeina-store-locator-loader"></div>
+    </div>
+
+{% endblock %}

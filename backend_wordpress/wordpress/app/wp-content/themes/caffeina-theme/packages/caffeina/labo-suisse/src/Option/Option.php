@@ -79,14 +79,16 @@ class Option
         return [
             'title' => $this->getOption('lb_stores_title_option'),
             'description' => $this->getOption('lb_stores_description_option'),
-            'infobox' => [
-                'image' => lb_get_images($this->getOption('lb_stores_infobox_image')),
-                'tagline' => $this->getOption('lb_stores_infobox_tagline'),
-                'title' => $this->getOption('lb_stores_infobox_title'),
-                'subtitle' => $this->getOption('lb_stores_infobox_subtitle'),
-                'paragraph' => $this->getOption('lb_stores_infobox_paragraph'),
-                'cta' => array_merge($this->getOption('lb_stores_infobox_btn'), ['variants' => ['tertiary']])
-            ]
+            'card' => [
+                'images' => lb_get_images($this->getOption('lb_stores_infobox_image')),
+                'infobox' => [
+                    'tagline' => $this->getOption('lb_stores_infobox_tagline'),
+                    'subtitle' => $this->getOption('lb_stores_infobox_subtitle'),
+                    'paragraph' => $this->getOption('lb_stores_infobox_paragraph'),
+                    'cta' => array_merge($this->getOption('lb_stores_infobox_btn'), ['variants' => ['quaternary']])
+                ],
+                'variants' => ['type-1', 'type-1-secondary'],
+            ],
         ];
     }
 
