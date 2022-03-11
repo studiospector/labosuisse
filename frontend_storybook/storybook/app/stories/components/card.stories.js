@@ -29,6 +29,29 @@ const dataCardType1 = {
     variants: ['type-1']
 }
 
+// Lifting Secondary
+const dataCardType1Secondary = {
+    images: {
+        original: '/assets/images/card-img-4.jpg',
+        lg: '/assets/images/card-img-4.jpg',
+        md: '/assets/images/card-img-4.jpg',
+        sm: '/assets/images/card-img-4.jpg',
+        xs: '/assets/images/card-img-4.jpg'
+    },
+    infobox: {
+        tagline: 'TRATTAMENTO FACCIALE',
+        subtitle: 'Lifting facciale: primo terzo del viso, sottomento e collo',
+        paragraph: 'Incipit del contenuto editoriale. Può essere parte dell’articolo originale oppure un’introduzione. Lorem ipsum dolor sit amet.',
+        cta: {
+            url: '#',
+            title: 'Scopri di più',
+            iconEnd: { name: 'arrow-right' },
+            variants: ['quaternary']
+        }
+    },
+    variants: ['type-1', 'type-1-secondary']
+}
+
 // News
 const dataCardType2 = {
     images: {
@@ -203,6 +226,8 @@ const dataCardType10 = {
 storiesOf('Components|Cards', module)
     // Lifting
     .add('Type 1 --- Lifting', () => renderCard(dataCardType1))
+    // Lifting Secondary
+    .add('Type 1 --- Lifting Secondary', () => renderCard(dataCardType1Secondary))
     // News
     .add('Type 2 --- News', () => renderCard(dataCardType2))
     // Trattamenti

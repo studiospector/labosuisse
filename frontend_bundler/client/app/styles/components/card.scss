@@ -44,6 +44,30 @@
         }
     }
 
+    &--type-1-secondary {
+        .card-img {
+            height: 265px;
+            margin-bottom: 0;
+
+            @include mq($until: md) {
+                height: 265px;
+            }
+        }
+
+        .infobox {
+            &__tagline {
+                margin-bottom: 20px;
+            }
+    
+            &__subtitle {
+                font-size: rem(26);
+                font-weight: 600;
+                line-height: rem(34);
+                text-transform: uppercase;
+            }
+        }
+    }
+
 
 
     &--type-3 {
