@@ -68,19 +68,41 @@ class CustomInput extends BasicElement {
             // SEARCH
             this.currInputType = this.cs[i].getAttribute('type')
             if (this.currInputType == 'search') {
-                if (this.inputVariant == 'primary') {
+                if (this.inputVariant == 'primary' || this.inputVariant == 'tertiary') {
                     this.addIconPrev('close')
+
+                    if (this.inputIconPrev) {
+                        this.inputIconPrev.addEventListener('click', (ev) => {
+                            ev.preventDefault()
+                            this.currInputElem.value = null
+                            this.onFocus(this.currInputElem.value)
+                        })
+                    }
                 }
-                this.addIconNext('icon-search')
+
+                if (this.inputVariant == 'tertiary') {
+                    this.addIconNext('icon-search', 'button')
+                } else {
+                    this.addIconNext('icon-search')
+                }
             }
 
             // Events on <input> focus
-            this.cs[i].addEventListener('focus', () => this.mainContainer.classList.add('is-focus'))
-            this.cs[i].addEventListener('blur', (el) => {
-                if (!(el.target.value.length > 0)) {
-                    this.mainContainer.classList.remove('is-focus')
-                }
-            })
+            this.cs[i].addEventListener('focus', () => this.onFocus())
+            this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+        }
+    }
+
+
+
+    /**
+     * Focus and Blur State animations
+     */
+    onFocus = (value) => {
+        this.mainContainer.classList.add('is-focus')
+
+        if (value !== undefined && value == 0) {
+            this.mainContainer.classList.remove('is-focus')
         }
     }
 
@@ -91,13 +113,15 @@ class CustomInput extends BasicElement {
      * 
      * @param {string} iconName Icon name to add
      */
-    addIconNext = (iconName) => {
+    addIconNext = (iconName, buttonType = null) => {
         const icon = `
+            ${buttonType ? '<button type="'+ buttonType +'" class="button button-primary">' : ''}
             <span class="lb-icon">
                 <svg aria-label="${iconName}" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#${iconName}"></use>
                 </svg>
             </span>
+            ${buttonType ? '</button>' : ''}
         `
         this.inputIconNext = this.createDOMElement('DIV', ['custom-input__icon', 'custom-input__icon--next'], null, icon, {pos: 'beforeend', elem: this.mainContainer})
         this.mainContainer.classList.add('custom-input--icon-next')
@@ -110,13 +134,15 @@ class CustomInput extends BasicElement {
      * 
      * @param {string} iconName Icon name to add
      */
-     addIconPrev = (iconName) => {
+     addIconPrev = (iconName, buttonType = null) => {
         const icon = `
+            ${buttonType ? '<button type="'+ buttonType +'" class="button button-primary">' : ''}
             <span class="lb-icon">
                 <svg aria-label="${iconName}" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#${iconName}"></use>
                 </svg>
             </span>
+            ${buttonType ? '</button>' : ''}
         `
         this.inputIconPrev = this.createDOMElement('DIV', ['custom-input__icon', 'custom-input__icon--prev'], null, icon, {pos: 'beforeend', elem: this.mainContainer})
         this.mainContainer.classList.add('custom-input--icon-prev')
