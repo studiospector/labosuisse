@@ -82,12 +82,11 @@ class Option
             'infobox' => [
                 'image' => lb_get_images($this->getOption('lb_stores_infobox_image')),
                 'tagline' => $this->getOption('lb_stores_infobox_tagline'),
-                'title' => $this->getOption('_lb_stores_infobox_title'),
-                'subtitle' => $this->getOption('_lb_stores_infobox_subtitle'),
-                'paragraph' => $this->getOption('_lb_stores_infobox_paragraph'),
-                'cta' => []
+                'title' => $this->getOption('lb_stores_infobox_title'),
+                'subtitle' => $this->getOption('lb_stores_infobox_subtitle'),
+                'paragraph' => $this->getOption('lb_stores_infobox_paragraph'),
+                'cta' => array_merge($this->getOption('lb_stores_infobox_btn'), ['variants' => ['tertiary']])
             ]
-
         ];
     }
 

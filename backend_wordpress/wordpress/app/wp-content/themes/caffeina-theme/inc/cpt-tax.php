@@ -387,6 +387,65 @@ function lb_stores_cpt_init()
 }
 add_action('init', 'lb_stores_cpt_init', 0);
 
+/**
+ * Register Custom Post Type Stores
+ */
+function lb_beauty_specialist_cpt_init()
+{
+    $args = array(
+        'label' => __('Beauty Specialist', 'lb-beauty-specialist-cpt'),
+        'labels' => array(
+            'name' => _x('Beauty Specialist', 'Post Type General Name', 'lb-beauty-specialist-cpt'),
+            'singular_name' => _x('Beauty Specialist', 'Post Type Singular Name', 'lb-beauty-specialist-cpt'),
+            'menu_name' => _x('Beauty Specialist', 'Admin Menu text', 'lb-beauty-specialist-cpt'),
+            'name_admin_bar' => _x('Beauty Specialist', 'Add New on Toolbar', 'lb-beauty-specialist-cpt'),
+            'archives' => __('Archivi Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'attributes' => __('Attributi delle Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'parent_item_colon' => __('Genitori Beauty Specialist:', 'lb-beauty-specialist-cpt'),
+            'all_items' => __('Tutte le Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'add_new_item' => __('Aggiungi nuova Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'add_new' => __('Nuovo', 'lb-beauty-specialist-cpt'),
+            'new_item' => __('Beauty Specialist redigere', 'lb-beauty-specialist-cpt'),
+            'edit_item' => __('Modifica Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'update_item' => __('Aggiorna Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'view_item' => __('Visualizza Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'view_items' => __('Visualizza le Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'search_items' => __('Cerca Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'not_found' => __('Nessuna Beauty Specialist trovata.', 'lb-beauty-specialist-cpt'),
+            'not_found_in_trash' => __('Nessuna Beauty Specialist trovata nel cestino.', 'lb-beauty-specialist-cpt'),
+            'featured_image' => __('Immagine in evidenza', 'lb-beauty-specialist-cpt'),
+            'set_featured_image' => __('Imposta immagine in evidenza', 'lb-beauty-specialist-cpt'),
+            'remove_featured_image' => __('Rimuovi immagine in evidenza', 'lb-beauty-specialist-cpt'),
+            'use_featured_image' => __('Usa come immagine in evidenza', 'lb-beauty-specialist-cpt'),
+            'insert_into_item' => __('Inserisci nella Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'uploaded_to_this_item' => __('Caricato in questa Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'items_list' => __('Elenco delle Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'items_list_navigation' => __('Navigazione elenco Beauty Specialist', 'lb-beauty-specialist-cpt'),
+            'filter_items_list' => __('Filtra elenco Beauty Specialist', 'lb-beauty-specialist-cpt'),
+        ),
+        'menu_icon' => 'dashicons-store',
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'taxonomies' => array(),
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'can_export' => true,
+        'has_archive' => true,
+        'hierarchical' => true,
+        'exclude_from_search' => false,
+        'show_in_rest' => true,
+        'publicly_queryable' => true,
+        'map_meta_cap' => true,
+        'capability_type' => array( 'lb-beauty-specialist', 'lb-beauties-specialist' ),
+        'rewrite' => array('slug' => 'beauty-specialist'),
+    );
+    register_post_type('lb-beauty-specialist', $args);
+}
+add_action('init', 'lb_beauty_specialist_cpt_init', 0);
+
 
 // Register Services API Key
 function lb_set_services_api_key() {

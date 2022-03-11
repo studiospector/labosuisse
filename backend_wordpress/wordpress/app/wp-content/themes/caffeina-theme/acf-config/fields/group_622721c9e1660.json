@@ -3,6 +3,26 @@
     "title": "Campi Personalizzati: Store",
     "fields": [
         {
+            "key": "field_622b0244a3e33",
+            "label": "ID Farmacia",
+            "name": "lb_stores_store_id",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_622721cc84cbf",
             "label": "Numero di telefono",
             "name": "lb_stores_phone_number",
@@ -218,5 +238,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646839200
+    "modified": 1646985823
 }
