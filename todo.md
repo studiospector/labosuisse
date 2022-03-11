@@ -60,3 +60,20 @@ BUGFIX
 - √ lancio due immagini campi tagline e titolo invertiti e uno dei due non si vede
 - √ aggiustare blocco infobox
 - √ apertura offset nav con sticky header product
+
+
+
+----------
+
+
+
+SEZIONI DA TERMINARE
+
+- T5 Beaty Specialist
+- T5 Single News
+- T5 Promozioni
+- T6 Store Locator
+- T10 Labo nel Mondo
+
+- Filtri e Ricerche
+- Integrazione Newsletter
