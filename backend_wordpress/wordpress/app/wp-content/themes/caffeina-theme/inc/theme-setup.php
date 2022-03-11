@@ -57,7 +57,10 @@ class ThemeSetup extends Timber\Site
         // add_filter( 'timber/context', array( $this, 'add_to_context' ) );
         add_filter('timber/twig', array($this, 'lb_add_to_twig'));
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
+        add_action('init', array($this, 'lb_manage_thumbnails'));
+        add_filter('fallback_intermediate_image_sizes', array($this, 'lb_disable_pdf_thumbnails'));
         add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
+
         parent::__construct();
     }
 
@@ -74,10 +77,10 @@ class ThemeSetup extends Timber\Site
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
-        add_image_size('lb-img-size-lg', 1300, 700, true);
-        add_image_size('lb-img-size-md', 700, 400, true);
-        add_image_size('lb-img-size-sm', 400, 400, true);
-        add_image_size('lb-img-size-xs', 200, 200, true);
+        add_image_size('lb-img-size-lg', 1300, 700, false);
+        add_image_size('lb-img-size-md', 700, 400, false);
+        add_image_size('lb-img-size-sm', 400, 400, false);
+        add_image_size('lb-img-size-xs', 200, 200, false);
 
         add_theme_support('customize-selective-refresh-widgets');
 
@@ -257,6 +260,26 @@ class ThemeSetup extends Timber\Site
         }
 
         return "$theme_path/$bundle_folder/$file";
+    }
+
+    /**
+     * Manage specific thumbnail sizes
+     */
+    public function lb_manage_thumbnails() {
+        
+        foreach ( get_intermediate_image_sizes() as $size ) {
+            if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048' ) ) ) {
+                remove_image_size( $size );
+            }
+        }
+    }
+
+    /**
+     * Disable PDF preview images
+     */
+    public function lb_disable_pdf_thumbnails() {
+        $fallbacksizes = array(); 
+        return $fallbacksizes; 
     }
 
     /**
