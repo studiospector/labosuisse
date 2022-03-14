@@ -17,7 +17,7 @@
 <article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ type_8 ? ' h-100' : '' }}"{{ (type_8 and color) ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
     <div class="row{{ type_1 ? ' mobile-min-gutters' : '' }}{{ type_2_6 ? ' no-gutters' : '' }}{{ type_8 ? ' h-100' : '' }}">
         {% if images|length > 0 %}
-            <div class="card-img-wrapper{{ type_1 ? ((type_1_secondary) ? ' col-4' : ' col-6 col-md-12') : ' col-12' }}">
+            <div class="card-img-wrapper{{ type_1 ? ((type_1_secondary) ? ' col-12 col-md-4' : ' col-6 col-md-12') : ' col-12' }}">
                 <div class="card-img">
                     {{ lbPicture(images) }}
                     {% if type_2_6 %}
@@ -26,7 +26,7 @@
                 </div>
             </div>
         {% endif %}
-        <div class="{{ type_1 ? ((type_1_secondary) ? 'col-8' : 'col-6 col-md-12') : 'col-12' }}{{ type_8 ? ' h-100' : '' }}{{ type_10 ? ' card-infobox-hover' : '' }}">
+        <div class="{{ type_1 ? ((type_1_secondary) ? 'col-12 col-md-8' : 'col-6 col-md-12') : 'col-12' }}{{ type_8 ? ' h-100' : '' }}{{ type_10 ? ' card-infobox-hover' : '' }}">
             <div class="card-infobox{{ type_8 ? ' h-100' : '' }}">
                 {% include '@PathViews/components/infobox.twig' with (type_10 ? infobox|merge({subtitle: ''}) : infobox) only %}
             </div>

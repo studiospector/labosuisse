@@ -55,8 +55,16 @@
         }
 
         .infobox {
+            @include mq($until: md) {
+                text-align: center;
+            }
+
             &__tagline {
                 margin-bottom: 20px;
+
+                @include mq($until: md) {
+                    margin-top: 20px;
+                }
             }
     
             &__subtitle {
