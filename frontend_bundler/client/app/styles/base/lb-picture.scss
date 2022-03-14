@@ -21,6 +21,7 @@
         object-fit: cover;
         // object-position: 50% 50%;
         // transform: translate(-50%, -50%);
+        object-position: center center;
 
         @include mq($until: md) {
             // height: inherit;
@@ -33,13 +34,25 @@
 
         img {
             width: inherit;
-            height: auto;
+            height: inherit;
             // height: auto;
             // height: initial;
             // position: initial;
             // left: 0;
             // top: 0;
             transform: scale(1.2);
+        }
+    }
+
+    &--infobox-left {
+        img {
+            object-position: center right;
+        }
+    }
+
+    &--infobox-right {
+        img {
+            object-position: center left;
         }
     }
 }

@@ -1,4 +1,6 @@
-{% macro lbPicture(images, isParallax, isReverse) %}
+{% macro lbPicture(images, isParallax, position) %}
+
+    {% set position = position|default('center') %}
 
 	{% set classes = [] %}
 
@@ -10,6 +12,9 @@
 	{% for variant in images.variants|default([parallaxVariant]) %}
 		{% set classes = classes|merge(['lb-picture--' ~ variant]) %}
 	{% endfor %}
+
+    {% set classes = classes|merge(['lb-picture--infobox-' ~ position]) %}
+
 	{% if class %}
 		{% set classes = classes|merge([class]) %}
 	{% endif %}
