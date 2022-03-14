@@ -8,6 +8,31 @@
     }
 
 
+    &__left-wrapper {
+        @include mq($until: lg) {
+            order: 1;
+        }
+
+        .lb-store-locator__card {
+            @include mq($from: lg) {
+                display: none;
+            }
+        }
+    }
+
+    &__right-wrapper {
+        @include mq($until: lg) {
+            order: 0;
+        }
+
+        .lb-store-locator__card {
+            @include mq($until: lg) {
+                display: none;
+            }
+        }
+    }
+
+
     &__filter {
         display: flex;
         justify-content: space-between;
@@ -29,13 +54,16 @@
     }
 
 
-    &__list {
-        
-    }
+    // &__list {
+    // }
 
 
     &__map {
         min-height: 430px;
+
+        @include mq($until: lg) {
+            margin-bottom: 30px;
+        }
     }
 
 
@@ -158,6 +186,10 @@
         .card {
             .card-img {
                 height: 265px;
+
+                @include mq($until: lg) {
+                    height: auto;
+                }
             }
         }
     }

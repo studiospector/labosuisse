@@ -25,7 +25,7 @@
     {# Store locator #}
     <div class="lb-store-locator caffeina-store-locator js-caffeina-store-locator js-store-locator">
         <div class="row">
-            <div class="col-12 col-lg-4">
+            <div class="lb-store-locator__left-wrapper col-12 col-lg-4">
                 <div class="lb-store-locator__filter">
                     <div class="lb-store-locator__filter__search">
                         {% include '@PathViews/components/fields/input.twig' with store_locator.search only %}
@@ -39,8 +39,11 @@
                     <div class="lb-store-locator__list caffeina-store-locator__list js-caffeina-store-locator-list"></div>
                     <div class="caffeina-store-locator__infowindows js-caffeina-store-locator-infowindows"></div>
                 </div>
+                <div class="lb-store-locator__card">
+                    {% include '@PathViews/components/card.twig' with card only %}
+                </div>
             </div>
-            <div class="col-12 col-lg-8">
+            <div class="lb-store-locator__right-wrapper col-12 col-lg-8">
                 <div class="lb-store-locator__map-wrapper">
                     <div class="lb-store-locator__map js-caffeina-store-locator-map" data-map-country="{{ store_locator.map_country }}" data-map-lang="{{ store_locator.map_lang }}"></div>
                     <div class="lb-store-locator__card">
