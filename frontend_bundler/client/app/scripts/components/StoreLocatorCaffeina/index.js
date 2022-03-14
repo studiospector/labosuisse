@@ -424,6 +424,19 @@ class StoreLocatorCaffeina extends Component {
 
 
 
+    closeAllInfowindowOutside = () => {
+        const infowindows = qsa('.caffeina-store-locator__infowindow', this.ui.infowindows)
+
+        infowindows.forEach(el => {
+            el.classList.remove('caffeina-store-locator__infowindow--open')
+        });
+
+        this.ui.list.classList.remove('caffeina-store-locator__list--hide')
+        this.ui.infowindows.classList.remove('caffeina-store-locator__infowindows--show')
+    }
+
+
+
     addInfowindowInside = (google, map, marker, markerData, i) => {
         const infowindow = new google.maps.InfoWindow({
             content: `
@@ -502,6 +515,8 @@ class StoreLocatorCaffeina extends Component {
 
         autocomplete.addListener("place_changed", () => {
             let place = autocomplete.getPlace()
+
+            this.closeAllInfowindowOutside()
 
             if (!place.geometry || !place.geometry.location) {
                 // User entered the name of a Place that was not suggested and
