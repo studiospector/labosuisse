@@ -4,6 +4,7 @@ import { on, qsa, qs } from '@okiba/dom';
 import axios from 'axios';
 
 import { Loader } from '@googlemaps/js-api-loader';
+import { MarkerClusterer } from '@googlemaps/markerclusterer';
 
 const ui = {
     map: '.js-caffeina-store-locator-map',
@@ -265,6 +266,13 @@ class StoreLocatorCaffeina extends Component {
         on(qsa('.js-caffeina-store-locator-store-open'), 'click', this.openInfowindowOutside)
         on(qsa('.js-caffeina-store-locator-store-close'), 'click', this.closeInfowindowOutside)
 
+        // Add a marker clusterer to manage the markers
+        new MarkerClusterer(this.map, this.map.markers, {
+            // gridSize: 10,
+            // imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
+            imagePath: window.location.origin + "/wp-content/themes/caffeina-theme/assets/images/map/markerclusterer/"
+        })
+
         // Center map
         this.centerMap(google, this.map)
 
@@ -274,6 +282,7 @@ class StoreLocatorCaffeina extends Component {
         // Init search with autocomplete
         this.search(google, this.map)
 
+        // Update Markers/Stores on map binding
         google.maps.event.addListener(this.map, 'bounds_changed', this.bindMap)
 
         // Set "href" to open maps app
