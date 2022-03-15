@@ -57,7 +57,7 @@
         "lodash.clonedeep": "^4.5.0",
         "node-fetch": "^2.6.0",
         "npm": "^7.24.1",
-        "photoswipe": "git://github.com/dimsemenov/photoswipe.git#v5-beta",
+        "photoswipe": "^5.2.0-beta.2",
         "raw-loader": "^4.0.1",
         "sass": "^1.49.7",
         "sass-mq": "^6.0.0",
