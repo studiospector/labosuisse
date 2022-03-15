@@ -295,8 +295,9 @@ class StoreLocatorCaffeina extends Component {
                     },
                     label: {
                         text: String(count),
-                        color: "rgba(255,255,255,0.9)",
+                        color: "#FFFFFF",
                         fontSize: "12px",
+                        fontWeight: "700",
                     },
                     // adjust zIndex to be above other markers
                     zIndex: Number(this.google.maps.Marker.MAX_ZINDEX) + count,
