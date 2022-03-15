@@ -213,7 +213,21 @@ class StoreLocatorCaffeina extends Component {
             // center: { lat: 41.58600176557397, lng: 12.840363935951498 },
             zoom: this.mapZoom,
             styles: this.mapStyles,
-            // controls: false,
+            // Controls
+            mapTypeControl: false,
+            streetViewControl: false,
+            fullscreenControl: false,
+            // Bounds and Zoom restictions
+            // minZoom: this.mapZoom - 3,
+            // maxZoom: this.mapZoom + 3,
+            // restriction: {
+            //     latLngBounds: {
+            //         north: -10,
+            //         south: -40,
+            //         east: 160,
+            //         west: 100,
+            //     },
+            // },
         }
 
         // Google map Loader
@@ -321,9 +335,11 @@ class StoreLocatorCaffeina extends Component {
             icon: window.location.origin + '/wp-content/themes/caffeina-theme/assets/images/map/markers/marker.svg'
         })
 
+        marker.position.storeID = i
+
         map.markers.push(marker)
 
-        // google.maps.event.addListener(marker, 'click', this.openInfowindowOutside)
+        google.maps.event.addListener(marker, 'click', this.openInfowindowOutsideFromMarker)
 
         // Add store to list
         this.addStoreToList(google, map, marker, markerData, i)
@@ -403,6 +419,24 @@ class StoreLocatorCaffeina extends Component {
         const storeID = open.dataset.storeId
         const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindows)
 
+        infowindow.classList.add('caffeina-store-locator__infowindow--open')
+
+        this.ui.list.classList.add('caffeina-store-locator__list--hide')
+        this.ui.infowindows.classList.add('caffeina-store-locator__infowindows--show')
+
+        this.map.setCenter({
+            lat: this.map.markers[storeID].position.lat(),
+            lng: this.map.markers[storeID].position.lng(),
+        })
+        this.map.setZoom(15)
+    }
+
+
+
+    openInfowindowOutsideFromMarker = (ev) => {
+        const storeID = ev.latLng.storeID
+        const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindows)
+        
         infowindow.classList.add('caffeina-store-locator__infowindow--open')
 
         this.ui.list.classList.add('caffeina-store-locator__list--hide')
@@ -598,13 +632,17 @@ class StoreLocatorCaffeina extends Component {
                     const marker = new google.maps.Marker({
                         position: pos,
                         map: map,
+                        animation: google.maps.Animation.DROP,
                     })
                     map.setCenter(pos)
                     map.setZoom(8)
-                    map.markers.push(marker)
+                    // map.markers.push(marker)
 
                     // Remove loader
                     this.removeLoader()
+
+                    // Reset list
+                    this.closeAllInfowindowOutside()
                 },
                     () => {
                         handleLocationError(true)
