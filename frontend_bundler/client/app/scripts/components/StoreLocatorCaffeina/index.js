@@ -9,7 +9,7 @@ import { MarkerClusterer } from '@googlemaps/markerclusterer';
 const ui = {
     map: '.js-caffeina-store-locator-map',
     list: '.js-caffeina-store-locator-list',
-    infowindows: '.js-caffeina-store-locator-infowindows',
+    infowindowsWrapper: '.js-caffeina-store-locator-infowindows',
     geolocation: '.js-caffeina-store-locator-geolocation',
     search: '.js-caffeina-store-locator-search',
     loader: '.js-caffeina-store-locator-loader',
@@ -21,6 +21,8 @@ class StoreLocatorCaffeina extends Component {
     constructor({ el }) {
         super({ el, ui })
 
+        // Base vars
+        this.google = null
         this.map = null
         this.stores = null
         this.prevInfowindow = false
@@ -241,10 +243,12 @@ class StoreLocatorCaffeina extends Component {
         this.loader
             .load()
             .then((google) => {
+                // Set google loader instance
+                this.google = google
                 // Get stores
                 this.getStores().then((res) => { this.stores = res }).then(() => {
                     // Init Map
-                    this.initMap(google, this.ui.map, this.mapParameters)
+                    this.initMap(this.ui.map)
                 })
             })
             .catch((error) => {
@@ -253,51 +257,45 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
     /**
-     * Init map
+     * Init Map
      * 
-     * @param {*} google 
-     * @param {*} mapEl 
-     * @param {*} mapParameters 
-     * @returns 
+     * @param {HTMLElement} mapEl Map element
      */
-    initMap = (google, mapEl, mapParameters) => {
+    initMap = (mapEl) => {
         // Init map
-        this.map = new google.maps.Map(mapEl, mapParameters)
+        this.map = new this.google.maps.Map(mapEl, this.mapParameters)
 
-        // Init map markers
+        // Init map markers array
         this.map.markers = []
 
         // Add markers
         if (this.stores.length > 0) {
             this.stores.forEach((markerData, i) => {
-                this.addMarker(google, this.map, markerData, i);
+                this.addMarker(markerData, i);
             })
         }
 
         // Add listener to open and close infowindow outside
-        on(qsa('.js-caffeina-store-locator-store-open'), 'click', this.openInfowindowOutside)
+        on(qsa('.js-caffeina-store-locator-store-open'), 'click', this.openInfowindowOutsideDispatcher)
         on(qsa('.js-caffeina-store-locator-store-close'), 'click', this.closeInfowindowOutside)
 
         // Add a marker clusterer to manage the markers
         new MarkerClusterer(this.map, this.map.markers, {
-            // gridSize: 10,
-            // imagePath: "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m",
             imagePath: window.location.origin + "/wp-content/themes/caffeina-theme/assets/images/map/markerclusterer/"
         })
 
         // Center map
-        this.centerMap(google, this.map)
+        this.centerMap()
 
         // Geolocation service
-        this.geolocation(google, this.map)
+        this.geolocation()
 
         // Init search with autocomplete
-        this.search(google, this.map)
+        this.search()
 
         // Update Markers/Stores on map binding
-        google.maps.event.addListener(this.map, 'bounds_changed', this.bindMap)
+        this.google.maps.event.addListener(this.map, 'bounds_changed', this.bindMap)
 
         // Set "href" to open maps app
         this.setOpenMapAppLink()
@@ -307,7 +305,11 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
+    /**
+     * Get all Stores
+     * 
+     * @returns Stores fetched
+     */
     getStores = async () => {
         let stores = []
 
@@ -322,38 +324,48 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
-    addMarker = (google, map, markerData, i) => {
-        const latLng = {
-            lat: parseFloat(markerData.geo_location.lat),
-            lng: parseFloat(markerData.geo_location.lng)
-        }
-
-        const marker = new google.maps.Marker({
-            position: latLng,
-            map: map,
+    /**
+     * Add single Marker to Map
+     * 
+     * @param {Object} markerData Store data
+     * @param {Number} i Incremental counter
+     */
+    addMarker = (markerData, i) => {
+        // Create Marker
+        const marker = new this.google.maps.Marker({
+            position: {
+                lat: parseFloat(markerData.geo_location.lat),
+                lng: parseFloat(markerData.geo_location.lng)
+            },
+            map: this.map,
             icon: window.location.origin + '/wp-content/themes/caffeina-theme/assets/images/map/markers/marker.svg'
         })
 
+        // Add Marker to Map Marker array
         marker.position.storeID = i
+        this.map.markers.push(marker)
 
-        map.markers.push(marker)
-
-        google.maps.event.addListener(marker, 'click', this.openInfowindowOutsideFromMarker)
+        // Open Infowindow from Marker
+        this.google.maps.event.addListener(marker, 'click', this.openInfowindowOutsideFromMarkerDispatcher)
 
         // Add store to list
-        this.addStoreToList(google, map, marker, markerData, i)
+        this.addStoreToList(markerData, i)
 
         // If you want to add Infowindow outside Map
-        this.addInfowindowOutside(google, map, marker, markerData, i)
+        this.addInfowindowOutside(markerData, i)
 
         // If you want to add Infowindow into Map on Marker
-        // this.addInfowindowInside(google, map, marker, markerData, i)
+        // this.addInfowindowInside(marker, markerData, i)
     }
 
 
-
-    addStoreToList = (google, map, marker, markerData, i) => {
+    /**
+     * Store element render into list
+     * 
+     * @param {Object} markerData Store data
+     * @param {Number} i Incremental counter
+     */
+    addStoreToList = (markerData, i) => {
         const infowindow = `
             <div class="lb-store-locator__store caffeina-store-locator__store" data-store-lat="${markerData.geo_location.lat}" data-store-lng="${markerData.geo_location.lng}">
                 <div class="lb-store-locator__store__shield">
@@ -381,8 +393,13 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
-    addInfowindowOutside = (google, map, marker, markerData, i) => {
+    /**
+     * Infowindow element render into infowindows list
+     * 
+     * @param {Object} markerData Store data
+     * @param {Number} i Incremental counter
+     */
+    addInfowindowOutside = (markerData, i) => {
         const infowindow = `
             <div class="lb-store-locator__infowindow caffeina-store-locator__infowindow" data-store-id="${i}">
                 <div class="lb-store-locator__infowindow__close js-caffeina-store-locator-store-close" data-store-id="${i}">
@@ -409,39 +426,51 @@ class StoreLocatorCaffeina extends Component {
                 </div>
             </div>
         `
-        this.ui.infowindows.insertAdjacentHTML('beforeend', infowindow)
+        this.ui.infowindowsWrapper.insertAdjacentHTML('beforeend', infowindow)
     }
 
 
-
-    openInfowindowOutside = (ev) => {
+    /**
+     * Dispatch event to open Infowindow outside Map from Item list
+     * 
+     * @param {EventListenerObject} ev Click event
+     */
+    openInfowindowOutsideDispatcher = (ev) => {
         const open = ev.target.closest('.js-caffeina-store-locator-store-open')
         const storeID = open.dataset.storeId
-        const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindows)
 
-        infowindow.classList.add('caffeina-store-locator__infowindow--open')
-
-        this.ui.list.classList.add('caffeina-store-locator__list--hide')
-        this.ui.infowindows.classList.add('caffeina-store-locator__infowindows--show')
-
-        this.map.setCenter({
-            lat: this.map.markers[storeID].position.lat(),
-            lng: this.map.markers[storeID].position.lng(),
-        })
-        this.map.setZoom(15)
+        this.openInfowindowOutside(storeID)
     }
 
 
-
-    openInfowindowOutsideFromMarker = (ev) => {
+    /**
+     * Dispatch event to open Infowindow outside Map from Marker in Map
+     * 
+     * @param {EventListenerObject} ev Click event
+     */
+    openInfowindowOutsideFromMarkerDispatcher = (ev) => {
         const storeID = ev.latLng.storeID
-        const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindows)
         
+        this.openInfowindowOutside(storeID)
+    }
+
+
+    /**
+     * Open Infowindow outside Map
+     * 
+     * @param {Number} storeID Store ID reference
+     */
+    openInfowindowOutside = (storeID) => {
+        // Select Infowindow to open
+        const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindowsWrapper)
         infowindow.classList.add('caffeina-store-locator__infowindow--open')
 
+        // Hide Store list
         this.ui.list.classList.add('caffeina-store-locator__list--hide')
-        this.ui.infowindows.classList.add('caffeina-store-locator__infowindows--show')
+        // Show Infowindows list
+        this.ui.infowindowsWrapper.classList.add('caffeina-store-locator__infowindows--show')
 
+        // Bound map on Store
         this.map.setCenter({
             lat: this.map.markers[storeID].position.lat(),
             lng: this.map.markers[storeID].position.lng(),
@@ -450,60 +479,83 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
+    /**
+     * Close Infowindow
+     * 
+     * @param {EventListenerObject} ev Click event
+     */
     closeInfowindowOutside = (ev) => {
         const close = ev.target.closest('.js-caffeina-store-locator-store-close')
         const storeID = close.dataset.storeId
-        const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindows)
+        const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindowsWrapper)
 
         infowindow.classList.remove('caffeina-store-locator__infowindow--open')
 
         this.ui.list.classList.remove('caffeina-store-locator__list--hide')
-        this.ui.infowindows.classList.remove('caffeina-store-locator__infowindows--show')
+        this.ui.infowindowsWrapper.classList.remove('caffeina-store-locator__infowindows--show')
 
         // Re-center map
-        this.centerMap(google, this.map)
+        this.centerMap(this.map)
     }
 
 
-
+    /**
+     * Close all Infowindows
+     */
     closeAllInfowindowOutside = () => {
-        const infowindows = qsa('.caffeina-store-locator__infowindow', this.ui.infowindows)
+        // Get all Infowindows
+        const infowindows = qsa('.caffeina-store-locator__infowindow', this.ui.infowindowsWrapper)
 
+        // Close all Infowindows 
         infowindows.forEach(el => {
             el.classList.remove('caffeina-store-locator__infowindow--open')
         });
 
+        // Show Store list
         this.ui.list.classList.remove('caffeina-store-locator__list--hide')
-        this.ui.infowindows.classList.remove('caffeina-store-locator__infowindows--show')
+        // Hide Infowindows list
+        this.ui.infowindowsWrapper.classList.remove('caffeina-store-locator__infowindows--show')
     }
 
 
-
-    addInfowindowInside = (google, map, marker, markerData, i) => {
-        const infowindow = new google.maps.InfoWindow({
+    /**
+     * Add GMap Marker Infowindow inside Map
+     * 
+     * @param {Marker} marker GMap Marker Object
+     * @param {Object} markerData Store data
+     * @param {Number} i Incremental counter
+     */
+    addInfowindowInside = (marker, markerData, i) => {
+        // Init new GMap Infowindow
+        const infowindow = new this.google.maps.InfoWindow({
             content: `
                 <div class="caffeina-store-locator__map__infowindow">
                     ${markerData.store}
                 </div>
             `
         })
-        google.maps.event.addListener(marker, 'click', () => {
+        // Open GMap Infowindow on Marker click
+        this.google.maps.event.addListener(marker, 'click', () => {
             if (this.prevInfowindow) {
                 this.prevInfowindow.close()
             }
             this.prevInfowindow = infowindow
-            infowindow.open(map, marker)
+            infowindow.open(this.map, marker)
         })
     }
 
 
-
+    /**
+     * Update Store list items based on Marker in view on Map drag/change
+     */
     bindMap = () => {
         let founded = []
         let notFounded = []
+
+        // Get all Store list items
         const elems = qsa('.caffeina-store-locator__store', this.ui.list)
 
+        // Filter Store list items based on Marker currently visible on Map
         for (let i = 0; i < this.map.markers.length; i++) {
             const markerLat = this.map.markers[i].position.lat()
             const markerLng = this.map.markers[i].position.lng()
@@ -520,6 +572,7 @@ class StoreLocatorCaffeina extends Component {
             }
         }
 
+        // Show Store list items founded on Map
         founded.forEach((elFounded) => {
             elems.forEach(el => {
                 if ((el.dataset.storeLat == elFounded.lat) && (el.dataset.storeLng == elFounded.lng)) {
@@ -528,6 +581,7 @@ class StoreLocatorCaffeina extends Component {
             })
         })
 
+        // Hide Store list items not founded on Map
         notFounded.forEach((elNotFounded) => {
             elems.forEach(el => {
                 if ((el.dataset.storeLat == elNotFounded.lat) && (el.dataset.storeLng == elNotFounded.lng)) {
@@ -536,6 +590,7 @@ class StoreLocatorCaffeina extends Component {
             })
         })
 
+        // Add no results Message
         if (founded.length <= 0) {
             this.ui.notFound.classList.add('caffeina-store-locator__notfound--show')
         } else {
@@ -544,81 +599,76 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
     /**
-     * Search with autocomplete
+     * Init Search field with GMap Autocomplete API
      */
-    search = (google, map) => {
-        const autocomplete = new google.maps.places.Autocomplete(this.ui.search, {
+    search = () => {
+        const autocomplete = new this.google.maps.places.Autocomplete(this.ui.search, {
             componentRestrictions: { country: this.mapCountry },
             // fields: ["address_components", "geometry", "icon", "name"],
             // types: ["establishment"],
         })
-        autocomplete.bindTo("bounds", map)
+        autocomplete.bindTo("bounds", this.map)
 
         autocomplete.addListener("place_changed", () => {
             let place = autocomplete.getPlace()
 
             this.closeAllInfowindowOutside()
 
+            // User entered the name of a Place that was not suggested and
+            // pressed the Enter key, or the Place Details request failed
             if (!place.geometry || !place.geometry.location) {
-                // User entered the name of a Place that was not suggested and
-                // pressed the Enter key, or the Place Details request failed
                 // alert("Error: No details available for input: '" + place.name + "'.")
                 return
+
+            // If the place has a geometry, then show it on a map
             } else {
-                // If the place has a geometry, then present it on a map
                 if (place.geometry.viewport) {
-                    map.fitBounds(place.geometry.viewport)
-                    map.setZoom(12)
+                    this.map.fitBounds(place.geometry.viewport)
+                    this.map.setZoom(12)
                 } else {
-                    map.setCenter(place.geometry.location)
-                    map.setZoom(6)
+                    this.map.setCenter(place.geometry.location)
+                    this.map.setZoom(6)
                 }
                 // bindMap(newMap)
-                // handleSearch(place, map, google)
+                // handleSearch(place, this.map, this.google)
             }
         })
     }
 
 
-
     /**
-     * Centers the map showing all markers in view
-     * 
-     * @param {*} map 
-     * @param {*} google 
+     * Center Map based on all Markers in view
      */
-    centerMap = (google, map) => {
-        if (map.markers && map.markers.length > 0) {
-            const bounds = new google.maps.LatLngBounds()
-            map.markers.forEach(function (marker) {
+    centerMap = () => {
+        if (this.map.markers && this.map.markers.length > 0) {
+            const bounds = new this.google.maps.LatLngBounds()
+            this.map.markers.forEach(function (marker) {
                 bounds.extend({
                     lat: marker.position.lat(),
                     lng: marker.position.lng()
                 })
             })
 
-            if (map.markers.length == 1) {
-                map.setCenter(bounds.getCenter())
+            if (this.map.markers.length == 1) {
+                this.map.setCenter(bounds.getCenter())
             } else {
-                map.fitBounds(bounds)
+                this.map.fitBounds(bounds)
             }
         } else {
-            map.setCenter({
+            this.map.setCenter({
                 lat: 41.58600176557397,
                 lng: 12.840363935951498,
             })
-            map.setZoom(5.5)
+            this.map.setZoom(5.5)
         }
     }
 
 
-
     /**
-     * Set current location on map
+     * Init Geolocation of current User and show Marker on Map
      */
-    geolocation = (google, map) => {
+    geolocation = () => {
         this.ui.geolocation.addEventListener("click", () => {
             // Add loader
             this.addLoader()
@@ -629,14 +679,14 @@ class StoreLocatorCaffeina extends Component {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude,
                     }
-                    const marker = new google.maps.Marker({
+                    const marker = new this.google.maps.Marker({
                         position: pos,
-                        map: map,
-                        animation: google.maps.Animation.DROP,
+                        map: this.map,
+                        animation: this.google.maps.Animation.DROP,
                     })
-                    map.setCenter(pos)
-                    map.setZoom(8)
-                    // map.markers.push(marker)
+                    this.map.setCenter(pos)
+                    this.map.setZoom(8)
+                    // this.map.markers.push(marker)
 
                     // Remove loader
                     this.removeLoader()
@@ -662,9 +712,8 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
     /**
-     * Open directions in map app
+     * Set link to GMap or Apple Maps APP based on device
      */
     setOpenMapAppLink = () => {
         const buttons = qsa('.js-caffeina-store-locator-store-link')
@@ -686,13 +735,17 @@ class StoreLocatorCaffeina extends Component {
     }
 
 
-
+    /**
+     * Add Loading Overlay to Map
+     */
     addLoader = () => {
         this.ui.loader.classList.add('caffeina-store-locator__loader--loading')
     }
 
 
-
+    /**
+     * Remove Loading Overlay to Map
+     */
     removeLoader = () => {
         this.ui.loader.classList.remove('caffeina-store-locator__loader--loading')
     }
