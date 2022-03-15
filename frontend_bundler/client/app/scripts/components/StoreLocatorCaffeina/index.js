@@ -276,13 +276,43 @@ class StoreLocatorCaffeina extends Component {
             })
         }
 
+        // Custom Marker Clusterer render 
+        this.customMarkerClustererRender = {
+            
+            render: ({ count, position }, stats) => {
+
+                const svg = window.btoa(`
+                    <svg fill="#b52a2d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+                        <circle cx="120" cy="120" opacity=".8" r="70" />    
+                    </svg>`
+                )
+                
+                return new this.google.maps.Marker({
+                    position,
+                    icon: {
+                        url: `data:image/svg+xml;base64,${svg}`,
+                        scaledSize: new this.google.maps.Size(75, 75),
+                    },
+                    label: {
+                        text: String(count),
+                        color: "rgba(255,255,255,0.9)",
+                        fontSize: "12px",
+                    },
+                    // adjust zIndex to be above other markers
+                    zIndex: Number(this.google.maps.Marker.MAX_ZINDEX) + count,
+                })
+            },
+        }
+
         // Add listener to open and close infowindow outside
         on(qsa('.js-caffeina-store-locator-store-open'), 'click', this.openInfowindowOutsideDispatcher)
         on(qsa('.js-caffeina-store-locator-store-close'), 'click', this.closeInfowindowOutside)
 
         // Add a marker clusterer to manage the markers
-        new MarkerClusterer(this.map, this.map.markers, {
-            imagePath: window.location.origin + "/wp-content/themes/caffeina-theme/assets/images/map/markerclusterer/"
+        new MarkerClusterer({
+            map: this.map,
+            markers: this.map.markers,
+            renderer: this.customMarkerClustererRender,
         })
 
         // Center map
