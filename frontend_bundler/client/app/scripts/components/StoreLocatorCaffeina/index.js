@@ -282,16 +282,16 @@ class StoreLocatorCaffeina extends Component {
             render: ({ count, position }, stats) => {
 
                 const svg = window.btoa(`
-                    <svg fill="#b52a2d" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
-                        <circle cx="120" cy="120" opacity=".8" r="70" />    
-                    </svg>`
-                )
+                    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="22" cy="22" r="22" fill="#B52A2D" opacity=".8" />
+                    </svg>
+                `)
                 
                 return new this.google.maps.Marker({
                     position,
                     icon: {
                         url: `data:image/svg+xml;base64,${svg}`,
-                        scaledSize: new this.google.maps.Size(75, 75),
+                        scaledSize: new this.google.maps.Size(44, 44),
                     },
                     label: {
                         text: String(count),
