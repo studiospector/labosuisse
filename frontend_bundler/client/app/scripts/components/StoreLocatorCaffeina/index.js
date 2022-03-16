@@ -526,7 +526,7 @@ class StoreLocatorCaffeina extends Component {
         this.ui.infowindowsWrapper.classList.remove('caffeina-store-locator__infowindows--show')
 
         // Re-center map
-        this.centerMap(this.map)
+        // this.centerMap(this.map)
     }
 
 
