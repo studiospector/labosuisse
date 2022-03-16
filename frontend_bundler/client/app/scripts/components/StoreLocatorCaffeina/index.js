@@ -481,7 +481,10 @@ class StoreLocatorCaffeina extends Component {
      */
     openInfowindowOutsideFromMarkerDispatcher = (ev) => {
         const storeID = ev.latLng.storeID
-        
+
+        // Close all Infowindows
+        this.closeAllInfowindowOutside()
+        // Open Infowindow
         this.openInfowindowOutside(storeID)
     }
 
