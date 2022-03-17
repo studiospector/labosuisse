@@ -23,6 +23,7 @@ import Product from './Product'
 import Accordion from './Accordion'
 import StoreLocatorCaffeina from './StoreLocatorCaffeina'
 import StoreLocator from './StoreLocator'
+import OpenMapAppLink from './OpenMapAppLink'
 
 const components = {
     scrollbar: {
@@ -123,6 +124,11 @@ const components = {
     storeLocator: {
         selector: '.js-store-locator',
         type: StoreLocator,
+        optional: true
+    },
+    openMapAppLink: {
+        selector: '.js-open-map-app-link',
+        type: OpenMapAppLink,
         optional: true
     },
 }

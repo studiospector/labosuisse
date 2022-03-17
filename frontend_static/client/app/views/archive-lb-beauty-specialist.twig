@@ -12,18 +12,17 @@
     {{ content|raw }}
     <hr class="lb-separator lb-separator--small" data-variant="small">
 
-    {# Filters #}
-    <div class="container">  
+    <div class="container">
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
-                <form action="" method="get" class="archive-lb-beauty-specialist__search">
+                <form action="" method="get" class="archive-lb-beauty-specialist__search js-geolocation" data-geolocation->
                     {% include '@PathViews/components/fields/input.twig' with search only %}
                     <div class="lb-geolocation">
                         {% include '@PathViews/components/icon.twig' with {name: 'geolocation'} %}
                     </div>
                 </form>
                 {% if num_posts is not null and num_posts >= 0 %}
-                    <div class="lb-posts-count">Risultati: <span>{{ num_posts }}</span></div>
+                    <div class="lb-posts-count">{{ num_posts_label }} <span>{{ num_posts }}</span></div>
                 {% endif %}
                 {% if items != null and num_posts > 0 %}
                     <div class="archive-lb-beauty-specialist__list">
@@ -41,7 +40,10 @@
                                                 paragraph: item.address ~ '<br>' ~ item.phone,
                                                 cta: {
                                                     url: '#',
-                                                    title: 'Vai alle indicazioni',
+                                                    target: '_blank',
+                                                    title: card_link_label,
+                                                    class: 'js-open-map-app-link',
+                                                    attributes: ['data-lat="'~ item.geo_location.lat ~'"', 'data-lng="'~ item.geo_location.lng ~'"'],
                                                     variants: ['quaternary']
                                                 }
                                             },

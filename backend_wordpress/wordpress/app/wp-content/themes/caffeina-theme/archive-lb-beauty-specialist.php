@@ -11,13 +11,16 @@ $context = [
     'content' => apply_filters('the_content', $page_archive->post_content),
     'search' => [
         'type' => 'search',
-        'name' => "city",
-        'label' => "Inserisci provincia",
+        'name' => 'city',
+        'label' => __('Inserisci provincia', 'labo-suisse-theme'),
+        'value' => $_GET['city'] ? $_GET['city'] : null,
         'disabled' => false,
         'required' => false,
         'autocomplete' => 'off',
         'variants' => ['tertiary'],
     ],
+    'card_link_label' => __('Vai alle indicazioni', 'labo-suisse-theme'),
+    'num_posts_label' => __('Risultati:', 'labo-suisse-theme'),
     'num_posts' => $items['count'],
     'items' => $items['items'],
 ];
