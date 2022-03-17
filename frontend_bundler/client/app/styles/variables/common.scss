@@ -20,7 +20,7 @@ $font-size-default: 16px;
 // TRANSITIONS
 $transition__base-1: all .2s ease;
 $transition__bezier-1: all .5s cubic-bezier(.25,1.7,.35,.8);
-$base-transition: .2s ease-out 0s;
+$transition__base: .2s ease-out 0s;
 
 @import "./uikit";
 @import "./layout";
