@@ -175,6 +175,25 @@ ul.lb-arrow-list {
 
 
 
+.caffeina-base-loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: map-get($colors, "white");
+    opacity: 1;
+    visibility: hidden;
+    z-index: 10;
+
+    &--loading {
+        opacity: 0.5;
+        visibility: visible;
+    }
+}
+
+
+
 .lb-geolocation {
     display: flex;
     margin-left: 20px;
