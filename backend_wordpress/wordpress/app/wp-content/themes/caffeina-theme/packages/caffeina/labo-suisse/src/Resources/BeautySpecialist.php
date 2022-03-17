@@ -2,6 +2,8 @@
 
 namespace Caffeina\LaboSuisse\Resources;
 
+use Carbon\Carbon;
+
 class BeautySpecialist
 {
     private $today = null;
@@ -10,17 +12,16 @@ class BeautySpecialist
     public function __construct()
     {
         $this->city = $_GET['city'] ?? null;
-        $this->today  = date("Ymd",mktime(0,0,0,date("m"),date("d"),date("Y")));
+        $this->today  = Carbon::now()->format('Ymd');
     }
 
     public function all()
     {
-        $items = [];
-
-        if(is_null($this->city)) {
-            return $items;
+        if (is_null($this->city)) {
+            return null;
         }
 
+        $items = [];
         $stores = $this->getStores($_GET['city']);
         $posts = $this->getBeautySpecialist($stores);
 
@@ -28,7 +29,7 @@ class BeautySpecialist
             $store = get_post(get_field('lb_beauty_specialist_store', $post->ID));
             $date = get_field('lb_beauty_specialist_date', $post->ID);
 
-            $items[$date]['date'] = \DateTime::createFromFormat('Ymd',$date)->format('l, d F Y');
+            $items[$date]['date'] = $this->getDate($date);
             $items[$date]['items'][] = [
                 'store_id' => get_field('lb_beauty_specialist_store', $post->ID),
                 'expired' => strtotime($date) < strtotime('now'),
@@ -42,6 +43,13 @@ class BeautySpecialist
         ksort($items);
 
         return $items;
+    }
+
+    private function getDate($date)
+    {
+        $localizedDate = Carbon::createFromFormat('Ymd',$date)->locale('it_IT');
+
+        return ucfirst($localizedDate->dayName) .  ", {$localizedDate->day} " . ucfirst($localizedDate->monthName) . " {$localizedDate->year}" ;
     }
 
     private function getStores($city)

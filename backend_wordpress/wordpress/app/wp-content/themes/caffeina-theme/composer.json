@@ -4,7 +4,8 @@
   "type": "library",
   "require": {
     "timber/timber": "^1.19.1",
-    "caffeina/labo-suisse":"@dev"
+    "caffeina/labo-suisse":"@dev",
+    "nesbot/carbon": "^2.57.0"
   },
   "license": "MIT",
   "repositories": {
