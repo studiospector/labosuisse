@@ -504,6 +504,46 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_623201c438d2c",
+            "label": "Beauty Specialist",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6232017f38d2b",
+            "label": "Pagina Archivio Beauty Specialist",
+            "name": "lb_archive_beauty_specialist_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
             "key": "field_622741428fdca",
             "label": "API Key",
             "name": "",
@@ -559,5 +599,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646912518
+    "modified": 1647444683
 }

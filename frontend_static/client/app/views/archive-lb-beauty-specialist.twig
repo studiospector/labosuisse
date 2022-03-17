@@ -1,0 +1,57 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'archive-lb-beauty-specialist' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {{ content|raw }}
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Filters #}
+    <div class="container">  
+        <div class="row">
+            <div class="col-12 col-md-6 offset-md-3">
+                <form action="" method="get" class="archive-lb-beauty-specialist__search">
+                    {% include '@PathViews/components/fields/input.twig' with search only %}
+                    <div class="lb-geolocation">
+                        {% include '@PathViews/components/icon.twig' with {name: 'geolocation'} %}
+                    </div>
+                </form>
+                {% if items %}
+                    <div class="archive-lb-beauty-specialist__list">
+                        {% for dates in items %}
+                            <div class="archive-lb-beauty-specialist__list-block">
+                                <div class="archive-lb-beauty-specialist__list__date">
+                                    {% include '@PathViews/components/icon.twig' with {name: 'calendar'} %}
+                                    <span></span>
+                                </div>
+                                {% for item in dates %}
+                                    <div class="archive-lb-beauty-specialist__list__item">
+                                        {% include '@PathViews/components/card.twig' with {
+                                            infobox: {
+                                                subtitle: item.store,
+                                                paragraph: item.address ~ '<br>' ~ item.phone,
+                                                cta: {
+                                                    url: '#',
+                                                    title: 'Vai alle indicazioni',
+                                                    variants: ['quaternary']
+                                                }
+                                            },
+                                            variants: ['type-2']
+                                        } only %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -150,6 +150,32 @@
             "return_format": "value",
             "wpml_cf_preferences": 2,
             "save_other_choice": 0
+        },
+        {
+            "key": "field_623205f1b5bcf",
+            "label": "Grandezza Blocco",
+            "name": "lb_block_infobox_width",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "full": "Big",
+                "medium": "Medium",
+                "small": "Small"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "full",
+            "layout": "vertical",
+            "return_format": "value",
+            "wpml_cf_preferences": 1,
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -170,5 +196,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644276264
+    "modified": 1647445607
 }

@@ -5,8 +5,9 @@
 {% if textAlign %}
   {% set classes = classes|default([])|merge(['text-' ~ textAlign]) %}
 {% endif %}
-{% if container %}
-  {% set classes = classes|default([])|merge(['container']) %}
+{% if container_width %}
+  {% set width = (container_width == 'full') ? null : (container_width == 'medium') ? 'col-12 col-md-8' : 'col-12 col-md-6' %}
+  {% set classes = classes|default([])|merge(['container', width]) %}
 {% endif %}
 {% if class %}
   {% set classes = classes|merge([class]) %}

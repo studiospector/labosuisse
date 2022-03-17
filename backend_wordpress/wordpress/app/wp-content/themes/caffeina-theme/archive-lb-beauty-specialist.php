@@ -2,6 +2,8 @@
 
 use Timber\Timber;
 
+$page_archive = get_field('lb_archive_beauty_specialist_page', 'option');
+
 $items = [];
 $today = date("Ymd",mktime(0,0,0,date("m"),date("d"),date("Y")));
 
@@ -52,7 +54,8 @@ foreach ($query->get_posts() as $post) {
     $store = get_post(get_field('lb_beauty_specialist_store', $post->ID));
     $date = get_field('lb_beauty_specialist_date', $post->ID);
 
-    $items[$date][]= [
+    $items[$date]['date'] = 'Mercoledì, 3 Novembre 2021';
+    $items[$date]['items'][] = [
         'store_id' => get_field('lb_beauty_specialist_store', $post->ID),
         'expired' => strtotime($date) < strtotime('now'),
         'date' => $date,
@@ -65,9 +68,21 @@ wp_reset_postdata();
 
 ksort($items);
 $context = [
+    'content' => apply_filters('the_content', $page_archive->post_content),
+    'search' => [
+        'type' => 'search',
+        'name' => "city",
+        'label' => "Inserisci provincia",
+        'disabled' => false,
+        'required' => false,
+        'autocomplete' => 'off',
+        'variants' => ['tertiary'],
+    ],
     'items' => $items,
 ];
-echo json_encode($items);
-//Timber::render('@PathViews/', $context);
 
+echo '<pre>';
+var_dump( $items );
+die;
 
+// Timber::render('@PathViews/archive-lb-beauty-specialist.twig', $context);

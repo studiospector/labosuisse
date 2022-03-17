@@ -10,7 +10,7 @@ $infobox = [
     'subtitle' => get_field('lb_block_infobox_subtitle'),
     'paragraph' => get_field('lb_block_infobox_paragraph'),
     'textAlign' => get_field('lb_block_infobox_text_align'),
-    'container' => true,
+    'container_width' => get_field('lb_block_infobox_width') ? get_field('lb_block_infobox_width') : 'full',
     //  'cta' => array_merge( get_field('lb_block_infobox_btn') == "" ? [] : [get_field('lb_block_infobox_btn')] ,['variants' => [get_field('lb_block_infobox_btn_variants')]])
 ];
 
