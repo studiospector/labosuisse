@@ -75,7 +75,7 @@ class BeautySpecialist
             'meta_query' => [
                 [
                     'key' => 'lb_stores_gmaps_point',
-                    'value' => '"' . $city . '"',
+                    'value' => $city,
                     'compare' => 'LIKE'
                 ]
             ]

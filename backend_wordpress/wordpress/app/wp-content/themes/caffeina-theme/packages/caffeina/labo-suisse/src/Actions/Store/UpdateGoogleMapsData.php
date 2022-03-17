@@ -51,7 +51,8 @@ class UpdateGoogleMapsData
         $data->street_name = $address->street;
         $data->city = $address->city;
         $data->state = $address->region;
-        $data->state_short = $address->district;
+        $data->state_short = $address->district_short;
+        $data->district = $address->district;
         $data->post_code = $address->postalCode;
         $data->country = $address->country;
         $data->country_short = $address->countryShort;
