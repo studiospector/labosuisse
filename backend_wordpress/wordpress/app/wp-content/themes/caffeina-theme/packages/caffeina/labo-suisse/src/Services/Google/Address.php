@@ -13,6 +13,7 @@ class Address
     public $streetFull = null;
     public $city = null;
     public $district = null;
+    public $district_short = null;
     public $postalCode = null;
     public $region = null;
     public $country = null;
@@ -74,7 +75,8 @@ class Address
             }
 
             if (in_array('administrative_area_level_2', $addressComponent->types)) {
-                $this->district = $addressComponent->short_name;
+                $this->district =  $addressComponent->long_name;
+                $this->district_short = $addressComponent->short_name;
             }
 
             if (in_array('postal_code', $addressComponent->types)) {
