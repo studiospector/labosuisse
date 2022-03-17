@@ -48,6 +48,7 @@ class BeautySpecialist
                 'store' => $store->post_title,
                 'address' => $store->post_content,
                 'phone' => get_field('lb_stores_phone_number', $store->ID),
+                'geo_location' => get_field('lb_stores_gmaps_point', $store->ID),
             ];
         }
 
