@@ -63,11 +63,11 @@ foreach ($query->get_posts() as $post) {
 }
 wp_reset_postdata();
 
-
+ksort($items);
 $context = [
     'items' => $items,
 ];
-
+echo json_encode($items);
 //Timber::render('@PathViews/', $context);
 
 
