@@ -9,12 +9,16 @@
         }
     }
 
+    .lb-posts-count {
+        margin-top: 20px;
+    }
+
     // &__list-block {        
     // }
 
     &__list {
         margin-top: 40px;
-        
+
         &__date {
             display: flex;
             align-items: center;
@@ -68,5 +72,11 @@
                 }
             }
         }
+    }
+
+    &__no-results {
+        margin-top: 60px;
+        text-align: center;
+        color: map-get($colors, "grey-3");
     }
 }

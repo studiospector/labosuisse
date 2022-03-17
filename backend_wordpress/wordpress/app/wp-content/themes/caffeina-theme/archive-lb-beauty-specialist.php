@@ -22,8 +22,4 @@ $context = [
     'items' => $items['items'],
 ];
 
-echo '<pre>';
-var_dump( $items );
-die;
-
-// Timber::render('@PathViews/archive-lb-beauty-specialist.twig', $context);
+Timber::render('@PathViews/archive-lb-beauty-specialist.twig', $context);

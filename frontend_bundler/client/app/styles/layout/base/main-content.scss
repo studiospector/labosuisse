@@ -11,6 +11,11 @@ html.has-scroll-smooth {
     overflow: hidden;
 }
 
+.has-scroll-smooth [data-scroll-container] {
+    display: flex;
+    flex-direction: column;
+}
+
 .has-scroll-smooth #content {
     will-change: transform;
 }

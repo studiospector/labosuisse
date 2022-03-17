@@ -22,15 +22,18 @@
                         {% include '@PathViews/components/icon.twig' with {name: 'geolocation'} %}
                     </div>
                 </form>
-                {% if items %}
+                {% if num_posts is not null and num_posts >= 0 %}
+                    <div class="lb-posts-count">Risultati: <span>{{ num_posts }}</span></div>
+                {% endif %}
+                {% if items != null and num_posts > 0 %}
                     <div class="archive-lb-beauty-specialist__list">
                         {% for dates in items %}
                             <div class="archive-lb-beauty-specialist__list-block">
                                 <div class="archive-lb-beauty-specialist__list__date">
                                     {% include '@PathViews/components/icon.twig' with {name: 'calendar'} %}
-                                    <span></span>
+                                    <span>{{ dates.date }}</span>
                                 </div>
-                                {% for item in dates %}
+                                {% for item in dates.items %}
                                     <div class="archive-lb-beauty-specialist__list__item">
                                         {% include '@PathViews/components/card.twig' with {
                                             infobox: {
@@ -51,6 +54,14 @@
                     </div>
                 {% endif %}
             </div>
+            {% if num_posts is not null and num_posts == 0 %}
+                <div class="col-12">
+                    <div class="archive-lb-beauty-specialist__no-results">
+                        <div class="infobox__title h2">Nessun evento previsto<br>prossimamente nella tua provincia.</div>
+                        <p class="infobox__paragraph">Cerca un’altra città a te vicina per scoprire le date a calendario.</p>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 
