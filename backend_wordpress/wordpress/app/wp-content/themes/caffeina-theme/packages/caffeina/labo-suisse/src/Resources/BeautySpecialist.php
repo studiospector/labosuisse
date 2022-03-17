@@ -18,11 +18,22 @@ class BeautySpecialist
     public function all()
     {
         if (is_null($this->city)) {
-            return null;
+            return [
+                'items' => null,
+                'count' => null
+            ];
+        }
+
+        $stores = $this->getStores($_GET['city']);
+
+        if(count($stores) == 0) {
+            return [
+                'items' => [],
+                'count' => 0
+            ];
         }
 
         $items = [];
-        $stores = $this->getStores($_GET['city']);
         $posts = $this->getBeautySpecialist($stores);
 
         foreach ($posts as $post) {
@@ -42,7 +53,10 @@ class BeautySpecialist
 
         ksort($items);
 
-        return $items;
+        return [
+            'items' => $items,
+            'count' => count($posts)
+        ];
     }
 
     private function getDate($date)

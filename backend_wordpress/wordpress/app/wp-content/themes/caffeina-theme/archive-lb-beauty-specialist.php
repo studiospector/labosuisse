@@ -18,7 +18,8 @@ $context = [
         'autocomplete' => 'off',
         'variants' => ['tertiary'],
     ],
-    'items' => $items,
+    'num_posts' => $items['count'],
+    'items' => $items['items'],
 ];
 
 echo '<pre>';
