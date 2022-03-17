@@ -24,6 +24,7 @@ import Accordion from './Accordion'
 import StoreLocatorCaffeina from './StoreLocatorCaffeina'
 import StoreLocator from './StoreLocator'
 import OpenMapAppLink from './OpenMapAppLink'
+import Geolocation from './Geolocation'
 
 const components = {
     scrollbar: {
@@ -129,6 +130,11 @@ const components = {
     openMapAppLink: {
         selector: '.js-open-map-app-link',
         type: OpenMapAppLink,
+        optional: true
+    },
+    geolocation: {
+        selector: '.js-geolocation',
+        type: Geolocation,
         optional: true
     },
 }
