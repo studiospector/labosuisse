@@ -31,7 +31,10 @@ $args = [
         'key' => 'lb_beauty_specialist_store',
         'value' => $stores,
         'compare' => 'IN'
-    ]]
+    ]],
+    'meta_key' => 'lb_beauty_specialist_date',
+    'orderby' => 'lb_beauty_specialist_date',
+    'order' => 'DESC'
 ];
 
 
@@ -39,7 +42,7 @@ if(!isset($_GET['show_expired'])) {
     $args['meta_query'][] = [
         'key' => 'lb_beauty_specialist_date',
         'value' => $today,
-        'compare' => '>'
+        'compare' => '>='
     ];
 }
 
@@ -49,7 +52,7 @@ foreach ($query->get_posts() as $post) {
     $store = get_post(get_field('lb_beauty_specialist_store', $post->ID));
     $date = get_field('lb_beauty_specialist_date', $post->ID);
 
-    $items[$date][] = [
+    $items[$date][]= [
         'store_id' => get_field('lb_beauty_specialist_store', $post->ID),
         'expired' => strtotime($date) < strtotime('now'),
         'date' => $date,
@@ -64,7 +67,6 @@ wp_reset_postdata();
 $context = [
     'items' => $items,
 ];
-
 
 //Timber::render('@PathViews/', $context);
 
