@@ -87,6 +87,9 @@ class CustomInput extends BasicElement {
                 }
             }
 
+            // Set default value
+            this.onFocus(this.currInputElem.value)
+
             // Events on <input> focus
             this.cs[i].addEventListener('focus', () => this.onFocus())
             this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
