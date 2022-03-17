@@ -18,4 +18,5 @@
     placeholder="{{ label }}"
     class="js-custom-input{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
     {{ dataVariants|length > 0 ? ' ' ~ dataVariants|join(' ') : '' }}
+    {{ buttonTypeNext ? ' data-button-type-next="' ~ buttonTypeNext ~ '"' : '' }}
 />

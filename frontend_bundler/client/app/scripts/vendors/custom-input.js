@@ -80,15 +80,18 @@ class CustomInput extends BasicElement {
                     }
                 }
 
-                if (this.inputVariant == 'tertiary') {
-                    this.addIconNext('icon-search', 'button')
-                } else {
-                    this.addIconNext('icon-search')
-                }
+                // Add Icon next
+                const buttonTypeNext = this.cs[i].getAttribute('data-button-type-next')
+                this.addIconNext('icon-search', buttonTypeNext)
             }
 
             // Set default value
             this.onFocus(this.currInputElem.value)
+
+            // Custom method to update state
+            this.cs[i].updateState = (value) => {
+                this.onFocus(value)
+            }
 
             // Events on <input> focus
             this.cs[i].addEventListener('focus', () => this.onFocus())

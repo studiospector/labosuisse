@@ -92,6 +92,7 @@ const dataSearchTertiary = {
     label: "Search",
     disabled: false,
     required: false,
+    buttonTypeNext: 'submit',
     variants: ['tertiary'],
 }
 
