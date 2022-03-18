@@ -15,7 +15,7 @@ class Checklist extends BaseBlock
             while(have_rows('lb_block_checklist_items')) {
                 the_row();
 
-                $items[] = get_sub_field('lb_block_checklist_items');
+                $items[]['title'] = get_sub_field('lb_block_checklist_items_item');
             }
         }
 

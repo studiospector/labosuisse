@@ -1,0 +1,24 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['checklist--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+<section class="checklist{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+    <div class="row">
+        <div class="col-10 offset-1">
+            {% if items %}
+                <div class="row">
+                    {% for item in items %}
+                        <div class="checklist__item col-12 col-md-4">
+                            {% include '@PathViews/components/icon.twig' with {name: 'checklist'} only %}
+                            <div class="checklist__item__title">{{ item.title }}</div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
