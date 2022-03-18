@@ -1,27 +1,27 @@
 <footer data-scroll-section>
-    {% if prefooter %}
+    {% if showPrefooter %}
         <div class="prefooter">
             <div class="prefooter--desktop container">
                 <div class="row">
                     <div class="prefooter__box col-12 col-md-4">
                         {% include '@PathViews/components/infobox.twig' with {
-                            subtitle: prefooter.block_1.title,
-                            paragraph: prefooter.block_1.text,
-                            cta: prefooter.block_1.cta,
+                            subtitle: data.prefooter.block_1.title,
+                            paragraph: data.prefooter.block_1.text,
+                            cta: data.prefooter.block_1.cta,
                         } only %}
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
                         {% include '@PathViews/components/infobox.twig' with {
-                            subtitle: prefooter.block_2.title,
-                            paragraph: prefooter.block_2.text,
+                            subtitle: data.prefooter.block_2.title,
+                            paragraph: data.prefooter.block_2.text,
                         } only %}
-                        {% include '@PathViews/components/fields/input.twig' with prefooter.block_2.input only %}
+                        {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.input only %}
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
                         {% include '@PathViews/components/infobox.twig' with {
-                            subtitle: prefooter.block_3.title,
-                            paragraph: prefooter.block_3.text,
-                            cta: prefooter.block_3.cta,
+                            subtitle: data.prefooter.block_3.title,
+                            paragraph: data.prefooter.block_3.text,
+                            cta: data.prefooter.block_3.cta,
                         } only %}
                     </div>
                 </div>
@@ -40,9 +40,9 @@
             </div>
             <div class="footer__bottom">
                 <div class="footer__bottom__item">
-                    <h6 class="infobox__tagline">{{ footer.discover.title }}</h6>
+                    <h6 class="infobox__tagline">{{ data.footer.discover.title }}</h6>
                     <ul class="footer__menu">
-                        {% for item in footer.discover.items %}
+                        {% for item in data.footer.discover.items %}
                             <li class="footer__menu__item">
                                 {% include '@PathViews/components/button.twig' with item only %}
                             </li>
@@ -50,9 +50,9 @@
                     </ul>
                 </div>
                 <div class="footer__bottom__item">
-                    <h6 class="infobox__tagline">{{ footer.support.title }}</h6>
+                    <h6 class="infobox__tagline">{{ data.footer.support.title }}</h6>
                     <ul class="footer__menu">
-                        {% for item in footer.support.items %}
+                        {% for item in data.footer.support.items %}
                             <li class="footer__menu__item">
                                 {% include '@PathViews/components/button.twig' with item only %}
                             </li>
@@ -60,18 +60,18 @@
                     </ul>
                 </div>
                 <div class="footer__bottom__item">
-                    <h6 class="infobox__tagline">{{ footer.search.title }}</h6>
-                    {% include '@PathViews/components/fields/input.twig' with footer.search.input only %}
+                    <h6 class="infobox__tagline">{{ data.footer.search.title }}</h6>
+                    {% include '@PathViews/components/fields/input.twig' with data.footer.search.input only %}
                 </div>
                 <div class="footer__bottom__item">
-                    <h6 class="infobox__tagline">{{ footer.newsletter.title }}</h6>
-                    <p class="infobox__paragraph">{{ footer.newsletter.text }}</p>
-                    {% include '@PathViews/components/button.twig' with footer.newsletter.cta only %}
+                    <h6 class="infobox__tagline">{{ data.footer.newsletter.title }}</h6>
+                    <p class="infobox__paragraph">{{ data.footer.newsletter.text }}</p>
+                    {% include '@PathViews/components/button.twig' with data.footer.newsletter.cta only %}
                 </div>
                 <div class="footer__bottom__item">
-                    <h6 class="infobox__tagline">{{ footer.social.title }}</h6>
+                    <h6 class="infobox__tagline">{{ data.footer.social.title }}</h6>
                     <ul class="footer__menu-icon">
-                        {% for item in footer.social.items %}
+                        {% for item in data.footer.social.items %}
                             <li class="footer__menu-icon__item">
                                 <a href="{{ item.url }}" target="_blank">
                                     {% include '@PathViews/components/icon.twig' with {name: item.icon} only %}

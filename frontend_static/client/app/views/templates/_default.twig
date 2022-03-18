@@ -62,7 +62,10 @@
             <!-- Footer -->
             {% block footer %}
                 {% set footer = fn('lb_footer') %}
-                {% include 'layout/footer.twig' with footer only %}
+                {% include 'layout/footer.twig' with {
+                    data: footer,
+                    showPrefooter: showPrefooter|default(false)
+                } only %}
             {% endblock %}
             <!-- Offset Navs -->
             {% block offsetNavs %}{% endblock %}

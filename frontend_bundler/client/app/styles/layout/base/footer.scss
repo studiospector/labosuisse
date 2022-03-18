@@ -1,7 +1,6 @@
 .prefooter {
     background-color: map-get($colors, "white");
     padding-top: 100px;
-    padding-bottom: 100px;
 
     @include mq($until: md) {
         padding-top: 80px;
@@ -43,6 +42,7 @@
 
 
 .footer {
+    margin-top: 100px;
     padding-top: 60px;
     padding-bottom: 40px;
     background-color: map-get($colors, "primary-light-1");
