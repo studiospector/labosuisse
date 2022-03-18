@@ -4,3 +4,15 @@
 //         margin-bottom: 40px;
 //     }
 // }
+
+.taxonomy-lb-brand-archive {
+    &__grid {
+        .card {
+            margin-bottom: 80px;
+
+            @include mq($until: md) {
+                margin-bottom: 60px;
+            }
+        }
+    }
+}
