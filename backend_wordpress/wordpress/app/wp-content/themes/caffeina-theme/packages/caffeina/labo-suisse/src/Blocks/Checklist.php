@@ -19,10 +19,10 @@ class Checklist extends BaseBlock
             }
         }
 
-        $paylod = [
+        $payload = [
             'items' => $items
         ];
 
-        $this->setContext($paylod);
+        $this->setContext($payload);
     }
 }
