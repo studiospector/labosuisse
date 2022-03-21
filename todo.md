@@ -45,6 +45,10 @@ STEFANO
 
 - sticky header dinamico pagina prodotto
 
+- link header
+- check translation header link (wpml_element_has_translations_filter)
+- caricamento store locator
+
 
 
 ----------
@@ -69,10 +73,10 @@ BUGFIX
 
 SEZIONI DA TERMINARE
 
-- T5 Beaty Specialist
+- √ T5 Beaty Specialist
 - T5 Single News
 - T5 Promozioni
-- T6 Store Locator
+- √ T6 Store Locator
 - T10 Labo nel Mondo
 
 - Filtri e Ricerche
