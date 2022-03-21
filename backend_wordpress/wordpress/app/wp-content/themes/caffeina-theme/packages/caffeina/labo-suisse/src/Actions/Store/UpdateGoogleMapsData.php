@@ -6,13 +6,12 @@ use Caffeina\LaboSuisse\Services\Google\Address;
 
 class UpdateGoogleMapsData
 {
-    private $stores = [];
+    public $stores = [];
 
-    public function __construct()
+    public function __construct($importId)
     {
-        $this->stores = $this->getStores();
+        $this->stores = $this->getStores($importId);
     }
-
 
     public function start()
     {
@@ -26,12 +25,21 @@ class UpdateGoogleMapsData
         }
     }
 
-    private function getStores()
+    private function getStores($importId)
     {
+        global $wpdb;
+
+        $result = $wpdb->get_results("SELECT post_id FROM wp_pmxi_posts WHERE import_id = {$importId}");
+
+        $ids = array_map(function ($item) {
+            return $item->post_id;
+        }, $result);
+
         $query = new \WP_Query([
             'post_status' => 'publish',
             'post_type' => 'lb-store',
-            'posts_per_page' => -1
+            'posts_per_page' => -1,
+            'post__in' => $ids
         ]);
 
         return $query->get_posts();
