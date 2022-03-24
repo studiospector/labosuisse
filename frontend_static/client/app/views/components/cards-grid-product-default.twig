@@ -1,7 +1,7 @@
-<div class="cards-grid-default">
-    <div class="row">
+<div class="lb-cards-grid lb-cards-grid--default">
+    <div class="lb-cards-grid__row row">
         {% for post in items %}
-            <div class="col-12 col-md-4">
+            <div class="lb-cards-grid__card col-12 col-md-4">
                 {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post} only %}
             </div>
         {% endfor %}

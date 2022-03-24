@@ -111,7 +111,7 @@ storiesOf('Cards Grid|News', module)
                 el: document.body,
                 components: [
                     {
-                        selector: '.js-cards-grid',
+                        selector: '.js-lb-posts-grid',
                         type: CardsGrid
                     }
                 ]

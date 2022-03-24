@@ -98,7 +98,7 @@ const components = {
         optional: true
     },
     cardsGrid: {
-        selector: '.js-cards-grid',
+        selector: '.js-lb-posts-grid',
         type: CardsGrid,
         optional: true
     },
