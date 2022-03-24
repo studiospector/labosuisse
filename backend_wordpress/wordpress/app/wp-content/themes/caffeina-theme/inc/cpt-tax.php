@@ -1,6 +1,5 @@
 <?php
 
-use Caffeina\LaboSuisse\Actions\Store\UpdateGoogleMapsData;
 use Caffeina\LaboSuisse\Option\Option;
 
 /**
@@ -455,11 +454,3 @@ function lb_set_services_api_key() {
 }
 add_action('acf/init', 'lb_set_services_api_key');
 
-
-function after_xml_import( $import_id, $import ) {
-
-    $store = new UpdateGoogleMapsData($import_id);
-
-    $store->start();
-}
-add_action( 'pmxi_after_xml_import', 'after_xml_import', 10, 2 );

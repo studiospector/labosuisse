@@ -42,6 +42,46 @@
             "display_format": "l, d F Y",
             "return_format": "Ymd",
             "first_day": 1
+        },
+        {
+            "key": "field_623c7cc863a31",
+            "label": "Id Farmacia",
+            "name": "lb_beauty_specialist_store_id",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_623c7d7663a32",
+            "label": "Numero Telefono Farmacia",
+            "name": "lb_beauty_specialist_store_phone_number",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -62,5 +102,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646930033
+    "modified": 1648131906
 }

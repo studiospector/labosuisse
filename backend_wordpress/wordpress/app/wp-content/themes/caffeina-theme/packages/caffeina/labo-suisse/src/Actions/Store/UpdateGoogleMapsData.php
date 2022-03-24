@@ -2,14 +2,20 @@
 
 namespace Caffeina\LaboSuisse\Actions\Store;
 
+use Caffeina\LaboSuisse\Actions\Utils;
 use Caffeina\LaboSuisse\Services\Google\Address;
+
 
 class UpdateGoogleMapsData
 {
-    public $stores = [];
+    use Utils;
+
+    private $stores = [];
 
     public function __construct($importId)
     {
+        echo " [{$this->getTime()}] [Start] Update Google Maps Addresses\n\n";
+
         $this->stores = $this->getStores($importId);
     }
 
@@ -21,8 +27,9 @@ class UpdateGoogleMapsData
             $value = $this->prepareData($address);
 
             update_field('lb_stores_gmaps_point', $value, $store->ID);
-
         }
+
+        echo " [{$this->getTime()}] [Ended] Update Google Maps Addresses\n\n";
     }
 
     private function getStores($importId)
