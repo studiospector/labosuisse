@@ -1,0 +1,81 @@
+.lb-loader {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: map-get($colors, "white");
+    visibility: hidden;
+    opacity: 0;
+    z-index: 999;
+    transition-delay: 0.6s;
+    transition: all .2s ease-in-out;
+
+    &__spinner {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        position: relative;
+        visibility: hidden;
+        opacity: 0;
+        transition: all .2s ease-in-out;
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        &::before {
+            border-right: 2px solid map-get($colors, "secondary");
+            animation: spin 1s 0s linear infinite;
+            // animation: spin 1s 0.3s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+            // animation: spin 1s 0.15s ease-in-out infinite;
+        }
+    }
+
+    &--loading {
+        visibility: visible;
+        opacity: 1;
+        transition: all .2s ease-in-out;
+
+        .lb-loader {
+            &__spinner {
+                visibility: visible;
+                opacity: 1;
+                transition: all .2s ease-in-out;
+            }
+        }
+    }
+
+    &--leaving {
+        visibility: visible;
+        opacity: 1;
+        transition: all .2s ease-in-out;
+
+        .lb-loader {
+            &__spinner {
+                display: none;
+            }
+        }
+    }
+}
+
+
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}

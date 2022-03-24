@@ -18,6 +18,7 @@
 @include generate-grid();
 
 // CRITICAL COMPONENTS
+@import "components/loader";
 @import "components/infobox";
 @import "components/hero";
 @import "components/carousel-hero";
