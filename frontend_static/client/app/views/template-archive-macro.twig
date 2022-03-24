@@ -1,0 +1,96 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-archive-macro' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    <div class="container text-center">
+        <div class="infobox">
+            {% if term_name %}
+                <h1 class="infobox__subtitle h2">{{ term_name }}</h1>
+            {% endif %}
+            {% if term_description %}
+                <p class="infobox__paragraph">{{ fn('nl2br', term_description) }}</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--medium" data-variant="medium" />
+
+    {# Filters #}
+    <div class="lb-filters container">  
+        <div class="row">
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-brands',
+                    label: '',
+                    placeholder: 'Brand',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: brands_filter,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-cat-typology',
+                    label: '',
+                    placeholder: 'Tipi di prodotto',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: tipologie_filter,
+                    variants: ['primary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-2">
+                {% include '@PathViews/components/fields/select.twig' with {
+                    id: 'lb-product-order',
+                    label: 'Ordina per',
+                    placeholder: 'Scegli...',
+                    multiple: false,
+                    required: false,
+                    disabled: false,
+                    confirmBtnLabel: 'Applica',
+                    options: order_filter,
+                    variants: ['secondary']
+                } only %}
+            </div>
+            <div class="lb-filters__item col-12 col-md-4 offset-md-2">
+                {% include '@PathViews/components/fields/input.twig' with {
+                    type: 'search',
+                    name: "lb-product-search",
+                    label: "Cerca",
+                    disabled: false,
+                    required: false,
+                    variants: ['secondary'],
+                } only %}
+            </div>
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Numbers of posts #}
+    <div class="container">
+        <div class="lb-posts-count">{{ num_posts }}</div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Posts Grig #}
+    <div class="container">
+        {% if grid_type == 'default' %}
+            {% include '@PathViews/components/cards-grid-product-default.twig' with { items: items } only %}
+        {% elseif grid_type == 'ordered' %}
+            {% include '@PathViews/components/cards-grid-product-ordered.twig' with { items: items } only %}
+        {% endif %}
+    </div>
+
+{% endblock %}
