@@ -15,7 +15,8 @@
         height: 100%;
         flex: 1;
         
-        .lb-picture {
+        .lb-picture,
+        .lb-picture-wrapper {
             min-height: 400px;
 
             @include mq($until: md) {

@@ -77,7 +77,7 @@ class ThemeSetup extends Timber\Site
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
-        add_image_size('lb-img-size-lg', 1300, 700, false);
+        add_image_size('lb-img-size-lg', 1800, 700, false);
         add_image_size('lb-img-size-md', 700, 400, false);
         add_image_size('lb-img-size-sm', 400, 400, false);
         add_image_size('lb-img-size-xs', 200, 200, false);
