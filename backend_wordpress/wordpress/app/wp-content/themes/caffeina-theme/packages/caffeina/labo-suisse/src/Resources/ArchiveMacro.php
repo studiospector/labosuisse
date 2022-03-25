@@ -6,8 +6,7 @@ use Timber\Timber;
 
 class ArchiveMacro
 {
-    private $category;
-
+    public $category;
     public $brands = [];
     public $products = [];
     public $totalPosts = 0;
@@ -17,8 +16,7 @@ class ArchiveMacro
      */
     public function __construct($category)
     {
-        $this->category = $category;
-
+        $this->category = get_term_by('slug', $category, 'product_cat');
         $this->products();
     }
 
@@ -71,7 +69,7 @@ class ArchiveMacro
             $filters[] = [
                 'taxonomy' => 'product_cat',
                 'field' => 'slug',
-                'terms' => $this->category
+                'terms' => $this->category->slug
             ];
         }
 

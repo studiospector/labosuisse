@@ -14,22 +14,8 @@ $context = [
     'grid_type' => 'ordered',
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $archiveMacro->totalPosts . '</span>',
     'items' => $archiveMacro->products,
-    'block_announcements' => (!get_field('lb_product_cat_announcements_state', $term)) ? null : [
-        'infobox' => [
-            'title' => get_field('lb_product_cat_announcements_title', $term),
-        ],
-        'cards' => [
-            [
-                'images' => lb_get_images(get_field('lb_product_cat_announcements_cardleft_image', $term)),
-                'infobox' => getCardByType(get_field('lb_product_cat_announcements_cardleft_item_type', $term), 'left', $term)
-            ],
-            [
-                'images' => lb_get_images(get_field('lb_product_cat_announcements_cardright_image', $term)),
-                'infobox' => getCardByType(get_field('lb_product_cat_announcements_cardright_item_type', $term), 'right', $term)
-            ]
-        ],
-        'variants' => ['horizontal'],
-    ]
+    'term_name' => $archiveMacro->category->name,
+    'term_description' => $archiveMacro->category->description
 ];
 
 Timber::render('@PathViews/template-archive-macro.twig', $context);
