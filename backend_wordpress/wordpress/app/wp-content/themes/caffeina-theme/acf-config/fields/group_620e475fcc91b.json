@@ -43,7 +43,7 @@
                     "key": "field_620e49a7072dd",
                     "label": "Link",
                     "name": "lb_header_links_link",
-                    "type": "post_object",
+                    "type": "page_link",
                     "instructions": "",
                     "required": 1,
                     "conditional_logic": 0,
@@ -52,15 +52,21 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 2,
                     "post_type": [
-                        "page"
+                        "post",
+                        "page",
+                        "lb-brand-page",
+                        "lb-faq",
+                        "lb-store",
+                        "lb-job",
+                        "lb-beauty-specialist",
+                        "product"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
+                    "allow_archives": 1,
                     "multiple": 0,
-                    "return_format": "object",
-                    "ui": 1
+                    "wpml_cf_preferences": 2
                 },
                 {
                     "key": "field_620e4e72072e3",
@@ -162,10 +168,10 @@
             "button_label": "",
             "sub_fields": [
                 {
-                    "key": "field_620e500434112",
+                    "key": "field_623de9bd68b72",
                     "label": "Link",
                     "name": "lb_menu_shop_links_link",
-                    "type": "post_object",
+                    "type": "page_link",
                     "instructions": "",
                     "required": 1,
                     "conditional_logic": 0,
@@ -176,13 +182,19 @@
                     },
                     "wpml_cf_preferences": 2,
                     "post_type": [
-                        "page"
+                        "post",
+                        "page",
+                        "lb-brand-page",
+                        "lb-faq",
+                        "lb-store",
+                        "lb-job",
+                        "lb-beauty-specialist",
+                        "product"
                     ],
                     "taxonomy": "",
                     "allow_null": 0,
-                    "multiple": 0,
-                    "return_format": "object",
-                    "ui": 1
+                    "allow_archives": 1,
+                    "multiple": 0
                 },
                 {
                     "key": "field_620e500434113",
@@ -245,5 +257,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646150715
+    "modified": 1648224802
 }

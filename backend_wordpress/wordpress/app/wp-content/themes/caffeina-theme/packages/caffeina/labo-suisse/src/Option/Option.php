@@ -19,7 +19,7 @@ class Option
                 'type' => 'icon',
                 'mobile' => $link['lb_header_links_mobile'],
                 'icon' => ['name' => $link['lb_header_links_icon']],
-                'href' => get_permalink($link['lb_header_links_link']->ID)
+                'href' => $link['lb_header_links_link']
             ];
         }
 
@@ -36,7 +36,7 @@ class Option
             $items[] = [
                 'type' => 'icon',
                 'icon' => ['name' => $link['lb_menu_shop_links_icon']],
-                'href' => get_permalink($link['lb_menu_shop_links_link']->ID)
+                'href' => $link['lb_menu_shop_links_link']
             ];
         }
 
