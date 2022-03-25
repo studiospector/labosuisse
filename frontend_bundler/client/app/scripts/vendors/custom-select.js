@@ -114,7 +114,7 @@ class CustomSelect extends BasicElement {
             // BUTTON CONFIRM
             const selectBtnLabel = this.cs[i].getAttribute('data-btn-confirm')
             if (selectBtnLabel) {
-                this.selectBtnConfirm = this.createDOMElement('BUTTON', ['custom-select-items__btn-confirm', 'button', 'button-primary'], selectBtnLabel, null, {pos: 'beforeend', elem: this.optionsList})
+                this.selectBtnConfirm = this.createDOMElement('BUTTON', ['custom-select-items__btn-confirm', 'button', 'button-small', 'button-primary'], selectBtnLabel, null, {pos: 'beforeend', elem: this.optionsList})
                 this.selectBtnConfirm.addEventListener('click', this.closeCurrentSelect)
             }
 

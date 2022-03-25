@@ -142,8 +142,10 @@
         }
 
         &__btn-confirm {
+            width: calc(100% - 32px);
             display: block;
             margin: 16px;
+            text-align: center;
         }
     }
 
