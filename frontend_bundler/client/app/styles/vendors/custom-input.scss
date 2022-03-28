@@ -134,8 +134,24 @@
             background-color: transparent;
             border: 1px solid map-get($colors, "grey-2");
         }
+
+        .custom-input {
+            &__icon--next {
+                margin-right: 16.5px;
+                
+                .button {
+                    background-color: transparent;
+                    border: 0;
+
+                    svg {
+                        fill: map-get($colors, "black");
+                    }
+                }
+            }
+        }
     }
 
+    &--secondary,
     &--tertiary {
         .custom-input {
             &__icon--next {
