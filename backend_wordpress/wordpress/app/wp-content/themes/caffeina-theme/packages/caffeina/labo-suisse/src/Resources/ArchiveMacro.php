@@ -26,7 +26,9 @@ class ArchiveMacro
             $query = new \WP_Query([
                 'post_type' => 'product',
                 'posts_per_page' => -1,
-                'tax_query' => $this->setFilter($brand)
+                'tax_query' => $this->setFilter($brand),
+                'orderby' => 'menu_order',
+                'order' => 'ASC'
             ]);
 
             if (empty($query->posts)) {
