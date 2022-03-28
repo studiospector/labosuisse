@@ -9,7 +9,9 @@
         {% endif %}
         {% if search %}
             <div class="lb-filters__item col-12 col-md-4 offset-md-{{ (items|length <= 2) ? '4' : '2' }}">
-                {% include '@PathViews/components/fields/input.twig' with search only %}
+                <form action="" method="get">
+                    {% include '@PathViews/components/fields/input.twig' with search only %}
+                </form>
             </div>
         {% endif %}
     </div>

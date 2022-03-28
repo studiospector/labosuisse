@@ -70,10 +70,12 @@ $context = [
         ],
         'search' => [
             'type' => 'search',
-            'name' => 'lb-post-search',
+            'name' => 's',
             'label' => __('Cerca', 'labo-suisse-theme'),
+            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
             'required' => false,
+            'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
     ],

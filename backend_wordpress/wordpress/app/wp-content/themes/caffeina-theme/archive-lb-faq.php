@@ -48,10 +48,12 @@ $context = [
         'items' => [],
         'search' => [
             'type' => 'search',
-            'name' => 'lb-faq-search',
+            'name' => 's',
             'label' => __('Cerca un argomento, un prodotto, una linea, ...', 'labo-suisse-theme'),
+            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
             'required' => false,
+            'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
     ],
