@@ -1,14 +1,14 @@
-<div class="lb-filters container">
+<div class="lb-filters{{ (containerized) ? '' : ' container' }}">
     <div class="row">
         {% if items|length > 0 %}
             {% for item in items %}
-                <div class="lb-filters__item col-12 col-md-2">
+                <div class="lb-filters__item col-12 col-md-{{ (containerized) ? '3' : '2' }}">
                     {% include '@PathViews/components/fields/select.twig' with item only %}
                 </div>
             {% endfor %}
         {% endif %}
         {% if search %}
-            <div class="lb-filters__item col-12 col-md-4 offset-md-{{ (items|length >= 2) ? '4' : '2' }}">
+            <div class="lb-filters__item col-12 col-md-4 offset-md-{{ (items|length <= 2) ? '4' : '2' }}">
                 {% include '@PathViews/components/fields/input.twig' with search only %}
             </div>
         {% endif %}

@@ -44,6 +44,17 @@ $options = (new Option())
 $context = [
     'title' => $options['title'],
     'description' => $options['description'],
+    'filters' => [
+        'items' => [],
+        'search' => [
+            'type' => 'search',
+            'name' => 'lb-faq-search',
+            'label' => __('Cerca un argomento, un prodotto, una linea, ...', 'labo-suisse-theme'),
+            'disabled' => false,
+            'required' => false,
+            'variants' => ['secondary'],
+        ],
+    ],
     'items' => $items,
 ];
 

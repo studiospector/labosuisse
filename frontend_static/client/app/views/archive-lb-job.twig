@@ -23,21 +23,16 @@
     <hr class="lb-separator lb-separator--medium" data-variant="medium">
 
     {# Filters #}
-    <div class="lb-filters container">
-        <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2">
-                <div class="row">
-                    <div class="lb-filters__item col-12 col-md-3">
-                        {% include '@PathViews/components/fields/select.twig' with job_location only %}
-                    </div>
-                    <div class="lb-filters__item col-12 col-md-3">
-                        {% include '@PathViews/components/fields/select.twig' with job_department only %}
-                    </div>
+    {% if filters|length > 0 %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+                    {% include '@PathViews/components/filters.twig' with filters only %}
+                    <hr class="lb-separator lb-separator--medium" data-variant="medium">
                 </div>
             </div>
         </div>
-    </div>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% endif %}
 
     {# Posts Grid #}
     <div class="lb-cards-grid lb-cards-grid--default container">

@@ -24,60 +24,10 @@
     <hr class="lb-separator lb-separator--medium" data-variant="medium" />
 
     {# Filters #}
-    <div class="lb-filters container">  
-        <div class="row">
-            <div class="lb-filters__item col-12 col-md-2">
-                {% include '@PathViews/components/fields/select.twig' with {
-                    id: 'lb-product-brands',
-                    label: '',
-                    placeholder: 'Brand',
-                    multiple: false,
-                    required: false,
-                    disabled: false,
-                    confirmBtnLabel: 'Applica',
-                    options: brands_filter,
-                    variants: ['primary']
-                } only %}
-            </div>
-            <div class="lb-filters__item col-12 col-md-2">
-                {% include '@PathViews/components/fields/select.twig' with {
-                    id: 'lb-product-cat-typology',
-                    label: '',
-                    placeholder: 'Tipi di prodotto',
-                    multiple: false,
-                    required: false,
-                    disabled: false,
-                    confirmBtnLabel: 'Applica',
-                    options: tipologie_filter,
-                    variants: ['primary']
-                } only %}
-            </div>
-            <div class="lb-filters__item col-12 col-md-2">
-                {% include '@PathViews/components/fields/select.twig' with {
-                    id: 'lb-product-order',
-                    label: 'Ordina per',
-                    placeholder: 'Scegli...',
-                    multiple: false,
-                    required: false,
-                    disabled: false,
-                    confirmBtnLabel: 'Applica',
-                    options: order_filter,
-                    variants: ['secondary']
-                } only %}
-            </div>
-            <div class="lb-filters__item col-12 col-md-4 offset-md-2">
-                {% include '@PathViews/components/fields/input.twig' with {
-                    type: 'search',
-                    name: "lb-product-search",
-                    label: "Cerca",
-                    disabled: false,
-                    required: false,
-                    variants: ['secondary'],
-                } only %}
-            </div>
-        </div>
-    </div>
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% if filters|length > 0 %}
+        {% include '@PathViews/components/filters.twig' with filters only %}
+        <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% endif %}
 
     {# Numbers of posts #}
     <div class="container">

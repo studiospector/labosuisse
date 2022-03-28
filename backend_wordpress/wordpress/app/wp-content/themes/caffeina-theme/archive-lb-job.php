@@ -45,27 +45,33 @@ $options = (new Option())->getJobsOptions();
 $context = [
     'title' => $options['title'],
     'description' => $options['description'],
-    'job_location' => [
-        'id' => 'lb-job-location',
-        'label' => '',
-        'placeholder' => 'Location',
-        'multiple' => true,
-        'required' => false,
-        'disabled' => false,
-        'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-        'options' =>lb_get_job_location_options(),
-        'variants' => ['primary']
-    ],
-    'job_department' => [
-        'id' => 'lb-job-department',
-        'label' => '',
-        'placeholder' => 'Dipartimento',
-        'multiple' => true,
-        'required' => false,
-        'disabled' => false,
-        'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-        'options' => lb_get_job_department_options(),
-        'variants' => ['primary']
+    'filters' => [
+        'containerized' => true,
+        'items' => [
+            [
+                'id' => 'lb-job-location',
+                'label' => '',
+                'placeholder' => __('Location', 'labo-suisse-theme'),
+                'multiple' => true,
+                'required' => false,
+                'disabled' => false,
+                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+                'options' =>lb_get_job_location_options(),
+                'variants' => ['primary']
+            ],
+            [
+                'id' => 'lb-job-department',
+                'label' => '',
+                'placeholder' => __('Dipartimento', 'labo-suisse-theme'),
+                'multiple' => true,
+                'required' => false,
+                'disabled' => false,
+                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+                'options' => lb_get_job_department_options(),
+                'variants' => ['primary']
+            ],
+        ],
+        'search' => null,
     ],
     'items' => $items,
     'infobox' => [

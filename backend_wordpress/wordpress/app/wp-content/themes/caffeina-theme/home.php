@@ -10,18 +10,18 @@ if ( have_posts() ) :
 
         $variant = 'type-2';
         $image = null;
-        $cta_title = __("Leggi l'articolo","labo-suisse-theme");
+        $cta_title = __("Leggi l'articolo", 'labo-suisse-theme');
 
         $typology = get_field('lb_post_typology');
         if ($typology == 'press') {
             $variant = 'type-6';
             $image = get_field('lb_post_press_logo');
-            $cta_title = __("Visualizza","labo-suisse-theme");
+            $cta_title = __('Visualizza', 'labo-suisse-theme');
         }
 
         $items[] = [
             'images' => lb_get_images(get_post_thumbnail_id(get_the_ID())),
-            'date' => get_the_date("d/m/Y"),
+            'date' => get_the_date('d/m/Y'),
             'variants' => [$variant],
             'infobox' => [
                 'image' => $image,
@@ -70,7 +70,7 @@ $context = [
         ],
         'search' => [
             'type' => 'search',
-            'name' => "lb-post-search",
+            'name' => 'lb-post-search',
             'label' => __('Cerca', 'labo-suisse-theme'),
             'disabled' => false,
             'required' => false,
