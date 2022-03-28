@@ -45,7 +45,7 @@ STEFANO
 
 - sticky header dinamico pagina prodotto
 
-- link header
+- √ link header
 - check translation header link (wpml_element_has_translations_filter)
 - caricamento store locator
 
