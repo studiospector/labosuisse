@@ -43,8 +43,40 @@ wp_reset_postdata();
 $context = [
     'title' => get_the_title($page_for_posts),
     'content' => apply_filters( 'the_content', get_the_content(null, false, $page_for_posts) ),
-    'postTypologiesTax' => lb_get_post_typologies(),
-    'years' => lb_get_posts_archive_years(),
+    'filters' => [
+        'items' => [
+            [
+                'id' => 'lb-post-typology',
+                'label' => '',
+                'placeholder' => __('Tipologia', 'labo-suisse-theme'),
+                'multiple' => true,
+                'required' => false,
+                'disabled' => false,
+                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+                'options' => lb_get_post_typologies(),
+                'variants' => ['primary']
+            ],
+            [
+                'id' => 'lb-post-archive-years',
+                'label' => '',
+                'placeholder' => __('Riferimento anno', 'labo-suisse-theme'),
+                'multiple' => true,
+                'required' => false,
+                'disabled' => false,
+                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+                'options' => lb_get_posts_archive_years(),
+                'variants' => ['primary']
+            ],
+        ],
+        'search' => [
+            'type' => 'search',
+            'name' => "lb-post-search",
+            'label' => __('Cerca', 'labo-suisse-theme'),
+            'disabled' => false,
+            'required' => false,
+            'variants' => ['secondary'],
+        ],
+    ],
     'posts' => $items,
     'pagination' => lb_pagination(),
 ];
