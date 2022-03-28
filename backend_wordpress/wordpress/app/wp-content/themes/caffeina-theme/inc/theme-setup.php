@@ -60,6 +60,7 @@ class ThemeSetup extends Timber\Site
         add_action('init', array($this, 'lb_manage_thumbnails'));
         add_filter('fallback_intermediate_image_sizes', array($this, 'lb_disable_pdf_thumbnails'));
         add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
+        add_filter('excerpt_length', array($this, 'lb_excerpt_length'), 999);
 
         parent::__construct();
     }
@@ -289,6 +290,21 @@ class ThemeSetup extends Timber\Site
     public function lb_yoast_breadcrumb_separator($sep)
     {
         return '<span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span>';
+    }
+
+    /**
+     * Filter the excerpt length to 20 words
+     *
+     * @param int $length Excerpt length
+     * 
+     * @return int (Maybe) modified excerpt length
+     */
+    function lb_excerpt_length($length)
+    {
+        if (is_admin()) {
+            return $length;
+        }
+        return 20;
     }
 }
 
