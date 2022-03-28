@@ -379,7 +379,7 @@ function lb_post_filters($query)
 
     // Posts page
     if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
-        $query->set('posts_per_page', 2);
+        $query->set('posts_per_page', 12);
     }
 
     // Archive page
