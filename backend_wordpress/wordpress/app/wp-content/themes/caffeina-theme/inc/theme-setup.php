@@ -146,8 +146,6 @@ class ThemeSetup extends Timber\Site
         add_theme_support('wc-product-gallery-lightbox');
         add_theme_support('wc-product-gallery-slider');
 
-        add_post_type_support( 'product', 'page-attributes' );
-
         /**
          * Set the maximum allowed width for any content in the theme
          * like oEmbeds and images added to posts
@@ -267,11 +265,11 @@ class ThemeSetup extends Timber\Site
     /**
      * Manage specific thumbnail sizes
      */
-    public function lb_manage_thumbnails() {
-
-        foreach ( get_intermediate_image_sizes() as $size ) {
-            if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048' ) ) ) {
-                remove_image_size( $size );
+    public function lb_manage_thumbnails()
+    {
+        foreach (get_intermediate_image_sizes() as $size) {
+            if (in_array($size, array('thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048'))) {
+                remove_image_size($size);
             }
         }
     }
@@ -279,7 +277,8 @@ class ThemeSetup extends Timber\Site
     /**
      * Disable PDF preview images
      */
-    public function lb_disable_pdf_thumbnails() {
+    public function lb_disable_pdf_thumbnails()
+    {
         $fallbacksizes = array();
         return $fallbacksizes;
     }
@@ -363,10 +362,9 @@ function lb_post_filters($query)
     }
 
     // Posts page
-    // if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
-    //     $query->set('posts_per_page', 10);
-    //     $query->set('ignore_sticky_posts', 1);
-    // }
+    if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
+        $query->set('posts_per_page', 2);
+    }
 
     // Archive page
     // if (is_archive() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
