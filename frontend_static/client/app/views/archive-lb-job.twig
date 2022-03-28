@@ -40,13 +40,13 @@
     <hr class="lb-separator lb-separator--medium" data-variant="medium">
 
     {# Posts Grid #}
-    <div class="lb-card-grid container">
-        <div class="row">
-            <div class="col-12 col-lg-8 offset-lg-2">
-                {% for post in items %}
+    <div class="lb-cards-grid lb-cards-grid--default container">
+        <div class="lb-cards-grid__row row">
+            {% for post in items %}
+                <div class="lb-cards-grid__card col-12 col-lg-8 offset-lg-2">
                     {% include '@PathViews/components/card.twig' with post only %}
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 

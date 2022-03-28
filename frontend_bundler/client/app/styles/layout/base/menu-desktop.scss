@@ -62,8 +62,8 @@
         
 
         &__submenu {
-            // height: rem(522px);
-            height: 100%;
+            height: calc(100vh - 186px);
+            // height: 100%;
             position: fixed;
             right: 0;
             left: 0;

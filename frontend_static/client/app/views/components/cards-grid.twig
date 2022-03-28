@@ -1,6 +1,6 @@
 {% set classes = [] %}
 {% for variant in variants|default([]) %}
-	{% set classes = classes|merge(['cards-grid--' ~ variant]) %}
+	{% set classes = classes|merge(['lb-posts-grid--' ~ variant]) %}
 {% endfor %}
 {% if class %}
 	{% set classes = classes|merge([class]) %}
@@ -10,10 +10,10 @@
 
 {% set col = (items|length == 2) ? 6 : (items|length == 3) ? 4 : (items|length == 4) ? 3 : (items|length > 4) ? 4 : 3 %}
 
-<section class="cards-grid{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-cards-grid">
+<section class="lb-posts-grid{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-lb-posts-grid">
     <div class="container">
         {% if tagline or title or paragraph %}
-            <div class="cards-grid__infobox">
+            <div class="lb-posts-grid__infobox">
                 {% if tagline %}
                     <h6 class="infobox__tagline">{{ tagline }}</h6>
                 {% endif %}
@@ -25,15 +25,15 @@
                 {% endif %}
             </div>
         {% endif %}
-        <div class="cards-grid__list row">
+        <div class="lb-posts-grid__list row">
             {% for post in items|default([]) %}
-                <div class="cards-grid__list__item col-12 col-md-6 col-xl-{{col}}">
+                <div class="lb-posts-grid__list__item col-12 col-md-6 col-xl-{{col}}">
                     {% include '@PathViews/components/card.twig' with post only %}
                 </div>
             {% endfor %}
         </div>
         {% if cta %}
-            <div class="cards-grid__cta">
+            <div class="lb-posts-grid__cta">
                 {% include '@PathViews/components/button.twig' with cta only %}
             </div>
         {% endif %}

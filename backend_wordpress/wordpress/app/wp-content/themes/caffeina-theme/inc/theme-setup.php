@@ -60,6 +60,7 @@ class ThemeSetup extends Timber\Site
         add_action('init', array($this, 'lb_manage_thumbnails'));
         add_filter('fallback_intermediate_image_sizes', array($this, 'lb_disable_pdf_thumbnails'));
         add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
+        add_filter('excerpt_length', array($this, 'lb_excerpt_length'), 999);
 
         parent::__construct();
     }
@@ -77,7 +78,7 @@ class ThemeSetup extends Timber\Site
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
-        add_image_size('lb-img-size-lg', 1300, 700, false);
+        add_image_size('lb-img-size-lg', 1800, 700, false);
         add_image_size('lb-img-size-md', 700, 400, false);
         add_image_size('lb-img-size-sm', 400, 400, false);
         add_image_size('lb-img-size-xs', 200, 200, false);
@@ -265,11 +266,11 @@ class ThemeSetup extends Timber\Site
     /**
      * Manage specific thumbnail sizes
      */
-    public function lb_manage_thumbnails() {
-        
-        foreach ( get_intermediate_image_sizes() as $size ) {
-            if ( in_array( $size, array( 'thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048' ) ) ) {
-                remove_image_size( $size );
+    public function lb_manage_thumbnails()
+    {
+        foreach (get_intermediate_image_sizes() as $size) {
+            if (in_array($size, array('thumbnail', 'medium', 'medium_large', 'large', '1536x1536', '2048x2048'))) {
+                remove_image_size($size);
             }
         }
     }
@@ -277,9 +278,10 @@ class ThemeSetup extends Timber\Site
     /**
      * Disable PDF preview images
      */
-    public function lb_disable_pdf_thumbnails() {
-        $fallbacksizes = array(); 
-        return $fallbacksizes; 
+    public function lb_disable_pdf_thumbnails()
+    {
+        $fallbacksizes = array();
+        return $fallbacksizes;
     }
 
     /**
@@ -288,6 +290,21 @@ class ThemeSetup extends Timber\Site
     public function lb_yoast_breadcrumb_separator($sep)
     {
         return '<span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span>';
+    }
+
+    /**
+     * Filter the excerpt length to 20 words
+     *
+     * @param int $length Excerpt length
+     * 
+     * @return int (Maybe) modified excerpt length
+     */
+    function lb_excerpt_length($length)
+    {
+        if (is_admin()) {
+            return $length;
+        }
+        return 20;
     }
 }
 
@@ -361,10 +378,9 @@ function lb_post_filters($query)
     }
 
     // Posts page
-    // if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
-    //     $query->set('posts_per_page', 10);
-    //     $query->set('ignore_sticky_posts', 1);
-    // }
+    if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
+        $query->set('posts_per_page', 2);
+    }
 
     // Archive page
     // if (is_archive() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {

@@ -18,10 +18,12 @@
         transition: $transition__base-1;
 
         &__img {
+            min-height: 410px;
             position: relative;
             margin-bottom: 40px;
 
             @include mq($until: md) {
+                min-height: 300px;
                 margin-bottom: 20px;
             }
 

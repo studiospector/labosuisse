@@ -1,4 +1,4 @@
-$hero-carousel-height-desk: 700px;
+$hero-carousel-height-desk: 650px;
 $hero-carousel-height-mobile: 460px;
 
 .carousel-hero {
@@ -19,7 +19,7 @@ $hero-carousel-height-mobile: 460px;
             min-height: $hero-carousel-height-desk;
         
             &__img {
-                @include mq($until: md) {
+                @include mq($until: lg) {
                     min-height: $hero-carousel-height-mobile;
                 }
             }
