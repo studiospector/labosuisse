@@ -25,6 +25,7 @@ import StoreLocatorCaffeina from './StoreLocatorCaffeina'
 import StoreLocator from './StoreLocator'
 import OpenMapAppLink from './OpenMapAppLink'
 import Geolocation from './Geolocation'
+import Filters from './Filters'
 
 const components = {
     scrollbar: {
@@ -135,6 +136,11 @@ const components = {
     geolocation: {
         selector: '.js-geolocation',
         type: Geolocation,
+        optional: true
+    },
+    filters: {
+        selector: '.js-filters',
+        type: Filters,
         optional: true
     },
 }
