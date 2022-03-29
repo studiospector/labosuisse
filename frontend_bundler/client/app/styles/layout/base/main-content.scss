@@ -202,3 +202,10 @@ ul.lb-arrow-list {
     border-radius: 3px;
     cursor: pointer;
 }
+
+
+
+.lb-no-results {
+    text-align: center;
+    color: map-get($colors, "grey-3");
+}

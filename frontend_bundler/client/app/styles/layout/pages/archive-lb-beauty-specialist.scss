@@ -75,9 +75,7 @@
         }
     }
 
-    &__no-results {
+    .lb-no-results {
         margin-top: 60px;
-        text-align: center;
-        color: map-get($colors, "grey-3");
     }
 }
