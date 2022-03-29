@@ -10,12 +10,6 @@ function get_stores()
 
 function get_archive(WP_REST_Request $request)
 {
-    $params = $request->get_params();
-    $args['tax_query'][] = [
-        'taxonomy' => 'lb-post-typology',
-        'field' => 'slug',
-        'terms' => $_GET['type'],
-    ];
     $posts = new Archive($request['type']);
 
     return $posts->get();
