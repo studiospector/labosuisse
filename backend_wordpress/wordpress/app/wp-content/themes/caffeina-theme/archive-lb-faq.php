@@ -53,7 +53,7 @@ $context = [
             'label' => __('Cerca un argomento, un prodotto, una linea, ...', 'labo-suisse-theme'),
             'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
-            'required' => false,
+            'required' => true,
             'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
