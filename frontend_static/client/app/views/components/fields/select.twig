@@ -9,6 +9,7 @@
     {{ multiple ? ' multiple="multiple"' : '' }}
     {{ disabled ? ' disabled="disabled"' : '' }}
     {{ required ? ' required="required"' : '' }}
+    {{ attributes|length > 0 ? ' ' ~ attributes|join(' ') : '' }}
     {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
     {{ label ? ' data-label="' ~ label ~ '"' : '' }}
     {{ confirmBtnLabel ? ' data-btn-confirm="' ~ confirmBtnLabel ~ '"' : '' }}
