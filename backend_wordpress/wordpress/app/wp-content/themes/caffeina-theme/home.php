@@ -1,64 +1,42 @@
 <?php
 
-use Carbon\Carbon;
-
 $page_for_posts = get_option('page_for_posts');
 
 $items = [];
 
-$args = [
-    'post_status' => 'publish',
-    'post_type' => 'post',
-    's' => $_GET['s'] ?? null,
-    'tax_query' => [],
-    'date_query' => []
-];
+if ( have_posts() ) :
+    while ( have_posts() ) :
+        the_post();
 
-if(isset($_GET['type'])) {
-    $args['tax_query'][] = [
-        'taxonomy' => 'lb-post-typology',
-        'field' => 'slug',
-        'terms' => $_GET['type'],
-    ];
-}
+        $variant = 'type-2';
+        $image = null;
+        $cta_title = __("Leggi l'articolo", 'labo-suisse-theme');
 
-if(isset($_GET['year'])) {
-    $args['date_query'][] = [
-        'year' => $_GET['year']
-    ];
-}
+        $typology = get_field('lb_post_typology');
+        if ($typology == 'press') {
+            $variant = 'type-6';
+            $image = get_field('lb_post_press_logo');
+            $cta_title = __('Visualizza', 'labo-suisse-theme');
+        }
 
-$posts = (new WP_Query($args))->get_posts();
-
-foreach ($posts as $post) {
-    $variant = 'type-2';
-    $image = null;
-    $cta_title = __("Leggi l'articolo", "labo-suisse-theme");
-
-    $typology = get_field('lb_post_typology', $post->ID);
-    if ($typology == 'press') {
-        $variant = 'type-6';
-        $image = get_field('lb_post_press_logo', $post->ID);
-        $cta_title = __("Visualizza", "labo-suisse-theme");
-    }
-
-    $items[] = [
-        'images' => lb_get_images(get_post_thumbnail_id($post->ID)),
-        'date' => Carbon::createFromDate($post->post_date)->format('d/m/Y'),
-        'variants' => [$variant],
-        'infobox' => [
-            'image' => $image,
-            'subtitle' => $post->post_title,
-            'paragraph' => $post->post_excerpt,
-            'cta' => [
-                'title' => $cta_title,
-                'url' => get_permalink($post->ID),
-                'iconEnd' => ['name' => 'arrow-right'],
-                'variants' => ['quaternary']
-            ]
-        ],
-    ];
-}
+        $items[] = [
+            'images' => lb_get_images(get_post_thumbnail_id(get_the_ID())),
+            'date' => get_the_date('d/m/Y'),
+            'variants' => [$variant],
+            'infobox' => [
+                'image' => $image,
+                'subtitle' => get_the_title(),
+                'paragraph' => get_the_excerpt(),
+                'cta' => [
+                    'title' => $cta_title,
+                    'url' => get_permalink( get_the_ID() ),
+                    'iconEnd' => ['name' => 'arrow-right'],
+                    'variants' => ['quaternary']
+                ]
+            ],
+        ];
+    endwhile;
+endif;
 
 wp_reset_postdata();
 
@@ -94,10 +72,8 @@ $context = [
             'type' => 'search',
             'name' => 's',
             'label' => __('Cerca', 'labo-suisse-theme'),
-            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
             'required' => false,
-            'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
     ],
