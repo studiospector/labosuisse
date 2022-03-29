@@ -4,6 +4,7 @@ import { qs, on } from '@okiba/dom'
 import axiosClient from '../HTTPClient'
 
 const ui = {
+    searchForm: '.lb-filters__search-form',
     selects: {
         selector: '.custom-field select',
         asArray: true
@@ -25,6 +26,7 @@ class Filters extends Component {
         }
 
         on(this.ui.buttons, 'click', this.parseArgs)
+        on(this.ui.searchForm, 'submit', this.searchFormValidation)
     }
 
     parseArgs = (ev) => {
@@ -68,6 +70,15 @@ class Filters extends Component {
         }
 
         return res
+    }
+
+    searchFormValidation = (ev) => {
+        const formData = new FormData(ev.target)
+        const searchValue = formData.get("s")
+
+        if (searchValue.length <= 2) {
+            ev.preventDefault()
+        }
     }
 }
 
