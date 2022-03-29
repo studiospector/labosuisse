@@ -9,6 +9,7 @@ $archiveMacro = new ArchiveMacro($_GET['product_category']);
 
 $context = [
     'filters' => [
+        'containerized' => false,
         'items' => [
             [
                 'id' => 'lb-product-brands',

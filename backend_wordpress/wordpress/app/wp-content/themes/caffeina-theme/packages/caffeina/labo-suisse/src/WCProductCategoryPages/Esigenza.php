@@ -111,6 +111,7 @@ class Esigenza extends BasePage
 
         $payload = [
             'filters' => [
+                'containerized' => false,
                 'items' => [
                     [
                         'id' => 'lb-product-brands',

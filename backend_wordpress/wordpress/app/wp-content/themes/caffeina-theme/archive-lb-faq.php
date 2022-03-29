@@ -45,6 +45,7 @@ $context = [
     'title' => $options['title'],
     'description' => $options['description'],
     'filters' => [
+        'containerized' => false,
         'items' => [],
         'search' => [
             'type' => 'search',
