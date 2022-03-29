@@ -40,7 +40,7 @@ class Archive
                 break;
         }
 
-        return $items;
+        return json_encode($items);
     }
 
 
@@ -103,7 +103,7 @@ class Archive
                 $cta_title = __("Visualizza", "labo-suisse-theme");
             }
 
-            $items[] = Timber::render('@PathViews/components/card.twig', [
+            $card_content = Timber::compile('@PathViews/components/card.twig', [
                 'images' => lb_get_images(get_post_thumbnail_id($post->ID)),
                 'date' => Carbon::createFromDate($post->post_date)->format('d/m/Y'),
                 'variants' => [$variant],
@@ -119,6 +119,8 @@ class Archive
                     ]
                 ],
             ]);
+
+            $items[] = "<div class=\"col-12 col-md-3\">$card_content</div>";
         }
 
         return $items;

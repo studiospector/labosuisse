@@ -3,6 +3,8 @@ import { qs, on } from '@okiba/dom'
 
 import axiosClient from '../HTTPClient'
 
+import DOMPurify from 'dompurify'
+
 const ui = {
     searchForm: '.lb-filters__search-form',
     selects: {
@@ -19,6 +21,8 @@ class Filters extends Component {
 
     constructor({ options, ...props }) {
         super({ ...props, ui })
+
+        this.cardsGrid = qs('.js-lb-cards-grid')
 
         this.payload = {
             postType: this.el.dataset.postType,
@@ -51,14 +55,18 @@ class Filters extends Component {
         this.payload.data = args
 
         this.getData().then((res) => {
-            console.log(res);
+            const items = JSON.parse(res)
+
+            this.cardsGrid.innerHTML = ''
+
+            items.forEach(item => {
+                this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
+            })
         })
     }
 
     getData = async () => {
         let res = null
-
-        console.log(this.payload);
         
         try {
             const { data } = await axiosClient.get(`/wp-json/v1/archives`, {
