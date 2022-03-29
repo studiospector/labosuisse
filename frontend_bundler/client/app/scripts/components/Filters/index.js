@@ -29,8 +29,13 @@ class Filters extends Component {
             data: []
         }
 
-        on(this.ui.buttons, 'click', this.parseArgs)
-        on(this.ui.searchForm, 'submit', this.searchFormValidation)
+        if (this.ui.buttons.length > 0) {
+            on(this.ui.buttons, 'click', this.parseArgs)
+        }
+
+        if (this.ui.searchForm) {
+            on(this.ui.searchForm, 'submit', this.searchFormValidation)
+        }
     }
 
     parseArgs = (ev) => {
