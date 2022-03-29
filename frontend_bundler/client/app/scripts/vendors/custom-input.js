@@ -89,7 +89,7 @@ class CustomInput extends BasicElement {
             this.onFocus(this.currInputElem.value)
 
             // Custom method to update state
-            this.cs[i].updateState = (value) => {
+            this.cs[i].updateFocus = (value) => {
                 this.onFocus(value)
             }
 

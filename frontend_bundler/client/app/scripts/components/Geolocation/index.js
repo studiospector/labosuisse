@@ -34,7 +34,7 @@ class Geolocation extends Component {
                 this.getCurrentLocation(position.coords.latitude, position.coords.longitude).then((res) => { this.location = res }).then(() => {
                     const city = this.location.results[0].address_components[2].long_name
                     this.ui.renderEl.value = city
-                    this.ui.renderEl.updateState(this.ui.renderEl.value)
+                    this.ui.renderEl.updateFocus(this.ui.renderEl.value)
                 })
 
                 // Remove loader
