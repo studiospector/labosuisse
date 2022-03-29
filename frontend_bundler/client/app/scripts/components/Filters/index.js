@@ -29,7 +29,7 @@ class Filters extends Component {
             data: []
         }
 
-        if (this.ui.buttons.length > 0) {
+        if (this.ui.selects.length > 0) {
             on(this.ui.buttons, 'click', this.parseArgs)
         }
 
@@ -100,22 +100,30 @@ class Filters extends Component {
 
     addLoader = () => {
         // Disable selects
-        this.ui.selects.forEach(el => {
-            el.updateState('disable')
-        })
+        if (this.ui.selects.length > 0) {
+            this.ui.selects.forEach(el => {
+                el.updateState('disable')
+            })
+        }
 
         // Disable search form
-        qs('input', this.ui.searchForm).updateState('disable')
+        if (this.ui.searchForm) {
+            qs('input', this.ui.searchForm).updateState('disable')
+        }
     }
 
     removeLoader = () => {
         // Active selects
-        this.ui.selects.forEach(el => {
-            el.updateState('active')
-        })
+        if (this.ui.selects.length > 0) {
+            this.ui.selects.forEach(el => {
+                el.updateState('active')
+            })
+        }
 
         // Active search form
-        qs('input', this.ui.searchForm).updateState('active')
+        if (this.ui.searchForm) {
+            qs('input', this.ui.searchForm).updateState('active')
+        }
     }
 }
 
