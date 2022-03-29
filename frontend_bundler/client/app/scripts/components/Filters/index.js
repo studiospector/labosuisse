@@ -41,6 +41,8 @@ class Filters extends Component {
     parseArgs = (ev) => {
         let args = []
 
+        this.addLoader()
+
         this.ui.selects.forEach(el => {
             const selectedOpts = [...el.options].filter(x => x.selected)
             const values = Array.from(selectedOpts).map(el => el.value)
@@ -67,6 +69,8 @@ class Filters extends Component {
             items.forEach(item => {
                 this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
             })
+        }).then(() => {
+            this.removeLoader()
         })
     }
 
@@ -92,6 +96,26 @@ class Filters extends Component {
         if (searchValue.length <= 2) {
             ev.preventDefault()
         }
+    }
+
+    addLoader = () => {
+        // Disable selects
+        this.ui.selects.forEach(el => {
+            el.updateState('disable')
+        })
+
+        // Disable search form
+        qs('input', this.ui.searchForm).updateState('disable')
+    }
+
+    removeLoader = () => {
+        // Active selects
+        this.ui.selects.forEach(el => {
+            el.updateState('active')
+        })
+
+        // Active search form
+        qs('input', this.ui.searchForm).updateState('active')
     }
 }
 
