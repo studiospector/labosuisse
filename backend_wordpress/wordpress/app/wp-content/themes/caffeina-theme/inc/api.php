@@ -10,9 +10,11 @@ function get_stores()
 
 function get_archive(WP_REST_Request $request)
 {
-    $posts = new Archive($request['type']);
+    $posts = new Archive($request['postType']);
 
-    return $posts->get();
+    return $posts
+        ->addFilters($request['data'])
+        ->get();
 }
 
 add_action( 'rest_api_init', function() {

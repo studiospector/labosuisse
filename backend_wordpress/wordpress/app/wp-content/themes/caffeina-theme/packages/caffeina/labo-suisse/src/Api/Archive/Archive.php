@@ -13,7 +13,7 @@ class Archive
 
     public function __construct($postType, $filters = [])
     {
-        $this->postType = $postType;
+        $this->postType = $this->postType($postType);
 
         $this->args = [
             'post_status' => 'publish',
@@ -25,9 +25,15 @@ class Archive
 
     public function get()
     {
+        $posts = (new WP_Query($this->args))
+            ->get_posts();
+
         switch ($this->postType) {
             case 'post':
-                $items = $this->getPost();
+                $items = $this->postArchiveResponse($posts);
+                break;
+            case 'product':
+                $items = $this->productArchiveResponse($posts);
                 break;
             default :
                 $items = [];
@@ -35,28 +41,54 @@ class Archive
         }
 
         return $items;
-
     }
 
-    private function getPost()
+
+    public function addFilters($filters)
+    {
+        if (!is_null($filters)) {
+            foreach ($filters as $filter) {
+                $filter = json_decode($filter);
+
+                if (property_exists($filter, 'taxonomy')) {
+                    $this->filterByTaxonomy($filter->taxonomy, $filter->values);
+                }
+
+                if (property_exists($filter, 'year')) {
+                    $this->filterByYear($filter->values);
+                }
+            }
+        }
+
+        return $this;
+    }
+
+    private function filterByTaxonomy($taxonomy, $values)
+    {
+        $this->args['tax_query'][] = [
+            'taxonomy' => $taxonomy,
+            'field' => 'term_id',
+            'terms' => $values,
+            'operator' => 'IN'
+        ];
+    }
+
+    private function filterByYear($years)
+    {
+        $this->args['date_query']['relation'] = 'OR';
+
+        foreach ($years as $year) {
+            $this->args['date_query'][] = [
+                'year' => $year
+            ];
+        }
+
+        return $this;
+    }
+
+    private function postArchiveResponse($posts)
     {
         $items = [];
-
-        if(isset($_GET['typology'])) {
-            $this->args['tax_query'][] = [
-                'taxonomy' => 'lb-post-typology',
-                'field' => 'slug',
-                'terms' => $_GET['typology'],
-            ];
-        }
-
-        if(isset($_GET['year'])) {
-            $this->args['date_query'][] = [
-                'year' => $_GET['year']
-            ];
-        }
-
-        $posts = (new WP_Query($this->args))->get_posts();
 
         foreach ($posts as $post) {
             $variant = 'type-2';
@@ -90,5 +122,54 @@ class Archive
         }
 
         return $items;
+    }
+
+    private function productArchiveResponse($posts)
+    {
+        $items = [];
+        foreach ($posts as $post) {
+            $brand = get_the_terms($post->ID, 'lb-brand');
+
+            if($brand) {
+                $brand = $brand[0];
+
+                if (!isset($items[$brand->term_id])) {
+                    $items[$brand->term_id] = [];
+                    $items[$brand->term_id]['brand_card'] = [
+                        'color' => get_field('lb_brand_color', $brand),
+                        'infobox' => [
+                            'subtitle' => $brand->name,
+                            'paragraph' => $brand->description,
+                            'cta' => [
+                                'url' => get_term_link($brand),
+                                'title' => __('Scopri il brand', 'labo-suisse-theme'),
+                                'variants' => ['quaternary']
+                            ]
+                        ],
+                        'variants' => ['type-8']
+                    ];
+                }
+
+            $items[$brand->term_id]['products'][] = Timber::get_post($post->ID);
+            }
+        }
+
+        return Timber::render('@PathViews/components/cards-grid-product-ordered.twig', ['items' => $items]);
+    }
+
+    private function postType($postType)
+    {
+        $type = null;
+
+        switch ($postType) {
+            case 'posts':
+                $type = 'post';
+                break;
+            case 'archives':
+                $type = 'product';
+                break;
+        }
+
+        return $type;
     }
 }
