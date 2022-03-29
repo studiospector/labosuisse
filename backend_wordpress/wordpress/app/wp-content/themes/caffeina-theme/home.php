@@ -44,6 +44,8 @@ $context = [
     'title' => get_the_title($page_for_posts),
     'content' => apply_filters( 'the_content', get_the_content(null, false, $page_for_posts) ),
     'filters' => [
+        'post_type' => 'posts',
+        'containerized' => false,
         'items' => [
             [
                 'id' => 'lb-post-typology',
@@ -54,6 +56,7 @@ $context = [
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
                 'options' => lb_get_post_typologies(),
+                'attributes' => ['data-taxonomy="lb-post-typology"'],
                 'variants' => ['primary']
             ],
             [
@@ -65,6 +68,7 @@ $context = [
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
                 'options' => lb_get_posts_archive_years(),
+                'attributes' => ['data-year="lb-post-archive-years"'],
                 'variants' => ['primary']
             ],
         ],
@@ -72,8 +76,10 @@ $context = [
             'type' => 'search',
             'name' => 's',
             'label' => __('Cerca', 'labo-suisse-theme'),
+            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
             'required' => false,
+            'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
     ],
