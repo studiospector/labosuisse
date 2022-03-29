@@ -36,7 +36,7 @@
 
     {# Posts Grid #}
     <div class="lb-cards-grid lb-cards-grid--default container">
-        <div class="lb-cards-grid__row row">
+        <div class="lb-cards-grid__row row js-lb-cards-grid">
             {% for post in items %}
                 <div class="lb-cards-grid__card col-12 col-lg-8 offset-lg-2">
                     {% include '@PathViews/components/card.twig' with post only %}

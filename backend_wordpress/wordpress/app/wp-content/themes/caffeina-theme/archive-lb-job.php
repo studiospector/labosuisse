@@ -46,6 +46,7 @@ $context = [
     'title' => $options['title'],
     'description' => $options['description'],
     'filters' => [
+        'post_type' => 'lb-job',
         'containerized' => true,
         'items' => [
             [
@@ -57,6 +58,7 @@ $context = [
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
                 'options' =>lb_get_job_location_options(),
+                'attributes' => ['data-taxonomy="lb-job-location"'],
                 'variants' => ['primary']
             ],
             [
@@ -68,6 +70,7 @@ $context = [
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
                 'options' => lb_get_job_department_options(),
+                'attributes' => ['data-taxonomy="lb-job-department"'],
                 'variants' => ['primary']
             ],
         ],

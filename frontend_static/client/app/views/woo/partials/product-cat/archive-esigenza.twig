@@ -36,7 +36,7 @@
     <hr class="lb-separator lb-separator--small" data-variant="small">
 
     {# Posts Grig #}
-    <div class="container">
+    <div class="container js-lb-cards-grid">
         {% if grid_type == 'default' %}
             {% include '@PathViews/components/cards-grid-product-default.twig' with { items: items } only %}
         {% elseif grid_type == 'ordered' %}

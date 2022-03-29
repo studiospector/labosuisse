@@ -9,19 +9,20 @@ $archiveMacro = new ArchiveMacro($_GET['product_category']);
 
 $context = [
     'filters' => [
+        'post_type' => 'product',
         'containerized' => false,
         'items' => [
-            [
-                'id' => 'lb-product-brands',
-                'label' => '',
-                'placeholder' => __('Brand', 'labo-suisse-theme'),
-                'multiple' => true,
-                'required' => false,
-                'disabled' => false,
-                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                'options' => $archiveMacro->brands,
-                'variants' => ['primary']
-            ],
+            // [
+            //     'id' => 'lb-product-brands',
+            //     'label' => '',
+            //     'placeholder' => __('Brand', 'labo-suisse-theme'),
+            //     'multiple' => true,
+            //     'required' => false,
+            //     'disabled' => false,
+            //     'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+            //     'options' => $archiveMacro->brands,
+            //     'variants' => ['primary']
+            // ],
             [
                 'id' => 'lb-product-cat-typology',
                 'label' => '',
@@ -31,24 +32,25 @@ $context = [
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
                 'options' => [],
+                'attributes' => ['data-taxonomy="lb-product-cat-typology"'],
                 'variants' => ['primary']
             ],
-            [
-                'id' => 'lb-product-order',
-                'label' => __('Ordina per', 'labo-suisse-theme'),
-                'placeholder' => __('Scegli...', 'labo-suisse-theme'),
-                'multiple' => true,
-                'required' => false,
-                'disabled' => false,
-                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                'options' => [],
-                'variants' => ['secondary']
-            ],
+            // [
+            //     'id' => 'lb-product-order',
+            //     'label' => __('Ordina per', 'labo-suisse-theme'),
+            //     'placeholder' => __('Scegli...', 'labo-suisse-theme'),
+            //     'multiple' => true,
+            //     'required' => false,
+            //     'disabled' => false,
+            //     'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+            //     'options' => [],
+            //     'variants' => ['secondary']
+            // ],
         ],
         'search' => [
             'type' => 'search',
             'name' => 's',
-            'label' => __('Cerca', 'labo-suisse-theme'),
+            'label' => __('Cerca... (inserisci almeno 3 caratteri)', 'labo-suisse-theme'),
             'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
             'required' => true,
