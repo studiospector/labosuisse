@@ -88,9 +88,14 @@ class CustomInput extends BasicElement {
             // Set default value
             this.onFocus(this.currInputElem.value)
 
-            // Custom method to update state
+            // Custom method to update focus state
             this.cs[i].updateFocus = (value) => {
                 this.onFocus(value)
+            }
+
+            // Custom method to update state
+            this.cs[i].updateState = (state) => {
+                this.updateState(state)
             }
 
             // Events on <input> focus
@@ -100,9 +105,27 @@ class CustomInput extends BasicElement {
     }
 
 
+    /**
+     * Update input state
+     * 
+     * @param {String} state 'disable' or 'active'
+     */
+    updateState = (state) => {
+        if (state === 'disable') {
+            this.currInputElem.disabled = true
+            this.mainContainer.classList.add('custom-input--disabled')
+        } else if (state === 'active') {
+            this.currInputElem.disabled = false
+            this.mainContainer.classList.remove('custom-input--disabled')
+        }
+    }
+
+
 
     /**
      * Focus and Blur State animations
+     * 
+     * @param {String} value Current input value
      */
     onFocus = (value) => {
         this.mainContainer.classList.add('is-focus')

@@ -124,6 +124,28 @@ class CustomSelect extends BasicElement {
             if (this.selectVariant == 'tertiary') {
                 this.tertiaryVariantAlignment()
             }
+
+            // Custom method to update state
+            this.cs[i].updateState = (state) => {
+                this.updateState(state)
+            }
+        }
+    }
+
+
+
+    /**
+     * Update select state
+     * 
+     * @param {String} state 'disable' or 'active'
+     */
+     updateState = (state) => {
+        if (state === 'disable') {
+            this.currSelectElem.disabled = true
+            this.mainContainer.classList.add('custom-select--disabled')
+        } else if (state === 'active') {
+            this.currSelectElem.disabled = false
+            this.mainContainer.classList.remove('custom-select--disabled')
         }
     }
 
