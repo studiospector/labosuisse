@@ -1,7 +1,7 @@
 import Component from '@okiba/component';
 import { on, qsa, qs } from '@okiba/dom';
 
-import axios from 'axios';
+import axiosClient from '../HTTPClient'
 
 import { Loader } from '@googlemaps/js-api-loader';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
@@ -345,7 +345,7 @@ class StoreLocatorCaffeina extends Component {
         let stores = []
 
         try {
-            const { data } = await axios.get(`${window.location.origin}/wp-json/v1/stores`);
+            const { data } = await axiosClient.get(`/wp-json/v1/stores`);
             stores = data
         } catch (error) {
             console.error(error);
