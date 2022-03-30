@@ -445,7 +445,7 @@ function lb_pagination()
     ]);
 
     if ($pagination) {
-        $pagination_html = "<div class=\"lb-pagination container\">$pagination</div>";
+        $pagination_html = "<div class=\"lb-pagination container\"><hr class=\"lb-separator lb-separator--medium\" data-variant=\"medium\">$pagination</div>";
     }
 
     return $pagination_html;
