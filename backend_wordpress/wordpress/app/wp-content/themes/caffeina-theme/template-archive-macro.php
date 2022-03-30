@@ -12,17 +12,18 @@ $context = [
         'post_type' => 'product',
         'containerized' => false,
         'items' => [
-            // [
-            //     'id' => 'lb-product-brands',
-            //     'label' => '',
-            //     'placeholder' => __('Brand', 'labo-suisse-theme'),
-            //     'multiple' => true,
-            //     'required' => false,
-            //     'disabled' => false,
-            //     'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-            //     'options' => $archiveMacro->brands,
-            //     'variants' => ['primary']
-            // ],
+            [
+                'id' => 'lb-brand',
+                'label' => '',
+                'placeholder' => __('Brand', 'labo-suisse-theme'),
+                'multiple' => true,
+                'required' => false,
+                'disabled' => false,
+                'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+                'options' => $archiveMacro->brands,
+                'attributes' => ['data-taxonomy="lb-brand"'],
+                'variants' => ['primary']
+            ],
             [
                 'id' => 'lb-product-cat-typology',
                 'label' => '',

@@ -44,7 +44,7 @@ class Esigenza extends BasePage
         // Set Tipologie array for FE select filter
         $tipologie_arr = array_map(function ($obj) {
             return [
-                'value' => $obj->slug,
+                'value' => $obj->term_id,
                 'label' => $obj->name,
             ];
         }, $tipologie);
@@ -78,7 +78,7 @@ class Esigenza extends BasePage
 
             if (count($the_query->posts) > 0) {
                 $brands_arr[] = [
-                    'value' => $brand->slug,
+                    'value' => $brand->term_id,
                     'label' => $brand->name,
                 ];
 
@@ -114,17 +114,18 @@ class Esigenza extends BasePage
                 'post_type' => 'product',
                 'containerized' => false,
                 'items' => [
-                    // [
-                    //     'id' => 'lb-product-brands',
-                    //     'label' => '',
-                    //     'placeholder' => __('Brand', 'labo-suisse-theme'),
-                    //     'multiple' => true,
-                    //     'required' => false,
-                    //     'disabled' => false,
-                    //     'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                    //     'options' => $brands_arr,
-                    //     'variants' => ['primary']
-                    // ],
+                    [
+                        'id' => 'lb-brand',
+                        'label' => '',
+                        'placeholder' => __('Brand', 'labo-suisse-theme'),
+                        'multiple' => true,
+                        'required' => false,
+                        'disabled' => false,
+                        'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+                        'options' => $brands_arr,
+                        'attributes' => ['data-taxonomy="lb-brand"'],
+                        'variants' => ['primary']
+                    ],
                     [
                         'id' => 'lb-product-cat-typology',
                         'label' => '',
