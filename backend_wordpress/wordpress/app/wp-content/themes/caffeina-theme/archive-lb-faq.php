@@ -61,6 +61,10 @@ $context = [
     ],
     'items' => $items,
     'pagination' => lb_pagination(),
+    'load_more' => [
+        'posts_per_page' => 4,
+        'label' => __('Carica altro', 'labo-suisse-theme'),
+    ],
 ];
 
 Timber::render('@PathViews/archive-lb-faq.twig', $context);

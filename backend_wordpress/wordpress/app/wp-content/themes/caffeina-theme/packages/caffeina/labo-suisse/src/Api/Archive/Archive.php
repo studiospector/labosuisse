@@ -55,6 +55,8 @@ class Archive
 
     public function postsPerPage($postsPerPage)
     {
+        $this->args['posts_per_page'] = 4;
+
         if ($postsPerPage) {
             $this->args['posts_per_page'] = $postsPerPage;
         }

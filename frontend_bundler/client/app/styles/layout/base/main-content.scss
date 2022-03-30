@@ -209,3 +209,16 @@ ul.lb-arrow-list {
     text-align: center;
     color: map-get($colors, "grey-3");
 }
+
+
+
+.lb-load-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &--hide {
+        display: none;
+    }
+}

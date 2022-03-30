@@ -23,11 +23,17 @@ class Filters extends Component {
         super({ ...props, ui })
 
         this.cardsGrid = qs('.js-lb-cards-grid')
+        this.pagination = qs('.lb-pagination')
+        this.loadMore = qs('.js-load-more')
+        this.loadMoreBtn = qs('.button', this.loadMore)
 
         this.payload = {
             postType: this.el.dataset.postType,
             data: []
         }
+
+        this.page = 2
+        this.postsPerPage = this.loadMore.dataset.postsPerPage
 
         if (this.ui.selects.length > 0) {
             on(this.ui.buttons, 'click', this.parseArgs)
@@ -65,12 +71,44 @@ class Filters extends Component {
             const items = JSON.parse(res)
 
             this.cardsGrid.innerHTML = ''
+            if (this.pagination) {
+                this.pagination.remove()
+            }
+
+            items.forEach(item => {
+                this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
+            })
+
+            if (this.loadMore) {
+                this.loadMore.classList.remove('lb-load-more--hide')
+                on(this.loadMoreBtn, 'click', this.loadMoreData)
+            }
+        }).then(() => {
+            this.removeLoader()
+            window.getCustomScrollbar.update()
+        })
+    }
+
+    loadMoreData = () => {
+        this.loadMoreBtn.disabled = true
+        
+        this.payload.page = this.page
+
+        if (this.postsPerPage) {
+            this.payload.posts_per_page = this.postsPerPage
+        }
+
+        this.getData().then((res) => {
+            const items = JSON.parse(res)
 
             items.forEach(item => {
                 this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
             })
         }).then(() => {
+            this.page++
+            this.loadMoreBtn.disabled = false
             this.removeLoader()
+            window.getCustomScrollbar.update()
         })
     }
 

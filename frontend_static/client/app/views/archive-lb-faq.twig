@@ -41,8 +41,10 @@
 
     {# Pagination #}
     {% if pagination %}
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
         {{ pagination|raw }}
     {% endif %}
+
+    {# Load More #}
+    {% include '@PathViews/components/load-more.twig' with load_more only %}
 
 {% endblock %}
