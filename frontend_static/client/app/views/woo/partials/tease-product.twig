@@ -1,3 +1,4 @@
+{# <article {{ fn('post_class', ['lb-product-card', entry_classes ], post.ID) }}> #}
 <article {{ fn('post_class', ['lb-product-card'] ) }}>
 
     {{ fn('timber_set_product', post) }}
@@ -11,7 +12,7 @@
             <h3 class="lb-product-card__title"><a href="{{ post.link }}">{{ fn('the_title') }}</a></h3>
         {% endif %}
 
-        {% do action( 'woocommerce_after_shop_loop_item_title' ) %}
-        {% do action( 'woocommerce_after_shop_loop_item' ) %}
+        {% do action('woocommerce_after_shop_loop_item_title') %}
+        {% do action('woocommerce_after_shop_loop_item') %}
     </div>
 </article>
