@@ -32,7 +32,7 @@ $context = [
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
                 'options' => [],
-                'attributes' => ['data-taxonomy="lb-product-cat-typology"'],
+                'attributes' => ['data-taxonomy="product_cat"'],
                 'variants' => ['primary']
             ],
             // [

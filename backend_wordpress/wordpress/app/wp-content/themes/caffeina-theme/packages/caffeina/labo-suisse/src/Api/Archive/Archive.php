@@ -11,7 +11,7 @@ class Archive
     private $postType;
     private $args;
 
-    public function __construct($postType, $filters = [])
+    public function __construct($postType)
     {
         $this->postType = $this->postType($postType);
 
@@ -35,6 +35,9 @@ class Archive
             case 'product':
                 $items = $this->productArchiveResponse($posts);
                 break;
+            case 'lb-job':
+                $items = $this->jobArchiveResponse($posts);
+                break;
             default :
                 $items = [];
                 break;
@@ -43,6 +46,21 @@ class Archive
         return json_encode($items);
     }
 
+    public function page($page)
+    {
+        $this->args['paged'] = $page;
+
+        return $this;
+    }
+
+    public function postsPerPage($postsPerPage)
+    {
+        if ($postsPerPage) {
+            $this->args['posts_per_page'] = $postsPerPage;
+        }
+
+        return $this;
+    }
 
     public function addFilters($filters)
     {
@@ -67,7 +85,6 @@ class Archive
     {
         $this->args['tax_query'][] = [
             'taxonomy' => $taxonomy,
-            'field' => 'term_id',
             'terms' => $values,
             'operator' => 'IN'
         ];
@@ -132,7 +149,7 @@ class Archive
         foreach ($posts as $post) {
             $brand = get_the_terms($post->ID, 'lb-brand');
 
-            if($brand) {
+            if ($brand) {
                 $brand = $brand[0];
 
                 if (!isset($items[$brand->term_id])) {
@@ -152,11 +169,48 @@ class Archive
                     ];
                 }
 
-            $items[$brand->term_id]['products'][] = Timber::get_post($post->ID);
+                $items[$brand->term_id]['products'][] = Timber::get_post($post->ID);
             }
         }
 
-        return Timber::render('@PathViews/components/cards-grid-product-ordered.twig', ['items' => $items]);
+        return [Timber::compile('@PathViews/components/cards-grid-product-ordered.twig', ['items' => $items])];
+    }
+
+    private function jobArchiveResponse($posts)
+    {
+        $items = [];
+
+        foreach ($posts as $post) {
+            // Job locations
+            $jobLocation = get_job_location();
+            $isHeadquarter = $jobLocation['isHeadquarter'];
+            $job_location_links = $jobLocation['jobLocationLinks'];
+
+            $card_content = Timber::compile('@PathViews/components/card.twig', [
+                'infobox' => [
+                    'subtitle' => $post->post_title,
+                    'location' => (empty($job_location_links)) ? null : [
+                        'isHeadquarter' => $isHeadquarter,
+                        'label' => $job_location_links,
+                    ],
+                    'scope' => [
+                        'label' => __('Ambito:', 'labo-suisse-theme'),
+                        'value' => get_field('lb_job_scope', $post->ID)
+                    ],
+                    'paragraph' => $post->post_excerpt,
+                    'cta' => [
+                        'url' => get_permalink($post->ID),
+                        'title' => __('Leggi di più', 'labo-suisse-theme'),
+                        'variants' => ['quaternary']
+                    ]
+                ],
+                'variants' => ['type-9']
+            ]);
+
+            $items[] = '<div class="lb-cards-grid__card col-12 col-lg-8 offset-lg-2">' . $card_content . '</div>';
+        }
+
+        return $items;
     }
 
     private function postType($postType)
@@ -167,8 +221,11 @@ class Archive
             case 'posts':
                 $type = 'post';
                 break;
-            case 'archives':
+            case 'product':
                 $type = 'product';
+                break;
+            case 'lb-job':
+                $type = 'lb-job';
                 break;
         }
 

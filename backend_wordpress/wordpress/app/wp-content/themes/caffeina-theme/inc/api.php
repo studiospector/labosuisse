@@ -13,6 +13,8 @@ function get_archive(WP_REST_Request $request)
     $posts = new Archive($request['postType']);
 
     return $posts
+        ->page($request['page'])
+        ->postsPerPage($request['posts_per_page'])
         ->addFilters($request['data'])
         ->get();
 }
