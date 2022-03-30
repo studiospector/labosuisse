@@ -374,11 +374,21 @@ function lb_post_filters($query)
 {
     // "Brand" and "Linea di Prodotto" Archive pages
     if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-        $query->set('posts_per_page', -1);
+        $query->set('posts_per_page', 12);
     }
 
     // Posts page
     if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
+        $query->set('posts_per_page', 12);
+    }
+
+    // Jobs Archive page
+    if (is_post_type_archive('lb-job') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+        $query->set('posts_per_page', 8);
+    }
+
+    // FAQs Archive page
+    if (is_post_type_archive('lb-faq') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
         $query->set('posts_per_page', 12);
     }
 
@@ -423,12 +433,14 @@ function lb_pagination()
 
     $pagination = get_the_posts_pagination([
         'mid_size' => 2,
-        'prev_text' => __('<', 'labo-suisse-theme'),
-        'next_text' => __('>', 'labo-suisse-theme'),
+        'prev_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-left']) . '</div>',
+        'next_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-right']) . '</div>',
+        'before_page_number' => '<div class="button button-secondary">',
+        'after_page_number'  => '</div>'
     ]);
 
     if ($pagination) {
-        $pagination_html = "<div class=\"lb-pagination\">$pagination</div>";
+        $pagination_html = "<div class=\"lb-pagination container\">$pagination</div>";
     }
 
     return $pagination_html;

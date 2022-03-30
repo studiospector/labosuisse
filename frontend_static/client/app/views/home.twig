@@ -4,6 +4,7 @@
 
 {% block main %}
 
+    {# Content #}
     {{ content|raw }}
 
     {# Filters #}
@@ -21,12 +22,12 @@
                 </div>
             {% endfor %}
         </div>
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
-        {# Pagination #}
-        {% if pagination %}
-            {{ pagination|raw }}
-            <hr class="lb-separator lb-separator--big" data-variant="big">
-        {% endif %}
     </div>
+
+    {# Pagination #}
+    {% if pagination %}
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {{ pagination|raw }}
+    {% endif %}
 
 {% endblock %}

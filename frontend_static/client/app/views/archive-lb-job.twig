@@ -45,9 +45,15 @@
         </div>
     </div>
 
+    {# Pagination #}
+    {% if pagination %}
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {{ pagination|raw }}
+    {% endif %}
+
     {# Info #}
     {% if infobox %}
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        <hr class="lb-separator lb-separator--big" data-variant="big">
         <div class="container text-center">
             {% include '@PathViews/components/infobox.twig' with infobox only %}
         </div>

@@ -39,4 +39,10 @@
         </div>
     </div>
 
+    {# Pagination #}
+    {% if pagination %}
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {{ pagination|raw }}
+    {% endif %}
+
 {% endblock %}

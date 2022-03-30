@@ -38,6 +38,7 @@ $context = [
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $num_posts . '</span>',
     'grid_type' => $grid_type,
     'items' => $items,
+    'pagination' => lb_pagination(),
 ];
 
 Timber::render('@PathViews/taxonomy-lb-brand.twig', $context);

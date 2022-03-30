@@ -77,6 +77,7 @@ $context = [
         'search' => null,
     ],
     'items' => $items,
+    'pagination' => lb_pagination(),
     'infobox' => [
         'subtitle' => $options['infobox']['title'],
         'paragraph' => $options['infobox']['paragraph'],
