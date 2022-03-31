@@ -10,7 +10,7 @@ $archiveMacro = new ArchiveMacro($_GET['product_category']);
 $context = [
     'filters' => [
         'post_type' => 'product',
-        'posts_per_page' => 4,
+        'posts_per_page' => -1,
         'containerized' => false,
         'items' => [
             [
@@ -63,10 +63,10 @@ $context = [
     'grid_type' => 'ordered',
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $archiveMacro->totalPosts . '</span>',
     'items' => $archiveMacro->products,
-    'load_more' => [
-        'posts_per_page' => 4,
-        'label' => __('Carica altro', 'labo-suisse-theme'),
-    ],
+    // 'load_more' => [
+    //     'posts_per_page' => 4,
+    //     'label' => __('Carica altro', 'labo-suisse-theme'),
+    // ],
     'term_name' => $archiveMacro->category->name,
     'term_description' => $archiveMacro->category->description
 ];

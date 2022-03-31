@@ -378,9 +378,9 @@ function lb_post_filters($query)
     }
 
     // Product Category Archive page
-    if (is_tax('product_cat') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-        $query->set('posts_per_page', 12);
-    }
+    // if (is_tax('product_cat') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+    //     $query->set('posts_per_page', 12);
+    // }
 
     // Posts page
     if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {

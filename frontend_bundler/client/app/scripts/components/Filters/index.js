@@ -25,7 +25,7 @@ class Filters extends Component {
         this.cardsGrid = qs('.js-lb-cards-grid')
         this.pagination = qs('.lb-pagination')
         this.loadMore = qs('.js-load-more')
-        this.loadMoreBtn = qs('.button', this.loadMore)
+        this.loadMoreBtn = (this.loadMore) ? qs('.button', this.loadMore) : null
 
         this.payload = {
             postType: this.el.dataset.postType,
@@ -34,7 +34,7 @@ class Filters extends Component {
             data: []
         }
 
-        this.loadMorePostsPerPage = this.loadMore.dataset.postsPerPage
+        this.loadMorePostsPerPage = (this.loadMore) ? this.loadMore.dataset.postsPerPage : null
 
         if (this.ui.selects.length > 0) {
             on(this.ui.buttons, 'click', this.parseArgs)

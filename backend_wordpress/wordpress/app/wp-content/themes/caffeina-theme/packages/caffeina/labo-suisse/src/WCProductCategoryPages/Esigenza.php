@@ -112,7 +112,7 @@ class Esigenza extends BasePage
         $payload = [
             'filters' => [
                 'post_type' => 'product',
-                'posts_per_page' => 4,
+                'posts_per_page' => -1,
                 'containerized' => false,
                 'items' => [
                     [
@@ -165,10 +165,10 @@ class Esigenza extends BasePage
             'grid_type' => 'ordered',
             'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $count_posts . '</span>',
             'items' => $items,
-            'load_more' => [
-                'posts_per_page' => 4,
-                'label' => __('Carica altro', 'labo-suisse-theme'),
-            ],
+            // 'load_more' => [
+            //     'posts_per_page' => 4,
+            //     'label' => __('Carica altro', 'labo-suisse-theme'),
+            // ],
             'block_announcements' => (!get_field('lb_product_cat_announcements_state', $term)) ? null : [
                 'infobox' => [
                     'title' => get_field('lb_product_cat_announcements_title', $term),
