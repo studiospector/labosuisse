@@ -1,0 +1,44 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-single-post' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Featured image #}
+    {% if featured_image %}
+        <div class="lb-single-post__featured-image">
+            {% include '@PathViews/components/hero.twig' with featured_image only %}
+        </div>
+        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% endif %}
+
+    {# Intro #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Info #}
+    <div class="lb-single-post__info">
+        <div class="lb-post-content">
+            <div class="infobox">
+                {% if date %}
+                    <div class="infobox__tagline">{{ date }}</div>
+                {% endif %}
+                {% if reading_time %}
+                    <div class="infobox__tagline">{{ reading_time }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+
+    {# Content #}
+    <div class="lb-single-post__content lb-post-elements-formatted">
+        {{ content|raw }}
+    </div>
+
+{% endblock %}

@@ -18,6 +18,7 @@
         font-weight: 400;
         color: map-get($colors, "secondary");
         text-transform: uppercase;
+        letter-spacing: 0.02em;
     }
 
     &__title {

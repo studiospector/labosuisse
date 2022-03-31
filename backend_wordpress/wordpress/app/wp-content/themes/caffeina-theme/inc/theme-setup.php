@@ -299,7 +299,7 @@ class ThemeSetup extends Timber\Site
      * 
      * @return int (Maybe) modified excerpt length
      */
-    function lb_excerpt_length($length)
+    public function lb_excerpt_length($length)
     {
         if (is_admin()) {
             return $length;
