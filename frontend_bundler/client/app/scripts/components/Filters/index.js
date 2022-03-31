@@ -23,6 +23,7 @@ class Filters extends Component {
         super({ ...props, ui })
 
         this.cardsGrid = qs('.js-lb-cards-grid')
+        this.results = qs('.lb-posts-count')
         this.pagination = qs('.lb-pagination')
         this.loadMore = qs('.js-load-more')
         this.loadMoreBtn = (this.loadMore) ? qs('.button', this.loadMore) : null
@@ -114,6 +115,11 @@ class Filters extends Component {
 
     render = (payload) => {
         const items = payload.posts
+
+        if (this.results) {
+            const resultsSpan = qs('span', this.results)
+            resultsSpan.innerText = DOMPurify.sanitize(payload.totalPosts)
+        }
 
         if (payload.totalPosts > 0) {
             items.forEach(item => {
