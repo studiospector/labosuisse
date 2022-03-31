@@ -13,7 +13,7 @@ class Archive
 
     public function __construct($postType)
     {
-        $this->postType = $this->postType($postType);
+        $this->postType = $postType;
 
         $this->args = [
             'post_status' => 'publish',
@@ -25,25 +25,26 @@ class Archive
 
     public function get()
     {
-        $posts = (new WP_Query($this->args))
-            ->get_posts();
+        $query = new WP_Query($this->args);
+        $totalPosts = $query->post_count;
 
-        switch ($this->postType) {
-            case 'post':
-                $items = $this->postArchiveResponse($posts);
-                break;
-            case 'product':
-                $items = $this->productArchiveResponse($posts);
-                break;
-            case 'lb-job':
-                $items = $this->jobArchiveResponse($posts);
-                break;
-            default :
-                $items = [];
-                break;
+        if($totalPosts === 0) {
+            return json_encode([
+                'totalPosts' => $totalPosts,
+                'posts' => $this->noResults()
+            ]);
         }
 
-        return json_encode($items);
+        $callback = str_replace('-','', $this->postType) . "ArchiveResponse";
+
+        $items = $this->$callback(
+            $query->get_posts()
+        );
+
+        return json_encode([
+            'totalPosts' => $totalPosts,
+            'posts' => $items
+        ]);
     }
 
     public function page($page)
@@ -178,7 +179,7 @@ class Archive
         return [Timber::compile('@PathViews/components/cards-grid-product-ordered.twig', ['items' => $items])];
     }
 
-    private function jobArchiveResponse($posts)
+    private function lbjobArchiveResponse($posts)
     {
         $items = [];
 
@@ -215,22 +216,13 @@ class Archive
         return $items;
     }
 
-    private function postType($postType)
+    private function noResults()
     {
-        $type = null;
-
-        switch ($postType) {
-            case 'posts':
-                $type = 'post';
-                break;
-            case 'product':
-                $type = 'product';
-                break;
-            case 'lb-job':
-                $type = 'lb-job';
-                break;
-        }
-
-        return $type;
+        return '<div class="col-12">
+            <div class="lb-no-results">
+                <div class="infobox__title h2">Nessun post trovato.</div>
+                <p class="infobox__paragraph">nessun post trovato.</p>
+            </div>
+        </div>';
     }
 }
