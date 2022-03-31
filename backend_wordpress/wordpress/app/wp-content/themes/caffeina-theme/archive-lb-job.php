@@ -47,6 +47,7 @@ $context = [
     'description' => $options['description'],
     'filters' => [
         'post_type' => 'lb-job',
+        'posts_per_page' => 4,
         'containerized' => true,
         'items' => [
             [

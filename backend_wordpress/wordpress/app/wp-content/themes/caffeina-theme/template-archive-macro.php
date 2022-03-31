@@ -10,6 +10,7 @@ $archiveMacro = new ArchiveMacro($_GET['product_category']);
 $context = [
     'filters' => [
         'post_type' => 'product',
+        'posts_per_page' => 4,
         'containerized' => false,
         'items' => [
             [

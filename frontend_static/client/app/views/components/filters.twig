@@ -1,4 +1,4 @@
-<div class="lb-filters{{ (containerized) ? '' : ' container' }} js-filters"{{ (post_type) ? ' data-post-type="' ~ post_type ~ '"' : '' }}>
+<div class="lb-filters{{ (containerized) ? '' : ' container' }} js-filters"{{ (post_type) ? ' data-post-type="' ~ post_type ~ '"' : '' }}{{ posts_per_page ? ' data-posts-per-page="' ~ posts_per_page ~ '"' : '' }}>
     <div class="row">
         {% if items|length > 0 %}
             {% for item in items %}

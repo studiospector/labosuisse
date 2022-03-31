@@ -45,6 +45,7 @@ $context = [
     'content' => apply_filters( 'the_content', get_the_content(null, false, $page_for_posts) ),
     'filters' => [
         'post_type' => 'post',
+        'posts_per_page' => 4,
         'containerized' => false,
         'items' => [
             [

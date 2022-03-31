@@ -1,5 +1,5 @@
 import Component from '@okiba/component'
-import { qs, on } from '@okiba/dom'
+import { qs, on, off } from '@okiba/dom'
 
 import axiosClient from '../HTTPClient'
 
@@ -29,11 +29,12 @@ class Filters extends Component {
 
         this.payload = {
             postType: this.el.dataset.postType,
+            page: 1,
+            posts_per_page: this.el.dataset.postsPerPage,
             data: []
         }
 
-        this.page = 2
-        this.postsPerPage = this.loadMore.dataset.postsPerPage
+        this.loadMorePostsPerPage = this.loadMore.dataset.postsPerPage
 
         if (this.ui.selects.length > 0) {
             on(this.ui.buttons, 'click', this.parseArgs)
@@ -66,49 +67,33 @@ class Filters extends Component {
         })
 
         this.payload.data = args
+        this.payload.page = 1
 
         this.getData().then((res) => {
-            const items = JSON.parse(res)
-
             this.cardsGrid.innerHTML = ''
             if (this.pagination) {
                 this.pagination.remove()
             }
-
-            items.forEach(item => {
-                this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
-            })
-
-            if (this.loadMore) {
-                this.loadMore.classList.remove('lb-load-more--hide')
-                on(this.loadMoreBtn, 'click', this.loadMoreData)
-            }
+            this.render(JSON.parse(res))
         }).then(() => {
-            this.removeLoader()
             window.getCustomScrollbar.update()
+            this.removeLoader()
         })
     }
 
     loadMoreData = () => {
         this.loadMoreBtn.disabled = true
-        
-        this.payload.page = this.page
 
-        if (this.postsPerPage) {
-            this.payload.posts_per_page = this.postsPerPage
+        if (this.loadMorePostsPerPage) {
+            this.payload.posts_per_page = this.loadMorePostsPerPage
         }
 
         this.getData().then((res) => {
-            const items = JSON.parse(res)
-
-            items.forEach(item => {
-                this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
-            })
+            this.render(JSON.parse(res))
         }).then(() => {
-            this.page++
             this.loadMoreBtn.disabled = false
-            this.removeLoader()
             window.getCustomScrollbar.update()
+            this.removeLoader()
         })
     }
 
@@ -125,6 +110,32 @@ class Filters extends Component {
         }
 
         return res
+    }
+
+    render = (payload) => {
+        const items = payload.posts
+
+        if (payload.totalPosts > 0) {
+            items.forEach(item => {
+                this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
+            })
+        } else {
+            this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(items))
+        }
+
+        if (this.loadMore) {
+            if (payload.totalPosts > 0 && payload.hasPosts) {
+                this.loadMore.classList.remove('lb-load-more--hide')
+                on(this.loadMoreBtn, 'click', this.loadMoreData)
+            } else {
+                this.loadMore.classList.add('lb-load-more--hide')
+                off(this.loadMoreBtn, 'click', this.loadMoreData)
+            }
+        }
+
+        if (payload.hasPosts) {
+            this.payload.page++
+        }
     }
 
     searchFormValidation = (ev) => {

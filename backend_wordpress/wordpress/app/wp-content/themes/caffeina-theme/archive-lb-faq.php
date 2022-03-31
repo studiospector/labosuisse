@@ -46,6 +46,7 @@ $context = [
     'description' => $options['description'],
     'filters' => [
         'post_type' => 'lb-faq',
+        'posts_per_page' => 4,
         'containerized' => false,
         'items' => [],
         'search' => [
