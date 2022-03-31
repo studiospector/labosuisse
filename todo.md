@@ -79,5 +79,6 @@ SEZIONI DA TERMINARE
 - √ T6 Store Locator
 - T10 Labo nel Mondo
 
-- Filtri e Ricerche
+- √ Filtri e Ricerche archivi
+- Ricerca globale
 - Integrazione Newsletter
