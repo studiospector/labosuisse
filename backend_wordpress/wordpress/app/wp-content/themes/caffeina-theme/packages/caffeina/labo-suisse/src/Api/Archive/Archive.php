@@ -27,11 +27,13 @@ class Archive
     {
         $query = new WP_Query($this->args);
         $totalPosts = $query->post_count;
+        $hasPost = $this->args['paged'] < $query->max_num_pages;
 
         if($totalPosts === 0) {
             return json_encode([
                 'totalPosts' => $totalPosts,
-                'posts' => $this->noResults()
+                'posts' => $this->noResults(),
+                'hasPost' => $hasPost
             ]);
         }
 
@@ -43,7 +45,8 @@ class Archive
 
         return json_encode([
             'totalPosts' => $totalPosts,
-            'posts' => $items
+            'posts' => $items,
+            'hasPost' => $hasPost
         ]);
     }
 
