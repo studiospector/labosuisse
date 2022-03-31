@@ -33,8 +33,11 @@ endif;
 wp_reset_postdata();
 
 $context = [
-    'brand' => $brand_obj,
     'level' => $level,
+    'page_intro' => [
+        'title' => $brand_obj->name,
+        'description' => nl2br($brand_obj->description),
+    ],
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $num_posts . '</span>',
     'grid_type' => $grid_type,
     'items' => $items,

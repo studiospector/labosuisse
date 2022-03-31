@@ -43,8 +43,10 @@ wp_reset_postdata();
 $options = (new Option())->getJobsOptions();
 
 $context = [
-    'title' => $options['title'],
-    'description' => $options['description'],
+    'page_intro' => [
+        'title' => $options['title'],
+        'description' => $options['description'],
+    ],
     'filters' => [
         'post_type' => 'lb-job',
         'posts_per_page' => 4,

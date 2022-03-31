@@ -67,8 +67,10 @@ $context = [
     //     'posts_per_page' => 4,
     //     'label' => __('Carica altro', 'labo-suisse-theme'),
     // ],
-    'term_name' => $archiveMacro->category->name,
-    'term_description' => $archiveMacro->category->description
+    'page_intro' => [
+        'title' => $archiveMacro->category->name,
+        'description' => nl2br($archiveMacro->category->description),
+    ],
 ];
 
 Timber::render('@PathViews/template-archive-macro.twig', $context);

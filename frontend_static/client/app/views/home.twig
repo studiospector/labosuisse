@@ -5,6 +5,7 @@
 {% block main %}
 
     {# Content #}
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
     {{ content|raw }}
 
     {# Filters #}
@@ -13,8 +14,8 @@
         <hr class="lb-separator lb-separator--medium" data-variant="medium">
     {% endif %}
 
+    {# Posts Grig #}
     <div class="container">
-        {# Posts Grig #}
         <div class="row js-lb-cards-grid">
             {% for item in posts %}
                 <div class="col-12 col-md-3">

@@ -16,8 +16,10 @@ class BasePage
         $this->context = [
             'level' => $this->name,
             'data' => [
-                'term_name' => $term->name,
-                'term_description' => $term->description,
+                'page_intro' => [
+                    'title' => $term->name,
+                    'description' => nl2br($term->description),
+                ],
                 'term_image' => get_field('lb_product_cat_image', $term),
             ]
         ];

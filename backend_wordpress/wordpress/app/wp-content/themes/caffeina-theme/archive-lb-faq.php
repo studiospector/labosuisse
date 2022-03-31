@@ -42,8 +42,10 @@ $options = (new Option())
     ->getFaqOptions();
 
 $context = [
-    'title' => $options['title'],
-    'description' => $options['description'],
+    'page_intro' => [
+        'title' => $options['title'],
+        'description' => $options['description'],
+    ],
     'filters' => [
         'post_type' => 'lb-faq',
         'posts_per_page' => 4,

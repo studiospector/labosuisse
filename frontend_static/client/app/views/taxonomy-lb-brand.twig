@@ -10,16 +10,7 @@
     {% endif %}
 
     {# Info #}
-    <div class="taxonomy-lb-brand__info container text-center">
-        <div class="infobox">
-            {% if brand.name %}
-                <h1 class="infobox__subtitle h2">{{ brand.name }}</h1>
-            {% endif %}
-            {% if brand.description %}
-                <p class="infobox__paragraph">{{ fn('nl2br', brand.description) }}</p>
-            {% endif %}
-        </div>
-    </div>
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
     <hr class="lb-separator lb-separator--small" data-variant="small">
 
     {# Numbers of posts #}
