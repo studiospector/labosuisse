@@ -44,6 +44,9 @@
         {% endif %}
     </div>
 
+    {# Load More #}
+    {% include '@PathViews/components/load-more.twig' with load_more only %}
+
     {# Block Announcements #}
     {% if block_announcements %}
         <div class="lb-archive-esigenza__announcements">

@@ -36,7 +36,7 @@ class ArchiveMacro
             }
 
             $this->brands[] = [
-                'value' => $brand->slug,
+                'value' => $brand->term_id,
                 'label' => $brand->name,
             ];
 

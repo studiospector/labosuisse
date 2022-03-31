@@ -62,6 +62,10 @@ $context = [
     'grid_type' => 'ordered',
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $archiveMacro->totalPosts . '</span>',
     'items' => $archiveMacro->products,
+    'load_more' => [
+        'posts_per_page' => 4,
+        'label' => __('Carica altro', 'labo-suisse-theme'),
+    ],
     'term_name' => $archiveMacro->category->name,
     'term_description' => $archiveMacro->category->description
 ];
