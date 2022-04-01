@@ -544,6 +544,44 @@
             "ui": 1
         },
         {
+            "key": "field_6246c76f9dfb2",
+            "label": "Product Gallery",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_6246c7939dfb3",
+            "label": "Pagina Archivio Gallery Prodotti",
+            "name": "lb_archive_product_gallery_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": "",
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "wpml_cf_preferences": 2,
+            "ui": 1
+        },
+        {
             "key": "field_622741428fdca",
             "label": "API Key",
             "name": "",
@@ -599,5 +637,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647444683
+    "modified": 1648806084
 }

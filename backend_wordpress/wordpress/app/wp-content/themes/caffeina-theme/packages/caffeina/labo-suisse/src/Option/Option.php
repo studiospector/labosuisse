@@ -9,6 +9,13 @@ class Option
         return get_permalink($this->getOption('lb_archive_brand_link'));
     }
 
+    public function getProductGalleryLink($productCategory)
+    {
+        $link = get_permalink($this->getOption('lb_archive_product_gallery_page'));
+
+        return "{$link}?product_category={$productCategory}";
+    }
+
     public function getHeaderLinks()
     {
         $links = $this->prepareLinks('lb_header_links');

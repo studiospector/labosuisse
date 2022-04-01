@@ -3,6 +3,7 @@
 namespace Caffeina\LaboSuisse\Menu\Product;
 
 use Caffeina\LaboSuisse\Menu\Traits\HasGetTerms;
+use Caffeina\LaboSuisse\Option\Option;
 
 class Area
 {
@@ -39,7 +40,8 @@ class Area
                     'type' => 'submenu',
                     'label' => 'Per Zona',
                     'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)]
+                        ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)],
+                        ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)]
                     ]
                 ],
                 [
