@@ -25,6 +25,10 @@ $context = [
     'num_posts_label' => __('Risultati:', 'labo-suisse-theme'),
     'num_posts' => $items['count'],
     'items' => $items['items'],
+    'no_results' => [
+        'title' => __('Nessun evento previsto<br>prossimamente nella tua provincia.', 'labo-suisse-theme'),
+        'text' => __('Cerca un’altra città a te vicina per scoprire le date a calendario.', 'labo-suisse-theme'),
+    ],
 ];
 
 Timber::render('@PathViews/archive-lb-beauty-specialist.twig', $context);

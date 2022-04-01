@@ -223,8 +223,8 @@ class Archive
     {
         return '<div class="col-12">
             <div class="lb-no-results">
-                <div class="infobox__title h2">Nessun post trovato.</div>
-                <p class="infobox__paragraph">nessun post trovato.</p>
+                <div class="infobox__title h2">'. __('Nessun risultato trovato', 'labo-suisse-theme') .'</div>
+                <p class="infobox__paragraph">'. __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme') .'</p>
             </div>
         </div>';
     }

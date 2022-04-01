@@ -60,8 +60,8 @@
             {% if num_posts is not null and num_posts == 0 %}
                 <div class="col-12">
                     <div class="lb-no-results">
-                        <div class="infobox__title h2">Nessun evento previsto<br>prossimamente nella tua provincia.</div>
-                        <p class="infobox__paragraph">Cerca un’altra città a te vicina per scoprire le date a calendario.</p>
+                        <div class="infobox__title h2">{{ no_results.title }}</div>
+                        <p class="infobox__paragraph">{{ no_results.text }}</p>
                     </div>
                 </div>
             {% endif %}
