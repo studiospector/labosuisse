@@ -26,6 +26,7 @@ import StoreLocator from './StoreLocator'
 import OpenMapAppLink from './OpenMapAppLink'
 import Geolocation from './Geolocation'
 import Filters from './Filters'
+import Loader from './Loader'
 
 const components = {
     scrollbar: {
@@ -143,6 +144,11 @@ const components = {
         type: Filters,
         optional: true
     },
+    loader: {
+        selector: '.js-loader',
+        type: Loader,
+        optional: true
+    },
 }
 
 export default class Application extends Component {
@@ -168,7 +174,7 @@ export default class Application extends Component {
         if (!document.querySelector('body').classList.contains('wp-admin')) {
             window.getCustomScrollbar.update()
 
-            // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+            // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
             ScrollTrigger.addEventListener("refresh", () => window.getCustomScrollbar.update());
 
             // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
