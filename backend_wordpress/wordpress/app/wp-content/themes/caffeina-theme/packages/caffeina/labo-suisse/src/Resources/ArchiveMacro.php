@@ -8,6 +8,7 @@ class ArchiveMacro
 {
     public $category;
     public $brands = [];
+    public $categories = [];
     public $products = [];
     public $totalPosts = 0;
 
@@ -17,6 +18,7 @@ class ArchiveMacro
     public function __construct($category)
     {
         $this->category = get_term_by('slug', $category, 'product_cat');
+
         $this->products();
     }
 
@@ -43,6 +45,7 @@ class ArchiveMacro
             $this->products[$brand->term_id]['brand_card'] = $this->getBrandCard($brand);
 
             foreach ($query->posts as $product) {
+                $this->getCategories($product);
                 $this->products[$brand->term_id]['products'][] = Timber::get_post($product->ID);
                 $this->totalPosts++;
             }
@@ -50,7 +53,6 @@ class ArchiveMacro
 
         wp_reset_postdata();
     }
-
 
     /**
      * @param $brand
@@ -97,5 +99,23 @@ class ArchiveMacro
             ],
             'variants' => ['type-8']
         ];
+    }
+
+    private function getCategories($product)
+    {
+        $items = wp_get_post_terms($product->ID, 'product_cat');
+
+        foreach ($items as $item) {
+            $this->categories[] = [
+                'value' => $item->term_id,
+                'label' => $item->name,
+            ];
+        }
+
+        $this->categories = array_map("unserialize",
+            array_unique(
+                array_map("serialize", $this->categories)
+            )
+        );
     }
 }

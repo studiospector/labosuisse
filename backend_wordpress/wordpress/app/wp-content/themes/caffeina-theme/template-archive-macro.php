@@ -33,7 +33,7 @@ $context = [
                 'required' => false,
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                'options' => [],
+                'options' => $archiveMacro->categories,
                 'attributes' => ['data-taxonomy="product_cat"'],
                 'variants' => ['primary']
             ],
