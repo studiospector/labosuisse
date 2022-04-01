@@ -118,7 +118,7 @@ class Filters extends Component {
 
         if (this.results) {
             const resultsSpan = qs('span', this.results)
-            resultsSpan.innerText = DOMPurify.sanitize(payload.totalPosts)
+            resultsSpan.innerText = (payload.totalPosts > 0) ? DOMPurify.sanitize(payload.totalPosts) : 0
         }
 
         if (payload.totalPosts > 0) {
