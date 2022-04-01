@@ -25,6 +25,10 @@
     &--parallax {
         img {
             transform: scale(1.1);
+
+            @include mq($until: lg) {
+                transform: scale(1);
+            }
         }
     }
 

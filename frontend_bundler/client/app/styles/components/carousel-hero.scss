@@ -1,12 +1,9 @@
-$hero-carousel-height-desk: 650px;
-$hero-carousel-height-mobile: 460px;
-
 .carousel-hero {
     position: relative;
     overflow: hidden;
 
     @include mq($until: md) {
-        margin-bottom: 55px;
+        // margin-bottom: 55px;
         overflow: hidden !important;
     }
 
@@ -16,13 +13,18 @@ $hero-carousel-height-mobile: 460px;
         }
 
         .hero {
-            min-height: $hero-carousel-height-desk;
-        
-            &__img {
-                @include mq($until: lg) {
-                    min-height: $hero-carousel-height-mobile;
-                }
+            min-height: 650px;
+
+            @include mq($until: lg) {
+                min-height: 460px;
             }
+
+            @include mq($until: md) {
+                min-height: 280px;
+            }
+
+            // &__img {
+            // }
         }
     }
 }
