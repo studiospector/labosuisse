@@ -101,6 +101,7 @@
     }
 
     .custom-select-items {
+        max-height: 300px;
         position: absolute;
         top: 100%;
         left: 0;
@@ -111,6 +112,7 @@
         border: 1px solid #000000;
         border-radius: 5px;
         cursor: pointer;
+        overflow-y: auto;
         z-index: 99;
         animation: customSelectFadeIn .3s ease;
         animation-fill-mode: both;
