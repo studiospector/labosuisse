@@ -26,6 +26,10 @@
         display: flex;
         z-index: 1;
 
+        > .h-100 {
+            height: auto;
+        }
+
         @include mq($until: md) {
             height: 100%;
             flex: 1 1 100%;
@@ -35,11 +39,20 @@
                 height: 100%;
                 display: flex;
                 flex-direction: column;
+                justify-content: space-between;
                 text-align: center;
                 padding: 0 rem(15);
 
                 &__text-wrap {
+                    margin-bottom: 100%;
                     flex: 1 1 100%;
+                }
+
+                &__cta {
+                    height: 100%;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
                 }
 
                 &__tagline {
@@ -59,14 +72,17 @@
 
     &--large {
         min-height: 700px;
+        max-height: 700px;
     }
 
     &--medium {
         min-height: 520px;
+        max-height: 520px;
     }
 
     &--small {
         min-height: 420px;
+        max-height: 420px;
     }
 
     &--infobox-bottom {
@@ -95,6 +111,10 @@
             &__subtitle,
             &__paragraph {
                 color: map-get($colors, "white");
+
+                @include mq($until: md) {
+                    color: map-get($colors, "black");
+                }
             }
         }
     }

@@ -3,15 +3,21 @@
 /**
  * Get Images array
  */
-function lb_get_images($id)
+function lb_get_images($id, $sizes = [])
 {
-    return ($id) ? [
-        'original' => wp_get_attachment_url($id),
-        'lg' => wp_get_attachment_image_src($id, 'lb-img-size-lg')[0],
-        'md' => wp_get_attachment_image_src($id, 'lb-img-size-md')[0],
-        'sm' => wp_get_attachment_image_src($id, 'lb-img-size-sm')[0],
-        'xs' => wp_get_attachment_image_src($id, 'lb-img-size-xs')[0]
-    ] : null;
+    $data = null;
+
+    if ( !empty($id) ) {
+        $data = [
+            'original' => wp_get_attachment_url($id),
+            'lg' => (empty($sizes) && empty($sizes['lg'])) ? wp_get_attachment_image_src($id, 'lb-img-size-lg')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['lg']}")[0],
+            'md' => (empty($sizes) && empty($sizes['md'])) ? wp_get_attachment_image_src($id, 'lb-img-size-md')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['md']}")[0],
+            'sm' => (empty($sizes) && empty($sizes['sm'])) ? wp_get_attachment_image_src($id, 'lb-img-size-sm')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['sm']}")[0],
+            'xs' => (empty($sizes) && empty($sizes['xs'])) ? wp_get_attachment_image_src($id, 'lb-img-size-xs')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['xs']}")[0],
+        ];
+    }
+
+    return $data;
 }
 
 /**
