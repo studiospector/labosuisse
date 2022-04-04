@@ -124,6 +124,26 @@ const dataCenterBottomInfobox = {
     variants: ['large']
 }
 
+const dataHeroWhiteText = {
+    images: {
+        original: '/assets/images/hero-crescina-right.jpg',
+        lg: '/assets/images/hero-crescina-right.jpg',
+        md: '/assets/images/hero-crescina-right.jpg',
+        sm: '/assets/images/hero-crescina-right.jpg',
+        xs: '/assets/images/hero-crescina-right.jpg'
+    },
+    infoboxPosX: 'left',
+    infoboxPosY: 'center',
+    infobox: {
+        tagline: 'LABEL',
+        title: 'Linea Lifting',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+    },
+    container: false,
+    whiteText: true,
+    variants: ['small']
+}
+
 const dataImageInfobox = {
     images: {
         original: '/assets/images/hero-crescina-right.jpg',
@@ -184,5 +204,6 @@ storiesOf('Components|Hero', module)
     .add('Right Bottom Infobox', () => renderHero(dataRightBottomInfobox))
     .add('Center Infobox', () => renderHero(dataCenterInfobox))
     .add('Center Bottom Infobox', () => renderHero(dataCenterBottomInfobox))
+    .add('Hero with White text', () => renderHero(dataHeroWhiteText))
     .add('Image Infobox', () => renderHero(dataImageInfobox))
     .add('Hero with Container', () => renderHero(dataHeroContainer))

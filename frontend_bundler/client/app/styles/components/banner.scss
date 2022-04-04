@@ -45,7 +45,7 @@
                 flex-direction: column;
                 justify-content: center;
                 text-align: center;
-                margin: 0;
+                margin: 0 15px;
     
                 &__tagline {
                     font-size: rem(12);
@@ -128,7 +128,8 @@
             margin-right: auto;
 
             @include mq($until: md) {
-                width: 100%;
+                width: auto;
+                margin: 0 15px;
             }
 
             &__cta {

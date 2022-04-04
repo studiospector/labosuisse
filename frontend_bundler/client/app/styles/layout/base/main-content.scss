@@ -22,6 +22,7 @@ html.has-scroll-smooth {
 
 #content {
     overflow-y: initial!important;
+    z-index: 2;
 }
 
 .c-scrollbar {

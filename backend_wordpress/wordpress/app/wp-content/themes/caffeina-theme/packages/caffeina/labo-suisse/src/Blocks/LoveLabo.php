@@ -19,7 +19,7 @@ class LoveLabo extends BaseBlock
 
         $payload = [
             'items' => $items,
-            'variants' => get_field('lb_block_love_labo_variants')
+            'variants' => [get_field('lb_block_love_labo_variants')]
         ];
 
         // $this->context['data'] = array_merge($this->context['data'],$infobox);

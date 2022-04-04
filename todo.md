@@ -11,6 +11,9 @@ MATTEO
 - √ pagina opzioni(Header links, etc...)
 - √ menu "Scopri Labo"
 
+- check payload filtri
+- action form ricerca negli archivi
+
 
 
 ----------
@@ -46,8 +49,17 @@ STEFANO
 - sticky header dinamico pagina prodotto
 
 - √ link header
+- searchbar mobile on scroll
 - check translation header link (wpml_element_has_translations_filter)
 - caricamento store locator
+
+- √ altezza fissa select
+- menu mobile discover labo
+- √ fix altezza logo brands in card
+- √ fix altezza logo brands in single product
+- fix card filtrate
+- √ fix altezza pagina al filtro
+- √ variante testo bianco nella hero e carousel hero
 
 
 

@@ -13,6 +13,7 @@ class Hero extends BaseBlock
             'infoboxPosX' => get_field('lb_block_hero_infoboxposx'),
             'infoboxPosY' => get_field('lb_block_hero_infoboxposy'),
             'container' => get_field('lb_block_hero_container'),
+            'whiteText' => get_field('lb_block_hero_text_white'),
             'variants' => [get_field('lb_block_hero_variants')],
         ];
 
