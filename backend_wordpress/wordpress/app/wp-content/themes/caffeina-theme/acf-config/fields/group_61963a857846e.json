@@ -498,8 +498,8 @@
             },
             "wpml_cf_preferences": 2,
             "choices": {
-                "dafault": "dafault",
-                "full": "full"
+                "default": "Default",
+                "full": "Full"
             },
             "default_value": false,
             "allow_null": 0,
@@ -535,5 +535,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645120832
+    "modified": 1649078311
 }
