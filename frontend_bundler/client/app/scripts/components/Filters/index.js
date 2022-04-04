@@ -77,8 +77,8 @@ class Filters extends Component {
             }
             this.render(JSON.parse(res))
         }).then(() => {
-            window.getCustomScrollbar.update()
             this.removeLoader()
+            window.getCustomScrollbar.update()
         })
     }
 
@@ -93,8 +93,8 @@ class Filters extends Component {
             this.render(JSON.parse(res))
         }).then(() => {
             this.loadMoreBtn.disabled = false
-            window.getCustomScrollbar.update()
             this.removeLoader()
+            window.getCustomScrollbar.update()
         })
     }
 

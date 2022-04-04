@@ -159,21 +159,21 @@
 
             img {
                 width: auto;
-                height: auto;
+                height: 27px;
 
-                @include mq($until: md) {
-                    height: 16px;
-                }
-            }
-        }
-
-        &__patent {
-            img {
                 @include mq($until: md) {
                     height: 20px;
                 }
             }
         }
+
+        // &__patent {
+        //     img {
+        //         @include mq($until: md) {
+        //             height: 20px;
+        //         }
+        //     }
+        // }
 
         &__product-title {
             margin-bottom: 40px;
