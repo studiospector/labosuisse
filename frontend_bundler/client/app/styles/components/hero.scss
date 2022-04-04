@@ -88,4 +88,14 @@
             }
         }
     }
+
+    &--white-text {
+        .infobox {
+            &__title,
+            &__subtitle,
+            &__paragraph {
+                color: map-get($colors, "white");
+            }
+        }
+    }
 }

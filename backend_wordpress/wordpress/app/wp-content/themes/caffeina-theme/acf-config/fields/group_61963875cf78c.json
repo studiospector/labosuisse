@@ -311,6 +311,26 @@
             "ui_off_text": ""
         },
         {
+            "key": "field_624acb6dd9409",
+            "label": "Testo su immagine  con sfondo nero",
+            "name": "lb_block_hero_text_white",
+            "type": "true_false",
+            "instructions": "Se l'immagine di sfondo è nera, attivare l'opzione.\r\nQuesto rende il testo di colore bianco.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_619639ffe3801",
             "label": "Varianti",
             "name": "lb_block_hero_variants",
@@ -362,5 +382,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645120832
+    "modified": 1649069701
 }
