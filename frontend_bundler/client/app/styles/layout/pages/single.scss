@@ -41,4 +41,12 @@
     @include mq($until: md) {
         max-width: 100%;
     }
+
+    &.wp-block-image {
+        margin-bottom: 40px;
+        
+        figure {
+            margin: 0;
+        }
+    }
 }
