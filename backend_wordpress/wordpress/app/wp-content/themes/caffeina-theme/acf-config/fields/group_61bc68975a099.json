@@ -179,6 +179,26 @@
             "new_lines": "br"
         },
         {
+            "key": "field_624b2187461b8",
+            "label": "Paragrafo piccolo",
+            "name": "lb_block_banner_alternate_infobox_paragraph_small",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
             "key": "field_61dd604bfff68",
             "label": "Bottone",
             "name": "lb_block_banner_alternate_infobox_btn",
@@ -335,5 +355,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645120832
+    "modified": 1649090972
 }

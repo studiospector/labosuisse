@@ -103,6 +103,7 @@ const dataRightImageBig = {
         tagline: 'Lorem Ipsum',
         subtitle: 'Linea Solari',
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        paragraph_small: 'Promozione valida, nei punti vendita aderenti. Fino a esaurimento scorte',
         cta: {
             url: '#',
             title: 'Scopri di più',
@@ -126,6 +127,7 @@ const dataLeftImageBig = {
         tagline: 'Lorem Ipsum',
         subtitle: 'Linea Solari',
         paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        paragraph_small: 'Promozione valida, nei punti vendita aderenti. Fino a esaurimento scorte',
         cta: {
             url: '#',
             title: 'Scopri di più',
