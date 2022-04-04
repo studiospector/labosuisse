@@ -59,6 +59,7 @@ STEFANO
 - √ fix altezza logo brands in single product
 - fix card filtrate
 - √ fix altezza pagina al filtro
+- √ variante testo bianco nella hero e carousel hero
 
 
 
