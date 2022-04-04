@@ -560,7 +560,10 @@ function lb_get_posts_archive_years()
  */
 function lb_header()
 {
+    $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+    
     return array(
+        'language_selector' => (!empty($lang_selector)) ? true : false,
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'menu_desktop' => ['items' => Menu::desktop()],
         'menu_mobile' => ['items' => Menu::mobile()],
