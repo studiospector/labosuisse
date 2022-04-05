@@ -4,7 +4,7 @@ import { on } from '@okiba/dom';
 import MenuDesktop from '../MenuDesktop';
 import MenuMobile from '../MenuMobile';
 
-import { stickyHeader, stickyHeaderScroll } from '../MenuMobile/animations';
+// import { stickyHeader, stickyHeaderScroll } from '../MenuMobile/animations';
 
 const ui = {
     hamburger: '.lb-header__hamburger',
@@ -30,7 +30,7 @@ class Menu extends Component {
             on(this.ui.search, 'click', this.toggleSearch);
         }
         // if (this.ui.logo) {
-            this.tl = stickyHeaderScroll(this.el, this.ui.logo);
+            // this.tl = stickyHeaderScroll(this.el, this.ui.logo);
         // }
         // if (this.ui.statusbar && this.ui.statusbar.querySelector('.lb-statusbar__end:first-child')) {
         //     this.el.classList.add('lb-header--scrolled-mobile');

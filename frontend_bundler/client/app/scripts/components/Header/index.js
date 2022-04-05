@@ -14,26 +14,25 @@ class Header extends Component {
         this.tempScrollUp = null
 
         this.headerProduct = qs('.lb-header-sticky-product')
-
-        // On scroll trigger with Locomotive
-        const customScrollbar = window.getCustomScrollbar
-        customScrollbar.on('scroll', this.checkScroll)
-
+        
         setTimeout(() => this.adjustMainContent(), 100)
         on(window, 'resize', this.adjustMainContent)
-
+        
         setTimeout(() => this.adjustMenu(), 100)
         on(window, 'resize', this.adjustMenu)
+
+        // On scroll trigger with Locomotive
+        window.getCustomScrollbar.on('scroll', this.checkScroll)
     }
 
 
+    /**
+     * Find the direction of scroll:
+     * 0 - initial
+     * 1 - up
+     * 2 - down
+     */
     checkScroll = (instance) => {
-        /**
-         * Find the direction of scroll:
-         * 0 - initial
-         * 1 - up
-         * 2 - down
-         */
         this.curScroll = instance.scroll.y
 
         // Scrolled up
@@ -44,7 +43,7 @@ class Header extends Component {
             }
             this.firstUp = false
 
-            // Scrolled down
+        // Scrolled down
         } else if (this.curScroll < this.prevScroll) {
             this.direction = 1
 

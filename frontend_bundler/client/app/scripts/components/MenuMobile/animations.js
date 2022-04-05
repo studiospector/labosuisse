@@ -40,9 +40,7 @@ export const searchTimeline = (el) => {
 export const stickyHeader = (header, logo, statusbar, translate = true) => {
     const tl = gsap.timeline();
     if (translate) {
-        tl.fromTo(header, { top: 0 }, { top: -64 }, 0)
-        tl.fromTo(header, { height: 70 }, { height: 0 }, 0)
-        tl.fromTo(header, { paddingBottom: 20 }, { paddingBottom: 0 }, 0)
+        tl.fromTo(header, { top: 0, height: 70, paddingBottom: 20 }, { top: -64, height: 0, paddingBottom: 0 })
     }
     return tl;
 }
@@ -50,9 +48,9 @@ export const stickyHeader = (header, logo, statusbar, translate = true) => {
 export const openMenu = ({ menuElement, hamburgerElement, headerElement, logoElement, searchElement, items }) => {
     let header = typeof headerElement == 'string' ? qs(headerElement) : headerElement;
     const tl = gsap.timeline({ paused: true });
-    tl.call(() => header.classList.remove('lb-header--hover'), 0)
-    tl.call(() => header.classList.add('lb-header--hover'))
-    tl.add(stickyHeader(qs('.lb-header__wrapper--mobile', header), logoElement).duration(.4), 0);
+    // tl.call(() => header.classList.remove('lb-header--hover'), 0)
+    // tl.call(() => header.classList.add('lb-header--hover'))
+    // tl.add(stickyHeader(qs('.lb-header__wrapper--mobile', header), logoElement).duration(.4), 0);
     tl.add(searchTimeline(searchElement).duration(.4), 0);
     tl.add(hamburgerTimeline(hamburgerElement).duration(.4), 0);
     tl.add(menuTimeline(menuElement).duration(.4), .4);
@@ -61,23 +59,23 @@ export const openMenu = ({ menuElement, hamburgerElement, headerElement, logoEle
 }
 
 
-export const stickyHeaderScroll = (header, logo) => {
-    const tl = stickyHeader(qs('.lb-header__wrapper--mobile', header), logo);
-    return gsap.timeline({
-        scrollTrigger: {
-            trigger: document.body,
-            scroller: '.js-scrollbar',
-            once: false,
-            scrub: .5,
-            start: '5 top',
-            end: '6 top',
-            invalidateOnRefresh: false,
-        }
-    })
-    .add(
-        gsap.timeline()
-            // .call(() => header.classList.remove('lb-header--scrolled'), 0)
-            .add(tl)
-            // .call(() => header.classList.add('lb-header--scrolled'))
-    )
-}
+// export const stickyHeaderScroll = (header, logo) => {
+//     const tl = stickyHeader(qs('.lb-header__wrapper--mobile', header), logo);
+//     return gsap.timeline({
+//         scrollTrigger: {
+//             trigger: document.body,
+//             scroller: '.js-scrollbar',
+//             once: false,
+//             scrub: .5,
+//             start: '5 top',
+//             end: '6 top',
+//             invalidateOnRefresh: false,
+//         }
+//     })
+//     .add(
+//         gsap.timeline()
+//             // .call(() => header.classList.remove('lb-header--scrolled'), 0)
+//             .add(tl)
+//             // .call(() => header.classList.add('lb-header--scrolled'))
+//     )
+// }

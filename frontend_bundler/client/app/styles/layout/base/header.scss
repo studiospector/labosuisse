@@ -19,6 +19,7 @@
                 padding-bottom: 30px;
 
                 @include mq($until: lg) {
+                    box-shadow: 0px 4px 8px rgb(0 0 0 / 5%);
                     padding-top: 20px;
                     padding-bottom: 20px;
                 }
@@ -27,6 +28,13 @@
             &__wrapper--desktop {
                 height: 0;
                 transform: translateY(-100%);
+            }
+
+            &__wrapper--mobile {
+                top: -64px;
+                height: 0px;
+                padding-bottom: 0px;
+                transition: $transition__base-1;
             }
         }
     }
@@ -150,10 +158,13 @@
         }
 
         &--mobile {
-            height: 50px;
+            height: 70px;
+            top: 0px;
             align-items: center;
             justify-content: center;
             padding: 0;
+            padding-bottom: 0px;
+            transition: $transition__base-1;
             
             @include mq($from: lg) {
                 display: none;
