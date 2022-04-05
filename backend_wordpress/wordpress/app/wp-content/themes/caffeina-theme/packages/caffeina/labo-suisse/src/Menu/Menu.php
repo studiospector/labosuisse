@@ -28,7 +28,10 @@ class Menu
     public static function mobile()
     {
         return [
-            'children' => (new Macro())->get('mobile'),
+            'children' => array_merge(
+                (new Macro())->get('mobile'),
+                (new DiscoverLabo())->get('mobile')
+            ),
             'fixed' => [
                 [
                     'type' => 'card',

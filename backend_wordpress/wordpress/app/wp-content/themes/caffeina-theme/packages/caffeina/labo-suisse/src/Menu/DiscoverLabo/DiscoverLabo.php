@@ -10,9 +10,16 @@ class DiscoverLabo
     {
         $this->items = $this->getItems();
     }
-    public function get()
-    {
 
+    public function get($device = 'desktop')
+    {
+        return ($device == 'desktop')
+            ? $this->desktop()
+            : $this->mobile();
+    }
+
+    public function desktop()
+    {
         $menu = [
             'type' => 'submenu',
             'label' => __('Scopri Labo', 'labo-suisse-theme'),
@@ -58,6 +65,25 @@ class DiscoverLabo
 
 
         return [$menu];
+    }
+
+    public function mobile()
+    {
+        $items = [
+            'type' => 'submenu',
+            'label' => __('Scopri Labo', 'labo-suisse-theme'),
+            'children' => []
+        ];
+
+        foreach ($this->items as $item) {
+            $items['children'][] = [
+                'type' => 'link',
+                'label' => $item->title,
+                'href' => $item->url,
+            ];
+        }
+
+        return [$items];
     }
 
     private function getItems()
