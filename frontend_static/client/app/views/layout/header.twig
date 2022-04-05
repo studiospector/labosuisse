@@ -59,14 +59,7 @@
 		</div>
         <!-- Menu Mobile -->
         <div class="lb-header__wrapper lb-header__wrapper--mobile">
-            {% include '@PathViews/components/fields/input.twig' with {
-                type: 'search',
-                name: "search",
-                label: "Cerca un prodotto, una linea,...",
-                disabled: false,
-                required: false,
-                variants: ['secondary'],
-            } only %}
+            {% include '@PathViews/components/fields/input.twig' with header.mobile_search only %}
         </div>
         {% if header.menu_mobile %}
 		    {% include "@PathViews/layout/menu-mobile.twig" with header.menu_mobile only %}
