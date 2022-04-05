@@ -75,6 +75,7 @@ class ThemeSetup extends Timber\Site
         add_theme_support('title-tag');
 
         add_theme_support('post-thumbnails');
+        add_post_type_support('page', 'excerpt');
 
         // add_theme_support('post-formats', array('aside', 'gallery'));
 
@@ -559,7 +560,10 @@ function lb_get_posts_archive_years()
  */
 function lb_header()
 {
+    $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+    
     return array(
+        'language_selector' => (!empty($lang_selector)) ? true : false,
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'menu_desktop' => ['items' => Menu::desktop()],
         'menu_mobile' => ['items' => Menu::mobile()],

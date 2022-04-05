@@ -61,6 +61,7 @@ class BaseBlock
                 'title' => get_field($this->acfName . '_infobox_title'),
                 'subtitle' => get_field($this->acfName . '_infobox_subtitle'),
                 'paragraph' => get_field($this->acfName . '_infobox_paragraph'),
+                'paragraph_small' => get_field($this->acfName . '_infobox_paragraph_small'),
                 //  'cta' => array_merge( get_field($this->acfName.'_infobox_btn') == "" ? [] : [get_field($this->acfName.'_infobox_btn')] ,['variants' => [get_field($this->acfName.'_infobox_btn_variants')]])
             ]
         ];

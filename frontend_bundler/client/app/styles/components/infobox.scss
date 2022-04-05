@@ -33,6 +33,13 @@
 
     &__paragraph {
         letter-spacing: 0.02em;
+
+        &--small {
+            margin-top: 20px;
+            font-size: rem(14);
+            line-height: rem(19);
+            color: map-get($colors, "primary-dark-1");
+        }
     }
 
     &__scope {

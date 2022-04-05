@@ -50,6 +50,9 @@
                 {% if paragraph %}
                     <p class="infobox__paragraph">{{ paragraph|raw }}</p>
                 {% endif %}
+                {% if paragraph_small %}
+                    <p class="infobox__paragraph infobox__paragraph--small">{{ paragraph_small|raw }}</p>
+                {% endif %}
             </div>
         </div>
     {% endif %}

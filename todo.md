@@ -5,14 +5,10 @@ MATTEO
 - √ card grid trattamenti make-up - template 1
 - √ card grid ultimi post - template 5
 - √ blocco stcky news archivio news(magazine)
-
 - √ namespaces
 - √ menu
 - √ pagina opzioni(Header links, etc...)
 - √ menu "Scopri Labo"
-
-- check payload filtri
-- action form ricerca negli archivi
 
 
 
@@ -46,21 +42,6 @@ STEFANO
 - √ single jobs
 - √ template candidatura spontanea
 
-- sticky header dinamico pagina prodotto
-
-- √ link header
-- searchbar mobile on scroll
-- check translation header link (wpml_element_has_translations_filter)
-- caricamento store locator
-
-- √ altezza fissa select
-- menu mobile discover labo
-- √ fix altezza logo brands in card
-- √ fix altezza logo brands in single product
-- fix card filtrate
-- √ fix altezza pagina al filtro
-- √ variante testo bianco nella hero e carousel hero
-
 
 
 ----------
@@ -77,6 +58,22 @@ BUGFIX
 - √ aggiustare blocco infobox
 - √ apertura offset nav con sticky header product
 
+- sticky header dinamico pagina prodotto
+
+- √ link header
+- searchbar mobile on scroll
+- √ check translation header link (wpml_element_has_translations_filter)
+- caricamento store locator
+- check payload filtri
+- action form ricerca negli archivi
+- √ altezza fissa select
+- menu mobile discover labo
+- √ fix altezza logo brands in card
+- √ fix altezza logo brands in single product
+- fix card filtrate
+- √ fix altezza pagina al filtro
+- √ variante testo bianco nella hero e carousel hero
+
 
 
 ----------
@@ -87,10 +84,11 @@ SEZIONI DA TERMINARE
 
 - √ T5 Beaty Specialist
 - √ T5 Single News
-- T5 Promozioni
+- √ T5 Promozioni
 - √ T6 Store Locator
 - T10 Labo nel Mondo
 
 - √ Filtri e Ricerche archivi
+- Gestione dinamica Footer
 - Ricerca globale
 - Integrazione Newsletter

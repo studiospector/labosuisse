@@ -64,8 +64,28 @@
         },
         {
             "key": "field_618adb1b58aa6",
-            "label": "Testo",
+            "label": "Paragrafo",
             "name": "lb_block_infobox_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_624b237f23e1c",
+            "label": "Paragrafo piccolo",
+            "name": "lb_block_infobox_paragraph_small",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -196,5 +216,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647445607
+    "modified": 1649091487
 }

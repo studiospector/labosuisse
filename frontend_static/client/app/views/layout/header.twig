@@ -18,10 +18,13 @@
             </a>
         </div>
         <div class="lb-header__top__icons">
-            <div class="lb-header__top__icons__item lb-header__top__icons__item--lang lb-header__top__icons__item--mobile-hide">
-                {% do action('wpml_add_language_selector') %}
-                {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
-            </div>
+            {% if header.language_selector %}
+                <div class="lb-header__top__icons__item lb-header__top__icons__item--lang lb-header__top__icons__item--mobile-hide">
+                    {# {% do action('wpml_add_language_selector') %} #}
+                    {{ fn('do_shortcode', '[wpml_language_selector_widget]') }}
+                    {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
+                </div>
+            {% endif %}
             {% if header.header_links.items %}
                 {% for link in header.header_links.items %}
                     <div class="lb-header__top__icons__item{{ link.mobile ? ' lb-header__top__icons__item--mobile-hide' : '' }}">
