@@ -19,6 +19,8 @@ class ArchiveMacro
     {
         $this->category = get_term_by('slug', $category, 'product_cat');
 
+        $this->getCategories($this->category);
+
         $this->products();
     }
 
@@ -30,7 +32,8 @@ class ArchiveMacro
                 'posts_per_page' => -1,
                 'tax_query' => $this->setFilter($brand),
                 'orderby' => 'menu_order',
-                'order' => 'ASC'
+                'order' => 'ASC',
+                's' => !empty($_GET['search']) ? $_GET['search'] : null
             ]);
 
             if (empty($query->posts)) {
@@ -45,7 +48,6 @@ class ArchiveMacro
             $this->products[$brand->term_id]['brand_card'] = $this->getBrandCard($brand);
 
             foreach ($query->posts as $product) {
-                $this->getCategories($product);
                 $this->products[$brand->term_id]['products'][] = Timber::get_post($product->ID);
                 $this->totalPosts++;
             }
@@ -101,21 +103,29 @@ class ArchiveMacro
         ];
     }
 
-    private function getCategories($product)
+    private function getCategories($macro)
     {
-        $items = wp_get_post_terms($product->ID, 'product_cat');
+        $area = $this->getTerms($macro);
 
-        foreach ($items as $item) {
-            $this->categories[] = [
-                'value' => $item->term_id,
-                'label' => $item->name,
-            ];
+        foreach ($area as $item) {
+            $needs = $this->getTerms($item->term_id);
+
+            foreach ($needs as $need) {
+                $this->categories[] = [
+                    'value' => $need->term_id,
+                    'label' => $need->name,
+                ];
+            }
         }
+    }
 
-        $this->categories = array_map("unserialize",
-            array_unique(
-                array_map("serialize", $this->categories)
-            )
-        );
+
+    private function getTerms($parent)
+    {
+        return get_terms([
+            'taxonomy' => 'product_cat',
+            'hide_empty' => true,
+            'parent' => $parent->term_id
+        ]);
     }
 }
