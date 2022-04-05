@@ -67,7 +67,7 @@ BUGFIX
 - √ check payload filtri
 - action form ricerca negli archivi
 - √ altezza fissa select
-- menu mobile discover labo
+- √ menu mobile discover labo
 - √ fix altezza logo brands in card
 - √ fix altezza logo brands in single product
 - fix card filtrate
