@@ -59,10 +59,10 @@ $context = [
             'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
-        'hidden' => [
-            'name' => 'product_category',
-            'value' => $_GET['product_category'],
-        ]
+//        'hidden' => [
+//            'name' => 'product_category',
+//            'value' => $_GET['product_category'],
+//        ]
     ],
     'grid_type' => 'ordered',
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $archiveMacro->totalPosts . '</span>',
