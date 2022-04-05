@@ -24,6 +24,10 @@
     &__image {
         height: 48px;
         margin-bottom: 20px;
+
+        @include mq($until: md) {
+            height: 32px;
+        }
     }
 
     &__items {
