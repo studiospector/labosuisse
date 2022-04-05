@@ -110,6 +110,24 @@
 		</a>
 	{% endif %}
 
+    {% if type == 'lang-selector' %}
+        {% if language_selector %}
+            <div class="lb-menu__link lb-menu__link--small lb-menu__link--lang-selector">
+                <span class="lb-menu__item-icon">
+                    {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
+                </span>
+                {{ fn('do_shortcode', '[wpml_language_selector_widget]') }}
+                {# {% if icon or badge %}
+                    <span class="lb-menu__item-icon">
+                        {% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                        <span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
+                    </span>
+                {% endif %}
+                <span>{{label}}</span> #}
+            </div>
+        {% endif %}
+	{% endif %}
+
     {% if type == 'card' %}
 		{% include '@PathViews/components/card.twig' with data only %}
 	{% endif %}

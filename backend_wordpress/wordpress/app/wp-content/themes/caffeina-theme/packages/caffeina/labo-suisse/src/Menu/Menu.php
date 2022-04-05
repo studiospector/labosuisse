@@ -27,6 +27,8 @@ class Menu
 
     public static function mobile()
     {
+        $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+
         return [
             'children' => array_merge(
                 (new Macro())->get('mobile'),
@@ -67,9 +69,8 @@ class Menu
                     'icon' => 'comments',
                 ],
                 [
-                    'type' => 'small-link',
-                    'label' => 'Italia',
-                    'icon' => 'earth',
+                    'type' => 'lang-selector',
+                    'language_selector' => (!empty($lang_selector)) ? true : false,
                 ],
             ]
         ];
