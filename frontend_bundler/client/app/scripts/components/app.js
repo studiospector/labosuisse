@@ -168,10 +168,13 @@ export default class Application extends Component {
     scrollbarUpdate = () => {
         window.getCustomScrollbar.update()
 
-        // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+        // Each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
         ScrollTrigger.addEventListener("refresh", () => window.getCustomScrollbar.update())
 
-        // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+        // After everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
         ScrollTrigger.refresh()
+
+        // Trigger 'resize' event to correct and prevent layout shifting
+        window.dispatchEvent(new Event('resize'))
     }
 }
