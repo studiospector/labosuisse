@@ -62,7 +62,8 @@ class BeautySpecialist
 
     private function getDate($date)
     {
-        $localizedDate = Carbon::createFromFormat('Ymd',$date)->locale('it_IT');
+        die(json_encode($date));
+        $localizedDate = Carbon::createFromTimeString('Ymd',$date)->locale('it_IT');
 
         return ucfirst($localizedDate->dayName) .  ", {$localizedDate->day} " . ucfirst($localizedDate->monthName) . " {$localizedDate->year}" ;
     }

@@ -108,7 +108,7 @@ class ArchiveMacro
         $area = $this->getTerms($macro);
 
         foreach ($area as $item) {
-            $needs = $this->getTerms($item->term_id);
+            $needs = $this->getTerms($item);
 
             foreach ($needs as $need) {
                 $this->categories[] = [
