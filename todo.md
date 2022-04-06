@@ -64,10 +64,10 @@ BUGFIX
 - searchbar mobile on scroll
 - √ check translation header link (wpml_element_has_translations_filter)
 - caricamento store locator
-- check payload filtri
+- √ check payload filtri
 - action form ricerca negli archivi
 - √ altezza fissa select
-- menu mobile discover labo
+- √ menu mobile discover labo
 - √ fix altezza logo brands in card
 - √ fix altezza logo brands in single product
 - fix card filtrate

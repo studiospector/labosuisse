@@ -51,14 +51,18 @@ $context = [
         ],
         'search' => [
             'type' => 'search',
-            'name' => 's',
+            'name' => 'search',
             'label' => __('Cerca... (inserisci almeno 3 caratteri)', 'labo-suisse-theme'),
-            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
+            'value' => !empty($_GET['search']) ? $_GET['search'] : null,
             'disabled' => false,
             'required' => true,
             'buttonTypeNext' => 'submit',
             'variants' => ['secondary'],
         ],
+//        'hidden' => [
+//            'name' => 'product_category',
+//            'value' => $_GET['product_category'],
+//        ]
     ],
     'grid_type' => 'ordered',
     'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $archiveMacro->totalPosts . '</span>',

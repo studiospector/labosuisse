@@ -565,6 +565,15 @@ function lb_header()
     return array(
         'language_selector' => (!empty($lang_selector)) ? true : false,
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
+        'mobile_search' => [
+            'type' => 'search',
+            'name' => 'search',
+            'label' => __('Cerca un prodotto, una linea...', 'labo-suisse-theme'),
+            'disabled' => false,
+            'required' => false,
+            'buttonTypeNext' => 'button',
+            'variants' => ['secondary'],
+        ],
         'menu_desktop' => ['items' => Menu::desktop()],
         'menu_mobile' => ['items' => Menu::mobile()],
     );
@@ -604,6 +613,7 @@ function lb_footer()
                     'label' => "Inserisci città, provincia, CAP,...",
                     'disabled' => false,
                     'required' => false,
+                    'buttonTypeNext' => 'button',
                     'variants' => ['secondary'],
                 ],
             ],
@@ -704,6 +714,7 @@ function lb_footer()
                 'label' => "Inserisci città, provincia, CAP,...",
                 'disabled' => false,
                 'required' => false,
+                'buttonTypeNext' => 'button',
                 'variants' => ['secondary'],
             ],
         ],

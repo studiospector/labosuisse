@@ -12,9 +12,13 @@
 
             .swiper-pagination-bullet {
                 margin: 0 6px;
-                background: map-get($colors, "grey-2");
+                background: map-get($colors, "white");
                 opacity: 1;
                 transform: scale(0.63);
+
+                @include mq($until: md) {
+                    background: map-get($colors, "grey-2");
+                }
     
                 &.swiper-pagination-bullet-active {
                     background: map-get($colors, "secondary");

@@ -6,7 +6,7 @@ import { gsap } from "gsap"
 import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 import { openBackgroundTimeline, openSubmenuTimeline, submenuTimeline } from './animations';
-import { stickyHeader } from "../MenuMobile/animations";
+// import { stickyHeader } from "../MenuMobile/animations";
 
 const ui = {
     hovers: '.lb-menu__main>.lb-menu__item>.lb-menu__link',
@@ -38,11 +38,11 @@ class MenuDesktop extends Component {
         // on(qs('.lb-header'), 'mouseleave', this.onHoverLeave);
 
 
-        this.hoverTL = stickyHeader('.lb-header', '.lb-header__logo', '.lb-statusbar', false).duration(.4);
+        // this.hoverTL = stickyHeader('.lb-header', '.lb-header__logo', '.lb-statusbar', false).duration(.4);
         this.lastMenuTL = gsap.timeline().duration(1);
         this.activeMenuTL = gsap.timeline().duration(1);
         this.commonTimeline = gsap.timeline()
-            .add(this.hoverTL, 0)
+            // .add(this.hoverTL, 0)
             .add(openBackgroundTimeline(this.ui.background, this.ui.overlay), .4)
             .duration(.8)
             .paused(true);
