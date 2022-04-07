@@ -61,7 +61,7 @@ BUGFIX
 - sticky header dinamico pagina prodotto
 
 - √ link header
-- searchbar mobile on scroll
+- √ searchbar mobile on scroll
 - √ check translation header link (wpml_element_has_translations_filter)
 - caricamento store locator
 - √ check payload filtri
@@ -73,6 +73,7 @@ BUGFIX
 - fix card filtrate
 - √ fix altezza pagina al filtro
 - √ variante testo bianco nella hero e carousel hero
+- √ resize immagini prodotti
 
 
 
