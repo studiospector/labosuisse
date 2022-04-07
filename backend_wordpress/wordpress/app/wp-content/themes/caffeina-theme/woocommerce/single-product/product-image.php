@@ -82,7 +82,7 @@ if ($post_thumbnail_id) {
                         ?>
                         <div class="col-6">
                             <a href="<?php echo $image_url; ?>" data-pswp-width="<?php echo $image_attributes[1]; ?>" data-pswp-height="<?php echo $image_attributes[2]; ?>" target="_blank">
-                                <?php echo wp_get_attachment_image($attachment_id); ?>
+                                <?php echo wp_get_attachment_image($attachment_id,  'woocommerce_gallery_thumbnail'); ?>
                             </a>
                         </div>
                         <?php
@@ -111,7 +111,7 @@ if ($post_thumbnail_id) {
                         ?>
                         <div class="swiper-slide">
                             <a href="<?php echo $image_url; ?>" data-pswp-width="<?php echo $image_attributes[1]; ?>" data-pswp-height="<?php echo $image_attributes[2]; ?>" target="_blank">
-                                <?php echo wp_get_attachment_image($attachment_id); ?>
+                                <?php echo wp_get_attachment_image($attachment_id,  'woocommerce_gallery_thumbnail'); ?>
                             </a>
                         </div>
                         <?php
