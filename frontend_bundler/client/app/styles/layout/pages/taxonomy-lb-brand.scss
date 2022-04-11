@@ -13,6 +13,12 @@
             @include mq($until: md) {
                 margin-bottom: 60px;
             }
+
+            .infobox {
+                &__paragraph {
+                    margin-bottom: 1rem;
+                }
+            }
         }
     }
 }
