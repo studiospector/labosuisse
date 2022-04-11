@@ -132,6 +132,14 @@ class ThemeSetup extends Timber\Site
             'updated_message' => 'Impostazioni aggiornate.',
         ));
 
+        acf_add_options_sub_page(array(
+            'page_title' => 'Impostazioni Tema - Footer e Prefooter',
+            'menu_title' => 'Footer',
+            'parent_slug' => 'lb-theme-general-settings',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
+        ));
+
         /**
          * Path to our custom editor style
          * It allows you to link a custom stylesheet file to the TinyMCE editor within the post edit screen
