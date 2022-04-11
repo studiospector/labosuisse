@@ -29,12 +29,18 @@
         }
 
         &__item {
-            p {
-                padding-left: 60px;
-                margin: 11px 0;
-
-                @include mq($until: md) {
-                    margin: 2px 0;
+            &__text {
+                min-height: 56px;
+                display: flex;
+                align-items: center;
+                
+                p {
+                    padding-left: 60px;
+                    margin: 11px 0;
+    
+                    @include mq($until: md) {
+                        margin: 2px 0;
+                    }
                 }
             }
 

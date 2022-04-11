@@ -15,7 +15,11 @@
             {% for post in items|default([]) %}
                 <li class="col-12 col-md-4">
                     <div class="block-routine__list__item">
-                        {% if post.text %}<p class="p-small">{{ post.text }}</p>{% endif %}
+                        {% if post.text %}
+                            <div class="block-routine__list__item__text">
+                                <p class="p-small">{{ post.text }}</p>
+                            </div>
+                        {% endif %}
                         {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post.product} only %}
                     </div>
                 </li>
