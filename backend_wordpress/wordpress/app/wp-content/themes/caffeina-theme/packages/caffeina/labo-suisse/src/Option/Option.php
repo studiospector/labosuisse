@@ -125,7 +125,7 @@ class Option
         $options = $this->getOption('lb_footer_social');
 
         $social = [
-            'title' => $options['lb_footer_social_links_title'],
+            'title' => $options['lb_footer_social_title'],
             'items' => []
         ];
 
@@ -137,6 +137,15 @@ class Option
         }
 
         return $social;
+    }
+
+    public function getPreFooterOptions()
+    {
+        return [
+            'left' => $this->getOption('lb_prefooter_left_block'),
+            'center' => $this->getOption('lb_prefooter_center_block'),
+            'right' => $this->getOption('lb_prefooter_right_block'),
+        ];
     }
 
     public function getApiKey($service)

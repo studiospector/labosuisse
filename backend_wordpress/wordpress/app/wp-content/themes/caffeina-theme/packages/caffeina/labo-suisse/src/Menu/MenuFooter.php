@@ -10,12 +10,21 @@ class MenuFooter
 {
     public static function get()
     {
+        $prefooter = (new Option())->getPreFooterOptions();
+
         return [
-            'discover' => (new DiscoverLaboFooter())->get(),
-            'support' => (new Support())->get(),
-            'search' => self::search(),
-            'newsletter' => self::newsletter(),
-            'social' => self::social()
+            'prefooter' => [
+                'block_1' => self::leftBlock($prefooter['left']),
+                'block_2' => self::centerBlock($prefooter['center']),
+                'block_3' => self::rightBlock($prefooter['right'])
+            ],
+            'footer' => [
+                'discover' => (new DiscoverLaboFooter())->get(),
+                'support' => (new Support())->get(),
+                'search' => self::search(),
+                'newsletter' => self::newsletter(),
+                'social' => self::social()
+            ]
         ];
     }
 
@@ -55,5 +64,41 @@ class MenuFooter
     {
         return (new Option())
             ->getFooterSocialNetwork();
+    }
+
+    private static function leftBlock($options)
+    {
+        return [
+            'title' => $options['lb_prefooter_left_block_title'],
+            'text' => $options['lb_prefooter_left_block_text'],
+            'cta' => array_merge($options['lb_prefooter_left_block_cta'], ['variants' => ['quaternary']])
+        ];
+    }
+
+    private static function centerBlock($options)
+    {
+        return [
+            'title' => $options['lb_prefooter_center_block_title'],
+            'text' => $options['lb_prefooter_center_block_text'],
+            'input' => [
+                // The only parameter to manage in options is label
+                'type' => 'search',
+                'name' => "lb-search-store-prefooter",
+                'label' => $options['lb_prefooter_center_block_label'],
+                'disabled' => false,
+                'required' => false,
+                'buttonTypeNext' => 'button',
+                'variants' => ['secondary'],
+            ]
+        ];
+    }
+
+    private static function rightBlock($options)
+    {
+        return [
+            'title' => $options['lb_prefooter_right_block_title'],
+            'text' => $options['lb_prefooter_right_block_text'],
+            'cta' => array_merge($options['lb_prefooter_right_block_cta'], ['variants' => ['quaternary']])
+        ];
     }
 }

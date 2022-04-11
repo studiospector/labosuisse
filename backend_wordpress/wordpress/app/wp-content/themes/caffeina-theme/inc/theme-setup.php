@@ -589,54 +589,5 @@ function lb_header()
  */
 function lb_footer()
 {
-
-    $prefooter = null;
-    $footer = null;
-
-    if (!is_home()) {
-        $prefooter = [
-            'block_1' => [
-                'title' => 'Hai delle domande?',
-                'text' => 'Scegli il tuo canale di comunicazione preferito dalla pagina di assistenza e mettiti in contatto con un esperto.',
-                'cta' => [
-                    'url' => '#',
-                    'title' => 'Vai all’assistenza',
-                    'iconEnd' => ['name' => 'arrow-right'],
-                    // Variants is static
-                    'variants' => ['quaternary']
-                ],
-            ],
-            'block_2' => [
-                'title' => 'Trova un punto vendita',
-                'text' => 'Inserisci un CAP, una città o un indirizzo per scoprire i rivenditori vicinot a te.',
-                'input' => [
-                    // The only parameter to manage in options is label
-                    'type' => 'search',
-                    'name' => "lb-search-store-prefooter",
-                    'label' => "Inserisci città, provincia, CAP,...",
-                    'disabled' => false,
-                    'required' => false,
-                    'buttonTypeNext' => 'button',
-                    'variants' => ['secondary'],
-                ],
-            ],
-            'block_3' => [
-                'title' => 'Iscriviti alla newsletter',
-                'text' => 'Inserisci i tuoi dati e ricevi direttamente sulla tua mail aggiornamenti e promozioni dal mondo Labo.',
-                'cta' => [
-                    'url' => '#',
-                    'title' => 'Procedi e iscriviti',
-                    'iconEnd' => ['name' => 'arrow-right'],
-                    // Variants is static
-                    'variants' => ['quaternary']
-                ],
-            ],
-        ];
-    }
-
-
-    return [
-        'footer' => MenuFooter::get(),
-        'prefooter' => $prefooter,
-    ];
+    return MenuFooter::get();
 }
