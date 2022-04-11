@@ -1,4 +1,5 @@
 import Component from '@okiba/component'
+import { qsa, qs, on } from '@okiba/dom'
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -159,27 +160,27 @@ export default class Application extends Component {
 
         this.el.classList.add('ready')
 
-        window.addEventListener('load', () => {setTimeout(() => {
+        setTimeout(() => {
             this.scrollbarUpdate()
-        }, 1000)})
+        }, 1200)
     }
 
+    /**
+     * Locomotive scroll calculates page height on initialization.
+     * Some content may have not finished to load and change page height afterwards (for example image loading).
+     * So we update scroll also after first initialization to prevent hidden sections.
+     * N.B. This is only for Front-end and not for admin WP area.
+     */
     scrollbarUpdate = () => {
-        /**
-         * Locomotive scroll calculates page height on initialization.
-         * Some content may have not finished to load and change page height afterwards (for example image loading).
-         * So we update scroll also after first initialization to prevent hidden sections.
-         * N.B. This is only for Front-end and not for admin WP area.
-         */
-        if (!document.querySelector('body').classList.contains('wp-admin')) {
-            window.getCustomScrollbar.update()
+        window.getCustomScrollbar.update()
 
-            // each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll.
-            ScrollTrigger.addEventListener("refresh", () => window.getCustomScrollbar.update());
+        // Each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
+        ScrollTrigger.addEventListener("refresh", () => window.getCustomScrollbar.update())
 
-            // after everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-            ScrollTrigger.refresh();
-        }
+        // After everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
+        ScrollTrigger.refresh()
+
+        // Trigger 'resize' event to correct and prevent layout shifting
+        window.dispatchEvent(new Event('resize'))
     }
-
 }

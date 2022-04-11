@@ -78,14 +78,23 @@ function lb_move_single_product_price()
 
 
 /**
- * Thumbnails product image size
+ * Thumbnails product image size of Single page Product Gallery
  */
 add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
     return array(
-        'width' => 400,
-        'height' => 345,
-        'crop' => 1,
+        'width' => 450,
+        'height' => null,
+        'crop' => 0,
     );
+});
+
+
+
+/**
+ * Thumbnails product image size of Product cards
+ */
+add_filter('single_product_archive_thumbnail_size', function ($size) {
+    return 'woocommerce_gallery_thumbnail';
 });
 
 
