@@ -2,9 +2,14 @@
 
 namespace Caffeina\LaboSuisse\Menu\DiscoverLabo;
 
+use Caffeina\LaboSuisse\Menu\Traits\HasGetMenu;
+
 class DiscoverLabo
 {
+    use HasGetMenu;
+
     private $items = [];
+    protected $menuPosition = 'lb_discover_labo';
 
     public function __construct()
     {
@@ -84,17 +89,5 @@ class DiscoverLabo
         }
 
         return [$items];
-    }
-
-    private function getItems()
-    {
-        $items = [];
-
-        if (($locations = get_nav_menu_locations()) && isset($locations['lb_discover_labo'])) {
-            $menu_obj = wp_get_nav_menu_object($locations['lb_discover_labo']);
-            $items = wp_get_nav_menu_items($menu_obj->term_id);
-        }
-
-        return $items;
     }
 }

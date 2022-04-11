@@ -99,6 +99,46 @@ class Option
         ];
     }
 
+    public function getFooterSearchOptions()
+    {
+       $options = $this->getOption('lb_footer_search');
+
+        return [
+            'title' => $options['lb_footer_search_title'],
+            'label' => $options['lb_footer_search_label'],
+        ];
+    }
+
+    public function getFooterNewsletterOptions()
+    {
+        $options = $this->getOption('lb_footer_newsletter');
+
+        return [
+            'title' => $options['lb_footer_newsletter_title'],
+            'text' => $options['lb_footer_newsletter_text'],
+            'cta' => array_merge($options['lb_footer_newsletter_cta'], ['variants' => ['secondary']]),
+        ];
+    }
+
+    public function getFooterSocialNetwork()
+    {
+        $options = $this->getOption('lb_footer_social');
+
+        $social = [
+            'title' => $options['lb_footer_social_links_title'],
+            'items' => []
+        ];
+
+        foreach ($options['lb_footer_social_links'] as $option) {
+            $social['items'][] = [
+                'url' => $option['lb_footer_social_links_link'],
+                'icon' => $option['lb_footer_social_links_icon']
+            ];
+        }
+
+        return $social;
+    }
+
     public function getApiKey($service)
     {
         return $this->getOption($service);

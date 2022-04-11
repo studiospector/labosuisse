@@ -1,6 +1,7 @@
 <?php
 
 use Caffeina\LaboSuisse\Menu\Menu;
+use Caffeina\LaboSuisse\Menu\MenuFooter;
 use Caffeina\LaboSuisse\Option\Option;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
@@ -108,6 +109,8 @@ class ThemeSetup extends Timber\Site
         // Register Menus
         register_nav_menus(array(
             'lb_discover_labo' => 'Scopri Labo',
+            'lb_discover_labo_footer' => 'Footer | Scopri Labo',
+            'lb_support_footer' => 'Footer | Assistenza',
         ));
 
         // Theme Options page
@@ -298,7 +301,7 @@ class ThemeSetup extends Timber\Site
      * Filter the excerpt length to 20 words
      *
      * @param int $length Excerpt length
-     * 
+     *
      * @return int (Maybe) modified excerpt length
      */
     public function lb_excerpt_length($length)
@@ -561,7 +564,7 @@ function lb_get_posts_archive_years()
 function lb_header()
 {
     $lang_selector = do_shortcode('[wpml_language_selector_widget]');
-    
+
     return array(
         'language_selector' => (!empty($lang_selector)) ? true : false,
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
@@ -631,136 +634,9 @@ function lb_footer()
         ];
     }
 
-    $footer = [
-        'discover' => [
-            'title' => 'SCOPRI LABO',
-            'items' => [
-                [
-                    'url' => '#',
-                    'title' => 'Labo Magazine',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Labo nel Mondo',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Lavora con noi',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Diventa farmacia concessonaria',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Consulenza personalizzata',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Privacy Policy',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-            ],
-        ],
-        'support' => [
-            'title' => 'ASSISTENZA',
-            'items' => [
-                [
-                    'url' => '#',
-                    'title' => 'FAQ',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Contatti',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-                [
-                    'url' => '#',
-                    'title' => 'Traccia un ordine',
-                    'target' => '_self',
-                    // Variants is static
-                    'variants' => ['link', 'thin', 'small']
-                ],
-            ],
-        ],
-        'search' => [
-            'title' => 'TROVA UNA FARMACIA CONCESSIONARIA ',
-            'input' => [
-                // The only parameter to manage in options is label
-                'type' => 'search',
-                'name' => "lb-search-store-footer",
-                'label' => "Inserisci città, provincia, CAP,...",
-                'disabled' => false,
-                'required' => false,
-                'buttonTypeNext' => 'button',
-                'variants' => ['secondary'],
-            ],
-        ],
-        'newsletter' => [
-            'title' => 'ISCRIVITI ALLA NEWSLETTER',
-            'text' => 'Ricevi aggiornamenti e promozioni<br>direttamente sulla tua mail.',
-            'cta' => [
-                'url' => '#',
-                'title' => 'Procedi e iscriviti',
-                // Variants is static
-                'variants' => ['secondary']
-            ],
-        ],
-        'social' => [
-            'title' => 'SEGUICI',
-            'items' => [
-                [
-                    'url' => '#',
-                    'icon' => 'instagram',
-                ],
-                [
-                    'url' => '#',
-                    'icon' => 'facebook',
-                ],
-                [
-                    'url' => '#',
-                    'icon' => 'twitter',
-                ],
-                [
-                    'url' => '#',
-                    'icon' => 'youtube',
-                ],
-                [
-                    'url' => '#',
-                    'icon' => 'linkedin',
-                ],
-                [
-                    'url' => '#',
-                    'icon' => 'whatsapp',
-                ],
-            ]
-        ],
-    ];
 
-    return array(
-        'footer' => $footer,
+    return [
+        'footer' => MenuFooter::get(),
         'prefooter' => $prefooter,
-    );
+    ];
 }
