@@ -7,6 +7,7 @@ import DOMPurify from 'dompurify'
 
 const ui = {
     searchForm: '.lb-filters__search-form',
+    searchFormInput: '.lb-filters__search-form .js-custom-input',
     selects: {
         selector: '.custom-field select',
         asArray: true
@@ -163,7 +164,7 @@ class Filters extends Component {
 
         // Disable search form
         if (this.ui.searchForm) {
-            qs('input', this.ui.searchForm).updateState('disable')
+            this.ui.searchFormInput.updateState('disable')
         }
     }
 
@@ -177,7 +178,7 @@ class Filters extends Component {
 
         // Active search form
         if (this.ui.searchForm) {
-            qs('input', this.ui.searchForm).updateState('active')
+            this.ui.searchFormInput.updateState('active')
         }
     }
 }
