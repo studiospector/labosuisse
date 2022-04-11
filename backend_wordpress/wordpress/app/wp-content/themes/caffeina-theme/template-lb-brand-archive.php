@@ -57,9 +57,9 @@ $context = [
         ],
         'search' => [
             'type' => 'search',
-            'name' => 'search',
+            'name' => 's',
             'label' => __('Cerca', 'labo-suisse-theme'),
-            'value' => !empty($_GET['search']) ? $_GET['search'] : null,
+            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
             'disabled' => false,
             'required' => true,
             'buttonTypeNext' => 'submit',
