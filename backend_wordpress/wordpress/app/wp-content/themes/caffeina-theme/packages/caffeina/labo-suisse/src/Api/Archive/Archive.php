@@ -265,7 +265,7 @@ class Archive
                 'variants' => ['type-10']
             ]);
 
-            $brands[$brand->term_id] = "<div class=\"col-12 col-md-3\">$card</div>";
+            $brands[$brand->term_id] = "<div class=\"col-12 col-md-4\">$card</div>";
         }
 
         return json_encode([

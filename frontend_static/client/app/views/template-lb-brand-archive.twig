@@ -15,7 +15,7 @@
 
     {# Posts Grid #}
     <div class="taxonomy-lb-brand-archive__grid container">
-        <div class="row">
+        <div class="row js-lb-cards-grid">
             {% for brand in items %}
                 <div class="col-12 col-md-4">
                     {% include '@PathViews/components/card.twig' with brand only %}
