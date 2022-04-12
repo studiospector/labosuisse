@@ -74,6 +74,10 @@ class MenuFooter
 
     private static function leftBlock($options)
     {
+        if (is_null($options)) {
+            return null;
+        }
+
         return [
             'title' => $options['lb_prefooter_left_block_title'],
             'text' => $options['lb_prefooter_left_block_text'],
@@ -83,6 +87,10 @@ class MenuFooter
 
     private static function centerBlock($options)
     {
+        if (is_null($options)) {
+            return null;
+        }
+
         return [
             'title' => $options['lb_prefooter_center_block_title'],
             'text' => $options['lb_prefooter_center_block_text'],
@@ -101,6 +109,10 @@ class MenuFooter
 
     private static function rightBlock($options)
     {
+        if (is_null($options)) {
+            return null;
+        }
+
         return [
             'title' => $options['lb_prefooter_right_block_title'],
             'text' => $options['lb_prefooter_right_block_text'],
