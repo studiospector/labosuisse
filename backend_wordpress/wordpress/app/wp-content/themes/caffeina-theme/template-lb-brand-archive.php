@@ -3,7 +3,10 @@
 /* Template Name: Template Brands Archive */
 
 $brands = [];
-$brand_terms = lb_get_brands();
+
+$brand_terms = lb_get_brands([
+    'name__like' => $_GET['search']
+]);
 
 $areas = [];
 $needs = [];
@@ -78,9 +81,9 @@ $context = [
         ],
         'search' => [
             'type' => 'search',
-            'name' => 's',
+            'name' => 'search',
             'label' => __('Cerca', 'labo-suisse-theme'),
-            'value' => !empty($_GET['s']) ? $_GET['s'] : null,
+            'value' => !empty($_GET['search']) ? $_GET['search'] : null,
             'disabled' => false,
             'required' => true,
             'buttonTypeNext' => 'submit',

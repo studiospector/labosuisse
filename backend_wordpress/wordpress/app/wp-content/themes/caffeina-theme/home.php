@@ -74,6 +74,7 @@ $context = [
             ],
         ],
         'search' => [
+            'action' => getBaseHomeUrl(),
             'type' => 'search',
             'name' => 's',
             'label' => __('Cerca... (inserisci almeno 3 caratteri)', 'labo-suisse-theme'),
