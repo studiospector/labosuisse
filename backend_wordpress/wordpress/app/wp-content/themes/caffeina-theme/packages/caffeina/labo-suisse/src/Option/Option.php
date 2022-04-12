@@ -123,6 +123,14 @@ class Option
     {
         $options = $this->getOption('lb_footer_newsletter');
 
+        if (is_null($options)) {
+            return [
+                'title' => null,
+                'text' => null,
+                'cta' => []
+            ];
+        }
+
         return [
             'title' => $options['lb_footer_newsletter_title'],
             'text' => $options['lb_footer_newsletter_text'],
