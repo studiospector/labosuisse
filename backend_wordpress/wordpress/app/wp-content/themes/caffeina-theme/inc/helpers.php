@@ -135,4 +135,30 @@ function get_job_location()
     ];
 }
 
+function get_all_macro()
+{
+   return get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true,
+        'parent' => null,
+        'exclude' => get_option('default_product_cat')
+    ]);
+}
 
+function get_all_area($macro)
+{
+    return get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true,
+        'parent' => $macro->term_id
+    ]);
+}
+
+function get_all_needs($area)
+{
+    return get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true,
+        'parent' => $area->term_id
+    ]);
+}

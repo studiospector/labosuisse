@@ -29,7 +29,9 @@
 		</div>
 	{% endif %}
 
-	<div class="banner__img container">
-		{{ lbPicture(images, true) }}
-	</div>
+    {% if images %}
+        <div class="banner__img container">
+            {{ lbPicture(images, true) }}
+        </div>
+    {% endif %}
 </section>

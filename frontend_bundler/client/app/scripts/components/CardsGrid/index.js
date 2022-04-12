@@ -12,7 +12,9 @@ class CardsGrid extends Component {
 
         this.maxHeight = 0
 
-        this.adjustTextWrapHeightDispatcher()
+        setTimeout(() => {
+            this.adjustTextWrapHeightDispatcher()
+        }, 1000);
         on(window, 'resize', this.adjustTextWrapHeightDispatcher)
     }
 
