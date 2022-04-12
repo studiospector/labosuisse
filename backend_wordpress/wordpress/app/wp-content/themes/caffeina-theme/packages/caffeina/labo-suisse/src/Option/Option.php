@@ -149,10 +149,11 @@ class Option
 
         foreach ($options['lb_footer_social_links'] as $option) {
             $social['items'][] = [
-                'url' => $option['lb_footer_social_links_link'],
+                'url' => $option['lb_footer_social_links_link']['url'],
                 'icon' => $option['lb_footer_social_links_icon']
             ];
         }
+
 
         return $social;
     }
