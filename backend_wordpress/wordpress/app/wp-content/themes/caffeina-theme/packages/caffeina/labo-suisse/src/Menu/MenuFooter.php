@@ -10,14 +10,20 @@ class MenuFooter
 {
     public static function get()
     {
-        $prefooter = (new Option())->getPreFooterOptions();
+        $prefooter = [];
+
+        if (!is_home()) {
+            $options = (new Option())->getPreFooterOptions();
+
+            $prefooter = [
+                'block_1' => self::leftBlock($options['left']),
+                'block_2' => self::centerBlock($options['center']),
+                'block_3' => self::rightBlock($options['right'])
+            ];
+        }
 
         return [
-            'prefooter' => [
-                'block_1' => self::leftBlock($prefooter['left']),
-                'block_2' => self::centerBlock($prefooter['center']),
-                'block_3' => self::rightBlock($prefooter['right'])
-            ],
+            'prefooter' => $prefooter,
             'footer' => [
                 'discover' => (new DiscoverLaboFooter())->get(),
                 'support' => (new Support())->get(),
