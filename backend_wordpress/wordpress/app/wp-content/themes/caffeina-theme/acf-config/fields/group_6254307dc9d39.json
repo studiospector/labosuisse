@@ -263,12 +263,12 @@
             "wpml_cf_preferences": 0
         },
         {
-            "key": "field_625433eb691ab",
-            "label": "Ricerca",
-            "name": "lb_footer_search",
+            "key": "field_62551ef08e3ba",
+            "label": "Titoli Menu",
+            "name": "lb_footer_menu_titles",
             "type": "group",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -276,7 +276,65 @@
                 "id": ""
             },
             "layout": "block",
+            "wpml_cf_preferences": 1,
+            "sub_fields": [
+                {
+                    "key": "field_62551f2a8e3bb",
+                    "label": "Scopri Labo",
+                    "name": "lb_footer_menu_titles_discover_labo",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_62551f4c8e3bc",
+                    "label": "Assistenza",
+                    "name": "lb_footer_menu_titles_support",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                }
+            ]
+        },
+        {
+            "key": "field_625433eb691ab",
+            "label": "Ricerca",
+            "name": "lb_footer_search",
+            "type": "group",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
             "wpml_cf_preferences": 2,
+            "layout": "block",
             "sub_fields": [
                 {
                     "key": "field_625433eb691ac",
@@ -326,15 +384,15 @@
             "name": "lb_footer_newsletter",
             "type": "group",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
             "wpml_cf_preferences": 2,
+            "layout": "block",
             "sub_fields": [
                 {
                     "key": "field_625433bd691aa",
@@ -400,15 +458,15 @@
             "name": "lb_footer_social",
             "type": "group",
             "instructions": "",
-            "required": 0,
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "layout": "block",
             "wpml_cf_preferences": 2,
+            "layout": "block",
             "sub_fields": [
                 {
                     "key": "field_62543463691b1",
@@ -519,5 +577,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649686501
+    "modified": 1649745889
 }

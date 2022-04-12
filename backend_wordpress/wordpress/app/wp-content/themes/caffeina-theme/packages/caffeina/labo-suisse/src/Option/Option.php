@@ -99,6 +99,16 @@ class Option
         ];
     }
 
+    public function getFooterMenuTitles()
+    {
+        $options = $this->getOption('lb_footer_menu_titles');
+
+        return [
+            'discoverLabo' => $options['lb_footer_menu_titles_discover_labo'] ?? null,
+            'support' => $options['lb_footer_menu_titles_support'] ?? null,
+        ];
+    }
+
     public function getFooterSearchOptions()
     {
        $options = $this->getOption('lb_footer_search');

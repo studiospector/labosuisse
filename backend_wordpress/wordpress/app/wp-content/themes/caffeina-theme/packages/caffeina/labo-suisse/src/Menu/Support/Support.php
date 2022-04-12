@@ -3,6 +3,7 @@
 namespace Caffeina\LaboSuisse\Menu\Support;
 
 use Caffeina\LaboSuisse\Menu\Traits\HasGetMenu;
+use Caffeina\LaboSuisse\Option\Option;
 
 class Support
 {
@@ -19,7 +20,7 @@ class Support
     public function get()
     {
         $menu = [
-            'title' => __('Assistenza', 'labo-suisse-theme'),
+            'title' => (new Option())->getFooterMenuTitles()['support'],
             'items' => []
         ];
 
