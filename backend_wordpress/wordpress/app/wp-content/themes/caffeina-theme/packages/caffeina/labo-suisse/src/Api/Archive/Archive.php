@@ -25,7 +25,7 @@ class Archive
 
     public function get()
     {
-        if($this->postType = 'brand') {
+        if($this->postType == 'brand') {
             return $this->brandArchiveResponse();
         }
 
