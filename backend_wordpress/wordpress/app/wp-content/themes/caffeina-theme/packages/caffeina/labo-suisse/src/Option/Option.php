@@ -99,6 +99,73 @@ class Option
         ];
     }
 
+    public function getFooterMenuTitles()
+    {
+        $options = $this->getOption('lb_footer_menu_titles');
+
+        return [
+            'discoverLabo' => $options['lb_footer_menu_titles_discover_labo'] ?? null,
+            'support' => $options['lb_footer_menu_titles_support'] ?? null,
+        ];
+    }
+
+    public function getFooterSearchOptions()
+    {
+       $options = $this->getOption('lb_footer_search');
+
+        return [
+            'title' => $options['lb_footer_search_title'],
+            'label' => $options['lb_footer_search_label'],
+        ];
+    }
+
+    public function getFooterNewsletterOptions()
+    {
+        $options = $this->getOption('lb_footer_newsletter');
+
+        if (is_null($options)) {
+            return [
+                'title' => null,
+                'text' => null,
+                'cta' => []
+            ];
+        }
+
+        return [
+            'title' => $options['lb_footer_newsletter_title'],
+            'text' => $options['lb_footer_newsletter_text'],
+            'cta' => array_merge($options['lb_footer_newsletter_cta'], ['variants' => ['secondary']]),
+        ];
+    }
+
+    public function getFooterSocialNetwork()
+    {
+        $options = $this->getOption('lb_footer_social');
+
+        $social = [
+            'title' => $options['lb_footer_social_title'],
+            'items' => []
+        ];
+
+        foreach ($options['lb_footer_social_links'] as $option) {
+            $social['items'][] = [
+                'url' => $option['lb_footer_social_links_link'],
+                'icon' => $option['lb_footer_social_links_icon']
+            ];
+        }
+
+        return $social;
+    }
+
+    public function getPreFooterOptions()
+    {
+        return [
+            'left' => $this->getOption('lb_prefooter_left_block'),
+            'center' => $this->getOption('lb_prefooter_center_block'),
+            'right' => $this->getOption('lb_prefooter_right_block'),
+        ];
+    }
+
     public function getApiKey($service)
     {
         return $this->getOption($service);
