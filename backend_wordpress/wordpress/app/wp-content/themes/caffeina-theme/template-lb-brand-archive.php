@@ -5,6 +5,27 @@
 $brands = [];
 $brand_terms = lb_get_brands();
 
+$areas = [];
+$needs = [];
+
+foreach (get_all_macro() as $macro) {
+    foreach (get_all_area($macro) as $area) {
+        $areas[] = [
+            'value' => $area->term_id,
+            'label' => $area->name
+        ];
+
+        foreach (get_all_needs($area) as $need) {
+            $needs[] = [
+                'value' => $need->term_id,
+                'label' => $need->name
+            ];
+        }
+    }
+}
+
+
+
 foreach ($brand_terms as $term) {
     $brand_page = get_field('lb_brand_page', $term);
     $brands[] = [
@@ -26,7 +47,7 @@ $context = [
     'title' => get_the_title(),
     'content' => apply_filters( 'the_content', get_the_content() ),
     'filters' => [
-        'post_type' => 'product',
+        'post_type' => 'brand',
         'posts_per_page' => -1,
         'containerized' => false,
         'items' => [
@@ -38,7 +59,7 @@ $context = [
                 'required' => false,
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                'options' => [],
+                'options' => $areas,
                 'attributes' => ['data-taxonomy="product_cat"'],
                 'variants' => ['primary']
             ],
@@ -50,7 +71,7 @@ $context = [
                 'required' => false,
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                'options' => [],
+                'options' => $needs,
                 'attributes' => ['data-taxonomy="product_cat"'],
                 'variants' => ['primary']
             ],
