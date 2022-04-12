@@ -40,12 +40,12 @@ class MenuFooter
             ->getFooterSearchOptions();
 
         return [
-            'title' => $search['title'],
+            'title' => $search['title'] ?? null,
             'input' => [
                 // The only parameter to manage in options is label
                 'type' => 'search',
                 'name' => "lb-search-store-footer",
-                'label' => $search['label'],
+                'label' => $search['label'] ?? null,
                 'disabled' => false,
                 'required' => false,
                 'buttonTypeNext' => 'button',
@@ -60,9 +60,9 @@ class MenuFooter
             ->getFooterNewsletterOptions();
 
         return [
-            'title' => $newsletter['title'],
-            'text' => $newsletter['text'],
-            'cta' => $newsletter['cta']
+            'title' => $newsletter['title'] ?? null,
+            'text' => $newsletter['text'] ?? null,
+            'cta' => $newsletter['cta'] ?? null
         ];
     }
 
@@ -75,7 +75,11 @@ class MenuFooter
     private static function leftBlock($options)
     {
         if (is_null($options)) {
-            return null;
+            return [
+                'title' => null,
+                'text' => null,
+                'cta' => [],
+            ];
         }
 
         return [
@@ -87,18 +91,15 @@ class MenuFooter
 
     private static function centerBlock($options)
     {
-        if (is_null($options)) {
-            return null;
-        }
 
         return [
-            'title' => $options['lb_prefooter_center_block_title'],
-            'text' => $options['lb_prefooter_center_block_text'],
+            'title' => $options['lb_prefooter_center_block_title'] ?? null,
+            'text' => $options['lb_prefooter_center_block_text'] ?? null,
             'input' => [
                 // The only parameter to manage in options is label
                 'type' => 'search',
                 'name' => "lb-search-store-prefooter",
-                'label' => $options['lb_prefooter_center_block_label'],
+                'label' => $options['lb_prefooter_center_block_label'] ?? null,
                 'disabled' => false,
                 'required' => false,
                 'buttonTypeNext' => 'button',
@@ -110,7 +111,11 @@ class MenuFooter
     private static function rightBlock($options)
     {
         if (is_null($options)) {
-            return null;
+            return [
+                'title' => null,
+                'text' => null,
+                'cta' => [],
+            ];
         }
 
         return [
