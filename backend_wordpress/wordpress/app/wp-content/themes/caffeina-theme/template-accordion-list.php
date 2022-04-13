@@ -4,6 +4,7 @@
 
 $items = [];
 if (have_rows('lb_template_accordion_list')) {
+    $count = 1;
     while (have_rows('lb_template_accordion_list')) : the_row();
         $accordions = [];
         
@@ -24,11 +25,12 @@ if (have_rows('lb_template_accordion_list')) {
         }
         
         $items[] = [
-            'id' => null,
+            'id' => $count,
             'icon' => get_sub_field('lb_template_accordion_list_icon'),
             'title' => get_sub_field('lb_template_accordion_list_title'),
             'content' => ($accordions) ? $accordions : []
         ];
+        $count++;
     endwhile;
 }
 
