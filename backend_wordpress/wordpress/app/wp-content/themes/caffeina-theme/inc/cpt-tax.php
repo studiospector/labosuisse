@@ -446,6 +446,64 @@ function lb_beauty_specialist_cpt_init()
 }
 add_action('init', 'lb_beauty_specialist_cpt_init', 0);
 
+/**
+ * Register Custom Post Type Stores
+ */
+function lb_distributor_cpt_init()
+{
+    $args = array(
+        'label' => __('Distributor', 'lb-distributor-cpt'),
+        'labels' => array(
+            'name' => _x('Distributor', 'Post Type General Name', 'lb-distributor-cpt'),
+            'singular_name' => _x('Distributor', 'Post Type Singular Name', 'lb-distributor-cpt'),
+            'menu_name' => _x('Distributor', 'Admin Menu text', 'lb-distributor-cpt'),
+            'name_admin_bar' => _x('Distributor', 'Add New on Toolbar', 'lb-distributor-cpt'),
+            'archives' => __('Archivi Distributor', 'lb-distributor-cpt'),
+            'attributes' => __('Attributi dei Distributors', 'lb-distributor-cpt'),
+            'parent_item_colon' => __('Genitori Distributors:', 'lb-distributor-cpt'),
+            'all_items' => __('Tutti i Distributors', 'lb-distributor-cpt'),
+            'add_new_item' => __('Aggiungi nuovo Distributor', 'lb-distributor-cpt'),
+            'add_new' => __('Nuovo', 'lb-distributor-cpt'),
+            'new_item' => __('Distributor redigere', 'lb-distributor-cpt'),
+            'edit_item' => __('Modifica Distributor', 'lb-distributor-cpt'),
+            'update_item' => __('Aggiorna Distributor', 'lb-distributor-cpt'),
+            'view_item' => __('Visualizza Distributor', 'lb-distributor-cpt'),
+            'view_items' => __('Visualizza i Distributors', 'lb-distributor-cpt'),
+            'search_items' => __('Cerca Distributor', 'lb-distributor-cpt'),
+            'not_found' => __('Nessun Distributor trovato.', 'lb-distributor-cpt'),
+            'not_found_in_trash' => __('Nessun Distributor trovato nel cestino.', 'lb-distributor-cpt'),
+            'featured_image' => __('Immagine in evidenza', 'lb-distributor-cpt'),
+            'set_featured_image' => __('Imposta immagine in evidenza', 'lb-distributor-cpt'),
+            'remove_featured_image' => __('Rimuovi immagine in evidenza', 'lb-distributor-cpt'),
+            'use_featured_image' => __('Usa come immagine in evidenza', 'lb-distributor-cpt'),
+            'insert_into_item' => __('Inserisci nel Distributor', 'lb-distributor-cpt'),
+            'uploaded_to_this_item' => __('Caricato in questo Distributor', 'lb-distributor-cpt'),
+            'items_list' => __('Elenco dei Distributors', 'lb-distributor-cpt'),
+            'items_list_navigation' => __('Navigazione elenco Distributor', 'lb-distributor-cpt'),
+            'filter_items_list' => __('Filtra elenco Distributor', 'lb-distributor-cpt'),
+        ),
+        'menu_icon' => 'dashicons-archive',
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
+        'taxonomies' => array(),
+        'public' => true,
+        'show_ui' => true,
+        'show_in_menu' => true,
+        'menu_position' => 5,
+        'show_in_admin_bar' => true,
+        'show_in_nav_menus' => true,
+        'can_export' => true,
+        'has_archive' => true,
+        'hierarchical' => true,
+        'exclude_from_search' => false,
+        'show_in_rest' => true,
+        'publicly_queryable' => true,
+        'map_meta_cap' => true,
+        'capability_type' => array( 'lb-distributor', 'lb-distributors' ),
+        'rewrite' => array('slug' => 'distributor'),
+    );
+    register_post_type('lb-distributor', $args);
+}
+add_action('init', 'lb_distributor_cpt_init', 0);
 
 // Register Services API Key
 function lb_set_services_api_key() {
