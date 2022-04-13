@@ -1,6 +1,6 @@
 {
     "key": "group_6256963d5e389",
-    "title": "Campi Personalizzati: Dealer",
+    "title": "Campi Personalizzati: Distributor",
     "fields": [
         {
             "key": "field_6256964fcfbd4",
@@ -73,12 +73,12 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 3,
             "collapsed": "",
             "min": 0,
             "max": 0,
             "layout": "table",
             "button_label": "",
-            "wpml_cf_preferences": 1,
             "sub_fields": [
                 {
                     "key": "field_62569ad2cfbdb",
@@ -113,7 +113,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "wpml_cf_preferences": 2,
+                    "wpml_cf_preferences": 3,
                     "collapsed": "",
                     "min": 0,
                     "max": 0,
@@ -172,7 +172,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "lb-dealer"
+                "value": "lb-distributor"
             }
         ]
     ],
@@ -185,5 +185,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649843795
+    "modified": 1649846574
 }
