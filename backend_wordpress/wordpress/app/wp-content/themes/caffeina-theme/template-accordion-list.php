@@ -40,6 +40,7 @@ $context = [
         'opened_by_default' => true,
         'items' => $items
     ],
+    'content' => apply_filters('the_content', get_the_content()),
 ];
 
 Timber::render('@PathViews/template-accordion-list.twig', $context);

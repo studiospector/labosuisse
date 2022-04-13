@@ -24,4 +24,10 @@
         </div>
     {% endif %}
 
+    {# Content #}
+    {% if content %}
+        <hr class="lb-separator lb-separator--big" data-variant="big">
+        {{ content|raw }}
+    {% endif %}
+
 {% endblock %}
