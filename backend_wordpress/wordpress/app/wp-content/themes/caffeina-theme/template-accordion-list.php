@@ -24,6 +24,7 @@ if (have_rows('lb_template_accordion_list')) {
         }
         
         $items[] = [
+            'id' => null,
             'icon' => get_sub_field('lb_template_accordion_list_icon'),
             'title' => get_sub_field('lb_template_accordion_list_title'),
             'content' => ($accordions) ? $accordions : []
