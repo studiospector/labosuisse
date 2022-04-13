@@ -1,5 +1,8 @@
 import Component from '@okiba/component'
 import { on } from '@okiba/dom';
+import { debounce } from '@okiba/functions'
+
+import { getHeaderFullHeight } from '../../utils/headerHeight';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -45,7 +48,20 @@ class Scrollbar extends Component {
 
         // Add Locomotive Scroll to window for global access
         window.getCustomScrollbar = scrollbar
+
+        this.scrollToWithAnchorLink(scrollbar)
     }
+
+    scrollToWithAnchorLink = debounce((scrollbar) => {
+        const fullHeaderHeight = getHeaderFullHeight()
+        const hash = window.location.hash
+
+        if (hash) {
+            scrollbar.scrollTo(hash, {
+                offset: -fullHeaderHeight
+            })
+        }
+    }, 1000)
 }
 
 export default Scrollbar
