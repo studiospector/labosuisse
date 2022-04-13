@@ -78,6 +78,7 @@ BUGFIX
 
 - refactor con template archivi
 - refactor componente separatore
+- refactor api call con autenticazione e url da .env
 
 
 
