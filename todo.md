@@ -76,6 +76,9 @@ BUGFIX
 - caricamento store locator
 - fix card filtrate
 
+- refactor con template archivi
+- refactor componente separatore
+
 
 
 ----------
