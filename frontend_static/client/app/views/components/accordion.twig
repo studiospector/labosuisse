@@ -6,7 +6,7 @@
 	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-<div class="lb-accordion{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-accordion">
+<div class="lb-accordion{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-accordion"{{ opened_by_default ? ' data-opened-by-default="' ~ opened_by_default ~ '"' : '' }}>
 	{% block items %}
 		{% for item in items %}
 			{% include '@PathViews/components/accordion-item.twig' with item only %}

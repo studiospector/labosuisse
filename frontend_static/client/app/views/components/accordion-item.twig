@@ -2,8 +2,11 @@
 	<div class="lb-accordion__header">
 		<div class="lb-accordion__header__title">
 			{% block accordion%}
+                {% if icon %}
+                    {% include '@PathViews/components/icon.twig' with {name: icon} %}
+                {% endif %}
 				{% if title is defined %}
-					<h6 class="p">{{ title }}</h6>
+					<h4 class="p">{{ title }}</h4>
 				{% endif %}
 			{% endblock %}
 		</div>
@@ -20,7 +23,14 @@
 	</div>
 	<div class="lb-accordion__content">
 		{% block accordionContent %}
-			{% if content %}
+			{% if content is iterable %}
+                {% for item in content %}
+                    <h6 class="lb-accordion__content__label">{{ item.label }}</h6>
+                    {% for link in item.links %}
+                        {% include '@PathViews/components/button.twig' with link only %}
+                    {% endfor %}
+                {% endfor %}
+            {% else %}
 				{{ content|raw }}
 			{% endif %}
 		{% endblock %}

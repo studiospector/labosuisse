@@ -23,6 +23,8 @@ class Accordion extends Component {
             ...options
         }
 
+        this.openedByDefault = this.el.dataset.openedByDefault
+
         this.screenWidth = window.innerWidth
 
         this.items = this.ui.items.reduce((acc, item) => {
@@ -40,6 +42,10 @@ class Accordion extends Component {
         }, new Map())
 
         on(window, 'resize', this.handleResize)
+        
+        if (this.openedByDefault && this.screenWidth > 991) {
+            this.handleOpenAll()
+        }
     }
 
     handleResize = debounce(() => {
@@ -48,6 +54,10 @@ class Accordion extends Component {
         }
         this.screenWidth = window.innerWidth
     }, 300)
+
+    handleOpenAll = () => {
+        this.items.forEach((el) => this.open(el))
+    }
 
     handleToggle = (e) => {
         if (e.target.classList.contains('button') ||
@@ -69,7 +79,7 @@ class Accordion extends Component {
     open(target) {
         if (!target) return
 
-        const height = target.header.offsetHeight + target.content.offsetHeight
+        const height = target.header.offsetHeight + target.content.offsetHeight + 40
 
         target.wrapper.classList.add('is-opening')
 
@@ -79,6 +89,7 @@ class Accordion extends Component {
             onComplete: () => {
                 target.wrapper.classList.remove('is-opening')
                 target.wrapper.classList.add('is-open')
+                window.getCustomScrollbar.update()
             }
         })
     }
@@ -91,7 +102,10 @@ class Accordion extends Component {
             gsap.to(target.wrapper, {
                 height: `${height}px`,
                 duration: this.options.duration,
-                onComplete: () => target.wrapper.classList.remove('is-open')
+                onComplete: () => {
+                    target.wrapper.classList.remove('is-open')
+                    window.getCustomScrollbar.update()
+                }
             })
         } else {
             this.items.forEach((el) => this.close(el))
