@@ -43,8 +43,18 @@ class Accordion extends Component {
 
         on(window, 'resize', this.handleResize)
         
-        if (this.openedByDefault && this.screenWidth > 991) {
+        if (this.openedByDefault && this.screenWidth > 991 && !window.location.hash) {
             this.handleOpenAll()
+        }
+
+        if (window.location.hash) {
+            const hash = window.location.hash.split('#')
+
+            const elem = document.getElementById(hash[1])
+
+            if (elem) {
+                this.items.forEach((el) => (elem == el.wrapper) ? this.open(el) : null)
+            }
         }
     }
 
