@@ -9,12 +9,11 @@
         {% endif %}
         {% if search %}
             <div class="lb-filters__item col-12 col-md-4 offset-md-{{ (items|length >= 3) ? '2' : (items|length == 2) ? '4' : (items|length == 1) ? '6' :  (items|length == 0) ? '4' : '2' }}">
-                <form action="" method="get" class="lb-filters__search-form">
-{#                    {% if hidden %}#}
-{#                        <input type="hidden" name="{{ hidden.name }}" value="{{ hidden.value }}"/>#}
-{#                    {% endif %}#}
-
+                <form action="{{ search.action }}" method="get" class="lb-filters__search-form">
                     {% include '@PathViews/components/fields/input.twig' with search only %}
+                    {% if hidden %}
+                        <input type="hidden" name="{{ hidden.name }}" value="{{ hidden.value }}"/>
+                    {% endif %}
                 </form>
             </div>
         {% endif %}

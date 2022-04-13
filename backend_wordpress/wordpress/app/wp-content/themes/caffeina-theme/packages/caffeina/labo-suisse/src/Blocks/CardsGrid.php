@@ -23,6 +23,7 @@ class CardsGrid extends BaseBlock
                         'title' => get_sub_field('lb_block_cards_grid_carousel_infobox_title'),
                         'subtitle' => get_sub_field('lb_block_cards_grid_carousel_infobox_subtitle'),
                         'paragraph' => get_sub_field('lb_block_cards_grid_carousel_infobox_paragraph'),
+                        'paragraph_small' => get_sub_field('lb_block_cards_grid_carousel_infobox_paragraph_small'),
                         'cta' => $cta
                     ],
                     'variants' => [get_field('lb_block_cards_grid_cards_variants')],
@@ -35,10 +36,11 @@ class CardsGrid extends BaseBlock
             $ctaCards = array_merge((array)get_field('lb_block_cards_grid_btn'), ['variants' => [get_field('lb_block_cards_grid_btn_variants')]]);
         }
         $payload = [
-            'tagline' =>  get_field('lb_block_cards_grid_tagline'),
-            'title' =>  get_field('lb_block_cards_grid_title'),
-            'paragraph' =>  get_field('lb_block_cards_grid_paragraph'),
+            'tagline' => get_field('lb_block_cards_grid_tagline'),
+            'title' => get_field('lb_block_cards_grid_title'),
+            'paragraph' => get_field('lb_block_cards_grid_paragraph'),
             'cta' => $ctaCards,
+            'cards_text_align' => get_field('lb_block_cards_grid_text_align'),
             'items' => $items,
         ];
         $this->setContext($payload);

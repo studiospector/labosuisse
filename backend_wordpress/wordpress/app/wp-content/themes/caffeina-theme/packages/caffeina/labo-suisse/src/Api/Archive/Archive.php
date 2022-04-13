@@ -25,6 +25,10 @@ class Archive
 
     public function get()
     {
+        if($this->postType == 'brand') {
+            return $this->brandArchiveResponse();
+        }
+
         $query = new WP_Query($this->args);
         $totalPosts = $query->post_count;
         $hasPosts = $this->args['paged'] < $query->max_num_pages;
@@ -89,11 +93,15 @@ class Archive
 
     private function filterByTaxonomy($taxonomy, $values)
     {
-        $this->args['tax_query'][] = [
-            'taxonomy' => $taxonomy,
-            'terms' => $values,
-            'operator' => 'IN'
-        ];
+        $values = array_filter($values);
+
+        if(!empty($values)) {
+            $this->args['tax_query'][] = [
+                'taxonomy' => $taxonomy,
+                'terms' => $values,
+                'operator' => 'IN'
+            ];
+        }
     }
 
     private function filterByYear($years)
@@ -217,6 +225,54 @@ class Archive
         }
 
         return $items;
+    }
+
+    private function brandArchiveResponse()
+    {
+        $this->args['post_type'] = 'product';
+        $query = new WP_Query($this->args);
+        $totalPosts = $query->post_count;
+        $hasPosts = $this->args['paged'] < $query->max_num_pages;
+
+        if($totalPosts === 0) {
+            return json_encode([
+                'totalPosts' => $totalPosts,
+                'posts' => $this->noResults(),
+                'hasPosts' => $hasPosts
+            ]);
+        }
+
+        $brands = [];
+        foreach ($query->get_posts() as $post) {
+            $brand = get_the_terms($post->ID, 'lb-brand')[0];
+            $brand_page = get_field('lb_brand_page', $brand);
+
+            if(isset($brands[$brand->term_id])) {
+                continue;
+            }
+
+            $card = Timber::compile('@PathViews/components/card.twig', [
+                'images' => lb_get_images(get_field('lb_brand_image', $brand)),
+                'infobox' => [
+                    'subtitle' => $brand->name,
+                    'paragraph' => $brand->description,
+                    'cta' => !empty($brand_page) ? [
+                        'url' => get_permalink($brand_page),
+                        'title' => __('Vai al brand', 'labo-suisse-theme'),
+                        'variants' => ['quaternary']
+                    ] : null
+                ],
+                'variants' => ['type-10']
+            ]);
+
+            $brands[$brand->term_id] = "<div class=\"col-12 col-md-4\">$card</div>";
+        }
+
+        return json_encode([
+            'totalPosts' => $totalPosts,
+            'posts' => array_values($brands),
+            'hasPosts' => $hasPosts
+        ]);
     }
 
     private function noResults()

@@ -137,6 +137,31 @@
             "placeholder": ""
         },
         {
+            "key": "field_62554a00725f2",
+            "label": "Allineamento testo nelle Cards",
+            "name": "lb_block_cards_grid_text_align",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "left": "Sinistra",
+                "center": "Centro"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "left",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
+        },
+        {
             "key": "field_61fd3c8116d7d",
             "label": "Cards Grid",
             "name": "lb_block_cards_grid_carousel",
@@ -251,7 +276,27 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": ""
+                    "new_lines": "br"
+                },
+                {
+                    "key": "field_6255499bd2d6a",
+                    "label": "Paragrafo piccolo",
+                    "name": "lb_block_cards_grid_carousel_infobox_paragraph_small",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": "",
+                    "new_lines": "br"
                 },
                 {
                     "key": "field_61fd3c8120337",
@@ -359,5 +404,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645120832
+    "modified": 1649757752
 }

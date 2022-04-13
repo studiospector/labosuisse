@@ -23,12 +23,15 @@ function lb_get_images($id, $sizes = [])
 /**
  * Get all Brands
  */
-function lb_get_brands()
+function lb_get_brands($search = [])
 {
-    $brands = get_terms(array(
+    $args = [
         'taxonomy' => 'lb-brand',
         'hide_empty' => false,
-    ));
+    ];
+    $args = array_merge($args, $search);
+
+    $brands = get_terms($args);
 
     $i = 0;
     foreach ($brands as $term) {
@@ -135,4 +138,44 @@ function get_job_location()
     ];
 }
 
+function get_all_macro()
+{
+   return get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true,
+        'parent' => null,
+        'exclude' => get_option('default_product_cat')
+    ]);
+}
 
+function get_all_area($macro)
+{
+    return get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true,
+        'parent' => $macro->term_id
+    ]);
+}
+
+function get_all_needs($area)
+{
+    return get_terms([
+        'taxonomy' => 'product_cat',
+        'hide_empty' => true,
+        'parent' => $area->term_id
+    ]);
+}
+
+function getBaseHomeUrl()
+{
+    global $wp;
+    $current_url = home_url($wp->request);
+
+    $pos = strpos($current_url, '/page');
+
+    if ($pos) {
+        $current_url = substr($current_url, 0, $pos);
+    }
+
+    return $current_url;
+}

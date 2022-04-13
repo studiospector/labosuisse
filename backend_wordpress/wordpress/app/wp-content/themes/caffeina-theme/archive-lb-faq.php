@@ -52,6 +52,7 @@ $context = [
         'containerized' => false,
         'items' => [],
         'search' => [
+            'action' => getBaseHomeUrl(),
             'type' => 'search',
             'name' => 's',
             'label' => __('Cerca un argomento, prodotto, linea...', 'labo-suisse-theme'),
