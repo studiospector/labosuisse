@@ -215,7 +215,7 @@ function lb_brand_tax_init()
         'show_in_rest' => true,
         'rewrite' => array('slug' => 'brands', 'with_front' => true, 'hierarchical' => true)
     );
-    register_taxonomy('lb-brand', array('product'), $args);
+    register_taxonomy('lb-brand', array('product', 'lb-distributor'), $args);
 }
 add_action('init', 'lb_brand_tax_init');
 
