@@ -27,6 +27,26 @@
         }
     }
 
+    &--container {
+        width: calc(100% - 30px);
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: rem(15);
+        padding-left: rem(15);
+        
+        @include mq($from: md) {
+            max-width: 720px;
+        }
+
+        @include mq($from: lg) {
+            max-width: 992px;
+        }
+
+        @include mq($from: xl) {
+            max-width: 1200px;
+        }
+    }
+
     &--line {
         border-bottom: 1px solid map-get($colors, "grey-2");
 
