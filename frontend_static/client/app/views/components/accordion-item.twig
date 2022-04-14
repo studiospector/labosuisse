@@ -24,12 +24,16 @@
 	<div class="lb-accordion__content">
 		{% block accordionContent %}
 			{% if content is iterable %}
-                {% for item in content %}
-                    <h6 class="lb-accordion__content__label">{{ item.label }}</h6>
-                    {% for link in item.links %}
-                        {% include '@PathViews/components/button.twig' with link only %}
+                <div class="links-list">
+                    {% for item in content %}
+                        <div class="links-list__item">
+                            <h6 class="links-list__label">{{ item.label }}</h6>
+                            {% for link in item.links %}
+                                {% include '@PathViews/components/button.twig' with link only %}
+                            {% endfor %}
+                        </div>
                     {% endfor %}
-                {% endfor %}
+                </div>
             {% else %}
 				{{ content|raw }}
 			{% endif %}

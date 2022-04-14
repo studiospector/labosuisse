@@ -16,7 +16,13 @@ if (have_rows('lb_template_accordion_list')) {
 
                 if (have_rows('lb_template_accordion_list_links')) {
                     while (have_rows('lb_template_accordion_list_links')) : the_row();
-                        $row['links'][] = array_merge((array)get_sub_field('lb_template_accordion_list_links_link'), ['iconStart' => ['name' => get_sub_field('lb_template_accordion_list_links_icon')]]);
+                        $row['links'][] = array_merge(
+                            (array)get_sub_field('lb_template_accordion_list_links_link'),
+                            [
+                                'iconStart' => ['name' => get_sub_field('lb_template_accordion_list_links_icon')],
+                                'variants' => ['link'],
+                            ]
+                        );
                     endwhile;
                 }
 
