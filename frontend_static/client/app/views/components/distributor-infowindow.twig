@@ -1,0 +1,33 @@
+<div class="lb-template-distributor__map__infowindow">
+    <div class="lb-template-distributor__map__infowindow__header">
+        
+    </div>
+    <div class="lb-template-distributor__map__infowindow__content">
+        <div class="lb-template-distributor__map__infowindow__brands">
+            {% for brand in brands %}
+
+            {% endfor %}
+        </div>
+        <div class="infobox">
+            <h3 class="infobox__subtitle">{{ title }}</h3>
+            <p class="infobox__paragraph infobox__paragraph--small">
+                {{ geo_location.address }}<br>
+                {{ phone }}<br>
+                {{ email }}
+            </p>
+            <p class="infobox__paragraph">{{ content }}</p>  
+        </div>
+        {% if links|length > 0 %}
+            <div class="links-list">
+                {% for item in links %}
+                    <div class="links-list__item">
+                        <h6 class="links-list__label">{{ item.label }}</h6>
+                        {% for link in item.links %}
+                            {% include '@PathViews/components/button.twig' with link only %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

@@ -19,8 +19,15 @@
         <hr class="lb-separator lb-separator--small" data-variant="small">
     {% endif %}
 
+    {# Map #}
+    <div class="lb-template-distributor__map-wrapper js-distributor-map-wrapper">
+        <div class="lb-template-distributor__map js-distributor-map" data-map-country="{{ map.map_country }}" data-map-lang="{{ map.map_lang }}"></div>
+        <div class="caffeina-sl__loader caffeina-sl__loader--loading js-distributor-loader"></div>
+    </div>
+
     {# Content #}
     {% if content %}
+        <hr class="lb-separator lb-separator--big" data-variant="big">
         <div class="lb-post-elements-formatted">
             {{ content|raw }}
         </div>
