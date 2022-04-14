@@ -1,0 +1,29 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-template-distributor' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Intro page #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Filters #}
+    {% if filters|length > 0 %}
+        {% include '@PathViews/components/filters.twig' with filters only %}
+        <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% endif %}
+
+    {# Content #}
+    {% if content %}
+        <div class="lb-post-elements-formatted">
+            {{ content|raw }}
+        </div>
+    {% endif %}
+
+{% endblock %}
