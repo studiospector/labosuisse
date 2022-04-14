@@ -582,6 +582,69 @@
             "ui": 1
         },
         {
+            "key": "field_6257fc4021e09",
+            "label": "Labo Nel Mondo",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 0
+        },
+        {
+            "key": "field_6257fc6821e0a",
+            "label": "Pagina Crescina Nel Mondo",
+            "name": "crescina_in_the_world_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "wpml_cf_preferences": 2,
+            "ui": 1
+        },
+        {
+            "key": "field_6257fcf821e0b",
+            "label": "Pagina Filerina Nel Mondo",
+            "name": "filerina_in_the_world_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "wpml_cf_preferences": 2,
+            "ui": 1
+        },
+        {
             "key": "field_622741428fdca",
             "label": "API Key",
             "name": "",
@@ -637,5 +700,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1648806084
+    "modified": 1649933652
 }

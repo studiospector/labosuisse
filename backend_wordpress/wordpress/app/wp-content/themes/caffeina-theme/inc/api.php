@@ -9,9 +9,9 @@ function get_stores()
     return (new Store())->all();
 }
 
-function get_distributors()
+function get_distributors(WP_REST_Request $request)
 {
-    return (new Distributor())->all();
+    return (new Distributor($request))->all();
 }
 
 function get_archive(WP_REST_Request $request)

@@ -2,6 +2,14 @@
 
 /* Template Name: Template Distributori */
 
+$brands = [];
+foreach (lb_get_brands() as $brand) {
+    $brands[] = [
+        'value' => $brand->term_id,
+        'label' => $brand->name,
+    ];
+}
+
 $context = [
     'page_intro' => [
         'title' => get_the_title(),
@@ -20,7 +28,7 @@ $context = [
                 'required' => false,
                 'disabled' => false,
                 'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                'options' => [],
+                'options' => $brands,
                 'attributes' => ['data-taxonomy="lb-brand"'],
                 'variants' => ['primary']
             ],
