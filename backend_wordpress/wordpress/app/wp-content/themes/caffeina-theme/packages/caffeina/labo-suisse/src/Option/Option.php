@@ -16,6 +16,14 @@ class Option
         return "{$link}?product_category={$productCategory}";
     }
 
+    public function getLaboInTheWorldLink()
+    {
+        return [
+            'crescina' => get_permalink($this->getOption('crescina_in_the_world_page')),
+            'filerina' => get_permalink($this->getOption('filerina_in_the_world_page'))
+        ];
+    }
+
     public function getHeaderLinks()
     {
         $links = $this->prepareLinks('lb_header_links');
