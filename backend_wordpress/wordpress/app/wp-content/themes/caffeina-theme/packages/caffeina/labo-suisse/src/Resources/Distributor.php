@@ -60,10 +60,13 @@ class Distributor
     private function parseLinks($links)
     {
         return array_map(function ($item) {
-            return [
-                'icon' => $item['lb_distributor_links_list_icon'],
-                'link' => $item['lb_distributor_links_list_link']
-            ];
+            return array_merge(
+                $item['lb_distributor_links_list_link'],
+                [
+                    'iconStart' => ['name' => $item['lb_distributor_links_list_icon']],
+                    'variants' => ['link'],
+                ]
+            );
         }, $links);
     }
 
@@ -72,15 +75,17 @@ class Distributor
         $laboInTheWorldLinks = (new Option())->getLaboInTheWorldLink();
 
         return [
-            'label' => __('scopri i trattamenti distribuiti', 'labo-suisse-theme'),
+            'label' => __('Scopri i trattamenti distribuiti', 'labo-suisse-theme'),
             'links' => [
                 [
-                    'label' => __("crescina in {$this->geo_location['country']}", 'labo-suisse-theme'),
-                    'link' => "{$laboInTheWorldLinks['crescina']}#{$this->geo_location['country_short']}"
+                    'title' => __("Crescina in {$this->geo_location['country']}", 'labo-suisse-theme'),
+                    'url' => "{$laboInTheWorldLinks['crescina']}#{$this->geo_location['country_short']}",
+                    'variants' => ['primary'],
                 ],
                 [
-                    'label' => __("filerina in {$this->geo_location['country']}", 'labo-suisse-theme'),
-                    'link' => "{$laboInTheWorldLinks['filerina']}#{$this->geo_location['country_short']}"
+                    'title' => __("Filerina in {$this->geo_location['country']}", 'labo-suisse-theme'),
+                    'url' => "{$laboInTheWorldLinks['filerina']}#{$this->geo_location['country_short']}",
+                    'variants' => ['primary'],
                 ]
             ]
         ];
