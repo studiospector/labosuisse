@@ -121,7 +121,7 @@ const components = {
         optional: true
     },
     storeLocatorCaffeina: {
-        selector: '.js-caffeina-store-locator',
+        selector: '.js-caffeina-sl',
         type: StoreLocatorCaffeina,
         optional: true
     },
