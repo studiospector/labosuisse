@@ -218,6 +218,7 @@
                 left: 0;
                 background: map-get($colors, "black");
                 transform: scaleX(0);
+                transform-origin: right center;
                 transition: transform .3s ease;
             }
 
@@ -225,6 +226,7 @@
             &:focus {
                 &::after {
                     transform: scaleX(1);
+                    transform-origin: left center;
                 }
             }
 
