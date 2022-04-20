@@ -29,6 +29,7 @@ import Geolocation from './Geolocation'
 import Filters from './Filters'
 import Loader from './Loader'
 import DistributorsMap from './DistributorsMap'
+import ScrollbarManagement from './ScrollbarManagement'
 
 const components = {
     scrollbar: {
@@ -154,6 +155,11 @@ const components = {
     distributorsMap: {
         selector: '.js-distributor-map-wrapper',
         type: DistributorsMap,
+        optional: true
+    },
+    scrollbarManagement: {
+        selector: '.js-scrollbar-management',
+        type: ScrollbarManagement,
         optional: true
     },
 }
