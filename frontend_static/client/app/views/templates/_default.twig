@@ -47,7 +47,7 @@
         
         {% block head %}{% endblock %}
     </head>
-    <body {{ fn('body_class', bodyClass) }}>
+    <body {{ fn('body_class', bodyClass ~ ' is-loading') }}>
 
         <div class="js-scrollbar" data-scroll-container>
             <!-- Header -->
