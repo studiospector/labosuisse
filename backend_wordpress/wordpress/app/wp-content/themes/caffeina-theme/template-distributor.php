@@ -16,6 +16,7 @@ $context = [
         'description' => get_the_excerpt(),
     ],
     'filters' => [
+        'filter_type' => 'map-distributor',
         'post_type' => 'lb-distributor',
         'posts_per_page' => -1,
         'containerized' => false,

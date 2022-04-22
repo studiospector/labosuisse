@@ -23,6 +23,8 @@ class Filters extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
+        this.filterType = this.el.dataset.filterType
+
         this.cardsGrid = qs('.js-lb-cards-grid')
         this.results = qs('.lb-posts-count')
         this.pagination = qs('.lb-pagination')
@@ -71,16 +73,25 @@ class Filters extends Component {
         this.payload.data = args
         this.payload.page = 1
 
-        this.getData().then((res) => {
-            this.cardsGrid.innerHTML = ''
-            if (this.pagination) {
-                this.pagination.remove()
-            }
-            this.render(JSON.parse(res))
-        }).then(() => {
+        // Render for Filter type Grid
+        if (this.filterType == 'grid') {
+            this.getData().then((res) => {
+                this.cardsGrid.innerHTML = ''
+                if (this.pagination) {
+                    this.pagination.remove()
+                }
+                this.renderTypeGrid(JSON.parse(res))
+
+            }).then(() => {
+                this.removeLoader()
+                window.getCustomScrollbar.update()
+            })
+            
+        // Render for Filter type Map
+        } else if (this.filterType == 'map-distributor') {
+            this.renderTypeMapDistributor(args)
             this.removeLoader()
-            window.getCustomScrollbar.update()
-        })
+        }
     }
 
     loadMoreData = () => {
@@ -91,7 +102,7 @@ class Filters extends Component {
         }
 
         this.getData().then((res) => {
-            this.render(JSON.parse(res))
+            this.renderTypeGrid(JSON.parse(res))
         }).then(() => {
             this.loadMoreBtn.disabled = false
             this.removeLoader()
@@ -114,7 +125,7 @@ class Filters extends Component {
         return res
     }
 
-    render = (payload) => {
+    renderTypeGrid = (payload) => {
         const items = payload.posts
 
         if (this.results) {
@@ -142,6 +153,50 @@ class Filters extends Component {
 
         if (payload.hasPosts) {
             this.payload.page++
+        }
+    }
+
+    renderTypeMapDistributor = (payload) => {
+        let categories = []
+        if (payload.length > 0) {
+            categories = payload[0].values
+        }
+        this.filterMarkers(window.lbGMapLoaderDistributors, window.lbMapDistributors, categories)
+    }
+
+    /**
+     * Filter markers by category
+     */
+    filterMarkers = (google, map, categories) => {
+        let bounds = new google.maps.LatLngBounds()
+        let countRes = 0
+
+        for (let i = 0; i < map.markers.length; i++) {
+            const marker = map.markers[i]
+            
+            if (categories.length > 0) {
+                const success = categories.some((val) => marker.category.includes(parseInt(val)))
+    
+                // If is same category or category not picked
+                if (success) {
+                    marker.setVisible(true)
+                    bounds.extend(marker.getPosition())
+                    countRes++
+                // Categories don't match 
+                } else {
+                    marker.setVisible(false)
+                }
+            } else {
+                bounds.extend(marker.getPosition())
+                marker.setVisible(true)
+                countRes++
+            }
+        }
+
+        // Center map
+        map.fitBounds(bounds)
+        if (countRes <= 1) {
+            map.setZoom(8)
         }
     }
 

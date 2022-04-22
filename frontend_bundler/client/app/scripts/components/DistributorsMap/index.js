@@ -314,6 +314,12 @@ class DistributorsMap extends Component {
 
         // Remove loader
         this.removeLoader()
+
+        // Add Center map function as method, to handle filters
+        window.lbGMapLoaderDistributors = this.google
+
+        // Add Map to window object, to handle filters
+        window.lbMapDistributors = this.map
     }
 
 
@@ -350,6 +356,7 @@ class DistributorsMap extends Component {
                 lng: parseFloat(markerData.geo_location.lng)
             },
             map: this.map,
+            category: markerData.brands.map((brand) => { return brand.id }),
             icon: window.location.origin + '/wp-content/themes/caffeina-theme/assets/images/map/markers/marker.svg'
         })
 
