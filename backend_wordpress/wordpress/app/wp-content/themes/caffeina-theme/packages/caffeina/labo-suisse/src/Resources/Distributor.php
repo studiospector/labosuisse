@@ -80,11 +80,13 @@ class Distributor
                 [
                     'title' => __("Crescina in {$this->geo_location['country']}", 'labo-suisse-theme'),
                     'url' => "{$laboInTheWorldLinks['crescina']}#{$this->geo_location['country_short']}",
+                    'target' => '_blank',
                     'variants' => ['primary'],
                 ],
                 [
                     'title' => __("Filerina in {$this->geo_location['country']}", 'labo-suisse-theme'),
                     'url' => "{$laboInTheWorldLinks['filerina']}#{$this->geo_location['country_short']}",
+                    'target' => '_blank',
                     'variants' => ['primary'],
                 ]
             ]

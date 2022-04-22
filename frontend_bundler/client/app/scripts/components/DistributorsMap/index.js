@@ -377,8 +377,25 @@ class DistributorsMap extends Component {
 
         // Init new GMap Infowindow
         const infowindow = new this.google.maps.InfoWindow({
-            content: html
+            content: html,
+            // pixelOffset: new this.google.maps.Size(-350, 250),
+            // disableAutoPan: false,
         })
+
+        // add Event to handle more/less text
+        this.google.maps.event.addListener(infowindow, 'domready', () => {
+            const btnMore = qs('.js-infowindow-more-text')
+            const content = qs('.js-infowindow-content')
+
+            on(btnMore, 'click', (ev) => {
+                const btnMoreLabel = ev.target.closest('.button__label')
+
+                content.classList.toggle('is-full')
+
+                btnMoreLabel.innerText = (content.classList.contains('is-full')) ? btnMore.dataset.lessText : btnMore.dataset.moreText
+            })
+        })
+
         // Open GMap Infowindow on Marker click
         this.google.maps.event.addListener(marker, 'click', () => {
             if (this.prevInfowindow) {
