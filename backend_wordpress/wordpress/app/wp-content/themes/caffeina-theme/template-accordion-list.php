@@ -29,9 +29,11 @@ if (have_rows('lb_template_accordion_list')) {
                 $accordions[] = $row;
             endwhile;
         }
+
+        $accordion_id = get_sub_field('lb_template_accordion_list_id');
         
         $items[] = [
-            'id' => $count,
+            'id' => $accordion_id ? $accordion_id : $count,
             'icon' => get_sub_field('lb_template_accordion_list_icon'),
             'title' => get_sub_field('lb_template_accordion_list_title'),
             'content' => ($accordions) ? $accordions : []
