@@ -93,7 +93,7 @@ SEZIONI DA TERMINARE
 - √ T5 Single News
 - √ T5 Promozioni
 - √ T6 Store Locator
-- T10 Labo nel Mondo
+- √ T10 Labo nel Mondo
 
 - √ Filtri e Ricerche archivi
 - √ Gestione dinamica Footer
