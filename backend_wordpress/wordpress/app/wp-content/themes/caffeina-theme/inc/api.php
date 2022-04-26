@@ -16,13 +16,13 @@ function get_distributors(WP_REST_Request $request)
 
 function get_archive(WP_REST_Request $request)
 {
-    $posts = new Archive($request['postType']);
-
-    return $posts
+    $posts = (new Archive($request['postType']))
         ->page($request['page'])
         ->postsPerPage($request['posts_per_page'])
         ->addFilters($request['data'])
         ->get();
+
+    return rest_ensure_response($posts);
 }
 
 add_action( 'rest_api_init', function() {

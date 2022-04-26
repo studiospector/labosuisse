@@ -34,11 +34,11 @@ class Archive
         $hasPosts = $this->args['paged'] < $query->max_num_pages;
 
         if($totalPosts === 0) {
-            return json_encode([
+            return [
                 'totalPosts' => $totalPosts,
-                'posts' => $this->noResults(),
-                'hasPosts' => $hasPosts
-            ]);
+                'hasPosts' => $hasPosts,
+                'noResult' => $this->noResults(),
+            ];
         }
 
         $callback = str_replace('-','', $this->postType) . "ArchiveResponse";
@@ -47,11 +47,11 @@ class Archive
             $query->get_posts()
         );
 
-        return json_encode([
+        return [
             'totalPosts' => $totalPosts,
             'posts' => $items,
             'hasPosts' => $hasPosts
-        ]);
+        ];
     }
 
     public function page($page)
@@ -134,7 +134,7 @@ class Archive
                 $cta_title = __("Visualizza", "labo-suisse-theme");
             }
 
-            $card_content = Timber::compile('@PathViews/components/card.twig', [
+            $items[] = [
                 'images' => lb_get_images(get_post_thumbnail_id($post->ID)),
                 'date' => Carbon::createFromDate($post->post_date)->format('d/m/Y'),
                 'variants' => [$variant],
@@ -149,9 +149,7 @@ class Archive
                         'variants' => ['quaternary']
                     ]
                 ],
-            ]);
-
-            $items[] = "<div class=\"col-12 col-md-3\">$card_content</div>";
+            ];
         }
 
         return $items;
@@ -187,7 +185,7 @@ class Archive
             }
         }
 
-        return [Timber::compile('@PathViews/components/cards-grid-product-ordered.twig', ['items' => $items])];
+        return $items;
     }
 
     private function lbjobArchiveResponse($posts)
@@ -200,7 +198,7 @@ class Archive
             $isHeadquarter = $jobLocation['isHeadquarter'];
             $job_location_links = $jobLocation['jobLocationLinks'];
 
-            $card_content = Timber::compile('@PathViews/components/card.twig', [
+            $items[] = [
                 'infobox' => [
                     'subtitle' => $post->post_title,
                     'location' => (empty($job_location_links)) ? null : [
@@ -219,9 +217,7 @@ class Archive
                     ]
                 ],
                 'variants' => ['type-9']
-            ]);
-
-            $items[] = '<div class="lb-cards-grid__card col-12 col-lg-8 offset-lg-2">' . $card_content . '</div>';
+            ];
         }
 
         return $items;
@@ -235,11 +231,11 @@ class Archive
         $hasPosts = $this->args['paged'] < $query->max_num_pages;
 
         if($totalPosts === 0) {
-            return json_encode([
+            return [
                 'totalPosts' => $totalPosts,
                 'posts' => $this->noResults(),
                 'hasPosts' => $hasPosts
-            ]);
+            ];
         }
 
         $brands = [];
@@ -251,7 +247,7 @@ class Archive
                 continue;
             }
 
-            $card = Timber::compile('@PathViews/components/card.twig', [
+            $brands[$brand->term_id] = [
                 'images' => lb_get_images(get_field('lb_brand_image', $brand)),
                 'infobox' => [
                     'subtitle' => $brand->name,
@@ -263,25 +259,21 @@ class Archive
                     ] : null
                 ],
                 'variants' => ['type-10']
-            ]);
-
-            $brands[$brand->term_id] = "<div class=\"col-12 col-md-4\">$card</div>";
+            ];
         }
 
-        return json_encode([
+        return [
             'totalPosts' => $totalPosts,
             'posts' => array_values($brands),
             'hasPosts' => $hasPosts
-        ]);
+        ];
     }
 
     private function noResults()
     {
-        return '<div class="col-12">
-            <div class="lb-no-results">
-                <div class="infobox__title h2">'. __('Nessun risultato trovato', 'labo-suisse-theme') .'</div>
-                <p class="infobox__paragraph">'. __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme') .'</p>
-            </div>
-        </div>';
+        return [
+            'title' => __('Nessun risultato trovato', 'labo-suisse-theme'),
+            'paragraph' => __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme')
+        ];
     }
 }
