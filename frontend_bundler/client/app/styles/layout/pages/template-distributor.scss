@@ -1,4 +1,8 @@
 .lb-template-distributor {
+    &__map-wrapper {
+        position: relative;
+    }
+    
     &__map {
         min-height: 660px;
 
