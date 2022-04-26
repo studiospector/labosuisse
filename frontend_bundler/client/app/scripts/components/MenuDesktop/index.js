@@ -84,7 +84,7 @@ class MenuDesktop extends Component {
                     this.previousHeaderPaddingRight = this.header.style.paddingRight;
                     this.header.style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
 
-                    document.querySelector('.lb-statusbar').style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
+                    // document.querySelector('.lb-statusbar').style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
                 }
                 this.masterTL.clear();
                 this.activeMenu = submenu;
@@ -119,7 +119,7 @@ class MenuDesktop extends Component {
             .call(() => {
                 if (this.previousHeaderPaddingRight) {
                     this.header.style.paddingRight = `${this.previousHeaderPaddingRight}`;
-                    document.querySelector('.lb-statusbar').style.paddingRight = `${this.previousHeaderPaddingRight}`;
+                    // document.querySelector('.lb-statusbar').style.paddingRight = `${this.previousHeaderPaddingRight}`;
                     this.previousHeaderPaddingRight = null;
                 }
             })
