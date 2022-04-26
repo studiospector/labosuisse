@@ -2,7 +2,6 @@
 
 namespace Caffeina\LaboSuisse\Api\Archive;
 
-use Caffeina\LaboSuisse\Resources\Distributor as DistributorResource;
 use Carbon\Carbon;
 use Timber\Timber;
 use WP_Query;
@@ -48,11 +47,11 @@ class Archive
             $query->get_posts()
         );
 
-        return [
+        return json_encode([
             'totalPosts' => $totalPosts,
             'posts' => $items,
             'hasPosts' => $hasPosts
-        ];
+        ]);
     }
 
     public function page($page)
@@ -274,17 +273,6 @@ class Archive
             'posts' => array_values($brands),
             'hasPosts' => $hasPosts
         ]);
-    }
-
-    private function lbDistributorArchiveResponse($posts)
-    {
-        $distributors = [];
-
-        foreach ($posts as $post) {
-            $distributors[] = (new DistributorResource($post))->toArray();
-        }
-
-        return $distributors;
     }
 
     private function noResults()
