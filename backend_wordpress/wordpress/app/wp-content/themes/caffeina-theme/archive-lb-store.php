@@ -19,7 +19,7 @@ $context = [
             'required' => false,
             'autocomplete' => 'off',
             'buttonTypeNext' => 'button',
-            'class' => 'js-caffeina-store-locator-search',
+            'class' => 'js-caffeina-sl-search',
             'variants' => ['tertiary'],
         ]
     ],

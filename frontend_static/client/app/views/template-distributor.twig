@@ -1,0 +1,36 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-template-distributor' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Intro page #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Filters #}
+    {% if filters|length > 0 %}
+        {% include '@PathViews/components/filters.twig' with filters only %}
+        <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% endif %}
+
+    {# Map #}
+    <div class="lb-template-distributor__map-wrapper js-distributor-map-wrapper js-scrollbar-management">
+        <div class="lb-template-distributor__map js-distributor-map" data-map-country="{{ map.map_country }}" data-map-lang="{{ map.map_lang }}"></div>
+        <div class="caffeina-sl__loader caffeina-sl__loader--loading js-distributor-loader"></div>
+    </div>
+
+    {# Content #}
+    {% if content %}
+        <hr class="lb-separator lb-separator--big" data-variant="big">
+        <div class="lb-post-elements-formatted">
+            {{ content|raw }}
+        </div>
+    {% endif %}
+
+{% endblock %}

@@ -160,6 +160,7 @@ footer {
                 svg {
                     width: 26px;
                     height: 26px;
+                    color: map-get($colors, "black");
                 }
             }
         }

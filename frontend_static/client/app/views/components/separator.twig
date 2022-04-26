@@ -1,5 +1,8 @@
 {% set classes = [] %}
 {% set dataVariants = [] %}
+{% if container %}
+    {% set variants = variants|merge(['container']) %}
+{% endif %}
 {% for variant in variants|default([]) %}
   {% set classes = classes|merge(['lb-separator--' ~ variant]) %}
   {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}

@@ -7,13 +7,13 @@ import { Loader } from '@googlemaps/js-api-loader';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
 
 const ui = {
-    map: '.js-caffeina-store-locator-map',
-    list: '.js-caffeina-store-locator-list',
-    infowindowsWrapper: '.js-caffeina-store-locator-infowindows',
-    geolocation: '.js-caffeina-store-locator-geolocation',
-    search: '.js-caffeina-store-locator-search',
-    loader: '.js-caffeina-store-locator-loader',
-    notFound: '.js-caffeina-store-locator-notfound',
+    map: '.js-caffeina-sl-map',
+    list: '.js-caffeina-sl-list',
+    infowindowsWrapper: '.js-caffeina-sl-infowindows',
+    geolocation: '.js-caffeina-sl-geolocation',
+    search: '.js-caffeina-sl-search',
+    loader: '.js-caffeina-sl-loader',
+    notFound: '.js-caffeina-sl-notfound',
 }
 
 class StoreLocatorCaffeina extends Component {
@@ -232,6 +232,8 @@ class StoreLocatorCaffeina extends Component {
             // },
         }
 
+        window.getCustomScrollbar.destroy()
+
         // Google map Loader
         this.loader = new Loader({
             apiKey: 'AIzaSyCG7SmW_OVvWwj1ngGzqBdLhOGgpXTpBnM',
@@ -306,8 +308,8 @@ class StoreLocatorCaffeina extends Component {
         }
 
         // Add listener to open and close infowindow outside
-        on(qsa('.js-caffeina-store-locator-store-open'), 'click', this.openInfowindowOutsideDispatcher)
-        on(qsa('.js-caffeina-store-locator-store-close'), 'click', this.closeInfowindowOutside)
+        on(qsa('.js-caffeina-sl-store-open'), 'click', this.openInfowindowOutsideDispatcher)
+        on(qsa('.js-caffeina-sl-store-close'), 'click', this.closeInfowindowOutside)
 
         // Add a marker clusterer to manage the markers
         new MarkerClusterer({
@@ -398,7 +400,7 @@ class StoreLocatorCaffeina extends Component {
      */
     addStoreToList = (markerData, i) => {
         const infowindow = `
-            <div class="lb-store-locator__store caffeina-store-locator__store" data-store-lat="${markerData.geo_location.lat}" data-store-lng="${markerData.geo_location.lng}">
+            <div class="lb-store-locator__store caffeina-sl__store" data-store-lat="${markerData.geo_location.lat}" data-store-lng="${markerData.geo_location.lng}">
                 <div class="lb-store-locator__store__shield">
                     <span class="lb-icon lb-icon-shield-icon">
                         <svg aria-label="shield-icon" xmlns="http://www.w3.org/2000/svg">
@@ -411,7 +413,7 @@ class StoreLocatorCaffeina extends Component {
                     <p class="lb-store-locator__store__info__address p-small">${markerData.geo_location.address}</p>
                     <p class="lb-store-locator__store__info__opened p-small">Aperto fino alle 19.30${markerData.open_until}</p>
                 </div>
-                <div class="lb-store-locator__store__open js-caffeina-store-locator-store-open" data-store-id="${i}">
+                <div class="lb-store-locator__store__open js-caffeina-sl-store-open" data-store-id="${i}">
                     <span class="lb-icon lb-icon-close-circle">
                         <svg aria-label="close-circle" xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="#close-circle"></use>
@@ -432,8 +434,8 @@ class StoreLocatorCaffeina extends Component {
      */
     addInfowindowOutside = (markerData, i) => {
         const infowindow = `
-            <div class="lb-store-locator__infowindow caffeina-store-locator__infowindow" data-store-id="${i}">
-                <div class="lb-store-locator__infowindow__close js-caffeina-store-locator-store-close" data-store-id="${i}">
+            <div class="lb-store-locator__infowindow caffeina-sl__infowindow" data-store-id="${i}">
+                <div class="lb-store-locator__infowindow__close js-caffeina-sl-store-close" data-store-id="${i}">
                     <span class="lb-icon lb-icon-close-circle">
                         <svg aria-label="close-circle" xmlns="http://www.w3.org/2000/svg">
                             <use xlink:href="#close-circle"></use>
@@ -444,7 +446,7 @@ class StoreLocatorCaffeina extends Component {
                 <p class="lb-store-locator__infowindow__address p-small">${markerData.geo_location.address}</p>
                 <p class="lb-store-locator__infowindow__opened p-small">Aperto fino alle 19.30${markerData.open_until}</p>
                 <p class="lb-store-locator__infowindow__telephone p-small">N. di telefono: ${markerData.phone}</p>
-                <a class="button button-quaternary js-caffeina-store-locator-store-link" href="#" target="_blank" data-store-lat="${markerData.geo_location.lat}" data-store-lng="${markerData.geo_location.lng}">
+                <a class="button button-quaternary js-caffeina-sl-store-link" href="#" target="_blank" data-store-lat="${markerData.geo_location.lat}" data-store-lng="${markerData.geo_location.lng}">
                     <span class="button__label">Vai alle indicazioni</span>
                     <span class="lb-icon lb-icon-arrow-right">
                         <svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg">
@@ -467,7 +469,7 @@ class StoreLocatorCaffeina extends Component {
      * @param {EventListenerObject} ev Click event
      */
     openInfowindowOutsideDispatcher = (ev) => {
-        const open = ev.target.closest('.js-caffeina-store-locator-store-open')
+        const open = ev.target.closest('.js-caffeina-sl-store-open')
         const storeID = open.dataset.storeId
 
         this.openInfowindowOutside(storeID)
@@ -497,12 +499,12 @@ class StoreLocatorCaffeina extends Component {
     openInfowindowOutside = (storeID) => {
         // Select Infowindow to open
         const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindowsWrapper)
-        infowindow.classList.add('caffeina-store-locator__infowindow--open')
+        infowindow.classList.add('caffeina-sl__infowindow--open')
 
         // Hide Store list
-        this.ui.list.classList.add('caffeina-store-locator__list--hide')
+        this.ui.list.classList.add('caffeina-sl__list--hide')
         // Show Infowindows list
-        this.ui.infowindowsWrapper.classList.add('caffeina-store-locator__infowindows--show')
+        this.ui.infowindowsWrapper.classList.add('caffeina-sl__infowindows--show')
 
         // Bound map on Store
         this.map.setCenter({
@@ -519,14 +521,14 @@ class StoreLocatorCaffeina extends Component {
      * @param {EventListenerObject} ev Click event
      */
     closeInfowindowOutside = (ev) => {
-        const close = ev.target.closest('.js-caffeina-store-locator-store-close')
+        const close = ev.target.closest('.js-caffeina-sl-store-close')
         const storeID = close.dataset.storeId
         const infowindow = qs(`[data-store-id="${storeID}"]`, this.ui.infowindowsWrapper)
 
-        infowindow.classList.remove('caffeina-store-locator__infowindow--open')
+        infowindow.classList.remove('caffeina-sl__infowindow--open')
 
-        this.ui.list.classList.remove('caffeina-store-locator__list--hide')
-        this.ui.infowindowsWrapper.classList.remove('caffeina-store-locator__infowindows--show')
+        this.ui.list.classList.remove('caffeina-sl__list--hide')
+        this.ui.infowindowsWrapper.classList.remove('caffeina-sl__infowindows--show')
 
         // Re-center map
         // this.centerMap(this.map)
@@ -538,17 +540,17 @@ class StoreLocatorCaffeina extends Component {
      */
     closeAllInfowindowOutside = () => {
         // Get all Infowindows
-        const infowindows = qsa('.caffeina-store-locator__infowindow', this.ui.infowindowsWrapper)
+        const infowindows = qsa('.caffeina-sl__infowindow', this.ui.infowindowsWrapper)
 
         // Close all Infowindows 
         infowindows.forEach(el => {
-            el.classList.remove('caffeina-store-locator__infowindow--open')
+            el.classList.remove('caffeina-sl__infowindow--open')
         });
 
         // Show Store list
-        this.ui.list.classList.remove('caffeina-store-locator__list--hide')
+        this.ui.list.classList.remove('caffeina-sl__list--hide')
         // Hide Infowindows list
-        this.ui.infowindowsWrapper.classList.remove('caffeina-store-locator__infowindows--show')
+        this.ui.infowindowsWrapper.classList.remove('caffeina-sl__infowindows--show')
     }
 
 
@@ -563,7 +565,7 @@ class StoreLocatorCaffeina extends Component {
         // Init new GMap Infowindow
         const infowindow = new this.google.maps.InfoWindow({
             content: `
-                <div class="caffeina-store-locator__map__infowindow">
+                <div class="caffeina-sl__map__infowindow">
                     ${markerData.store}
                 </div>
             `
@@ -587,7 +589,7 @@ class StoreLocatorCaffeina extends Component {
         let notFounded = []
 
         // Get all Store list items
-        const elems = qsa('.caffeina-store-locator__store', this.ui.list)
+        const elems = qsa('.caffeina-sl__store', this.ui.list)
 
         // Filter Store list items based on Marker currently visible on Map
         for (let i = 0; i < this.map.markers.length; i++) {
@@ -626,9 +628,9 @@ class StoreLocatorCaffeina extends Component {
 
         // Add no results Message
         if (founded.length <= 0) {
-            this.ui.notFound.classList.add('caffeina-store-locator__notfound--show')
+            this.ui.notFound.classList.add('caffeina-sl__notfound--show')
         } else {
-            this.ui.notFound.classList.remove('caffeina-store-locator__notfound--show')
+            this.ui.notFound.classList.remove('caffeina-sl__notfound--show')
         }
     }
 
@@ -750,7 +752,7 @@ class StoreLocatorCaffeina extends Component {
      * Set link to GMap or Apple Maps APP based on device
      */
     setOpenMapAppLink = () => {
-        const buttons = qsa('.js-caffeina-store-locator-store-link')
+        const buttons = qsa('.js-caffeina-sl-store-link')
 
         buttons.forEach((el) => {
             let platform = navigator?.userAgentData?.platform || navigator?.platform
@@ -773,7 +775,7 @@ class StoreLocatorCaffeina extends Component {
      * Add Loading Overlay to Map
      */
     addLoader = () => {
-        this.ui.loader.classList.add('caffeina-store-locator__loader--loading')
+        this.ui.loader.classList.add('caffeina-sl__loader--loading')
     }
 
 
@@ -781,7 +783,7 @@ class StoreLocatorCaffeina extends Component {
      * Remove Loading Overlay to Map
      */
     removeLoader = () => {
-        this.ui.loader.classList.remove('caffeina-store-locator__loader--loading')
+        this.ui.loader.classList.remove('caffeina-sl__loader--loading')
     }
 }
 

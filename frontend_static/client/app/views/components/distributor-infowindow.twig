@@ -1,0 +1,48 @@
+<div class="lb-template-distributor__map__infowindow">
+    <div class="lb-template-distributor__map__infowindow__header">
+        <h4 class="infobox__subtitle">{{ geo_location.country }}</h4>
+    </div>
+    <div class="lb-template-distributor__map__infowindow__content">
+        <div class="lb-template-distributor__map__infowindow__brands">
+            {% for brand in brands %}
+                {% include '@PathViews/components/button.twig' with {
+                    title: brand.name,
+                    type: 'button',
+                    variants: ['link']
+                } only %}
+            {% endfor %}
+        </div>
+        <div class="infobox">
+            <h3 class="infobox__subtitle">{{ title }}</h3>
+            <p class="infobox__paragraph infobox__paragraph--small">
+                {{ geo_location.address }}<br>
+                {% if phone %}
+                    <a href="tel:{{ phone }}">{{ phone }}</a><br>
+                {% endif %}
+                {% if email %}
+                    <a href="mailto:{{ email }}">{{ email }}</a>
+                {% endif %}
+            </p>
+            <div class="p infobox__paragraph js-infowindow-content">{{ content }}</div>
+            {% include '@PathViews/components/button.twig' with {
+                title: 'Leggi di più',
+                type: 'button',
+                class: 'lb-template-distributor__map__infowindow__more-text js-infowindow-more-text',
+                attributes: ['data-more-text="Leggi di più"', 'data-less-text="Vedi meno dettagli"'],
+                variants: ['link', 'small']
+            } only %}
+        </div>
+        {% if links|length > 0 %}
+            <div class="links-list">
+                {% for item in links %}
+                    <div class="links-list__item">
+                        <h6 class="links-list__label">{{ item.label }}</h6>
+                        {% for link in item.links %}
+                            {% include '@PathViews/components/button.twig' with link only %}
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>

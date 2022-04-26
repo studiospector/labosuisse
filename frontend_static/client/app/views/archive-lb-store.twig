@@ -23,21 +23,21 @@
     <hr class="lb-separator lb-separator--medium" data-variant="medium">
 
     {# Store locator #}
-    <div class="lb-store-locator caffeina-store-locator js-caffeina-store-locator js-store-locator">
+    <div class="lb-store-locator caffeina-sl js-store-locator js-caffeina-sl">
         <div class="row">
             <div class="lb-store-locator__left-wrapper col-12 col-lg-4">
                 <div class="lb-store-locator__filter">
                     <div class="lb-store-locator__filter__search">
                         {% include '@PathViews/components/fields/input.twig' with store_locator.search only %}
                     </div>
-                    <div class="lb-geolocation js-caffeina-store-locator-geolocation">
+                    <div class="lb-geolocation js-caffeina-sl-geolocation">
                         {% include '@PathViews/components/icon.twig' with {name: 'geolocation'} %}
                     </div>
                 </div>
-                <div class="lb-store-locator__list-wrapper caffeina-store-locator__list-wrapper">
-                    <div class="caffeina-store-locator__notfound js-caffeina-store-locator-notfound">Nessuno Store trovato</div>
-                    <div class="lb-store-locator__list caffeina-store-locator__list js-caffeina-store-locator-list"></div>
-                    <div class="caffeina-store-locator__infowindows js-caffeina-store-locator-infowindows"></div>
+                <div class="lb-store-locator__list-wrapper caffeina-sl__list-wrapper">
+                    <div class="caffeina-sl__notfound js-caffeina-sl-notfound">Nessuno Store trovato</div>
+                    <div class="lb-store-locator__list caffeina-sl__list js-caffeina-sl-list js-scrollbar-management"></div>
+                    <div class="caffeina-sl__infowindows js-caffeina-sl-infowindows"></div>
                 </div>
                 <div class="lb-store-locator__card">
                     {% include '@PathViews/components/card.twig' with card only %}
@@ -45,7 +45,7 @@
             </div>
             <div class="lb-store-locator__right-wrapper col-12 col-lg-8">
                 <div class="lb-store-locator__map-wrapper">
-                    <div class="lb-store-locator__map js-caffeina-store-locator-map" data-map-country="{{ store_locator.map_country }}" data-map-lang="{{ store_locator.map_lang }}"></div>
+                    <div class="lb-store-locator__map js-caffeina-sl-map js-scrollbar-management" data-map-country="{{ store_locator.map_country }}" data-map-lang="{{ store_locator.map_lang }}"></div>
                     <div class="lb-store-locator__card">
                         {% include '@PathViews/components/card.twig' with card only %}
                     </div>
@@ -53,7 +53,9 @@
             </div>
         </div>
 
-        <div class="caffeina-store-locator__loader caffeina-store-locator__loader--loading js-caffeina-store-locator-loader"></div>
+        <div class="caffeina-sl__loader caffeina-sl__loader--loading js-caffeina-sl-loader">
+            <div class="lb-loader-spinner"></div>
+        </div>
     </div>
 
 {% endblock %}

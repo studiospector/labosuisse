@@ -1,0 +1,33 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-template-accordion-list' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Intro page #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+
+    {# Accordions #}
+    {% if list.items|length > 0 %}
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-md-10 offset-md-1">
+                    {% include '@PathViews/components/accordion.twig' with list only %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {# Content #}
+    {% if content %}
+        <hr class="lb-separator lb-separator--big" data-variant="big">
+        {{ content|raw }}
+    {% endif %}
+
+{% endblock %}

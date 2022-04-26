@@ -28,6 +28,8 @@ import OpenMapAppLink from './OpenMapAppLink'
 import Geolocation from './Geolocation'
 import Filters from './Filters'
 import Loader from './Loader'
+import DistributorsMap from './DistributorsMap'
+import ScrollbarManagement from './ScrollbarManagement'
 
 const components = {
     scrollbar: {
@@ -121,7 +123,7 @@ const components = {
         optional: true
     },
     storeLocatorCaffeina: {
-        selector: '.js-caffeina-store-locator',
+        selector: '.js-caffeina-sl',
         type: StoreLocatorCaffeina,
         optional: true
     },
@@ -148,6 +150,16 @@ const components = {
     loader: {
         selector: '.js-loader',
         type: Loader,
+        optional: true
+    },
+    distributorsMap: {
+        selector: '.js-distributor-map-wrapper',
+        type: DistributorsMap,
+        optional: true
+    },
+    scrollbarManagement: {
+        selector: '.js-scrollbar-management',
+        type: ScrollbarManagement,
         optional: true
     },
 }
