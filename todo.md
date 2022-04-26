@@ -73,13 +73,13 @@ BUGFIX
 - √ variante testo bianco nella hero e carousel hero
 - √ resize immagini prodotti
 
-- caricamento store locator
+- √ caricamento store locator
 - fix card filtrate
 
 - refactor con template archivi
 - refactor componente separatore
 - refactor api call con autenticazione e url da .env
-- refactor classi store locator base
+- √ refactor classi store locator base
 
 
 
