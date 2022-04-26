@@ -17,34 +17,8 @@
     transition: all .2s ease-in-out;
     transition-delay: .6s;
 
-    &__spinner {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        position: relative;
-        visibility: hidden;
-        opacity: 0;
-        transition: all .2s ease-in-out;
+    .lb-loader-spinner {
         transition-delay: .3s;
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 50%;
-            border: 2px solid rgba(0, 0, 0, 0.05);
-        }
-
-        &::before {
-            border-right: 2px solid map-get($colors, "secondary");
-            animation: spin 1s 0s linear infinite;
-            // animation: spin 1s 0.3s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
-            // animation: spin 1s 0.15s ease-in-out infinite;
-        }
     }
 
     &--loading {
@@ -52,12 +26,10 @@
         opacity: 1;
         transition: all .2s ease-in-out;
 
-        .lb-loader {
-            &__spinner {
-                visibility: visible;
-                opacity: 1;
-                transition: all .2s ease-in-out;
-            }
+        .lb-loader-spinner {
+            visibility: visible;
+            opacity: 1;
+            transition: all .2s ease-in-out;
         }
     }
 
@@ -66,11 +38,38 @@
         opacity: 1;
         transition: all .2s ease-in-out;
 
-        .lb-loader {
-            &__spinner {
-                display: none;
-            }
+        .lb-loader-spinner {
+            display: none;
         }
+    }
+}
+
+
+
+.lb-loader-spinner {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    position: relative;
+    transition: all .2s ease-in-out;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+        border-radius: 50%;
+        border: 2px solid rgba(0, 0, 0, 0.05);
+    }
+
+    &::before {
+        border-right: 2px solid map-get($colors, "secondary");
+        animation: spin 1s 0s linear infinite;
+        // animation: spin 1s 0.3s cubic-bezier(0.46, 0.03, 0.52, 0.96) infinite;
+        // animation: spin 1s 0.15s ease-in-out infinite;
     }
 }
 
