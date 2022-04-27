@@ -135,13 +135,14 @@ class Archive
             }
 
             $items[] = [
+                'col_classes' => ['col-12', 'col-md-3'], // Used only in JS for setting col Grid
                 'images' => lb_get_images(get_post_thumbnail_id($post->ID)),
                 'date' => Carbon::createFromDate($post->post_date)->format('d/m/Y'),
                 'variants' => [$variant],
                 'infobox' => [
                     'image' => $image,
                     'subtitle' => $post->post_title,
-                    'paragraph' => $post->post_excerpt,
+                    'paragraph' => get_the_excerpt($post->ID),
                     'cta' => [
                         'title' => $cta_title,
                         'url' => get_permalink($post->ID),
@@ -181,7 +182,7 @@ class Archive
                     ];
                 }
 
-                $items[$brand->term_id]['products'][] = Timber::get_post($post->ID);
+                $items[$brand->term_id]['products'][] = Timber::compile('@PathViews/woo/partials/tease-product.twig', ['post' => Timber::get_post($post->ID)]);
             }
         }
 
@@ -199,6 +200,7 @@ class Archive
             $job_location_links = $jobLocation['jobLocationLinks'];
 
             $items[] = [
+                'col_classes' => ['lb-cards-grid__card', 'col-12', 'col-lg-8', 'offset-lg-2'], // Used only in JS for setting col Grid
                 'infobox' => [
                     'subtitle' => $post->post_title,
                     'location' => (empty($job_location_links)) ? null : [
@@ -209,7 +211,7 @@ class Archive
                         'label' => __('Ambito:', 'labo-suisse-theme'),
                         'value' => get_field('lb_job_scope', $post->ID)
                     ],
-                    'paragraph' => $post->post_excerpt,
+                    'paragraph' => get_the_excerpt($post->ID),
                     'cta' => [
                         'url' => get_permalink($post->ID),
                         'title' => __('Leggi di più', 'labo-suisse-theme'),
@@ -248,6 +250,7 @@ class Archive
             }
 
             $brands[$brand->term_id] = [
+                'col_classes' => ['col-12', 'col-md-4'], // Used only in JS for setting col Grid
                 'images' => lb_get_images(get_field('lb_brand_image', $brand)),
                 'infobox' => [
                     'subtitle' => $brand->name,

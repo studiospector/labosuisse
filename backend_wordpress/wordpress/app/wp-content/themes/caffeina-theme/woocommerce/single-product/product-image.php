@@ -25,42 +25,8 @@ if (!function_exists('wc_get_gallery_image_html')) {
 
 global $product;
 
-/*
-$post_thumbnail_id = $product->get_image_id();
-
-if ($post_thumbnail_id) {
-    $html = lb_wc_get_gallery_image_html($post_thumbnail_id, true);
-} else {
-    $html  = '<div class="lb-product-gallery__image--placeholder">';
-    $html .= sprintf('<img src="%s" alt="%s" class="wp-post-image" />', esc_url(wc_placeholder_img_src('woocommerce_single')), esc_html__('Awaiting product image', 'woocommerce'));
-    $html .= '</div>';
-}
-
-
 ?>
-<div class="lb-product-gallery js-lb-product-gallery">
-    <div class="swiper lb-product-gallery-slider">
-        <div class="swiper-wrapper">
-            <?php
-            echo apply_filters('woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
-            do_action('woocommerce_product_thumbnails');
-            ?>
-        </div>
-        <div class="swiper-pagination"></div>
-        <!-- <div class="swiper-button-next"></div>
-        <div class="swiper-button-prev"></div> -->
-    </div>
-    <div thumbsSlider="" class="swiper lb-product-gallery-thumb">
-        <div class="swiper-wrapper">
-            <?php
-            echo apply_filters('woocommerce_single_product_image_thumbnail_html', $html, $post_thumbnail_id); // phpcs:disable WordPress.XSS.EscapeOutput.OutputNotEscaped
-            do_action('woocommerce_product_thumbnails');
-            ?>
-        </div>
-    </div>
-</div>
-<?php
-*/ ?>
+
 <div class="lb-product-gallery js-lb-product-gallery">
 
     <div class="lb-product-gallery__desktop">

@@ -2,6 +2,7 @@ import Component from '@okiba/component'
 import { qs, on, off } from '@okiba/dom'
 
 import axiosClient from '../HTTPClient'
+import templateLoader from '../../utils/templateLoader';
 
 import DOMPurify from 'dompurify'
 
@@ -31,6 +32,12 @@ class Filters extends Component {
         this.loadMore = qs('.js-load-more')
         this.loadMoreBtn = (this.loadMore) ? qs('.button', this.loadMore) : null
 
+        this.cardTemplate = null
+        this.noResultsTemplate = null
+        this.cardsGridProductOrderedTemplate = null
+
+        this.getTemplates()
+
         this.payload = {
             postType: this.el.dataset.postType,
             page: 1,
@@ -47,6 +54,16 @@ class Filters extends Component {
         if (this.ui.searchForm) {
             on(this.ui.searchForm, 'submit', this.searchFormValidation)
         }
+    }
+
+    getTemplates = async () => {
+        const cardTemplate = await templateLoader('components/card.twig')
+        const noResultsTemplate = await templateLoader('components/no-results.twig')
+        const cardsGridProductOrderedTemplate = await templateLoader('components/cards-grid-product-ordered.twig')
+        
+        this.cardTemplate = cardTemplate
+        this.noResultsTemplate = noResultsTemplate
+        this.cardsGridProductOrderedTemplate = cardsGridProductOrderedTemplate
     }
 
     parseArgs = (ev) => {
@@ -74,19 +91,17 @@ class Filters extends Component {
         this.payload.page = 1
 
         // Render for Filter type Grid
-        if (this.filterType == 'grid') {
+        if (this.filterType == 'postDefault' || this.filterType == 'product') {
             this.getData().then((res) => {
                 this.cardsGrid.innerHTML = ''
                 if (this.pagination) {
                     this.pagination.remove()
                 }
-                this.renderTypeGrid(JSON.parse(res))
-
-            }).then(() => {
-                this.removeLoader()
-                window.getCustomScrollbar.update()
+                this.renderTypeGrid(res).then(() => {
+                    this.removeLoader()
+                    window.getCustomScrollbar.update()
+                })
             })
-            
         // Render for Filter type Map
         } else if (this.filterType == 'map-distributor') {
             this.renderTypeMapDistributor(args)
@@ -125,7 +140,7 @@ class Filters extends Component {
         return res
     }
 
-    renderTypeGrid = (payload) => {
+    renderTypeGrid = async (payload) => {
         const items = payload.posts
 
         if (this.results) {
@@ -134,11 +149,19 @@ class Filters extends Component {
         }
 
         if (payload.totalPosts > 0) {
-            items.forEach(item => {
-                this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(item))
-            })
+            if (this.filterType == 'product') {
+                const htmlCardsGridProductOrdered = this.cardsGridProductOrderedTemplate.render({isFilter: true, items: payload.posts})
+                this.cardsGrid.insertAdjacentHTML( 'beforeend', DOMPurify.sanitize(htmlCardsGridProductOrdered, { ADD_TAGS: ['use'] } ))
+            } else {
+                items.map(item => {
+                    const htmlCard = this.cardTemplate.render(item)
+                    const classes = item.col_classes.join(' ')
+                    this.cardsGrid.insertAdjacentHTML( 'beforeend', DOMPurify.sanitize(`<div class="${classes}">${htmlCard}</div>`, { ADD_TAGS: ['use'] } ))
+                })
+            }
         } else {
-            this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(items))
+            const htmlNoResults = this.noResultsTemplate.render(payload.noResult)
+            this.cardsGrid.insertAdjacentHTML('beforeend', DOMPurify.sanitize(htmlNoResults))
         }
 
         if (this.loadMore) {
