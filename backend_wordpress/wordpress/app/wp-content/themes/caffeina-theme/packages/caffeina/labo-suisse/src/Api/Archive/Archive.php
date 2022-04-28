@@ -2,6 +2,9 @@
 
 namespace Caffeina\LaboSuisse\Api\Archive;
 
+use Caffeina\LaboSuisse\Resources\Posts\Brand;
+use Caffeina\LaboSuisse\Resources\Posts\Magazine;
+use Caffeina\LaboSuisse\Resources\Posts\Product;
 use Carbon\Carbon;
 use Timber\Timber;
 use WP_Query;
@@ -122,35 +125,7 @@ class Archive
         $items = [];
 
         foreach ($posts as $post) {
-            $variant = 'type-2';
-            $image = null;
-            $cta_title = __("Leggi l'articolo", "labo-suisse-theme");
-
-            $typology = get_field('lb_post_typology', $post->ID);
-
-            if ($typology == 'press') {
-                $variant = 'type-6';
-                $image = get_field('lb_post_press_logo', $post->ID);
-                $cta_title = __("Visualizza", "labo-suisse-theme");
-            }
-
-            $items[] = [
-                'col_classes' => ['col-12', 'col-md-3'], // Used only in JS for setting col Grid
-                'images' => lb_get_images(get_post_thumbnail_id($post->ID)),
-                'date' => Carbon::createFromDate($post->post_date)->format('d/m/Y'),
-                'variants' => [$variant],
-                'infobox' => [
-                    'image' => $image,
-                    'subtitle' => $post->post_title,
-                    'paragraph' => get_the_excerpt($post->ID),
-                    'cta' => [
-                        'title' => $cta_title,
-                        'url' => get_permalink($post->ID),
-                        'iconEnd' => ['name' => 'arrow-right'],
-                        'variants' => ['quaternary']
-                    ]
-                ],
-            ];
+            $items[] = (new Magazine($post))->toArray();
         }
 
         return $items;
@@ -159,27 +134,13 @@ class Archive
     private function productArchiveResponse($posts)
     {
         $items = [];
+
         foreach ($posts as $post) {
-            $brand = get_the_terms($post->ID, 'lb-brand');
-
+            $brand = get_the_terms($post->ID, 'lb-brand')[0] ?? null;
             if ($brand) {
-                $brand = $brand[0];
-
                 if (!isset($items[$brand->term_id])) {
                     $items[$brand->term_id] = [];
-                    $items[$brand->term_id]['brand_card'] = [
-                        'color' => get_field('lb_brand_color', $brand),
-                        'infobox' => [
-                            'subtitle' => $brand->name,
-                            'paragraph' => $brand->description,
-                            'cta' => [
-                                'url' => get_term_link($brand),
-                                'title' => __('Scopri il brand', 'labo-suisse-theme'),
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-8']
-                    ];
+                    $items[$brand->term_id]['brand_card'] = Product::brandCard($brand);
                 }
 
                 $items[$brand->term_id]['products'][] = Timber::compile('@PathViews/woo/partials/tease-product.twig', ['post' => Timber::get_post($post->ID)]);
@@ -243,26 +204,12 @@ class Archive
         $brands = [];
         foreach ($query->get_posts() as $post) {
             $brand = get_the_terms($post->ID, 'lb-brand')[0];
-            $brand_page = get_field('lb_brand_page', $brand);
 
             if(isset($brands[$brand->term_id])) {
                 continue;
             }
 
-            $brands[$brand->term_id] = [
-                'col_classes' => ['col-12', 'col-md-4'], // Used only in JS for setting col Grid
-                'images' => lb_get_images(get_field('lb_brand_image', $brand)),
-                'infobox' => [
-                    'subtitle' => $brand->name,
-                    'paragraph' => $brand->description,
-                    'cta' => !empty($brand_page) ? [
-                        'url' => get_permalink($brand_page),
-                        'title' => __('Vai al brand', 'labo-suisse-theme'),
-                        'variants' => ['quaternary']
-                    ] : null
-                ],
-                'variants' => ['type-10']
-            ];
+            $brands[$brand->term_id] = (new Brand($brand))->toArray();
         }
 
         return [
