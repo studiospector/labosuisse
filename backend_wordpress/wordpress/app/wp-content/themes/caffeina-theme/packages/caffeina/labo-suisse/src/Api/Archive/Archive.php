@@ -204,26 +204,12 @@ class Archive
         $brands = [];
         foreach ($query->get_posts() as $post) {
             $brand = get_the_terms($post->ID, 'lb-brand')[0];
-            $brand_page = get_field('lb_brand_page', $brand);
 
             if(isset($brands[$brand->term_id])) {
                 continue;
             }
+
             $brands[$brand->term_id] = (new Brand($brand))->toArray();
-            $brands[$brand->term_id] = [
-                'col_classes' => ['col-12', 'col-md-4'], // Used only in JS for setting col Grid
-                'images' => lb_get_images(get_field('lb_brand_image', $brand)),
-                'infobox' => [
-                    'subtitle' => $brand->name,
-                    'paragraph' => $brand->description,
-                    'cta' => !empty($brand_page) ? [
-                        'url' => get_permalink($brand_page),
-                        'title' => __('Vai al brand', 'labo-suisse-theme'),
-                        'variants' => ['quaternary']
-                    ] : null
-                ],
-                'variants' => ['type-10']
-            ];
         }
 
         return [
