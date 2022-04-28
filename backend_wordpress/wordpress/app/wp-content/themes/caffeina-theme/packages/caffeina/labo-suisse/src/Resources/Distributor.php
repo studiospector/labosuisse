@@ -3,9 +3,12 @@
 namespace Caffeina\LaboSuisse\Resources;
 
 use Caffeina\LaboSuisse\Option\Option;
+use Caffeina\LaboSuisse\Resources\Traits\Arrayable;
 
 class Distributor
 {
+    use Arrayable;
+
     public $title;
     public $content;
     public $phone;
@@ -32,17 +35,6 @@ class Distributor
         }
 
         $this->links[] = $this->getLaboInTheWorldLinks();
-    }
-
-    public function toArray()
-    {
-        $attributes = [];
-
-        foreach (get_object_vars($this) as $key => $value) {
-            $attributes[$key] = $value;
-        }
-
-        return $attributes;
     }
 
     private function getBrands($post)
@@ -92,5 +84,4 @@ class Distributor
             ]
         ];
     }
-
 }
