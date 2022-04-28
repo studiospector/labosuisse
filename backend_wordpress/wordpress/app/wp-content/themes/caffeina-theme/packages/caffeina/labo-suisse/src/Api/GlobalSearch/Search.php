@@ -2,6 +2,7 @@
 
 namespace Caffeina\LaboSuisse\Api\GlobalSearch;
 
+use Caffeina\LaboSuisse\Resources\Posts\Brand;
 use Caffeina\LaboSuisse\Resources\Posts\Faq;
 use Caffeina\LaboSuisse\Resources\Posts\Magazine;
 use Caffeina\LaboSuisse\Resources\Posts\Product;
@@ -19,7 +20,12 @@ class Search
 
     public function get()
     {
-        return $this->getArchive();
+        $items = array_merge(
+            $this->getArchive(),
+            $this->getBrands()
+        );
+
+        return rest_ensure_response($items);
     }
 
     public function setSearch($search)
@@ -31,6 +37,12 @@ class Search
 
     private function getArchive()
     {
+        $totalItems = [
+            'post' => 0,
+            'faq' => 0,
+            'product' => 0
+        ];
+
         $items = [];
 
         $query = new \WP_Query([
@@ -43,29 +55,39 @@ class Search
         $posts = $query->get_posts();
 
         foreach ($posts as $post) {
-            switch (get_post_type($post)){
+            switch (get_post_type($post)) {
                 case 'post':
-                   $items['post'][] = (new Magazine($post))->toArray();
-                   break;
+                    $items['post']['totalItems'] = ++$totalItems['post'];
+                    $items['post']['items'][] = (new Magazine($post))->toArray();
+                    break;
                 case 'lb-faq':
-                    $items['faq'][] = (new Faq($post))->toArray();
+                    $items['faq']['totalItems'] = ++$totalItems['faq'];
+                    $items['faq']['items'][] = (new Faq($post))->toArray();
                     break;
                 case 'product':
+                    $items['products']['totalItems'] = ++$totalItems['product'];
                     $items = $this->getProducts($post, $items);
                     break;
             }
         }
 
-        return rest_ensure_response($items);
+        return $items;
     }
 
     private function getBrands()
     {
+        $items = [];
+        $count = 0;
         $brands = lb_get_brands([
             'name__like' => $this->search
         ]);
 
+        foreach ($brands as $brand) {
+            $items['brands']['totalItems'] = ++$count;
+            $items['brands']['items'][] = (new Brand($brand))->toArray();
+        }
 
+        return $items;
     }
 
     /**
