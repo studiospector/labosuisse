@@ -111,6 +111,7 @@ class Esigenza extends BasePage
 
         $payload = [
             'filters' => [
+                'filter_type' => 'product',
                 'post_type' => 'product',
                 'posts_per_page' => -1,
                 'containerized' => false,

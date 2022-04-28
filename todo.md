@@ -74,7 +74,7 @@ BUGFIX
 - √ resize immagini prodotti
 
 - √ caricamento store locator
-- fix card filtrate
+- √ fix card filtrate
 
 - refactor con template archivi
 - refactor componente separatore

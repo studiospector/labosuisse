@@ -1,4 +1,4 @@
-{% set filterType = filter_type|default('grid') %}
+{% set filterType = filter_type|default('postDefault') %}
 
 <div class="lb-filters{{ (containerized) ? '' : ' container' }} js-filters"
     {{ post_type ? ' data-post-type="' ~ post_type ~ '"' : '' }}
