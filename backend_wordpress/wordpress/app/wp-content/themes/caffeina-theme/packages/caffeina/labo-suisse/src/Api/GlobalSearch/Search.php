@@ -25,7 +25,7 @@ class Search
             $this->getBrands()
         );
 
-        return rest_ensure_response($items);
+        return $items;
     }
 
     public function setSearch($search)
