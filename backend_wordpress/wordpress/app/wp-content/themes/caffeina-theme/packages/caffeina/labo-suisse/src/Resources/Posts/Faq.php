@@ -13,7 +13,7 @@ class Faq
 
     public $images;
     public $infobox;
-    public $variants = 'type-7';
+    public $variants = ['type-7'];
 
     public function __construct($post)
     {
