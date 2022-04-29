@@ -1,15 +1,25 @@
 import Component from '@okiba/component'
-import { qs } from '@okiba/dom'
+import { qs, on } from '@okiba/dom'
+
+import { getHeaderFullHeight } from '../../utils/headerHeight'
 
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
+const ui = {
+    button: '.lb-header-sticky-product__button'
+}
+
 class HeaderProduct extends Component {
 
     constructor({ options, ...props }) {
-        super({ ...props })
+        super({ ...props, ui })
+
+        this.customScrollbar = window.getCustomScrollbar
+
+        this.fullHeaderHeight = getHeaderFullHeight()
 
         this.elemHeight = this.el.getBoundingClientRect().height
 
@@ -29,6 +39,8 @@ class HeaderProduct extends Component {
         // })
 
         this.animation()
+
+        on(this.ui.button, 'click', this.scrollToAddToCart)
     }
 
     animation = () => {
@@ -70,6 +82,28 @@ class HeaderProduct extends Component {
                 this.el.style.top = `${top}px`
             }
         }
+    }
+
+    scrollToAddToCart = (ev) => {
+        ev.stopPropagation()
+        const scrollToSection = qs('#lb-product-add-to-cart')
+        const addToCartButton = qs('.single_add_to_cart_button')
+        this.customScrollbar.scrollTo(scrollToSection, {
+            offset: -this.fullHeaderHeight,
+            callback: () => {
+                const timeline = gsap.timeline()
+                timeline.to(addToCartButton, {
+                    scale: 1.2,
+                    ease: "power2.inOut",
+                    duration: 0.8,
+                })
+                timeline.to(addToCartButton, {
+                    scale: 1,
+                    ease: "power2.inOut",
+                    duration: 0.8,
+                })
+            }
+        })
     }
 }
 
