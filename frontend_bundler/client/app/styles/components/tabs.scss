@@ -1,0 +1,44 @@
+.lb-tabs {
+    overflow: hidden;
+
+    &__nav {
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        border: 1px solid map-get($colors, "grey-2");
+        white-space: nowrap;
+        overflow: auto;
+    }
+
+    &__tab {
+        margin-right: 60px;
+        padding: 10px 0;
+        font-weight: 400;
+        color: map-get($colors, "primary-dark-1");
+        transition: color 0.2s;
+    
+        &:hover,
+        &.is-active {
+            color: map-get($colors, "black");
+        }
+    
+        &.is-active {
+            border-bottom: 4px solid map-get($colors, "secondary");
+            cursor: default;
+        }
+    
+        &:hover:not(.is-active) {
+            cursor: pointer;
+        }
+    }
+
+    &__content {
+        padding-top: 40px;
+    }
+
+    &__pane {
+        &:not(.is-active) {
+            display: none;
+        }
+    }
+}

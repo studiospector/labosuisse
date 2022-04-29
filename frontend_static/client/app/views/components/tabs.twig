@@ -1,0 +1,31 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-tabs--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+<div class="lb-tabs{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-tabs">
+    <div class="lb-tabs__wrap">
+        <nav class="lb-tabs__nav">
+            {% for tab in tabs|default([]) %}
+                <div class="lb-tabs__tab{{ loop.index == 1 ? ' is-active' : '' }}" data-target="{{ tab.id }}">
+                    {{ tab.head.label }}
+                    {{ (tab.head.count) ? '(' ~ tab.head.count ~ ')' : '' }}
+                </div>
+            {% endfor %}
+        </nav>
+        <div class="lb-tabs__content">
+            {% for tab in tabs|default([]) %}
+                <div id="{{ tab.id }}" class="lb-tabs__pane{{ loop.index == 1 ? ' is-active' : '' }}">
+                    {% for item in tab.entries %}
+                        {% if item.type == 'infobox' %}
+                            {% include '@PathViews/components/infobox.twig' with item.data only %} 
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
