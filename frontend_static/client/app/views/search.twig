@@ -4,8 +4,23 @@
 
 {% block main %}
 
-    <pre>
-        {{ dump(items) }}
-    </pre>
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {% if num_res|length > 0 and search_val %}
+
+        tabs
+
+        <pre>
+            {{ dump(items) }}
+        </pre>
+
+    {% elseif num_res|length <= 0 and not search_val %}
+        
+        search form
+
+    {% endif %}
 
 {% endblock %}
