@@ -1,0 +1,12 @@
+<form role="search" method="get" action="{{ action }}" class="lb-search-form">
+    {% include '@PathViews/components/fields/input.twig' with {
+        type: 'search',
+        name: id,
+        value: search_val,
+        label: label,
+        disabled: false,
+        required: false,
+        buttonTypeNext: 'button',
+        variants: ['tertiary'],
+    } only %}
+</form>
