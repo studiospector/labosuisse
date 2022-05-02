@@ -10,22 +10,16 @@ use Timber\Timber;
 
 class Search
 {
-    private $postType = [
-        'post',
-        'product',
-        'lb-faq',
-    ];
-
     private $search;
 
     public function get()
     {
-        $items = array_merge(
-            $this->getArchive(),
-            $this->getBrands()
-        );
-
-        return $items;
+        return [
+            $this->posts(),
+            $this->faq(),
+            $this->brands(),
+            $this->products()
+        ];
     }
 
     public function setSearch($search)
@@ -35,77 +29,113 @@ class Search
         return $this;
     }
 
-    private function getArchive()
+    private function posts()
     {
-        $totalItems = [
-            'post' => 0,
-            'faq' => 0,
-            'product' => 0
+        $post = [
+            'id' => 'post',
+            'head' => [
+                'label' => __('Articoli', 'labo-suisse-theme'),
+                'count' => 0
+            ],
+            'entries' => []
         ];
 
-        $items = [];
+        foreach ($this->getArchive('post') as $item) {
+            ++$post['head']['count'];
+            $post['entries'][] = [
+                'type' => 'infobox',
+                'data' => (new Magazine($item))->toArray()
+            ];
+        }
 
+        return $post;
+    }
+
+    private function faq()
+    {
+        $faq = [
+            'id' => 'faq',
+            'head' => [
+                'label' => __('Faq', 'labo-suisse-theme'),
+                'count' => 0
+            ],
+            'entries' => []
+        ];
+
+        foreach ($this->getArchive('lb-faq') as $item) {
+            ++$faq['head']['count'];
+            $faq['entries'][] = [
+                'type' => 'infobox',
+                'data' => (new Faq($item))->toArray()
+            ];
+        }
+
+        return $faq;
+    }
+
+    private function brands()
+    {
+        $brand = [
+            'id' => 'brand',
+            'head' => [
+                'label' => __('Brand', 'labo-suisse-theme'),
+                'count' => 0
+            ],
+            'entries' => []
+        ];
+
+        $brands = lb_get_brands(['name__like' => $this->search]);
+
+        foreach ($brands as $item) {
+            ++$brand['head']['count'];
+            $brand['entries'][] = [
+                'type' => 'infobox',
+                'data' => (new Brand($item))->toArray()
+            ];
+        }
+
+        return $brand;
+    }
+
+    private function products()
+    {
+        $counter = 0;
+
+        $items = [];
+        foreach ($this->getArchive('product') as $item) {
+            ++$counter;
+
+            $brand = get_the_terms($item->ID, 'lb-brand')[0] ?? null;
+
+            if (!isset($items[$brand->term_id])) {
+                $items[$brand->term_id]['brand_card'] = Product::brandCard($brand);
+            }
+
+            $items[$brand->term_id]['product'][] = Timber::get_post($item->ID);
+        }
+
+        return [
+            'id' => 'product',
+            'head' => [
+                'label' => __('Prodotti', 'labo-suisse-theme'),
+                'count' => $counter
+            ],
+            'entries' => [
+                'type' => 'card-grid-product-ordered',
+                'data' => $items
+            ]
+        ];
+    }
+
+    private function getArchive($type)
+    {
         $query = new \WP_Query([
             'post_status' => 'publish',
             'posts_per_page' => -1,
-            'post_type' => $this->postType,
+            'post_type' => $type,
             's' => $this->search
         ]);
 
-        $posts = $query->get_posts();
-
-        foreach ($posts as $post) {
-            switch (get_post_type($post)) {
-                case 'post':
-                    $items['post']['totalItems'] = ++$totalItems['post'];
-                    $items['post']['items'][] = (new Magazine($post))->toArray();
-                    break;
-                case 'lb-faq':
-                    $items['faq']['totalItems'] = ++$totalItems['faq'];
-                    $items['faq']['items'][] = (new Faq($post))->toArray();
-                    break;
-                case 'product':
-                    $items['products']['totalItems'] = ++$totalItems['product'];
-                    $items = $this->getProducts($post, $items);
-                    break;
-            }
-        }
-
-        return $items;
-    }
-
-    private function getBrands()
-    {
-        $items = [];
-        $count = 0;
-        $brands = lb_get_brands([
-            'name__like' => $this->search
-        ]);
-
-        foreach ($brands as $brand) {
-            $items['brands']['totalItems'] = ++$count;
-            $items['brands']['items'][] = (new Brand($brand))->toArray();
-        }
-
-        return $items;
-    }
-
-    /**
-     * @param mixed $post
-     * @param array $items
-     * @return array
-     */
-    private function getProducts(mixed $post, array $items): array
-    {
-        $brand = get_the_terms($post->ID, 'lb-brand')[0] ?? null;
-
-        if (!isset($items[$brand->term_id])) {
-            $items['products'][$brand->term_id]['brand_card'] = Product::brandCard($brand);
-        }
-
-        //TODO: estrarre solo campi necessari
-        $items['products'][$brand->term_id]['products'][] = Timber::get_post($post->ID);
-
-        return $items;
+        return $query->get_posts();
     }
 }
