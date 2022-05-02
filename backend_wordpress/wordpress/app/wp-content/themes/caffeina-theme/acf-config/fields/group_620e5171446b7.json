@@ -540,7 +540,7 @@
             "taxonomy": "",
             "allow_null": 0,
             "multiple": 0,
-            "return_format": "object",
+            "return_format": "id",
             "ui": 1
         },
         {
@@ -579,6 +579,46 @@
             "multiple": 0,
             "return_format": "object",
             "wpml_cf_preferences": 2,
+            "ui": 1
+        },
+        {
+            "key": "field_626fb018de889",
+            "label": "Ricerca",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_626fb04fde88b",
+            "label": "Pagina di Ricerca",
+            "name": "lb_page_search",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
             "ui": 1
         },
         {
@@ -700,5 +740,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649933652
+    "modified": 1651487954
 }
