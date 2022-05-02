@@ -1,10 +1,15 @@
 import Component from '@okiba/component'
 import { qsa, qs, on } from '@okiba/dom'
 
+const ui = {
+    iconOpenSearch: '.lb-header__top__icons__item--search .lb-open-search',
+    searchForm: '.lb-header__top__icons__item--search .lb-search-form'
+}
+
 class Header extends Component {
 
     constructor({ options, ...props }) {
-        super({ ...props })
+        super({ ...props, ui })
 
         this.curScroll = null
         this.prevScroll = window.scrollY
@@ -20,6 +25,8 @@ class Header extends Component {
         
         setTimeout(() => this.adjustMenu(), 100)
         on(window, 'resize', this.adjustMenu)
+
+        setTimeout(() => on([this.ui.iconOpenSearch, qs('.lb-header__top__icons__item--search .custom-input .custom-input__icon--prev')], 'click', this.toggleSearch), 1000)
 
         // On scroll trigger with Locomotive
         window.getCustomScrollbar.on('scroll', this.checkScroll)
@@ -96,6 +103,10 @@ class Header extends Component {
         const headerHeight = this.el.getBoundingClientRect().height
         const mainContent = qs('#content')
         mainContent.style.paddingTop = `${headerHeight}px`
+    }
+
+    toggleSearch = (ev) => {
+        this.ui.searchForm.classList.toggle('lb-search-form--open')
     }
 }
 
