@@ -27,7 +27,13 @@ class Faq
     {
         $image = (get_field('lb_faq_logo')) ? get_field('lb_faq_logo') : null;
 
-        $questions = get_field('lb_faq_items', $this->post->ID);
+        $questions = [];
+
+        while (have_rows('lb_faq_items', $this->post->ID)) {
+            the_row();
+            $questions[] = get_sub_field('lb_faq_item_question', $this->post->ID);
+        }
+
         $questions = array_slice($questions, -4);
 
         return [

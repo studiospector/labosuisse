@@ -1,4 +1,4 @@
-<form role="search" method="get" action="{{ action }}" class="lb-search-form lb-search-autocomplete js-search-autocomplete">
+<form role="search" method="get" action="{{ action }}" class="lb-search-form lb-search-autocomplete js-search-autocomplete" data-label-res-less="{{ label_res_less }}" data-label-res-more="{{ label_res_more }}">
     {% include '@PathViews/components/fields/input.twig' with {
         type: 'search',
         name: id,

@@ -10,6 +10,9 @@ import renderTabs from '../../views/components/tabs.twig'
 import Tabs from '../../scripts/components/Tabs'
 
 const data = {
+    no_results: {
+        paragraph: 'Siamo spiacenti! nessun risultato corrisponde alla tua ricerca per quasta entità.',
+    },
     tabs: [
         {
             id: 'product',

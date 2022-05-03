@@ -31,6 +31,7 @@ class Search
 
     private function posts()
     {
+        $items = [];
         $post = [
             'id' => 'post',
             'head' => [
@@ -42,20 +43,23 @@ class Search
 
         foreach ($this->getArchive('post') as $item) {
             ++$post['head']['count'];
-            $post['entries'][] = [
-                'type' => 'cards-grid-default',
-                'data' => [
-                    'col' => 3,
-                    'items' => (new Magazine($item))->toArray()
-                ]
-            ];
+            $items[] = (new Magazine($item))->toArray();
         }
+
+        $post['entries'][] = [
+            'type' => 'cards-grid-default',
+            'data' => [
+                'col' => 3,
+                'items' => $items,
+            ]
+        ];
 
         return $post;
     }
 
     private function faq()
     {
+        $items = [];
         $faq = [
             'id' => 'faq',
             'head' => [
@@ -67,20 +71,23 @@ class Search
 
         foreach ($this->getArchive('lb-faq') as $item) {
             ++$faq['head']['count'];
-            $faq['entries'][] = [
-                'type' => 'cards-grid-default',
-                'data' => [
-                    'col' => 4,
-                    'items' => (new Faq($item))->toArray()
-                ]
-            ];
+            $items[] = (new Faq($item))->toArray();
         }
+
+        $faq['entries'][] = [
+            'type' => 'cards-grid-default',
+            'data' => [
+                'col' => 4,
+                'items' => $items,
+            ]
+        ];
 
         return $faq;
     }
 
     private function brands()
     {
+        $items = [];
         $brand = [
             'id' => 'brand',
             'head' => [
@@ -94,14 +101,16 @@ class Search
 
         foreach ($brands as $item) {
             ++$brand['head']['count'];
-            $brand['entries'][] = [
-                'type' => 'cards-grid-default',
-                'data' => [
-                    'col' => 4,
-                    'items' => (new Brand($item))->toArray()
-                ]
-            ];
+            $items[] = (new Brand($item))->toArray();
         }
+
+        $brand['entries'][] = [
+            'type' => 'cards-grid-default',
+            'data' => [
+                'col' => 4,
+                'items' => $items,
+            ]
+        ];
 
         return $brand;
     }
@@ -120,7 +129,7 @@ class Search
                 $items[$brand->term_id]['brand_card'] = Product::brandCard($brand);
             }
 
-            $items[$brand->term_id]['product'][] = Timber::get_post($item->ID);
+            $items[$brand->term_id]['products'][] = Timber::get_post($item->ID);
         }
 
         return [

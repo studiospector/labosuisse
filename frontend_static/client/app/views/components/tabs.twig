@@ -19,10 +19,18 @@
         <div class="lb-tabs__content">
             {% for tab in tabs|default([]) %}
                 <div id="{{ tab.id }}" class="lb-tabs__pane{{ loop.index == 1 ? ' is-active' : '' }}">
-                    {% for item in tab.entries %}
-                        {% set component = '@PathViews/components/' ~ item.type ~ '.twig' %}
-                        {% include component with item.data only %}
-                    {% endfor %}
+                    {% if tab.head.count > 0 %}
+                        {% for item in tab.entries %}
+                            {% set component = '@PathViews/components/' ~ item.type ~ '.twig' %}
+                            {% include component with item.data only %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="container">
+                            <div class="lb-no-results">
+                                {% include '@PathViews/components/infobox.twig' with no_results only %}
+                            </div>
+                        </div>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

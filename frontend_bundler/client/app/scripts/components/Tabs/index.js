@@ -36,6 +36,8 @@ class Tabs extends Component {
 
         this.ui.tabs[this.current].classList.add('is-active')
         this.ui.panes[this.current].classList.add('is-active')
+
+        window.getCustomScrollbar.update()
     }
 
     onDestroy() {

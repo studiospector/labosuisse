@@ -8,18 +8,36 @@
     {% if fn('function_exists', 'yoast_breadcrumb') %}
         {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
     {% endif %}
+    <hr class="lb-separator lb-separator--small" data-variant="small">
 
-    {% if items|length > 0 and search_val %}
-
-        <hr class="lb-separator lb-separator--small" data-variant="small">
+    {# Display results #}
+    {% if num_res > 0 and search_val %}
         <div class="container">
-            {% include '@PathViews/components/tabs.twig' with { tabs: items } only %}
+            <div class="lb-search-page__res-text infobox__title h3">{{ res_text }} <span>&ldquo;{{ search_val }}&rdquo;</span></div>
+            <hr class="lb-separator lb-separator--small" data-variant="small">
+            {% include '@PathViews/components/tabs.twig' with {
+                no_results: no_results_tab,
+                tabs: items,
+            } only %}
         </div>
 
-    {% elseif items|length <= 0 and not search_val %}
-        
-        {# {% include '@PathViews/components/infobox.twig' with  only %} #}
+    {# Base view #}
+    {% elseif num_res <= 0 and not search_val %}
+        <div class="container">
+            <div class="lb-no-results">
+                {% include '@PathViews/components/infobox.twig' with base_text only %}
+                {{ fn('get_search_form') }}
+            </div>
+        </div>
 
+    {# No results for search #}
+    {% elseif num_res <= 0 and search_val %}
+        <div class="container">
+            <div class="lb-no-results">
+                {% include '@PathViews/components/infobox.twig' with no_results only %}
+                {{ fn('get_search_form') }}
+            </div>
+        </div>
     {% endif %}
 
 {% endblock %}

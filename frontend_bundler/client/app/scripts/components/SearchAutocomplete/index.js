@@ -13,6 +13,9 @@ class SearchAutocomplete extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
+        this.labelResLess = this.el.dataset.labelResLess
+        this.labelResMore = this.el.dataset.labelResMore
+
         this.init()
     }
 
@@ -42,20 +45,20 @@ class SearchAutocomplete extends Component {
                     return list
                 },
             },
-            placeHolder: "Search for Food & Drinks!",
+            // placeHolder: "",
             resultsList: {
                 noResults: true,
-                maxResults: -1,
+                maxResults: 100,
                 tabSelect: true,
                 destination: ".lb-search-autocomplete__input",
-                class: 'lb-search-autocomplete__selection',
+                class: 'lb-search-autocomplete__selection js-scrollbar-management',
                 element: (list, data) => {
                     const info = document.createElement("p")
                     info.classList = 'lb-search-autocomplete__selection__results'
-                    if (data.results.length > 0) {
-                        info.innerHTML = `<strong>${data.matches.length}</strong> results`
+                    if (data.results.length == 0 || data.results.length > 1) {
+                        info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResMore} <strong>"${data.query}"</strong>`
                     } else {
-                        info.innerHTML = `Found <strong>${data.matches.length}</strong> matching results for <strong>"${data.query}"</strong>`
+                        info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResLess} <strong>"${data.query}"</strong>`
                     }
                     list.prepend(info)
                 },
@@ -64,7 +67,6 @@ class SearchAutocomplete extends Component {
                 highlight: true,
                 class: 'lb-search-autocomplete__selection__item',
                 element: (item, data) => {
-                    // Modify Results Item Content
                     item.innerHTML = `
                         <span class="lb-search-autocomplete__selection__item__text">
                             ${data.match}
@@ -84,13 +86,9 @@ class SearchAutocomplete extends Component {
 
         autoCompleteJS.input.addEventListener("selection", (event) => {
             const feedback = event.detail
-            // Prepare User's Selected Value
             // const selection = feedback.selection.value[feedback.selection.key]
             const selection = feedback.selection.value
-            // Replace Input value with the selected value
             autoCompleteJS.input.value = selection
-            // Console log autoComplete data feedback
-            // console.log(feedback)
         })
     }
 }
