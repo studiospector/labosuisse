@@ -11,14 +11,20 @@ use Timber\Timber;
 class Search
 {
     private $search;
+    private $count = 0;
 
     public function get()
     {
-        return [
+        $items = [
             $this->posts(),
             $this->faq(),
             $this->brands(),
             $this->products()
+        ];
+
+        return [
+            'count' => $this->count,
+            'items' => $items
         ];
     }
 
@@ -43,6 +49,7 @@ class Search
 
         foreach ($this->getArchive('post') as $item) {
             ++$post['head']['count'];
+            ++$this->count;
             $items[] = (new Magazine($item))->toArray();
         }
 
@@ -71,6 +78,7 @@ class Search
 
         foreach ($this->getArchive('lb-faq') as $item) {
             ++$faq['head']['count'];
+            ++$this->count;
             $items[] = (new Faq($item))->toArray();
         }
 
@@ -101,6 +109,7 @@ class Search
 
         foreach ($brands as $item) {
             ++$brand['head']['count'];
+            ++$this->count;
             $items[] = (new Brand($item))->toArray();
         }
 
@@ -122,7 +131,7 @@ class Search
         $items = [];
         foreach ($this->getArchive('product') as $item) {
             ++$counter;
-
+            ++$this->count;
             $brand = get_the_terms($item->ID, 'lb-brand')[0] ?? null;
 
             if (!isset($items[$brand->term_id])) {

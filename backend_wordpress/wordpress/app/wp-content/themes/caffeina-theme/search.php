@@ -6,14 +6,14 @@ use Caffeina\LaboSuisse\Api\GlobalSearch\Search;
 
 $search_val = !empty($_GET['lb-search-val']) ? $_GET['lb-search-val'] : null;
 
-$items = (new Search())
+$search = (new Search())
     ->setSearch($search_val)
     ->get();
 
 $context = [
     'search_val' => $search_val,
-    // 'num_res' => 3,
-    'items' => $items,
+     'num_res' => $search['count'],
+    'items' => $search['items'],
     'res_text' => __("Risultati della ricerca", 'labo-suisse-theme'),
     'base_text' => [
         'title' => __('Ricerca globale', 'labo-suisse-theme'),
