@@ -11,9 +11,8 @@ $items = (new Search())
     ->get();
 
 $context = [
-    'num_res' => 0,
     'search_val' => $search_val,
-    'tabs' => $items,
+    'items' => $items,
 ];
 
 Timber::render('@PathViews/search.twig', $context);

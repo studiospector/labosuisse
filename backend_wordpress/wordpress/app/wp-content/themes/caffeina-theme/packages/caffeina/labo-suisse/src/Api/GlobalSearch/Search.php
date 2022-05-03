@@ -43,8 +43,11 @@ class Search
         foreach ($this->getArchive('post') as $item) {
             ++$post['head']['count'];
             $post['entries'][] = [
-                'type' => 'infobox',
-                'data' => (new Magazine($item))->toArray()
+                'type' => 'cards-grid-default',
+                'data' => [
+                    'col' => 3,
+                    'items' => (new Magazine($item))->toArray()
+                ]
             ];
         }
 
@@ -65,8 +68,11 @@ class Search
         foreach ($this->getArchive('lb-faq') as $item) {
             ++$faq['head']['count'];
             $faq['entries'][] = [
-                'type' => 'infobox',
-                'data' => (new Faq($item))->toArray()
+                'type' => 'cards-grid-default',
+                'data' => [
+                    'col' => 4,
+                    'items' => (new Faq($item))->toArray()
+                ]
             ];
         }
 
@@ -89,8 +95,11 @@ class Search
         foreach ($brands as $item) {
             ++$brand['head']['count'];
             $brand['entries'][] = [
-                'type' => 'infobox',
-                'data' => (new Brand($item))->toArray()
+                'type' => 'cards-grid-default',
+                'data' => [
+                    'col' => 4,
+                    'items' => (new Brand($item))->toArray()
+                ]
             ];
         }
 
@@ -121,8 +130,12 @@ class Search
                 'count' => $counter
             ],
             'entries' => [
-                'type' => 'card-grid-product-ordered',
-                'data' => $items
+                [
+                    'type' => 'cards-grid-product-ordered',
+                    'data' => [
+                        'items' => $items
+                    ]
+                ]
             ]
         ];
     }

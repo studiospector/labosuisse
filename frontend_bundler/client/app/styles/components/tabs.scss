@@ -5,7 +5,7 @@
         display: flex;
         justify-content: flex-start;
         flex-wrap: nowrap;
-        border: 1px solid map-get($colors, "grey-2");
+        border-bottom: 1px solid map-get($colors, "grey-2");
         white-space: nowrap;
         overflow: auto;
     }

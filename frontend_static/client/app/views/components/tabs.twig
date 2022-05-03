@@ -20,9 +20,8 @@
             {% for tab in tabs|default([]) %}
                 <div id="{{ tab.id }}" class="lb-tabs__pane{{ loop.index == 1 ? ' is-active' : '' }}">
                     {% for item in tab.entries %}
-                        {% if item.type == 'infobox' %}
-                            {% include '@PathViews/components/infobox.twig' with item.data only %} 
-                        {% endif %}
+                        {% set component = '@PathViews/components/' ~ item.type ~ '.twig' %}
+                        {% include component with item.data only %}
                     {% endfor %}
                 </div>
             {% endfor %}
