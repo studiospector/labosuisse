@@ -31,6 +31,7 @@ import Loader from './Loader'
 import DistributorsMap from './DistributorsMap'
 import ScrollbarManagement from './ScrollbarManagement'
 import Tabs from './Tabs'
+import SearchAutocomplete from './SearchAutocomplete'
 
 const components = {
     scrollbar: {
@@ -166,6 +167,11 @@ const components = {
     tabs: {
         selector: '.js-tabs',
         type: Tabs,
+        optional: true
+    },
+    searchAutocomplete: {
+        selector: '.js-search-autocomplete',
+        type: SearchAutocomplete,
         optional: true
     },
 }

@@ -1,12 +1,14 @@
-<form role="search" method="get" action="{{ action }}" class="lb-search-form">
+<form role="search" method="get" action="{{ action }}" class="lb-search-form lb-search-autocomplete js-search-autocomplete">
     {% include '@PathViews/components/fields/input.twig' with {
         type: 'search',
         name: id,
         value: search_val,
         label: label,
+        autocomplete: 'off',
         disabled: false,
         required: false,
-        buttonTypeNext: 'button',
+        class: 'lb-search-autocomplete__input',
+        buttonTypeNext: 'submit',
         variants: ['tertiary'],
     } only %}
 </form>

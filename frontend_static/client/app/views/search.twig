@@ -9,17 +9,16 @@
         {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
     {% endif %}
 
-    {% if num_res|length > 0 and search_val %}
+    {% if items|length > 0 and search_val %}
 
-        tabs
+        <hr class="lb-separator lb-separator--small" data-variant="small">
+        <div class="container">
+            {% include '@PathViews/components/tabs.twig' with { tabs: items } only %}
+        </div>
 
-        <pre>
-            {{ dump(items) }}
-        </pre>
-
-    {% elseif num_res|length <= 0 and not search_val %}
+    {% elseif items|length <= 0 and not search_val %}
         
-        search form
+        {# {% include '@PathViews/components/infobox.twig' with  only %} #}
 
     {% endif %}
 

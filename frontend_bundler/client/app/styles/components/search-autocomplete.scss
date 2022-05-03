@@ -1,0 +1,41 @@
+.lb-search-autocomplete {
+    // &__input {
+    // }
+
+    &__selection {
+        width: 300px;
+        max-height: 300px;
+        position: absolute;
+        top: 60px;
+        background-color: map-get($colors, "white");
+        border: 1px solid map-get($colors, "grey-2");
+        border-radius: 4px;
+        overflow: auto;
+        overflow-x: hidden;
+
+        &__results {
+            padding: 7.5px 15px;
+            margin: 0;
+            border-bottom: 1px solid map-get($colors, "grey-2");
+        }
+
+        &__item {
+            padding: 7.5px 15px;
+
+            &:hover,
+            &[aria-selected="true"] {
+                background-color: map-get($colors, "grey-2");
+                cursor: pointer;
+            }
+
+            &__text {
+                font-size: rem(13);
+                font-weight: 300;
+                mark {
+                    font-weight: 800;
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+}
