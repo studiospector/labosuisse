@@ -15,13 +15,16 @@ class Search
 
     public function get()
     {
-        $items = [
-            $this->posts(),
-            $this->faq(),
-            $this->brands(),
-            $this->products()
-        ];
+        $items = [];
 
+        if($this->search) {
+            $items = [
+                $this->posts(),
+                $this->faq(),
+                $this->brands(),
+                $this->products()
+            ];
+        }
         return [
             'count' => $this->count,
             'items' => $items
