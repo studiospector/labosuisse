@@ -1,0 +1,22 @@
+.lb-search-page {
+    &__res-text {
+        color: map-get($colors, "grey-3");
+
+        span {
+            color: map-get($colors, "black");
+        }
+    }
+
+    .lb-no-results {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .lb-search-form {
+            width: 100%;
+            max-width: 560px;
+            margin-top: 40px;
+        }
+    }
+}
