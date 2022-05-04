@@ -11,12 +11,17 @@ if (have_rows('lb_template_accordion_list')) {
         if (have_rows('lb_template_accordion_list_row')) {
             while (have_rows('lb_template_accordion_list_row')) : the_row();
                 $row = [];
-                $row['label'] = get_sub_field('lb_template_accordion_list_row_label');
-                $row['links'] = [];
+
+                $row['type'] = 'links-list';
+                $row['data'] = [];
+
+                $data = [];
+                $data['label'] = get_sub_field('lb_template_accordion_list_row_label');
+                $data['links'] = [];
 
                 if (have_rows('lb_template_accordion_list_links')) {
                     while (have_rows('lb_template_accordion_list_links')) : the_row();
-                        $row['links'][] = array_merge(
+                        $data['links'][] = array_merge(
                             (array)get_sub_field('lb_template_accordion_list_links_link'),
                             [
                                 'iconStart' => ['name' => get_sub_field('lb_template_accordion_list_links_icon')],
@@ -25,6 +30,8 @@ if (have_rows('lb_template_accordion_list')) {
                         );
                     endwhile;
                 }
+
+                $row['data'][] = $data;
 
                 $accordions[] = $row;
             endwhile;
@@ -53,5 +60,9 @@ $context = [
     ],
     'content' => apply_filters('the_content', get_the_content()),
 ];
+
+// echo '<pre>';
+// var_dump( $context['list']['items'] );
+// die;
 
 Timber::render('@PathViews/template-accordion-list.twig', $context);
