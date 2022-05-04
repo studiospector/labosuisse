@@ -11,15 +11,19 @@ class LBCustomSelect extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
-        this.init()
+        this.wcVariationsSupport = this.el.dataset.wcVariationsSupport
+
+        this.wcVariationsSupport ? this.dispatchInit() : this.init()
     }
 
-    init = debounce(() => {
+    dispatchInit = debounce(() => this.init(), 300)
+
+    init = () => {
         new CustomSelect({
             selector: this.el,
-            woocommerceSupportVariations: {
+            woocommerceSupportVariations: this.wcVariationsSupport ? {
                 selector: '.single-product-details__summary__variations'
-            },
+            } : false,
             // debug: true
         })
 
@@ -28,7 +32,7 @@ class LBCustomSelect extends Component {
 
         on(this.customFieldOptions, 'mouseenter', this.disableLocomotive)
         on(this.customFieldOptions, 'mouseleave', this.enableLocomotive)
-    }, 300)
+    }
 
     disableLocomotive = (ev) => {
         window.getCustomScrollbar.stop()

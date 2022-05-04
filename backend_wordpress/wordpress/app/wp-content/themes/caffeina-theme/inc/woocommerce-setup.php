@@ -53,7 +53,7 @@ function lb_set_custom_data_attribute_product_variations($html, $args)
 {
     $label = ucfirst(str_replace("pa_", "", $args['attribute']));
 
-    $html = str_replace("id=\"{$args['attribute']}\"", "id=\"{$args['attribute']}\" " . "data-variant=\"tertiary\" data-label=\"$label\"", $html);
+    $html = str_replace("id=\"{$args['attribute']}\"", "id=\"{$args['attribute']}\" " . "data-variant=\"tertiary\" data-label=\"$label\" data-wc-variations-support=\"true\"", $html);
 
     return $html;
 }
