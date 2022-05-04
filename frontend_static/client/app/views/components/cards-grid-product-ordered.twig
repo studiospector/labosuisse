@@ -6,7 +6,11 @@
             </div>
             {% for post in item.products %}
                 <div class="lb-cards-grid__card col-12 col-md-4">
-                    {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post} only %}
+                    {% if isFilter %}
+                        {{ post|raw }}
+                    {% else %}
+                        {% include ["@PathViews/woo/partials/tease-product.twig"] with {post: post} only %}
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

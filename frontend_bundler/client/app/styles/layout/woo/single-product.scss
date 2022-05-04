@@ -255,6 +255,10 @@
                 }
             }
 
+            .woocommerce-variation {
+                margin-bottom: 60px;
+            }
+
             @include mq($until: md) {
                 .button {
                     width: 100%;

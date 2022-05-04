@@ -119,6 +119,25 @@
                     margin-right: 0;
                 }
 
+                &--search {
+                    .lb-open-search {
+                        display: flex;
+                        cursor: pointer;
+                    }
+
+                    .lb-search-form {
+                        width: 300px;
+                        display: none;
+                        position: absolute;
+                        right: 0;
+                        background-color: map-get($colors, "white");
+
+                        &--open {
+                            display: block;
+                        }
+                    }
+                }
+
                 &--btn-menu {
                     @include mq(lg) {
                         display: none;

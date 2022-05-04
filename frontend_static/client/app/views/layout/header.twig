@@ -35,9 +35,10 @@
                 {% endfor %}
             {% endif %}
             <div class="lb-header__top__icons__item lb-header__top__icons__item--search lb-header__top__icons__item--mobile-hide">
-                <a href="">
+                <div class="lb-open-search">
                     {% include '@PathViews/components/icon.twig' with {name: 'icon-search'} only %}
-                </a>
+                </div>
+                {{ fn('get_search_form') }}
             </div>
             <!-- Btn Menu Mobile -->
             <div class="lb-header__top__icons__item lb-header__top__icons__item--btn-menu">

@@ -1,0 +1,7 @@
+<div class="row js-lb-cards-grid">
+    {% for post in items %}
+        <div class="col-12 col-md-{{ col }}">
+            {% include '@PathViews/components/card.twig' with post only %}
+        </div>
+    {% endfor %}
+</div>

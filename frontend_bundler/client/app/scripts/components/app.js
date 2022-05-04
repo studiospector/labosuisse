@@ -30,6 +30,8 @@ import Filters from './Filters'
 import Loader from './Loader'
 import DistributorsMap from './DistributorsMap'
 import ScrollbarManagement from './ScrollbarManagement'
+import Tabs from './Tabs'
+import SearchAutocomplete from './SearchAutocomplete'
 
 const components = {
     scrollbar: {
@@ -160,6 +162,16 @@ const components = {
     scrollbarManagement: {
         selector: '.js-scrollbar-management',
         type: ScrollbarManagement,
+        optional: true
+    },
+    tabs: {
+        selector: '.js-tabs',
+        type: Tabs,
+        optional: true
+    },
+    searchAutocomplete: {
+        selector: '.js-search-autocomplete',
+        type: SearchAutocomplete,
         optional: true
     },
 }
