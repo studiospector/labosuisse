@@ -3,6 +3,7 @@ import Component from '@okiba/component'
 import axiosClient from '../HTTPClient'
 
 import autoComplete from '@tarekraafat/autocomplete.js'
+import { on, qs } from '@okiba/dom'
 
 const ui = {
     input: '.lb-search-autocomplete__input',
@@ -51,7 +52,7 @@ class SearchAutocomplete extends Component {
                 maxResults: 100,
                 tabSelect: true,
                 destination: ".lb-search-autocomplete__input",
-                class: 'lb-search-autocomplete__selection js-scrollbar-management',
+                class: 'lb-search-autocomplete__selection',
                 element: (list, data) => {
                     const info = document.createElement("p")
                     info.classList = 'lb-search-autocomplete__selection__results'
@@ -90,6 +91,23 @@ class SearchAutocomplete extends Component {
             const selection = feedback.selection.value
             autoCompleteJS.input.value = selection
         })
+
+
+        on(this.ui.input, 'init', this.manageScrollbar)
+    }
+
+    manageScrollbar = () => {
+        const elementsToDisable = qs('.lb-search-autocomplete__selection')
+        on(elementsToDisable, 'mouseenter', this.disableLocomotive)
+        on(elementsToDisable, 'mouseleave', this.enableLocomotive)
+    }
+
+    disableLocomotive = (ev) => {
+        window.getCustomScrollbar.stop()
+    }
+
+    enableLocomotive = (ev) => {
+        window.getCustomScrollbar.start()
     }
 }
 
