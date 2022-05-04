@@ -81,6 +81,12 @@ BUGFIX
 - refactor api call con autenticazione e url da .env
 - √ refactor classi store locator base
 
+- gestione utenti BE
+- gestione accordion prefooter in mobile
+- gestione ricerca store locator dal campo nel prefooter
+- gestione ricerca dal campo nel footer
+- animazioni
+
 
 
 ----------
@@ -97,5 +103,5 @@ SEZIONI DA TERMINARE
 
 - √ Filtri e Ricerche archivi
 - √ Gestione dinamica Footer
-- Ricerca globale
+- √ Ricerca globale
 - Integrazione Newsletter
