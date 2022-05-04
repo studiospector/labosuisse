@@ -1,0 +1,17 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-page' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    <hr class="lb-separator lb-separator--small" data-variant="small">
+    <div class="container text-center">
+        {% include '@PathViews/components/infobox.twig' with infobox only %}
+    </div>
+
+{% endblock %}
