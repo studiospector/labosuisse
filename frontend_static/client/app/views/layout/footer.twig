@@ -4,27 +4,53 @@
             <div class="prefooter--desktop container">
                 <div class="row">
                     <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with {
-                            subtitle: data.prefooter.block_1.title,
-                            paragraph: data.prefooter.block_1.text,
-                            cta: data.prefooter.block_1.cta,
-                        } only %}
+                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_1 only %}
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with {
-                            subtitle: data.prefooter.block_2.title,
-                            paragraph: data.prefooter.block_2.text,
-                        } only %}
+                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
                         {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.input only %}
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with {
-                            subtitle: data.prefooter.block_3.title,
-                            paragraph: data.prefooter.block_3.text,
-                            cta: data.prefooter.block_3.cta,
-                        } only %}
+                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
                     </div>
                 </div>
+            </div>
+            <div class="prefooter--mobile">
+                {% include '@PathViews/components/accordion.twig' with {
+                    items: [
+                        {
+                            title: data.prefooter.block_1.subtitle,
+                            content: [
+                                {
+                                    type: 'infobox',
+                                    data: data.prefooter.block_1|merge({subtitle: ''}),
+                                },
+                            ],
+                        },
+                        {
+                            title: data.prefooter.block_2.subtitle,
+                            content: [
+                                {
+                                    type: 'infobox',
+                                    data: data.prefooter.block_2|merge({subtitle: ''}),
+                                },
+                                {
+                                    type: 'field',
+                                    data: data.prefooter.block_2.input,
+                                },
+                            ],
+                        },
+                        {
+                            title: data.prefooter.block_3.subtitle,
+                            content: [
+                                {
+                                    type: 'infobox',
+                                    data: data.prefooter.block_3|merge({subtitle: ''}),
+                                },
+                            ],
+                        },
+                    ],
+                } only %}
             </div>
         </div>
     {% endif %}

@@ -83,8 +83,8 @@ class MenuFooter
         }
 
         return [
-            'title' => $options['lb_prefooter_left_block_title'],
-            'text' => $options['lb_prefooter_left_block_text'],
+            'subtitle' => $options['lb_prefooter_left_block_title'],
+            'paragraph' => $options['lb_prefooter_left_block_text'],
             'cta' => array_merge($options['lb_prefooter_left_block_cta'], ['variants' => ['quaternary']])
         ];
     }
@@ -93,10 +93,9 @@ class MenuFooter
     {
 
         return [
-            'title' => $options['lb_prefooter_center_block_title'] ?? null,
-            'text' => $options['lb_prefooter_center_block_text'] ?? null,
+            'subtitle' => $options['lb_prefooter_center_block_title'] ?? null,
+            'paragraph' => $options['lb_prefooter_center_block_text'] ?? null,
             'input' => [
-                // The only parameter to manage in options is label
                 'type' => 'search',
                 'name' => "lb-search-store-prefooter",
                 'label' => $options['lb_prefooter_center_block_label'] ?? null,
@@ -112,15 +111,15 @@ class MenuFooter
     {
         if (is_null($options)) {
             return [
-                'title' => null,
-                'text' => null,
+                'subtitle' => null,
+                'paragraph' => null,
                 'cta' => [],
             ];
         }
 
         return [
-            'title' => $options['lb_prefooter_right_block_title'],
-            'text' => $options['lb_prefooter_right_block_text'],
+            'subtitle' => $options['lb_prefooter_right_block_title'],
+            'paragraph' => $options['lb_prefooter_right_block_text'],
             'cta' => array_merge($options['lb_prefooter_right_block_cta'], ['variants' => ['quaternary']])
         ];
     }
