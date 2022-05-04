@@ -5,9 +5,9 @@ import { useEffect } from '@storybook/client-api'
 import Component from '@okiba/component'
 
 // Components
-import renderTabs from '../../views/components/tabs.twig'
+// import renderTabs from '../../views/components/tabs.twig'
 
-import Tabs from '../../scripts/components/Tabs'
+// import Tabs from '../../scripts/components/Tabs'
 
 const data = {
     no_results: {
@@ -49,22 +49,22 @@ const data = {
     ]
 }
 
-storiesOf('Components|Tabs', module)
-    .addDecorator(storyFn => {
-        useEffect(() => {
-            const app = new Component({
-                el: document.body,
-                components: [
-                    {
-                        selector: '.js-tabs',
-                        type: Tabs
-                    }
-                ]
-            })
+// storiesOf('Components|Tabs', module)
+//     .addDecorator(storyFn => {
+//         useEffect(() => {
+//             const app = new Component({
+//                 el: document.body,
+//                 components: [
+//                     {
+//                         selector: '.js-tabs',
+//                         type: Tabs
+//                     }
+//                 ]
+//             })
 
-            return () => app.destroy()
-        }, [])
+//             return () => app.destroy()
+//         }, [])
 
-        return storyFn()
-    })
-    .add('Default', () => renderTabs(data))
+//         return storyFn()
+//     })
+//     .add('Default', () => renderTabs(data))
