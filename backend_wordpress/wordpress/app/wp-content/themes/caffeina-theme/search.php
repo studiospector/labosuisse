@@ -12,7 +12,7 @@ $search = (new Search())
 
 $context = [
     'search_val' => $search_val,
-     'num_res' => $search['count'],
+    'num_res' => $search['count'],
     'items' => $search['items'],
     'res_text' => __("Risultati della ricerca", 'labo-suisse-theme'),
     'base_text' => [
