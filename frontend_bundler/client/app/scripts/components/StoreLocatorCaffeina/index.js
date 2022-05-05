@@ -333,6 +333,9 @@ class StoreLocatorCaffeina extends Component {
         // Set "href" to open maps app
         this.setOpenMapAppLink()
 
+        // Search on Init
+        this.searchOnInit()
+
         // Remove loader
         this.removeLoader()
     }
@@ -674,6 +677,30 @@ class StoreLocatorCaffeina extends Component {
 
 
     /**
+     * Search on init map
+     */
+    searchOnInit = () => {
+        const request = {
+            query: this.ui.search.value,
+            fields: ['name', 'geometry'],
+        }
+    
+        const service = new this.google.maps.places.PlacesService(this.map)
+    
+        service.findPlaceFromQuery(request, (results, status) => {
+            if (status === this.google.maps.places.PlacesServiceStatus.OK) {
+                this.ui.search.value = results[0].name
+                // for (var i = 0; i < results.length; i++) {
+                //     createMarker(results[i]);
+                // }
+                this.map.setCenter(results[0].geometry.location)
+                this.map.setZoom(9)
+            }
+        })
+    }
+
+
+    /**
      * Center Map based on all Markers in view
      */
     centerMap = () => {
@@ -721,7 +748,7 @@ class StoreLocatorCaffeina extends Component {
                         animation: this.google.maps.Animation.DROP,
                     })
                     this.map.setCenter(pos)
-                    this.map.setZoom(8)
+                    this.map.setZoom(9)
                     // this.map.markers.push(marker)
 
                     // Remove loader
