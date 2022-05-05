@@ -15,6 +15,7 @@ $context = [
             'type' => 'search',
             'name' => "lb-search-autocomplete",
             'label' => "Inserisci città, provincia, CAP",
+            'value' => $_GET['lb-search-val'] ?? null,
             'disabled' => false,
             'required' => false,
             'autocomplete' => 'off',

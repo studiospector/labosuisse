@@ -18,5 +18,12 @@
             max-width: 560px;
             margin-top: 40px;
         }
+
+        .lb-search-autocomplete {
+            &__selection {
+                text-align: left;
+                color: map-get($colors, "black");
+            }
+        }
     }
 }

@@ -82,10 +82,11 @@ BUGFIX
 - √ refactor classi store locator base
 
 - gestione utenti BE
-- gestione accordion prefooter in mobile
-- gestione ricerca store locator dal campo nel prefooter
-- gestione ricerca dal campo nel footer
+- √ gestione accordion prefooter in mobile
+- √ gestione ricerca store locator dal campo nel prefooter
+- √ gestione ricerca store locator dal campo nel footer
 - animazioni
+- KPI
 
 
 
