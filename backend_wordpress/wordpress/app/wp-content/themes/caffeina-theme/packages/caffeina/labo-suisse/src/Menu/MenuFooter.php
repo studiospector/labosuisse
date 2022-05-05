@@ -76,8 +76,8 @@ class MenuFooter
     {
         if (is_null($options)) {
             return [
-                'title' => null,
-                'text' => null,
+                'subtitle' => null,
+                'paragraph' => null,
                 'cta' => [],
             ];
         }
