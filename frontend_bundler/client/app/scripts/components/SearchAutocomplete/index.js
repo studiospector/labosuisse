@@ -22,7 +22,9 @@ class SearchAutocomplete extends Component {
 
     init = () => {
         const autoCompleteJS = new autoComplete({
-            selector: '.lb-search-autocomplete__input',
+            selector: () => {
+                return this.ui.input
+            },
             wrapper: false,
             data: {
                 // keys: ["food", "cities", "animals"],
@@ -51,7 +53,9 @@ class SearchAutocomplete extends Component {
                 noResults: true,
                 maxResults: 100,
                 tabSelect: true,
-                destination: ".lb-search-autocomplete__input",
+                destination: () => {
+                    return this.ui.input
+                },
                 class: 'lb-search-autocomplete__selection',
                 element: (list, data) => {
                     const info = document.createElement("p")
