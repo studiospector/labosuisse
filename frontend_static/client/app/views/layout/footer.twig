@@ -8,7 +8,9 @@
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
                         {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
-                        {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.input only %}
+                        <form action="{{ data.prefooter.block_2.form.action }}" method="get">
+                            {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
+                        </form>
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
                         {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
@@ -36,7 +38,7 @@
                                 },
                                 {
                                     type: 'field',
-                                    data: data.prefooter.block_2.input,
+                                    data: data.prefooter.block_2.form.input,
                                 },
                             ],
                         },
@@ -87,7 +89,9 @@
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.search.title }}</h6>
-                    {% include '@PathViews/components/fields/input.twig' with data.footer.search.input only %}
+                    <form action="{{ data.footer.search.form.action }}" method="get">
+                        {% include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only %}
+                    </form>
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.newsletter.title }}</h6>

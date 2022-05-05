@@ -41,16 +41,18 @@ class MenuFooter
 
         return [
             'title' => $search['title'] ?? null,
-            'input' => [
-                // The only parameter to manage in options is label
-                'type' => 'search',
-                'name' => "lb-search-store-footer",
-                'label' => $search['label'] ?? null,
-                'disabled' => false,
-                'required' => false,
-                'buttonTypeNext' => 'button',
-                'variants' => ['secondary'],
-            ]
+            'form' => [
+                'action' => get_post_type_archive_link('lb-store'),
+                'input' => [
+                    'type' => 'search',
+                    'name' => "lb-search-val",
+                    'label' => $search['label'] ?? null,
+                    'disabled' => false,
+                    'required' => false,
+                    'buttonTypeNext' => 'submit',
+                    'variants' => ['secondary'],
+                ],
+            ],
         ];
     }
 
@@ -95,15 +97,18 @@ class MenuFooter
         return [
             'subtitle' => $options['lb_prefooter_center_block_title'] ?? null,
             'paragraph' => $options['lb_prefooter_center_block_text'] ?? null,
-            'input' => [
-                'type' => 'search',
-                'name' => "lb-search-store-prefooter",
-                'label' => $options['lb_prefooter_center_block_label'] ?? null,
-                'disabled' => false,
-                'required' => false,
-                'buttonTypeNext' => 'button',
-                'variants' => ['secondary'],
-            ]
+            'form' => [
+                'action' => get_post_type_archive_link('lb-store'),
+                'input' => [
+                    'type' => 'search',
+                    'name' => "lb-search-val",
+                    'label' => $options['lb_prefooter_center_block_label'] ?? null,
+                    'disabled' => false,
+                    'required' => false,
+                    'buttonTypeNext' => 'submit',
+                    'variants' => ['secondary'],
+                ],
+            ],
         ];
     }
 
