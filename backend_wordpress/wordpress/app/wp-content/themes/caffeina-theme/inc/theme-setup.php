@@ -1,8 +1,7 @@
 <?php
 
-use Caffeina\LaboSuisse\Menu\Menu;
-use Caffeina\LaboSuisse\Menu\MenuFooter;
-use Caffeina\LaboSuisse\Option\Option;
+use Caffeina\LaboSuisse\Setup\Clean;
+use Caffeina\LaboSuisse\Setup\Assets;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -22,13 +21,6 @@ if (!class_exists('Timber')) {
             echo '<div class="error"><p>Timber not activated. Make sure you activate the plugin in <a href="' . esc_url(admin_url('plugins.php#timber')) . '">' . esc_url(admin_url('plugins.php')) . '</a></p></div>';
         }
     );
-
-    // add_filter(
-    // 	'template_include',
-    // 	function( $template ) {
-    // 		return get_stylesheet_directory() . '/static/no-timber.html';
-    // 	}
-    // );
 
     return;
 }
@@ -58,10 +50,17 @@ class ThemeSetup extends Timber\Site
         // add_filter( 'timber/context', array( $this, 'add_to_context' ) );
         add_filter('timber/twig', array($this, 'lb_add_to_twig'));
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
+        add_action('init', [$this, 'lb_unregister_taxonomies'], 999);
+        add_action('pre_get_posts', [$this, 'lb_post_filters']);
+        add_filter('acf/settings/save_json', [$this, 'lb_acf_json_save_point']);
+        add_filter('acf/settings/load_json', [$this, 'lb_acf_json_load_point']);
+        add_action('block_categories_all', [$this, 'lb_gutenberg_block_categories'], 10, 2);
+        add_action('admin_footer', [$this, 'lb_add_symbols_to_admin']);
         add_action('init', array($this, 'lb_manage_thumbnails'));
         add_filter('fallback_intermediate_image_sizes', array($this, 'lb_disable_pdf_thumbnails'));
         add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
         add_filter('excerpt_length', array($this, 'lb_excerpt_length'), 999);
+        add_filter('wpcf7_form_tag', array($this, 'lb_parse_cf7_fields'));
 
         parent::__construct();
     }
@@ -277,6 +276,108 @@ class ThemeSetup extends Timber\Site
     }
 
     /**
+     * Unregister taxonomies
+     */
+    public function lb_unregister_taxonomies()
+    {
+        register_taxonomy('category', []);
+        register_taxonomy('post_tag', []);
+    }
+
+    /**
+     * Filter main query
+     */
+    public function lb_post_filters($query)
+    {
+        // "Brand" and "Linea di Prodotto" Archive pages
+        if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+            $query->set('posts_per_page', 12);
+        }
+
+        // Product Category Archive page
+        // if (is_tax('product_cat') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+        //     $query->set('posts_per_page', 12);
+        // }
+
+        // Posts page
+        if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
+            $query->set('posts_per_page', 12);
+        }
+
+        // Jobs Archive page
+        if (is_post_type_archive('lb-job') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+            $query->set('posts_per_page', 8);
+        }
+
+        // FAQs Archive page
+        if (is_post_type_archive('lb-faq') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+            $query->set('posts_per_page', 12);
+        }
+
+        // Archive page
+        // if (is_archive() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+        //     $query->set('posts_per_page', 12);
+        //     $query->set('ignore_sticky_posts', 1);
+        // }
+
+        // Tag page
+        // if (is_tag() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+        //     $query->set('posts_per_page', 12);
+        //     $query->set('ignore_sticky_posts', 1);
+        // }
+
+        // Search page
+        // if (is_search() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page() && !is_archive()) {
+        //     $query->set('posts_per_page', 12);
+        //     $query->set('ignore_sticky_posts', 1);
+        // }
+    }
+
+    /**
+     * ACF Config JSON save point
+     */
+    public function lb_acf_json_save_point($path)
+    {
+        // unset($path[0]);
+        $path = get_stylesheet_directory() . '/acf-config/fields';
+        return $path;
+    }
+
+    /**
+     * ACF Config JSON load point
+     */
+    public function lb_acf_json_load_point($path)
+    {
+        // unset($path[0]);
+        $path = get_stylesheet_directory() . '/acf-config/fields';
+        return $path;
+    }
+
+    /**
+     * Add custom category for components to Gutenberg editor
+     */
+    public function lb_gutenberg_block_categories($categories)
+    {
+        return array_merge(
+            $categories,
+            [
+                [
+                    'slug'  => 'caffeina-theme',
+                    'title' => 'Caffeina Theme Components',
+                ],
+            ]
+        );
+    }
+
+    /**
+     * Add symbols.twig to WP admin area
+     */
+    public function lb_add_symbols_to_admin()
+    {
+        Timber::render('@PathViews/components/symbols.twig');
+    }
+
+    /**
      * Manage specific thumbnail sizes
      */
     public function lb_manage_thumbnails()
@@ -319,283 +420,30 @@ class ThemeSetup extends Timber\Site
         }
         return 20;
     }
+
+    /**
+     * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
+     */
+    public function lb_parse_cf7_fields($tag) {
+        $datas = [];
+        foreach ((array)$tag['options'] as $option) {
+            if (strpos($option, 'data-') === 0) {
+                $option = explode(':', $option, 2);
+                $data_attribute = $option[0];
+                $data_value = str_replace('|', ' ', $option[1]);
+                $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
+            }
+        }
+        if (!empty($datas)) {
+            $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
+            add_filter('wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
+                return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" " . wpcf7_format_atts($datas), $content));
+            });
+        }
+        return $tag;
+    }
 }
 
 new ThemeSetup();
-
-
-
-/**
- * ACF Config
- */
-// ACF Config JSON save point
-add_filter('acf/settings/save_json', 'labo_acf_json_save_point');
-function labo_acf_json_save_point($path)
-{
-    // var_dump($path);die;
-    // unset($path[0]);
-    $path = get_stylesheet_directory() . '/acf-config/fields';
-    return $path;
-}
-
-// ACF Config JSON load point
-add_filter('acf/settings/load_json', 'labo_acf_json_load_point');
-function labo_acf_json_load_point($path)
-{
-    // unset($path[0]);
-    $path = get_stylesheet_directory() . '/acf-config/fields';
-    return $path;
-}
-
-
-
-/**
- * Add custom category for components to Gutenberg editor
- */
-add_action('block_categories_all', 'labo_gutenberg_block_categories', 10, 2);
-function labo_gutenberg_block_categories($categories)
-{
-    return array_merge(
-        $categories,
-        [
-            [
-                'slug'  => 'caffeina-theme',
-                'title' => 'Caffeina Theme Components',
-            ],
-        ]
-    );
-}
-
-
-
-/**
- * Assign global $product object in Timber
- */
-function timber_set_product($post)
-{
-    global $product;
-    $product = isset($post->product) ? $post->product : wc_get_product($post->ID);
-}
-
-
-
-/**
- * Filter main query
- */
-add_action('pre_get_posts', 'lb_post_filters');
-function lb_post_filters($query)
-{
-    // "Brand" and "Linea di Prodotto" Archive pages
-    if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-        $query->set('posts_per_page', 12);
-    }
-
-    // Product Category Archive page
-    // if (is_tax('product_cat') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-    //     $query->set('posts_per_page', 12);
-    // }
-
-    // Posts page
-    if (is_home() && !is_admin() && $query->is_main_query() && !is_front_page() && !is_archive()) {
-        $query->set('posts_per_page', 12);
-    }
-
-    // Jobs Archive page
-    if (is_post_type_archive('lb-job') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-        $query->set('posts_per_page', 8);
-    }
-
-    // FAQs Archive page
-    if (is_post_type_archive('lb-faq') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-        $query->set('posts_per_page', 12);
-    }
-
-    // Archive page
-    // if (is_archive() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-    //     $query->set('posts_per_page', 12);
-    //     $query->set('ignore_sticky_posts', 1);
-    // }
-
-    // Tag page
-    // if (is_tag() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
-    //     $query->set('posts_per_page', 12);
-    //     $query->set('ignore_sticky_posts', 1);
-    // }
-
-    // Search page
-    // if (is_search() && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page() && !is_archive()) {
-    //     $query->set('posts_per_page', 12);
-    //     $query->set('ignore_sticky_posts', 1);
-    // }
-}
-
-
-
-/**
- * Add symbols.twig to WP admin area
- */
-add_action('admin_footer', 'lb_add_symbols_to_admin');
-function lb_add_symbols_to_admin()
-{
-    Timber::render('@PathViews/components/symbols.twig');
-}
-
-
-
-/**
- * Custom pagination
- */
-function lb_pagination()
-{
-    $pagination_html = null;
-
-    $pagination = get_the_posts_pagination([
-        'mid_size' => 2,
-        'prev_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-left']) . '</div>',
-        'next_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-right']) . '</div>',
-        'before_page_number' => '<div class="button button-secondary">',
-        'after_page_number'  => '</div>'
-    ]);
-
-    if ($pagination) {
-        $pagination_html = "<div class=\"lb-pagination container\"><hr class=\"lb-separator lb-separator--medium\" data-variant=\"medium\">$pagination</div>";
-    }
-
-    return $pagination_html;
-}
-
-
-
-/**
- * Unregister taxonomies
- */
-add_action('init', 'lb_unregister_taxonomies', 999);
-function lb_unregister_taxonomies()
-{
-    register_taxonomy('category', []);
-    register_taxonomy('post_tag', []);
-}
-
-
-
-/**
- * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
- */
-add_filter('wpcf7_form_tag', function ($tag) {
-    $datas = [];
-    foreach ((array)$tag['options'] as $option) {
-        if (strpos($option, 'data-') === 0) {
-            $option = explode(':', $option, 2);
-            $data_attribute = $option[0];
-            $data_value = str_replace('|', ' ', $option[1]);
-            $datas[$data_attribute] = apply_filters('wpcf7_option_value', $data_value, $data_attribute);
-        }
-    }
-    if (!empty($datas)) {
-        $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
-        add_filter('wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
-            return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" " . wpcf7_format_atts($datas), $content));
-        });
-    }
-    return $tag;
-});
-
-
-
-/**
- * Get posts archive years
- */
-function lb_get_post_typologies()
-{
-    $items = [];
-    $typologies = get_terms([
-        'taxonomy' => 'lb-post-typology',
-        'hide_empty' => false,
-    ]);
-
-    foreach ($typologies as $typology) {
-        $items[] = [
-            'label' => $typology->name,
-            'value' => $typology->term_id,
-        ];
-    }
-
-    return $items;
-}
-
-
-
-/**
- * Get posts archive years
- */
-function lb_get_posts_archive_years()
-{
-    $years = array();
-    $years_args = array(
-        'type' => 'yearly',
-        'format' => 'custom',
-        'before' => '',
-        'after' => '|',
-        'echo' => false,
-        'post_type' => 'post',
-    );
-
-    // Get Years
-    $years_content = wp_get_archives($years_args);
-    if (!empty($years_content)) {
-        $years_arr = explode('|', $years_content);
-        $years_arr = array_filter($years_arr, function ($item) {
-            return trim($item) !== '';
-        }); // Remove empty whitespace item from array
-
-        foreach ($years_arr as $year_item) {
-            $year_row = trim($year_item);
-            preg_match('/href=["\']?([^"\'>]+)["\']>(.+)<\/a>/', $year_row, $year_vars);
-
-            if (!empty($year_vars)) {
-                $years[] = array(
-                    'label' => $year_vars[2],
-                    'value' => $year_vars[2]
-                );
-            }
-        }
-    }
-
-    return $years;
-}
-
-
-
-/**
- * Get header and menu
- */
-function lb_header()
-{
-    $lang_selector = do_shortcode('[wpml_language_selector_widget]');
-
-    return array(
-        'language_selector' => (!empty($lang_selector)) ? true : false,
-        'header_links' => ['items' => (new Option())->getHeaderLinks()],
-        'mobile_search' => [
-            'type' => 'search',
-            'name' => 'search',
-            'label' => __('Cerca un prodotto, una linea...', 'labo-suisse-theme'),
-            'disabled' => false,
-            'required' => false,
-            'buttonTypeNext' => 'button',
-            'variants' => ['secondary'],
-        ],
-        'menu_desktop' => ['items' => Menu::desktop()],
-        'menu_mobile' => ['items' => Menu::mobile()],
-    );
-}
-
-
-
-/**
- * Get footer and prefooter
- */
-function lb_footer()
-{
-    return MenuFooter::get();
-}
+new Clean();
+new Assets();

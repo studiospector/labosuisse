@@ -1,5 +1,9 @@
 <?php
 
+use Caffeina\LaboSuisse\Menu\Menu;
+use Caffeina\LaboSuisse\Menu\MenuFooter;
+use Caffeina\LaboSuisse\Option\Option;
+
 /**
  * Get Images array
  */
@@ -9,6 +13,7 @@ function lb_get_images($id, $sizes = [])
 
     if ( !empty($id) ) {
         $data = [
+            'alt' => get_the_title($id),
             'original' => wp_get_attachment_url($id),
             'lg' => (empty($sizes) && empty($sizes['lg'])) ? wp_get_attachment_image_src($id, 'lb-img-size-lg')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['lg']}")[0],
             'md' => (empty($sizes) && empty($sizes['md'])) ? wp_get_attachment_image_src($id, 'lb-img-size-md')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['md']}")[0],
@@ -178,4 +183,175 @@ function getBaseHomeUrl()
     }
 
     return $current_url;
+}
+
+/**
+ * Get posts archive years
+ */
+function lb_get_post_typologies()
+{
+    $items = [];
+    $typologies = get_terms([
+        'taxonomy' => 'lb-post-typology',
+        'hide_empty' => false,
+    ]);
+
+    foreach ($typologies as $typology) {
+        $items[] = [
+            'label' => $typology->name,
+            'value' => $typology->term_id,
+        ];
+    }
+
+    return $items;
+}
+
+/**
+ * Get posts archive years
+ */
+function lb_get_posts_archive_years()
+{
+    $years = array();
+    $years_args = array(
+        'type' => 'yearly',
+        'format' => 'custom',
+        'before' => '',
+        'after' => '|',
+        'echo' => false,
+        'post_type' => 'post',
+    );
+
+    // Get Years
+    $years_content = wp_get_archives($years_args);
+    if (!empty($years_content)) {
+        $years_arr = explode('|', $years_content);
+        $years_arr = array_filter($years_arr, function ($item) {
+            return trim($item) !== '';
+        }); // Remove empty whitespace item from array
+
+        foreach ($years_arr as $year_item) {
+            $year_row = trim($year_item);
+            preg_match('/href=["\']?([^"\'>]+)["\']>(.+)<\/a>/', $year_row, $year_vars);
+
+            if (!empty($year_vars)) {
+                $years[] = array(
+                    'label' => $year_vars[2],
+                    'value' => $year_vars[2]
+                );
+            }
+        }
+    }
+
+    return $years;
+}
+
+/**
+ * Assign global $product object in Timber
+ */
+function timber_set_product($post)
+{
+    global $product;
+    $product = isset($post->product) ? $post->product : wc_get_product($post->ID);
+}
+
+/**
+ * Get current language
+ */
+function lb_get_current_lang() {
+    global $sitepress;
+
+    $current_lang = $sitepress->get_current_language();
+
+    return $current_lang;
+}
+
+/**
+ * Custom pagination
+ */
+function lb_pagination()
+{
+    $pagination_html = null;
+
+    $pagination = get_the_posts_pagination([
+        'mid_size' => 2,
+        'prev_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-left']) . '</div>',
+        'next_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-right']) . '</div>',
+        'before_page_number' => '<div class="button button-secondary">',
+        'after_page_number'  => '</div>'
+    ]);
+
+    if ($pagination) {
+        $pagination_html = "<div class=\"lb-pagination container\"><hr class=\"lb-separator lb-separator--medium\" data-variant=\"medium\">$pagination</div>";
+    }
+
+    return $pagination_html;
+}
+
+/**
+ * Get header and menu
+ */
+function lb_header()
+{
+    $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+
+    return array(
+        'language_selector' => (!empty($lang_selector)) ? true : false,
+        'header_links' => ['items' => (new Option())->getHeaderLinks()],
+        'mobile_search' => [
+            'type' => 'search',
+            'name' => 'search',
+            'label' => __('Cerca un prodotto, una linea...', 'labo-suisse-theme'),
+            'disabled' => false,
+            'required' => false,
+            'buttonTypeNext' => 'button',
+            'variants' => ['secondary'],
+        ],
+        'menu_desktop' => ['items' => Menu::desktop()],
+        'menu_mobile' => ['items' => Menu::mobile()],
+    );
+}
+
+/**
+ * Get footer and prefooter
+ */
+function lb_footer()
+{
+    return MenuFooter::get();
+}
+
+/**
+ * Check if current user has role
+ */
+function lb_user_has_role($role)
+{
+    $user = get_userdata(get_current_user_id());
+
+    if (!$user || !$user->roles) {
+        return false;
+    }
+
+    if (is_array($role)) {
+        return array_intersect($role, (array)$user->roles) ? true : false;
+    }
+
+    return in_array($role, (array)$user->roles);
+}
+
+/**
+ * Custom recursive multidimensional array search
+ */
+function lb_recursive_array_search($needle, $haystack)
+{
+    foreach ($haystack as $key => $value) {
+        $current_key = $key;
+        if (
+            $needle === $value
+            or (is_array($value)
+                && lb_recursive_array_search($needle, $value) !== false
+            )
+        ) {
+            return $current_key;
+        }
+    }
+    return false;
 }

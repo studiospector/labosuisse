@@ -1,5 +1,7 @@
+/**
+ * Theme Options Menu link style
+ */
 #adminmenu {
-
     #toplevel_page_lb-theme-general-settings {
         &.opensub,
         &:hover {
@@ -20,6 +22,10 @@
     }
 }
 
+
+/**
+ * Labels for Product Category
+ */
 .edit-tags-php {
     #posts-filter {
         .wp-list-table {
@@ -96,4 +102,169 @@
             }
         }
     }
+}
+
+
+/**
+ * Footer text
+ */
+#wpfooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    #footer-left,
+    .clear {
+        display: none;
+    }
+
+    .credits {
+        font-size: 0.9rem;
+        display: block;
+        text-align: right;
+        color: #212121;
+        margin: 0;
+
+        a {
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-size: 15px;
+            color: #212121;
+            text-decoration: none;
+            text-transform: none;
+        }
+    }
+}
+
+
+/**
+ * Admin bar
+ */
+#wpadminbar #wp-admin-bar-site-name > .ab-item::before {
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+    margin-top: 4px;
+}
+#wpadminbar #wp-admin-bar-site-name.hover > .ab-item {
+    background-position: 0 0;
+}
+
+
+/**
+ * Welcome panel
+ */
+.welcome-panel-close {
+    display: none !important;
+}
+
+.lb-welcome-panel-content {
+    display: flex;
+    padding-bottom: 23px;
+
+    &__logo {
+        display: flex;
+        align-items: center;
+    }
+
+    &__text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-left: 40px;
+        padding-left: 40px;
+        border-left: 1px solid #c3c4c7;
+    }
+}
+
+
+/**
+ * Admin login page
+ */
+body.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f1f1f1;
+
+    div#login {
+        padding: 0;
+
+        h1 {
+            a {
+                width: 100%;
+                height: 80px;
+                margin: 0;
+                margin-bottom: 26px;
+                background-size: contain;
+                font-size: inherit;
+                font-weight: unset;
+                line-height: inherit;
+            }
+        }
+
+        form#loginform {
+            // p {
+            //     label {
+            //     }
+            // }
+
+            input {
+                &:focus {
+                    border-color: #b52a2d;
+                    box-shadow: 0 0 0 1px #b52a2d;
+                }
+            }
+
+            // input#user_login {
+            // }
+
+            // input#user_pass {
+            // }
+
+            // p.forgetmenot {
+            //     input#rememberme {
+            //     }
+            // }
+
+            p.submit {
+                input#wp-submit {
+                    background-color: #b52a2d;
+                    border-color: #b52a2d;
+                }
+            }
+        }
+
+        // p#nav {
+        //     a {
+        //     }
+        // }
+
+        // p#backtoblog {
+        //     a {
+        //     }
+        // }
+    }
+
+    .dashicons {
+        color: #212121;
+    }
+
+    #login_error {
+        border-left: 4px solid #b52a2d;
+    }
+
+    .message,
+    .success {
+        border-left: 4px solid #97C939;
+    }
+}
+
+
+
+body.login-action-login #loginform,
+body.login-action-lostpassword #lostpasswordform,
+body.login-action-register #registerform {
+    width: auto !important;
 }
