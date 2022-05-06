@@ -197,3 +197,19 @@ function lb_user_has_role($role)
 
     return in_array($role, (array)$user->roles);
 }
+
+function lb_recursive_array_search($needle, $haystack)
+{
+    foreach ($haystack as $key => $value) {
+        $current_key = $key;
+        if (
+            $needle === $value
+            or (is_array($value)
+                && lb_recursive_array_search($needle, $value) !== false
+            )
+        ) {
+            return $current_key;
+        }
+    }
+    return false;
+}

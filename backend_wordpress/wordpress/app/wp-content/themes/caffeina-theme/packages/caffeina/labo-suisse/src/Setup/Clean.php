@@ -24,6 +24,9 @@ class Clean
         // Manage admin menu
         add_action('admin_menu', [$this, 'lb_manage_admin_menu'], 999);
 
+        // Change labels admin menu
+        add_action('admin_menu', [$this, 'lb_change_labels_admin_menu'], 999);
+
         add_filter('custom_menu_order', [$this, 'lb_custom_menu_order'], 10, 1);
         add_filter('menu_order', [$this, 'lb_custom_menu_order'], 10, 1);
 
@@ -253,13 +256,14 @@ class Clean
      */
     function lb_manage_admin_menu()
     {
+        // Comments
+        remove_menu_page('edit-comments.php');
+
         if (!lb_user_has_role('administrator')) {
             // Tools
             remove_menu_page('tools.php');
             // Profile
             remove_menu_page('profile.php');
-            // Comments
-            remove_menu_page('edit-comments.php');
             // Theme
             remove_submenu_page('themes.php', 'themes.php');
             // Customize
@@ -275,12 +279,55 @@ class Clean
 
 
     /**
+     * Change label Menu admin
+     */
+    function lb_change_labels_admin_menu()
+    {
+        global $menu;
+
+        $acf_menu_key = lb_recursive_array_search('edit.php?post_type=acf-field-group', $menu);
+        $cf7_menu_key = lb_recursive_array_search('wpcf7', $menu);
+
+        $menu[$acf_menu_key][0] = 'ACF Pro';
+        $menu[$cf7_menu_key][0] = 'CF7';
+    }
+
+
+    /**
      * Order position of admin menu
      */
     function lb_custom_menu_order( $menu_ord ) {
         if ( !$menu_ord ) return true;
     
-        if (!lb_user_has_role('administrator')) {
+        if (lb_user_has_role('administrator')) {
+            return array(
+                'index.php', // Dashboard
+                'separator1', // First separator
+                'lb-theme-general-settings', // Theme options
+                'upload.php', // Media
+                'edit.php', // Posts
+                'edit.php?post_type=page', // Pages
+                'edit.php?post_type=lb-brand-page',// Brand pages
+                'edit.php?post_type=lb-faq', // FAQ
+                'edit.php?post_type=lb-job', // Job
+                'edit.php?post_type=lb-store', // Store
+                'edit.php?post_type=lb-beauty-specialist', // Beauty specialist
+                'edit.php?post_type=lb-distributor', // Distributor
+                'separator-woocommerce', // Last separator
+                'edit.php?post_type=product', // Product
+                'woocommerce', // WooCommerce
+                'wc-admin&path=/analytics/overview', // WooCommerce
+                'woocommerce-marketing', // WooCommerce
+                'separator2', // Second separator
+                'themes.php', // Appearance
+                'users.php', // Users
+                'tools.php', // Tools
+                'options-general.php', // Settings
+                'plugins.php', // Plugins
+                'separator-last', // Last separator
+                'edit.php?post_type=acf-field-group',
+            );
+        } else {
             return array(
                 'index.php', // Dashboard
                 'separator1', // First separator
@@ -299,7 +346,6 @@ class Clean
                 'woocommerce', // WooCommerce
                 'separator2', // Second separator
                 'themes.php', // Appearance
-                'separator-last', // Last separator
             );
         }
 
