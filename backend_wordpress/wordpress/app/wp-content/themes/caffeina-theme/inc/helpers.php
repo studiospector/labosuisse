@@ -179,3 +179,21 @@ function getBaseHomeUrl()
 
     return $current_url;
 }
+
+/**
+ * Check if current user has role
+ */
+function lb_user_has_role($role)
+{
+    $user = get_userdata(get_current_user_id());
+
+    if (!$user || !$user->roles) {
+        return false;
+    }
+
+    if (is_array($role)) {
+        return array_intersect($role, (array)$user->roles) ? true : false;
+    }
+
+    return in_array($role, (array)$user->roles);
+}

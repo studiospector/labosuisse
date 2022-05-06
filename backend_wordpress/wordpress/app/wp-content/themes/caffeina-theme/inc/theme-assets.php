@@ -56,6 +56,17 @@ function lb_register_admin_styles()
 
 
 /**
+ * Enqueue admin login page style
+ */
+add_action('login_enqueue_scripts', 'lb_enqueue_admin_login_scripts');
+function lb_enqueue_admin_login_scripts()
+{
+    wp_enqueue_style('lb-login-custom-style', LB_BUILD_CSS_URI . '/admin.css', 'all');
+}
+
+
+
+/**
  * Enqueue editor scripts and styles
  * 
  * Note:

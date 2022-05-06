@@ -28,7 +28,7 @@ if (!defined('LB_BUILD_JS_DIR_PATH')) {
 }
 
 if (!defined('LB_BUILD_IMG_URI')) {
-	define('LB_BUILD_IMG_URI', untrailingslashit(get_template_directory_uri()) . '/static/src/img');
+	define('LB_BUILD_IMG_URI', untrailingslashit(get_template_directory_uri()) . '/assets/images');
 }
 
 if (!defined('LB_BUILD_CSS_URI')) {
