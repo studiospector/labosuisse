@@ -287,9 +287,14 @@ class Clean
 
         $acf_menu_key = lb_recursive_array_search('edit.php?post_type=acf-field-group', $menu);
         $cf7_menu_key = lb_recursive_array_search('wpcf7', $menu);
+        
+        if ($acf_menu_key) {
+            $menu[$acf_menu_key][0] = 'ACF Pro';
+        }
 
-        $menu[$acf_menu_key][0] = 'ACF Pro';
-        $menu[$cf7_menu_key][0] = 'CF7';
+        if ($cf7_menu_key) {
+            $menu[$cf7_menu_key][0] = 'CF7';
+        }
     }
 
 

@@ -203,6 +203,9 @@ class CustomSelect extends BasicElement {
                     selectOptions.forEach(el => el.classList.remove('custom-select-items__item--active'))
                     // Add 'active' class to selected option 
                     elem.classList.add('custom-select-items__item--active')
+                    // Close select
+                    this.closeCurrentSelect()
+                    // Debug
                     this.traceClick(select)
                 }
                 this.multiSelected = multiSelected
