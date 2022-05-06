@@ -1,6 +1,7 @@
 <?php
 
 use Caffeina\LaboSuisse\Setup\Clean;
+use Caffeina\LaboSuisse\Setup\Assets;
 use Caffeina\LaboSuisse\Menu\Menu;
 use Caffeina\LaboSuisse\Menu\MenuFooter;
 use Caffeina\LaboSuisse\Option\Option;
@@ -324,6 +325,7 @@ class ThemeSetup extends Timber\Site
 
 new ThemeSetup();
 new Clean();
+new Assets();
 
 
 /**
