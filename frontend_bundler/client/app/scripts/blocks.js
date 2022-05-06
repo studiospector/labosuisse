@@ -19,6 +19,13 @@ const lbSetExtraPropsToBlockType = (props, blockType, attributes) => {
         })
     }
 
+    if (blockType.name === 'core/list') {
+        return Object.assign(props, {
+            // className: notDefined ? 'post__paragraph' : `post__paragraph ${props.className}`,
+            className: notDefined ? 'lb-post-content' : `lb-post-content ${props.className}`,
+        })
+    }
+
     if (blockType.name === 'core/image') {
         return Object.assign(props, {
             // className: notDefined ? 'post__paragraph' : `post__paragraph ${props.className}`,
