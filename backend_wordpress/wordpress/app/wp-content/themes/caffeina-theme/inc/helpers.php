@@ -13,6 +13,7 @@ function lb_get_images($id, $sizes = [])
 
     if ( !empty($id) ) {
         $data = [
+            'alt' => get_the_title($id),
             'original' => wp_get_attachment_url($id),
             'lg' => (empty($sizes) && empty($sizes['lg'])) ? wp_get_attachment_image_src($id, 'lb-img-size-lg')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['lg']}")[0],
             'md' => (empty($sizes) && empty($sizes['md'])) ? wp_get_attachment_image_src($id, 'lb-img-size-md')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['md']}")[0],
@@ -251,6 +252,17 @@ function timber_set_product($post)
 {
     global $product;
     $product = isset($post->product) ? $post->product : wc_get_product($post->ID);
+}
+
+/**
+ * Get current language
+ */
+function lb_get_current_lang() {
+    global $sitepress;
+
+    $current_lang = $sitepress->get_current_language();
+
+    return $current_lang;
 }
 
 /**
