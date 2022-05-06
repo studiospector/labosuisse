@@ -1,5 +1,4 @@
 import Component from '@okiba/component'
-import { qsa, qs, on } from '@okiba/dom'
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -184,9 +183,11 @@ export default class Application extends Component {
 
         this.el.classList.add('ready')
 
-        setTimeout(() => {
-            this.scrollbarUpdate()
-        }, 1200)
+        if (!document.querySelector('body').classList.contains('wp-admin')) {
+            setTimeout(() => {
+                this.scrollbarUpdate()
+            }, 1200)
+        }
     }
 
     /**
