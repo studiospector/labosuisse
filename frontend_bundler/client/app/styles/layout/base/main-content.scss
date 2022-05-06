@@ -1,3 +1,6 @@
+/**
+ * Core elements
+ */
 html.has-scroll-smooth {
     overflow: hidden;
     position: fixed;
@@ -31,7 +34,9 @@ html.has-scroll-smooth {
 }
 
 
-
+/**
+ * Logo and shield
+ */
 .lb-logo {
     svg {
         width: 182px;
@@ -57,7 +62,9 @@ html.has-scroll-smooth {
 }
 
 
-
+/**
+ * Ordered lists
+ */
 ol:not(.flex-control-nav) {
     margin: 0;
     padding: 0;
@@ -68,7 +75,7 @@ ol:not(.flex-control-nav) {
         counter-increment: lbListCounter;
 
         &::before {
-            content: counter(lbListCounter)".";
+            content: counter(lbListCounter) ".";
             min-width: 65px;
             margin-right: 15px;
             font-size: rem(56);
@@ -85,7 +92,9 @@ ol:not(.flex-control-nav) {
 }
 
 
-
+/**
+ * Unordered lists
+ */
 ul.lb-arrow-list {
     margin: 0;
     padding: 0;
@@ -119,7 +128,9 @@ ul.lb-arrow-list {
 }
 
 
-
+/**
+ * Photoswipe
+ */
 .pswp {
     &__bg {
         background-color: #f6f5f3;
@@ -165,7 +176,9 @@ ul.lb-arrow-list {
 }
 
 
-
+/**
+ * Lazyloading
+ */
 .lazyload,
 .lazyloading {
 	opacity: 0;
@@ -176,7 +189,9 @@ ul.lb-arrow-list {
 }
 
 
-
+/**
+ * Base component loader
+ */
 .caffeina-base-loader {
     width: 100%;
     height: 100%;
@@ -195,7 +210,9 @@ ul.lb-arrow-list {
 }
 
 
-
+/**
+ * Geolocation
+ */
 .lb-geolocation {
     display: flex;
     margin-left: 20px;
@@ -206,14 +223,18 @@ ul.lb-arrow-list {
 }
 
 
-
+/**
+ * No results element
+ */
 .lb-no-results {
     text-align: center;
     color: map-get($colors, "grey-3");
 }
 
 
-
+/**
+ * Load more element
+ */
 .lb-load-more {
     display: flex;
     flex-direction: column;
@@ -222,5 +243,30 @@ ul.lb-arrow-list {
 
     &--hide {
         display: none;
+    }
+}
+
+
+/**
+ * Post content wrapper
+ */
+.lb-post-content {
+    width: 100%;
+    max-width: 755px !important;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0.9375rem;
+    padding-left: 0.9375rem;
+
+    @include mq($until: md) {
+        max-width: 100%;
+    }
+
+    &.wp-block-image {
+        margin-bottom: 40px;
+        
+        figure {
+            margin: 0;
+        }
     }
 }

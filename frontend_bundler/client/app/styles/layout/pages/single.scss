@@ -27,26 +27,3 @@
         }
     }
 }
-
-
-
-.lb-post-content {
-    width: 100%;
-    max-width: 755px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 0.9375rem;
-    padding-left: 0.9375rem;
-
-    @include mq($until: md) {
-        max-width: 100%;
-    }
-
-    &.wp-block-image {
-        margin-bottom: 40px;
-        
-        figure {
-            margin: 0;
-        }
-    }
-}
