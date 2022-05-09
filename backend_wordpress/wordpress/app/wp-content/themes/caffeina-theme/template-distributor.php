@@ -44,4 +44,5 @@ $context = [
     'content' => apply_filters('the_content', get_the_content()),
 ];
 
+(new \Caffeina\LaboSuisse\Actions\Distributor\Distributor(38))->update();
 Timber::render('@PathViews/template-distributor.twig', $context);
