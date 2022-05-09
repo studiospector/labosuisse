@@ -270,3 +270,16 @@ ul.lb-arrow-list {
         }
     }
 }
+
+
+/**
+ * Text animation
+ */
+.lb-split-parent-line {
+    overflow: hidden;
+}
+
+.lb-split-child-line {
+    display: inline-block;
+    will-change: transform;
+}

@@ -31,6 +31,7 @@ import DistributorsMap from './DistributorsMap'
 import ScrollbarManagement from './ScrollbarManagement'
 import Tabs from './Tabs'
 import SearchAutocomplete from './SearchAutocomplete'
+import AnimationReveal from './AnimationReveal'
 
 const components = {
     scrollbar: {
@@ -171,6 +172,11 @@ const components = {
     searchAutocomplete: {
         selector: '.js-search-autocomplete',
         type: SearchAutocomplete,
+        optional: true
+    },
+    animationReveal: {
+        selector: '.js-animation-reveal',
+        type: AnimationReveal,
         optional: true
     },
 }
