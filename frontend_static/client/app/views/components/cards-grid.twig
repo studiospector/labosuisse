@@ -10,10 +10,10 @@
 
 {% set col = (items|length == 2) ? 6 : (items|length == 3) ? 4 : (items|length == 4) ? 3 : (items|length > 4) ? 4 : 3 %}
 
-<section class="lb-posts-grid{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-lb-posts-grid">
+<section class="lb-posts-grid{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-lb-posts-grid js-animation-reveal">
     <div class="container">
         {% if tagline or title or paragraph %}
-            <div class="lb-posts-grid__infobox">
+            <div class="lb-posts-grid__infobox js-text-reveal">
                 {% if tagline %}
                     <h6 class="infobox__tagline">{{ tagline }}</h6>
                 {% endif %}
@@ -25,7 +25,7 @@
                 {% endif %}
             </div>
         {% endif %}
-        <div class="lb-posts-grid__list row text-{{ cards_text_align|default('left') }}">
+        <div class="lb-posts-grid__list row text-{{ cards_text_align|default('left') }} js-card-reveal">
             {% for post in items|default([]) %}
                 <div class="lb-posts-grid__list__item col-12 col-md-6 col-xl-{{col}}">
                     {% include '@PathViews/components/card.twig' with post only %}

@@ -19,18 +19,18 @@
 	{% set _infoboxPosY = (infoboxPosY == 'center') ? '' : (infoboxPosY == 'bottom' ? ' hero--infobox-' ~ infoboxPosY : '') %}
 {% endif %}
 
-<section class="hero{{ container ? ' container' : '' }}{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ _infoboxPosY }} js-hero">
+<section class="hero{{ container ? ' container' : '' }}{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ _infoboxPosY }} js-hero js-animation-reveal">
 	{% if infobox %}
 		<div class="hero__infobox container">
 			{# <div class="container"> #}
 				<div class="h-100 col-12 col-md-{{ infoboxPosX == 'center' ? '6' : '5' }}{{ _infoboxPosX }}">
-					{% include '@PathViews/components/infobox.twig' with infobox only %}
+					{% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
 				</div>
 			{# </div> #}
 		</div>
 	{% endif %}
 
 	<div class="hero__img{{ container ? ' container' : '' }}">
-		{{ lbPicture(images, true, infoboxPosX) }}
+		{{ lbPicture(images, true, infoboxPosX, true) }}
 	</div>
 </section>
