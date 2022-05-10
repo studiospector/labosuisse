@@ -25,6 +25,12 @@ class OffsetNavs extends BaseBlock
                     'title' => __('Tecnologia', 'labo-suisse-theme'),
                     'data' => $this->filldata('technology')
                 ],
+                'effectiveness' => [
+                    'active' => get_field('lb_block_offsetnav_state_effectiveness'), // true, false
+                    'id' => 'lb-offsetnav-product-effectiveness',
+                    'title' => __('Efficacia', 'labo-suisse-theme'),
+                    'data' => $this->filldata('effectiveness')
+                ],
                 'use_cases' => [
                     'active' => get_field('lb_block_offsetnav_state_usecases'), // true, false
                     'id' => 'lb-offsetnav-product-usecases',
@@ -80,6 +86,7 @@ class OffsetNavs extends BaseBlock
                     $item['type'] = 'text';
                     $item['data']['title'] = get_sub_field('lb_block_offsetnav_' . $name . '_content_text_title');
                     $item['data']['subtitle'] = get_sub_field('lb_block_offsetnav_' . $name . '_content_text_subtitle');
+                    $item['data']['paragraph_small'] = get_sub_field('lb_block_offsetnav_' . $name . '_content_text_paragraph_small');
                     $item['data']['text'] = get_sub_field('lb_block_offsetnav_' . $name . '_content_text_paragraph');
                 } elseif (get_row_layout() == 'table') {
                     $item['type'] = 'table';
@@ -95,6 +102,12 @@ class OffsetNavs extends BaseBlock
                             $item['data']['table'][] = $item_table;
                         endwhile;
                     }
+                } elseif (get_row_layout() == 'button') {
+                    $item['type'] = 'button';
+                    $item['data']['cta'] = array_merge(get_sub_field('lb_block_offsetnav_' . $name . '_content_button'), ['variants' => ['primary']]);
+                } elseif (get_row_layout() == 'image') {
+                    $item['type'] = 'image';
+                    $item['data']['image'] = lb_get_images(get_sub_field('lb_block_offsetnav_' . $name . '_content_image'));
                 }
 
                 $offsetnav_content[] = $item;
