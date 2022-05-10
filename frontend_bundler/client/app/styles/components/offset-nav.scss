@@ -132,9 +132,30 @@
     &__item {
         margin-bottom: 40px;
 
+        &--text {
+            a {
+                color: map-get($colors, "black");
+            }
+
+            .infobox__paragraph--small {
+                font-style: italic;
+            }
+        }
+
         &--table {
             .infobox__subtitle {
                 margin-bottom: 0;
+            }
+        }
+
+        &--image {
+            .lb-picture {
+                position: relative;
+                
+                img {
+                    width: auto;
+                    height: auto;
+                }
             }
         }
     }
