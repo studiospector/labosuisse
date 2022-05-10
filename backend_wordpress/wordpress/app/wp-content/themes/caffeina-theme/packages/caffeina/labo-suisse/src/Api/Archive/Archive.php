@@ -2,6 +2,9 @@
 
 namespace Caffeina\LaboSuisse\Api\Archive;
 
+use Caffeina\LaboSuisse\Resources\Posts\Brand;
+use Caffeina\LaboSuisse\Resources\Posts\Magazine;
+use Caffeina\LaboSuisse\Resources\Posts\Product;
 use Carbon\Carbon;
 use Timber\Timber;
 use WP_Query;
@@ -34,11 +37,11 @@ class Archive
         $hasPosts = $this->args['paged'] < $query->max_num_pages;
 
         if($totalPosts === 0) {
-            return json_encode([
+            return [
                 'totalPosts' => $totalPosts,
-                'posts' => $this->noResults(),
-                'hasPosts' => $hasPosts
-            ]);
+                'hasPosts' => $hasPosts,
+                'noResult' => $this->noResults(),
+            ];
         }
 
         $callback = str_replace('-','', $this->postType) . "ArchiveResponse";
@@ -47,11 +50,11 @@ class Archive
             $query->get_posts()
         );
 
-        return json_encode([
+        return [
             'totalPosts' => $totalPosts,
             'posts' => $items,
             'hasPosts' => $hasPosts
-        ]);
+        ];
     }
 
     public function page($page)
@@ -122,36 +125,7 @@ class Archive
         $items = [];
 
         foreach ($posts as $post) {
-            $variant = 'type-2';
-            $image = null;
-            $cta_title = __("Leggi l'articolo", "labo-suisse-theme");
-
-            $typology = get_field('lb_post_typology', $post->ID);
-
-            if ($typology == 'press') {
-                $variant = 'type-6';
-                $image = get_field('lb_post_press_logo', $post->ID);
-                $cta_title = __("Visualizza", "labo-suisse-theme");
-            }
-
-            $card_content = Timber::compile('@PathViews/components/card.twig', [
-                'images' => lb_get_images(get_post_thumbnail_id($post->ID)),
-                'date' => Carbon::createFromDate($post->post_date)->format('d/m/Y'),
-                'variants' => [$variant],
-                'infobox' => [
-                    'image' => $image,
-                    'subtitle' => $post->post_title,
-                    'paragraph' => $post->post_excerpt,
-                    'cta' => [
-                        'title' => $cta_title,
-                        'url' => get_permalink($post->ID),
-                        'iconEnd' => ['name' => 'arrow-right'],
-                        'variants' => ['quaternary']
-                    ]
-                ],
-            ]);
-
-            $items[] = "<div class=\"col-12 col-md-3\">$card_content</div>";
+            $items[] = (new Magazine($post))->toArray();
         }
 
         return $items;
@@ -160,34 +134,20 @@ class Archive
     private function productArchiveResponse($posts)
     {
         $items = [];
+
         foreach ($posts as $post) {
-            $brand = get_the_terms($post->ID, 'lb-brand');
-
+            $brand = get_the_terms($post->ID, 'lb-brand')[0] ?? null;
             if ($brand) {
-                $brand = $brand[0];
-
                 if (!isset($items[$brand->term_id])) {
                     $items[$brand->term_id] = [];
-                    $items[$brand->term_id]['brand_card'] = [
-                        'color' => get_field('lb_brand_color', $brand),
-                        'infobox' => [
-                            'subtitle' => $brand->name,
-                            'paragraph' => $brand->description,
-                            'cta' => [
-                                'url' => get_term_link($brand),
-                                'title' => __('Scopri il brand', 'labo-suisse-theme'),
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-8']
-                    ];
+                    $items[$brand->term_id]['brand_card'] = Product::brandCard($brand);
                 }
 
-                $items[$brand->term_id]['products'][] = Timber::get_post($post->ID);
+                $items[$brand->term_id]['products'][] = Timber::compile('@PathViews/woo/partials/tease-product.twig', ['post' => Timber::get_post($post->ID)]);
             }
         }
 
-        return [Timber::compile('@PathViews/components/cards-grid-product-ordered.twig', ['items' => $items])];
+        return $items;
     }
 
     private function lbjobArchiveResponse($posts)
@@ -200,7 +160,8 @@ class Archive
             $isHeadquarter = $jobLocation['isHeadquarter'];
             $job_location_links = $jobLocation['jobLocationLinks'];
 
-            $card_content = Timber::compile('@PathViews/components/card.twig', [
+            $items[] = [
+                'col_classes' => ['lb-cards-grid__card', 'col-12', 'col-lg-8', 'offset-lg-2'], // Used only in JS for setting col Grid
                 'infobox' => [
                     'subtitle' => $post->post_title,
                     'location' => (empty($job_location_links)) ? null : [
@@ -211,7 +172,7 @@ class Archive
                         'label' => __('Ambito:', 'labo-suisse-theme'),
                         'value' => get_field('lb_job_scope', $post->ID)
                     ],
-                    'paragraph' => $post->post_excerpt,
+                    'paragraph' => get_the_excerpt($post->ID),
                     'cta' => [
                         'url' => get_permalink($post->ID),
                         'title' => __('Leggi di più', 'labo-suisse-theme'),
@@ -219,9 +180,7 @@ class Archive
                     ]
                 ],
                 'variants' => ['type-9']
-            ]);
-
-            $items[] = '<div class="lb-cards-grid__card col-12 col-lg-8 offset-lg-2">' . $card_content . '</div>';
+            ];
         }
 
         return $items;
@@ -235,53 +194,36 @@ class Archive
         $hasPosts = $this->args['paged'] < $query->max_num_pages;
 
         if($totalPosts === 0) {
-            return json_encode([
+            return [
                 'totalPosts' => $totalPosts,
                 'posts' => $this->noResults(),
                 'hasPosts' => $hasPosts
-            ]);
+            ];
         }
 
         $brands = [];
         foreach ($query->get_posts() as $post) {
             $brand = get_the_terms($post->ID, 'lb-brand')[0];
-            $brand_page = get_field('lb_brand_page', $brand);
 
             if(isset($brands[$brand->term_id])) {
                 continue;
             }
 
-            $card = Timber::compile('@PathViews/components/card.twig', [
-                'images' => lb_get_images(get_field('lb_brand_image', $brand)),
-                'infobox' => [
-                    'subtitle' => $brand->name,
-                    'paragraph' => $brand->description,
-                    'cta' => !empty($brand_page) ? [
-                        'url' => get_permalink($brand_page),
-                        'title' => __('Vai al brand', 'labo-suisse-theme'),
-                        'variants' => ['quaternary']
-                    ] : null
-                ],
-                'variants' => ['type-10']
-            ]);
-
-            $brands[$brand->term_id] = "<div class=\"col-12 col-md-4\">$card</div>";
+            $brands[$brand->term_id] = (new Brand($brand))->toArray();
         }
 
-        return json_encode([
+        return [
             'totalPosts' => $totalPosts,
             'posts' => array_values($brands),
             'hasPosts' => $hasPosts
-        ]);
+        ];
     }
 
     private function noResults()
     {
-        return '<div class="col-12">
-            <div class="lb-no-results">
-                <div class="infobox__title h2">'. __('Nessun risultato trovato', 'labo-suisse-theme') .'</div>
-                <p class="infobox__paragraph">'. __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme') .'</p>
-            </div>
-        </div>';
+        return [
+            'title' => __('Nessun risultato trovato', 'labo-suisse-theme'),
+            'paragraph' => __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme')
+        ];
     }
 }

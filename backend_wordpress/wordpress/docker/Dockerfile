@@ -7,6 +7,7 @@ RUN apk add --no-cache git --update
 # Install dependencies
 COPY ./frontend_bundler/client/app/package.json ./
 COPY ./frontend_bundler/client/app/package-lock.json ./
+COPY ./frontend_bundler/client/app/.npmrc ./
 RUN npm install
 
 COPY ./frontend_bundler/client/app/ ./

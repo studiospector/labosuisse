@@ -18,12 +18,12 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<section class="banner container{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+<section class="banner container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-animation-reveal">
 	{% if infobox %}
 		<div class="banner__infobox">
 			<div class="container">
 				<div class="h-100 col-12{{ _infoboxTextAlignment }}">
-					{% include '@PathViews/components/infobox.twig' with infobox only %}
+					{% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
 				</div>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 
     {% if images %}
         <div class="banner__img container">
-            {{ lbPicture(images, true) }}
+            {{ lbPicture(images, true, null, true) }}
         </div>
     {% endif %}
 </section>

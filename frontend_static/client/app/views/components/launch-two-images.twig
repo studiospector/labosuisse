@@ -1,19 +1,19 @@
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<section class="block-launch-two-images">
+<section class="block-launch-two-images js-animation-reveal">
   <div class="container">
     <div class="row">
       <div class="block-launch-two-images__img-wrap col-12 col-md-6">
         <div class="block-launch-two-images__img">
-          {{ lbPicture(imagesLeft, true) }}
+          {{ lbPicture(imagesLeft, true, null, true) }}
         </div>
       </div>
       <div class="block-launch-two-images__img-wrap col-12 col-md-6">
         <div class="block-launch-two-images__img">
-          {{ lbPicture(imagesRight, true, true) }}
+          {{ lbPicture(imagesRight, true, null, true) }}
         </div>
       </div>
     </div>
   </div>
-  {% include '@PathViews/components/infobox.twig' with infobox only %}
+  {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
 </section>

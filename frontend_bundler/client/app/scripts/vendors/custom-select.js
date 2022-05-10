@@ -203,11 +203,18 @@ class CustomSelect extends BasicElement {
                     selectOptions.forEach(el => el.classList.remove('custom-select-items__item--active'))
                     // Add 'active' class to selected option 
                     elem.classList.add('custom-select-items__item--active')
+                    // Close select
+                    this.closeCurrentSelect()
+                    // Debug
                     this.traceClick(select)
                 }
                 this.multiSelected = multiSelected
                 break;
             }
+        }
+        
+        if (this.settings.woocommerceSupportVariations) {
+            this.triggerWoocommerceVariations(document.querySelector(this.settings.woocommerceSupportVariations.selector))
         }
         // selectSelected.click()
     }
@@ -320,6 +327,20 @@ class CustomSelect extends BasicElement {
         elWidth += parseInt(window.getComputedStyle(el).getPropertyValue('margin-right'))
 
         return elWidth
+    }
+
+
+
+    /**
+     * Trigger events for Woocommerce variations
+     * 
+     * @param {HTMLElement} element element to dispatch event
+     */
+    triggerWoocommerceVariations = (element) => {
+        const checkVariationsEvent = new Event('check_variations')
+        const variationFormEvent = new Event('wc_variation_form')
+        element.dispatchEvent(checkVariationsEvent)
+        element.dispatchEvent(variationFormEvent)
     }
 
 

@@ -1,6 +1,8 @@
 import Component from '@okiba/component';
 import { on, qs } from '@okiba/dom';
 
+import { getHeaderFullHeight } from '../../utils/headerHeight';
+
 import { gsap } from 'gsap';
 
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -16,10 +18,7 @@ class ScrollTo extends Component {
 
         this.customScrollbar = window.getCustomScrollbar
 
-        const header = qs('.lb-header')
-        const headerProduct = qs('.lb-header-sticky-product')
-
-        this.fullHeaderHeight = (header ? header.getBoundingClientRect().height : 0) + (headerProduct ? headerProduct.getBoundingClientRect().height : 0)
+        this.fullHeaderHeight = getHeaderFullHeight()
 
         on(this.el, 'click', this.scrollTo)
     }

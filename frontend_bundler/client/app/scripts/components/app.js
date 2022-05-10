@@ -1,5 +1,4 @@
 import Component from '@okiba/component'
-import { qsa, qs, on } from '@okiba/dom'
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -28,6 +27,11 @@ import OpenMapAppLink from './OpenMapAppLink'
 import Geolocation from './Geolocation'
 import Filters from './Filters'
 import Loader from './Loader'
+import DistributorsMap from './DistributorsMap'
+import ScrollbarManagement from './ScrollbarManagement'
+import Tabs from './Tabs'
+import SearchAutocomplete from './SearchAutocomplete'
+import AnimationReveal from './AnimationReveal'
 
 const components = {
     scrollbar: {
@@ -121,7 +125,7 @@ const components = {
         optional: true
     },
     storeLocatorCaffeina: {
-        selector: '.js-caffeina-store-locator',
+        selector: '.js-caffeina-sl',
         type: StoreLocatorCaffeina,
         optional: true
     },
@@ -150,6 +154,31 @@ const components = {
         type: Loader,
         optional: true
     },
+    distributorsMap: {
+        selector: '.js-distributor-map-wrapper',
+        type: DistributorsMap,
+        optional: true
+    },
+    scrollbarManagement: {
+        selector: '.js-scrollbar-management',
+        type: ScrollbarManagement,
+        optional: true
+    },
+    tabs: {
+        selector: '.js-tabs',
+        type: Tabs,
+        optional: true
+    },
+    searchAutocomplete: {
+        selector: '.js-search-autocomplete',
+        type: SearchAutocomplete,
+        optional: true
+    },
+    animationReveal: {
+        selector: '.js-animation-reveal',
+        type: AnimationReveal,
+        optional: true
+    },
 }
 
 export default class Application extends Component {
@@ -160,9 +189,11 @@ export default class Application extends Component {
 
         this.el.classList.add('ready')
 
-        setTimeout(() => {
-            this.scrollbarUpdate()
-        }, 1200)
+        if (!document.querySelector('body').classList.contains('wp-admin')) {
+            setTimeout(() => {
+                this.scrollbarUpdate()
+            }, 1200)
+        }
     }
 
     /**

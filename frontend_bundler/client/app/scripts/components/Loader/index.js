@@ -1,14 +1,21 @@
 import Component from '@okiba/component'
-import { on, qsa } from '@okiba/dom'
+import { on, qs, qsa } from '@okiba/dom'
+import { debounce } from '@okiba/functions'
 
 class Loader extends Component {
 
     constructor({ options, ...props }) {
         super({ ...props })
 
+        qs('body').classList.remove('is-loading')
+
         this.onLoad()
         on(window, 'beforeunload', this.onLeave)
     }
+
+    // onLoad = debounce(() => {
+    //     this.el.classList.remove('lb-loader--loading')
+    // }, 300)
 
     onLoad = () => {
         this.el.classList.remove('lb-loader--loading')

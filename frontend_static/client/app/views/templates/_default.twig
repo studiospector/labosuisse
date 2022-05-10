@@ -8,31 +8,25 @@
 {% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %}
 {% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ fn('lb_get_current_lang') }}">
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		{# <title>{{ page.data.title }}</title> #}
-		{# <meta name="description" content="{{ metaDescription }}"> #}
 
+        <!-- Custom meta -->
         {% block meta %}{% endblock %}
+        <!-- / Custom meta -->
 
-		{# <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{{assets}}/favicon/57x57.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{assets}}/favicon/14x114.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{assets}}/favicon/72x72.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{assets}}/favicon/144x144.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="120x120" href="{{assets}}/favicon/120x120.png" />
-        <link rel="apple-touch-icon-precomposed" sizes="152x152" href="{{assets}}/favicon/152x152.png" />
-        <link rel="icon" type="image/png" href="{{assets}}/favicon/32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="{{assets}}/favicon/16x16.png" sizes="16x16" /> #}
-
-		<!-- mobile meta (hooray!) -->
+		<!-- Mobile meta -->
 		<meta name="HandheldFriendly" content="True">
         <meta name="MobileOptimized" content="320">
 		<meta name="format-detection" content="telephone=no">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no">
+        <!-- / Mobile meta -->
 
+        <!-- WP Head -->
 		{{ fn('wp_head') }}
+        <!-- / WP Head -->
 
 		<link rel="preload" as="style" href="{{ mainCss }}">
 		<link rel="preload" as="script" href="{{ mainJsModern }}">
@@ -43,11 +37,13 @@
 			<link rel="stylesheet" href="{{ criticalCss }}">
 		{% endif %}
 
-		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="none" onload="if(media!='all')media='all'">
+		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="all">
         
+        <!-- Custom Head -->
         {% block head %}{% endblock %}
+        <!-- / Custom Head -->
     </head>
-    <body {{ fn('body_class', bodyClass) }}>
+    <body {{ fn('body_class', bodyClass ~ ' is-loading') }}>
 
         <div class="js-scrollbar" data-scroll-container>
             <!-- Header -->
@@ -71,7 +67,7 @@
             {% block offsetNavs %}{% endblock %}
             <!-- Loader -->
             <div class="js-loader lb-loader lb-loader--loading">
-                <div class="lb-loader__spinner"></div>
+                <div class="lb-loader-spinner"></div>
             </div>
         </div>
 

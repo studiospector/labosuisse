@@ -1,9 +1,12 @@
-<div class="lb-accordion__item{{ class ? ' ' ~ class : '' }}">
+<div class="lb-accordion__item{{ class ? ' ' ~ class : '' }}"{{ id ? ' id="' ~ id ~ '"' : '' }}>
 	<div class="lb-accordion__header">
 		<div class="lb-accordion__header__title">
 			{% block accordion%}
+                {% if icon %}
+                    {% include '@PathViews/components/icon.twig' with {name: icon} %}
+                {% endif %}
 				{% if title is defined %}
-					<h6 class="p">{{ title }}</h6>
+					<h4 class="p">{{ title }}</h4>
 				{% endif %}
 			{% endblock %}
 		</div>
@@ -20,7 +23,29 @@
 	</div>
 	<div class="lb-accordion__content">
 		{% block accordionContent %}
-			{% if content %}
+			{% if content is iterable %}
+                {% for item in content %}
+                    {# Links list #}
+                    {% if item.type == 'links-list' %}
+                        <div class="links-list">
+                            {% for list in item.data %}
+                                <div class="links-list__item">
+                                    <h6 class="links-list__label">{{ list.label }}</h6>
+                                    {% for link in list.links %}
+                                        {% include '@PathViews/components/button.twig' with link only %}
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {# Infobox #}
+                    {% elseif item.type == 'infobox' %}
+                        {% include '@PathViews/components/infobox.twig' with item.data only %}
+                    {# Field #}
+                    {% elseif item.type == 'field' %}
+                        {% include '@PathViews/components/fields/input.twig' with item.data only %}
+                    {% endif %}
+                {% endfor %}
+            {% else %}
 				{{ content|raw }}
 			{% endif %}
 		{% endblock %}

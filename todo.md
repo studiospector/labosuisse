@@ -63,17 +63,30 @@ BUGFIX
 - √ link header
 - √ searchbar mobile on scroll
 - √ check translation header link (wpml_element_has_translations_filter)
-- caricamento store locator
 - √ check payload filtri
-- action form ricerca negli archivi
+- √ action form ricerca negli archivi
 - √ altezza fissa select
 - √ menu mobile discover labo
 - √ fix altezza logo brands in card
 - √ fix altezza logo brands in single product
-- fix card filtrate
 - √ fix altezza pagina al filtro
 - √ variante testo bianco nella hero e carousel hero
 - √ resize immagini prodotti
+
+- √ caricamento store locator
+- √ fix card filtrate
+
+- refactor con template archivi
+- refactor componente separatore
+- refactor api call con autenticazione e url da .env
+- √ refactor classi store locator base
+
+- √ gestione utenti BE + Dashboard
+- √ gestione accordion prefooter in mobile
+- √ gestione ricerca store locator dal campo nel prefooter
+- √ gestione ricerca store locator dal campo nel footer
+- animazioni
+- KPI
 
 
 
@@ -87,9 +100,9 @@ SEZIONI DA TERMINARE
 - √ T5 Single News
 - √ T5 Promozioni
 - √ T6 Store Locator
-- T10 Labo nel Mondo
+- √ T10 Labo nel Mondo
 
 - √ Filtri e Ricerche archivi
-- Gestione dinamica Footer
-- Ricerca globale
+- √ Gestione dinamica Footer
+- √ Ricerca globale
 - Integrazione Newsletter

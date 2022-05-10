@@ -16,13 +16,10 @@
 
     {# Posts Grig #}
     <div class="container">
-        <div class="row js-lb-cards-grid">
-            {% for item in posts %}
-                <div class="col-12 col-md-3">
-                    {% include '@PathViews/components/card.twig' with item only %}
-                </div>
-            {% endfor %}
-        </div>
+        {% include '@PathViews/components/cards-grid-default.twig' with {
+            col: 3,
+            items: posts,
+        } only %}
     </div>
 
     {# Load More #}

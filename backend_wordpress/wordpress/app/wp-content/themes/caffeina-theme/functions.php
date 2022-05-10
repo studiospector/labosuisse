@@ -28,7 +28,7 @@ if (!defined('LB_BUILD_JS_DIR_PATH')) {
 }
 
 if (!defined('LB_BUILD_IMG_URI')) {
-	define('LB_BUILD_IMG_URI', untrailingslashit(get_template_directory_uri()) . '/static/src/img');
+	define('LB_BUILD_IMG_URI', untrailingslashit(get_template_directory_uri()) . '/assets/images');
 }
 
 if (!defined('LB_BUILD_CSS_URI')) {
@@ -50,7 +50,6 @@ if (!defined('LB_BUILD_LIB_URI')) {
  */
 include __DIR__ . '/inc/helpers.php';
 include __DIR__ . '/inc/theme-setup.php';
-include __DIR__ . '/inc/theme-assets.php';
 include __DIR__ . '/inc/cpt-tax.php';
 include __DIR__ . '/inc/woocommerce-setup.php';
 include __DIR__ . '/inc/api.php';
@@ -61,9 +60,8 @@ include __DIR__ . '/inc/pmxi-hooks.php';
 /**
  * ACF Blocks autoload
  */
-
- $files = glob(__DIR__ . '/acf-config/blocks/*');
- #$files = list_files(__DIR__ . '/acf-config/blocks');
- foreach ( $files as $file ) {
+$acf_blocks_files = glob(__DIR__ . '/acf-config/blocks/*');
+#$files = list_files(__DIR__ . '/acf-config/blocks');
+foreach ( $acf_blocks_files as $file ) {
     include_once $file;
 }

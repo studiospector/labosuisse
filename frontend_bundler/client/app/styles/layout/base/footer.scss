@@ -3,8 +3,8 @@
     padding-top: 100px;
 
     @include mq($until: md) {
-        padding-top: 80px;
-        padding-bottom: 80px;
+        padding-top: 40px;
+        padding-bottom: 0;
     }
 
     &--desktop {
@@ -35,6 +35,36 @@
 
         .custom-field {
             margin-top: 30px;
+        }
+    }
+
+    &--mobile {
+        @include mq($from: md) {
+            display: none;
+        }
+
+        .lb-accordion {
+            text-align: center;
+
+            &__header {
+                justify-content: center;
+                padding: 0 15px;
+            }
+
+            &__content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                @include mq($until: md) {
+                    padding: 0 15px 15px 15px;
+                }
+
+                .custom-field {
+                    width: 300px;
+                    margin-top: 20px;
+                }
+            }
         }
     }
 }
@@ -160,6 +190,7 @@ footer {
                 svg {
                     width: 26px;
                     height: 26px;
+                    color: map-get($colors, "black");
                 }
             }
         }

@@ -19,7 +19,14 @@
         {% include '@PathViews/components/icon.twig' with iconStart only %}
     {% endif %}
     {% if title %}
-        <span class="button__label">{{ title }}</span>
+        <span class="button__label">
+            {% if 'quaternary' in variants or 'link' in variants %}
+                {{ title }}
+            {% else %}
+                <span>{{ title }}</span>
+                <span aria-hidden="true">{{ title }}</span>
+            {% endif %}
+        </span>
     {% endif %}
     {% if iconEnd %}
         {% include '@PathViews/components/icon.twig' with iconEnd only %}
