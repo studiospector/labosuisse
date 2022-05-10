@@ -10,15 +10,15 @@
 
 {% set variatTwoPosts = ('two-posts' in variants) ? true : false %}
 
-<section class="carousel-posts{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+<section class="carousel-posts{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
     <div class="row no-gutters">
         <div class="col-12{{ variatTwoPosts ? ' col-md-4' : ' col-md-5' }}">
-            <div class="carousel-posts__card">
+            <div class="carousel-posts__card js-text-reveal">
                 {% include '@PathViews/components/card.twig' with leftCard only %}
             </div>
         </div>
         <div class="col-12{{ variatTwoPosts ? ' col-md-8' : ' col-md-7' }}">
-            <div class="carousel-posts__slider">
+            <div class="carousel-posts__slider js-card-reveal">
                 <div class="swiper js-carousel-posts"{{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}>
                     <div class="swiper-wrapper">
                         {% for item in items|default([]) %}

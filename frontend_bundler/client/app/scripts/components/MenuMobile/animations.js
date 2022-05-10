@@ -51,7 +51,7 @@ export const openMenu = ({ menuElement, hamburgerElement, headerElement, logoEle
     // tl.call(() => header.classList.remove('lb-header--hover'), 0)
     // tl.call(() => header.classList.add('lb-header--hover'))
     // tl.add(stickyHeader(qs('.lb-header__wrapper--mobile', header), logoElement).duration(.4), 0);
-    tl.add(searchTimeline(searchElement).duration(.4), 0);
+    // tl.add(searchTimeline(searchElement).duration(.4), 0);
     tl.add(hamburgerTimeline(hamburgerElement).duration(.4), 0);
     tl.add(menuTimeline(menuElement).duration(.4), .4);
     // tl.add(itemsTimeline(items), .3)

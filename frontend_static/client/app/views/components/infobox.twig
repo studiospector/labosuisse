@@ -9,6 +9,9 @@
   {% set width = (container_width == 'full') ? null : (container_width == 'medium') ? 'col-12 col-md-8' : 'col-12 col-md-6' %}
   {% set classes = classes|default([])|merge(['container', width]) %}
 {% endif %}
+{% if reveal %}
+  {% set classes = classes|default([])|merge(['js-text-reveal']) %}
+{% endif %}
 {% if class %}
   {% set classes = classes|merge([class]) %}
 {% endif %}
