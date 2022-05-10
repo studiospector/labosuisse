@@ -98,3 +98,14 @@ deploy-preprod:
     - convox deploy -a $CONVOX_APP_NAME
   only:
     - preprod
+
+deploy-prod:
+  stage: push
+  image: registry.caffeina.co/devops/convox-gitlab-ci:latest
+  variables:
+    CONVOX_APP_NAME: ${PROJECT_NAME}
+    CONVOX_RACK: ${PROD_CONVOX_RACK}
+  script:
+    - convox deploy -a $CONVOX_APP_NAME
+  only:
+    - master
