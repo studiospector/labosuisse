@@ -40,9 +40,11 @@
                     {# Infobox #}
                     {% elseif item.type == 'infobox' %}
                         {% include '@PathViews/components/infobox.twig' with item.data only %}
-                    {# Field #}
-                    {% elseif item.type == 'field' %}
-                        {% include '@PathViews/components/fields/input.twig' with item.data only %}
+                    {# Form #}
+                    {% elseif item.type == 'form' %}
+                        <form action="{{ item.data.action }}" method="get" class="{{ item.data.class }}" {{ item.data.attributes ? ' ' ~ item.data.attributes|join(' ') : '' }}>
+                            {% include '@PathViews/components/fields/input.twig' with item.data.input only %}
+                        </form>
                     {% endif %}
                 {% endfor %}
             {% else %}
