@@ -38,6 +38,8 @@
 		{% endif %}
 
 		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="all">
+
+        {% include 'various/tracking-head.twig' %}
         
         <!-- Custom Head -->
         {% block head %}{% endblock %}
@@ -84,5 +86,7 @@
         <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
 
         {{ fn('wp_footer') }}
+
+        {% include 'various/tracking-body.twig' %}
     </body>
 </html>

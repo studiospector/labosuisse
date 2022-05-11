@@ -87,7 +87,11 @@ class MenuFooter
         return [
             'subtitle' => $options['lb_prefooter_left_block_title'],
             'paragraph' => $options['lb_prefooter_left_block_text'],
-            'cta' => array_merge($options['lb_prefooter_left_block_cta'], ['variants' => ['quaternary']])
+            'cta' => array_merge($options['lb_prefooter_left_block_cta'], [
+                'class' => 'js-gtm-tracking',
+                'attributes' => 'data-ga-event="click" data-ga-event-name="cta-prefooter" data-ga-event-value="left"',
+                'variants' => ['quaternary'],
+            ])
         ];
     }
 
@@ -108,6 +112,8 @@ class MenuFooter
                     'buttonTypeNext' => 'submit',
                     'variants' => ['secondary'],
                 ],
+                'class' => 'js-gtm-tracking',
+                'attributes' => 'data-ga-event="submit" data-ga-event-name="cta-prefooter" data-ga-event-value="center"',
             ],
         ];
     }
@@ -125,7 +131,11 @@ class MenuFooter
         return [
             'subtitle' => $options['lb_prefooter_right_block_title'],
             'paragraph' => $options['lb_prefooter_right_block_text'],
-            'cta' => array_merge($options['lb_prefooter_right_block_cta'], ['variants' => ['quaternary']])
+            'cta' => array_merge($options['lb_prefooter_right_block_cta'], [
+                'class' => 'js-gtm-tracking',
+                'attributes' => 'data-ga-event="click" data-ga-event-name="cta-prefooter" data-ga-event-value="right"',
+                'variants' => ['quaternary'],
+            ])
         ];
     }
 }

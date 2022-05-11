@@ -8,7 +8,7 @@
                     </div>
                     <div class="prefooter__box col-12 col-md-4">
                         {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
-                        <form action="{{ data.prefooter.block_2.form.action }}" method="get">
+                        <form action="{{ data.prefooter.block_2.form.action }}" method="get" class="{{ data.prefooter.block_2.form.class }}" {{ data.prefooter.block_2.form.attributes ? ' ' ~ data.prefooter.block_2.form.attributes|join(' ') : '' }}>
                             {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
                         </form>
                     </div>
@@ -37,8 +37,8 @@
                                     data: data.prefooter.block_2|merge({subtitle: ''}),
                                 },
                                 {
-                                    type: 'field',
-                                    data: data.prefooter.block_2.form.input,
+                                    type: 'form',
+                                    data: data.prefooter.block_2.form,
                                 },
                             ],
                         },

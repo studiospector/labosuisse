@@ -32,6 +32,7 @@ import ScrollbarManagement from './ScrollbarManagement'
 import Tabs from './Tabs'
 import SearchAutocomplete from './SearchAutocomplete'
 import AnimationReveal from './AnimationReveal'
+import GTMTracking from './GTMTracking'
 
 const components = {
     scrollbar: {
@@ -177,6 +178,11 @@ const components = {
     animationReveal: {
         selector: '.js-animation-reveal',
         type: AnimationReveal,
+        optional: true
+    },
+    gtmTracking: {
+        selector: '.js-gtm-tracking',
+        type: GTMTracking,
         optional: true
     },
 }
