@@ -11,6 +11,8 @@ class GTMTracking extends Component {
         this.eventValue = this.el.dataset.gaEventValue
 
         on(this.el, this.event, this.traceEvent)
+
+        this.traceMailchimp()
     }
 
     traceEvent = (ev) => {
@@ -21,6 +23,17 @@ class GTMTracking extends Component {
         Object.assign(data, this.eventValue && { value: this.eventValue })
 
         dataLayer.push(data)
+    }
+
+    traceMailchimp = () => {
+        if (mc4wp) {
+            mc4wp.forms.on('subscribed', (form) => {
+                dataLayer.push({
+                    event: 'form-newsletter',
+                    value: form.name
+                })
+            })
+        }
     }
 }
 
