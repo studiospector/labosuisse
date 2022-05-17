@@ -320,6 +320,32 @@ function lb_footer()
 }
 
 /**
+ * Newsletter nav
+ */
+function lb_newsletter_nav()
+{
+    $footer_newsletter_options = get_field('lb_footer_newsletter', 'option');
+
+    return [
+        'id' => 'lb-newsletter-nav',
+        'title' => __('Newsletter', 'labo-suisse-theme'),
+        'data' => [
+            [
+                'type' => 'text',
+                'data' => [
+                    'title' => __('Iscriviti alla newsletter', 'labo-suisse-theme'),
+                    'text' => __('Ricevi aggiornamenti e promozioni direttamente sulla tua mail.', 'labo-suisse-theme'),
+                ]
+            ],
+            [
+                'type' => 'html',
+                'data' => do_shortcode($footer_newsletter_options['lb_footer_newsletter_shortcode'])
+            ]
+        ]
+    ];
+}
+
+/**
  * Check if current user has role
  */
 function lb_user_has_role($role)

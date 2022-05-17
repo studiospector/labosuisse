@@ -139,10 +139,21 @@ class Option
             ];
         }
 
+        // Remove unused data
+        unset($options['lb_footer_newsletter_cta']['url']);
+        unset($options['lb_footer_newsletter_cta']['target']);
+
         return [
             'title' => $options['lb_footer_newsletter_title'],
             'text' => $options['lb_footer_newsletter_text'],
-            'cta' => array_merge($options['lb_footer_newsletter_cta'], ['variants' => ['secondary']]),
+            'cta' => array_merge(
+                $options['lb_footer_newsletter_cta'],
+                [
+                    'attributes' => ['data-target-offset-nav="lb-newsletter-nav"'],
+                    'class' => 'js-open-offset-nav',
+                    'variants' => ['secondary']
+                ]
+            ),
         ];
     }
 

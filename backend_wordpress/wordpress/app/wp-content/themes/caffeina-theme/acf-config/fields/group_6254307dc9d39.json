@@ -449,6 +449,26 @@
                     },
                     "return_format": "",
                     "wpml_cf_preferences": ""
+                },
+                {
+                    "key": "field_6283735d33d5f",
+                    "label": "Shortcode form",
+                    "name": "lb_footer_newsletter_shortcode",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
                 }
             ]
         },
@@ -577,5 +597,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1651660353
+    "modified": 1652781969
 }
