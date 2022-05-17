@@ -11,14 +11,15 @@
         }
 
         .custom-field {
+            margin-top: 40px;
             background: map-get($colors, "white");
         }
 
         &__text {
             z-index: 1;
 
-            .infobox {
-                margin-bottom: 40px;
+            .infobox__subtitle {
+                margin: 0;
             }
         }
     }
@@ -42,9 +43,12 @@
         .mc4wp-form {
             width: 100%;
             max-width: 420px;
+            position: relative;
 
             .mc4wp-form-fields {
                 .custom-input {
+                    margin-bottom: 20px;
+
                     .custom-input-label {
                         color: map-get($colors, "grey-3");
                     }
@@ -69,11 +73,22 @@
 
                 .button {
                     margin-top: 100px;
+                    text-align: center;
                 }
             }
 
             .mc4wp-response {
+                width: 100%;
                 margin-top: 20px;
+                position: absolute;
+                bottom: 72px;
+                left: 0;
+
+                > .mc4wp-response {
+                    position: relative;
+                    bottom: 0;
+                    margin: 0;
+                }
 
                 .mc4wp-alert {
                     p {

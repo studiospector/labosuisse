@@ -8,9 +8,12 @@ class NewsletterSubscription extends BaseBlock
     {
         parent::__construct($block, $name);
 
+        $search_form_visibility = get_field('lb_block_newsletter_subscription_search_visibility');
+        $search_title = get_field('lb_block_newsletter_subscription_search_title');
+
         $payload = [
             'images' => lb_get_images(get_field('lb_block_newsletter_subscription_image')),
-            'search_input' => [
+            'search_input' => $search_form_visibility ? [
                 'type' => 'search',
                 'id' => "lb-search-val-newsletter",
                 'name' => "lb-search-val",
@@ -19,10 +22,10 @@ class NewsletterSubscription extends BaseBlock
                 'required' => false,
                 'buttonTypeNext' => 'submit',
                 'variants' => ['secondary'],
-            ],
-            'search_infobox' => [
-                'subtitle' => get_field('lb_block_newsletter_subscription_search_title'),
-            ],
+            ] : null,
+            'search_infobox' => $search_title ? [
+                'subtitle' => $search_title,
+            ] : null,
             'form_infobox' => [
                 'subtitle' => get_field('lb_block_newsletter_subscription_form_title'),
                 'paragraph' => get_field('lb_block_newsletter_subscription_form_text'),

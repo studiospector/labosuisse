@@ -6,12 +6,18 @@
 			<div class="col-12 col-md-6">
 				<div class="lb-newletter-subscription__search">
 					{{ lbPicture(images) }}
-                    <div class="lb-newletter-subscription__search__text">
-                        {% include '@PathViews/components/infobox.twig' with search_infobox only %}
-                        <form action="" method="get">
-                            {% include '@PathViews/components/fields/input.twig' with search_input only %}
-                        </form>
-                    </div>
+                    {% if search_infobox or search_input %}
+                        <div class="lb-newletter-subscription__search__text">
+                            {% if search_infobox %}
+                                {% include '@PathViews/components/infobox.twig' with search_infobox only %}
+                            {% endif %}
+                            {% if search_input %}
+                                <form action="" method="get">
+                                    {% include '@PathViews/components/fields/input.twig' with search_input only %}
+                                </form>
+                            {% endif %}
+                        </div>
+                    {% endif %}
 				</div>
 			</div>
 			<div class="col-12 col-md-6">
