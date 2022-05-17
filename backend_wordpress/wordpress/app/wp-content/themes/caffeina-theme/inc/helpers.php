@@ -328,8 +328,15 @@ function lb_newsletter_nav()
 
     return [
         'id' => 'lb-newsletter-nav',
-        'title' => __('Iscriviti alla newsletter', 'labo-suisse-theme'),
+        'title' => __('Newsletter', 'labo-suisse-theme'),
         'data' => [
+            [
+                'type' => 'text',
+                'data' => [
+                    'title' => __('Iscriviti alla newsletter', 'labo-suisse-theme'),
+                    'text' => __('Ricevi aggiornamenti e promozioni direttamente sulla tua mail.', 'labo-suisse-theme'),
+                ]
+            ],
             [
                 'type' => 'html',
                 'data' => do_shortcode($footer_newsletter_options['lb_footer_newsletter_shortcode'])
