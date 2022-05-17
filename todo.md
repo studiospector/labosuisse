@@ -86,7 +86,7 @@ BUGFIX
 - √ gestione ricerca store locator dal campo nel prefooter
 - √ gestione ricerca store locator dal campo nel footer
 - animazioni
-- KPI
+- √ KPI
 
 
 
@@ -105,4 +105,7 @@ SEZIONI DA TERMINARE
 - √ Filtri e Ricerche archivi
 - √ Gestione dinamica Footer
 - √ Ricerca globale
-- Integrazione Newsletter
+- √ Integrazione Newsletter
+- Template Ricerca e Innovazione
+- Template Marchi e Brevetti
+- Nuovo menu
