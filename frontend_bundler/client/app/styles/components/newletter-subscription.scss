@@ -43,43 +43,15 @@
         .mc4wp-form {
             width: 100%;
             max-width: 420px;
-            position: relative;
 
             .mc4wp-form-fields {
-                .custom-input {
-                    margin-bottom: 20px;
-
-                    .custom-input-label {
-                        color: map-get($colors, "grey-3");
-                    }
-
-                    input {
-                        border: 1px solid map-get($colors, "grey-2");
-                    }
-                }
-
-                .custom-checkbox {
-                    margin-top: 20px;
-
-                    &__options {
-                        label {
-                            display: flex;
-                            justify-content: center;
-                            font-size: rem(13);
-                            font-weight: 300;
-                        }
-                    }
-                }
-
                 .button {
                     margin-top: 100px;
-                    text-align: center;
                 }
             }
 
             .mc4wp-response {
                 width: 100%;
-                margin-top: 20px;
                 position: absolute;
                 bottom: 72px;
                 left: 0;
@@ -88,16 +60,6 @@
                     position: relative;
                     bottom: 0;
                     margin: 0;
-                }
-
-                .mc4wp-alert {
-                    p {
-                        margin: 0;
-                    }
-
-                    // &.mc4wp-success {
-
-                    // }
                 }
             }
         }

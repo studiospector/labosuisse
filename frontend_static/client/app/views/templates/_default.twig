@@ -66,6 +66,8 @@
                 } only %}
             {% endblock %}
             <!-- Offset Navs -->
+            {% set newsletter_nav = fn('lb_newsletter_nav') %}
+            {% include '@PathViews/components/offset-nav/default.twig' with newsletter_nav only %}
             {% block offsetNavs %}{% endblock %}
             <!-- Loader -->
             <div class="js-loader lb-loader lb-loader--loading">

@@ -54,6 +54,8 @@
                         {% include '@PathViews/components/button.twig' with item.data.cta only %}
                     {% elseif item.type == 'image' %}
                         {{ lbPicture(item.data.image) }}
+                    {% elseif item.type == 'html' %}
+                        {{ item.data|raw }}
                     {% endif %}
                 </div>
 
