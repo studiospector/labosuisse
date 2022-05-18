@@ -6,9 +6,9 @@
 	<?php endif ?>
 </div>
 <div id="current_xml">
-	<div class="variations_tag">
+	<div class="variations_tag">	
 		<input type="hidden" name="variations_tagno" value="<?php echo $tagno + 1 ?>" />
-		<div class="title">
+		<div class="title">			
 			<div class="navigation">
 				<?php if ($tagno > 0): ?><a href="#variation_prev" class="previous_element">&nbsp;</a><?php else: ?><span class="previous_element">&nbsp;</span><?php endif ?>
 				<?php printf(__('#<strong>%s</strong> out of <strong>%s</strong>', 'wp_all_import_plugin'), $tagno + 1, $variation_list_count); ?>
@@ -16,15 +16,15 @@
 			</div>
 		</div>
 		<div class="clear"></div>
-		<div class="xml resetable"> <?php if (!empty($variation_list_count)) PMXI_Render::render_xml_element($variation_elements->item($tagno), true);  ?></div>
+		<div class="xml resetable"> <?php if (!empty($variation_list_count)) PMXI_Render::render_xml_element($variation_elements->item($tagno), true);  ?></div>	
 	</div>
 </div>
 <?php endif; ?>
 <script type="text/javascript">
-(function($){
+(function($){	
 	var paths = <?php echo json_encode($paths) ?>;
-	var $xml = $('#variations_xml');
-
+	var $xml = $('#variations_xml');	
+	
 	$xml.html($('#current_xml').html()).css({'visibility':'visible'});
 	for (var i = 0; i < paths.length; i++) {
 		$xml.find('.xml-element[title="' + paths[i] + '"]').addClass('selected').parents('.xml-element').find('> .xml-content.collapsed').removeClass('collapsed').parent().find('> .xml-expander').html('-');

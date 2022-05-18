@@ -1,6 +1,6 @@
-<div class="tag">
+<div class="tag">		
 	<div>
-		<?php if ( ! empty($elements->length) ):?>
+		<?php if ( ! empty($elements->length) ):?>		
 			<div class="title">
 				<!--h3><?php _e('Elements', 'wp_all_import_plugin'); ?></h3-->
 				<div class="navigation">
@@ -10,9 +10,9 @@
 				</div>
 			</div>
 			<div class="clear"></div>
-			<div class="wpallimport-xml resetable">
-				<?php
-				if ( ! empty($elements->length) ):
+			<div class="wpallimport-xml resetable"> 
+				<?php 
+				if ( ! empty($elements->length) ):					
 					if ( PMXI_Plugin::$session->options['delimiter'] ):
 						PMXI_Render::render_csv_element($elements->item($elements->length > 1 ? $tagno : 0), true);
 					else:
@@ -20,12 +20,12 @@
 					endif;
 
 				endif;
-				?>
-			</div>
+				?>			
+			</div>			
 		<?php else: ?>
 			<div class="error inline below-h2" style="padding:10px; margin-top:45px;">
-				<?php printf(__('History file not found. Probably you are using wrong encoding.', 'wp_all_import_plugin')); ?>
+				<?php printf(__('History file not found. Probably you are using wrong encoding.', 'wp_all_import_plugin')); ?>			
 			</div>
-		<?php endif; ?>
+		<?php endif; ?>		
 	</div>
 </div>

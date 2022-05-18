@@ -9,7 +9,7 @@
 		<p><?php _e('<strong>Note</strong>: Highlighting is turned off since can be very slow on large sets of elements.', 'wp_all_import_plugin') ?></p>
 	<?php endif ?>
 </div>
-<div id="current_xml">
+<div id="current_xml">	
 	<?php if ($is_csv): ?>
 		<?php PMXI_Render::render_csv_element($elements->item($elements->length > 1 ? $show_element : 0), false, '//'); ?>
 	<?php else:?>
@@ -17,13 +17,13 @@
 	<?php endif;?>
 </div>
 <script type="text/javascript">
-(function($){
+(function($){	
 	var paths = <?php echo json_encode($paths) ?>;
 	var $xml = $('.wpallimport-xml');
 	$('.wpallimport-console').fadeIn();
 	$xml.html($('#current_xml').html()).css({'visibility':'visible'});
 	for (var i = 0; i < paths.length; i++) {
 		$xml.find('.xml-element[title="' + paths[i] + '"]').addClass('selected').parents('.xml-element').find('> .xml-content.collapsed').removeClass('collapsed').parent().find('> .xml-expander').html('-');
-	}
+	}	
 })(jQuery);
 </script>

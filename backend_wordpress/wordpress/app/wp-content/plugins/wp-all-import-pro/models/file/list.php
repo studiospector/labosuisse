@@ -5,7 +5,7 @@ class PMXI_File_List extends PMXI_Model_List {
 		parent::__construct();
 		$this->setTable(PMXI_Plugin::getInstance()->getTablePrefix() . 'files');
 	}
-
+	
 	/**
 	 * Sweep history files in accordance with plugin settings
 	 * @return PMXI_File_List
@@ -26,7 +26,7 @@ class PMXI_File_List extends PMXI_Model_List {
 				$f->delete();
 			}
 		}
-
+		
 		return $this;
 	}
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * xml-string-streamer Parser interface
- *
+ * 
  * @package xml-string-streamer
  * @author  Oskar Thornblad <oskar.thornblad@gmail.com>
  */

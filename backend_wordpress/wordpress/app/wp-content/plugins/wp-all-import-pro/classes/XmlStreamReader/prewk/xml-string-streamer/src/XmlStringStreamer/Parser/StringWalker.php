@@ -1,7 +1,7 @@
 <?php
 /**
  * xml-string-streamer StringWalker parser
- *
+ * 
  * @package xml-string-streamer
  * @author  Oskar Thornblad <oskar.thornblad@gmail.com>
  */
@@ -159,7 +159,7 @@ class StringWalker implements ParserInterface
             }
         }
     }
-
+    
     /**
      * The shave method must be able to request more data even though there isn't any more to fetch from the stream, this method wraps the getChunk call so that it returns true as long as there is XML data left
      * @param  StreamInterface $stream The stream to read from
@@ -226,13 +226,13 @@ class StringWalker implements ParserInterface
                 list($opening, $closing, $depth) = $this->getEdges($element);
 
                 if ( strpos($element, "<![CDATA[") === false && strpos($element, "<?xml") === false && strpos($element, "</") === false && strpos($element, "/>") === false )
-                {
+                {   
                     $cloud_element = str_replace(array("<", ">"), "", preg_replace("%\s.*%", "", $element));
                     if ( strpos($cloud_element, ":") === false )
                     {
-                        if ( isset($this->cloud[$cloud_element])) $this->cloud[$cloud_element]++; else $this->cloud[$cloud_element] = 1;
-                    }
-                }
+                        if ( isset($this->cloud[$cloud_element])) $this->cloud[$cloud_element]++; else $this->cloud[$cloud_element] = 1;    
+                    }                    
+                }                
 
                 // Update depth
                 $this->depth += $depth;
@@ -244,10 +244,10 @@ class StringWalker implements ParserInterface
                     // Yes, we've just entered capture depth, start capturing
                     $this->capture = true;
                 } else if ($this->depth === $this->options["captureDepth"] - 1 && $depth < 0) {
-                    // No, we've just exited capture depth, stop capturing and prepare for flush
+                    // No, we've just exited capture depth, stop capturing and prepare for flush      
                     $flush = true;
                     $this->capture = false;
-
+                    
                     // ..but include this last node
                     $this->shaved .= $data;
                 } else if ($this->options["extractContainer"] && $this->depth < $this->options["captureDepth"]) {

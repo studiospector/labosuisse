@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 function pmxi_delete_term($term, $tt_id, $taxonomy, $deleted_term, $object_ids) {
 	if (is_numeric($term)){

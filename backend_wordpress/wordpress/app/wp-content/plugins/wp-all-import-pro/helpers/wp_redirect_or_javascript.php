@@ -1,7 +1,7 @@
 <?php
 if ( ! function_exists('wp_redirect_or_javascript')):
 /**
- * For AJAX request outputs javascript specified, otherwise acts like wp_redirect
+ * For AJAX request outputs javascript specified, otherwise acts like wp_redirect 
  * @param string $location
  * @param string[optional] $javascript
  * @param int[optional] $status

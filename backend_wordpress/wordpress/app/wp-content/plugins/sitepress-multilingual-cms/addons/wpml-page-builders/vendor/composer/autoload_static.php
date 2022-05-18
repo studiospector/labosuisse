@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit121fce6d64820970cf3aaf6a028599d0
+class ComposerStaticInit69eac7c56a84362665883b3cb937f600
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -20,6 +20,7 @@ class ComposerStaticInit121fce6d64820970cf3aaf6a028599d0
         'IWPML_Page_Builders_Translatable_Nodes' => __DIR__ . '/../..' . '/classes/Shared/st/compatibility/interface-iwpml-page-builders-translatable-nodes.php',
         'WPML\\Compatibility\\BaseDynamicContent' => __DIR__ . '/../..' . '/classes/Shared/Abstracts/BaseDynamicContent.php',
         'WPML\\Compatibility\\Divi\\Builder' => __DIR__ . '/../..' . '/classes/Integrations/Divi/builder.php',
+        'WPML\\Compatibility\\Divi\\DisplayConditions' => __DIR__ . '/../..' . '/classes/Integrations/Divi/DisplayConditions.php',
         'WPML\\Compatibility\\Divi\\DiviOptionsEncoding' => __DIR__ . '/../..' . '/classes/Integrations/Divi/divi-options-encoding.php',
         'WPML\\Compatibility\\Divi\\DoubleQuotes' => __DIR__ . '/../..' . '/classes/Integrations/Divi/DoubleQuotes.php',
         'WPML\\Compatibility\\Divi\\DynamicContent' => __DIR__ . '/../..' . '/classes/Integrations/Divi/dynamic-content.php',
@@ -53,15 +54,24 @@ class ComposerStaticInit121fce6d64820970cf3aaf6a028599d0
         'WPML\\PB\\Cornerstone\\Modules\\ModuleWithItemsFromConfig' => __DIR__ . '/../..' . '/classes/Integrations/Cornerstone/modules/ModuleWithItemsFromConfig.php',
         'WPML\\PB\\Cornerstone\\Styles\\Hooks' => __DIR__ . '/../..' . '/classes/Integrations/Cornerstone/Styles/Hooks.php',
         'WPML\\PB\\Cornerstone\\Utils' => __DIR__ . '/../..' . '/classes/Integrations/Cornerstone/class-wpml-cornerstone-utils.php',
+        'WPML\\PB\\Elementor\\Config\\DynamicElements\\EssentialAddons\\ContentTimeline' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/DynamicElements/EssentialAddons/ContentTimeline.php',
+        'WPML\\PB\\Elementor\\Config\\DynamicElements\\FormPopup' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/DynamicElements/FormPopup.php',
+        'WPML\\PB\\Elementor\\Config\\DynamicElements\\Hotspot' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/DynamicElements/Hotspot.php',
+        'WPML\\PB\\Elementor\\Config\\DynamicElements\\Popup' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/DynamicElements/Popup.php',
+        'WPML\\PB\\Elementor\\Config\\DynamicElements\\Provider' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/DynamicElements/Provider.php',
+        'WPML\\PB\\Elementor\\Config\\DynamicElements\\WooProduct' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/DynamicElements/WooProduct.php',
         'WPML\\PB\\Elementor\\Config\\Factory' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Config/Factory.php',
         'WPML\\PB\\Elementor\\DataConvert' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/DataConvert.php',
         'WPML\\PB\\Elementor\\DynamicContent\\Field' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/DynamicContent/Field.php',
         'WPML\\PB\\Elementor\\DynamicContent\\Strings' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/DynamicContent/Strings.php',
         'WPML\\PB\\Elementor\\Hooks\\DynamicElements' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/DynamicElements.php',
         'WPML\\PB\\Elementor\\Hooks\\Editor' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/Editor.php',
+        'WPML\\PB\\Elementor\\Hooks\\FormPopup' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/FormPopup.php',
         'WPML\\PB\\Elementor\\Hooks\\Frontend' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/Frontend.php',
         'WPML\\PB\\Elementor\\Hooks\\GutenbergCleanup' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/GutenbergCleanup.php',
         'WPML\\PB\\Elementor\\Hooks\\LandingPages' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/LandingPages.php',
+        'WPML\\PB\\Elementor\\Hooks\\WooCommerce' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/WooCommerce.php',
+        'WPML\\PB\\Elementor\\Hooks\\WordPressWidgets' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/WordPressWidgets.php',
         'WPML\\PB\\Elementor\\LanguageSwitcher\\LanguageSwitcher' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/LanguageSwitcher/LanguageSwitcher.php',
         'WPML\\PB\\Elementor\\LanguageSwitcher\\Widget' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/LanguageSwitcher/Widget.php',
         'WPML\\PB\\Elementor\\LanguageSwitcher\\WidgetAdaptor' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/LanguageSwitcher/WidgetAdaptor.php',
@@ -82,6 +92,7 @@ class ComposerStaticInit121fce6d64820970cf3aaf6a028599d0
         'WPML\\PB\\Gutenberg\\ConvertIdsInBlock\\TagAttributes' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/IdsInBlock/TagAttributes.php',
         'WPML\\PB\\Gutenberg\\Integration' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/interface-integration.php',
         'WPML\\PB\\Gutenberg\\Integration_Composite' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/class-integration-composite.php',
+        'WPML\\PB\\Gutenberg\\Navigation\\Frontend' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/Navigation/Frontend.php',
         'WPML\\PB\\Gutenberg\\ReusableBlocks\\AdminIntegration' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/reusable-blocks/class-admin-integration.php',
         'WPML\\PB\\Gutenberg\\ReusableBlocks\\Basket' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/reusable-blocks/Basket.php',
         'WPML\\PB\\Gutenberg\\ReusableBlocks\\BasketElement' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/reusable-blocks/class-basket-element.php',
@@ -274,7 +285,7 @@ class ComposerStaticInit121fce6d64820970cf3aaf6a028599d0
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit121fce6d64820970cf3aaf6a028599d0::$classMap;
+            $loader->classMap = ComposerStaticInit69eac7c56a84362665883b3cb937f600::$classMap;
 
         }, null, ClassLoader::class);
     }

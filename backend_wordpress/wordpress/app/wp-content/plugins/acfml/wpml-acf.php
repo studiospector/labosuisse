@@ -5,10 +5,14 @@
  * Author: OnTheGoSystems
  * Plugin URI: https://wpml.org/
  * Author URI: http://www.onthegosystems.com/
- * Version: 1.9.5
+ * Version: 1.10.3
  *
  * @package WPML\ACF
  */
+
+if ( get_option( '_wpml_inactive' ) ) {
+	return;
+}
 
 function acfmlInit() {
 	$vendorDir = __DIR__ . '/vendor';
@@ -25,7 +29,11 @@ function acfmlInit() {
 
 	$acfml_dependencies_factory = new WPML_ACF_Dependencies_Factory();
 	$acfml = new WPML_ACF( $acfml_dependencies_factory );
-	$acfml->init_worker();
+	if ( did_action( 'acf/init' ) ) {
+		$acfml->init_worker();
+	} else {
+		add_action( 'acf/init', [ $acfml, 'init_worker' ] );
+	}
 
 	add_action( 'admin_enqueue_scripts', function() {
 		wp_enqueue_script( 'acfml_js', plugin_dir_url( __FILE__ ) . 'assets/js/admin-script.js', array( 'jquery' ) );

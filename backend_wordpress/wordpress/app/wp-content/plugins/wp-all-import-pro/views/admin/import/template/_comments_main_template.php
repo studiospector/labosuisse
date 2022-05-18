@@ -23,7 +23,7 @@ switch ($post_type){
 	<div class="wpallimport-content-section" style="overflow: hidden; padding-bottom: 0;">
 		<div class="wpallimport-collapsed-header" style="margin-bottom: 15px;">
             <h3><?php printf(__('%s Content',PMXI_Plugin::LANGUAGE_DOMAIN), $custom_type->labels->singular_name);?></h3>
-		</div>
+		</div>		
 		<div class="wpallimport-collapsed-content" style="padding: 0;">
 			<div class="wpallimport-collapsed-content-inner wpallimport-user-data">
 				<div class="comments-import-fields">

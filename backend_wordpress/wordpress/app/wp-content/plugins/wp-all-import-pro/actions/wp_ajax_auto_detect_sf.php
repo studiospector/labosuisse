@@ -59,12 +59,12 @@ function pmxi_wp_ajax_auto_detect_sf(){
 						foreach ($v as $skey => $svalue) {
 							$result[] = array(
 								'key' => $skey,
-								'val' => maybe_serialize($svalue),
+								'val' => maybe_serialize($svalue),								
 							);
 						}
 						break;
-					}
-				}
+					}										
+				}					
 			}
 		}
 

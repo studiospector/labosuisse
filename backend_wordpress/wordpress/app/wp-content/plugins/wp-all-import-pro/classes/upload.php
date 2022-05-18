@@ -578,6 +578,8 @@ if ( ! class_exists('PMXI_Upload')){
 					 $this->errors->add('form-validation', __('WP All Import can\'t access your WordPress uploads folder.', 'wp_all_import_plugin'));
 				}
 
+                if ( $this->errors->get_error_codes() ) return $this->errors;
+
 				echo '<span style="display:none">';
 				copy( $from, $to);
 				echo '</span>';
@@ -663,29 +665,33 @@ if ( ! class_exists('PMXI_Upload')){
 				if (!@file_exists($from)) {
 				    $this->errors->add('form-validation', __('File doesn\'t exist.', 'wp_all_import_plugin'));
                 }
-				// copy file in temporary folder
-				// hide warning message
-				echo '<span style="display:none">';
-				copy( $from, $to);
-				echo '</span>';
-				$filePath = $to;
-				$source = array(
-					'name' => trim($this->file),
-					'type' => 'file',
-					'path' => $from,
-				);
-				// Detect if file is very large
-				include_once(PMXI_Plugin::ROOT_DIR.'/libraries/XmlImportCsvParse.php');
-				$csv = new PMXI_CsvParser( array( 'filename' => $filePath, 'targetDir' => $this->uploadsPath ) ); // create chunks
-				//wp_all_import_remove_source($filePath, false);
-				$filePath = $csv->xml_path;
-				$this->is_csv = $csv->is_csv;
-				$this->root_element = 'node';
+
+                if ( $this->errors->get_error_codes() ) return $this->errors;
+
+                // copy file in temporary folder
+                // hide warning message
+                echo '<span style="display:none">';
+                copy( $from, $to);
+                echo '</span>';
+                $filePath = $to;
+                $source = array(
+                    'name' => trim($this->file),
+                    'type' => 'file',
+                    'path' => $from,
+                );
+                // Detect if file is very large
+                include_once(PMXI_Plugin::ROOT_DIR.'/libraries/XmlImportCsvParse.php');
+                $csv = new PMXI_CsvParser( array( 'filename' => $filePath, 'targetDir' => $this->uploadsPath ) ); // create chunks
+                //wp_all_import_remove_source($filePath, false);
+                $filePath = $csv->xml_path;
+                $this->is_csv = $csv->is_csv;
+                $this->root_element = 'node';
 			}
 			elseif (preg_match('%\W(json)$%i', trim($this->file))){
 				if($this->uploadsPath === false){
 					 $this->errors->add('form-validation', __('WP All Import can\'t access your WordPress uploads folder.', 'wp_all_import_plugin'));
 				}
+                if ( $this->errors->get_error_codes() ) return $this->errors;
 				// copy file in temporary folder
 				// hide warning message
 				echo '<span style="display:none">';
@@ -718,6 +724,8 @@ if ( ! class_exists('PMXI_Upload')){
 				if ($this->uploadsPath === false){
 					 $this->errors->add('form-validation', __('WP All Import can\'t access your WordPress uploads folder.', 'wp_all_import_plugin'));
 				}
+                if ( $this->errors->get_error_codes() ) return $this->errors;
+
 				// copy file in temporary folder
 				// hide warning message
 				echo '<span style="display:none">';
@@ -742,6 +750,7 @@ if ( ! class_exists('PMXI_Upload')){
 				if ($this->uploadsPath === false){
 					 $this->errors->add('form-validation', __('WP All Import can\'t access your WordPress uploads folder.', 'wp_all_import_plugin'));
 				}
+                if ( $this->errors->get_error_codes() ) return $this->errors;
 				// copy file in temporary folder
 				// hide warning message
 				echo '<span style="display:none">';
@@ -762,6 +771,8 @@ if ( ! class_exists('PMXI_Upload')){
 				if ($this->uploadsPath === false){
 					$this->errors->add('form-validation', __('WP All Import can\'t access your WordPress uploads folder.', 'wp_all_import_plugin'));
 				}
+                if ( $this->errors->get_error_codes() ) return $this->errors;
+
 				// copy file in temporary folder
 				// hide warning message
 				echo '<span style="display:none">';

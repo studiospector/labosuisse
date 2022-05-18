@@ -10,7 +10,7 @@ use ACFML\Repeater\Shuffle\Strategy;
  */
 class WPML_ACF_Repeater_Shuffle {
 
-	const ACTION_SYNCHRONISE = 'wpml_synchronise_acf_fields_translations_nonce';
+	const ACTION_SYNCHRONISE         = 'wpml_synchronise_acf_fields_translations_nonce';
 	const SYNCHRONISE_WP_OPTION_NAME = 'acfml_synchronise_repeater_fields';
 
 	/**
@@ -36,7 +36,7 @@ class WPML_ACF_Repeater_Shuffle {
 	 * @var bool|int
 	 */
 	private $trid;
-	
+
 	/**
 	 * @var FieldState
 	 */
@@ -45,8 +45,8 @@ class WPML_ACF_Repeater_Shuffle {
 	/**
 	 * WPML_ACF_Repeater_Shuffle constructor.
 	 *
-	 * @param Strategy    $shuffled
-     * @param FieldState $field_state
+	 * @param Strategy   $shuffled
+	 * @param FieldState $field_state
 	 */
 	public function __construct( Strategy $shuffled, FieldState $field_state ) {
 		$this->shuffled    = $shuffled;
@@ -57,10 +57,10 @@ class WPML_ACF_Repeater_Shuffle {
 	 * Registers hooks used while repeater field's values are being updated.
 	 */
 	public function register_hooks() {
-		add_action( 'acf/save_post', array( $this, 'storeSynchroniseOption' ), 4, 1 );
-		add_action( 'acf/save_post', array( $this, 'store_state_before' ), 5, 1 );
-		add_action( 'acf/save_post', array( $this, 'update_translated_repeaters' ), 15, 1 );
-		add_action( 'acf/render_fields', array( $this, 'display_synchronisation_switcher' ), 10, 2 );
+		add_action( 'acf/save_post', [ $this, 'storeSynchroniseOption' ], 4, 1 );
+		add_action( 'acf/save_post', [ $this, 'store_state_before' ], 5, 1 );
+		add_action( 'acf/save_post', [ $this, 'update_translated_repeaters' ], 15, 1 );
+		add_action( 'acf/render_fields', [ $this, 'display_synchronisation_switcher' ], 10, 2 );
 		add_filter( 'wpml_custom_field_values_for_post_signature', [ $this, 'revertFieldValuesForSignature' ], 10, 2 );
 	}
 
@@ -71,7 +71,7 @@ class WPML_ACF_Repeater_Shuffle {
 	 * @param int   $element_id Current post ID.
 	 */
 	public function display_synchronisation_switcher( $fields, $element_id ) {
-		if ( $this->hasRepeaterField( $fields ) && $this->should_display_synchronisation_switcher( $element_id ) ) {
+		if ( $this->hasRepeaterOrFlexibleField( $fields ) && $this->should_display_synchronisation_switcher( $element_id ) ) {
 			?>
 			<div class="acf-field acfml-synchronise-repeater-checkbox">
 				<div class="acf-label">
@@ -81,7 +81,7 @@ class WPML_ACF_Repeater_Shuffle {
 					<div class="acf-input-wrap">
 						<input type="checkbox" name="wpml_synchronise_acf_fields_translations" value="synchronise" <?php checked( $this->isSynchroniseOptionChecked( $element_id ), true, true ); ?> />
 						<?php wp_nonce_field( self::ACTION_SYNCHRONISE, self::ACTION_SYNCHRONISE ); ?>
-						<?php esc_html_e( 'Synchronise repeater sub-fields positions in post translations (record drag-and-drop moves and do the same moves in other translations).', 'acfml' ); ?>
+						<?php esc_html_e( 'Synchronise repeater and flexible sub-fields positions in post translations (record drag-and-drop moves and do the same moves in other translations).', 'acfml' ); ?>
 					</div>
 				</div>
 			</div>
@@ -124,16 +124,16 @@ class WPML_ACF_Repeater_Shuffle {
 		if ( $this->should_translation_update_run( $post_id ) ) {
 			$this->meta_data_after_move = $this->field_state->getCurrentMetadata( $post_id );
 
-            foreach ( $this->meta_data_after_move as $key => $value ) {
-                $key_change = $this->get_keys_for_meta_value_changed( $key, $value );
-                if ( $key_change ) {
-                    $translations = $this->shuffled->getTranslations( $post_id );
-                    if ( $translations ) {
-                        $this->remove_deprecated_meta( $translations, $key_change['was'], $key_change['is'] );
-                    }
-                }
-            }
-            
+			foreach ( $this->meta_data_after_move as $key => $value ) {
+				$key_change = $this->get_keys_for_meta_value_changed( $key, $value );
+				if ( $key_change ) {
+					$translations = $this->shuffled->getTranslations( $post_id );
+					if ( $translations ) {
+						$this->remove_deprecated_meta( $translations, $key_change['was'], $key_change['is'] );
+					}
+				}
+			}
+
 			$this->readd_meta();
 		}
 	}
@@ -158,7 +158,7 @@ class WPML_ACF_Repeater_Shuffle {
 	 * @return array
 	 */
 	private function get_keys_for_meta_value_changed( $meta_key_after_move, $meta_value_after_move ) {
-		$changed = array();
+		$changed = [];
 		// For given meta value after move, find related keys in data before move.
 		$keys_before_move = $this->keys_before_move( $meta_value_after_move );
 		if ( $keys_before_move ) {
@@ -230,10 +230,10 @@ class WPML_ACF_Repeater_Shuffle {
 				$this->shuffled->getOneMeta( $translated_post_data->element_id, $key_of_original_value, true );
 			if ( $translated_meta_value ) {
 				$this->shuffled->deleteOneMeta( $translated_post_data->element_id, $key_of_original_value );
-				$this->meta_to_update[ $translated_post_data->element_id ][] = array(
+				$this->meta_to_update[ $translated_post_data->element_id ][] = [
 					$meta_key_after_move,
 					$translated_meta_value,
-				);
+				];
 			}
 		}
 	}
@@ -266,9 +266,9 @@ class WPML_ACF_Repeater_Shuffle {
 	 *
 	 * @return bool
 	 */
-	private function hasRepeaterField( $fields ) {
+	private function hasRepeaterOrFlexibleField( $fields ) {
 		foreach ( (array) $fields as $field ) {
-			if ( isset( $field['type'] ) && 'repeater' === $field['type'] ) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], [ 'repeater', 'flexible_content' ], true ) ) {
 				return true;
 			}
 		}
@@ -302,7 +302,7 @@ class WPML_ACF_Repeater_Shuffle {
 	 *
 	 * @return bool
 	 */
-	private function isSynchroniseOptionChecked( $elementID ) {
+	protected function isSynchroniseOptionChecked( $elementID ) {
 		$trid = $this->shuffled->getTrid( $elementID );
 		if ( $trid ) {
 			$synchroniseOption = get_option( self::SYNCHRONISE_WP_OPTION_NAME, [] );
@@ -310,7 +310,7 @@ class WPML_ACF_Repeater_Shuffle {
 				return (bool) $synchroniseOption[ $trid ];
 			}
 		}
-		return true;
+		return defined( 'ACFML_REPEATER_SYNC_DEFAULT' ) ? (bool) constant( 'ACFML_REPEATER_SYNC_DEFAULT' ) : true;
 	}
 
 	/**
@@ -352,7 +352,7 @@ class WPML_ACF_Repeater_Shuffle {
 		$acfFieldObject = get_field_object( $key, $postId );
 		if ( isset( $acfFieldObject['parent'] )
 			 && $acfFieldObject['parent'] > 0 ) {
-			$fieldParent = get_post( $acfFieldObject['parent'] );
+			$fieldParent        = get_post( $acfFieldObject['parent'] );
 			$fieldParentContent = maybe_unserialize( $fieldParent->post_content );
 			if ( isset( $fieldParentContent['type'] ) && 'repeater' === $fieldParentContent['type'] ) {
 				return true;

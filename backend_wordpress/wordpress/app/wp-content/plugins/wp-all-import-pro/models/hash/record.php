@@ -1,7 +1,7 @@
 <?php
 
 class PMXI_Hash_Record extends PMXI_Model_Record {
-
+	
 	/**
 	 * Initialize model instance
 	 * @param array[optional] $data Array of record data to initialize object with
@@ -10,5 +10,5 @@ class PMXI_Hash_Record extends PMXI_Model_Record {
 		parent::__construct($data);
 		$this->setTable(PMXI_Plugin::getInstance()->getTablePrefix() . 'hash');
 	}
-
+	
 }

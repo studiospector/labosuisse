@@ -58,7 +58,7 @@ class XmlImportAstElseif
   /**
    * String representation of an object
    *
-   * @return string
+   * @return string 
    */
   public function __toString()
   {

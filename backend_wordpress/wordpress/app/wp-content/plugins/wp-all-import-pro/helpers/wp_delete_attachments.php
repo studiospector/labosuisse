@@ -26,7 +26,7 @@ function wp_delete_attachments($parent_id, $unlink = true, $type = 'images') {
     }
 
     global $wpdb;
-
+				
 	if ( ! empty( $ids ) ) {
 
 		$ids_string = implode( ',', $ids );

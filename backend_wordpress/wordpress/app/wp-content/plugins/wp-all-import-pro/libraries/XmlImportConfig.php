@@ -67,7 +67,7 @@ if (!class_exists('XmlImportConfig'))
 		{
 			$this->cache_dir = $cacheDirectoryPath;
 		}
-
+		
 		/**
 		 * Returns string glue to use when concatenating multiple elements
 		 * @return string

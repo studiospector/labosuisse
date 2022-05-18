@@ -11,5 +11,5 @@ require_once dirname(__FILE__) . '/XmlImportAstLiteral.php';
  */
 class XmlImportAstInteger extends XmlImportAstLiteral
 {
-
+  
 }

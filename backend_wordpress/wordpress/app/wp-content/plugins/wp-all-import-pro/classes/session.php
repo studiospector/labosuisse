@@ -55,10 +55,10 @@ abstract class PMXI_Session {
     public function __unset( $key ) {
 
         if ( isset( $this->_data[ $key ] ) ) {
-            unset( $this->_data[ $key ] );
+            unset( $this->_data[ $key ] );       		
             $this->_dirty = true;
         }
-
+                
     }
 
     /**

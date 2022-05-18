@@ -2102,7 +2102,7 @@ class PHPExcel_Calculation
         if ($workbook !== null) {
             $instance = $workbook->getCalculationEngine();
             if (isset($instance)) {
-                return $instance;
+                return $instance;  
             }
         }
 

@@ -79,4 +79,4 @@ function wp_all_import_get_image_from_gallery($image_name, $targetDir = FALSE, $
     }
 
     return apply_filters('wp_all_import_get_image_from_gallery', $attch, $original_image_name, $targetDir);
-}
+} 

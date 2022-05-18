@@ -7,7 +7,7 @@ if ( ! function_exists('get_taxonomies_by_object_type')):
  */
 function get_taxonomies_by_object_type($object_type, $output = 'names') {
 	global $wp_taxonomies;
-
+	
 	is_array($object_type) or $object_type = array($object_type);
 	$field = ('names' == $output) ? 'name' : false;
 	$filtered = array();

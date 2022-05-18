@@ -1,6 +1,6 @@
 <?php
 /**
- * Contains function which were introduced in late wordpress versions
+ * Contains function which were introduced in late wordpress versions 
  */
 
 if ( ! function_exists('is_network_admin')):

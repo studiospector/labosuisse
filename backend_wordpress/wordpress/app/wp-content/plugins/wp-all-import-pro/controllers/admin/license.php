@@ -1,14 +1,14 @@
-<?php
+<?php 
 /**
  * Admin License page
  *
  * @author Maksym Tsypliakov <maksym.tsypliakov@gmail.com>
  */
 class PMXI_Admin_License extends PMXI_Controller_Admin {
+	
+	public function index() {			
 
-	public function index() {
-
-		$this->data['post'] = $post = $this->input->post(PMXI_Plugin::getInstance()->getOption());
+		$this->data['post'] = $post = $this->input->post(PMXI_Plugin::getInstance()->getOption());		
 
 		/*$addons = new PMXI_Admin_Addons();
 
@@ -23,18 +23,18 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 		if ($this->input->post('is_licenses_submitted')) { // save settings form
 
-			check_admin_referer('edit-licenses', '_wpnonce_edit-licenses');
+			check_admin_referer('edit-licenses', '_wpnonce_edit-licenses');													
 
-			if ( ! $this->errors->get_error_codes()) { // no validation errors detected
+			if ( ! $this->errors->get_error_codes()) { // no validation errors detected																
 
 				PMXI_Plugin::getInstance()->updateOption($post);
 
 				if (empty($_POST['pmxi_license_activate']) and empty($_POST['pmxi_license_deactivate'])) {
 					foreach ($this->data['addons'] as $class => $addon) {
 						$post['statuses'][$class] = $this->check_license($class);
-					}
+					}					
 					PMXI_Plugin::getInstance()->updateOption($post);
-				}
+				}				
 
 				isset( $_POST['pmxi_license_activate'] ) and $this->activate_licenses();
 
@@ -43,18 +43,18 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 				wp_redirect(add_query_arg('pmxi_nt', urlencode(__('Licenses saved', 'wp_all_import_plugin')), $this->baseUrl)); die();
 			}
 
-		}
-		else{
+		}		
+		else{			
 
 			foreach ($this->data['addons'] as $class => $addon) {
 				$post['statuses'][$class] = $this->check_license($class);
-			}
+			}								
 
-			PMXI_Plugin::getInstance()->updateOption($post);
-		}
+			PMXI_Plugin::getInstance()->updateOption($post);	
+		}							
 
 		$this->render();
-	}
+	}	
 
 	/*
 	*
@@ -64,12 +64,12 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 	protected function activate_licenses() {
 
 		// listen for our activate button to be clicked
-		if( isset( $_POST['pmxi_license_activate'] ) ) {
+		if( isset( $_POST['pmxi_license_activate'] ) ) {			
 
 			// retrieve the license from the database
 			$options = PMXI_Plugin::getInstance()->getOption();
-
-			foreach ($_POST['pmxi_license_activate'] as $class => $val) {
+			
+			foreach ($_POST['pmxi_license_activate'] as $class => $val) {							
 
 				if (!empty($options['licenses'][$class])){
 
@@ -77,12 +77,12 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 					if ( $product_name !== false ){
 						// data to send in our API request
-						$api_params = array(
-							'edd_action'=> 'activate_license',
-							'license' 	=> $options['licenses'][$class],
+						$api_params = array( 
+							'edd_action'=> 'activate_license', 
+							'license' 	=> $options['licenses'][$class], 
 							'item_name' => urlencode( $product_name ) // the name of our product in EDD
 						);
-
+						
 						// Call the custom API.
 						$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => true ) );
 
@@ -92,16 +92,16 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 						// decode the license data
 						$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
+						
 						// $license_data->license will be either "active" or "inactive"
 
 						$options['statuses'][$class] = $license_data->license;
-
-						PMXI_Plugin::getInstance()->updateOption($options);
+						
+						PMXI_Plugin::getInstance()->updateOption($options);	
 					}
 				}
 
-			}
+			}				
 
 		}
 	}
@@ -114,12 +114,12 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 	protected function deactivate_licenses(){
 
 		// listen for our activate button to be clicked
-		if( isset( $_POST['pmxi_license_deactivate'] ) ) {
+		if( isset( $_POST['pmxi_license_deactivate'] ) ) {	
 
 			// retrieve the license from the database
-			$options = PMXI_Plugin::getInstance()->getOption();
+			$options = PMXI_Plugin::getInstance()->getOption();	
 
-			foreach ($_POST['pmxi_license_deactivate'] as $class => $val) {
+			foreach ($_POST['pmxi_license_deactivate'] as $class => $val) {		
 
 				if (!empty($options['licenses'][$class])){
 
@@ -128,12 +128,12 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 					if ( $product_name !== false ){
 
 						// data to send in our API request
-						$api_params = array(
-							'edd_action'=> 'deactivate_license',
-							'license' 	=> $options['licenses'][$class],
+						$api_params = array( 
+							'edd_action'=> 'deactivate_license', 
+							'license' 	=> $options['licenses'][$class], 
 							'item_name' => urlencode( $product_name ) // the name of our product in EDD
 						);
-
+						
 						// Call the custom API.
 						$response = wp_remote_get( add_query_arg( $api_params, $options['info_api_url'] ), array( 'timeout' => 15, 'sslverify' => true ) );
 
@@ -143,18 +143,18 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 						// decode the license data
 						$license_data = json_decode( wp_remote_retrieve_body( $response ) );
-
+						
 						// $license_data->license will be either "deactivated" or "failed"
 						if( $license_data->license == 'deactivated' ){
 
 							$options['statuses'][$class] = 'deactivated';
 
-							PMXI_Plugin::getInstance()->updateOption($options);
+							PMXI_Plugin::getInstance()->updateOption($options);	
 
-						}
+						}							
 					}
 				}
-			}
+			}			
 		}
 	}
 
@@ -167,7 +167,7 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 		global $wp_version;
 
-		$options = PMXI_Plugin::getInstance()->getOption();
+		$options = PMXI_Plugin::getInstance()->getOption();	
 
 		if (!empty($options['licenses'][$class])){
 
@@ -175,10 +175,10 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 			if ( $product_name !== false ){
 
-				$api_params = array(
-					'edd_action' => 'check_license',
-					'license' => $options['licenses'][$class],
-					'item_name' => urlencode( $product_name )
+				$api_params = array( 
+					'edd_action' => 'check_license', 
+					'license' => $options['licenses'][$class], 
+					'item_name' => urlencode( $product_name ) 
 				);
 
 				// Call the custom API.
@@ -193,10 +193,10 @@ class PMXI_Admin_License extends PMXI_Controller_Admin {
 
 				/*if( $license_data->license == 'valid' ) {
 					return true;
-
+				
 				} else {
 					return false;
-
+				
 				}*/
 			}
 		}
