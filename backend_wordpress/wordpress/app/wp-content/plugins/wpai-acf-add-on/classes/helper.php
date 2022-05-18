@@ -8,7 +8,7 @@ class PMAI_Helper {
 	const GLOB_MARK = 1;
 	const GLOB_NOSORT = 2;
 	const GLOB_ONLYDIR = 4;
-
+	
 	const GLOB_NODIR = 256;
 	const GLOB_PATH = 512;
 	const GLOB_NODOTS = 1024;
@@ -40,20 +40,20 @@ class PMAI_Helper {
 	public static function safe_glob($pattern,  $flags=0) {
 		$split = explode('/', str_replace('\\', '/', $pattern));
 		$mask = array_pop($split);
-		$path = implode('/', $split);
+		$path = implode('/', $split);			
 
 		if (($dir = @opendir($path . '/')) !== false or ($dir = @opendir($path)) !== false) {
 			$glob = array();
 			while(($file = readdir($dir)) !== false) {
-				// Match file mask
-				if (self::fnmatch($mask, $file, self::FNM_CASEFOLD)) {
+				// Match file mask				
+				if (self::fnmatch($mask, $file, self::FNM_CASEFOLD)) {					
 					if ((( ! ($flags & self::GLOB_ONLYDIR)) || is_dir("$path/$file"))
 						&& (( ! ($flags & self::GLOB_NODIR)) || ( ! is_dir($path . '/' . $file)))
 						&& (( ! ($flags & self::GLOB_NODOTS)) || ( ! in_array($file, array('.', '..'))))
 					) {
 						$glob[] = ($flags & self::GLOB_PATH ? $path . '/' : '') . $file . ($flags & self::GLOB_MARK ? '/' : '');
 					}
-				}
+				}				
 			}
             closedir($dir);
             if (($dir = @opendir($path . '/')) !== false or ($dir = @opendir($path)) !== false) {
@@ -71,7 +71,7 @@ class PMAI_Helper {
 			return (strpos($pattern, "*") === false) ? array($pattern) : false;
 		}
 	}
-
+	
 	/**
 	 * Prepends $string to each element of $array
 	 * If $deep is true, will indeed also apply to sub-arrays
@@ -101,7 +101,7 @@ class PMAI_Helper {
 	 * non-POSIX complient remplacement for the fnmatch
 	 */
 	public static function fnmatch($pattern, $string, $flags = 0) {
-
+		
 		$modifiers = null;
 		$transforms = array(
 			'\*'    => '.*',
@@ -113,32 +113,32 @@ class PMAI_Helper {
 			'\\'    => '\\\\',
 			'\-'    => '-',
 		);
-
+		 
 		// Forward slash in string must be in pattern:
 		if ($flags & self::FNM_PATHNAME) {
 			$transforms['\*'] = '[^/]*';
 		}
-
+		 
 		// Back slash should not be escaped:
 		if ($flags & self::FNM_NOESCAPE) {
 			unset($transforms['\\']);
 		}
-
+		 
 		// Perform case insensitive match:
 		if ($flags & self::FNM_CASEFOLD) {
 			$modifiers .= 'i';
 		}
-
+		 
 		// Period at start must be the same as pattern:
 		if ($flags & self::FNM_PERIOD) {
 			if (strpos($string, '.') === 0 && strpos($pattern, '.') !== 0) return false;
 		}
-
+		 
 		$pattern = '#^'
 			.strtr(preg_quote($pattern, '#'), $transforms)
 			.'$#'
 			.$modifiers;
-
+		
 		return (boolean)preg_match($pattern, $string);
 	}
 }

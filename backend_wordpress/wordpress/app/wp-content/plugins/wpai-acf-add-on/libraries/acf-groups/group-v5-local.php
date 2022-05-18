@@ -49,7 +49,7 @@ class GroupV5Local extends Group {
                     $this->fieldsData[] = $fieldData;
                 }
             }
-        }
+        }        
         // create field instances
         parent::initFields();
     }

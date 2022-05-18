@@ -2,7 +2,7 @@
  * plugin admin area javascript
  */
 (function($){$(function () {
-
+	
 	if ( ! $('body.wpallimport-plugin').length) return; // do not execute any code if we are not on plugin page
 
 	let pmai_repeater_clone = function($parent){
@@ -24,10 +24,10 @@
 			let name = $(this).attr('name');
 			if (name != undefined) $(this).attr({'name':$(this).attr('name').replace('ROWNUMBER', $number)});
 		});
+		
+		$parent.find('.acf-input-table:first').find('tbody:first').append($clone);		
 
-		$parent.find('.acf-input-table:first').find('tbody:first').append($clone);
-
-		$parent.find('tr.row').find('.sortable').each(function(){
+		$parent.find('tr.row').find('.sortable').each(function(){			
 			if ( ! $(this).hasClass('ui-sortable') && ! $(this).parents('tr.row-clone').length ){
 				$(this).pmxi_nestedSortable({
 			        handle: 'div',
@@ -91,8 +91,8 @@
 	let pmai_get_acf_group = function(ths){
 
 		let request = {
-			action:'get_acf',
-			security: wp_all_import_security,
+			action:'get_acf',		
+			security: wp_all_import_security,		
 			acf: ths.attr('rel')
 	    };
 
@@ -110,7 +110,7 @@
 			data: request,
 			success: function(response) {
 				$('.pmai_acf_group').removeAttr('disabled');
-				$ths.find('.pmai_preloader').remove();
+				$ths.find('.pmai_preloader').remove();						
 				$ths.find('.acf_groups').prepend(response.html);
 				pmai_init($ths.find('.acf_signle_group:first'));
 				// swither show/hide logic
@@ -151,7 +151,7 @@
 			// if requsted ACF group doesn't exists
 			if ( ! $(this).parents('.pmai_options:first').find('.acf_signle_group[rel=' + acf + ']').length){
 				pmai_get_acf_group($(this));
-			}
+			}	
 		} else {
 			if (confirm("Confirm removal?")) {
 				$(this).parents('.pmai_options:first').find('.acf_signle_group[rel=' + acf + ']').remove();
@@ -159,7 +159,7 @@
 				$(this).attr('checked','checked');
 			}
 		}
-	});
+	});	
 
 	function pmai_init(ths){
 
@@ -172,19 +172,19 @@
 		ths.find('input.datepicker').datepicker({
 			dateFormat: 'dd-mm-yy'
 		});
-
+		
 		ths.find('.sortable').each(function(){
 			if ( ! $(this).parents('tr.row-clone').length ){
 				$(this).pmxi_nestedSortable({
 			        handle: 'div',
 			        items: 'li.dragging',
 			        toleranceElement: '> div',
-			        update: function () {
+			        update: function () {	        
 				       $(this).parents('td:first').find('.hierarhy-output').val(window.JSON.stringify($(this).pmxi_nestedSortable('toArray', {startDepthCount: 0})));
 				       if ($(this).parents('td:first').find('input:first').val() == '') $(this).parents('td:first').find('.hierarhy-output').val('');
 				    }
-			    });
-			}
+			    });		    
+			} 
 		});
 
 		ths.find('.repeater').find('.add-row-end').on('click', function(){
@@ -207,7 +207,7 @@
 	}
 
 	$('.acf_signle_group').find('.switcher').on('click', function(){
-		$(this).parents('div.acf-input-wrap:first').find('.sortable').each(function(){
+		$(this).parents('div.acf-input-wrap:first').find('.sortable').each(function(){			
 			if ( ! $(this).hasClass('ui-sortable') && ! $(this).parents('tr.row-clone').length ){
 				$(this).pmxi_nestedSortable({
 			        handle: 'div',

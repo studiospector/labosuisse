@@ -11,7 +11,7 @@
 							<?php if (!empty($groups)): ?>
 								<p><strong><?php _e("Please choose your Field Groups.",'wp_all_import_acf_add_on');?></strong></p>
 								<ul>
-									<?php
+									<?php 
 									foreach ($groups as $key => $group) {
 										$is_show_acf_group = apply_filters('wp_all_import_acf_is_show_group', true, $group);
 										$id = $group['ID'];
@@ -40,14 +40,14 @@
 									}
 									?>
 								</ul>
-								<div class="acf_groups"></div>
+								<div class="acf_groups"></div>								
 								<?php
 							else:
 								?>
 								<p><strong><?php _e("Please create Field Groups.",'wp_all_import_acf_add_on');?></strong></p>
-								<?php
+								<?php	
 							endif;
-							?>
+							?>					
 						</td>
 					</tr>
 				</table>

@@ -181,7 +181,7 @@ final class ACFService{
             }
 
             $downloadFiles = "no";
-            $fileName = basename($img_url);
+            $fileName = wp_all_import_basename(parse_url(trim($img_url), PHP_URL_PATH));
         }
 
         return PMXI_API::upload_image($pid, $img_url, $downloadFiles, $logger, true, $fileName, 'images', $search_in_gallery, $importData['articleData'], $importData);

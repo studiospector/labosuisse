@@ -240,22 +240,22 @@ msgid "Please create Field Groups."
 msgstr ""
 
 #. Name of the plugin
-#:
+#: 
 msgid "WP All Import - ACF Add-On"
 msgstr ""
 
 #. Description of the plugin
-#:
+#: 
 msgid "Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields."
 msgstr ""
 
 #. URI of the plugin
-#:
+#: 
 msgid "http://www.wpallimport.com/"
 msgstr ""
 
 #. Author of the plugin
-#:
+#: 
 msgid "Soflyy"
 msgstr ""
 
