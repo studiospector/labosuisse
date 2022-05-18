@@ -242,6 +242,54 @@
             "save_other_choice": 0
         },
         {
+            "key": "field_62841a864b9de",
+            "label": "Apri Offset Nav",
+            "name": "lb_block_banner_alternate_open_offset_nav",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_62841ad94b9df",
+            "label": "ID Offset Nav",
+            "name": "lb_block_banner_alternate_offset_nav_id",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_62841a864b9de",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "lb-offsetnav-",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_61f921c727674",
             "label": "Impostazioni",
             "name": "",
@@ -355,5 +403,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649090972
+    "modified": 1652824890
 }
