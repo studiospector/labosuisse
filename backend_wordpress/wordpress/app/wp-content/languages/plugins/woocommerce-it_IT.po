@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-17 11:54:09+0000\n"
+"PO-Revision-Date: 2022-05-19 09:54:10+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32064,6 +32064,10 @@ msgstr "Estensioni ufficiali"
 #: includes/admin/class-wc-admin-help.php:79
 msgid "Official theme"
 msgstr "Tema ufficiale"
+
+#: includes/admin/class-wc-admin-help.php:78
+msgid "GitHub project"
+msgstr "Progetto di Github"
 
 #: includes/admin/class-wc-admin-help.php:77
 msgid "WordPress.org project"

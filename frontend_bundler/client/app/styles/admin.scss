@@ -158,9 +158,20 @@
     display: none !important;
 }
 
+#welcome-panel {
+    padding: 40px;
+    background: #fff;
+
+    &::before {
+        content: none;
+    }
+}
+
 .lb-welcome-panel-content {
+    min-height: auto;
     display: flex;
-    padding-bottom: 23px;
+    flex-direction: row;
+    justify-content: flex-start;
 
     &__logo {
         display: flex;
@@ -174,6 +185,16 @@
         margin-left: 40px;
         padding-left: 40px;
         border-left: 1px solid #c3c4c7;
+
+        h1, p {
+            margin: 0;
+            padding: 0;
+            line-height: 1;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
     }
 }
 
