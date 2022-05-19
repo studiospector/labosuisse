@@ -17,11 +17,21 @@ if (have_rows('lb_navs_template_items')) {
                 $row['data'] = [];
 
                 $data = [];
-                $data['title'] = get_sub_field('lb_navs_template_item_content_text_title');
-                $data['subtitle'] = get_sub_field('lb_navs_template_item_content_text_subtitle');
-                $data['paragraph_small'] = get_sub_field('lb_navs_template_item_content_text_paragraph_small');
-                $data['text'] = get_sub_field('lb_navs_template_item_content_text_paragraph');
 
+                if (get_row_layout() == 'text') {
+                    $data['title'] = get_sub_field('lb_navs_template_item_content_text_title');
+                    $data['subtitle'] = get_sub_field('lb_navs_template_item_content_text_subtitle');
+                    $data['paragraph_small'] = get_sub_field('lb_navs_template_item_content_text_paragraph_small');
+                    $data['text'] = get_sub_field('lb_navs_template_item_content_text_paragraph');
+                } elseif (get_row_layout() == 'unordered-arrow-list') {
+                    if (have_rows('lb_navs_template_item_content_list')) {
+                        while (have_rows('lb_navs_template_item_content_list')) {
+                            the_row();
+                            $data['items'][] = get_sub_field('lb_navs_template_item_content_list_text');
+                        }
+                    }
+                }
+                
                 $row['data'] = $data;
 
                 $blocks[] = $row;
