@@ -17,7 +17,7 @@ const backgroundHeight = () => {
 
 export const backgroundTimeline = (el) => {
     const tl = gsap.timeline()
-        .fromTo(el, { height: 0, opacity: 0 }, ({ height: backgroundHeight, opacity: 1, onComplete: () => tl.invalidate() }));
+        .fromTo(el, { height: 0, opacity: 0 }, ({ height: 530, opacity: 1, onComplete: () => tl.invalidate() }));
     return tl;
 }
 

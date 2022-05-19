@@ -92,7 +92,7 @@ class Header extends Component {
 
     adjustMenu = () => {
         const headerHeight = this.el.getBoundingClientRect().height
-        const elems = qsa('.lb-menu__background, .lb-menu__overlay, lb-menu--desktop .lb-menu__submenu')
+        const elems = qsa('.lb-menu__overlay, lb-menu--desktop .lb-menu__submenu')
         elems.forEach(elem => {
             elem.style.top = `${headerHeight}px`
         })
