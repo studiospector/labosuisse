@@ -91,7 +91,7 @@ class Area
         $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
         $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
 
-        return $this->fixMenu($items);
+        return $this->fixDesktopMenu($items);
     }
 
     private function mobile()
@@ -100,9 +100,7 @@ class Area
             'type' => 'submenu',
             'label' => $this->parent->name,
             'subLabel' => 'Per zona',
-            'children' => [
-                ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)]
-            ]
+            'children' => []
 
         ];
 
@@ -115,10 +113,12 @@ class Area
             ];
         }
 
-        return $items;
+        $items['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
+
+        return $this->fixMobileMenu($items);
     }
 
-    private function fixMenu(array $items)
+    private function fixDesktopMenu($items)
     {
         $areaName = $items['label'];
         $totalNeed = count($items['children'][0]['children']);
@@ -130,6 +130,19 @@ class Area
             array_unshift($items['children']);
 
             $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+        }
+
+        return $items;
+    }
+
+    private function fixMobileMenu($items)
+    {
+        $areaName = $items['label'];
+        $totalNeed = count($items['children']);
+        $needName = $items['children'][0]['label'];
+
+        if($totalNeed === 2 and ($areaName === $needName)) {
+            $items = $items['children'][0];
         }
 
         return $items;
