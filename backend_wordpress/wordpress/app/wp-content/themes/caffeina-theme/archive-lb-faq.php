@@ -1,11 +1,6 @@
 <?php
 
-use Caffeina\LaboSuisse\Menu\Product\Macro;
 use Caffeina\LaboSuisse\Option\Option;
-
-$items = [];
-
-(new Macro())->get('mobile');
 
 if (have_posts()) :
     while (have_posts()) :
