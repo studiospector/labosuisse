@@ -1,18 +1,18 @@
 <nav class="lb-menu lb-menu--mobile">
 	<div class="lb-menu__wrapper">
         <div class="lb-menu-scroller">
-            <ul body-scroll-lock-ignore class="lb-menu__main">
+            <div body-scroll-lock-ignore class="lb-menu__main">
                 {% for item in items.children %}
                     {% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
                 {% endfor %}
-            </ul>
-            <ul class="lb-menu__fixed">
+            </div>
+            <div class="lb-menu__fixed">
                 <div class="lb-menu__service">
                     {% for item in items.fixed %}
                         {% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
                     {% endfor %}
                 </div>
-            </ul>
+            </div>
         </div>
 	</div>
 </nav>
