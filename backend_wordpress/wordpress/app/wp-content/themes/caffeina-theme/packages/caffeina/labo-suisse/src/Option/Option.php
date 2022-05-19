@@ -119,7 +119,14 @@ class Option
 
     public function getFooterSearchOptions()
     {
-       $options = $this->getOption('lb_footer_search');
+        $options = $this->getOption('lb_footer_search');
+
+        if (is_null($options)) {
+            return [
+                'title' => null,
+                'label' => null,
+            ];
+        }
 
         return [
             'title' => $options['lb_footer_search_title'],
@@ -161,6 +168,13 @@ class Option
     {
         $options = $this->getOption('lb_footer_social');
 
+        if (is_null($options)) {
+            return [
+                'title' => null,
+                'items' => []
+            ];
+        }
+
         $social = [
             'title' => $options['lb_footer_social_title'],
             'items' => []
@@ -172,7 +186,6 @@ class Option
                 'icon' => $option['lb_footer_social_links_icon']
             ];
         }
-
 
         return $social;
     }
