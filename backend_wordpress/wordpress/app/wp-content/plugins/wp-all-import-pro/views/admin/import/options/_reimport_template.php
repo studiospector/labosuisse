@@ -2,46 +2,46 @@
 <div class="wpallimport-collapsed wpallimport-section">
 	<script type="text/javascript">
 		__META_KEYS = <?php echo json_encode($existing_meta_keys) ?>;
-	</script>
+	</script>	
 	<div class="wpallimport-content-section">
-		<div class="wpallimport-collapsed-header">
-		<?php
-		if ( "new" == $post['wizard_type']): ?>
-			<?php
+		<div class="wpallimport-collapsed-header">					
+		<?php 		
+		if ( "new" == $post['wizard_type']): ?>	
+			<?php 
 				if ( ! $this->isWizard )
 				{
 					?>
-					<h3><?php _e('Record Matching', 'wp_all_import_plugin'); ?></h3>
-					<?php
+					<h3><?php _e('Record Matching', 'wp_all_import_plugin'); ?></h3>	
+					<?php 
 				}
 				else
-				{
+				{ 					
 					if ( ! empty(PMXI_Plugin::$session->deligate) and PMXI_Plugin::$session->deligate == 'wpallexport' )
 					{
 						?>
-						<h3 style="padding-left:0;"><?php _e('Choose how exported data will be re-imported.','wp_all_import_plugin');?></h3>
-						<?php
+						<h3 style="padding-left:0;"><?php _e('Choose how exported data will be re-imported.','wp_all_import_plugin');?></h3>	
+						<?php 
 					}
 					else
 					{
 						?>
 						<h3 style="padding-left:0;"><?php printf(__('WP All Import will create new %s for each unique record in your file.','wp_all_import_plugin'), $custom_type->labels->name);?></h3>
-						<?php
+						<?php 
 					}
-				}
-			?>
+				} 
+			?>			
 			</div>
 			<div class="wpallimport-collapsed-content" style="padding: 0;">
-				<div class="wpallimport-collapsed-content-inner">
+				<div class="wpallimport-collapsed-content-inner">					
 					<table class="form-table" style="max-width:none;">
 						<tr>
 							<td>
-								<input type="hidden" name="duplicate_matching" value="auto"/>
-								<?php if ( ! $this->isWizard ):?>
+								<input type="hidden" name="duplicate_matching" value="auto"/>										
+								<?php if ( ! $this->isWizard ):?>												 
 								<h4><?php printf(__('WP All Import will associate records in your file with %s it has already created from previous runs of this import based on the Unique Identifier.','wp_all_import_plugin'), $custom_type->labels->name);?></h4>
 								<?php endif; ?>
 								<div class="wpallimport-unique-key-wrapper" <?php if (!empty(PMXI_Plugin::$session->deligate)):?>style="display:none;"<?php endif; ?>>
-									<label style="font-weight: bold;"><?php _e("Unique Identifier", "pmxi_plugin"); ?></label>
+									<label style="font-weight: bold;"><?php _e("Unique Identifier", "pmxi_plugin"); ?></label>										
 
 									<input type="text" class="smaller-text" name="unique_key" style="width:300px;" value="<?php if ( ! $this->isWizard ) echo esc_attr($post['unique_key']); elseif ($post['tmp_unique_key']) echo esc_attr($post['unique_key']); ?>" <?php echo  ( ! $isWizard and ! empty($post['unique_key']) ) ? 'disabled="disabled"' : '' ?>/>
 
@@ -68,33 +68,33 @@
 										<p class="info_ico"><?php printf(__('If you run this import again with an updated file, the Unique Identifier allows WP All Import to correctly link the records in your updated file with the %s it will create right now. If multiple records in this file have the same Unique Identifier, only the first will be created. The others will be detected as duplicates.', 'wp_all_import_plugin'), $custom_type->labels->name); ?></p>
 										<p class="new_element_ico"><?php printf(__('In Step 1 you selected New Items. So, if you run this import again WP All Import will only try to update records that were created by this import. It will never update, modify, or remove %s that were not created by this import. If you want to match records in your file to records that already exist on this site, select Existing Items in Step 1.', 'wp_all_import_plugin'), $custom_type->labels->name); ?></p>
 									<?php endif; ?>
-								</div>
-
+								</div>													
+								
 								<?php include( '_reimport_options.php' ); ?>
-
+								
 							</td>
 						</tr>
 					</table>
 				</div>
-			</div>
+			</div>		
 		<?php else: ?>
 			<?php if ( ! $this->isWizard ):?>
-				<h3><?php _e('Record Matching', 'wp_all_import_plugin'); ?></h3>
+				<h3><?php _e('Record Matching', 'wp_all_import_plugin'); ?></h3>					
 			<?php else: ?>
-				<h3 style="padding-left:0;"><?php printf(__('WP All Import will merge data into existing %s.','wp_all_import_plugin'), $custom_type->labels->name);?></h3>
+				<h3 style="padding-left:0;"><?php printf(__('WP All Import will merge data into existing %s.','wp_all_import_plugin'), $custom_type->labels->name);?></h3>	
 			<?php endif; ?>
 			</div>
-			<div class="wpallimport-collapsed-content" style="padding:0;">
-				<div class="wpallimport-collapsed-content-inner">
+			<div class="wpallimport-collapsed-content" style="padding:0;">				
+				<div class="wpallimport-collapsed-content-inner">					
 					<table class="form-table" style="max-width:none;">
 						<tr>
-							<td>
-								<div class="input" style="margin-bottom:15px; position:relative;">
+							<td>						
+								<div class="input" style="margin-bottom:15px; position:relative;">					
 									<input type="hidden" name="duplicate_matching" value="manual"/>
 									<h4><?php printf(__('Records in your file will be matched with %ss on your site based on...', 'wp_all_import_plugin' ), $custom_type->labels->singular_name);?></h4>
 									<div style="margin-left: -4px;">
-										<div class="input">
-
+										<div class="input">						
+											
 											<input type="radio" id="duplicate_indicator_title" class="switcher" name="duplicate_indicator" value="title" <?php echo 'title' == $post['duplicate_indicator'] ? 'checked="checked"': '' ?>/>
 											<label for="duplicate_indicator_title"><?php _e('Title', 'wp_all_import_plugin' )?></label><br>
 											<input type="radio" id="duplicate_indicator_content" class="switcher" name="duplicate_indicator" value="content" <?php echo 'content' == $post['duplicate_indicator'] ? 'checked="checked"': '' ?>/>
@@ -112,19 +112,19 @@
 											<div class="input">
 												<input type="radio" id="duplicate_indicator_pid" class="switcher" name="duplicate_indicator" value="pid" <?php echo 'pid' == $post['duplicate_indicator'] ? 'checked="checked"': '' ?>/>
 												<label for="duplicate_indicator_pid"><?php _e('Post ID', 'wp_all_import_plugin' )?></label><br>
-												<span class="switcher-target-duplicate_indicator_pid" style="vertical-align:middle; padding-left:17px;">
+												<span class="switcher-target-duplicate_indicator_pid" style="vertical-align:middle; padding-left:17px;">												
 													<input type="text" name="pid_xpath" value="<?php echo esc_attr($post['pid_xpath']) ?>" />
 												</span>
 											</div>
 										</div>
 									</div>
-								</div>
+								</div>								
 								<?php include( '_reimport_options.php' ); ?>
 							</td>
 						</tr>
 					</table>
 				</div>
-			</div>
-		<?php endif; ?>
+			</div>			
+		<?php endif; ?>	
 	</div>
 </div>

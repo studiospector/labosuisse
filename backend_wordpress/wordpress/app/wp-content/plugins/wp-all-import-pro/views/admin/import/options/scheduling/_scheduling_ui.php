@@ -38,7 +38,7 @@
                         						var lastPart = parts[parts.length-1];
 
                         						var opt = $('#timezone').find("option:contains('"+ lastPart +"')");
-
+                        						
                         						$('#timezone').val(opt.val());
                         						$('#timezone').trigger("chosen:updated");
 
@@ -265,6 +265,6 @@
 					</tr>
 				</table>
 			</div>
-		</div>
+		</div>		
 	</div>
 </div>

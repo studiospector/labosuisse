@@ -119,4 +119,4 @@ if (!function_exists('wp_all_import_get_url')) {
             'localPath' => $localPath
         ) : $localPath;
     }
-}
+}	

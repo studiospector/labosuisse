@@ -69,12 +69,13 @@ class WPML_ACF_Location_Rules {
 	 * @return bool
 	 */
 	private function rule_match_page_parent( $match, $rule, $options ) {
-		if ( isset( $rule['param'], $rule['value'], $rule['operator'], $options['page_parent'], $options['lang'] )
-		     && 'page_parent' === $rule['param']
-		     && ! $this->sitepress->is_translated_post_type( 'acf-field-group' )
+		if ( isset( $rule['param'], $rule['value'], $rule['operator'], $options['lang'] )
+			 && 'page_parent' === $rule['param']
+			 && ! $this->sitepress->is_translated_post_type( 'acf-field-group' )
 		) {
-			$match = $this->match_against_operator(
-				intval( Obj::propOr( $rule['value'], $options['lang'], self::get_translation_ids( $rule['value'] ) ) ) === (int) $options['page_parent'],
+			$page_parent = Obj::propOr( wp_get_post_parent_id( get_the_ID() ), 'page_parent', $options );
+			$match       = $this->match_against_operator(
+				intval( Obj::propOr( $rule['value'], $options['lang'], self::get_translation_ids( $rule['value'] ) ) ) === intval( $page_parent ),
 				$rule['operator']
 			);
 		}

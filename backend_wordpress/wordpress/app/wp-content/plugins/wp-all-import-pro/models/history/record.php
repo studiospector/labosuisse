@@ -1,7 +1,7 @@
 <?php
 
-class PMXI_History_Record extends PMXI_Model_Record {
-
+class PMXI_History_Record extends PMXI_Model_Record {	
+	
 	/**
 	 * Initialize model instance
 	 * @param array[optional] $data Array of record data to initialize object with
@@ -23,5 +23,5 @@ class PMXI_History_Record extends PMXI_Model_Record {
 		}
 		return ($db) ? parent::delete() : true;
 	}
-
+	
 }

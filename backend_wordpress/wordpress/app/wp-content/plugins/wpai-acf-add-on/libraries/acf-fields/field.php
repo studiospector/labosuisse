@@ -508,8 +508,7 @@ abstract class Field implements FieldInterface {
         $values = $this->options['values'];
         if (isset($this->options['is_multiple_field']) && $this->options['is_multiple_field'] == 'yes') {
             $value = array_shift($values);
-        }
-        else {
+        } else {
             $value = isset($values[$this->getPostIndex()]) ? $values[$this->getPostIndex()] : '';
             $parents = $this->getParents();
             if (!empty($parents)){
@@ -521,7 +520,25 @@ abstract class Field implements FieldInterface {
                 }
             }
         }
-        return is_array($value) ? array_map('trim', $value) : trim($value);
+        return $this->trimValue($value);
+    }
+
+    /**
+     * Trim
+     *
+     * @param $value
+     * @return array|string
+     */
+    public function trimValue($value) {
+        if (is_array($value)) {
+            foreach ($value as $k => $v) {
+                if (is_string($v)) {
+                    $value[$k] = $this->trimValue($v);
+                }
+            }
+            return $value;
+        }
+        return is_string($value) ? trim($value) : $value;
     }
 
     /**

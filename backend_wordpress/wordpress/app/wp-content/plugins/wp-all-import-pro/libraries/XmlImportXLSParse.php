@@ -2,9 +2,9 @@
 
 class PMXI_XLSParser{
 
-	public $csv_path;
+	public $csv_path;	
 
-	public $_filename;
+	public $_filename;	
 
 	public $targetDir;
 
@@ -13,17 +13,17 @@ class PMXI_XLSParser{
 	public function __construct($path, $targetDir = false){
 
 		$this->_filename = $path;
-
-		$wp_uploads = wp_upload_dir();
+		
+		$wp_uploads = wp_upload_dir();		
 
 		$this->targetDir = ( ! $targetDir ) ? wp_all_import_secure_file($wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::UPLOADS_DIRECTORY ) : $targetDir;
 	}
 
-	public function parse(){
+	public function parse(){		
 
         $tmpname = wp_unique_filename($this->targetDir,  preg_replace('%\W(xls|xlsx)$%i', ".csv", basename($this->_filename)));
-
-        $this->csv_path = $this->targetDir  . '/' . wp_all_import_url_title($tmpname);
+        
+        $this->csv_path = $this->targetDir  . '/' . wp_all_import_url_title($tmpname);               
 
         return $this->toXML();
 	}

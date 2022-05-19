@@ -24,11 +24,11 @@
                 jQuery('[class^="dd-selected-text dashicon"]').removeClass( class_check );
 
             }
-        }
+        }           
     }
 
     // Rapid Add-On API Images
-    $(document).ready(function($){
+    $(document).ready(function($){    
         var class_check;
         var original_class;
         var new_class_name;
@@ -55,19 +55,19 @@
                         $(this).addClass("wpaiimgfor" + new_class_name);
                         $(this).removeClass( class_check );
                     }
-                }
+                }                
             }
         });
         // Append all of the classes to head.
         allstyles = allstyles + "</style>";
         $( allstyles ).appendTo("head");
     });
-
+	
 	// fix wpallimport-layout position
 	setTimeout(function () {
-		$('table.wpallimport-layout').length && $('table.wpallimport-layout td.left h2:first-child').css('margin-top',  $('.wrap').offset().top - $('table.wpallimport-layout').offset().top);
+		$('table.wpallimport-layout').length && $('table.wpallimport-layout td.left h2:first-child').css('margin-top',  $('.wrap').has('.wpallimport-layout').offset().top - $('table.wpallimport-layout').offset().top);
 	}, 10);
-
+	
 	// help icons
 	$(document).tipsy({
 		gravity: function() {
@@ -224,7 +224,7 @@
 	});
 
 	$('.change_file').each(function(){
-		let $wrap = $('.wrap');
+		let $wrap = $('.wrap').has('.wpallimport-layout');
 		let formHeight = ($('.wpallimport-layout').height() < 730) ? 730 : $('.wpallimport-layout').height();
 		$('#file_selector').ddslick({
 			width: 600,
@@ -301,7 +301,7 @@
 			}
 
 			$('.wpallimport-import-from').removeClass('selected').addClass('bind');
-			$(this).addClass('selected').removeClass('bind');
+			$(this).addClass('selected').removeClass('bind');			
 			$('.wpallimport-import-from').removeClass('selected').addClass('bind');
 			$(this).addClass('selected').removeClass('bind');
 			$('.change_file').find('.wpallimport-upload-type-container').hide();
@@ -368,7 +368,7 @@
 	// enter-submit form on step 1
 	$('.wpallimport-step-1').each(function(){
 
-		var $wrap = $('.wrap');
+		var $wrap = $('.wrap').has('.wpallimport-layout');
 
 		var formHeight = ($('.wpallimport-layout').height() < 730) ? 730 : $('.wpallimport-layout').height();
 
@@ -389,7 +389,7 @@
 					}
 					$('.wpallimport-download-from-checked').click();
 					break;
-				case 'file_type':
+				case 'file_type':					
 					if ($('input[name=file]').val() != '') {
 						showImportType = true;
 					}
@@ -663,11 +663,11 @@
 							$('.wpallimport-header').next('.clear').after(response.responseText);
 						},
 						dataType: "json"
-					});
-
+					});					
+														
 		    	} else {
 		    		if ($('.wpallimport-import-from.selected').attr('rel') == 'file_type') {
-		    			$('.wpallimport-choose-file').find('input[name=file]').val('');
+		    			$('.wpallimport-choose-file').find('input[name=file]').val('');	
 			    		$('#file_selector').find('.dd-selected').css({'color':'#cfceca'});
 			    		$('.wpallimport-choose-file').find('.wpallimport-upload-resource-step-two').slideUp();
 						$('.wpallimport-choose-file').find('.wpallimport-submit-buttons').hide();
@@ -1890,7 +1890,7 @@
 	});
 
 	$(document).on('click', '.add-new-ico', function() {
-		let count = $(this).parents('tr:first').find('ol.sortable').find('li.dragging').length + 1;
+		let count = parseInt($(this).parents('tr:first').find('ol.sortable').find('li.dragging').last().attr('id').replace('item_', '')) + 1;
 		let $template = $(this).parents('td:first').find('ol').children('li.template');
 		$clone = $template.clone(true);
 		$clone.addClass('dragging').attr({'id': $clone.attr('id') + '_' + count}).find('input[type=checkbox][name^=categories_mapping]').each(function(){
@@ -1919,29 +1919,29 @@
 	$('ol.sortable').each(function(){
 		if ( ! $(this).children('li').not('.template').length ) $(this).next('.add-new-ico').click();
 	});
-
+	
 	$('form.wpallimport-template').find('input[type=submit]').on('click', function(e){
 
 		e.preventDefault();
-
+		
 		$('.hierarhy-output').each(function(){
 			var sortable = $(this).parents('td:first').find('.ui-sortable:first');
 			if (sortable.length){
-				$(this).val(window.JSON.stringify(sortable.pmxi_nestedSortable('toArray', {startDepthCount: 0})));
+				$(this).val(window.JSON.stringify(sortable.pmxi_nestedSortable('toArray', {startDepthCount: 0})));			
 				if ($(this).parents('td:first').find('input:first').val() == '') $(this).val('');
 			}
 		});
 		if ($(this).attr('name') == 'btn_save_only') $('.save_only').val('1');
 
 		$('input[name^=in_variations], input[name^=is_visible], input[name^=is_taxonomy], input[name^=create_taxonomy_in_not_exists], input[name^=variable_create_taxonomy_in_not_exists], input[name^=variable_in_variations], input[name^=variable_is_visible], input[name^=variable_is_taxonomy]').each(function(){
-	    	if ( ! $(this).is(':checked') && ! $(this).parents('.form-field:first').hasClass('template')){
+	    	if ( ! $(this).is(':checked') && ! $(this).parents('.form-field:first').hasClass('template')){	    		
 	    		$(this).val('0').prop('checked', true);
 	    	}
 	    });
 
 	    $('.custom_type[rel=serialized]').each(function(){
 	    	var values = new Array();
-	    	$(this).find('.form-field').each(function(){
+	    	$(this).find('.form-field').each(function(){	    		
     			var skey = $(this).find('.serialized_key').val();
     			if ('' == skey){
     				values.push($(this).find('.serialized_value').val());
@@ -1949,7 +1949,7 @@
     				var obj = {};
     				obj[skey] = $(this).find('.serialized_value').val();
     				values.push(obj);
-    			}
+    			}	    			
 	    	});
 	    	$(this).find('input[name^=serialized_values]').val(window.JSON.stringify(values));
 	    });
@@ -1959,7 +1959,7 @@
 	    	$(this).find('.form-field').each(function(){
 	    		if ($(this).find('.mapping_to').val() != "") {
 	    			var skey = $(this).find('.mapping_from').val();
-	    			if ('' != skey){
+	    			if ('' != skey){	    				
 	    				var obj = {};
 	    				obj[skey] = $(this).find('.mapping_to').val();
 	    				values.push(obj);
@@ -1973,7 +1973,7 @@
 
 		$(this).parents('form:first').submit();
 
-	});
+	});	
 
 	$('.wpallimport-step-4').each(function(){
 		$(this).find('input[name^=custom_duplicate_name]').autocomplete({
@@ -1989,7 +1989,7 @@
 		var $template = $(this).parents('table').first().children('tbody').children('tr.template');
 		$number = $(this).parents('table').first().children('tbody').children('tr').length - 2;
 		$clone = $template.clone(true);
-
+		
 		$clone.find('div[rel^=serialized]').attr({'id':'serialized_' + $number}).find('table:first').attr({'rel':'serialized_' + $number});
 		$clone.find('div[rel^=mapping]').attr({'id':'cf_mapping_' + $number}).find('table:first').attr({'rel':'cf_mapping_' + $number});
 		$clone.find('a.specify_cf').attr({'rel':'serialized_' + $number})
@@ -2012,7 +2012,7 @@
 		$template.clone(true).insertBefore($template).css('display', 'none').removeClass('template').fadeIn();
 	});
 
-	/* END Categories hierarchy */
+	/* END Categories hierarchy */		
 
 	$('form.options').each(function(){
 		var $form = $(this);
@@ -2024,7 +2024,7 @@
 	});
 
 	$('form.edit').each(function(){
-		var $form = $(this);
+		var $form = $(this);		
 		$form.find('.wpallimport-change-unique-key').on('click', function(){
 			var $ths = $(this);
 			$( "#dialog-confirm" ).dialog({
@@ -2034,7 +2034,7 @@
 				modal: true,
 				draggable: false,
 				buttons: {
-					"Continue": function() {
+					"Continue": function() {						
 						$( this ).dialog( "close" );
 						$ths.hide();
 						$('input[name=unique_key]').removeAttr('disabled').focus();
@@ -2051,11 +2051,11 @@
 			$uniqueKey.val($tmpUniqueKey.val());
 		});
 	});
-
+	
 	// chunk files upload
 	if ($('#plupload-ui').length) {
 		$('#plupload-ui').show();
-		$('#html-upload-ui').hide();
+		$('#html-upload-ui').hide();	
 
 		wplupload = $('#select-files').wplupload({
 			runtimes : 'gears,browserplus,html5,flash,silverlight,html4',
@@ -2065,11 +2065,11 @@
 			file_data_name : 'async-upload',
 			multipart: true,
 			max_file_size: '1000mb',
-			chunk_size: '1mb',
+			chunk_size: '1mb',			
 			drop_element: 'plupload-ui',
-			multipart_params : {}
+			multipart_params : {}				
 		});
-	}
+	}	
 
 	/* END plupload scripts */
 
@@ -2078,7 +2078,7 @@
 		$('#logwrapper').slideToggle(100, function(){
 			$('#import_finished').css({'visibility':'visible'});
 		});
-	});
+	});			     
 
 	// Select Encoding
 	$('#import_encoding').on('change', function(){
@@ -2090,9 +2090,9 @@
 
 	$('#cancel_new_encoding').on('click', function(){
 		$('#add_encoding').hide();
-		$('#select_encoding').show();
+		$('#select_encoding').show();		
 		$('#new_encoding').val('');
-		$('#import_encoding').prop('selectedIndex', 0);
+		$('#import_encoding').prop('selectedIndex', 0);	
 	});
 
 	$('#add_new_encoding').on('click', function(){
@@ -2100,33 +2100,33 @@
 		if ("" != new_encoding){
 			$('#import_encoding').prepend('<option value="'+new_encoding+'">' + new_encoding + '</option>');
 			$('#cancel_new_encoding').click();
-			$('#import_encoding').prop('selectedIndex',0);
+			$('#import_encoding').prop('selectedIndex',0);	
 		}
 		else alert('Please enter encoding.');
 	});
 
 	$('input[name=keep_custom_fields]').on('click', function(){
 		$(this).parents('.input:first').find('.keep_except').slideToggle();
-	});
-
-    $('.pmxi_choosen').each(function(){
+	});		
+	
+    $('.pmxi_choosen').each(function(){    	
     	$(this).find(".choosen_input").select2({
     		tags: $(this).find('.choosen_values').html().split(','),
-    		width: '80%',
+    		width: '80%',    		
     	});
-    });
+    });    
 
     if (typeof wpPointerL10n != "undefined") wpPointerL10n.dismiss = 'Close';
 
 	$('.show_hints').on('click', function(){
-		var $ths = $(this);
+		var $ths = $(this);	
 		$('.wpallimport-overlay').show();
 
 		$(this).pointer({
             content: $('#' + $ths.attr('rel')).html(),
             position: {
                 edge: 'right',
-                align: 'center'
+                align: 'center'                
             },
             pointerWidth: 715,
             close: function() {
@@ -2137,11 +2137,11 @@
                 $('.wpallimport-overlay').hide();
             }
         }).pointer('open');
-	});
+	});		
 
 	// Serialized Custom Field Dialog
 	$('.pmxi_cf_pointer').on('click', function(){
-		var $ths = $(this);
+		var $ths = $(this);	
 		//$('.wpallimport-overlay').show();
 
 		if ($ths.parents('.form-field:first').find('input[name^=custom_name]').val() == "") {
@@ -2154,7 +2154,7 @@
             content: $('#' + $ths.attr('rel')).html(),
             position: {
                 edge: 'top',
-                align: 'center'
+                align: 'center'                
             },
             pointerWidth: 450,
             close: function() {
@@ -2165,7 +2165,7 @@
                 //$('.wpallimport-overlay').hide();
             }
         }).pointer('open');
-	});
+	});	
 
 	// Custom Fields Mapping Dialog
 	$('.wpallimport-cf-menu li').on('click', function(){
@@ -2173,12 +2173,12 @@
 		if ($triggerEvent.hasClass('pmxi_cf_mapping')){
 
 			//$('.wpallimport-overlay').show();
-			var $ths = $triggerEvent;
+			var $ths = $triggerEvent;	
 			$triggerEvent.pointer({
 	            content: $('#' + $ths.attr('rel')).html(),
 	            position: {
 	                edge: 'right',
-	                align: 'center'
+	                align: 'center'                
 	            },
 	            pointerWidth: 450,
 	            close: function() {
@@ -2188,15 +2188,15 @@
 	                });
 	                //$('.wpallimport-overlay').hide();
 	            }
-	        }).pointer('open');
+	        }).pointer('open');					
 		}
-	});
+	});	
 
 	$('.wpallimport-overlay').on('click', function(){
 		$('.wp-pointer').hide();
 		$('fieldset.wp-all-import-scheduling-help').hide();
-		$(this).hide();
-	});
+		$(this).hide();        
+	});	
 
 	if ($('#wp_all_import_code').length){
 		var editor = wp.codeEditor.initialize($('#wp_all_import_code'), wpai_cm_settings);
@@ -2220,17 +2220,17 @@
 
     $('.wp_all_import_save_functions').on('click', function(){
     	var request = {
-			action: 'save_import_functions',
+			action: 'save_import_functions',	
 			data: editor.codemirror.getValue(),
-			security: wp_all_import_security
-	    };
+			security: wp_all_import_security				
+	    };    
 	    $('.wp_all_import_functions_preloader').show();
 	    $('.wp_all_import_saving_status').removeClass('error updated').html('');
 		$.ajax({
 			type: 'POST',
 			url: ajaxurl + ((typeof import_id != "undefined") ? '?id=' + import_id : ''),
 			data: request,
-			success: function(response) {
+			success: function(response) {						
 				$('.wp_all_import_functions_preloader').hide();
 				if (response.result) {
 					window.onbeforeunload = false;
@@ -2243,12 +2243,12 @@
 				}
 				$('.wp_all_import_saving_status').html(response.msg).show();
 			},
-			error: function( jqXHR, textStatus ) {
+			error: function( jqXHR, textStatus ) {						
 				$('.wp_all_import_functions_preloader').hide();
 			},
 			dataType: "json"
 		});
-    });
+    }); 
 
     $('.wp_all_import_ajax_deletion').on('click', function(e){
     	e.preventDefault();
@@ -2300,10 +2300,10 @@
 				if ($('#wp_all_import_code').length) editor.codemirror.setCursor(1);
 			});
 		} else {
-			$parent.addClass('closed');
+			$parent.addClass('closed');			
 			$parent.find('.wpallimport-collapsed-content:first').slideUp();
 		}
-	});
+	});	
 
 	$('#is_delete_posts').change(function(){
 		if ($(this).is(':checked')){
@@ -2320,16 +2320,16 @@
 	$('.wpallimport-delete-and-edit, .download_import_template, .download_import_bundle').on('click', function(e){
 		e.preventDefault();
     	window.location.href = $(this).attr('rel');
-    });
+    });        
 
     $('.wpallimport-wpae-notify-read-more').on('click', function(e){
     	e.preventDefault();
-
+    	
     	var request = {
-			action: 'dismiss_notifications',
-			security: wp_all_import_security,
+			action: 'dismiss_notifications',		
+			security: wp_all_import_security,	
 			addon: $(this).parent('div:first').attr('rel')
-	    };
+	    };		
 
 	    var ths = $(this);
 
@@ -2338,11 +2338,11 @@
 			url: ajaxurl,
 			data: request,
 			success: function(response) {
-
-			},
+								
+			},			
 			dataType: "json"
 		});
-
+		
 		$(this).parent('div:first').slideUp();
 
     	window.open($(this).attr('href'), '_blank');
@@ -2358,7 +2358,7 @@
     		$('.wp-all-import-sure-to-delete').show();
     	}
     	if ( ! $('#is_delete_import').is(':checked') && ! $('#is_delete_posts').is(':checked')) {
-    		$('.wp-all-import-sure-to-delete').hide();
+    		$('.wp-all-import-sure-to-delete').hide();    		
     		$('.delete-single-import').attr('disabled', 'disabled');
     	}
     	if ( $('#is_delete_import').is(':checked') && $('#is_delete_posts').is(':checked')) {
@@ -2382,19 +2382,19 @@
 
     $('#is_delete_import, #is_delete_posts').on('click', function(){
     	wpai_are_sure_to_delete_import();
-    });
-    // [\ Delete Import]
+    });    
+    // [\ Delete Import]    
 
     if ($('.switcher-target-update_choosen_data').length) {
     	var $re_import_options = $('.switcher-target-update_choosen_data');
     	var $toggle_re_import_options = $('.wpallimport-trigger-options');
-
+    	
     	if ($re_import_options.find('input[type=checkbox]').length == $re_import_options.find('input[type=checkbox]:checked').length) {
-    		var $newtitle = $toggle_re_import_options.attr('rel');
+    		var $newtitle = $toggle_re_import_options.attr('rel');    		
     		$toggle_re_import_options.attr('rel', $toggle_re_import_options.html());
     		$toggle_re_import_options.html($newtitle);
     		$toggle_re_import_options.removeClass('wpallimport-select-all');
-    	}
+    	}    	
     }
 
     $('.wpallimport-trigger-options').on('click', function(){
@@ -2402,7 +2402,7 @@
     	var $newtitle = $(this).attr('rel');
     	if ( $(this).hasClass('wpallimport-select-all') ) {
     		$parent.find('input[type=checkbox]').not('.exclude-select-all').removeAttr('checked').click();
-    		$(this).removeClass('wpallimport-select-all');
+    		$(this).removeClass('wpallimport-select-all');    		    		
     	} else {
 			$parent.find('input[type=checkbox]:checked').not('.exclude-select-all').click();
     		$(this).addClass('wpallimport-select-all');
@@ -2443,9 +2443,9 @@
 	    }
 	}
 
-	fix_tag_position();
+	fix_tag_position();	
 
-	$(document).scroll(function() {
+	$(document).scroll(function() {    	    				
     	fix_tag_position();
     });
 

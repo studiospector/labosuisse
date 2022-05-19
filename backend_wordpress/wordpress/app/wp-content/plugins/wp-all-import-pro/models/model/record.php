@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * Base class for models
  *
@@ -16,7 +16,7 @@ class PMXI_Model_Record extends PMXI_Model {
 		}
 		$data and $this->set($data);
 	}
-
+	
 	/**
 	 * @see PMXI_Model::getBy()
 	 * @return PMXI_Model_Record
@@ -63,18 +63,18 @@ class PMXI_Model_Record extends PMXI_Model {
 		}
 		return $related instanceof PMXI_Model_List ? $related->convertRecords() : $related;
 	}
-
+	
 	/**
 	 * Saves currently set object data as database record
 	 * @return PMXI_Model_Record
 	 */
 	public function insert() {
-		if ($this->wpdb->insert($this->table, $this->toArray(TRUE))) {
+		if ($this->wpdb->insert($this->table, $this->toArray(TRUE))) {						
 			if (isset($this->auto_increment)) {
 				$this[$this->primary[0]] = $this->wpdb->insert_id;
-			}
+			}			
 			return $this;
-		} else {
+		} else {					
 			throw new Exception($this->wpdb->last_error);
 		}
 	}
@@ -82,15 +82,15 @@ class PMXI_Model_Record extends PMXI_Model {
 	 * Update record in database
 	 * @return PMXI_Model_Record
 	 */
-	public function update() {
-		$record = $this->toArray(TRUE);
-		$this->wpdb->update($this->table, $record, array_intersect_key($record, array_flip($this->primary)));
+	public function update() {		
+		$record = $this->toArray(TRUE);				
+		$this->wpdb->update($this->table, $record, array_intersect_key($record, array_flip($this->primary)));				
 		if ($this->wpdb->last_error) {
 			throw new Exception($this->wpdb->last_error);
-		}
+		}		
 		return $this;
 	}
-
+	
 	/**
 	 * Delete record form database
 	 * @return PMXI_Model_Record
@@ -115,12 +115,12 @@ class PMXI_Model_Record extends PMXI_Model {
 		}
 		return $this;
 	}
-
+	
 	/**
 	 * Set record data
-	 * When 1st parameter is an array, it expected to be an associative array of field => value pairs
+	 * When 1st parameter is an array, it expected to be an associative array of field => value pairs 
 	 * If 2 parameters are set, first one is expected to be a field name and second - it's value
-	 *
+	 * 
 	 * @param string|array $field
 	 * @param mixed[optional] $value
 	 * @return PMXI_Model_Record
@@ -134,10 +134,10 @@ class PMXI_Model_Record extends PMXI_Model {
 		} else {
 			$this[$field] = $value;
 		}
-
+		
 		return $this;
 	}
-
+	
 	/**
 	 * Magic method to resolved object-like request to record values in format $obj->%FIELD_NAME%
 	 * @param string $field
@@ -172,5 +172,5 @@ class PMXI_Model_Record extends PMXI_Model {
 	public function __unset($field) {
 		$this->offsetUnset($field);
 	}
-
+	
 }

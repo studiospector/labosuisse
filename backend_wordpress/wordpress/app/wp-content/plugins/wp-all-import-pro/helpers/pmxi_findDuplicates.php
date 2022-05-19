@@ -67,7 +67,7 @@ function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_
                             FROM {$wpdb->posts} as posts
                             INNER JOIN {$wpdb->postmeta} AS lookup ON posts.ID = lookup.post_id
                             WHERE
-                            posts.post_type IN ( '" . implode("','", $post_types) . "' )
+                            posts.post_type IN ( '" . implode("','", $post_types) . "' )                            
                             AND lookup.meta_key = %s
                             AND lookup.meta_value = %s
                             LIMIT 1
@@ -140,7 +140,7 @@ function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_
                 AND tt.taxonomy LIKE %s
                     AND (REPLACE(REPLACE(REPLACE(t." . $field . ", ' ', ''), '\\t', ''), '\\n', '') = %s
                         OR REPLACE(REPLACE(REPLACE(t." . $field . ", ' ', ''), '\\t', ''), '\\n', '') = %s
-                            OR REPLACE(REPLACE(REPLACE(t." . $field . ", ' ', ''), '\\t', ''), '\\n', '') = %s)
+                            OR REPLACE(REPLACE(REPLACE(t." . $field . ", ' ', ''), '\\t', ''), '\\n', '') = %s) 
             ",
                         isset($articleData['ID']) ? $articleData['ID'] : 0,
                         isset($articleData['taxonomy']) ? $articleData['taxonomy'] : '%',
@@ -153,7 +153,7 @@ function pmxi_findDuplicates($articleData, $custom_duplicate_name = '', $custom_
                     $field = 'comment_' . $duplicate_indicator; // post_title or post_content
                     return $wpdb->get_col($wpdb->prepare("
             SELECT comment_ID FROM " . $wpdb->comments . "
-            WHERE
+            WHERE                
                 AND comment_ID != %s
                 AND REPLACE(REPLACE(REPLACE($field, ' ', ''), '\\t', ''), '\\n', '') = %s
             ",

@@ -15,10 +15,10 @@ function pmxi_wp_ajax_save_import_functions(){
 	$functions = apply_filters( 'import_functions_file_path', $functions );
 
 	$input = new PMXI_Input();
-
+	
 	$post = $input->post('data', '');
 
-	$response = wp_remote_post('http://phpcodechecker.com/api', array(
+	$response = wp_remote_post('https://phpcodechecker.com/api', array(
 		'body' => array(
 			'code' => $post
 		)
@@ -28,8 +28,8 @@ function pmxi_wp_ajax_save_import_functions(){
 	{
 		if (strpos($post, "<?php") === false || strpos($post, "?>") === false)
 		{
-			exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp_all_import_plugin')))); die;
-		}
+			exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp_all_import_plugin')))); die;	
+		}	
 		else
 		{
 			file_put_contents($functions, $post);
@@ -42,21 +42,21 @@ function pmxi_wp_ajax_save_import_functions(){
 		$body = json_decode(wp_remote_retrieve_body($response), true);
 
 		if ($body['errors'] === 'TRUE')
-		{
-			exit(json_encode(array('result' => false, 'msg' => $body['syntax']['message']))); die;
+		{			
+			exit(json_encode(array('result' => false, 'msg' => $body['syntax']['message']))); die;	
 		}
 		elseif($body['errors'] === 'FALSE')
 		{
 			if (strpos($post, "<?php") === false || strpos($post, "?>") === false)
 			{
-				exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp_all_import_plugin')))); die;
-			}
+				exit(json_encode(array('result' => false, 'msg' => __('PHP code must be wrapped in "&lt;?php" and "?&gt;"', 'wp_all_import_plugin')))); die;	
+			}	
 			else
 			{
 				file_put_contents($functions, $post);
-			}
+			}					
 		}
-	}
+	}	
 
 	exit(json_encode(array('result' => true, 'msg' => __('File has been successfully updated.', 'wp_all_import_plugin')))); die;
 }

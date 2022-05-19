@@ -112,20 +112,20 @@ class XmlImportToken
    * Token is a float number
    */
   const KIND_FLOAT = "FLOAT";
-
+  
   /**
    * Token is a math on the price element
-   */
+   */ 
   const KIND_MATH = "MATH";
 
   /**
    * Token is a spintax
-   */
+   */ 
   const KIND_SPINTAX = "SPINTAX";
-
+  
   /**
    * Token is a math on the price element
-   */
+   */ 
   const KIND_OPERATION = "OPERATION";
 
   /**

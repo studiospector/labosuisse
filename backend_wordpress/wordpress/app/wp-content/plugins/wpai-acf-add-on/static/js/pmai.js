@@ -1,7 +1,7 @@
 /**
  * plugin javascript
  */
-(function($){$(function () {
+(function($){$(function () {				
 
 
 });})(jQuery);

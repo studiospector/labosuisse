@@ -52,7 +52,7 @@ class XmlImportAstPrint extends XmlImportAstStatement
       $array[$i] = '  ' . $array[$i];
     }
     $result .= implode("\n", $array) . "\n";
-
+    
     $result .= "--> end " . get_class($this);
 
     return $result;

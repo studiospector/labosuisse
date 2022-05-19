@@ -4,8 +4,8 @@
  * Render admin notices if ACF or WP All Import plugins are activated
  */
 function pmai_admin_notices() {
-
-	// notify user if history folder is not writable
+	
+	// notify user if history folder is not writable		
 	if ( ! class_exists( 'PMXI_Plugin' ) ) {
 		?>
 		<div class="error"><p>
@@ -15,9 +15,9 @@ function pmai_admin_notices() {
 			) ?>
 		</p></div>
 		<?php
-
+		
 		deactivate_plugins( PMAI_ROOT_DIR . '/wpai-acf-add-on.php');
-
+		
 	}
 
 	if ( class_exists( 'PMXI_Plugin' ) and ( version_compare(PMXI_VERSION, '4.1.1') < 0 and PMXI_EDITION == 'paid' or version_compare(PMXI_VERSION, '3.2.3') <= 0 and PMXI_EDITION == 'free') ) {
@@ -29,7 +29,7 @@ function pmai_admin_notices() {
 			) ?>
 		</p></div>
 		<?php
-
+		
 		deactivate_plugins( PMAI_ROOT_DIR . '/wpai-acf-add-on.php');
 	}
 
@@ -42,9 +42,9 @@ function pmai_admin_notices() {
 			) ?>
 		</p></div>
 		<?php
-
+		
 		deactivate_plugins( PMAI_ROOT_DIR . '/wpai-acf-add-on.php');
-
+		
 	}
 	$input = new PMAI_Input();
 	$messages = $input->get('pmai_nt', array());
@@ -54,7 +54,7 @@ function pmai_admin_notices() {
 			in_array((string)$type, array('updated', 'error')) or $type = 'updated';
 			?>
 			<div class="<?php echo $type ?>"><p><?php echo $m ?></p></div>
-			<?php
+			<?php 
 		}
 	}
 }

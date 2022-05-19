@@ -1,11 +1,11 @@
 <?php
 
 class PMXI_Download
-{
-
+{		
+	
 	static public function zip($file_name)
 	{
-
+		
 		header('Content-type: application/zip');
 		header("Content-Disposition: attachment; filename=\"".basename($file_name)."\"");
 		readfile($file_name);
@@ -34,6 +34,6 @@ class PMXI_Download
         header("Content-Disposition: attachment; filename=\"".basename($file_name)."\"");
         readfile($file_name);
         die;
-	}
+	}	
 
 }

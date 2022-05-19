@@ -1,11 +1,11 @@
 === WooCommerce Multilingual - run WooCommerce with WPML ===
-Contributors: AmirHelzer, sergey.r, mihaimihai, EduardMaghakyan, andrewp-2, kaggdesign
+Contributors: AmirHelzer, strategio, dgwatkins, andrewp-2
 Donate link: http://wpml.org/documentation/related-projects/woocommerce-multilingual/
 Tags: CMS, woocommerce, commerce, ecommerce, e-commerce, products, WPML, multilingual, e-shop, shop
 License: GPLv2
 Requires at least: 4.7
 Tested up to: 5.9
-Stable tag: 4.12.5
+Stable tag: 4.12.6
 Requires PHP: 5.6
 
 Allows running fully multilingual e-commerce sites using WooCommerce and WPML.
@@ -138,6 +138,10 @@ WooCommerce Multilingual is compatible with all major WooCommerce extensions. We
 
 == Changelog ==
 
+= 4.12.6 =
+
+* Fixed the wcml_client_country user data when using the cookie strategy.
+
 = 4.12.5 =
 
 * Fixed a currency geolocation bug due to WC 6.1.
@@ -160,7 +164,7 @@ WooCommerce Multilingual is compatible with all major WooCommerce extensions. We
 = 4.12.1 =
 
 * Removed translation files for some locales that we cannot maintain anymore and updated the remaining locale translations.
-* Revamped the wizardâ€™s â€œTranslation Optionsâ€ step to include â€œTranslate Everythingâ€ mode.
+* Revamped the wizardÃ¢â‚¬â„¢s Ã¢â‚¬Å“Translation OptionsÃ¢â‚¬Â step to include Ã¢â‚¬Å“Translate EverythingÃ¢â‚¬Â mode.
 * Updated logic to add noindex to reviews in all languages.
 * Fixed to show the correct WooCommerce Bookings items in the order summary.
 * Fixed an issue with selecting a country in multi-currency modal.
@@ -193,19 +197,19 @@ WooCommerce Multilingual is compatible with all major WooCommerce extensions. We
 * Fixed compatibility with Name Your Price extension in version 3.0.
 * WooCommerce Analytics Dashboard now will not display translated products separately.
 * Fixed a conflict when using the wpml_sync_custom_field action hook on a product field.
-* Fixed an issue with translating WooCommerce Table Rate Shipping rateâ€™s abort messages.
+* Fixed an issue with translating WooCommerce Table Rate Shipping rateÃ¢â‚¬â„¢s abort messages.
 * Fixed an issue with the currency switcher not showing when a new language is added.
 * Fixed scenarios for translated products in the WooCommerce Composite Products addon.
 * Fixed translating singular labels for attribute taxonomies.
 * Fixed the wrong product translation author when using the Classic Translation Editor.
 * Fixed the product analytics pagination.
-* Variation Swatches And Photos â€“ Fixed a bug when the custom attribute translation is the same as the original.
+* Variation Swatches And Photos Ã¢â‚¬â€œ Fixed a bug when the custom attribute translation is the same as the original.
 * Fixed a PHP notice from the currency switcher when an extra language is added.
 * Fixed the checkout block redirecting to the wrong language for the confirmation page.
 * Fixed the currency conversion when switching subscriptions.
 * Fixed the encoding of base permalinks that contain slashes.
 * Fixed an issue with Print Invoices/Packing Lists addon using the admin language instead of the order language.
-* Improved the attribute taxonomy translation UI when itâ€™s not publicly queryable.
+* Improved the attribute taxonomy translation UI when itÃ¢â‚¬â„¢s not publicly queryable.
 * Fixed a link pointing to the wrong admin screen to translate non-WooCommerce taxonomies.
 * Fixed an issue with displaying the wrong product category count between languages.
 * Added /order-pay/ to reserved endpoints for absolute links converting.

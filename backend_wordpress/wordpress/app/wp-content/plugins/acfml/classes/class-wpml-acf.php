@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Obj;
+
 /**
  * Class WPML_ACF
  */
@@ -23,17 +25,24 @@ class WPML_ACF {
 
 	private function set_shuffle_strategy() {
 		global $pagenow;
+		//phpcs:disable WordPress.Security.NonceVerification.Recommended,WordPress.CSRF.NonceVerification.NoNonceVerification,WordPress.VIP.SuperGlobalInputUsage.AccessDetected
 		$is_repeater_update_on_term_edit  = isset( $_REQUEST['action'] ) && 'editedtag' === $_REQUEST['action'] && isset( $_REQUEST['acf'] );
 		$is_repeater_display_on_term_edit = isset( $pagenow ) && 'term.php' === $pagenow;
 		$is_repeater_update_on_post_edit  = isset( $_REQUEST['action'] ) && 'editpost' === $_REQUEST['action'] && isset( $_REQUEST['acf'] );
 		$is_repeater_display_on_post_edit = isset( $pagenow ) && 'post.php' === $pagenow;
+		$is_option_page_request           = function() {
+			return is_admin() && function_exists( 'acf_get_options_page' ) && acf_get_options_page( Obj::prop( 'page', $_REQUEST ) );
+		};
 
 		if ( $is_repeater_update_on_term_edit || $is_repeater_display_on_term_edit ) {
+			//phpcs:disable WordPress.Security.NonceVerification.Recommended
 			if ( isset( $_REQUEST['taxonomy'] ) ) {
-				$this->shuffle_strategy = new \ACFML\Repeater\Shuffle\Term( $_REQUEST['taxonomy'] );
+				$this->shuffle_strategy = new \ACFML\Repeater\Shuffle\Term( sanitize_text_field( wp_unslash( $_REQUEST['taxonomy'] ) ) );
 			}
 		} elseif ( $is_repeater_update_on_post_edit || $is_repeater_display_on_post_edit ) {
 			$this->shuffle_strategy = new \ACFML\Repeater\Shuffle\Post();
+		} elseif ( $is_option_page_request() ) {
+			$this->shuffle_strategy = new \ACFML\Repeater\Shuffle\OptionsPage();
 		}
 	}
 
@@ -65,6 +74,7 @@ class WPML_ACF {
 			$this->init_duplicated_post();
 			$this->init_acf_field_reference_adjuster();
 			$this->init_transfer_tools();
+			$this->init_translatable_groups_checker();
 		}
 	}
 
@@ -116,7 +126,8 @@ class WPML_ACF {
 	}
 
 	private function init_acf_pro() {
-		$this->dependencies_factory->create_pro();
+		$acfPro = $this->dependencies_factory->create_pro();
+		$acfPro->register_hooks();
 	}
 
 	/**
@@ -131,7 +142,7 @@ class WPML_ACF {
 		$WPML_ACF_Custom_Fields_Sync = $this->dependencies_factory->create_custom_fields_sync( $this->shuffle_strategy );
 		$WPML_ACF_Custom_Fields_Sync->register_hooks();
 	}
-	
+
 	private function init_field_translation_jobs() {
 		$this->dependencies_factory->create_field_translation_jobs()->add_hooks();
 	}
@@ -200,5 +211,12 @@ class WPML_ACF {
 		$this->dependencies_factory->create_tools_export()->init();
 		$this->dependencies_factory->create_tools_import()->init();
 		$this->dependencies_factory->create_tools_local()->init();
+	}
+
+	/**
+	 * Instantiate ACFML\WPML_ACF_Translatable_Groups_Checker and register its hooks.
+	 */
+	private function init_translatable_groups_checker() {
+		$this->dependencies_factory->create_translatable_groups_checker()->register_hooks();
 	}
 }

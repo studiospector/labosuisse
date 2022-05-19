@@ -26,17 +26,17 @@ abstract class PMAI_Controller {
 	public function __construct() {
 		$this->input = new PMAI_Input();
 		$this->input->addFilter('trim');
-
+		
 		$this->errors = new WP_Error();
-
+		
 		$this->init();
 	}
-
+	
 	/**
 	 * Method to put controller initialization logic to
 	 */
 	protected function init() {}
-
+	
 	/**
 	 * Checks wether protocol is HTTPS and redirects user to secure connection if not
 	 */
@@ -47,12 +47,12 @@ abstract class PMAI_Controller {
 			} else {
 				wp_redirect('https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']); die();
 			}
-		}
+		}		
 	}
-
+	
 	/**
 	 * Method returning resolved template content
-	 *
+	 * 
 	 * @param string[optional] $viewPath Template path to render
 	 */
 	protected function render($viewPath = null) {
@@ -73,10 +73,10 @@ abstract class PMAI_Controller {
 			throw new Exception("Requested template file $filePath is not found.");
 		}
 	}
-
+	
 	/**
 	 * Display list of errors
-	 *
+	 * 
 	 * @param string|array|WP_Error[optional] $msgs
 	 */
 	protected function error($msgs = NULL) {
@@ -90,7 +90,7 @@ abstract class PMAI_Controller {
 			$msgs = array($msgs);
 		}
 		$this->data['errors'] = $msgs;
-
+		
 		$viewPathRel = str_replace('_', '/', preg_replace('%^' . preg_quote(PMAI_Plugin::PREFIX, '%') . '%', '', strtolower(get_class($this)))) . '/error.php';
 		if (is_file(PMAI_Plugin::ROOT_DIR . '/views/' . $viewPathRel)) { // if calling controller class has specific error view
 			$this->render($viewPathRel);
@@ -98,5 +98,5 @@ abstract class PMAI_Controller {
 			$this->render('controller/error.php');
 		}
 	}
-
+	
 }

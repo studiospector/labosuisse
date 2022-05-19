@@ -1,12 +1,12 @@
-<?php
+<?php 
 /**
  * Base class for models
- *
+ * 
  * @author Pavel Kulbakin <p.kulbakin@gmail.com>
  */
 abstract class PMXI_Model extends ArrayObject {
 	/**
-	 * WPDB instance
+	 * WPDB instance 
 	 * @var wpdb
 	 */
 	protected $wpdb;
@@ -25,13 +25,13 @@ abstract class PMXI_Model extends ArrayObject {
 	 * @var bool
 	 */
 	protected $auto_increment = FALSE;
-
+	
 	/**
 	 * Cached data retrieved from database
 	 * @var array
 	 */
 	private static $meta_cache = array();
-
+	
 	/**
 	 * Initialize model
 	 * @param array[optional] $data Array of record data to initialize object with
@@ -39,18 +39,18 @@ abstract class PMXI_Model extends ArrayObject {
 	public function __construct() {
 		$this->wpdb = $GLOBALS['wpdb'];
 	}
-
+	
 	/**
 	 * Read records from database by specified fields and values
-	 * When 1st parameter is an array, it expected to be an associative array of field => value pairs to read data by
+	 * When 1st parameter is an array, it expected to be an associative array of field => value pairs to read data by 
 	 * If 2 parameters are set, first one is expected to be a field name and second - it's value
-	 *
+	 * 
 	 * @param string|array $field
-	 * @param mixed[optional] $value
+	 * @param mixed[optional] $value 
 	 * @return PMXI_Model
 	 */
 	abstract public function getBy($field = NULL, $value = NULL);
-
+	
 	/**
 	 * Magic function to automatically resolve calls like $obj->getBy%FIELD_NAME%
 	 * @param string $method
@@ -65,7 +65,7 @@ abstract class PMXI_Model extends ArrayObject {
 			throw new Exception("Requested method " . get_class($this) . "::$method doesn't exist.");
 		}
 	}
-
+	
 	/**
 	 * Bind model to database table
 	 * @param string $tableName
@@ -93,10 +93,10 @@ abstract class PMXI_Model extends ArrayObject {
 		}
 		$this->primary = self::$meta_cache[$this->table]['primary'];
 		$this->auto_increment = self::$meta_cache[$this->table]['auto_increment'];
-
+		
 		return $this;
-	}
-
+	} 
+	
 	/**
 	 * Return database table name this object is bound to
 	 * @return string
@@ -112,7 +112,7 @@ abstract class PMXI_Model extends ArrayObject {
 	public function getFieldName($col) {
 		return $this->table . '.' . $col;
 	}
-
+	
 	/**
 	 * Compose WHERE clause based on parameters provided
 	 * @param string|array $field
@@ -127,7 +127,7 @@ abstract class PMXI_Model extends ArrayObject {
 			$operator = $value;
 		}
 		! is_null($operator) or $operator = 'AND'; // apply default operator value
-
+		
 		$where = array();
 		foreach ($field as $key => $val) {
 			if (is_int($key)) {
@@ -135,7 +135,7 @@ abstract class PMXI_Model extends ArrayObject {
 			} else {
 				if ( ! preg_match('%^(.+?) *(=|<>|!=|<|>|<=|>=| (NOT +)?(IN|(LIKE|REGEXP|RLIKE)( BINARY)?))?$%i', trim($key), $mtch)) {
 					throw new Exception('Wrong field name format.');
-				}
+				}				
 				$key = $mtch[1];
 				if (is_array($val) and (empty($mtch[2]) or 'IN' == strtoupper($mtch[4]))) {
 					$op = empty($mtch[2]) ? 'IN' : strtoupper(trim($mtch[2]));
@@ -145,10 +145,10 @@ abstract class PMXI_Model extends ArrayObject {
 					$where[] = $this->wpdb->prepare("$key $op %s", $val);
 				}
 			}
-		}
+		}		
 		return implode(" $operator ", $where);
 	}
-
+		
 	/**
 	 * Return associative array with record data
 	 * @param bool[optional] $serialize Whether returned fields should be serialized
@@ -165,7 +165,7 @@ abstract class PMXI_Model extends ArrayObject {
 		}
 		return $result;
 	}
-
+	
 	/**
 	 * Check whether object data is empty
 	 * @return bool
@@ -173,7 +173,7 @@ abstract class PMXI_Model extends ArrayObject {
 	public function isEmpty() {
 		return $this->count() == 0;
 	}
-
+	
 	/**
 	 * Empty object data
 	 * @return PMXI_Model
@@ -182,7 +182,7 @@ abstract class PMXI_Model extends ArrayObject {
 		$this->exchangeArray(array());
 		return $this;
 	}
-
+	
 	/**
 	 * Delete all content from model's table
 	 * @return PMXI_Model

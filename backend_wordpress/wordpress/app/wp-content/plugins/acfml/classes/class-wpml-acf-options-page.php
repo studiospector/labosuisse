@@ -40,8 +40,8 @@ class WPML_ACF_Options_Page {
 	 * Adds filters for displaying options page value and updating this value.
 	 */
 	public function register_hooks() {
-		add_filter( 'acf/pre_render_fields', array( $this, 'fields_on_translated_options_page' ), 10, 2 );
-		add_filter( 'acf/update_value', array( $this, 'overwrite_option_value' ), 10, 4 );
+		add_filter( 'acf/pre_render_fields', [ $this, 'fields_on_translated_options_page' ], 10, 2 );
+		add_filter( 'acf/update_value', [ $this, 'overwrite_option_value' ], 10, 4 );
 		add_filter( 'acf/validate_post_id', [ $this, 'append_language_code_for_option_pages' ] );
 	}
 
@@ -49,8 +49,10 @@ class WPML_ACF_Options_Page {
 	 * @return bool Tells if currently displayed page is ACF options page within wp-admin.
 	 */
 	public function is_acf_options_page() {
-		$is = is_admin() && isset( $_GET['page'] ) && stristr( $_GET['page'], 'acf-options-' ) !== false;
-		return $is;
+		return is_admin()
+			&& function_exists( 'acf_get_options_page' )
+			/* phpcs:ignore WordPress.Security.NonceVerification.Recommended */
+			&& acf_get_options_page( sanitize_text_field( wp_unslash( Obj::prop( 'page', $_REQUEST ) ) ) );
 	}
 
 	/**
@@ -81,20 +83,16 @@ class WPML_ACF_Options_Page {
 					if ( $this->is_field_on_translated_options_page( $post_id ) ) {
 						if ( $this->is_repeater_field( $field ) ) {
 							$field['value'] = acf_get_value( self::ORIGINAL_ID, $field );
-							$field = $this->updateTranslatedSubfieldValue( $field );
+							$field          = $this->updateTranslatedSubfieldValue( $field );
 						} else {
-							
 							$field['value'] = $this->convert_relationship_field( acf_get_value( self::ORIGINAL_ID, $field ), $field );
-							
-							$instructions = '';
-							if ( isset( $field['instructions'] ) ) {
-								$instructions = $field['instructions'] . '<br />';
-							}
-							$instructions .= __( 'This value will be always replaced with the original, because its translation preferences are set to copy.', 'acfml' );
-							
-							$field['instructions'] = $instructions;
+
+							$field['readonly'] = true;
+
+							$message        = esc_attr__( 'This field is locked for editing because WPML will copy its value from the original language.', 'acfml' );
+							$label          = Obj::propOr( '', 'label', $field );
+							$field['label'] = sprintf( '%s <i class="otgs-ico-lock js-otgs-popover-tooltip" title="%s"></i>', $label, $message );
 						}
-						
 					}
 					break;
 				case WPML_COPY_ONCE_CUSTOM_FIELD:
@@ -111,7 +109,7 @@ class WPML_ACF_Options_Page {
 
 		return $field;
 	}
-	
+
 	/**
 	 * @param array $field
 	 *
@@ -238,7 +236,7 @@ class WPML_ACF_Options_Page {
 	private function is_repeater_field( $field ) {
 		return isset( $field['type'] ) && 'repeater' === $field['type'];
 	}
-	
+
 	/**
 	 * @param mixed $post_id
 	 *
@@ -253,19 +251,18 @@ class WPML_ACF_Options_Page {
 			&& ! $this->is_taxonomy_name( $post_id )
 			&& ! $this->is_block_id( $post_id )
 			&& ! $this->id_starts_with_user( $post_id )
+			&& ! $this->is_widget_id( $post_id )
 		) {
-			$cl = acf_get_setting('current_language');
-			$dl = acf_get_setting('default_language');
-			
-			if( ! $this->id_ends_with_language_code( $post_id, $cl ) && $cl !== $dl ) {
-				
+			$cl = acf_get_setting( 'current_language' );
+			$dl = acf_get_setting( 'default_language' );
+
+			if ( ! $this->id_ends_with_language_code( $post_id, $cl ) && $cl !== $dl ) {
 				$post_id .= '_' . $cl;
-				
 			}
 		}
 		return $post_id;
 	}
-	
+
 	/**
 	 * @param mixed $post_id
 	 *
@@ -326,7 +323,16 @@ class WPML_ACF_Options_Page {
 		}
 		return false;
 	}
-	
+
+	/**
+	 * @param string $post_id
+	 *
+	 * @return bool
+	 */
+	private function is_widget_id( $post_id ) {
+		return 'widget_' === substr( $post_id, 0, 7 );
+	}
+
 	/**
 	 * @param string $post_id
 	 *

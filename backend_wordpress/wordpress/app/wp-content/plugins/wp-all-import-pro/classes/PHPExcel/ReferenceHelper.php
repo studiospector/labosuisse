@@ -252,7 +252,7 @@ class PHPExcel_ReferenceHelper
     {
         $aDataValidationCollection = $pSheet->getDataValidationCollection();
         ($pNumCols > 0 || $pNumRows > 0) ? uksort($aDataValidationCollection, array('PHPExcel_ReferenceHelper','cellReverseSort')) : uksort($aDataValidationCollection, array('PHPExcel_ReferenceHelper','cellSort'));
-
+        
         foreach ($aDataValidationCollection as $key => $value) {
             $newReference = $this->updateCellReference($key, $pBefore, $pNumCols, $pNumRows);
             if ($key != $newReference) {

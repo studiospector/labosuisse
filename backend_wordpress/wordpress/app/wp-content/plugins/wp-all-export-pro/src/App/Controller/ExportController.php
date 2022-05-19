@@ -60,6 +60,10 @@ class ExportController extends BaseController
             }
 
             $exportData = $export->options['google_merchants_post_data'];
+
+            if(!isset($exportData['shipping']['includeAttributes'])) {
+                $exportData['shipping']['includeAttributes'] = 'include';
+            }
         }
 
         if($exportData === 'false' || !$exportData) {

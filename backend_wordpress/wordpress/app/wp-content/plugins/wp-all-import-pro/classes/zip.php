@@ -1,7 +1,7 @@
 <?php
 
 if ( ! class_exists('PMXI_Zip')){
-
+	
 	class PMXI_Zip
 	{
 		/**
@@ -49,6 +49,6 @@ if ( ! class_exists('PMXI_Zip')){
 		    self::folderToZip($sourcePath, $z, strlen("$parentPath/"));
 		    $z->close();
 		}
-	}
+	} 
 
 }

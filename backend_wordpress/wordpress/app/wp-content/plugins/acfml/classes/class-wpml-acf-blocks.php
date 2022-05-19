@@ -85,25 +85,35 @@ class WPML_ACF_Blocks {
 	 * @return WP_Block_Parser_Block
 	 */
 	public function update_block_data_attribute( WP_Block_Parser_Block $block, array $string_translations, $lang ) {
-
 		if ( $this->is_acf_block( $block ) && isset( $block->attrs['data'] ) ) {
-
 			foreach ( $block->attrs['data'] as $field_name => $text ) {
-
 				if ( $this->is_system_field( $field_name ) ) {
 					continue;
 				}
-
-				if ( is_array( $text ) ) {
-					foreach ( $text as $inner_field_name => $inner_text ) {
-						$block = $this->get_block_field_translation( $block, $string_translations, $lang, $inner_text, $field_name, $inner_field_name );
-					}
-				} else {
-					$block = $this->get_block_field_translation( $block, $string_translations, $lang, $text, $field_name );
-				}
+				$block = $this->get_block_field_translation_recursive( $block, $string_translations, $lang, $text, $field_name );
 			}
 		}
+		return $block;
+	}
 
+	/**
+	 * @param WP_Block_Parser_Block $block
+	 * @param array                 $string_translations
+	 * @param string                $lang
+	 * @param string|array          $text
+	 * @param string                $field_name
+	 * @param null|string           $inner_field_name
+	 *
+	 * @return mixed
+	 */
+	private function get_block_field_translation_recursive( $block, $string_translations, $lang, $text, $field_name, $inner_field_name = null ) {
+		if ( is_array( $text ) ) {
+			foreach ( $text as $inner_field_name => $inner_text ) {
+				$block = $this->get_block_field_translation_recursive( $block, $string_translations, $lang, $inner_text, $field_name, $inner_field_name );
+			}
+		} else {
+			$block = $this->get_block_field_translation( $block, $string_translations, $lang, $text, $field_name, $inner_field_name );
+		}
 		return $block;
 	}
 

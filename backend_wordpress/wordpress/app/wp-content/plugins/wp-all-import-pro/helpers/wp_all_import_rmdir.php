@@ -12,4 +12,4 @@ function wp_all_import_rmdir($dir) {
             return @rmdir($dir);
         }
     }
-}
+} 

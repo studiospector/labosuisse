@@ -1,4 +1,4 @@
-<?php
+<?php 
 /**
  * Base class for models
  *
@@ -16,7 +16,7 @@ class PMAI_Model_Record extends PMAI_Model {
 		}
 		$data and $this->set($data);
 	}
-
+	
 	/**
 	 * @see PMAI_Model::getBy()
 	 * @return PMAI_Model_Record
@@ -39,7 +39,7 @@ class PMAI_Model_Record extends PMAI_Model {
 		}
 		return $this;
 	}
-
+	
 	/**
 	 * Ger records related to current one
 	 * @param string $model Class name of model of related records
@@ -63,7 +63,7 @@ class PMAI_Model_Record extends PMAI_Model {
 		}
 		return $related instanceof PMAI_Model_List ? $related->convertRecords() : $related;
 	}
-
+	
 	/**
 	 * Saves currently set object data as database record
 	 * @return PMAI_Model_Record
@@ -90,7 +90,7 @@ class PMAI_Model_Record extends PMAI_Model {
 		}
 		return $this;
 	}
-
+	
 	/**
 	 * Delete record form database
 	 * @return PMAI_Model_Record
@@ -115,12 +115,12 @@ class PMAI_Model_Record extends PMAI_Model {
 		}
 		return $this;
 	}
-
+	
 	/**
 	 * Set record data
-	 * When 1st parameter is an array, it expected to be an associative array of field => value pairs
+	 * When 1st parameter is an array, it expected to be an associative array of field => value pairs 
 	 * If 2 parameters are set, first one is expected to be a field name and second - it's value
-	 *
+	 * 
 	 * @param string|array $field
 	 * @param mixed[optional] $value
 	 * @return PMAI_Model_Record
@@ -134,10 +134,10 @@ class PMAI_Model_Record extends PMAI_Model {
 		} else {
 			$this[$field] = $value;
 		}
-
+		
 		return $this;
 	}
-
+	
 	/**
 	 * Magic method to resolved object-like request to record values in format $obj->%FIELD_NAME%
 	 * @param string $field
@@ -172,5 +172,5 @@ class PMAI_Model_Record extends PMAI_Model {
 	public function __unset($field) {
 		$this->offsetUnset($field);
 	}
-
+	
 }

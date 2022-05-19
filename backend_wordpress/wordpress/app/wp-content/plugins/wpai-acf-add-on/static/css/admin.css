@@ -37,7 +37,7 @@
 	display: none;
 }
 
-.acf_postbox .widefat th,
+.acf_postbox .widefat th, 
 .acf_postbox .widefat td {
 	overflow: visible;
 }
@@ -64,7 +64,7 @@
 	border-top: none;
 }
 
-.acf_postbox.no_box > .inside > .field {
+.acf_postbox.no_box > .inside > .field { 
     border-top: 0 none;
     padding-left: 0;
     padding-right: 0;
@@ -83,17 +83,17 @@
 .acf_postbox .field .acf-error-message {
 	display: none;
 	position: relative;
-
+	
 	background: #CC0000;
 	color: #fff;
 	text-shadow: none;
-
+	
 	border-radius: 3px;
 	padding: 5px 10px;
-
+	
 	font-size: 12px;
 	line-height: 14px;
-
+	
 	margin: 5px 0 0;
 }
 
@@ -102,7 +102,7 @@
 	height: 0;
 	border: transparent 5px solid;
 	border-bottom-color: #CC0000;
-
+	
 	display: block;
 	position: absolute;
 	top: -10px;
@@ -117,7 +117,7 @@
 	color: #CC0000;
 }
 
-.acf_postbox.no_box > .inside > .field.error {
+.acf_postbox.no_box > .inside > .field.error { 
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -191,7 +191,7 @@
 	border-radius: 4px;
 	-moz-border-radius: 4px;
 	-khtml-border-radius: 4px;
-	-webkit-border-radius: 4px;
+	-webkit-border-radius: 4px;	
 	height: 32px;
 }
 
@@ -227,14 +227,14 @@
 *---------------------------------------------------------------------------------------------*/
 
 .acf_wysiwyg {
-
+	
 }
 
 .acf_wysiwyg .wp_themeSkin table.mceToolbarRow1 {
     margin-top: 2px !important;
 }
 
-.acf_wysiwyg iframe{
+.acf_wysiwyg iframe{ 
 	min-height: 250px;
 }
 
@@ -297,12 +297,12 @@
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
-
+	
 	.acf-image-uploader img {
 		width: auto;
 		max-width: 100%;
 	}
-
+	
 }
 
 
@@ -314,12 +314,12 @@
 	position: absolute;
 	top: -11px;
 	right: -11px;
-
+	
 	-webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
 	-moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-
+	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 	
+	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 
+	
 	visibility: hidden;
 	opacity: 0;
 }
@@ -329,7 +329,7 @@
 	-moz-transition-delay:0s;
 	-o-transition-delay:0s;
 	transition-delay:0s;
-
+	
 	visibility: visible;
 	opacity: 1;
 }
@@ -351,8 +351,8 @@
 *
 *---------------------------------------------------------------------------------------------*/
 
-.media-modal {
-
+.media-modal { 
+	
 }
 
 .media-modal .field {
@@ -409,10 +409,10 @@
 	height: 15px;
 	width: 15px;
 	float: left;
-
+	
 	background: url(../images/arrows.png) 0 -72px no-repeat;
 	border: #C7C7C7 solid 1px;
-
+	
 	border-radius: 10px;
 	margin: 0 4px 0 0;
 }
@@ -449,21 +449,21 @@
 
 /* Sidebar: Collapse */
 .media-modal .compat-item .label {
-	margin: 0;
+	margin: 0;	
 }
 
-.media-modal .media-sidebar .setting span,
+.media-modal .media-sidebar .setting span, 
 .media-modal .compat-item label span,
-.media-modal .media-sidebar .setting input,
+.media-modal .media-sidebar .setting input, 
 .media-modal .media-sidebar .setting textarea,
 .media-modal .compat-item .field {
 	min-height: 0;
 	margin: 5px 0 0;
 }
 
-.media-modal .media-sidebar .setting span,
+.media-modal .media-sidebar .setting span, 
 .media-modal .compat-item label span {
-	padding-top: 7px;
+	padding-top: 7px;	
 }
 
 .media-modal .attachment-display-settings .setting span {
@@ -483,10 +483,10 @@
 
 .media-modal.acf-expanded .media-sidebar .setting span,
 .media-modal.acf-expanded .compat-item .label {
-	min-width: 20%;
+	min-width: 20%;	
 }
 
-.media-modal.acf-expanded .media-sidebar .setting input,
+.media-modal.acf-expanded .media-sidebar .setting input, 
 .media-modal.acf-expanded .media-sidebar .setting textarea,
 .media-modal.acf-expanded .compat-item .field {
 	width: 77%;
@@ -552,11 +552,11 @@
 		left: 10%;
 		right: 10%;
 	}
-
+	
 }
 
 @media (max-width: 760px) {
-
+	
 	.media-modal.acf-expanded .media-sidebar .setting span,
 	.media-modal.acf-expanded .compat-item .label {
 		min-width: 100%;
@@ -564,17 +564,17 @@
 		min-height: 0;
 		padding: 0;
 	}
-
+	
 	.media-modal.acf-expanded .compat-item .label br {
 		display: none;
 	}
-
-	.media-modal.acf-expanded .media-sidebar .setting input,
+	
+	.media-modal.acf-expanded .media-sidebar .setting input, 
 	.media-modal.acf-expanded .media-sidebar .setting textarea,
 	.media-modal.acf-expanded .compat-item .field {
 		width: 100%;
 	}
-
+	
 }
 
 
@@ -654,12 +654,12 @@
 	position: absolute;
 	top: -10px;
 	right: -10px;
-
+	
 	-webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
 	-moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-
+	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 	
+	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 
+	
 	visibility: hidden;
 	opacity: 0;
 }
@@ -669,7 +669,7 @@
 	-moz-transition-delay:0s;
 	-o-transition-delay:0s;
 	transition-delay:0s;
-
+	
 	visibility: visible;
 	opacity: 1;
 }
@@ -729,10 +729,10 @@ table.acf-input-table {
 }
 
 table.acf-input-table > thead { }
-table.acf-input-table > thead > tr > td {
+table.acf-input-table > thead > tr > td { 
 	padding: 8px !important;
 	position: relative;
-
+	
 	vertical-align: top;
 	border-right: 1px solid #e1e1e1;
 }
@@ -750,10 +750,10 @@ td.acf_input-wrap {
 table.acf_input > tbody > tr > td {
 	background: transparent;
 	border: 0 none;
-
+   
     border-top: 1px solid #ededed;
     border-right: 1px solid #ededed;
-
+     
     padding: 8px !important;
     position: relative;
 }
@@ -761,10 +761,10 @@ table.acf_input > tbody > tr > td {
 table.acf_input > tbody > tr > td {
 	background: transparent;
 	border: 0 none;
-
+   
     border-top: 1px solid #ededed;
     border-right: 1px solid #ededed;
-
+     
     padding: 8px !important;
     position: relative;
 }
@@ -787,7 +787,7 @@ table.acf-input-table > tbody > tr > td:last-child {
     font-family: sans-serif;
     font-size: 12px;
     text-shadow: 0 1px 0 #FFFFFF;
-
+    
     font-weight: normal;
 }
 table.acf_input tbody tr td.label{
@@ -906,7 +906,7 @@ table.acf_input tbody tr td.label{
 	margin-left: 10px;
 	height: 193px;
 	min-height: 193px;
-	border-top-width:1px;
+	border-top-width:1px; 
 }
 
 .acf_relationship .relationship_list li a .acf-button-add,
@@ -915,7 +915,7 @@ table.acf_input tbody tr td.label{
 	top: 5px;
 	right: 5px;
 	display: none;
-
+	
 	cursor: pointer;
 }
 
@@ -947,22 +947,22 @@ table.acf_input tbody tr td.label{
 .acf_relationship select {
 	font-family: sans-serif;
 	font-size: 12px;
-
+	
 }
 
 .acf_relationship .widefat tr + tr th {
 	border-radius: 0;
 	border-top: #DFDFDF solid 1px;
 	background: #F3F3F3;
-
+	
 }
 
 .acf_relationship .relationship_list .result-thumbnail {
-	width:21px;
-	height:21px;
-	background:#F9F9F9;
-	border:#E1E1E1 solid 1px;
-	float:left;
+	width:21px; 
+	height:21px; 
+	background:#F9F9F9; 
+	border:#E1E1E1 solid 1px; 
+	float:left; 
 	margin:-3px 5px 0 0;
 }
 
@@ -974,11 +974,11 @@ table.acf_input tbody tr td.label{
 *---------------------------------------------------------------------------------------------*/
 
 .acf-taxonomy-field {
-
+	
 }
 
 .acf-taxonomy-field ul {
-
+	
 }
 
 .acf-taxonomy-field .categorychecklist-holder {
@@ -994,7 +994,7 @@ table.acf_input tbody tr td.label{
 }
 
 .acf-taxonomy-field ul li {
-
+	
 }
 
 .acf-taxonomy-field ul.children {
@@ -1043,7 +1043,7 @@ table.acf_input tbody tr td.label{
 	border-bottom: #DFDFDF solid 1px;
 	margin: 0 0 10px;
 	padding: 10px 4px 0 10px;
-
+	
 	background: #F3F3F3;
 }
 
@@ -1052,27 +1052,27 @@ table.acf_input tbody tr td.label{
 	font-size: 23px;
     line-height: 29px;
     margin: 0 6px -1px 0;
-
+    
 }
 
 .acf-tab-group li a {
 	padding: 10px;
 	display: block;
 	border-radius: 3px 3px 0 0;
-
+	
 	color: #AAAAAA;
 	font-size: 20px;
     font-weight: 200;
     line-height: 1em;
     padding: 5px 10px 7px;
-
+    
     border: #DFDFDF solid 1px;
     text-decoration: none;
     background: #F8F8F8;
-
+    
 }
 
-.acf-tab-group li a:hover,
+.acf-tab-group li a:hover, 
 .acf-tab-group li.active a {
     color: #d54e21
 }
@@ -1106,7 +1106,7 @@ table.acf_input tbody tr td.label{
 
 .acf_postbox.no_box .acf-tab-group li a {
     background: #fff;
-
+    
 }
 
 
@@ -1141,7 +1141,7 @@ table.acf_input tbody tr td.label{
 /*--------------------------------------------------------------------------
 *
 *	Tab Group
-*
+*	
 *-------------------------------------------------------------------------*/
 
 .acf-tab_group-show {
@@ -1158,7 +1158,7 @@ tr.acf-tab_group-show {
 /*--------------------------------------------------------------------------
 *
 *	Conditional Logic
-*
+*	
 *-------------------------------------------------------------------------*/
 
 /* Show */
@@ -1200,7 +1200,7 @@ th.acf-conditional_logic-hide.acf-show-blank .inner {
 /*--------------------------------------------------------------------------
 *
 *	Conditional Logic + Tabs
-*
+*	
 *-------------------------------------------------------------------------*/
 
 .acf-tab_group-hide.acf-conditional_logic-show {
@@ -1215,11 +1215,11 @@ th.acf-conditional_logic-hide.acf-show-blank .inner {
 /*--------------------------------------------------------------------------
 *
 *	Field: Color picker
-*
+*	
 *-------------------------------------------------------------------------*/
 
 .acf-color_picker {
-
+	
 }
 
 .acf-color_picker input[type="text"] {
@@ -1257,7 +1257,7 @@ th.acf-conditional_logic-hide.acf-show-blank .inner {
 /*--------------------------------------------------------------------------
 *
 *	Field: Location
-*
+*	
 *-------------------------------------------------------------------------*/
 .field_type-google_map .wpallimport-content-section {
     padding-bottom: 0;
@@ -1368,7 +1368,7 @@ th.acf-conditional_logic-hide.acf-show-blank .inner {
 
 a.acf-button,
 input[type="submit"].acf-button {
-	display: block;
+	display: block;	
 	text-decoration: none !important;
 	background: #40acad;
 	color: #fff;
@@ -1401,7 +1401,7 @@ input[type="submit"].acf-button[disabled] {
 a.acf-button[disabled]:hover,
 a.acf-button.disabled:hover,
 input[type="submit"].acf-button[disabled]:hover {
-
+	
 }
 
 a.acf-button-big {
@@ -1414,7 +1414,7 @@ div.error a.acf-button {
 }
 
 .repeater {
-
+	
 }
 
 .repeater > table {
@@ -1433,12 +1433,12 @@ div.error a.acf-button {
 .repeater > table > tbody > tr > td.remove > a.acf-button-add,
 .repeater > table > tbody > tr > td.remove > a.acf-button-remove {
 	position: absolute;
-
+	
 	-webkit-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
 	-moz-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s;
-
+	-o-transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 	
+	transition: opacity 0.25s 0s ease-in-out, visibility 0s linear 0.25s; 
+	
 	visibility: hidden;
 	opacity: 0;
 }
@@ -1454,7 +1454,7 @@ div.error a.acf-button {
 	-moz-transition-delay:0s;
 	-o-transition-delay:0s;
 	transition-delay:0s;
-
+	
 	visibility: visible;
 	opacity: 1;
 }
@@ -1567,7 +1567,7 @@ div.error a.acf-button {
 	background: url("../img/preloader.png");
 	width: 80px;
 	height: 10px;
-	margin: 20px auto;
+	margin: 20px auto;	
 }
 .pmai_foreach{
 	width: 50% !important;
@@ -1612,16 +1612,16 @@ div.error a.acf-button {
 }
 
 .acf-flexible-content .layout.popup-open .acf-fc-layout-controlls {
-	visibility: visible !important;
+	visibility: visible !important;	
 }
 
 .acf-flexible-content .layout .acf-fc-layout-controlls {
 	visibility: hidden;
-
+	
 	position: absolute;
 	top: 9px;
 	right: 9px;
-
+	
 	z-index: 1;
 }
 
@@ -1656,7 +1656,7 @@ div.error a.acf-button {
 .acf-flexible-content .layout > .acf-input-table > thead > tr > td {
 	background: none repeat scroll 0 0 #F9F9F9;
     border-bottom: 1px solid #E1E1E1;
-    border-right: 1px solid #E1E1E1;
+    border-right: 1px solid #E1E1E1;    
     font-size: 12px;
 	font-family: sans-serif;
 	font-weight: bold;
@@ -1701,23 +1701,23 @@ div.error a.acf-button {
 
 .acf-fc-popup .bit {
 	position: absolute;
-
+	
 	left: 50%;
 	margin: 0 0 0 -10px;
-
+	
 	width: 0;
 	height: 0;
-
+	
 	border: transparent solid 10px;
 	border-top-color: #333739;
-
+	
 	z-index: 2;
 }
 
 .acf-fc-popup .bit.top {
 	top: 0;
 	margin-top: -20px;
-
+	
 	border: transparent solid 10px;
 	border-bottom-color: #333739;
 }
@@ -1733,7 +1733,7 @@ div.error a.acf-button {
 .acf-fc-popup ul li {
 	position: relative;
 	float: none;
-
+	
 	border-top: #2B2F31 solid 1px;
 }
 
@@ -1768,9 +1768,9 @@ div.error a.acf-button {
 	border-radius: 8px;
 	font-size: 8px;
 	line-height: 15px;
-
+	
 	border: #288FBC solid 1px;
-
+	
 	text-align: center;
 	color: #DFDFDF;
 
@@ -1820,7 +1820,7 @@ div.error a.acf-button {
 	width: 95% !important;
 }
 .pmai_taxonomy{
-	width:100%;
+	width:100%; 
 	clear:both;
 }
 /*.pmai_taxonomy .drag-element .widefat{

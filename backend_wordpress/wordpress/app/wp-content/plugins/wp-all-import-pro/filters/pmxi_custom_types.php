@@ -29,7 +29,7 @@ function pmxi_pmxi_custom_types($custom_types) {
 				} else {
 					$ordered_custom_types[$key] = $custom_type;
 				}
-			}
+			}			
 		}
         return $ordered_custom_types;
 	}

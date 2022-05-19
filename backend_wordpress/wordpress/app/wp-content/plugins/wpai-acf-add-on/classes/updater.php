@@ -98,7 +98,7 @@ if( ! class_exists('PMAI_Updater') ) {
 
             if( empty( $_transient_data ) ) return $_transient_data;
 
-            if ( empty( $_transient_data->response ) || empty( $_transient_data->response[ $this->name ] ) ) {
+            if ( empty( $_transient_data->response ) || empty( $_transient_data->response[ $this->name ] ) ) {                
 
                 $cache_key    = md5( 'edd_plugin_' . sanitize_key( $this->name ) . '_version_info' );
                 $version_info = get_transient( $cache_key );
@@ -269,7 +269,7 @@ if( ! class_exists('PMAI_Updater') ) {
                 if ( false !== $api_response ) {
                     $_data = $api_response;
                     set_transient( $cache_key, $_data, 3600 * 24 );
-                }
+                }                                
 
             }
 
@@ -317,7 +317,7 @@ if( ! class_exists('PMAI_Updater') ) {
 
             if( $this->api_url == home_url() ) {
                 return false; // Don't allow a plugin to ping itself
-            }
+            }                    
 
             $api_params = array(
                 'edd_action' => 'get_version',
@@ -328,7 +328,7 @@ if( ! class_exists('PMAI_Updater') ) {
                 'author'     => $data['author'],
                 'url'        => home_url(),
                 'version'    => $this->version
-            );
+            );            
 
             $request = wp_remote_post( $this->api_url, array( 'timeout' => 15, 'sslverify' => false, 'body' => $api_params ) );
 

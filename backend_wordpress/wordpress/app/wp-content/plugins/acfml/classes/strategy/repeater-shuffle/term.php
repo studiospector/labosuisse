@@ -40,7 +40,7 @@ class Term extends Strategy {
 	protected function getElement( $id ) {
 		if ( $this->isValidId( $id ) ) {
 			$id   = $this->getNumericId( $id );
-			$term = get_term_by( 'id', $id );
+			$term = get_term( $id );
 			if ( isset( $term->taxonomy ) ) {
 				return (object) [
 					'id'   => $id,

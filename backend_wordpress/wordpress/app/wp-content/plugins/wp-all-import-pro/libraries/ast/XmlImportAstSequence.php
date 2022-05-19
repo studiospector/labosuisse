@@ -29,10 +29,10 @@ class XmlImportAstSequence extends XmlImportAstStatement
   /**
    * Current variable number
    *
-   * @var int
+   * @var int 
    */
   private $varNumber = 0;
-
+  
   /**
    * List of statements
    *

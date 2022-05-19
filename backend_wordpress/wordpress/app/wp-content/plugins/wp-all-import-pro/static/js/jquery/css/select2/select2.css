@@ -446,7 +446,7 @@ disabled look for disabled choices in the results dropdown
     border-radius: 4px;
     -moz-border-radius: 4px;
     -khtml-border-radius: 4px;
-    -webkit-border-radius: 4px;
+    -webkit-border-radius: 4px; 
 }
 
 .select2-locked {
@@ -519,7 +519,7 @@ disabled look for disabled choices in the results dropdown
               user-select: none;
 
     background-color: #e4e4e4;
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#f4f4f4', GradientType=0);    
 }
 .select2-container-multi .select2-choices .select2-search-choice .select2-chosen {
     cursor: default;

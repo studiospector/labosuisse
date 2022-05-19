@@ -24,7 +24,7 @@ class File implements StreamInterface
         } else {
             throw new \Exception("First argument must be either a filename or a file handle");
         }
-
+        
         if ($this->handle === false) {
             throw new \Exception("Couldn't create file handle");
         }
@@ -42,7 +42,7 @@ class File implements StreamInterface
             if (is_callable($this->chunkCallback)) {
                 call_user_func_array($this->chunkCallback, array($buffer, $this->readBytes));
             }
-
+            
             return $buffer;
         } else if (is_resource($this->handle)) {
             fclose($this->handle);

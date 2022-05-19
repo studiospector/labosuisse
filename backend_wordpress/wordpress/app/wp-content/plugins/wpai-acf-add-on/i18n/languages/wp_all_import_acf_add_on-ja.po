@@ -240,22 +240,22 @@ msgid "Please create Field Groups."
 msgstr "フィールドのグループを作成してください。"
 
 #. Name of the plugin
-#:
+#: 
 msgid "WP All Import - ACF Add-On"
 msgstr "WP すべてインポート - ACF アドオン"
 
 #. Description of the plugin
-#:
+#: 
 msgid "Import to Advanced Custom Fields. Requires WP All Import & Advanced Custom Fields."
 msgstr "カスタム フィールドの詳細をインポートします。WP すべてインポート & 高度なカスタム フィールドが必要です。"
 
 #. URI of the plugin
-#:
+#: 
 msgid "http://www.wpallimport.com/"
 msgstr "http://www.wpallimport.com/"
 
 #. Author of the plugin
-#:
+#: 
 msgid "Soflyy"
 msgstr "Soflyy"
 

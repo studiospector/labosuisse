@@ -70,7 +70,7 @@ final class XmlImportTemplateScanner
   public function scan(XmlImportReaderInterface $input)
   {
     $results = array();
-
+    
     while (($ch = $input->peek()) !== false)
     {
       switch ($this->currentState)
@@ -102,7 +102,7 @@ final class XmlImportTemplateScanner
           break;
         case XmlImportTemplateScanner::STATE_LANG:
           $ch = $input->peek();
-
+		 
           if (preg_match('/\s/', $ch))
           {
             //omit space
@@ -115,7 +115,7 @@ final class XmlImportTemplateScanner
               $results = array_merge($results, $result);
             else
               $results[] = $result;
-          }
+          }		  
           elseif (preg_match('/(\d)/', $ch))
           {
             $result = $this->scanNumber($input);
@@ -123,7 +123,7 @@ final class XmlImportTemplateScanner
               $results = array_merge($results, $result);
             else
               $results[] = $result;
-          }
+          }		      
           elseif ($ch == '"')
           {
             //omit "
@@ -145,7 +145,7 @@ final class XmlImportTemplateScanner
           }
           elseif ($ch == '(')
           {
-            $this->isLangBegin = false;
+            $this->isLangBegin = false;            
             $input->read();
             $results[] = new XmlImportToken(XmlImportToken::KIND_OPEN);
           }
@@ -169,8 +169,8 @@ final class XmlImportTemplateScanner
             $input->read();
           }
           elseif ($ch == "|" || $ch == "+" || $ch == "-" || $ch == "*" || $ch == "/")
-          {
-            $results[] = $this->scanText($input);
+          {            
+            $results[] = $this->scanText($input);           
           }
           else{
             if ($ch == "'"){
@@ -179,12 +179,12 @@ final class XmlImportTemplateScanner
             else{
               throw new XmlImportException("Unexpected symbol '$ch'");
             }
-          }
-
+          }            
+		
           break;
-      }
+      }      
     }
-
+	
     return $results;
   }
 
@@ -196,9 +196,9 @@ final class XmlImportTemplateScanner
    */
   private function scanText($input)
   {
-    $accum = $input->read();
+    $accum = $input->read();    
     while (($ch = $input->peek()) !== false)
-    {
+    {            
       if ($ch == '{' && $accum[strlen($accum) - 1] != "\\")
       {
         $this->currentState = XmlImportTemplateScanner::STATE_XPATH;
@@ -207,15 +207,15 @@ final class XmlImportTemplateScanner
         break;
       }
       elseif ($ch == '[' && $accum[strlen($accum) - 1] != "\\")
-      {
-
+      {                   
+        
         $this->currentState = XmlImportTemplateScanner::STATE_LANG;
         $this->isLangBegin = true;
         //omit [
         $input->read();
         break;
       }
-      elseif ($accum == '/' && $this->previous_ch == "["){
+      elseif ($accum == '/' && $this->previous_ch == "["){        
         $accum = "[" . $accum . $input->read();
         //$this->previous_ch = false;
       }
@@ -225,7 +225,7 @@ final class XmlImportTemplateScanner
     }
     $accum = str_replace(array("\\[", "\\{"), array('[', '{'), $accum);
     return new XmlImportToken(XmlImportToken::KIND_TEXT, $accum);
-  }
+  }    
 
   /**
    * Scans XPath
@@ -274,46 +274,46 @@ final class XmlImportTemplateScanner
    */
   private function scanName(XmlImportReaderInterface $input)
   {
-    $accum = $input->read();
+    $accum = $input->read();  
 
     $is_function = false;
     while (preg_match('%[/_a-z0-9=\s\-"]%i', $input->peek(), $matches))
-    {
+    {                         
         $accum .= $input->read();
         if ($input->peek() === false)
           throw new XmlImportException("Unexpected end of function or keyword name \"$accum\"");
-    }
+    }      
 
     $ch = $input->peek();
 
     if ($ch == "(") $is_function = true;
-
+    
     if (in_array(strtoupper(trim($accum)), $this->keywords))
     {
       return new XmlImportToken(strtoupper($accum));
     }
     else
     {
-
-      if (strpos($accum, "=") !== false or (shortcode_exists($accum) and !$is_function) or ! $is_function) {
+      
+      if (strpos($accum, "=") !== false or (shortcode_exists($accum) and !$is_function) or ! $is_function) {                
         $this->isLangBegin = false;
-        return new XmlImportToken(XmlImportToken::KIND_TEXT, '[' . trim(trim($accum, "["), "]") . ']');
-
-      }
+        return new XmlImportToken(XmlImportToken::KIND_TEXT, '[' . trim(trim($accum, "["), "]") . ']');            
+              
+      } 
 
       if ($this->isLangBegin)
       {
-        $this->isLangBegin = false;
+        $this->isLangBegin = false;                        
         if ( function_exists($accum) or in_array($accum, array('array')))
-          return array(new XmlImportToken(XmlImportToken::KIND_PRINT), new XmlImportToken(XmlImportToken::KIND_FUNCTION, $accum));
-        else
+          return array(new XmlImportToken(XmlImportToken::KIND_PRINT), new XmlImportToken(XmlImportToken::KIND_FUNCTION, $accum));        
+        else          
           throw new XmlImportException("Call to undefined function \"$accum\"");
-
+        
       }
       else{
         if ( function_exists($accum) or in_array($accum, array('array')))
-          return new XmlImportToken(XmlImportToken::KIND_FUNCTION, $accum);
-        else
+          return new XmlImportToken(XmlImportToken::KIND_FUNCTION, $accum);              
+        else          
           throw new XmlImportException("Call to undefined function \"$accum\"");
       }
     }

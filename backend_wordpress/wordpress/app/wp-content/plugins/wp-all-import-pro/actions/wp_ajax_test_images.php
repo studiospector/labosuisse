@@ -15,11 +15,11 @@ function pmxi_wp_ajax_test_images(){
 	$post = $input->post(array(
 		'download' => 'yes',
 		'imgs' => array()
-	));
+	));	
 
 	$result = array();
-
-	$wp_uploads = wp_upload_dir();
+	
+	$wp_uploads = wp_upload_dir();	
 	$imgs_basedir = $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY . DIRECTORY_SEPARATOR;
 	$targetDir = $wp_uploads['path'];
 	$success_images = 0;
@@ -29,22 +29,22 @@ function pmxi_wp_ajax_test_images(){
 
 	if ( ! @is_writable($targetDir) )
 	{
-		$failed_msgs[] = sprintf(__('Uploads folder `%s` is not writable.', 'wp_all_import_plugin'), $targetDir);
+		$failed_msgs[] = sprintf(__('Uploads folder `%s` is not writable.', 'wp_all_import_plugin'), $targetDir);	
 	}
 	else
 	{
-		switch ($post['download'])
+		switch ($post['download']) 
 		{
 			// Use images currently uploaded in wp-content/uploads/wpallimport/files/
 			case 'no':
 
 				if ( ! empty($post['imgs']) )
 				{
-					foreach ($post['imgs'] as $img)
+					foreach ($post['imgs'] as $img) 
 					{
 						if ( preg_match('%^(http|https|ftp|ftps)%i', $img)){
-							$failed_msgs[] = sprintf(__('Use image name instead of URL `%s`.', 'wp_all_import_plugin'), $img);
-							continue;
+							$failed_msgs[] = sprintf(__('Use image name instead of URL `%s`.', 'wp_all_import_plugin'), $img);		
+							continue;								
 						}
 						if ( @file_exists($imgs_basedir . $img) ){
 							if (@is_readable($imgs_basedir . $img)){
@@ -52,20 +52,20 @@ function pmxi_wp_ajax_test_images(){
 							} else{
 								$failed_msgs[] = sprintf(__('File `%s` isn\'t readable', 'wp_all_import_plugin'), preg_replace('%.*/wp-content%', '/wp-content', $imgs_basedir . $img));
 							}
-						}
+						} 					
 						else{
 							$failed_msgs[] = sprintf(__('File `%s` doesn\'t exist', 'wp_all_import_plugin'), preg_replace('%.*/wp-content%', '/wp-content', $imgs_basedir . $img));
 						}
-					}
+					}			
 				}
 				if ((int)$success_images === 1)
 				{
-					$success_msg = sprintf(__('%d image was successfully retrieved from `%s`', 'wp_all_import_plugin'), $success_images, preg_replace('%.*/wp-content%', '/wp-content', $wp_uploads['basedir']) . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY);
-				}
+					$success_msg = sprintf(__('%d image was successfully retrieved from `%s`', 'wp_all_import_plugin'), $success_images, preg_replace('%.*/wp-content%', '/wp-content', $wp_uploads['basedir']) . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY);		
+				}					
 				elseif ((int)$success_images > 1)
 				{
-					$success_msg = sprintf(__('%d images were successfully retrieved from `%s`', 'wp_all_import_plugin'), $success_images, preg_replace('%.*/wp-content%', '/wp-content', $wp_uploads['basedir']) . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY);
-				}
+					$success_msg = sprintf(__('%d images were successfully retrieved from `%s`', 'wp_all_import_plugin'), $success_images, preg_replace('%.*/wp-content%', '/wp-content', $wp_uploads['basedir']) . DIRECTORY_SEPARATOR . PMXI_Plugin::FILES_DIRECTORY);		
+				}					
 
 				break;
 
@@ -76,11 +76,11 @@ function pmxi_wp_ajax_test_images(){
 				{
 					global $wpdb;
 
-					foreach ($post['imgs'] as $img)
+					foreach ($post['imgs'] as $img) 
 					{
 						$bn      = wp_all_import_sanitize_filename(wp_all_import_basename($img));
-						$img_ext = pmxi_getExtensionFromStr($img);
-						$default_extension = pmxi_getExtension($bn);
+						$img_ext = pmxi_getExtensionFromStr($img);									
+						$default_extension = pmxi_getExtension($bn);																									
 
 						$image_name = apply_filters("wp_all_import_image_filename", urldecode(sanitize_file_name((($img_ext) ? str_replace("." . $default_extension, "", $bn) : $bn))) . (("" != $img_ext) ? '.' . $img_ext : ''));
 
@@ -99,28 +99,28 @@ function pmxi_wp_ajax_test_images(){
 
 				if ((int)$success_images === 1)
 				{
-					$success_msg = sprintf(__('%d image was successfully found in media gallery', 'wp_all_import_plugin'), $success_images);
-				}
+					$success_msg = sprintf(__('%d image was successfully found in media gallery', 'wp_all_import_plugin'), $success_images);		
+				}					
 				elseif ((int)$success_images > 1)
 				{
-					$success_msg = sprintf(__('%d images were successfully found in media gallery', 'wp_all_import_plugin'), $success_images);
-				}
+					$success_msg = sprintf(__('%d images were successfully found in media gallery', 'wp_all_import_plugin'), $success_images);		
+				}				
 
-				break;
+				break;		
 
 			// Download images hosted elsewhere
 			default:
-
+				
 				$start = time();
 				if ( ! empty($post['imgs']) )
-				{
-					foreach ($post['imgs'] as $img)
-					{
+				{								
+					foreach ($post['imgs'] as $img) 
+					{	
 						if ( ! preg_match('%^(http|https|ftp|ftps)%i', $img)){
-							$failed_msgs[] = sprintf(__('URL `%s` is not valid.', 'wp_all_import_plugin'), $img);
-							continue;
+							$failed_msgs[] = sprintf(__('URL `%s` is not valid.', 'wp_all_import_plugin'), $img);		
+							continue;								
 						}
-
+						
 						$image_name = wp_unique_filename($targetDir, 'test');
 
 						$image_filepath = $targetDir . '/' . $image_name;
@@ -132,12 +132,12 @@ function pmxi_wp_ajax_test_images(){
 						$get_ctx = stream_context_create(array('http' => array('timeout' => 5)));
 
 						if ( (is_wp_error($request) or $request === false) and ! @file_put_contents($image_filepath, @file_get_contents($img, false, $get_ctx))) {
-							$failed_msgs[] = (is_wp_error($request)) ? $request->get_error_message() : sprintf(__('File `%s` cannot be saved locally', 'wp_all_import_plugin'), $img);
+							$failed_msgs[] = (is_wp_error($request)) ? $request->get_error_message() : sprintf(__('File `%s` cannot be saved locally', 'wp_all_import_plugin'), $img);										
 						} elseif( ! ($image_info = apply_filters('pmxi_getimagesize', @getimagesize($image_filepath), $image_filepath)) or ! in_array($image_info[2], wp_all_import_supported_image_types())) {
-							$failed_msgs[] = sprintf(__('File `%s` is not a valid image.', 'wp_all_import_plugin'), $img);
+							$failed_msgs[] = sprintf(__('File `%s` is not a valid image.', 'wp_all_import_plugin'), $img);										
 						} else {
-							$success_images++;
-						}
+							$success_images++;											
+						}						
 						@unlink($image_filepath);
 					}
 				}
@@ -145,18 +145,18 @@ function pmxi_wp_ajax_test_images(){
 
 				if ((int)$success_images === 1)
 				{
-					$success_msg = sprintf(__('%d image was successfully downloaded in %s seconds', 'wp_all_import_plugin'), $success_images, number_format($time, 2));
-				}
+					$success_msg = sprintf(__('%d image was successfully downloaded in %s seconds', 'wp_all_import_plugin'), $success_images, number_format($time, 2));		
+				}					
 				elseif ((int)$success_images > 1)
 				{
-					$success_msg = sprintf(__('%d images were successfully downloaded in %s seconds', 'wp_all_import_plugin'), $success_images, number_format($time, 2));
-				}
+					$success_msg = sprintf(__('%d images were successfully downloaded in %s seconds', 'wp_all_import_plugin'), $success_images, number_format($time, 2));		
+				}					
 
 				break;
-		}
+		}			
 	}
 
-	exit(json_encode(array(
+	exit(json_encode(array(		
 		'success_images' => $success_images,
 		'success_msg' => $success_msg,
 		'failed_msgs' => $failed_msgs
