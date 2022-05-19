@@ -1,6 +1,6 @@
 {
     "key": "group_6204dfe7d0b15",
-    "title": "Campi personalizzati: Blocco - Offset Navs",
+    "title": "Campi personalizzati: Prodotto - Blocco - Offset Navs",
     "fields": [
         {
             "key": "field_61f8177f66135",
@@ -2562,5 +2562,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1652190350
+    "modified": 1652795954
 }

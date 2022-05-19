@@ -50,6 +50,8 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
+                    {% elseif item.type == 'unordered-arrow-list' %}
+                        {% include '@PathViews/components/list-arrow.twig' with item.data only %}
                     {% elseif item.type == 'button' %}
                         {% include '@PathViews/components/button.twig' with item.data.cta only %}
                     {% elseif item.type == 'image' %}
