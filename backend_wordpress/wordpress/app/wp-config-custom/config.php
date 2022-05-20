@@ -126,3 +126,6 @@ define('WP_MEMORY_LIMIT', '512M');
 // Disable Auto Updates
 define('WP_AUTO_UPDATE_CORE', false);
 define('AUTOMATIC_UPDATER_DISABLED', true);
+
+// Disallow file edit
+define('DISALLOW_FILE_EDIT', true);
