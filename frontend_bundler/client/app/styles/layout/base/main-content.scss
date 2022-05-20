@@ -33,6 +33,10 @@ html.has-scroll-smooth {
     z-index: 999;
 }
 
+.grecaptcha-badge { 
+    visibility: hidden !important;
+}
+
 
 /**
  * Logo and shield
