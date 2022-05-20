@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-05-17 07:51:32+0000\n"
+"PO-Revision-Date: 2022-05-20 11:26:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -206,7 +206,7 @@ msgstr "Rinnova il tuo abbonamento a %s"
 #. SEO, 3: Link closing tag.
 #: src/integrations/admin/first-time-configuration-notice-integration.php:126
 msgid "Get started quickly with the %1$s%2$s First-time configuration%3$s and configure Yoast SEO with the optimal SEO settings for your site!"
-msgstr "Inizia subito con il %1$s%2$s primo l'allenamento di configurazione %3$s e configura Yoast SEO con le impostazioni SEO ottimali per il tuo sito!"
+msgstr "Fai subito i primi passi con la %1$s%2$s configurazione iniziale %3$s e configura Yoast SEO con le impostazioni SEO ottimali per il tuo sito!"
 
 #: inc/class-wpseo-replace-vars.php:1458
 msgid "Category Title"
