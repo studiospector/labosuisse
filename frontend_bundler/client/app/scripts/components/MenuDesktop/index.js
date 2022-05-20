@@ -128,7 +128,7 @@ class MenuDesktop extends Component {
     openSubmenu = (el) => {
         const triggerLink = el.target.getAttribute('data-submenu-trigger')
 
-        qsa('li.lb-menu__item.lb-menu__item--subitem').forEach(el => {
+        qsa('.lb-menu__item.lb-menu__item--subitem').forEach(el => {
             const trigger = el.getAttribute('data-submenu-trigger')
             if (trigger == triggerLink) {
                 el.classList.add('is-visible')
