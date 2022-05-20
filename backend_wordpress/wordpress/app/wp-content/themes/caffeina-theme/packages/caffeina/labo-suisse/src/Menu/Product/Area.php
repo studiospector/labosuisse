@@ -39,10 +39,7 @@ class Area
                 [
                     'type' => 'submenu',
                     'label' => 'Per Zona',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)],
-                        ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)]
-                    ]
+                    'children' => []
                 ],
                 [
                     'type' => 'submenu-second',
@@ -91,7 +88,10 @@ class Area
             ];
         }
 
-        return $items;
+        $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
+        $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+
+        return $this->fixDesktopMenu($items);
     }
 
     private function mobile()
@@ -100,9 +100,7 @@ class Area
             'type' => 'submenu',
             'label' => $this->parent->name,
             'subLabel' => 'Per zona',
-            'children' => [
-                ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)]
-            ]
+            'children' => []
 
         ];
 
@@ -113,6 +111,38 @@ class Area
                 'subLabel' => 'Per esigenza',
                 'children' => (new Need($area))->get()
             ];
+        }
+
+        $items['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
+
+        return $this->fixMobileMenu($items);
+    }
+
+    private function fixDesktopMenu($items)
+    {
+        $areaName = $items['label'];
+        $totalNeed = count($items['children'][0]['children']);
+        $needName = $items['children'][0]['children'][0]['label'];
+
+        if ($totalNeed === 3 and ($areaName === $needName)) {
+            unset($items['children'][0]);
+            $items['children'][1] = $items['children'][1]['children'][0];
+            array_unshift($items['children']);
+
+            $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+        }
+
+        return $items;
+    }
+
+    private function fixMobileMenu($items)
+    {
+        $areaName = $items['label'];
+        $totalNeed = count($items['children']);
+        $needName = $items['children'][0]['label'];
+
+        if($totalNeed === 2 and ($areaName === $needName)) {
+            $items = $items['children'][0];
         }
 
         return $items;
