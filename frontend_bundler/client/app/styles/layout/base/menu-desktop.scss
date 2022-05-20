@@ -127,23 +127,30 @@
                             transition: $transition__base-1;
                         }
                         
-                        .lb-menu__item {
-                            &:not(:last-child) {
-                                margin-bottom: 30px;
+                        .lb-menu {
+                            &__item {
+                                &:not(:last-child) {
+                                    margin-bottom: 15px;
+                                }
+    
+                                &.is-visible {
+                                    display: block;
+                                    transition: $transition__base-1;
+                                }
                             }
 
-                            &.is-visible {
-                                display: block;
-                                transition: $transition__base-1;
-                            }
-                        }
+                            &__link {
+                                display: inline-block;
+                                padding-bottom: 5px;
+                                font-size: rem(13);
+                                font-weight: 300;
+                                text-transform: unset;
 
-                        .lb-menu__link {
-                            display: inline-block;
-                            padding-bottom: 5px;
-                            font-size: rem(13);
-                            font-weight: 300;
-                            text-transform: unset;
+                                &--spaced {
+                                    font-weight: 500;
+                                    margin-top: 35px;
+                                }
+                            }
                         }
                     }
                 }

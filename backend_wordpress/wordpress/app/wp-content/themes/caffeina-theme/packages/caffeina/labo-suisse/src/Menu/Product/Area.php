@@ -89,7 +89,7 @@ class Area
         }
 
         $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
-        $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+        $items['children'][0]['children'][] = ['type' => 'link-spaced', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
 
         return $this->fixDesktopMenu($items);
     }
@@ -129,7 +129,7 @@ class Area
             $items['children'][1] = $items['children'][1]['children'][0];
             array_unshift($items['children']);
 
-            $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+            $items['children'][0]['children'][] = ['type' => 'link-spaced', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
         }
 
         return $items;

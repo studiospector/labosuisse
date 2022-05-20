@@ -3,6 +3,10 @@
 		<a class="lb-menu__link" href="{{href}}" tabindex="0">{{label}}</a>
 	{% endif %}
 
+    {% if type == 'link-spaced' %}
+        <a href="{{href}}" class="lb-menu__link lb-menu__link--spaced" tabindex="0">{{label}}</a>
+    {% endif %}
+
 	{% if type == 'card' %}
 		{% include '@PathViews/components/card.twig' with data only %}
 	{% endif %}
