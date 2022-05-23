@@ -118,6 +118,6 @@ SEZIONI DA TERMINARE
 
 
 PRE GO LIVE
-- Cache
-- iThemes
-- reCaptcha
+- √ Cache
+- √ iThemes
+- √ reCaptcha
