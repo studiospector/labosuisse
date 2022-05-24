@@ -387,6 +387,10 @@ class ThemeSetup extends Timber\Site
                 remove_image_size($size);
             }
         }
+
+        // Remove sizes for medium_large thumb
+        update_option('medium_large_size_w', '0');
+        update_option('medium_large_size_h', '0');
     }
 
     /**
