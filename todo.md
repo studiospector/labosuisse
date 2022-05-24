@@ -118,6 +118,7 @@ SEZIONI DA TERMINARE
 
 
 PRE GO LIVE
-- √ Cache
+- Cache
 - √ iThemes
 - √ reCaptcha
+- SMTP
