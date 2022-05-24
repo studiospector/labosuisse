@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitfb2aa99818c5b9419e502afb295b190c
+class ComposerStaticInitd51248ec55aafbe49203fb3d635be135
 {
     public static $files = array (
         '5f5b8f7c1db2e892006e8805f0ed573c' => __DIR__ . '/..' . '/wpml/collect/src/Illuminate/Support/helpers.php',
@@ -822,6 +822,7 @@ class ComposerStaticInitfb2aa99818c5b9419e502afb295b190c
         'WPML\\TM\\User\\Hooks' => __DIR__ . '/../..' . '/classes/user/Hooks.php',
         'WPML\\TM\\WP\\App\\Resources' => __DIR__ . '/../..' . '/classes/utils/Resources.php',
         'WPML\\TaxonomyTermTranslation\\AutoSync' => __DIR__ . '/../..' . '/classes/taxonomy-term-translation/AutoSync.php',
+        'WPML\\TaxonomyTermTranslation\\Hooks' => __DIR__ . '/../..' . '/classes/taxonomy-term-translation/Hooks.php',
         'WPML\\Timer' => __DIR__ . '/..' . '/wpml/core-api/core/Timer.php',
         'WPML\\TranslateLinkTargets\\Hooks' => __DIR__ . '/../..' . '/classes/translate_link_targets/Hooks.php',
         'WPML\\TranslationMode\\Endpoint\\SetTranslateEverything' => __DIR__ . '/../..' . '/classes/translation-mode/endpoints/SetTranslateEverything.php',
@@ -1696,6 +1697,7 @@ class ComposerStaticInitfb2aa99818c5b9419e502afb295b190c
         'WPML_Term_Clauses' => __DIR__ . '/../..' . '/classes/query-filtering/class-wpml-term-clauses.php',
         'WPML_Term_Custom_Field_Setting' => __DIR__ . '/../..' . '/classes/settings/class-wpml-term-custom-field-setting.php',
         'WPML_Term_Custom_Field_Setting_Keys' => __DIR__ . '/../..' . '/classes/settings/class-wpml-term-custom-field-setting-keys.php',
+        'WPML_Term_Display_As_Translated_Adjust_Count' => __DIR__ . '/../..' . '/classes/query-filtering/class-wpml-term-display-as-translated-adjust-count.php',
         'WPML_Term_Element' => __DIR__ . '/../..' . '/classes/translations/class-wpml-term-element.php',
         'WPML_Term_Filters' => __DIR__ . '/../..' . '/inc/taxonomy-term-translation/wpml-term-filters.class.php',
         'WPML_Term_Hierarchy_Duplication' => __DIR__ . '/../..' . '/inc/taxonomy-term-translation/wpml-term-hierarchy-duplication.class.php',
@@ -1908,9 +1910,9 @@ class ComposerStaticInitfb2aa99818c5b9419e502afb295b190c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitfb2aa99818c5b9419e502afb295b190c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitfb2aa99818c5b9419e502afb295b190c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitfb2aa99818c5b9419e502afb295b190c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitd51248ec55aafbe49203fb3d635be135::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitd51248ec55aafbe49203fb3d635be135::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitd51248ec55aafbe49203fb3d635be135::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -2,6 +2,7 @@
 
 use \WPML\FP\Relation;
 use \WPML\FP\Fns;
+use WPML\TaxonomyTermTranslation\Hooks as TermTranslationHooks;
 
 class WPML_Term_Query_Filter {
 
@@ -61,6 +62,10 @@ class WPML_Term_Query_Filter {
 	 */
 	public function get_terms_args_filter( $args, $taxonomies ) {
 		if ( $this->lock ) {
+			return $args;
+		}
+
+		if ( TermTranslationHooks::shouldSkip( $args ) ) {
 			return $args;
 		}
 
