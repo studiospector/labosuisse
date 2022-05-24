@@ -15,9 +15,9 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0,
-            "wpml_cf_preferences": 0
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
         },
         {
             "key": "field_620e4e3d072e2",
@@ -144,7 +144,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -257,5 +257,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649686169
+    "modified": 1653396567
 }
