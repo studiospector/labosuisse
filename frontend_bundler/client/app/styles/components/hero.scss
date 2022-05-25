@@ -101,7 +101,9 @@
     &--containerized {
         .hero {
             &__infobox {
-                padding: 0 70px;
+                @include mq($from: md) {
+                    padding: 0 70px;
+                }
             }
         }
     }
