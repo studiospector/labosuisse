@@ -866,7 +866,7 @@
         },
         {
             "key": "field_622741428fdca",
-            "label": "API Key",
+            "label": "Google Map",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -883,7 +883,7 @@
         },
         {
             "key": "field_622741678fdcb",
-            "label": "Google Maps",
+            "label": "API Key",
             "name": "lb_api_key_google_maps",
             "type": "text",
             "instructions": "",
@@ -937,6 +937,43 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_628e21cf684bb",
+            "label": "Cookiebot",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_628e21e2684bc",
+            "label": "Gruppo di dominio ID",
+            "name": "lb_cookiebot_key",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -957,5 +994,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1653396517
+    "modified": 1653482014
 }
