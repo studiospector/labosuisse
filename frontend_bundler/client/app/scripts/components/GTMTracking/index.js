@@ -26,7 +26,7 @@ class GTMTracking extends Component {
     }
 
     traceMailchimp = () => {
-        if (mc4wp) {
+        if (typeof mc4wp !== 'undefined') {
             mc4wp.forms.on('subscribed', (form) => {
                 dataLayer.push({
                     event: 'form-newsletter',

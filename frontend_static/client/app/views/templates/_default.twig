@@ -29,7 +29,7 @@
         <!-- / WP Head -->
 
 		<link rel="preload" as="style" href="{{ mainCss }}">
-		<link rel="preload" as="script" href="{{ mainJsModern }}">
+		<link rel="preload" as="script" href="{{ mainJsModern }}" data-cookieconsent="ignore">
 
 		{% if production %}
 			<style>{{source('@bundle' ~ criticalCssProd)}}</style>
@@ -77,15 +77,15 @@
 
         {% include 'components/symbols.twig' %}
 
-        <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" defer></script>
+        <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
 
         {% if production %}
-            <script type="text/javascript">{{ source('@bundle' ~ criticalJs) }}</script>
+            <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
         {% else %}
-            <script src="{{ criticalJsModern }}"></script>
+            <script src="{{ criticalJsModern }}" data-cookieconsent="ignore"></script>
         {% endif %}
 
-        <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
+        <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" data-cookieconsent="ignore" defer></script>
 
         {{ fn('wp_footer') }}
 

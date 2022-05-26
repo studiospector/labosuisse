@@ -8,18 +8,17 @@
     }
 
     &__img {
+        min-height: 500px;
+        position: relative;
         flex: 1 1 50%;
-
+        
         @include mq($until: md) {
+            min-height: 335px;
             flex: 1;
             margin-bottom: 40px;
-        }
-
-        .lb-picture {
-            min-height: 500px;
-
-            @include mq($until: md) {
-                min-height: 335px;
+            
+            .lb-picture-wrapper {
+                position: initial;
             }
         }
     }

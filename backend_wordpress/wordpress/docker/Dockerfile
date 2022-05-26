@@ -55,6 +55,7 @@ ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
 # :poop:
 USER root
 RUN apk --no-cache add \
+  redis \
   php8-exif \
   php8-fileinfo \
   php8-zip \
@@ -62,6 +63,7 @@ RUN apk --no-cache add \
   php8-pecl-imagick \
   php8-simplexml \
   php8-xmlwriter \
+  php8-redis \
   # required by NR agent
   pcre
 

@@ -2,6 +2,7 @@
 
 use Caffeina\LaboSuisse\Setup\Clean;
 use Caffeina\LaboSuisse\Setup\Assets;
+use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -387,6 +388,10 @@ class ThemeSetup extends Timber\Site
                 remove_image_size($size);
             }
         }
+
+        // Remove sizes for medium_large thumb
+        update_option('medium_large_size_w', '0');
+        update_option('medium_large_size_h', '0');
     }
 
     /**
@@ -447,3 +452,4 @@ class ThemeSetup extends Timber\Site
 new ThemeSetup();
 new Clean();
 new Assets();
+new CookiebotDeclarationShortcode;

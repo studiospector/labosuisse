@@ -280,6 +280,13 @@ class SitePress extends WPML_WPDB_User implements
 		$this->api_hooks();
 		add_action( 'wpml_loaded', array( $this, 'load_dependencies' ), 10000 );
 		do_action( 'wpml_after_startup' );
+
+
+        // Load adjust count for terms display as translated.
+        new WPML_Term_Display_As_Translated_Adjust_Count(
+			$this,
+			$this->wpdb
+		);
 	}
 
 	/**

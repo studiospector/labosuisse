@@ -85,8 +85,9 @@ BUGFIX
 - √ gestione accordion prefooter in mobile
 - √ gestione ricerca store locator dal campo nel prefooter
 - √ gestione ricerca store locator dal campo nel footer
-- animazioni
 - √ KPI
+
+- animazioni
 
 
 
@@ -106,6 +107,18 @@ SEZIONI DA TERMINARE
 - √ Gestione dinamica Footer
 - √ Ricerca globale
 - √ Integrazione Newsletter
-- Template Ricerca e Innovazione
-- Template Marchi e Brevetti
-- Nuovo menu
+- √ Template Ricerca e Innovazione
+- √ Template Marchi e Brevetti
+- √ Nuovo menu
+
+
+
+----------
+
+
+
+PRE GO LIVE
+- Cache
+- √ iThemes
+- √ reCaptcha
+- SMTP
