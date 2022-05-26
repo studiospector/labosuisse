@@ -2,6 +2,7 @@
 
 use Caffeina\LaboSuisse\Setup\Clean;
 use Caffeina\LaboSuisse\Setup\Assets;
+use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -451,3 +452,4 @@ class ThemeSetup extends Timber\Site
 new ThemeSetup();
 new Clean();
 new Assets();
+new CookiebotDeclarationShortcode;

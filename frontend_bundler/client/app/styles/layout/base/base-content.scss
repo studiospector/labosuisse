@@ -9,6 +9,12 @@
         display: none;
     }
 
+    a {
+        font-weight: 500;
+        color: map-get($colors, "black");
+        letter-spacing: 0.02em;
+    }
+
     h1, h2, h3, h4, h5, h6, p, ol, ul {
         margin-bottom: rem(20);
     }
