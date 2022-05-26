@@ -3,6 +3,26 @@
     "title": "Campi Personalizzati: Distributor",
     "fields": [
         {
+            "key": "field_628f732b59369",
+            "label": "Id",
+            "name": "lb_distributor_id",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_6257eb118f65a",
             "label": "Descrizione",
             "name": "lb_distributor_description",
@@ -205,5 +225,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1652189776
+    "modified": 1653568384
 }
