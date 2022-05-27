@@ -11,16 +11,20 @@ const ui = {
 }
 
 class AnimationImage extends Component {
-    constructor({ el }) {
+    constructor({ el, revealType }) {
         super({ el, ui })
+
+        const timeout = (revealType == 'intro') ? 1500 : 1
 
         ScrollTrigger.matchMedia({
             "(min-width: 769px)": this.onDesktopMatch,
             "(max-width: 768px)": this.onMobileMatch
         })
 
-        this.init()
-        this.listen()
+        setTimeout(() => {
+            this.init()
+            this.listen()
+        }, timeout);
     }
 
     init() {

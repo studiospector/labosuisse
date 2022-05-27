@@ -17,8 +17,10 @@ const ui = {
 }
 
 class AnimationText extends Component {
-    constructor({ el }) {
+    constructor({ el, revealType }) {
         super({ el, ui })
+
+        this.revealType = revealType
 
         ScrollTrigger.matchMedia({
             "(min-width: 769px)": this.onDesktopMatch,
@@ -82,6 +84,8 @@ class AnimationText extends Component {
             }
         })
 
+        const timeout = (this.revealType == 'intro') ? 1 : 0
+
         const elems = [this.ui.tagline, this.ui.title, this.ui.subtitle, this.ui.paragraph].filter(el => el)
 
         const childSplit = new SplitText(elems, {
@@ -100,7 +104,7 @@ class AnimationText extends Component {
             yPercent: 100,
             ease: "power4",
             stagger: 0.1
-        })
+        }, timeout)
         if (this.ui.cta) {
             this.tl.fromTo(this.ui.cta, { autoAlpha: 0 }, { duration: 1, autoAlpha: 1, ease: "Power4.easeOut" })
         }
