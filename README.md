@@ -1,23 +1,20 @@
-## Flusso 🚰
+# Flusso 🚰
 
-#### Prerequisiti
+* [Sviluppo](#sviluppo)
+* [Ambienti](#ambienti)
+* [Branches](#branches)
+* [Release Flow](#release-flow)
+* [Product Category Hierarchy](#product-category-hierarchy)
+* [Workflow Blocks and Components Development](#workflow-blocks-and-components-development)
+* [WP Plugins](#wp-plugins)
 
-Come primo step dobbiamo creare un access token su [Gitlab](git.caffeina.co).
-Per fare questo vai nel tuo profilo utente su Gitlab e dal menu a sinistra seleziona la tab **Access Token**.
+<br><br>
 
-Inserisci un nome per il token e **assicurati** di selezionare le checkbox:
-* api
-* read_registry
+## Sviluppo
 
-A questo punto puoi creare il token.
+Worklow di sviluppo:
 
-Successivamente lanciare il seguente comando:
-`docker login registry.caffeina.co -u <gitlab-username> -p <access-token>`
-dove il gitlab-username sarà la tua mail di caffeina e la password sarà l'access token creato precedentemente.
-
-> **Tip**: Assicurati che nella cartella ~/.docker il file config.json abbia la voce auths come segue auths: {}
-
--
+### Reverse proxy
 
 Assicurati di avere tirato su il reverse proxy globale che serve per risolvere i domini in ambiente locale.
 
@@ -33,75 +30,384 @@ Per poi tirarlo su semplicemente con il comando
 nador loadbalancer
 ```
 
+### Avviare container Docker
 
-#### Sviluppo
+Una volta creato il progetto con [nador-cli](https://git.caffeina.co/devops/nador-cli) puoi avviare l'ambiente di sviluppo con:
 
-Una volta creato il progetto con [nador-cli](https://git.caffeina.co/devops/nador-cli) puoi avviare l'ambiente di sviluppo con `./cmd/dev.sh`
+```sh
+./cmd/dev.sh --build
+```
+oppure in modalità detached
+```sh
+./cmd/dev.sh -d
+```
 
 Questo avvierà l'intero stack di sviluppo definito dai servizi scelti durante la creazione del progetto.
 
-> **Tip**: per lanciare comandi `npm` puoi usare il comando `/cmd/npm.sh <service> <args>`.
+### Installare dipendenze via `npm`
 
-##### Local problems
+> **Tip**: per lanciare comandi `npm` puoi usare il comando:
 
-Se hai problemi con `max_allowed_packet` segui i passaggi sotto:
-- `docker exec -it labo-website-2021_storage_mysql_1 sh`
-- `apt-get update`
-- `apt-get install nano`
-- `cd etc`
-- `cd mysql`
-- `nano my.cnf`
-- aggiungi al file la riga `max_allowed_packet=500M` con il valore che serve
-- salva il file
-- riavvia il container
+```sh
+./cmd/npm.sh <service> <args>
+```
 
-#### Deploy
+<br><br>
 
-Inserire la variabile **n2_env** per la CI in Gitlab copiando al suo interno tutte le variabili presenti nel tuo **.env** in locale.
+## Ambienti
 
-Per mettere un progetto online ti basterà inviare un commit.
-Una pipeline di CI partirà automaticamente.
+| Ambiente    | Server      | Branch      | Link                                                                                                                         |
+| ----------- | ----------- | ----------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| PROD        | AWS         | `master`    |                                                                                                                              |
+| PREPROD     | AWS         | `preprod`   | [https://labosuisse.caffeina.host/caffadmin](https://labosuisse.caffeina.host/caffadmin)                                     |
+| DEV         | N3          | `develop`   | [https://develop.labo-website-2021.n3.caffeina.host/caffadmin](https://develop.labo-website-2021.n3.caffeina.host/caffadmin) |
+| LOCAL       |             |             | [http://labo-website-2021.localhost/caffadmin](http://labo-website-2021.localhost/caffadmin)                                 |
 
+<br><br>
 
-## Branches
+## Branches
 
 - MASTER: deploys on *aws production*
 - PREPROD: deploys on *aws preproduction*
 - DEVELOP: deploys on *n3 stage*
 
-Branch produzione: master
-Hotfix partono da: master
-Feature partono da: preprod
+Branch produzione: master\
+Hotfix partono da: master\
+Feature partono da: preprod\
 Release partono da: preprod
 
 Develop: branch che contiene feature non complete e altre cose WIP. Questo branch è "sporco", **NON** deve essere mergiato dentro altri branch e può essere eliminato in ogni momento perché il codice che contiene esiste anche in altri branch (features/master/preprod).
 
 #### Branch Protections:
+
 Protezione branch abilitata per:
 - master
 - preprod
 
-### Release Flow
+<br><br>
+
+## Release Flow
+
 1. Crea nuovo branch `release/` partendo da `preprod`
 2. Fai fix dell'ultimo minuto (eg bump del numero di versione)
 3. Crea tag di versione
 4. Chiudi la release facendo merge in `preprod` e `master`
 5. Cancella branch di release
 6. _bonus_: usa `git flow release start` e  `git flow release finish` per ottimizzare il processo dei punti precedenti.
+
+### Q&A
+
 #### Posso fare il merge della mia feature dentro `preprod`?
-Sì, ma solo se è finita ed è stata testata (dai tester e/o PM)
+> Sì, ma solo se è finita ed è stata testata (dai tester e/o PM)
 
 #### Posso fare il merge di `preprod` nella mia feature?
-Sì.
+> Sì.
 
 #### La mia feature è terminata e deve essere testata:
-Fai il merge del branch dentro a `develop` e sposta il task in `Ready for Test` nella kanban.
+> Fai il merge del branch dentro a `develop` e sposta il task in `Ready for Test` nella kanban.
 
 #### Posso fare il merge di `develop` nel mio branch?
-NO.
+> NO.
 
 #### Posso fare il merge di `develop` in `master`?
-ASSOLUTAMENTE NO.
+> ASSOLUTAMENTE NO.
 
 #### Posso fare il merge di `develop` in `preprod`?
-NO.
+> NO.
+
+<br><br>
+
+## Product Category Hierarchy
+
+Le categorie dei prodotti hanno una suddivisione per livelli:
+1. Macro
+2. Zona
+3. Esigenza
+4. Tipologia di Prodotto
+
+```
+Viso [MACRO]
+|
+└--- Labbra [ZONA]
+│   │
+│   └--- Anti-rughe [ESIGENZA]
+|   |   |
+|   |   └--- Crema [TIPOLOGIA]
+|   |   
+|   └--- Effetto filler [ESIGENZA]
+|       |
+|       └--- Trattamento intensivo [TIPOLOGIA]
+│
+└─── Occhi e sguardo [ZONA]
+│   │
+│   └--- Ciglia e sopracciglia folte [ESIGENZA]
+|   |   |
+|   |   └--- Eyeliner [TIPOLOGIA]
+|   |   └--- Mascara [TIPOLOGIA]
+|   |   
+|   └--- Anti-rughe [ESIGENZA]
+|       |
+|       └--- Crema [TIPOLOGIA]
+|       └--- Gocce [TIPOLOGIA]
+│   
+└─── Volto [ZONA]
+    |
+    └--- Anti-età [ESIGENZA]
+    |   |
+    |   └--- Creama giorno [TIPOLOGIA]
+    |   └--- Creama notte [TIPOLOGIA]
+    |   
+    └--- Rassodare [ESIGENZA]
+        |
+        └--- Maschera [TIPOLOGIA]
+        └--- Crema di proseguimento [TIPOLOGIA]
+```
+
+<br><br>
+
+## Workflow Blocks and Components Development
+
+Il workflow da seguire per aggiungere un Componente o un Blocco è il seguente.
+
+> Sviluppare prima il componente nello **Storybook**, e quindi:
+
+> ATTENZIONE: se il componente che si va a sviluppare contiene funzioni che rimandano strettamente a WP oppure fa uso di include dinamici, non è possibile passare per lo sviluppo con lo storybook per via di incompatibilità con `twig-js`.
+
+1. **Twig** - Creazione file in `frontend_static/client/app/views/components/{component-name}.twig`
+```twig
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+    {% set classes = classes|merge(['lb-component-name--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+    {% set classes = classes|merge([class]) %}
+{% endif %}
+
+<section class="lb-component-name{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-component-name">
+    <h3>{{ title }}</h3>
+</section>
+```
+
+2. **SCSS** - Creazione file in `frontend_bundler/client/app/styles/components/{component-name}.scss`
+```scss
+.lb-component-name {
+    position: relative;
+}
+```
+
+3. **JS** - Creazione file in `frontend_bundler/client/app/scripts/components/{ComponentName}/{ComponentName}.js`
+```js
+import Component from '@okiba/component'
+import { qs, qsa, on, off } from '@okiba/dom'
+import { debounce } from '@okiba/functions'
+
+const ui = {
+    test: '.lb-component-name__test'
+}
+
+class ComponentName extends Component {
+
+    constructor({ options, ...props }) {
+        super({ ...props, ui })
+
+        this.init()
+    }
+
+    init = () => {
+        console.log('Component Init')
+    }
+}
+
+export default ComponentName
+```
+
+4. **Okiba Component Init** - Inizializzare il componente tramite Okiba in `frontend_bundler/client/app/scripts/components/app.js`
+```js
+import Component from '@okiba/component'
+
+import ComponentName from './ComponentName'
+
+const components = {
+    componentName: {
+        selector: '.js-component-name',
+        type: ComponentName,
+        optional: true
+    },
+}
+
+export default class Application extends Component {
+    constructor() {
+        super({ el: document.body, components })
+
+        this.el.classList.add('ready')
+    }
+}
+```
+
+5. **Storybook** - Creazione story del componente in `frontend_storybook/storybook/app/stories/components/{component-name}.stories.js`
+```js
+// Storybook API
+import { storiesOf } from '@storybook/html'
+import { useEffect } from '@storybook/client-api'
+// Okiba API
+import Component from '@okiba/component'
+
+// Component Twig
+import render from '../../views/components/component-name.twig'
+// Component JS
+import ComponentName from '../../scripts/components/ComponentName'
+
+const dataDefault = {
+    title: 'Test',
+}
+
+storiesOf('Components|Component Name', module)
+    .addDecorator(storyFn => {
+        useEffect(() => {
+            const app = new Component({
+                el: document.body,
+                components: [
+                    {
+                        selector: '.js-component-name',
+                        type: ComponentName
+                    }
+                ]
+            })
+            return () => app.destroy()
+        }, [])
+
+        return storyFn()
+    })
+    .add('Default', () => render(dataDefault))
+```
+
+<br><br>
+
+> Dopodichè creare e integrare il componnete nell'editor di Wordpress, **Gutenberg**:
+
+6. **ACF Block** - Registrare il blocco in `backend_wordpress/wordpress/app/wp-content/themes/caffeina-theme/acf-config/blocks/acf-block-{component-name}.php`
+```php
+<?php
+
+add_action('acf/init', 'lb_init_block_component_name');
+
+function lb_init_block_component_name()
+{
+    if (function_exists('acf_register_block_type')) {
+
+        acf_register_block_type(array(
+            'name'              => 'lb-component-name',
+            'title'             => __('Component Name'),
+            'description'       => __('Caffeina Block - Component Name.'),
+            'render_template'   => 'gutenberg-blocks/component-name.php',
+            'category'          => 'caffeina-theme',
+            'keywords'          => array('lorem', 'ipsum', 'component name'),
+            'example' => array(
+                'attributes' => array(
+                    'data' => array(
+                        'is_preview' => true
+                    )
+                )
+            )
+        ));
+    }
+}
+```
+
+7. **Payload e Render** - Gestire il payload del blocco e il render in
+`backend_wordpress/wordpress/app/wp-content/themes/caffeina-theme/gutenberg-blocks/block-{component-name}.php`
+```php
+<?php
+
+use Caffeina\LaboSuisse\Blocks\ComponentName;
+
+$blockComponentName = (new ComponentName($block, null))
+    ->render();
+```
+
+e in `backend_wordpress/wordpress/app/wp-content/themes/caffeina-theme/packages/caffeina/labo-suisse/src/Blocks/{ComponentName}.php`
+```php
+<?php
+
+namespace Caffeina\LaboSuisse\Blocks;
+
+class ComponentName extends BaseBlock
+{
+    public function __construct($block, $name)
+    {
+        parent::__construct($block, $name);
+
+        $payload = [
+            'title' => get_field('field_name'),
+        ];
+
+        $this->setContext($payload);
+    }
+}
+```
+
+8. **ACF Fields** - Aggiungere i campi personalizzati ACF relativi al blocco tramite la dashboard sul CMS
+
+<br><br>
+
+## WP Plugins
+
+Custom Fields
+- Advanced Custom Fields PRO
+
+Form di Contatto
+- Contact Form 7
+
+Security
+- iThemes Security
+
+Mailchimp
+- MC4WP: Mailchimp for WordPress
+- MC4WP: Mailchimp for WordPress Premium
+
+User Roles Management
+- User Role Editor
+
+Cache
+- W3 Total Cache
+
+E-commerce Management
+- WooCommerce
+
+Import/Export
+- WP All Import Pro
+- - Support plugin
+- - - ACF
+- - - - WP All Import - ACF Add-On
+- WP All Export Pro
+- - Support plugin
+- - - ACF
+- - - - WP All Export - ACF Export Add-On Pro
+
+Mail
+- WP Mail SMTP
+
+Media
+- WP Offload Media
+
+Multilanguage
+- WPML String Translation
+- WPML Multilingual CMS
+- - Support plugin
+- - - Media
+- - - - WPML Media
+- - - ACF
+- - - - Advanced Custom Fields Multilingual
+- - - CF7
+- - - - Contact Form 7 Multilingual
+- - - WooCommerce
+- - - - WooCommerce Multilingual & Multicurrency
+- - - Yoast
+- - - - WPML SEO
+
+SEO
+- Yoast SEO
+
+Other
+- Regenerate Thumbnails
+- YIKES Simple Taxonomy Ordering
