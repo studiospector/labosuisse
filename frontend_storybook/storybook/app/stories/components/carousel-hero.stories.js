@@ -9,16 +9,17 @@ import renderCarouselHero from '../../views/components/carousel-hero.twig'
 
 import CarouselHero from '../../scripts/components/CarouselHero'
 import Hero from '../../scripts/components/Hero'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataRightInfobox = {
     slides: [
         {
             images: {
-                original: '/assets/images/carousel-hero-img.jpg',
-                lg: '/assets/images/carousel-hero-img.jpg',
-                md: '/assets/images/carousel-hero-img.jpg',
-                sm: '/assets/images/carousel-hero-img.jpg',
-                xs: '/assets/images/carousel-hero-img.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'right',
             infoboxPosY: 'center',
@@ -36,11 +37,11 @@ const dataRightInfobox = {
         },
         {
             images: {
-                original: '/assets/images/carousel-hero-img.jpg',
-                lg: '/assets/images/carousel-hero-img.jpg',
-                md: '/assets/images/carousel-hero-img.jpg',
-                sm: '/assets/images/carousel-hero-img.jpg',
-                xs: '/assets/images/carousel-hero-img.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'right',
             infoboxPosY: 'center',
@@ -64,11 +65,11 @@ const dataLeftInfobox = {
     slides: [
         {
             images: {
-                original: '/assets/images/carousel-hero-img-2.jpg',
-                lg: '/assets/images/carousel-hero-img-2.jpg',
-                md: '/assets/images/carousel-hero-img-2.jpg',
-                sm: '/assets/images/carousel-hero-img-2.jpg',
-                xs: '/assets/images/carousel-hero-img-2.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'left',
             infoboxPosY: 'center',
@@ -87,11 +88,11 @@ const dataLeftInfobox = {
         },
         {
             images: {
-                original: '/assets/images/carousel-hero-img-2.jpg',
-                lg: '/assets/images/carousel-hero-img-2.jpg',
-                md: '/assets/images/carousel-hero-img-2.jpg',
-                sm: '/assets/images/carousel-hero-img-2.jpg',
-                xs: '/assets/images/carousel-hero-img-2.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'left',
             infoboxPosY: 'center',
@@ -123,7 +124,12 @@ storiesOf('Components|Carousel Hero', module)
                     {
                         selector: '.js-hero',
                         type: Hero
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

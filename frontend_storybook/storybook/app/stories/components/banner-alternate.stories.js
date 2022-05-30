@@ -8,14 +8,15 @@ import Component from '@okiba/component'
 import renderBannerAlternate from '../../views/components/banner-alternate.twig'
 
 import BannerAlternate from '../../scripts/components/BannerAlternate'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataRightInfoboxFullHeight = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -35,11 +36,11 @@ const dataRightInfoboxFullHeight = {
 
 const dataLeftInfoboxFullHeight = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -59,11 +60,11 @@ const dataLeftInfoboxFullHeight = {
 
 const dataRightInfoboxCentered = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
@@ -76,11 +77,11 @@ const dataRightInfoboxCentered = {
 
 const dataLeftInfoboxCentered = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
@@ -93,11 +94,11 @@ const dataLeftInfoboxCentered = {
 
 const dataRightImageBig = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/800x560',
+        lg: 'https://via.placeholder.com/800x560',
+        md: 'https://via.placeholder.com/800x560',
+        sm: 'https://via.placeholder.com/800x560',
+        xs: 'https://via.placeholder.com/800x560'
     },
     infobox: {
         tagline: 'Lorem Ipsum',
@@ -117,11 +118,11 @@ const dataRightImageBig = {
 
 const dataLeftImageBig = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/800x560',
+        lg: 'https://via.placeholder.com/800x560',
+        md: 'https://via.placeholder.com/800x560',
+        sm: 'https://via.placeholder.com/800x560',
+        xs: 'https://via.placeholder.com/800x560'
     },
     infobox: {
         tagline: 'Lorem Ipsum',
@@ -148,7 +149,12 @@ storiesOf('Components|Banner Alternate', module)
                     {
                         selector: '.js-banner-alternate',
                         type: BannerAlternate
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

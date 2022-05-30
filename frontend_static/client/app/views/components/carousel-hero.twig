@@ -1,10 +1,10 @@
 <section class="carousel-hero swiper js-carousel-hero">
-  <div class="swiper-wrapper">
-    {% for slide in slides|default([]) %}
-      <div class="carousel-hero__slide swiper-slide">
-        {% include '@PathViews/components/hero.twig' with slide only %}
-      </div>
-    {% endfor %}
-  </div>
-  <div class="swiper-pagination"></div>
+	<div class="swiper-wrapper">
+		{% for slide in slides|default([]) %}
+			<div class="carousel-hero__slide swiper-slide">
+				{% include '@PathViews/components/hero.twig' with slide|merge({animationType: 'intro'}) only %}
+			</div>
+		{% endfor %}
+	</div>
+	<div class="swiper-pagination"></div>
 </section>

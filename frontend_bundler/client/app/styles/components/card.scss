@@ -97,10 +97,17 @@
 
         .infobox {
             &__subtitle {
-                margin-bottom: 20px;
+                margin: 0;
+            }
+
+            &__paragraph {
+                margin: 0;
+                margin-top: 20px;
             }
 
             &__cta {
+                margin-top: 15px;
+                
                 @include mq($until: md) {
                     margin-bottom: 20px;
                 }

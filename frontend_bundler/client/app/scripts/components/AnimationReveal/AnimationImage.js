@@ -4,6 +4,8 @@ import { qs } from '@okiba/dom'
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import isStorybook from '../../utils/isStorybook'
+
 const ui = {
     picture: '.lb-picture',
     image: 'img',
@@ -11,16 +13,20 @@ const ui = {
 }
 
 class AnimationImage extends Component {
-    constructor({ el }) {
+    constructor({ el, revealType }) {
         super({ el, ui })
+
+        const timeout = (revealType == 'intro') ? 1500 : 1
 
         ScrollTrigger.matchMedia({
             "(min-width: 769px)": this.onDesktopMatch,
             "(max-width: 768px)": this.onMobileMatch
         })
 
-        this.init()
-        this.listen()
+        setTimeout(() => {
+            this.init()
+            this.listen()
+        }, timeout);
     }
 
     init() {
@@ -70,7 +76,7 @@ class AnimationImage extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: '.js-scrollbar',
+                scroller: isStorybook() ? 'body' : '.js-scrollbar',
                 trigger: this.ui.picture,
                 start: "30% 80%",
             }

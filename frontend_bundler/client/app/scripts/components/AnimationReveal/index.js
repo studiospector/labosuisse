@@ -23,13 +23,15 @@ class AnimationReveal extends Component {
     constructor({el}) {
         super({el, ui})
 
+        this.revealType = this.el.dataset.revealType
+
         this.init()
     }
 
     init = () => {
-        this.ui.images.forEach(image => new AnimationImage({el: image}))
-        this.ui.texts.forEach(text => new AnimationText({el: text}))
-        this.ui.grids.forEach(grid => new AnimationCard({el: grid}))
+        this.ui.images.forEach(image => new AnimationImage({el: image, revealType: this.revealType}))
+        this.ui.texts.forEach(text => new AnimationText({el: text, revealType: this.revealType}))
+        this.ui.grids.forEach(grid => new AnimationCard({el: grid, revealType: this.revealType}))
     }
 }
 

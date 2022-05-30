@@ -6,23 +6,24 @@ import Component from '@okiba/component'
 
 // Components
 import renderLaunchTwoImages from '../../views/components/launch-two-images.twig'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const data = {
     imagesLeft: {
         variants: ["parallax"],
-        original: '/assets/images/launch-img-1.jpg',
-        lg: '/assets/images/launch-img-1.jpg',
-        md: '/assets/images/launch-img-1.jpg',
-        sm: '/assets/images/launch-img-1.jpg',
-        xs: '/assets/images/launch-img-1.jpg'
+        original: 'https://via.placeholder.com/570x700',
+        lg: 'https://via.placeholder.com/570x700',
+        md: 'https://via.placeholder.com/570x700',
+        sm: 'https://via.placeholder.com/570x700',
+        xs: 'https://via.placeholder.com/570x700'
     },
     imagesRight: {
         variants: ["parallax"],
-        original: '/assets/images/launch-img-2.jpg',
-        lg: '/assets/images/launch-img-2.jpg',
-        md: '/assets/images/launch-img-2.jpg',
-        sm: '/assets/images/launch-img-2.jpg',
-        xs: '/assets/images/launch-img-2.jpg'
+        original: 'https://via.placeholder.com/570x700',
+        lg: 'https://via.placeholder.com/570x700',
+        md: 'https://via.placeholder.com/570x700',
+        sm: 'https://via.placeholder.com/570x700',
+        xs: 'https://via.placeholder.com/570x700'
     },
     infobox: {
         tagline: 'CHI SIAMO',
@@ -38,4 +39,22 @@ const data = {
 }
 
 storiesOf('Components|Block Launch two Images', module)
+    .addDecorator(storyFn => {
+        useEffect(() => {
+            const app = new Component({
+                el: document.body,
+                components: [
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
+                ]
+            })
+
+            return () => app.destroy()
+        }, [])
+
+        return storyFn()
+    })
     .add('Default', () => renderLaunchTwoImages(data))

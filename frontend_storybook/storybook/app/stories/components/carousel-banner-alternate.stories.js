@@ -9,17 +9,18 @@ import renderCarouselBannerAlternate from '../../views/components/carousel-banne
 
 import BannerAlternate from '../../scripts/components/BannerAlternate'
 import CarouselBannerAlternate from '../../scripts/components/CarouselBannerAlternate'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataRightInfobox = {
     slides: [
         {
             noContainer: true,
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/570x400',
+                lg: 'https://via.placeholder.com/570x400',
+                md: 'https://via.placeholder.com/570x400',
+                sm: 'https://via.placeholder.com/570x400',
+                xs: 'https://via.placeholder.com/570x400'
             },
             infobox: {
                 date: '00/00/00',
@@ -37,11 +38,11 @@ const dataRightInfobox = {
         {
             noContainer: true,
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/570x400',
+                lg: 'https://via.placeholder.com/570x400',
+                md: 'https://via.placeholder.com/570x400',
+                sm: 'https://via.placeholder.com/570x400',
+                xs: 'https://via.placeholder.com/570x400'
             },
             infobox: {
                 date: '00/00/00',
@@ -64,11 +65,11 @@ const dataLeftInfobox = {
         {
             noContainer: true,
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/570x400',
+                lg: 'https://via.placeholder.com/570x400',
+                md: 'https://via.placeholder.com/570x400',
+                sm: 'https://via.placeholder.com/570x400',
+                xs: 'https://via.placeholder.com/570x400'
             },
             infobox: {
                 date: '00/00/00',
@@ -86,11 +87,11 @@ const dataLeftInfobox = {
         {
             noContainer: true,
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/570x400',
+                lg: 'https://via.placeholder.com/570x400',
+                md: 'https://via.placeholder.com/570x400',
+                sm: 'https://via.placeholder.com/570x400',
+                xs: 'https://via.placeholder.com/570x400'
             },
             infobox: {
                 date: '00/00/00',
@@ -121,6 +122,11 @@ storiesOf('Components|Carousel Banner Alternate', module)
                     {
                         selector: '.js-carousel-banner-alternate',
                         type: CarouselBannerAlternate
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
                     },
                 ]
             })

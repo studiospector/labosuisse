@@ -88,6 +88,8 @@ BUGFIX
 - √ KPI
 
 - animazioni
+- fix cards grid spaces
+- fix prefooter spaces + line
 
 
 
