@@ -7,6 +7,7 @@
 * [Product Category Hierarchy](#product-category-hierarchy)
 * [Workflow Blocks and Components Development](#workflow-blocks-and-components-development)
 * [WP Plugins](#wp-plugins)
+* [Images Guidelines](#images-guidelines)
 
 <br><br>
 
@@ -411,3 +412,139 @@ SEO
 Other
 - Regenerate Thumbnails
 - YIKES Simple Taxonomy Ordering
+
+<br><br>
+
+## Images Guidelines
+
+### Hero & Carousel Hero
+
+**Dimensioni:**
+| Variante      | Width       | Height             |
+| ------------- | ----------- | ------------------ |
+| Large         | `2500px`    | `700px`            |
+| Medium        | `2500px`    | `520px`            |
+| Small         | `2500px`    | `420px`            |
+| Containerized | `1200px`    | Large/Medium/Small |
+
+**Safe Area:**
+| Variante       | Top         | Bottom      | Left        | Right       |
+| -------------- | ----------- | ----------- | ----------- | ----------- |
+| Infobox Left   | `100px`     | `100px`     | `1250px`    | `0px`       |
+| Infobox Right  | `100px`     | `100px`     | `0px`       | `1250px`    |
+| Infobox Center | `100px`     | `100px`     | `0px`       | `0px`       |
+
+<br>
+
+### Banner
+
+**Note:**
+
+Il testo non deve superare un certo numero di righe:
+- `Tagline` max 1 riga
+- `Titolo` max 2 righe
+- `Paragrafo` max 3 righe
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Default     | `1200px`    | `400px`     |
+
+**Safe Area:**
+| Variante       | Top         | Bottom      | Left        | Right       |
+| -------------- | ----------- | ----------- | ----------- | ----------- |
+| Infobox Left   | `60px`      | `60px`      | `600px`     | `0px`       |
+| Infobox Right  | `60px`      | `60px`      | `0px`       | `600px`     |
+| Infobox Center | `60px`      | `60px`      | `0px`       | `0px`       |
+
+<br>
+
+### Banner Alternate & Carousel Banner Alternate
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Default     | `570px`     | `400px`     |
+| Image big   | `800px`     | `560px`     |
+
+**Safe Area:**
+| Variante    | Top         | Bottom      | Left        | Right       |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Default     | `60px`      | `60px`      | `60px`      | `60px`      |
+
+<br>
+
+### Block Launch two Images
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Default     | `570px`     | `700px`     |
+
+**Safe Area:**
+| Variante    | Top         | Bottom      | Left        | Right       |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Default     | `60px`      | `60px`      | `60px`      | `60px`      |
+
+<br>
+
+### Block Image and Card
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Image Left  | `535px`     | `500px`     |
+| Image Right | `535px`     | `160px`     |
+
+**Safe Area:**
+| Variante    | Top         | Bottom      | Left        | Right       |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Image Left  | `60px`      | `60px`      | `60px`      | `60px`      |
+| Image Right |             |             |             |             |
+
+<br>
+
+### Block Launch two Cards
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Horizontal  | `570px`     | `310px`     |
+| Vertical    | `1200px`    | `470px`     |
+
+**Safe Area:**
+| Variante    | Top         | Bottom      | Left        | Right       |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Default     | `60px`      | `60px`      | `60px`      | `60px`      |
+
+<br>
+
+### Block Love Labo
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Default     | `160px`     | `160px`     |
+
+<br>
+
+### Carousel Centered
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Default     | `560px`     | `410px`     |
+
+<br>
+
+### Number List with Image
+
+**Dimensioni:**
+| Variante    | Width       | Height      |
+| ----------- | ----------- | ----------- |
+| Default     | `570px`     | `420px`     |
+
+**Safe Area:**
+| Variante    | Top         | Bottom      | Left        | Right       |
+| ----------- | ----------- | ----------- | ----------- | ----------- |
+| Default     | `60px`      | `60px`      | `60px`      | `60px`      |
