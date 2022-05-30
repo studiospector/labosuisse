@@ -26,11 +26,11 @@
     {% endfor %}
 {% endif %}
 
-<section class="block-two-cards{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+<section class="block-two-cards{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
     <div class="block-two-cards__infobox text-center">
-        {% include '@PathViews/components/infobox.twig' with infobox only %}
+        {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
     </div>
-    <div class="block-two-cards__cards text-center">
+    <div class="block-two-cards__cards text-center js-card-reveal">
         <div class="row">
             {% for item in cards %}
                 {% if navLinks|length > 0 %}
