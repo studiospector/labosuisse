@@ -5,7 +5,10 @@ const ui = {
     image: '.banner-alternate__img',
     infoboxText: '.js-infobox-text',
     infoboxCTA: '.infobox__cta',
-    infoboxParagraph: '.infobox__paragraph',
+    infoboxParagraph: {
+        selector: '.infobox__paragraph',
+        asArray: true,
+    },
 }
 
 class BannerAlternate extends Component {
@@ -51,8 +54,8 @@ class BannerAlternate extends Component {
                 this.ui.image.style.height = `calc(100% - ${textWrapHeight + ctaWrapHeight}px)`
             }
         } else {
-            if (this.ui.infoboxParagraph && this.ui.infoboxText) {
-                this.ui.infoboxText.insertAdjacentElement('afterend', this.ui.infoboxParagraph)
+            if (this.ui.infoboxParagraph.length > 0 && this.ui.infoboxText) {
+                this.ui.infoboxText.insertAdjacentElement('afterend', this.ui.infoboxParagraph[this.ui.infoboxParagraph.length - 1])
             }
             this.ui.image.style.marginTop = `0px`
             this.ui.image.style.marginBottom = `0px`
