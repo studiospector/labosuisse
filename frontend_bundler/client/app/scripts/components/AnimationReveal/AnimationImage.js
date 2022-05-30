@@ -4,6 +4,8 @@ import { qs } from '@okiba/dom'
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import isStorybook from '../../utils/isStorybook'
+
 const ui = {
     picture: '.lb-picture',
     image: 'img',
@@ -74,7 +76,7 @@ class AnimationImage extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: '.js-scrollbar',
+                scroller: isStorybook() ? 'body' : '.js-scrollbar',
                 trigger: this.ui.picture,
                 start: "30% 80%",
             }

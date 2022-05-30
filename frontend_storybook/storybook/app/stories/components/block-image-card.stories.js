@@ -6,22 +6,23 @@ import Component from '@okiba/component'
 
 // Components
 import renderBlock from '../../views/components/block-image-card.twig'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataDefault = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/535x500',
+        lg: 'https://via.placeholder.com/535x500',
+        md: 'https://via.placeholder.com/535x500',
+        sm: 'https://via.placeholder.com/535x500',
+        xs: 'https://via.placeholder.com/535x500'
     },
     card: {
         images: {
-            original: '/assets/images/carousel-hero-img.jpg',
-            lg: '/assets/images/carousel-hero-img.jpg',
-            md: '/assets/images/carousel-hero-img.jpg',
-            sm: '/assets/images/carousel-hero-img.jpg',
-            xs: '/assets/images/carousel-hero-img.jpg'
+            original: 'https://via.placeholder.com/535x160',
+            lg: 'https://via.placeholder.com/535x160',
+            md: 'https://via.placeholder.com/535x160',
+            sm: 'https://via.placeholder.com/535x160',
+            xs: 'https://via.placeholder.com/535x160'
         },
         infobox: {
             subtitle: 'La tecnologia dietro l’efficacia',
@@ -38,4 +39,22 @@ const dataDefault = {
 }
 
 storiesOf('Components|Block Image Card', module)
+    .addDecorator(storyFn => {
+        useEffect(() => {
+            const app = new Component({
+                el: document.body,
+                components: [
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
+                ]
+            })
+
+            return () => app.destroy()
+        }, [])
+
+        return storyFn()
+    })
     .add('Default', () => renderBlock(dataDefault))

@@ -8,14 +8,15 @@ import Component from '@okiba/component'
 import renderHero from '../../views/components/hero.twig'
 
 import Hero from '../../scripts/components/Hero'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataLeftInfobox = {
     images: {
-        original: '/assets/images/hero-face-right.jpg',
-        lg: '/assets/images/hero-face-right.jpg',
-        md: '/assets/images/hero-face-right.jpg',
-        sm: '/assets/images/hero-face-right.jpg',
-        xs: '/assets/images/hero-face-right.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
@@ -29,11 +30,11 @@ const dataLeftInfobox = {
 
 const dataLeftBottomInfobox = {
     images: {
-        original: '/assets/images/hero-face-right.jpg',
-        lg: '/assets/images/hero-face-right.jpg',
-        md: '/assets/images/hero-face-right.jpg',
-        sm: '/assets/images/hero-face-right.jpg',
-        xs: '/assets/images/hero-face-right.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'bottom',
@@ -47,11 +48,11 @@ const dataLeftBottomInfobox = {
 
 const dataRightInfobox = {
     images: {
-        original: '/assets/images/hero-face-left.jpg',
-        lg: '/assets/images/hero-face-left.jpg',
-        md: '/assets/images/hero-face-left.jpg',
-        sm: '/assets/images/hero-face-left.jpg',
-        xs: '/assets/images/hero-face-left.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'right',
     infoboxPosY: 'center',
@@ -65,11 +66,11 @@ const dataRightInfobox = {
 
 const dataRightBottomInfobox = {
     images: {
-        original: '/assets/images/hero-face-left.jpg',
-        lg: '/assets/images/hero-face-left.jpg',
-        md: '/assets/images/hero-face-left.jpg',
-        sm: '/assets/images/hero-face-left.jpg',
-        xs: '/assets/images/hero-face-left.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'right',
     infoboxPosY: 'bottom',
@@ -83,11 +84,11 @@ const dataRightBottomInfobox = {
 
 const dataCenterInfobox = {
     images: {
-        original: '/assets/images/carousel-hero-img-2.jpg',
-        lg: '/assets/images/carousel-hero-img-2.jpg',
-        md: '/assets/images/carousel-hero-img-2.jpg',
-        sm: '/assets/images/carousel-hero-img-2.jpg',
-        xs: '/assets/images/carousel-hero-img-2.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'center',
     infoboxPosY: 'center',
@@ -107,11 +108,11 @@ const dataCenterInfobox = {
 
 const dataCenterBottomInfobox = {
     images: {
-        original: '/assets/images/carousel-hero-img-2.jpg',
-        lg: '/assets/images/carousel-hero-img-2.jpg',
-        md: '/assets/images/carousel-hero-img-2.jpg',
-        sm: '/assets/images/carousel-hero-img-2.jpg',
-        xs: '/assets/images/carousel-hero-img-2.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'center',
     infoboxPosY: 'bottom',
@@ -126,11 +127,11 @@ const dataCenterBottomInfobox = {
 
 const dataHeroWhiteText = {
     images: {
-        original: '/assets/images/hero-crescina-right.jpg',
-        lg: '/assets/images/hero-crescina-right.jpg',
-        md: '/assets/images/hero-crescina-right.jpg',
-        sm: '/assets/images/hero-crescina-right.jpg',
-        xs: '/assets/images/hero-crescina-right.jpg'
+        original: 'https://via.placeholder.com/2500x420',
+        lg: 'https://via.placeholder.com/2500x420',
+        md: 'https://via.placeholder.com/2500x420',
+        sm: 'https://via.placeholder.com/2500x420',
+        xs: 'https://via.placeholder.com/2500x420'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
@@ -146,11 +147,11 @@ const dataHeroWhiteText = {
 
 const dataImageInfobox = {
     images: {
-        original: '/assets/images/hero-crescina-right.jpg',
-        lg: '/assets/images/hero-crescina-right.jpg',
-        md: '/assets/images/hero-crescina-right.jpg',
-        sm: '/assets/images/hero-crescina-right.jpg',
-        xs: '/assets/images/hero-crescina-right.jpg'
+        original: 'https://via.placeholder.com/2500x420',
+        lg: 'https://via.placeholder.com/2500x420',
+        md: 'https://via.placeholder.com/2500x420',
+        sm: 'https://via.placeholder.com/2500x420',
+        xs: 'https://via.placeholder.com/2500x420'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
@@ -164,11 +165,11 @@ const dataImageInfobox = {
 
 const dataHeroContainer = {
     images: {
-        original: '/assets/images/hero-crescina-right.jpg',
-        lg: '/assets/images/hero-crescina-right.jpg',
-        md: '/assets/images/hero-crescina-right.jpg',
-        sm: '/assets/images/hero-crescina-right.jpg',
-        xs: '/assets/images/hero-crescina-right.jpg'
+        original: 'https://via.placeholder.com/2500x420',
+        lg: 'https://via.placeholder.com/2500x420',
+        md: 'https://via.placeholder.com/2500x420',
+        sm: 'https://via.placeholder.com/2500x420',
+        xs: 'https://via.placeholder.com/2500x420'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
@@ -189,7 +190,12 @@ storiesOf('Components|Hero', module)
                     {
                         selector: '.js-hero',
                         type: Hero
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

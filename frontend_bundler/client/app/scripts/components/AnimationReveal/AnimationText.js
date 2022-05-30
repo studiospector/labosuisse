@@ -2,6 +2,8 @@ import Component from '@okiba/component'
 import EventManager from '@okiba/event-manager'
 import { qs } from '@okiba/dom'
 
+import isStorybook from '../../utils/isStorybook'
+
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { SplitText } from "gsap/SplitText"
@@ -12,7 +14,10 @@ const ui = {
     tagline: '.infobox__tagline',
     title: '.infobox__title',
     subtitle: '.infobox__subtitle',
-    paragraph: '.infobox__paragraph',
+    paragraph: {
+        selector: '.infobox__paragraph',
+        asArray: true,
+    },
     cta: '.infobox__cta',
 }
 
@@ -78,7 +83,7 @@ class AnimationText extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: '.js-scrollbar',
+                scroller: isStorybook() ? 'body' : '.js-scrollbar',
                 trigger: this.el,
                 start: "30% 80%",
             }
@@ -86,7 +91,7 @@ class AnimationText extends Component {
 
         const timeout = (this.revealType == 'intro') ? 1 : 0
 
-        const elems = [this.ui.tagline, this.ui.title, this.ui.subtitle, this.ui.paragraph].filter(el => el)
+        const elems = [this.ui.tagline, this.ui.title, this.ui.subtitle, ...this.ui.paragraph].filter(el => el)
 
         const childSplit = new SplitText(elems, {
             type: "lines",
