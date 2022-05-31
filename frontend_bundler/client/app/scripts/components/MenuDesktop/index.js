@@ -29,7 +29,7 @@ class MenuDesktop extends Component {
         on(this.ui.submenuLinks, 'click', this.openSubmenu)
 
         on(this.ui.hovers || [], 'click', this.onEnter); // mouseenter, focusin
-        // on(this.ui.overlay || [], 'mouseenter', this.onLeave);
+        on(this.ui.overlay || [], 'click', this.onLeave);
         // on(qsa('.lb-header__end'), 'mouseenter', this.onLeave);
         // on(qsa('.lb-header__logo'), 'mouseenter', this.onLeave);
         on(qsa('.js-close-menu'), 'click', this.onLeave);
