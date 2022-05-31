@@ -17,7 +17,8 @@
             &__top {
                 padding-top: 30px;
                 padding-bottom: 30px;
-
+                transition: $transition__base-1;
+                
                 @include mq($until: lg) {
                     box-shadow: 0px 4px 8px rgb(0 0 0 / 5%);
                     padding-top: 20px;
