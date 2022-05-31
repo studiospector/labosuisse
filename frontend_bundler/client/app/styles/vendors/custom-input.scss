@@ -155,11 +155,12 @@
     &--tertiary {
         .custom-input {
             &__icon--next {
+                display: flex;
                 margin: 0;
 
                 .button {
                     border-radius: 3px;
-                    margin: 4px;
+                    margin: 5px;
                     padding: 13px;
 
                     .lb-icon {
