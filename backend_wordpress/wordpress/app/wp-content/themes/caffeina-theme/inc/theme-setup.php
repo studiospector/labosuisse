@@ -62,6 +62,8 @@ class ThemeSetup extends Timber\Site
         add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
         add_filter('excerpt_length', array($this, 'lb_excerpt_length'), 999);
         add_filter('wpcf7_form_tag', array($this, 'lb_parse_cf7_fields'));
+        add_filter('wpseo_exclude_from_sitemap_by_post_ids', array($this, 'lb_exclude_specific_posts_from_sitemap'));
+        add_filter('wpseo_sitemap_exclude_post_type', array($this, 'lb_exclude_post_types_from_sitemap'), 10, 2);
 
         parent::__construct();
     }
@@ -446,6 +448,37 @@ class ThemeSetup extends Timber\Site
             });
         }
         return $tag;
+    }
+
+    /**
+     * Exclude Single Posts from the Yoast Sitemap
+     */
+    public function lb_exclude_specific_posts_from_sitemap()
+    {
+        $posts = get_posts(array(
+            'post_type' => array(
+                'lb-store',
+                'lb-beauty-specialist',
+            ),
+            'numberposts' => -1,
+        ));
+
+        $posts_ids = wp_list_pluck($posts, 'ID');
+
+        return $posts_ids;
+    }
+
+
+    /**
+     * Exclude a post type from XML sitemaps
+     *
+     * @param boolean $excluded  Whether the post type is excluded by default.
+     * @param string  $post_type The post type to exclude.
+     *
+     * @return bool Whether or not a given post type should be excluded.
+     */
+    public function lb_exclude_post_types_from_sitemap( $excluded, $post_type ) {
+        return $post_type === 'lb-distributor';
     }
 }
 
