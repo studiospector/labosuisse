@@ -16,7 +16,9 @@ class AnimationImage extends Component {
     constructor({ el, revealType }) {
         super({ el, ui })
 
-        const timeout = (revealType == 'intro') ? 1500 : 1
+        this.revealType = revealType
+
+        const timeout = (this.revealType == 'intro') ? 1500 : 1
 
         ScrollTrigger.matchMedia({
             "(min-width: 769px)": this.onDesktopMatch,
@@ -82,16 +84,35 @@ class AnimationImage extends Component {
             }
         })
 
+        if (this.revealType == 'intro') {
+            this.animateIntro()
+        } else {
+            this.animateDefault()
+        }
+    }
+
+    animateDefault = () => {
         this.tl.addLabel('start')
         this.tl.to(this.ui.overlay, { duration: 1, width: "100%", ease: "Power4.easeInOut" })
         this.tl.set(this.ui.overlay, { duration: 0, right: 0, left: "unset" })
         this.tl.to(this.ui.overlay, { duration: 1, width: "0%", ease: "Power4.easeInOut" })
         this.tl.to(this.ui.image, { duration: 1, opacity: 1, delay: -1, ease: "Power4.easeInOut" })
         this.tl.from(this.ui.image, {
-            duration: 1,
-            scale: 1.4,
-            ease: "Power4.easeInOut",
-            delay: -1.2
+            duration: 2,
+            scale: 1.2,
+            ease: "Power4.easeOut",
+            delay: -0.8
+        })
+    }
+
+    animateIntro = () => {
+        this.tl.addLabel('start')
+        this.tl.to(this.ui.image, { duration: 1, opacity: 1, ease: "Power4.easeInOut" })
+        this.tl.from(this.ui.image, {
+            duration: 2,
+            scale: 1.2,
+            ease: "Power4.easeOut",
+            delay: -0.8
         })
     }
 }

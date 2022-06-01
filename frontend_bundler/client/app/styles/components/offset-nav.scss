@@ -127,6 +127,7 @@
     @include mq($until: lg) {
         padding: 20px 16px;
         padding-bottom: 80px;
+        -webkit-overflow-scrolling: touch;
     }
 
     &__item {

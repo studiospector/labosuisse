@@ -14,21 +14,23 @@
 	{% set classes = classes|merge([class]) %}
 {% endif %}
 
+{% set noReveal = noReveal|default(false) %}
+
 {% if infobox %}
 	{% set _infoboxPosX = (infoboxPosX == 'left') ? '' : (infoboxPosX == 'center' ? ' offset-md-3 text-center' : ' offset-md-7') %}
 	{% set _infoboxPosY = (infoboxPosY == 'center') ? '' : (infoboxPosY == 'bottom' ? ' hero--infobox-' ~ infoboxPosY : '') %}
 {% endif %}
 
-<section class="hero{{ container ? ' container' : '' }}{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ _infoboxPosY }} js-hero js-animation-reveal"{{ animationType|default('default') != 'default' ? 'data-reveal-type="' ~ animationType ~ '"' : '' }}>
+<section class="hero{{ container ? ' container' : '' }}{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ _infoboxPosY }} js-hero{{ not noReveal ? ' js-animation-reveal' : '' }}"{{ animationType|default('default') != 'default' ? 'data-reveal-type="' ~ animationType ~ '"' : '' }}>
 	{% if infobox %}
 		<div class="hero__infobox container">
             <div class="h-100 col-12 col-md-{{ infoboxPosX == 'center' ? '6' : '5' }}{{ _infoboxPosX }}">
-                {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
+                {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: not noReveal}) only %}
             </div>
 		</div>
 	{% endif %}
 
 	<div class="hero__img{{ container ? ' container' : '' }}">
-		{{ lbPicture(images, true, infoboxPosX, true) }}
+		{{ lbPicture(images, true, infoboxPosX, not noReveal) }}
 	</div>
 </section>

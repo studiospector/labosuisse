@@ -87,9 +87,9 @@ BUGFIX
 - √ gestione ricerca store locator dal campo nel footer
 - √ KPI
 
-- animazioni
-- fix cards grid spaces
-- fix prefooter spaces + line
+- √ animazioni
+- √ fix cards grid spaces
+- √ fix prefooter spaces + line
 
 
 

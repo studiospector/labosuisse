@@ -9,17 +9,8 @@
         {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
     {% endif %}
 
-    {# Info #}
-    <div class="container text-center">
-        <div class="infobox">
-            {% if title %}
-                <h1 class="infobox__subtitle h2">{{ title }}</h1>
-            {% endif %}
-            {% if description %}
-                <p class="infobox__paragraph">{{ description }}</p>
-            {% endif %}
-        </div>
-    </div>
+    {# Intro page #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
     <hr class="lb-separator lb-separator--medium" data-variant="medium">
 
     {# Store locator #}

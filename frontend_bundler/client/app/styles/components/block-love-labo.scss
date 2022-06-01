@@ -18,6 +18,8 @@
         }
 
         &__img {
+            width: 160px;
+            
             .lb-picture {
                 width: 160px;
                 height: 160px;
@@ -57,8 +59,6 @@
             }
 
             &__img {
-                width: 160px;
-
                 .p-small {
                     white-space: initial;
                 }
