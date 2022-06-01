@@ -123,6 +123,7 @@ class MenuMobile extends Component {
 
     close = () => {
         qs(this.opt.headerElement).classList.remove('lb-header--hide')
+        qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
         this.isOpen = false;
         enableBodyScroll(this.ui.main);
         window.getCustomScrollbar.start()
@@ -134,7 +135,6 @@ class MenuMobile extends Component {
                 this.stack = [];
                 this.slide();
                 this.updateNavigation()
-                qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
             }
         })
     }
