@@ -25,7 +25,8 @@ const dataRightInfobox = {
             infoboxPosY: 'center',
             infobox: {
                 tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
-                title: 'Favorisce la crescita<br>fisiologica dei capelli',
+                title: 'Favorisce la crescita',
+                paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
                 cta: {
                     url: '#',
                     title: 'Scopri la linea',
@@ -47,7 +48,30 @@ const dataRightInfobox = {
             infoboxPosY: 'center',
             infobox: {
                 tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
-                title: 'Favorisce la crescita<br>fisiologica dei capelli',
+                title: 'Fisiologica dei Capelli',
+                paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
+                cta: {
+                    url: '#',
+                    title: 'Scopri la linea',
+                    variants: ['secondary']
+                }
+            },
+            container: false,
+            variants: ['large']
+        },
+        {
+            images: {
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
+            },
+            infoboxPosX: 'right',
+            infoboxPosY: 'center',
+            infobox: {
+                tagline: 'Lorem Ipsum Dolor',
+                title: 'Lorem Ipsum',
                 paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
                 cta: {
                     url: '#',

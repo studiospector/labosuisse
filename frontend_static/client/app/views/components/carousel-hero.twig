@@ -1,8 +1,9 @@
 <section class="carousel-hero swiper js-carousel-hero">
 	<div class="swiper-wrapper">
 		{% for slide in slides|default([]) %}
+            {% set slide = slide|merge({noReveal: true}) %}
 			<div class="carousel-hero__slide swiper-slide">
-				{% include '@PathViews/components/hero.twig' with slide|merge({animationType: 'intro'}) only %}
+				{% include '@PathViews/components/hero.twig' with slide only %}
 			</div>
 		{% endfor %}
 	</div>

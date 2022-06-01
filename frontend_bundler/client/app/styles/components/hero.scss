@@ -26,10 +26,6 @@
         display: flex;
         z-index: 1;
 
-        > .h-100 {
-            height: auto;
-        }
-
         @include mq($until: md) {
             height: 100%;
             flex: 1 1 100%;
@@ -74,11 +70,19 @@
     &--large {
         min-height: 700px;
         max-height: 700px;
+
+        @include mq($until: md) {
+            min-height: 460px;
+        }
     }
 
     &--medium {
         min-height: 520px;
         max-height: 520px;
+
+        @include mq($until: md) {
+            min-height: 460px;
+        }
     }
 
     &--small {
