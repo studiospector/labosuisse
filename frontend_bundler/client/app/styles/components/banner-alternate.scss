@@ -69,6 +69,10 @@
     }
 
     &--infobox-right {
+        @include mq($until: md) {
+            align-items: center;
+        }
+
         .banner-alternate {
             &__img {
                 order: 0;
@@ -102,6 +106,12 @@
                     
                         &__paragraph {
                             font-size: rem(13);
+                        }
+
+                        &__cta {
+                            .button {
+                                margin-top: 20px;
+                            }
                         }
                     }
                 }
@@ -163,6 +173,10 @@
 
     &--infobox-bottom {
         align-items: flex-end;
+        
+        @include mq($until: md) {
+            align-items: center;
+        }
     }
 
     &--image-big {
@@ -171,10 +185,18 @@
         .banner-alternate {
             &__infobox {
                 flex: 0 1 30%;
+
+                @include mq($until: md) {
+                    flex: 1 1 100%;
+                }
             }
 
             &__img {
                 flex: 0 1 70%;
+
+                @include mq($until: md) {
+                    flex: 1 1 100%;
+                }
 
                 .lb-picture-wrapper,
                 .lb-picture {

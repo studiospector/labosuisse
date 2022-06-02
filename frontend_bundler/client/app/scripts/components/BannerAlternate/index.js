@@ -36,8 +36,10 @@ class BannerAlternate extends Component {
         if (e.matches) {
             let textWrapHeight = 0, ctaWrapHeight = 0
 
-            if (this.ui.infoboxParagraph && this.ui.infoboxCTA) {
-                this.ui.infoboxCTA.insertAdjacentElement('afterbegin', this.ui.infoboxParagraph)
+            if (this.ui.infoboxParagraph.length > 0 && this.ui.infoboxCTA) {
+                this.ui.infoboxParagraph.reverse().forEach(el => {
+                    this.ui.infoboxCTA.insertAdjacentElement('afterbegin', el)
+                })
             }
 
             if (this.ui.infoboxText) {
@@ -55,7 +57,9 @@ class BannerAlternate extends Component {
             }
         } else {
             if (this.ui.infoboxParagraph.length > 0 && this.ui.infoboxText) {
-                this.ui.infoboxText.insertAdjacentElement('afterend', this.ui.infoboxParagraph[this.ui.infoboxParagraph.length - 1])
+                this.ui.infoboxParagraph.reverse().forEach(el => {
+                    this.ui.infoboxText.insertAdjacentElement('afterend', el)
+                })
             }
             this.ui.image.style.marginTop = `0px`
             this.ui.image.style.marginBottom = `0px`
