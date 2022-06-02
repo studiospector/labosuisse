@@ -11,7 +11,7 @@
 
     {# Intro page #}
     {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# Store locator #}
     <div class="lb-store-locator caffeina-sl js-store-locator js-caffeina-sl">

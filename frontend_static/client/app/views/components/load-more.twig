@@ -1,5 +1,5 @@
 <div class="lb-load-more lb-load-more--hide js-load-more"{{ posts_per_page ? ' data-posts-per-page="' ~ posts_per_page ~ '"' : '' }}>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
     {% include '@PathViews/components/button.twig' with {
         title: label,
         variants: ['primary'],

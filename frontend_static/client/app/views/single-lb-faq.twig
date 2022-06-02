@@ -23,7 +23,7 @@
             {% endif %}
         </div>
     </div>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# FAQs Accordion #}
     {% if faq %}
@@ -38,7 +38,7 @@
 
     {# FAQs Info #}
     {% if infobox %}
-        <hr class="lb-separator lb-separator--big" data-variant="big">
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
         <div class="container text-center">
             {% include '@PathViews/components/infobox.twig' with infobox only %}
         </div>

@@ -10,7 +10,7 @@
     {% endif %}
 
     {# Info #}
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
     <div class="container text-center">
         <div class="infobox">
             {% if title %}
@@ -18,7 +18,7 @@
             {% endif %}
         </div>
     </div>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     <div class="single-lb-job__info container">
         <div class="row">
@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# Company #}
     <div class="single-lb-job__company container">
@@ -44,7 +44,7 @@
             <div class="col-12 col-lg-8 offset-lg-2">
                 <h6>{{ company.title }}</h6>
                 <p class="single-lb-job__section-content">{{ company.content }}</p>
-                <hr class="lb-separator lb-separator--big lb-separator--line" data-variant="big">
+                {% include '@PathViews/components/separator.twig' with {variants: ['big', 'line']} only %}
             </div>
         </div>
     </div>
@@ -63,7 +63,7 @@
     <div class="single-lb-job__form container">
         <div class="row">
             <div class="col-12 col-lg-8 offset-lg-2">
-                <hr class="lb-separator lb-separator--big lb-separator--line" data-variant="big">
+                {% include '@PathViews/components/separator.twig' with {variants: ['big', 'line']} only %}
                 <h4 class="infobox__subtitle text-center">{{ application.title }}</h4>
                 <p class="single-lb-job__section-content">{{ application.content }}</p>
                 {% if application.shortcode %}
