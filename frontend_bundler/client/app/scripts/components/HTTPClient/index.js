@@ -3,6 +3,7 @@ import axios from 'axios'
 const axiosClient = axios.create({
     baseURL: window.location.origin,
     headers: {
+        // 'Authorization': `Bearer ${AUTH_TOKEN}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }
