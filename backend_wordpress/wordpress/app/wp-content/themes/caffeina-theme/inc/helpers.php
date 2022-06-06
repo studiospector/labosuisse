@@ -340,7 +340,9 @@ function lb_newsletter_nav()
             ],
             [
                 'type' => 'html',
-                'data' => do_shortcode($footer_newsletter_options['lb_footer_newsletter_shortcode'])
+                'data' => (isset($footer_newsletter_options['lb_footer_newsletter_shortcode']))
+                    ? do_shortcode($footer_newsletter_options['lb_footer_newsletter_shortcode'])
+                    : null
             ]
         ]
     ];
