@@ -6,8 +6,10 @@ use Timber\Timber;
 $options = (new Option())->getStoresOptions();
 
 $context = [
-    'title' => $options['title'],
-    'description' => $options['description'],
+    'page_intro' => [
+        'title' => $options['title'],
+        'description' => $options['description'],
+    ],
     'store_locator' => [
         'map_country' => 'IT',
         'map_lang' => 'it',

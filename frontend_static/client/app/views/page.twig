@@ -1,7 +1,7 @@
 {% extends '@PathViews/templates/_default.twig' %}
 
 {% set bodyClass = 'lb-page' %}
-{% set showPrefooter = true %}
+{% set prefooterConfig = {show: true, line: true} %}
 
 {% block main %}
 
@@ -12,15 +12,11 @@
 
     {# Intro page #}
     {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# Content #}
     <div class="lb-post-elements-formatted">
         {{ content|raw }}
-    </div>
-
-    <div class="container">
-        <hr class="lb-separator lb-separator--big lb-separator--line" data-variant="big">
     </div>
 
 {% endblock %}

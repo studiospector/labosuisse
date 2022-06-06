@@ -12,7 +12,7 @@
     {# Faetured image #}
     {% if hero %}
         {% include '@PathViews/components/hero.twig' with hero only %}
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
     {% endif %}
 
     {# Content #}
@@ -23,7 +23,7 @@
             </div>
         </div>
     </div>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# Form #}
     {% if form_shortcode %}

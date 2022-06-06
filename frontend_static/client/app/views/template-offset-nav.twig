@@ -12,14 +12,14 @@
     {# Featured image #}
     {% if featured_image %}
         <div class="lb-single-post__featured-image">
-            {% include '@PathViews/components/hero.twig' with featured_image only %}
+            {% include '@PathViews/components/hero.twig' with featured_image|merge({animationType: 'intro'}) only %}
         </div>
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
     {% endif %}
 
     {# Intro page #}
     {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    <hr class="lb-separator lb-separator--big" data-variant="big">
+    {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
 
     {# Content #}
     {% if content %}

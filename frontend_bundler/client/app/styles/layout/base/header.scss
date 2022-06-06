@@ -17,7 +17,8 @@
             &__top {
                 padding-top: 30px;
                 padding-bottom: 30px;
-
+                transition: $transition__base-1;
+                
                 @include mq($until: lg) {
                     box-shadow: 0px 4px 8px rgb(0 0 0 / 5%);
                     padding-top: 20px;
@@ -192,55 +193,145 @@
             .custom-input {
                 width: 100%;
             }
+
+            .lb-search-form {
+                width: 100%;
+            }
         }
     }
 
 
     &__hamburger {
-        width: rem(18);
-        height: rem(18);
+        width: 20px;
+        height: 14px;
+        display: block;
         position: relative;
+        cursor: pointer;
 
-        // &::after {
-        //     content: '';
-        //     width: rem(18);
-        //     height: rem(18);
-        //     position: absolute;
-        //     top: 4px;
-        //     border: 1px solid map-get($colors, "black");
-        //     border-radius: 100%;
-        //     opacity: 0;
-        //     transition: all .2s ease-in-out;
-        // }
-    
-        span {
-            height: 1px;
+        &__wrap {
             position: absolute;
-            right: 0;
             left: 0;
-            background-color: currentColor;
-        }
-    
-        span:first-child {
-            top: 50%;
-        }
-
-        span:nth-child(2) {
-            transition: all .2s ease-in-out;
-            opacity: 1;
-        }
-    
-        span:last-child {
+            top: 0;
+            right: 0;
             bottom: 0;
+            transition: transform .5s ease;
+
+            span {
+                display: block;
+                position: absolute;
+                left: 0;
+                right: 0;
+
+                &:first-child {
+                    top: 0;
+
+                    &:before,
+                    &:after {
+                        top: 0;
+                    }
+                }
+
+                &:last-child {
+                    bottom: 0;
+
+                    &:before,
+                    &:after {
+                        bottom: 0;
+                    }
+                }
+
+                &:before,
+                &:after {
+                    content: '';
+                    width: 47%;
+                    height: 1px;
+                    display: block;
+                    position: absolute;
+                    background: map-get($colors, "black");
+                    backface-visibility: hidden;
+                    -webkit-backface-visibility: hidden;
+                    transition: transform .5s ease, background .4s ease;
+                }
+
+                &:before {
+                    left: 0;
+                    transform-origin: 0 50%;
+                    transform: translate(1px, 0) scaleX(1.1);
+                }
+
+                &:after {
+                    right: 0;
+                    transform-origin: 100% 50%;
+                    transform: translate(-1px, 0) scaleX(1.1);
+                }
+            }
+        }
+        
+        svg {
+            width: 44px;
+            height: 44px;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -22px 0 0 -10px;
+            fill: none;
+            stroke: map-get($colors, "black");
+            stroke-width: 1px;
+            stroke-dasharray: 0 82 9 0;
+            stroke-dashoffset: 82;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            transform-origin: 50% 50%;
+            transform: scale(1);
+            transition: stroke-dashoffset .5s ease, stroke-dasharray .6s ease, transform .5s ease, stroke .4s ease;
+            
+            &:nth-child(3) {
+                transform: rotate(180deg) scale(1);
+            }
         }
 
         &--is-open {
-            // &::after {
-            //     opacity: 1;
-            // }
+            .lb-header__hamburger__wrap {
+                transform: rotate(90deg) scale(0.6);
 
-            span:nth-child(2) {
-                opacity: 0;
+                span {
+                    &:before,
+                    &:after {
+                        background: map-get($colors, "black");
+                    }
+
+                    &:first-child {
+                        &:before {
+                            transform: rotate(45deg) translate(2.2px, -3px) scaleX(1.05);
+                        }
+
+                        &:after {
+                            transform: rotate(-45deg) translate(-2.2px, -3px) scaleX(1.05);
+                        }
+                    }
+
+                    &:last-child {
+                        &:before {
+                            transform: rotate(-45deg) translate(2.2px, 3px) scaleX(1.05);
+                        }
+
+                        &:after {
+                            transform: rotate(45deg) translate(-2.2px, 3px) scaleX(1.05);
+                        }
+                    }
+                }
+            }
+
+            svg {
+                stroke-dashoffset: 62;
+                stroke-dasharray: 0 71 62 82.801;
+                transform: rotate(90deg);
+                stroke: map-get($colors, "black");
+
+                &:nth-child(3) {
+                    transform: rotate(270deg);
+                }
             }
         }
     }

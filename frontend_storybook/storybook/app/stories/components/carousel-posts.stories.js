@@ -8,6 +8,7 @@ import Component from '@okiba/component'
 import renderCarouselPosts from '../../views/components/carousel-posts.twig'
 
 import CarouselPosts from '../../scripts/components/CarouselPosts'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataFull = {
     leftCard: {
@@ -263,7 +264,12 @@ storiesOf('Components|Carousel Posts', module)
                     {
                         selector: '.js-carousel-posts',
                         type: CarouselPosts
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

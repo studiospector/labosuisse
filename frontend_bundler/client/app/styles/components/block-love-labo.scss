@@ -10,11 +10,18 @@
         }
 
         &__grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            column-gap: 30px;
             position: relative;
         }
 
         &__img {
+            width: 160px;
+            
             .lb-picture {
+                width: 160px;
                 height: 160px;
                 position: relative;
             }
@@ -40,7 +47,7 @@
     &--full {
         .lovelabo {
             &__grid {
-                .row {
+                // .row {
                     @include mq($until: md) {
                         flex-wrap: nowrap;
                         overflow-x: scroll;
@@ -48,7 +55,7 @@
                         touch-action: pan-x;
                         cursor: grab;
                     }
-                }
+                // }
             }
 
             &__img {

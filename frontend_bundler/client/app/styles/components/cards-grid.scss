@@ -1,13 +1,13 @@
 .lb-cards-grid {
     &__card {
-        margin-bottom: 30px;
+        margin-bottom: 60px;
     }
     
     &--ordered {
         .lb-cards-grid {
             &__row {
                 &:not(:first-child) {
-                    margin-top: 80px;
+                    margin-top: 20px;
                 }
             }
         }

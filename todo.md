@@ -76,8 +76,8 @@ BUGFIX
 - √ caricamento store locator
 - √ fix card filtrate
 
-- refactor con template archivi
-- refactor componente separatore
+- √ refactor template archivi
+- √ refactor componente separatore
 - refactor api call con autenticazione e url da .env
 - √ refactor classi store locator base
 
@@ -87,7 +87,9 @@ BUGFIX
 - √ gestione ricerca store locator dal campo nel footer
 - √ KPI
 
-- animazioni
+- √ animazioni
+- √ fix cards grid spaces
+- √ fix prefooter spaces + line
 
 
 

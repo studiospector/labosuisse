@@ -8,14 +8,15 @@ import Component from '@okiba/component'
 import renderBannerAlternate from '../../views/components/banner-alternate.twig'
 
 import BannerAlternate from '../../scripts/components/BannerAlternate'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataRightInfoboxFullHeight = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -35,11 +36,11 @@ const dataRightInfoboxFullHeight = {
 
 const dataLeftInfoboxFullHeight = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         tagline: 'LOREM IPSUM',
@@ -59,11 +60,11 @@ const dataLeftInfoboxFullHeight = {
 
 const dataRightInfoboxCentered = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
@@ -76,11 +77,11 @@ const dataRightInfoboxCentered = {
 
 const dataLeftInfoboxCentered = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/570x400',
+        lg: 'https://via.placeholder.com/570x400',
+        md: 'https://via.placeholder.com/570x400',
+        sm: 'https://via.placeholder.com/570x400',
+        xs: 'https://via.placeholder.com/570x400'
     },
     infobox: {
         subtitle: 'Lorem ipsum dolor sit amet, consectetur',
@@ -93,35 +94,11 @@ const dataLeftInfoboxCentered = {
 
 const dataRightImageBig = {
     images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
-    },
-    infobox: {
-        tagline: 'Lorem Ipsum',
-        subtitle: 'Linea Solari',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        paragraph_small: 'Promozione valida, nei punti vendita aderenti. Fino a esaurimento scorte',
-        cta: {
-            url: '#',
-            title: 'Scopri di più',
-            variants: ['tertiary']
-        },
-        variants: ['alternate'],
-    },
-    imageBig: true,
-    variants: ['infobox-left', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
-}
-
-const dataLeftImageBig = {
-    images: {
-        original: '/assets/images/banner-img.jpg',
-        lg: '/assets/images/banner-img.jpg',
-        md: '/assets/images/banner-img.jpg',
-        sm: '/assets/images/banner-img.jpg',
-        xs: '/assets/images/banner-img.jpg'
+        original: 'https://via.placeholder.com/800x560',
+        lg: 'https://via.placeholder.com/800x560',
+        md: 'https://via.placeholder.com/800x560',
+        sm: 'https://via.placeholder.com/800x560',
+        xs: 'https://via.placeholder.com/800x560'
     },
     infobox: {
         tagline: 'Lorem Ipsum',
@@ -139,6 +116,30 @@ const dataLeftImageBig = {
     variants: ['infobox-right', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
+const dataLeftImageBig = {
+    images: {
+        original: 'https://via.placeholder.com/800x560',
+        lg: 'https://via.placeholder.com/800x560',
+        md: 'https://via.placeholder.com/800x560',
+        sm: 'https://via.placeholder.com/800x560',
+        xs: 'https://via.placeholder.com/800x560'
+    },
+    infobox: {
+        tagline: 'Lorem Ipsum',
+        subtitle: 'Linea Solari',
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        paragraph_small: 'Promozione valida, nei punti vendita aderenti. Fino a esaurimento scorte',
+        cta: {
+            url: '#',
+            title: 'Scopri di più',
+            variants: ['tertiary']
+        },
+        variants: ['alternate'],
+    },
+    imageBig: true,
+    variants: ['infobox-left', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
+}
+
 storiesOf('Components|Banner Alternate', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -148,7 +149,12 @@ storiesOf('Components|Banner Alternate', module)
                     {
                         selector: '.js-banner-alternate',
                         type: BannerAlternate
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

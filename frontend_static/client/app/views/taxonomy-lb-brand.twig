@@ -11,13 +11,13 @@
 
     {# Info #}
     {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     {# Numbers of posts #}
     <div class="container">
         <div class="lb-posts-count">{{ num_posts }}</div>
     </div>
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     {# Posts Grig #}
     <div class="taxonomy-lb-brand__grid container">

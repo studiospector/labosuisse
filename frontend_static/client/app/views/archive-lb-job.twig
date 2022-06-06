@@ -11,7 +11,7 @@
 
     {# Intro page #}
     {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# Filters #}
     {% if filters|length > 0 %}
@@ -19,7 +19,7 @@
             <div class="row">
                 <div class="col-12 col-lg-8 offset-lg-2">
                     {% include '@PathViews/components/filters.twig' with filters only %}
-                    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+                    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
                 </div>
             </div>
         </div>
@@ -46,7 +46,7 @@
 
     {# Info #}
     {% if infobox %}
-        <hr class="lb-separator lb-separator--big" data-variant="big">
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
         <div class="container text-center">
             {% include '@PathViews/components/infobox.twig' with infobox only %}
         </div>

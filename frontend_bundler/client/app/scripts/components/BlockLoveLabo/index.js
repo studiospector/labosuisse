@@ -1,7 +1,7 @@
 import Component from '@okiba/component'
 
 const ui = {
-    scroller: '.lovelabo__grid .row',
+    scroller: '.lovelabo__grid',
     items: {
         selector: '.lovelabo__grid .lovelabo__img',
         asArray: true

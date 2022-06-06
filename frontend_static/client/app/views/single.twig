@@ -12,14 +12,14 @@
     {# Featured image #}
     {% if featured_image %}
         <div class="lb-single-post__featured-image">
-            {% include '@PathViews/components/hero.twig' with featured_image only %}
+            {% include '@PathViews/components/hero.twig' with featured_image|merge({animationType: 'intro'}) only %}
         </div>
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
     {% endif %}
 
     {# Intro #}
     {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     {# Info #}
     <div class="lb-single-post__info">
@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     {# Content #}
     <div class="lb-single-post__content lb-post-elements-formatted">

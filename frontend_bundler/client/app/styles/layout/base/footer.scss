@@ -1,18 +1,35 @@
-.prefooter {
+footer {
+    z-index: 1;
+}
+
+
+
+.lb-prefooter {
     background-color: map-get($colors, "white");
     padding-top: 100px;
 
-    @include mq($until: md) {
-        padding-top: 40px;
-        padding-bottom: 0;
+    &--line {
+        padding-top: 0;
+
+        @include mq($until: md) {
+            padding-top: 100px;
+        }
+
+        .lb-prefooter {
+            &__desktop {
+                margin-top: 100px;
+                padding-top: 100px;
+                border-top: 1px solid map-get($colors, "grey-2");
+            }
+        }
     }
 
-    &--desktop {
+    &__desktop {
         @include mq($until: md) {
             display: none;
         }
 
-        .prefooter__box {
+        .lb-prefooter__box {
             &:first-child {
                 padding-right: 60px;
             }
@@ -38,7 +55,7 @@
         }
     }
 
-    &--mobile {
+    &__mobile {
         @include mq($from: md) {
             display: none;
         }
@@ -67,12 +84,6 @@
             }
         }
     }
-}
-
-
-
-footer {
-    z-index: 1;
 }
 
 
