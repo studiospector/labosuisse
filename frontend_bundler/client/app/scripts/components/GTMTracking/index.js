@@ -6,13 +6,16 @@ class GTMTracking extends Component {
     constructor({el}) {
         super({el})
 
+        this.eventType = this.el.dataset.gaEventType ? this.el.dataset.gaEventType : 'local'
         this.event = this.el.dataset.gaEvent
         this.eventName = this.el.dataset.gaEventName
         this.eventValue = this.el.dataset.gaEventValue
 
-        on(this.el, this.event, this.traceEvent)
-
-        this.traceMailchimp()
+        if (this.eventType == 'local') {
+            on(this.el, this.event, this.traceEvent)
+        } else if (this.eventType == 'global') {
+            this.traceGlobalEvents()
+        }
     }
 
     traceEvent = (ev) => {
@@ -25,7 +28,7 @@ class GTMTracking extends Component {
         dataLayer.push(data)
     }
 
-    traceMailchimp = () => {
+    traceGlobalEvents = () => {
         if (typeof mc4wp !== 'undefined') {
             mc4wp.forms.on('subscribed', (form) => {
                 dataLayer.push({

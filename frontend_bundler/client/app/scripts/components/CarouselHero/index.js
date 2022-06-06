@@ -116,7 +116,9 @@ class CarouselHero extends Component {
         // Reset animations
         gsap.set(slidesNextPrevImages, { opacity: 0 })
         gsap.set(slidesNextPrevText, { autoAlpha: 0 })
-        gsap.set(slidesCTA, { autoAlpha: 0 })
+        if (slidesCTA.length > 0) {
+            gsap.set(slidesCTA, { autoAlpha: 0 })
+        }
     }
 
     onDestroy() {

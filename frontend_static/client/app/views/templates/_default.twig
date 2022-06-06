@@ -47,7 +47,7 @@
     </head>
     <body {{ fn('body_class', bodyClass ~ ' is-loading') }}>
 
-        <div class="js-scrollbar" data-scroll-container>
+        <div class="js-scrollbar js-gtm-tracking" data-ga-event-type="global" data-scroll-container>
             <!-- Header -->
             {% block header %}
                 {% set header = fn('lb_header') %}
