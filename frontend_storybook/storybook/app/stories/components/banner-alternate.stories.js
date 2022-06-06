@@ -113,7 +113,7 @@ const dataRightImageBig = {
         variants: ['alternate'],
     },
     imageBig: true,
-    variants: ['infobox-left', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
+    variants: ['infobox-right', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
 const dataLeftImageBig = {
@@ -137,7 +137,7 @@ const dataLeftImageBig = {
         variants: ['alternate'],
     },
     imageBig: true,
-    variants: ['infobox-right', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
+    variants: ['infobox-left', 'infobox-bottom'], // infobox-left, infobox-right AND infobox-fullheight, infobox-centered, infobox-bottom
 }
 
 storiesOf('Components|Banner Alternate', module)

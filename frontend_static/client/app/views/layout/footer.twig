@@ -1,23 +1,25 @@
 <footer data-scroll-section>
-    {% if showPrefooter %}
-        <div class="prefooter">
-            <div class="prefooter--desktop container">
-                <div class="row">
-                    <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_1 only %}
-                    </div>
-                    <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
-                        <form action="{{ data.prefooter.block_2.form.action }}" method="get" class="{{ data.prefooter.block_2.form.class }}" {{ data.prefooter.block_2.form.attributes ? ' ' ~ data.prefooter.block_2.form.attributes|join(' ') : '' }}>
-                            {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
-                        </form>
-                    </div>
-                    <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
+    {% if prefooterConfig.show %}
+        <div class="lb-prefooter{{ prefooterConfig.line ? ' lb-prefooter--line' : '' }}">
+            <div class="container">
+                <div class="lb-prefooter__desktop">
+                    <div class="row">
+                        <div class="lb-prefooter__box col-12 col-md-4">
+                            {% include '@PathViews/components/infobox.twig' with data.prefooter.block_1 only %}
+                        </div>
+                        <div class="lb-prefooter__box col-12 col-md-4">
+                            {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
+                            <form action="{{ data.prefooter.block_2.form.action }}" method="get" class="{{ data.prefooter.block_2.form.class }}" {{ data.prefooter.block_2.form.attributes ? ' ' ~ data.prefooter.block_2.form.attributes|join(' ') : '' }}>
+                                {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
+                            </form>
+                        </div>
+                        <div class="lb-prefooter__box col-12 col-md-4">
+                            {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="prefooter--mobile">
+            <div class="lb-prefooter__mobile">
                 {% include '@PathViews/components/accordion.twig' with {
                     items: [
                         {

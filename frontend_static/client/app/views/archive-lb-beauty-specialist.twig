@@ -10,7 +10,7 @@
     {% endif %}
 
     {{ content|raw }}
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     <div class="container">
         <div class="row">

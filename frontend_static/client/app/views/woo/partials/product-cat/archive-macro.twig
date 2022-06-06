@@ -22,7 +22,7 @@
         animationType: 'intro',
         variants: ['medium']
     } only %}
-    <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
 
     <div class="lb-product-cat__grid container">
         <div class="row{{ terms|length <= 3 ? ' justify-center' : '' }}">

@@ -8,13 +8,13 @@
     {% if fn('function_exists', 'yoast_breadcrumb') %}
         {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
     {% endif %}
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     {# Display results #}
     {% if num_res > 0 and search_val %}
         <div class="container">
             <div class="lb-search-page__res-text infobox__title h3">{{ res_text }} <span>&ldquo;{{ search_val }}&rdquo;</span></div>
-            <hr class="lb-separator lb-separator--small" data-variant="small">
+            {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
             {% include '@PathViews/components/tabs.twig' with {
                 no_results: no_results_tab,
                 tabs: items,

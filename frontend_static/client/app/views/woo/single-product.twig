@@ -2,7 +2,7 @@
 
 {% set bodyClass = 'single-product' %}
 {% set mainClass = 'js-lb-product' %}
-{% set showPrefooter = true %} 
+{% set prefooterConfig = {show: true, line: false} %}
 
 
 {% block header %}
@@ -47,42 +47,42 @@
 
     <div class="js-single-product-details"></div>
 
-    <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
 
     {% if hero %}
         {% include '@PathViews/components/hero.twig' with hero only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if offset_navs %}
         {% include '@PathViews/components/block-offset-navs.twig' with offset_navs only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if banner_alternate %}
         {% include '@PathViews/components/banner-alternate.twig' with banner_alternate only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if two_cards %}
         {% include '@PathViews/components/block-launch-two-cards.twig' with two_cards|merge({offsetNavs: offset_navs.items_two_cards}) only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if image_and_card %}
         {% include '@PathViews/components/block-image-card.twig' with image_and_card|merge({offsetNav: offset_navs.items.technology}) only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if number_list %}
         {% include '@PathViews/components/number-list-with-image.twig' with number_list only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if miniatures %}
         {% include '@PathViews/components/block-love-labo.twig' with miniatures only %}
         {% if routine %}
-            <hr class="lb-separator lb-separator--big" data-variant="big" />
+            {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
         {% endif %}
     {% endif %}
 

@@ -13,6 +13,10 @@
         overflow: auto;
         overflow-x: hidden;
 
+        @include mq($until: lg) {
+            width: 100%;
+        }
+
         &__results {
             padding: 7.5px 15px;
             margin: 0;
@@ -31,6 +35,7 @@
             &__text {
                 font-size: rem(13);
                 font-weight: 300;
+                
                 mark {
                     font-weight: 800;
                     background-color: transparent;

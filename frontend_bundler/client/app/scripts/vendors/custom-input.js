@@ -68,20 +68,29 @@ class CustomInput extends BasicElement {
             // SEARCH
             this.currInputType = this.cs[i].getAttribute('type')
             if (this.currInputType == 'search') {
-                if (this.inputVariant == 'primary' || this.inputVariant == 'tertiary') {
-                    this.addIconPrev('close')
+                this.mainContainer.classList.add('custom-input--icon-prev-hide')
 
-                    if (this.inputIconPrev) {
-                        this.inputIconPrev.addEventListener('click', (ev) => {
-                            ev.preventDefault()
-                            this.currInputElem.value = null
-                            this.onFocus(this.currInputElem.value)
-                        })
-                    }
+                this.addIconPrev('close')
+
+                if (this.inputIconPrev) {
+                    this.cs[i].addEventListener('input', (ev) => {
+                        if (ev.target.value.length <= 0) {
+                            this.mainContainer.classList.add('custom-input--icon-prev-hide')
+                        } else {
+                            this.mainContainer.classList.remove('custom-input--icon-prev-hide')
+                        }
+                    })
+                    this.inputIconPrev.addEventListener('click', (ev) => {
+                        ev.preventDefault()
+                        this.currInputElem.value = null
+                        this.onFocus(this.currInputElem.value)
+                        this.mainContainer.classList.add('custom-input--icon-prev-hide')
+                    })
                 }
 
                 // Add Icon next
-                const buttonTypeNext = this.cs[i].getAttribute('data-button-type-next')
+                let buttonTypeNext = this.cs[i].getAttribute('data-button-type-next')
+                buttonTypeNext = buttonTypeNext ? buttonTypeNext : 'button'
                 this.addIconNext('icon-search', buttonTypeNext)
             }
 

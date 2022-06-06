@@ -45,6 +45,7 @@ class MenuFooter
                 'action' => get_post_type_archive_link('lb-store'),
                 'input' => [
                     'type' => 'search',
+                    'id' => "lb-search-val-footer",
                     'name' => "lb-search-val",
                     'label' => $search['label'] ?? null,
                     'disabled' => false,
@@ -105,6 +106,7 @@ class MenuFooter
                 'action' => get_post_type_archive_link('lb-store'),
                 'input' => [
                     'type' => 'search',
+                    'id' => "lb-search-val-prefooter",
                     'name' => "lb-search-val",
                     'label' => $options['lb_prefooter_center_block_label'] ?? null,
                     'disabled' => false,

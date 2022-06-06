@@ -1,17 +1,13 @@
 {% set classes = [] %}
 {% set dataVariants = [] %}
 {% if container %}
-    {% set variants = variants|merge(['container']) %}
+	{% set variants = variants|merge(['container']) %}
 {% endif %}
 {% for variant in variants|default([]) %}
-  {% set classes = classes|merge(['lb-separator--' ~ variant]) %}
-  {% set dataVariants = dataVariants|merge(['data-variant="' ~ variant ~ '"']) %}
+	{% set classes = classes|merge(['lb-separator--' ~ variant]) %}
 {% endfor %}
 {% if class %}
-  {% set classes = classes|merge([class]) %}
+	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-<hr
-    class="lb-separator{{ classes|length ? ' ' ~ classes|join(' ') : '' }}" 
-    {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
-/>
+<hr class="lb-separator{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"/>

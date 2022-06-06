@@ -5,13 +5,13 @@
 {% block main %}
 
     {# Content #}
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
     {{ content|raw }}
 
     {# Filters #}
     {% if filters|length > 0 %}
         {% include '@PathViews/components/filters.twig' with filters only %}
-        <hr class="lb-separator lb-separator--medium" data-variant="medium">
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
     {% endif %}
 
     {# Posts Grig #}
