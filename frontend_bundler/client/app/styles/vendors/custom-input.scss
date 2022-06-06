@@ -41,46 +41,66 @@
     }
 
     .custom-input-label {
-        margin-bottom: 5px;
-        margin-left: 17px;
-        font-size: rem(11);
-        color: map-get($colors, "grey-3");
+        position: absolute;
+        top: 50%;
+        margin-bottom: 0;
+        margin-left: 16.5px;
+        font-size: rem(13);
+        line-height: 1;
+        color: map-get($colors, "black");
+        cursor: text;
+        user-select: none;
+        z-index: 1;
+        transform: translateY(-50%);
+        transition: $transition__base-1;
+    }
+
+    &.is-focus {
+        input {
+            padding-top: 25px;
+            padding-bottom: 8px;
+        }
+
+        .custom-input-label {
+            font-size: rem(11);
+            margin-top: 10px;
+            top: 0;
+            transform: translateY(0);
+            transition: $transition__base-1;
+        }
     }
 
     &__icon {
-        height: 100%;
+        width: 42px;
+        height: 42px;
+        display: flex;
+        justify-content: center;
         position: absolute;
         cursor: pointer;
         z-index: 1;
 
-        .lb-icon {
-            height: 100%;
-            display: flex;
-            align-items: center;
+        .button {
+            width: 100%;
+            justify-content: center;
+            padding: 0;
+            border-radius: 3px;
+
+            .lb-icon {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                margin: 0;
+            }
         }
 
         &--next {
-            right: 0;
-            margin-right: 16.5px;
+            right: 5px;
         }
 
         &--prev {
             left: 0;
-            margin-left: 16.5px;
         }
     }
-
-    &--icon-prev {
-        input {
-            padding-left: 50px;
-        }
-
-        .custom-input-label {
-            margin-left: 50px !important;
-        }
-    }
-
-
 
     &--disabled {
         opacity: 0.5;
@@ -88,57 +108,19 @@
         cursor: not-allowed;
     }
 
-
-
-    &--primary,
-    &--secondary,
-    &--tertiary {
-        .custom-input-label {
-            position: absolute;
-            top: 50%;
-            margin-bottom: 0;
-            margin-left: 17px;
-            font-size: rem(13);
-            line-height: 1;
-            color: map-get($colors, "black");
-            cursor: text;
-            user-select: none;
-            z-index: 1;
-            transform: translateY(-50%);
-            transition: $transition__base-1;
-        }
-
-        &.is-focus {
-            input {
-                padding-top: 25px;
-                padding-bottom: 8px;
-            }
-
-            .custom-input-label {
-                font-size: rem(11);
-                margin-top: 10px;
-                top: 0;
-                transform: translateY(0);
-                transition: $transition__base-1;
-            }
-        }
-    }
-
     &--secondary {
+        input {
+            background-color: transparent;
+            border: 1px solid map-get($colors, "grey-2");
+        }
+        
         .custom-input-label {
             font-style: italic;
             color: map-get($colors, "grey-3");
         }
 
-        input {
-            background-color: transparent;
-            border: 1px solid map-get($colors, "grey-2");
-        }
-
         .custom-input {
             &__icon--next {
-                margin-right: 16.5px;
-                
                 .button {
                     background-color: transparent;
                     border: 0;
@@ -151,22 +133,28 @@
         }
     }
 
-    &--secondary,
-    &--tertiary {
-        .custom-input {
-            &__icon--next {
-                display: flex;
-                margin: 0;
+    &--icon-prev {
+        input {
+            padding-left: 42px;
+        }
 
-                .button {
-                    border-radius: 3px;
-                    margin: 5px;
-                    padding: 13px;
+        .custom-input-label {
+            margin-left: 42px;
+        }
+    }
 
-                    .lb-icon {
-                        margin: 0;
-                    }
-                }
+    &--icon-prev-hide {
+        input {
+            padding-left: 16.5px;
+        }
+
+        .custom-input-label {
+            margin-left: 16.5px;
+        }
+
+        .custom-input__icon {
+            &--prev {
+                width: 0;
             }
         }
     }
