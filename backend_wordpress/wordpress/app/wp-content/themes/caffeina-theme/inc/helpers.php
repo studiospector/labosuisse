@@ -299,6 +299,7 @@ function lb_header()
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'mobile_search' => [
             'type' => 'search',
+            'id' => 'lb-search-header-mobile',
             'name' => 'search',
             'label' => __('Cerca un prodotto, una linea...', 'labo-suisse-theme'),
             'disabled' => false,
@@ -380,4 +381,17 @@ function lb_recursive_array_search($needle, $haystack)
         }
     }
     return false;
+}
+
+/**
+ * Get unique ID
+ */
+function lb_get_unique_id($prefix = '')
+{
+    static $id_counter = 0;
+
+    if (function_exists('wp_unique_id'))
+        return wp_unique_id($prefix);
+
+    return $prefix . (string) ++$id_counter;
 }
