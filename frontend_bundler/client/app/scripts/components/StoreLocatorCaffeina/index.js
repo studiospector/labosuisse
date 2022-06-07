@@ -694,7 +694,7 @@ class StoreLocatorCaffeina extends Component {
                 //     createMarker(results[i]);
                 // }
                 this.map.setCenter(results[0].geometry.location)
-                this.map.setZoom(9)
+                this.map.setZoom(12)
             }
         })
     }
@@ -748,7 +748,7 @@ class StoreLocatorCaffeina extends Component {
                         animation: this.google.maps.Animation.DROP,
                     })
                     this.map.setCenter(pos)
-                    this.map.setZoom(9)
+                    this.map.setZoom(12)
                     // this.map.markers.push(marker)
 
                     // Remove loader
