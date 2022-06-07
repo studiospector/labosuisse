@@ -35,11 +35,15 @@ class LBCustomSelect extends Component {
     }
 
     disableLocomotive = (ev) => {
-        window.getCustomScrollbar.stop()
+        if (window.getCustomScrollbar) {
+            window.getCustomScrollbar.stop()
+        }
     }
 
     enableLocomotive = (ev) => {
-        window.getCustomScrollbar.start()
+        if (window.getCustomScrollbar) {
+            window.getCustomScrollbar.start()
+        }
     }
 }
 
