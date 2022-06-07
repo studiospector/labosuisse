@@ -1,0 +1,15 @@
+body.lb-is-shop {
+    .lb-header {
+        &__top {
+            @include mq($until: md) {
+                border-top: 30px solid map-get($colors, "secondary");
+            }
+        }
+    }
+
+    .lb-menu {
+        &--mobile {
+            top: 103px;
+        }
+    }
+}
