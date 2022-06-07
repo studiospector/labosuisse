@@ -35,6 +35,7 @@ class Filters extends Component {
         this.cardTemplate = null
         this.noResultsTemplate = null
         this.cardsGridProductOrderedTemplate = null
+        this.cardsGridLoaderTemplate = null
 
         this.getTemplates()
 
@@ -60,10 +61,12 @@ class Filters extends Component {
         const cardTemplate = await templateLoader('components/card.twig')
         const noResultsTemplate = await templateLoader('components/no-results.twig')
         const cardsGridProductOrderedTemplate = await templateLoader('components/cards-grid-product-ordered.twig')
+        const cardsGridLoaderTemplate = await templateLoader('components/cards-grid-loader.twig')
         
         this.cardTemplate = cardTemplate
         this.noResultsTemplate = noResultsTemplate
         this.cardsGridProductOrderedTemplate = cardsGridProductOrderedTemplate
+        this.cardsGridLoaderTemplate = cardsGridLoaderTemplate
     }
 
     parseArgs = (ev) => {
@@ -92,6 +95,12 @@ class Filters extends Component {
 
         // Render for Filter type Grid
         if (this.filterType == 'postDefault' || this.filterType == 'product') {
+            this.cardsGrid.innerHTML = ''
+            const htmlCardsGridProductOrdered = this.cardsGridLoaderTemplate.render({withRow: this.filterType == 'product' ? true : false, num: 3, col: 4})
+            this.cardsGrid.insertAdjacentHTML( 'beforeend', DOMPurify.sanitize(htmlCardsGridProductOrdered, { ADD_TAGS: ['use'] } ))
+
+            window.getCustomScrollbar.update()
+
             this.getData().then((res) => {
                 this.cardsGrid.innerHTML = ''
                 if (this.pagination) {
