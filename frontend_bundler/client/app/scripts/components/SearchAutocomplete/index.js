@@ -1,9 +1,9 @@
 import Component from '@okiba/component'
+import { on, off, qs } from '@okiba/dom'
 
 import axiosClient from '../HTTPClient'
 
 import autoComplete from '@tarekraafat/autocomplete.js'
-import { on, qs } from '@okiba/dom'
 
 const ui = {
     input: '.lb-search-autocomplete__input',
@@ -25,13 +25,19 @@ class SearchAutocomplete extends Component {
             selector: () => {
                 return this.ui.input
             },
+            submit: true,
             wrapper: false,
             data: {
                 // keys: ["food", "cities", "animals"],
                 cache: true,
                 src: async () => {
                     try {
+                        this.ui.input.updateState('disable')
+
                         const { data } = await axiosClient.get('/wp-json/v1/global-search/autocomplete')
+
+                        this.ui.input.updateState('active')
+                        
                         return data
                     } catch (error) {
                         return error
@@ -96,12 +102,16 @@ class SearchAutocomplete extends Component {
             autoCompleteJS.input.value = selection
         })
 
+        autoCompleteJS.input.addEventListener("navigate", (event) => {
+            this.disableLocomotive()
+            on(document, 'wheel', this.enableLocomotive)
+        })
 
         on(this.ui.input, 'init', this.manageScrollbar)
     }
 
     manageScrollbar = () => {
-        const elementsToDisable = qs('.lb-search-autocomplete__selection')
+        const elementsToDisable = qs('.lb-search-autocomplete__selection', this.el)
         on(elementsToDisable, 'mouseenter', this.disableLocomotive)
         on(elementsToDisable, 'mouseleave', this.enableLocomotive)
     }
@@ -112,6 +122,7 @@ class SearchAutocomplete extends Component {
 
     enableLocomotive = (ev) => {
         window.getCustomScrollbar.start()
+        off(document, 'wheel', this.enableLocomotive)
     }
 }
 
