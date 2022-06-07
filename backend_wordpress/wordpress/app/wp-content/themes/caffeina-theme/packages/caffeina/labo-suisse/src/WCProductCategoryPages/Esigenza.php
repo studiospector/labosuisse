@@ -60,6 +60,7 @@ class Esigenza extends BasePage
             $the_query = new \WP_Query(array(
                 'post_type' => 'product',
                 'posts_per_page' => -1,
+                's' => !empty($_GET['s']) ? $_GET['s'] : null,
                 'tax_query' => array(
                     'relation' => 'AND',
                     array(
