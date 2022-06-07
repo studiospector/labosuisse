@@ -5,7 +5,7 @@
 $brands = [];
 
 $brand_terms = lb_get_brands([
-    'name__like' => $_GET['search']
+    'name__like' => !empty($_GET['search']) ? $_GET['search'] : null,
 ]);
 
 $areas = [];
