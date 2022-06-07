@@ -13,6 +13,7 @@ class NewsletterSubscription extends BaseBlock
 
         $payload = [
             'images' => lb_get_images(get_field('lb_block_newsletter_subscription_image')),
+            'search_form_action' => get_post_type_archive_link('lb-store'),
             'search_input' => $search_form_visibility ? [
                 'type' => 'search',
                 'id' => "lb-search-val-newsletter",

@@ -196,7 +196,7 @@ class Archive
         if($totalPosts === 0) {
             return [
                 'totalPosts' => $totalPosts,
-                'posts' => $this->noResults(),
+                'noResult' => $this->noResults(),
                 'hasPosts' => $hasPosts
             ];
         }

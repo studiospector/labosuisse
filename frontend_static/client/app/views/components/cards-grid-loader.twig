@@ -1,0 +1,15 @@
+{% if withRow %}
+    <div class="row js-lb-cards-grid">
+{% endif %}
+    {% for i in 1..num %}
+        <div class="col-12 col-md-{{ col }}">
+            <div class="card card--loading">
+                <div class="card-block-loader card-block-loader--big"></div>
+                <div class="card-block-loader card-block-loader--small"></div>
+                <div class="card-block-loader card-block-loader--medium"></div>
+            </div>
+        </div>
+    {% endfor %}
+{% if withRow %}
+    </div>
+{% endif %}
