@@ -101,7 +101,7 @@
     }
 
     .custom-select-items {
-        max-height: 300px;
+        max-height: 289px;
         position: absolute;
         top: 100%;
         left: 0;
@@ -123,13 +123,17 @@
             animation-fill-mode: both;
         }
 
+        &__wrapper {
+            position: relative;
+        }
+
         &__item {
             padding: 8px 16px;
             font-size: rem(13);
 
             &:hover,
             &--active {
-                background-color: map-get($colors, "grey-2");
+                background-color: map-get($colors, "grey-1");
             }
 
             &--disabled {
@@ -144,10 +148,19 @@
         }
 
         &__btn-confirm {
-            width: calc(100% - 32px);
+            width: 100%;
             display: block;
-            margin: 16px;
-            text-align: center;
+            position: sticky;
+            bottom: 0;
+            padding: 16px;
+            margin-top: 10px;
+            background-color: map-get($colors, "white");
+            border-top: 1px solid map-get($colors, "grey-2");
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     }
 
@@ -219,7 +232,7 @@
                 }
 
                 &:hover {
-                    background-color: map-get($colors, "grey-2");
+                    background-color: map-get($colors, "grey-1");
                 }
 
                 &--active {
@@ -287,7 +300,7 @@
                 }
 
                 &:hover {
-                    background-color: map-get($colors, "grey-2");
+                    background-color: map-get($colors, "grey-1");
                 }
 
                 &__check {

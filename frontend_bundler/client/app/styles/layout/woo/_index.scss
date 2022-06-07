@@ -1,14 +1,5 @@
+@import './global';
 @import './sticky-header-product';
 @import './breadcrumb';
 @import './single-product';
 @import './tease-product';
-
-body.lb-is-shop {
-    .lb-header {
-        &__top {
-            @include mq($until: md) {
-                border-top: 30px solid map-get($colors, "secondary");
-            }
-        }
-    }
-}

@@ -73,13 +73,8 @@ class CustomInput extends BasicElement {
                 this.addIconPrev('close')
 
                 if (this.inputIconPrev) {
-                    this.cs[i].addEventListener('input', (ev) => {
-                        if (ev.target.value.length <= 0) {
-                            this.mainContainer.classList.add('custom-input--icon-prev-hide')
-                        } else {
-                            this.mainContainer.classList.remove('custom-input--icon-prev-hide')
-                        }
-                    })
+                    this.showHideIcons(this.cs[i].value, 'prev')
+                    this.cs[i].addEventListener('input', (ev) => this.showHideIcons(ev.target.value, 'prev'))
                     this.inputIconPrev.addEventListener('click', (ev) => {
                         ev.preventDefault()
                         this.currInputElem.value = null
@@ -184,6 +179,19 @@ class CustomInput extends BasicElement {
         `
         this.inputIconPrev = this.createDOMElement('DIV', ['custom-input__icon', 'custom-input__icon--prev'], null, icon, {pos: 'beforeend', elem: this.mainContainer})
         this.mainContainer.classList.add('custom-input--icon-prev')
+    }
+
+
+
+    /**
+     * Show hide Icons
+     */
+    showHideIcons = (value, icon) => {
+        if (value.length <= 0) {
+            this.mainContainer.classList.add(`custom-input--icon-${icon}-hide`)
+        } else {
+            this.mainContainer.classList.remove(`custom-input--icon-${icon}-hide`)
+        }
     }
 
 

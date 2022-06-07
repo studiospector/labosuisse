@@ -8,7 +8,7 @@ $context = [
     'label' => __('Cerca un prodotto, una linea...', 'labo-suisse-theme'),
     'label_res_less' => __('risultato per', 'labo-suisse-theme'),
     'label_res_more' => __('risultati per', 'labo-suisse-theme'),
-    'variants' => $args['variants'],
+    'variants' => !empty($args['variants']) ? $args['variants'] : ['tertiary'],
 ];
 
 Timber::render('@PathViews/components/searchform.twig', $context);
