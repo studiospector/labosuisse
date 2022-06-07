@@ -19,10 +19,10 @@ class Search
 
         if($this->search) {
             $items = [
-                $this->posts(),
-                $this->faq(),
+                $this->products(),
                 $this->brands(),
-                $this->products()
+                $this->faq(),
+                $this->posts(),
             ];
         }
         return [
@@ -73,7 +73,7 @@ class Search
         $faq = [
             'id' => 'faq',
             'head' => [
-                'label' => __('Faq', 'labo-suisse-theme'),
+                'label' => __('FAQ', 'labo-suisse-theme'),
                 'count' => 0
             ],
             'entries' => []
