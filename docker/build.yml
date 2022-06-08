@@ -55,7 +55,8 @@ services:
       ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
     build:
       context: ..
-      dockerfile: ./frontend_storybook/nginx/docker/Dockerfile
+      dockerfile: ./frontend_storybook/Dockerfile
+      target: frontend_storybook_nginx
       args:
         CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
         CI_REGISTRY: '${CI_REGISTRY}'
@@ -67,7 +68,8 @@ services:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook'
     build:
       context: ..
-      dockerfile: ./frontend_storybook/storybook/docker/Dockerfile
+      dockerfile: ./frontend_storybook/Dockerfile
+      target: frontend_storybook
       args:
         CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
         CI_REGISTRY: '${CI_REGISTRY}'

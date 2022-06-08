@@ -1,4 +1,4 @@
-FROM node:12-alpine AS modules
+FROM node:12-alpine AS frontend_storybook
 WORKDIR /app
 
 RUN apk add --no-cache git --update
@@ -16,3 +16,12 @@ RUN npm run build
 
 EXPOSE 6006
 ENTRYPOINT ["entrypoint"]
+
+FROM nginx:alpine AS frontend_storybook_nginx
+
+COPY ./frontend_storybook/nginx/config /etc/config
+COPY ./frontend_storybook/nginx/docker/entrypoint.sh /usr/bin/entrypoint
+COPY ./frontend_bundler/tommy/optimized /var/assets
+COPY --from=frontend_storybook /app/dist/public /var/static
+
+ENTRYPOINT entrypoint
