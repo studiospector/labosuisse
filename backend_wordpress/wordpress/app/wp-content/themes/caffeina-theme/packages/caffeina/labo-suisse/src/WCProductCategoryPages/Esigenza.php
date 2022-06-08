@@ -94,7 +94,8 @@ class Esigenza extends BasePage
                             'variants' => ['quaternary']
                         ]
                     ],
-                    'variants' => ['type-8']
+                    'type' => 'type-8',
+                    'variants' => null
                 ];
 
                 foreach ($the_query->posts as $product) {

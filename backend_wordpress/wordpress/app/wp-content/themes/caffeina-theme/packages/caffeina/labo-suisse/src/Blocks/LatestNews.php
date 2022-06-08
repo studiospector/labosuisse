@@ -32,7 +32,8 @@ class LatestNews extends BaseBlock
                         'variants' => ['quaternary']
                     ]
                 ],
-                'variants' => ['type-2'],
+                'type' => 'type-2',
+                'variants' => null
             ];
         }
 

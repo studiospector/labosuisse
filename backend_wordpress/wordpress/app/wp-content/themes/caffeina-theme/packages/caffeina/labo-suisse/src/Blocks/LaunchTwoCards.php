@@ -40,7 +40,8 @@ class LaunchTwoCards extends BaseBlock
         }
 
         if (get_field('lb_block_launch_two_cards_variants') != "") {
-            $payload['variants'] = [get_field('lb_block_launch_two_cards_variants')];
+            $payload['type'] = get_field('lb_block_cards_grid_cards_variants');
+            $payload['variants'] = null;
         }
 
         $this->setContext($payload);

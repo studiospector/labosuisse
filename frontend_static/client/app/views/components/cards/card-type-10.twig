@@ -1,0 +1,11 @@
+{% extends "@PathViews/components/cards/card-base.twig" %}
+
+{% block blockInfobox %}
+    {% include '@PathViews/components/infobox.twig' with {subtitle: infobox.subtitle} only %}
+{% endblock %}
+
+{% block blockInfoboxAfter %}
+    <div class="card-infobox-hover">
+        {% include '@PathViews/components/infobox.twig' with infobox|merge({subtitle: ''}) only %}
+    </div>
+{% endblock %}

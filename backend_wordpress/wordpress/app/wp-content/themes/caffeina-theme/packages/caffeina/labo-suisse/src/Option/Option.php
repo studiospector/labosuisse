@@ -102,7 +102,8 @@ class Option
                     'paragraph' => $this->getOption('lb_stores_infobox_paragraph'),
                     'cta' => array_merge($this->getOption('lb_stores_infobox_btn'), ['variants' => ['quaternary']])
                 ],
-                'variants' => ['type-1', 'type-1-secondary'],
+                'type' => 'type-1-secondary',
+                'variants' => null
             ],
         ];
     }

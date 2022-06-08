@@ -54,7 +54,8 @@ class Menu
                                 'variants' => ['quaternary']
                             ]
                         ],
-                        'variants' => ['type-1']
+                        'type' => 'type-1',
+                        'variants' => null
                     ],
                 ],
                 [

@@ -1,9 +1,6 @@
 .card {
-
-    .card-img {
-        position: relative;
-        margin-bottom: 20px;
-    }
+    display: flex;
+    flex-direction: column;
 
     .card-date {
         position: absolute;
@@ -17,65 +14,173 @@
         line-height: rem(16);
         color: map-get($colors, "primary-dark-1");
     }
-
-
-
-    &--type-1 {
-        .card-img {
-            height: 340px;
-
-            @include mq($until: md) {
-                height: 200px;
-                margin-bottom: 0;
-            }
-        }
     
+    .card-img {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .card-infobox {
         .infobox {
             &__tagline {
                 margin-bottom: 20px;
             }
-    
+
             &__subtitle {
                 font-size: rem(20);
                 font-weight: 400;
                 line-height: rem(25);
                 text-transform: unset;
-            }
-        }
-    }
-
-    &--type-1-secondary {
-        .card-img {
-            height: 265px;
-            margin-bottom: 0;
-
-            @include mq($until: md) {
-                height: 265px;
-            }
-        }
-
-        .infobox {
-            @include mq($until: md) {
-                text-align: center;
-            }
-
-            &__tagline {
                 margin-bottom: 20px;
 
                 @include mq($until: md) {
-                    margin-top: 20px;
+                    font-size: rem(16);
+                    line-height: rem(23);
+                    margin-bottom: 12px;
                 }
             }
-    
-            &__subtitle {
-                font-size: rem(26);
-                font-weight: 600;
-                line-height: rem(34);
-                text-transform: uppercase;
+
+            &__paragraph {
+                line-height: rem(20);
+
+                @include mq($until: md) {
+                    font-size: rem(13);
+                }
+            }
+
+            &__cta {
+                margin-top: 4px;
+
+                .button {
+                    &__label {
+                        @include mq($until: md) {
+                            font-size: rem(13);
+                        }
+                    }
+                }
             }
         }
     }
 
+
+    &--type-1 {
+        @include mq($until: md) {
+            flex-direction: row;
+            align-items: center;
+            column-gap: 18px;
+        }
+
+        .card-img {
+            height: 340px;
+
+            @include mq($until: md) {
+                height: 200px;
+                flex: 1 1 50%;
+                margin-bottom: 0;
+            }
+        }
+    
+        .card-infobox {
+            @include mq($until: md) {
+                flex: 1 1 50%;
+            }
+
+            .infobox {
+                &__tagline {
+                    @include mq($until: md) {
+                        font-size: rem(12);
+                    }
+                }
+
+                &__paragraph {
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+
+
+    &--type-1-secondary {
+        flex-direction: row;
+        align-items: center;
+        column-gap: 18px;
+
+        @include mq($until: md) {
+            flex-direction: column;
+        }
+
+        .card-img {
+            height: 265px;
+            flex: 1 1 50%;
+            margin-bottom: 0;
+
+            @include mq($until: md) {
+                width: 100%;
+                height: 265px;
+                flex: auto;
+            }
+        }
+
+        .card-infobox {
+            flex: 1 1 50%;
+
+            @include mq($until: md) {
+                flex: auto;
+            }
+
+            .infobox {
+                @include mq($until: md) {
+                    text-align: center;
+                }
+    
+                &__tagline {
+                    @include mq($until: md) {
+                        margin-top: 20px;
+                    }
+                }
+        
+                &__subtitle {
+                    font-size: rem(26);
+                    font-weight: 600;
+                    line-height: rem(34);
+                    text-transform: uppercase;
+                }
+
+                &__cta {
+                    margin-top: 14px;
+                }
+            }
+        }
+    }
+
+
+    &--type-2 {
+        height: 100%;
+        background-color: map-get($colors, "white");
+
+        .card-img {
+            height: 270px;
+
+            @include mq($until: md) {
+                height: 148px;
+            }
+        }
+
+        .card-infobox {
+            flex: 1;
+
+            .infobox {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+
+            @include mq($until: md) {
+                text-align: center;
+            }
+        }
+    }
 
 
     &--type-3 {
@@ -93,96 +198,29 @@
                 text-align: center;
                 border-bottom: 1px solid map-get($colors, "grey-2");
             }
-        }
 
-        .infobox {
-            &__subtitle {
-                margin: 0;
-            }
+            .infobox {
+                &__subtitle {
+                    font-size: rem(26);
+                    font-weight: 600;
+                    line-height: rem(34);
+                    text-transform: uppercase;
 
-            &__paragraph {
-                margin: 0;
-                margin-top: 20px;
-            }
-
-            &__cta {
-                margin-top: 15px;
-                
-                @include mq($until: md) {
-                    margin-bottom: 20px;
-                }
-            }
-        }
-    }
-
-
-
-    &--type-2 {
-        .card-img {
-            height: 270px;
-            margin-bottom: 0;
-            background-color: map-get($colors, "white");
-
-            @include mq($until: md) {
-                height: 148px;
-                // padding: 20px 20px 0 20px;
-
-                .lb-picture {
-                    position: relative;
-                }
-
-                // .card-date {
-                //     margin: 10px 30px;
-                // }
-            }
-        }
-
-        .card-infobox {
-            // padding: 20px;
-            padding-top: 20px;
-            background-color: map-get($colors, "white");
-
-            @include mq($until: md) {
-                text-align: center;
-            }
-        }
-    
-        .infobox {
-            &__subtitle {
-                font-size: rem(20);
-                font-weight: 400;
-                line-height: rem(25);
-                text-transform: unset;
-                margin-bottom: 20px;
-
-                @include mq($until: md) {
-                    font-size: rem(16);
-                    line-height: rem(23);
-                }
-            }
-
-            &__paragraph {
-                @include mq($until: md) {
-                    font-size: rem(13);
-                    line-height: rem(20);
-                }
-            }
-
-            &__cta {
-                @include mq($until: md) {
-                    margin-top: 0;
-                }
-
-                .button__label {
                     @include mq($until: md) {
-                        font-size: rem(13);
-                        line-height: rem(20);
+                        font-size: rem(18);
+                    }
+                }
+
+                &__cta {
+                    margin-top: 24px;
+
+                    @include mq($until: md) {
+                        margin-bottom: 20px;
                     }
                 }
             }
         }
     }
-
 
 
     &--type-5 {
@@ -194,47 +232,65 @@
             }
         }
 
-        .infobox {
-            @include mq($until: md) {
-                text-align: center;
+        .card-infobox {
+            .infobox {
+                @include mq($until: md) {
+                    text-align: center;
+                }
+    
+                &__subtitle {
+                    font-size: rem(26);
+                    font-weight: 600;
+                    line-height: rem(34);
+                    text-transform: uppercase;
+    
+                    @include mq($until: md) {
+                        font-size: rem(16);
+                    }
+
+                    &__paragraph {
+                        font-size: rem(11);
+                    }
+                }
             }
         }
     }
 
 
-
     &--type-6 {
+        height: 100%;
+
         .card-img {
-            height: 305px;
+            // height: 305px;
+            height: 270px;
 
             @include mq($until: md) {
-                height: 185px;
+                // height: 185px;
+                height: 148px;
             }
         }
 
         .card-infobox {
+            flex: 1;
+            
             @include mq($until: md) {
                 margin: 0 20px;
                 text-align: center;
             }
+
+            .infobox {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                &__paragraph {
+                    color: map-get($colors, "primary-dark-1");
+                }
+            }
         }
     
-        .infobox {
-            &__subtitle {
-                font-size: rem(20);
-                font-weight: 400;
-                line-height: rem(25);
-                text-transform: unset;
-                margin-bottom: 20px;
-            }
-
-            &__paragraph {
-                font-weight: 300;
-                color: map-get($colors, "primary-dark-1");
-            }
-        }
     }
-
 
 
     &--type-7 {
@@ -246,31 +302,56 @@
             }
         }
 
-        .infobox {
-            &__paragraph {
-                opacity: 0.7;
-            }
-
-            img {
-                height: 27px;
+        .card-infobox {
+            .infobox {
+                img {
+                    height: 27px;
+                }
+    
+                &__paragraph {
+                    opacity: 0.7;
+                }
+    
+                &__cta {
+                    margin-top: 24px;
+                }
             }
         }
     }
-
 
 
     &--type-8 {
+        height: 100%;
         padding: 30px;
+        padding-bottom: 14px;
         background-color: map-get($colors, "primary-light-1");
 
-        .infobox {
+        .card-infobox {
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+
+            .infobox {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+
+                @include mq($until: md) {
+                    text-align: center;
+                }
+
+                &__subtitle {
+                    font-size: rem(26);
+                    font-weight: 600;
+                    line-height: rem(34);
+                    text-transform: uppercase;
+
+                    @include mq($until: md) {
+                        font-size: rem(18);
+                    }
+                }
+            }
         }
     }
-
 
 
     &--type-9 {
@@ -278,80 +359,43 @@
         border: 1px solid map-get($colors, "grey-2");
         border-radius: 3px;
 
-        .infobox {
-            &__subtitle {
-                font-size: rem(16);
-                font-weight: 400;
-                line-height: 1;
-                margin-bottom: 20px;
-            }
-
-            &__location {
-                display: flex;
-                align-items: center;
-                margin-bottom: 20px;
-
-                &__label {
-                    margin-left: 8px;
+        .card-infobox {
+            .infobox {
+                &__subtitle {
+                    font-size: rem(16);
+                    text-transform: uppercase;
                 }
-            }
 
-            &__scope {
-                margin-bottom: 20px;
-            }
-
-            &__location,
-            &__scope,
-            &__paragraph {
-                font-size: rem(14);
-                line-height: 1;
-            }
-
-            &__location,
-            &__paragraph {
-                color: map-get($colors, "primary-dark-1");
-                line-height: rem(19);
-            }
-
-            &__cta {
-                margin-top: 20px;
-
-                .button {
-                    padding-bottom: 0;
+                &__location,
+                &__paragraph {
+                    line-height: rem(19);
+                    color: map-get($colors, "primary-dark-1");
+                }
+    
+                &__cta {
+                    .button {
+                        padding-bottom: 0;
+                    }
                 }
             }
         }
     }
 
 
-
     &--type-10 {
+        &:hover {
+            .card-infobox-hover {
+                visibility: visible;
+                opacity: 0.9;
+                transition: $transition__base-1;
+            }
+        }
+
         .card-img {
             height: 400px;
 
             @include mq($until: md) {
                 height: 230px;
-            }
-        }
-
-        .card-infobox-hover {
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-color: map-get($colors, "white");
-            opacity: 0;
-            visibility: hidden;
-            transition: $transition__base-1;
-            
-            .card-infobox {
-                height: 400px;
-                display: flex;
-                align-items: flex-end;
-                padding: 0 30px;
-
-                @include mq($until: md) {
-                    height: 230px;
-                }
             }
         }
     
@@ -361,30 +405,47 @@
                 text-align: center;
                 border-bottom: 1px solid map-get($colors, "grey-2");
             }
-        }
 
-        .infobox {
-            &__subtitle {
-                margin-bottom: 20px;
-                text-align: center;
-            }
+            .infobox {
+                &__subtitle {
+                    font-size: rem(26);
+                    font-weight: 600;
+                    line-height: rem(34);
+                    text-transform: uppercase;
+                    text-align: center;
 
-            &__cta {
-                @include mq($until: md) {
-                    margin-bottom: 20px;
+                    @include mq($until: md) {
+                        font-size: rem(18);
+                    }
+                }
+    
+                &__cta {
+                    @include mq($until: md) {
+                        margin-bottom: 20px;
+                    }
                 }
             }
         }
 
-        &:hover {
-            .card-infobox-hover {
-                visibility: visible;
-                opacity: 0.9;
-                transition: $transition__base-1;
+        .card-infobox-hover {
+            width: 100%;
+            height: 400px;
+            display: flex;
+            align-items: flex-end;
+            padding: 0 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: map-get($colors, "white");
+            opacity: 0;
+            visibility: hidden;
+            transition: $transition__base-1;
+            
+            @include mq($until: md) {
+                height: 230px;
             }
         }
     }
-
 
 
     &--loading {
@@ -397,7 +458,7 @@
             margin-bottom: 60px;
         }
 
-        .card-block-loader {
+        .card-loader {
             background: #eee;
             background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
             border-radius: 5px;

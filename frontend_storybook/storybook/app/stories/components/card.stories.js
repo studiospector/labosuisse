@@ -26,7 +26,8 @@ const dataCardType1 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-1']
+    type: 'type-1',
+    variants: null
 }
 
 // Lifting Secondary
@@ -49,7 +50,8 @@ const dataCardType1Secondary = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-1', 'type-1-secondary']
+    type: 'type-1-secondary',
+    variants: null
 }
 
 // News
@@ -72,7 +74,8 @@ const dataCardType2 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-2']
+    type: 'type-2',
+    variants: null
 }
 
 // Trattamenti
@@ -94,7 +97,8 @@ const dataCardType3 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-3']
+    type: 'type-3',
+    variants: null
 }
 
 // About
@@ -110,7 +114,8 @@ const dataCardType5 = {
         subtitle: '1989: il primo lancio',
         paragraph: 'Lancio di Nicotenil Anti-Caduta, il primo trattamento cosmetico per prevenire la caduta dei capelli, con specifiche proprietà vasodilatatorie, sviluppate per stimolare la microcircolazione sanguigna del cuoio capelluto.',
     },
-    variants: ['type-5']
+    type: 'type-5',
+    variants: null
 }
 
 // Magazine
@@ -133,7 +138,8 @@ const dataCardType6 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-6']
+    type: 'type-6',
+    variants: null
 }
 
 // FAQ
@@ -161,7 +167,8 @@ const dataCardType7 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-7']
+    type: 'type-7',
+    variants: null
 }
 
 // Colored
@@ -177,7 +184,8 @@ const dataCardType8 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-8']
+    type: 'type-8',
+    variants: null
 }
 
 // Job
@@ -199,7 +207,8 @@ const dataCardType9 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-9']
+    type: 'type-9',
+    variants: null
 }
 
 // Brand
@@ -220,7 +229,13 @@ const dataCardType10 = {
             variants: ['quaternary']
         }
     },
-    variants: ['type-10']
+    type: 'type-10',
+    variants: null
+}
+
+// Loading
+const dataCardLoading = {
+    type: 'loading'
 }
 
 storiesOf('Components|Cards', module)
@@ -244,3 +259,5 @@ storiesOf('Components|Cards', module)
     .add('Type 9 --- Job', () => renderCard(dataCardType9))
     // Brand
     .add('Type 10 --- Brand', () => renderCard(dataCardType10))
+    // Brand
+    .add('Type --- Loading', () => renderCard(dataCardLoading))

@@ -17,7 +17,6 @@ class CarouselPosts extends BaseBlock
                     $items[] = [
                         'images' => lb_get_images(get_post_thumbnail_id($cf_post->ID)),
                         'date' => date("d/m/Y", strtotime($cf_post->post_date)),
-                        'variants' => ['type-2'],
                         'infobox' => [
                             'subtitle' => $cf_post->post_title,
                             'paragraph' => $cf_post->post_excerpt,
@@ -28,13 +27,18 @@ class CarouselPosts extends BaseBlock
                                 'variants' => ['quaternary']
                             ]
                         ],
+                        'type' => 'type-2',
+                        'variants' => null
                     ];
                 }
             endwhile;
         }
 
         $payload = [
-            'leftCard' => ['variants' => ['type-8']],
+            'leftCard' => [
+                'type' => 'type-8',
+                'variants' => null
+            ],
             'items' => $items,
             'variants' => [get_field('lb_block_carousel_posts_variant')]
         ];

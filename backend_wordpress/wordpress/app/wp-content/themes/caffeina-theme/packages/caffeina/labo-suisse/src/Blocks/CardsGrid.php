@@ -26,7 +26,8 @@ class CardsGrid extends BaseBlock
                         'paragraph_small' => get_sub_field('lb_block_cards_grid_carousel_infobox_paragraph_small'),
                         'cta' => $cta
                     ],
-                    'variants' => [get_field('lb_block_cards_grid_cards_variants')],
+                    'type' => get_field('lb_block_cards_grid_cards_variants'),
+                    'variants' => null
                 ];
 
             endwhile;
