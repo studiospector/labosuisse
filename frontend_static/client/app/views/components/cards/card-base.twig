@@ -8,7 +8,12 @@
   {% set classes = classes|merge([class]) %}
 {% endif %}
 
-<article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ color ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
+<a 
+    href="{{ infobox.cta.url|default('#') }}"
+    target="{{ infobox.cta.target|default('_self') }}"
+    class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
+    {{ color ? ' style="background-color: ' ~ color ~ ';"' : '' }}
+>
     {% if images|length > 0 %}
         <div class="card-img">
             {{ lbPicture(images) }}
@@ -19,10 +24,13 @@
     {% endif %}
 
     {% if infobox %}
+        {% if infobox.cta is defined %}
+            {% set infobox = infobox|merge({cta: infobox.cta|merge({url: null})}) %}
+        {% endif %}
         <div class="card-infobox">
             {% block blockInfobox %}{% endblock %}
         </div>
     {% endif %}
 
     {% block blockInfoboxAfter %}{% endblock %}
-</article>
+</a>
