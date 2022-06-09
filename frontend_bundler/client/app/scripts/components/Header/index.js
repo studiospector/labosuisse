@@ -27,6 +27,7 @@ class Header extends Component {
         on(window, 'resize', this.adjustMenu)
 
         setTimeout(() => on([this.ui.iconOpenSearch, qs('.lb-header__top__icons__item--search .custom-input .custom-input__icon--prev')], 'click', this.toggleSearch), 1000)
+        on(document, 'click', this.closeSearchOnClickOutside)
 
         // On scroll trigger with Locomotive
         window.getCustomScrollbar.on('scroll', this.checkScroll)
@@ -107,6 +108,12 @@ class Header extends Component {
 
     toggleSearch = (ev) => {
         this.ui.searchForm.classList.toggle('lb-search-form--open')
+    }
+
+    closeSearchOnClickOutside = (ev) => {
+        if (ev.target.closest('.lb-search-form') !== this.ui.searchForm && ev.target.closest('.lb-open-search') !== this.ui.iconOpenSearch) {
+            this.ui.searchForm.classList.remove('lb-search-form--open')
+        }
     }
 }
 
