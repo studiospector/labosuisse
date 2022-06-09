@@ -32,6 +32,7 @@ class Menu
         return [
             'children' => array_merge(
                 (new Macro())->get('mobile'),
+                (new Brands())->get('mobile'),
                 (new DiscoverLabo())->get('mobile')
             ),
             'fixed' => [
