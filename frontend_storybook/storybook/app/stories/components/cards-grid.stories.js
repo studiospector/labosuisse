@@ -36,7 +36,7 @@ const data = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2'],
+            type: 'type-2'
         },
         {
             images: {
@@ -57,7 +57,7 @@ const data = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2'],
+            type: 'type-2'
         },
         {
             images: {
@@ -78,7 +78,7 @@ const data = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2'],
+            type: 'type-2'
         },
         {
             images: {
@@ -99,7 +99,7 @@ const data = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2'],
+            type: 'type-2'
         },
     ],
 }
