@@ -200,6 +200,25 @@ class Option
         ];
     }
 
+    public function getMenuFixedCard($device='desktop')
+    {
+        return [
+            'type' => 'card',
+            'data' => [
+                'images' => lb_get_images(
+                    $this->getOption('lb_menu_fixed_card_image')
+                ),
+                'infobox' => [
+                    'subtitle' => $this->getOption('lb_menu_fixed_card_subtitle'),
+                    'paragraph' => $this->getOption('lb_menu_fixed_card_paragraph'),
+                    'cta' => array_merge($this->getOption('lb_menu_fixed_card_btn'), [ 'variants' => ['quaternary']])
+                ],
+                'type' => ($device === 'desktop') ? 'type-3' : 'type-1',
+                'variants' => null
+            ],
+        ];
+    }
+
     public function getApiKey($service)
     {
         return $this->getOption($service);
