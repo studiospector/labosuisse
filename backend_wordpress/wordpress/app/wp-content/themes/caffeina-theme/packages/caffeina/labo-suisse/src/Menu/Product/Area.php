@@ -115,6 +115,7 @@ class Area
         }
 
         $items['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
+        $items['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
 
         return $this->fixMobileMenu($items);
     }

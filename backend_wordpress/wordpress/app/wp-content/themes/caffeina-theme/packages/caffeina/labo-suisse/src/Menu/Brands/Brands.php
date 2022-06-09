@@ -22,7 +22,14 @@ class Brands
         $this->option = new Option();
     }
 
-    public function get()
+    public function get($device = 'desktop')
+    {
+        return ($device == 'desktop')
+            ? $this->desktop()
+            : $this->mobile();
+    }
+
+    private function desktop()
     {
         $menu = [
             'type' => 'submenu',
@@ -83,6 +90,25 @@ class Brands
         }
 
         return [$menu];
+    }
+
+    private function mobile()
+    {
+        $items  = [
+            'type' => 'submenu',
+            'label' => __('Tutti i Brand', 'labo-suisse-theme'),
+            'children' => [],
+        ];
+
+        foreach ($this->brands as $i => $brand) {
+            $items['children'][] = [
+                'type' => 'submenu',
+                'label' => $brand->name,
+                'children' => $this->getProductLines($brand)
+            ];
+        }
+
+        return [$items];
     }
 
     private function getProductLines($brand)
