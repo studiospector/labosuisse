@@ -23,6 +23,11 @@ const dataLeftInfobox = {
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -41,6 +46,11 @@ const dataLeftBottomInfobox = {
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -59,6 +69,11 @@ const dataRightInfobox = {
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -77,6 +92,11 @@ const dataRightBottomInfobox = {
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -119,7 +139,12 @@ const dataCenterBottomInfobox = {
     infobox: {
         tagline: 'LABEL',
         title: 'Linea Lifting',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['large']
@@ -138,7 +163,12 @@ const dataHeroWhiteText = {
     infobox: {
         tagline: 'LABEL',
         title: 'Linea Lifting',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     whiteText: true,
@@ -157,7 +187,12 @@ const dataImageInfobox = {
     infoboxPosY: 'center',
     infobox: {
         image: '/assets/images/crescina-logo.png',
-        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. '
+        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. ',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['small']
@@ -175,7 +210,12 @@ const dataHeroContainer = {
     infoboxPosY: 'center',
     infobox: {
         image: '/assets/images/crescina-logo.png',
-        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. '
+        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. ',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: true,
     variants: ['small']
