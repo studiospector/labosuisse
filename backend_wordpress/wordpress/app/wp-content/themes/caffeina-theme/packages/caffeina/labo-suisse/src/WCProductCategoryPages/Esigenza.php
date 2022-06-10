@@ -61,6 +61,8 @@ class Esigenza extends BasePage
                 'post_type' => 'product',
                 'posts_per_page' => -1,
                 's' => !empty($_GET['s']) ? $_GET['s'] : null,
+                'orderby' => 'menu_order',
+                'order' => 'ASC',
                 'tax_query' => array(
                     'relation' => 'AND',
                     array(
