@@ -102,7 +102,8 @@ class Option
                     'paragraph' => $this->getOption('lb_stores_infobox_paragraph'),
                     'cta' => array_merge($this->getOption('lb_stores_infobox_btn'), ['variants' => ['quaternary']])
                 ],
-                'variants' => ['type-1', 'type-1-secondary'],
+                'type' => 'type-1-secondary',
+                'variants' => null
             ],
         ];
     }
@@ -196,6 +197,31 @@ class Option
             'left' => $this->getOption('lb_prefooter_left_block'),
             'center' => $this->getOption('lb_prefooter_center_block'),
             'right' => $this->getOption('lb_prefooter_right_block'),
+        ];
+    }
+
+    public function getMenuFixedCard($device='desktop')
+    {
+        $cta = $this->getOption('lb_menu_fixed_card_btn');
+
+        if ($cta) {
+            $cta = array_merge($this->getOption('lb_menu_fixed_card_btn'), [ 'variants' => ['quaternary']]);
+        } else {
+            $cta = [];
+        }
+
+        return [
+            'type' => 'card',
+            'data' => [
+                'images' => lb_get_images($this->getOption('lb_menu_fixed_card_image')),
+                'infobox' => [
+                    'subtitle' => $this->getOption('lb_menu_fixed_card_subtitle'),
+                    'paragraph' => $this->getOption('lb_menu_fixed_card_paragraph'),
+                    'cta' => $cta
+                ],
+                'type' => ($device === 'desktop') ? 'type-3' : 'type-1',
+                'variants' => null
+            ],
         ];
     }
 

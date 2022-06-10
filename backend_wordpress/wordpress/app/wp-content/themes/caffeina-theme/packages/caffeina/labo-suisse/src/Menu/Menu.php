@@ -32,31 +32,11 @@ class Menu
         return [
             'children' => array_merge(
                 (new Macro())->get('mobile'),
+                (new Brands())->get('mobile'),
                 (new DiscoverLabo())->get('mobile')
             ),
             'fixed' => [
-                [
-                    'type' => 'card',
-                    'data' => [
-                        'images' => [
-                            'original' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'lg' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'md' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'sm' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'xs' => get_stylesheet_directory_uri() . '/assets/images/card-img-5.jpg',
-                        ],
-                        'infobox' => [
-                            'subtitle' => 'AFTER MASK',
-                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.',
-                            'cta' => [
-                                'url' => '#',
-                                'title' => 'Scopri la linea',
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-1']
-                    ],
-                ],
+                (new Option())->getMenuFixedCard('mobile'),
                 [
                     'type' => 'small-link',
                     'label' => __('Profilo', 'labo-suisse-theme'),

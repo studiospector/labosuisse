@@ -1,0 +1,36 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+{% set classes = [] %}
+{% for variant in variants|default([])|merge([type]) %}
+  {% set classes = classes|merge(['card--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+  {% set classes = classes|merge([class]) %}
+{% endif %}
+
+<a 
+    href="{{ infobox.cta.url|default('#') }}"
+    target="{{ infobox.cta.target|default('_self') }}"
+    class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
+    {{ color ? ' style="background-color: ' ~ color ~ ';"' : '' }}
+>
+    {% if images|length > 0 %}
+        <div class="card-img">
+            {{ lbPicture(images) }}
+            {% if date %}
+                <div class="card-date">{{ date }}</div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {% if infobox %}
+        {% if infobox.cta is defined %}
+            {% set infobox = infobox|merge({cta: infobox.cta|merge({url: null})}) %}
+        {% endif %}
+        <div class="card-infobox">
+            {% block blockInfobox %}{% endblock %}
+        </div>
+    {% endif %}
+
+    {% block blockInfoboxAfter %}{% endblock %}
+</a>

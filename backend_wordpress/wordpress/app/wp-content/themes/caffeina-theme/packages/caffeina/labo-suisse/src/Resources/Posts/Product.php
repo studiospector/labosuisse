@@ -22,7 +22,8 @@ class Product
                     'variants' => ['quaternary']
                 ]
             ],
-            'variants' => ['type-8']
+            'type' => 'type-8',
+            'variants' => null
         ];
     }
 }

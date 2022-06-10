@@ -12,7 +12,7 @@ class Brand
 
     public $images;
     public $infobox;
-    public $variants = ['type-10'];
+    public $type = 'type-10';
     public $col_classes = ['col-12', 'col-md-4'];
 
     public function __construct($term)

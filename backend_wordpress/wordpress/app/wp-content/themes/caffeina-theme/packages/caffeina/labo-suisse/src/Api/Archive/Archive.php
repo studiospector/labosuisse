@@ -179,7 +179,8 @@ class Archive
                         'variants' => ['quaternary']
                     ]
                 ],
-                'variants' => ['type-9']
+                'type' => 'type-9',
+                'variants' => null
             ];
         }
 

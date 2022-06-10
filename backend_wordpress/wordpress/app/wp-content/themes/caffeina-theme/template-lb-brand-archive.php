@@ -42,7 +42,8 @@ foreach ($brand_terms as $term) {
                 'variants' => ['quaternary']
             ] : null
         ],
-        'variants' => ['type-10']
+        'type' => 'type-10',
+        'variants' => null
     ];
 }
 

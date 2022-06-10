@@ -34,7 +34,7 @@ const dataDefault = {
                 variants: ['quaternary']
             }
         },
-        variants: ['type-7']
+        type: 'type-7'
     }
 }
 

@@ -1,42 +1,31 @@
-{% set classes = [] %}
-{% for variant in variants|default([]) %}
-  {% set classes = classes|merge(['card--' ~ variant]) %}
-{% endfor %}
-{% if class %}
-  {% set classes = classes|merge([class]) %}
+{# 
+    The reason there are all these if statements is that 'twigjs' doesn't support dynamic includes.
+    Consequently it would not have been possible to have the component in the Storybook.
+
+    Ex.
+    {% include '@PathViews/components/cards/card-' ~ type ~ '.twig' %}
+#}
+
+{% if type == 'type-1' %}
+    {% include '@PathViews/components/cards/card-type-1.twig' %}
+{% elseif type == 'type-1-secondary' %}
+    {% include '@PathViews/components/cards/card-type-1-secondary.twig' %}
+{% elseif type == 'type-2' %}
+    {% include '@PathViews/components/cards/card-type-2.twig' %}
+{% elseif type == 'type-3' %}
+    {% include '@PathViews/components/cards/card-type-3.twig' %}
+{% elseif type == 'type-5' %}
+    {% include '@PathViews/components/cards/card-type-5.twig' %}
+{% elseif type == 'type-6' %}
+    {% include '@PathViews/components/cards/card-type-6.twig' %}
+{% elseif type == 'type-7' %}
+    {% include '@PathViews/components/cards/card-type-7.twig' %}
+{% elseif type == 'type-8' %}
+    {% include '@PathViews/components/cards/card-type-8.twig' %}
+{% elseif type == 'type-9' %}
+    {% include '@PathViews/components/cards/card-type-9.twig' %}
+{% elseif type == 'type-10' %}
+    {% include '@PathViews/components/cards/card-type-10.twig' %}
+{% elseif type == 'loading' %}
+    {% include '@PathViews/components/cards/card-loading.twig' %}
 {% endif %}
-
-{% set type_1 = ('type-1' in variants) ? true : false %}
-{% set type_1_secondary = ('type-1-secondary' in variants) ? true : false %}
-{% set type_2_6 = ('type-2' in variants) or ('type-6' in variants) ? true : false %}
-{% set type_8 = ('type-8' in variants) ? true : false %}
-{% set type_10 = ('type-10' in variants) ? true : false %}
-
-{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
-
-<article class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ type_8 ? ' h-100' : '' }}"{{ (type_8 and color) ? ' style="background-color: ' ~ color ~ ';"' : '' }}>
-    <div class="row{{ type_1 ? ' mobile-min-gutters' : '' }}{{ type_2_6 ? ' no-gutters' : '' }}{{ type_8 ? ' h-100' : '' }}">
-        {% if images|length > 0 %}
-            <div class="card-img-wrapper{{ type_1 ? ((type_1_secondary) ? ' col-12 col-md-4' : ' col-6 col-md-12') : ' col-12' }}">
-                <div class="card-img">
-                    {{ lbPicture(images) }}
-                    {% if type_2_6 %}
-                        <div class="card-date">{{ date }}</div>
-                    {% endif %}
-                </div>
-            </div>
-        {% endif %}
-        <div class="{{ type_1 ? ((type_1_secondary) ? 'col-12 col-md-8' : 'col-6 col-md-12') : 'col-12' }}{{ type_8 ? ' h-100' : '' }}{{ type_10 ? ' card-infobox-hover' : '' }}">
-            <div class="card-infobox{{ type_8 ? ' h-100' : '' }}">
-                {% include '@PathViews/components/infobox.twig' with (type_10 ? infobox|merge({subtitle: ''}) : infobox) only %}
-            </div>
-        </div>
-        {% if type_10 %}
-            <div class="col-12">
-                <div class="card-infobox">
-                    {% include '@PathViews/components/infobox.twig' with {subtitle: infobox.subtitle} only %}
-                </div>
-            </div>
-        {% endif %}
-    </div>
-</article>

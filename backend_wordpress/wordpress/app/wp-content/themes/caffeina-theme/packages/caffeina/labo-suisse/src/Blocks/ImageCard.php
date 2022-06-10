@@ -12,7 +12,8 @@ class ImageCard extends BaseBlock
             'images' => lb_get_images(get_field('lb_block_image_card_image_left')),
             'card' => [
                 'images' => lb_get_images(get_field('lb_block_image_card_image_right')),
-                'variants' => ['type-7']
+                'type' => 'type-7',
+                'variants' => null
             ],
         ];
 

@@ -22,7 +22,7 @@ const dataFull = {
                 variants: ['secondary']
             }
         },
-        variants: ['type-8']
+        type: 'type-8'
     },
     items: [
         {
@@ -44,7 +44,7 @@ const dataFull = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -65,7 +65,7 @@ const dataFull = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -86,7 +86,7 @@ const dataFull = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
     ],
     variants: ['full']
@@ -104,7 +104,7 @@ const dataOnePost = {
                 variants: ['secondary']
             }
         },
-        variants: ['type-8']
+        type: 'type-8'
     },
     items: [
         {
@@ -126,7 +126,7 @@ const dataOnePost = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -147,7 +147,7 @@ const dataOnePost = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -168,7 +168,7 @@ const dataOnePost = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
     ],
     variants: ['one-post']
@@ -185,7 +185,7 @@ const dataTwoPosts = {
                 variants: ['secondary']
             }
         },
-        variants: ['type-8']
+        type: 'type-8'
     },
     items: [
         {
@@ -207,7 +207,7 @@ const dataTwoPosts = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -228,7 +228,7 @@ const dataTwoPosts = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -249,7 +249,7 @@ const dataTwoPosts = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
     ],
     variants: ['two-posts']
