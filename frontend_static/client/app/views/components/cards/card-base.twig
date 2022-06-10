@@ -24,7 +24,7 @@
     {% endif %}
 
     {% if infobox %}
-        {% if infobox.cta is defined %}
+        {% if (infobox.cta is defined) and (infobox.cta is not null) %}
             {% set infobox = infobox|merge({cta: infobox.cta|merge({url: null})}) %}
         {% endif %}
         <div class="card-infobox">
