@@ -46,32 +46,7 @@ class Area
                     'children' => []
                 ]
             ],
-            'fixed' => [
-                [
-                    'type' => 'card',
-                    'data' => [
-                        'images' => [
-                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'lg' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'md' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'sm' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'xs' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        ],
-                        'infobox' => [
-                            'subtitle' => 'Magnetic Eyes',
-                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            'cta' => [
-                                'url' => '#',
-                                'title' => 'Scopri di più',
-                                'iconEnd' => ['name' => 'arrow-right'],
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'type' => 'type-3',
-                        'variants' => null
-                    ],
-                ],
-            ]
+            'fixed' => [ (new Option())->getMenuFixedCard()]
         ];
 
         foreach ($this->areas as $i => $area) {
