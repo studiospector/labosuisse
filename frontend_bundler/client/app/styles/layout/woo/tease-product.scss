@@ -1,5 +1,15 @@
 .lb-product-card {
     text-align: center;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+        .button {
+            .lb-icon {
+                transform: translateX(5px);
+            }
+        }
+    }
     
     &__content {
         display: flex;
