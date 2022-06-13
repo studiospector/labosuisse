@@ -78,7 +78,6 @@ BUGFIX
 
 - √ refactor template archivi
 - √ refactor componente separatore
-- refactor api call con autenticazione e url da .env
 - √ refactor classi store locator base
 
 - √ gestione utenti BE + Dashboard
@@ -120,7 +119,12 @@ SEZIONI DA TERMINARE
 
 
 PRE GO LIVE
-- Cache
 - √ iThemes
 - √ reCaptcha
-- SMTP
+- * Cache
+- * SMTP
+- * email definitive form CF7
+- * refactoring api call con autenticazione e url da .env
+- * gestione PDF in pagina News
+- associazione prodotti a più categorie
+- refactoring Store locator
