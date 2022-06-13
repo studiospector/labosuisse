@@ -10,7 +10,9 @@
 
     <div class="lb-header__top container">
         <div class="lb-header__top__shield lb-shield">
-            {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
+            <a href="{{ fn('home_url') }}">
+                {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
+            </a>
         </div>
         <div class="lb-header__top__logo lb-logo">
             <a href="{{ fn('home_url') }}">
