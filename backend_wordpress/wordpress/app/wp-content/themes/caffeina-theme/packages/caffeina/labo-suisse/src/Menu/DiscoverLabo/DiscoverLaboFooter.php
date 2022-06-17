@@ -28,7 +28,7 @@ class DiscoverLaboFooter
             $menu['items'][] = [
                 'title' => $item->title,
                 'url' => $item->url,
-                'target' => '_self',
+                'target' => $item->target ? $item->target : '_self',
                 'variants' => ['link', 'thin', 'small']
             ];
         }
