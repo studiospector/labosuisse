@@ -21,7 +21,7 @@ global $product;
 
 if ( ! $product->is_purchasable() ) {
     ?>
-    <a href="#" class="button button-tertiary">
+    <a href="<?php echo get_post_type_archive_link('lb-store'); ?>" class="button button-tertiary">
         <span class="button__label"><?php echo __('Trova una farmacia concessionaria', 'labo-suisse-theme'); ?></span>
     </a>
     <?php
@@ -60,7 +60,7 @@ if ( $product->is_in_stock() ) : ?>
 
 <?php else: ?>
 
-    <a href="#" class="button button-tertiary">
+    <a href="<?php echo get_post_type_archive_link('lb-store'); ?>" class="button button-tertiary">
         <span class="button__label"><?php echo __('Trova una farmacia concessionaria', 'labo-suisse-theme'); ?></span>
     </a>
 
