@@ -20,11 +20,12 @@ defined( 'ABSPATH' ) || exit;
 global $product;
 
 if ( ! $product->is_purchasable() ) {
-    ?>
-    <a href="<?php echo get_post_type_archive_link('lb-store'); ?>" class="button button-tertiary">
-        <span class="button__label"><?php echo __('Trova una farmacia concessionaria', 'labo-suisse-theme'); ?></span>
-    </a>
-    <?php
+    Timber::render('@PathViews/components/button.twig', [
+        'title' => __('Trova una farmacia concessionaria', 'labo-suisse-theme'),
+        'url' => get_post_type_archive_link('lb-store'),
+        'variants' => ['tertiary'],
+    ]);
+    
 	return;
 }
 
@@ -60,8 +61,12 @@ if ( $product->is_in_stock() ) : ?>
 
 <?php else: ?>
 
-    <a href="<?php echo get_post_type_archive_link('lb-store'); ?>" class="button button-tertiary">
-        <span class="button__label"><?php echo __('Trova una farmacia concessionaria', 'labo-suisse-theme'); ?></span>
-    </a>
+    <?php
+        Timber::render('@PathViews/components/button.twig', [
+            'title' => __('Trova una farmacia concessionaria', 'labo-suisse-theme'),
+            'url' => get_post_type_archive_link('lb-store'),
+            'variants' => ['tertiary'],
+        ]);
+    ?>
 
 <?php endif; ?>
