@@ -163,6 +163,10 @@
         &--html {
             .mc4wp-form {
                 text-align: center;
+
+                .custom-checkbox__options {
+                    text-align: left;
+                }
             }
         }
     }
