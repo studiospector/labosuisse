@@ -44,6 +44,7 @@ class DiscoverLabo
                 'type' => 'link',
                 'label' => $item->title,
                 'href' => $item->url,
+                'target' => $item->target ? $item->target : '_self',
             ];
         }
 
@@ -64,6 +65,7 @@ class DiscoverLabo
                 'type' => 'link',
                 'label' => $item->title,
                 'href' => $item->url,
+                'target' => $item->target ? $item->target : '_self',
             ];
         }
 

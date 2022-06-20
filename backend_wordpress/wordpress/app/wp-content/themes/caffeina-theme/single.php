@@ -13,7 +13,7 @@ $context = [
         'tagline' => __('Articolo', 'labo-suisse-theme'),
         'title' => get_the_title(),
     ],
-    'date' => '20 Febbraio 2021',
+    'date' => (get_field('lb_post_creation_date_show') !== false) ? get_the_date() : null,
     'reading_time' => ($reading_time) ? $reading_time . ' ' . __('min', 'labo-suisse-theme') : null,
     'content' => apply_filters( 'the_content', get_the_content() ),
 ];

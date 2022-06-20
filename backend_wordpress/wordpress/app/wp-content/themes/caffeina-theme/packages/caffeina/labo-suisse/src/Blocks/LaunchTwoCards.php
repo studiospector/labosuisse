@@ -17,7 +17,8 @@ class LaunchTwoCards extends BaseBlock
                         'title' => get_field('lb_block_launch_two_cards_title_left'),
                         'subtitle' => get_field('lb_block_launch_two_cards_subtitle_left'),
                         'paragraph' => get_field('lb_block_launch_two_cards_paragraph_left'),
-                    ]
+                    ],
+                    'type' => 'type-3',
                 ],
                 [
                     'images' => lb_get_images(get_field('lb_block_launch_two_cards_image_right')),
@@ -26,7 +27,8 @@ class LaunchTwoCards extends BaseBlock
                         'title' => get_field('lb_block_launch_two_cards_title_right'),
                         'subtitle' => get_field('lb_block_launch_two_cards_subtitle_right'),
                         'paragraph' => get_field('lb_block_launch_two_cards_paragraph_right'),
-                    ]
+                    ],
+                    'type' => 'type-3',
                 ]
             ]
         ];
@@ -40,7 +42,7 @@ class LaunchTwoCards extends BaseBlock
         }
 
         if (get_field('lb_block_launch_two_cards_variants') != "") {
-            $payload['type'] = get_field('lb_block_cards_grid_cards_variants');
+            $payload['type'] = get_field('lb_block_launch_two_cards_variants');
             $payload['variants'] = null;
         }
 

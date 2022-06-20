@@ -30,12 +30,14 @@ if ( ! $short_description ) {
 ?>
 <div class="woocommerce-product-details__short-description single-product-details__summary__short-description">
 	<?php echo $short_description; // WPCS: XSS ok. ?>
-    <button type="button" class="button button-quaternary js-scroll-to js-gtm-tracking" data-scroll-to=".block-offset-navs" data-ga-event="click" data-ga-event-name="discover-more-product-page">
-        <span class="button__label"><?php echo __('Più informazioni', 'labo-suisse-theme') ?></span>
-        <span class="lb-icon lb-icon-arrow-right">
-            <svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg">
-            <use xlink:href="#arrow-right"></use>
-            </svg>
-        </span>
-    </button>
+    <?php
+        if (get_field('lb_block_offset_navs_visibility')) {
+            Timber::render('@PathViews/components/button.twig', [
+                'title' => __('Più informazioni', 'labo-suisse-theme'),
+                'attributes' => ['data-scroll-to=".block-offset-navs"', 'data-ga-event="click"', 'data-ga-event-name="discover-more-product-page"'],
+                'class' => 'js-scroll-to js-gtm-tracking',
+                'variants' => ['quaternary'],
+            ]);
+        }
+    ?>
 </div>

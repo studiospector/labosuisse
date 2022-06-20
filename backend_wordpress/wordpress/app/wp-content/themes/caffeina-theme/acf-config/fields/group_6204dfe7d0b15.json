@@ -1,6 +1,6 @@
 {
     "key": "group_6204dfe7d0b15",
-    "title": "Campi personalizzati: Prodotto - Blocco - Offset Navs",
+    "title": "Campi personalizzati: Blocco - Offset Navs",
     "fields": [
         {
             "key": "field_61f8177f66135",
@@ -609,7 +609,7 @@
                                     "key": "field_61f009561054b",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_technology_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -618,14 +618,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 1
                                 }
                             ]
                         }
@@ -2562,5 +2560,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1652795954
+    "modified": 1655125654
 }

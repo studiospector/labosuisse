@@ -273,6 +273,14 @@ ul.lb-arrow-list {
             margin: 0;
         }
     }
+
+    &.wp-block-file {
+        a {
+            margin-top: 10px;
+            font-size: rem(16);
+            color: map-get($colors, "black");
+        }
+    }
 }
 
 

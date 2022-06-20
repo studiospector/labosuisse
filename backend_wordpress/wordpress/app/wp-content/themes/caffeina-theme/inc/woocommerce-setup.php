@@ -11,14 +11,16 @@ add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
 add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
 
-
+remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
+remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
 
 /**
  * WC Support
  */
 add_action( 'init', 'lb_wc_support' );	 	 
 function lb_wc_support() {	 	 
-   remove_theme_support( 'wc-product-gallery-lightbox' );	 	 
+    add_post_type_support('product', 'page-attributes');
+    remove_theme_support('wc-product-gallery-lightbox');	 	 
 }
 
 

@@ -30,7 +30,8 @@ const dataHorizontal = {
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
-            }
+            },
+            type: 'type-3',
         },
         {
             images: {
@@ -48,7 +49,8 @@ const dataHorizontal = {
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
-            }
+            },
+            type: 'type-3',
         }
     ],
     variants: ['horizontal'],
@@ -70,7 +72,8 @@ const dataVertical = {
             },
             infobox: {
                 subtitle: 'Scala di diradamento uomo',
-            }
+            },
+            type: 'type-3',
         },
         {
             images: {
@@ -82,7 +85,8 @@ const dataVertical = {
             },
             infobox: {
                 subtitle: 'Scala di diradamento donna',
-            }
+            },
+            type: 'type-3',
         }
     ],
     variants: ['vertical'],
