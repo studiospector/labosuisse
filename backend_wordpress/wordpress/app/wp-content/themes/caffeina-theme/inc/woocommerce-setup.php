@@ -19,7 +19,8 @@ remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_pro
  */
 add_action( 'init', 'lb_wc_support' );	 	 
 function lb_wc_support() {	 	 
-   remove_theme_support( 'wc-product-gallery-lightbox' );	 	 
+    add_post_type_support('product', 'page-attributes');
+    remove_theme_support('wc-product-gallery-lightbox');	 	 
 }
 
 
