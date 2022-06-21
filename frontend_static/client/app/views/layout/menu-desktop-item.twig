@@ -9,7 +9,7 @@
         {% endif %}
 
         {% if type == 'link' %}
-            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</a>
+            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" target="{{ target ? target : '_self' }}" tabindex="0">{{label}}</a>
         {% endif %}
 
         {% if type == 'submenu' %}
