@@ -89,8 +89,12 @@ class CustomInput extends BasicElement {
                 this.addIconNext('icon-search', buttonTypeNext)
             }
 
-            // Set default value
-            this.onFocus(this.currInputElem.value)
+            // Set focus
+            if (this.currInputType == 'date') {
+                this.onFocus()
+            } else {
+                this.onFocus(this.currInputElem.value)
+            }
 
             // Custom method to update focus state
             this.cs[i].updateFocus = (value) => {
@@ -103,8 +107,10 @@ class CustomInput extends BasicElement {
             }
 
             // Events on <input> focus
-            this.cs[i].addEventListener('focus', () => this.onFocus())
-            this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+            if (this.currInputType != 'date') {
+                this.cs[i].addEventListener('focus', () => this.onFocus())
+                this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+            }
         }
     }
 
