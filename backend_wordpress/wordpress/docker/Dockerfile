@@ -1,6 +1,10 @@
 # Frontend stage
 
 FROM node:12-alpine as frontend_bundler
+
+ARG LB_API_TOKEN
+ARG LB_API_URL
+
 WORKDIR /app
 RUN apk add --no-cache git --update
 
@@ -13,6 +17,9 @@ RUN npm install
 COPY ./frontend_bundler/client/app/ ./
 
 ENV NODE_ENV=production
+ENV LB_API_TOKEN=$LB_API_TOKEN
+ENV LB_API_URL=$LB_API_URL
+
 RUN npm run build
 
 
