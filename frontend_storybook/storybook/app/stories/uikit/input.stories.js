@@ -96,6 +96,16 @@ const dataSearchTertiary = {
     variants: ['tertiary'],
 }
 
+// Datepicker
+const dataDatepicker = {
+    type: 'date',
+    name: "date",
+    label: "Select date",
+    disabled: false,
+    required: false,
+    variants: ['default'],
+}
+
 storiesOf('UIKit|Input', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -132,3 +142,5 @@ storiesOf('UIKit|Input', module)
     .add('Search --- Secondary', () => renderInput(dataSearchSecondary))
     // Search Tertiary
     .add('Search --- Tertiary', () => renderInput(dataSearchTertiary))
+    // Datepicker
+    .add('Datepicker', () => renderInput(dataDatepicker))

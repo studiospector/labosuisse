@@ -18,6 +18,14 @@ class SearchAutocomplete extends Component {
         this.labelResMore = this.el.dataset.labelResMore
 
         this.init()
+
+        on(this.el, 'submit', (ev) => {
+            if (this.ui.input.value.length <= 2) {
+                ev.preventDefault()
+                ev.stopPropagation()
+                return
+            }
+        })
     }
 
     init = () => {
@@ -89,6 +97,9 @@ class SearchAutocomplete extends Component {
                 input: {
                     focus: () => {
                         if (autoCompleteJS.input.value.length) autoCompleteJS.start()
+                    },
+                    input: () => {
+                        if (autoCompleteJS.input.value.length > 2) autoCompleteJS.start()
                     }
                 }
             }

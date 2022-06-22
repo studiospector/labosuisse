@@ -10,6 +10,8 @@ services:
           CI_REGISTRY: '${CI_REGISTRY}'
           CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
           CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+          LB_API_TOKEN: ${LB_API_TOKEN}
+          LB_API_URL: ${LB_API_URL}
     environment:
       WITH_WORDPRESS: 1
     depends_on:
@@ -25,6 +27,9 @@ services:
     build:
       context: ..
       dockerfile: ./frontend_bundler/client/docker/Dockerfile
+      args:
+        LB_API_TOKEN: ${LB_API_TOKEN}
+        LB_API_URL: ${LB_API_URL}
   frontend_static:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static'
     build:

@@ -11,7 +11,13 @@ RUN npm install
 COPY ./frontend_bundler/client/docker/entrypoint.sh /usr/bin/entrypoint
 COPY ./frontend_bundler/client/app/ ./
 
+ARG LB_API_TOKEN
+ARG LB_API_URL
+
 ENV NODE_ENV=production
+ENV LB_API_TOKEN=$LB_API_TOKEN
+ENV LB_API_URL=$LB_API_URL
+
 RUN npm run build
 
 ENTRYPOINT ["entrypoint"]

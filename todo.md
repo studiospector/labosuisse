@@ -124,7 +124,8 @@ PRE GO LIVE
 - * Cache
 - * SMTP
 - * email definitive form CF7
+- √ titolo candidatura non presente nell'email
 - * refactoring api call con autenticazione e url da .env
-- * gestione PDF in pagina News
+- √ gestione PDF in pagina News
 - associazione prodotti a più categorie
 - refactoring Store locator

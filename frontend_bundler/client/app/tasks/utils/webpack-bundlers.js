@@ -46,6 +46,13 @@ if (!options.production) {
   plugins.push(new webpack.HotModuleReplacementPlugin())
 }
 
+plugins.push(new webpack.DefinePlugin({
+  'process.env': {
+    'LB_API_URL': JSON.stringify(process.env.LB_API_URL),
+    'LB_API_TOKEN': JSON.stringify(process.env.LB_API_TOKEN)
+  }
+}))
+
 const bundlers = {
   scripts: webpack(Object.assign({}, webpackConfigEs5, {
     entry: entries,

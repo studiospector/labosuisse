@@ -3,7 +3,8 @@ import { qsa, qs, on } from '@okiba/dom'
 
 const ui = {
     iconOpenSearch: '.lb-header__top__icons__item--search .lb-open-search',
-    searchForm: '.lb-header__top__icons__item--search .lb-search-form'
+    searchForm: '.lb-header__top__icons__item--search .lb-search-form',
+    searchFormInput: '.lb-header__top__icons__item--search .lb-search-form .lb-search-autocomplete__input'
 }
 
 class Header extends Component {
@@ -28,6 +29,10 @@ class Header extends Component {
 
         setTimeout(() => on([this.ui.iconOpenSearch, qs('.lb-header__top__icons__item--search .custom-input .custom-input__icon--prev')], 'click', this.toggleSearch), 1000)
         on(document, 'click', this.closeSearchOnClickOutside)
+
+        if (this.ui.searchFormInput.value.length > 0) {
+            this.toggleSearch()
+        }
 
         // On scroll trigger with Locomotive
         window.getCustomScrollbar.on('scroll', this.checkScroll)

@@ -13,7 +13,7 @@
 <div class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
 
 	{% if type == 'link' %}
-		<a class="lb-menu__link" href="{{href}}">
+		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
 					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
@@ -96,7 +96,7 @@
 
 
 	{% if type == 'small-link' %}
-		<a class="lb-menu__link lb-menu__link--small" href="{{href}}">
+		<a class="lb-menu__link lb-menu__link--small" href="{{href}}" target="{{ target ? target : '_self' }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
 					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
