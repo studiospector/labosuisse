@@ -52,13 +52,15 @@ class Distributor
     private function parseLinks($links)
     {
         return array_map(function ($item) {
-            return array_merge(
-                $item['lb_distributor_links_list_link'],
-                [
-                    'iconStart' => ['name' => $item['lb_distributor_links_list_icon']],
-                    'variants' => ['link'],
-                ]
-            );
+            if($item['lb_distributor_links_list_link']) {
+                return array_merge(
+                    $item['lb_distributor_links_list_link'],
+                    [
+                        'iconStart' => ['name' => $item['lb_distributor_links_list_icon']],
+                        'variants' => ['link'],
+                    ]
+                );
+            }
         }, $links);
     }
 
