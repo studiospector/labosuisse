@@ -58,8 +58,9 @@ switch ($level) {
 
         // Tipologia
     case 4:
-        echo "Tipologia";
-        break;
+        return wp_safe_redirect(
+            get_search_link()
+        );
 
 
         // Default
