@@ -5,6 +5,12 @@
 use Caffeina\LaboSuisse\Resources\ArchiveMacro;
 use Timber\Timber;
 
+if(!isset($_GET['product_category']) or $_GET['product_category'] === null) {
+    return wp_safe_redirect(
+        get_search_link()
+    );
+}
+
 $archiveMacro = new ArchiveMacro($_GET['product_category']);
 
 $context = [

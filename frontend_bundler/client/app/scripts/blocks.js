@@ -17,6 +17,13 @@ const lbSetExtraPropsToBlockType = (props, blockType, attributes) => {
             className: notDefined ? `lb-post-content` : `lb-post-content ${props.className}`,
         })
     }
+    else if (
+        blockType.name === 'core/embed'
+    ) {
+        return Object.assign(props, {
+            className: notDefined ? `container` : `container ${props.className}`,
+        })
+    }
 
     return props
 }
