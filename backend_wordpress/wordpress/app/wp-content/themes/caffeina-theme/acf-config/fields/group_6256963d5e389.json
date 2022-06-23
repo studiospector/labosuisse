@@ -176,7 +176,11 @@
                             "wpml_cf_preferences": 2,
                             "choices": {
                                 "link": "Default",
-                                "youtube": "Youtube"
+                                "youtube": "Youtube",
+                                "instagram": "Instagram",
+                                "twitter": "Twitter",
+                                "facebook": "Facebook",
+                                "linkedin": "Linkedin"
                             },
                             "default_value": false,
                             "allow_null": 0,
@@ -225,5 +229,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1653568384
+    "modified": 1655973698
 }
