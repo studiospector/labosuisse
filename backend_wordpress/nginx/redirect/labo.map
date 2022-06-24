@@ -1,0 +1,18 @@
+map $request_uri $new_uri {
+    default "";
+
+    # static
+    /it/content/chi-siamo /chi-siamo/;
+
+    # dynamic
+
+    # prodotto e linea prodotto (brand)
+    ~^/it/content/(.*)?$	/ricerca/?lb-search-val=$1;
+    # Categoria Prodotto
+    ~^/it/prodotti/voglio-prendermi-cura-di/(.*)?$	/gallery-tutti-i-prodotti/?product_category=$1;
+    # Categoria Prodotto 2
+    ~^/it/prodotti/ho-bisogno-di/(.*)?$	/gallery-tutti-i-prodotti;
+    # Prodotto (en)
+    ~^/en/content/(.*)?$	/gallery-tutti-i-prodotti;
+
+}
