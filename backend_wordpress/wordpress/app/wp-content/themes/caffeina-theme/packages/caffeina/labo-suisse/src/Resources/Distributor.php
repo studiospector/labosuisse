@@ -51,6 +51,10 @@ class Distributor
 
     private function parseLinks($links)
     {
+        if (empty($links)) {
+            return [];
+        }
+
         return array_map(function ($item) {
             if($item['lb_distributor_links_list_link']) {
                 return array_merge(
@@ -67,6 +71,10 @@ class Distributor
     private function getLaboInTheWorldLinks()
     {
         $laboInTheWorldLinks = (new Option())->getLaboInTheWorldLink();
+
+        if(empty($this->geo_location)) {
+            return [];
+        }
 
         return [
             'label' => __('Scopri i trattamenti distribuiti', 'labo-suisse-theme'),
