@@ -45,6 +45,10 @@ class ArchiveMacro
                 'label' => $brand->name,
             ];
 
+            usort($this->brands, function($a, $b) {
+                return $a['label'] <=> $b['label'];
+            });
+
             $this->products[$brand->term_id]['brand_card'] = $this->getBrandCard($brand);
 
             foreach ($query->posts as $product) {
@@ -112,12 +116,20 @@ class ArchiveMacro
             $needs = $this->getTerms($item);
 
             foreach ($needs as $need) {
-                $this->categories[] = [
-                    'value' => $need->term_id,
-                    'label' => $need->name,
-                ];
+                $typologies = $this->getTerms($need);
+
+                foreach ($typologies as $typology) {
+                    $this->categories[] = [
+                        'value' => $typology->term_id,
+                        'label' => $typology->name,
+                    ];
+                }
             }
         }
+
+        usort($this->categories, function($a, $b) {
+            return $a['label'] <=> $b['label'];
+        });
     }
 
 
