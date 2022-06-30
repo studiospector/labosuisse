@@ -246,6 +246,25 @@ function lb_get_posts_archive_years()
 }
 
 /**
+ * Get Posts count by taxonomy
+ */
+function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms) {
+    $term_posts = get_posts(array(
+        'post_type' => $post_type,
+        'numberposts' => -1,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'slug',
+                'terms'    => $terms
+            )
+        )
+    ));
+    
+    return count($term_posts);
+}
+
+/**
  * Assign global $product object in Timber
  */
 function timber_set_product($post)

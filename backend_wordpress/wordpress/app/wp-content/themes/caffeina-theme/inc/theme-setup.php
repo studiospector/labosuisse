@@ -294,6 +294,7 @@ class ThemeSetup extends Timber\Site
     {
         // "Brand" and "Linea di Prodotto" Archive pages
         if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+            $query->set('post_type', array('product'));
             $query->set('posts_per_page', 12);
         }
 
