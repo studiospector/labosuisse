@@ -1,6 +1,7 @@
 <?php
 
 $brand_obj = get_queried_object();
+$brand_posts_count = get_posts_count_by_taxonomy('product', 'lb-brand', $brand_obj->slug);
 
 $items = [];
 
@@ -20,7 +21,7 @@ $context = [
         'title' => $brand_obj->name,
         'description' => nl2br($brand_obj->description),
     ],
-    'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $brand_obj->count . '</span>',
+    'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $brand_posts_count . '</span>',
     'grid_type' => 'default',
     'items' => $items,
     'pagination' => lb_pagination(),
