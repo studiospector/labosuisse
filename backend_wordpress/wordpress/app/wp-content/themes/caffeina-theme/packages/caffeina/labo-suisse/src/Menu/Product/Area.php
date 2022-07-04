@@ -64,15 +64,15 @@ class Area
             ];
         }
 
-        $items['children'][0]['children'][] = [
-            'type' => 'link',
-            'label' => sprintf(__("Tutte le zone %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
-            'href' => get_term_link($this->parent)
-        ];
+//        $items['children'][0]['children'][] = [
+//            'type' => 'link',
+//            'label' => sprintf(__("Tutte le zone %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
+//            'href' => get_term_link($this->parent)
+//        ];
         $items['children'][0]['children'][] = [
             'type' => 'link-spaced',
             'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
-            'href' => (new Option())->getProductGalleryLink($this->parent->slug)
+            'href' => get_term_link($this->parent)
         ];
 
         return $this->fixDesktopMenu($items);

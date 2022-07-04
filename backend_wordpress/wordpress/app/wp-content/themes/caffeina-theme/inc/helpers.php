@@ -11,7 +11,7 @@ function lb_get_images($id, $sizes = [])
 {
     $data = null;
 
-    if ( !empty($id) ) {
+    if (!empty($id)) {
         $data = [
             'alt' => get_the_title($id),
             'original' => wp_get_attachment_url($id),
@@ -145,7 +145,7 @@ function get_job_location()
 
 function get_all_macro()
 {
-   return get_terms([
+    return get_terms([
         'taxonomy' => 'product_cat',
         'hide_empty' => true,
         'parent' => null,
@@ -248,7 +248,8 @@ function lb_get_posts_archive_years()
 /**
  * Get Posts count by taxonomy
  */
-function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms) {
+function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms)
+{
     $term_posts = get_posts(array(
         'post_type' => $post_type,
         'numberposts' => -1,
@@ -260,7 +261,7 @@ function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms) {
             )
         )
     ));
-    
+
     return count($term_posts);
 }
 
@@ -276,7 +277,8 @@ function timber_set_product($post)
 /**
  * Get current language
  */
-function lb_get_current_lang() {
+function lb_get_current_lang()
+{
     global $sitepress;
 
     $current_lang = $sitepress->get_current_language();
