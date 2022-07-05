@@ -6,22 +6,21 @@ use Timber\Timber;
 
 class ArchiveProduct
 {
-    private $category;
+    private $term;
     private $level;
     private $brands = [];
     private $filterItems = [];
     private $products = [];
     private $totalPosts = 0;
 
-    /**
-     * @param $category
-     */
     public function __construct($term, $level)
     {
-        $this->category = $term;
+        $this->term = $term;
         $this->level = $level;
 
         $this->getFilterItems($term);
+
+        $this->redirectIfNotHasArea();
 
         $this->products();
     }
@@ -75,12 +74,21 @@ class ArchiveProduct
             'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $this->totalPosts . '</span>',
             'items' => $this->products,
             'page_intro' => [
-                'title' => $this->category->name,
-                'description' => nl2br($this->category->description),
+                'title' => $this->term->name,
+                'description' => nl2br($this->term->description),
             ],
         ];
 
         Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
+    }
+
+    private function redirectIfNotHasArea()
+    {
+        if(count($this->filterItems) and $this->filterItems[0]['label'] === $this->term->name) {
+            return wp_safe_redirect(
+                get_term_link(get_term_by('id', $this->filterItems[0]['value'],'product_cat'))
+            );
+        }
     }
 
     private function products()
@@ -164,11 +172,11 @@ class ArchiveProduct
             ]
         ];
 
-        if ($this->category) {
+        if ($this->term) {
             $filters[] = [
                 'taxonomy' => 'product_cat',
                 'field' => 'slug',
-                'terms' => $this->category->slug
+                'terms' => $this->term->slug
             ];
         }
 

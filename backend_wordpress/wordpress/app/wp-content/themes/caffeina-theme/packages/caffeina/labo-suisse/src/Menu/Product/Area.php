@@ -117,7 +117,7 @@ class Area
         $totalNeed = count($items['children'][0]['children']);
         $needName = $items['children'][0]['children'][0]['label'];
 
-        if ($totalNeed === 3 and ($areaName === $needName)) {
+        if ($totalNeed === 2 and ($areaName === $needName)) {
             unset($items['children'][0]);
             $items['children'][1] = $items['children'][1]['children'][0];
             array_unshift($items['children']);
