@@ -64,11 +64,6 @@ class Area
             ];
         }
 
-//        $items['children'][0]['children'][] = [
-//            'type' => 'link',
-//            'label' => sprintf(__("Tutte le zone %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
-//            'href' => get_term_link($this->parent)
-//        ];
         $items['children'][0]['children'][] = [
             'type' => 'link-spaced',
             'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
@@ -99,13 +94,8 @@ class Area
 
         $items['children'][] = [
             'type' => 'link',
-            'label' => sprintf(__("Tutte le zone %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
-            'href' => get_term_link($this->parent)
-        ];
-        $items['children'][] = [
-            'type' => 'link',
             'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
-            'href' => (new Option())->getProductGalleryLink($this->parent->slug)
+            'href' => get_term_link($this->parent)
         ];
 
         return $this->fixMobileMenu($items);
@@ -121,12 +111,6 @@ class Area
             unset($items['children'][0]);
             $items['children'][1] = $items['children'][1]['children'][0];
             array_unshift($items['children']);
-
-            $items['children'][0]['children'][] = [
-                'type' => 'link-spaced',
-                'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
-                'href' => (new Option())->getProductGalleryLink($this->parent->slug)
-            ];
         }
 
         return $items;
@@ -141,6 +125,12 @@ class Area
         if($totalNeed === 2 and ($areaName === $needName)) {
             $items = $items['children'][0];
         }
+
+        $items['children'][] = [
+            'type' => 'link',
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
+            'href' => get_term_link($this->parent)
+        ];
 
         return $items;
     }
