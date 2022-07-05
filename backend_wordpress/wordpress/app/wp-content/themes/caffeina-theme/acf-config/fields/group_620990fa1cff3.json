@@ -81,6 +81,62 @@
             "mime_types": ""
         },
         {
+            "key": "field_62c3fa32a254a",
+            "label": "Sottotitolo",
+            "name": "lb_product_cat_menu_subtitle",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_62c3fa65a254b",
+            "label": "Paragrafo",
+            "name": "lb_product_cat_menu_paragraph",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br"
+        },
+        {
+            "key": "field_62c3fa7fa254c",
+            "label": "Bottone",
+            "name": "lb_product_cat_menu_link",
+            "type": "link",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_62bf082a4ccc9",
             "label": "Card Menu Accordions --- Endpoint",
             "name": "",
@@ -640,5 +696,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656686743
+    "modified": 1657013413
 }

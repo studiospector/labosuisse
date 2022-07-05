@@ -276,11 +276,11 @@
             .card {
                 overflow: hidden;
 
-                @include mq($until: md) {
-                    @media screen and (max-height: 900px) {
-                        display: none;
-                    }
-                }
+                // @include mq($until: md) {
+                //     @media screen and (max-height: 900px) {
+                //         display: none;
+                //     }
+                // }
 
                 .card-infobox {
                     padding-top: 20px;

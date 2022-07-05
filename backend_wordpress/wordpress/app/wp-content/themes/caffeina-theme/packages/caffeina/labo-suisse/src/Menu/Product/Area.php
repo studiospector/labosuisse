@@ -46,7 +46,7 @@ class Area
                     'children' => []
                 ]
             ],
-            'fixed' => [ (new Option())->getMenuFixedCard()]
+            'fixed' => [ (new Option())->getMenuFixedCardByTaxTerm($this->parent)]
         ];
 
         foreach ($this->areas as $i => $area) {

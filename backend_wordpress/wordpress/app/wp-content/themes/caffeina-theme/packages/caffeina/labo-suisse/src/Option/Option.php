@@ -200,12 +200,12 @@ class Option
         ];
     }
 
-    public function getMenuFixedCard($device='desktop')
+    public function getMenuFixedCard($location, $device = 'desktop')
     {
-        $cta = $this->getOption('lb_menu_fixed_card_btn');
+        $cta = $this->getOption("lb_menu_fixed_card_{$location}_btn");
 
         if ($cta) {
-            $cta = array_merge($this->getOption('lb_menu_fixed_card_btn'), [ 'variants' => ['quaternary']]);
+            $cta = array_merge($this->getOption("lb_menu_fixed_card_{$location}_btn"), [ 'variants' => ['quaternary']]);
         } else {
             $cta = [];
         }
@@ -213,10 +213,35 @@ class Option
         return [
             'type' => 'card',
             'data' => [
-                'images' => lb_get_images($this->getOption('lb_menu_fixed_card_image')),
+                'images' => lb_get_images($this->getOption("lb_menu_fixed_card_{$location}_image")),
                 'infobox' => [
-                    'subtitle' => $this->getOption('lb_menu_fixed_card_subtitle'),
-                    'paragraph' => $this->getOption('lb_menu_fixed_card_paragraph'),
+                    'subtitle' => $this->getOption("lb_menu_fixed_card_{$location}_subtitle"),
+                    'paragraph' => $this->getOption("lb_menu_fixed_card_{$location}_paragraph"),
+                    'cta' => $cta
+                ],
+                'type' => ($device === 'desktop') ? 'type-3' : 'type-1',
+                'variants' => null
+            ],
+        ];
+    }
+
+    public function getMenuFixedCardByTaxTerm($term, $device = 'desktop')
+    {
+        $cta = get_field('lb_product_cat_menu_link', $term);
+
+        if ($cta) {
+            $cta = array_merge(get_field('lb_product_cat_menu_link', $term), [ 'variants' => ['quaternary']]);
+        } else {
+            $cta = [];
+        }
+
+        return [
+            'type' => 'card',
+            'data' => [
+                'images' => lb_get_images(get_field('lb_product_cat_menu_image', $term)),
+                'infobox' => [
+                    'subtitle' => get_field('lb_product_cat_menu_subtitle', $term),
+                    'paragraph' => get_field('lb_product_cat_menu_paragraph', $term),
                     'cta' => $cta
                 ],
                 'type' => ($device === 'desktop') ? 'type-3' : 'type-1',

@@ -47,7 +47,7 @@ class Brands
                     'children' => []
                 ]
             ],
-            'fixed' => [ (new Option())->getMenuFixedCard()]
+            'fixed' => [ (new Option())->getMenuFixedCard('brands')]
         ];
 
         foreach ($this->brands as $i => $brand) {

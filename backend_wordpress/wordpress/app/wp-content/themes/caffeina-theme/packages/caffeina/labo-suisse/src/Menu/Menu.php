@@ -36,7 +36,7 @@ class Menu
                 (new DiscoverLabo())->get('mobile')
             ),
             'fixed' => [
-                (new Option())->getMenuFixedCard('mobile'),
+                // (new Option())->getMenuFixedCard('mobile'),
                 [
                     'type' => 'small-link',
                     'label' => __('Profilo', 'labo-suisse-theme'),
