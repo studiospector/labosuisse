@@ -432,7 +432,8 @@ class ThemeSetup extends Timber\Site
     /**
      * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
      */
-    public function lb_parse_cf7_fields($tag) {
+    public function lb_parse_cf7_fields($tag)
+    {
         $datas = [];
         foreach ((array)$tag['options'] as $option) {
             if (strpos($option, 'data-') === 0) {
@@ -478,7 +479,8 @@ class ThemeSetup extends Timber\Site
      *
      * @return bool Whether or not a given post type should be excluded.
      */
-    public function lb_exclude_post_types_from_sitemap( $excluded, $post_type ) {
+    public function lb_exclude_post_types_from_sitemap($excluded, $post_type)
+    {
         return $post_type === 'lb-distributor';
     }
 }

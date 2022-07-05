@@ -30,7 +30,7 @@ class Need
             ];
         }
 
-        $items[] = ['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => get_term_link($this->parent)];
+        $items[] = ['type' => 'link-spaced', 'label' => 'Tutti i prodotti ' . $this->parent->name, 'href' => get_term_link($this->parent)];
 
         return $items;
     }
