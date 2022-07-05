@@ -96,8 +96,7 @@ class Brands
         ));
 
         $items = [
-            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))],
-            ['type' => 'link', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)],
+            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))]
         ];
 
         foreach ($lines as $line) {
@@ -108,6 +107,7 @@ class Brands
             ];
         }
 
+        $items[] = ['type' => 'link-spaced', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)];
         return $items;
     }
 }
