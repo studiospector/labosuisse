@@ -65,6 +65,8 @@ class ThemeSetup extends Timber\Site
         add_filter('wpseo_exclude_from_sitemap_by_post_ids', array($this, 'lb_exclude_specific_posts_from_sitemap'));
         add_filter('wpseo_sitemap_exclude_post_type', array($this, 'lb_exclude_post_types_from_sitemap'), 10, 2);
 
+        add_filter('woocommerce_enqueue_styles', '__return_empty_array', 999);
+
         parent::__construct();
     }
 
