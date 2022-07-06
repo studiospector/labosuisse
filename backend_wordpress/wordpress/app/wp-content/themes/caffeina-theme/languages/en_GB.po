@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-06-30 10:02+0000\n"
+"PO-Revision-Date: 2022-07-06 13:14+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -31,7 +31,7 @@ msgstr "Add your Cookiebot ID to show cookie declarations."
 msgid "Ambito:"
 msgstr "Scope:"
 
-#: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71 template-archive-macro.php:30 template-archive-macro.php:42 template-distributor.php:31 template-lb-brand-archive.php:65 template-lb-brand-archive.php:77 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:130 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:142
+#: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71 template-distributor.php:31 template-lb-brand-archive.php:65 template-lb-brand-archive.php:77 packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44 packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:130 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:142
 msgid "Applica"
 msgstr "Apply"
 
@@ -43,7 +43,7 @@ msgstr "Articles"
 msgid "Articolo"
 msgstr "Article"
 
-#: template-archive-macro.php:26 template-distributor.php:27 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:126 packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:105
+#: template-distributor.php:27 packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:40 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:126 packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:105
 msgid "Brand"
 msgstr "Brand"
 
@@ -71,7 +71,7 @@ msgstr "Search for any content on the site."
 msgid "Cerca un argomento, prodotto, linea..."
 msgstr "Search for a topic, product, line ..."
 
-#: searchform.php:8 inc/helpers.php:304
+#: searchform.php:8 inc/helpers.php:325
 msgid "Cerca un prodotto, una linea..."
 msgstr "Search for a product, a line ..."
 
@@ -79,7 +79,7 @@ msgstr "Search for a product, a line ..."
 msgid "Cerca un’altra città a te vicina per scoprire le date a calendario."
 msgstr "Search for another city near you to find out the dates on the calendar."
 
-#: home.php:81 template-archive-macro.php:62 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:162
+#: home.php:81 packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:65 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:162
 msgid "Cerca... (inserisci almeno 3 caratteri)"
 msgstr "Search ... (enter at least 3 characters)"
 
@@ -123,6 +123,10 @@ msgstr "404 Error"
 msgid "Esigenza"
 msgstr "Need"
 
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:192
+msgid "Esigenze"
+msgstr "Need"
+
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:76
 msgid "FAQ"
 msgstr "FAQ"
@@ -148,7 +152,7 @@ msgstr "Enter city, province, postcode, ..."
 msgid "Inserisci provincia"
 msgstr "Enter province"
 
-#: inc/helpers.php:337
+#: inc/helpers.php:358
 msgid "Iscriviti alla newsletter"
 msgstr "Subscribe to the newsletter"
 
@@ -197,7 +201,7 @@ msgstr "No upcoming events<br>expected in your province."
 msgid "Nessun risultato trovato"
 msgstr "No results found"
 
-#: inc/helpers.php:332
+#: inc/helpers.php:353
 msgid "Newsletter"
 msgstr "Newsletter"
 
@@ -205,7 +209,7 @@ msgstr "Newsletter"
 msgid "Per Brand"
 msgstr "For Brand"
 
-#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:61 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:95
+#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:61 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:90
 msgid "Per Esigenza"
 msgstr "For Need"
 
@@ -213,7 +217,7 @@ msgstr "For Need"
 msgid "Per linea di prodotto"
 msgstr "By product line"
 
-#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:41 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:86
+#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:41 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:81
 msgid "Per Zona"
 msgstr "For Area"
 
@@ -241,7 +245,7 @@ msgstr "Reviews"
 msgid "Ricerca globale"
 msgstr "Global search"
 
-#: inc/helpers.php:338
+#: inc/helpers.php:359
 msgid "Ricevi aggiornamenti e promozioni direttamente sulla tua mail."
 msgstr "Receive updates and promotions directly to your email."
 
@@ -257,7 +261,7 @@ msgstr "Search results"
 msgid "risultati per"
 msgstr "results for"
 
-#: archive-lb-beauty-specialist.php:25 taxonomy-lb-brand.php:23 template-archive-macro.php:75 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:171
+#: archive-lb-beauty-specialist.php:25 taxonomy-lb-brand.php:24 packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:74 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:171
 msgid "Risultati:"
 msgstr "Results:"
 
@@ -273,7 +277,7 @@ msgstr "Find out more"
 msgid "Scopri i trattamenti distribuiti"
 msgstr "Discover the treatments distributed"
 
-#: packages/caffeina/labo-suisse/src/Resources/ArchiveMacro.php:102 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:95 packages/caffeina/labo-suisse/src/Resources/Posts/Product.php:21
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:139 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:95 packages/caffeina/labo-suisse/src/Resources/Posts/Product.php:21
 msgid "Scopri il brand"
 msgstr "Discover the brand"
 
@@ -306,10 +310,6 @@ msgid "Template Application"
 msgstr "Template Application"
 
 #. Name of the template
-msgid "Template Archive Macro categoria"
-msgstr "Template Archive Macro categoria"
-
-#. Name of the template
 msgid "Template Assistenza"
 msgstr "Template Assistenza"
 
@@ -337,7 +337,7 @@ msgstr "Template Offset Nav"
 msgid "Template Ricerca"
 msgstr "Template Ricerca"
 
-#: template-archive-macro.php:38 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:138
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:194 packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:138
 msgid "Tipi di prodotto"
 msgstr "Product types"
 
@@ -357,16 +357,11 @@ msgstr "Back to Home Page"
 msgid "Trova una farmacia concessionaria"
 msgstr "Find a licensed pharmacy"
 
-#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:69 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:102
-#, php-format
-msgid "Tutte le zone %s"
-msgstr "All areas %s"
-
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:36 packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:75
 msgid "Tutti i Brand"
 msgstr "All Brands"
 
-#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:74 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:107 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:127
+#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:69 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:97 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:131
 #, php-format
 msgid "Tutti i prodotti %s"
 msgstr "All products %s"
@@ -383,7 +378,7 @@ msgstr "Go to the brand"
 msgid "Vai alle indicazioni"
 msgstr "Go to directions"
 
-#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:100
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:110
 msgid "Vedi tutti i prodotti"
 msgstr "See all products"
 
@@ -401,4 +396,8 @@ msgstr "View"
 
 #: template-lb-brand-archive.php:61
 msgid "Zona"
+msgstr "Area"
+
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:190
+msgid "Zone"
 msgstr "Area"

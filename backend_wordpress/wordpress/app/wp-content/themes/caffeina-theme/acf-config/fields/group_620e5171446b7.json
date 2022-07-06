@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 0,
             "placement": "left",
             "endpoint": 0
         },
@@ -994,5 +994,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1653482014
+    "modified": 1657113664
 }
