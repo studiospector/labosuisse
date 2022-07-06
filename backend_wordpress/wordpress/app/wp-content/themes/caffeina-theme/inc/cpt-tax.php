@@ -39,7 +39,7 @@ function lb_brand_page_cpt_init()
             'filter_items_list' => __('Filtra elenco Brand pages', 'lb-brand-page-cpt'),
         ),
         'menu_icon' => 'dashicons-media-default',
-        'supports' => array('title', 'editor', 'thumbnail'),
+        'supports' => array('title', 'editor', 'thumbnail', 'excerpt'),
         'taxonomies' => array(),
         'public' => true,
         'show_ui' => true,
