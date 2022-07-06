@@ -72,6 +72,10 @@ RUN apk --no-cache add \
   php8-xmlwriter \
   php8-redis \
   php8-tokenizer \
+  libmemcached \
+  libmemcached-libs \
+  libmemcached-dev \
+  php8-pecl-memcached \
   # required by NR agent
   pcre
 
