@@ -42,6 +42,9 @@ services:
       minimum: 50
       maximum: 200
     scale:
-      count: 1
+      targets:
+        cpu: 80
+        memory: 90
+      count: 1-16
       cpu: 512
-      memory: 1024
+      memory: 512
