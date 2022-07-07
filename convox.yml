@@ -43,8 +43,8 @@ services:
       maximum: 200
     scale:
       targets:
-        cpu: 80
+        cpu: 70
         memory: 90
       count: 1-16
       cpu: 512
-      memory: 512
+      memory: 1024
