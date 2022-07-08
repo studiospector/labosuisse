@@ -111,6 +111,8 @@ class SearchAutocomplete extends Component {
             // const selection = feedback.selection.value[feedback.selection.key]
             const selection = feedback.selection.value
             autoCompleteJS.input.value = selection
+
+            this.el.submit()
         })
 
         autoCompleteJS.input.addEventListener("navigate", (event) => {
