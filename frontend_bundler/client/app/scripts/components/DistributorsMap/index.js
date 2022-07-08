@@ -229,6 +229,8 @@ class DistributorsMap extends Component {
             // },
         }
 
+        window.getCustomScrollbar.destroy()
+
         // Google map Loader
         this.loader = new Loader({
             apiKey: 'AIzaSyCG7SmW_OVvWwj1ngGzqBdLhOGgpXTpBnM',
