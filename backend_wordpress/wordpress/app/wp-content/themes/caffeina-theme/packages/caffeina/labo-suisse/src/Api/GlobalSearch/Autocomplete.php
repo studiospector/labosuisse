@@ -29,7 +29,7 @@ class Autocomplete
         );
 
         return array_map(function ($item) {
-            return preg_replace('/\s+/', ' ', strip_tags($item));
+            return preg_replace('/\s+/', ' ', preg_replace("#<br\s?/?>#", ' ', $item));
         }, $values);
     }
 
