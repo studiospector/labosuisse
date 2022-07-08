@@ -22,11 +22,15 @@ class Autocomplete
         $archive = $this->getArchive();
         $brands = $this->getBrands();
 
-        return array_values(
+        $values = array_values(
             array_unique(
                 array_merge($archive, $brands)
             )
         );
+
+        return array_map(function ($item) {
+            return preg_replace('/\s+/', ' ', strip_tags($item));
+        }, $values);
     }
 
     private function getArchive()
