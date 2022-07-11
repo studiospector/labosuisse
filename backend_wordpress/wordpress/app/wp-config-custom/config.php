@@ -28,6 +28,8 @@ define('DB_USER', $dsn->user);
 define('DB_PASSWORD', isset($dsn->pass) ? $dsn->pass : null);
 define('DB_HOST', isset($dsn->port) ? "{$dsn->host}:{$dsn->port}" : $dsn->host);
 
+define('W3TC_PRO_DEV_MODE', getenv('W3TC_PRO_DEV_MODE') === 'true');
+
 /* Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
 

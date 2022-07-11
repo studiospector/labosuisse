@@ -11,6 +11,9 @@ services:
     volumes:
       - 'backend_media:/uploads'
     environment:
+      W3TC_PRO_DEV_MODE: '${W3TC_PRO_DEV_MODE}'
+      W3TC_PRO_KEY: ${W3TC_PRO_KEY}
+      MEMCACHED_URL: ${MEMCACHED_URL}
       VIRTUAL_HOST: '${VIRTUAL_HOST}'
       LETSENCRYPT_HOST: '${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
@@ -94,6 +97,11 @@ services:
     restart: on-failure
   storage_redis:
     image: redis
+    restart: unless-stopped
+    networks:
+      - labo-website-2021
+  storage_memcached:
+    image: memcached
     restart: unless-stopped
     networks:
       - labo-website-2021
