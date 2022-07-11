@@ -12,7 +12,8 @@
         "frontend_static",
         "frontend_storybook",
         "storage_mysql",
-        "storage_redis"
+        "storage_redis",
+        "storage_memcached"
     ],
     "repository": {
         "REPO_EXIST": false,

@@ -16,6 +16,9 @@ services:
       front-tier: null
     environment:
       DEBUG: '${DEBUG}'
+      W3TC_PRO_DEV_MODE: '${W3TC_PRO_DEV_MODE}'
+      W3TC_PRO_KEY: ${W3TC_PRO_KEY}
+      MEMCACHED_URL: ${MEMCACHED_URL}
       WP_CONTENT_CUSTOM_DIR: '${WP_CONTENT_CUSTOM_DIR}'
       VIRTUAL_HOST: '${VIRTUAL_HOST}.localhost'
       DATABASE_URL: '${DATABASE_URL}'
@@ -44,6 +47,8 @@ services:
       - 'backend_media:/uploads'
       - >-
         ../backend_wordpress/wordpress/app/wp-content/themes:/var/www/html/wp-content-custom/themes
+      - >-
+        ../backend_wordpress/wordpress/app/wp-content/w3tc-config:/var/www/html/wp-content-custom/w3tc-config
       - >-
         ../backend_wordpress/wordpress/app/wp-content/plugins:/var/www/html/wp-content-custom/plugins
       - >-
@@ -186,6 +191,11 @@ services:
       - 'storage_mysql:/var/lib/mysql:rw'
   storage_redis:
     image: redis
+    restart: unless-stopped
+    networks:
+      - labo-website-2021
+  storage_memcached:
+    image: memcached
     restart: unless-stopped
     networks:
       - labo-website-2021
