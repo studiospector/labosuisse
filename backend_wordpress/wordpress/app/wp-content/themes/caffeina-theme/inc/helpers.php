@@ -253,6 +253,7 @@ function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms)
     $term_posts = get_posts(array(
         'post_type' => $post_type,
         'numberposts' => -1,
+        'suppress_filters' => false,
         'tax_query' => array(
             array(
                 'taxonomy' => $taxonomy,
