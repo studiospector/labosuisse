@@ -14,6 +14,8 @@ class SearchAutocomplete extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
+        this.lang = document.documentElement.lang
+
         this.labelResLess = this.el.dataset.labelResLess
         this.labelResMore = this.el.dataset.labelResMore
 
@@ -42,7 +44,7 @@ class SearchAutocomplete extends Component {
                     try {
                         this.ui.input.updateState('disable')
 
-                        const { data } = await axiosClient.get('/wp-json/v1/global-search/autocomplete')
+                        const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/global-search/autocomplete`)
 
                         this.ui.input.updateState('active')
                         

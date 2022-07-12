@@ -49,6 +49,9 @@ class Assets
         // wp_dequeue_style('wp-block-library-css');
 
         wp_dequeue_style('wc-blocks-style');
+
+        wp_dequeue_style('wcml-dropdown-0');
+        wp_dequeue_style('wpml-legacy-horizontal-list-0');
     }
 
 

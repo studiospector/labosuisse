@@ -19,6 +19,7 @@ class DistributorsMap extends Component {
         super({ el, ui })
 
         // Base vars
+        this.lang = document.documentElement.lang
         this.google = null
         this.map = null
         this.distributors = null
@@ -334,7 +335,7 @@ class DistributorsMap extends Component {
         let stores = []
 
         try {
-            const { data } = await axiosClient.get(`/wp-json/v1/distributors`);
+            const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/distributors`);
             stores = data
         } catch (error) {
             console.error(error);
