@@ -7,6 +7,7 @@ function setSettings()
     $settings->{'dbcache.memcached.servers'}[0] = getenv('MEMCACHED_URL');
     $settings->{'pgcache.memcached.servers'}[0] = getenv('MEMCACHED_URL');
     $settings->{'objectcache.memcached.servers'}[0] = getenv('MEMCACHED_URL');
+    $settings->{'minify.memcached.servers'}[0] = getenv('MEMCACHED_URL');
 
     save($settings);
 }
