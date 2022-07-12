@@ -295,6 +295,7 @@ function lb_pagination()
     $pagination_html = null;
 
     $pagination = get_the_posts_pagination([
+        'screen_reader_text' => '&nbsp;',
         'mid_size' => 2,
         'prev_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-left']) . '</div>',
         'next_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-right']) . '</div>',
