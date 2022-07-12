@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-06 13:13+0000\n"
+"POT-Creation-Date: 2022-07-12 10:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "Cerca un argomento, prodotto, linea..."
 msgstr ""
 
-#: searchform.php:8 inc/helpers.php:325
+#: searchform.php:8 inc/helpers.php:326
 msgid "Cerca un prodotto, una linea..."
 msgstr ""
 
@@ -97,7 +97,7 @@ msgid "Descrizione del ruolo:"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:19
-msgid "Descrizione e inci"
+msgid "Descrizione e INCI"
 msgstr ""
 
 #: woocommerce/loop/add-to-cart.php:41
@@ -153,7 +153,7 @@ msgstr ""
 msgid "Inserisci provincia"
 msgstr ""
 
-#: inc/helpers.php:358
+#: inc/helpers.php:359
 msgid "Iscriviti alla newsletter"
 msgstr ""
 
@@ -202,7 +202,7 @@ msgstr ""
 msgid "Nessun risultato trovato"
 msgstr ""
 
-#: inc/helpers.php:353
+#: inc/helpers.php:354
 msgid "Newsletter"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Ricerca globale"
 msgstr ""
 
-#: inc/helpers.php:359
+#: inc/helpers.php:360
 msgid "Ricevi aggiornamenti e promozioni direttamente sulla tua mail."
 msgstr ""
 
@@ -358,11 +358,11 @@ msgstr ""
 msgid "Trova una farmacia concessionaria"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:36 packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:75
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:36 packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:42 packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:75
 msgid "Tutti i Brand"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:69 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:97 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:131
+#: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:69 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:97 packages/caffeina/labo-suisse/src/Menu/Product/Area.php:131 packages/caffeina/labo-suisse/src/Menu/Product/Need.php:35
 #, php-format
 msgid "Tutti i prodotti %s"
 msgstr ""
