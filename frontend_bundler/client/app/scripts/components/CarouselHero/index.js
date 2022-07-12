@@ -19,10 +19,10 @@ class CarouselHero extends Component {
         // Init swiper
         this.swiper = new Swiper(this.el, {
             speed: 400,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
-            },
+            // autoplay: {
+            //     delay: 5000,
+            //     disableOnInteraction: false
+            // },
             grabCursor: true,
             effect: 'fade',
             fadeEffect: {
@@ -43,6 +43,12 @@ class CarouselHero extends Component {
                 },
             }
         })
+
+        setTimeout(() => {
+            this.swiper.params.autoplay.delay = 5000
+            this.swiper.params.autoplay.disableOnInteraction = false
+            this.swiper.autoplay.start()
+        }, 8000)
 
         this.initAnimations(this.swiper)
     }

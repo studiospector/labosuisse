@@ -4,6 +4,10 @@
     justify-content: center;
     align-items: center;
 
+    .screen-reader-text {
+        display: none;
+    }
+
     .nav-links {
         display: flex;
         align-items: center;

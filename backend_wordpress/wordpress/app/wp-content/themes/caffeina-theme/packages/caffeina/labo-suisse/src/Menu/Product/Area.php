@@ -66,7 +66,7 @@ class Area
 
         $items['children'][0]['children'][] = [
             'type' => 'link-spaced',
-            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
             'href' => get_term_link($this->parent)
         ];
 
@@ -94,7 +94,7 @@ class Area
 
         $items['children'][] = [
             'type' => 'link',
-            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
             'href' => get_term_link($this->parent)
         ];
 
@@ -128,7 +128,7 @@ class Area
 
         $items['children'][] = [
             'type' => 'link',
-            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), strtolower($this->parent->name)),
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
             'href' => get_term_link($this->parent)
         ];
 

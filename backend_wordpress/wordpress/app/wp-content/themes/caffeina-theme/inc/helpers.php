@@ -253,6 +253,7 @@ function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms)
     $term_posts = get_posts(array(
         'post_type' => $post_type,
         'numberposts' => -1,
+        'suppress_filters' => false,
         'tax_query' => array(
             array(
                 'taxonomy' => $taxonomy,
@@ -294,6 +295,7 @@ function lb_pagination()
     $pagination_html = null;
 
     $pagination = get_the_posts_pagination([
+        'screen_reader_text' => '&nbsp;',
         'mid_size' => 2,
         'prev_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-left']) . '</div>',
         'next_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-right']) . '</div>',

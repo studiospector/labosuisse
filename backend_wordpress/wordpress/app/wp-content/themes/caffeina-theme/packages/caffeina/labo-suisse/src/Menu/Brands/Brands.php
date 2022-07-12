@@ -39,7 +39,7 @@ class Brands
                     'type' => 'submenu',
                     'label' => __('Per Brand', 'labo-suisse-theme'),
                     'children' => [
-                        ['type' => 'link', 'label' => 'Tutti i brand', 'href' => $this->option->getArchiveBrandLink()]
+                        ['type' => 'link', 'label' => __('Tutti i Brand', 'labo-suisse-theme'), 'href' => $this->option->getArchiveBrandLink()]
                     ]
                 ],
                 [
