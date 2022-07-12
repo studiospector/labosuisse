@@ -1,7 +1,7 @@
 import Component from '@okiba/component'
 import { qs, on } from '@okiba/dom'
 
-import Swiper from 'swiper/bundle';
+import Swiper, { Pagination } from 'swiper'
 
 const ui = {
     pagination: '.swiper-pagination'
@@ -14,6 +14,7 @@ class CarouselPosts extends Component {
 
         // Swiper Default params
         const swiperDefault = {
+            modules: [ Pagination ],
             speed: 400,
             slidesPerView: 1,
             spaceBetween: 20,
@@ -25,11 +26,13 @@ class CarouselPosts extends Component {
             },
             pagination: {
                 el: this.ui.pagination,
+                type: 'bullets',
             },
         }
 
         // Swiper Two posts variant params
         const swiperTwoPosts = {
+            modules: [ Pagination ],
             slidesPerView: 1,
             spaceBetween: 20,
             breakpoints: {

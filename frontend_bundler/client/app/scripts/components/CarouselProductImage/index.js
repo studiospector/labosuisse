@@ -3,7 +3,7 @@ import Component from '@okiba/component'
 import PhotoSwipeLightbox from 'photoswipe/dist/photoswipe-lightbox.esm.js'
 import PhotoSwipe from 'photoswipe/dist/photoswipe.esm.js'
 
-import Swiper from 'swiper/bundle'
+import Swiper, { Pagination } from 'swiper'
 
 const ui = {
     desktop: '.lb-product-gallery__desktop',
@@ -84,6 +84,7 @@ class CarouselProductImage extends Component {
 
         // Slider mobile
         this.slider = new Swiper(this.ui.sliderMobile, {
+            modules: [ Pagination ],
             autoHeight: true,
             slidesPerView: 1,
             spaceBetween: 30,

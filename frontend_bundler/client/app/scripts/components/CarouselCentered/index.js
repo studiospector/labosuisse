@@ -1,6 +1,6 @@
 import Component from '@okiba/component'
 
-import Swiper from 'swiper/bundle';
+import Swiper, { Navigation } from 'swiper'
 
 const ui = {
     nextElement: '.swiper-button-next',
@@ -15,6 +15,7 @@ class CarouselCentered extends Component {
         setTimeout(() => {
             // Init swiper
             this.swiper = new Swiper(this.el, {
+                modules: [ Navigation ],
                 // loop: true,
                 slidesPerView: 1,
                 centeredSlides: false,
