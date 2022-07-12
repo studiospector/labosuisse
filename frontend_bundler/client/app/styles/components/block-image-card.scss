@@ -26,6 +26,16 @@
     &__card {
         flex: 1 1 50%;
 
+        .infobox {
+            &__title,
+            &__subtitle {
+                font-weight: 600;
+                font-size: rem(30);
+                line-height: rem(38);
+                letter-spacing: 0.02em;
+            }
+        }
+
         @include mq($until: md) {
             flex: 1;
             text-align: center;
