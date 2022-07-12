@@ -98,6 +98,11 @@
                 &--lang {
                     .wpml-ls {
                         padding-left: 0;
+
+                        ul {
+                            margin: 0;
+                            margin-right: 10px;
+                        }
     
                         .wpml-ls-link {
                             padding-right: 0;
@@ -105,6 +110,7 @@
                             font-size: rem(14);
                             font-weight: 300;
                             color: map-get($colors, "black");
+                            text-decoration: none;
                         }
                     }
                 }
