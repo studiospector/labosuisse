@@ -491,3 +491,15 @@ new ThemeSetup();
 new Clean();
 new Assets();
 new CookiebotDeclarationShortcode;
+
+
+
+// function filter_wp_image_editors( $array ) {
+//     return array('WP_Image_Editor_Imagick');
+// }
+// add_filter('wp_image_editors', 'filter_wp_image_editors', 10, 1);
+
+// function filter_jpeg_quality( $int, $edit_image ) {
+//     return 90;
+// }
+// add_filter('jpeg_quality', 'filter_jpeg_quality', 10, 2);
