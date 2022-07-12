@@ -82,15 +82,20 @@ RUN apk --no-cache add \
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
+COPY ./backend_wordpress/wordpress/docker/entrypoint.sh /entrypoint.sh
 
 USER nobody
 
 # overrides for nginx conf
 COPY ./backend_wordpress/config/php.ini /etc/php8/conf.d/custom.ini
-COPY ./backend_wordpress/nginx /etc/nginx
+COPY backend_wordpress/php-fpm.d/www.conf /etc/php8/php-fpm.d/www.conf
+COPY --chown=nobody ./backend_wordpress/nginx /etc/nginx
 
 # copy final code
 COPY --from=wordpress --chown=nobody /var/www/html /var/www/html
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 FROM production AS dev
 
