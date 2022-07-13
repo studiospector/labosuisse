@@ -36,7 +36,7 @@ class CarouselHero extends Component {
             on: {
                 init: debounce((swiperObj) => {
                     this.transitionStart(swiperObj)
-                }, 800),
+                }, 10),
                 slideChangeTransitionStart: (swiperObj) => {
                     this.transitionStart(swiperObj)
                 },
@@ -50,7 +50,7 @@ class CarouselHero extends Component {
             this.swiper.params.autoplay.delay = 5000
             this.swiper.params.autoplay.disableOnInteraction = false
             this.swiper.autoplay.start()
-        }, 8000)
+        }, 10000)
 
         this.initAnimations(this.swiper)
     }
