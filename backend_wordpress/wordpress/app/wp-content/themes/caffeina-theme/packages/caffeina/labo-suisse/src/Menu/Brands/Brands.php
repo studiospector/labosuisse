@@ -80,14 +80,14 @@ class Brands
             $items['children'][] = [
                 'type' => 'submenu',
                 'label' => $brand->name,
-                'children' => $this->getProductLines($brand)
+                'children' => $this->getProductLines($brand, 'mobile')
             ];
         }
 
         return [$items];
     }
 
-    private function getProductLines($brand)
+    private function getProductLines($brand, $device = 'desktop')
     {
         $lines =  get_terms(array(
             'taxonomy' => 'lb-brand',
@@ -107,7 +107,11 @@ class Brands
             ];
         }
 
-        $items[] = ['type' => 'link-spaced', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)];
+        $type = ($device === 'desktop')
+            ? 'link-spaced'
+            : 'link';
+
+        $items[] = ['type' => $type, 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)];
         return $items;
     }
 }
