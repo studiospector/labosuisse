@@ -21,8 +21,8 @@ class AnimationImage extends Component {
         const timeout = (this.revealType == 'intro') ? 1500 : 1
 
         ScrollTrigger.matchMedia({
-            "(min-width: 769px)": this.onDesktopMatch,
-            "(max-width: 768px)": this.onMobileMatch
+            "(min-width: 768px)": this.onDesktopMatch,
+            "(max-width: 767px)": this.onMobileMatch
         })
 
         setTimeout(() => {

@@ -15,7 +15,7 @@
             }
 
             .card {
-                height: auto;
+                height: 100%;
                 padding: 70px;
 
                 @include mq($until: md) {
@@ -75,6 +75,7 @@
                 background-color: map-get($colors, "primary-light-1");
 
                 .card {
+                    height: auto;
                     padding-right: 0;
                     
                     @include mq($until: lg) {

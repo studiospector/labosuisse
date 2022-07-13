@@ -1,7 +1,7 @@
 import Component from '@okiba/component'
 import { debounce } from '@okiba/functions'
 
-import Swiper from 'swiper/bundle'
+import Swiper, { Pagination, Autoplay, EffectFade } from 'swiper'
 import { gsap } from "gsap"
 import { SplitText } from "gsap/SplitText"
 
@@ -18,6 +18,7 @@ class CarouselHero extends Component {
 
         // Init swiper
         this.swiper = new Swiper(this.el, {
+            modules: [ Pagination, Autoplay, EffectFade ],
             speed: 400,
             // autoplay: {
             //     delay: 5000,
@@ -30,11 +31,12 @@ class CarouselHero extends Component {
             },
             pagination: {
                 el: this.ui.pagination,
+                type: 'bullets',
             },
             on: {
                 init: debounce((swiperObj) => {
                     this.transitionStart(swiperObj)
-                }, 800),
+                }, 10),
                 slideChangeTransitionStart: (swiperObj) => {
                     this.transitionStart(swiperObj)
                 },
@@ -48,7 +50,7 @@ class CarouselHero extends Component {
             this.swiper.params.autoplay.delay = 5000
             this.swiper.params.autoplay.disableOnInteraction = false
             this.swiper.autoplay.start()
-        }, 8000)
+        }, 10000)
 
         this.initAnimations(this.swiper)
     }
