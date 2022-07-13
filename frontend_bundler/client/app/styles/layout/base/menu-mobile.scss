@@ -253,9 +253,11 @@
 
                                 .wpml-ls-link {
                                     width: 100%;
+                                    display: inline-block;
                                     padding: 16px 15px;
                                     font-weight: 300;
                                     color: map-get($colors, "black");
+                                    text-decoration: none;
                                 }
                             }
     
