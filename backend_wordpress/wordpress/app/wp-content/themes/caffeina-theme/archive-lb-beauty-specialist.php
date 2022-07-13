@@ -24,6 +24,7 @@ $context = [
     'card_link_label' => __('Vai alle indicazioni', 'labo-suisse-theme'),
     'num_posts_label' => __('Risultati:', 'labo-suisse-theme'),
     'num_posts' => $items['count'],
+    'form_action' => get_post_type_archive_link('lb-beauty-specialist') . '#lb-form-container',
     'items' => $items['items'],
     'no_results' => [
         'title' => __('Nessun evento previsto<br>prossimamente nella tua provincia.', 'labo-suisse-theme'),
