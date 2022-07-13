@@ -25,8 +25,8 @@ class CarouselCentered extends Component {
                     prevEl: this.ui.prevElement,
                 },
                 breakpoints: {
-                    // when window width is >= 768px
-                    768: {
+                    // when window width is >= 767px
+                    767: {
                         slidesPerView: 'auto',
                         centeredSlides: true,
                         spaceBetween: 80,

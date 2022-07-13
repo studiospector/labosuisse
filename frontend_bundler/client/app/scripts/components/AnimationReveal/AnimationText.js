@@ -28,8 +28,8 @@ class AnimationText extends Component {
         this.revealType = revealType
 
         ScrollTrigger.matchMedia({
-            "(min-width: 769px)": this.onDesktopMatch,
-            "(max-width: 768px)": this.onMobileMatch
+            "(min-width: 768px)": this.onDesktopMatch,
+            "(max-width: 767px)": this.onMobileMatch
         })
 
         this.init()

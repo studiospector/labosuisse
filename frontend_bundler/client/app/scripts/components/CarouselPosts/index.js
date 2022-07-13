@@ -19,8 +19,8 @@ class CarouselPosts extends Component {
             slidesPerView: 1,
             spaceBetween: 20,
             breakpoints: {
-                // when window width is >= 768px
-                768: {
+                // when window width is >= 767px
+                767: {
                     spaceBetween: 30,
                 },
             },
@@ -36,8 +36,8 @@ class CarouselPosts extends Component {
             slidesPerView: 1,
             spaceBetween: 20,
             breakpoints: {
-                // when window width is >= 768px
-                768: {
+                // when window width is >= 767px
+                767: {
                     slidesPerView: 1,
                     spaceBetween: 70,
                 },
@@ -67,7 +67,7 @@ class CarouselPosts extends Component {
     }
 
     variantsDispatcher = () => {
-        let matchMedia = window.matchMedia("screen and (min-width: 768px)")
+        let matchMedia = window.matchMedia("screen and (min-width: 767px)")
         this.variantFull(matchMedia)
     }
 

@@ -71,7 +71,7 @@ class HeaderProduct extends Component {
     }
 
     adjustElement = (elemHeight, height, isHide) => {
-        let matchMedia = window.matchMedia("screen and (max-width: 768px)")
+        let matchMedia = window.matchMedia("screen and (max-width: 767px)")
         // if (height || (isHide === undefined || isHide === false)) {
         if (height || (isHide === undefined || isHide === false || isHide === true)) {
             if (matchMedia.matches) {
