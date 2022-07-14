@@ -27,7 +27,7 @@ $context = [
     'form_action' => get_post_type_archive_link('lb-beauty-specialist') . '#lb-form-container',
     'items' => $items['items'],
     'no_results' => [
-        'title' => __('Nessun evento previsto<br>prossimamente nella tua provincia.', 'labo-suisse-theme'),
+        'title' => __('Nessun evento previsto<br>questo mese nella tua provincia.', 'labo-suisse-theme'),
         'text' => __('Cerca un’altra città a te vicina per scoprire le date a calendario.', 'labo-suisse-theme'),
     ],
 ];
