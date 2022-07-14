@@ -6,6 +6,9 @@
 
 // VENDORS
 @import "node_modules/sass-mq/mq";
+@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import 'node_modules/swiper/swiper-bundle';
+@import 'node_modules/photoswipe/dist/photoswipe';
 
 // BASE STYLE
 @import "base/index";
@@ -24,6 +27,6 @@
 @import "components/carousel-hero";
 
 // CRITICAL LAYOUT
-@import "layout/base/header";
-@import "layout/base/menu-desktop";
-@import "layout/base/menu-mobile";
+@import "layout/base";
+// @import "layout/base/menu-desktop";
+// @import "layout/base/menu-mobile";

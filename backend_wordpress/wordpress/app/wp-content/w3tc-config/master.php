@@ -311,7 +311,7 @@
     "minify.symlinks": [],
     "minify.lifetime": 86400,
     "minify.upload": true,
-    "minify.html.enable": true,
+    "minify.html.enable": false,
     "minify.html.engine": "html",
     "minify.html.reject.feed": true,
     "minify.html.inline.css": true,
