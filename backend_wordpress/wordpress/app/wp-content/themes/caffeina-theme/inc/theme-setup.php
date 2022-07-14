@@ -248,6 +248,7 @@ class ThemeSetup extends Timber\Site
 
         // Global Paths
         $loader->addPath($bundle_path, 'static');
+        $loader->addPath($bundle_path, 'bundle');
 
         // Namespaces
         $loader->addPath($template_dir . '/views', 'PathViews');
