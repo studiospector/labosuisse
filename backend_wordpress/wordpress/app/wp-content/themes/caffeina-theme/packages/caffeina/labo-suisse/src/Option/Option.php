@@ -126,12 +126,14 @@ class Option
             return [
                 'title' => null,
                 'label' => null,
+                'link' => null,
             ];
         }
 
         return [
             'title' => $options['lb_footer_search_title'],
             'label' => $options['lb_footer_search_label'],
+            'link' => $options['lb_footer_search_link_eng'],
         ];
     }
 

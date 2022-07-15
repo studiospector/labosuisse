@@ -21,7 +21,7 @@ global $product;
 
 if ( ! $product->is_purchasable() ) {
     Timber::render('@PathViews/components/button.twig', [
-        'title' => __('Trova una farmacia concessionaria', 'labo-suisse-theme'),
+        'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
         'url' => get_post_type_archive_link('lb-store'),
         'variants' => ['tertiary'],
     ]);
@@ -63,7 +63,7 @@ if ( $product->is_in_stock() ) : ?>
 
     <?php
         Timber::render('@PathViews/components/button.twig', [
-            'title' => __('Trova una farmacia concessionaria', 'labo-suisse-theme'),
+            'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
             'url' => get_post_type_archive_link('lb-store'),
             'variants' => ['tertiary'],
         ]);

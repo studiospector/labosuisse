@@ -36,25 +36,38 @@ class MenuFooter
 
     private static function search()
     {
+        $payload = [];
+        $lang = lb_get_current_lang();
         $search = (new Option())
             ->getFooterSearchOptions();
 
-        return [
-            'title' => $search['title'] ?? null,
-            'form' => [
-                'action' => get_post_type_archive_link('lb-store'),
-                'input' => [
-                    'type' => 'search',
-                    'id' => "lb-search-val-footer",
-                    'name' => "lb-search-val",
-                    'label' => $search['label'] ?? null,
-                    'disabled' => false,
-                    'required' => false,
-                    'buttonTypeNext' => 'submit',
-                    'variants' => ['secondary'],
+        if ($lang != 'it') {
+            $payload = [
+                'items' => [
+                    array_merge($search['link'], ['variants' => ['link', 'thin', 'small']])
+                ]
+            ];
+        } else {
+            $payload = [
+                'form' => [
+                    'action' => get_post_type_archive_link('lb-store'),
+                    'input' => [
+                        'type' => 'search',
+                        'id' => "lb-search-val-footer",
+                        'name' => "lb-search-val",
+                        'label' => $search['label'] ?? null,
+                        'disabled' => false,
+                        'required' => false,
+                        'buttonTypeNext' => 'submit',
+                        'variants' => ['secondary'],
+                    ],
                 ],
-            ],
-        ];
+            ];
+        }
+
+        return array_merge([
+            'title' => $search['title'] ?? null,
+        ], $payload);
     }
 
     private static function newsletter()
@@ -98,26 +111,42 @@ class MenuFooter
 
     private static function centerBlock($options)
     {
+        $payload = [];
+        $lang = lb_get_current_lang();
 
-        return [
+        if ($lang != 'it') {
+            $payload = [
+                'form' => null,
+                'cta' => array_merge($options['lb_prefooter_center_block_link_eng'], [
+                    'class' => 'js-gtm-tracking',
+                    'attributes' => 'data-ga-event="submit" data-ga-event-name="cta-prefooter" data-ga-event-value="center"',
+                    'variants' => ['quaternary'],
+                ])
+            ];
+        } else {
+            $payload = [
+                'form' => [
+                    'action' => get_post_type_archive_link('lb-store'),
+                    'input' => [
+                        'type' => 'search',
+                        'id' => "lb-search-val-prefooter",
+                        'name' => "lb-search-val",
+                        'label' => $options['lb_prefooter_center_block_label'] ?? null,
+                        'disabled' => false,
+                        'required' => false,
+                        'buttonTypeNext' => 'submit',
+                        'variants' => ['secondary'],
+                    ],
+                    'class' => 'js-gtm-tracking',
+                    'attributes' => 'data-ga-event="submit" data-ga-event-name="cta-prefooter" data-ga-event-value="center"',
+                ],
+            ];
+        }
+        
+        return array_merge([
             'subtitle' => $options['lb_prefooter_center_block_title'] ?? null,
             'paragraph' => $options['lb_prefooter_center_block_text'] ?? null,
-            'form' => [
-                'action' => get_post_type_archive_link('lb-store'),
-                'input' => [
-                    'type' => 'search',
-                    'id' => "lb-search-val-prefooter",
-                    'name' => "lb-search-val",
-                    'label' => $options['lb_prefooter_center_block_label'] ?? null,
-                    'disabled' => false,
-                    'required' => false,
-                    'buttonTypeNext' => 'submit',
-                    'variants' => ['secondary'],
-                ],
-                'class' => 'js-gtm-tracking',
-                'attributes' => 'data-ga-event="submit" data-ga-event-name="cta-prefooter" data-ga-event-value="center"',
-            ],
-        ];
+        ], $payload);
     }
 
     private static function rightBlock($options)
@@ -134,8 +163,8 @@ class MenuFooter
             'subtitle' => $options['lb_prefooter_right_block_title'],
             'paragraph' => $options['lb_prefooter_right_block_text'],
             'cta' => array_merge($options['lb_prefooter_right_block_cta'], [
-                'class' => 'js-gtm-tracking',
-                'attributes' => 'data-ga-event="click" data-ga-event-name="cta-prefooter" data-ga-event-value="right"',
+                'class' => 'js-open-offset-nav js-gtm-tracking',
+                'attributes' => 'data-target-offset-nav="lb-newsletter-nav" data-ga-event="click" data-ga-event-name="cta-prefooter" data-ga-event-value="right"',
                 'variants' => ['quaternary'],
             ])
         ];

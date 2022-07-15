@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-14 14:30+0000\n"
+"POT-Creation-Date: 2022-07-15 14:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -355,7 +355,7 @@ msgid "Torna alla Homepage"
 msgstr ""
 
 #: woocommerce/single-product/add-to-cart/simple.php:24 woocommerce/single-product/add-to-cart/simple.php:66 woocommerce/single-product/add-to-cart/variable.php:40
-msgid "Trova una farmacia concessionaria"
+msgid "Trova una farmacia autorizzata"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:36 packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:42 packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:75

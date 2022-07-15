@@ -113,6 +113,10 @@
                     &__item {
                         margin-top: 30px;
 
+                        &:last-child {
+                            margin-bottom: 20px;
+                        }
+
                         .button {
                             @include mq($until: md) {
                                 width: 100%;
