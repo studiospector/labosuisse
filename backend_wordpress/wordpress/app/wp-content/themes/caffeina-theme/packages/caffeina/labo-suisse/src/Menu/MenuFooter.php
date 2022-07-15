@@ -134,8 +134,8 @@ class MenuFooter
             'subtitle' => $options['lb_prefooter_right_block_title'],
             'paragraph' => $options['lb_prefooter_right_block_text'],
             'cta' => array_merge($options['lb_prefooter_right_block_cta'], [
-                'class' => 'js-gtm-tracking',
-                'attributes' => 'data-ga-event="click" data-ga-event-name="cta-prefooter" data-ga-event-value="right"',
+                'class' => 'js-open-offset-nav js-gtm-tracking',
+                'attributes' => 'data-target-offset-nav="lb-newsletter-nav" data-ga-event="click" data-ga-event-name="cta-prefooter" data-ga-event-value="right"',
                 'variants' => ['quaternary'],
             ])
         ];
