@@ -60,7 +60,7 @@ class Distributor
                 return array_merge(
                     $item['lb_distributor_links_list_link'],
                     [
-                        'iconStart' => ['name' => $item['lb_distributor_links_list_icon']],
+                        'iconStart' => ['name' => $item['lb_distributor_links_list_icon'] == 'default' ? 'link' : $item['lb_distributor_links_list_icon'] ],
                         'variants' => ['link'],
                     ]
                 );

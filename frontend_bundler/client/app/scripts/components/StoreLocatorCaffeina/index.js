@@ -515,6 +515,8 @@ class StoreLocatorCaffeina extends Component {
             lng: this.map.markers[storeID].position.lng(),
         })
         this.map.setZoom(15)
+
+        setTimeout(() => window.getCustomScrollbar.scrollTo(this.ui.list), 1000)
     }
 
 
