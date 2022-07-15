@@ -9,9 +9,11 @@
                         </div>
                         <div class="lb-prefooter__box col-12 col-md-4">
                             {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
-                            <form action="{{ data.prefooter.block_2.form.action }}" method="get" class="{{ data.prefooter.block_2.form.class }}" {{ data.prefooter.block_2.form.attributes ? ' ' ~ data.prefooter.block_2.form.attributes|join(' ') : '' }}>
-                                {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
-                            </form>
+                            {% if data.prefooter.block_2.form %}
+                                <form action="{{ data.prefooter.block_2.form.action }}" method="get" class="{{ data.prefooter.block_2.form.class }}" {{ data.prefooter.block_2.form.attributes ? ' ' ~ data.prefooter.block_2.form.attributes|join(' ') : '' }}>
+                                    {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
+                                </form>
+                            {% endif %}
                         </div>
                         <div class="lb-prefooter__box col-12 col-md-4">
                             {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
@@ -37,10 +39,6 @@
                                 {
                                     type: 'infobox',
                                     data: data.prefooter.block_2|merge({subtitle: ''}),
-                                },
-                                {
-                                    type: 'form',
-                                    data: data.prefooter.block_2.form,
                                 },
                             ],
                         },
@@ -91,9 +89,20 @@
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.search.title }}</h6>
-                    <form action="{{ data.footer.search.form.action }}" method="get">
-                        {% include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only %}
-                    </form>
+                    {% if data.footer.search.items %}
+                        <ul class="footer__menu">
+                            {% for item in data.footer.search.items %}
+                                <li class="footer__menu__item">
+                                    {% include '@PathViews/components/button.twig' with item only %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if data.footer.search.form %}
+                        <form action="{{ data.footer.search.form.action }}" method="get">
+                            {% include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only %}
+                        </form>
+                    {% endif %}
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.newsletter.title }}</h6>
