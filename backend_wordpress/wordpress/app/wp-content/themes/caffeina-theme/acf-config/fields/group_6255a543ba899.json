@@ -45,7 +45,7 @@
                         "BR": "BRASILE",
                         "CA": "CANADA",
                         "CN": "CINA",
-                        "CV": "CIPRO",
+                        "CY": "CIPRO",
                         "DK": "DANIMARCA",
                         "AE": "EMIRATI ARABI UNITI",
                         "EE": "ESTONIA",
@@ -73,6 +73,7 @@
                         "PY": "PARAGUAY",
                         "PL": "POLONIA",
                         "PT": "PORTOGALLO",
+                        "QA": "QATAR",
                         "CZ": "REPUBBLICA CECA",
                         "RO": "ROMANIA",
                         "RU": "RUSSIA",
@@ -313,5 +314,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1656924598
+    "modified": 1657886216
 }
