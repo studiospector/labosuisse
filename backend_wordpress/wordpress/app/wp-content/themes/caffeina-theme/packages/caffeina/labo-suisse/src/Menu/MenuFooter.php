@@ -116,6 +116,7 @@ class MenuFooter
 
         if ($lang != 'it') {
             $payload = [
+                'form' => null,
                 'cta' => array_merge($options['lb_prefooter_center_block_link_eng'], [
                     'class' => 'js-gtm-tracking',
                     'attributes' => 'data-ga-event="submit" data-ga-event-name="cta-prefooter" data-ga-event-value="center"',
