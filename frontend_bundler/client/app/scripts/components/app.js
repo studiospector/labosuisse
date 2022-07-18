@@ -196,9 +196,7 @@ export default class Application extends Component {
         this.el.classList.add('ready')
 
         if (!document.querySelector('body').classList.contains('wp-admin')) {
-            setTimeout(() => {
-                this.scrollbarUpdate()
-            }, 1200)
+            this.scrollbarUpdate()
         }
     }
 

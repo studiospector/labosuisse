@@ -21,7 +21,7 @@ class Scrollbar extends Component {
             smooth: true,
             // getSpeed: true,
             getDirection: true,
-            // reloadOnContextChange: true
+            reloadOnContextChange: true
         }
 
         this.init()
