@@ -124,13 +124,13 @@ class Area
 
         if($totalNeed === 2 and ($areaName === $needName)) {
             $items = $items['children'][0];
-        }
 
-        $items['children'][] = [
-            'type' => 'link',
-            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
-            'href' => get_term_link($this->parent)
-        ];
+            $items['children'][] = [
+                'type' => 'link',
+                'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+                'href' => get_term_link($this->parent)
+            ];
+        }
 
         return $items;
     }
