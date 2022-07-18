@@ -132,7 +132,13 @@ class Search
         $counter = 0;
 
         $items = [];
-        foreach ($this->getArchive('product') as $item) {
+
+        $products = $this->getArchive('product', [
+            'orderby' => 'menu_order',
+            'order' => 'ASC'
+        ]);
+
+        foreach ($products as $item) {
             ++$counter;
             ++$this->count;
             $brand = get_the_terms($item->ID, 'lb-brand')[0] ?? null;
@@ -161,14 +167,16 @@ class Search
         ];
     }
 
-    private function getArchive($type)
+    private function getArchive($type, $args = [])
     {
-        $query = new \WP_Query([
+        $query = array_merge($args, [
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'post_type' => $type,
             's' => $this->search
         ]);
+
+        $query = new \WP_Query($query);
 
         return $query->get_posts();
     }
