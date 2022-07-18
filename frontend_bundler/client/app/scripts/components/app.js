@@ -193,8 +193,6 @@ export default class Application extends Component {
 
         this.components.offsetNavs = OffsetNavSystem.get()
 
-        this.el.classList.add('ready')
-
         if (!document.querySelector('body').classList.contains('wp-admin')) {
             this.scrollbarUpdate()
         }
@@ -217,5 +215,10 @@ export default class Application extends Component {
 
         // Trigger 'resize' event to correct and prevent layout shifting
         window.dispatchEvent(new Event('resize'))
+
+        // Enable Scroll of page
+        window.getCustomScrollbar.start()
+
+        this.el.classList.add('ready')
     }
 }

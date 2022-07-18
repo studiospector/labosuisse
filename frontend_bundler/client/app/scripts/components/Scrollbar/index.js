@@ -46,6 +46,8 @@ class Scrollbar extends Component {
             pinType: document.querySelector(".js-scrollbar").style.transform ? "transform" : "fixed"
         });
 
+        scrollbar.stop()
+
         // Add Locomotive Scroll to window for global access
         window.getCustomScrollbar = scrollbar
 
