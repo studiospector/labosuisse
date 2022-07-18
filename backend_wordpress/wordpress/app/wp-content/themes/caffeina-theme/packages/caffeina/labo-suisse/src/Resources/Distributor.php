@@ -70,28 +70,35 @@ class Distributor
 
     private function getLaboInTheWorldLinks()
     {
-        $laboInTheWorldLinks = (new Option())->getLaboInTheWorldLink();
-
         if(empty($this->geo_location)) {
             return [];
         }
 
+        $laboInTheWorldLinks = (new Option())->getLaboInTheWorldLink();
+        $brands = array_column($this->brands,'name');
+        $links = [];
+
+        if(in_array('Fillerina', $brands)) {
+            $links[] = [
+                'title' => __("Filerina in {$this->geo_location['country']}", 'labo-suisse-theme'),
+                'url' => "{$laboInTheWorldLinks['filerina']}#{$this->geo_location['country_short']}",
+                'target' => '_blank',
+                'variants' => ['primary'],
+            ];
+        }
+
+        if(in_array('Crescina', $brands)) {
+            $links[] = [
+                'title' => __("Crescina in {$this->geo_location['country']}", 'labo-suisse-theme'),
+                'url' => "{$laboInTheWorldLinks['crescina']}#{$this->geo_location['country_short']}",
+                'target' => '_blank',
+                'variants' => ['primary'],
+            ];
+        }
+
         return [
             'label' => __('Scopri i trattamenti distribuiti', 'labo-suisse-theme'),
-            'links' => [
-                [
-                    'title' => __("Crescina in {$this->geo_location['country']}", 'labo-suisse-theme'),
-                    'url' => "{$laboInTheWorldLinks['crescina']}#{$this->geo_location['country_short']}",
-                    'target' => '_blank',
-                    'variants' => ['primary'],
-                ],
-                [
-                    'title' => __("Filerina in {$this->geo_location['country']}", 'labo-suisse-theme'),
-                    'url' => "{$laboInTheWorldLinks['filerina']}#{$this->geo_location['country_short']}",
-                    'target' => '_blank',
-                    'variants' => ['primary'],
-                ]
-            ]
+            'links' => $links
         ];
     }
 }
