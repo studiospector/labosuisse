@@ -21,7 +21,7 @@ class Scrollbar extends Component {
             smooth: true,
             // getSpeed: true,
             getDirection: true,
-            // reloadOnContextChange: true
+            reloadOnContextChange: true
         }
 
         this.init()
@@ -45,6 +45,8 @@ class Scrollbar extends Component {
             // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
             pinType: document.querySelector(".js-scrollbar").style.transform ? "transform" : "fixed"
         });
+
+        scrollbar.stop()
 
         // Add Locomotive Scroll to window for global access
         window.getCustomScrollbar = scrollbar

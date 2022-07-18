@@ -33,6 +33,7 @@
         display: block;
         object-fit: cover;
         object-position: center;
+        background-color: map-get($colors, "grey-1");
     }
 
     &--parallax {
@@ -65,7 +66,7 @@
 
     &--infobox-right {
         img {
-            object-position: initial;
+            object-position: left center;
         }
     }
 }

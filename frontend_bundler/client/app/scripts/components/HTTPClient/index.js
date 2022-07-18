@@ -1,8 +1,9 @@
 import axios from 'axios'
 
 const axiosClient = axios.create({
-    baseURL: window.location.origin,
+    baseURL: process.env.LB_API_URL,
     headers: {
+        // 'Authorization': `Bearer ${process.env.LB_API_TOKEN}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     }

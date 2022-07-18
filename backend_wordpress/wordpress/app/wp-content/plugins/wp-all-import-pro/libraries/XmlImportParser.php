@@ -41,24 +41,24 @@ class XmlImportParser {
 	 * @param bool $isURL whether xml is URL or path
 	 */
 	public function __construct($xml, $rootNodeXPath, $cachedTemplate, $isURL = false)
-	{
+	{		
 		if ($isURL) {
 			$xml = file_get_contents($xml);
-		}
-
+		}		
+		
 		// FIX: remove default namespace because libxml xpath implementation doesn't handle it properly
 		$xml and $xml = preg_replace('%xmlns\s*=\s*([\'"]).*\1%sU', '', $xml);
-
+	
 		libxml_use_internal_errors(true);
-		try{
+		try{ 			
 			$this->xml = new SimpleXMLElement($xml);
-		} catch (Exception $e){
-			try{
+		} catch (Exception $e){ 			
+			try{ 
 				$this->xml = new SimpleXMLElement(utf8_encode($xml));
-			} catch (Exception $e){
+			} catch (Exception $e){ 
 				throw new XmlImportException($e->getMessage());
 			}
-		}
+		}			
 
 		$this->rootNodeXPath = $rootNodeXPath;
 		$this->cachedTemplate = $cachedTemplate;
@@ -72,22 +72,22 @@ class XmlImportParser {
 	 * @return array
 	 */
 	public function parse($records = array())
-	{
+	{				
 		empty($records) or is_array($records) or $records = array($records);
-
+		
 		$result = array();
-
-		$rootNodes = $this->xml->xpath($this->rootNodeXPath);
+		
+		$rootNodes = $this->xml->xpath($this->rootNodeXPath);		
 		if ($rootNodes === false)
 		throw new XmlImportException('Invalid root node XPath \'' . $this->rootNodeXPath . '\' specified');
-
+	    		
 		for ($i = 0; $i < count($rootNodes); $i++) {
-			if (empty($records) or in_array($i + 1, $records)) {
+			if (empty($records) or in_array($i + 1, $records)) {                
 				$rootNode = apply_filters('wpallimport_xml_row', $rootNodes[$i]);
 				$template = new XmlImportTemplate($rootNode, $this->cachedTemplate);
 				$result[] = $template->parse();
 			}
-		}
+		}				
 		return $result;
 	}
 
@@ -101,15 +101,15 @@ class XmlImportParser {
 	 * @return XmlImportParser
 	 */
 	public static function factory($xml, $rootNodeXPath, $template, &$file = NULL)
-	{
-
-		$scanner = new XmlImportTemplateScanner();
-		$tokens = $scanner->scan(new XmlImportStringReader($template));
+	{		
+	
+		$scanner = new XmlImportTemplateScanner();		
+		$tokens = $scanner->scan(new XmlImportStringReader($template));				
 		$t_parser = new XmlImportTemplateParser($tokens);
 		$tree = $t_parser->parse();
 		$codegenerator = new XmlImportTemplateCodeGenerator($tree);
 		$file = $codegenerator->generate();
-
+				
 		return new self($xml, $rootNodeXPath, $file);
 	}
 }

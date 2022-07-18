@@ -1,1 +1,49 @@
-{% include '@PathViews/woo/partials/product-cat/archive-' ~ level ~ '.twig' with data only %}
+{# {% include '@PathViews/woo/partials/product-cat/archive-' ~ level ~ '.twig' with data only %} #}
+
+
+
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-archive-macro' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Info #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
+
+    {# Filters #}
+    {% if filters|length > 0 %}
+        {% include '@PathViews/components/filters.twig' with filters only %}
+        {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
+    {% endif %}
+
+    {# Numbers of posts #}
+    <div class="container">
+        <div class="lb-posts-count">{{ num_posts }}</div>
+    </div>
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
+
+    {# Posts Grig #}
+    <div class="container js-lb-cards-grid">
+        {% if grid_type == 'default' %}
+            {% include '@PathViews/components/cards-grid-product-default.twig' with { items: items } only %}
+        {% elseif grid_type == 'ordered' %}
+            {% include '@PathViews/components/cards-grid-product-ordered.twig' with { items: items } only %}
+        {% endif %}
+    </div>
+
+    {# Pagination #}
+    {% if pagination %}
+        {{ pagination|raw }}
+    {% endif %}
+
+    {# Load More #}
+    {# {% include '@PathViews/components/load-more.twig' with load_more only %} #}
+
+{% endblock %}

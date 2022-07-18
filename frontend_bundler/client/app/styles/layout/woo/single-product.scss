@@ -7,6 +7,10 @@
         padding-right: rem(15);
         padding-left: rem(15);
 
+        &:empty {
+            display: none;
+        }
+
         @include mq($from: md) {
             max-width: 720px;
         }
@@ -167,13 +171,15 @@
             }
         }
 
-        // &__patent {
-        //     img {
-        //         @include mq($until: md) {
-        //             height: 20px;
-        //         }
-        //     }
-        // }
+        &__patent {
+            img {
+                height: 40px;
+
+                @include mq($until: md) {
+                    height: 20px;
+                }
+            }
+        }
 
         &__product-title {
             margin-bottom: 40px;

@@ -32,7 +32,8 @@ if (have_posts()) :
                     'variants' => ['quaternary']
                 ]
             ],
-            'variants' => ['type-9']
+            'type' => 'type-9',
+            'variants' => null
         ];
     endwhile;
 endif;

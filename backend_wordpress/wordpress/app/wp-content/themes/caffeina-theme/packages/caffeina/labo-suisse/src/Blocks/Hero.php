@@ -14,6 +14,7 @@ class Hero extends BaseBlock
             'infoboxPosY' => get_field('lb_block_hero_infoboxposy'),
             'container' => get_field('lb_block_hero_container'),
             'whiteText' => get_field('lb_block_hero_text_white'),
+            'animationType' => get_field('lb_block_hero_animation_type'),
             'variants' => [get_field('lb_block_hero_variants')],
         ];
 

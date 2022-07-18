@@ -1,20 +1,20 @@
 <?php
 if ( ! function_exists('wp_all_import_get_gz')){
 
-	function wp_all_import_get_gz($filename, $use_include_path = 0, $targetDir = false, $headers = false) {
+	function wp_all_import_get_gz($filename, $use_include_path = 0, $targetDir = false, $headers = false) {					
 
 		$type = 'csv';
         if (!empty($headers['Content-Type']) && preg_match('%(csv|xml|json|sql|txt|xls|xlsx)$%i', $headers['Content-Type'])) {
             $type = $headers['Content-Type'];
         }
 
-		$uploads = wp_upload_dir();
+		$uploads = wp_upload_dir();	
 		$targetDir = ( ! $targetDir ) ? wp_all_import_secure_file($uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::UPLOADS_DIRECTORY ) : $targetDir;
 
-		$tmpname = wp_unique_filename($targetDir, (strlen(basename($filename)) < 30) ? basename($filename) : time() );
+		$tmpname = wp_unique_filename($targetDir, (strlen(basename($filename)) < 30) ? basename($filename) : time() );	
 		$localPath = $targetDir  .'/'. urldecode(sanitize_file_name($tmpname));
 
-		$fp = @fopen($localPath, 'w');
+		$fp = @fopen($localPath, 'w');			
 	    $file = @gzopen($filename, 'rb', $use_include_path);
 
 	    if ($file) {
@@ -29,12 +29,12 @@ if ( ! function_exists('wp_all_import_get_gz')){
 	            @fwrite($fp, $chunk);
 	        }
 	        gzclose($file);
-	    }
+	    } 
 	    else{
 
-	    	$tmpname = wp_unique_filename($targetDir, (strlen(basename($filename)) < 30) ? basename($filename) : time() );
+	    	$tmpname = wp_unique_filename($targetDir, (strlen(basename($filename)) < 30) ? basename($filename) : time() );	
 	    	$localGZpath = $targetDir  .'/'. urldecode(sanitize_file_name($tmpname));
-			$request = get_file_curl($filename, $localGZpath, false, true);
+			$request = get_file_curl($filename, $localGZpath, false, true);				
 
 			if ( ! is_wp_error($request) ){
 
@@ -43,7 +43,7 @@ if ( ! function_exists('wp_all_import_get_gz')){
 				if ($file) {
 			        $first_chunk = true;
 			        while (!gzeof($file)) {
-			            $chunk = gzread($file, 1024);
+			            $chunk = gzread($file, 1024);			            
 			            if ($first_chunk and strpos($chunk, "<?") !== false and strpos($chunk, "</") !== false) {
 			                $type = 'xml';
                             $first_chunk = false;
@@ -52,7 +52,7 @@ if ( ! function_exists('wp_all_import_get_gz')){
 			            @fwrite($fp, $chunk);
 			        }
 			        gzclose($file);
-			    }
+			    } 
 
 			    @unlink($localGZpath);
 
@@ -60,7 +60,7 @@ if ( ! function_exists('wp_all_import_get_gz')){
 			else return $request;
 
 	    }
-	    @fclose($fp);
+	    @fclose($fp);	    	    	    
 
 	    if (strpos($headers['Content-Disposition'], 'tar.gz') !== false && class_exists('PharData'))
 		{
@@ -84,7 +84,7 @@ if ( ! function_exists('wp_all_import_get_gz')){
 			}
 		}
 
-	    if (preg_match('%\W(gz)$%i', basename($localPath))){
+	    if (preg_match('%\W(gz)$%i', basename($localPath))){		    	
 		    if (@rename($localPath, str_replace('.gz', '.' . $type, $localPath)))
 		    	$localPath = str_replace('.gz', '.' . $type, $localPath);
 		}
@@ -92,7 +92,7 @@ if ( ! function_exists('wp_all_import_get_gz')){
 			if (@rename($localPath, $localPath . '.' . $type))
 		    	$localPath = $localPath . '.' . $type;
 		}
-
+	   
 	    return array('type' => $type, 'localPath' => $localPath);
 	}
 }

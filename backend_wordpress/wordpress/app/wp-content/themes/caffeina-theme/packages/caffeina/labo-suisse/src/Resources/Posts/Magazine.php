@@ -15,7 +15,7 @@ class Magazine
 
     public $images;
     public $date;
-    public $variants;
+    public $type;
     public $infobox;
     public $col_classes = ['col-12', 'col-md-3'];
 
@@ -26,7 +26,7 @@ class Magazine
         $this->typlogy = $this->getTypology();
         $this->images = $this->getImages();
         $this->date = $this->getDate();
-        $this->variants = $this->getVariants();
+        $this->type = $this->getVariants();
         $this->infobox = $this->getInfobox();
     }
 
@@ -48,7 +48,7 @@ class Magazine
             $variant = 'type-6';
         }
 
-        return [$variant];
+        return $variant;
     }
 
     private function getInfobox()

@@ -4,6 +4,8 @@ import { qs } from '@okiba/dom'
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+import isStorybook from '../../utils/isStorybook'
+
 const ui = {
     picture: '.lb-picture',
     image: 'img',
@@ -11,16 +13,22 @@ const ui = {
 }
 
 class AnimationImage extends Component {
-    constructor({ el }) {
+    constructor({ el, revealType }) {
         super({ el, ui })
 
+        this.revealType = revealType
+
+        const timeout = (this.revealType == 'intro') ? 1500 : 1
+
         ScrollTrigger.matchMedia({
-            "(min-width: 769px)": this.onDesktopMatch,
-            "(max-width: 768px)": this.onMobileMatch
+            "(min-width: 768px)": this.onDesktopMatch,
+            "(max-width: 767px)": this.onMobileMatch
         })
 
-        this.init()
-        this.listen()
+        setTimeout(() => {
+            this.init()
+            this.listen()
+        }, timeout);
     }
 
     init() {
@@ -70,22 +78,41 @@ class AnimationImage extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: '.js-scrollbar',
+                scroller: isStorybook() ? 'body' : '.js-scrollbar',
                 trigger: this.ui.picture,
                 start: "30% 80%",
             }
         })
 
+        if (this.revealType == 'intro') {
+            this.animateIntro()
+        } else {
+            this.animateDefault()
+        }
+    }
+
+    animateDefault = () => {
         this.tl.addLabel('start')
         this.tl.to(this.ui.overlay, { duration: 1, width: "100%", ease: "Power4.easeInOut" })
         this.tl.set(this.ui.overlay, { duration: 0, right: 0, left: "unset" })
         this.tl.to(this.ui.overlay, { duration: 1, width: "0%", ease: "Power4.easeInOut" })
         this.tl.to(this.ui.image, { duration: 1, opacity: 1, delay: -1, ease: "Power4.easeInOut" })
         this.tl.from(this.ui.image, {
-            duration: 1,
-            scale: 1.4,
-            ease: "Power4.easeInOut",
-            delay: -1.2
+            duration: 2,
+            scale: 1.2,
+            ease: "Power4.easeOut",
+            delay: -0.8
+        })
+    }
+
+    animateIntro = () => {
+        this.tl.addLabel('start')
+        this.tl.to(this.ui.image, { duration: 1, opacity: 1, ease: "Power4.easeInOut" })
+        this.tl.from(this.ui.image, {
+            duration: 2,
+            scale: 1.2,
+            ease: "Power4.easeOut",
+            delay: -0.8
         })
     }
 }

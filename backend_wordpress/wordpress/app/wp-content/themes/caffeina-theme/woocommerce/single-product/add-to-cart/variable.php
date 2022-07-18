@@ -35,9 +35,13 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
     <?php do_action('woocommerce_before_variations_form'); ?>
 
     <?php if (!$product->is_in_stock()) : ?>
-        <a href="#" class="button button-tertiary">
-            <span class="button__label"><?php echo __('Trova una farmacia concessionaria', 'labo-suisse-theme'); ?></span>
-        </a>
+        <?php
+            Timber::render('@PathViews/components/button.twig', [
+                'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
+                'url' => get_post_type_archive_link('lb-store'),
+                'variants' => ['tertiary'],
+            ]);
+        ?>
         <?php /* <p class="stock out-of-stock"><?php echo esc_html(apply_filters('woocommerce_out_of_stock_message', __('This product is currently out of stock and unavailable.', 'woocommerce'))); ?></p> */ ?>
     <?php else : ?>
         <div class="variations lb-product-variations custom-select-group">

@@ -1,0 +1,54 @@
+{% set GTMKey = fn('get_field', 'lb_gtm_key', 'option') %}
+{% set cookiebotKey = fn('get_field', 'lb_cookiebot_key', 'option') %}
+
+{% if GTMKey %}
+    <!-- Google Tag Manager -->
+    <script data-blockingmode="auto">
+        (function(w,d,s,l,i){
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event:'gtm.js'}
+            );
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j,f);
+        })(window, document, 'script', 'dataLayer', '{{ GTMKey }}');
+    </script>
+    <!-- / Google Tag Manager -->
+{% endif %}
+
+{% if cookiebotKey %}
+    <!-- CookieBot -->
+    <script type="text/javascript"
+            id="Cookiebot"
+            src="https://consent.cookiebot.com/uc.js"
+            data-cbid="{{ cookiebotKey }}"
+            data-layer-name="dataLayer"
+            data-culture="{{ fn('lb_get_current_lang') }}"
+            data-blockingmode="auto"
+    ></script>
+    <!-- / CookieBot -->
+{% endif %}
+
+{% if GTMKey and cookiebotKey %}
+    <!-- Cookiebot and Google Consent Mode -->
+    <script data-cookieconsent="ignore">
+        (function(w,d,l){
+            w[l] = w[l] || [];
+            function gtag() {
+                w[l].push(arguments)
+            }
+            gtag("consent", "default", {
+                ad_storage: d,
+                analytics_storage: d,
+                wait_for_update: 500,
+            });
+            gtag("set", "ads_data_redaction", true);
+        })(window, "denied", "{{ GTMKey }}");
+    </script>
+    <!-- / Cookiebot and Google Consent Mode -->
+{% endif %}

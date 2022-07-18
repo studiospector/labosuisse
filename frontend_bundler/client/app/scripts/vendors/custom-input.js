@@ -68,25 +68,33 @@ class CustomInput extends BasicElement {
             // SEARCH
             this.currInputType = this.cs[i].getAttribute('type')
             if (this.currInputType == 'search') {
-                if (this.inputVariant == 'primary' || this.inputVariant == 'tertiary') {
-                    this.addIconPrev('close')
+                this.mainContainer.classList.add('custom-input--icon-prev-hide')
 
-                    if (this.inputIconPrev) {
-                        this.inputIconPrev.addEventListener('click', (ev) => {
-                            ev.preventDefault()
-                            this.currInputElem.value = null
-                            this.onFocus(this.currInputElem.value)
-                        })
-                    }
+                this.addIconPrev('close')
+
+                if (this.inputIconPrev) {
+                    this.showHideIcons(this.cs[i].value, 'prev')
+                    this.cs[i].addEventListener('input', (ev) => this.showHideIcons(ev.target.value, 'prev'))
+                    this.inputIconPrev.addEventListener('click', (ev) => {
+                        ev.preventDefault()
+                        this.currInputElem.value = null
+                        this.onFocus(this.currInputElem.value)
+                        this.mainContainer.classList.add('custom-input--icon-prev-hide')
+                    })
                 }
 
                 // Add Icon next
-                const buttonTypeNext = this.cs[i].getAttribute('data-button-type-next')
+                let buttonTypeNext = this.cs[i].getAttribute('data-button-type-next')
+                buttonTypeNext = buttonTypeNext ? buttonTypeNext : 'button'
                 this.addIconNext('icon-search', buttonTypeNext)
             }
 
-            // Set default value
-            this.onFocus(this.currInputElem.value)
+            // Set focus
+            if (this.currInputType == 'date') {
+                this.onFocus()
+            } else {
+                this.onFocus(this.currInputElem.value)
+            }
 
             // Custom method to update focus state
             this.cs[i].updateFocus = (value) => {
@@ -99,8 +107,10 @@ class CustomInput extends BasicElement {
             }
 
             // Events on <input> focus
-            this.cs[i].addEventListener('focus', () => this.onFocus())
-            this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+            if (this.currInputType != 'date') {
+                this.cs[i].addEventListener('focus', () => this.onFocus())
+                this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+            }
         }
     }
 
@@ -175,6 +185,19 @@ class CustomInput extends BasicElement {
         `
         this.inputIconPrev = this.createDOMElement('DIV', ['custom-input__icon', 'custom-input__icon--prev'], null, icon, {pos: 'beforeend', elem: this.mainContainer})
         this.mainContainer.classList.add('custom-input--icon-prev')
+    }
+
+
+
+    /**
+     * Show hide Icons
+     */
+    showHideIcons = (value, icon) => {
+        if (value.length <= 0) {
+            this.mainContainer.classList.add(`custom-input--icon-${icon}-hide`)
+        } else {
+            this.mainContainer.classList.remove(`custom-input--icon-${icon}-hide`)
+        }
     }
 
 

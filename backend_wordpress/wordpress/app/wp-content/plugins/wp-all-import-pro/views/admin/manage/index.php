@@ -190,12 +190,12 @@ $columns = apply_filters('pmxi_manage_imports_columns', $columns);
 											$import_actions = array(
 												'import_template' => array(
 													'url' => ( ! $item['processing'] and ! $item['executing'] ) ? add_query_arg(array('id' => $item['id'], 'action' => 'edit'), $this->baseUrl) : '',
-													'title' => __('Edit Import', 'wp_all_import_plugin'),
+													'title' => __('Edit Template', 'wp_all_import_plugin'),
 													'class' => 'edit'
 												),
 												'import_settings' => array(
 													'url' => ( ! $item['processing'] and ! $item['executing'] ) ? add_query_arg(array('id' => $item['id'], 'action' => 'options'), $this->baseUrl) : '',
-													'title' => __('Import Settings', 'wp_all_import_plugin'),
+													'title' => __('Settings', 'wp_all_import_plugin'),
 													'class' => 'edit'
 												),
 												'delete' => array(

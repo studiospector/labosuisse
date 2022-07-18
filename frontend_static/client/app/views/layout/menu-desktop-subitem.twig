@@ -1,7 +1,11 @@
-<li class="lb-menu__item lb-menu__item--subitem"{{ (type == 'submenu' and trigger) ? ' data-submenu-trigger="' ~ trigger ~ '"' : '' }}>
+<div class="lb-menu__item lb-menu__item--subitem"{{ (type == 'submenu' and trigger) ? ' data-submenu-trigger="' ~ trigger ~ '"' : '' }}>
 	{% if type == 'link' %}
-		<a class="lb-menu__link" href="{{href}}" tabindex="0">{{label}}</a>
+		<a class="lb-menu__link" href="{{href}}" tabindex="0" target="{{ target ? target : '_self' }}">{{label}}</a>
 	{% endif %}
+
+    {% if type == 'link-spaced' %}
+        <a href="{{href}}" target="{{ target ? target : '_self' }}" class="lb-menu__link lb-menu__link--spaced" tabindex="0">{{label}}</a>
+    {% endif %}
 
 	{% if type == 'card' %}
 		{% include '@PathViews/components/card.twig' with data only %}
@@ -11,11 +15,11 @@
         {% if label %}
             <h6 class="lb-menu__header">{{label}}</h6>
         {% endif %}
-		<ul>
+		<div>
 			{% for item in children %}
 				{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
 			{% endfor %}
-		</ul>
+		</div>
 	{% endif %}
 
     {% if type == 'submenu-link' %}
@@ -26,10 +30,10 @@
         {% if label %}
             <h6 class="lb-menu__header">{{label}}</h6>
         {% endif %}
-		<ul>
+		<div>
 			{% for item in children %}
 				{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
 			{% endfor %}
-		</ul>
+		</div>
 	{% endif %}
-</li>
+</div>

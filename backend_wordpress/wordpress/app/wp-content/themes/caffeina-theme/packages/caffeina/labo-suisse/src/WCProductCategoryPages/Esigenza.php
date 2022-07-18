@@ -60,6 +60,9 @@ class Esigenza extends BasePage
             $the_query = new \WP_Query(array(
                 'post_type' => 'product',
                 'posts_per_page' => -1,
+                's' => !empty($_GET['s']) ? $_GET['s'] : null,
+                'orderby' => 'menu_order',
+                'order' => 'ASC',
                 'tax_query' => array(
                     'relation' => 'AND',
                     array(
@@ -93,7 +96,8 @@ class Esigenza extends BasePage
                             'variants' => ['quaternary']
                         ]
                     ],
-                    'variants' => ['type-8']
+                    'type' => 'type-8',
+                    'variants' => null
                 ];
 
                 foreach ($the_query->posts as $product) {

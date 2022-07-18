@@ -1,7 +1,7 @@
 {% if type == 'separator' %}
-    <li class="lb-menu__item lb-menu__item--separator"></li>
+    <div class="lb-menu__item lb-menu__item--separator"></div>
 {% else %}
-    <li class="lb-menu__item">
+    <div class="lb-menu__item">
         {% if type == 'icon' %}
             <a href="{{href}}" class="lb-menu__link lb-menu__link--icon" tabindex="0">
                 {% include '@PathViews/components/icon.twig' with icon only %}
@@ -9,12 +9,12 @@
         {% endif %}
 
         {% if type == 'link' %}
-            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</a>
+            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" target="{{ target ? target : '_self' }}" tabindex="0">{{label}}</a>
         {% endif %}
 
         {% if type == 'submenu' %}
             <a class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</a>
-            <ul class="lb-menu__submenu container">
+            <div class="lb-menu__submenu container">
                 <div class="lb-menu__wrapper">
                     <div class="lb-menu__close js-close-menu">
                         {% include '@PathViews/components/icon.twig' with {name: 'close-circle'} only %}
@@ -30,7 +30,7 @@
                         </div>
                     {% endif %}
                 </div>
-            </ul>
+            </div>
         {% endif %}
-    </li>
+    </div>
 {% endif %}

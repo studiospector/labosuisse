@@ -43,23 +43,30 @@
                 // COMPONENTS
                 @import "components/index";
                 @import "components/infobox";
+                @import "components/separator";
+                @import "components/buttons";
                 @import "components/hero";
                 @import "components/carousel-hero";
+                @import "components/swiper";
 
                 // LAYOUT
                 @import "layout/base/main-content";
 
                 // Title
                 .edit-post-visual-editor__post-title-wrapper {
+                    margin: 0;
+                    padding: 1rem;
                     background-color: #f3f4f5;
 
                     .editor-post-title {
                         margin-top: 0;
     
                         &__input {
+                            margin: 0;
                             // font-family: 'Lato', 'sans-serif';
-                            text-rendering: optimizelegibility;
+                            font-size: 2.3rem;
                             font-weight: 800;
+                            text-rendering: optimizelegibility;
                         }
                     }
                 }
@@ -102,7 +109,15 @@
                 #poststuff {
 
                     .postbox-container {
-                        border: 1px solid #ddd;
+                        border: 0;
+
+                        .postbox {
+                            border: 1px solid #ddd;
+        
+                            &:not(:last-child) {
+                                margin-bottom: 10px;
+                            }
+                        }
                     }
             
                     .postbox-header {

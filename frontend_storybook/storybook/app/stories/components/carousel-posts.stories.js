@@ -8,6 +8,7 @@ import Component from '@okiba/component'
 import renderCarouselPosts from '../../views/components/carousel-posts.twig'
 
 import CarouselPosts from '../../scripts/components/CarouselPosts'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataFull = {
     leftCard: {
@@ -21,7 +22,7 @@ const dataFull = {
                 variants: ['secondary']
             }
         },
-        variants: ['type-8']
+        type: 'type-8'
     },
     items: [
         {
@@ -43,7 +44,7 @@ const dataFull = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -64,7 +65,7 @@ const dataFull = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -85,7 +86,7 @@ const dataFull = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
     ],
     variants: ['full']
@@ -103,7 +104,7 @@ const dataOnePost = {
                 variants: ['secondary']
             }
         },
-        variants: ['type-8']
+        type: 'type-8'
     },
     items: [
         {
@@ -125,7 +126,7 @@ const dataOnePost = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -146,7 +147,7 @@ const dataOnePost = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -167,7 +168,7 @@ const dataOnePost = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
     ],
     variants: ['one-post']
@@ -184,7 +185,7 @@ const dataTwoPosts = {
                 variants: ['secondary']
             }
         },
-        variants: ['type-8']
+        type: 'type-8'
     },
     items: [
         {
@@ -206,7 +207,7 @@ const dataTwoPosts = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -227,7 +228,7 @@ const dataTwoPosts = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
         {
             images: {
@@ -248,7 +249,7 @@ const dataTwoPosts = {
                     variants: ['quaternary']
                 }
             },
-            variants: ['type-2']
+            type: 'type-2'
         },
     ],
     variants: ['two-posts']
@@ -263,7 +264,12 @@ storiesOf('Components|Carousel Posts', module)
                     {
                         selector: '.js-carousel-posts',
                         type: CarouselPosts
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

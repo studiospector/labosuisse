@@ -20,7 +20,7 @@ class WCML_Store_Pages {
 	/** @var WP_Post|null $shop_page */
 	private $shop_page;
 
-	public function __construct( woocommerce_wpml $woocommerce_wpml, SitePress $sitepress ) {
+	public function __construct( woocommerce_wpml $woocommerce_wpml, \WPML\Core\ISitePress $sitepress ) {
 
 		$this->woocommerce_wpml = $woocommerce_wpml;
 		$this->sitepress        = $sitepress;
@@ -652,6 +652,7 @@ class WCML_Store_Pages {
 
 				if ( ! $is_translated ) {
 					$text = sprintf(
+						/* translators: %1$s and %2$s are opening and closing HTML link tags */
 						__( 'To quickly translate this and other WooCommerce store pages, please run the %1$ssetup wizard%2$s.', 'woocommerce-multilingual' ),
 						'<a href="' . admin_url( 'admin.php?page=wcml-setup' ) . '">',
 						'</a>'

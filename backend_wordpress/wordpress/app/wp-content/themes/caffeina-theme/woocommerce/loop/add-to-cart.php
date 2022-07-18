@@ -21,17 +21,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $product;
 
-echo apply_filters(
-	'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
-	sprintf(
-		'<a href="%s" data-quantity="%s" class="button button-quaternary %s" %s><span class="button__label">%s</span><span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span></a>',
-		esc_url( $product->add_to_cart_url() ),
-		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
-		esc_attr( isset( $args['class'] ) ? $args['class'] : '' ),
-		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
-        __('Dettagli', 'labo-suisse-theme')
-		// esc_html( $product->add_to_cart_text() )
-	),
-	$product,
-	$args
-);
+// echo apply_filters(
+// 	'woocommerce_loop_add_to_cart_link', // WPCS: XSS ok.
+// 	sprintf(
+// 		'<a href="%s" data-quantity="%s" class="button button-quaternary %s" %s><span class="button__label">%s</span><span class="lb-icon lb-icon-arrow-right"><svg aria-label="arrow-right" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#arrow-right"></use></svg></span></a>',
+// 		esc_url( $product->add_to_cart_url() ),
+// 		esc_attr( isset( $args['quantity'] ) ? $args['quantity'] : 1 ),
+// 		esc_attr( isset( $args['class'] ) ? $args['class'] : '' ),
+// 		isset( $args['attributes'] ) ? wc_implode_html_attributes( $args['attributes'] ) : '',
+//         __('Dettagli', 'labo-suisse-theme')
+// 		// esc_html( $product->add_to_cart_text() )
+// 	),
+// 	$product,
+// 	$args
+// );
+
+Timber::render('@PathViews/components/button.twig', [
+    'url' => null,
+    'title' => __('Dettagli', 'labo-suisse-theme'),
+    'variants' => ['quaternary']
+]);

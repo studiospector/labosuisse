@@ -25,6 +25,9 @@ services:
       # NEW RELIC
       - NEW_RELIC_APP_NAME
       - NEW_RELIC_LICENSE_KEY
+      # JS
+      - LB_API_TOKEN
+      - LB_API_URL
     health: /test.html
     internal: false
     port: 8080
@@ -39,6 +42,9 @@ services:
       minimum: 50
       maximum: 200
     scale:
-      count: 1
+      targets:
+        cpu: 70
+        memory: 90
+      count: 1-16
       cpu: 512
       memory: 1024

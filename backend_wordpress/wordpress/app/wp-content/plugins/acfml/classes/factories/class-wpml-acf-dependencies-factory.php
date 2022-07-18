@@ -63,6 +63,11 @@ class WPML_ACF_Dependencies_Factory {
 	private $tools_local;
 
 	/**
+	 * @var WPML_ACF_Translatable_Groups_Checker|void
+	 */
+	private $translatable_groups_checker;
+
+	/**
 	 * WPML_ACF_Options_Page factory.
 	 *
 	 * @return WPML_ACF_Options_Page
@@ -286,6 +291,16 @@ class WPML_ACF_Dependencies_Factory {
 			$this->tools_local = new Local( $this->create_field_settings() );
 		}
 		return $this->tools_local;
+	}
+
+	/**
+	 * @return WPML_ACF_Translatable_Groups_Checker
+	 */
+	public function create_translatable_groups_checker() {
+		if ( ! $this->translatable_groups_checker ) {
+			$this->translatable_groups_checker = new WPML_ACF_Translatable_Groups_Checker();
+		}
+		return $this->translatable_groups_checker;
 	}
 
 	private function get_sitepress() {

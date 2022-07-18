@@ -6,7 +6,7 @@
 	<?php foreach ($ids as $id): ?>
 		<input type="hidden" name="items[]" value="<?php echo esc_attr($id) ?>" />
 	<?php endforeach ?>
-
+	
 	<p><?php printf(__('Are you sure you want to delete <strong>%s</strong> selected %s?', 'wp_all_import_plugin'), $items->count(), _n('import', 'imports', $items->count(), 'wp_all_import_plugin')) ?></p>
 	<div class="input">
 		<input type="checkbox" id="is_delete_posts" name="is_delete_posts" class="switcher"/> <label for="is_delete_posts"><?php _e('Delete associated posts as well','wp_all_import_plugin');?> </label>
@@ -14,12 +14,12 @@
 			<div class="input">
 				<input type="hidden" name="is_delete_images" value="no"/>
 				<input type="checkbox" id="is_delete_images" name="is_delete_images" value="yes" />
-				<label for="is_delete_images"><?php _e('Delete associated images from media gallery', 'wp_all_import_plugin') ?></label>
+				<label for="is_delete_images"><?php _e('Delete associated images from media gallery', 'wp_all_import_plugin') ?></label>			
 			</div>
 			<div class="input">
 				<input type="hidden" name="is_delete_attachments" value="no"/>
 				<input type="checkbox" id="is_delete_attachments" name="is_delete_attachments" value="yes" />
-				<label for="is_delete_attachments"><?php _e('Delete associated files from media gallery', 'wp_all_import_plugin') ?></label>
+				<label for="is_delete_attachments"><?php _e('Delete associated files from media gallery', 'wp_all_import_plugin') ?></label>			
 			</div>
 		</div>
 		<?php foreach($items->convertRecords() as $item) : ?>
@@ -34,7 +34,7 @@
 			<?php endif; ?>
 		<?php endforeach; ?>
 	</div>
-
+	
 	<p class="submit">
 		<?php wp_nonce_field('bulk-imports', '_wpnonce_bulk-imports') ?>
 		<input type="hidden" name="is_confirmed" value="1" />

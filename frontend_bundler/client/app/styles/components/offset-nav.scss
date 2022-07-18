@@ -127,14 +127,46 @@
     @include mq($until: lg) {
         padding: 20px 16px;
         padding-bottom: 80px;
+        -webkit-overflow-scrolling: touch;
     }
 
     &__item {
         margin-bottom: 40px;
 
+        &--text {
+            a {
+                color: map-get($colors, "black");
+            }
+
+            .infobox__paragraph--small {
+                font-style: italic;
+            }
+        }
+
         &--table {
             .infobox__subtitle {
                 margin-bottom: 0;
+            }
+        }
+
+        &--image {
+            .lb-picture {
+                position: relative;
+                
+                img {
+                    width: auto;
+                    height: auto;
+                }
+            }
+        }
+
+        &--html {
+            .mc4wp-form {
+                text-align: center;
+
+                .custom-checkbox__options {
+                    text-align: left;
+                }
             }
         }
     }

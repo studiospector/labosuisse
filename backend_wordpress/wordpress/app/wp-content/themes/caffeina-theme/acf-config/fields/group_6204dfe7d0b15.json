@@ -16,7 +16,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -53,7 +53,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -130,7 +130,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -348,7 +348,7 @@
                                     "key": "field_61f00a809d096",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_description_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -357,14 +357,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -391,7 +389,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -609,7 +607,7 @@
                                     "key": "field_61f009561054b",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_technology_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -622,12 +620,350 @@
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": ""
                                 }
                             ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Aggiungi Blocco",
+            "min": "",
+            "max": ""
+        },
+        {
+            "key": "field_627a5b645a753",
+            "label": "Efficacia",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_627a5b7d5a754",
+            "label": "Attiva",
+            "name": "lb_block_offsetnav_state_effectiveness",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_627a5bbc5a755",
+            "label": "Contenuto",
+            "name": "lb_block_offsetnav_effectiveness_content",
+            "type": "flexible_content",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 3,
+            "layouts": {
+                "layout_61e9b3b44ee80": {
+                    "key": "layout_61e9b3b44ee80",
+                    "name": "text",
+                    "label": "Blocco Testo",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a5bbc5a756",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_effectiveness_content_text_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_627a5bbc5a757",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_effectiveness_content_text_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_627a5ffcc0b43",
+                            "label": "Testo piccolo",
+                            "name": "lb_block_offsetnav_effectiveness_content_text_paragraph_small",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_627a5bbc5a758",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_effectiveness_content_text_paragraph",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "basic",
+                            "media_upload": 0,
+                            "delay": 0,
+                            "wpml_cf_preferences": 2
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_61e9b589eef35": {
+                    "key": "layout_61e9b589eef35",
+                    "name": "table",
+                    "label": "Blocco Tabella",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a5bbc5a759",
+                            "label": "Titolo",
+                            "name": "lb_block_offsetnav_effectiveness_content_table_title",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
+                        },
+                        {
+                            "key": "field_627a5bbc5a75a",
+                            "label": "Sottotitolo",
+                            "name": "lb_block_offsetnav_effectiveness_content_table_subtitle",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_627a5bbc5a75b",
+                            "label": "Testo",
+                            "name": "lb_block_offsetnav_effectiveness_content_table_paragraph",
+                            "type": "textarea",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "default_value": "",
+                            "placeholder": "",
+                            "maxlength": "",
+                            "rows": 5,
+                            "new_lines": "br"
+                        },
+                        {
+                            "key": "field_627a5bbc5a75c",
+                            "label": "Tabella",
+                            "name": "lb_block_offsetnav_effectiveness_content_table_item",
+                            "type": "repeater",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 3,
+                            "collapsed": "",
+                            "min": 0,
+                            "max": 0,
+                            "layout": "row",
+                            "button_label": "",
+                            "sub_fields": [
+                                {
+                                    "key": "field_627a5bbc5a75d",
+                                    "label": "Titolo",
+                                    "name": "lb_block_offsetnav_effectiveness_content_table_item_title",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "wpml_cf_preferences": 2,
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": ""
+                                },
+                                {
+                                    "key": "field_627a5bbc5a75e",
+                                    "label": "Valore",
+                                    "name": "lb_block_offsetnav_effectiveness_content_table_item_value",
+                                    "type": "text",
+                                    "instructions": "",
+                                    "required": 0,
+                                    "conditional_logic": 0,
+                                    "wrapper": {
+                                        "width": "",
+                                        "class": "",
+                                        "id": ""
+                                    },
+                                    "default_value": "",
+                                    "placeholder": "",
+                                    "prepend": "",
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
+                                }
+                            ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_627a5ee93776b": {
+                    "key": "layout_627a5ee93776b",
+                    "name": "button",
+                    "label": "Blocco Bottone",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a5f103776c",
+                            "label": "Link",
+                            "name": "lb_block_offsetnav_effectiveness_content_button",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "wpml_cf_preferences": 2,
+                            "return_format": "array"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_627a5f513776d": {
+                    "key": "layout_627a5f513776d",
+                    "name": "image",
+                    "label": "Blocco Immagine",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a5f603776e",
+                            "label": "Immagine",
+                            "name": "lb_block_offsetnav_effectiveness_content_image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "id",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "wpml_cf_preferences": 2
                         }
                     ],
                     "min": "",
@@ -652,7 +988,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -870,7 +1206,7 @@
                                     "key": "field_61f0071ae1ee9",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_usecases_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -879,14 +1215,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -913,7 +1247,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -973,7 +1307,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -1191,7 +1525,7 @@
                                     "key": "field_61f0059990ca1",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_patents_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -1200,14 +1534,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -1234,7 +1566,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -1452,7 +1784,7 @@
                                     "key": "field_61e9b6ceeef3c",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_reviews_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -1461,14 +1793,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -1495,7 +1825,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -1751,7 +2081,7 @@
                                     "key": "field_620bcc20bb284",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_cardleft_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -1760,16 +2090,75 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_627a6c1ce0aa8": {
+                    "key": "layout_627a6c1ce0aa8",
+                    "name": "button",
+                    "label": "Blocco Bottone",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a6c29e0aa9",
+                            "label": "Link",
+                            "name": "lb_block_offsetnav_cardleft_content_button",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "wpml_cf_preferences": 2
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_627a6bcce0aa6": {
+                    "key": "layout_627a6bcce0aa6",
+                    "name": "image",
+                    "label": "Blocco Immagine",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a6bd9e0aa7",
+                            "label": "Immagine",
+                            "name": "lb_block_offsetnav_cardleft_content_image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "id",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "wpml_cf_preferences": 2
                         }
                     ],
                     "min": "",
@@ -1794,7 +2183,7 @@
                 "id": ""
             },
             "wpml_cf_preferences": 0,
-            "placement": "top",
+            "placement": "left",
             "endpoint": 0
         },
         {
@@ -2050,7 +2439,7 @@
                                     "key": "field_620bcc9fbb28e",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_cardright_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -2059,16 +2448,75 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_627a6c5ce0aaa": {
+                    "key": "layout_627a6c5ce0aaa",
+                    "name": "button",
+                    "label": "Blocco Bottone",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a6c63e0aab",
+                            "label": "Link",
+                            "name": "lb_block_offsetnav_cardright_content_link",
+                            "type": "link",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "array",
+                            "wpml_cf_preferences": 2
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_627a6b82e0aa4": {
+                    "key": "layout_627a6b82e0aa4",
+                    "name": "image",
+                    "label": "Blocco Immagine",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_627a6b9be0aa5",
+                            "label": "Immagine",
+                            "name": "lb_block_offsetnav_cardright_content_image",
+                            "type": "image",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "return_format": "id",
+                            "preview_size": "medium",
+                            "library": "all",
+                            "min_width": "",
+                            "min_height": "",
+                            "min_size": "",
+                            "max_width": "",
+                            "max_height": "",
+                            "max_size": "",
+                            "mime_types": "",
+                            "wpml_cf_preferences": 2
                         }
                     ],
                     "min": "",
@@ -2098,5 +2546,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646153392
+    "modified": 1657887041
 }

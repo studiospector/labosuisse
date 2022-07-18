@@ -22,10 +22,9 @@ if ( have_posts() ) :
         $items[] = [
             'images' => lb_get_images(get_post_thumbnail_id(get_the_ID())),
             'date' => get_the_date('d/m/Y'),
-            'variants' => [$variant],
             'infobox' => [
                 'image' => $image,
-                'subtitle' => get_the_title(),
+                'subtitle' => empty($image) ? get_the_title() : null,
                 'paragraph' => get_the_excerpt(),
                 'cta' => [
                     'title' => $cta_title,
@@ -34,6 +33,8 @@ if ( have_posts() ) :
                     'variants' => ['quaternary']
                 ]
             ],
+            'type' => $variant,
+            'variants' => null
         ];
     endwhile;
 endif;

@@ -6,9 +6,6 @@
 
 // VENDORS AND MIXINS
 @import "../node_modules/sass-mq/mq";
-@import '../node_modules/locomotive-scroll/dist/locomotive-scroll';
-@import '../node_modules/swiper/swiper-bundle';
-@import '../node_modules/photoswipe/dist/photoswipe';
 @import "vendors/custom-input";
 @import "vendors/custom-radio";
 @import "vendors/custom-checkbox";
@@ -18,10 +15,8 @@
 // @include generate-grid();
 
 // LAYOUT
-// @import "layout/main-content";
-// @import "layout/footer";
-@import "layout/base/index";
-@import "layout/woo/index";
+// @import "layout/base/index";
+// @import "layout/woo/index";
 @import "layout/pages/index";
 
 // COMPONENTS

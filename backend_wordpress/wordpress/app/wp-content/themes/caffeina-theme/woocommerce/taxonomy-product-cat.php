@@ -1,8 +1,6 @@
 <?php
 
-use Caffeina\LaboSuisse\WCProductCategoryPages\Esigenza;
-use Caffeina\LaboSuisse\WCProductCategoryPages\Macro;
-use Caffeina\LaboSuisse\WCProductCategoryPages\Zona;
+use Caffeina\LaboSuisse\Resources\ArchiveProduct;
 
 /**
  * The Template for displaying products in a product category. Simply includes the archive template
@@ -24,45 +22,20 @@ if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly.
 }
 
-
-
 // Current term
 $term = get_term_by('slug', get_query_var('term'), get_query_var('taxonomy'));
 // Direct parents of current taxonomy
 $level = get_category_parents_custom($term->term_id, 'product_cat');
 
-//$context = [];
-
 switch ($level) {
-        // Macro
-    case 1:
-        $macro = new Macro('macro', $term);
-        $macro->render();
-        break;
-
-
-        // Zona
-    case 2:
-        $zona = new Zona('zona', $term);
-        $zona->render();
-        break;
-
-
-        // Esigenza
-    case 3:
-
-        $esigenza = new Esigenza('esigenza', $term);
-        $esigenza->render();
-        break;
-
-
-        // Tipologia
-    case 4:
-        echo "Tipologia";
-        break;
-
-
-        // Default
-    default:
-        echo "Level others";
+    case 1: // Macro
+    case 2: // Zona
+    case 3: // Esigenza
+        $archive = new ArchiveProduct($term, $level);
+        return $archive->render();
+    case 4: // Tipologia
+    default: // Default
+        return wp_safe_redirect(
+            get_search_link()
+        );
 }

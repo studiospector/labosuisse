@@ -1,5 +1,5 @@
 .number-list-with-image {
-    &__list {
+    & &__list {
         display: flex;
         align-items: center;
         order: 0;
@@ -13,20 +13,14 @@
         }
     }
 
-    &__img {
+    & &__img {
+        min-height: 420px;
         order: 1;
-
+        
         @include mq($until: md) {
+            min-height: 200px;
             order: 0;
             margin-bottom: 30px;
-        }
-
-        .lb-picture {
-            min-height: 420px;
-
-            @include mq($until: md) {
-                min-height: 200px;
-            }
         }
     }
 }

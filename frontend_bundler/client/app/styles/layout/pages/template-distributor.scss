@@ -8,6 +8,7 @@
 
         .gm-style {
             .gm-style-iw {
+                max-width: 360px !important;
                 padding: 0;
                 border-radius: 0;
                 box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
@@ -112,8 +113,14 @@
                     &__item {
                         margin-top: 30px;
 
+                        &:last-child {
+                            margin-bottom: 20px;
+                        }
+
                         .button {
                             @include mq($until: md) {
+                                width: 100%;
+                                justify-content: center;
                                 text-align: center;
                                 margin-right: 0;
                             }

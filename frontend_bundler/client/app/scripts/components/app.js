@@ -32,6 +32,7 @@ import ScrollbarManagement from './ScrollbarManagement'
 import Tabs from './Tabs'
 import SearchAutocomplete from './SearchAutocomplete'
 import AnimationReveal from './AnimationReveal'
+import GTMTracking from './GTMTracking'
 
 const components = {
     scrollbar: {
@@ -179,6 +180,11 @@ const components = {
         type: AnimationReveal,
         optional: true
     },
+    gtmTracking: {
+        selector: '.js-gtm-tracking',
+        type: GTMTracking,
+        optional: true
+    },
 }
 
 export default class Application extends Component {
@@ -187,12 +193,8 @@ export default class Application extends Component {
 
         this.components.offsetNavs = OffsetNavSystem.get()
 
-        this.el.classList.add('ready')
-
         if (!document.querySelector('body').classList.contains('wp-admin')) {
-            setTimeout(() => {
-                this.scrollbarUpdate()
-            }, 1200)
+            this.scrollbarUpdate()
         }
     }
 
@@ -213,5 +215,10 @@ export default class Application extends Component {
 
         // Trigger 'resize' event to correct and prevent layout shifting
         window.dispatchEvent(new Event('resize'))
+
+        // Enable Scroll of page
+        window.getCustomScrollbar.start()
+
+        this.el.classList.add('ready')
     }
 }

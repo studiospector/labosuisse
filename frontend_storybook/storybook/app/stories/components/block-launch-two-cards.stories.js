@@ -6,6 +6,7 @@ import Component from '@okiba/component'
 
 // Components
 import renderBlock from '../../views/components/block-launch-two-cards.twig'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataHorizontal = {
     infobox: {
@@ -15,11 +16,11 @@ const dataHorizontal = {
     cards: [
         {
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/570x310',
+                lg: 'https://via.placeholder.com/570x310',
+                md: 'https://via.placeholder.com/570x310',
+                sm: 'https://via.placeholder.com/570x310',
+                xs: 'https://via.placeholder.com/570x310'
             },
             infobox: {
                 subtitle: 'Scala di diradamento uomo',
@@ -29,15 +30,16 @@ const dataHorizontal = {
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
-            }
+            },
+            type: 'type-3',
         },
         {
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/570x310',
+                lg: 'https://via.placeholder.com/570x310',
+                md: 'https://via.placeholder.com/570x310',
+                sm: 'https://via.placeholder.com/570x310',
+                xs: 'https://via.placeholder.com/570x310'
             },
             infobox: {
                 subtitle: 'Scala di diradamento donna',
@@ -47,7 +49,8 @@ const dataHorizontal = {
                     iconEnd: { name: 'arrow-right' },
                     variants: ['quaternary']
                 }
-            }
+            },
+            type: 'type-3',
         }
     ],
     variants: ['horizontal'],
@@ -61,32 +64,52 @@ const dataVertical = {
     cards: [
         {
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/1200x470',
+                lg: 'https://via.placeholder.com/1200x470',
+                md: 'https://via.placeholder.com/1200x470',
+                sm: 'https://via.placeholder.com/1200x470',
+                xs: 'https://via.placeholder.com/1200x470'
             },
             infobox: {
                 subtitle: 'Scala di diradamento uomo',
-            }
+            },
+            type: 'type-3',
         },
         {
             images: {
-                original: '/assets/images/banner-img.jpg',
-                lg: '/assets/images/banner-img.jpg',
-                md: '/assets/images/banner-img.jpg',
-                sm: '/assets/images/banner-img.jpg',
-                xs: '/assets/images/banner-img.jpg'
+                original: 'https://via.placeholder.com/1200x470',
+                lg: 'https://via.placeholder.com/1200x470',
+                md: 'https://via.placeholder.com/1200x470',
+                sm: 'https://via.placeholder.com/1200x470',
+                xs: 'https://via.placeholder.com/1200x470'
             },
             infobox: {
                 subtitle: 'Scala di diradamento donna',
-            }
+            },
+            type: 'type-3',
         }
     ],
     variants: ['vertical'],
 }
 
 storiesOf('Components|Block Launch Two Cards', module)
+    .addDecorator(storyFn => {
+        useEffect(() => {
+            const app = new Component({
+                el: document.body,
+                components: [
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
+                ]
+            })
+
+            return () => app.destroy()
+        }, [])
+
+        return storyFn()
+    })
     .add('Horizontal', () => renderBlock(dataHorizontal))
     .add('Vertical', () => renderBlock(dataVertical))

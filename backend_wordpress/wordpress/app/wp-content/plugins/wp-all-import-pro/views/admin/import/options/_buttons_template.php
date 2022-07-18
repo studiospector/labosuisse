@@ -4,7 +4,7 @@
 	<?php wp_nonce_field('options', '_wpnonce_options') ?>
 	<input type="hidden" name="is_submitted" value="1" />
 	<input type="hidden" name="converted_options" value="1"/>
-
+	
 	<?php if ($isWizard): ?>
 
 		<a href="<?php echo apply_filters('pmxi_options_back_link', add_query_arg('action', 'template', $this->baseUrl), $isWizard); ?>" class="back rad3"><?php _e('Back to Step 3', 'wp_all_import_plugin') ?></a>
@@ -18,7 +18,7 @@
 
 		<!--<input type="submit" class="button button-primary button-hero wpallimport-large-button" value="<?php _e('Continue', 'wp_all_import_plugin') ?>" /> -->
 
-	<?php else: ?>
+	<?php else: ?>		
 		<a href="<?php echo apply_filters('pmxi_options_back_link', remove_query_arg('id', remove_query_arg('action', $this->baseUrl)), $isWizard); ?>" class="back rad3"><?php _e('Back to Manage Imports', 'wp_all_import_plugin') ?></a>
         <?php renderButton('Save Import Configuration', $this->isWizard); ?>
 	<?php endif ?>

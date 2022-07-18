@@ -22,8 +22,6 @@ class Need
 
     public function get()
     {
-        $items = [['type' => 'link', 'label' => 'Tutte le esigenze', 'href' => get_term_link($this->parent)]];
-
         foreach ($this->needs as $need) {
             $items[] = [
                 'type' => 'link',
@@ -31,6 +29,12 @@ class Need
                 'href' => get_term_link($need),
             ];
         }
+
+        $items[] = [
+            'type' => 'link-spaced',
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+            'href' => get_term_link($this->parent)
+        ];
 
         return $items;
     }

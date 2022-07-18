@@ -14,7 +14,7 @@ class Hero extends Component {
     }
 
     adjustImageOffsetDispatcher = () => {
-        let matchMedia = window.matchMedia("screen and (max-width: 768px)")
+        let matchMedia = window.matchMedia("screen and (max-width: 767px)")
         this.adjustImageOffset(matchMedia)
     }
 

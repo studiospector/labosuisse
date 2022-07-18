@@ -3,7 +3,7 @@
 		<em><?php printf(__('%s - ID: %s Import History', 'wp_all_import_plugin'), $import->friendly_name, $import->id); ?></em>
 		<?php else: ?>
 		<em><?php printf(__('%s - ID: %s Import History', 'wp_all_import_plugin'), $import->name, $import->id); ?></em>
-	<?php endif ?>
+	<?php endif ?>	
 </h4>
 
 <?php if ($this->errors->get_error_codes()): ?>
@@ -15,9 +15,9 @@
 $columns = array(
 	'id'			=> __('ID', 'wp_all_import_plugin'),
 	'date'			=> __('Date', 'wp_all_import_plugin'),
-	'time_run'		=> __('Run Time', 'wp_all_import_plugin'),
+	'time_run'		=> __('Run Time', 'wp_all_import_plugin'),	
 	'type'			=> __('Type', 'wp_all_import_plugin'),
-	'summary'		=> __('Summary', 'wp_all_import_plugin'),
+	'summary'		=> __('Summary', 'wp_all_import_plugin'),	
 	'download'		=> '',
 );
 ?>
@@ -97,7 +97,7 @@ $columns = array(
 			?>
 			<?php foreach ($list as $item): ?>
 				<?php $class = ('alternate' == $class) ? '' : 'alternate'; ?>
-				<tr class="<?php echo $class; ?>" valign="middle">
+				<tr class="<?php echo $class; ?>" valign="middle">					
 					<th scope="row" class="check-column">
 						<input type="checkbox" id="item_<?php echo $item['id'] ?>" name="items[]" value="<?php echo esc_attr($item['id']) ?>" />
 					</th>
@@ -128,7 +128,7 @@ $columns = array(
 									<?php echo ($item['time_run'] and is_numeric($item['time_run'])) ? gmdate("H:i:s", $item['time_run']) : '-'; ?>
 								</td>
 								<?php
-								break;
+								break;							
 							case 'summary':
 								?>
 								<td style="vertical-align: middle;">
@@ -167,28 +167,28 @@ $columns = array(
 							case 'download':
 								?>
 								<td style="vertical-align: middle;">
-									<?php
+									<?php 
 									if ( ! in_array($item['type'], array('trigger'))){
 										$wp_uploads = wp_upload_dir();
 										$log_file = wp_all_import_secure_file( $wp_uploads['basedir'] . DIRECTORY_SEPARATOR . PMXI_Plugin::LOGS_DIRECTORY, $item['id'], false, false ) . DIRECTORY_SEPARATOR . $item['id'] . '.html';
 										if (file_exists($log_file)){
-											?>
+											?>											
 											<a href="<?php echo add_query_arg(array('id' => $import->id, 'action' => 'log', 'history_id' => $item['id'], '_wpnonce' => wp_create_nonce( '_wpnonce-download_log' )), $this->baseUrl); ?>"><?php _e('Download Log', 'wp_all_import_plugin'); ?></a>
 											<?php
-										}
-										else {
-											_e('Log Unavailable', 'wp_all_import_plugin');
-										}
-									}
-									else {
-										?>
+										} 
+										else { 
+											_e('Log Unavailable', 'wp_all_import_plugin'); 
+										}										
+									} 
+									else { 
+										?>									
 										&nbsp;
-										<?php
-									};
+										<?php 
+									}; 
 									?>
 								</td>
 								<?php
-								break;
+								break;							
 							default:
 								?>
 								<td>
@@ -199,7 +199,7 @@ $columns = array(
 						endswitch;
 						?>
 					<?php endforeach; ?>
-				</tr>
+				</tr>								
 			<?php endforeach; ?>
 		<?php endif ?>
 		</tbody>

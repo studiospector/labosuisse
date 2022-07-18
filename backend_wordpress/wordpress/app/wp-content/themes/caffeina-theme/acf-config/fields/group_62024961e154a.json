@@ -140,6 +140,43 @@
             "max": "",
             "step": "",
             "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_62ac8963f6f26",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_62ac896cf6f27",
+            "label": "Mostra Data di creazione",
+            "name": "lb_post_creation_date_show",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "wpml_cf_preferences": 2
         }
     ],
     "location": [
@@ -160,5 +197,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1648750762
+    "modified": 1655474611
 }

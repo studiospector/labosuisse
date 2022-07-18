@@ -1,10 +1,12 @@
 .banner {
+    min-height: 400px;
     position: relative;
     display: flex;
     align-items: center;
     overflow: hidden;
 
     @include mq($until: md) {
+        min-height: auto;
         height: auto;
         flex-direction: column;
         padding: 30px 0;

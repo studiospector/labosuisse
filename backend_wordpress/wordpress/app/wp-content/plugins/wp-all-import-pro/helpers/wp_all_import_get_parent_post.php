@@ -36,4 +36,4 @@ function wp_all_import_get_parent_post($identity, $post_type, $import_type = 'po
             break;
     }
     return (!empty($page)) ? (int) $page->ID : 0;
-}
+} 

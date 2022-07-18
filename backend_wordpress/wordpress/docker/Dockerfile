@@ -1,6 +1,10 @@
 # Frontend stage
 
 FROM node:12-alpine as frontend_bundler
+
+ARG LB_API_TOKEN
+ARG LB_API_URL
+
 WORKDIR /app
 RUN apk add --no-cache git --update
 
@@ -13,11 +17,14 @@ RUN npm install
 COPY ./frontend_bundler/client/app/ ./
 
 ENV NODE_ENV=production
+ENV LB_API_TOKEN=$LB_API_TOKEN
+ENV LB_API_URL=$LB_API_URL
+
 RUN npm run build
 
 
 # WORDPRESS STAGE
-FROM wordpress:5.8.0-php7.4-fpm-alpine AS wordpress-base
+FROM wordpress:5.9.3-php7.4-fpm-alpine AS wordpress-base
 
 WORKDIR /wordpress_dir
 RUN cp -r /var/www/html /wordpress_dir
@@ -55,6 +62,7 @@ ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
 # :poop:
 USER root
 RUN apk --no-cache add \
+  redis \
   php8-exif \
   php8-fileinfo \
   php8-zip \
@@ -62,21 +70,32 @@ RUN apk --no-cache add \
   php8-pecl-imagick \
   php8-simplexml \
   php8-xmlwriter \
+  php8-redis \
+  php8-tokenizer \
+  libmemcached \
+  libmemcached-libs \
+  libmemcached-dev \
+  php8-pecl-memcached \
   # required by NR agent
   pcre
 
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
+COPY ./backend_wordpress/wordpress/docker/entrypoint.sh /entrypoint.sh
 
 USER nobody
 
 # overrides for nginx conf
 COPY ./backend_wordpress/config/php.ini /etc/php8/conf.d/custom.ini
-COPY ./backend_wordpress/nginx /etc/nginx
+COPY backend_wordpress/php-fpm.d/www.conf /etc/php8/php-fpm.d/www.conf
+COPY --chown=nobody ./backend_wordpress/nginx /etc/nginx
 
 # copy final code
 COPY --from=wordpress --chown=nobody /var/www/html /var/www/html
+
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/supervisord.conf"]
 
 FROM production AS dev
 

@@ -2,7 +2,7 @@
 
 class PMXI_Image_Record extends PMXI_Model_Record {
 	protected $primary = array('attachment_id');
-
+	
 	/**
 	 * Initialize model instance
 	 * @param array[optional] $data Array of record data to initialize object with

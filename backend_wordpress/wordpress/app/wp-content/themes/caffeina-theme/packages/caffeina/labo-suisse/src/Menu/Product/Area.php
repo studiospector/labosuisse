@@ -38,42 +38,15 @@ class Area
             'children' => [
                 [
                     'type' => 'submenu',
-                    'label' => 'Per Zona',
-                    'children' => [
-                        ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)],
-                        ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)]
-                    ]
+                    'label' => __('Per Zona', 'labo-suisse-theme'),
+                    'children' => []
                 ],
                 [
                     'type' => 'submenu-second',
                     'children' => []
                 ]
             ],
-            'fixed' => [
-                [
-                    'type' => 'card',
-                    'data' => [
-                        'images' => [
-                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'lg' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'md' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'sm' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'xs' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        ],
-                        'infobox' => [
-                            'subtitle' => 'Magnetic Eyes',
-                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            'cta' => [
-                                'url' => '#',
-                                'title' => 'Scopri di più',
-                                'iconEnd' => ['name' => 'arrow-right'],
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-3']
-                    ],
-                ],
-            ]
+            'fixed' => [ (new Option())->getMenuFixedCardByTaxTerm($this->parent)]
         ];
 
         foreach ($this->areas as $i => $area) {
@@ -85,13 +58,19 @@ class Area
 
             $items['children'][1]['children'][$i] = [
                 'type' => 'submenu',
-                'label' => 'Per Esigenza',
+                'label' => __('Per Esigenza', 'labo-suisse-theme'),
                 'trigger' => md5($area->slug),
                 'children' => (new Need($area))->get()
             ];
         }
 
-        return $items;
+        $items['children'][0]['children'][] = [
+            'type' => 'link-spaced',
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+            'href' => get_term_link($this->parent)
+        ];
+
+        return $this->fixDesktopMenu($items);
     }
 
     private function mobile()
@@ -99,10 +78,8 @@ class Area
         $items = [
             'type' => 'submenu',
             'label' => $this->parent->name,
-            'subLabel' => 'Per zona',
-            'children' => [
-                ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' =>  get_term_link($this->parent)]
-            ]
+            'subLabel' => __('Per Zona', 'labo-suisse-theme'),
+            'children' => []
 
         ];
 
@@ -110,8 +87,48 @@ class Area
             $items['children'][] = [
                 'type' => 'submenu',
                 'label' => $area->name,
-                'subLabel' => 'Per esigenza',
+                'subLabel' => __('Per Esigenza', 'labo-suisse-theme'),
                 'children' => (new Need($area))->get()
+            ];
+        }
+
+        $items['children'][] = [
+            'type' => 'link',
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+            'href' => get_term_link($this->parent)
+        ];
+
+        return $this->fixMobileMenu($items);
+    }
+
+    private function fixDesktopMenu($items)
+    {
+        $areaName = $items['label'];
+        $totalNeed = count($items['children'][0]['children']);
+        $needName = $items['children'][0]['children'][0]['label'];
+
+        if ($totalNeed === 2 and ($areaName === $needName)) {
+            unset($items['children'][0]);
+            $items['children'][1] = $items['children'][1]['children'][0];
+            array_unshift($items['children']);
+        }
+
+        return $items;
+    }
+
+    private function fixMobileMenu($items)
+    {
+        $areaName = $items['label'];
+        $totalNeed = count($items['children']);
+        $needName = $items['children'][0]['label'];
+
+        if($totalNeed === 2 and ($areaName === $needName)) {
+            $items = $items['children'][0];
+
+            $items['children'][] = [
+                'type' => 'link',
+                'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+                'href' => get_term_link($this->parent)
             ];
         }
 

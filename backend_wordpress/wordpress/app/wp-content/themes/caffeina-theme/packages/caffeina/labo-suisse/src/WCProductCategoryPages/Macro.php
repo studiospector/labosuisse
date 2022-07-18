@@ -28,7 +28,8 @@ class Macro extends BasePage
                         'variants' => ['quaternary']
                     ]
                 ],
-                'variants' => ['type-3']
+                'type' => 'type-3',
+                'variants' => null
             ];
         }
 

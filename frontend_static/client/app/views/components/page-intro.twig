@@ -1,13 +1,14 @@
-<div class="container text-center">
+<div class="lb-page-intro container text-center">
     <div class="lb-post-content">
         <div class="infobox">
             {% if tagline %}
                 <h6 class="infobox__tagline">{{ tagline }}</h6>
             {% endif %}
             {% if title %}
-                <h1 class="infobox__subtitle h2">{{ title }}</h1>
+                <h1 class="infobox__subtitle h3">{{ title }}</h1>
             {% endif %}
             {% if description %}
+                {# <p class="infobox__paragraph">{{ fn('nl2br', description) }}</p> #}
                 <p class="infobox__paragraph">{{ description }}</p>
             {% endif %}
         </div>

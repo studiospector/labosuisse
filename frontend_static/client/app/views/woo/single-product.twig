@@ -2,7 +2,8 @@
 
 {% set bodyClass = 'single-product' %}
 {% set mainClass = 'js-lb-product' %}
-{% set showPrefooter = true %} 
+{% set prefooterConfig = {show: true, line: false} %}
+
 
 {% block header %}
     {{ parent() }}
@@ -11,48 +12,12 @@
     {% if isInStock %}
         {% set stickyHeaderImage = fn('get_field', 'lb_product_stickyheader_img') %}
         <!-- Header Sticky Product -->
-        <div class="lb-header-sticky-product js-header-sticky-product">
-            <div class="container">
-                <div class="row">
-                    <div class="lb-header-sticky-product__left col-12 col-md-7">
-                        {% if stickyHeaderImage %}
-                            <div class="lb-header-sticky-product__img">
-                                <img data-src="{{ stickyHeaderImage }}" class="lazyload"/>
-                            </div>
-                        {% endif %}
-                        <div class="lb-header-sticky-product__info">
-                            <h5 class="lb-header-sticky-product__info__title">{{ fn('get_the_title') }}</h5>
-                            <p class="p-small">Trattamento donna, 20 fiale, 200ml</p>
-                        </div>
-                    </div>
-                    <div class="lb-header-sticky-product__right col-12 col-md-5">
-                        <div class="lb-header-sticky-product__price">
-                            {{ stickyHeader.price }}
-                        </div>
-                        {% include '@PathViews/components/button.twig' with {
-                            type: 'button',
-                            title: stickyHeader.cartUrlLabel,
-                            class: 'lb-header-sticky-product__button',
-                            variants: ['primary'],
-                        } only %}
-                        {# {% include '@PathViews/components/button.twig' with {
-                            type: 'submit',
-                            form: 'lb-product-add-to-cart',
-                            title: stickyHeader.cartUrlLabel,
-                            variants: ['primary'],
-                        } only %} #}
-                    </div>
-                </div>
-            </div>
-        </div>
+        {% include '@PathViews/layout/header-sticky-product.twig' %}
     {% endif %}
-
 {% endblock header %}
 
 
-
 {% block main %}
-
     {% do action('woocommerce_before_main_content') %}
 
     {% do action('woocommerce_before_single_product') %}
@@ -82,55 +47,52 @@
 
     <div class="js-single-product-details"></div>
 
-    <hr class="lb-separator lb-separator--big" data-variant="big" />
+    {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
 
     {% if hero %}
         {% include '@PathViews/components/hero.twig' with hero only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if offset_navs %}
         {% include '@PathViews/components/block-offset-navs.twig' with offset_navs only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if banner_alternate %}
         {% include '@PathViews/components/banner-alternate.twig' with banner_alternate only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if two_cards %}
         {% include '@PathViews/components/block-launch-two-cards.twig' with two_cards|merge({offsetNavs: offset_navs.items_two_cards}) only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if image_and_card %}
         {% include '@PathViews/components/block-image-card.twig' with image_and_card|merge({offsetNav: offset_navs.items.technology}) only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if number_list %}
         {% include '@PathViews/components/number-list-with-image.twig' with number_list only %}
-        <hr class="lb-separator lb-separator--big" data-variant="big" />
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
     {% endif %}
 
     {% if miniatures %}
         {% include '@PathViews/components/block-love-labo.twig' with miniatures only %}
         {% if routine %}
-            <hr class="lb-separator lb-separator--big" data-variant="big" />
+            {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
         {% endif %}
     {% endif %}
 
     {% if routine %}
         {% include '@PathViews/components/block-routine.twig' with routine only %}
     {% endif %}
-
 {% endblock main %}
 
 
-
 {% block offsetNavs %}
-
     {% if offset_navs.items %}
         {% for item in offset_navs.items %}
             {% if item.active %}
@@ -146,5 +108,4 @@
             {% endif %}
         {% endfor %}
     {% endif %}
-
 {% endblock offsetNavs %}

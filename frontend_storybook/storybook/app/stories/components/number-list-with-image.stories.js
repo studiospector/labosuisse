@@ -7,13 +7,15 @@ import Component from '@okiba/component'
 // Components
 import renderNumberList from '../../views/components/number-list-with-image.twig'
 
+import AnimationReveal from '../../scripts/components/AnimationReveal'
+
 const dataDefault = {
     images: {
-        original: '/assets/images/carousel-hero-img-2.jpg',
-        lg: '/assets/images/carousel-hero-img-2.jpg',
-        md: '/assets/images/carousel-hero-img-2.jpg',
-        sm: '/assets/images/carousel-hero-img-2.jpg',
-        xs: '/assets/images/carousel-hero-img-2.jpg'
+        original: 'https://via.placeholder.com/570x420',
+        lg: 'https://via.placeholder.com/570x420',
+        md: 'https://via.placeholder.com/570x420',
+        sm: 'https://via.placeholder.com/570x420',
+        xs: 'https://via.placeholder.com/570x420'
     },
     numbersList: {
         title: 'Tre consigli utili',
@@ -36,4 +38,22 @@ const dataDefault = {
 }
 
 storiesOf('Components|Number List with Image', module)
+    .addDecorator(storyFn => {
+        useEffect(() => {
+            const app = new Component({
+                el: document.body,
+                components: [
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
+                ]
+            })
+
+            return () => app.destroy()
+        }, [])
+
+        return storyFn()
+    })
     .add('Default', () => renderNumberList(dataDefault))

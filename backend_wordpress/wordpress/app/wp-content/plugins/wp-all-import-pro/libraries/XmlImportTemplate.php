@@ -46,13 +46,13 @@ class XmlImportTemplate {
 	 * @return string
 	 */
 	public function parse()
-	{
-
+	{			
+		
 		ob_start();
 		$err_lvl = error_reporting(E_ALL);
 		include $this->cachedTemplate;
 		error_reporting($err_lvl);
-
+		
 		return ob_get_clean();
 	}
 
@@ -64,14 +64,14 @@ class XmlImportTemplate {
 	 */
 	protected function getValue($xpath = array())
 	{
-
+				
 		if (is_array($xpath) && count($xpath) > 0) {
 			$result = array();
 			foreach ($xpath as $xp) { // concatenate multiple elements into 1 string
 				ob_start();
 				echo $xp;
 				$result[] = $this->trimValues ? trim(ob_get_clean()) : ob_get_clean();
-			}
+			}			
 			return implode(XmlImportConfig::getInstance()->getMultiGlue(), $result);
 		} else {
 			// return null if nothing found

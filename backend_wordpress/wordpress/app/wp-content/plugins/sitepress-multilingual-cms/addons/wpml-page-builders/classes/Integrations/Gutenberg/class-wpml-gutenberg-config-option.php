@@ -30,7 +30,7 @@ class WPML_Gutenberg_Config_Option {
 			}
 		}
 
-		update_option( self::OPTION, $blocks );
+		update_option( self::OPTION, $blocks, 'no' );
 	}
 
 	/**
@@ -95,6 +95,10 @@ class WPML_Gutenberg_Config_Option {
 
 			if ( isset( $key_config['attr']['label'] ) ) {
 				$partial_config['label'] = $key_config['attr']['label'];
+			}
+
+			if ( isset( $key_config['attr']['encoding'] ) ) {
+				$partial_config['encoding'] = $key_config['attr']['encoding'];
 			}
 
 			if ( isset( $key_config['key'] ) ) {

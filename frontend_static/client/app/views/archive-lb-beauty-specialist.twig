@@ -10,12 +10,12 @@
     {% endif %}
 
     {{ content|raw }}
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
-    <div class="container">
+    <div class="container" id="lb-form-container" data-scroll-to-offset="50">
         <div class="row">
             <div class="col-12 col-md-6 offset-md-3">
-                <form action="" method="get" class="archive-lb-beauty-specialist__search js-geolocation" data-geolocation-parameter="region">
+                <form action="{{ form_action }}" method="get" class="archive-lb-beauty-specialist__search js-geolocation" data-geolocation-parameter="region">
                     <div class="caffeina-base-loader js-geolocation-loader"></div>
                     {% include '@PathViews/components/fields/input.twig' with search only %}
                     <div class="lb-geolocation js-geolocation-trigger-element">
@@ -48,7 +48,7 @@
                                                     variants: ['quaternary']
                                                 }
                                             },
-                                            variants: ['type-2']
+                                            type: 'type-2'
                                         } only %}
                                     </div>
                                 {% endfor %}

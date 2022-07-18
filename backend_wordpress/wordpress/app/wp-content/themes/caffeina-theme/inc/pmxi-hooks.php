@@ -1,5 +1,6 @@
 <?php
 
+use Caffeina\LaboSuisse\Actions\Distributor\Distributor;
 use Caffeina\LaboSuisse\Actions\Store\AttachBeautySpecialistEvent;
 use Caffeina\LaboSuisse\Actions\Store\UpdateGoogleMapsData;
 
@@ -13,6 +14,9 @@ function after_xml_import($import_id, $import)
             break;
         case 'lb-beauty-specialist':
             (new AttachBeautySpecialistEvent($import_id))->start();
+            break;
+        case 'lb-distributor':
+            (new Distributor($import_id))->update();
             break;
     }
 }

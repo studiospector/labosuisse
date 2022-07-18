@@ -1,5 +1,4 @@
-{# <article {{ fn('post_class', ['lb-product-card', entry_classes ], post.ID) }}> #}
-<article {{ fn('post_class', ['lb-product-card'] ) }}>
+<a href="{{ post.link }}" {{ fn('post_class', ['lb-product-card'] ) }}>
 
     {{ fn('timber_set_product', post) }}
 
@@ -7,12 +6,12 @@
         {% do action('woocommerce_before_shop_loop_item_title') %}
 
         {% if post.title %}
-            <h3 class="lb-product-card__title"><a href="{{ post.link }}">{{ post.title }}</a></h3>
+            <h3 class="lb-product-card__title">{{ post.title }}</h3>
         {% else %}
-            <h3 class="lb-product-card__title"><a href="{{ post.link }}">{{ fn('the_title') }}</a></h3>
+            <h3 class="lb-product-card__title">{{ fn('the_title') }}</h3>
         {% endif %}
 
         {% do action('woocommerce_after_shop_loop_item_title') %}
         {% do action('woocommerce_after_shop_loop_item') %}
     </div>
-</article>
+</a>

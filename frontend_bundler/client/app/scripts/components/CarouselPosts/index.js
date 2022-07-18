@@ -1,7 +1,7 @@
 import Component from '@okiba/component'
 import { qs, on } from '@okiba/dom'
 
-import Swiper from 'swiper/bundle';
+import Swiper, { Pagination } from 'swiper'
 
 const ui = {
     pagination: '.swiper-pagination'
@@ -14,27 +14,30 @@ class CarouselPosts extends Component {
 
         // Swiper Default params
         const swiperDefault = {
+            modules: [ Pagination ],
             speed: 400,
             slidesPerView: 1,
             spaceBetween: 20,
             breakpoints: {
-                // when window width is >= 768px
-                768: {
+                // when window width is >= 767px
+                767: {
                     spaceBetween: 30,
                 },
             },
             pagination: {
                 el: this.ui.pagination,
+                type: 'bullets',
             },
         }
 
         // Swiper Two posts variant params
         const swiperTwoPosts = {
+            modules: [ Pagination ],
             slidesPerView: 1,
             spaceBetween: 20,
             breakpoints: {
-                // when window width is >= 768px
-                768: {
+                // when window width is >= 767px
+                767: {
                     slidesPerView: 1,
                     spaceBetween: 70,
                 },
@@ -64,7 +67,7 @@ class CarouselPosts extends Component {
     }
 
     variantsDispatcher = () => {
-        let matchMedia = window.matchMedia("screen and (min-width: 768px)")
+        let matchMedia = window.matchMedia("screen and (min-width: 767px)")
         this.variantFull(matchMedia)
     }
 

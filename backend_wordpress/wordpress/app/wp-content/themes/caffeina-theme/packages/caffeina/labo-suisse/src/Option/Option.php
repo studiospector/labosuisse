@@ -102,7 +102,8 @@ class Option
                     'paragraph' => $this->getOption('lb_stores_infobox_paragraph'),
                     'cta' => array_merge($this->getOption('lb_stores_infobox_btn'), ['variants' => ['quaternary']])
                 ],
-                'variants' => ['type-1', 'type-1-secondary'],
+                'type' => 'type-1-secondary',
+                'variants' => null
             ],
         ];
     }
@@ -119,11 +120,20 @@ class Option
 
     public function getFooterSearchOptions()
     {
-       $options = $this->getOption('lb_footer_search');
+        $options = $this->getOption('lb_footer_search');
+
+        if (is_null($options)) {
+            return [
+                'title' => null,
+                'label' => null,
+                'link' => null,
+            ];
+        }
 
         return [
             'title' => $options['lb_footer_search_title'],
             'label' => $options['lb_footer_search_label'],
+            'link' => $options['lb_footer_search_link_eng'],
         ];
     }
 
@@ -139,16 +149,34 @@ class Option
             ];
         }
 
+        // Remove unused data
+        unset($options['lb_footer_newsletter_cta']['url']);
+        unset($options['lb_footer_newsletter_cta']['target']);
+
         return [
             'title' => $options['lb_footer_newsletter_title'],
             'text' => $options['lb_footer_newsletter_text'],
-            'cta' => array_merge($options['lb_footer_newsletter_cta'], ['variants' => ['secondary']]),
+            'cta' => array_merge(
+                $options['lb_footer_newsletter_cta'],
+                [
+                    'attributes' => ['data-target-offset-nav="lb-newsletter-nav"'],
+                    'class' => 'js-open-offset-nav',
+                    'variants' => ['secondary']
+                ]
+            ),
         ];
     }
 
     public function getFooterSocialNetwork()
     {
         $options = $this->getOption('lb_footer_social');
+
+        if (is_null($options)) {
+            return [
+                'title' => null,
+                'items' => []
+            ];
+        }
 
         $social = [
             'title' => $options['lb_footer_social_title'],
@@ -162,7 +190,6 @@ class Option
             ];
         }
 
-
         return $social;
     }
 
@@ -172,6 +199,56 @@ class Option
             'left' => $this->getOption('lb_prefooter_left_block'),
             'center' => $this->getOption('lb_prefooter_center_block'),
             'right' => $this->getOption('lb_prefooter_right_block'),
+        ];
+    }
+
+    public function getMenuFixedCard($location, $device = 'desktop')
+    {
+        $cta = $this->getOption("lb_menu_fixed_card_{$location}_btn");
+
+        if ($cta) {
+            $cta = array_merge($this->getOption("lb_menu_fixed_card_{$location}_btn"), [ 'variants' => ['quaternary']]);
+        } else {
+            $cta = [];
+        }
+
+        return [
+            'type' => 'card',
+            'data' => [
+                'images' => lb_get_images($this->getOption("lb_menu_fixed_card_{$location}_image")),
+                'infobox' => [
+                    'subtitle' => $this->getOption("lb_menu_fixed_card_{$location}_subtitle"),
+                    'paragraph' => $this->getOption("lb_menu_fixed_card_{$location}_paragraph"),
+                    'cta' => $cta
+                ],
+                'type' => ($device === 'desktop') ? 'type-3' : 'type-1',
+                'variants' => null
+            ],
+        ];
+    }
+
+    public function getMenuFixedCardByTaxTerm($term, $device = 'desktop')
+    {
+        $cta = get_field('lb_product_cat_menu_link', $term);
+
+        if ($cta) {
+            $cta = array_merge(get_field('lb_product_cat_menu_link', $term), [ 'variants' => ['quaternary']]);
+        } else {
+            $cta = [];
+        }
+
+        return [
+            'type' => 'card',
+            'data' => [
+                'images' => lb_get_images(get_field('lb_product_cat_menu_image', $term)),
+                'infobox' => [
+                    'subtitle' => get_field('lb_product_cat_menu_subtitle', $term),
+                    'paragraph' => get_field('lb_product_cat_menu_paragraph', $term),
+                    'cta' => $cta
+                ],
+                'type' => ($device === 'desktop') ? 'type-3' : 'type-1',
+                'variants' => null
+            ],
         ];
     }
 

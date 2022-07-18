@@ -1,3 +1,5 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
 {% set classes = [] %}
 {% for variant in variants|default([]) %}
 	{% set classes = classes|merge(['block-image-card--' ~ variant]) %}
@@ -5,8 +7,6 @@
 {% if class %}
 	{% set classes = classes|merge([class]) %}
 {% endif %}
-
-{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
 {# Offset Nav links payload #}
 {% set navLink = {} %}
@@ -20,11 +20,11 @@
     {% endif %}
 {% endif %}
 
-<section class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container">
+<section class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
     <div class="block-image-card__img">
-        {{ lbPicture(images, true) }}
+        {{ lbPicture(images, true, null, true) }}
     </div>
-    <div class="block-image-card__card">
+    <div class="block-image-card__card js-card-reveal">
         {% if navLink %}
             {% set ctaCurr = card.infobox.cta %}
             {% set infoboxCurr = card.infobox %}

@@ -22,7 +22,14 @@ class Brands
         $this->option = new Option();
     }
 
-    public function get()
+    public function get($device = 'desktop')
+    {
+        return ($device == 'desktop')
+            ? $this->desktop()
+            : $this->mobile();
+    }
+
+    private function desktop()
     {
         $menu = [
             'type' => 'submenu',
@@ -32,7 +39,7 @@ class Brands
                     'type' => 'submenu',
                     'label' => __('Per Brand', 'labo-suisse-theme'),
                     'children' => [
-                        ['type' => 'link', 'label' => 'Tutti i brand', 'href' => $this->option->getArchiveBrandLink()]
+                        ['type' => 'link', 'label' => __('Tutti i Brand', 'labo-suisse-theme'), 'href' => $this->option->getArchiveBrandLink()]
                     ]
                 ],
                 [
@@ -40,30 +47,7 @@ class Brands
                     'children' => []
                 ]
             ],
-            'fixed' => [
-                [
-                    'type' => 'card',
-                    'data' => [
-                        'images' => [
-                            'original' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'lg' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'md' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'sm' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                            'xs' => get_template_directory_uri() . '/assets/images/card-img-5.jpg',
-                        ],
-                        'infobox' => [
-                            'subtitle' => 'Magnetic Eyes',
-                            'paragraph' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                            'cta' => [
-                                'url' => '#',
-                                'title' => __('Scopri di più', 'labo-suisse-theme'),
-                                'variants' => ['quaternary']
-                            ]
-                        ],
-                        'variants' => ['type-3']
-                    ],
-                ],
-            ]
+            'fixed' => [ (new Option())->getMenuFixedCard('brands')]
         ];
 
         foreach ($this->brands as $i => $brand) {
@@ -84,7 +68,26 @@ class Brands
         return [$menu];
     }
 
-    private function getProductLines($brand)
+    private function mobile()
+    {
+        $items  = [
+            'type' => 'submenu',
+            'label' => __('Tutti i Brand', 'labo-suisse-theme'),
+            'children' => [],
+        ];
+
+        foreach ($this->brands as $i => $brand) {
+            $items['children'][] = [
+                'type' => 'submenu',
+                'label' => $brand->name,
+                'children' => $this->getProductLines($brand, 'mobile')
+            ];
+        }
+
+        return [$items];
+    }
+
+    private function getProductLines($brand, $device = 'desktop')
     {
         $lines =  get_terms(array(
             'taxonomy' => 'lb-brand',
@@ -93,8 +96,7 @@ class Brands
         ));
 
         $items = [
-            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))],
-            ['type' => 'link', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)],
+            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))]
         ];
 
         foreach ($lines as $line) {
@@ -105,6 +107,11 @@ class Brands
             ];
         }
 
+        $type = ($device === 'desktop')
+            ? 'link-spaced'
+            : 'link';
+
+        $items[] = ['type' => $type, 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)];
         return $items;
     }
 }

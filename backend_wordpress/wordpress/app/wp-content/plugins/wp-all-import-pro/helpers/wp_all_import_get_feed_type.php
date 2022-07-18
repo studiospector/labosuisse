@@ -2,9 +2,9 @@
 
 if ( ! function_exists('wp_all_import_get_feed_type')){
 	function wp_all_import_get_feed_type($url){
-
-		$type = wp_all_import_get_remote_file_name($url);
-
+		
+		$type = wp_all_import_get_remote_file_name($url);		
+		
 		if ($type !== false) {
 
 			return array(
@@ -21,22 +21,22 @@ if ( ! function_exists('wp_all_import_get_feed_type')){
             $headers = wp_remote_retrieve_headers( $response );
         }
 
-		$extensions = array('gzip', 'gz', 'xml', 'csv', 'json', 'sql');
+		$extensions = array('gzip', 'gz', 'xml', 'csv', 'json', 'sql');	
 		$type = false;
 
 		$contentType = ( ! empty($headers['Content-Type']) ) ? $headers['Content-Type'] : false;
 		if ($contentType === false)
 			$contentType = ( ! empty($headers['content-type']) ) ? $headers['content-type'] : false;
-
+		
 		if ( ! empty($contentType)){
 	   		if (is_array($contentType)){
 	   			foreach ($contentType as $key => $ct) {
 	   				foreach ($extensions as $ext) {
-	   					if (strpos($ct, $ext) !== false) {
+	   					if (strpos($ct, $ext) !== false) { 
 	   						$type = $ext;
 	   						break(2);
 	   					}
-	   				}
+	   				}   								
 				}
 	   		}
 	   		else{
@@ -45,7 +45,7 @@ if ( ! function_exists('wp_all_import_get_feed_type')){
 						$type = $ext;
 	   					break;
 					}
-				}
+				} 
 	   		}
 	   		if ( ! empty($headers['Content-Disposition'])){
 	   			foreach ($extensions as $ext) {

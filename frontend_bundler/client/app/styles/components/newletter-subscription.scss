@@ -1,0 +1,67 @@
+.lb-newletter-subscription {
+    &__search {
+        height: 565px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        @include mq($until: md) {
+            height: 420px;
+        }
+
+        .custom-field {
+            margin-top: 40px;
+            background: map-get($colors, "white");
+        }
+
+        &__text {
+            z-index: 1;
+
+            .infobox__subtitle {
+                margin: 0;
+            }
+        }
+    }
+
+    &__form {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+
+        @include mq($until: md) {
+            margin-top: 100px;
+        }
+
+        .infobox {
+            margin-bottom: 40px;
+        }
+
+        .mc4wp-form {
+            width: 100%;
+            max-width: 420px;
+
+            .mc4wp-form-fields {
+                .button {
+                    margin-top: 100px;
+                }
+            }
+
+            .mc4wp-response {
+                width: 100%;
+                position: absolute;
+                bottom: 72px;
+                left: 0;
+
+                > .mc4wp-response {
+                    position: relative;
+                    bottom: 0;
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

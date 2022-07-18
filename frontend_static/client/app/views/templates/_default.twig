@@ -29,23 +29,28 @@
         <!-- / WP Head -->
 
 		<link rel="preload" as="style" href="{{ mainCss }}">
-		<link rel="preload" as="script" href="{{ mainJsModern }}">
+		<link rel="preload" as="script" href="{{ mainJsModern }}" data-cookieconsent="ignore">
 
-		{% if production %}
+        <style>{{source('@bundle' ~ criticalCssProd)}}</style>
+		{# {% if production %}
 			<style>{{source('@bundle' ~ criticalCssProd)}}</style>
 		{% else %}
 			<link rel="stylesheet" href="{{ criticalCss }}">
-		{% endif %}
+		{% endif %} #}
 
 		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="all">
+
+        {% include 'various/tracking-head.twig' %}
         
         <!-- Custom Head -->
         {% block head %}{% endblock %}
         <!-- / Custom Head -->
-    </head>
-    <body {{ fn('body_class', bodyClass ~ ' is-loading') }}>
 
-        <div class="js-scrollbar" data-scroll-container>
+        {% set page_loader = fn('get_field', 'lb_page_loader_status', 'option') ? ' is-loading' : false %}
+    </head>
+    <body {{ fn('body_class', bodyClass ~ page_loader) }}>
+
+        <div class="js-scrollbar js-gtm-tracking" data-ga-event-type="global" data-scroll-container>
             <!-- Header -->
             {% block header %}
                 {% set header = fn('lb_header') %}
@@ -60,29 +65,37 @@
                 {% set footer = fn('lb_footer') %}
                 {% include 'layout/footer.twig' with {
                     data: footer,
-                    showPrefooter: showPrefooter|default(false)
+                    prefooterConfig: prefooterConfig|default({show: false, line: false})
                 } only %}
             {% endblock %}
             <!-- Offset Navs -->
+            {% set newsletter_nav = fn('lb_newsletter_nav') %}
+            {% include '@PathViews/components/offset-nav/default.twig' with newsletter_nav only %}
             {% block offsetNavs %}{% endblock %}
-            <!-- Loader -->
-            <div class="js-loader lb-loader lb-loader--loading">
-                <div class="lb-loader-spinner"></div>
-            </div>
+
+            {% if page_loader %}
+                <!-- Loader -->
+                <div class="js-loader lb-loader lb-loader--loading">
+                    <div class="lb-loader-spinner"></div>
+                </div>
+            {% endif %}
         </div>
 
         {% include 'components/symbols.twig' %}
 
-        <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" defer></script>
+        <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
 
-        {% if production %}
-            <script type="text/javascript">{{ source('@bundle' ~ criticalJs) }}</script>
+        <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
+        {# {% if production %}
+            <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
         {% else %}
-            <script src="{{ criticalJsModern }}"></script>
-        {% endif %}
+            <script src="{{ criticalJsModern }}" data-cookieconsent="ignore"></script>
+        {% endif %} #}
 
-        <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" defer></script>
+        <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" data-cookieconsent="ignore" defer></script>
 
         {{ fn('wp_footer') }}
+
+        {% include 'various/tracking-body.twig' %}
     </body>
 </html>

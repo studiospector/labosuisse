@@ -4185,22 +4185,22 @@ msgid "<b>%s Plugin</b>: Current sql user %s doesn't have ALTER privileges"
 msgstr "<b>%s Plugin:</b> O usuário atual do sql %s não tem privilégios ALTER"
 
 #. Plugin Name of the plugin/theme
-#:
+#: 
 msgid "WP All Import Pro"
 msgstr "WP All Import Pro"
 
 #. Plugin URI of the plugin/theme
-#:
+#: 
 msgid "http://www.wpallimport.com/"
 msgstr "http://www.wpallimport.com/"
 
 #. Description of the plugin/theme
-#:
+#: 
 msgid "The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more."
 msgstr "A solução a mais poderosa para importar arquivos XML e CSV para o WordPress. Importar para postagens, páginas e tipos de postagem personalizados. Suporte para importações que executam em um cronograma, capaz de atualizar importações existentes e muito mais."
 
 #. Author of the plugin/theme
-#:
+#: 
 msgid "Soflyy"
 msgstr "Soflyy"
 

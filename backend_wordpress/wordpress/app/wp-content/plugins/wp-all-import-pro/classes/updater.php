@@ -8,7 +8,7 @@ if( ! class_exists('PMXI_Updater') ) {
         private $name     = '';
         private $slug     = '';
         private $_plugin_file = '';
-        private $did_check = false;
+        private $did_check = false;        
         private $version;
 
         /**
@@ -46,8 +46,8 @@ if( ! class_exists('PMXI_Updater') ) {
         public function init() {
 
             add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'check_update' ), 20 );
-            add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );
-
+            add_filter( 'plugins_api', array( $this, 'plugins_api_filter' ), 10, 3 );            
+            
             add_action( 'after_plugin_row_' . $this->name, array( $this, 'show_update_notification' ), 11, 2 );
             add_filter( 'plugin_row_meta', array( $this, 'plugin_row_meta' ), 10, 2 );
         }
@@ -86,7 +86,7 @@ if( ! class_exists('PMXI_Updater') ) {
          * @return array Modified update array with custom plugin data.
          */
         function check_update( $_transient_data ) {
-
+            
             global $pagenow;
             global $wpdb;
 
@@ -100,7 +100,7 @@ if( ! class_exists('PMXI_Updater') ) {
 
             if( empty( $_transient_data ) ) return $_transient_data;
 
-            if ( empty( $_transient_data->response ) || empty( $_transient_data->response[ $this->name ] ) ) {
+            if ( empty( $_transient_data->response ) || empty( $_transient_data->response[ $this->name ] ) ) {                
 
                 $cache_key    = md5( 'edd_plugin_' .sanitize_key( $this->name ) . '_version_info' );
                 $version_info = get_transient( $cache_key );
@@ -115,7 +115,7 @@ if( ! class_exists('PMXI_Updater') ) {
                         // cache time is not expired
                         if ( $value >= strtotime("now") )
                         {
-                            $cache_value = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $this->slug . '_' . $cache_key ) );
+                            $cache_value = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $this->slug . '_' . $cache_key ) );        
                             if ( is_object( $cache_value ) and ! empty($cache_value->option_value)) {
                                 $version_info = maybe_unserialize($cache_value->option_value);
                             }
@@ -129,10 +129,10 @@ if( ! class_exists('PMXI_Updater') ) {
 
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . $cache_key) );
-
+                                         
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name, autoload ) VALUES ( %s, %s, 'no' )", maybe_serialize( $version_info ), $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );
-
+                        
                     }
                 }
 
@@ -151,7 +151,7 @@ if( ! class_exists('PMXI_Updater') ) {
                     }
 
                     $_transient_data->last_checked = time();
-                    $_transient_data->checked[ $this->name ] = $this->version;
+                    $_transient_data->checked[ $this->name ] = $this->version;                    
 
                 }
 
@@ -198,7 +198,7 @@ if( ! class_exists('PMXI_Updater') ) {
                         // cache time is not expired
                         if ( $value >= strtotime("now") )
                         {
-                            $cache_value = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $this->slug . '_' . $cache_key ) );
+                            $cache_value = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $this->slug . '_' . $cache_key ) );        
                             if ( is_object( $cache_value ) and ! empty($cache_value->option_value)) {
                                 $version_info = maybe_unserialize($cache_value->option_value);
                             }
@@ -213,10 +213,10 @@ if( ! class_exists('PMXI_Updater') ) {
 
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . $cache_key) );
-
+                                         
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name, autoload ) VALUES ( %s, %s, 'no' )", maybe_serialize( $version_info ), $this->slug . '_' . $cache_key) );
-                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );
-
+                        $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );                       
+                        
                     }
                 }
 
@@ -360,7 +360,7 @@ if( ! class_exists('PMXI_Updater') ) {
                     // cache time is not expired
                     if ( $value >= strtotime("now") )
                     {
-                        $cache_value = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $this->slug . '_' . $cache_key ) );
+                        $cache_value = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $this->slug . '_' . $cache_key ) );        
                         if ( is_object( $cache_value ) and ! empty($cache_value->option_value)) {
                             $_data = maybe_unserialize($cache_value->option_value);
                         }
@@ -385,12 +385,12 @@ if( ! class_exists('PMXI_Updater') ) {
 
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("DELETE FROM $wpdb->options WHERE option_name = %s", $this->slug . '_timeout_' . $cache_key) );
-
+                                         
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name, autoload ) VALUES ( %s, %s, 'no' )", maybe_serialize( $_data ), $this->slug . '_' . $cache_key) );
                         $wpdb->query( $wpdb->prepare("INSERT INTO $wpdb->options ( option_value, option_name ) VALUES ( %s, %s )", strtotime("+1 hour"), $this->slug . '_timeout_' . $cache_key) );
-
-                    }
-                }
+                                                                      
+                    }   
+                }                         
 
             }
 
@@ -429,9 +429,9 @@ if( ! class_exists('PMXI_Updater') ) {
          */
         private function api_request( $_action, $_data, $debug = false ) {
 
-            global $wp_version;
+            global $wp_version;            
 
-            $data = array_merge( $this->api_data, $_data );
+            $data = array_merge( $this->api_data, $_data );                        
 
             if ( $data['slug'] != $this->slug )
                 return;
@@ -441,7 +441,7 @@ if( ! class_exists('PMXI_Updater') ) {
 
             if( $this->api_url == home_url() ) {
                 return false; // Don't allow a plugin to ping itself
-            }
+            }            
 
             $api_params = array(
                 'edd_action' => 'get_version',
@@ -455,11 +455,11 @@ if( ! class_exists('PMXI_Updater') ) {
                 'version'    => $this->version,
                 'signature'  => defined('WPALLIMPORT_SIGNATURE') ? WPALLIMPORT_SIGNATURE : ''
             );
-
+            
             $request = wp_remote_post( $this->api_url, array( 'timeout' => 15, 'sslverify' => true, 'body' => $api_params ) );
 
-            if ( ! is_wp_error( $request ) ) {
-                $request = json_decode( wp_remote_retrieve_body( $request ) );
+            if ( ! is_wp_error( $request ) ) {                
+                $request = json_decode( wp_remote_retrieve_body( $request ) );                
             }
 
             if ( $request && isset( $request->contributors ) ) {

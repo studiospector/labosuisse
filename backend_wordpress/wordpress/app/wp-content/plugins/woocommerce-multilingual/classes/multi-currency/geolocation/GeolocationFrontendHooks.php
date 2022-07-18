@@ -2,13 +2,15 @@
 
 namespace WCML\MultiCurrency;
 
-class GeolocationFrontendHooks implements \IWPML_Frontend_Action {
+use WCML\StandAlone\IStandAloneAction;
+
+class GeolocationFrontendHooks implements \IWPML_Frontend_Action, IStandAloneAction {
 
 	const KEY_CLIENT_COUNTRY = 'wcml_client_country';
 
 	public function add_hooks() {
 		if ( Geolocation::isUsed() ) {
-			add_action( 'after_setup_theme', [ self::class, 'storeUserCountry' ] );
+			add_action( 'init', [ self::class, 'storeUserCountry' ] );
 		}
 	}
 

@@ -76,17 +76,19 @@ BUGFIX
 - √ caricamento store locator
 - √ fix card filtrate
 
-- refactor con template archivi
-- refactor componente separatore
-- refactor api call con autenticazione e url da .env
+- √ refactor template archivi
+- √ refactor componente separatore
 - √ refactor classi store locator base
 
 - √ gestione utenti BE + Dashboard
 - √ gestione accordion prefooter in mobile
 - √ gestione ricerca store locator dal campo nel prefooter
 - √ gestione ricerca store locator dal campo nel footer
-- animazioni
-- KPI
+- √ KPI
+
+- √ animazioni
+- √ fix cards grid spaces
+- √ fix prefooter spaces + line
 
 
 
@@ -105,4 +107,25 @@ SEZIONI DA TERMINARE
 - √ Filtri e Ricerche archivi
 - √ Gestione dinamica Footer
 - √ Ricerca globale
-- Integrazione Newsletter
+- √ Integrazione Newsletter
+- √ Template Ricerca e Innovazione
+- √ Template Marchi e Brevetti
+- √ Nuovo menu
+
+
+
+----------
+
+
+
+PRE GO LIVE
+- √ iThemes
+- √ reCaptcha
+- * Cache
+- * SMTP
+- * email definitive form CF7
+- √ titolo candidatura non presente nell'email
+- * refactoring api call con autenticazione e url da .env
+- √ gestione PDF in pagina News
+- associazione prodotti a più categorie
+- refactoring Store locator

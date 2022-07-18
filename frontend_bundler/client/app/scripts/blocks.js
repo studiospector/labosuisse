@@ -5,31 +5,23 @@ import Application from '~/components/app'
 const lbSetExtraPropsToBlockType = (props, blockType, attributes) => {
     const notDefined = (typeof props.className === 'undefined' || !props.className) ? true : false
 
-    if (blockType.name === 'core/heading') {
+    if (
+        blockType.name === 'core/heading'
+        || blockType.name === 'core/paragraph'
+        || blockType.name === 'core/list'
+        || blockType.name === 'core/image'
+        || blockType.name === 'core/file'
+    ) {
         return Object.assign(props, {
             // className: notDefined ? `post__heading-${props.tagName}` : `post__heading-${props.tagName} ${props.className}`,
             className: notDefined ? `lb-post-content` : `lb-post-content ${props.className}`,
         })
     }
-
-    if (blockType.name === 'core/paragraph') {
+    else if (
+        blockType.name === 'core/embed'
+    ) {
         return Object.assign(props, {
-            // className: notDefined ? 'post__paragraph' : `post__paragraph ${props.className}`,
-            className: notDefined ? 'lb-post-content' : `lb-post-content ${props.className}`,
-        })
-    }
-
-    if (blockType.name === 'core/list') {
-        return Object.assign(props, {
-            // className: notDefined ? 'post__paragraph' : `post__paragraph ${props.className}`,
-            className: notDefined ? 'lb-post-content' : `lb-post-content ${props.className}`,
-        })
-    }
-
-    if (blockType.name === 'core/image') {
-        return Object.assign(props, {
-            // className: notDefined ? 'post__paragraph' : `post__paragraph ${props.className}`,
-            className: notDefined ? 'lb-post-content' : `lb-post-content ${props.className}`,
+            className: notDefined ? `container` : `container ${props.className}`,
         })
     }
 
@@ -37,22 +29,28 @@ const lbSetExtraPropsToBlockType = (props, blockType, attributes) => {
 }
 
 window.addEventListener('load', (event) => {
-    wp.hooks.addFilter(
-        'blocks.getSaveContent.extraProps',
-        'your-namespace/block-filters',
-        lbSetExtraPropsToBlockType
-    )
+    let postType = null
+    const body = document.querySelector('body')
+
+    body.classList.forEach((attr) => {
+        if ('post-type-' === attr.slice(0, 10)) {
+            postType = attr.split('post-type-')
+            postType = postType[postType.length - 1]
+
+            return
+        }
+    })
+
+    if (postType != 'lb-job') {
+        wp.hooks.addFilter(
+            'blocks.getSaveContent.extraProps',
+            'labo-suisse-theme/block-filters',
+            lbSetExtraPropsToBlockType
+        )
+    }
 
     // Disable default Separator block
     wp.blocks.unregisterBlockType('core/separator')
 
     new Application()
 })
-
-// function init() {
-//   console.log('initAPP')
-//   return new Application()
-// }
-
-// if (!window.APP) window.APP = {}
-// window.APP.init = init

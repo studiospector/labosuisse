@@ -11,7 +11,7 @@ function lb_get_images($id, $sizes = [])
 {
     $data = null;
 
-    if ( !empty($id) ) {
+    if (!empty($id)) {
         $data = [
             'alt' => get_the_title($id),
             'original' => wp_get_attachment_url($id),
@@ -145,7 +145,7 @@ function get_job_location()
 
 function get_all_macro()
 {
-   return get_terms([
+    return get_terms([
         'taxonomy' => 'product_cat',
         'hide_empty' => true,
         'parent' => null,
@@ -246,6 +246,27 @@ function lb_get_posts_archive_years()
 }
 
 /**
+ * Get Posts count by taxonomy
+ */
+function get_posts_count_by_taxonomy($post_type, $taxonomy, $terms)
+{
+    $term_posts = get_posts(array(
+        'post_type' => $post_type,
+        'numberposts' => -1,
+        'suppress_filters' => false,
+        'tax_query' => array(
+            array(
+                'taxonomy' => $taxonomy,
+                'field'    => 'slug',
+                'terms'    => $terms
+            )
+        )
+    ));
+
+    return count($term_posts);
+}
+
+/**
  * Assign global $product object in Timber
  */
 function timber_set_product($post)
@@ -257,7 +278,8 @@ function timber_set_product($post)
 /**
  * Get current language
  */
-function lb_get_current_lang() {
+function lb_get_current_lang()
+{
     global $sitepress;
 
     $current_lang = $sitepress->get_current_language();
@@ -273,6 +295,7 @@ function lb_pagination()
     $pagination_html = null;
 
     $pagination = get_the_posts_pagination([
+        'screen_reader_text' => '&nbsp;',
         'mid_size' => 2,
         'prev_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-left']) . '</div>',
         'next_text' => '<div class="button button-tertiary">' . Timber::compile('@PathViews/components/icon.twig', ['name' => 'arrow-right']) . '</div>',
@@ -299,6 +322,7 @@ function lb_header()
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'mobile_search' => [
             'type' => 'search',
+            'id' => 'lb-search-header-mobile',
             'name' => 'search',
             'label' => __('Cerca un prodotto, una linea...', 'labo-suisse-theme'),
             'disabled' => false,
@@ -317,6 +341,34 @@ function lb_header()
 function lb_footer()
 {
     return MenuFooter::get();
+}
+
+/**
+ * Newsletter nav
+ */
+function lb_newsletter_nav()
+{
+    $footer_newsletter_options = get_field('lb_footer_newsletter', 'option');
+
+    return [
+        'id' => 'lb-newsletter-nav',
+        'title' => __('Newsletter', 'labo-suisse-theme'),
+        'data' => [
+            [
+                'type' => 'text',
+                'data' => [
+                    'title' => __('Iscriviti alla newsletter', 'labo-suisse-theme'),
+                    'text' => __('Ricevi aggiornamenti e promozioni direttamente sulla tua mail.', 'labo-suisse-theme'),
+                ]
+            ],
+            [
+                'type' => 'html',
+                'data' => (isset($footer_newsletter_options['lb_footer_newsletter_shortcode']))
+                    ? do_shortcode($footer_newsletter_options['lb_footer_newsletter_shortcode'])
+                    : null
+            ]
+        ]
+    ];
 }
 
 /**
@@ -354,4 +406,17 @@ function lb_recursive_array_search($needle, $haystack)
         }
     }
     return false;
+}
+
+/**
+ * Get unique ID
+ */
+function lb_get_unique_id($prefix = '')
+{
+    static $id_counter = 0;
+
+    if (function_exists('wp_unique_id'))
+        return wp_unique_id($prefix);
+
+    return $prefix . (string) ++$id_counter;
 }

@@ -20,7 +20,7 @@ $context = [
         'paragraph' => __('Cerca qualunque contenuto nel sito.', 'labo-suisse-theme')
     ],
     'no_results_tab' => [
-        'paragraph' => __('Siamo spiacenti! nessun risultato corrisponde alla tua ricerca per quasta entità.', 'labo-suisse-theme')
+        'paragraph' => __('Siamo spiacenti! Nessun risultato corrisponde alla tua ricerca per questa entità.', 'labo-suisse-theme')
     ],
     'no_results' => [
         'title' => sprintf(__("La tua ricerca per &ldquo;%s&rdquo; non ha prodotto alcun risultato", 'labo-suisse-theme'), $search_val),

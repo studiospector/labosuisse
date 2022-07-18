@@ -1,0 +1,31 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<section class="lb-newletter-subscription">
+	<div class="container">
+		<div class="row">
+			<div class="col-12 col-md-6">
+				<div class="lb-newletter-subscription__search">
+					{{ lbPicture(images) }}
+                    {% if search_infobox or search_input %}
+                        <div class="lb-newletter-subscription__search__text">
+                            {% if search_infobox %}
+                                {% include '@PathViews/components/infobox.twig' with search_infobox only %}
+                            {% endif %}
+                            {% if search_input %}
+                                <form action="{{ search_form_action }}" method="get">
+                                    {% include '@PathViews/components/fields/input.twig' with search_input only %}
+                                </form>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+				</div>
+			</div>
+			<div class="col-12 col-md-6">
+				<div class="lb-newletter-subscription__form">
+					{% include '@PathViews/components/infobox.twig' with form_infobox only %}
+                    {{ form_shortcode|raw }}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

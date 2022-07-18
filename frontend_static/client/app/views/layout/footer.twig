@@ -1,23 +1,27 @@
 <footer data-scroll-section>
-    {% if showPrefooter %}
-        <div class="prefooter">
-            <div class="prefooter--desktop container">
-                <div class="row">
-                    <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_1 only %}
-                    </div>
-                    <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
-                        <form action="{{ data.prefooter.block_2.form.action }}" method="get">
-                            {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
-                        </form>
-                    </div>
-                    <div class="prefooter__box col-12 col-md-4">
-                        {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
+    {% if prefooterConfig.show %}
+        <div class="lb-prefooter{{ prefooterConfig.line ? ' lb-prefooter--line' : '' }}">
+            <div class="container">
+                <div class="lb-prefooter__desktop">
+                    <div class="row">
+                        <div class="lb-prefooter__box col-12 col-md-4">
+                            {% include '@PathViews/components/infobox.twig' with data.prefooter.block_1 only %}
+                        </div>
+                        <div class="lb-prefooter__box col-12 col-md-4">
+                            {% include '@PathViews/components/infobox.twig' with data.prefooter.block_2 only %}
+                            {% if data.prefooter.block_2.form %}
+                                <form action="{{ data.prefooter.block_2.form.action }}" method="get" class="{{ data.prefooter.block_2.form.class }}" {{ data.prefooter.block_2.form.attributes ? ' ' ~ data.prefooter.block_2.form.attributes|join(' ') : '' }}>
+                                    {% include '@PathViews/components/fields/input.twig' with data.prefooter.block_2.form.input only %}
+                                </form>
+                            {% endif %}
+                        </div>
+                        <div class="lb-prefooter__box col-12 col-md-4">
+                            {% include '@PathViews/components/infobox.twig' with data.prefooter.block_3 only %}
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="prefooter--mobile">
+            <div class="lb-prefooter__mobile">
                 {% include '@PathViews/components/accordion.twig' with {
                     items: [
                         {
@@ -37,8 +41,8 @@
                                     data: data.prefooter.block_2|merge({subtitle: ''}),
                                 },
                                 {
-                                    type: 'field',
-                                    data: data.prefooter.block_2.form.input,
+                                    type: 'form',
+                                    data: data.prefooter.block_2.form,
                                 },
                             ],
                         },
@@ -89,9 +93,20 @@
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.search.title }}</h6>
-                    <form action="{{ data.footer.search.form.action }}" method="get">
-                        {% include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only %}
-                    </form>
+                    {% if data.footer.search.items %}
+                        <ul class="footer__menu">
+                            {% for item in data.footer.search.items %}
+                                <li class="footer__menu__item">
+                                    {% include '@PathViews/components/button.twig' with item only %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                    {% if data.footer.search.form %}
+                        <form action="{{ data.footer.search.form.action }}" method="get">
+                            {% include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only %}
+                        </form>
+                    {% endif %}
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.newsletter.title }}</h6>

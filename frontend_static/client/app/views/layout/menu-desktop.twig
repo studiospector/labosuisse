@@ -1,9 +1,9 @@
 <nav class="lb-menu lb-menu--desktop">
     <div class="lb-menu__overlay"></div>
     <div class="lb-menu__background"></div>
-    <ul class="lb-menu__main">
+    <div class="lb-menu__main">
         {% for menu in items %}
             {% include '@PathViews/layout/menu-desktop-item.twig' with menu only %}
         {% endfor %}
-    </ul>
+    </div>
 </nav>

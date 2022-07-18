@@ -1,3 +1,5 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
 {% set classes = [] %}
 {% set dataVariants = [] %}
 {% for variant in variants|default([]) %}
@@ -11,17 +13,15 @@
 	{% set classes = classes|merge(['banner-alternate--image-big']) %}
 {% endif %}
 
-{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
-
 <section 
-    class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }} js-banner-alternate"
+    class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }} js-banner-alternate js-animation-reveal"
     {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
 >
     <div class="banner-alternate__img">
-		{{ lbPicture(images, true) }}
+		{{ lbPicture(images, true, null, true) }}
 	</div>
 
     <div class="banner-alternate__infobox">
-        {% include '@PathViews/components/infobox.twig' with infobox only %}
+        {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
     </div>
 </section>

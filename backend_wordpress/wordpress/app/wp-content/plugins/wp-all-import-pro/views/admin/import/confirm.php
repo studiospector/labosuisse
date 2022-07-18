@@ -13,12 +13,12 @@
 			<div class="wpallimport-links">
 				<a href="http://www.wpallimport.com/support/" target="_blank"><?php _e('Support', 'wp_all_import_plugin'); ?></a> | <a href="http://www.wpallimport.com/documentation/" target="_blank"><?php _e('Documentation', 'wp_all_import_plugin'); ?></a>
 			</div>
-		</div>
+		</div>	
 		<div class="clear"></div>
 	</div>
 	<?php
-	$is_valid_root_element = true;
-	$error_codes = $this->errors->get_error_codes();
+	$is_valid_root_element = true;	
+	$error_codes = $this->errors->get_error_codes();		
 	if ( ! empty($error_codes) and is_array($error_codes) and in_array('root-element-validation', $error_codes))
 	{
 		$is_valid_root_element = false;
@@ -32,8 +32,8 @@
 			<?php $this->warning() ?>
 		<?php endif ?>
 
-		<?php
-			wp_all_import_template_notifications( $post );
+		<?php 
+			wp_all_import_template_notifications( $post );								
 		?>
 	</div>
 
@@ -47,9 +47,9 @@
 				<h3><?php _e('There\'s a problem with your import file', 'wp_all_import_plugin');?></h3>
 				<h4><?php _e("It has changed and is not compatible with this import template.", "wp_all_import_plugin"); ?></h4>
 				<?php endif; ?>
-			</div>
-		</div>
-		<a class="button button-primary button-hero wpallimport-large-button wpallimport-notify-read-more" href="http://www.wpallimport.com/documentation/troubleshooting/problems-with-import-files/#invalid" target="_blank"><?php _e('Read More', 'wp_all_import_plugin');?></a>
+			</div>		
+		</div>		
+		<a class="button button-primary button-hero wpallimport-large-button wpallimport-notify-read-more" href="http://www.wpallimport.com/documentation/troubleshooting/problems-with-import-files/#invalid" target="_blank"><?php _e('Read More', 'wp_all_import_plugin');?></a>		
 	</div>
 
 	<?php
@@ -68,33 +68,33 @@
 				break;
 		}
 	?>
-
+		
 	<?php if ($is_valid_root_element):?>
-		<div class="wpallimport-content-section" style="padding: 30px; overflow: hidden;">
+		<div class="wpallimport-content-section" style="padding: 30px; overflow: hidden;">			
 			<div class="wpallimport-ready-to-go">
-
+				
 				<?php if ($is_new_import):?>
 				<h3><?php _e('Your file is all set up!', 'wp_all_import_plugin'); ?></h3>
 				<?php else: ?>
 				<h3><?php _e('This import did not finish successfully last time it was run.', 'wp_all_import_plugin'); ?></h3>
-				<?php endif; ?>
+				<?php endif; ?>				
 
-				<?php if ($is_new_import):?>
+				<?php if ($is_new_import):?>				
 					<h4><?php _e('Check the settings below, then click the green button to run the import.', 'wp_all_import_plugin'); ?></h4>
 				<?php else: ?>
 					<h4><?php _e('You can attempt to continue where it left off.', 'wp_all_import_plugin'); ?></h4>
-				<?php endif; ?>
+				<?php endif; ?>				
 
-			</div>
+			</div>				
 			<?php if ($is_new_import):?>
 				<form class="confirm <?php echo ! $isWizard ? 'edit' : '' ?>" method="post" style="float:right;">
 					<?php wp_nonce_field('confirm', '_wpnonce_confirm') ?>
 					<input type="hidden" name="is_confirmed" value="1" />
-					<input type="submit" class="rad10" value="<?php _e('Confirm & Run Import', 'wp_all_import_plugin') ?>" />
-				</form>
+					<input type="submit" class="rad10" value="<?php _e('Confirm & Run Import', 'wp_all_import_plugin') ?>" />											
+				</form>	
 			<?php else: ?>
 				<form class="confirm <?php echo ! $isWizard ? 'edit' : '' ?>" method="post" style="float: right;">
-					<?php wp_nonce_field('confirm', '_wpnonce_confirm') ?>
+					<?php wp_nonce_field('confirm', '_wpnonce_confirm') ?>				
 					<input type="hidden" name="is_confirmed" value="1" />
 					<!--input type="hidden" name="is_continue" value="1" /-->
 					<div class="input wpallimport-is-continue">
@@ -105,26 +105,26 @@
 						<div class="input">
 							<input type="radio" name="is_continue" value="no" id="is_continue_no"/>
 							<label for="is_continue_no"><?php _e('Run from the beginning', 'wp_all_import_plugin'); ?></label>
-						</div>
+						</div>			
 					</div>
-					<input type="submit" class="rad10" value="<?php _e('Continue Import', 'wp_all_import_plugin') ?>" style="margin-left: 0px; float: right;"/>
+					<input type="submit" class="rad10" value="<?php _e('Continue Import', 'wp_all_import_plugin') ?>" style="margin-left: 0px; float: right;"/>						
 					<!--div class="input" style="margin-top:20px;">
 						<a href="<?php echo add_query_arg(array('id' => $import->id, 'action' => 'update', 'continue' => 'no'), $this->baseUrl); ?>" id="entire_run"><?php _e('Run entire import from the beginning', 'wp_all_import_plugin'); ?></a>
 					</div-->
-				</form>
-			<?php endif; ?>
+				</form>	
+			<?php endif; ?>		
 		</div>
 	<?php endif; ?>
-
+			
 	<div class="clear"></div>
 
 	<table class="wpallimport-layout confirm">
 		<tr>
-			<td class="left">
+			<td class="left">						
+							   
+			<?php if ( $is_new_import ):?>					
 
-			<?php if ( $is_new_import ):?>
-
-			<?php $max_execution_time = ini_get('max_execution_time');?>
+			<?php $max_execution_time = ini_get('max_execution_time');?>			
 
 			<div class="wpallimport-section" style="margin-top: -20px;">
 				<div class="wpallimport-content-section">
@@ -132,28 +132,28 @@
 						<h3 style="color: #425e99;"><?php _e('Import Summary', 'wp_all_import_plugin'); ?> <?php if (!$isWizard):?><span style="color:#000;"><?php printf(__(" - ID: %s - %s"), $import->id, empty($import->friendly_name) ? $import->name : $import->friendly_name);?></span><?php endif;?></h3>
 					</div>
 					<div class="wpallimport-collapsed-content" style="padding: 15px 25px 25px;">
-
+						
 						<!-- Warnings -->
-						<?php if ($max_execution_time != -1): ?>
+						<?php if ($max_execution_time != -1): ?>			
 						<p><?php printf(__('Your max_execution_time is %s seconds', 'wp_all_import_plugin'), $max_execution_time); ?></p>
 						<?php endif;?>
-
+						
 						<!-- General -->
-						<?php
+						<?php										
 							$import_type = (!empty($source['type'])) ? $source['type'] : $import['type'];
 							$path = $source['path'];
 							if ( in_array($import_type, array('upload', 'file'))){
-								$path = wp_all_import_get_absolute_path($source['path']);
+								$path = wp_all_import_get_absolute_path($source['path']);				
 							}
 							if ( in_array($import_type, array('upload'))){
 								$path_parts = pathinfo($source['path']);
 								if ( ! empty($path_parts['dirname'])){
 									$path_all_parts = explode('/', $path_parts['dirname']);
 									$dirname = array_pop($path_all_parts);
-									if ( wp_all_import_isValidMd5($dirname)){
-										$path = str_replace($dirname, preg_replace('%^(.{3}).*(.{3})$%', '$1***$2', $dirname), str_replace('temp/', '', $path));
+									if ( wp_all_import_isValidMd5($dirname)){								
+										$path = str_replace($dirname, preg_replace('%^(.{3}).*(.{3})$%', '$1***$2', $dirname), str_replace('temp/', '', $path));										
 									}
-								}
+								}								
 							} elseif ( in_array($import_type, array('ftp'))){
 							    $path = $import->options['ftp_username'] . '@' . preg_replace('%^ftps?://%i', '', $import->options['ftp_host']) . '/' . $import->options['ftp_path'];
                             } else{
@@ -174,21 +174,21 @@
 						<?php if ( $post['is_import_specified']): ?>
 						<p><?php printf(__('WP All Import will process only specified records: %s', 'wp_all_import_plugin'), $post['import_specified']); ?></p>
 						<?php endif;?>
-
+						
 						<!-- Record Matching -->
 
 						<?php if ( "new" == $post['wizard_type']): ?>
-
+						
 							<p><?php printf(__('Your unique key is <span style="color:#000; font-weight:bold;">%s</span>', 'wp_all_import_plugin'), wp_all_import_clear_xss($post['unique_key'])); ?></p>
-
+							
 							<?php if ( ! $isWizard and !empty($custom_type)): ?>
-
+								
 								<p><?php printf(__('%ss previously imported by this import (ID: %s) with the same unique key will be updated.', 'wp_all_import_plugin'), $custom_type->labels->singular_name, $import->id); ?></p>
-
+								
 								<?php if ( $post['is_delete_missing'] and ! $post['is_update_missing_cf'] and ! $post['set_missing_to_draft']): ?>
 									<p><?php printf(__('%ss previously imported by this import (ID: %s) that aren\'t present for this run of the import will be deleted.', 'wp_all_import_plugin'), $custom_type->labels->singular_name, $import->id); ?></p>
 								<?php endif; ?>
-
+								
 								<?php if ( $post['is_delete_missing'] and $post['set_missing_to_draft']): ?>
 									<p><?php printf(__('%ss previously imported by this import (ID: %s) that aren\'t present for this run of the import will be set to draft.', 'wp_all_import_plugin'), $custom_type->labels->singular_name, $import->id); ?></p>
 								<?php endif; ?>
@@ -198,9 +198,9 @@
 								<?php endif; ?>
 
 							<?php endif; ?>
-
+						
 						<?php else: ?>
-
+						
 							<?php
 							$criteria = '';
 							if ( 'pid' == $post['duplicate_indicator']) $criteria = 'has the same ID';
@@ -278,7 +278,7 @@
 									<?php endif; ?>
 									<?php if ( ! empty($post['is_update_acf'])): ?>
 										<li>
-										<?php
+										<?php 
 										switch($post['update_acf_logic']){
 											case 'full_update':
 												_e('all advanced custom fields', 'wp_all_import_plugin');
@@ -293,28 +293,28 @@
 												printf(__('all ACF except these: %s', 'wp_all_import_plugin'), $post['acf_except_list']);
 												break;
 										} ?>
-										</li>
+										</li>						
 									<?php endif; ?>
 									<?php if ( ! empty($post['is_update_images'])): ?>
 										<li>
-										<?php
+										<?php 
 										switch($post['update_images_logic']){
 											case 'full_update':
 												_e('old images will be updated with new', 'wp_all_import_plugin');
 												break;
 											case 'add_new':
 												_e('only new images will be added', 'wp_all_import_plugin');
-												break;
+												break;							
 										} ?>
-										</li>
+										</li>						
 									<?php endif; ?>
 									<?php if ( ! empty($post['is_update_custom_fields'])): ?>
 										<li>
-										<?php
+										<?php 
 										switch($post['update_custom_fields_logic']){
 											case 'full_update':
 												_e('all custom fields', 'wp_all_import_plugin');
-												break;
+												break;							
 											case 'only':
 												printf(__('only these custom fields : %s', 'wp_all_import_plugin'), $post['custom_fields_only_list']);
 												break;
@@ -322,11 +322,11 @@
 												printf(__('all cusom fields except these: %s', 'wp_all_import_plugin'), $post['custom_fields_except_list']);
 												break;
 										} ?>
-										</li>
+										</li>						
 									<?php endif; ?>
 									<?php if ( ! empty($post['is_update_categories']) && 'taxonomies' != $post['custom_type'] && 'comments' != $post['custom_type']): ?>
 										<li>
-										<?php
+										<?php 
 										switch($post['update_categories_logic']){
 											case 'full_update':
 												_e('remove existing taxonomies, add new taxonomies', 'wp_all_import_plugin');
@@ -341,8 +341,8 @@
 												printf(__('leave these taxonomies: %s alone, update all others', 'wp_all_import_plugin'), $post['taxonomies_except_list']);
 												break;
 										} ?>
-										</li>
-									<?php endif; ?>
+										</li>						
+									<?php endif; ?>					
 								</ul>
 								<?php endif; ?>
 								<?php do_action('pmxi_confirm_data_to_import', $isWizard, $post);?>
@@ -350,9 +350,9 @@
 							<?php } ?>
 							<?php if ( $post['create_new_records']): ?>
 							<p><?php printf(__('New %ss will be created from records that don\'t match the above criteria.', 'wp_all_import_plugin'), $custom_type->labels->singular_name); ?></p>
-							<?php endif; ?>
+							<?php endif; ?>							
 						<?php endif; ?>
-
+						
 						<!-- Import Performance -->
                         <p><?php printf(__('Piece By Piece Processing enabled. %s records will be processed each iteration. If it takes longer than your server\'s max_execution_time to process %s records, your import will fail.', 'wp_all_import_plugin'), $post['records_per_request'], $post['records_per_request']); ?></p>
 
@@ -364,11 +364,11 @@
 
 					</div>
 				</div>
-			</div>
+			</div>														
 
-			<?php endif; ?>
-
-			</td>
+			<?php endif; ?>									
+					
+			</td>			
 		</tr>
 	</table>
 	<?php if ( isset($import_type) && $import_type !== 'upload' ): ?>
@@ -389,10 +389,10 @@
 			<a href="<?php echo apply_filters('pmxi_options_back_link', add_query_arg('action', 'options', $this->baseUrl), $isWizard); ?>"><?php _e('or go back to Step 4', 'wp_all_import_plugin') ?></a>
 		<?php else:?>
 			<a href="<?php echo apply_filters('pmxi_options_back_link', remove_query_arg('id', remove_query_arg('action', $this->baseUrl)), $isWizard); ?>"><?php _e('or go back to Manage Imports', 'wp_all_import_plugin') ?></a>
-		<?php endif; ?>
+		<?php endif; ?>		
 		</p>
-	</form>
+	</form>	
 	<?php endif; ?>
 	<a href="http://soflyy.com/" target="_blank" class="wpallimport-created-by"><?php _e('Created by', 'wp_all_import_plugin'); ?> <span></span></a>
-
+	
 </div>

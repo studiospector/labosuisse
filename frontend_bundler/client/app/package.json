@@ -64,7 +64,7 @@
         "raw-loader": "^4.0.1",
         "sass": "^1.49.7",
         "sass-mq": "^6.0.0",
-        "swiper": "^6.8.4",
+        "swiper": "^8.3.0",
         "twig": "^1.15.4",
         "webpack": "^4.43.0",
         "webpack-bundle-analyzer": "^4.4.0",

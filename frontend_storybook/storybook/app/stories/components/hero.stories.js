@@ -8,20 +8,26 @@ import Component from '@okiba/component'
 import renderHero from '../../views/components/hero.twig'
 
 import Hero from '../../scripts/components/Hero'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataLeftInfobox = {
     images: {
-        original: '/assets/images/hero-face-right.jpg',
-        lg: '/assets/images/hero-face-right.jpg',
-        md: '/assets/images/hero-face-right.jpg',
-        sm: '/assets/images/hero-face-right.jpg',
-        xs: '/assets/images/hero-face-right.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -29,17 +35,22 @@ const dataLeftInfobox = {
 
 const dataLeftBottomInfobox = {
     images: {
-        original: '/assets/images/hero-face-right.jpg',
-        lg: '/assets/images/hero-face-right.jpg',
-        md: '/assets/images/hero-face-right.jpg',
-        sm: '/assets/images/hero-face-right.jpg',
-        xs: '/assets/images/hero-face-right.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'bottom',
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -47,17 +58,22 @@ const dataLeftBottomInfobox = {
 
 const dataRightInfobox = {
     images: {
-        original: '/assets/images/hero-face-left.jpg',
-        lg: '/assets/images/hero-face-left.jpg',
-        md: '/assets/images/hero-face-left.jpg',
-        sm: '/assets/images/hero-face-left.jpg',
-        xs: '/assets/images/hero-face-left.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'right',
     infoboxPosY: 'center',
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -65,17 +81,22 @@ const dataRightInfobox = {
 
 const dataRightBottomInfobox = {
     images: {
-        original: '/assets/images/hero-face-left.jpg',
-        lg: '/assets/images/hero-face-left.jpg',
-        md: '/assets/images/hero-face-left.jpg',
-        sm: '/assets/images/hero-face-left.jpg',
-        xs: '/assets/images/hero-face-left.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'right',
     infoboxPosY: 'bottom',
     infobox: {
         title: 'Le linee viso',
         paragraph: 'Descrizione dell’universo in cui l’utente si trova. Breve overview delle tipologie di prodotto e trattamenti che potrà trovare. Il testo dovrà essere di minimo 2 e massimo 4 righe.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['medium']
@@ -83,11 +104,11 @@ const dataRightBottomInfobox = {
 
 const dataCenterInfobox = {
     images: {
-        original: '/assets/images/carousel-hero-img-2.jpg',
-        lg: '/assets/images/carousel-hero-img-2.jpg',
-        md: '/assets/images/carousel-hero-img-2.jpg',
-        sm: '/assets/images/carousel-hero-img-2.jpg',
-        xs: '/assets/images/carousel-hero-img-2.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'center',
     infoboxPosY: 'center',
@@ -107,18 +128,23 @@ const dataCenterInfobox = {
 
 const dataCenterBottomInfobox = {
     images: {
-        original: '/assets/images/carousel-hero-img-2.jpg',
-        lg: '/assets/images/carousel-hero-img-2.jpg',
-        md: '/assets/images/carousel-hero-img-2.jpg',
-        sm: '/assets/images/carousel-hero-img-2.jpg',
-        xs: '/assets/images/carousel-hero-img-2.jpg'
+        original: 'https://via.placeholder.com/2500x520',
+        lg: 'https://via.placeholder.com/2500x520',
+        md: 'https://via.placeholder.com/2500x520',
+        sm: 'https://via.placeholder.com/2500x520',
+        xs: 'https://via.placeholder.com/2500x520'
     },
     infoboxPosX: 'center',
     infoboxPosY: 'bottom',
     infobox: {
         tagline: 'LABEL',
         title: 'Linea Lifting',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['large']
@@ -126,18 +152,23 @@ const dataCenterBottomInfobox = {
 
 const dataHeroWhiteText = {
     images: {
-        original: '/assets/images/hero-crescina-right.jpg',
-        lg: '/assets/images/hero-crescina-right.jpg',
-        md: '/assets/images/hero-crescina-right.jpg',
-        sm: '/assets/images/hero-crescina-right.jpg',
-        xs: '/assets/images/hero-crescina-right.jpg'
+        original: 'https://via.placeholder.com/2500x420',
+        lg: 'https://via.placeholder.com/2500x420',
+        md: 'https://via.placeholder.com/2500x420',
+        sm: 'https://via.placeholder.com/2500x420',
+        xs: 'https://via.placeholder.com/2500x420'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
     infobox: {
         tagline: 'LABEL',
         title: 'Linea Lifting',
-        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.'
+        paragraph: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     whiteText: true,
@@ -146,17 +177,22 @@ const dataHeroWhiteText = {
 
 const dataImageInfobox = {
     images: {
-        original: '/assets/images/hero-crescina-right.jpg',
-        lg: '/assets/images/hero-crescina-right.jpg',
-        md: '/assets/images/hero-crescina-right.jpg',
-        sm: '/assets/images/hero-crescina-right.jpg',
-        xs: '/assets/images/hero-crescina-right.jpg'
+        original: 'https://via.placeholder.com/2500x420',
+        lg: 'https://via.placeholder.com/2500x420',
+        md: 'https://via.placeholder.com/2500x420',
+        sm: 'https://via.placeholder.com/2500x420',
+        xs: 'https://via.placeholder.com/2500x420'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
     infobox: {
         image: '/assets/images/crescina-logo.png',
-        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. '
+        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. ',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: false,
     variants: ['small']
@@ -164,17 +200,22 @@ const dataImageInfobox = {
 
 const dataHeroContainer = {
     images: {
-        original: '/assets/images/hero-crescina-right.jpg',
-        lg: '/assets/images/hero-crescina-right.jpg',
-        md: '/assets/images/hero-crescina-right.jpg',
-        sm: '/assets/images/hero-crescina-right.jpg',
-        xs: '/assets/images/hero-crescina-right.jpg'
+        original: 'https://via.placeholder.com/2500x420',
+        lg: 'https://via.placeholder.com/2500x420',
+        md: 'https://via.placeholder.com/2500x420',
+        sm: 'https://via.placeholder.com/2500x420',
+        xs: 'https://via.placeholder.com/2500x420'
     },
     infoboxPosX: 'left',
     infoboxPosY: 'center',
     infobox: {
         image: '/assets/images/crescina-logo.png',
-        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. '
+        paragraph: 'Descrizione dell’immagine e spiegazione del titolo. Questo testo può occupare fino a 5 o 6 righe, ma sarebbe ideale mantenerlo di tre. ',
+        cta: {
+            url: '#',
+            title: 'Scopri la linea',
+            variants: ['secondary']
+        }
     },
     container: true,
     variants: ['small']
@@ -189,7 +230,12 @@ storiesOf('Components|Hero', module)
                     {
                         selector: '.js-hero',
                         type: Hero
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

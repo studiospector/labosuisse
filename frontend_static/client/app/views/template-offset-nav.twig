@@ -1,0 +1,41 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-template-accordion-list' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Featured image #}
+    {% if featured_image %}
+        <div class="lb-single-post__featured-image">
+            {% include '@PathViews/components/hero.twig' with featured_image|merge({animationType: 'intro'}) only %}
+        </div>
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
+    {% endif %}
+
+    {# Intro page #}
+    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+    {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
+
+    {# Content #}
+    {% if content %}
+        {{ content|raw }}
+    {% endif %}
+
+{% endblock %}
+
+
+
+{% block offsetNavs %}
+
+    {% if navs.items %}
+        {% for item in navs.items %}
+            {% include '@PathViews/components/offset-nav/default.twig' with item only %}
+        {% endfor %}
+    {% endif %}
+
+{% endblock offsetNavs %}

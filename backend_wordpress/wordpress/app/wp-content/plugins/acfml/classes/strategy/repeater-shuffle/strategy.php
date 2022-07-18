@@ -14,7 +14,7 @@ abstract class Strategy {
 	protected $trid;
 
 	/** @var array $element_translations */
-	private $element_translations;
+	protected $element_translations;
 
 	/**
 	 * Check if this is valid ID of processed post, term etc.
@@ -39,7 +39,7 @@ abstract class Strategy {
 	 *
 	 * @param int|string $elementId Processed element (post, taxonomy) ID.
 	 *
-	 * @return false|int Translation ID or false if does not exist.
+	 * @return false|int|string Translated post or term or option page ID, or false if does not exist.
 	 */
 	public function getTrid( $elementId ) {
 		if ( null === $this->trid ) {
@@ -54,30 +54,30 @@ abstract class Strategy {
 	}
 
 	/**
-	 * Gets all post meta or term meta for given ID.
+	 * Gets all post meta or term meta or options page for given ID.
 	 *
-	 * @param int $id The post or term ID.
+	 * @param int|string $id The post or term or options page ID.
 	 *
 	 * @return mixed
 	 */
 	abstract public function getAllMeta( $id );
 
 	/**
-	 * Gets one post/term meta.
+	 * Gets one post/term/option page's meta.
 	 *
-	 * @param int    $id     The post or term ID.
-	 * @param string $key    The meta key.
-	 * @param bool   $single
+	 * @param int|string $id     The post or term or options page ID.
+	 * @param string     $key    The meta/option key.
+	 * @param bool       $single Return single value.
 	 *
 	 * @return mixed
 	 */
 	abstract public function getOneMeta( $id, $key, $single );
 
 	/**
-	 * Deletes one post/term meta from database.
+	 * Deletes one post/term/option page's meta from database.
 	 *
-	 * @param int    $id  The post or term ID.
-	 * @param string $key The meta key.
+	 * @param int|string $id  The post or term or options page ID.
+	 * @param string     $key The meta/option key.
 	 *
 	 * @return mixed
 	 */
@@ -86,9 +86,9 @@ abstract class Strategy {
 	/**
 	 * Updates term/post meta in database.
 	 *
-	 * @param int    $id  The post or term ID.
-	 * @param string $key The meta key.
-	 * @param mixed  $val New value.
+	 * @param int|string $id  The post or term or options page ID.
+	 * @param string     $key The meta/option key.
+	 * @param mixed      $val New value.
 	 *
 	 * @return mixed
 	 */
@@ -129,7 +129,7 @@ abstract class Strategy {
 	/**
 	 * Returns post or term translations.
 	 *
-	 * @param int $id The post or term ID.
+	 * @param int|string $id The post or term or option page ID.
 	 *
 	 * @return array
 	 */

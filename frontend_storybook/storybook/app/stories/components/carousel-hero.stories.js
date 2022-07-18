@@ -9,22 +9,24 @@ import renderCarouselHero from '../../views/components/carousel-hero.twig'
 
 import CarouselHero from '../../scripts/components/CarouselHero'
 import Hero from '../../scripts/components/Hero'
+import AnimationReveal from '../../scripts/components/AnimationReveal'
 
 const dataRightInfobox = {
     slides: [
         {
             images: {
-                original: '/assets/images/carousel-hero-img.jpg',
-                lg: '/assets/images/carousel-hero-img.jpg',
-                md: '/assets/images/carousel-hero-img.jpg',
-                sm: '/assets/images/carousel-hero-img.jpg',
-                xs: '/assets/images/carousel-hero-img.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'right',
             infoboxPosY: 'center',
             infobox: {
                 tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
-                title: 'Favorisce la crescita<br>fisiologica dei capelli',
+                title: 'Favorisce la crescita',
+                paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
                 cta: {
                     url: '#',
                     title: 'Scopri la linea',
@@ -36,17 +38,40 @@ const dataRightInfobox = {
         },
         {
             images: {
-                original: '/assets/images/carousel-hero-img.jpg',
-                lg: '/assets/images/carousel-hero-img.jpg',
-                md: '/assets/images/carousel-hero-img.jpg',
-                sm: '/assets/images/carousel-hero-img.jpg',
-                xs: '/assets/images/carousel-hero-img.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'right',
             infoboxPosY: 'center',
             infobox: {
                 tagline: 'CRESCINA TRANSDERMIC RAPID-INTENSIVE',
-                title: 'Favorisce la crescita<br>fisiologica dei capelli',
+                title: 'Fisiologica dei Capelli',
+                paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
+                cta: {
+                    url: '#',
+                    title: 'Scopri la linea',
+                    variants: ['secondary']
+                }
+            },
+            container: false,
+            variants: ['large']
+        },
+        {
+            images: {
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
+            },
+            infoboxPosX: 'right',
+            infoboxPosY: 'center',
+            infobox: {
+                tagline: 'Lorem Ipsum Dolor',
+                title: 'Lorem Ipsum',
                 paragraph: 'Dal 1898 Labo investe nella ricerca di tecnologie all’avanguardia per sviluppare prodotti innovativi e brevettati, per la cura dei capelli e della pelle.',
                 cta: {
                     url: '#',
@@ -64,11 +89,11 @@ const dataLeftInfobox = {
     slides: [
         {
             images: {
-                original: '/assets/images/carousel-hero-img-2.jpg',
-                lg: '/assets/images/carousel-hero-img-2.jpg',
-                md: '/assets/images/carousel-hero-img-2.jpg',
-                sm: '/assets/images/carousel-hero-img-2.jpg',
-                xs: '/assets/images/carousel-hero-img-2.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'left',
             infoboxPosY: 'center',
@@ -87,11 +112,11 @@ const dataLeftInfobox = {
         },
         {
             images: {
-                original: '/assets/images/carousel-hero-img-2.jpg',
-                lg: '/assets/images/carousel-hero-img-2.jpg',
-                md: '/assets/images/carousel-hero-img-2.jpg',
-                sm: '/assets/images/carousel-hero-img-2.jpg',
-                xs: '/assets/images/carousel-hero-img-2.jpg'
+                original: 'https://via.placeholder.com/2500x700',
+                lg: 'https://via.placeholder.com/2500x700',
+                md: 'https://via.placeholder.com/2500x700',
+                sm: 'https://via.placeholder.com/2500x700',
+                xs: 'https://via.placeholder.com/2500x700'
             },
             infoboxPosX: 'left',
             infoboxPosY: 'center',
@@ -123,7 +148,12 @@ storiesOf('Components|Carousel Hero', module)
                     {
                         selector: '.js-hero',
                         type: Hero
-                    }
+                    },
+                    {
+                        selector: '.js-animation-reveal',
+                        type: AnimationReveal,
+                        optional: true
+                    },
                 ]
             })
 

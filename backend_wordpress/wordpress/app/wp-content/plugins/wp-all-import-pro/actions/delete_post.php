@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 function pmxi_delete_post($post_id) {
     if (!empty($post_id) && is_numeric($post_id)){

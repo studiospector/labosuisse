@@ -9,7 +9,7 @@
 
 <input 
     type="{{ type|default('text') }}"
-    id="{{ name }}"
+    id="{{ id ? id : name }}"
     name="{{ name }}"
     value="{{ value }}"
     {{ disabled ? ' disabled="disabled"' : '' }}

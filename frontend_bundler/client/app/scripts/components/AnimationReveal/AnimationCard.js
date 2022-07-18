@@ -2,6 +2,8 @@ import Component from '@okiba/component'
 import EventManager from '@okiba/event-manager'
 import { qs } from '@okiba/dom'
 
+import isStorybook from '../../utils/isStorybook'
+
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
@@ -19,8 +21,8 @@ class AnimationCard extends Component {
         super({ el, ui })
 
         ScrollTrigger.matchMedia({
-            "(min-width: 769px)": this.onDesktopMatch,
-            "(max-width: 768px)": this.onMobileMatch
+            "(min-width: 768px)": this.onDesktopMatch,
+            "(max-width: 767px)": this.onMobileMatch
         })
 
         this.init()
@@ -74,7 +76,7 @@ class AnimationCard extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: '.js-scrollbar',
+                scroller: isStorybook() ? 'body' : '.js-scrollbar',
                 trigger: this.el,
                 start: "30% 80%",
             }

@@ -10,27 +10,36 @@ html.has-scroll-smooth {
     bottom: 0;
 }
 
-.has-scroll-smooth body {
+html.has-scroll-smooth body {
     overflow: hidden;
 }
 
-.has-scroll-smooth [data-scroll-container] {
+html.has-scroll-smooth [data-scroll-container] {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.has-scroll-smooth #content {
+html.has-scroll-smooth #content {
     will-change: transform;
 }
 
+body.ready {
+    overflow-y: auto;
+}
+
 #content {
+    padding-top: 185px;
     overflow-y: initial!important;
     z-index: 2;
 }
 
 .c-scrollbar {
     z-index: 999;
+}
+
+.grecaptcha-badge { 
+    visibility: hidden !important;
 }
 
 
@@ -268,6 +277,20 @@ ul.lb-arrow-list {
         figure {
             margin: 0;
         }
+    }
+
+    &.wp-block-file {
+        a {
+            margin-top: 10px;
+            font-size: rem(16);
+            color: map-get($colors, "black");
+        }
+    }
+}
+
+.wp-block-embed {
+    iframe {
+        width: 100%;
     }
 }
 

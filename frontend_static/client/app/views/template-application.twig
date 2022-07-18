@@ -17,7 +17,7 @@
             {% endif %}
         </div>
     </div>
-    <hr class="lb-separator lb-separator--small" data-variant="small">
+    {% include '@PathViews/components/separator.twig' with {variants: ['small']} only %}
 
     {# Content #}
     <div class="lb-template-application__content container">
@@ -27,7 +27,7 @@
             </div>
         </div>
     </div>
-    <hr class="lb-separator lb-separator--medium" data-variant="medium">
+    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
 
     {# Form #}
     {% if form_shortcode %}

@@ -1,0 +1,9 @@
+{% set GTMKey = fn('get_field', 'lb_gtm_key', 'option') %}
+
+{% if GTMKey %}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id={{ GTMKey }}" height="0" width="0" style="display:none; visibility:hidden"></iframe>
+    </noscript>
+    <!-- / Google Tag Manager (noscript) -->
+{% endif %}

@@ -1,5 +1,8 @@
 {% embed '@PathViews/components/offset-nav.twig' %}
-	{% block offsetNavContent %}
+    
+    {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+	
+    {% block offsetNavContent %}
 
         {% for item in data %}
 
@@ -16,6 +19,9 @@
                         {% endif %}
                         {% if item.data.subtitle %}
                             <p class="infobox__paragraph p p-big">{{ item.data.subtitle }}</p>
+                        {% endif %}
+                        {% if item.data.paragraph_small %}
+                            <p class="infobox__paragraph infobox__paragraph--small">{{ item.data.paragraph_small }}</p>
                         {% endif %}
                         {% if item.data.text %}
                             <p class="infobox__paragraph p-small">{{ item.data.text }}</p>
@@ -38,12 +44,20 @@
                                             <p class="p-small">{{ tableItem.title }}</p>
                                         </div>
                                         <div class="col-2 col-md-1">
-                                            <p class="p-small">{{ tableItem.value }}%</p>
+                                            <p class="p-small">{{ tableItem.value }}</p>
                                         </div>
                                     </div>
                                 {% endfor %}
                             </div>
                         {% endif %}
+                    {% elseif item.type == 'unordered-arrow-list' %}
+                        {% include '@PathViews/components/list-arrow.twig' with item.data only %}
+                    {% elseif item.type == 'button' %}
+                        {% include '@PathViews/components/button.twig' with item.data.cta only %}
+                    {% elseif item.type == 'image' %}
+                        {{ lbPicture(item.data.image) }}
+                    {% elseif item.type == 'html' %}
+                        {{ item.data|raw }}
                     {% endif %}
                 </div>
 

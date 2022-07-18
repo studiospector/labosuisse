@@ -1,0 +1,11 @@
+{% if withRow %}
+    <div class="row js-lb-cards-grid">
+{% endif %}
+    {% for i in 1..num %}
+        <div class="col-12 col-md-{{ col }}">
+            {% include '@PathViews/components/card.twig' with { type: 'loading' } only %}
+        </div>
+    {% endfor %}
+{% if withRow %}
+    </div>
+{% endif %}

@@ -2,6 +2,7 @@
 
 use Caffeina\LaboSuisse\Setup\Clean;
 use Caffeina\LaboSuisse\Setup\Assets;
+use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -61,6 +62,10 @@ class ThemeSetup extends Timber\Site
         add_filter('wpseo_breadcrumb_separator', array($this, 'lb_yoast_breadcrumb_separator'), 10, 1);
         add_filter('excerpt_length', array($this, 'lb_excerpt_length'), 999);
         add_filter('wpcf7_form_tag', array($this, 'lb_parse_cf7_fields'));
+        add_filter('wpseo_exclude_from_sitemap_by_post_ids', array($this, 'lb_exclude_specific_posts_from_sitemap'));
+        add_filter('wpseo_sitemap_exclude_post_type', array($this, 'lb_exclude_post_types_from_sitemap'), 10, 2);
+
+        add_filter('woocommerce_enqueue_styles', '__return_empty_array', 999);
 
         parent::__construct();
     }
@@ -243,6 +248,7 @@ class ThemeSetup extends Timber\Site
 
         // Global Paths
         $loader->addPath($bundle_path, 'static');
+        $loader->addPath($bundle_path, 'bundle');
 
         // Namespaces
         $loader->addPath($template_dir . '/views', 'PathViews');
@@ -291,6 +297,7 @@ class ThemeSetup extends Timber\Site
     {
         // "Brand" and "Linea di Prodotto" Archive pages
         if (is_tax('lb-brand') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
+            $query->set('post_type', array('product'));
             $query->set('posts_per_page', 12);
         }
 
@@ -387,6 +394,10 @@ class ThemeSetup extends Timber\Site
                 remove_image_size($size);
             }
         }
+
+        // Remove sizes for medium_large thumb
+        update_option('medium_large_size_w', '0');
+        update_option('medium_large_size_h', '0');
     }
 
     /**
@@ -424,7 +435,8 @@ class ThemeSetup extends Timber\Site
     /**
      * Parse CF7 shortcode tags to implement custom HTML data attributes on fields
      */
-    public function lb_parse_cf7_fields($tag) {
+    public function lb_parse_cf7_fields($tag)
+    {
         $datas = [];
         foreach ((array)$tag['options'] as $option) {
             if (strpos($option, 'data-') === 0) {
@@ -442,8 +454,53 @@ class ThemeSetup extends Timber\Site
         }
         return $tag;
     }
+
+    /**
+     * Exclude Single Posts from the Yoast Sitemap
+     */
+    public function lb_exclude_specific_posts_from_sitemap()
+    {
+        $posts = get_posts(array(
+            'post_type' => array(
+                'lb-store',
+                'lb-beauty-specialist',
+            ),
+            'numberposts' => -1,
+        ));
+
+        $posts_ids = wp_list_pluck($posts, 'ID');
+
+        return $posts_ids;
+    }
+
+
+    /**
+     * Exclude a post type from XML sitemaps
+     *
+     * @param boolean $excluded  Whether the post type is excluded by default.
+     * @param string  $post_type The post type to exclude.
+     *
+     * @return bool Whether or not a given post type should be excluded.
+     */
+    public function lb_exclude_post_types_from_sitemap($excluded, $post_type)
+    {
+        return $post_type === 'lb-distributor';
+    }
 }
 
 new ThemeSetup();
 new Clean();
 new Assets();
+new CookiebotDeclarationShortcode;
+
+
+
+// function filter_wp_image_editors( $array ) {
+//     return array('WP_Image_Editor_Imagick');
+// }
+// add_filter('wp_image_editors', 'filter_wp_image_editors', 10, 1);
+
+// function filter_jpeg_quality( $int, $edit_image ) {
+//     return 90;
+// }
+// add_filter('jpeg_quality', 'filter_jpeg_quality', 10, 2);

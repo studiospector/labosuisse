@@ -179,7 +179,8 @@ class Archive
                         'variants' => ['quaternary']
                     ]
                 ],
-                'variants' => ['type-9']
+                'type' => 'type-9',
+                'variants' => null
             ];
         }
 
@@ -196,7 +197,7 @@ class Archive
         if($totalPosts === 0) {
             return [
                 'totalPosts' => $totalPosts,
-                'posts' => $this->noResults(),
+                'noResult' => $this->noResults(),
                 'hasPosts' => $hasPosts
             ];
         }
@@ -223,7 +224,7 @@ class Archive
     {
         return [
             'title' => __('Nessun risultato trovato', 'labo-suisse-theme'),
-            'paragraph' => __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme')
+            'paragraph' => __('Siamo spiacenti! Non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme')
         ];
     }
 }

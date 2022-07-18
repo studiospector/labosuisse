@@ -11,5 +11,5 @@
  */
 abstract class XmlImportAstExpression
 {
-
+  
 }
