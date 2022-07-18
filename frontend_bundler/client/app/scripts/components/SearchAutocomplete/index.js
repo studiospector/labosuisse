@@ -66,23 +66,23 @@ class SearchAutocomplete extends Component {
             },
             // placeHolder: "",
             resultsList: {
-                noResults: true,
+                noResults: false,
                 maxResults: 100,
                 tabSelect: true,
                 destination: () => {
                     return this.ui.input
                 },
                 class: 'lb-search-autocomplete__selection',
-                element: (list, data) => {
-                    const info = document.createElement("p")
-                    info.classList = 'lb-search-autocomplete__selection__results'
-                    if (data.results.length == 0 || data.results.length > 1) {
-                        info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResMore} <strong>"${data.query}"</strong>`
-                    } else {
-                        info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResLess} <strong>"${data.query}"</strong>`
-                    }
-                    list.prepend(info)
-                },
+                // element: (list, data) => {
+                //     const info = document.createElement("p")
+                //     info.classList = 'lb-search-autocomplete__selection__results'
+                //     if (data.results.length == 0 || data.results.length > 1) {
+                //         info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResMore} <strong>"${data.query}"</strong>`
+                //     } else {
+                //         info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResLess} <strong>"${data.query}"</strong>`
+                //     }
+                //     list.prepend(info)
+                // },
             },
             resultItem: {
                 highlight: true,

@@ -7,6 +7,10 @@
         padding-right: rem(15);
         padding-left: rem(15);
 
+        &:empty {
+            display: none;
+        }
+
         @include mq($from: md) {
             max-width: 720px;
         }
