@@ -819,6 +819,29 @@
             "endpoint": 0
         },
         {
+            "key": "field_62d6bd2467d94",
+            "label": "Pagina Labo Nel Mondo",
+            "name": "lb_labo_in_the_world_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
             "key": "field_6257fc6821e0a",
             "label": "Pagina Crescina Nel Mondo",
             "name": "crescina_in_the_world_page",
@@ -1031,5 +1054,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1657122206
+    "modified": 1658240551
 }
