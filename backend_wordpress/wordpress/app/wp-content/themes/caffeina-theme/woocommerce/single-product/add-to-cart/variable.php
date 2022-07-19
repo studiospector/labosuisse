@@ -36,9 +36,12 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 
     <?php if (!$product->is_in_stock()) : ?>
         <?php
+            $lang = lb_get_current_lang();
+            $labo_in_the_world_link = get_page_link( get_field('lb_labo_in_the_world_page', 'option') );
+
             Timber::render('@PathViews/components/button.twig', [
                 'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
-                'url' => get_post_type_archive_link('lb-store'),
+                'url' => $lang != 'it' ? $labo_in_the_world_link : get_post_type_archive_link('lb-store'),
                 'variants' => ['tertiary'],
             ]);
         ?>
