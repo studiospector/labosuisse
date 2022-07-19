@@ -319,6 +319,7 @@ class ThemeSetup extends Timber\Site
         // FAQs Archive page
         if (is_post_type_archive('lb-faq') && !is_admin() && $query->is_main_query() && !is_home() && !is_front_page()) {
             $query->set('posts_per_page', 12);
+            $query->set('orderby', 'menu_order');
         }
 
         // Archive page
