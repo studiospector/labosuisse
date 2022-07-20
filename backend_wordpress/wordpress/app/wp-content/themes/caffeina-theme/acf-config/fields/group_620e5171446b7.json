@@ -417,6 +417,44 @@
             "wpml_cf_preferences": 2
         },
         {
+            "key": "field_62d7b8ec9c24b",
+            "label": "Pagina Singola - Form",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_62d7b8f79c24c",
+            "label": "Shortcode Modulo di Candidatura",
+            "name": "lb_jobs_form_application_shortcode",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_628ccfe132bf2",
             "label": "Jobs Accordions --- Endpoint",
             "name": "",
@@ -1054,5 +1092,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658240551
+    "modified": 1658304859
 }
