@@ -107,7 +107,12 @@ class OffsetNavs extends BaseBlock
                     $item['data']['cta'] = array_merge(get_sub_field('lb_block_offsetnav_' . $name . '_content_button'), ['variants' => ['primary']]);
                 } elseif (get_row_layout() == 'image') {
                     $item['type'] = 'image';
-                    $item['data']['image'] = lb_get_images(get_sub_field('lb_block_offsetnav_' . $name . '_content_image'));
+                    $item['data']['image'] = lb_get_images(get_sub_field('lb_block_offsetnav_' . $name . '_content_image'), [
+                        'lg' => 'original',
+                        'md' => 'original',
+                        'sm' => 'original',
+                        'xs' => 'original'
+                    ]);
                 }
 
                 $offsetnav_content[] = $item;
