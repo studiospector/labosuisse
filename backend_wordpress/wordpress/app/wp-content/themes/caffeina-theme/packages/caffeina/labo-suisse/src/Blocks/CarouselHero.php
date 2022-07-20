@@ -52,7 +52,23 @@ class CarouselHero extends BaseBlock
             'slides' => $slides
         ];
 
+        $this->linkToPreload($slides);
+
         // $this->context['data'] = array_merge($this->context['data'],$infobox);
         $this->setContext($payload);
+    }
+
+    public function linkToPreload($slides) {
+        
+        if (!empty($slides)) {
+
+            $preload_image = $slides[0]['images']['original'];
+    
+            add_action('wp_head', function() use ($preload_image)  {
+                ?>
+                <link rel="preload" as="image" href="<?php echo $preload_image; ?>">
+                <?php
+            });
+        }
     }
 }

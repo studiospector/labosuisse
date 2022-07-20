@@ -21,5 +21,20 @@ class Hero extends BaseBlock
         // $this->context['data'] = array_merge($this->context['data'],$infobox);
         $this->setContext($payload);
         $this->addInfobox();
+        $this->linkToPreload($payload['images']);
+    }
+
+    public function linkToPreload($image) {
+        
+        if (!empty($image)) {
+
+            $preload_image = $image['original'];
+    
+            add_action('wp_head', function() use ($preload_image)  {
+                ?>
+                <link rel="preload" as="image" href="<?php echo $preload_image; ?>">
+                <?php
+            });
+        }
     }
 }
