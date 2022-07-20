@@ -38,7 +38,7 @@
                 {% if navLinks|length > 0 %}
                     {% set ctaCurr = item.infobox.cta %}
                     {% set infoboxCurr = item.infobox %}
-                    {% set ctaNew = ctaCurr|merge(navLinks[loop.index0]) %}
+                    {% set ctaNew = ctaCurr ? ctaCurr|merge(navLinks[loop.index0]) : null %}
                     {% set infoboxNew = infoboxCurr|merge({'cta': ctaNew}) %}
                     {% set item = item|merge({'infobox': infoboxNew}) %}
                 {% endif %}
