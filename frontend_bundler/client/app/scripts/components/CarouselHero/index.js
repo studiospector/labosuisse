@@ -31,7 +31,7 @@ class CarouselHero extends Component {
             },
             on: {
                 init: debounce((swiperObj) => {
-                    this.swiper.params.autoplay.delay = 6000
+                    this.swiper.params.autoplay.delay = 8000
                     this.swiper.params.autoplay.disableOnInteraction = false
                     this.swiper.autoplay.start()
                 }, 1000),
