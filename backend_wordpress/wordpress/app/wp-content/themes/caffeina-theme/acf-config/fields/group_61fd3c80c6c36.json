@@ -3,6 +3,23 @@
     "title": "Campi personalizzati: Blocco - Cards Grid",
     "fields": [
         {
+            "key": "field_62d836150819c",
+            "label": "Infobox",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
             "key": "field_6203a4cc9cc49",
             "label": "Tagline",
             "name": "lb_block_cards_grid_tagline",
@@ -106,10 +123,10 @@
             "save_other_choice": 0
         },
         {
-            "key": "field_61fd3d92e2189",
-            "label": "Variante Cards",
-            "name": "lb_block_cards_grid_cards_variants",
-            "type": "select",
+            "key": "field_62d8368f0819e",
+            "label": "Cards",
+            "name": "",
+            "type": "tab",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -118,48 +135,9 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 2,
-            "choices": {
-                "type-1": "Tipo 1",
-                "type-2": "Tipo 2",
-                "type-3": "Tipo 3",
-                "type-5": "Tipo 5",
-                "type-6": "Tipo 6",
-                "type-7": "Tipo 7",
-                "type-8": "Tipo 8"
-            },
-            "default_value": false,
-            "allow_null": 0,
-            "multiple": 0,
-            "ui": 1,
-            "ajax": 0,
-            "return_format": "value",
-            "placeholder": ""
-        },
-        {
-            "key": "field_62554a00725f2",
-            "label": "Allineamento testo nelle Cards",
-            "name": "lb_block_cards_grid_text_align",
-            "type": "radio",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 2,
-            "choices": {
-                "left": "Sinistra",
-                "center": "Centro"
-            },
-            "allow_null": 0,
-            "other_choice": 0,
-            "default_value": "left",
-            "layout": "vertical",
-            "return_format": "value",
-            "save_other_choice": 0
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
         },
         {
             "key": "field_61fd3c8116d7d",
@@ -384,6 +362,79 @@
                     "mime_types": ""
                 }
             ]
+        },
+        {
+            "key": "field_62d836440819d",
+            "label": "Impostazioni",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0,
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_61fd3d92e2189",
+            "label": "Variante Cards",
+            "name": "lb_block_cards_grid_cards_variants",
+            "type": "select",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "type-1": "Tipo 1",
+                "type-2": "Tipo 2",
+                "type-3": "Tipo 3",
+                "type-5": "Tipo 5",
+                "type-6": "Tipo 6",
+                "type-7": "Tipo 7",
+                "type-8": "Tipo 8"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
+            "placeholder": ""
+        },
+        {
+            "key": "field_62554a00725f2",
+            "label": "Allineamento testo nelle Cards",
+            "name": "lb_block_cards_grid_text_align",
+            "type": "radio",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "choices": {
+                "left": "Sinistra",
+                "center": "Centro"
+            },
+            "allow_null": 0,
+            "other_choice": 0,
+            "default_value": "left",
+            "layout": "vertical",
+            "return_format": "value",
+            "save_other_choice": 0
         }
     ],
     "location": [
@@ -404,5 +455,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649757752
+    "modified": 1658336967
 }
