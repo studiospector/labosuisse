@@ -8,10 +8,17 @@ class LaunchTwoCards extends BaseBlock
     {
         parent::__construct($block, $name);
 
+        $sizes = [
+            'lg' => 'lg',
+            'md' => 'lg',
+            'sm' => 'lg',
+            'xs' => 'lg'
+        ];
+
         $payload = [
             'cards' => [
                 [
-                    'images' => lb_get_images(get_field('lb_block_launch_two_cards_image_left')),
+                    'images' => lb_get_images(get_field('lb_block_launch_two_cards_image_left'), $sizes),
                     'infobox' => [
                         'tagline' => get_field('lb_block_launch_two_cards_tagline_left'),
                         'title' => get_field('lb_block_launch_two_cards_title_left'),
@@ -21,7 +28,7 @@ class LaunchTwoCards extends BaseBlock
                     'type' => 'type-3',
                 ],
                 [
-                    'images' => lb_get_images(get_field('lb_block_launch_two_cards_image_right')),
+                    'images' => lb_get_images(get_field('lb_block_launch_two_cards_image_right'), $sizes),
                     'infobox' => [
                         'tagline' => get_field('lb_block_launch_two_cards_tagline_right'),
                         'title' => get_field('lb_block_launch_two_cards_title_right'),
@@ -41,6 +48,18 @@ class LaunchTwoCards extends BaseBlock
             $payload['cards'][1]['infobox']['cta'] = array_merge((array)get_field('lb_block_launch_two_cards_btn_right'), ['variants' => [get_field('lb_block_launch_two_cards_btn_variants_right')]]);
         }
 
+        foreach ($payload['cards'] as $key => $card) {
+            $card_is_empty = empty($card['images']);
+
+            foreach ($payload['infobox'] as $infobox_field) {
+                $card_is_empty = empty($infobox_field);
+            }
+
+            if ($card_is_empty) {
+                $payload['cards'][$key] = null;
+            }
+        }
+        
         if (get_field('lb_block_launch_two_cards_variants') != "") {
             $payload['variants'] = [get_field('lb_block_launch_two_cards_variants')];
         }
