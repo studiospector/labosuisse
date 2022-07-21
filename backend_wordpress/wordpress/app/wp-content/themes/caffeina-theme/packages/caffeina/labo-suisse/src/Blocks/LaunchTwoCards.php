@@ -51,7 +51,7 @@ class LaunchTwoCards extends BaseBlock
         foreach ($payload['cards'] as $key => $card) {
             $card_is_empty = empty($card['images']);
 
-            foreach ($payload['infobox'] as $infobox_field) {
+            foreach ($card['infobox'] as $infobox_field) {
                 $card_is_empty = empty($infobox_field);
             }
 
