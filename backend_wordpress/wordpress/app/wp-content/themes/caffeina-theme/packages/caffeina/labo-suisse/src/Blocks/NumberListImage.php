@@ -10,6 +10,13 @@ class NumberListImage extends BaseBlock
 
         $list = [];
 
+        $sizes = [
+            'lg' => 'lg',
+            'md' => 'lg',
+            'sm' => 'lg',
+            'xs' => 'lg'
+        ];
+
         if (have_rows('lb_block_numbers_list')) {
             $list = [];
             while (have_rows('lb_block_numbers_list')) : the_row();
@@ -23,7 +30,7 @@ class NumberListImage extends BaseBlock
         }
 
         $payload = [
-            'images' => lb_get_images(get_field('lb_block_numbers_image')),
+            'images' => lb_get_images(get_field('lb_block_numbers_image'), $sizes),
             'numbersList' => [
                 'title' => get_field('lb_block_numbers_title'),
                 'list' => $list,
