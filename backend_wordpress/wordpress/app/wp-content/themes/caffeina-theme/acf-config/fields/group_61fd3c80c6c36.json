@@ -435,6 +435,26 @@
             "layout": "vertical",
             "return_format": "value",
             "save_other_choice": 0
+        },
+        {
+            "key": "field_62d91943965cf",
+            "label": "Immagini Full size Mobile",
+            "name": "lb_block_cards_grid_image_full_size_mobile",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": "",
+            "wpml_cf_preferences": 2
         }
     ],
     "location": [
@@ -455,5 +475,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658336967
+    "modified": 1658395067
 }

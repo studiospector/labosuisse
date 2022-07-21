@@ -37,4 +37,32 @@
             }
         }
     }
+
+    &--image-full-size-mobile {
+        @include mq($until: md) {
+            .lb-posts-grid {
+                &__list {
+                    &__item {
+                        .card {
+                            flex-direction: column;
+    
+                            .card-img,
+                            .card-infobox {
+                                flex: 1;
+                            }
+    
+                            .card-img {
+                                width: 100%;
+                                margin-bottom: 20px;
+    
+                                .lb-picture {
+                                    position: relative;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
