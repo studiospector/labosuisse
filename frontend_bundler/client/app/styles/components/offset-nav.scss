@@ -47,7 +47,6 @@
     transition-duration: 0.2s;
     transition-property: transform, opacity;
     transform: translate3d(#{rem(40px)}, 0, 0);
-    overflow: hidden;
 
     // @include mq(lg) {
     //     margin-bottom: 0;
@@ -96,14 +95,10 @@
 }
 
 .lb-offset-nav__header {
-    width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    position: fixed;
-    background-color: map-get($colors, "white");
     border-bottom: 1px solid map-get($colors, "grey-2");
-    z-index: 2;
 
     &__title {
         font-size: rem(12);
@@ -113,16 +108,13 @@
 }
 
 .lb-offset-nav__content {
-    // height: inherit;
-    // min-height: 100vh;
-    // overflow: hidden;
+    height: inherit;
     position: relative;
     padding: 40px 64px;
     padding-bottom: 100px;
     margin: 0 auto;
     color: map-get($colors, "black");
-    // overflow-y: scroll;
-    z-index: 1;
+    overflow-y: scroll;
 
     &>.p:not(:first-child) {
         margin-top: rem(24px);
@@ -133,18 +125,13 @@
     // }
 
     @include mq($until: lg) {
-        // top: 80px;
-        padding: 80px 16px 80px;
-        // padding-bottom: 80px;
-        // -webkit-overflow-scrolling: touch;
+        padding: 20px 16px;
+        padding-bottom: 80px;
+        -webkit-overflow-scrolling: touch;
     }
 
     &__item {
         margin-bottom: 40px;
-
-        // &:last-child {
-        //     margin-bottom: 0;
-        // }
 
         &--text {
             a {

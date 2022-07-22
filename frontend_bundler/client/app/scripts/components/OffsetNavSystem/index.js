@@ -22,8 +22,8 @@ class OffsetNavSystem extends Component {
 
         if (!offsetNav) return
 
-        disableBodyScroll(this.el)
-        window.getCustomScrollbar.stop()
+        // disableBodyScroll(this.el)
+        // window.getCustomScrollbar.stop()
 
         if (!this.offsetNavs.hasOwnProperty(id)) {
             this.offsetNavs[id] = new OffsetNav({ el: offsetNav, options: { initComponents } })
@@ -48,8 +48,8 @@ class OffsetNavSystem extends Component {
         }
 
         if (!this.openOffsetNavs.length) {
-            enableBodyScroll(this.el)
-            window.getCustomScrollbar.start()
+            // enableBodyScroll(this.el)
+            // window.getCustomScrollbar.start()
         }
     }
 
