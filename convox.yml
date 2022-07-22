@@ -11,7 +11,7 @@ environment:
 
 services:
   website:
-    domain: ${ADMIN_URL}
+    domain: ${DOMAIN},www.${DOMAIN}
     build:
       manifest: ./backend_wordpress/wordpress/docker/Dockerfile
       # command: bin/api
