@@ -21,9 +21,9 @@ class OffsetNavSystem extends Component {
         const offsetNav = qs(`#${id}`)
 
         if (!offsetNav) return
-
-        // disableBodyScroll(this.el)
-        // window.getCustomScrollbar.stop()
+        
+        disableBodyScroll(offsetNav)
+        window.getCustomScrollbar.stop()
 
         if (!this.offsetNavs.hasOwnProperty(id)) {
             this.offsetNavs[id] = new OffsetNav({ el: offsetNav, options: { initComponents } })
@@ -47,9 +47,9 @@ class OffsetNavSystem extends Component {
             this.openOffsetNavs.forEach(id => this.closeOffsetNav(id))
         }
 
-        if (!this.openOffsetNavs.length) {
-            // enableBodyScroll(this.el)
-            // window.getCustomScrollbar.start()
+        if (!this.openOffsetNavs.length && id) {
+            enableBodyScroll(this.offsetNavs[id].el)
+            window.getCustomScrollbar.start()
         }
     }
 
