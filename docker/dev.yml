@@ -64,8 +64,6 @@ services:
       - >-
         ../backend_wordpress/wordpress/app/wp-content/languages:/var/www/html/wp-content-custom/languages
       - >-
-        ../backend_wordpress/nginx/conf.d/wordpress.conf:/etc/nginx/conf.d/wordpress.conf
-      - >-
         ../backend_wordpress/nginx/redirect/labo.map:/etc/nginx/redirect/labo.map
       - >-
         ../backend_wordpress/nginx/nginx.conf:/etc/nginx/nginx.conf
