@@ -28,7 +28,7 @@
         {% if navLink %}
             {% set ctaCurr = card.infobox.cta %}
             {% set infoboxCurr = card.infobox %}
-            {% set ctaNew = ctaCurr|merge(navLink) %}
+            {% set ctaNew = ctaCurr ? ctaCurr|merge(navLink) : null %}
             {% set infoboxNew = infoboxCurr|merge({'cta': ctaNew}) %}
             {% set card = card|merge({'infobox': infoboxNew}) %}
         {% endif %}

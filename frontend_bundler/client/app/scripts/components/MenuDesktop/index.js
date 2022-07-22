@@ -128,6 +128,10 @@ class MenuDesktop extends Component {
     openSubmenu = (el) => {
         const triggerLink = el.target.getAttribute('data-submenu-trigger')
 
+        this.ui.submenuLinks.map(el => el.classList.remove('lb-menu__link--main-active'))
+
+        el.target.classList.add('lb-menu__link--main-active')
+
         qsa('.lb-menu__item.lb-menu__item--subitem').forEach(el => {
             const trigger = el.getAttribute('data-submenu-trigger')
             if (trigger == triggerLink) {

@@ -129,9 +129,10 @@
                         
                         .lb-menu {
                             &__item {
-                                &:not(:last-child) {
-                                    margin-bottom: 15px;
-                                }
+                                margin-bottom: 15px;
+                                // &:not(:last-child) {
+                                //     margin-bottom: 15px;
+                                // }
     
                                 &.is-visible {
                                     display: block;

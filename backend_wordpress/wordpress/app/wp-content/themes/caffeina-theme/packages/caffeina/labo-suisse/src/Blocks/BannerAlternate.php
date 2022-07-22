@@ -7,8 +7,16 @@ class BannerAlternate extends BaseBlock
     public function __construct($block, $name)
     {
         parent::__construct($block, $name);
+
+        $sizes = [
+            'lg' => 'lg',
+            'md' => 'lg',
+            'sm' => 'lg',
+            'xs' => 'lg'
+        ];
+
         $payload = [
-            'images' => lb_get_images(get_field('lb_block_banner_alternate_img')),
+            'images' => lb_get_images(get_field('lb_block_banner_alternate_img'), $sizes),
             'imageBig' => get_field('lb_block_banner_alternate_img_big'),
             'variants' => [get_field('lb_block_banner_alternate_variants_lr'), get_field('lb_block_banner_alternate_variants_hcb')],
         ];

@@ -10,21 +10,26 @@ html.has-scroll-smooth {
     bottom: 0;
 }
 
-.has-scroll-smooth body {
+html.has-scroll-smooth body {
     overflow: hidden;
 }
 
-.has-scroll-smooth [data-scroll-container] {
+html.has-scroll-smooth [data-scroll-container] {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.has-scroll-smooth #content {
+html.has-scroll-smooth #content {
     will-change: transform;
 }
 
+body.ready {
+    overflow-y: auto;
+}
+
 #content {
+    padding-top: 185px;
     overflow-y: initial!important;
     z-index: 2;
 }

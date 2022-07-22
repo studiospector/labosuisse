@@ -31,11 +31,12 @@
 		<link rel="preload" as="style" href="{{ mainCss }}">
 		<link rel="preload" as="script" href="{{ mainJsModern }}" data-cookieconsent="ignore">
 
-		{% if production %}
+        <style>{{source('@bundle' ~ criticalCssProd)}}</style>
+		{# {% if production %}
 			<style>{{source('@bundle' ~ criticalCssProd)}}</style>
 		{% else %}
 			<link rel="stylesheet" href="{{ criticalCss }}">
-		{% endif %}
+		{% endif %} #}
 
 		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="all">
 
@@ -44,8 +45,10 @@
         <!-- Custom Head -->
         {% block head %}{% endblock %}
         <!-- / Custom Head -->
+
+        {% set page_loader = fn('get_field', 'lb_page_loader_status', 'option') ? ' is-loading' : false %}
     </head>
-    <body {{ fn('body_class', bodyClass ~ ' is-loading') }}>
+    <body {{ fn('body_class', bodyClass ~ page_loader) }}>
 
         <div class="js-scrollbar js-gtm-tracking" data-ga-event-type="global" data-scroll-container>
             <!-- Header -->
@@ -69,21 +72,25 @@
             {% set newsletter_nav = fn('lb_newsletter_nav') %}
             {% include '@PathViews/components/offset-nav/default.twig' with newsletter_nav only %}
             {% block offsetNavs %}{% endblock %}
-            <!-- Loader -->
-            <div class="js-loader lb-loader lb-loader--loading">
-                <div class="lb-loader-spinner"></div>
-            </div>
+
+            {% if page_loader %}
+                <!-- Loader -->
+                <div class="js-loader lb-loader lb-loader--loading">
+                    <div class="lb-loader-spinner"></div>
+                </div>
+            {% endif %}
         </div>
 
         {% include 'components/symbols.twig' %}
 
         <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
 
-        {% if production %}
+        <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
+        {# {% if production %}
             <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
         {% else %}
             <script src="{{ criticalJsModern }}" data-cookieconsent="ignore"></script>
-        {% endif %}
+        {% endif %} #}
 
         <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" data-cookieconsent="ignore" defer></script>
 

@@ -8,7 +8,8 @@
                 <h1 class="infobox__subtitle h3">{{ title }}</h1>
             {% endif %}
             {% if description %}
-                <p class="infobox__paragraph">{{ fn('nl2br', description) }}</p>
+                {# <p class="infobox__paragraph">{{ fn('nl2br', description) }}</p> #}
+                <p class="infobox__paragraph">{{ description }}</p>
             {% endif %}
         </div>
     </div>

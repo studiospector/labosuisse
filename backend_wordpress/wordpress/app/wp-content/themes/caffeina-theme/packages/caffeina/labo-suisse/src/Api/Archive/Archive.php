@@ -224,7 +224,7 @@ class Archive
     {
         return [
             'title' => __('Nessun risultato trovato', 'labo-suisse-theme'),
-            'paragraph' => __('Siamo spiacenti! non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme')
+            'paragraph' => __('Siamo spiacenti! Non riusciamo a trovare nessun risultato che corrisponda alla tua ricerca.', 'labo-suisse-theme')
         ];
     }
 }

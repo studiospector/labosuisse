@@ -15,7 +15,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 0,
             "placement": "left",
             "endpoint": 0
         },
@@ -414,6 +414,44 @@
             "maxlength": "",
             "rows": "",
             "new_lines": "br",
+            "wpml_cf_preferences": 2
+        },
+        {
+            "key": "field_62d7b8ec9c24b",
+            "label": "Pagina Singola - Form",
+            "name": "",
+            "type": "accordion",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "open": 0,
+            "multi_expand": 0,
+            "endpoint": 0
+        },
+        {
+            "key": "field_62d7b8f79c24c",
+            "label": "Shortcode Modulo di Candidatura",
+            "name": "lb_jobs_form_application_shortcode",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": "",
             "wpml_cf_preferences": 2
         },
         {
@@ -819,6 +857,29 @@
             "endpoint": 0
         },
         {
+            "key": "field_62d6bd2467d94",
+            "label": "Pagina Labo Nel Mondo",
+            "name": "lb_labo_in_the_world_page",
+            "type": "post_object",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "100",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "post_type": [
+                "page"
+            ],
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 0,
+            "return_format": "object",
+            "ui": 1
+        },
+        {
             "key": "field_6257fc6821e0a",
             "label": "Pagina Crescina Nel Mondo",
             "name": "crescina_in_the_world_page",
@@ -974,6 +1035,43 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_62c5ad385aeb9",
+            "label": "Others",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_62c5ad425aeba",
+            "label": "Page Loader",
+            "name": "lb_page_loader_status",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "ui": 1,
+            "ui_on_text": "Attivo",
+            "ui_off_text": "Disattivo",
+            "wpml_cf_preferences": 1
         }
     ],
     "location": [
@@ -994,5 +1092,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1653482014
+    "modified": 1658304859
 }

@@ -36,13 +36,12 @@ class Menu
                 (new DiscoverLabo())->get('mobile')
             ),
             'fixed' => [
-                (new Option())->getMenuFixedCard('mobile'),
-                [
-                    'type' => 'small-link',
-                    'label' => __('Profilo', 'labo-suisse-theme'),
-                    'icon' => 'user',
-                    'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
-                ],
+//                [
+//                    'type' => 'small-link',
+//                    'label' => __('Profilo', 'labo-suisse-theme'),
+//                    'icon' => 'user',
+//                    'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+//                ],
                 [
                     'type' => 'small-link',
                     'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),

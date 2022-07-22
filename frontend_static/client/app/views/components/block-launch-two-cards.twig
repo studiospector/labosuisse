@@ -27,22 +27,26 @@
 {% endif %}
 
 <section class="block-two-cards{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
-    <div class="block-two-cards__infobox text-center">
-        {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
-    </div>
+    {% if infobox %}
+        <div class="block-two-cards__infobox text-center">
+            {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
+        </div>
+    {% endif %}
     <div class="block-two-cards__cards text-center js-card-reveal">
         <div class="row">
             {% for item in cards %}
-                {% if navLinks|length > 0 %}
-                    {% set ctaCurr = item.infobox.cta %}
-                    {% set infoboxCurr = item.infobox %}
-                    {% set ctaNew = ctaCurr|merge(navLinks[loop.index0]) %}
-                    {% set infoboxNew = infoboxCurr|merge({'cta': ctaNew}) %}
-                    {% set item = item|merge({'infobox': infoboxNew}) %}
+                {% if item %}
+                    {% if navLinks|length > 0 %}
+                        {% set ctaCurr = item.infobox.cta %}
+                        {% set infoboxCurr = item.infobox %}
+                        {% set ctaNew = ctaCurr ? ctaCurr|merge(navLinks[loop.index0]) : null %}
+                        {% set infoboxNew = infoboxCurr|merge({'cta': ctaNew}) %}
+                        {% set item = item|merge({'infobox': infoboxNew}) %}
+                    {% endif %}
+                    <div class="block-two-cards__card-item col-12{{ is_variant_vertical ? '' : ' col-md-6' }}">
+                        {% include '@PathViews/components/card.twig' with item only %}
+                    </div>
                 {% endif %}
-                <div class="block-two-cards__card-item col-12{{ is_variant_vertical ? '' : ' col-md-6' }}">
-                    {% include '@PathViews/components/card.twig' with item only %}
-                </div>
             {% endfor %}
         </div>
     </div>

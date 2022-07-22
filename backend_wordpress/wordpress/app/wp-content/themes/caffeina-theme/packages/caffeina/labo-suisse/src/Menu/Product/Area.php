@@ -38,7 +38,7 @@ class Area
             'children' => [
                 [
                     'type' => 'submenu',
-                    'label' => 'Per Zona',
+                    'label' => __('Per Zona', 'labo-suisse-theme'),
                     'children' => []
                 ],
                 [
@@ -46,7 +46,7 @@ class Area
                     'children' => []
                 ]
             ],
-            'fixed' => [ (new Option())->getMenuFixedCard()]
+            'fixed' => [ (new Option())->getMenuFixedCardByTaxTerm($this->parent)]
         ];
 
         foreach ($this->areas as $i => $area) {
@@ -58,14 +58,17 @@ class Area
 
             $items['children'][1]['children'][$i] = [
                 'type' => 'submenu',
-                'label' => 'Per Esigenza',
+                'label' => __('Per Esigenza', 'labo-suisse-theme'),
                 'trigger' => md5($area->slug),
                 'children' => (new Need($area))->get()
             ];
         }
 
-        $items['children'][0]['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
-        $items['children'][0]['children'][] = ['type' => 'link-spaced', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+        $items['children'][0]['children'][] = [
+            'type' => 'link-spaced',
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+            'href' => get_term_link($this->parent)
+        ];
 
         return $this->fixDesktopMenu($items);
     }
@@ -75,7 +78,7 @@ class Area
         $items = [
             'type' => 'submenu',
             'label' => $this->parent->name,
-            'subLabel' => 'Per zona',
+            'subLabel' => __('Per Zona', 'labo-suisse-theme'),
             'children' => []
 
         ];
@@ -84,13 +87,16 @@ class Area
             $items['children'][] = [
                 'type' => 'submenu',
                 'label' => $area->name,
-                'subLabel' => 'Per esigenza',
+                'subLabel' => __('Per Esigenza', 'labo-suisse-theme'),
                 'children' => (new Need($area))->get()
             ];
         }
 
-        $items['children'][] = ['type' => 'link', 'label' => 'Tutte le zone ' . strtolower($this->parent->name), 'href' => get_term_link($this->parent)];
-        $items['children'][] = ['type' => 'link', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
+        $items['children'][] = [
+            'type' => 'link',
+            'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+            'href' => get_term_link($this->parent)
+        ];
 
         return $this->fixMobileMenu($items);
     }
@@ -101,12 +107,10 @@ class Area
         $totalNeed = count($items['children'][0]['children']);
         $needName = $items['children'][0]['children'][0]['label'];
 
-        if ($totalNeed === 3 and ($areaName === $needName)) {
+        if ($totalNeed === 2 and ($areaName === $needName)) {
             unset($items['children'][0]);
             $items['children'][1] = $items['children'][1]['children'][0];
             array_unshift($items['children']);
-
-            $items['children'][0]['children'][] = ['type' => 'link-spaced', 'label' => 'Tutti i prodotti ' . strtolower($this->parent->name), 'href' => (new Option())->getProductGalleryLink($this->parent->slug)];
         }
 
         return $items;
@@ -120,6 +124,12 @@ class Area
 
         if($totalNeed === 2 and ($areaName === $needName)) {
             $items = $items['children'][0];
+
+            $items['children'][] = [
+                'type' => 'link',
+                'label' => sprintf(__("Tutti i prodotti %s", 'labo-suisse-theme'), $this->parent->name),
+                'href' => get_term_link($this->parent)
+            ];
         }
 
         return $items;

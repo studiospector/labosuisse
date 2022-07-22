@@ -168,6 +168,22 @@
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
+                },
+                {
+                    "key": "field_62d160e09021b",
+                    "label": "Link Inglese",
+                    "name": "lb_prefooter_center_block_link_eng",
+                    "type": "link",
+                    "instructions": "<b>Attenzione!<\/b>\r\nQuesto campo verrà utilizzato solo nella parte Inglese.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "return_format": "array"
                 }
             ]
         },
@@ -375,6 +391,22 @@
                     "prepend": "",
                     "append": "",
                     "maxlength": ""
+                },
+                {
+                    "key": "field_62d161759021d",
+                    "label": "Link Inglese",
+                    "name": "lb_footer_search_link_eng",
+                    "type": "link",
+                    "instructions": "<b>Attenzione!<\/b>\r\nQuesto campo verrà utilizzato solo nella parte Inglese.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "return_format": "array"
                 }
             ]
         },
@@ -597,5 +629,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1653396678
+    "modified": 1657890197
 }

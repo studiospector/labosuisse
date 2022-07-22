@@ -36,7 +36,7 @@
         "sass-loader": "^8.0.2",
         "sass-mq": "^6.0.0",
         "style-loader": "^1.2.1",
-        "swiper": "^6.8.4",
+        "swiper": "^8.3.0",
         "twig": "^1.15.4",
         "twigjs-loader": "^1.0.2"
     },

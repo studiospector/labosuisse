@@ -36,7 +36,7 @@ class DiscoverLabo
                     'children' => []
                 ],
             ],
-            'fixed' => [ (new Option())->getMenuFixedCard()]
+            'fixed' => [ (new Option())->getMenuFixedCard('discoverlabo')]
         ];
 
         foreach ($this->items as $item) {

@@ -1,45 +1,28 @@
 <?php
 
 $brand_obj = get_queried_object();
-$level = get_category_parents_custom($brand_obj->term_id, 'lb-brand');
+$brand_posts_count = get_posts_count_by_taxonomy('product', 'lb-brand', $brand_obj->slug);
 
 $items = [];
-$grid_type = 'default';
 
 if ( have_posts() ) :
-    $num_posts = 0;
     while ( have_posts() ) :
         the_post();
 
-        $num_posts++;
-
-        if ($level == 1) {
-            $grid_type = 'default';
-
-            $terms = get_the_terms( get_the_ID(), 'lb-brand' );
-            
-            foreach ($terms as $term) {
-                if ( $term->parent != 0 ) {
-                    $items[] = \Timber::get_post( get_the_ID() );
-                }
-            }
-
-        } else if ($level > 1) {
-            $items[] = \Timber::get_post( get_the_ID() );
-        }
+        $items[] = \Timber::get_post( get_the_ID() );
     endwhile;
 endif;
 
 wp_reset_postdata();
 
+
 $context = [
-    'level' => $level,
     'page_intro' => [
         'title' => $brand_obj->name,
         'description' => nl2br($brand_obj->description),
     ],
-    'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $num_posts . '</span>',
-    'grid_type' => $grid_type,
+    'num_posts' => __('Risultati:', 'labo-suisse-theme') . ' <span>' . $brand_posts_count . '</span>',
+    'grid_type' => 'default',
     'items' => $items,
     'pagination' => lb_pagination(),
 ];

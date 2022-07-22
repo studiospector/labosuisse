@@ -7,7 +7,20 @@ class CardsGrid extends BaseBlock
     public function __construct($block, $name)
     {
         parent::__construct($block, $name);
+        
         $items = [];
+        $image_sizes = [];
+        $image_full_size_mobile = get_field('lb_block_cards_grid_image_full_size_mobile');
+
+        if ($image_full_size_mobile) {
+            $image_sizes = [
+                'lg' => 'lg',
+                'md' => 'lg',
+                'sm' => 'lg',
+                'xs' => 'lg'
+            ];
+        }
+
         if (have_rows('lb_block_cards_grid_carousel')) {
             $items = [];
             while (have_rows('lb_block_cards_grid_carousel')) : the_row();
@@ -16,7 +29,7 @@ class CardsGrid extends BaseBlock
                     $cta = array_merge((array)get_sub_field('lb_block_cards_grid_carousel_infobox_btn'), ['variants' => [get_sub_field('lb_block_cards_grid_carousel_infobox_btn_variants')]]);
                 }
                 $items[] = [
-                    'images' => lb_get_images(get_sub_field('lb_block_cards_grid_carousel_img')),
+                    'images' => lb_get_images(get_sub_field('lb_block_cards_grid_carousel_img'), $image_sizes),
                     'noContainer' => true,
                     'infobox' => [
                         'tagline' => get_sub_field('lb_block_cards_grid_carousel_infobox_tagline'),
@@ -43,6 +56,7 @@ class CardsGrid extends BaseBlock
             'cta' => $ctaCards,
             'cards_text_align' => get_field('lb_block_cards_grid_text_align'),
             'items' => $items,
+            'variants' => $image_full_size_mobile ? ['image-full-size-mobile'] : null
         ];
         $this->setContext($payload);
     }

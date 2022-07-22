@@ -348,7 +348,7 @@
                                     "key": "field_61f00a809d096",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_description_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -357,14 +357,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -618,12 +616,12 @@
                                         "class": "",
                                         "id": ""
                                     },
+                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
                                     "append": "",
-                                    "maxlength": "",
-                                    "wpml_cf_preferences": 1
+                                    "maxlength": ""
                                 }
                             ]
                         }
@@ -888,7 +886,7 @@
                                     "key": "field_627a5bbc5a75e",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_effectiveness_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -897,14 +895,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -1210,7 +1206,7 @@
                                     "key": "field_61f0071ae1ee9",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_usecases_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -1219,14 +1215,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -1531,7 +1525,7 @@
                                     "key": "field_61f0059990ca1",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_patents_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -1540,14 +1534,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -1792,7 +1784,7 @@
                                     "key": "field_61e9b6ceeef3c",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_reviews_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -1801,14 +1793,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -2091,7 +2081,7 @@
                                     "key": "field_620bcc20bb284",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_cardleft_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -2100,14 +2090,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -2451,7 +2439,7 @@
                                     "key": "field_620bcc9fbb28e",
                                     "label": "Valore",
                                     "name": "lb_block_offsetnav_cardright_content_table_item_value",
-                                    "type": "number",
+                                    "type": "text",
                                     "instructions": "",
                                     "required": 0,
                                     "conditional_logic": 0,
@@ -2460,14 +2448,12 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "wpml_cf_preferences": 2,
                                     "default_value": "",
                                     "placeholder": "",
                                     "prepend": "",
-                                    "append": "%",
-                                    "min": "",
-                                    "max": "",
-                                    "step": ""
+                                    "append": "",
+                                    "maxlength": "",
+                                    "wpml_cf_preferences": 2
                                 }
                             ]
                         }
@@ -2560,5 +2546,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1655125654
+    "modified": 1657887041
 }

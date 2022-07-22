@@ -39,7 +39,7 @@ class Brands
                     'type' => 'submenu',
                     'label' => __('Per Brand', 'labo-suisse-theme'),
                     'children' => [
-                        ['type' => 'link', 'label' => 'Tutti i brand', 'href' => $this->option->getArchiveBrandLink()]
+                        ['type' => 'link', 'label' => __('Tutti i Brand', 'labo-suisse-theme'), 'href' => $this->option->getArchiveBrandLink()]
                     ]
                 ],
                 [
@@ -47,7 +47,7 @@ class Brands
                     'children' => []
                 ]
             ],
-            'fixed' => [ (new Option())->getMenuFixedCard()]
+            'fixed' => [ (new Option())->getMenuFixedCard('brands')]
         ];
 
         foreach ($this->brands as $i => $brand) {
@@ -80,14 +80,14 @@ class Brands
             $items['children'][] = [
                 'type' => 'submenu',
                 'label' => $brand->name,
-                'children' => $this->getProductLines($brand)
+                'children' => $this->getProductLines($brand, 'mobile')
             ];
         }
 
         return [$items];
     }
 
-    private function getProductLines($brand)
+    private function getProductLines($brand, $device = 'desktop')
     {
         $lines =  get_terms(array(
             'taxonomy' => 'lb-brand',
@@ -96,8 +96,7 @@ class Brands
         ));
 
         $items = [
-            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))],
-            ['type' => 'link', 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)],
+            ['type' => 'link', 'label' => __('Scopri la linea', 'labo-suisse-theme'), 'href' => get_permalink(get_field('lb_brand_page', $brand))]
         ];
 
         foreach ($lines as $line) {
@@ -108,6 +107,11 @@ class Brands
             ];
         }
 
+        $type = ($device === 'desktop')
+            ? 'link-spaced'
+            : 'link';
+
+        $items[] = ['type' => $type, 'label' => __('Vedi tutti i prodotti', 'labo-suisse-theme') . ' ' . $brand->name, 'href' => get_term_link($brand)];
         return $items;
     }
 }

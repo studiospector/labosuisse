@@ -25,26 +25,28 @@
 		{% block accordionContent %}
 			{% if content is iterable %}
                 {% for item in content %}
-                    {# Links list #}
-                    {% if item.type == 'links-list' %}
-                        <div class="links-list">
-                            {% for list in item.data %}
-                                <div class="links-list__item">
-                                    <h6 class="links-list__label">{{ list.label }}</h6>
-                                    {% for link in list.links %}
-                                        {% include '@PathViews/components/button.twig' with link only %}
-                                    {% endfor %}
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {# Infobox #}
-                    {% elseif item.type == 'infobox' %}
-                        {% include '@PathViews/components/infobox.twig' with item.data only %}
-                    {# Form #}
-                    {% elseif item.type == 'form' %}
-                        <form action="{{ item.data.action }}" method="get" class="{{ item.data.class }}" {{ item.data.attributes ? ' ' ~ item.data.attributes|join(' ') : '' }}>
-                            {% include '@PathViews/components/fields/input.twig' with item.data.input only %}
-                        </form>
+                    {% if item.data %}
+                        {# Links list #}
+                        {% if item.type == 'links-list' %}
+                            <div class="links-list">
+                                {% for list in item.data %}
+                                    <div class="links-list__item">
+                                        <h6 class="links-list__label">{{ list.label }}</h6>
+                                        {% for link in list.links %}
+                                            {% include '@PathViews/components/button.twig' with link only %}
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {# Infobox #}
+                        {% elseif item.type == 'infobox' %}
+                            {% include '@PathViews/components/infobox.twig' with item.data only %}
+                        {# Form #}
+                        {% elseif item.type == 'form' %}
+                            <form action="{{ item.data.action }}" method="get" class="{{ item.data.class }}" {{ item.data.attributes ? ' ' ~ item.data.attributes|join(' ') : '' }}>
+                                {% include '@PathViews/components/fields/input.twig' with item.data.input only %}
+                            </form>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             {% else %}

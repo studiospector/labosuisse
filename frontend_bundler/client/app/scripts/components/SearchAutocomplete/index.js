@@ -14,6 +14,8 @@ class SearchAutocomplete extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
+        this.lang = document.documentElement.lang
+
         this.labelResLess = this.el.dataset.labelResLess
         this.labelResMore = this.el.dataset.labelResMore
 
@@ -42,7 +44,7 @@ class SearchAutocomplete extends Component {
                     try {
                         this.ui.input.updateState('disable')
 
-                        const { data } = await axiosClient.get('/wp-json/v1/global-search/autocomplete')
+                        const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/global-search/autocomplete`)
 
                         this.ui.input.updateState('active')
                         
@@ -64,23 +66,23 @@ class SearchAutocomplete extends Component {
             },
             // placeHolder: "",
             resultsList: {
-                noResults: true,
+                noResults: false,
                 maxResults: 100,
                 tabSelect: true,
                 destination: () => {
                     return this.ui.input
                 },
                 class: 'lb-search-autocomplete__selection',
-                element: (list, data) => {
-                    const info = document.createElement("p")
-                    info.classList = 'lb-search-autocomplete__selection__results'
-                    if (data.results.length == 0 || data.results.length > 1) {
-                        info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResMore} <strong>"${data.query}"</strong>`
-                    } else {
-                        info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResLess} <strong>"${data.query}"</strong>`
-                    }
-                    list.prepend(info)
-                },
+                // element: (list, data) => {
+                //     const info = document.createElement("p")
+                //     info.classList = 'lb-search-autocomplete__selection__results'
+                //     if (data.results.length == 0 || data.results.length > 1) {
+                //         info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResMore} <strong>"${data.query}"</strong>`
+                //     } else {
+                //         info.innerHTML = `<strong>${data.matches.length}</strong> ${this.labelResLess} <strong>"${data.query}"</strong>`
+                //     }
+                //     list.prepend(info)
+                // },
             },
             resultItem: {
                 highlight: true,
@@ -111,6 +113,8 @@ class SearchAutocomplete extends Component {
             // const selection = feedback.selection.value[feedback.selection.key]
             const selection = feedback.selection.value
             autoCompleteJS.input.value = selection
+
+            this.el.submit()
         })
 
         autoCompleteJS.input.addEventListener("navigate", (event) => {

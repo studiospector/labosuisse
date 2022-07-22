@@ -1,7 +1,7 @@
 import Component from '@okiba/component'
 import { debounce } from '@okiba/functions'
 
-import Swiper from 'swiper/bundle'
+import Swiper, { Pagination, Autoplay, EffectFade } from 'swiper'
 import { gsap } from "gsap"
 import { SplitText } from "gsap/SplitText"
 
@@ -18,11 +18,8 @@ class CarouselHero extends Component {
 
         // Init swiper
         this.swiper = new Swiper(this.el, {
+            modules: [ Pagination, Autoplay, EffectFade ],
             speed: 400,
-            autoplay: {
-                delay: 5000,
-                disableOnInteraction: false
-            },
             grabCursor: true,
             effect: 'fade',
             fadeEffect: {
@@ -30,53 +27,57 @@ class CarouselHero extends Component {
             },
             pagination: {
                 el: this.ui.pagination,
+                type: 'bullets',
             },
             on: {
                 init: debounce((swiperObj) => {
-                    this.transitionStart(swiperObj)
-                }, 800),
+                    this.swiper.params.autoplay.delay = 8000
+                    this.swiper.params.autoplay.disableOnInteraction = false
+                    this.swiper.autoplay.start()
+                }, 1000),
                 slideChangeTransitionStart: (swiperObj) => {
                     this.transitionStart(swiperObj)
-                },
-                slideChangeTransitionEnd: (swiperObj) => {
-                    this.transitionEnd(swiperObj)
-                },
+                }
             }
         })
-
-        this.initAnimations(this.swiper)
-    }
-
-    initAnimations = (swiperObj) => {
-        // Slides Images
-        const slidesImages = swiperObj.slides.find("img")
-        // Slides Texts
-        const slidesTexts = swiperObj.slides.find(".infobox__tagline, .infobox__title, .infobox__subtitle, .infobox__paragraph")
-        // Slides CTAs
-        const slidesCTAs = swiperObj.slides.find(".infobox__cta")
-
-        // Reset animations
-        gsap.set(slidesImages, { opacity: 0 })
-        gsap.set(slidesTexts, { autoAlpha: 0 })
-        gsap.set(slidesCTAs, { autoAlpha: 0 })
     }
 
     transitionStart = (swiperObj) => {
-        // Active slide
+        // Active Slide
         const slideActive = swiperObj.$el.find(".swiper-slide-active")
+        // Next and Prev Slides
+        const slidesNextPrev = swiperObj.$el.find(".swiper-slide-prev, .swiper-slide-next")
 
-        // Current Slide image
+        // Active Slide Image
         const slideImage = slideActive.find("img")
-        // Current Slide Texts
+        // Active Slide Texts
         const slideText = slideActive.find(".infobox__tagline, .infobox__title, .infobox__subtitle, .infobox__paragraph")
         const childSplit = new SplitText(slideText, { type: "lines", linesClass: "lb-split-child-line" })
         const parentSplit = new SplitText(slideText, { type: "lines", linesClass: "lb-split-parent-line" })
-        // Current Slide CTA
+        // Active Slide CTA
         const slideCTA = slideActive.find(".infobox__cta")
+
+        // Next and Prev Slides Images
+        const slidesNextPrevImages = slidesNextPrev.find("img")
+
+        // Timeline start
+        const tl = gsap.timeline()
+
+        // Leave Image animations
+        gsap.set(slideImage, { opacity: 0 })
+        tl.to(slidesNextPrevImages, { duration: 1, opacity: 1, ease: "Power4.easeInOut" })
+
+        // Image animation
+        tl.to(slideImage, { duration: 1, opacity: 1, ease: "Power4.easeInOut" }, '-=0.5')
+        tl.from(slideImage, {
+            duration: 2,
+            scale: 1.2,
+            ease: "Power4.easeOut",
+        }, '<')
         
         // Texts animation
-        gsap.set(slideText, { autoAlpha: 1 })
-        gsap.from(childSplit.lines, {
+        tl.set(slideText, { autoAlpha: 1 }, '<')
+        tl.from(childSplit.lines, {
             duration: 1.5,
             yPercent: 100,
             ease: "power4",
@@ -85,39 +86,11 @@ class CarouselHero extends Component {
             onComplete: () => {
                 childSplit.revert()
             }
-        })
-        // // CTA animation
+        }, '<')
+
+        // CTA animation
         if (slideCTA.length > 0) {
-            gsap.set(slideCTA, { autoAlpha: 1 })
-            gsap.from(slideCTA, { duration: 1, autoAlpha: 0, ease: "Power4.easeOut", delay: 1.5 })
-        }
-
-        // Image animation
-        gsap.to(slideImage, { duration: 1, opacity: 1, ease: "Power4.easeInOut" })
-        gsap.from(slideImage, {
-            duration: 2,
-            scale: 1.2,
-            ease: "Power4.easeOut",
-            delay: 0.5
-        })
-    }
-
-    transitionEnd = (swiperObj) => {
-        // Next and Prev Slides
-        const slidesNextPrev = swiperObj.$el.find(".swiper-slide-prev, .swiper-slide-next")
-
-        // Next and Prev Slides Images
-        const slidesNextPrevImages = slidesNextPrev.find("img")
-        // Next and Prev Slides Texts
-        const slidesNextPrevText = slidesNextPrev.find(".infobox__tagline, .infobox__title, .infobox__subtitle, .infobox__paragraph")
-        // Next and Prev Slides CTAs
-        const slidesCTA = slidesNextPrev.find(".infobox__cta")
-
-        // Reset animations
-        gsap.set(slidesNextPrevImages, { opacity: 0 })
-        gsap.set(slidesNextPrevText, { autoAlpha: 0 })
-        if (slidesCTA.length > 0) {
-            gsap.set(slidesCTA, { autoAlpha: 0 })
+            tl.from(slideCTA, { duration: 1, autoAlpha: 0, ease: "Power4.easeOut" }, '-=0.5')
         }
     }
 
