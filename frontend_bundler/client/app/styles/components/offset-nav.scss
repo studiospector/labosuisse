@@ -5,10 +5,11 @@
     justify-content: flex-end;
     align-items: flex-start;
     flex-wrap: wrap;
-    position: fixed;
+    position: sticky;
     z-index: -999;
     top: -9999px;
     left: -9999px;
+    bottom: 0;
     visibility: hidden;
     opacity: 0;
     // overflow-y: scroll;
@@ -16,7 +17,7 @@
     background-color: rgba(#000, 0.5);
     transition-delay: 0.3s, 0.3s, 0.3s, 0s, 0s;
     transition-duration: 0s, 0s, 0s, 0.3s, 0.3s;
-    transition-property: z-index, top, left, opacity, visibility;
+    transition-property: z-index, top, left, bottom, opacity, visibility;
 
     // @include mq(lg) {
     //     padding: rem(32px);
@@ -30,6 +31,7 @@
     &.is-open {
         top: 0;
         left: 0;
+        bottom: 0;
         opacity: 1;
         visibility: visible;
         transition-delay: 0s;
