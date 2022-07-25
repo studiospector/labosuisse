@@ -39,13 +39,10 @@
         @include mq($until: md) {
             flex: 1;
             text-align: center;
-
-            .card-img-wrapper {
+            
+            .card-img {
                 order: 1;
                 margin-top: 20px;
-            }
-
-            .card-img {
                 margin-bottom: 0;
             }
         }
