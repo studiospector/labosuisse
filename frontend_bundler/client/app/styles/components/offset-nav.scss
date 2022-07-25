@@ -5,19 +5,18 @@
     justify-content: flex-end;
     align-items: flex-start;
     flex-wrap: wrap;
-    position: sticky;
+    position: fixed;
     z-index: -999;
     top: -9999px;
     left: -9999px;
-    bottom: 0;
     visibility: hidden;
     opacity: 0;
-    // overflow-y: scroll;
-    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: scroll;
     background-color: rgba(#000, 0.5);
     transition-delay: 0.3s, 0.3s, 0.3s, 0s, 0s;
     transition-duration: 0s, 0s, 0s, 0.3s, 0.3s;
-    transition-property: z-index, top, left, bottom, opacity, visibility;
+    transition-property: z-index, top, left, opacity, visibility;
 
     // @include mq(lg) {
     //     padding: rem(32px);
@@ -31,7 +30,6 @@
     &.is-open {
         top: 0;
         left: 0;
-        bottom: 0;
         opacity: 1;
         visibility: visible;
         transition-delay: 0s;
@@ -41,7 +39,7 @@
 
 .lb-offset-nav__dialog {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 705px;
     position: relative;
     opacity: 0;
@@ -100,7 +98,11 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: sticky;
+    top: 0;
+    background-color: map-get($colors, "white");
     border-bottom: 1px solid map-get($colors, "grey-2");
+    z-index: 1;
 
     &__title {
         font-size: rem(12);
@@ -110,14 +112,14 @@
 }
 
 .lb-offset-nav__content {
-    // height: inherit;
-    height: calc(100vh - 246px);
+    height: inherit;
+    // height: calc(100vh - 246px);
     position: relative;
     padding: 40px 64px;
     // padding-bottom: 100px;
     margin: 0 auto;
     color: map-get($colors, "black");
-    overflow-y: scroll;
+    // overflow-y: scroll;
 
     &>.p:not(:first-child) {
         margin-top: rem(24px);
@@ -128,7 +130,7 @@
     // }
 
     @include mq($until: lg) {
-        height: calc(100vh - 183px);
+        // height: calc(100vh - 183px);
         padding: 20px 16px;
         padding-bottom: 80px;
         -webkit-overflow-scrolling: touch;
