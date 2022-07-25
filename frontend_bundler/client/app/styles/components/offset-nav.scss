@@ -128,7 +128,7 @@
     @include mq($until: lg) {
         height: calc(100vh - 183px);
         padding: 20px 16px;
-        // padding-bottom: 80px;
+        padding-bottom: 80px;
         -webkit-overflow-scrolling: touch;
     }
 
