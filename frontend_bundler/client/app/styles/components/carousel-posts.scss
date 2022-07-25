@@ -31,19 +31,23 @@
 
             @include mq($until: md) {
                 padding: 20px;
-                padding-bottom: 70px;
                 background-color: map-get($colors, "primary-light-1");
             }
 
             .swiper {
                 @include mq($until: md) {
                     overflow: hidden;
+                    padding-bottom: 30px;
                 }
 
                 .swiper-pagination {
                     bottom: 28px;
 
-                    @include mq(md) {
+                    @include mq($until: md) {
+                        bottom: 0;
+                    }
+
+                    @include mq($from: md) {
                         display: none;
                     }
                 }
@@ -100,10 +104,6 @@
 
                 @include mq($until: lg) {
                     padding: 20px;
-                }
-
-                @include mq($until: md) {
-                    padding-bottom: 70px;
                 }
 
                 .swiper {
