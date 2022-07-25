@@ -30,7 +30,7 @@
         flex: 1;
 
         @include mq($until: md) {
-            padding: 20px 0;
+            padding: 20px 15px;
 
             .infobox {
                 text-align: center;
