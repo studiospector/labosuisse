@@ -40,11 +40,11 @@
                             <div class="lb-offset-nav__table">
                                 {% for tableItem in item.data.table %}
                                     <div class="row">
-                                        <div class="col-10 col-md-11">
-                                            <p class="p-small">{{ tableItem.title }}</p>
+                                        <div class="col-9 col-md-11">
+                                            <p class="lb-offset-nav__table__prop p-small">{{ tableItem.title }}</p>
                                         </div>
-                                        <div class="col-2 col-md-1">
-                                            <p class="p-small">{{ tableItem.value }}</p>
+                                        <div class="col-3 col-md-1">
+                                            <p class="lb-offset-nav__table__value p-small">{{ tableItem.value }}</p>
                                         </div>
                                     </div>
                                 {% endfor %}
