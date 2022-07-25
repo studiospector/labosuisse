@@ -179,9 +179,9 @@
             .card-img {
                 height: 265px;
 
-                @include mq($until: lg) {
-                    height: auto;
-                }
+                // @include mq($until: lg) {
+                //     height: auto;
+                // }
             }
         }
     }

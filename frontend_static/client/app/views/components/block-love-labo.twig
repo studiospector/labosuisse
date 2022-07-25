@@ -22,12 +22,14 @@
 	{% if items %}
         <div class="lovelabo__grid">
             {% for item in items|default([]) %}
-                <div class="lovelabo__img">
-                    {{ lbPicture(item.images) }}
-                    {% if item.text %}
-                        <p class="p-small">{{ item.text }}</p>
-                    {% endif %}
-                </div>
+                {% if item.text or item.images %}
+                    <div class="lovelabo__img">
+                        {{ lbPicture(item.images) }}
+                        {% if item.text %}
+                            <p class="p-small">{{ item.text }}</p>
+                        {% endif %}
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
     {% endif %}
