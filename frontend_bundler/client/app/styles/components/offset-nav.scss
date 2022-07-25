@@ -108,10 +108,11 @@
 }
 
 .lb-offset-nav__content {
-    height: inherit;
+    // height: inherit;
+    height: calc(100vh - 246px);
     position: relative;
     padding: 40px 64px;
-    padding-bottom: 100px;
+    // padding-bottom: 100px;
     margin: 0 auto;
     color: map-get($colors, "black");
     overflow-y: scroll;
@@ -125,13 +126,18 @@
     // }
 
     @include mq($until: lg) {
+        height: calc(100vh - 183px);
         padding: 20px 16px;
-        padding-bottom: 80px;
+        // padding-bottom: 80px;
         -webkit-overflow-scrolling: touch;
     }
 
     &__item {
         margin-bottom: 40px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
 
         &--text {
             a {
@@ -178,6 +184,10 @@
     p {
         margin: 0;
         line-height: 20px;
+    }
+
+    &__value {
+        text-align: right;
     }
 }
 

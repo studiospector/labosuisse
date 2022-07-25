@@ -33,7 +33,14 @@ class OffsetNav extends Component {
     }
 
     adjustContent = () => {
-        const headerHeight = qs('.lb-header').getBoundingClientRect().height
+        let matchMedia = window.matchMedia("screen and (max-width: 767px)")
+        let elem = '.lb-header'
+
+        if (matchMedia.matches) {
+            elem = '.lb-header .lb-header__top'
+        }
+
+        const headerHeight = qs(elem).getBoundingClientRect().height
         this.el.style.paddingTop = `${headerHeight}px`
     }
 

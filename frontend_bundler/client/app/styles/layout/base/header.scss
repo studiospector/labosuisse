@@ -46,6 +46,13 @@
                 height: 0;
                 transform: translateY(-100%);
             }
+
+            &__wrapper--mobile {
+                top: -64px;
+                height: 0px;
+                padding-bottom: 0px;
+                transition: $transition__base-1;
+            }
         }
     }
 
