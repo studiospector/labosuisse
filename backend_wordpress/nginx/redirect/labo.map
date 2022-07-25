@@ -1,0 +1,71 @@
+map_hash_max_size 128;
+map_hash_bucket_size 128;
+
+map $request_uri $new_uri {
+
+    default "";
+
+    # static
+    /it/content/chi-siamo /chi-siamo/;
+    /it/content/fillerina-world /fillerina-nel-mondo/;
+    /it/content/crescina-world /crescina-nel-mondo/;
+    /it/content/labo-worldwide /labo-nel-mondo;
+    /it/novita /magazine/;
+    /it/content/promozioni-labo /magazine/;
+    /it/press-campaigns	/magazine/;
+    /it/content/contatti /contatti/;
+    /it/newsletter /contatti/;
+    /it/content/follow-us	/assistenza/;
+    /it/content/lavora-con-labo	/jobs/;
+    /it/shops	/store/;
+    /it/content/microcamera	/microcamera-labo;
+    /it/content/privacy-policy https://static.labosuisse.com/uploads/2022/06/17123521/informativa-web-e-cookie.pdf;
+
+    /it/prodotti/voglio-prendermi-cura-di/capelli	/categoria-prodotto/capelli;
+    /it/prodotti/voglio-prendermi-cura-di/viso /categoria-prodotto/viso;
+    /it/prodotti/voglio-prendermi-cura-di/corpo /categoria-prodotto/corpo;
+    /it/prodotti/voglio-prendermi-cura-di/occhi /categoria-prodotto/viso/occhi;
+    /it/prodotti/voglio-prendermi-cura-di/labbra /categoria-prodotto/viso/labbra;
+    /it/prodotti/voglio-prendermi-cura-di/seno /categoria-prodotto/corpo/seno;
+    /it/prodotti/voglio-prendermi-cura-di/mani /ricerca;
+    /it/prodotti/voglio-prendermi-cura-di/gambe /categoria-prodotto/corpo/cosce-e-glutei;
+    /it/prodotti/voglio-prendermi-cura-di/piedi /categoria-prodotto/corpo;
+
+    /it/prodotti/ho-bisogno-di/Stimolare%20la%20crescita%20fisiologica%20dei%20capelli /categoria-prodotto/capelli/capelli-capelli/ricrescita;
+    /it/prodotti/ho-bisogno-di/Contrastare%20la%20caduta%20dei%20capelli /categoria-prodotto/capelli/capelli-capelli/anti-caduta;
+    /it/prodotti/ho-bisogno-di/Prendermi%20cura%20dei%20capelli /categoria-prodotto/capelli;
+    /it/prodotti/ho-bisogno-di/Contrastare%20la%20diffusione%20dei%20capelli%20bianchi /categoria-prodotto/capelli/capelli-capelli/stop-capelli-bianchi;
+    /it/prodotti/ho-bisogno-di/Correggere%20i%20segni%20dell%27et%C3%A0 /categoria-prodotto/viso/tutto-il-viso/azione-anti-rughe-e-anti-eta-globale;
+    /it/prodotti/ho-bisogno-di/Contrastare%20lassit%C3%A0%20e%5Co%20flaccidit%C3%A0%20cutanea /categoria-prodotto/viso/tutto-il-viso/azione-rassodante;
+    /it/prodotti/ho-bisogno-di/Idratare%2C%20detergere%20e%20nutrire%20la%20pelle /categoria-prodotto/viso/tutto-il-viso/azione-idratante-protettiva;
+    /it/prodotti/ho-bisogno-di/Favorire%20il%20volume%20del%20seno /categoria-prodotto/corpo/seno/volumizzare;
+    /it/prodotti/ho-bisogno-di/Favorire%20il%20volume%20delle%20labbra /categoria-prodotto/viso/labbra/azione-filler-labbra;
+    /it/prodotti/ho-bisogno-di/Contrastare%20cellulite%20e%20adiposit%C3%A0%20localizzate /categoria-prodotto/corpo/cosce-e-glutei/anticellulite;
+    /it/prodotti/ho-bisogno-di/Contrastare%20le%20smagliature /categoria-prodotto/corpo;
+    /it/prodotti/ho-bisogno-di/Trattamenti%20di%20bellezza%20sotto%20il%20sole /categoria-prodotto/solari/solari-solari;
+    /it/prodotti/ho-bisogno-di/Innovativi%20trattamenti%20make-up /categoria-prodotto/make-up;
+
+
+    /en/content/who-we-are /en/the-company;
+    /en/content/fillerina-world /en/fillerina-in-the-world;
+    /en/content/crescina-world /en/crescina-in-the-world;
+    /en/content/labo-worldwide /en/labo-in-the-world;
+    /en/content/global-contact-details /en/contact-us;
+    /en/content/follow-us /en/contact-us;
+    /en/content/videos /en/magazine;
+    /en/content/business-opportunity /en/become-labo-distributor;
+    /en/node/4969 /en/microcamera-labo;
+    /en/content/privacy-policy https://static.labosuisse.com/uploads/2022/07/20092631/Labo_Customer_Information.pdf;
+    /en/content/crescina /en/brands;
+
+
+    # dynamic
+
+    # prodotto e linea prodotto (brand)
+    ~^/it/content/(.*)?$	/ricerca/?lb-search-val=$1;
+
+
+    # Prodotto (en)
+    ~^/en/content/(.*)?$ /en/search/?lb-search-val=$1;
+
+}
