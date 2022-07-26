@@ -1,4 +1,4 @@
-<footer data-scroll-section>
+<footer{{ not scrollbarDisabled ? ' data-scroll-section' : '' }}>
     {% if prefooterConfig.show %}
         <div class="lb-prefooter{{ prefooterConfig.line ? ' lb-prefooter--line' : '' }}">
             <div class="container">

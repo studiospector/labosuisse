@@ -3,6 +3,7 @@ import EventManager from '@okiba/event-manager'
 import { qs } from '@okiba/dom'
 
 import isStorybook from '../../utils/isStorybook'
+import isScrollbarDisabled from '../../utils/isScrollbarDisabled'
 
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -83,7 +84,7 @@ class AnimationText extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: isStorybook() ? 'body' : '.js-scrollbar',
+                scroller: (isStorybook() || isScrollbarDisabled()) ? 'body' : '.js-scrollbar',
                 trigger: this.el,
                 start: "30% 80%",
             }
