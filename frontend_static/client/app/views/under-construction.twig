@@ -1,0 +1,23 @@
+{% extends '@PathViews/templates/_under-construction.twig' %}
+
+{% block head %}
+    <style>
+        #content {
+            height: 100vh;
+            display: flex;
+            justify-content: center;    
+            align-items: center;
+            padding-top: 0;
+        }
+        #content .infobox img {
+            height: 100px;
+            margin-bottom: 100px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+
+    {% include '@PathViews/components/infobox.twig' with infobox only %}
+
+{% endblock %}
