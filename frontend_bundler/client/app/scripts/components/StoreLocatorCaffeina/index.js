@@ -516,7 +516,11 @@ class StoreLocatorCaffeina extends Component {
         })
         this.map.setZoom(15)
 
-        setTimeout(() => window.getCustomScrollbar.scrollTo(this.ui.list), 1000)
+        let matchMedia = window.matchMedia("screen and (max-width: 767px)")
+
+        if (matchMedia.matches) {
+            setTimeout(() => window.getCustomScrollbar.scrollTo(this.ui.list), 1000)
+        }
     }
 
 
