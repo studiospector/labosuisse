@@ -48,7 +48,7 @@
 
         {% set page_loader = fn('get_field', 'lb_page_loader_status', 'option') ? ' is-loading' : false %}
     </head>
-    <body {{ fn('body_class', bodyClass ~ page_loader) }}>
+    <body {{ fn('body_class', bodyClass ~ page_loader) }}{{ disableScrollbar ? ' data-disable-scrollbar="true"' : '' }}>
 
         <div class="js-scrollbar js-gtm-tracking" data-ga-event-type="global" data-scroll-container>
             <!-- Header -->
@@ -64,6 +64,7 @@
             {% block footer %}
                 {% set footer = fn('lb_footer') %}
                 {% include 'layout/footer.twig' with {
+                    scrollbarDisabled: disableScrollbar,
                     data: footer,
                     prefooterConfig: prefooterConfig|default({show: false, line: false})
                 } only %}

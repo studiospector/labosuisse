@@ -232,8 +232,6 @@ class StoreLocatorCaffeina extends Component {
             // },
         }
 
-        window.getCustomScrollbar.destroy()
-
         // Google map Loader
         this.loader = new Loader({
             apiKey: 'AIzaSyCG7SmW_OVvWwj1ngGzqBdLhOGgpXTpBnM',
@@ -412,9 +410,9 @@ class StoreLocatorCaffeina extends Component {
                     </span>
                 </div>
                 <div class="lb-store-locator__store__info">
-                    <h6 class="lb-store-locator__store__info__title">${markerData.store}</h6>
-                    <p class="lb-store-locator__store__info__address p-small">${markerData.geo_location.address}</p>
-                    <p class="lb-store-locator__store__info__opened p-small">Aperto fino alle 19.30${markerData.open_until}</p>
+                    ${markerData.store ? `<h6 class="lb-store-locator__store__info__title">${markerData.store}</h6>` : ''}
+                    ${markerData.geo_location.address ? `<p class="lb-store-locator__store__info__address p-small">${markerData.geo_location.address}</p>` : ''}
+                    ${markerData.open_until ? `<p class="lb-store-locator__store__info__opened p-small">Aperto fino alle 19.30${markerData.open_until}</p>` : ''}
                 </div>
                 <div class="lb-store-locator__store__open js-caffeina-sl-store-open" data-store-id="${i}">
                     <span class="lb-icon lb-icon-close-circle">
@@ -445,10 +443,10 @@ class StoreLocatorCaffeina extends Component {
                         </svg>
                     </span>
                 </div>
-                <h6 class="lb-store-locator__infowindow__title">${markerData.store}</h6>
-                <p class="lb-store-locator__infowindow__address p-small">${markerData.geo_location.address}</p>
-                <p class="lb-store-locator__infowindow__opened p-small">Aperto fino alle 19.30${markerData.open_until}</p>
-                <p class="lb-store-locator__infowindow__telephone p-small">N. di telefono: ${markerData.phone}</p>
+                ${markerData.store ? `<h6 class="lb-store-locator__infowindow__title">${markerData.store}</h6>` : ''}
+                ${markerData.geo_location.address ? `<p class="lb-store-locator__infowindow__address p-small">${markerData.geo_location.address}</p>` : ''}
+                ${markerData.open_until ? `<p class="lb-store-locator__infowindow__opened p-small">Aperto fino alle 19.30${markerData.open_until}</p>` : ''}
+                ${markerData.phone ? `<p class="lb-store-locator__infowindow__telephone p-small">N. di telefono: ${markerData.phone}</p>` : ''}
                 <a class="button button-quaternary js-caffeina-sl-store-link" href="#" target="_blank" data-store-lat="${markerData.geo_location.lat}" data-store-lng="${markerData.geo_location.lng}">
                     <span class="button__label">Vai alle indicazioni</span>
                     <span class="lb-icon lb-icon-arrow-right">
@@ -516,7 +514,11 @@ class StoreLocatorCaffeina extends Component {
         })
         this.map.setZoom(15)
 
-        setTimeout(() => window.getCustomScrollbar.scrollTo(this.ui.list), 1000)
+        let matchMedia = window.matchMedia("screen and (max-width: 767px)")
+
+        if (matchMedia.matches) {
+            setTimeout(() => window.getCustomScrollbar.scrollTo(this.ui.list), 1000)
+        }
     }
 
 

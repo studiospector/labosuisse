@@ -191,6 +191,8 @@ export default class Application extends Component {
     constructor() {
         super({ el: document.body, components })
 
+        this.disableScrollbar = this.el.dataset.disableScrollbar
+
         this.components.offsetNavs = OffsetNavSystem.get()
 
         if (!document.querySelector('body').classList.contains('wp-admin')) {
@@ -217,7 +219,11 @@ export default class Application extends Component {
         window.dispatchEvent(new Event('resize'))
 
         // Enable Scroll of page
-        window.getCustomScrollbar.start()
+        if (this.disableScrollbar) {
+            window.getCustomScrollbar.destroy()
+        } else {
+            window.getCustomScrollbar.start()
+        }
 
         this.el.classList.add('ready')
     }

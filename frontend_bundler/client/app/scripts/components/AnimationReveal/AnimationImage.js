@@ -1,10 +1,12 @@
 import Component from '@okiba/component'
 import EventManager from '@okiba/event-manager'
 import { qs } from '@okiba/dom'
-import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 import isStorybook from '../../utils/isStorybook'
+import isScrollbarDisabled from '../../utils/isScrollbarDisabled'
+
+import { gsap } from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const ui = {
     picture: '.lb-picture',
@@ -78,7 +80,7 @@ class AnimationImage extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: isStorybook() ? 'body' : '.js-scrollbar',
+                scroller: (isStorybook() || isScrollbarDisabled()) ? 'body' : '.js-scrollbar',
                 trigger: this.ui.picture,
                 start: "30% 80%",
             }
