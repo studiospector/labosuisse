@@ -1,7 +1,13 @@
 User-agent: *
-Sitemap: https://www.labosuisse.com/sitemap_index.xml
-Disallow: /search
+
 Disallow: /wp-admin
-Disallow: /wp-includes
-Disallow: /wp-login.php
 Allow: /wp-admin/admin-ajax.php
+Disallow: /wp-includes
+
+Disallow: /wp-login.php
+Disallow: /ricerca
+Disallow: /en/search
+Disallow: /*?*login=
+Disallow: /*?*utm_source=
+
+Sitemap: https://www.labosuisse.com/sitemap_index.xml
