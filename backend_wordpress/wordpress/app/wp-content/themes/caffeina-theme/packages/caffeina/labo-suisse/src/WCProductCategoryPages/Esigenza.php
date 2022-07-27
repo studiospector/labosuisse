@@ -85,13 +85,14 @@ class Esigenza extends BasePage
                     'label' => $brand->name,
                 ];
 
+                $brand_page = get_field('lb_brand_page', $brand);
                 $items[$brand->term_id]['brand_card'] = [
                     'color' => get_field('lb_brand_color', $brand),
                     'infobox' => [
                         'subtitle' => $brand->name,
                         'paragraph' => $brand->description,
                         'cta' => [
-                            'url' => get_term_link($brand),
+                            'url' => get_permalink($brand_page),
                             'title' => __('Scopri il brand', 'labo-suisse-theme'),
                             'variants' => ['quaternary']
                         ]
