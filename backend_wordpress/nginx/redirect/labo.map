@@ -13,7 +13,8 @@ map $request_uri $new_uri {
     /it/content/fillerina /brand-page/brand-fillerina-it-2;
     /it/content/labo-filler-make /brand-page/brand-linea-filler-make-up-it;
     /it/content/fillerina-colour /brand-page/brand-fillerina-colour-it;
-    /it/content/x-ingredients-strong-ingredient /brands/x-ingredients;
+    /it/content/x-ingredients-strong-ingredients /brands/x-ingredients;
+
     /it/content/chi-siamo /chi-siamo/;
     /it/content/fillerina-world /fillerina-nel-mondo;
     /it/content/crescina-world /crescina-nel-mondo;
