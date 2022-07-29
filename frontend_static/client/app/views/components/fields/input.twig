@@ -15,6 +15,9 @@
     {{ disabled ? ' disabled="disabled"' : '' }}
     {{ required ? ' required="required"' : '' }}
     {{ autocomplete ? ' autocomplete="' ~ autocomplete ~ '"' : '' }}
+    {{ step ? ' step="' ~ step ~ '"' : '' }}
+    {{ min ? ' min="' ~ min ~ '"' : '' }}
+    {{ max ? ' max="' ~ max ~ '"' : '' }}
     placeholder="{{ label }}"
     class="js-custom-input{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
     {{ dataVariants|length > 0 ? ' ' ~ dataVariants|join(' ') : '' }}

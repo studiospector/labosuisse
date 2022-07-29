@@ -37,7 +37,20 @@
     input[type="search"]::-webkit-search-results-button,
     input[type="search"]::-webkit-search-results-decoration {
         appearance: none;
-        -webkit-appearance:none;
+        -webkit-appearance: none;
+    }
+
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+        appearance: none;
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        text-align: center;
+        pointer-events: none;
+        -moz-appearance: textfield;
     }
 
     .custom-input-label {
@@ -98,7 +111,7 @@
         }
 
         &--prev {
-            left: 0;
+            left: 5px;
         }
     }
 
@@ -120,6 +133,7 @@
         }
 
         .custom-input {
+            &__icon--prev,
             &__icon--next {
                 .button {
                     background-color: transparent;
@@ -135,11 +149,11 @@
 
     &--icon-prev {
         input {
-            padding-left: 42px;
+            padding-left: 50px;
         }
 
         .custom-input-label {
-            margin-left: 42px;
+            margin-left: 50px;
         }
     }
 
@@ -163,5 +177,9 @@
                 width: 0;
             }
         }
+    }
+
+    &--search {
+        max-width: 150px;
     }
 }

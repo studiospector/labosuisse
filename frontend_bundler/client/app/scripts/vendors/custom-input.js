@@ -33,9 +33,10 @@ class CustomInput extends BasicElement {
             // Current <input>
             this.currInputElem = this.cs[i]
             this.currInputElemLength = this.currInputElem.length
+            this.currInputType = this.cs[i].getAttribute('type')
 
             // MAIN CONTAINER
-            this.mainContainer = this.createDOMElement('LABEL', ['custom-field', 'custom-input'], null, null, {pos: 'beforebegin', elem: this.cs[i]})
+            this.mainContainer = this.createDOMElement('LABEL', ['custom-field', 'custom-input', `custom-input--${this.currInputType}`], null, null, {pos: 'beforebegin', elem: this.cs[i]})
             this.mainContainer.setAttribute('for', this.cs[i].getAttribute('id'))
 
             // DISABLED <input>
@@ -59,14 +60,12 @@ class CustomInput extends BasicElement {
             this.mainContainer.appendChild(this.cs[i])
 
             // PASSWORD
-            this.currInputType = this.cs[i].getAttribute('type')
             if (this.currInputType == 'password') {
                 this.addIconNext('eye-on')
                 this.inputIconNext.addEventListener('click', this.showHidePassword)
             }
 
             // SEARCH
-            this.currInputType = this.cs[i].getAttribute('type')
             if (this.currInputType == 'search') {
                 this.mainContainer.classList.add('custom-input--icon-prev-hide')
 
@@ -89,27 +88,68 @@ class CustomInput extends BasicElement {
                 this.addIconNext('icon-search', buttonTypeNext)
             }
 
-            // Set focus
-            if (this.currInputType == 'date') {
-                this.onFocus()
+            // NUMBER
+            if (this.currInputType == 'number') {
+                const min = this.cs[i].min
+                const max = this.cs[i].max
+                const step = Number(this.cs[i].step || 1)
+                
+                this.addIconPrev('minus', true)
+                this.addIconNext('plus', true)
+
+                if (this.cs[i].value < min) {
+                    this.cs[i].value = min
+                } else if (this.cs[i].value > max) {
+                    this.cs[i].value = max
+                }
+
+                this.inputIconNext.addEventListener('click', (ev) => {
+                    let newVal = null
+                    let oldValue = parseFloat((this.cs[i].value || 0))
+                    if (oldValue >= max) {
+                        newVal = oldValue
+                    } else {
+                        newVal = oldValue + step
+                    }
+                    this.cs[i].value = newVal
+                    this.cs[i].dispatchEvent(new Event('change'))
+                })
+
+                this.inputIconPrev.addEventListener('click', (ev) => {
+                    let newVal = null
+                    let oldValue = parseFloat(this.cs[i].value || 0)
+                    if (oldValue <= min) {
+                        newVal = oldValue
+                    } else {
+                        newVal = oldValue - step
+                    }
+                    this.cs[i].value = newVal
+                    this.cs[i].dispatchEvent(new Event('change'))
+                })
+
             } else {
-                this.onFocus(this.currInputElem.value)
-            }
+                // Set focus
+                if (this.currInputType == 'date') {
+                    this.onFocus()
+                } else {
+                    this.onFocus(this.currInputElem.value)
+                }
 
-            // Custom method to update focus state
-            this.cs[i].updateFocus = (value) => {
-                this.onFocus(value)
-            }
+                // Custom method to update focus state
+                this.cs[i].updateFocus = (value) => {
+                    this.onFocus(value)
+                }
 
-            // Custom method to update state
-            this.cs[i].updateState = (state) => {
-                this.updateState(state)
-            }
+                // Custom method to update state
+                this.cs[i].updateState = (state) => {
+                    this.updateState(state)
+                }
 
-            // Events on <input> focus
-            if (this.currInputType != 'date') {
-                this.cs[i].addEventListener('focus', () => this.onFocus())
-                this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+                // Events on <input> focus
+                if (this.currInputType != 'date') {
+                    this.cs[i].addEventListener('focus', () => this.onFocus())
+                    this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
+                }
             }
         }
     }

@@ -106,6 +106,20 @@ const dataDatepicker = {
     variants: ['default'],
 }
 
+// Number
+const dataNumber = {
+    type: 'number',
+    name: "num",
+    label: null,
+    disabled: false,
+    required: false,
+    step: 1,
+    min: 1,
+    max: 5,
+    value: 1,
+    variants: ['secondary'],
+}
+
 storiesOf('UIKit|Input', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -144,3 +158,5 @@ storiesOf('UIKit|Input', module)
     .add('Search --- Tertiary', () => renderInput(dataSearchTertiary))
     // Datepicker
     .add('Datepicker', () => renderInput(dataDatepicker))
+    // Number
+    .add('Number', () => renderInput(dataNumber))
