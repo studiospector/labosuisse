@@ -53,6 +53,7 @@ class ThemeSetup extends Timber\Site
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
         add_action('init', [$this, 'lb_unregister_taxonomies'], 999);
         add_action('pre_get_posts', [$this, 'lb_post_filters']);
+        add_filter('acf/settings/capability', [$this, 'lb_acf_capability']);
         add_filter('acf/settings/save_json', [$this, 'lb_acf_json_save_point']);
         add_filter('acf/settings/load_json', [$this, 'lb_acf_json_load_point']);
         add_action('block_categories_all', [$this, 'lb_gutenberg_block_categories'], 10, 2);
@@ -339,6 +340,14 @@ class ThemeSetup extends Timber\Site
         //     $query->set('posts_per_page', 12);
         //     $query->set('ignore_sticky_posts', 1);
         // }
+    }
+
+    /**
+     * ACF Config Capability
+     */
+    public function lb_acf_capability($cap)
+    {
+        return 'administrator';
     }
 
     /**
