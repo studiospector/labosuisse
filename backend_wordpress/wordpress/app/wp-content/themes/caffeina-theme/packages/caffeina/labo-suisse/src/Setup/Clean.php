@@ -106,6 +106,24 @@ class Clean
             echo $output;
         });
 
+        add_action('admin_head', function () {
+            ob_start();
+            if (lb_user_has_role('shop_manager')) {
+                ?>
+                <style>
+                    .otgs-notice,
+                    .otgs-installer-notice,
+                    #robotsmessage {
+                        display: none !important;
+                    }
+                </style>
+                <?php
+            }
+            // Output the content
+            $output = ob_get_clean();
+            echo $output;
+        });
+
         // Welcome panel customization
         add_action('load-index.php', [$this, 'always_show_welcome_panel']);
         remove_action('welcome_panel', 'wp_welcome_panel');
@@ -164,6 +182,11 @@ class Clean
             remove_meta_box('wc_admin_dashboard_setup', 'dashboard', 'normal');
             // Remove Yoast SEO metabox
             remove_meta_box('wpseo-dashboard-overview', 'dashboard', 'normal');
+            // Remove WP SMTP metabox
+            remove_meta_box('wp_mail_smtp_reports_widget_lite', 'dashboard', 'normal');
+            // Remove MC4WP metabox
+            remove_meta_box('mc4wp_log_widget', 'dashboard', 'normal');
+            
         }
     }
 
@@ -274,6 +297,24 @@ class Clean
             remove_menu_page('wpcf7');
             // WPML
             remove_menu_page('tm/menu/main.php');
+        }
+        
+        if (lb_user_has_role('shop_manager')) {
+            // Tools
+            remove_menu_page('export-personal-data.php');
+            // Settings
+            remove_menu_page('options-general.php');
+            // WP Mail SMTP
+            remove_menu_page('wp-mail-smtp');
+            // Mailchimp
+            remove_menu_page('mailchimp-for-wp');
+            // Under construction
+            remove_menu_page('under-construction');
+            // WP All Import/Export
+            remove_menu_page('pmxe-admin-home');
+            remove_menu_page('pmxi-admin-home');
+            // Separator
+            remove_menu_page('separator2');
         }
     }
 

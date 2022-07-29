@@ -1,0 +1,27 @@
+.woocommerce_page_calicantus-setting-admin input[type="text"] {
+  min-width: 800px;
+}
+.woocommerce_page_calicantus-setting-admin .form-table th {
+  width: 400px;
+}
+.icona-gestione {
+  float:left;
+  width: 15px;
+  height: 15px;
+  color: white;
+  padding: 5px;
+  line-height: 15px;
+  text-align: center;
+}
+.icona-ignorato {
+  background-color:#ccc;
+}
+.icona-da-esportare {
+  background-color:#DD9C2C;
+}
+.icona-esportato {
+  background-color:#108510;
+}
+.icona-non-esportato {
+  background-color:red;
+}
