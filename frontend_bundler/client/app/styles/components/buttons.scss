@@ -145,4 +145,25 @@ $buttonsPropertyList: (
     }
 }
 
+.lb-button-group {
+    display: flex;
+    align-items: center;
+
+    @include mq($until: md) {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .button {
+        &:nth-child(odd) {
+            margin-right: 30px;
+        }
+
+        &.button-primary {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+}
+
 @include generate-rules($buttonsVariablesToCSSClasses, $buttonsPropertyList, $componentsVariables);

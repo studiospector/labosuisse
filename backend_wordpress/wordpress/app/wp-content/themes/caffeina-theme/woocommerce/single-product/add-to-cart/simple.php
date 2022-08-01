@@ -20,7 +20,7 @@ defined( 'ABSPATH' ) || exit;
 global $product;
 
 $lang = lb_get_current_lang();
-$labo_in_the_world_link = get_page_link( get_field('lb_labo_in_the_world_page', 'option') );
+$labo_in_the_world_link = get_page_link(get_field('lb_labo_in_the_world_page', 'option'));
 
 if ( ! $product->is_purchasable() ) {
     Timber::render('@PathViews/components/button.twig', [
@@ -46,6 +46,7 @@ if ( $product->is_in_stock() ) : ?>
 
 		woocommerce_quantity_input(
 			array(
+                'product_name' => '',
 				'min_value'   => apply_filters( 'woocommerce_quantity_input_min', $product->get_min_purchase_quantity(), $product ),
 				'max_value'   => apply_filters( 'woocommerce_quantity_input_max', $product->get_max_purchase_quantity(), $product ),
 				'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( wp_unslash( $_POST['quantity'] ) ) : $product->get_min_purchase_quantity(), // WPCS: CSRF ok, input var ok.
@@ -53,9 +54,23 @@ if ( $product->is_in_stock() ) : ?>
 		);
 
 		do_action( 'woocommerce_after_add_to_cart_quantity' );
-		?>
 
-		<button type="submit" name="add-to-cart" value="<?php echo esc_attr( $product->get_id() ); ?>" class="single_add_to_cart_button button alt"><?php echo esc_html( $product->single_add_to_cart_text() ); ?></button>
+        echo '<div class="lb-button-group">';
+            Timber::render('@PathViews/components/button.twig', [
+                'title' => __('Punti vendita', 'labo-suisse-theme'),
+                'url' => $lang != 'it' ? $labo_in_the_world_link : get_post_type_archive_link('lb-store'),
+                'variants' => ['tertiary'],
+            ]);
+
+            Timber::render('@PathViews/components/button.twig', [
+                'title' => esc_html( $product->single_add_to_cart_text() ),
+                'attributes' => 'name="add-to-cart" value="'. esc_attr( $product->get_id() ) .'"',
+                'class' => 'single_add_to_cart_button alt',
+                'type' => 'submit',
+                'variants' => ['primary'],
+            ]);
+        echo '</div>';
+		?>
 
 		<?php do_action( 'woocommerce_after_add_to_cart_button' ); ?>
 	</form>

@@ -235,6 +235,8 @@
         }
 
         .price {
+            display: flex;
+            align-items: center;
             margin-bottom: 40px;
             font-size: rem(26);
             letter-spacing: 0.02em;
@@ -249,6 +251,34 @@
                 font-weight: 600;
                 color: map-get($colors, "black");
             }
+
+            .lb-price-label {
+                margin: 0;
+                margin-right: 8px;
+            }
+
+            /* In case of variation management in JS */
+            .price {
+                margin: 0;
+            }
+        }
+
+        .onsale {
+            display: none;
+        }
+
+        .cart {
+            .quantity {
+                margin-bottom: 40px;
+
+                @include mq($until: md) {
+                    margin-bottom: 30px;
+                }
+
+                .screen-reader-text {
+                    display: none;
+                }
+            }
         }
 
         &__variations {
@@ -262,7 +292,11 @@
             }
 
             .woocommerce-variation {
-                margin-bottom: 60px;
+                // margin-bottom: 60px;
+
+                .woocommerce-variation-price {
+                    display: none;
+                }
             }
 
             @include mq($until: md) {
