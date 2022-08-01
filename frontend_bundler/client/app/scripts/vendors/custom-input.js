@@ -46,6 +46,9 @@ class CustomInput extends BasicElement {
 
             // VARIANT
             this.inputVariant = this.cs[i].getAttribute('data-variant')
+            if (this.currInputType == 'number') {
+                this.inputVariant = 'secondary'
+            }
             if (this.inputVariant) {
                 this.mainContainer.classList.add(`custom-input--${this.inputVariant}`);
             }
@@ -91,11 +94,11 @@ class CustomInput extends BasicElement {
             // NUMBER
             if (this.currInputType == 'number') {
                 const min = this.cs[i].min
-                const max = this.cs[i].max
+                const max = this.cs[i].max || 100
                 const step = Number(this.cs[i].step || 1)
                 
-                this.addIconPrev('minus', true)
-                this.addIconNext('plus', true)
+                this.addIconPrev('minus', 'button')
+                this.addIconNext('plus', 'button')
 
                 if (this.cs[i].value < min) {
                     this.cs[i].value = min
