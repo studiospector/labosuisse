@@ -93,9 +93,9 @@ class CustomInput extends BasicElement {
 
             // NUMBER
             if (this.currInputType == 'number') {
-                const min = this.cs[i].min
-                const max = this.cs[i].max || 100
-                const step = Number(this.cs[i].step || 1)
+                const min = Number(this.cs[i].min) >= 0 ? Number(this.cs[i].min) : 0
+                const max = Number(this.cs[i].max) >= 0 ? Number(this.cs[i].max) : 100
+                const step = Number(this.cs[i].step) >= 1 ? Number(this.cs[i].step) : 1
                 
                 this.addIconPrev('minus', 'button')
                 this.addIconNext('plus', 'button')
