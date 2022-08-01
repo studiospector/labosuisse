@@ -109,11 +109,9 @@ class CustomInput extends BasicElement {
                 this.inputIconNext.addEventListener('click', (ev) => {
                     let newVal = null
                     let oldValue = parseFloat((this.cs[i].value || 0))
-                    if (oldValue >= max) {
-                        newVal = oldValue
-                    } else {
-                        newVal = oldValue + step
-                    }
+
+                    newVal = oldValue >= max ? oldValue : oldValue + step
+
                     this.cs[i].value = newVal
                     this.cs[i].dispatchEvent(new Event('change'))
                 })
@@ -121,13 +119,20 @@ class CustomInput extends BasicElement {
                 this.inputIconPrev.addEventListener('click', (ev) => {
                     let newVal = null
                     let oldValue = parseFloat(this.cs[i].value || 0)
-                    if (oldValue <= min) {
-                        newVal = oldValue
-                    } else {
-                        newVal = oldValue - step
-                    }
+
+                    newVal = oldValue <= min ? oldValue : oldValue - step
+
                     this.cs[i].value = newVal
                     this.cs[i].dispatchEvent(new Event('change'))
+                })
+
+                this.cs[i].addEventListener('change', (ev) => {
+                    let newVal = null
+                    let oldValue = parseFloat(ev.target.value || 0)
+
+                    newVal = oldValue >= max ? max : oldValue
+                    
+                    this.cs[i].value = newVal
                 })
 
             } else {
