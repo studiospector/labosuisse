@@ -13,6 +13,8 @@
     class="button{{ classes ? ' ' ~ classes : '' }}"
     {{ url ? ' href="' ~ url ~ '" target="' ~ target|default('_self') ~ '"' : '' }}
     {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
+    {{ name ? ' name="' ~ name ~ '"' : '' }}
+    {{ value ? ' value="' ~ value ~ '"' : '' }}
     {{ form ? ' form="' ~ form ~ '"' : '' }}
 >
     {% if iconStart %}
