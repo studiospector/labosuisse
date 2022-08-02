@@ -1,0 +1,203 @@
+.lb-wc-cart {
+    .woocommerce-cart-form {
+        &__contents {
+            thead {
+                display: none;
+            }
+
+            tbody {
+                tr {
+                    display: flex;
+                    align-items: center;
+                    padding: 20px 0;
+
+                    @include mq($until: md) {
+                        flex-wrap: wrap;
+                    }
+
+                    &.not-has-coupon,
+                    &:not(:last-child) {
+                        border-top: 1px solid map-get($colors, "grey-2");
+                    }
+
+                    &:last-child {
+                        padding-top: 0;
+
+                        td {
+                            width: 100%;
+
+                            .coupon {
+                                display: flex;
+
+                                .custom-input {
+                                    flex: 1;
+                                    margin-right: 20px;
+                                }
+                            }
+
+                            .lb-accordion {
+                                &__content {
+                                    padding-right: 0;
+                                }
+
+                                &__header__title {
+                                    h4 {
+                                        font-weight: 400;
+                                        text-transform: uppercase;
+                                    }
+                                }
+                            }
+
+                            button[name="update_cart"] {
+                                margin-top: 20px;
+
+                                @include mq($until: md) {
+                                    width: 100%;
+                                    justify-content: center;
+                                }
+                            }
+                        }
+                    }
+
+                    td {
+                        &:not(:last-child) {
+                            margin-right: 30px;
+
+                            @include mq($until: md) {
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+
+                .product-thumbnail {
+                    width: 130px;
+
+                    @include mq($until: md) {
+                        flex: 0 0 30%;
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .product-name {
+                    flex: 1;
+
+                    @include mq($until: md) {
+                        flex: 0 0 70%;
+                        margin-bottom: 10px;
+                        padding-left: 15px;
+                    }
+
+                    a {
+                        color: map-get($colors, "black");
+                        text-decoration: none;
+                    }
+
+                    .variation {
+                        margin-top: 15px;
+
+                        ul {
+                            li {
+                                &:not(:last-child) {
+                                    margin-bottom: 4px;
+                                }
+                            }
+                        }
+
+                        span {
+                            font-size: rem(14);
+                        }
+
+                        &__label {
+                            margin-right: 8px;
+                            font-weight: 300;
+                            color: map-get($colors, "primary-dark-1");
+                        }
+
+                        &__value {
+                            color: map-get($colors, "black");
+                        }
+                    }
+                }
+
+                .product-quantity {
+                    .screen-reader-text {
+                        display: none;
+                    }
+                }
+
+                .product-subtotal {
+                    font-weight: 500;
+
+                    @include mq($until: md) {
+                        flex: 1;
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+
+    .cart-collaterals {
+        .cart_totals  {
+            border-radius: 3px;
+            background-color: map-get($colors, "primary-light-1");
+        }
+
+        h2 {
+            padding: 20px;
+            font-size: rem(20);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            text-align: center;
+            color: map-get($colors, "black");
+            border-bottom: 1px solid map-get($colors, "grey-2");
+        }
+
+        table {
+            width: 100%;
+            padding: 20px 15px;
+
+            tr {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+                }
+
+                th {
+                    font-weight: 300;
+                    text-align: left;
+                }
+
+                td {
+                    font-weight: 500;
+                    text-align: right;
+                }
+
+                &.order-total {
+                    th, strong {
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+
+        .wc-proceed-to-checkout {
+            padding: 0 15px;
+
+            .button {
+                width: 100%;
+                justify-content: center;
+                margin-top: 10px;
+
+                &:last-child {
+                    margin: 10px 0;
+                }
+            }
+        }
+    }
+}
