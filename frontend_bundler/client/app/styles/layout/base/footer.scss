@@ -91,7 +91,7 @@ footer {
 .footer {
     margin-top: 100px;
     padding-top: 60px;
-    padding-bottom: 40px;
+    padding-bottom: 30px;
     background-color: map-get($colors, "primary-light-1");
 
     @include mq($until: md) {
@@ -202,6 +202,54 @@ footer {
                     width: 26px;
                     height: 26px;
                     color: map-get($colors, "black");
+                }
+            }
+        }
+    }
+
+    &__impressum {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 25px;
+        padding-top: 25px;
+        border-top: 1px solid map-get($colors, "grey-2");
+
+        @include mq($until: md) {
+            flex-direction: column;
+            margin-top: 40px;
+            margin-bottom: 0;
+        }
+        
+        &__text {
+            margin: 0;
+            font-size: rem(11);
+        }
+
+        &__menu {
+            display: flex;
+
+            @include mq($until: md) {
+                width: 100%;
+                margin-top: 25px;
+            }
+
+            .button {
+                padding-top: 0;
+                padding-bottom: 0;
+
+                @include mq($until: md) {
+                    &:first-child {
+                        padding-left: 0;
+                    }
+                }
+
+                &:not(:last-child) {
+                    border-right: 1px solid map-get($colors, "black");
+                }
+
+                &:last-child {
+                    padding-right: 0;
                 }
             }
         }

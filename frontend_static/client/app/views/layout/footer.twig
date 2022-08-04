@@ -126,6 +126,14 @@
                     </ul>
                 </div>
             </div>
+            <div class="footer__impressum">
+                <p class="footer__impressum__text">{{ data.footer.impressum.text }}</p>
+                <div class="footer__impressum__menu">
+                    {% for item in data.footer.impressum.items %}
+                        {% include '@PathViews/components/button.twig' with item only %}
+                    {% endfor %}
+                </div>
+            </div>
         </div>
     </div>
 </footer>

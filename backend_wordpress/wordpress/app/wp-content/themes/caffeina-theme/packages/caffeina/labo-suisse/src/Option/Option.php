@@ -167,6 +167,21 @@ class Option
         ];
     }
 
+    public function getFooterImpressumOptions()
+    {
+        $options = $this->getOption('lb_footer_impressum_text');
+
+        if (is_null($options)) {
+            return [
+                'text' => null,
+            ];
+        }
+
+        return [
+            'text' => $options,
+        ];
+    }
+
     public function getFooterSocialNetwork()
     {
         $options = $this->getOption('lb_footer_social');
