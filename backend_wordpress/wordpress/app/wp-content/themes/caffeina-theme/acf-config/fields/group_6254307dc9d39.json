@@ -609,6 +609,43 @@
                     ]
                 }
             ]
+        },
+        {
+            "key": "field_62ebda81ed703",
+            "label": "Impressum",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_62ebda8bed704",
+            "label": "Testo",
+            "name": "lb_footer_impressum_text",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 5,
+            "new_lines": "br",
+            "wpml_cf_preferences": 2
         }
     ],
     "location": [
@@ -629,5 +666,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1657890197
+    "modified": 1659624134
 }

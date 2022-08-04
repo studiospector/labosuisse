@@ -4,6 +4,7 @@ namespace Caffeina\LaboSuisse\Menu;
 
 use Caffeina\LaboSuisse\Menu\DiscoverLabo\DiscoverLaboFooter;
 use Caffeina\LaboSuisse\Menu\Support\Support;
+use Caffeina\LaboSuisse\Menu\Impressum\Impressum;
 use Caffeina\LaboSuisse\Option\Option;
 
 class MenuFooter
@@ -29,7 +30,8 @@ class MenuFooter
                 'support' => (new Support())->get(),
                 'search' => self::search(),
                 'newsletter' => self::newsletter(),
-                'social' => self::social()
+                'social' => self::social(),
+                'impressum' => self::impressum(),
             ]
         ];
     }
@@ -86,6 +88,17 @@ class MenuFooter
     {
         return (new Option())
             ->getFooterSocialNetwork();
+    }
+
+    private static function impressum()
+    {
+        $impressum = (new Option())
+            ->getFooterImpressumOptions();
+
+        return [
+            'text' => $impressum['text'] ?? null,
+            'items' => (new Impressum())->get(),
+        ];
     }
 
     private static function leftBlock($options)
