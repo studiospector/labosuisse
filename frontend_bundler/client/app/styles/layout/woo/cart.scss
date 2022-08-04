@@ -1,6 +1,8 @@
 .lb-wc-cart {
     .woocommerce-cart-form {
         &__contents {
+            width: 100%;
+
             thead {
                 display: none;
             }
@@ -87,37 +89,6 @@
                         margin-bottom: 10px;
                         padding-left: 15px;
                     }
-
-                    a {
-                        color: map-get($colors, "black");
-                        text-decoration: none;
-                    }
-
-                    .variation {
-                        margin-top: 15px;
-
-                        ul {
-                            li {
-                                &:not(:last-child) {
-                                    margin-bottom: 4px;
-                                }
-                            }
-                        }
-
-                        span {
-                            font-size: rem(14);
-                        }
-
-                        &__label {
-                            margin-right: 8px;
-                            font-weight: 300;
-                            color: map-get($colors, "primary-dark-1");
-                        }
-
-                        &__value {
-                            color: map-get($colors, "black");
-                        }
-                    }
                 }
 
                 .product-quantity {
@@ -153,37 +124,6 @@
             text-align: center;
             color: map-get($colors, "black");
             border-bottom: 1px solid map-get($colors, "grey-2");
-        }
-
-        table {
-            width: 100%;
-            padding: 20px 15px;
-
-            tr {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-
-                &:not(:last-child) {
-                    margin-bottom: 20px;
-                }
-
-                th {
-                    font-weight: 300;
-                    text-align: left;
-                }
-
-                td {
-                    font-weight: 500;
-                    text-align: right;
-                }
-
-                &.order-total {
-                    th, strong {
-                        font-weight: 500;
-                    }
-                }
-            }
         }
 
         .wc-proceed-to-checkout {

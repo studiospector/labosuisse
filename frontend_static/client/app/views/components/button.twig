@@ -13,6 +13,7 @@
     class="button{{ classes ? ' ' ~ classes : '' }}"
     {{ url ? ' href="' ~ url ~ '" target="' ~ target|default('_self') ~ '"' : '' }}
     {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
+    {{ id ? ' id="' ~ id ~ '"' : '' }}
     {{ name ? ' name="' ~ name ~ '"' : '' }}
     {{ value ? ' value="' ~ value ~ '"' : '' }}
     {{ form ? ' form="' ~ form ~ '"' : '' }}

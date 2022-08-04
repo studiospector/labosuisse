@@ -45,6 +45,42 @@ const dataPrimaryDisabled = {
     variants: ['primary'],
 }
 
+// Secondary
+const dataSecondary = {
+    name: "lorem-ipsum",
+    label: "Lorem Ipsum",
+    disabled: false,
+    required: false,
+    variants: ['secondary'],
+}
+
+// Secondary Disabled
+const dataSecondaryDisabled = {
+    name: "lorem-ipsum",
+    label: "Lorem Ipsum",
+    disabled: true,
+    required: false,
+    variants: ['secondary'],
+}
+
+// Tertiary
+const dataTertiary = {
+    name: "lorem-ipsum",
+    label: "Lorem Ipsum",
+    disabled: false,
+    required: false,
+    variants: ['tertiary'],
+}
+
+// Tertiary Disabled
+const dataTertiaryDisabled = {
+    name: "lorem-ipsum",
+    label: "Lorem Ipsum",
+    disabled: true,
+    required: false,
+    variants: ['tertiary'],
+}
+
 // Email
 const dataEmail = {
     type: 'email',
@@ -93,6 +129,7 @@ const dataSearchTertiary = {
     disabled: false,
     required: false,
     buttonTypeNext: 'submit',
+    buttonVariantNext: 'primary',
     variants: ['tertiary'],
 }
 
@@ -146,17 +183,25 @@ storiesOf('UIKit|Input', module)
     .add('Primary', () => renderInput(dataPrimary))
     // Primary Disabled
     .add('Primary --- Disabled', () => renderInput(dataPrimaryDisabled))
+    // Secondary
+    .add('Secondary', () => renderInput(dataSecondary))
+    // Secondary Disabled
+    .add('Secondary --- Disabled', () => renderInput(dataSecondaryDisabled))
+    // Tertiary
+    .add('Tertiary', () => renderInput(dataTertiary))
+    // Tertiary Disabled
+    .add('Tertiary --- Disabled', () => renderInput(dataTertiaryDisabled))
     // Email
     .add('Email', () => renderInput(dataEmail))
     // Password
     .add('Password', () => renderInput(dataPassword))
+    // Number
+    .add('Number', () => renderInput(dataNumber))
+    // Datepicker
+    .add('Datepicker', () => renderInput(dataDatepicker))
     // Search
     .add('Search', () => renderInput(dataSearch))
     // Search Secondary
     .add('Search --- Secondary', () => renderInput(dataSearchSecondary))
     // Search Tertiary
     .add('Search --- Tertiary', () => renderInput(dataSearchTertiary))
-    // Datepicker
-    .add('Datepicker', () => renderInput(dataDatepicker))
-    // Number
-    .add('Number', () => renderInput(dataNumber))

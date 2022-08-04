@@ -1,0 +1,100 @@
+.lb-wc-product-form-login {
+    margin-bottom: 60px;
+
+    .woocommerce-form-login-toggle {
+        margin-bottom: 0;
+    }
+
+    .lb-wc-form-login {
+        margin-top: 30px;
+    }
+}
+
+.lb-wc-checkout {
+    .woocommerce-account-fields,
+    .woocommerce-shipping-fields {
+        margin-top: 40px;
+
+        .custom-checkbox {
+            font-weight: 300;
+        }
+
+        div.create-account,
+        div.shipping_address {
+            margin-top: 60px;
+        }
+    }
+    
+    .woocommerce-account-fields {
+        p.create-account {
+            padding: 0;
+        }
+    }
+
+    .woocommerce-additional-fields {
+        margin-top: 60px;
+    }
+
+    &__details {
+        border-radius: 3px;
+        background-color: map-get($colors, "primary-light-1");
+
+        #order_review_heading {
+            padding: 20px;
+            margin: 0;
+            font-size: rem(20);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            text-align: center;
+            color: map-get($colors, "black");
+            border-bottom: 1px solid map-get($colors, "grey-2");
+        }
+
+        .woocommerce-checkout-review-order-table {
+            width: 100%;
+
+            tbody, tfoot {
+                display: flex;
+                flex-direction: column;
+                padding: 30px 15px;
+                border-bottom: 1px solid map-get($colors, "grey-2");
+            }
+
+            tbody {
+                .cart_item {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    &:not(:last-child) {
+                        margin-bottom: 20px;
+                    }
+
+                    .variation {
+                        margin-top: 5px;
+                    }
+                }
+            }
+        }
+
+        .woocommerce-checkout-payment {
+            padding: 30px 15px;
+
+            .place-order {
+                padding-bottom: 0;
+
+                .woocommerce-terms-and-conditions-wrapper {
+                    a {
+                        color: map-get($colors, "black");
+                        font-weight: 400;
+                    }
+                }
+
+                .button {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}

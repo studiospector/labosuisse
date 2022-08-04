@@ -87,8 +87,10 @@ class CustomInput extends BasicElement {
 
                 // Add Icon next
                 let buttonTypeNext = this.cs[i].getAttribute('data-button-type-next')
+                let buttonVariantNext = this.cs[i].getAttribute('data-button-variant-next')
                 buttonTypeNext = buttonTypeNext ? buttonTypeNext : 'button'
-                this.addIconNext('icon-search', buttonTypeNext)
+                buttonVariantNext = buttonVariantNext ? buttonVariantNext : null
+                this.addIconNext('icon-search', buttonTypeNext, buttonVariantNext)
             }
 
             // NUMBER
@@ -113,7 +115,12 @@ class CustomInput extends BasicElement {
                     newVal = oldValue >= max ? oldValue : oldValue + step
 
                     this.cs[i].value = newVal
-                    this.cs[i].dispatchEvent(new Event('change'))
+
+                    if (this.settings.woocommerceQuantitySupport) {
+                        jQuery(($) => {
+                            $(this.cs[i]).trigger('change')
+                        })
+                    }
                 })
 
                 this.inputIconPrev.addEventListener('click', (ev) => {
@@ -123,7 +130,12 @@ class CustomInput extends BasicElement {
                     newVal = oldValue <= min ? oldValue : oldValue - step
 
                     this.cs[i].value = newVal
-                    this.cs[i].dispatchEvent(new Event('change'))
+
+                    if (this.settings.woocommerceQuantitySupport) {
+                        jQuery(($) => {
+                            $(this.cs[i]).trigger('change')
+                        })
+                    }
                 })
 
                 this.cs[i].addEventListener('change', (ev) => {
@@ -200,9 +212,10 @@ class CustomInput extends BasicElement {
      * 
      * @param {string} iconName Icon name to add
      */
-    addIconNext = (iconName, buttonType = null) => {
+    addIconNext = (iconName, buttonType = null, buttonVariant = null) => {
+        const variant = buttonVariant ? ` button-${buttonVariant}` : ''
         const icon = `
-            ${buttonType ? '<button type="'+ buttonType +'" class="button button-primary">' : ''}
+            ${buttonType ? '<button type="'+ buttonType +'" class="button'+ variant +'">' : ''}
             <span class="lb-icon">
                 <svg aria-label="${iconName}" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#${iconName}"></use>
@@ -221,9 +234,10 @@ class CustomInput extends BasicElement {
      * 
      * @param {string} iconName Icon name to add
      */
-     addIconPrev = (iconName, buttonType = null) => {
+     addIconPrev = (iconName, buttonType = null, buttonVariant = null) => {
+        const variant = buttonVariant ? ` button-${buttonVariant}` : ''
         const icon = `
-            ${buttonType ? '<button type="'+ buttonType +'" class="button button-primary">' : ''}
+            ${buttonType ? '<button type="'+ buttonType +'" class="button'+ variant +'">' : ''}
             <span class="lb-icon">
                 <svg aria-label="${iconName}" xmlns="http://www.w3.org/2000/svg">
                     <use xlink:href="#${iconName}"></use>
