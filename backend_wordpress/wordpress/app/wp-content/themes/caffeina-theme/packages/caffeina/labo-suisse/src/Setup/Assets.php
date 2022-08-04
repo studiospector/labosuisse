@@ -31,7 +31,7 @@ class Assets
         // wp_enqueue_script('lb-main');
 
         // Dequeue scripts
-        if (!is_admin() && !is_woocommerce()) {
+        if (!is_admin() && !is_woocommerce() && !is_cart() && !is_checkout()) {
             wp_deregister_script('jquery');
         }
     }
