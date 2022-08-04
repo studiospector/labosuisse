@@ -18,9 +18,9 @@ class Menu
             (new DiscoverLabo())->get()
         );
 
-//         if (is_woocommerce()) {
-//             $desktop = array_merge($desktop, (new Option())->getLShopLinks());
-//         }
+        if (is_woocommerce()) {
+            $desktop = array_merge($desktop, (new Option())->getLShopLinks());
+        }
 
         return $desktop;
     }
@@ -36,12 +36,12 @@ class Menu
                 (new DiscoverLabo())->get('mobile')
             ),
             'fixed' => [
-//                [
-//                    'type' => 'small-link',
-//                    'label' => __('Profilo', 'labo-suisse-theme'),
-//                    'icon' => 'user',
-//                    'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
-//                ],
+               [
+                   'type' => 'small-link',
+                   'label' => __('Profilo', 'labo-suisse-theme'),
+                   'icon' => 'user',
+                   'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+               ],
                 [
                     'type' => 'small-link',
                     'label' => __('Hai bisogno di aiuto?', 'labo-suisse-theme'),

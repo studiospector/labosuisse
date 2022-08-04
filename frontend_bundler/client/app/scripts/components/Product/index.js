@@ -1,12 +1,37 @@
 import Component from '@okiba/component'
-import { qsa } from '@okiba/dom'
+import { on, qs, qsa } from '@okiba/dom'
+
+const ui = {
+    productDetails: '.single-product-details',
+}
 
 class Product extends Component {
 
     constructor({ options, ...props }) {
-        super({ ...props })
+        super({ ...props, ui })
 
-        this.selectTertiaryVariantAlignment()
+        if (this.ui.productDetails.classList.contains('product-type-variable') && (jQuery || $)) {
+            this.variationChangePrice()
+        }
+
+        setTimeout(() => this.selectTertiaryVariantAlignment(), 500);
+    }
+
+    variationChangePrice = () => {
+        jQuery(function($) {
+            const priceSelector = '.single-product-details__summary > p.price'
+            const priceContent = qs(priceSelector).innerHTML
+            
+            $('.single-product-details__summary > form.cart')
+                .on('show_variation', (ev, data) => {
+                    if ( data.price_html ) {
+                        qs(priceSelector).innerHTML = data.price_html
+                    }
+                })
+                .on('hide_variation', (ev) => {
+                    qs(priceSelector).innerHTML = priceContent
+                })
+        })
     }
 
     selectTertiaryVariantAlignment = () => {
@@ -22,6 +47,7 @@ class Product extends Component {
                     labelsFullWidth.push(this.getFullWidth(el))
                 })
 
+                console.log(labels);
                 labels.forEach(elem => {
                     elem.style.minWidth = `${Math.max(...labelsWidth)}px`
                 })

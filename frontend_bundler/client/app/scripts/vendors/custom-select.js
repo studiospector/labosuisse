@@ -243,7 +243,7 @@ class CustomSelect extends BasicElement {
     setSelectedValue(value = null) {
         // If is first init of custom select
         if (!value) {
-            this.itemSelectedValue = this.createDOMElement('SPAN', ['custom-select-value'], null, null, {pos: 'beforeend', elem: this.itemSelected})
+            this.itemSelectedValue = this.createDOMElement('SPAN', ['custom-select-value', 'custom-select-value--default'], null, null, {pos: 'beforeend', elem: this.itemSelected})
             // Set as value the current option selected(in case of 'selected' attribute as default)
             if (this.currSelectElem.selectedIndex != -1) {
                 this.itemSelectedValue.innerHTML = this.currSelectElem.options[this.currSelectElem.selectedIndex].innerHTML
@@ -255,6 +255,7 @@ class CustomSelect extends BasicElement {
 
         // If only change value of select
         } else {
+            this.itemSelectedValue.classList.remove('custom-select-value--default')
             this.itemSelectedValue.innerHTML = value
         }
     }

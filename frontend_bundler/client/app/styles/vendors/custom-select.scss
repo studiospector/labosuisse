@@ -370,6 +370,14 @@
         .custom-select-container {
             width: 100%;
             border: 0;
+
+            .custom-select-value {
+                &--default {
+                    font-size: rem(13);
+                    font-style: italic;
+                    color: map-get($colors, "grey-3");
+                }
+            }
         }
 
         .custom-select-items {

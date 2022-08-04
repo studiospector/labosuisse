@@ -91,9 +91,7 @@ $buttonsPropertyList: (
     }
 }
 
-.button-link {
-
-}
+// .button-link {}
 
 .button-thin {
     .button__label {
@@ -141,6 +139,37 @@ $buttonsPropertyList: (
                     transform: translate3d(0, 0, 0);
                 }
             }
+        }
+    }
+}
+
+.lb-button-group {
+    display: flex;
+    align-items: center;
+
+    @include mq($until: md) {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .button {
+        &:nth-child(odd) {
+            margin-right: 30px;
+
+            @include mq($until: md) {
+                margin-right: 0;
+            }
+        }
+
+        &:not(:last-child) {
+            @include mq($until: md) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &.button-primary {
+            flex: 1;
+            justify-content: center;
         }
     }
 }

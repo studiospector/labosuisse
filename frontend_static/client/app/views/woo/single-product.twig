@@ -20,7 +20,9 @@
 {% block main %}
     {% do action('woocommerce_before_main_content') %}
 
-    {% do action('woocommerce_before_single_product') %}
+    <div class="container">
+        {% do action('woocommerce_before_single_product') %}
+    </div>
 
     <article itemscope itemtype="http://schema.org/Product" {{ product_classes }}>
         <div class="single-product-details__wrapper row">

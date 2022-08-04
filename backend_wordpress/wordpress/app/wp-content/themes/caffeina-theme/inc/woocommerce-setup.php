@@ -111,3 +111,66 @@ add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
 add_filter('single_product_archive_thumbnail_size', function ($size) {
     return 'woocommerce_gallery_thumbnail';
 });
+
+
+
+/**
+ * Set base options for input quantity
+ */
+add_filter('woocommerce_get_stock_html', function ($html, $product) {
+    return '';
+}, 10, 2);
+
+add_filter('woocommerce_quantity_input_classes', function ($value, $product) {
+    return ['js-custom-input', 'qty'];
+}, 10, 2);
+
+
+
+/**
+ * Change Price Range for Variable Products
+ */
+add_filter('woocommerce_variable_sale_price_html', 'lb_variable_product_price', 10, 2);
+add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2);
+function lb_variable_product_price($v_price, $v_product)
+{
+    $min_price = $v_product->get_variation_price('min', true);
+
+    $price_html = sprintf(
+        __('%1$s A partire da %2$s %3$s', 'labo-suisse-theme'),
+        '<span class="lb-price-label infobox__paragraph--small">',
+        '</span>',
+        wc_price($min_price),
+    );
+
+    return $price_html;
+}
+
+
+
+/**
+ * Form fields custom
+ */
+add_filter('woocommerce_form_field_args', 'lb_custom_form_field_args', 10, 3);
+function lb_custom_form_field_args($args, $key, $value)
+{
+    if (in_array($args['type'], ['text', 'number', 'email', 'tel', 'password'])) {
+        $args['input_class'] = ['js-custom-input'];
+        $args['placeholder'] = ($args['placeholder'] ? $args['placeholder'] : $args['label']) . ($args['required'] ? '*' : '');
+
+        $args['custom_attributes'] = [
+            'data-label' => ($args['label'] ? $args['label'] : $args['placeholder']) . ($args['required'] ? '*' : ''),
+            'data-variant' => 'tertiary',
+        ];
+        $args['label'] = '';
+    }
+    else if (in_array($args['type'], ['country', 'state'])) {
+        $args['label_class'] = ['lb-wc-label'];
+    }
+    else if (in_array($args['type'], ['textarea'])) {
+        $args['class'] = ['custom-input', 'custom-field'];
+        $args['label_class'] = ['lb-wc-label'];
+    }
+
+    return $args;
+}
