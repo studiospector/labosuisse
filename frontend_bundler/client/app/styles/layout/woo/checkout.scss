@@ -10,6 +10,20 @@
     }
 }
 
+.lb-wc-product-form-coupon {
+    margin-bottom: 60px;
+
+    .form-row {
+        display: flex;
+        padding: 0;
+
+        .custom-input {
+            flex: 1;
+            margin-right: 20px;
+        }
+    }
+}
+
 .lb-wc-checkout {
     .woocommerce-account-fields,
     .woocommerce-shipping-fields {
@@ -84,6 +98,8 @@
                 padding-bottom: 0;
 
                 .woocommerce-terms-and-conditions-wrapper {
+                    margin-top: 30px;
+                    
                     a {
                         color: map-get($colors, "black");
                         font-weight: 400;
