@@ -24,7 +24,6 @@ global $product;
 
 <?php if ( $price_html = $product->get_price_html() ) : ?>
 	<div class="lb-product-card__price">
-        <span class="lb-product-card__price__desc"><?php echo __('a partire da ', 'labo-suisse-theme'); ?></span>
         <?php echo $price_html; ?>
     </div>
 <?php endif; ?>

@@ -57,6 +57,7 @@
             font-size: rem(14);
             font-weight: 300;
             color: map-get($colors, "primary-dark-1");
+            margin-right: 5px;
 
             @include mq($until: md) {
                 font-size: rem(11);
@@ -65,7 +66,7 @@
 
         .amount {
             font-size: rem(18);
-            font-weight: 300;
+            font-weight: 400;
             color: map-get($colors, "primary-dark-1");
 
             @include mq($until: md) {

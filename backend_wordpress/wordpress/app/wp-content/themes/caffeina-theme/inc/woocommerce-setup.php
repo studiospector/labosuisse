@@ -134,11 +134,13 @@ add_filter('woocommerce_variable_sale_price_html', 'lb_variable_product_price', 
 add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2);
 function lb_variable_product_price($v_price, $v_product)
 {
+    $classes = !is_product() ? 'lb-product-card__price__desc' : 'lb-price-label infobox__paragraph--small';
+    
     $min_price = $v_product->get_variation_price('min', true);
 
     $price_html = sprintf(
-        __('%1$s A partire da %2$s %3$s', 'labo-suisse-theme'),
-        '<span class="lb-price-label infobox__paragraph--small">',
+        __('%1$sa partire da%2$s %3$s', 'labo-suisse-theme'),
+        '<span class="'. $classes .'">',
         '</span>',
         wc_price($min_price),
     );
