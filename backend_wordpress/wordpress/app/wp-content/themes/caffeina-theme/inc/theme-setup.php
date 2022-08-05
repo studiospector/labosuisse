@@ -116,6 +116,7 @@ class ThemeSetup extends Timber\Site
             'lb_discover_labo' => 'Scopri Labo',
             'lb_discover_labo_footer' => 'Footer | Scopri Labo',
             'lb_support_footer' => 'Footer | Assistenza',
+            'lb_impressum_footer' => 'Footer | Impressum',
         ));
 
         // Theme Options page
