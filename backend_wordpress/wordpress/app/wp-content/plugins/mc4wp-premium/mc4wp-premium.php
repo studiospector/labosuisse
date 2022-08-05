@@ -3,7 +3,7 @@
 Plugin Name: MC4WP: Mailchimp for WordPress Premium
 Plugin URI: https://www.mc4wp.com/
 Description: Add-on for the MC4WP: Mailchimp for WordPress plugin. Adds Premium functionality when activated.
-Version: 4.8.21
+Version: 4.9
 Author: ibericode
 Author URI: https://ibericode.com/
 License: GPL v3
@@ -31,7 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 defined('ABSPATH') or exit;
 
 // Define some useful constants
-define('MC4WP_PREMIUM_VERSION', '4.8.21');
+define('MC4WP_PREMIUM_VERSION', '4.9');
 define('MC4WP_PREMIUM_PLUGIN_FILE', __FILE__);
 
 /**
@@ -69,6 +69,7 @@ function _mc4wp_premium_load()
     // PHP 5.3 compatible plugins
     $plugins = array(
         'ajax-forms',
+        'autocomplete',
         'custom-color-theme',
         'email-notifications',
         'styles-builder',

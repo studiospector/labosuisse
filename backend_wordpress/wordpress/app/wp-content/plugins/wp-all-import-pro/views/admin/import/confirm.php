@@ -109,7 +109,7 @@
 					</div>
 					<input type="submit" class="rad10" value="<?php _e('Continue Import', 'wp_all_import_plugin') ?>" style="margin-left: 0px; float: right;"/>						
 					<!--div class="input" style="margin-top:20px;">
-						<a href="<?php echo add_query_arg(array('id' => $import->id, 'action' => 'update', 'continue' => 'no'), $this->baseUrl); ?>" id="entire_run"><?php _e('Run entire import from the beginning', 'wp_all_import_plugin'); ?></a>
+						<a href="<?php echo esc_url(add_query_arg(array('id' => $import->id, 'action' => 'update', 'continue' => 'no'), $this->baseUrl)); ?>" id="entire_run"><?php _e('Run entire import from the beginning', 'wp_all_import_plugin'); ?></a>
 					</div-->
 				</form>	
 			<?php endif; ?>		
@@ -386,9 +386,9 @@
         <input type="submit" class="rad10" value="<?php _e('Confirm & Run Import', 'wp_all_import_plugin') ?>" />
 		<p>
 		<?php if ($isWizard): ?>
-			<a href="<?php echo apply_filters('pmxi_options_back_link', add_query_arg('action', 'options', $this->baseUrl), $isWizard); ?>"><?php _e('or go back to Step 4', 'wp_all_import_plugin') ?></a>
+			<a href="<?php echo apply_filters('pmxi_options_back_link', esc_url(add_query_arg('action', 'options', $this->baseUrl)), $isWizard); ?>"><?php _e('or go back to Step 4', 'wp_all_import_plugin') ?></a>
 		<?php else:?>
-			<a href="<?php echo apply_filters('pmxi_options_back_link', remove_query_arg('id', remove_query_arg('action', $this->baseUrl)), $isWizard); ?>"><?php _e('or go back to Manage Imports', 'wp_all_import_plugin') ?></a>
+			<a href="<?php echo apply_filters('pmxi_options_back_link', esc_url(remove_query_arg('id', remove_query_arg('action', $this->baseUrl))), $isWizard); ?>"><?php _e('or go back to Manage Imports', 'wp_all_import_plugin') ?></a>
 		<?php endif; ?>		
 		</p>
 	</form>	

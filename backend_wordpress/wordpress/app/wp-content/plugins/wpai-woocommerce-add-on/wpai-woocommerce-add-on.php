@@ -3,7 +3,7 @@
 Plugin Name: WP All Import - WooCommerce Import Add-On Pro
 Plugin URI: http://www.wpallimport.com/
 Description: Import to WooCommerce. Adds a section to WP All Import that looks just like WooCommerce. Requires WP All Import.
-Version: 3.3.1
+Version: 3.3.3
 Author: Soflyy
 WC tested up to: 6.2
 */
@@ -20,12 +20,12 @@ if ( is_plugin_active('woocommerce-xml-csv-product-import/plugin.php') ) {
 }
 else {
 
-    define('PMWI_VERSION', '3.3.1');
+    define('PMWI_VERSION', '3.3.3');
 
 	define('PMWI_EDITION', 'paid');
 
     /**
-     * Plugin root dir with forward slashes as directory separator regardless of actuall DIRECTORY_SEPARATOR value
+     * Plugin root dir with forward slashes as directory separator regardless of actual DIRECTORY_SEPARATOR value
      * @var string
      */
     define('PMWI_ROOT_DIR', str_replace('\\', '/', dirname(__FILE__)));
@@ -43,6 +43,8 @@ else {
      * @var string
      */
     define('PMWI_PREFIX', 'pmwi_');
+
+    require PMWI_ROOT_DIR . '/vendor/autoload.php';
 
 	/**
 	 * Main plugin file, Introduces MVC pattern
@@ -183,10 +185,6 @@ else {
 			if (is_dir(self::ROOT_DIR . '/helpers')) foreach (PMWI_Helper::safe_glob(self::ROOT_DIR . '/helpers/*.php', PMWI_Helper::GLOB_RECURSE | PMWI_Helper::GLOB_PATH) as $filePath) {
 				require_once $filePath;
 			}
-
-            if (is_dir(self::ROOT_DIR . '/libraries')) foreach (PMWI_Helper::safe_glob(self::ROOT_DIR . '/libraries/*.php', PMWI_Helper::GLOB_RECURSE | PMWI_Helper::GLOB_PATH | PMWI_Helper::GLOB_NOSORT) as $filePath) {
-                require_once $filePath;
-            }
 
 			register_activation_hook(self::FILE, array($this, 'activation'));
 
@@ -486,6 +484,11 @@ else {
 		 * @return bool
 		 */
 		public function autoload($className) {
+
+            if ( ! preg_match('/PMWI/m', $className) ) {
+                return false;
+            }
+
 			$is_prefix = false;
 			$filePath = str_replace('_', '/', preg_replace('%^' . preg_quote(self::PREFIX, '%') . '%', '', strtolower($className), 1, $is_prefix)) . '.php';
 			if ( ! $is_prefix) { // also check file with original letter case

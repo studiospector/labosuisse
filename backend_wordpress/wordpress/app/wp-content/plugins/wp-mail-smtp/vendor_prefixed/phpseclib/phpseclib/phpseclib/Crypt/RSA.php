@@ -514,32 +514,32 @@ abstract class RSA extends \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\Asymmetric
         // see http://tools.ietf.org/html/rfc3447#page-43
         switch ($this->hash->getHash()) {
             case 'md2':
-                $t = "0 0\f\6\10*ï¿½Hï¿½ï¿½\r\2\2\5\0\4\20";
+                $t = "0 0\f\6\10*†H†÷\r\2\2\5\0\4\20";
                 break;
             case 'md5':
-                $t = "0 0\f\6\10*ï¿½Hï¿½ï¿½\r\2\5\5\0\4\20";
+                $t = "0 0\f\6\10*†H†÷\r\2\5\5\0\4\20";
                 break;
             case 'sha1':
                 $t = "0!0\t\6\5+\16\3\2\32\5\0\4\24";
                 break;
             case 'sha256':
-                $t = "010\r\6\t`ï¿½H\1e\3\4\2\1\5\0\4 ";
+                $t = "010\r\6\t`†H\1e\3\4\2\1\5\0\4 ";
                 break;
             case 'sha384':
-                $t = "0A0\r\6\t`ï¿½H\1e\3\4\2\2\5\0\0040";
+                $t = "0A0\r\6\t`†H\1e\3\4\2\2\5\0\0040";
                 break;
             case 'sha512':
-                $t = "0Q0\r\6\t`ï¿½H\1e\3\4\2\3\5\0\4@";
+                $t = "0Q0\r\6\t`†H\1e\3\4\2\3\5\0\4@";
                 break;
             // from https://www.emc.com/collateral/white-papers/h11300-pkcs-1v2-2-rsa-cryptography-standard-wp.pdf#page=40
             case 'sha224':
-                $t = "0-0\r\6\t`ï¿½H\1e\3\4\2\4\5\0\4\34";
+                $t = "0-0\r\6\t`†H\1e\3\4\2\4\5\0\4\34";
                 break;
             case 'sha512/224':
-                $t = "0-0\r\6\t`ï¿½H\1e\3\4\2\5\5\0\4\34";
+                $t = "0-0\r\6\t`†H\1e\3\4\2\5\5\0\4\34";
                 break;
             case 'sha512/256':
-                $t = "010\r\6\t`ï¿½H\1e\3\4\2\6\5\0\4 ";
+                $t = "010\r\6\t`†H\1e\3\4\2\6\5\0\4 ";
         }
         $t .= $h;
         $tLen = \strlen($t);
@@ -574,23 +574,23 @@ abstract class RSA extends \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\Asymmetric
                 $t = "0\0370\7\6\5+\16\3\2\32\4\24";
                 break;
             case 'sha256':
-                $t = "0/0\v\6\t`ï¿½H\1e\3\4\2\1\4 ";
+                $t = "0/0\v\6\t`†H\1e\3\4\2\1\4 ";
                 break;
             case 'sha384':
-                $t = "0?0\v\6\t`ï¿½H\1e\3\4\2\2\0040";
+                $t = "0?0\v\6\t`†H\1e\3\4\2\2\0040";
                 break;
             case 'sha512':
-                $t = "0O0\v\6\t`ï¿½H\1e\3\4\2\3\4@";
+                $t = "0O0\v\6\t`†H\1e\3\4\2\3\4@";
                 break;
             // from https://www.emc.com/collateral/white-papers/h11300-pkcs-1v2-2-rsa-cryptography-standard-wp.pdf#page=40
             case 'sha224':
-                $t = "0+0\v\6\t`ï¿½H\1e\3\4\2\4\4\34";
+                $t = "0+0\v\6\t`†H\1e\3\4\2\4\4\34";
                 break;
             case 'sha512/224':
-                $t = "0+0\v\6\t`ï¿½H\1e\3\4\2\5\4\34";
+                $t = "0+0\v\6\t`†H\1e\3\4\2\5\4\34";
                 break;
             case 'sha512/256':
-                $t = "0/0\v\6\t`ï¿½H\1e\3\4\2\6\4 ";
+                $t = "0/0\v\6\t`†H\1e\3\4\2\6\4 ";
                 break;
             default:
                 throw new \WPMailSMTP\Vendor\phpseclib3\Exception\UnsupportedAlgorithmException('md2 and md5 require NULLs');

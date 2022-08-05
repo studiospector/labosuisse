@@ -22,12 +22,12 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
     const HASH = 'sha512';
     /*
       Per https://tools.ietf.org/html/rfc8032#page-6 EdDSA has several parameters, one of which is b:
-
+    
       2.   An integer b with 2^(b-1) > p.  EdDSA public keys have exactly b
            bits, and EdDSA signatures have exactly 2*b bits.  b is
            recommended to be a multiple of 8, so public key and signature
            lengths are an integral number of octets.
-
+    
       SIZE corresponds to b
     */
     const SIZE = 32;
@@ -49,15 +49,15 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
         $this->setReduction(function($x) {
             $parts = $x->bitwise_split(255);
             $className = $this->className;
-
+        
             if (count($parts) > 2) {
                 list(, $r) = $x->divide($className::$modulo);
                 return $r;
             }
-
+        
             $zero = new BigInteger();
             $c = new BigInteger(19);
-
+        
             switch (count($parts)) {
                 case 2:
                     list($qi, $ri) = $parts;
@@ -70,7 +70,7 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
                     return $zero;
             }
             $r = $ri;
-
+        
             while ($qi->compare($zero) > 0) {
                 $temp = $qi->multiply($c)->bitwise_split(255);
                 if (count($temp) == 2) {
@@ -81,7 +81,7 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
                 }
                 $r = $r->add($ri);
             }
-
+        
             while ($r->compare($className::$modulo) > 0) {
                 $r = $r->subtract($className::$modulo);
             }
@@ -116,7 +116,7 @@ class Ed25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\TwistedE
         // find the square root
         /* we don't do $x2->squareRoot() because, quoting from
                    https://tools.ietf.org/html/rfc8032#section-5.1.1:
-
+        
                    "For point decoding or "decompression", square roots modulo p are
                     needed.  They can be computed using the Tonelli-Shanks algorithm or
                     the special case for p = 5 (mod 8).  To find a square root of a,

@@ -53,7 +53,7 @@ class WPML_Term_Clauses {
 		// Special case for when term hierarchy is cached in wp_options.
 		if (
 			! $taxonomies
-			|| TermTranslationHooks::shouldSkip( $args )
+			|| ( class_exists( 'WPML\TaxonomyTermTranslation\Hooks' ) && TermTranslationHooks::shouldSkip( $args ) )
 			|| $this->debug_backtrace->are_functions_in_call_stack(
 				[
 					'_get_term_hierarchy',

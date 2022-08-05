@@ -1,5 +1,7 @@
 <?php
 
+use wpai_woocommerce_add_on\XmlImportWooCommerceService;
+
 /**
  * Adjust price and prepare it to valid format.
  *

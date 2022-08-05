@@ -43,6 +43,7 @@ return [
 	'OTGS_Installer_WP_Components_Storage'                         => $baseDir . '/includes/class-otgs-installer-wp-components-storage.php',
 	'OTGS_Installer_WP_Share_Local_Components_Setting'             => $baseDir . '/includes/class-otgs-installer-wp-share-local-components-setting.php',
 	'OTGS_Installer_WP_Share_Local_Components_Setting_Hooks'       => $baseDir . '/includes/class-otgs-installer-wp-share-local-components-setting-hooks.php',
+	'OTGS_Installer_WPML_Core_Plugin'       					   => $baseDir . '/includes/class-otgs-installer-wpml-core-plugin.php',
 	'OTGS_Installer_Subscription_Factory'                          => $baseDir . '/includes/class-otgs-installer-subscription-factory.php',
 	'Translation_Service_Info'                                     => $baseDir . '/includes/class-translation-service-info.php',
 	'WP_Installer'                                                 => $baseDir . '/includes/class-wp-installer.php',
