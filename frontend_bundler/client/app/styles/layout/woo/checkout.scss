@@ -99,7 +99,7 @@
 
                 .woocommerce-terms-and-conditions-wrapper {
                     margin-top: 30px;
-                    
+
                     a {
                         color: map-get($colors, "black");
                         font-weight: 400;
@@ -109,6 +109,14 @@
                 .button {
                     width: 100%;
                     justify-content: center;
+                }
+            }
+
+            .custom-radio {
+                &__options {
+                    span {
+                        pointer-events: all;
+                    }
                 }
             }
         }
