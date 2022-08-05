@@ -89,22 +89,22 @@ abstract class OpenSSH
                   OpenSSH private keys use a customized version of bcrypt. specifically, instead of encrypting
                   OrpheanBeholderScryDoubt 64 times OpenSSH's bcrypt variant encrypts
                   OxychromaticBlowfishSwatDynamite 64 times. so we can't use crypt().
-
+                
                   bcrypt is basically Blowfish with an altered key expansion. whereas Blowfish just runs the
                   key through the key expansion bcrypt interleaves the key expansion with the salt and
                   password. this renders openssl / mcrypt unusuable. this forces us to use a pure-PHP implementation
                   of bcrypt. the problem with that is that pure-PHP is too slow to be practically useful.
-
+                
                   in addition to encrypting a different string 64 times the OpenSSH implementation also performs bcrypt
                   from scratch $rounds times. calling crypt() 64x with bcrypt takes 0.7s. PHP is going to be naturally
                   slower. pure-PHP is 215x slower than OpenSSL for AES and pure-PHP is 43x slower for bcrypt.
                   43 * 0.7 = 30s. no one wants to wait 30s to load a private key.
-
+                
                   another way to think about this..  according to wikipedia's article on Blowfish,
                   "Each new key requires pre-processing equivalent to encrypting about 4 kilobytes of text".
                   key expansion is done (9+64*2)*160 times. multiply that by 4 and it turns out that Blowfish,
                   OpenSSH style, is the equivalent of encrypting ~80mb of text.
-
+                
                   more supporting evidence: sodium_compat does not implement Argon2 (another password hashing
                   algorithm) because "It's not feasible to polyfill scrypt or Argon2 into PHP and get reasonable
                   performance. Users would feel motivated to select parameters that downgrade security to avoid
@@ -193,7 +193,7 @@ abstract class OpenSSH
         $paddedKey = \WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings::packSSH2('NN', $checkint, $checkint) . $privateKey . \WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings::packSSH2('s', $comment);
         /*
           from http://tools.ietf.org/html/rfc4253#section-6 :
-
+        
           Note that the length of the concatenation of 'packet_length',
           'padding_length', 'payload', and 'random padding' MUST be a multiple
           of the cipher block size or 8, whichever is larger.

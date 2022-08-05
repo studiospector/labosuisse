@@ -185,7 +185,7 @@ abstract class PSS extends \WPMailSMTP\Vendor\phpseclib3\Crypt\Common\Formats\Ke
          Implementations that perform signature validation MUST
          recognize both a present trailerField field with value 1 and an
          absent trailerField field.
-
+        
          source: https://tools.ietf.org/html/rfc4055#page-9
         */
         $params = ['trailerField' => new \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger(1)];

@@ -198,13 +198,13 @@ final class Mbstring
         } else {
             $s = \iconv($encoding, 'UTF-8//IGNORE', $s);
         }
-        static $ulenMask = array("ï¿½" => 2, "ï¿½" => 2, "ï¿½" => 3, "ï¿½" => 4);
+        static $ulenMask = array("À" => 2, "Ð" => 2, "à" => 3, "ð" => 4);
         $cnt = \floor(\count($convmap) / 4) * 4;
         $i = 0;
         $len = \strlen($s);
         $result = '';
         while ($i < $len) {
-            $ulen = $s[$i] < "ï¿½" ? 1 : $ulenMask[$s[$i] & "ï¿½"];
+            $ulen = $s[$i] < "€" ? 1 : $ulenMask[$s[$i] & "ð"];
             $uchr = \substr($s, $i, $ulen);
             $i += $ulen;
             $c = self::mb_ord($uchr);
@@ -260,11 +260,11 @@ final class Mbstring
                 }
                 $map = $lower;
             }
-            static $ulenMask = array("ï¿½" => 2, "ï¿½" => 2, "ï¿½" => 3, "ï¿½" => 4);
+            static $ulenMask = array("À" => 2, "Ð" => 2, "à" => 3, "ð" => 4);
             $i = 0;
             $len = \strlen($s);
             while ($i < $len) {
-                $ulen = $s[$i] < "ï¿½" ? 1 : $ulenMask[$s[$i] & "ï¿½"];
+                $ulen = $s[$i] < "€" ? 1 : $ulenMask[$s[$i] & "ð"];
                 $uchr = \substr($s, $i, $ulen);
                 $i += $ulen;
                 if (isset($map[$uchr])) {

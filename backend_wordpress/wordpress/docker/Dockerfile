@@ -24,7 +24,7 @@ RUN npm run build
 
 
 # WORDPRESS STAGE
-FROM wordpress:5.9.3-php7.4-fpm-alpine AS wordpress-base
+FROM wordpress:6.0.1-php7.4-fpm-alpine AS wordpress-base
 
 WORKDIR /wordpress_dir
 RUN cp -r /var/www/html /wordpress_dir

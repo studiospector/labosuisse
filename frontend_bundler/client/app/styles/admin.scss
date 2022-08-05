@@ -167,6 +167,12 @@
     }
 }
 
+.welcome-panel-content {
+    &:not(.lb-welcome-panel-content) {
+        display: none;
+    }
+}
+
 .lb-welcome-panel-content {
     min-height: auto;
     display: flex;

@@ -7,11 +7,11 @@
  * Author URI: http://www.onthegosystems.com/
  * Text Domain: woocommerce-multilingual
  * Requires at least: 4.7
- * Tested up to: 5.9
- * Version: 5.0.0
+ * Tested up to: 6.0
+ * Version: 5.0.2
  * Plugin Slug: woocommerce-multilingual
  * WC requires at least: 3.9
- * WC tested up to: 6.5
+ * WC tested up to: 6.7
  *
  * @package WCML
  * @author  OnTheGoSystems
@@ -37,7 +37,7 @@ if ( ! $wpml_php_version_check->is_ok() ) {
 	return;
 }
 
-define( 'WCML_VERSION', '5.0.0' );
+define( 'WCML_VERSION', '5.0.2' );
 define( 'WCML_PLUGIN_PATH', dirname( __FILE__ ) );
 define( 'WCML_PLUGIN_FOLDER', basename( WCML_PLUGIN_PATH ) );
 define( 'WCML_LOCALE_PATH', WCML_PLUGIN_PATH . '/locale' );
@@ -56,19 +56,20 @@ require WCML_PLUGIN_PATH . '/vendor/autoload.php';
 require_once WCML_PLUGIN_PATH . '/vendor/otgs/ui/loader.php';
 otgs_ui_initialize( WCML_PLUGIN_PATH . '/vendor/otgs/ui', WCML_PLUGIN_URL . '/vendor/otgs/ui' ); // @phpstan-ignore-line
 
-if ( defined( 'ICL_SITEPRESS_VERSION' ) && ! ICL_PLUGIN_INACTIVE && class_exists( 'SitePress' ) ) {
-	global $sitepress;
-	// Detecting language switching.
-	$wcml_switch_lang_request = new WCML_Switch_Lang_Request( new WPML_Cookie(), new WPML_WP_API(), $sitepress );
-	$wcml_switch_lang_request->add_hooks();
-
-	// Cart related language switching functions.
-	$wcml_cart_switch_lang_functions = new WCML_Cart_Switch_Lang_Functions();
-	$wcml_cart_switch_lang_functions->add_actions();
-}
-
 if ( WPML_Core_Version_Check::is_ok( WCML_PLUGIN_PATH . '/wpml-dependencies.json' ) ) {
 	global $woocommerce_wpml;
+
+	if ( defined( 'ICL_SITEPRESS_VERSION' ) && ! ICL_PLUGIN_INACTIVE && class_exists( 'SitePress' ) ) {
+		global $sitepress;
+		// Detecting language switching.
+		$wcml_switch_lang_request = new WCML_Switch_Lang_Request( new WPML_Cookie(), new WPML_WP_API(), $sitepress );
+		$wcml_switch_lang_request->add_hooks();
+
+		// Cart related language switching functions.
+		$wcml_cart_switch_lang_functions = new WCML_Cart_Switch_Lang_Functions();
+		$wcml_cart_switch_lang_functions->add_actions();
+	}
+
 	$woocommerce_wpml = new woocommerce_wpml();
 	$woocommerce_wpml->add_hooks();
 
@@ -119,7 +120,8 @@ function wcml_loader() {
 		\WCML\API\VendorAddon\Hooks::class,
 		\WCML\Attributes\LookupTableFactory::class,
 		\WCML\Attributes\LookupFiltersFactory::class,
-		\WCML\HomeScreen\Factory::class
+		\WCML\HomeScreen\Factory::class,
+		\WCML\Terms\Count\Hooks::class,
 	];
 
 	if (

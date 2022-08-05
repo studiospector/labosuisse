@@ -883,20 +883,20 @@ abstract class SymmetricKey
                         (most-significant byte first).  There are no Unicode byte order
                         marks.  The 2 bytes produced from the last character in the BMPString
                         are followed by 2 additional bytes with the value 0x00.
-
+                        
                         -- https://tools.ietf.org/html/rfc7292#appendix-B.1
                         */
                         $password = "\0" . \chunk_split($password, 1, "\0") . "\0";
                         /*
                         This standard specifies 3 different values for the ID byte mentioned
                         above:
-
+                        
                         1.  If ID=1, then the pseudorandom bits being produced are to be used
                             as key material for performing encryption or decryption.
-
+                        
                         2.  If ID=2, then the pseudorandom bits being produced are to be used
                             as an IV (Initial Value) for encryption or decryption.
-
+                        
                         3.  If ID=3, then the pseudorandom bits being produced are to be used
                             as an integrity key for MACing.
                         */
@@ -2970,7 +2970,7 @@ abstract class SymmetricKey
         switch (\true) {
             case \is_int($x):
             // PHP 5.3, per http://php.net/releases/5_3_0.php, introduced "more consistent float rounding"
-            case (\php_uname('m') & "ï¿½ï¿½ï¿½") != 'ARM':
+            case (\php_uname('m') & "ßßß") != 'ARM':
                 return $x;
         }
         return \fmod($x, 0x80000000) & 0x7fffffff | (\fmod(\floor($x / 0x80000000), 2) & 1) << 31;
@@ -2985,7 +2985,7 @@ abstract class SymmetricKey
     {
         switch (\true) {
             case \defined('PHP_INT_SIZE') && \PHP_INT_SIZE == 8:
-            case (\php_uname('m') & "ï¿½ï¿½ï¿½") != 'ARM':
+            case (\php_uname('m') & "ßßß") != 'ARM':
                 return '%s';
                 break;
             default:
@@ -3099,7 +3099,7 @@ abstract class SymmetricKey
         // strlen($this->poly1305Key) == 32
         $r = \WPMailSMTP\Vendor\phpseclib3\Common\Functions\Strings::shift($s, 16);
         $r = \strrev($r);
-        $r &= "\17ï¿½ï¿½ï¿½\17ï¿½ï¿½ï¿½\17ï¿½ï¿½ï¿½\17ï¿½ï¿½ï¿½";
+        $r &= "\17ÿÿü\17ÿÿü\17ÿÿü\17ÿÿÿ";
         $s = \strrev($s);
         $r = self::$poly1305Field->newInteger(new \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger($r, 256));
         $s = self::$poly1305Field->newInteger(new \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger($s, 256));
@@ -3112,7 +3112,7 @@ abstract class SymmetricKey
             $a = $a->multiply($r);
         }
         $r = $a->toBigInteger()->add($s->toBigInteger());
-        $mask = "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½";
+        $mask = "ÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿÿ";
         return \strrev($r->toBytes()) & $mask;
     }
     /**

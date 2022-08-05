@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c
+class ComposerStaticInit6310bae2541bee1bbc1f0e0a2f0f70a5
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -195,6 +195,9 @@ class ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c
         'WCML\\StandAlone\\NullSitePress' => __DIR__ . '/../..' . '/classes/StandAlone/NullSitePress.php',
         'WCML\\StandAlone\\UI\\AdminMenu' => __DIR__ . '/../..' . '/classes/StandAlone/UI/AdminMenu.php',
         'WCML\\Tax\\Strings\\Hooks' => __DIR__ . '/../..' . '/classes/Tax/Strings/Hooks.php',
+        'WCML\\Terms\\Count\\Hooks' => __DIR__ . '/../..' . '/classes/Terms/Count/Hooks.php',
+        'WCML\\Terms\\SuspendWpmlFilters' => __DIR__ . '/../..' . '/classes/Terms/SuspendWpmlFilters.php',
+        'WCML\\Terms\\SuspendWpmlFiltersFactory' => __DIR__ . '/../..' . '/classes/Terms/SuspendWpmlFiltersFactory.php',
         'WCML\\User\\Store\\Cookie' => __DIR__ . '/../..' . '/classes/User/Store/Cookie.php',
         'WCML\\User\\Store\\Noop' => __DIR__ . '/../..' . '/classes/User/Store/Noop.php',
         'WCML\\User\\Store\\Store' => __DIR__ . '/../..' . '/classes/User/Store/Store.php',
@@ -204,6 +207,8 @@ class ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c
         'WCML\\Utilities\\DB' => __DIR__ . '/../..' . '/classes/Utilities/DB.php',
         'WCML\\Utilities\\Post' => __DIR__ . '/../..' . '/classes/Utilities/Post.php',
         'WCML\\Utilities\\Resources' => __DIR__ . '/../..' . '/classes/Utilities/Resources.php',
+        'WCML\\Utilities\\Suspend\\Filters' => __DIR__ . '/../..' . '/classes/Utilities/Suspend/Filters.php',
+        'WCML\\Utilities\\Suspend\\Suspend' => __DIR__ . '/../..' . '/classes/Utilities/Suspend/Suspend.php',
         'WCML\\Utilities\\WcAdminPages' => __DIR__ . '/../..' . '/classes/Utilities/WcAdminPages.php',
         'WCML\\Utilities\\WpAdminPages' => __DIR__ . '/../..' . '/classes/Utilities/WpAdminPages.php',
         'WCML_ATE_Activate_Synchronization' => __DIR__ . '/../..' . '/classes/ate/class-wcml-ate-activate-synchronization.php',
@@ -390,9 +395,9 @@ class ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit2a42c0a2d4b4686946aa5100d38a418c::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit6310bae2541bee1bbc1f0e0a2f0f70a5::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit6310bae2541bee1bbc1f0e0a2f0f70a5::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit6310bae2541bee1bbc1f0e0a2f0f70a5::$classMap;
 
         }, null, ClassLoader::class);
     }

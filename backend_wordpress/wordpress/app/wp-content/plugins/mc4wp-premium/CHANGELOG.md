@@ -1,9 +1,15 @@
 Changelog
 ==========
 
+#### 4.9 - Jul 26, 2022
+
+- Forms: add autocomplete feature for common email domains.
+
+
 #### 4.8.21 - May 10, 2022
 
 - E-commerce: Add filter `mc4wp_ecommerce_enable_coupon_tracking` (default: `true`) which if set to `false` disables coupon tracking entirely.
+- User Sync: Show a friendlier error message when user changes their email address to one that is already in Mailchimp. 
 - Updated all third-party JS dependencies to their latest versions.
 
 

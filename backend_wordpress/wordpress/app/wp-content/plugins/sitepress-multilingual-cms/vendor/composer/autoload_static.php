@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd51248ec55aafbe49203fb3d635be135
+class ComposerStaticInit5f0e357b80c0c78b992d6782abdcb257
 {
     public static $files = array (
         '5f5b8f7c1db2e892006e8805f0ed573c' => __DIR__ . '/..' . '/wpml/collect/src/Illuminate/Support/helpers.php',
@@ -1910,9 +1910,9 @@ class ComposerStaticInitd51248ec55aafbe49203fb3d635be135
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd51248ec55aafbe49203fb3d635be135::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd51248ec55aafbe49203fb3d635be135::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitd51248ec55aafbe49203fb3d635be135::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit5f0e357b80c0c78b992d6782abdcb257::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit5f0e357b80c0c78b992d6782abdcb257::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit5f0e357b80c0c78b992d6782abdcb257::$classMap;
 
         }, null, ClassLoader::class);
     }
