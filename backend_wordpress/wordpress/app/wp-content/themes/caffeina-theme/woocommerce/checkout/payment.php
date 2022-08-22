@@ -24,7 +24,7 @@ if ( ! wp_doing_ajax() ) {
 <div id="payment" class="woocommerce-checkout-payment">
 	<?php if ( WC()->cart->needs_payment() ) : ?>
 		<div class="wc_payment_methods payment_methods methods">
-            <div class="custom-field custom-radio custom-radio--vertical">
+            <div class="custom-field custom-radio custom-radio--vertical custom-radio--wc-support">
                 <div class="custom-radio__options">
                     <?php
                     if ( ! empty( $available_gateways ) ) {
