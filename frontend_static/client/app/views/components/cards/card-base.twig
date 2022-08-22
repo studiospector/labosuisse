@@ -18,7 +18,6 @@
     {{ tag == 'a' ? ' href="' ~ infobox.cta.url|default('#') ~ '"' : '' }}
     {{ tag == 'a' ? ' target="' ~ infobox.cta.target|default('_self') ~ '"' : '' }} 
     class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
-    {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
     {{ color ? ' style="background-color: ' ~ color ~ ';"' : '' }}
 >
     {% if images|length > 0 %}
