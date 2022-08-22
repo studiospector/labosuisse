@@ -36,6 +36,8 @@
                                 {% for item in dates.items %}
                                     <div class="archive-lb-beauty-specialist__list__item">
                                         {% include '@PathViews/components/card.twig' with {
+                                            class: 'js-open-map-app-link',
+                                            attributes: ['data-lat="'~ item.geo_location.lat ~'"', 'data-lng="'~ item.geo_location.lng ~'"'],
                                             infobox: {
                                                 subtitle: item.store,
                                                 paragraph: item.address ~ '<br>' ~ item.phone,
@@ -43,8 +45,6 @@
                                                     url: '#',
                                                     target: '_blank',
                                                     title: card_link_label,
-                                                    class: 'js-open-map-app-link',
-                                                    attributes: ['data-lat="'~ item.geo_location.lat ~'"', 'data-lng="'~ item.geo_location.lng ~'"'],
                                                     variants: ['quaternary']
                                                 }
                                             },
