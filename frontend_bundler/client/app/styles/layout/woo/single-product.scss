@@ -165,6 +165,10 @@
                 text-align: left;
             }
 
+            del {
+                margin-right: 15px;
+            }
+
             bdi {
                 font-weight: 600;
                 color: map-get($colors, "black");
