@@ -151,4 +151,25 @@
             }
         }
     }
+
+
+    &--wc-support {
+        .custom-radio {
+            &__options {
+                label {
+                    > span {
+                        span {
+                            display: inline-block;
+                            padding-left: 0;
+                            
+                            &::after,
+                            &::before {
+                                content: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

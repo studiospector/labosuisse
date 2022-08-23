@@ -86,7 +86,7 @@ class HeaderProduct extends Component {
 
     scrollToAddToCart = (ev) => {
         ev.stopPropagation()
-        const scrollToSection = qs('#lb-product-add-to-cart')
+        const scrollToSection = qs('.single-product-details__summary > p.price')
         const addToCartButton = qs('.single_add_to_cart_button')
         this.customScrollbar.scrollTo(scrollToSection, {
             offset: -this.fullHeaderHeight,
