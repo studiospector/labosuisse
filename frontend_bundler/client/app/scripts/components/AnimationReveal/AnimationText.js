@@ -28,10 +28,9 @@ class AnimationText extends Component {
 
         this.revealType = revealType
 
-        ScrollTrigger.matchMedia({
-            "(min-width: 768px)": this.onDesktopMatch,
-            "(max-width: 767px)": this.onMobileMatch
-        })
+        let mm = gsap.matchMedia()
+        mm.add("(min-width: 768px)", () => this.onDesktopMatch())
+        mm.add("(max-width: 767px", () => this.onMobileMatch())
 
         this.init()
         this.listen()
