@@ -8,6 +8,8 @@ import isScrollbarDisabled from '../../utils/isScrollbarDisabled'
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+gsap.registerPlugin(ScrollTrigger)
+
 const ui = {
     picture: '.lb-picture',
     image: 'img',
@@ -22,10 +24,9 @@ class AnimationImage extends Component {
 
         const timeout = (this.revealType == 'intro') ? 1500 : 1
 
-        ScrollTrigger.matchMedia({
-            "(min-width: 768px)": this.onDesktopMatch,
-            "(max-width: 767px)": this.onMobileMatch
-        })
+        let mm = gsap.matchMedia()
+        mm.add("(min-width: 768px)", () => this.onDesktopMatch())
+        mm.add("(max-width: 767px", () => this.onMobileMatch())
 
         setTimeout(() => {
             this.init()
