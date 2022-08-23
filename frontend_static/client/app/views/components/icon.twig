@@ -1,13 +1,16 @@
 {% set classes = classes|default([])|merge(['lb-icon-' ~ name]) %}
 {% for variant in variants|default([]) %}
-  {% set classes = classes|merge(['lb-icon-' ~ variant]) %}
+    {% set classes = classes|merge(['lb-icon-' ~ variant]) %}
 {% endfor %}
 {% if class %}
-  {% set classes = classes|merge([class]) %}
+    {% set classes = classes|merge([class]) %}
 {% endif %}
 
 <span class="lb-icon{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
-  <svg aria-label="{{ name }}" xmlns="http://www.w3.org/2000/svg">
-    <use xlink:href="#{{ name }}"></use>
-  </svg>
+    {% if counter %}
+        <span class="lb-icon__counter">{{ counter }}</span>
+    {% endif %}
+    <svg aria-label="{{ name }}" xmlns="http://www.w3.org/2000/svg">
+        <use xlink:href="#{{ name }}"></use>
+    </svg>
 </span>

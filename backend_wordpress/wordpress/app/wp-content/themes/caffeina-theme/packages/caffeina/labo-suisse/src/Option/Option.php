@@ -47,6 +47,19 @@ class Option
 
         $items[] = ['type' => 'separator'];
 
+        $items[] = [
+            'type' => 'icon',
+            'icon' => ['name' => 'cart', 'counter' => WC()->cart->get_cart_contents_count()],
+            'href' => wc_get_cart_url(),
+        ];
+
+        $items[] = [
+            'type' => 'icon',
+            'icon' => ['name' => 'user'],
+            'href' => '#',
+            // 'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+        ];
+
         foreach ($links as $i => $link) {
             $items[] = [
                 'type' => 'icon',
