@@ -16,7 +16,11 @@
 		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
-					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+					{% if icon is iterable %}
+                        {% include '@PathViews/components/icon.twig' with icon only %}
+                    {% else %}
+                        {% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                    {% endif %}
 					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
 				</span>
 			{% endif %}
@@ -99,7 +103,11 @@
 		<a class="lb-menu__link lb-menu__link--small" href="{{href}}" target="{{ target ? target : '_self' }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
-					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                    {% if icon is iterable %}
+                        {% include '@PathViews/components/icon.twig' with icon only %}
+                    {% else %}
+                        {% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                    {% endif %}
 					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
 				</span>
 			{% endif %}
