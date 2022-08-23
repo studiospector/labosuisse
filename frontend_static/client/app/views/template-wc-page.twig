@@ -10,8 +10,10 @@
     {% endif %}
 
     {# Intro page #}
-    {% include '@PathViews/components/page-intro.twig' with page_intro only %}
-    {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
+    {% if page_intro %}
+        {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
+    {% endif %}
 
     {# Content #}
     <div class="container">
