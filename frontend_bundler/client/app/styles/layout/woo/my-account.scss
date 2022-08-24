@@ -1,0 +1,116 @@
+.lb-wc-myaccount {
+    &__navigation {
+        &__title {
+            margin-bottom: 40px;
+            font-size: rem(14);
+            font-weight: 700;
+        }
+
+        ul {
+            li {
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+
+                    a {
+                        font-size: rem(13);
+                        font-weight: 300;
+                        color: map-get($colors, "black");
+                        text-decoration: none;
+                    }
+                }
+
+                .button {
+                    margin-top: 30px;
+                }
+
+                &.is-active {
+                    a {
+                        font-weight: 700;
+                        border-bottom: 4px solid map-get($colors, "black");
+                    }
+                }
+            }
+        }
+    }
+
+    &__content {
+        @include mq($until: lg) {
+            margin-top: 40px;
+        }
+
+        .banner {
+            .infobox {
+                @include mq($from: md) {
+                    width: 100%;
+                    max-width: 430px;
+                }
+
+                &__paragraph {
+                    a {
+                        font-weight: 500;
+                        text-decoration: none;
+                        color: map-get($colors, "black");
+                    }
+                }
+            }
+        }
+
+
+        &__table {
+            @include mq($until: md) {
+                overflow-x: auto;
+            }
+        }
+
+
+        .woocommerce-orders-table {
+            width: 100%;
+            margin-top: 50px;
+            border-spacing: 0;
+            border-collapse: collapse;
+
+            thead {
+                background-color: map-get($colors, "primary-light-1");
+                margin-bottom: 20px;
+                padding: 0 20px;
+            }
+
+            &__header {
+                padding: 8px 0;
+                padding-left: 20px;
+                border: 0;
+                font-size: rem(12);
+                font-weight: 700;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            &__header-order-number {
+                span {
+                    &::before {
+                        content: '# ';
+                    }
+                }
+            }
+
+            &__row {
+                border-bottom: 1px solid map-get($colors, "grey-3");
+
+                &:first-child {
+                    .woocommerce-orders-table__cell {
+                        padding-top: 50px;
+                    }
+                }
+            }
+            
+            &__cell {
+                padding: 30px 20px;
+                font-weight: 300;
+
+                .button {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

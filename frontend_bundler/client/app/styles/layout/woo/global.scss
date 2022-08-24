@@ -173,3 +173,9 @@ body.lb-is-shop {
         flex-direction: column;
     }
 }
+
+.lb-wc-box-grey {
+    background-color: map-get($colors, "primary-light-1");
+    padding: 40px 70px;
+    border-radius: 4px;
+}
