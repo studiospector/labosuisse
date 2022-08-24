@@ -56,8 +56,7 @@ class Option
         $items[] = [
             'type' => 'icon',
             'icon' => ['name' => 'user'],
-            'href' => '#',
-            // 'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+            'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
         ];
 
         foreach ($links as $i => $link) {
