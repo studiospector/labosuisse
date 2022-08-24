@@ -420,3 +420,30 @@ function lb_get_unique_id($prefix = '')
 
     return $prefix . (string) ++$id_counter;
 }
+
+/**
+ * Change key of array from old to new value
+ */
+function lb_array_change_key( $array, $old_key, $new_key ) {
+
+    if( ! array_key_exists( $old_key, $array ) )
+        return $array;
+
+    $keys = array_keys( $array );
+    $keys[ array_search( $old_key, $keys ) ] = $new_key;
+
+    return array_combine( $keys, $array );
+}
+
+/**
+ * Move array element and change key
+ */
+function lb_move_array_element(&$array, $a, $b, $key)
+{
+    $out = array_splice($array, $a, 1);
+    array_splice($array, $b, 0, $out);
+
+    $array = lb_array_change_key($array, 0, $key);
+
+    return $array;
+}
