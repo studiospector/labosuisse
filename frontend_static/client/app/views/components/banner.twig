@@ -23,7 +23,7 @@
 		<div class="banner__infobox">
 			<div class="container">
 				<div class="h-100 col-12{{ _infoboxTextAlignment }}">
-					{% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
+					{% include '@PathViews/components/infobox.twig' with {reveal: true}|merge(infobox) only %}
 				</div>
 			</div>
 		</div>
