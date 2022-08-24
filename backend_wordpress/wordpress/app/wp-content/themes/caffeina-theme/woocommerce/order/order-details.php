@@ -46,12 +46,12 @@ if ( $show_downloads ) {
 
 	<table class="lb-wc-total-price-table woocommerce-table woocommerce-table--order-details shop_table order_details">
 
-		<thead>
+        <?php /* <thead>
 			<tr>
 				<th class="woocommerce-table__product-name product-name"><?php esc_html_e( 'Product', 'woocommerce' ); ?></th>
 				<th class="woocommerce-table__product-table product-total"><?php esc_html_e( 'Total', 'woocommerce' ); ?></th>
 			</tr>
-		</thead>
+		</thead> */ ?>
 
 		<tbody>
 			<?php
