@@ -179,3 +179,35 @@ body.lb-is-shop {
     padding: 40px 70px;
     border-radius: 4px;
 }
+
+.lb-wc-psw {
+    .custom-input {
+        &--password {
+            .custom-input__icon--next {
+                top: 12px;
+            }
+
+            .woocommerce-password-strength,
+            .woocommerce-password-hint {
+                margin-left: 16.5px;
+                font-size: rem(11);
+                color: map-get($colors, "grey-3");
+            }
+        
+            .woocommerce-password-strength {
+                &.bad,
+                &.short {
+                    color: map-get($colors, "secondary");
+                }
+
+                &.good {
+                    color: map-get($colors, "secondary-dark-2");
+                }
+
+                &.strong {
+                    color: map-get($colors, "primary-dark-2");
+                }
+            }
+        }
+    }
+}
