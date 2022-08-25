@@ -27,6 +27,7 @@
                     a {
                         font-weight: 700;
                         border-bottom: 4px solid map-get($colors, "black");
+                        padding-bottom: 5px;
                     }
                 }
             }
@@ -110,6 +111,38 @@
                 .button {
                     padding: 0;
                 }
+            }
+        }
+
+
+        .woocommerce-Address {
+            font-weight: 300;
+
+            .infobox__subtitle {
+                margin-top: 40px;
+            }
+
+            a {
+                display: block;
+                font-weight: 500;
+                color: map-get($colors, "black");
+                margin-bottom: 10px;
+                text-decoration: none;
+            }
+
+            address {
+                font-style: normal;
+            }
+        }
+
+
+        .lb-wc-edit-address-form {
+            .infobox__subtitle {
+                margin-bottom: 40px;
+            }
+
+            .button {
+                margin-top: 20px;
             }
         }
     }
