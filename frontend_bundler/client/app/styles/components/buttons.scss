@@ -50,7 +50,13 @@ $buttonsPropertyList: (
   }
 
   .lb-icon {
-    margin-left: 10px;
+    &:first-of-type {
+       margin-right: 10px;
+    }
+
+    &:last-of-type {
+       margin-left: 10px;
+    }
   }
 }
 
@@ -85,8 +91,15 @@ $buttonsPropertyList: (
 
     &:hover {
         .lb-icon {
-            transform: translateX(5px);
             transition: all 0.2s;
+
+            &:first-of-type {
+                transform: translateX(-5px);
+            }
+
+            &:last-of-type {
+                transform: translateX(5px);
+            }
         }
     }
 }

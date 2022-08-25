@@ -34,7 +34,7 @@
     {% if iconEnd %}
         {% include '@PathViews/components/icon.twig' with iconEnd only %}
     {% endif %}
-    {% if not iconEnd and 'quaternary' in variants %}
+    {% if iconEnd is null and 'quaternary' in variants %}
         {% include '@PathViews/components/icon.twig' with {name: 'arrow-right'} only %}
     {% endif %}
 </{{ tag }}>
