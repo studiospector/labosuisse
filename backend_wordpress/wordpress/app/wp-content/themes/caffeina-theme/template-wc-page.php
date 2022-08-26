@@ -10,6 +10,8 @@ $page_intro = [
 // If is thank you page
 if ( is_checkout() && !empty(is_wc_endpoint_url('order-received')) ) {
     $page_intro = null;
+} else if ( is_account_page() ) {
+    $page_intro = null;
 }
 
 $context = [

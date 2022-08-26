@@ -46,8 +46,7 @@ class Menu
                     'type' => 'small-link',
                     'label' => __('Profilo', 'labo-suisse-theme'),
                     'icon' => 'user',
-                    'href' => '#',
-                    // 'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+                    'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
                 ],
                 [
                     'type' => 'small-link',

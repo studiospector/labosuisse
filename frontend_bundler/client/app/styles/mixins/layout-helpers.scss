@@ -4,6 +4,14 @@
   @return map-get($layers, $level);
 }
 
+@mixin generate-colors-classes($colors) {
+    @each $color, $hex in $colors {
+        .lb-c-#{$color} {
+            color: $hex !important;
+        }
+    }
+}
+
 @mixin placeholder {
   &::-webkit-input-placeholder {
     @content;

@@ -176,3 +176,45 @@ function lb_custom_form_field_args($args, $key, $value)
 
     return $args;
 }
+
+
+
+/**
+ * Remove menu link my account
+ */
+add_filter('woocommerce_account_menu_items', 'lb_wc_remove_account_menu_link');
+function lb_wc_remove_account_menu_link($menu_links)
+{
+    unset($menu_links['dashboard']);
+    return $menu_links;
+}
+
+
+
+/**
+ * Manage columns to orders table of user account
+ */
+add_filter('woocommerce_my_account_my_orders_columns', 'lb_add_account_orders_column');
+function lb_add_account_orders_column($columns)
+{
+    $columns['lb-articles-count-column'] = __('Articoli', 'labo-suisse-theme');
+    $columns['order-actions'] = '&nbsp;';
+
+    $columns = lb_move_array_element($columns, 5, 2, 'lb-articles-count-column');
+    $columns = lb_move_array_element($columns, 3, 4, 'order-status');
+
+    return $columns;
+}
+
+/**
+ * Add value to custom column of articles count in orders table of user account
+ */
+add_action('woocommerce_my_account_my_orders_column_lb-articles-count-column', 'lb_add_account_orders_column_rows');
+function lb_add_account_orders_column_rows($order)
+{
+    if ($order->get_item_count() == 1) {
+        printf('%1$s %2$s ', $order->get_item_count(), __('articolo', 'labo-suisse-theme'));
+    } else if ($order->get_item_count() > 1) {
+        printf('%1$s %2$s ', $order->get_item_count(), __('articoli', 'labo-suisse-theme'));
+    }
+}
