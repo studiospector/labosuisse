@@ -56,7 +56,7 @@ class Option
         $items[] = [
             'type' => 'icon',
             'icon' => ['name' => 'user'],
-            'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+            'href' => is_user_logged_in() ? get_permalink(get_option('woocommerce_myaccount_page_id')) : get_field('lb_shop_login_registration_page', 'option'),
         ];
 
         foreach ($links as $i => $link) {

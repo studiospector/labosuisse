@@ -1,0 +1,31 @@
+{% extends '@PathViews/templates/_default.twig' %}
+
+{% set bodyClass = 'lb-page' %}
+
+{% block main %}
+
+    {# Yoast SEO Breadcrumb #}
+    {% if fn('function_exists', 'yoast_breadcrumb') %}
+        {{ fn('yoast_breadcrumb', '<div id="lb-breadcrumbs" class="lb-breadcrumbs"><div class="container">', '</div></div>') }}
+    {% endif %}
+
+    {# Intro page #}
+    {% if page_intro %}
+        {% include '@PathViews/components/page-intro.twig' with page_intro only %}
+        {% include '@PathViews/components/separator.twig' with {variants: ['medium']} only %}
+    {% endif %}
+
+    {# Content #}
+    <div class="lb-wc-template-sign-in-up container">
+        {% if content %}
+            <div class="lb-wc-template-sign-in-up__content">
+                {{ content|raw }}
+            </div>
+        {% endif %}
+
+        <div class="lb-wc-template-sign-in-up__forms">
+            {{ fn('do_shortcode', shortcode) }}
+        </div>
+    </div>
+
+{% endblock %}

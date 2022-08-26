@@ -1,0 +1,68 @@
+.lb-wc-sign-in-up {
+    &__form-info {
+        margin-bottom: 20px;
+    }
+
+    &__form-signin,
+    &__form-signup {
+        .woocommerce-form {
+            max-width: 360px;
+            padding-top: 10px;
+
+            @include mq($until: md) {
+                max-width: 100%;
+            }
+
+            .form-row {
+                &:last-of-type {
+                    padding-bottom: 0;
+                }
+            }
+
+            .button {
+                width: 100%;
+                max-width: 290px;
+                justify-content: center;
+
+                @include mq($until: md) {
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+    &__form-signin {
+        margin-top: 30px;
+        
+        .custom-checkbox {
+            margin-top: 15px;
+            margin-bottom: 40px;
+            font-weight: 300;
+        }
+
+        .woocommerce-LostPassword {
+            margin-top: 15px;
+        }
+    }
+
+    &__form-signup {
+        @include mq($until: md) {
+            margin-top: 10px;
+        }
+    }
+
+    .woocommerce-privacy-policy-text {
+        p {
+            margin-top: 15px;
+            margin-bottom: 35px;
+            font-size: 11px;
+            font-weight: 400;
+            line-height: 12.74px;
+    
+            a {
+                text-decoration: none;
+                color: map-get($colors, "secondary");
+            }
+        }
+    }
+}
