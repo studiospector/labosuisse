@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-08-26 07:44+0000\n"
+"PO-Revision-Date: 2022-08-26 07:42+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26083,8 +26083,8 @@ msgstr "Metodi di pagamento"
 #: includes/class-wc-query.php:146 includes/wc-account-functions.php:102
 msgid "Addresses"
 msgid_plural "Address"
-msgstr[0] "Il mio indirizzo"
-msgstr[1] "I miei indirizzi"
+msgstr[0] "Indirizzo"
+msgstr[1] "Indirizzi"
 
 #: includes/admin/importers/class-wc-product-csv-importer-controller.php:716
 #: includes/admin/settings/class-wc-settings-advanced.php:256
@@ -34777,7 +34777,7 @@ msgstr "Nessun indirizzo di fatturazione impostato."
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:327
 #: packages/woocommerce-blocks/build/wc-settings.js:1
 msgid "Address"
-msgstr "Indirizzo"
+msgstr "I miei indirizzi"
 
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:320
 msgid "Load billing address"
