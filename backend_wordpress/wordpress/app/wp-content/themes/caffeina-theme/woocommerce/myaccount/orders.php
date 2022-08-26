@@ -24,7 +24,7 @@ do_action( 'woocommerce_before_account_orders', $has_orders ); ?>
 <?php if ( $has_orders ) :
     
     Timber::render('@PathViews/components/infobox.twig', [
-        'title' => __('I miei ordini', 'labo-suisse-theme'),
+        'subtitle' => __('I miei ordini', 'labo-suisse-theme'),
         'paragraph' => __('Controlla lo stato dei tuoi ordini e lo storico degli ordini passati.', 'labo-suisse-theme'),
     ]);
     ?>
