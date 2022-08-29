@@ -4,9 +4,9 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class LaunchTwoCards extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
 
         $sizes = [
             'lg' => 'lg',
@@ -16,6 +16,7 @@ class LaunchTwoCards extends BaseBlock
         ];
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'cards' => [
                 [
                     'images' => lb_get_images(get_field('lb_block_launch_two_cards_image_left'), $sizes),

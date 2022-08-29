@@ -4,9 +4,9 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class NumberListImage extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
 
         $list = [];
 
@@ -30,6 +30,7 @@ class NumberListImage extends BaseBlock
         }
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_numbers_image'), $sizes),
             'numbersList' => [
                 'title' => get_field('lb_block_numbers_title'),

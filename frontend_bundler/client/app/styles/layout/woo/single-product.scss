@@ -215,6 +215,10 @@
                     margin-bottom: 40px;
                     text-align: left;
                 }
+
+                &--link-help {
+                    margin-bottom: 0;
+                }
             }
 
             .woocommerce-variation {
@@ -233,8 +237,10 @@
             }
         }
 
-        // &__product-meta {
-            
-        // }
+        .lb-product-variation-help {
+            margin-bottom: 45px;
+        }
+
+        // &__product-meta { }
     }
 }
