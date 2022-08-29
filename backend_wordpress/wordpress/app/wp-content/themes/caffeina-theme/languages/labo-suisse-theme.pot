@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-23 07:27+0000\n"
+"POT-Creation-Date: 2022-08-29 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -19,6 +19,10 @@ msgstr ""
 #: inc/woocommerce-setup.php:142
 #, php-format
 msgid "%1$sa partire da%2$s %3$s"
+msgstr ""
+
+#: woocommerce/myaccount/lost-password-confirmation.php:26
+msgid "Accedi con la nuova password"
 msgstr ""
 
 #: woocommerce/single-product.php:44
@@ -48,12 +52,21 @@ msgstr ""
 msgid "Applica"
 msgstr ""
 
+#: inc/woocommerce-setup.php:200
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:47
 msgid "Articoli"
 msgstr ""
 
+#: inc/woocommerce-setup.php:218
+msgid "articoli"
+msgstr ""
+
 #: single.php:13
 msgid "Articolo"
+msgstr ""
+
+#: inc/woocommerce-setup.php:216
+msgid "articolo"
 msgstr ""
 
 #: template-distributor.php:27
@@ -73,6 +86,10 @@ msgstr ""
 
 #: archive-lb-faq.php:71 archive-lb-job.php:87 home.php:93
 msgid "Carica altro"
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:41
+msgid "Carrello"
 msgstr ""
 
 #: template-lb-brand-archive.php:86
@@ -105,8 +122,37 @@ msgstr ""
 msgid "Ci dispiace, non riusciamo a trovare<br>la pagina che stai cercando. "
 msgstr ""
 
+#. 1: user display name 2: logout url
+#: woocommerce/myaccount/dashboard.php:43
+#, php-format
+msgid "Ciao %1$s!"
+msgstr ""
+
+#: woocommerce/myaccount/orders.php:28
+msgid "Controlla lo stato dei tuoi ordini e lo storico degli ordini passati."
+msgstr ""
+
 #. Description of the theme
 msgid "Custom WP theme developed by Caffeina."
+msgstr ""
+
+#. 1: Orders URL 2: Addresses URL 3: Account URL.
+#: woocommerce/myaccount/dashboard.php:34
+#, php-format
+msgid ""
+"Dal tuo account Labo Suisse puoi visualizzare <a href=\"%1$s\">i tuoi ordini,"
+"</a> gestire i tuoi <a href=\"%2$s\">indirizzi di fatturazione e spedizione,"
+"</a> modificare <a href=\"%3$s\">la password e i dettagli del tuo account."
+"</a>"
+msgstr ""
+
+#. 1: Orders URL 2: Address URL 3: Account URL.
+#: woocommerce/myaccount/dashboard.php:31
+#, php-format
+msgid ""
+"Dal tuo account Labo Suisse puoi visualizzare <a href=\"%1$s\">i tuoi ordini,"
+"</a> gestire il tuo <a href=\"%2$s\">indirizzo di fatturazione,</a> "
+"modificare <a href=\"%3$s\">la password e i dettagli del tuo account.</a>"
 msgstr ""
 
 #: single-lb-job.php:27
@@ -149,8 +195,16 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:47
+#: woocommerce/checkout/thankyou.php:42
+msgid "Grazie!<br>il tuo ordine è stato preaso in carico"
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:53
 msgid "Hai bisogno di aiuto?"
+msgstr ""
+
+#: woocommerce/myaccount/form-lost-password.php:25
+msgid "Hai dimenticato la password?"
 msgstr ""
 
 #. URI of the theme
@@ -158,8 +212,17 @@ msgstr ""
 msgid "https://caffeina.com/"
 msgstr ""
 
+#: woocommerce/myaccount/orders.php:27
+msgid "I miei ordini"
+msgstr ""
+
 #: single-lb-job.php:36
 msgid "Il candidato"
+msgstr ""
+
+#: woocommerce/myaccount/dashboard.php:40
+#: woocommerce/myaccount/navigation.php:29
+msgid "Il mio account"
 msgstr ""
 
 #: woocommerce/checkout/form-shipping.php:34
@@ -208,6 +271,12 @@ msgstr ""
 msgid "Location:"
 msgstr ""
 
+#. 1: order number 2: order date 3: order status
+#: woocommerce/myaccount/view-order.php:43
+#, php-format
+msgid "L’ordine è stato creato il %1$s ed è attualmente %2$s."
+msgstr ""
+
 #: single.php:17
 msgid "min"
 msgstr ""
@@ -232,13 +301,35 @@ msgstr ""
 msgid "Newsletter"
 msgstr ""
 
+#: woocommerce/myaccount/lost-password-confirmation.php:30
+msgid ""
+"Non hai ricevuto l’email? Controlla la tua posta indesiderata o fai clic di "
+"seguito per inviare una nuovamente l’email."
+msgstr ""
+
+#: woocommerce/myaccount/view-order.php:37
+msgid "Ordine N."
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:40
 msgid "Per Brand"
+msgstr ""
+
+#: woocommerce/myaccount/lost-password-confirmation.php:28
+msgid ""
+"Per creare la tua nuova password, fai clic sul link nell’e-mail che ti "
+"abbiamo inviato e inseriscine una nuova."
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:61
 #: packages/caffeina/labo-suisse/src/Menu/Product/Area.php:90
 msgid "Per Esigenza"
+msgstr ""
+
+#: woocommerce/myaccount/lost-password-confirmation.php:32
+msgid ""
+"Per favore attendi almeno 10 minuti prima di effettuare un'ulteriore "
+"richiesta."
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:62
@@ -258,7 +349,7 @@ msgstr ""
 msgid "Prodotti"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:41
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:47
 msgid "Profilo"
 msgstr ""
 
@@ -277,12 +368,24 @@ msgstr ""
 msgid "Recensioni"
 msgstr ""
 
+#: woocommerce/myaccount/form-reset-password.php:25
+msgid "Resetta password"
+msgstr ""
+
 #: search.php:19
 msgid "Ricerca globale"
 msgstr ""
 
+#: woocommerce/checkout/thankyou.php:44
+msgid "Riceverai un’email di conferma appena sarà spedito."
+msgstr ""
+
 #: inc/helpers.php:361
 msgid "Ricevi aggiornamenti e promozioni direttamente sulla tua mail."
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:80
+msgid "Ricorda i miei dati"
 msgstr ""
 
 #: home.php:67
@@ -328,6 +431,25 @@ msgstr ""
 #: packages/caffeina/labo-suisse/src/Menu/DiscoverLabo/DiscoverLabo.php:31
 #: packages/caffeina/labo-suisse/src/Menu/DiscoverLabo/DiscoverLabo.php:59
 msgid "Scopri Labo"
+msgstr ""
+
+#: woocommerce/myaccount/form-lost-password.php:28
+msgid ""
+"Se hai già un account ma non ti ricordi la password, inserisci la tua email, "
+"ti invieremo un link per reimpostarla."
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:34
+msgid ""
+"Se hai già un profilo, inserisci i tuoi dati e accedi al tuo account "
+"personale."
+msgstr ""
+
+#: woocommerce/myaccount/form-login.php:120
+msgid ""
+"Se non hai ancora un profilo, inserisci il tuo indirizzo email e una "
+"password che ti serviranno per accedere al tuo account personale e avere a "
+"disposizione tutte le informazioni sui tuoi ordini."
 msgstr ""
 
 #: search.php:23
@@ -379,11 +501,19 @@ msgid "Template Offset Nav"
 msgstr ""
 
 #. Name of the template
+msgid "Template Pagina Login/Registrazione"
+msgstr ""
+
+#. Name of the template
 msgid "Template Pagina WooCommerce"
 msgstr ""
 
 #. Name of the template
 msgid "Template Ricerca"
+msgstr ""
+
+#: woocommerce/myaccount/lost-password-confirmation.php:27
+msgid "Ti abbiamo inviato un’email per reimpostare la password."
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:196
@@ -397,6 +527,10 @@ msgstr ""
 
 #: single-lb-job.php:23
 msgid "Tipologia di contratto:"
+msgstr ""
+
+#: woocommerce/myaccount/view-order.php:29
+msgid "Torna a Tutti i miei ordini"
 msgstr ""
 
 #: 404.php:11
