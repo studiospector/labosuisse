@@ -8,7 +8,7 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<section class="block-routine{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+<section {{ sectionID ? 'id="' ~ sectionID ~ '" ' : '' }}class="block-routine{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
     <div class="container">
         <h3 class="infobox__title">{{ title }}</h3>
         <ol class="block-routine__list row">

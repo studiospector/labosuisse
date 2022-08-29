@@ -4,9 +4,9 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class BannerAlternate extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
 
         $sizes = [
             'lg' => 'lg',
@@ -16,6 +16,7 @@ class BannerAlternate extends BaseBlock
         ];
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_banner_alternate_img'), $sizes),
             'imageBig' => get_field('lb_block_banner_alternate_img_big'),
             'variants' => [get_field('lb_block_banner_alternate_variants_lr'), get_field('lb_block_banner_alternate_variants_hcb')],

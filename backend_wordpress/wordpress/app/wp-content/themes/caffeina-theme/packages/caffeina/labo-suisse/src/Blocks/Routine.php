@@ -4,9 +4,9 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class Routine extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
         $items = [];
         // Carousel data
         if (have_rows('lb_block_routine_carousel')) {
@@ -23,6 +23,7 @@ class Routine extends BaseBlock
         }
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'title' =>  get_field('lb_block_routine_title'),
             'cta' => (get_field('lb_block_routine_btn')) ? array_merge((array)get_field('lb_block_routine_btn'), ['variants' => [get_field('lb_block_routine_btn_variants')]]) : null,
             'items' => $items,

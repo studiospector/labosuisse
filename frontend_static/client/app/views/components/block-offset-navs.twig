@@ -8,7 +8,7 @@
 
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-<section class="block-offset-navs{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+<section {{ sectionID ? 'id="' ~ sectionID ~ '" ' : '' }}class="block-offset-navs{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
 	<div class="container">
 		<div class="row">
             <div class="block-offset-navs__infobox col-12 col-md-6">

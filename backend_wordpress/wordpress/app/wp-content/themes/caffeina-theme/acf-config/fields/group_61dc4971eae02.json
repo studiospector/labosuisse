@@ -93,6 +93,38 @@
                     "maxlength": ""
                 }
             ]
+        },
+        {
+            "key": "field_630cae802652f",
+            "label": "Link scroll to help section",
+            "name": "lb_product_link_scrollto_help",
+            "type": "select",
+            "instructions": "Componente che spiega le varianti del prodotto.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "choices": {
+                "lb-block-hero": "Hero",
+                "lb-block-offset-navs": "Offset navs",
+                "lb-block-banner-alternate": "Banner alternate",
+                "lb-block-launch-two-cards": "Lancio due card",
+                "lb-block-image-card": "Immagine e card",
+                "lb-block-number-list-with-image": "Lista numeri con immagine",
+                "lb-block-love-labo": "Love labo",
+                "lb-block-routine": "Routiune"
+            },
+            "default_value": false,
+            "allow_null": 0,
+            "multiple": 0,
+            "ui": 1,
+            "ajax": 0,
+            "return_format": "value",
+            "wpml_cf_preferences": 2,
+            "placeholder": ""
         }
     ],
     "location": [
@@ -113,5 +145,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645121677
+    "modified": 1661776676
 }

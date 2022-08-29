@@ -4,9 +4,9 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class LoveLabo extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
 
         $items = [];
 
@@ -18,6 +18,7 @@ class LoveLabo extends BaseBlock
         }
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'items' => $items,
             'variants' => [get_field('lb_block_love_labo_variants')]
         ];
