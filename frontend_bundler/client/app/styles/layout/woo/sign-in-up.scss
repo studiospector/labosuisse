@@ -95,4 +95,16 @@
             max-width: 100%;
         }
     }
+
+    &--reset {
+        .lb-wc-lost-reset-psw {
+            &__content {
+                margin-top: 40px;
+            }
+        }
+
+        .custom-input {
+            margin-top: 0;
+        }
+    }
 }
