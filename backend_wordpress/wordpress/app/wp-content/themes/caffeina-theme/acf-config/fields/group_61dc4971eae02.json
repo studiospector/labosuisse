@@ -107,6 +107,7 @@
                 "class": "",
                 "id": ""
             },
+            "wpml_cf_preferences": 2,
             "choices": {
                 "lb-block-hero": "Hero",
                 "lb-block-offset-navs": "Offset navs",
@@ -118,12 +119,11 @@
                 "lb-block-routine": "Routiune"
             },
             "default_value": false,
-            "allow_null": 0,
+            "allow_null": 1,
             "multiple": 0,
             "ui": 1,
             "ajax": 0,
             "return_format": "value",
-            "wpml_cf_preferences": 2,
             "placeholder": ""
         }
     ],
@@ -145,5 +145,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1661776676
+    "modified": 1661778641
 }
