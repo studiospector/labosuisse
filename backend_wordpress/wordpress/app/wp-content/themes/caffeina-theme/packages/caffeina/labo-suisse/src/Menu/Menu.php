@@ -46,7 +46,7 @@ class Menu
                     'type' => 'small-link',
                     'label' => __('Profilo', 'labo-suisse-theme'),
                     'icon' => 'user',
-                    'href' => get_permalink(get_option('woocommerce_myaccount_page_id')),
+                    'href' => is_user_logged_in() ? get_permalink(get_option('woocommerce_myaccount_page_id')) : get_field('lb_shop_login_registration_page', 'option'),
                 ],
                 [
                     'type' => 'small-link',

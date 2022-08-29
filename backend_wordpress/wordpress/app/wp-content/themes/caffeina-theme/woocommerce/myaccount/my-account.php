@@ -25,7 +25,7 @@ defined( 'ABSPATH' ) || exit;
     do_action( 'woocommerce_account_navigation' ); ?>
 
     <div class="col-12 col-lg-9">
-        <div class="lb-wc-myaccount__content woocommerce-MyAccount-content">
+        <div class="lb-wc-myaccount__content<?php echo (is_user_logged_in() && is_account_page() && !is_wc_endpoint_url()) ? ' lb-wc-myaccount__content--no-margin' : '' ?> woocommerce-MyAccount-content">
             <?php
                 /**
                  * My Account content.

@@ -180,6 +180,12 @@ body.lb-is-shop {
     border-radius: 4px;
 }
 
+.lb-wc-box-grey-small {
+    background-color: map-get($colors, "primary-light-1");
+    padding: 30px;
+    border-radius: 4px;
+}
+
 .lb-wc-psw {
     .custom-input {
         &--password {
