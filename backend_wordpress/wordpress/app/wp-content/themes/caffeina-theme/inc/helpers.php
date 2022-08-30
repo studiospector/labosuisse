@@ -372,6 +372,22 @@ function lb_newsletter_nav()
 }
 
 /**
+ * Cart nav
+ */
+function lb_async_cart_nav() {
+    return [
+        'id' => 'lb-offsetnav-async-cart',
+        'title' => __('Carrello', 'labo-suisse-theme'),
+        'data' => [
+            [
+                'type' => 'html',
+                'data' => ''
+            ]
+        ]
+    ];
+}
+
+/**
  * Check if current user has role
  */
 function lb_user_has_role($role)

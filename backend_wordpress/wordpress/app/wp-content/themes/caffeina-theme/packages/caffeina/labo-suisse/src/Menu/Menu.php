@@ -41,6 +41,8 @@ class Menu
                     'label' => __('Carrello', 'labo-suisse-theme'),
                     'icon' => ['name' => 'cart', 'counter' => WC()->cart->get_cart_contents_count()],
                     'href' => wc_get_cart_url(),
+                    // 'class' => 'js-open-offset-nav',
+                    // 'attributes' => ['data-target-offset-nav="lb-async-cart-nav"'],
                 ],
                 [
                     'type' => 'small-link',
