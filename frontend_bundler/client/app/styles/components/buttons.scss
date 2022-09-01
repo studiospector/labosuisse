@@ -123,6 +123,7 @@ $buttonsPropertyList: (
     .button__label {
         position: relative;
         overflow: hidden;
+        white-space: nowrap;
 
         & > span {
             display: block;
@@ -183,6 +184,25 @@ $buttonsPropertyList: (
         &.button-primary {
             flex: 1;
             justify-content: center;
+        }
+    }
+}
+
+.button {
+    &.button-loading {
+        .button {
+            &__label {
+                visibility: hidden;
+            }
+        }
+
+        &::after {
+            content: '...';
+            position: absolute;
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: 5px;
+            transform: translateX(5px);
         }
     }
 }

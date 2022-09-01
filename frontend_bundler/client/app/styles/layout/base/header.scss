@@ -47,6 +47,14 @@
 
     &--offsetnav-open {
         .lb-header {
+            &__bottom {
+                z-index: 9;
+            }
+
+            &__top {
+                z-index: 10;
+            }
+
             &__wrapper--desktop {
                 height: 0;
                 transform: translateY(-100%);

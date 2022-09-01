@@ -66,7 +66,7 @@ if ( $product->is_in_stock() ) : ?>
                 'title' => esc_html( $product->single_add_to_cart_text() ),
                 'attributes' => 'name="add-to-cart" value="'. esc_attr( $product->get_id() ) .'"',
                 'class' => 'single_add_to_cart_button alt',
-                'type' => 'submit',
+                'type' => 'button',
                 'variants' => ['primary'],
             ]);
         echo '</div>';

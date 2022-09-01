@@ -218,3 +218,18 @@ function lb_add_account_orders_column_rows($order)
         printf('%1$s %2$s ', $order->get_item_count(), __('articoli', 'labo-suisse-theme'));
     }
 }
+
+/**
+ * Ajax Fragments
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'lb_wc_header_add_to_cart_fragment' );
+function lb_wc_header_add_to_cart_fragment( $fragments ) {
+	global $woocommerce;
+
+	ob_start();
+	?>
+	<span class="lb-wc-cart-total-count lb-icon__counter"><?php echo $woocommerce->cart->cart_contents_count > 0 ? $woocommerce->cart->cart_contents_count : ''; ?></span>
+	<?php
+	$fragments['span.lb-wc-cart-total-count'] = ob_get_clean();
+	return $fragments;
+}
