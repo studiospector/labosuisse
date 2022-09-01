@@ -42,7 +42,7 @@ $labo_in_the_world_link = get_page_link(get_field('lb_labo_in_the_world_page', '
         Timber::render('@PathViews/components/button.twig', [
             'title' => esc_html( $product->single_add_to_cart_text() ),
             'class' => 'single_add_to_cart_button alt',
-            'type' => 'submit',
+            'type' => 'button',
             'variants' => ['primary'],
         ]);
     echo '</div>';

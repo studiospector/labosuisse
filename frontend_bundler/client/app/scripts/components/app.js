@@ -33,6 +33,7 @@ import Tabs from './Tabs'
 import SearchAutocomplete from './SearchAutocomplete'
 import AnimationReveal from './AnimationReveal'
 import GTMTracking from './GTMTracking'
+import AsyncCart from './AsyncCart'
 
 const components = {
     scrollbar: {
@@ -183,6 +184,11 @@ const components = {
     gtmTracking: {
         selector: '.js-gtm-tracking',
         type: GTMTracking,
+        optional: true
+    },
+    asyncCart: {
+        selector: '.js-async-cart',
+        type: AsyncCart,
         optional: true
     },
 }

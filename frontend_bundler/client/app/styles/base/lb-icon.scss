@@ -50,6 +50,10 @@
     background-color: map-get($colors, "secondary");
     color: map-get($colors, "white");
     border-radius: 100%;
+
+    &:empty {
+        display: none;
+    }
   }
 }
 
