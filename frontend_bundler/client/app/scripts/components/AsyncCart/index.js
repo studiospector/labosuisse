@@ -16,7 +16,11 @@ class AsyncCart extends Component {
 
         this.refreshFragmentsOnPageLoad()
 
-        jQuery(document).ready(function ($) {
+        jQuery(document).ready(($) => {
+
+            $(document.body).on('wc_fragments_refreshed', function(){
+                console.log('wc_fragments_refreshed');
+            });
 
             $.fn.serializeArrayAll = function () {
                 var rCRLF = /\r?\n/g;
@@ -40,27 +44,34 @@ class AsyncCart extends Component {
                             { name: elem.name, value: val.replace(rCRLF, "\r\n") };
                     }
                 }).get();
-            };
+            }
+
+            // Remove from cart listeners
+            $('.lb-wc-async-cart__item__remove').on('click', function (e) {
+                $('#lb-offsetnav-async-cart .lb-offset-nav__content').addClass('lb-offset-nav__content--loading');
+            })
+            $(document).on('removed_from_cart', function (e) {
+                $('#lb-offsetnav-async-cart .lb-offset-nav__content').removeClass('lb-offset-nav__content--loading');
+            })
 
             // Add to cart
             $(document).on('click', '.single_add_to_cart_button:not(.disabled)', function (e) {
-
                 var $thisbutton = $(this),
                     $form = $thisbutton.closest('form.cart'),
                     //quantity = $form.find('input[name=quantity]').val() || 1,
                     //product_id = $form.find('input[name=variation_id]').val() || $thisbutton.val(),
-                    data = $form.find('input:not([name="product_id"]), select, button, textarea').serializeArrayAll() || 0;
+                    data = $form.find('input:not([name="product_id"]), select, button, textarea').serializeArrayAll() || 0
 
                 $.each(data, function (i, item) {
                     if (item.name == 'add-to-cart') {
                         item.name = 'product_id';
                         item.value = $form.find('input[name=variation_id]').val() || $thisbutton.val();
                     }
-                });
+                })
 
-                e.preventDefault();
+                e.preventDefault()
 
-                $(document.body).trigger('adding_to_cart', [$thisbutton, data]);
+                $(document.body).trigger('adding_to_cart', [$thisbutton, data])
 
                 $.ajax({
                     type: 'POST',
@@ -86,7 +97,7 @@ class AsyncCart extends Component {
 
                         window.openOffsetNav('lb-offsetnav-async-cart')
 
-                        // Remove from cart
+                        // Remove from cart listeners
                         $('.lb-wc-async-cart__item__remove').on('click', function (e) {
                             $('#lb-offsetnav-async-cart .lb-offset-nav__content').addClass('lb-offset-nav__content--loading');
                         })
@@ -94,23 +105,23 @@ class AsyncCart extends Component {
                             $('#lb-offsetnav-async-cart .lb-offset-nav__content').removeClass('lb-offset-nav__content--loading');
                         })
                     },
-                });
+                })
 
-                return false;
+                return false
             })
         })
     }
 
     refreshFragments() {
         if (typeof wc_cart_fragments_params !== 'undefined') {
-            jQuery(document.body).trigger('wc_fragment_refresh');
-            return;
+            jQuery(document.body).trigger('wc_fragment_refresh')
+            return
         }
     }
 
     refreshFragmentsOnPageLoad() {
         setTimeout(function () {
-            this.refreshFragments();
+            this.refreshFragments()
         }.bind(this), 1000)
     }
 }

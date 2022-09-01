@@ -8,10 +8,17 @@ $page_intro = [
 ];
 
 // If is thank you page
-if ( is_checkout() && !empty(is_wc_endpoint_url('order-received')) ) {
+if (is_checkout() && !empty(is_wc_endpoint_url('order-received'))) {
     $page_intro = null;
-} else if ( is_account_page() ) {
+// If is account
+} else if (is_account_page()) {
     $page_intro = null;
+// If is cart
+} else if (is_cart()) {
+    // If is cart empty
+    if (sizeof(WC()->cart->get_cart()) <= 0) {
+        $page_intro = null;
+    }
 }
 
 $context = [

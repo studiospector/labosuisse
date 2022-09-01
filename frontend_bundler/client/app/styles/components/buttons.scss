@@ -190,6 +190,8 @@ $buttonsPropertyList: (
 
 .button {
     &.button-loading {
+        position: relative;
+
         .button {
             &__label {
                 visibility: hidden;
@@ -197,13 +199,30 @@ $buttonsPropertyList: (
         }
 
         &::after {
-            content: '...';
+            content: '';
             position: absolute;
-            font-weight: 800;
-            font-size: 20px;
-            letter-spacing: 5px;
-            transform: translateX(5px);
+            width: 25px;
+            height: 25px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 100%;
+            animation: lb-button-loading-spinner 1s linear infinite;
         }
+    }
+}
+
+@keyframes lb-button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+  
+    to {
+        transform: rotate(1turn);
     }
 }
 
