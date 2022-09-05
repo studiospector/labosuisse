@@ -73,6 +73,8 @@ RUN apk --no-cache add \
   php8-xmlwriter \
   php8-redis \
   php8-tokenizer \
+  php8-ftp \
+  php8-openssl \
   libmemcached \
   libmemcached-libs \
   libmemcached-dev \
