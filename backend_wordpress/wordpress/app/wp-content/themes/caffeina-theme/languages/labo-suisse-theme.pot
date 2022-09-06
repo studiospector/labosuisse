@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-08-29 09:20+0000\n"
+"POT-Creation-Date: 2022-09-06 12:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -76,7 +76,7 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:43
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:44
 msgid "Brevetti"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Carica altro"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:41
+#: inc/helpers.php:380 packages/caffeina/labo-suisse/src/Menu/Menu.php:41
 msgid "Carrello"
 msgstr ""
 
@@ -159,7 +159,7 @@ msgstr ""
 msgid "Descrizione del ruolo:"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:19
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:20
 msgid "Descrizione e INCI"
 msgstr ""
 
@@ -171,11 +171,11 @@ msgstr ""
 msgid "Dipartimento"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:49
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:50
 msgid "Domande frequenti"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:31
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:32
 msgid "Efficacia"
 msgstr ""
 
@@ -199,7 +199,7 @@ msgstr ""
 msgid "Grazie!<br>il tuo ordine è stato preaso in carico"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:53
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:55
 msgid "Hai bisogno di aiuto?"
 msgstr ""
 
@@ -281,7 +281,7 @@ msgstr ""
 msgid "min"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:37
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:38
 msgid "Modalità di utilizzo"
 msgstr ""
 
@@ -305,6 +305,12 @@ msgstr ""
 msgid ""
 "Non hai ricevuto l’email? Controlla la tua posta indesiderata o fai clic di "
 "seguito per inviare una nuovamente l’email."
+msgstr ""
+
+#. %s: Order ID.
+#: woocommerce/emails/email-order-details.php:34
+#, php-format
+msgid "Ordine #%s"
 msgstr ""
 
 #: woocommerce/myaccount/view-order.php:37
@@ -345,11 +351,15 @@ msgstr ""
 msgid "Più informazioni"
 msgstr ""
 
+#: woocommerce/cart/mini-cart.php:99
+msgid "Procedi con l'ordine"
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:156
 msgid "Prodotti"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:47
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:49
 msgid "Profilo"
 msgstr ""
 
@@ -364,7 +374,7 @@ msgstr ""
 msgid "Punti vendita"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:55
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:56
 msgid "Recensioni"
 msgstr ""
 
@@ -468,7 +478,7 @@ msgstr ""
 msgid "Stefano Iachetta | Giuseppe Gatto | Matteo Meloni"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:25
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:26
 msgid "Tecnologia"
 msgstr ""
 
@@ -588,6 +598,10 @@ msgstr ""
 #: home.php:19
 #: packages/caffeina/labo-suisse/src/Resources/Posts/Magazine.php:61
 msgid "Visualizza"
+msgstr ""
+
+#: woocommerce/cart/mini-cart.php:106
+msgid "Visualizza il carrello"
 msgstr ""
 
 #: template-lb-brand-archive.php:61
