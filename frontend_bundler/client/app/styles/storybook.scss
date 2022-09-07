@@ -36,3 +36,7 @@ $assetsBasePath: '/assets';
 @import "components/hero";
 @import "components/carousel-hero";
 @import "components/swiper";
+
+body {
+    overflow-y: auto!important;
+}
