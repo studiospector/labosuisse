@@ -24,6 +24,7 @@ use Caffeina\LaboSuisse\Blocks\LoveLabo;
 use Caffeina\LaboSuisse\Blocks\NumberListImage;
 use Caffeina\LaboSuisse\Blocks\OffsetNavs;
 use Caffeina\LaboSuisse\Blocks\Routine;
+use Caffeina\LaboSuisse\Blocks\InformationBoxes;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -84,6 +85,10 @@ $context['miniatures'] = $block_love_labo->getPayload();
 // Routine
 $block_routine = new Routine(null, 'block-routine', 'lb-block-routine');
 $context['routine'] = $block_routine->getPayload();
+
+// Shipping info
+$block_shipping_info = new InformationBoxes(null, 'information-boxes', 'lb-information-boxes');
+$context['shipping_info'] = $block_shipping_info->getPayload();
 
 
 
