@@ -381,7 +381,7 @@ function lb_async_cart_nav() {
         'data' => [
             [
                 'type' => 'html',
-                'data' => Timber::compile('@PathViews/components/async-cart-content.twig'),
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/async-cart-content.twig'),
             ]
         ]
     ];
