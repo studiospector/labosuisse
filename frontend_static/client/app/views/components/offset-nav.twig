@@ -1,4 +1,12 @@
-<div id="{{ id }}" class="lb-offset-nav" {{ noClose ? ' data-no-close' : '' }}>
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-offset-nav--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+<div id="{{ id }}" class="lb-offset-nav{{ classes|length ? ' ' ~ classes|join(' ') : '' }}" {{ noClose ? ' data-no-close' : '' }}>
 	<div class="lb-offset-nav__dialog lb-offset-nav__dialog-{{ size|default('small') }}">
         <div class="lb-offset-nav__header">
             {% if not noClose %}
@@ -7,7 +15,7 @@
                 </div>
             {% endif %}
             <div class="lb-offset-nav__header__title">
-                {{ title }}
+                {{ title ? title '' }}
             </div>
         </div>
 		<div class="lb-offset-nav__content">

@@ -196,6 +196,20 @@
             text-align: right;
         }
     }
+
+
+
+    &--popup {
+        justify-content: center;
+        align-items: center;
+
+        .lb-offset-nav {
+            &__dialog {
+                min-height: auto;
+                transform: translate3d(0, #{rem(40px)}, 0);
+            }
+        }
+    }
 }
 
 
