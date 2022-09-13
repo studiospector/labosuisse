@@ -1,0 +1,11 @@
+{% if message %}
+    <p>{{ message }}</p>
+{% endif %}
+
+{% if button %}
+    <div class="lb-button-group lb-button-group--vertical">
+        {% for cta in button %}
+            {% include '@PathViews/components/button.twig' with cta only %}
+        {% endfor %}
+    </div>
+{% endif %}

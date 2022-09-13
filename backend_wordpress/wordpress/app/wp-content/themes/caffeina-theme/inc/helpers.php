@@ -381,6 +381,20 @@ function lb_custom_offset_navs() {
         ]
     ];
 
+    // Multicountry geolocation
+    $multicountry_geolocation_nav = [
+        'id' => 'lb-offsetnav-multicountry-geolocation',
+        'title' => null,
+        'data' => [
+            [
+                'type' => 'html',
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry-geolocation.twig'),
+            ]
+        ],
+        // 'noClose' => true,
+        'variants' => ['popup']
+    ];
+
     // Multicountry
     $multicountry_nav = [
         'id' => 'lb-offsetnav-multicountry',
@@ -398,6 +412,7 @@ function lb_custom_offset_navs() {
     return [
         $newsletter_nav,
         $cart_async_nav,
+        $multicountry_geolocation_nav,
         $multicountry_nav
     ];
 }
