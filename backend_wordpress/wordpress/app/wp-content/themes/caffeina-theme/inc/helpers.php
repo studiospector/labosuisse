@@ -344,13 +344,12 @@ function lb_footer()
 }
 
 /**
- * Newsletter nav
+ * Custom Offset navs
  */
-function lb_newsletter_nav()
-{
+function lb_custom_offset_navs() {
+    // Newsletter
     $footer_newsletter_options = get_field('lb_footer_newsletter', 'option');
-
-    return [
+    $newsletter_nav = [
         'id' => 'lb-newsletter-nav',
         'title' => __('Newsletter', 'labo-suisse-theme'),
         'data' => [
@@ -369,13 +368,9 @@ function lb_newsletter_nav()
             ]
         ]
     ];
-}
 
-/**
- * Cart nav
- */
-function lb_async_cart_nav() {
-    return [
+    // Cart Async
+    $cart_async_nav = [
         'id' => 'lb-offsetnav-async-cart',
         'title' => __('Carrello', 'labo-suisse-theme'),
         'data' => [
@@ -385,13 +380,9 @@ function lb_async_cart_nav() {
             ]
         ]
     ];
-}
 
-/**
- * Multicountry nav
- */
-function lb_multicountry_nav() {
-    return [
+    // Multicountry
+    $multicountry_nav = [
         'id' => 'lb-offsetnav-multicountry',
         'title' => null,
         'data' => [
@@ -402,6 +393,12 @@ function lb_multicountry_nav() {
         ],
         // 'noClose' => true,
         'variants' => ['popup']
+    ];
+
+    return [
+        $newsletter_nav,
+        $cart_async_nav,
+        $multicountry_nav
     ];
 }
 
