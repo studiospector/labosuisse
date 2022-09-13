@@ -192,6 +192,7 @@ $buttonsPropertyList: (
         justify-content: center;
 
         .button {
+            width: 100%;
             justify-content: center;
             
             &:nth-child(odd) {
