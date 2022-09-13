@@ -376,7 +376,7 @@ function lb_custom_offset_navs() {
         'data' => [
             [
                 'type' => 'html',
-                'data' => Timber::compile('@PathViews/components/offset-nav/templates/async-cart-content.twig'),
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/async-cart.twig'),
             ]
         ]
     ];
@@ -402,7 +402,7 @@ function lb_custom_offset_navs() {
         'data' => [
             [
                 'type' => 'html',
-                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry-content.twig'),
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry.twig'),
             ]
         ],
         // 'noClose' => true,
