@@ -72,8 +72,10 @@
             <!-- Offset Navs -->
             {% set newsletter_nav = fn('lb_newsletter_nav') %}
             {% set async_cart_nav = fn('lb_async_cart_nav') %}
+            {% set multicountry_nav = fn('lb_multicountry_nav') %}
             {% include '@PathViews/components/offset-nav/default.twig' with newsletter_nav only %}
             {% include '@PathViews/components/offset-nav/default.twig' with async_cart_nav only %}
+            {% include '@PathViews/components/offset-nav/default.twig' with multicountry_nav only %}
             {% block offsetNavs %}{% endblock %}
 
             {% if page_loader %}

@@ -388,6 +388,24 @@ function lb_async_cart_nav() {
 }
 
 /**
+ * Multicountry nav
+ */
+function lb_multicountry_nav() {
+    return [
+        'id' => 'lb-offsetnav-multicountry',
+        'title' => null,
+        'data' => [
+            [
+                'type' => 'html',
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry-content.twig'),
+            ]
+        ],
+        // 'noClose' => true,
+        'variants' => ['popup']
+    ];
+}
+
+/**
  * Check if current user has role
  */
 function lb_user_has_role($role)
