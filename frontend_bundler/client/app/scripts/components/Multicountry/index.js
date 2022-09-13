@@ -14,7 +14,7 @@ class Multicountry extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
-        
+        console.log('Multicountry');
     }
 
 }
