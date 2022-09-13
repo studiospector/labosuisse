@@ -72,7 +72,7 @@ services:
       - LB_API_URL
     health: /test.html
     internal: false
-    port: 3000
+    port: 8080
     resources:
       - database
     # - queue
