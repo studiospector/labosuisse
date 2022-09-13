@@ -1,11 +1,13 @@
-{% if infobox %}
-    {% include '@PathViews/components/infobox.twig' with infobox only %}
-{% endif %}
+<div id="lb-multicountry-geolocation-content">
+    {% if infobox %}
+        {% include '@PathViews/components/infobox.twig' with infobox only %}
+    {% endif %}
 
-{% if buttons %}
-    <div class="lb-button-group lb-button-group--vertical">
-        {% for cta in buttons %}
-            {% include '@PathViews/components/button.twig' with cta only %}
-        {% endfor %}
-    </div>
-{% endif %}
+    {% if buttons %}
+        <div class="lb-button-group lb-button-group--vertical">
+            {% for cta in buttons %}
+                {% include '@PathViews/components/button.twig' with cta only %}
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
