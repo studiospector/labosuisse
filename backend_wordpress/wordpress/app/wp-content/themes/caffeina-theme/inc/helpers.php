@@ -391,7 +391,7 @@ function lb_custom_offset_navs() {
                 'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry-geolocation.twig'),
             ]
         ],
-        // 'noClose' => true,
+        'noClose' => true,
         'variants' => ['popup']
     ];
 

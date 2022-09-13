@@ -210,6 +210,7 @@
         .lb-offset-nav {
             &__close {
                 height: rem(50);
+                order: 1;
 
                 @include mq(lg) {
                     height: rem(50);
@@ -217,7 +218,15 @@
             }
 
             &__header {
-                justify-content: flex-end;
+                justify-content: space-between;
+
+                &__title {
+                    height: rem(50);
+                    display: flex;
+                    align-items: center;
+                    order: 0;
+                    margin: 0 24px;
+                }
             }
 
             &__dialog {
