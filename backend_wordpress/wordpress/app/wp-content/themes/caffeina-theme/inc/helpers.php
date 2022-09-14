@@ -405,7 +405,87 @@ function lb_custom_offset_navs() {
         'data' => [
             [
                 'type' => 'html',
-                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry.twig'),
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry.twig', [
+                    'content' => [
+                        'infobox' => [
+                            'paragraph' => __("Seleziona il Paese in cui sei per vedere i contenuti locali e acquistare online.", 'labo-suisse-theme')
+                        ],
+                        'form' => [
+                            'select' => [
+                                'id' => 'lb-country',
+                                'label' => __('Paese', 'labo-suisse-theme'),
+                                'placeholder' => null,
+                                'multiple' => false,
+                                'required' => true,
+                                'disabled' => false,
+                                'options' => [
+                                    [
+                                        'value' => 'Al',
+                                        'label' => 'Albania',
+                                    ],
+                                    [
+                                        'value' => 'AT',
+                                        'label' => 'Austria',
+                                    ],
+                                    [
+                                        'value' => 'BE',
+                                        'label' => 'Belgio',
+                                        'icon' => 'cart',
+                                    ],
+                                    [
+                                        'value' => 'FR',
+                                        'label' => 'Francia',
+                                        'icon' => 'cart',
+                                    ],
+                                    [
+                                        'value' => 'FI',
+                                        'label' => 'Finlandia',
+                                    ],
+                                    [
+                                        'value' => 'GE',
+                                        'label' => 'Germania',
+                                        'icon' => 'cart',
+                                    ],
+                                    [
+                                        'value' => 'IR',
+                                        'label' => 'Irlanda',
+                                        'icon' => 'cart',
+                                    ],
+                                    [
+                                        'value' => 'ID',
+                                        'label' => 'Indonesia',
+                                    ],
+                                    [
+                                        'value' => 'IT',
+                                        'label' => 'Italia',
+                                        'icon' => 'cart',
+                                        'selected' => true,
+                                    ],
+                                    [
+                                        'value' => 'RO',
+                                        'label' => 'Romania',
+                                    ],
+                                    [
+                                        'value' => 'PB',
+                                        'label' => 'Paesi Bassi',
+                                        'icon' => 'cart',
+                                    ],
+                                    [
+                                        'value' => 'ES',
+                                        'label' => 'Spagna',
+                                        'icon' => 'cart',
+                                    ],
+                                ],
+                                'variants' => ['quaternary']
+                            ],
+                            'button' => [
+                                'title' => __("Salva", 'labo-suisse-theme'),
+                                'type' => 'button',
+                                'variants' => ['primary'],
+                            ],
+                        ]
+                    ]
+                ]),
             ]
         ],
         // 'noClose' => true,
