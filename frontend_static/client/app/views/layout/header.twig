@@ -23,7 +23,8 @@
             {% if header.language_selector %}
                 <div class="lb-header__top__icons__item lb-header__top__icons__item--lang lb-header__top__icons__item--mobile-hide">
                     {# {% do action('wpml_add_language_selector') %} #}
-                    {{ fn('do_shortcode', '[wpml_language_selector_widget]') }}
+                    {# {{ fn('do_shortcode', '[wpml_language_selector_widget]') }} #}
+                    {{ header.language_selector.label }}
                     {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
                 </div>
             {% endif %}

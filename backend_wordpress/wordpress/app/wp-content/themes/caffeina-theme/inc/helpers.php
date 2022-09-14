@@ -315,10 +315,13 @@ function lb_pagination()
  */
 function lb_header()
 {
-    $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+    // $lang_selector = do_shortcode('[wpml_language_selector_widget]');
 
     return array(
-        'language_selector' => (!empty($lang_selector)) ? true : false,
+        // 'language_selector' => (!empty($lang_selector)) ? true : false,
+        'language_selector' => [
+            'label' => lb_get_current_lang() == 'it' ? 'Italia' : 'English',
+        ],
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'mobile_search' => [
             'type' => 'search',
