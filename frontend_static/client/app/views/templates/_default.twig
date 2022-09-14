@@ -8,7 +8,7 @@
 {% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %}
 {% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %}
 <!DOCTYPE html>
-<html lang="{{ fn('lb_get_current_lang') }}">
+<html lang="{{ fn('lb_get_current_lang') }}"{{ fn('is_admin_bar_showing') ? ' class="lb-is-admin-bar"' : '' }}>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">

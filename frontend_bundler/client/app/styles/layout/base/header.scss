@@ -371,3 +371,33 @@
         }
     }
 }
+
+
+html.lb-is-admin-bar {
+    @media screen and (max-width: 782px) {
+        margin-top: 0 !important;
+    }
+
+    .lb-header,
+    .lb-offset-nav {
+        top: 32px;
+
+        @media screen and (max-width: 782px) {
+            top: 0;
+        }
+    }
+
+    footer {
+        padding-bottom: 26px;
+
+        @media screen and (max-width: 782px) {
+            padding-bottom: 0;
+        }
+    }
+
+    #wpadminbar {
+        @media screen and (max-width: 782px) {
+            display: none;
+        }
+    }
+}
