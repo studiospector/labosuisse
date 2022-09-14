@@ -262,6 +262,32 @@ const dataTertiary = {
     variants: ['tertiary']
 }
 
+// Quaternary
+const dataQuaternary = {
+    id: 'test-select',
+    label: 'Test label',
+    placeholder: null,
+    multiple: false,
+    required: false,
+    disabled: false,
+    options: [
+        {
+            value: 'aaa',
+            label: 'AAA',
+        },
+        {
+            value: 'bbb',
+            label: 'BBB',
+            icon: 'cart',
+        },
+        {
+            value: 'ccc',
+            label: 'CCC',
+        },
+    ],
+    variants: ['quaternary']
+}
+
 storiesOf('UIKit|Select', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -300,3 +326,5 @@ storiesOf('UIKit|Select', module)
     .add('Secondary --- Disabled', () => renderSelect(dataSecondaryDisabled))
     // Tertiary
     .add('Tertiary', () => renderSelect(dataTertiary))
+    // Quaternary
+    .add('Quaternary', () => renderSelect(dataQuaternary))
