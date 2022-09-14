@@ -37,6 +37,21 @@
         text-overflow: ellipsis;
         white-space: nowrap;
 
+        .custom-select-value {
+            display: flex;
+            align-items: center;
+
+            svg {
+                width: 13px;
+                height: 13px;
+                margin-right: 8px;
+            }
+
+            strong {
+                margin-left: 3px;
+            }
+        }
+
         .custom-select-arrow {
             width: 10px;
             height: 3px;
@@ -130,6 +145,16 @@
         &__item {
             padding: 8px 16px;
             font-size: rem(13);
+
+            &__icon {
+                position: absolute;
+                // margin-right: 10px;
+
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
 
             &:hover,
             &--active {
@@ -434,6 +459,93 @@
     }
 
 
+    /**
+     * Quaternary variant
+     */
+    &--quaternary {
+        .custom-select-label {
+            position: absolute;
+            top: 50%;
+            margin-bottom: 0;
+            margin-left: 16.5px;
+            font-size: rem(13);
+            line-height: 1;
+            color: map-get($colors, "black");
+            cursor: text;
+            user-select: none;
+            z-index: 1;
+            transform: translateY(-50%);
+            transition: $transition__base-1;
+        }
+
+        &.is-selected {
+            .custom-select-label {
+                font-size: rem(11);
+                color: map-get($colors, "grey-3");
+                margin-top: 8px;
+                top: 0;
+                transform: translateY(0);
+                transition: $transition__base-1;
+            }
+
+            .custom-select-container {
+                padding-top: 25px;
+                padding-bottom: 8px;
+                border: 1px solid map-get($colors, "black");
+
+                .custom-select-arrow {
+                    transform: translateY(-8px);
+                }
+            }
+
+            .custom-select-value {
+                font-size: rem(13);
+            }
+        }
+
+        .custom-select-container {
+            height: 50px;
+            border: 1px solid map-get($colors, "grey-2");
+
+            &--active {
+                border: 1px solid map-get($colors, "grey-2") !important;
+                border-bottom: 1px solid transparent !important;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+
+                &::after {
+                    content: '';
+                    width: 100%;
+                    height: 1px;
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    background: map-get($colors, "grey-2");
+                }
+            }
+        }
+
+        .custom-select-items {
+            margin-top: 0;
+            border: 1px solid map-get($colors, "grey-2");
+            border-top: 0;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+
+            &__item {
+                display: flex;
+                align-items: center;
+                padding: 16px;
+            }
+        }
+    }
+
+
+    &--with-icons {
+        .custom-select-items__item__value {
+            padding-left: 30px;
+        }
+    }
 }
 
 

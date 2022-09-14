@@ -8,7 +8,7 @@
 {% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %}
 {% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %}
 <!DOCTYPE html>
-<html lang="{{ fn('lb_get_current_lang') }}">
+<html lang="{{ fn('lb_get_current_lang') }}"{{ fn('is_admin_bar_showing') ? ' class="lb-is-admin-bar"' : '' }}>
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -70,10 +70,10 @@
                 } only %}
             {% endblock %}
             <!-- Offset Navs -->
-            {% set newsletter_nav = fn('lb_newsletter_nav') %}
-            {% set async_cart_nav = fn('lb_async_cart_nav') %}
-            {% include '@PathViews/components/offset-nav/default.twig' with newsletter_nav only %}
-            {% include '@PathViews/components/offset-nav/default.twig' with async_cart_nav only %}
+            {% set custom_offset_navs = fn('lb_custom_offset_navs') %} 
+            {% for offset_nav in custom_offset_navs %}
+                {% include '@PathViews/components/offset-nav/default.twig' with offset_nav only %}
+            {% endfor %}
             {% block offsetNavs %}{% endblock %}
 
             {% if page_loader %}

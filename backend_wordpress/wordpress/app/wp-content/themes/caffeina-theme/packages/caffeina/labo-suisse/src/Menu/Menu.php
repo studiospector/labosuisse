@@ -57,7 +57,10 @@ class Menu
                 ],
                 [
                     'type' => 'lang-selector',
-                    'language_selector' => (!empty($lang_selector)) ? true : false,
+                    // 'language_selector' => (!empty($lang_selector)) ? true : false,
+                    'language_selector' => [
+                        'label' => lb_get_current_lang() == 'it' ? 'Italia' : 'English',
+                    ],
                 ],
             ]
         ];

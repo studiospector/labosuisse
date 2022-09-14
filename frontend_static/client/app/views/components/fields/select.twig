@@ -16,6 +16,6 @@
 >
     <option value>{{ placeholder }}</option>
     {% for option in options|default([]) %}
-        <option value="{{ option.value }}">{{ option.label }}</option>
+        <option value="{{ option.value }}"{{ option.selected ? ' selected="selected"' : '' }}{{ option.icon ? ' data-option-icon="' ~ option.icon ~ '"' : '' }}>{{ option.label }}</option>
     {% endfor %}
 </select>

@@ -186,6 +186,20 @@ $buttonsPropertyList: (
             justify-content: center;
         }
     }
+
+    &--vertical {
+        flex-direction: column;
+        justify-content: center;
+
+        .button {
+            width: 100%;
+            justify-content: center;
+            
+            &:nth-child(odd) {
+                margin-right: 0;
+            }
+        }
+    }
 }
 
 .button {

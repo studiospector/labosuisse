@@ -237,32 +237,32 @@
                         background: map-get($colors, 'white');
                     }
 
-                    &--lang-selector {
-                        padding: 0 1.5rem;
+                    // &--lang-selector {
+                    //     padding: 0 1.5rem;
 
-                        .lb-menu__item-icon {
-                            margin: 0;
-                        }
+                    //     .lb-menu__item-icon {
+                    //         margin: 0;
+                    //     }
 
-                        .wpml-ls {
-                            width: 100%;
-                            padding: 0;
+                    //     .wpml-ls {
+                    //         width: 100%;
+                    //         padding: 0;
 
-                            .wpml-ls-item {
-                                width: 100%;
+                    //         .wpml-ls-item {
+                    //             width: 100%;
 
-                                .wpml-ls-link {
-                                    width: 100%;
-                                    display: inline-block;
-                                    padding: 16px 15px;
-                                    font-weight: 300;
-                                    color: map-get($colors, "black");
-                                    text-decoration: none;
-                                }
-                            }
+                    //             .wpml-ls-link {
+                    //                 width: 100%;
+                    //                 display: inline-block;
+                    //                 padding: 16px 15px;
+                    //                 font-weight: 300;
+                    //                 color: map-get($colors, "black");
+                    //                 text-decoration: none;
+                    //             }
+                    //         }
     
-                        }
-                    }
+                    //     }
+                    // }
                 }
 
                 &__item-icon {
