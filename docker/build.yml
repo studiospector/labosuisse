@@ -17,6 +17,23 @@ services:
     depends_on:
       - frontend_bundler
       - frontend_static
+  admin_backend_wordpress:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_wordpress'
+    build:
+      context: ..
+      dockerfile: ./backend_wordpress/wordpress/docker/Dockerfile
+      args:
+          CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
+          CI_REGISTRY: '${CI_REGISTRY}'
+          CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
+          CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
+          LB_API_TOKEN: ${LB_API_TOKEN}
+          LB_API_URL: ${LB_API_URL}
+    environment:
+      WITH_WORDPRESS: 1
+    depends_on:
+      - frontend_bundler
+      - frontend_static
   backup_service:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
     build:

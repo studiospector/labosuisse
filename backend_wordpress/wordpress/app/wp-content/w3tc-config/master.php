@@ -189,9 +189,10 @@
     ],
     "pgcache.late_init": false,
     "pgcache.late_caching": false,
-    "pgcache.mirrors.enabled": false,
+    "pgcache.mirrors.enabled": true,
     "pgcache.mirrors.home_urls": [
-        ""
+        "cms.labo-website-2021.localhost",
+        "www.labo-website-2021.localhost"
     ],
     "pgcache.reject.front_page": false,
     "pgcache.reject.logged": true,
