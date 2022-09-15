@@ -4,18 +4,29 @@ namespace Caffeina\LaboSuisse\Api\Multicountry;
 
 class Geolocation
 {
+    private $curr_lang;
+
+    public function __construct($curr_lang)
+    {
+        $this->curr_lang = strtoupper($curr_lang);
+    }
+
     public function get()
     {
-        $geolocate = $this->geolocate();
-        $response = [
-            'geolocation' => $geolocate,
-            'infobox' => [
-                'paragraph' => "Looks like you're in Spain!<br>You want to visit the Labo Suisse International Website?"
-            ],
-            'buttons' => [
+        $text = '';
+        $buttons = [];
+        $geolocation = $this->geolocate();
+
+        if ($geolocation['data']['country'] == 'IT' && $this->curr_lang == 'IT') {
+            return null;
+        } else if ($geolocation['data']['country'] != 'IT' && $this->curr_lang != 'IT') {
+            return null;
+        } else if ($geolocation['data']['country'] != 'IT' && $this->curr_lang == 'IT') {
+            $text = "Looks like you're in {$geolocation['data']['country']}!<br>You want to visit the Labo Suisse International Website?";
+            $buttons = [
                 [
                     'title' => 'Confirm',
-                    'url' => '#',
+                    'url' => home_url() . '/en',
                     'variants' => ['primary'],
                 ],
                 [
@@ -25,6 +36,33 @@ class Geolocation
                     'iconEnd' => [],
                     'variants' => ['quaternary'],
                 ]
+            ];
+        } else if ($geolocation['data']['country'] == 'IT' && $this->curr_lang != 'IT') {
+            $text = "Sembra tu sia in Italia!<br>Vuoi visitare il sito Italiano di Labo Suisse?";
+            $buttons = [
+                [
+                    'title' => 'Conferma',
+                    'url' => home_url(),
+                    'variants' => ['primary'],
+                ],
+                [
+                    'title' => 'No, continua con il sito Internazionale',
+                    'class' => 'js-close-offset-nav',
+                    'attributes' => 'data-target-offset-nav="lb-offsetnav-multicountry-geolocation"',
+                    'iconEnd' => [],
+                    'variants' => ['quaternary'],
+                ]
+            ];
+        }
+
+        $response = [
+            'curr_lang' => $this->curr_lang,
+            'geolocation' => $geolocation,
+            'data' => [
+                'infobox' => [
+                    'paragraph' => $text,
+                ],
+                'buttons' => $buttons
             ]
         ];
 
@@ -33,16 +71,12 @@ class Geolocation
 
     private function geolocate()
     {
-        $wc_geo_instance  = new \WC_Geolocation();
-        $user_ip = $wc_geo_instance->get_ip_address();
-        $user_geodata_wc = $wc_geo_instance->geolocate_ip($user_ip);
-
-        $maxmind_geo_instance  = new \WC_Integration_MaxMind_Geolocation();
-        $user_geodata_maxmind = $maxmind_geo_instance->get_geolocation(null, $user_ip);
+        $user_ip = \WC_Geolocation::get_external_ip_address();
+        $user_geodata_wc = \WC_Geolocation::geolocate_ip($user_ip);
         
         return [
-            'wc' => $user_geodata_wc,
-            'maxmind' => $user_geodata_maxmind,
+            'ip' => $user_ip,
+            'data' => $user_geodata_wc,
         ];
     }
 }

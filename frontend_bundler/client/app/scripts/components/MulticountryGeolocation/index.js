@@ -24,12 +24,15 @@ class MulticountryGeolocation extends Component {
 
         if (!Boolean(this.cookie)) {
             this.getGeolocationData().then((res) => {
-                this.render(res).then(() => {
-                    window.openOffsetNav('lb-offsetnav-multicountry-geolocation')
-        
-                    const buttons = qsa('#lb-multicountry-geolocation-content .button')
-                    on(buttons, 'click', this.setCookieOnClick)
-                })
+                console.log(res);
+                if (res) {
+                    this.render(res).then(() => {
+                        window.openOffsetNav('lb-offsetnav-multicountry-geolocation')
+            
+                        const buttons = qsa('#lb-multicountry-geolocation-content .button')
+                        on(buttons, 'click', this.setCookieOnClick)
+                    })
+                }
             })
         }
     }
@@ -43,7 +46,13 @@ class MulticountryGeolocation extends Component {
         let response = []
         
         try {
-            let { data } = await axiosClient.get('/wp-json/v1/multicountry-geolocation')
+            const currentLang = getCookie('wp-wpml_current_language')
+
+            if (typeof currentLang !== 'string') {
+                throw "currentLang: Not a string";
+            }
+            
+            let { data } = await axiosClient.get('/wp-json/v1/multicountry-geolocation', {params: {lang: currentLang}})
             response = data
         } catch (error) {
             console.error(error)
@@ -65,7 +74,7 @@ class MulticountryGeolocation extends Component {
     render = async (data) => {
         // Load twig template
         const template = await templateLoader('components/offset-nav/templates/multicountry/geolocation-content.twig')
-        const html = template.render(data)
+        const html = template.render(data.data)
 
         this.el.innerHTML = html
     }
