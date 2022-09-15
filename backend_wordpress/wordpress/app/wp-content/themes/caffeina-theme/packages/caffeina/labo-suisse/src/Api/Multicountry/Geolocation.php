@@ -71,7 +71,7 @@ class Geolocation
 
     private function geolocate()
     {
-        $user_ip = \WC_Geolocation::get_external_ip_address();
+        $user_ip = \WC_Geolocation::get_ip_address();
         $user_geodata_wc = \WC_Geolocation::geolocate_ip($user_ip);
         
         return [
