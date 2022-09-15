@@ -75,6 +75,7 @@ class Geolocation
         $user_geodata_wc = \WC_Geolocation::geolocate_ip($user_ip);
         
         return [
+            'external_ip' => \WC_Geolocation::get_external_ip_address(),
             'ip' => $user_ip,
             'data' => $user_geodata_wc,
         ];
