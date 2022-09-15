@@ -46,7 +46,7 @@ function get_archive(WP_REST_Request $request)
 
 function get_multicountry_geolocation(WP_REST_Request $request)
 {
-    return (new Geolocation($request))->get();
+    return (new Geolocation($request['lang']))->get();
 }
 
 add_action( 'rest_api_init', function() {
