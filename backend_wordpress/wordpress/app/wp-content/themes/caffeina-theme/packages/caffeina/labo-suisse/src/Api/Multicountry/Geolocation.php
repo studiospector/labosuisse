@@ -74,11 +74,15 @@ class Geolocation
     {
         $user_ip = \WC_Geolocation::get_ip_address();
         $user_geodata_wc = \WC_Geolocation::geolocate_ip($user_ip);
-        
+
         return [
             'external_ip' => \WC_Geolocation::get_external_ip_address(),
             'ip' => $user_ip,
             'data' => $user_geodata_wc,
+            'header' => [
+                'HTTP_X_FORWARDED_FOR' => $_SERVER['HTTP_X_FORWARDED_FOR'],
+                'REMOTE_ADDR' => $_SERVER['REMOTE_ADDR'],
+            ]
         ];
     }
 }
