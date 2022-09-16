@@ -72,3 +72,55 @@ label.lb-wc-label {
         }
     }
 }
+
+
+
+.lb-wc-custom-fields {
+    .form-row {
+        label {
+            display: block;
+            margin-bottom: 5px;
+            margin-left: 16.5px;
+            font-size: rem(11);
+            line-height: 1;
+            user-select: none;
+            cursor: auto;
+            color: map-get($colors, "grey-3");
+            z-index: 1;
+            transition: all .2s ease;
+        }
+
+        .woocommerce-input-wrapper {
+            display: block;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            position: relative;
+            padding: 16.5px;
+            background-color: map-get($colors, "white");
+            border: 1px solid map-get($colors, "grey-3");
+            border-radius: 4px;
+            font-size: rem(13);
+            font-weight: 400;
+
+            &::-webkit-input-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+            &:-moz-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+            &::-moz-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+            &:-ms-input-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+        }
+    }
+}
