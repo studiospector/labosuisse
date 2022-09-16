@@ -743,6 +743,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             public function wc_new_order_column_data($column) {
                 global $post;
+                $output = '';
                 $settings = get_option('calicantus_options');
                 if ('gestione_column' === $column) {
                     $order = wc_get_order($post->ID);
@@ -784,7 +785,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $ftps = new Ftps($this->ftps_host, $this->ftps_port, $this->ftps_user, $this->ftps_password);
                         if ($ftps->checkConnection())
                             $documents = $ftps->lsDirectory($this->ftp_primario_documentation);
-                        if (is_array($documents)) {
+                        if (isset($documents) && is_array($documents)) {
                             update_option('calicantus_document_cache_ad', $documents);
                             $this->setCacheValid('agilis_documentation');
                         }
@@ -913,7 +914,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         foreach ($availabilities as $availability) {
                             $sku = (string) $availability->sku;
                             $product_id = wc_get_product_id_by_sku($sku);
-
+                            
                             if ($product_id > 0) {
                                 $status = 'outofstock';
                                 if ($availability->availability > 0)
@@ -1195,7 +1196,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $delivery_line->addChild('delivery_line_type', 'A');
                         $delivery_line->addChild('sku', $product_sku);
                         $delivery_line->addChild('sku_parent', '');
-                        $sku_description = $delivery_line->addChild('sku_description', $item_data['name']);
+                        $sku_description = $delivery_line->addChild('sku_description', strip_tags($item_data['name']));
                         $sku_description->addAttribute('lang', strtolower($lang));
                         $delivery_line->addChild('qty', $item_data['quantity']);
 
