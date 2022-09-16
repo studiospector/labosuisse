@@ -156,22 +156,24 @@ function lb_variable_product_price($v_price, $v_product)
 add_filter('woocommerce_form_field_args', 'lb_custom_form_field_args', 10, 3);
 function lb_custom_form_field_args($args, $key, $value)
 {
-    if (in_array($args['type'], ['text', 'number', 'email', 'tel', 'password'])) {
-        $args['input_class'] = ['js-custom-input'];
-        $args['placeholder'] = ($args['placeholder'] ? $args['placeholder'] : $args['label']) . ($args['required'] ? '*' : '');
-
-        $args['custom_attributes'] = [
-            'data-label' => ($args['label'] ? $args['label'] : $args['placeholder']) . ($args['required'] ? '*' : ''),
-            'data-variant' => 'tertiary',
-        ];
-        $args['label'] = '';
-    }
-    else if (in_array($args['type'], ['country', 'state'])) {
-        $args['label_class'] = ['lb-wc-label'];
-    }
-    else if (in_array($args['type'], ['textarea'])) {
-        $args['class'] = ['custom-input', 'custom-field'];
-        $args['label_class'] = ['lb-wc-label'];
+    if (!is_checkout()) {
+        if (in_array($args['type'], ['text', 'number', 'email', 'tel', 'password'])) {
+            $args['input_class'] = ['js-custom-input'];
+            $args['placeholder'] = ($args['placeholder'] ? $args['placeholder'] : $args['label']) . ($args['required'] ? '*' : '');
+    
+            $args['custom_attributes'] = [
+                'data-label' => ($args['label'] ? $args['label'] : $args['placeholder']) . ($args['required'] ? '*' : ''),
+                'data-variant' => 'tertiary',
+            ];
+            $args['label'] = '';
+        }
+        else if (in_array($args['type'], ['country', 'state'])) {
+            $args['label_class'] = ['lb-wc-label'];
+        }
+        else if (in_array($args['type'], ['textarea'])) {
+            $args['class'] = ['custom-input', 'custom-field'];
+            $args['label_class'] = ['lb-wc-label'];
+        }
     }
 
     return $args;

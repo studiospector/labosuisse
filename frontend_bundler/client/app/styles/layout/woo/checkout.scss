@@ -124,5 +124,18 @@
         .ppc-button-wrapper {
             padding: 0 15px;
         }
+
+        .woocommerce-terms-and-conditions-wrapper {
+            .form-row {
+                label {
+                    margin-left: 0;
+                    margin-bottom: 0;
+    
+                    span {
+                        pointer-events: all;
+                    }
+                }
+            }
+        }
     }
 }
