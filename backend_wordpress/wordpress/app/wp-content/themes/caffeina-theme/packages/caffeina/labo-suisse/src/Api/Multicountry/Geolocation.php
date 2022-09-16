@@ -17,9 +17,10 @@ class Geolocation
         $buttons = [];
         $geolocation = $this->geolocate();
 
-        if ($geolocation['data']['country'] == 'IT' && $this->curr_lang == 'IT') {
-            return null;
-        } else if ($geolocation['data']['country'] != 'IT' && $this->curr_lang != 'IT') {
+        if (
+            ($geolocation['data']['country'] == 'IT' && $this->curr_lang == 'IT') ||
+            ($geolocation['data']['country'] != 'IT' && $this->curr_lang != 'IT')
+        ) {
             return null;
         } else if ($geolocation['data']['country'] != 'IT' && $this->curr_lang == 'IT') {
             $text = "Looks like you're in {$geolocation['data']['country']}!<br>You want to visit the Labo Suisse International Website?";
