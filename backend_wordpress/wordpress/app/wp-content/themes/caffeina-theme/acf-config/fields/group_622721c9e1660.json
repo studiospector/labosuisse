@@ -62,6 +62,26 @@
             "height": ""
         },
         {
+            "key": "field_63233d0936950",
+            "label": "Provincia",
+            "name": "lb_stores_province",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_6228c3a48684c",
             "label": "Orari",
             "name": "",
@@ -238,5 +258,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647337034
+    "modified": 1663255067
 }
