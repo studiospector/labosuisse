@@ -9,6 +9,10 @@ function setSettings()
     $settings->{'objectcache.memcached.servers'}[0] = getenv('MEMCACHED_URL');
     $settings->{'minify.memcached.servers'}[0] = getenv('MEMCACHED_URL');
 
+    $settings->{'pgcache.mirrors.enabled'} = true;
+    $settings->{'pgcache.mirrors.home_urls'}[0] =  getenv('ADMIN_URL');
+    $settings->{'pgcache.mirrors.home_urls'}[1] =  getenv('FRONTEND_URL');
+
     save($settings);
 }
 
