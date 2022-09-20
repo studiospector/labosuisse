@@ -13,18 +13,78 @@ class Geolocation
 
     public function get()
     {
-        $text = '';
-        $buttons = [];
+        $payload = [];
         $geolocation = $this->geolocate();
 
+        $countryCode = $geolocation['countryCode'];
+        $country = $geolocation['country'];
+
         if (
-            ($geolocation['data']['country'] == 'IT' && $this->curr_lang == 'IT') ||
-            ($geolocation['data']['country'] != 'IT' && $this->curr_lang != 'IT')
+            ($countryCode == 'IT' && $this->curr_lang == 'IT') ||
+            ($countryCode != 'IT' && $this->curr_lang != 'IT')
         ) {
             return null;
-        } else if ($geolocation['data']['country'] != 'IT' && $this->curr_lang == 'IT') {
-            $text = "Looks like you're in {$geolocation['data']['country']}!<br>You want to visit the Labo Suisse International Website?";
-            $buttons = [
+        }
+
+        if ($countryCode != 'IT' && $this->curr_lang == 'IT') {
+            $payload = $this->redirectToEnglishSite($country);
+        } else if ($countryCode == 'IT' && $this->curr_lang != 'IT') {
+            $payload = $this->redirectToMainSite();
+        }
+
+        return [
+            'curr_lang' => $this->curr_lang,
+            'geolocation' => $geolocation,
+            'data' => [
+                'infobox' => [
+                    'paragraph' => $payload['text'],
+                ],
+                'buttons' => $payload['buttons']
+            ]
+        ];
+    }
+
+    private function geolocate()
+    {
+        $ip = \WC_Geolocation::get_ip_address();
+        $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
+
+        //for local environment
+        if (empty($geolocationInfo['country'])) {
+            $ip = \WC_Geolocation::get_external_ip_address();
+            $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
+        }
+
+        return array_merge($geolocationInfo, $this->getLocationInfo($ip));
+    }
+
+    private function getLocationInfo($ip)
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_URL => "http://ip-api.com/json/?{$ip}",
+            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+            CURLOPT_RETURNTRANSFER => true
+        ));
+
+        $response = json_decode(curl_exec($curl));
+
+        curl_close($curl);
+
+        return [
+            'country' => $response->country,
+            'countryCode' => $response->countryCode,
+        ];
+    }
+
+    private function redirectToEnglishSite($country)
+    {
+        return [
+            'text' => "Looks like you're in {$country}!<br>You want to visit the Labo Suisse International Website?",
+
+            'buttons' => [
                 [
                     'title' => 'Confirm',
                     'url' => home_url() . '/en',
@@ -37,10 +97,15 @@ class Geolocation
                     'iconEnd' => [],
                     'variants' => ['quaternary'],
                 ]
-            ];
-        } else if ($geolocation['data']['country'] == 'IT' && $this->curr_lang != 'IT') {
-            $text = "Sembra tu sia in Italia!<br>Vuoi visitare il sito Italiano di Labo Suisse?";
-            $buttons = [
+            ]
+        ];
+    }
+
+    private function redirectToMainSite()
+    {
+        return [
+            'text' => "Sembra tu sia in Italia!<br>Vuoi visitare il sito Italiano di Labo Suisse?",
+            'buttons' => [
                 [
                     'title' => 'Conferma',
                     'url' => home_url(),
@@ -53,35 +118,6 @@ class Geolocation
                     'iconEnd' => [],
                     'variants' => ['quaternary'],
                 ]
-            ];
-        }
-
-        $response = [
-            'curr_lang' => $this->curr_lang,
-            'geolocation' => $geolocation,
-            'data' => [
-                'infobox' => [
-                    'paragraph' => $text,
-                ],
-                'buttons' => $buttons
-            ]
-        ];
-
-        return $response;
-    }
-
-    private function geolocate()
-    {
-        $user_ip = \WC_Geolocation::get_ip_address();
-        $user_geodata_wc = \WC_Geolocation::geolocate_ip($user_ip);
-
-        return [
-            'external_ip' => \WC_Geolocation::get_external_ip_address(),
-            'ip' => $user_ip,
-            'data' => $user_geodata_wc,
-            'header' => [
-                'HTTP_X_FORWARDED_FOR' => $_SERVER['HTTP_X_FORWARDED_FOR'],
-                'REMOTE_ADDR' => $_SERVER['REMOTE_ADDR'],
             ]
         ];
     }
