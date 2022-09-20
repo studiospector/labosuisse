@@ -1,0 +1,29 @@
+<wpml-config>
+  <custom-fields>
+    <custom-field action="translate">cor_check_opt</custom-field>
+    <custom-field action="translate">cor_price_opt</custom-field>
+    <custom-field action="translate">cor_enable_bluk</custom-field>
+    <custom-field action="translate">cor_countries</custom-field>
+    <custom-field action="translate">cor_payment_opt</custom-field>
+    <custom-field action="translate">cor_vis_opt</custom-field>
+    <custom-field action="translate">cor_r_message</custom-field>
+    <custom-field action="translate">cor_price_text</custom-field>
+    <custom-field action="translate">cor_add_text</custom-field>
+    <custom-field action="translate">cor_pages</custom-field>
+    <custom-field action="translate">cor_add_pages</custom-field>
+    <custom-field action="translate">cor_product</custom-field>
+    <custom-field action="translate">cor_categories</custom-field>
+    <custom-field action="translate">cor_tags</custom-field>
+    <custom-field action="translate">cor_restriction_rule</custom-field>
+    <custom-field action="translate">cor_restricted_countries</custom-field>
+    <custom-field action="translate">cor_product_add</custom-field>
+    <custom-field action="translate">cor_product_price</custom-field>
+    <custom-field action="translate">cor_list_product_all</custom-field>
+    <custom-field action="translate">cor_countries_for_specific</custom-field>
+    <custom-field action="translate">cor_countries_for_specific_restriction</custom-field>
+    <custom-field action="translate">cor_list_product_specific_c</custom-field>
+    <custom-field action="translate">cor_list_product_specific_restrict</custom-field>
+    <custom-field action="translate">cor_role_priority</custom-field>
+    <custom-field action="translate">cor_rule_priority</custom-field>
+  </custom-fields>
+</wpml-config>

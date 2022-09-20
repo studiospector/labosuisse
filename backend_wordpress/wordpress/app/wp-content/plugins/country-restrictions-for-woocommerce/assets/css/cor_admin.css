@@ -1,0 +1,57 @@
+.line{
+	height: 2px gray;
+}
+.cor_all_cats{
+	border: 1px solid gray;
+	width: 60%;
+	max-height: 250px;
+	overflow: auto;
+	border-radius: 3px;
+}
+.cor_child_cat{
+	padding-left: 20px;
+	margin-top: 5px;
+}
+.cor_form{
+	width: 100%;
+	padding-left: 10px;
+}
+.cor-table{
+	width: 100%;
+}
+.width_input_text{
+	text-align: left;
+	width: 30%;
+}
+.width_input{
+	width: 65% !important;
+	overflow-x: hidden;
+}
+.country_input_mb{
+	width: 60%	;
+}
+.select_input_width{
+	width: 60%;
+}
+.cor_par_cat{
+	padding-left: 10px;
+}
+.afrfq_input_class{
+	width: 60%;
+	min-height: 100px;
+}
+.general_input_class{
+	width: 50%;
+	min-height: 100px;
+}
+
+.general_settings_text_size{
+	width: 400px;
+}
+.general_settings_text_size_text_area{
+	width: 400px;
+	height: 100px;
+}
+.hidden{
+	display: none;
+}
