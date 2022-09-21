@@ -75,26 +75,3 @@ add_filter('rest_url', function ($url) {
 
     return $url;
 });
-
-
-function db_crontest_schedules( $schedules ) {
-    $schedules['five_minutes'] = array(
-        'interval' => 300,
-        'display'  => 'Once Every 5 Minutes',
-    );
-
-    return $schedules;
-}
-add_filter( 'cron_schedules', 'db_crontest_schedules', 10, 1 );
-
-function debug_cron_event()
-{
-    error_log(print_r('here', true));
-    wp_mail('matteo.meloni@caffeina.com', 'Testing a cron event', 'This is an automatic WordPress email for testing a cron event.');
-}
-
-add_action( 'debug_cron_event_hook', 'debug_cron_event' );
-
-if ( ! wp_next_scheduled( 'debug_cron_event_hook' ) ) {
-    wp_schedule_event( time(), 'five_minutes', 'debug_cron_event_hook' );
-}
