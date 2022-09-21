@@ -16,8 +16,8 @@ class Geolocation
         $payload = [];
         $geolocation = $this->geolocate();
 
-        $countryCode = $geolocation['countryCode'];
-        $country = $geolocation['country'];
+        $countryCode = $geolocation['data']['countryCode'];
+        $country = $geolocation['data']['country'];
 
         if (
             ($countryCode == 'IT' && $this->curr_lang == 'IT') ||
@@ -47,15 +47,23 @@ class Geolocation
     private function geolocate()
     {
         $ip = \WC_Geolocation::get_ip_address();
+        $externalIp = null;
         $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
 
         //for local environment
         if (empty($geolocationInfo['country'])) {
-            $ip = \WC_Geolocation::get_external_ip_address();
+            $externalIp = $ip = \WC_Geolocation::get_external_ip_address();
             $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
         }
 
-        return array_merge($geolocationInfo, $this->getLocationInfo($ip));
+        return [
+            'data' => array_merge($geolocationInfo, $this->getLocationInfo($ip)),
+            'ip' => $ip,
+            'external' => $externalIp,
+            'geoInfo' => $geolocationInfo,
+            'geoInfoApi' => $this->getLocationInfo($ip)
+        ];
+//        return array_merge($geolocationInfo, $this->getLocationInfo($ip));
     }
 
     private function getLocationInfo($ip)
@@ -64,7 +72,7 @@ class Geolocation
 
         curl_setopt_array($curl, array(
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_URL => "http://ip-api.com/json/?{$ip}",
+            CURLOPT_URL => "http://ip-api.com/json/{$ip}",
             CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
             CURLOPT_RETURNTRANSFER => true
         ));
@@ -76,6 +84,7 @@ class Geolocation
         return [
             'country' => $response->country,
             'countryCode' => $response->countryCode,
+            'ip' => $ip
         ];
     }
 
