@@ -16,8 +16,8 @@ class Geolocation
         $payload = [];
         $geolocation = $this->geolocate();
 
-        $countryCode = $geolocation['data']['countryCode'];
-        $country = $geolocation['data']['country'];
+        $countryCode = $geolocation['countryCode'];
+        $country = $geolocation['country'];
 
         if (
             ($countryCode == 'IT' && $this->curr_lang == 'IT') ||
@@ -47,23 +47,15 @@ class Geolocation
     private function geolocate()
     {
         $ip = \WC_Geolocation::get_ip_address();
-        $externalIp = null;
         $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
 
         //for local environment
         if (empty($geolocationInfo['country'])) {
-            $externalIp = $ip = \WC_Geolocation::get_external_ip_address();
+            $ip = \WC_Geolocation::get_external_ip_address();
             $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
         }
 
-        return [
-            'data' => array_merge($geolocationInfo, $this->getLocationInfo($ip)),
-            'ip' => $ip,
-            'external' => $externalIp,
-            'geoInfo' => $geolocationInfo,
-            'geoInfoApi' => $this->getLocationInfo($ip)
-        ];
-//        return array_merge($geolocationInfo, $this->getLocationInfo($ip));
+        return array_merge($geolocationInfo, $this->getLocationInfo($ip));
     }
 
     private function getLocationInfo($ip)
@@ -83,8 +75,7 @@ class Geolocation
 
         return [
             'country' => $response->country,
-            'countryCode' => $response->countryCode,
-            'ip' => $ip
+            'countryCode' => $response->countryCode
         ];
     }
 
