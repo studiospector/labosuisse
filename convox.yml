@@ -24,6 +24,7 @@ services:
       - OFFLOAD_AWS_BUCKET
       - OFFLOAD_AWS_ACCESS_ID
       - OFFLOAD_AWS_SECRET
+      - DISABLE_WP_CRON
       # NEW RELIC
       - NEW_RELIC_APP_NAME
       - NEW_RELIC_LICENSE_KEY
@@ -64,6 +65,7 @@ services:
       - OFFLOAD_AWS_BUCKET
       - OFFLOAD_AWS_ACCESS_ID
       - OFFLOAD_AWS_SECRET
+      - DISABLE_WP_CRON
       # NEW RELIC
       - NEW_RELIC_APP_NAME
       - NEW_RELIC_LICENSE_KEY
@@ -90,3 +92,9 @@ services:
       count: 1-1
       cpu: 512
       memory: 1024
+
+timers:
+  wpcron:
+    command: "php /var/www/html/wp-cron.php"
+    schedule: "* * * * *"
+    service: cms

@@ -41,6 +41,7 @@ services:
       POSTINO_CAFF_MAIL_SENDER: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER}'
       POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
       WITH_REDIS: 1
+      DISABLE_WP_CRON: '${DISABLE_WP_CRON}'
     depends_on:
       - storage_mysql
       - frontend_bundler
@@ -105,6 +106,7 @@ services:
       POSTINO_CAFF_MAIL_SENDER: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER}'
       POSTINO_CAFF_MAIL_SENDER_NAME: '${BACKEND_WP_POSTINO_CAFF_MAIL_SENDER_NAME}'
       WITH_REDIS: 1
+      DISABLE_WP_CRON: '${DISABLE_WP_CRON}'
     depends_on:
       - storage_mysql
       - frontend_bundler
