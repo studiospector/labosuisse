@@ -90,3 +90,9 @@ services:
       count: 1-1
       cpu: 512
       memory: 1024
+
+timers:
+  wpcron:
+    command: php /var/www/html/wp-cron.ph
+    schedule: "* * * * *"
+    service: cms
