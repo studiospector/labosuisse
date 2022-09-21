@@ -64,7 +64,7 @@ class Geolocation
 
         curl_setopt_array($curl, array(
             CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_URL => "http://ip-api.com/json/?{$ip}",
+            CURLOPT_URL => "http://ip-api.com/json/{$ip}",
             CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
             CURLOPT_RETURNTRANSFER => true
         ));
@@ -75,7 +75,7 @@ class Geolocation
 
         return [
             'country' => $response->country,
-            'countryCode' => $response->countryCode,
+            'countryCode' => $response->countryCode
         ];
     }
 
