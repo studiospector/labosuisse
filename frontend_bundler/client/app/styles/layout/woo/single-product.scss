@@ -179,6 +179,10 @@
                 margin-right: 8px;
             }
 
+            &:empty {
+                display: none;
+            }
+
             /* In case of variation management in JS */
             .price {
                 margin: 0;

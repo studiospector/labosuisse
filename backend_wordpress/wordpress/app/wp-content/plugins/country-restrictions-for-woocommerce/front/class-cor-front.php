@@ -749,7 +749,7 @@ if ( ! class_exists( 'Cor_Front' ) ) {
 								if (in_array(get_the_ID() , (array) $this->addf_cor_check_rule_for_product_merge( $rule->ID ))) { 
 									remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart' );
 									if ( '1' == $hide_add_to_cart_opt) {
-										echo ' ';
+										echo apply_filters('lb_multicountry_hide_add_to_cart_btn', '');
 										return;
 									} elseif ( '2' == $hide_add_to_cart_opt) {
 										?>
