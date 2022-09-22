@@ -239,17 +239,17 @@ function lb_wc_header_add_to_cart_fragment( $fragments ) {
 /**
  * Add custom buttons on multicountry restriction for add to cart
  */
-add_filter('lb_multicountry_hide_add_to_cart_btn', 'lb_multicountry_hide_add_to_cart_btn_callback', 10, 1);
-function lb_multicountry_hide_add_to_cart_btn_callback($content)
-{
-    $lang = lb_get_current_lang();
-    $labo_in_the_world_link = get_page_link(get_field('lb_labo_in_the_world_page', 'option'));
+// add_filter('lb_multicountry_hide_add_to_cart_btn', 'lb_multicountry_hide_add_to_cart_btn_callback', 10, 1);
+// function lb_multicountry_hide_add_to_cart_btn_callback($content)
+// {
+//     $lang = lb_get_current_lang();
+//     $labo_in_the_world_link = get_page_link(get_field('lb_labo_in_the_world_page', 'option'));
 
-    $content = Timber::compile('@PathViews/components/button.twig', [
-        'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
-        'url' => $lang != 'it' ? $labo_in_the_world_link : get_post_type_archive_link('lb-store'),
-        'variants' => ['tertiary'],
-    ]);
+//     $content = Timber::compile('@PathViews/components/button.twig', [
+//         'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
+//         'url' => $lang != 'it' ? $labo_in_the_world_link : get_post_type_archive_link('lb-store'),
+//         'variants' => ['tertiary'],
+//     ]);
 
-    return $content;
-}
+//     return $content;
+// }

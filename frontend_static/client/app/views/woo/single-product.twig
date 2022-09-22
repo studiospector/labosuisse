@@ -9,7 +9,7 @@
     {{ parent() }}
 
     {# Sticky Header #}
-    {% if isInStock %}
+    {% if stickyHeader.show %}
         {% set stickyHeaderImage = fn('get_field', 'lb_product_stickyheader_img') %}
         <!-- Header Sticky Product -->
         {% include '@PathViews/layout/header-sticky-product.twig' %}
