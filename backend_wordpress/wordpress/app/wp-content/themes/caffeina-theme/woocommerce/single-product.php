@@ -38,9 +38,12 @@ $context['post'] = Timber::get_post();
 // Base Product
 $product = wc_get_product($context['post']->ID);
 $context['product'] = $product;
-$context['isInStock'] = $product->is_in_stock();
 
 // Sticky Header
+$context['stickyHeader']['show'] = true;
+if (!$product->is_in_stock() || !$product->is_purchasable()) {
+    $context['stickyHeader']['show'] = false;
+}
 $context['stickyHeader']['price'] = $product->get_price_html();
 $context['stickyHeader']['cartUrlLabel'] = __('Aggiungi al carrello', 'labo-suisse-theme');
 

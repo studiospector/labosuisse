@@ -34,7 +34,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
                                                                                                                                                                                                                                                                                             ?>">
     <?php do_action('woocommerce_before_variations_form'); ?>
 
-    <?php if (!$product->is_in_stock()) : ?>
+    <?php if (!$product->is_in_stock() || !$product->is_purchasable()) : ?>
         <?php
             $lang = lb_get_current_lang();
             $labo_in_the_world_link = get_page_link( get_field('lb_labo_in_the_world_page', 'option') );
