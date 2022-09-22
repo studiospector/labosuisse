@@ -2,12 +2,12 @@
 # This file is distributed under the same license as the Plugins - User Role Editor - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-03-01 16:02:02+0000\n"
+"PO-Revision-Date: 2022-09-17 18:16:56+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.0-alpha.1\n"
+"X-Generator: GlotPress/4.0.0-alpha.2\n"
 "Language: it\n"
 "Project-Id-Version: Plugins - User Role Editor - Stable (latest release)\n"
 
@@ -65,11 +65,11 @@ msgstr "seleziona i ruoli in basso per assegnarli automaticamente ai nuovi utent
 
 #: includes/classes/screen-help.php:48
 msgid "Show at the \"Users\" page a quant of users without role. Module allows to assign all of them an empty role \"No rights\", in order to look on the users list with role \"No rights\" at the separate tab then."
-msgstr "Mostra nella pagina \"Utenti\" gli utenti senza un ruolo. Il modulo permette di assegnare a tutti questi un ruolo \"Nessun permesso\", allo scopo di filtrare tali utenti in una scheda separata nell'elenco utenti."
+msgstr "Mostra nella pagina \"Utenti\" un'analisi quantitativa degli utenti senza un ruolo. Il modulo consente di assegnare a tutti questi un ruolo vuoto \"Nessun permesso\", allo scopo di filtrare tali utenti in una scheda separata nell'elenco utenti con ruolo \"Nessun permesso\"."
 
 #: includes/classes/screen-help.php:28
 msgid "If turned off - capabilities section of selected user is shown in readonly mode. Administrator can not assign capabilities to the user directly. He should do it using roles only."
-msgstr "Se è disattivato la sezione capacità dell'utente selezionato è mostrata in modalità sola lettura. L'amministratore non può assegnare capacità all'utente direttamente. Può farlo esclusivamente tramite i ruoli."
+msgstr "Se disattivato la sezione capacità dell'utente selezionato viene mostrata in modalità sola lettura. L'amministratore non può assegnare capacità all'utente direttamente. Può farlo esclusivamente tramite i ruoli."
 
 #: includes/classes/screen-help.php:22
 msgid "Capabilities like \"level_0\", \"level_1\" are deprecated and are not used by WordPress. They are left at the user roles for the compatibility purpose with old themes and plugins code. Turning on this option will show those deprecated capabilities."
@@ -77,7 +77,7 @@ msgstr "Le capacità come \"level_0\", \"level_1\" sono deprecate e non sono usa
 
 #: includes/classes/screen-help.php:19
 msgid "automatically converts capability names from the technical form for internal use like \"edit_others_posts\" to more user friendly form, e.g. \"Edit others posts\"."
-msgstr "converte automaticamente i nomi delle capacità dalla forma tecnica usata internamente come \"edit_others_posts\" in una forma più amichevole, es. \"Modifica articoli di altri utenti\"."
+msgstr "converte automaticamente i nomi delle capacità dalla forma tecnica per uso interno come \"edit_others_posts\" in una forma più amichevole, es. \"Modifica articoli di altri utenti\"."
 
 #: includes/classes/screen-help.php:16
 msgid "turn this option on in order to make the \"Administrator\" role available at the User Role Editor roles selection drop-down list. It is hidden by default for security reasons."
@@ -164,7 +164,7 @@ msgstr "Reimposta i ruoli al loro stato originale"
 
 #: includes/classes/tools.php:32
 msgid "If checked, then apply action to ALL sites. Main site only is affected in other case."
-msgstr "Se selezionato, applica l'azione a TUTTI i siti. Il sito principale viene modificato solo negli altri casi."
+msgstr "Se spuntata, applicherà l'azione a TUTTI i siti. Altrimenti solo il sito principale ne è interessato."
 
 #: includes/classes/tools.php:24
 msgid "For more information on how to undo undesired changes and restore plugins capabilities in case you lost them by mistake go to: "
@@ -184,7 +184,7 @@ msgstr "ATTENZIONE!"
 
 #: includes/classes/tools.php:64
 msgid "Tools: Reset: User Roles were initialized"
-msgstr "Strumento di reimpostazione: i ruoli utente sono stati inizializzati"
+msgstr "Strumenti: reimpostazione: i ruoli utente sono stati inizializzati"
 
 #: includes/classes/screen-help.php:26
 msgid "Show confirmation dialog before save changes made to a current role."
@@ -342,7 +342,7 @@ msgstr "Cambia le capacità per l'utente"
 
 #: includes/classes/user-view.php:71
 msgid "Network Super Admin"
-msgstr "Super Admin Network"
+msgstr "Super amministratore di rete"
 
 #: includes/classes/capabilities-groups-manager.php:201
 msgid "Custom capabilities"
@@ -358,7 +358,7 @@ msgstr "Applica a tutti i siti"
 
 #: includes/classes/role-view.php:367
 msgid "If checked, then apply action to ALL sites of this Network"
-msgstr "Se selezionato, applica l'azione a tuti i siti di questa rete."
+msgstr "Se spuntata, applicherà l'azione a TUTTI i siti di questa rete"
 
 #: includes/classes/role-view.php:353 includes/classes/user-view.php:154
 msgid "Show capabilities in human readable form"
@@ -374,7 +374,7 @@ msgstr "Consente ad un utente non super amministratore di creare, modificare ed 
 
 #: includes/settings-template.php:181
 msgid "Note for multisite environment: take into account that other default roles should exist at the site, in order to be assigned to the new registered users."
-msgstr "Nota per l'ambiente multisito: altri ruoli predefiniti devono esistere nel sito, per poter essere assegnati ai nuovi utenti registrati."
+msgstr "Nota per l'ambiente multisito: considera che gli altri ruoli predefiniti devono esistere nel sito, così da poter essere assegnati ai nuovi utenti registrati."
 
 #: includes/settings-template.php:175
 msgid "Other default roles for new registered user: "
@@ -407,7 +407,7 @@ msgstr " Il nome della capacità (ID) non può essere vuoto!"
 
 #: includes/classes/user-role-editor.php:774
 msgid "Warning! Be careful - removing critical capability could crash some plugin or other custom code"
-msgstr "Attenzione! Rimuovere le capacità critiche potrebbe causare malfunzionamenti a plugin o a codice personalizzato"
+msgstr "Fai attenzione! Sii prudente - rimuovere capacità critiche potrebbe causare dei malfunzionamenti a qualche plugin o altro codice personalizzato"
 
 #: includes/classes/user-role-editor.php:772
 msgid "Set New Default Role"
@@ -556,7 +556,7 @@ msgstr "Altri ruoli"
 
 #: includes/classes/screen-help.php:84
 msgid "Allow non super-administrators to create, edit and delete users"
-msgstr "Permetti a chi non è super amministratore di creare, modificare e cancellare utenti"
+msgstr "Consente ad un utente che non è super amministratore di creare, modificare ed eliminare utenti"
 
 #: includes/classes/screen-help.php:65
 msgid "Other default roles for new registered user"
