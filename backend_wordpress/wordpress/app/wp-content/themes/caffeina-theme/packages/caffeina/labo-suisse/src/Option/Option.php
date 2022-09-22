@@ -47,9 +47,11 @@ class Option
 
         $items[] = ['type' => 'separator'];
 
+        $cart_items = is_object(WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
+
         $items[] = [
             'type' => 'nav',
-            'icon' => ['name' => 'cart', 'counter' => WC()->cart->get_cart_contents_count(), 'counter_classes' => 'lb-wc-cart-total-count'],
+            'icon' => ['name' => 'cart', 'counter' => $cart_items, 'counter_classes' => 'lb-wc-cart-total-count'],
             // 'href' => wc_get_cart_url(),
             'class' => 'js-open-offset-nav',
             'attributes' => ['data-target-offset-nav="lb-offsetnav-async-cart"'],
