@@ -129,4 +129,4 @@ define('WP_MAX_MEMORY_LIMIT', '128M');
 // Disable Auto Updates
 define('WP_AUTO_UPDATE_CORE', false);
 define('AUTOMATIC_UPDATER_DISABLED', true);
-define('DISABLE_WP_CRON', getenv('DISABLE_WP_CRON'));
+define('DISABLE_WP_CRON', getenv('DISABLE_WP_CRON') === 'true');
