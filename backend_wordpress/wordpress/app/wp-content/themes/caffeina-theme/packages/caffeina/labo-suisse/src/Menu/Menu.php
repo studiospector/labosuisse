@@ -29,6 +29,8 @@ class Menu
     {
         $lang_selector = do_shortcode('[wpml_language_selector_widget]');
 
+        $cart_items = is_object(WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
+
         return [
             'children' => array_merge(
                 (new Macro())->get('mobile'),
@@ -39,7 +41,7 @@ class Menu
                 [
                     'type' => 'small-link',
                     'label' => __('Carrello', 'labo-suisse-theme'),
-                    'icon' => ['name' => 'cart', 'counter' => WC()->cart->get_cart_contents_count(), 'counter_classes' => 'lb-wc-cart-total-count'],
+                    'icon' => ['name' => 'cart', 'counter' => $cart_items, 'counter_classes' => 'lb-wc-cart-total-count'],
                     'href' => wc_get_cart_url(),
                     // 'class' => 'js-open-offset-nav',
                     // 'attributes' => ['data-target-offset-nav="lb-async-cart-nav"'],
