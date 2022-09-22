@@ -50,7 +50,7 @@ services:
         memory: 90
       count: 1-16
       cpu: 512
-      memory: 1024
+      memory: 1536
   cms:
     domain: cms.${DOMAIN}
     build:
@@ -91,7 +91,7 @@ services:
         memory: 90
       count: 1-1
       cpu: 512
-      memory: 1024
+      memory: 1536
 
 timers:
   wpcron:

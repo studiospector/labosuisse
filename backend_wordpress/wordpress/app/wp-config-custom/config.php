@@ -121,8 +121,8 @@ define('AS3CF_SETTINGS', serialize(array(
 )));
 
 // Memory limit
-define('WP_MEMORY_LIMIT', '128M');
-define('WP_MAX_MEMORY_LIMIT', '128M');
+define('WP_MEMORY_LIMIT', '512M');
+define('WP_MAX_MEMORY_LIMIT', '512M');
 @ini_set('post_max_size' , '512M' );
 @ini_set('upload_max_size' , '512M' );
 
