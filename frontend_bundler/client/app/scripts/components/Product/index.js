@@ -19,32 +19,34 @@ class Product extends Component {
 
     variationChangePrice = () => {
         jQuery(function($) {
-            const priceSelector = ['.single-product-details__summary > p.price', '.lb-header-sticky-product .lb-header-sticky-product__price']
-            const priceContent = qs(priceSelector).innerHTML
+            const priceSelector = qsa(['.single-product-details__summary > p.price', '.lb-header-sticky-product .lb-header-sticky-product__price'])
+            const price = qs('.single-product-details__summary > p.price')
             
-            $('.single-product-details__summary > form.cart')
-                .on('show_variation', (ev, data) => {
-                    if ( data.price_html ) {
-                        priceSelector.map(el => qs(el).innerHTML = data.price_html)
-
-                        let variantsText = []
-                        const variations = qsa('.lb-product-variations select')
-                        const headerVariation = qs('.lb-header-sticky-product .lb-header-sticky-product__info__variants')
-
-                        variations.map(el => {
-                            if (el.options[el.selectedIndex].text) {
-                                variantsText.push(el.options[el.selectedIndex].text)
+            if (priceSelector.length > 0) {
+                $('.single-product-details__summary > form.cart')
+                    .on('show_variation', (ev, data) => {
+                        if ( data.price_html ) {
+                            priceSelector.map(el => el.innerHTML = data.price_html)
+    
+                            let variantsText = []
+                            const variations = qsa('.lb-product-variations select')
+                            const headerVariation = qs('.lb-header-sticky-product .lb-header-sticky-product__info__variants')
+    
+                            variations.map(el => {
+                                if (el.options[el.selectedIndex].text) {
+                                    variantsText.push(el.options[el.selectedIndex].text)
+                                }
+                            })
+    
+                            if (variantsText.length > 0) {
+                                headerVariation.innerText = variantsText.join(', ')
                             }
-                        })
-
-                        if (variantsText.length > 0) {
-                            headerVariation.innerText = variantsText.join(', ')
                         }
-                    }
-                })
-                .on('hide_variation', (ev) => {
-                    priceSelector.map(el => qs(el).innerHTML = priceContent)
-                })
+                    })
+                    .on('hide_variation', (ev) => {
+                        priceSelector.map(el => el.innerHTML = price.innerHTML)
+                    })
+            }
         })
     }
 
