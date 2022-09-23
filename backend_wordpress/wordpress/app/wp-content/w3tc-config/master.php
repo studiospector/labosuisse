@@ -203,8 +203,8 @@
     "pgcache.late_caching": false,
     "pgcache.mirrors.enabled": true,
     "pgcache.mirrors.home_urls": [
-        "cms.labo-website-2021.localhost",
-        "www.labo-website-2021.localhost"
+        "cms.labo-website-2021.localhost\/",
+        "www.labo-website-2021.localhost\/"
     ],
     "pgcache.reject.front_page": false,
     "pgcache.reject.logged": true,
