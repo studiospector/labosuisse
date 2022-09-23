@@ -318,6 +318,9 @@ function lb_header()
     // $lang_selector = do_shortcode('[wpml_language_selector_widget]');
 
     return array(
+        'pre' => [
+            'text' => get_field('lb_preheader_text', 'option'),
+        ],
         // 'language_selector' => (!empty($lang_selector)) ? true : false,
         'language_selector' => [
             'label' => lb_get_current_lang() == 'it' ? 'Italia' : 'English',
