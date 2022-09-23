@@ -39,7 +39,7 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php else : ?>
 
-			<h1 class="infobox__subtitle h3 woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Grazie!<br>il tuo ordine è stato preaso in carico', 'labo-suisse-theme' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h1>
+			<h1 class="infobox__subtitle h3 woocommerce-notice woocommerce-notice--success woocommerce-thankyou-order-received"><?php echo apply_filters( 'woocommerce_thankyou_order_received_text', __( 'Grazie!<br>il tuo ordine è stato preso in carico', 'labo-suisse-theme' ), $order ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></h1>
 
             <p><?php echo __('Riceverai un’email di conferma appena sarà spedito.', 'labo-suisse-theme'); ?></p>
 

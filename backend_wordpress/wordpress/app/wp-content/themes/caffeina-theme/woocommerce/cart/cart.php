@@ -143,12 +143,14 @@ do_action( 'woocommerce_before_cart' ); ?>
                                 ?>
                                 <div class="coupon">
                                     <?php
+                                        $input_label = __('Codice coupon', 'labo-suisse-theme');
+                                        $button_label = __('Applica', 'labo-suisse-theme');
                                         Timber::render('@PathViews/components/fields/input.twig', [
                                             'type' => 'text',
                                             'id' => 'coupon_code',
                                             'name' => 'coupon_code',
                                             'value' => '',
-                                            'label' => esc_attr( 'Coupon code', 'woocommerce' ),
+                                            'label' => esc_attr($input_label),
                                             'autocomplete' => 'off',
                                             'disabled' => false,
                                             'required' => false,
@@ -157,9 +159,9 @@ do_action( 'woocommerce_before_cart' ); ?>
                                             'variants' => ['secondary'],
                                         ]);
                                         Timber::render('@PathViews/components/button.twig', [
-                                            'title' => esc_attr( 'Apply coupon', 'woocommerce' ),
+                                            'title' => esc_attr($button_label),
                                             'name' => 'apply_coupon',
-                                            'value' => esc_attr( 'Apply coupon', 'woocommerce' ),
+                                            'value' => esc_attr($button_label),
                                             'type' => 'submit',
                                             'variants' => ['secondary'],
                                         ]);

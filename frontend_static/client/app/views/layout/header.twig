@@ -8,6 +8,12 @@
 
 <header class="lb-header lb-header js-header js-menu {{classes|length ? ' ' ~ classes|join(' ') : '' }}">
 
+    {% if header.pre.text %}
+        <div class="lb-header__pre">
+            <p>{{ header.pre.text ? header.pre.text : '' }}</p>
+        </div>
+    {% endif %}
+
     <div class="lb-header__top container">
         <div class="lb-header__top__shield lb-shield">
             <a href="{{ fn('home_url') }}">
