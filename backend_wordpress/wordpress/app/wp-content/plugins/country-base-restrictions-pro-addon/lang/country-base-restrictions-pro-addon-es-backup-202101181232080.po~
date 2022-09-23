@@ -1,0 +1,224 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Country Based Restrictions PRO Add-on\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-21 05:58+0000\n"
+"PO-Revision-Date: 2020-10-21 06:01+0000\n"
+"Language-Team: Spanish\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.4.3; wp-5.5.1\n"
+"Last-Translator: Kuldip\n"
+"Language: es"
+
+#: country-base-restrictions-pro-addon.php:94
+#, php-format
+msgid ""
+"Please install and activate %sWooCommerce%s for Country Based Restrictions "
+"for WooCommerce!"
+msgstr ""
+"¡Instale y active% sWooCommerce% s para restricciones basadas en el país "
+"para WooCommerce!\n"
+
+#: country-base-restrictions-pro-addon.php:162
+#, php-format
+msgid ""
+"You must install and activate the %sCountry Based Restrictions for "
+"WooCommerce%s plugin for the Country Based Restrictions PRO add-on to work."
+msgstr ""
+"Debes instalar el plugin %sRestricciones Basadas en País para WooCommerce%s "
+"para que funcione el complemento Restricciones Basadas en País PRO."
+
+#: includes/class-cbr-pro-addon-admin.php:241
+#: includes/class-cbr-pro-addon-admin.php:266
+msgid "Hide Restricted Product Price"
+msgstr ""
+"Ocultar precio de producto restringido\n"
+
+#: includes/class-cbr-pro-addon-admin.php:248
+#: includes/class-cbr-pro-addon-admin.php:273
+msgid "Enable this option to hide restricted product price."
+msgstr ""
+"Habilite esta opción para ocultar el precio del producto restringido.\n"
+
+#: includes/class-cbr-pro-addon-admin.php:583
+#: includes/class-cbr-pro-addon-admin.php:584
+#: includes/views/cbr_bulk_restriction_tab.php:8
+msgid "Bulk Product Restrictions"
+msgstr "Restricciones Masivas de Productos"
+
+#: includes/class-cbr-pro-addon-admin.php:585
+#: includes/class-cbr-pro-addon-admin.php:586
+#: includes/views/cbr_payment_gateway_tab.php:12
+msgid "Payment Gateway Restrictions"
+msgstr "Restricciones de Pasarela de Pago"
+
+#: includes/class-cbr-pro-addon-admin.php:587
+#: includes/class-cbr-pro-addon-admin.php:588
+msgid "License"
+msgstr "Licencia"
+
+#: includes/class-cbr-pro-addon-admin.php:713
+msgid ""
+"Sorry, products from this category are not available to purchase in your "
+"country."
+msgstr ""
+"Lo sentimos, los productos de esta categoría no están disponibles para "
+"comprar en su país.\n"
+
+#: includes/class-cbr-pro-addon-admin.php:726
+msgid ""
+"Sorry, products from this tag are not available to purchase in your country."
+msgstr ""
+"Lo sentimos, los productos de esta etiqueta no están disponibles para la "
+"venta en su país.\n"
+
+#: includes/class-cbr-pro-update-manager.php:172
+#, php-format
+msgid ""
+"To receive automatic updates license activation is required. Please visit "
+"%ssettings%s to activate your Country Based Restrictions for WooCommerce."
+msgstr ""
+"Para recibir actualizaciones automáticas se requiere la activación de la "
+"licencia. Visita %sconfiguración%s para activar tu Restricciones Basadas en "
+"País para WooCommerce."
+
+#: includes/views/cbr_bulk_restriction_tab.php:24
+msgid "Add Rule"
+msgstr "Añadir Regla"
+
+#: includes/views/cbr_bulk_restriction_tab.php:67
+msgid "Rule Name"
+msgstr ""
+"Nombre de la regla\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:67
+msgid "Add a name for your rule, only for admin use."
+msgstr ""
+"Agregue un nombre para su regla, solo para uso administrativo.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:73
+msgid "Restriction By"
+msgstr "Restricción Por"
+
+#: includes/views/cbr_bulk_restriction_tab.php:73
+msgid "Restrict products by categories, tags, attributes and shipping class."
+msgstr ""
+"Restrinja los productos por categorías, etiquetas, atributos y clase de "
+"envío.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:83
+msgid "Select Categories"
+msgstr "Seleccionar Categorías"
+
+#: includes/views/cbr_bulk_restriction_tab.php:105
+msgid "Select Tags"
+msgstr "Seleccionar Etiquetas"
+
+#: includes/views/cbr_bulk_restriction_tab.php:119
+msgid "Select Shipping classs"
+msgstr "Seleccionar Clases de Envío"
+
+#: includes/views/cbr_bulk_restriction_tab.php:134
+msgid "Select Attributes"
+msgstr "Seleccionar Atributos"
+
+#: includes/views/cbr_bulk_restriction_tab.php:158
+msgid "Restriction Rule"
+msgstr ""
+"Regla de restricción\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:158
+msgid ""
+"Select if to include only the selected countries or to exclude the selected "
+"countries."
+msgstr ""
+"Seleccione si desea incluir solo los países seleccionados o excluir los "
+"países seleccionados.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:160
+msgid "Selected countries only"
+msgstr ""
+"Solo países seleccionados\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:161
+msgid "Excluding selected countries"
+msgstr ""
+"Excluyendo países seleccionados\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:165
+msgid "Select countries"
+msgstr "Seleccionar países"
+
+#: includes/views/cbr_bulk_restriction_tab.php:183
+msgid "You need to setup shipping locations in WooCommerce settings"
+msgstr ""
+"Necesitas configurar ubicaciones de envío en la configuración de WooCommerce"
+
+#: includes/views/cbr_bulk_restriction_tab.php:183
+msgid "HERE"
+msgstr "AQUÍ"
+
+#: includes/views/cbr_bulk_restriction_tab.php:183
+msgid "before you can choose country restrictions"
+msgstr "antes de que pueda elegir las restricciones de país"
+
+#: includes/views/cbr_license_tab.php:21
+msgid "Country Based Restrictions Pro"
+msgstr ""
+"Restricciones basadas en países Pro\n"
+
+#: includes/views/cbr_license_tab.php:29
+msgid ""
+"Activate your license to receive  automatic updates, you can get the license "
+"key in your"
+msgstr ""
+"Active su licencia para recibir actualizaciones automáticas, puede obtener "
+"la clave de licencia en su\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:25
+msgid "Restriction Type"
+msgstr ""
+"Tipo de restricción\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:27
+msgid "Enable for all countries"
+msgstr ""
+"Habilitar para todos los países\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:28
+msgid "Enable for selected billing countries"
+msgstr ""
+"Habilitar para países de facturación seleccionados\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:29
+msgid "Enable for selected shipping countries"
+msgstr ""
+"Habilitar para países de envío seleccionados\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:30
+msgid "Disable for selected billing countries"
+msgstr ""
+"Inhabilitar para países de facturación seleccionados\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:31
+msgid "Disable for selected shipping countries"
+msgstr ""
+"Deshabilitar para países de envío seleccionados\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:42
+msgid "Select Countries"
+msgstr "Seleccionar Países"
+
+#. Description of the plugin
+msgid ""
+"The Country Based Restrictions pro add-on extends the Country Based "
+"Restrictions for WooCommerce plugin and allows you to using more options and "
+"products restriction by categories."
+msgstr ""
+"El complemento Restricciones Basadas en País extiende las restricciones "
+"basadas en el país para el complemento WooCommerce y le permite utilizas más "
+"opciones y restricciones de productos por categorías."
