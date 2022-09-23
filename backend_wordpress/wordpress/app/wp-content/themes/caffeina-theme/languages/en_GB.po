@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-09-06 12:14+0000\n"
+"PO-Revision-Date: 2022-09-23 09:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -24,7 +24,7 @@ msgstr "%1$sstarting from%2$s %3$s"
 msgid "Accedi con la nuova password"
 msgstr "Log in with your new password"
 
-#: woocommerce/single-product.php:44
+#: woocommerce/single-product.php:48
 msgid "Aggiungi al carrello"
 msgstr "Add to Cart"
 
@@ -32,7 +32,7 @@ msgstr "Add to Cart"
 msgid "Aggiungi il tuo ID Cookiebot per mostrare le dichiarazioni sui cookie."
 msgstr "Add your Cookiebot ID to show cookie declarations."
 
-#: woocommerce/cart/cart.php:175
+#: woocommerce/cart/cart.php:177
 msgid "Aggiungi un codice promozionale"
 msgstr "Add a promotional code"
 
@@ -43,7 +43,7 @@ msgstr "Scope:"
 
 #: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71
 #: template-distributor.php:31 template-lb-brand-archive.php:65
-#: template-lb-brand-archive.php:77
+#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:147
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:131
@@ -51,12 +51,12 @@ msgstr "Scope:"
 msgid "Applica"
 msgstr "Apply"
 
-#: inc/woocommerce-setup.php:200
+#: inc/woocommerce-setup.php:202
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:47
 msgid "Articoli"
 msgstr "Articles"
 
-#: inc/woocommerce-setup.php:218
+#: inc/woocommerce-setup.php:220
 msgid "articoli"
 msgstr "items"
 
@@ -64,7 +64,7 @@ msgstr "items"
 msgid "Articolo"
 msgstr "Article"
 
-#: inc/woocommerce-setup.php:216
+#: inc/woocommerce-setup.php:218
 msgid "articolo"
 msgstr "item"
 
@@ -87,7 +87,7 @@ msgstr "Caffeina Theme"
 msgid "Carica altro"
 msgstr "Load more"
 
-#: inc/helpers.php:380 packages/caffeina/labo-suisse/src/Menu/Menu.php:41
+#: inc/helpers.php:381 packages/caffeina/labo-suisse/src/Menu/Menu.php:43
 msgid "Carrello"
 msgstr "Cart"
 
@@ -103,7 +103,7 @@ msgstr "Search for any content on the site."
 msgid "Cerca un argomento, prodotto, linea..."
 msgstr "Search for a topic, product, line ..."
 
-#: searchform.php:8 inc/helpers.php:327
+#: searchform.php:8 inc/helpers.php:333
 msgid "Cerca un prodotto, una linea..."
 msgstr "Search for a product, a line ..."
 
@@ -127,6 +127,10 @@ msgstr "Sorry, we can't find<br>the page you are looking for."
 #, php-format
 msgid "Ciao %1$s!"
 msgstr "Hello %1$s!"
+
+#: woocommerce/cart/cart.php:146
+msgid "Codice coupon"
+msgstr "Coupon code"
 
 #: woocommerce/myaccount/orders.php:28
 msgid "Controlla lo stato dei tuoi ordini e lo storico degli ordini passati."
@@ -203,10 +207,11 @@ msgid "FAQ"
 msgstr "FAQ"
 
 #: woocommerce/checkout/thankyou.php:42
-msgid "Grazie!<br>il tuo ordine è stato preaso in carico"
+#| msgid "Grazie!<br>il tuo ordine è stato preaso in carico"
+msgid "Grazie!<br>il tuo ordine è stato preso in carico"
 msgstr "Thank you!<br>your order has been processed"
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:55
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:57
 msgid "Hai bisogno di aiuto?"
 msgstr "Do you need help?"
 
@@ -244,7 +249,7 @@ msgstr "Enter city, province, postcode, ..."
 msgid "Inserisci provincia"
 msgstr "Enter province"
 
-#: inc/helpers.php:360
+#: inc/helpers.php:365
 msgid "Iscriviti alla newsletter"
 msgstr "Subscribe to the newsletter"
 
@@ -305,7 +310,7 @@ msgstr "No events planned<br>this month in your province."
 msgid "Nessun risultato trovato"
 msgstr "No results found"
 
-#: inc/helpers.php:355
+#: inc/helpers.php:360
 msgid "Newsletter"
 msgstr "Newsletter"
 
@@ -326,6 +331,10 @@ msgstr "Order #%s"
 #: woocommerce/myaccount/view-order.php:37
 msgid "Ordine N."
 msgstr "Order N."
+
+#: inc/helpers.php:419
+msgid "Paese"
+msgstr "Country"
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:40
 msgid "Per Brand"
@@ -371,7 +380,7 @@ msgstr "Proceed with the order"
 msgid "Prodotti"
 msgstr "Products"
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:49
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:51
 msgid "Profilo"
 msgstr "Profile"
 
@@ -404,7 +413,7 @@ msgstr "Global search"
 msgid "Riceverai un’email di conferma appena sarà spedito."
 msgstr "You will receive a confirmation email as soon as it is sent."
 
-#: inc/helpers.php:361
+#: inc/helpers.php:366
 msgid "Ricevi aggiornamenti e promozioni direttamente sulla tua mail."
 msgstr "Receive updates and promotions directly to your email."
 
@@ -433,6 +442,10 @@ msgstr "Results:"
 #: searchform.php:9
 msgid "risultato per"
 msgstr "result for"
+
+#: inc/helpers.php:485
+msgid "Salva"
+msgstr "Save"
 
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:206
 msgid "Scopri di più"
@@ -482,6 +495,12 @@ msgstr ""
 "If you do not have a profile yet, enter your email address and a password "
 "which you will need to access your personal account and have all the "
 "information on your orders available."
+
+#: inc/helpers.php:414
+msgid ""
+"Seleziona il Paese in cui sei per vedere i contenuti locali e acquistare "
+"online."
+msgstr "Select the country you are in to see local content and buy online."
 
 #: search.php:23
 msgid ""

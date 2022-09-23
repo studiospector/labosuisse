@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-06 12:13+0000\n"
+"POT-Creation-Date: 2022-09-23 09:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Accedi con la nuova password"
 msgstr ""
 
-#: woocommerce/single-product.php:44
+#: woocommerce/single-product.php:48
 msgid "Aggiungi al carrello"
 msgstr ""
 
@@ -33,7 +33,7 @@ msgstr ""
 msgid "Aggiungi il tuo ID Cookiebot per mostrare le dichiarazioni sui cookie."
 msgstr ""
 
-#: woocommerce/cart/cart.php:175
+#: woocommerce/cart/cart.php:177
 msgid "Aggiungi un codice promozionale"
 msgstr ""
 
@@ -44,7 +44,7 @@ msgstr ""
 
 #: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71
 #: template-distributor.php:31 template-lb-brand-archive.php:65
-#: template-lb-brand-archive.php:77
+#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:147
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:131
@@ -52,12 +52,12 @@ msgstr ""
 msgid "Applica"
 msgstr ""
 
-#: inc/woocommerce-setup.php:200
+#: inc/woocommerce-setup.php:202
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:47
 msgid "Articoli"
 msgstr ""
 
-#: inc/woocommerce-setup.php:218
+#: inc/woocommerce-setup.php:220
 msgid "articoli"
 msgstr ""
 
@@ -65,7 +65,7 @@ msgstr ""
 msgid "Articolo"
 msgstr ""
 
-#: inc/woocommerce-setup.php:216
+#: inc/woocommerce-setup.php:218
 msgid "articolo"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgstr ""
 msgid "Carica altro"
 msgstr ""
 
-#: inc/helpers.php:380 packages/caffeina/labo-suisse/src/Menu/Menu.php:41
+#: inc/helpers.php:381 packages/caffeina/labo-suisse/src/Menu/Menu.php:43
 msgid "Carrello"
 msgstr ""
 
@@ -104,7 +104,7 @@ msgstr ""
 msgid "Cerca un argomento, prodotto, linea..."
 msgstr ""
 
-#: searchform.php:8 inc/helpers.php:327
+#: searchform.php:8 inc/helpers.php:333
 msgid "Cerca un prodotto, una linea..."
 msgstr ""
 
@@ -126,6 +126,10 @@ msgstr ""
 #: woocommerce/myaccount/dashboard.php:43
 #, php-format
 msgid "Ciao %1$s!"
+msgstr ""
+
+#: woocommerce/cart/cart.php:146
+msgid "Codice coupon"
 msgstr ""
 
 #: woocommerce/myaccount/orders.php:28
@@ -196,10 +200,10 @@ msgid "FAQ"
 msgstr ""
 
 #: woocommerce/checkout/thankyou.php:42
-msgid "Grazie!<br>il tuo ordine è stato preaso in carico"
+msgid "Grazie!<br>il tuo ordine è stato preso in carico"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:55
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:57
 msgid "Hai bisogno di aiuto?"
 msgstr ""
 
@@ -237,7 +241,7 @@ msgstr ""
 msgid "Inserisci provincia"
 msgstr ""
 
-#: inc/helpers.php:360
+#: inc/helpers.php:365
 msgid "Iscriviti alla newsletter"
 msgstr ""
 
@@ -297,7 +301,7 @@ msgstr ""
 msgid "Nessun risultato trovato"
 msgstr ""
 
-#: inc/helpers.php:355
+#: inc/helpers.php:360
 msgid "Newsletter"
 msgstr ""
 
@@ -315,6 +319,10 @@ msgstr ""
 
 #: woocommerce/myaccount/view-order.php:37
 msgid "Ordine N."
+msgstr ""
+
+#: inc/helpers.php:419
+msgid "Paese"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:40
@@ -359,7 +367,7 @@ msgstr ""
 msgid "Prodotti"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Menu.php:49
+#: packages/caffeina/labo-suisse/src/Menu/Menu.php:51
 msgid "Profilo"
 msgstr ""
 
@@ -390,7 +398,7 @@ msgstr ""
 msgid "Riceverai un’email di conferma appena sarà spedito."
 msgstr ""
 
-#: inc/helpers.php:361
+#: inc/helpers.php:366
 msgid "Ricevi aggiornamenti e promozioni direttamente sulla tua mail."
 msgstr ""
 
@@ -418,6 +426,10 @@ msgstr ""
 
 #: searchform.php:9
 msgid "risultato per"
+msgstr ""
+
+#: inc/helpers.php:485
+msgid "Salva"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:206
@@ -460,6 +472,12 @@ msgid ""
 "Se non hai ancora un profilo, inserisci il tuo indirizzo email e una "
 "password che ti serviranno per accedere al tuo account personale e avere a "
 "disposizione tutte le informazioni sui tuoi ordini."
+msgstr ""
+
+#: inc/helpers.php:414
+msgid ""
+"Seleziona il Paese in cui sei per vedere i contenuti locali e acquistare "
+"online."
 msgstr ""
 
 #: search.php:23
