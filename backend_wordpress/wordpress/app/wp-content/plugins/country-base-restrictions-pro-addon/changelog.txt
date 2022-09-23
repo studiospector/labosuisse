@@ -1,0 +1,189 @@
+== Country Based Restrictions PRO Add-on ==
+
+February 26, 2020 - version 1.0.0
+* Launch it!
+
+March 03, 2020 - version 1.0.1
+* Update design of setting.
+
+March 06, 2020 - version 1.0.2
+* Update design of setting.
+* Added CSV Import/Export Compatibility with Woocoomerce.
+
+March 09, 2020 - version 1.0.3
+* Bug fix - Warning: Invalid argument supplied for foreach().
+* Added message for restricted categories on category page.
+
+March 11, 2020 - version 1.0.4
+* Bug fix - Warning: Invalid argument supplied for foreach() on line 199.
+* Added Default message field in Bulk restrictions setting.
+
+April 09, 2020 - version 1.0.5
+* Improved bulk restriction setting design.
+* Added 404 error page redirect to shop page Pro option in general setting.
+
+April 23, 2020 - version 1.0.6
+* Enhancement - added more feature of disabel payment methods by countries.
+* Enhancement - bulk product restriction by Categoryies, Tags, Attributes, Shipping class.
+
+April 28, 2020 - version 1.0.7
+* Tweak - improvement on restriction type in disabel payment methods by countries.
+
+April 28, 2020 - version 1.0.8
+* Fix - issue of get_shipping_country().
+
+April 30, 2020 - version 1.0.9
+* Fix - issue of invalid argument supplied for foreach() in php.
+
+May 07, 2020 - version 1.1.0
+* Fix - issue of css in payment gateway setting.
+* Tweak - input textarea valid for Html tag/class.
+
+May 13, 2020 - version 1.1.1
+* Fix - css issue in settings design.
+* Tweak - updated settings tab design.
+
+May 18, 2020 - version 1.1.2
+* Enhancement - added feature of hide product price for restricted product.
+
+Jun 11, 2020 - version 1.1.3
+* Enhancement - added option of Globle for restricted product in Bulk restriction.
+
+Jun 19, 2020 - version 1.1.4
+* Enhancement - Added Bulk Action option for remove single product rule.
+* Tweak - optimized Wp query to improve site speed.
+
+July 13, 2020 - version 1.1.5
+* Dev - WC Compatibility added upto 4.3
+* Dev - Added Compatibility with Visual composer
+
+Sep 11, 2020 - version 1.1.6
+* Dev - WC Compatibility added upto 4.5
+* Dev - WP Compatibility added upto 5.5
+* Fix - issue of disable Payment Gateway by location
+* Tweak - design UI/UX.
+* Tweak - changed label of option.
+* Tweak - input textarea valid for Html tag/class.
+
+Sep 16, 2020 - version 1.1.7
+* Fix - css issue in settings design.
+
+Sep 21, 2020 - version 1.1.8
+* Fix - css issue in settings design.
+* Fix - issue of countries list dropdown.
+
+Sep 22, 2020 - version 1.1.9
+* Fix - issue of disable Payment Gateway by location.
+
+Oct 21, 2020 - version 1.2.0
+* Fix - css issue in settings design.
+* Fix - Fix css validation issue in bulk setting
+* Enhancement - Added Cart restriction message option.
+
+Oct 27, 2020 - version 1.2.1
+* Fix - js issue in bulk restriction setting.
+
+Oct 27, 2020 - version 1.2.2
+* Fix - issue in bulk restriction products.
+* Enhancement - Added Cart restriction message shortcode([cbr_category_message]).
+
+Nov 5, 2020 - version 1.3
+* Fix - issue in bulk restriction products.
+* Enhancement - Added CBR widget for Customer.
+* Enhancement - Added option for CBR widget Customize.
+
+Nov 6, 2020 - version 1.4
+* Tweak - updated settings tab design.
+
+Nov 13, 2020 - version 1.5
+* Tweak - updated settings tab design.
+* Enhancement - Added addons tab and Moved license tab inside the addons tab.
+
+Nov 24, 2020 - version 1.6
+* Fix - PHP Notices: Undefined variable term_id.
+
+Dec 08, 2020 - version 1.7
+* Dev – WC Compatibility added upto 4.8
+* Dev – WP Compatibility added upto 5.6
+
+Jan 01, 2021 - version 1.8
+* Fix - Issues with geo location / widget detectors.
+
+Jan 20, 2021 - version 1.9
+* Tweak - updated settings design.
+
+Jan 28, 2021 - version 2.0
+* Tweak - updated settings design.
+* Enhancement - import all free plugin features in PRO(Run without free plugin).
+
+Jan 29, 2021 - version 2.1
+* Enhancement - Updated select 2 dropdown class and js
+
+Jan 29, 2021 - version 2.2
+* Fix - Fixed Location widget shortcode issue
+
+Feb 02, 2021 - version 2.3
+* Fix - Hide Completely - select a page to redirect BUG
+
+Feb 03, 2021 - version 2.4
+* Fix - Related Products / WC products widgets - BUG
+* Fix - Tool Bar /debug mode CRITICAL Bug
+
+Feb 11, 2021 - version 2.5
+* Dev – WC Compatibility added upto 5.0
+
+Mar 10, 2021 - version 2.6
+* Dev – WP tested upto 5.7
+* Enhancement - Removed payment gateway restriction tab.
+* Enhancement - Added payment restriction tab.
+* Enhancement - added features of restrict by shipping/payment methods.
+
+Mar 11, 2021 - version 2.7
+* weak - updated settings design.
+* Dev - WC Compatibility added upto 5.1
+
+Mar 18, 2021 - version 2.8
+* Fix - Warning: in_array() expects parameter 2 to be array, null given
+* Fix - Fix the issue of Subscription variation restriction
+* weak - updated settings design.
+
+May 13, 2021 - version 2.9
+* Dev - WC Compatibility added upto 5.3
+* Enhancement - Added product restriction msg in cart when allow add to cart option is selected
+
+May 27, 2021 - version 3.0
+* Fix - the issue of first time select default country from geolocation in cbr widget shortcode.
+
+July 21, 2021 - version 3.0.1
+* Fix - ovveride some select2 css styles in my checkout page
+
+August 06, 2021 - version 3.1
+* Fix - issue of shipping class restriction rule.
+* Dev - WP Compatibility added upto 5.8
+
+August 27, 2021 - version 3.2
+* Fix - the issue of the Uncaught ReferenceError: setCountryCookie is not defined
+* Dev - WC Compatibility added upto 5.6
+* Enhancement - Added Country flag icon in widgets
+
+November 09, 2021 - version 3.3
+* Fix - issue of country widget
+* Dev - WC Compatibility added upto 5.8
+
+December 28, 2021 - version 3.4
+* Fix - issue of country widget in sidebar
+* Dev - WC Compatibility added upto 6.0
+* Dev - Conflict with Customer Reviews for WooCommerce
+* Enhancement - Setup new licensign system
+* Enhancement - Added Docs, Support and Review link on plugins page
+
+March 23, 2022 - version 3.5
+* Fix - Uncaught Error get_shipping_class_id() on bool
+* Dev - WC Compatibility added upto 6.3
+* Dev - WP tested upto 5.9
+* Improved - updated a setting design
+* Improved - CBR widget issue
+
+August 17, 2022 - version 3.6
+* Dev - WC Compatibility added upto 6.8
+* Dev - WP tested upto 6.0
