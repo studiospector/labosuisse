@@ -237,19 +237,28 @@ function lb_wc_header_add_to_cart_fragment( $fragments ) {
 }
 
 /**
- * Add custom buttons on multicountry restriction for add to cart
+ * Set max quantity purchasable foreach product
  */
-// add_filter('lb_multicountry_hide_add_to_cart_btn', 'lb_multicountry_hide_add_to_cart_btn_callback', 10, 1);
-// function lb_multicountry_hide_add_to_cart_btn_callback($content)
-// {
-//     $lang = lb_get_current_lang();
-//     $labo_in_the_world_link = get_page_link(get_field('lb_labo_in_the_world_page', 'option'));
 
-//     $content = Timber::compile('@PathViews/components/button.twig', [
-//         'title' => __('Trova una farmacia autorizzata', 'labo-suisse-theme'),
-//         'url' => $lang != 'it' ? $labo_in_the_world_link : get_post_type_archive_link('lb-store'),
-//         'variants' => ['tertiary'],
-//     ]);
+// Simple products
+add_filter('woocommerce_quantity_input_args', 'lb_wc_quantity_input_args', 10, 2);
+function lb_wc_quantity_input_args($args, $product)
+{
+    // if (is_singular('product')) {
+    //     $args['input_value'] = 2;
+    // }
+    $args['max_value'] = 5;
+    $args['step'] = 1;
 
-//     return $content;
-// }
+    return $args;
+}
+
+// Variable products
+add_filter('woocommerce_available_variation', 'lb_wc_available_variation');
+function lb_wc_available_variation($args)
+{
+    $args['max_qty'] = 5;
+    $args['min_qty'] = 1;
+
+    return $args;
+}
