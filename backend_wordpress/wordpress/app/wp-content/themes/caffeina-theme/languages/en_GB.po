@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-09-23 09:53+0000\n"
+"PO-Revision-Date: 2022-09-26 15:35+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -90,6 +90,10 @@ msgstr "Load more"
 #: inc/helpers.php:381 packages/caffeina/labo-suisse/src/Menu/Menu.php:43
 msgid "Carrello"
 msgstr "Cart"
+
+#: inc/helpers.php:420
+msgid "Catalogo"
+msgstr "Catalog"
 
 #: template-lb-brand-archive.php:86
 msgid "Cerca"
@@ -249,9 +253,17 @@ msgstr "Enter city, province, postcode, ..."
 msgid "Inserisci provincia"
 msgstr "Enter province"
 
+#: inc/helpers.php:326 inc/helpers.php:434
+msgid "Internazionale"
+msgstr "Worldwide"
+
 #: inc/helpers.php:365
 msgid "Iscriviti alla newsletter"
 msgstr "Subscribe to the newsletter"
+
+#: inc/helpers.php:326 inc/helpers.php:428
+msgid "Italiano"
+msgstr "Italian"
 
 #: single-lb-job.php:32
 msgid "L'azienda"
@@ -331,10 +343,6 @@ msgstr "Order #%s"
 #: woocommerce/myaccount/view-order.php:37
 msgid "Ordine N."
 msgstr "Order N."
-
-#: inc/helpers.php:419
-msgid "Paese"
-msgstr "Country"
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:40
 msgid "Per Brand"
@@ -443,7 +451,7 @@ msgstr "Results:"
 msgid "risultato per"
 msgstr "result for"
 
-#: inc/helpers.php:485
+#: inc/helpers.php:441
 msgid "Salva"
 msgstr "Save"
 
@@ -496,11 +504,11 @@ msgstr ""
 "which you will need to access your personal account and have all the "
 "information on your orders available."
 
-#: inc/helpers.php:414
+#: inc/helpers.php:415
 msgid ""
-"Seleziona il Paese in cui sei per vedere i contenuti locali e acquistare "
-"online."
-msgstr "Select the country you are in to see local content and buy online."
+"Seleziona il catalogo che vuoi visualizzare, in base alla tua Nazione di "
+"provenienza."
+msgstr "Select the catalog you want to view, based on your country of origin."
 
 #: search.php:23
 msgid ""
