@@ -323,7 +323,7 @@ function lb_header()
         ],
         // 'language_selector' => (!empty($lang_selector)) ? true : false,
         'language_selector' => [
-            'label' => lb_get_current_lang() == 'it' ? 'Italia' : 'English',
+            'label' => lb_get_current_lang() == 'it' ? __('Italiano', 'labo-suisse-theme') : __('Internazionale', 'labo-suisse-theme'),
         ],
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'mobile_search' => [
@@ -402,6 +402,7 @@ function lb_custom_offset_navs() {
     ];
 
     // Multicountry
+    $curr_lang = lb_get_current_lang();
     $multicountry_nav = [
         'id' => 'lb-offsetnav-multicountry',
         'title' => null,
@@ -411,79 +412,35 @@ function lb_custom_offset_navs() {
                 'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry.twig', [
                     'content' => [
                         'infobox' => [
-                            'paragraph' => __("Seleziona il Paese in cui sei per vedere i contenuti locali e acquistare online.", 'labo-suisse-theme')
+                            'paragraph' => __("Seleziona il catalogo che vuoi visualizzare, in base alla tua Nazione di provenienza.", 'labo-suisse-theme')
                         ],
                         'form' => [
                             'select' => [
-                                'id' => 'lb-country',
-                                'label' => __('Paese', 'labo-suisse-theme'),
+                                'id' => 'lb-catalog-selection',
+                                'label' => __('Catalogo', 'labo-suisse-theme'),
                                 'placeholder' => null,
                                 'multiple' => false,
                                 'required' => true,
                                 'disabled' => false,
                                 'options' => [
                                     [
-                                        'value' => 'Al',
-                                        'label' => 'Albania',
-                                    ],
-                                    [
-                                        'value' => 'AT',
-                                        'label' => 'Austria',
-                                    ],
-                                    [
-                                        'value' => 'BE',
-                                        'label' => 'Belgio',
-                                        'icon' => 'cart',
-                                    ],
-                                    [
-                                        'value' => 'FR',
-                                        'label' => 'Francia',
-                                        'icon' => 'cart',
-                                    ],
-                                    [
-                                        'value' => 'FI',
-                                        'label' => 'Finlandia',
-                                    ],
-                                    [
-                                        'value' => 'GE',
-                                        'label' => 'Germania',
-                                        'icon' => 'cart',
-                                    ],
-                                    [
-                                        'value' => 'IR',
-                                        'label' => 'Irlanda',
-                                        'icon' => 'cart',
-                                    ],
-                                    [
-                                        'value' => 'ID',
-                                        'label' => 'Indonesia',
-                                    ],
-                                    [
                                         'value' => 'IT',
-                                        'label' => 'Italia',
-                                        'icon' => 'cart',
-                                        'selected' => true,
+                                        'label' => __('Italiano', 'labo-suisse-theme'),
+                                        // 'icon' => 'cart',
+                                        'selected' => $curr_lang == 'it' ? true : false,
                                     ],
                                     [
-                                        'value' => 'RO',
-                                        'label' => 'Romania',
-                                    ],
-                                    [
-                                        'value' => 'PB',
-                                        'label' => 'Paesi Bassi',
-                                        'icon' => 'cart',
-                                    ],
-                                    [
-                                        'value' => 'ES',
-                                        'label' => 'Spagna',
-                                        'icon' => 'cart',
+                                        'value' => 'EN',
+                                        'label' => __('Internazionale', 'labo-suisse-theme'),
+                                        'selected' => $curr_lang != 'it' ? true : false,
                                     ],
                                 ],
                                 'variants' => ['quaternary']
                             ],
                             'button' => [
                                 'title' => __("Salva", 'labo-suisse-theme'),
-                                'type' => 'button',
+                                'url' => '#',
+                                'class' => 'button-primary-disabled',
                                 'variants' => ['primary'],
                             ],
                         ]
