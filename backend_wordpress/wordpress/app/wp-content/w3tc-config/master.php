@@ -1,5 +1,5 @@
 <?php exit; ?>{
-    "version": "2.2.3",
+    "version": "2.2.4",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
     "cluster.messagebus.sns.region": "",
@@ -203,8 +203,8 @@
     "pgcache.late_caching": false,
     "pgcache.mirrors.enabled": true,
     "pgcache.mirrors.home_urls": [
-        "cms.labo-website-2021.localhost\/",
-        "www.labo-website-2021.localhost\/"
+        "cms.labo-website-2021.localhost",
+        "www.labo-website-2021.localhost"
     ],
     "pgcache.reject.front_page": false,
     "pgcache.reject.logged": true,
@@ -481,6 +481,7 @@
     "cdn.s3.bucket.location": "us-east-1",
     "cdn.s3.cname": [],
     "cdn.s3.ssl": "auto",
+    "cdn.s3.public_objects": "enabled",
     "cdn.s3_compatible.api_host": "auto",
     "cdn.cf.key": "",
     "cdn.cf.secret": "",
