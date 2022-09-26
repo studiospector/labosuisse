@@ -219,6 +219,10 @@ class CustomSelect extends BasicElement {
                     this.traceClick(select)
                 }
                 this.multiSelected = multiSelected
+
+                const selectEvent = new Event('select')
+                select.dispatchEvent(selectEvent)
+
                 break;
             }
         }
