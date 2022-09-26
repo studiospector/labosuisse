@@ -7,19 +7,19 @@ $button-big-padding: rem(24px 32px);
 $buttonsVariablesToCSSClasses: (
   "btn-primary-default": ".button-primary",
   "btn-primary-hover": ".button-primary:hover",
-  "btn-primary-disabled": ".button-primary:disabled",
+  "btn-primary-disabled": ".button-primary:disabled, .button-primary-disabled",
 
   "btn-secondary-default": ".button-secondary",
   "btn-secondary-hover": ".button-secondary:hover",
-  "btn-secondary-disabled": ".button-secondary:disabled",
+  "btn-secondary-disabled": ".button-secondary:disabled, .button-secondary-disabled",
 
   "btn-tertiary-default": ".button-tertiary",
   "btn-tertiary-hover": ".button-tertiary:hover",
-  "btn-tertiary-disabled": ".button-tertiary:disabled",
+  "btn-tertiary-disabled": ".button-tertiary:disabled, .button-tertiary-disabled",
 
   "btn-quaternary-default": ".button-quaternary",
   "btn-quaternary-hover": ".button-quaternary:hover",
-  "btn-quaternary-disabled": ".button-quaternary:disabled",
+  "btn-quaternary-disabled": ".button-quaternary:disabled, .button-quaternary-disabled",
 );
 $buttonsPropertyList: (
   "background-color",
@@ -44,7 +44,10 @@ $buttonsPropertyList: (
   cursor: pointer;
   transition: background 0.2s;
 
-  &:disabled {
+  &:disabled,
+  &.button-primary-disabled,
+  &.button-secondary-disabled,
+  &.button-tertiary-disabled {
     cursor: not-allowed;
     pointer-events: none;
   }
