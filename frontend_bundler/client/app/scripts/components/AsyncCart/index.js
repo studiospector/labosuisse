@@ -17,10 +17,9 @@ class AsyncCart extends Component {
         this.refreshFragmentsOnPageLoad()
 
         jQuery(document).ready(($) => {
-
-            $(document.body).on('wc_fragments_refreshed', function(){
-                console.log('wc_fragments_refreshed');
-            });
+            // $(document.body).on('wc_fragments_refreshed', function(){
+            //     console.log('wc_fragments_refreshed');
+            // });
 
             $.fn.serializeArrayAll = function () {
                 var rCRLF = /\r?\n/g;

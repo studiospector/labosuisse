@@ -50,7 +50,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="woocommerce-account-fields">
 		<?php if ( ! $checkout->is_registration_required() ) : ?>
 
-            <p class="form-row form-row-wide create-account">
+            <p class="create-account">
                 <span class="custom-field custom-checkbox custom-checkbox--vertical">
                     <span class="custom-checkbox__options">
                         <label class="woocommerce-form__label woocommerce-form__label-for-checkbox checkbox">
