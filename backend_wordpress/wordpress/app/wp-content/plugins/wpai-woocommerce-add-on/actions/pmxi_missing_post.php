@@ -1,4 +1,7 @@
 <?php
+
+use wpai_woocommerce_add_on\XmlImportWooCommerceService;
+
 /**
  * @param $pid
  */

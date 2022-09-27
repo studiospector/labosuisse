@@ -1,0 +1,19 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-information-boxes--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+<section class="lb-information-boxes{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container text-center">
+    {% if items %}
+        <div class="row">
+            {% for item in items %}
+                <div class="lb-information-boxes__item col-12 col-md-4">
+                    {% include '@PathViews/components/infobox.twig' with item only %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>

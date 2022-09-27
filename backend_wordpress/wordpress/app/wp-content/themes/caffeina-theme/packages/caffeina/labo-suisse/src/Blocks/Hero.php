@@ -4,9 +4,9 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class Hero extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
 
         $sizes = [
             // 'lg' => 'lg',
@@ -20,6 +20,7 @@ class Hero extends BaseBlock
         ];
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_hero_img'), $sizes),
             'infoboxPosX' => get_field('lb_block_hero_infoboxposx'),
             'infoboxPosY' => get_field('lb_block_hero_infoboxposy'),

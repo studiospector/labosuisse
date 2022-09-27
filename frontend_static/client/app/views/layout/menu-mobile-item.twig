@@ -16,7 +16,11 @@
 		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
-					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+					{% if icon is iterable %}
+                        {% include '@PathViews/components/icon.twig' with icon only %}
+                    {% else %}
+                        {% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                    {% endif %}
 					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
 				</span>
 			{% endif %}
@@ -99,7 +103,11 @@
 		<a class="lb-menu__link lb-menu__link--small" href="{{href}}" target="{{ target ? target : '_self' }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
-					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                    {% if icon is iterable %}
+                        {% include '@PathViews/components/icon.twig' with icon only %}
+                    {% else %}
+                        {% include '@PathViews/components/icon.twig' with {name: icon} only %}
+                    {% endif %}
 					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
 				</span>
 			{% endif %}
@@ -112,11 +120,12 @@
 
     {% if type == 'lang-selector' %}
         {% if language_selector %}
-            <div class="lb-menu__link lb-menu__link--small lb-menu__link--lang-selector">
+            <div class="lb-menu__link lb-menu__link--small lb-menu__link--lang-selector js-open-offset-nav" data-target-offset-nav="lb-offsetnav-multicountry">
                 <span class="lb-menu__item-icon">
                     {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
                 </span>
-                {{ fn('do_shortcode', '[wpml_language_selector_widget]') }}
+				<span>{{ language_selector.label }}</span>
+                {# {{ fn('do_shortcode', '[wpml_language_selector_widget]') }} #}
                 {# {% if icon or badge %}
                     <span class="lb-menu__item-icon">
                         {% include '@PathViews/components/icon.twig' with {name: icon} only %}

@@ -24,6 +24,7 @@ use Caffeina\LaboSuisse\Blocks\LoveLabo;
 use Caffeina\LaboSuisse\Blocks\NumberListImage;
 use Caffeina\LaboSuisse\Blocks\OffsetNavs;
 use Caffeina\LaboSuisse\Blocks\Routine;
+use Caffeina\LaboSuisse\Blocks\InformationBoxes;
 
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -37,9 +38,12 @@ $context['post'] = Timber::get_post();
 // Base Product
 $product = wc_get_product($context['post']->ID);
 $context['product'] = $product;
-$context['isInStock'] = $product->is_in_stock();
 
 // Sticky Header
+$context['stickyHeader']['show'] = true;
+if (!$product->is_in_stock() || !$product->is_purchasable()) {
+    $context['stickyHeader']['show'] = false;
+}
 $context['stickyHeader']['price'] = $product->get_price_html();
 $context['stickyHeader']['cartUrlLabel'] = __('Aggiungi al carrello', 'labo-suisse-theme');
 
@@ -54,36 +58,40 @@ $context['product_classes'] = ob_get_clean();
 // $context['related_products'] = Timber::get_posts($related_ids);
 
 // Hero
-$block_hero = new Hero(null, 'hero');
+$block_hero = new Hero(null, 'hero', 'lb-block-hero');
 $context['hero'] = $block_hero->getPayload();
 
 // Offset Navs
-$block_offsetNavs = new OffsetNavs(null, 'block-offset-navs');
+$block_offsetNavs = new OffsetNavs(null, 'block-offset-navs', 'lb-block-offset-navs');
 $context['offset_navs'] = $block_offsetNavs->getPayload();
 
 // Banner alternate
-$block_banner_alternate = new BannerAlternate(null, 'banner_alternate');
+$block_banner_alternate = new BannerAlternate(null, 'banner_alternate', 'lb-block-banner-alternate');
 $context['banner_alternate'] = $block_banner_alternate->getPayload();
 
 // Two Cards
-$block_launch_two_cards = new LaunchTwoCards(null, "block-launch-two-cards");
+$block_launch_two_cards = new LaunchTwoCards(null, "block-launch-two-cards", 'lb-block-launch-two-cards');
 $context['two_cards'] = $block_launch_two_cards->getPayload();
 
 // Image and Card
-$block_image_card = new ImageCard(null, 'block-image-card');
+$block_image_card = new ImageCard(null, 'block-image-card', 'lb-block-image-card');
 $context['image_and_card'] = $block_image_card->getPayload();
 
 // Numbers List
-$block_numbers = new NumberListImage(null, 'number-list-with-image');
+$block_numbers = new NumberListImage(null, 'number-list-with-image', 'lb-block-number-list-with-image');
 $context['number_list'] = $block_numbers->getPayload();
 
 // Love labo
-$block_love_labo = new LoveLabo(null, "block-love-labo");
+$block_love_labo = new LoveLabo(null, "block-love-labo", 'lb-block-love-labo');
 $context['miniatures'] = $block_love_labo->getPayload();
 
 // Routine
-$block_routine = new Routine(null, 'block-routine');
+$block_routine = new Routine(null, 'block-routine', 'lb-block-routine');
 $context['routine'] = $block_routine->getPayload();
+
+// Shipping info
+$block_shipping_info = new InformationBoxes(null, 'information-boxes', 'lb-information-boxes');
+$context['shipping_info'] = $block_shipping_info->getPayload();
 
 
 

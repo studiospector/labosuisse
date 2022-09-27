@@ -28,22 +28,22 @@
     }
 
     &--container {
-        width: calc(100% - 30px);
+        width: 100%;
         margin-right: auto;
         margin-left: auto;
         padding-right: rem(15);
         padding-left: rem(15);
         
         @include mq($from: md) {
-            max-width: 720px;
+            max-width: calc(720px - 30px);
         }
 
         @include mq($from: lg) {
-            max-width: 992px;
+            max-width: calc(992px - 30px);
         }
 
         @include mq($from: xl) {
-            max-width: 1200px;
+            max-width: calc(1200px - 30px);
         }
     }
 

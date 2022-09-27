@@ -65,7 +65,7 @@ class WPML_Term_Query_Filter {
 			return $args;
 		}
 
-		if ( TermTranslationHooks::shouldSkip( $args ) ) {
+		if ( class_exists( 'WPML\TaxonomyTermTranslation\Hooks' ) && TermTranslationHooks::shouldSkip( $args ) ) {
 			return $args;
 		}
 

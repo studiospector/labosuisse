@@ -86,6 +86,13 @@ class CustomSelect extends BasicElement {
                 this.optionItem = this.createDOMElement('DIV', ['custom-select-items__item'])
                 this.optionItemValue = this.createDOMElement('SPAN', ['custom-select-items__item__value'], null, this.currSelectElem.options[j].innerHTML, {pos: 'afterbegin', elem: this.optionItem})
                 
+                // Add icon
+                const optionIcon = this.currSelectElem.options[j].dataset.optionIcon
+                if (optionIcon) {
+                    this.optionItemIcon = this.createDOMElement('SPAN', ['custom-select-items__item__icon'], null, this.getOptionIcon(optionIcon), {pos: 'afterbegin', elem: this.optionItem})
+                    this.mainContainer.classList.add(`custom-select--with-icons`);
+                }
+
                 // Check icon only for 'primary' variant
                 if (this.selectVariant == 'primary' || this.selectVariant == 'secondary' || this.selectVariant == 'tertiary') {
                     this.createDOMElement('DIV', ['custom-select-items__item__check'], null, null, {pos: 'afterbegin', elem: this.optionItem})
@@ -161,6 +168,7 @@ class CustomSelect extends BasicElement {
     dispatchSelectedOption = (ev, multiSelected) => {
         let elem = ev.target.closest('.custom-select-items__item')
         let elemValue = elem.querySelector('.custom-select-items__item__value').innerText
+        let elemIcon = elem.querySelector('.custom-select-items__item__icon')
         let select = elem.parentNode.parentNode.getElementsByTagName('select')[0]
         let selectLength = select.length
         // let selectSelected = elem.parentNode.previousSibling
@@ -198,7 +206,7 @@ class CustomSelect extends BasicElement {
                 // For normal <select>
                 } else {
                     select.selectedIndex = i
-                    this.setSelectedValue(elemValue)
+                    this.setSelectedValue(elemValue, elemIcon)
                     multiSelected[0] = elemValue
                     // Remove 'active' class from all custom options
                     let selectOptions = [...this.optionsList.children]
@@ -211,6 +219,10 @@ class CustomSelect extends BasicElement {
                     this.traceClick(select)
                 }
                 this.multiSelected = multiSelected
+
+                const selectEvent = new Event('select')
+                select.dispatchEvent(selectEvent)
+
                 break;
             }
         }
@@ -240,22 +252,29 @@ class CustomSelect extends BasicElement {
      * Set selected value
      * @param {string} value Current <option>s selected
      */
-    setSelectedValue(value = null) {
+    setSelectedValue(value = null, icon = null) {
         // If is first init of custom select
         if (!value) {
-            this.itemSelectedValue = this.createDOMElement('SPAN', ['custom-select-value'], null, null, {pos: 'beforeend', elem: this.itemSelected})
+            this.itemSelectedValue = this.createDOMElement('SPAN', ['custom-select-value', 'custom-select-value--default'], null, null, {pos: 'beforeend', elem: this.itemSelected})
+            // Icon
+            if (this.currSelectElem.options[this.currSelectElem.selectedIndex]) {
+                icon = this.getOptionIcon(this.currSelectElem.options[this.currSelectElem.selectedIndex].dataset.optionIcon)
+            }
             // Set as value the current option selected(in case of 'selected' attribute as default)
-            if (this.currSelectElem.selectedIndex != -1) {
-                this.itemSelectedValue.innerHTML = this.currSelectElem.options[this.currSelectElem.selectedIndex].innerHTML
+            if (this.currSelectElem.selectedIndex != -1 && this.currSelectElem.selectedIndex != 0) {
+                this.mainContainer.classList.add('is-selected')
+                this.itemSelectedValue.innerHTML = (icon ? icon : '') + this.currSelectElem.options[this.currSelectElem.selectedIndex].innerHTML
             } else {
-                this.itemSelectedValue.innerHTML = this.currSelectElem.options[0].innerHTML
+                this.itemSelectedValue.innerHTML = (icon ? icon : '') + this.currSelectElem.options[0].innerHTML
             }
             // Add icon arrow
             this.addIconArrow()
 
         // If only change value of select
         } else {
-            this.itemSelectedValue.innerHTML = value
+            this.mainContainer.classList.add('is-selected')
+            this.itemSelectedValue.classList.remove('custom-select-value--default')
+            this.itemSelectedValue.innerHTML = (icon ? icon.innerHTML : '') + value
         }
     }
 
@@ -267,6 +286,23 @@ class CustomSelect extends BasicElement {
     addIconArrow() {
         const iconHTML = `<span class="custom-select-arrow__line custom-select-arrow__line--left"></span><span class="custom-select-arrow__line custom-select-arrow__line--right"></span>`
         this.createDOMElement('DIV', ['custom-select-arrow'], null, iconHTML, {pos: 'beforeend', elem: this.itemSelected})
+    }
+
+
+
+    /**
+     * Get option icon
+     */
+    getOptionIcon = (optionIcon) => {
+        let html = null
+
+        if (optionIcon) {
+            html = `<svg aria-label="${optionIcon}" xmlns="http://www.w3.org/2000/svg">
+                <use xlink:href="#${optionIcon}"></use>
+            </svg>`
+        }
+        
+        return html
     }
 
 

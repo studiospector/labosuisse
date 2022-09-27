@@ -8,7 +8,8 @@ class LBCustomInput extends Component {
         super({ ...props })
 
         new CustomInput({
-            selector: this.el
+            selector: this.el,
+            woocommerceQuantitySupport: this.el.dataset.wcQuantitySupport
         });
     }
 }

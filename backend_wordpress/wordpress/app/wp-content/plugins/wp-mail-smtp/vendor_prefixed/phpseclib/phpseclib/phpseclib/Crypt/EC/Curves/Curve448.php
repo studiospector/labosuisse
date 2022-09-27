@@ -51,9 +51,9 @@ class Curve448 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\Montgom
         //$r = strrev(sodium_crypto_scalarmult($d->toBytes(), strrev($p[0]->toBytes())));
         //return [$this->factory->newInteger(new BigInteger($r, 256))];
         $d = $d->toBytes();
-        $d[0] = $d[0] & "ï¿½";
+        $d[0] = $d[0] & "ü";
         $d = \strrev($d);
-        $d |= "ï¿½";
+        $d |= "€";
         $d = new \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger($d, 256);
         return parent::multiplyPoint($p, $d);
     }

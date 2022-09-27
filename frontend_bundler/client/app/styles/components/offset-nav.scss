@@ -167,6 +167,20 @@
                 }
             }
         }
+
+        &--loading {
+            &::after {
+                content: '';
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0.8;
+                background-color: map-get($colors, "white");
+                z-index: 1;
+            }
+        }
     }
 
 
@@ -180,6 +194,50 @@
     
         &__value {
             text-align: right;
+        }
+    }
+
+
+
+    &--popup {
+        justify-content: center;
+        align-items: center;
+        
+        &.is-open {
+            z-index: 99;
+        }
+
+        .lb-offset-nav {
+            &__close {
+                height: rem(50);
+                order: 1;
+
+                @include mq(lg) {
+                    height: rem(50);
+                }
+            }
+
+            &__header {
+                justify-content: space-between;
+
+                &__title {
+                    height: rem(50);
+                    display: flex;
+                    align-items: center;
+                    order: 0;
+                    margin: 0 24px;
+                }
+            }
+
+            &__dialog {
+                max-width: 360px;
+                min-height: auto;
+                transform: translate3d(0, #{rem(40px)}, 0);
+            }
+
+            &__content {
+                padding: 30px 24px;
+            }
         }
     }
 }

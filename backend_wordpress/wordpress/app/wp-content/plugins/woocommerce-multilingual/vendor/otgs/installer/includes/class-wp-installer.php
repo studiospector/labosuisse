@@ -2390,6 +2390,14 @@ class WP_Installer {
 		$response['success']   = $ret;
 		$response['message']   = $message;
 
+        if( isset( $_POST['wpml_core_install' ] ) ) {
+           try {
+			   $response['wpml_core_install'] = [ 'url' => $this->get_wpml_setup_url() ];
+		   } catch ( \Exception $e ) {
+               $response['wpml_core_install'] = [ 'error' => $e->getMessage() ];
+           }
+		}
+
 		echo json_encode( $response );
 		exit;
 
@@ -2490,6 +2498,25 @@ class WP_Installer {
 		echo json_encode( $ret );
 		exit;
 
+	}
+
+	private function get_wpml_setup_url() {
+        if( ! defined( 'WPML_PLUGIN_FOLDER' ) ) {
+            // Edge case: This should not really happen as we call it right after the activation. Anyway.
+			throw new Exception( __( 'WPML Multilingual CMS is not active. Please reload the page and try again.', 'installer' ) );
+		}
+
+        global $sitepress;
+        if(
+                is_object( $sitepress )
+                && method_exists( $sitepress, 'is_setup_complete' )
+                && $sitepress->is_setup_complete()
+        ) {
+            // Edge case, but important to catch because the setup page is not callable if the the setup already finished.
+			throw new Exception( __( 'The WPML Multilingual CMS setup is already completed. Please reload the page if you want to install other WPML plugins.', 'installer' ) );
+		}
+
+        return admin_url( 'admin.php?page=' . WPML_PLUGIN_FOLDER . '/menu/setup.php' );
 	}
 
 	public function custom_plugins_api_call( $result, $action, $args ) {

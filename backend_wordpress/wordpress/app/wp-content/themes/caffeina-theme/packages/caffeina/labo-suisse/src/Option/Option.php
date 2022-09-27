@@ -47,6 +47,22 @@ class Option
 
         $items[] = ['type' => 'separator'];
 
+        $cart_items = is_object(WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
+
+        $items[] = [
+            'type' => 'nav',
+            'icon' => ['name' => 'cart', 'counter' => $cart_items, 'counter_classes' => 'lb-wc-cart-total-count'],
+            // 'href' => wc_get_cart_url(),
+            'class' => 'js-open-offset-nav',
+            'attributes' => ['data-target-offset-nav="lb-offsetnav-async-cart"'],
+        ];
+
+        $items[] = [
+            'type' => 'icon',
+            'icon' => ['name' => 'user'],
+            'href' => is_user_logged_in() ? get_permalink(get_option('woocommerce_myaccount_page_id')) : get_field('lb_shop_login_registration_page', 'option'),
+        ];
+
         foreach ($links as $i => $link) {
             $items[] = [
                 'type' => 'icon',

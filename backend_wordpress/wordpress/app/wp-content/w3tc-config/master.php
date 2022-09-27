@@ -1,5 +1,5 @@
 <?php exit; ?>{
-    "version": "2.2.1",
+    "version": "2.2.4",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
     "cluster.messagebus.sns.region": "",
@@ -26,8 +26,12 @@
     "dbcache.redis.servers": [
         "127.0.0.1:6379"
     ],
+    "dbcache.redis.verify_tls_certificates": true,
     "dbcache.redis.password": "",
     "dbcache.redis.dbid": 0,
+    "dbcache.redis.timeout": 0,
+    "dbcache.redis.retry_interval": 0,
+    "dbcache.redis.read_timeout": 0,
     "dbcache.use_filters": false,
     "dbcache.reject.constants": [
         "APP_REQUEST",
@@ -114,8 +118,12 @@
     "objectcache.redis.servers": [
         "127.0.0.1:6379"
     ],
+    "objectcache.redis.verify_tls_certificates": true,
     "objectcache.redis.password": "",
     "objectcache.redis.dbid": 0,
+    "objectcache.redis.timeout": 0,
+    "objectcache.redis.retry_interval": 0,
+    "objectcache.redis.read_timeout": 0,
     "objectcache.groups.global": [
         "users",
         "userlogins",
@@ -157,8 +165,12 @@
     "pgcache.redis.servers": [
         "127.0.0.1:6379"
     ],
+    "pgcache.redis.verify_tls_certificates": true,
     "pgcache.redis.password": "",
     "pgcache.redis.dbid": 0,
+    "pgcache.redis.timeout": 0,
+    "pgcache.redis.retry_interval": 0,
+    "pgcache.redis.read_timeout": 0,
     "pgcache.cache.query": false,
     "pgcache.cache.home": true,
     "pgcache.cache.feed": false,
@@ -202,7 +214,13 @@
     ],
     "pgcache.reject.uri": [
         "wp-.*\\.php",
-        "index\\.php"
+        "index\\.php",
+        "\/account",
+        "\/en\/account",
+        "\/carrello",
+        "\/en\/cart",
+        "\/carrello\/pagamento",
+        "\/en\/cart\/checkout"
     ],
     "pgcache.reject.categories": [
         ""
@@ -220,7 +238,11 @@
         ""
     ],
     "pgcache.reject.cookie": [
-        "wptouch_switch_toggle"
+        "wptouch_switch_toggle",
+        "woocommerce_items_in_cart",
+        "woocommerce_cart_hash",
+        "wp_woocommerce_session_",
+        "wordpress_logged_in"
     ],
     "pgcache.reject.request_head": false,
     "pgcache.purge.front_page": false,
@@ -305,8 +327,12 @@
     "minify.redis.servers": [
         "127.0.0.1:6379"
     ],
+    "minify.redis.verify_tls_certificates": true,
     "minify.redis.password": "",
     "minify.redis.dbid": 0,
+    "minify.redis.timeout": 0,
+    "minify.redis.retry_interval": 0,
+    "minify.redis.read_timeout": 0,
     "minify.rewrite": false,
     "minify.options": [],
     "minify.symlinks": [],
@@ -455,6 +481,7 @@
     "cdn.s3.bucket.location": "us-east-1",
     "cdn.s3.cname": [],
     "cdn.s3.ssl": "auto",
+    "cdn.s3.public_objects": "enabled",
     "cdn.s3_compatible.api_host": "auto",
     "cdn.cf.key": "",
     "cdn.cf.secret": "",
@@ -463,6 +490,7 @@
     "cdn.cf.id": "",
     "cdn.cf.cname": [],
     "cdn.cf.ssl": "auto",
+    "cdn.cf.public_objects": "enabled",
     "cdn.cf2.key": "",
     "cdn.cf2.secret": "",
     "cdn.cf2.id": "",
@@ -938,7 +966,12 @@
         "compression": "lossy",
         "auto": "enabled"
     },
+    "imageservice.configuration_overloaded": true,
     "fragmentcache": {
         "engine": ""
+    },
+    "pgcache.bad_behavior_path": "",
+    "newrelic": {
+        "monitoring_type": "apm"
     }
 }

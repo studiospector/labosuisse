@@ -1,0 +1,782 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Country Based Restrictions PRO Add-on\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-21 05:58+0000\n"
+"PO-Revision-Date: 2021-03-05 05:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: French (France)\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Loco-Version: 2.5.0; wp-5.7-alpha-49973"
+
+#: includes/views/cbr_bulk_restriction_tab.php:69
+msgid "Add a name for your rule, only for admin use."
+msgstr ""
+"Ajoutez un nom pour votre règle, uniquement à usage administrateur.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:31
+#: includes/views/cbr_checkout_restriction_tab.php:31
+msgid "Add New Restriction Rule"
+msgstr ""
+"Ajouter une nouvelle règle de restriction\n"
+
+#: includes/cbr-pro-admin.php:148 includes/cbr-pro-admin.php:149
+msgid "Add-ons"
+msgstr ""
+"Modules complémentaires\n"
+
+#: includes/views/cbr_setting_tab.php:28 includes/views/cbr_setting_tab.php:44
+#: includes/views/cbr_setting_tab.php:61
+msgid "Advanced"
+msgstr ""
+"Avancée\n"
+
+#: includes/cbr-pro-admin.php:276
+msgid "After add to cart"
+msgstr ""
+"Après ajouter au panier\n"
+"Après méta\n"
+"Après prix\n"
+"Après le partage\n"
+"Après une brève description\n"
+"Après le titre\n"
+"Avant le titre\n"
+"Bordure Redius\n"
+"Visibilité du catalogue\n"
+"Catalogue visible (non achetable)\n"
+"Choisissez la page pour rediriger la page d'erreur 404 vers la page "
+"sélectionnée.\n"
+"Choisissez la page à rediriger\n"
+"Les restrictions basées sur le pays nécessitent WooCommerce 3.0 ou plus "
+"récent\n"
+"Restrictions par pays\n"
+"Par défaut: après l'ajout au panier. Ce message s'affichera sur la page du "
+"produit lorsque le produit n'est pas achetable.\n"
+"Options de conception\n"
+"Afficher le widget de détection de pays\n"
+"Docs\n"
+"Activer la barre d'outils de débogage\n"
+"Activez cette option pour détecter le pays du client uniquement par la "
+"géolocalisation WooCommerce et pour ignorer le pays d'expédition du client "
+"(s'il est connecté)\n"
+"Activez cette option pour masquer les variantes de produit restreintes de la "
+"sélection des variantes de produit sur la page de produit variable.\n"
+"Activez cette option pour rendre les produits non achetables (c'est-à-dire "
+"que le produit ne peut pas être ajouté au panier).\n"
+"Activez cette option pour rediriger la page d'erreur 404 vers la page de la "
+"boutique.\n"
+"Activez cette option pour afficher le pays de géolocalisation détecté en "
+"haut de l'en-tête du frontend.\n"
+"Géolocalisation forcée\n"
+"réglages généraux\n"
+"Masquer la visibilité du catalogue\n"
+"Cacher complètement\n"
+"Masquer les variantes de produit\n"
+"Rendre non achetable\n"
+"Opacité de la superposition\n"
+"Rembourrage\n"
+"Produit disponible pour tous les pays\n"
+"Produit disponible pour certains pays\n"
+"Produit non disponible pour certains pays\n"
+"Message de restriction de produit\n"
+"Position du message de restriction de produit\n"
+"Rediriger la page 404\n"
+"Gagnez du temps en appliquant des restrictions de pays en vrac par "
+"catégories de produits, étiquettes, attributs et classes d'expédition. "
+"Activez et désactivez les passerelles de paiement par pays de facturation ou "
+"d'expédition du client et plus encore ...\n"
+"Désolé, ce produit n'est pas disponible à l'achat dans votre pays.\n"
+"Le plugin gratuit Country Based Restrictions n'est pas utilisé car vous avez "
+"déjà installé la version PRO. Veuillez désactiver et supprimer la version "
+"gratuite.\n"
+"Le plugin gratuit Country Based Restrictions a été désactivé depuis que vous "
+"utilisez la version PRO. Vous pouvez maintenant supprimer la version "
+"gratuite.\n"
+"Ce message s'affiche sur la page du produit lorsque le produit n'est pas "
+"achetable. Message par défaut: Désolé, ce produit n'est pas disponible dans "
+"votre pays.\n"
+"Cette option masquera complètement les produits restreints et les variantes "
+"de produits de votre boutique (y compris un lien direct)\n"
+"Cette option affichera vos produits et variations de produits sur la "
+"boutique mais pas achetable.\n"
+"Cette option masquera les produits restreints et les variantes de produits "
+"de votre boutique et des résultats de recherche, mais ces produits seront "
+"toujours accessibles et achetables via un lien direct.\n"
+"Utiliser un shortcode\n"
+"Utilisez le shortcode [cbr_message_position] dans votre modèle de produit.\n"
+"Largeur du widget"
+
+#: includes/cbr-pro-admin.php:277
+msgid "After meta"
+msgstr ""
+"Après méta\n"
+
+#: includes/cbr-pro-admin.php:274
+msgid "After price"
+msgstr ""
+"Après prix\n"
+
+#: includes/cbr-pro-admin.php:278
+msgid "After sharing"
+msgstr ""
+"Après le partage\n"
+
+#: includes/cbr-pro-admin.php:275
+msgid "After short description"
+msgstr ""
+"Après une brève description\n"
+
+#: includes/cbr-pro-admin.php:273
+msgid "After title"
+msgstr ""
+"Après le titre\n"
+
+#: includes/cbr-pro-admin.php:285
+msgid "Available variable: {Product_Name}, {Product_name_with_link}"
+msgstr ""
+"Variable disponible: {Product_Name}, {Product_name_with_link}\n"
+
+#: includes/customizer/cbr-widget-customizer.php:321
+msgid "Background Color"
+msgstr ""
+"Couleur de l'arrière plan\n"
+
+#: includes/cbr-pro-admin.php:272
+msgid "Before title"
+msgstr ""
+"Avant le titre\n"
+
+#: includes/cbr-pro-product.php:145
+#: includes/views/cbr_bulk_restriction_tab.php:184
+#: includes/views/cbr_checkout_restriction_tab.php:136
+msgid "before you can choose country restrictions"
+msgstr ""
+"avant de pouvoir choisir les restrictions par pays\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:71
+msgid "Billing Country"
+msgstr ""
+"Pays de facturation\n"
+
+#: includes/customizer/cbr-widget-customizer.php:339
+msgid "Border Color"
+msgstr ""
+"Couleur de la bordure\n"
+
+#: includes/customizer/cbr-widget-customizer.php:356
+msgid "Border Redius"
+msgstr ""
+"Bordure Redius\n"
+
+#: includes/cbr-pro-admin.php:283
+msgid "Cart restriction message"
+msgstr ""
+"Message de restriction du panier\n"
+
+#: includes/cbr-pro-admin.php:142 includes/cbr-pro-admin.php:143
+#: includes/views/cbr_bulk_restriction_tab.php:13
+msgid "Catalog Restrictions"
+msgstr ""
+"Restrictions du catalogue\n"
+
+#: includes/views/cbr_setting_tab.php:13
+msgid "Catalog Visibility"
+msgstr ""
+"Visibilité du catalogue\n"
+
+#: includes/views/cbr_setting_tab.php:61
+msgid "Catalog Visible (non purchasable)"
+msgstr ""
+"Catalogue visible (non achetable)\n"
+
+#: includes/cbr-pro-admin.php:293
+msgid "Category restriction message"
+msgstr ""
+"Message de restriction de catégorie\n"
+
+#: includes/customizer/cbr-widget-customizer.php:172
+msgid "Check our <a href=\"#\">shipping  policy</a> for more info"
+msgstr ""
+"Consultez notre politique d'expédition pour plus d'informations\n"
+
+#: includes/cbr-pro-admin.php:144 includes/cbr-pro-admin.php:145
+#: includes/views/cbr_checkout_restriction_tab.php:13
+msgid "Checkout Restrictions"
+msgstr ""
+"Restrictions de paiement\n"
+
+#: includes/customizer/cbr-widget-customizer.php:138
+msgid "Choose Shipping Country"
+msgstr ""
+"Choisissez le pays d'expédition\n"
+
+#: includes/cbr-pro-admin.php:334
+msgid "Choose the page for redirect 404 error page to selected page."
+msgstr ""
+"Choisissez la page pour rediriger la page d'erreur 404 vers la page "
+"sélectionnée.\n"
+
+#: includes/cbr-pro-admin.php:327
+msgid "Choose the page to redirect"
+msgstr ""
+"Choisissez la page à rediriger\n"
+
+#: country-base-restrictions-pro-addon.php:71
+msgid "Country Based Restrictions requires WooCommerce 3.0 or newer"
+msgstr ""
+"Les restrictions basées sur le pays nécessitent WooCommerce 3.0 ou plus "
+"récent\n"
+
+#. Base ID
+#: includes/cbr-pro-widget.php:57 includes/customizer/cbr-customizer.php:55
+#: includes/views/cbr_setting_tab.php:104
+msgid "Country detection widget"
+msgstr ""
+"Widget de détection de pays\n"
+
+#: includes/cbr-pro-admin.php:132 includes/cbr-pro-product.php:89
+msgid "Country Restrictions"
+msgstr ""
+"Restrictions par pays\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:69
+msgid "Customer Country"
+msgstr ""
+"Pays du client\n"
+
+#: includes/views/cbr_setting_tab.php:118
+msgid "Customize"
+msgstr "Personnaliser"
+
+#: includes/views/cbr_setting_tab.php:115
+msgid "Customize the Display the detected country widget"
+msgstr ""
+"Personnaliser le widget Afficher le pays détecté\n"
+
+#: includes/cbr-pro-admin.php:264
+msgid ""
+"Default : After add to cart. This message will show on product page when "
+"product is not purchasable."
+msgstr ""
+"Par défaut: après l'ajout au panier. Ce message s'affichera sur la page du "
+"produit lorsque le produit n'est pas achetable.\n"
+
+#: includes/customizer/cbr-widget-customizer.php:196
+msgid "Design Options"
+msgstr ""
+"Options de conception\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:43
+msgid "Disable for selected billing countries"
+msgstr ""
+"Désactiver pour certains pays de facturation\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:44
+msgid "Disable for selected shipping countries"
+msgstr ""
+"Désactiver pour certains pays d'expédition\n"
+
+#: includes/cbr-pro-widget.php:59
+msgid "Display the country detection widget"
+msgstr ""
+"Afficher le widget de détection de pays\n"
+
+#: includes/views/cbr_setting_tab.php:105
+msgid ""
+"Display the detected country and let your customers change their shipping "
+"country on any page on your store."
+msgstr ""
+"Affichez le pays détecté et laissez vos clients modifier leur pays "
+"d'expédition sur n'importe quelle page de votre boutique.\n"
+
+#: includes/cbr-pro-admin.php:135
+msgid "Docs"
+msgstr ""
+"Docs\n"
+
+#: includes/cbr-pro-admin.php:231
+msgid "Enable Debug Toolbar"
+msgstr ""
+"Activer la barre d'outils de débogage\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:40
+msgid "Enable for all countries"
+msgstr ""
+"Activer pour tous les pays\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:41
+msgid "Enable for selected billing countries"
+msgstr ""
+"Activer pour certains pays de facturation\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:42
+msgid "Enable for selected shipping countries"
+msgstr ""
+"Activer pour certains pays d'expédition\n"
+
+#: includes/cbr-pro-admin.php:228
+msgid ""
+"Enable this option to detect the customer country only by the WooCommerce "
+"geo-location and to ignore the customer shipping country (if logged in)"
+msgstr ""
+"Activez cette option pour détecter le pays du client uniquement par la "
+"géolocalisation WooCommerce et pour ignorer le pays d'expédition du client "
+"(s'il est connecté)\n"
+
+#: includes/cbr-pro-admin.php:367 includes/cbr-pro-admin.php:400
+msgid "Enable this option to hide restricted product price."
+msgstr ""
+"Activez cette option pour masquer le prix du produit restreint.\n"
+
+#: includes/cbr-pro-admin.php:357 includes/cbr-pro-admin.php:410
+msgid ""
+"Enable this option to hide the restricted product variations form the "
+"product variations selection on variable product page."
+msgstr ""
+"Activez cette option pour masquer les variantes de produit restreintes de la "
+"sélection des variantes de produit sur la page de produit variable.\n"
+
+#: includes/cbr-pro-admin.php:377
+msgid ""
+"Enable this option to make products non-purchasable (i.e. product can't be "
+"added to the cart)."
+msgstr ""
+"Activez cette option pour rendre les produits non achetables (c'est-à-dire "
+"que le produit ne peut pas être ajouté au panier).\n"
+
+#: includes/cbr-pro-admin.php:323
+msgid "Enable this option to redirect 404 error page to shop page."
+msgstr ""
+"Activez cette option pour rediriger la page d'erreur 404 vers la page de la "
+"boutique.\n"
+
+#: includes/cbr-pro-admin.php:238
+msgid ""
+"Enable this option to show detected geo-location country top of header in "
+"frontend."
+msgstr ""
+"Activez cette option pour afficher le pays de géolocalisation détecté en "
+"haut de l'en-tête du frontend.\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:114
+msgid "Exclude"
+msgstr "Exclure"
+
+#: includes/views/cbr_bulk_restriction_tab.php:162
+msgid "Excluding selected countries"
+msgstr ""
+"À l'exclusion de certains pays\n"
+
+#: includes/customizer/cbr-widget-customizer.php:180
+msgid "Footer content"
+msgstr ""
+"Contenu du pied de page\n"
+
+#: includes/cbr-pro-admin.php:221
+msgid "Force Geolocation"
+msgstr ""
+"Géolocalisation forcée\n"
+
+#: includes/views/cbr_setting_tab.php:79
+msgid "General Settings"
+msgstr ""
+"réglages généraux\n"
+
+#: includes/customizer/cbr-widget-customizer.php:146
+msgid "Header text"
+msgstr ""
+"En-tête\n"
+
+#: includes/cbr-pro-product.php:145
+#: includes/views/cbr_bulk_restriction_tab.php:184
+#: includes/views/cbr_checkout_restriction_tab.php:136
+msgid "HERE"
+msgstr ""
+"ICI\n"
+
+#: includes/views/cbr_setting_tab.php:44
+msgid "Hide catalog visibility"
+msgstr ""
+"Masquer la visibilité du catalogue\n"
+
+#: includes/views/cbr_setting_tab.php:28
+msgid "Hide Completely"
+msgstr ""
+"Cacher complètement\n"
+
+#: includes/cbr-pro-admin.php:350 includes/cbr-pro-admin.php:403
+msgid "Hide Product Variations"
+msgstr ""
+"Masquer les variantes de produit\n"
+
+#: includes/cbr-pro-admin.php:360 includes/cbr-pro-admin.php:393
+msgid "Hide Restricted Product Price"
+msgstr ""
+"Masquer le prix du produit restreint\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:113
+msgid "Include"
+msgstr "Comprendre"
+
+#: includes/views/cbr_checkout_restriction_tab.php:65
+msgid "Label Name"
+msgstr ""
+"Nom de l'étiquette\n"
+
+#: includes/cbr-pro-admin.php:370
+msgid "Make non-purchasable"
+msgstr ""
+"Rendre non achetable\n"
+
+#: includes/customizer/cbr-widget-customizer.php:163
+msgid "Message"
+msgstr "Message"
+
+#: includes/customizer/cbr-widget-customizer.php:282
+msgid "Overlay Background Color"
+msgstr ""
+"Couleur d'arrière-plan de la superposition\n"
+
+#: includes/customizer/cbr-widget-customizer.php:298
+msgid "Overlay Opacity"
+msgstr ""
+"Opacité de la superposition\n"
+
+#: includes/customizer/cbr-widget-customizer.php:235
+msgid "Padding"
+msgstr ""
+"Rembourrage\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:16
+msgid "Payment Gateway Restrictions"
+msgstr ""
+"Restrictions de la passerelle de paiement\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:78
+#: includes/views/cbr_checkout_restriction_tab.php:97
+msgid "Payment Methods"
+msgstr ""
+"méthodes de payement\n"
+
+#: country-base-restrictions-pro-addon.php:109
+#, php-format
+#| msgid ""
+#| "Please install and activate %sWooCommerce%s for Country Based "
+#| "Restrictions for WooCommerce!"
+msgid ""
+"Please install and activate %sWooCommerce%s for Country Based Restrictions "
+"PRO!"
+msgstr ""
+"Veuillez installer et activer% sWooCommerce% s pour les restrictions par "
+"pays pour WooCommerce!\n"
+
+#: includes/cbr-pro-product.php:115 includes/cbr-pro-product.php:169
+msgid "Product Available for all countries"
+msgstr ""
+"Produit disponible pour tous les pays\n"
+
+#: includes/cbr-pro-product.php:116 includes/cbr-pro-product.php:170
+msgid "Product Available for selected countries"
+msgstr ""
+"Produit disponible pour certains pays\n"
+
+#: includes/cbr-pro-product.php:117 includes/cbr-pro-product.php:171
+msgid "Product not Available for selected countries"
+msgstr ""
+"Produit non disponible pour certains pays\n"
+
+#: includes/cbr-pro-admin.php:254
+msgid "Product restriction message"
+msgstr ""
+"Message de restriction de produit\n"
+
+#: includes/cbr-pro-admin.php:263
+msgid "Product restriction message position"
+msgstr ""
+"Position du message de restriction de produit\n"
+
+#: includes/cbr-pro-admin.php:317
+msgid "Redirect the 404 page"
+msgstr ""
+"Rediriger la page 404\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:76
+msgid "Restrict products by categories, tags, attributes and shipping class."
+msgstr ""
+"Limitez les produits par catégories, balises, attributs et classe "
+"d'expédition.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:76
+msgid "Restriction By"
+msgstr ""
+"Restriction par\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:159
+#: includes/views/cbr_checkout_restriction_tab.php:111
+msgid "Restriction Rule"
+msgstr ""
+"Règle de restriction\n"
+
+#: includes/cbr-pro-product.php:110 includes/cbr-pro-product.php:163
+msgid "Restriction rule"
+msgstr ""
+"Règle de restriction\n"
+
+#: includes/views/cbr_payment_gateway_tab.php:38
+#: includes/views/cbr_checkout_restriction_tab.php:76
+msgid "Restriction Type"
+msgstr ""
+"Type de restriction\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:69
+msgid "Rule Name"
+msgstr ""
+"Nom de la règle\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:57
+#: includes/views/cbr_checkout_restriction_tab.php:53
+msgid "Save & Close"
+msgstr ""
+"Sauvegarder et fermer\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:137
+msgid "Select Attributes"
+msgstr ""
+"Sélectionner les attributs\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:86
+msgid "Select Categories"
+msgstr ""
+"Sélectionner les catégories\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:166
+#: includes/views/cbr_payment_gateway_tab.php:53
+#: includes/views/cbr_checkout_restriction_tab.php:118
+msgid "Select Countries"
+msgstr ""
+"Sélectionnez un pays\n"
+
+#: includes/cbr-pro-product.php:131 includes/cbr-pro-product.php:185
+msgid "Select countries"
+msgstr ""
+"Sélectionnez les pays\n"
+
+#: includes/cbr-pro-admin.php:850 includes/cbr-pro-widget.php:145
+#: includes/cbr-pro-widget.php:250 includes/cbr-pro-widget.php:287
+#| msgid "Select countries"
+msgid "Select Country"
+msgstr ""
+"Sélectionner les pays\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:159
+msgid ""
+"Select if to include only the selected countries or to exclude the selected "
+"countries."
+msgstr ""
+"Choisissez d'inclure uniquement les pays sélectionnés ou d'exclure les pays "
+"sélectionnés.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:122
+msgid "Select Shipping classs"
+msgstr ""
+"Sélectionnez la classe d'expédition\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:108
+msgid "Select Tags"
+msgstr ""
+"Sélectionner les balises\n"
+
+#: includes/customizer/cbr-widget-customizer.php:155
+msgid "Select your shipping country"
+msgstr ""
+"Sélectionnez votre pays d'expédition\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:161
+msgid "Selected countries only"
+msgstr ""
+"Pays sélectionnés uniquement\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:72
+msgid "Shipping Country"
+msgstr ""
+"Pays de livraison\n"
+
+#: includes/views/cbr_checkout_restriction_tab.php:79
+#: includes/views/cbr_checkout_restriction_tab.php:83
+msgid "Shipping Methods"
+msgstr ""
+"méthodes de livraison\n"
+
+#: includes/cbr-pro-admin.php:295
+msgid ""
+"Sorry,  products from this category are not available to purchase in your "
+"country."
+msgstr ""
+"Désolé, les produits de cette catégorie ne sont pas disponibles à l'achat "
+"dans votre pays.\n"
+
+#: includes/cbr-pro-restriction.php:855
+msgid ""
+"Sorry, products from this category are not available to purchase in your "
+"country."
+msgstr ""
+"Désolé, les produits de cette catégorie ne sont pas disponibles à l'achat "
+"dans votre pays.\n"
+
+#: includes/cbr-pro-restriction.php:868
+msgid ""
+"Sorry, products from this tag are not available to purchase in your country."
+msgstr ""
+"Désolé, les produits de cette balise ne sont pas disponibles à l'achat dans "
+"votre pays.\n"
+
+#: includes/cbr-pro-admin.php:256 includes/cbr-pro-restriction.php:266
+msgid "Sorry, this product is not available to purchase in your country."
+msgstr ""
+"Désolé, ce produit n'est pas disponible à l'achat dans votre pays.\n"
+
+#: includes/cbr-pro-notice.php:125
+msgid ""
+"The Country Based Restrictions free plugin is not used since you already "
+"have the PRO version installed. Please deactivate and remove the Free "
+"version."
+msgstr ""
+"Le plugin gratuit Country Based Restrictions n'est pas utilisé car vous avez "
+"déjà installé la version PRO. Veuillez désactiver et supprimer la version "
+"gratuite.\n"
+
+#: includes/cbr-pro-notice.php:91
+msgid ""
+"The Country Based Restrictions free plugin was deactivated since you use the "
+"PRO version. You can now remove the Free version."
+msgstr ""
+"Le plugin gratuit Country Based Restrictions a été désactivé depuis que vous "
+"utilisez la version PRO. Vous pouvez maintenant supprimer la version "
+"gratuite.\n"
+
+#. Description of the plugin
+#| msgid ""
+#| "The Country Based Restrictions pro add-on extends the Country Based "
+#| "Restrictions for WooCommerce plugin and allows you to using more options "
+#| "and products restriction by categories."
+msgid ""
+"The Country Based Restrictions pro extends the Country Based Restrictions "
+"for WooCommerce plugin and allows you to using more options and products "
+"restriction by categories."
+msgstr ""
+"L'extension Country Based Restrictions pro étend le plugin Country Based "
+"Restrictions for WooCommerce et vous permet d'utiliser plus d'options et de "
+"restreindre les produits par catégories.\n"
+
+#: includes/cbr-pro-admin.php:284
+msgid "This message show on cart page when product is not purchasable."
+msgstr ""
+"Ce message s'affiche sur la page du panier lorsque le produit n'est pas "
+"achetable.\n"
+
+#: includes/cbr-pro-admin.php:255
+msgid ""
+"This message show on product page when product is not purchasable. Default "
+"message : Sorry, this product is not available in your country."
+msgstr ""
+"Ce message s'affiche sur la page du produit lorsque le produit n'est pas "
+"achetable. Message par défaut: Désolé, ce produit n'est pas disponible dans "
+"votre pays.\n"
+
+#: includes/cbr-pro-admin.php:294
+msgid ""
+"This message show on the category/tag page when a category/tag is restricted."
+" Default message: Sorry, this category's/tag's product is not available in "
+"your country."
+msgstr ""
+"Ce message s'affiche sur la page des catégories / balises lorsqu'une "
+"catégorie / balise est restreinte. Message par défaut: Désolé, le produit de "
+"cette catégorie / tag n'est pas disponible dans votre pays.\n"
+
+#: includes/views/cbr_setting_tab.php:34
+msgid ""
+"This option will completely hide restricted products and product variations "
+"from your store (including a direct link)"
+msgstr ""
+"Cette option masquera complètement les produits restreints et les variantes "
+"de produits de votre boutique (y compris un lien direct)"
+
+#: includes/views/cbr_setting_tab.php:67
+msgid ""
+"This option will display your products and product variations on the shop "
+"but not purchasable."
+msgstr ""
+"Cette option affichera vos produits et variations de produits sur la "
+"boutique mais pas achetable.\n"
+
+#: includes/views/cbr_setting_tab.php:51
+msgid ""
+"This option will hide restricted products and product variations from your "
+"shop and search results, however these products will still be accessible and "
+"purchasable via direct link."
+msgstr ""
+"Cette option masquera les produits restreints et les variantes de produits "
+"de votre boutique et des résultats de recherche, mais ces produits seront "
+"toujours accessibles et achetables via un lien direct.\n"
+
+#: includes/cbr-pro-update-manager.php:182
+#, php-format
+msgid ""
+"To receive automatic updates license activation is required. Please visit "
+"%ssettings%s to activate your Country Based Restrictions for WooCommerce."
+msgstr ""
+"Pour recevoir les mises à jour automatiques, l'activation de la licence est "
+"nécessaire. Veuillez visiter %ssettings%s pour activer vos restrictions par "
+"pays pour WooCommerce.\n"
+
+#: includes/cbr-pro-admin.php:279
+msgid "Use shortcode"
+msgstr ""
+"Utiliser un shortcode\n"
+
+#: includes/cbr-pro-admin.php:265
+msgid "Use the shortcode [cbr_message_position] in your product template."
+msgstr ""
+"Utilisez le shortcode [cbr_message_position] dans votre modèle de produit.\n"
+
+#: includes/customizer/cbr-widget-customizer.php:213
+msgid "Widget width"
+msgstr "Largeur du widget"
+
+#: includes/customizer/cbr-widget-customizer.php:164
+#: includes/customizer/cbr-widget-customizer.php:181
+msgid "You can use HTML tags : <a>, <strong>, <i>, <a>"
+msgstr ""
+"Vous pouvez utiliser des balises HTML:<a>, <strong>, <i>, <a>\n"
+
+#: includes/cbr-pro-admin.php:296
+msgid "You can use shortcode [cbr_category_message] in your category template."
+msgstr ""
+"Vous pouvez utiliser le shortcode [cbr_category_message] dans votre modèle "
+"de catégorie.\n"
+
+#: includes/views/cbr_bulk_restriction_tab.php:184
+#: includes/views/cbr_checkout_restriction_tab.php:136
+msgid "You need to setup shipping locations in WooCommerce settings"
+msgstr ""
+"Vous devez configurer les lieux d'expédition dans les paramètres de "
+"WooCommerce\n"
+
+#: includes/cbr-pro-product.php:145
+msgid "You need to setup shipping locations in WooCommerce settings "
+msgstr ""
+"Vous devez configurer les lieux de livraison dans les paramètres "
+"WooCommerce\n"
+
+#: includes/cbr-pro-admin.php:286 includes/cbr-pro-restriction.php:527
+msgid ""
+"{Product_Name} has been removed from your cart since it is not available for "
+"purchase to your Country."
+msgstr ""
+"{Product_Name} a été supprimé de votre panier car il n'est pas disponible à "
+"l'achat dans votre pays.\n"

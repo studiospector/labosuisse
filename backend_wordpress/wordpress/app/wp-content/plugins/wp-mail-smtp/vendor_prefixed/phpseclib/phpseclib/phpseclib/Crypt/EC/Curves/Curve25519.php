@@ -48,7 +48,7 @@ class Curve25519 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\Montg
         //$r = strrev(sodium_crypto_scalarmult($d->toBytes(), strrev($p[0]->toBytes())));
         //return [$this->factory->newInteger(new BigInteger($r, 256))];
         $d = $d->toBytes();
-        $d &= "ï¿½" . \str_repeat("ï¿½", 30) . "";
+        $d &= "ø" . \str_repeat("ÿ", 30) . "";
         $d = \strrev($d);
         $d |= "@";
         $d = new \WPMailSMTP\Vendor\phpseclib3\Math\BigInteger($d, -256);

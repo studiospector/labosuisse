@@ -24,7 +24,7 @@ RUN npm run build
 
 
 # WORDPRESS STAGE
-FROM wordpress:5.9.3-php7.4-fpm-alpine AS wordpress-base
+FROM wordpress:6.0.1-php7.4-fpm-alpine AS wordpress-base
 
 WORKDIR /wordpress_dir
 RUN cp -r /var/www/html /wordpress_dir
@@ -53,6 +53,9 @@ COPY --chown=nobody ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/
 COPY --chown=nobody ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/views
 COPY --chown=nobody ./backend_wordpress/wordpress/app/robots.txt ${WP_CORE_DIR}/
 
+#index.html
+COPY --chown=nobody ./backend_wordpress/wordpress/app/index.html ${WP_CORE_DIR}/index.html
+
 # trafex stage (wrap it)
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
 FROM trafex/php-nginx:2.4.0 AS production
@@ -73,6 +76,8 @@ RUN apk --no-cache add \
   php8-xmlwriter \
   php8-redis \
   php8-tokenizer \
+  php8-ftp \
+  php8-openssl \
   libmemcached \
   libmemcached-libs \
   libmemcached-dev \

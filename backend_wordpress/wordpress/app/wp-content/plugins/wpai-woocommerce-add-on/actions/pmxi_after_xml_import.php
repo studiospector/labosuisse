@@ -1,6 +1,7 @@
 <?php
 
-use wpai_woocommerce_add_on\libraries\importer\ImportProductBase;
+use wpai_woocommerce_add_on\importer\products\ImportProductBase;
+use wpai_woocommerce_add_on\XmlImportWooCommerceService;
 
 /**
  * @param $importID
@@ -16,6 +17,10 @@ function pmwi_pmxi_after_xml_import($importID) {
             'product_variation'
         ))
     ) {
+        $logger = function ( $m ) {
+            print( "<p>[" . date( "H:i:s" ) . "] ".wp_all_import_filter_html_kses($m)."</p>\n" );
+        };
+        $logger = apply_filters('wp_all_import_logger', $logger);
         // Sync parent products with variations.
         $productStack = get_option('wp_all_import_product_stack_' . $importID, array());
         foreach ($productStack as $parentProductID) {
@@ -53,11 +58,15 @@ function pmwi_pmxi_after_xml_import($importID) {
                         [
                             'taxonomy' => wc_attribute_taxonomy_name($attribute->attribute_name),
                             'hide_empty' => FALSE,
-                            'fields' => 'ids',
+                            'fields' => 'tt_ids',
                         ]
                     );
                     if (!empty($term_ids)) {
-                        wp_update_term_count_now($term_ids, wc_attribute_taxonomy_name($attribute->attribute_name));
+                        if ( is_wp_error( $term_ids ) ) {
+                            $logger and call_user_func($logger, sprintf(__('Error recounting taxonomy `%s`: `%s`', 'wp_all_import_plugin'), $attribute->attribute_name, $term_ids->get_error_message()));
+                        } else {
+                            wp_update_term_count_now($term_ids, wc_attribute_taxonomy_name($attribute->attribute_name));
+                        }
                     }
                 }
             }
@@ -68,7 +77,7 @@ function pmwi_pmxi_after_xml_import($importID) {
                     [
                         'taxonomy' => 'product_shipping_class',
                         'hide_empty' => FALSE,
-                        'fields' => 'ids',
+                        'fields' => 'tt_ids',
                     ]
                 );
                 if (!empty($shipping_terms)) {

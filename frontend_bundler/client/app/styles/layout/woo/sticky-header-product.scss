@@ -63,6 +63,7 @@
             line-height: rem(19);
             text-transform: uppercase;
             letter-spacing: 0.02em;
+            margin-bottom: 0;
 
             @include mq($until: md) {
                 font-size: rem(13);
@@ -71,8 +72,13 @@
             }
         }
 
-        p {
+        &__variants {
+            margin-top: 10px;
             margin-bottom: 0;
+
+            &:empty {
+                display: none;
+            }
         }
     }
 
@@ -92,7 +98,7 @@
         font-weight: 600;
         line-height: rem(28);
         letter-spacing: 0.02em;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         margin-right: 40px;
 
         @include mq($until: md) {
@@ -105,10 +111,14 @@
             margin-right: 0;
             line-height: 1;
         }
+
+        .lb-price-label {
+            font-weight: 400;
+        }
     }
 
     &--adjust {
-        transform: translateY(70px);
+        transform: translateY(100px);
 
         @include mq($until: md) {
             transform: translateY(0);

@@ -7,19 +7,19 @@ $button-big-padding: rem(24px 32px);
 $buttonsVariablesToCSSClasses: (
   "btn-primary-default": ".button-primary",
   "btn-primary-hover": ".button-primary:hover",
-  "btn-primary-disabled": ".button-primary:disabled",
+  "btn-primary-disabled": ".button-primary:disabled, .button-primary-disabled",
 
   "btn-secondary-default": ".button-secondary",
   "btn-secondary-hover": ".button-secondary:hover",
-  "btn-secondary-disabled": ".button-secondary:disabled",
+  "btn-secondary-disabled": ".button-secondary:disabled, .button-secondary-disabled",
 
   "btn-tertiary-default": ".button-tertiary",
   "btn-tertiary-hover": ".button-tertiary:hover",
-  "btn-tertiary-disabled": ".button-tertiary:disabled",
+  "btn-tertiary-disabled": ".button-tertiary:disabled, .button-tertiary-disabled",
 
   "btn-quaternary-default": ".button-quaternary",
   "btn-quaternary-hover": ".button-quaternary:hover",
-  "btn-quaternary-disabled": ".button-quaternary:disabled",
+  "btn-quaternary-disabled": ".button-quaternary:disabled, .button-quaternary-disabled",
 );
 $buttonsPropertyList: (
   "background-color",
@@ -44,13 +44,22 @@ $buttonsPropertyList: (
   cursor: pointer;
   transition: background 0.2s;
 
-  &:disabled {
+  &:disabled,
+  &.button-primary-disabled,
+  &.button-secondary-disabled,
+  &.button-tertiary-disabled {
     cursor: not-allowed;
     pointer-events: none;
   }
 
   .lb-icon {
-    margin-left: 10px;
+    &:first-of-type {
+       margin-right: 10px;
+    }
+
+    &:last-of-type {
+       margin-left: 10px;
+    }
   }
 }
 
@@ -85,15 +94,20 @@ $buttonsPropertyList: (
 
     &:hover {
         .lb-icon {
-            transform: translateX(5px);
             transition: all 0.2s;
+
+            &:first-of-type {
+                transform: translateX(-5px);
+            }
+
+            &:last-of-type {
+                transform: translateX(5px);
+            }
         }
     }
 }
 
-.button-link {
-
-}
+// .button-link {}
 
 .button-thin {
     .button__label {
@@ -112,6 +126,7 @@ $buttonsPropertyList: (
     .button__label {
         position: relative;
         overflow: hidden;
+        white-space: nowrap;
 
         & > span {
             display: block;
@@ -142,6 +157,89 @@ $buttonsPropertyList: (
                 }
             }
         }
+    }
+}
+
+.lb-button-group {
+    display: flex;
+    align-items: center;
+
+    @include mq($until: md) {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .button {
+        &:nth-child(odd) {
+            margin-right: 30px;
+
+            @include mq($until: md) {
+                margin-right: 0;
+            }
+        }
+
+        &:not(:last-child) {
+            @include mq($until: md) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &.button-primary {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+
+    &--vertical {
+        flex-direction: column;
+        justify-content: center;
+
+        .button {
+            width: 100%;
+            justify-content: center;
+            
+            &:nth-child(odd) {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.button {
+    &.button-loading {
+        position: relative;
+
+        .button {
+            &__label {
+                visibility: hidden;
+            }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 100%;
+            animation: lb-button-loading-spinner 1s linear infinite;
+        }
+    }
+}
+
+@keyframes lb-button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+  
+    to {
+        transform: rotate(1turn);
     }
 }
 

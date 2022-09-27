@@ -56,7 +56,7 @@ class BinaryField extends \WPMailSMTP\Vendor\phpseclib3\Math\Common\FiniteField
         $t = \ceil($m / 8);
         $finalMask = \chr((1 << $m % 8) - 1);
         if ($finalMask == "\0") {
-            $finalMask = "ï¿½";
+            $finalMask = "ÿ";
         }
         $bitLen = $mStart + 1;
         $pad = \ceil($bitLen / 8);

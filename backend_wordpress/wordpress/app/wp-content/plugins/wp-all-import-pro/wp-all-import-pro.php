@@ -3,7 +3,7 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.7.3
+Version: 4.7.5
 Author: Soflyy
 */
 
@@ -25,7 +25,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
     /**
      *
      */
-    define('PMXI_VERSION', '4.7.3');
+    define('PMXI_VERSION', '4.7.5');
 
     /**
      *
@@ -33,7 +33,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
     define('PMXI_EDITION', 'paid');
 
 	/**
-	 * Plugin root dir with forward slashes as directory separator regardless of actuall DIRECTORY_SEPARATOR value
+	 * Plugin root dir with forward slashes as directory separator regardless of actual DIRECTORY_SEPARATOR value
 	 * @var string
 	 */
 	define('WP_ALL_IMPORT_ROOT_DIR', str_replace('\\', '/', dirname(__FILE__)));
@@ -81,7 +81,9 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 	 */
 	define('WP_ALL_IMPORT_TEMP_DIRECTORY', WP_ALL_IMPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'temp');
 
-	/**
+    require WP_ALL_IMPORT_ROOT_DIR . '/vendor/autoload.php';
+
+    /**
 	 * Main plugin file, Introduces MVC pattern
 	 *
 	 * @singletone
@@ -837,8 +839,8 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 
 		/**
 		 * Autoloader
-		 * It's assumed class name consists of prefix folloed by its name which in turn corresponds to location of source file
-		 * if `_` symbols replaced by directory path separator. File name consists of prefix folloed by last part in class name (i.e.
+		 * It's assumed class name consists of prefix followed by its name which in turn corresponds to location of source file
+		 * if `_` symbols replaced by directory path separator. File name consists of prefix followed by last part in class name (i.e.
 		 * symbols after last `_` in class name)
 		 * When class has prefix it's source is looked in `models`, `controllers`, `shortcodes` folders, otherwise it looked in `core` or `library` folder
 		 *
@@ -846,60 +848,33 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 		 * @return bool
 		 */
 		public function autoload($className) {
+
+            if ( ! preg_match('/PMXI|Xml/m', $className) ) {
+                return false;
+            }
+
 			$is_prefix = false;
 			$filePath = str_replace('_', '/', preg_replace('%^' . preg_quote(self::PREFIX, '%') . '%', '', strtolower($className), 1, $is_prefix)) . '.php';
-			if ( ! $is_prefix) { // also check file with original letter case
+			if ( ! $is_prefix ) { // also check file with original letter case
 				$filePathAlt = $className . '.php';
 			}
 			foreach ($is_prefix ? array('models', 'controllers', 'shortcodes', 'classes') : array('libraries') as $subdir) {
 				$path = self::ROOT_DIR . '/' . $subdir . '/' . $filePath;
-				if (strlen($filePath) < 40 && is_file($path)) {
-					require $path;
+				if (is_file($path)) {
+                    require_once $path;
 					return TRUE;
 				}
 				if ( ! $is_prefix) {
-					$pathAlt = self::ROOT_DIR . '/' . $subdir . '/' . $filePathAlt;
-					if (strlen($filePathAlt) < 40 && is_file($pathAlt)) {
-						require $pathAlt;
+                    if (strpos($className, '_') !== false) {
+                        $filePathAlt = $this->lreplace('_', DIRECTORY_SEPARATOR, $filePathAlt);
+                    }
+
+                    $pathAlt = self::ROOT_DIR . DIRECTORY_SEPARATOR . $subdir . DIRECTORY_SEPARATOR . $filePathAlt;
+
+                    if (is_file($pathAlt)) {
+                        require_once $pathAlt;
 						return TRUE;
 					}
-				}
-			}
-
-			if(strpos($className, '\\') !== false){
-
-				// project-specific namespace prefix
-				$prefix = 'Wpai\\';
-
-				// base directory for the namespace prefix
-				$base_dir = self::ROOT_DIR . '/src/';
-
-				// does the class use the namespace prefix?
-				$len = strlen($prefix);
-				if (strncmp($prefix, $className, $len) !== 0) {
-
-				    // Autoload third party libraries also.
-				    $path = self::ROOT_DIR . '/libraries/' . str_replace('\\','/',$className) . '.php';
-
-				    if(is_file($path)){
-				        require_once($path);
-                    }else {
-					    // no, move to the next registered autoloader
-					    return false;
-				    }
-				}
-
-				// get the relative class name
-				$relative_class = substr($className, $len);
-
-				// replace the namespace prefix with the base directory, replace namespace
-				// separators with directory separators in the relative class name, append
-				// with .php
-				$file = $base_dir . str_replace('\\', '/', $relative_class) . '.php';
-
-				// if the file exists, require it
-				if (file_exists($file)) {
-					require_once $file;
 				}
 			}
 
@@ -1135,7 +1110,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 
 				if ( ! empty($gf_imports) ) {
 					$entries_table = $wpdb->base_prefix . 'gf_entry';
-					$entries_query = 'DELETE FROM ' . $pmxi_post->getTable() . ' WHERE import_id IN (' . implode(',', $entries_table) . ') AND post_id NOT IN (SELECT id FROM ' . $entries_table . ')';
+					$entries_query = 'DELETE FROM ' . $pmxi_post->getTable() . ' WHERE import_id IN (' . implode(',', $gf_imports) . ') AND post_id NOT IN (SELECT id FROM ' . $entries_table . ')';
 					$wpdb->query($entries_query);
 				}
 
@@ -1675,6 +1650,23 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
                 $import_id = $input->get('import_id');
             }
             return $import_id;
+        }
+
+        /**
+         * Replace last occurence of string
+         * Used in autoloader, that's not muved in string class
+         *
+         * @param $search
+         * @param $replace
+         * @param $subject
+         * @return mixed
+         */
+        private function lreplace($search, $replace, $subject) {
+            $pos = strrpos($subject, $search);
+            if ($pos !== false) {
+                $subject = substr_replace($subject, $replace, $pos, strlen($search));
+            }
+            return $subject;
         }
 
 	}

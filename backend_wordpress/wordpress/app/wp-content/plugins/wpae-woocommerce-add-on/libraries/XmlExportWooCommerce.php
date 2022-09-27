@@ -23,6 +23,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
                 'type'  => 'parent',
             )
 		);
+
 		private $_woo_data     = array();
 		private $_product_data = array();
 
@@ -125,6 +126,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 		}
 
 		// [FILTERS]
+
 			/**
 			*
 			* Filter Init Fields
@@ -249,6 +251,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 											'type'  => 'woo'
 										);
 										break;
+
 									default:
 										$advanced_fields[] = $this->fix_titles(array(
 											'name'  => $woo_key,
@@ -391,6 +394,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 										'auto'  => true
 									);
 									break;
+
 								default:
 									$product_fields[] = $this->fix_titles(array(
 										'name'  => $woo_key,
@@ -458,6 +462,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 				if ( ! empty($meta_keys) )
 				{
 					foreach ($meta_keys as $key => $record_meta_key) {
+
 						if ( in_array($record_meta_key, $this->_woo_data) ) unset($meta_keys[$key]);
 
 						if ( strpos($record_meta_key, 'attribute_pa_') === 0 || strpos($record_meta_key, '_min_') === 0 || strpos($record_meta_key, '_max_') === 0){
@@ -820,6 +825,7 @@ if ( ! class_exists('XmlExportWooCommerce') )
 
 						break;
 				}
+
 			}
 
 

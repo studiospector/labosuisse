@@ -40,26 +40,26 @@ class secp192r1 extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC\BaseCurves\Prime
         $this->setReduction(function($c) use ($m_length) {
             $cBytes = $c->toBytes();
             $className = $this->className;
-
+        
             if (strlen($cBytes) > 2 * $m_length) {
                 list(, $r) = $c->divide($className::$modulo);
                 return $r;
             }
-
+        
             $c = str_pad($cBytes, 48, "\0", STR_PAD_LEFT);
             $c = array_reverse(str_split($c, 8));
-
+        
             $null = "\0\0\0\0\0\0\0\0";
             $s1 = new BigInteger($c[2] . $c[1] . $c[0], 256);
             $s2 = new BigInteger($null . $c[3] . $c[3], 256);
             $s3 = new BigInteger($c[4] . $c[4] . $null, 256);
             $s4 = new BigInteger($c[5] . $c[5] . $c[5], 256);
-
+        
             $r = $s1->add($s2)->add($s3)->add($s4);
             while ($r->compare($className::$modulo) >= 0) {
                 $r = $r->subtract($className::$modulo);
             }
-
+        
             return $r;
         });
         */

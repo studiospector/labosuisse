@@ -1,0 +1,10 @@
+<div id="lb-multicountry-content">
+    {% if infobox %}
+        {% include '@PathViews/components/infobox.twig' with infobox only %}
+    {% endif %}
+
+    {% include '@PathViews/components/fields/select.twig' with form.select only %}
+    <div class="lb-button-group lb-button-group--vertical">
+        {% include '@PathViews/components/button.twig' with form.button only %}
+    </div>
+</div>

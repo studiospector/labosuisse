@@ -20,7 +20,7 @@
     {% endif %}
 {% endif %}
 
-<section class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
+<section {{ sectionID ? 'id="' ~ sectionID ~ '" ' : '' }}class="block-image-card{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
     <div class="block-image-card__img">
         {{ lbPicture(images, true, null, true) }}
     </div>

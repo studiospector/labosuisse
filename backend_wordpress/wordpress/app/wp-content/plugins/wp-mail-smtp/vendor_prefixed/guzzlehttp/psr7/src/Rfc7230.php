@@ -14,6 +14,6 @@ final class Rfc7230
      *
      * @license https://github.com/amphp/http/blob/v1.0.1/LICENSE
      */
-    const HEADER_REGEX = "(^([^()<>@,;:\\\"/[\\]?={}\1- ]++):[ \t]*+((?:[ \t]*+[!-~ï¿½-ï¿½]++)*+)[ \t]*+\r?\n)m";
+    const HEADER_REGEX = "(^([^()<>@,;:\\\"/[\\]?={}\1- ]++):[ \t]*+((?:[ \t]*+[!-~€-ÿ]++)*+)[ \t]*+\r?\n)m";
     const HEADER_FOLD_REGEX = "(\r?\n[ \t]++)";
 }

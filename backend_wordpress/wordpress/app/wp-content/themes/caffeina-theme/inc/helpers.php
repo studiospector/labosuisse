@@ -315,10 +315,16 @@ function lb_pagination()
  */
 function lb_header()
 {
-    $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+    // $lang_selector = do_shortcode('[wpml_language_selector_widget]');
 
     return array(
-        'language_selector' => (!empty($lang_selector)) ? true : false,
+        'pre' => [
+            'text' => get_field('lb_preheader_text', 'option'),
+        ],
+        // 'language_selector' => (!empty($lang_selector)) ? true : false,
+        'language_selector' => [
+            'label' => lb_get_current_lang() == 'it' ? __('Italiano', 'labo-suisse-theme') : __('Internazionale', 'labo-suisse-theme'),
+        ],
         'header_links' => ['items' => (new Option())->getHeaderLinks()],
         'mobile_search' => [
             'type' => 'search',
@@ -344,13 +350,12 @@ function lb_footer()
 }
 
 /**
- * Newsletter nav
+ * Custom Offset navs
  */
-function lb_newsletter_nav()
-{
+function lb_custom_offset_navs() {
+    // Newsletter
     $footer_newsletter_options = get_field('lb_footer_newsletter', 'option');
-
-    return [
+    $newsletter_nav = [
         'id' => 'lb-newsletter-nav',
         'title' => __('Newsletter', 'labo-suisse-theme'),
         'data' => [
@@ -368,6 +373,90 @@ function lb_newsletter_nav()
                     : null
             ]
         ]
+    ];
+
+    // Cart Async
+    $cart_async_nav = [
+        'id' => 'lb-offsetnav-async-cart',
+        'title' => __('Carrello', 'labo-suisse-theme'),
+        'data' => [
+            [
+                'type' => 'html',
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/async-cart.twig'),
+            ]
+        ]
+    ];
+
+    // Multicountry geolocation
+    $multicountry_geolocation_nav = [
+        'id' => 'lb-offsetnav-multicountry-geolocation',
+        'title' => null,
+        'data' => [
+            [
+                'type' => 'html',
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry-geolocation.twig'),
+            ]
+        ],
+        'noClose' => true,
+        'variants' => ['popup']
+    ];
+
+    // Multicountry
+    $curr_lang = lb_get_current_lang();
+    $multicountry_nav = [
+        'id' => 'lb-offsetnav-multicountry',
+        'title' => null,
+        'data' => [
+            [
+                'type' => 'html',
+                'data' => Timber::compile('@PathViews/components/offset-nav/templates/multicountry.twig', [
+                    'content' => [
+                        'infobox' => [
+                            'paragraph' => __("Seleziona il catalogo che vuoi visualizzare, in base alla tua Nazione di provenienza.", 'labo-suisse-theme')
+                        ],
+                        'form' => [
+                            'select' => [
+                                'id' => 'lb-catalog-selection',
+                                'label' => __('Catalogo', 'labo-suisse-theme'),
+                                'placeholder' => null,
+                                'multiple' => false,
+                                'required' => true,
+                                'disabled' => false,
+                                'options' => [
+                                    [
+                                        'value' => 'IT',
+                                        'label' => __('Italiano', 'labo-suisse-theme'),
+                                        // 'icon' => 'cart',
+                                        'selected' => $curr_lang == 'it' ? true : false,
+                                    ],
+                                    [
+                                        'value' => 'EN',
+                                        'label' => __('Internazionale', 'labo-suisse-theme'),
+                                        'selected' => $curr_lang != 'it' ? true : false,
+                                    ],
+                                ],
+                                'variants' => ['quaternary']
+                            ],
+                            'button' => [
+                                'title' => __("Salva", 'labo-suisse-theme'),
+                                'url' => '#',
+                                'class' => 'button-primary-disabled',
+                                'variants' => ['primary'],
+                            ],
+                        ]
+                    ]
+                ]),
+            ]
+        ],
+        // 'noClose' => true,
+        'variants' => ['popup']
+    ];
+
+    return [
+        $newsletter_nav,
+        $cart_async_nav,
+        $multicountry_geolocation_nav,
+        $multicountry_nav
     ];
 }
 
@@ -419,4 +508,31 @@ function lb_get_unique_id($prefix = '')
         return wp_unique_id($prefix);
 
     return $prefix . (string) ++$id_counter;
+}
+
+/**
+ * Change key of array from old to new value
+ */
+function lb_array_change_key( $array, $old_key, $new_key ) {
+
+    if( ! array_key_exists( $old_key, $array ) )
+        return $array;
+
+    $keys = array_keys( $array );
+    $keys[ array_search( $old_key, $keys ) ] = $new_key;
+
+    return array_combine( $keys, $array );
+}
+
+/**
+ * Move array element and change key
+ */
+function lb_move_array_element(&$array, $a, $b, $key)
+{
+    $out = array_splice($array, $a, 1);
+    array_splice($array, $b, 0, $out);
+
+    $array = lb_array_change_key($array, 0, $key);
+
+    return $array;
 }

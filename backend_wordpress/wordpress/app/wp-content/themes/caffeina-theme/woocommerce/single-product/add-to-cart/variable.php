@@ -34,7 +34,7 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
                                                                                                                                                                                                                                                                                             ?>">
     <?php do_action('woocommerce_before_variations_form'); ?>
 
-    <?php if (!$product->is_in_stock()) : ?>
+    <?php if (!$product->is_in_stock() || !$product->is_purchasable()) : ?>
         <?php
             $lang = lb_get_current_lang();
             $labo_in_the_world_link = get_page_link( get_field('lb_labo_in_the_world_page', 'option') );
@@ -46,8 +46,10 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
             ]);
         ?>
         <?php /* <p class="stock out-of-stock"><?php echo esc_html(apply_filters('woocommerce_out_of_stock_message', __('This product is currently out of stock and unavailable.', 'woocommerce'))); ?></p> */ ?>
-    <?php else : ?>
-        <div class="variations lb-product-variations custom-select-group">
+    <?php else :
+        $variation_link_help = get_field('lb_product_link_scrollto_help');
+        ?>
+        <div class="variations lb-product-variations<?php echo $variation_link_help ? ' lb-product-variations--link-help' : '' ?> custom-select-group">
             <?php foreach ($attributes as $attribute_name => $options) : ?>
                 <div class="lb-product-variations__item">
                     <?php
@@ -88,6 +90,18 @@ do_action('woocommerce_before_add_to_cart_form'); ?>
 		</table>
         */ ?>
         <?php do_action( 'woocommerce_after_variations_table' ); ?>
+
+        <?php
+            // Variation help link
+            if (!empty($variation_link_help)) {
+                Timber::render('@PathViews/components/button.twig', [
+                    'title' => esc_html( 'Come scegliere il prodotto migliore per me?', 'labo-suisse-theme' ),
+                    'attributes' => ['data-scroll-to="#'. $variation_link_help .'"'],
+                    'class' => 'lb-product-variation-help js-scroll-to',
+                    'variants' => ['quaternary'],
+                ]);
+            }
+        ?>
 
         <div class="single_variation_wrap">
             <?php

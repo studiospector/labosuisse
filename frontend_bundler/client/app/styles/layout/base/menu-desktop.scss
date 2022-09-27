@@ -223,7 +223,8 @@
         }
 
 
-        &__link {
+        &__link,
+        &__link-nav {
             display: block;
             position: relative;
             padding-bottom: 15px;
@@ -276,6 +277,12 @@
                     content: none;
                 }
             }
+        }
+
+
+        &__link-nav {
+            padding-bottom: 15px;
+            cursor: pointer;
         }
 
 

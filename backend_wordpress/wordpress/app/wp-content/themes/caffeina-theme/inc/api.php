@@ -5,6 +5,7 @@ use Caffeina\LaboSuisse\Api\Distributor\Distributor;
 use Caffeina\LaboSuisse\Api\GlobalSearch\Autocomplete;
 use Caffeina\LaboSuisse\Api\GlobalSearch\Search;
 use Caffeina\LaboSuisse\Api\Store\Store;
+use Caffeina\LaboSuisse\Api\Multicountry\Geolocation;
 
 function get_stores()
 {
@@ -43,6 +44,11 @@ function get_archive(WP_REST_Request $request)
     return rest_ensure_response($posts);
 }
 
+function get_multicountry_geolocation(WP_REST_Request $request)
+{
+    return (new Geolocation($request['lang']))->get();
+}
+
 add_action( 'rest_api_init', function() {
     register_rest_route('v1', '/stores', [
         'methods' => 'GET',
@@ -71,6 +77,12 @@ add_action( 'rest_api_init', function() {
     register_rest_route('v1','/global-search', [
         'methods' => 'GET',
         'callback' => 'get_global_search',
+        'permission_callback' => '__return_true'
+    ]);
+
+    register_rest_route('v1', '/multicountry-geolocation', [
+        'methods' => 'GET',
+        'callback' => 'get_multicountry_geolocation',
         'permission_callback' => '__return_true'
     ]);
 });

@@ -22,8 +22,9 @@ $context = [
             'required' => false,
             'autocomplete' => 'off',
             'buttonTypeNext' => 'button',
+            'buttonVariantNext' => 'primary',
             'class' => 'js-caffeina-sl-search',
-            'variants' => ['tertiary'],
+            'variants' => ['secondary'],
         ]
     ],
     'card' => $options['card'],

@@ -174,7 +174,7 @@ class PrivateKey extends \WPMailSMTP\Vendor\phpseclib3\Crypt\EC implements \WPMa
         $this->q = $this->curve->getOrder();
         $dA = $this->dA->toBigInteger();
         $this->x = $dA;
-
+        
         $h1 = $this->hash->hash($message);
         $k = $this->computek($h1);
         list($x, $y) = $this->curve->multiplyPoint($this->curve->getBasePoint(), $k);

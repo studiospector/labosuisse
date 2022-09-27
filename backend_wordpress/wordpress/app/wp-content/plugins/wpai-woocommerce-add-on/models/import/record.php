@@ -1,5 +1,10 @@
 <?php
 
+use wpai_woocommerce_add_on\XmlImportWooCommerce;
+use wpai_woocommerce_add_on\XmlImportWooCommerceProduct;
+use wpai_woocommerce_add_on\XmlImportWooCommerceService;
+use wpai_woocommerce_add_on\XmlImportWooCommerceShopOrder;
+
 /**
  * Class PMWI_Import_Record
  */

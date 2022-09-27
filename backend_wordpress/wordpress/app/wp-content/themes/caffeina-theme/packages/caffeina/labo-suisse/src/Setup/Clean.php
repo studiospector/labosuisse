@@ -21,6 +21,9 @@ class Clean
         // Remove emoji support
         add_action('init', [$this, 'remove_emoji_support']);
 
+        // Redirect admin pages
+        add_action( 'admin_init', [$this, 'lb_disallowed_admin_pages'] );
+
         // Manage admin menu
         add_action('admin_menu', [$this, 'lb_manage_admin_menu'], 999);
 
@@ -275,6 +278,23 @@ class Clean
 
 
     /**
+     * Redirect admin pages
+     */
+    function lb_disallowed_admin_pages() {
+
+        // global $pagenow;
+
+        if (!lb_user_has_role('administrator') && is_admin()) {
+            // W3TC pages
+            if ( isset($_GET['page']) && preg_match("/w3tc_/i", $_GET['page']) ) {
+                wp_redirect( admin_url( '/index.php' ) );
+                exit;
+            }
+        }
+    }
+
+
+    /**
      * Manage Menu admin
      */
     function lb_manage_admin_menu()
@@ -297,6 +317,8 @@ class Clean
             remove_menu_page('wpcf7');
             // WPML
             remove_menu_page('tm/menu/main.php');
+            // W3TC
+            remove_menu_page('w3tc_dashboard');
         }
         
         if (lb_user_has_role('shop_manager')) {
@@ -411,6 +433,13 @@ class Clean
         $wp_admin_bar->remove_menu('comments');
 
         if (!lb_user_has_role('administrator')) {
+            // W3TC
+            $wp_admin_bar->remove_node('w3tc_flush');
+            $wp_admin_bar->remove_node('w3tc_feature_showcase');
+            $wp_admin_bar->remove_node('w3tc_settings_general');
+            $wp_admin_bar->remove_node('w3tc_settings_extensions');
+            $wp_admin_bar->remove_node('w3tc_settings_faq');
+            $wp_admin_bar->remove_node('w3tc_support');
             // $wp_admin_bar->remove_menu('user-info');
             // $wp_admin_bar->remove_menu('edit-profile');
         }

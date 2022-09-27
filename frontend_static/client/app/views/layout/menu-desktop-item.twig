@@ -2,6 +2,12 @@
     <div class="lb-menu__item lb-menu__item--separator"></div>
 {% else %}
     <div class="lb-menu__item">
+        {% if type == 'nav' %}
+            <div class="lb-menu__link-nav lb-menu__link--icon{{ class ? ' ' ~ class : '' }}" tabindex="0"{{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
+                {% include '@PathViews/components/icon.twig' with icon only %}
+            </div>
+        {% endif %}
+        
         {% if type == 'icon' %}
             <a href="{{href}}" class="lb-menu__link lb-menu__link--icon" tabindex="0">
                 {% include '@PathViews/components/icon.twig' with icon only %}

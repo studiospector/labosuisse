@@ -111,3 +111,154 @@ add_filter('woocommerce_get_image_size_gallery_thumbnail', function ($size) {
 add_filter('single_product_archive_thumbnail_size', function ($size) {
     return 'woocommerce_gallery_thumbnail';
 });
+
+
+
+/**
+ * Set base options for input quantity
+ */
+add_filter('woocommerce_get_stock_html', function ($html, $product) {
+    return '';
+}, 10, 2);
+
+add_filter('woocommerce_quantity_input_classes', function ($value, $product) {
+    return ['js-custom-input', 'qty'];
+}, 10, 2);
+
+
+
+/**
+ * Change Price Range for Variable Products
+ */
+add_filter('woocommerce_variable_sale_price_html', 'lb_variable_product_price', 10, 2);
+add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2);
+function lb_variable_product_price($v_price, $v_product)
+{
+    $classes = !is_product() ? 'lb-product-card__price__desc' : 'lb-price-label infobox__paragraph--small';
+    
+    $min_price = $v_product->get_variation_price('min', true);
+
+    $price_html = sprintf(
+        __('%1$sa partire da%2$s %3$s', 'labo-suisse-theme'),
+        '<span class="'. $classes .'">',
+        '</span>',
+        wc_price($min_price),
+    );
+
+    return $price_html;
+}
+
+
+
+/**
+ * Form fields custom
+ */
+add_filter('woocommerce_form_field_args', 'lb_custom_form_field_args', 10, 3);
+function lb_custom_form_field_args($args, $key, $value)
+{
+    if (!is_checkout()) {
+        if (in_array($args['type'], ['text', 'number', 'email', 'tel', 'password'])) {
+            $args['input_class'] = ['js-custom-input'];
+            $args['placeholder'] = ($args['placeholder'] ? $args['placeholder'] : $args['label']) . ($args['required'] ? '*' : '');
+    
+            $args['custom_attributes'] = [
+                'data-label' => ($args['label'] ? $args['label'] : $args['placeholder']) . ($args['required'] ? '*' : ''),
+                'data-variant' => 'tertiary',
+            ];
+            $args['label'] = '';
+        }
+        else if (in_array($args['type'], ['country', 'state'])) {
+            $args['label_class'] = ['lb-wc-label'];
+        }
+        else if (in_array($args['type'], ['textarea'])) {
+            $args['class'] = ['custom-input', 'custom-field'];
+            $args['label_class'] = ['lb-wc-label'];
+        }
+    }
+
+    return $args;
+}
+
+
+
+/**
+ * Remove menu link my account
+ */
+add_filter('woocommerce_account_menu_items', 'lb_wc_remove_account_menu_link');
+function lb_wc_remove_account_menu_link($menu_links)
+{
+    unset($menu_links['dashboard']);
+    return $menu_links;
+}
+
+
+
+/**
+ * Manage columns to orders table of user account
+ */
+add_filter('woocommerce_my_account_my_orders_columns', 'lb_add_account_orders_column');
+function lb_add_account_orders_column($columns)
+{
+    $columns['lb-articles-count-column'] = __('Articoli', 'labo-suisse-theme');
+    $columns['order-actions'] = '&nbsp;';
+
+    $columns = lb_move_array_element($columns, 5, 2, 'lb-articles-count-column');
+    $columns = lb_move_array_element($columns, 3, 4, 'order-status');
+
+    return $columns;
+}
+
+/**
+ * Add value to custom column of articles count in orders table of user account
+ */
+add_action('woocommerce_my_account_my_orders_column_lb-articles-count-column', 'lb_add_account_orders_column_rows');
+function lb_add_account_orders_column_rows($order)
+{
+    if ($order->get_item_count() == 1) {
+        printf('%1$s %2$s ', $order->get_item_count(), __('articolo', 'labo-suisse-theme'));
+    } else if ($order->get_item_count() > 1) {
+        printf('%1$s %2$s ', $order->get_item_count(), __('articoli', 'labo-suisse-theme'));
+    }
+}
+
+/**
+ * Ajax Fragments
+ */
+add_filter( 'woocommerce_add_to_cart_fragments', 'lb_wc_header_add_to_cart_fragment' );
+function lb_wc_header_add_to_cart_fragment( $fragments ) {
+	global $woocommerce;
+
+	ob_start();
+	?>
+	<span class="lb-wc-cart-total-count lb-icon__counter"><?php echo $woocommerce->cart->cart_contents_count > 0 ? $woocommerce->cart->cart_contents_count : ''; ?></span>
+	<?php
+	$fragments['span.lb-wc-cart-total-count'] = ob_get_clean();
+	return $fragments;
+}
+
+/**
+ * Set max quantity purchasable foreach product
+ */
+
+// Simple products
+add_filter('woocommerce_quantity_input_args', 'lb_wc_quantity_input_args', 10, 2);
+function lb_wc_quantity_input_args($args, $product)
+{
+    // if (is_singular('product')) {
+    //     $args['input_value'] = 2;
+    // }
+    $args['max_value'] = 5;
+    $args['step'] = 1;
+
+    return $args;
+}
+
+// Variable products
+add_filter('woocommerce_available_variation', 'lb_wc_available_variation');
+function lb_wc_available_variation($args)
+{
+    $args['max_qty'] = 5;
+    $args['min_qty'] = 1;
+
+    return $args;
+}

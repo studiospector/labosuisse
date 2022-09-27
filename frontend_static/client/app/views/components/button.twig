@@ -13,6 +13,9 @@
     class="button{{ classes ? ' ' ~ classes : '' }}"
     {{ url ? ' href="' ~ url ~ '" target="' ~ target|default('_self') ~ '"' : '' }}
     {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
+    {{ id ? ' id="' ~ id ~ '"' : '' }}
+    {{ name ? ' name="' ~ name ~ '"' : '' }}
+    {{ value ? ' value="' ~ value ~ '"' : '' }}
     {{ form ? ' form="' ~ form ~ '"' : '' }}
 >
     {% if iconStart %}
@@ -31,7 +34,7 @@
     {% if iconEnd %}
         {% include '@PathViews/components/icon.twig' with iconEnd only %}
     {% endif %}
-    {% if not iconEnd and 'quaternary' in variants %}
+    {% if iconEnd is null and 'quaternary' in variants %}
         {% include '@PathViews/components/icon.twig' with {name: 'arrow-right'} only %}
     {% endif %}
 </{{ tag }}>

@@ -4,11 +4,12 @@ namespace Caffeina\LaboSuisse\Blocks;
 
 class OffsetNavs extends BaseBlock
 {
-    public function __construct($block, $name)
+    public function __construct($block, $name, $sectionID)
     {
-        parent::__construct($block, $name);
+        parent::__construct($block, $name, $sectionID);
 
         $payload = [
+            'sectionID' => $sectionID ?? null,
             'title' =>  get_field('lb_block_offsetnav_title'),
             'subtitle' => get_field('lb_block_offsetnav_subtitle'),
             'paragraph' => get_field('lb_block_offsetnav_paragraph'),

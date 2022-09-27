@@ -35,6 +35,26 @@
   .p-big > & {
     height: rem(30px);
   }
+
+  &__counter {
+    min-width: 16px;
+    min-height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: rem(10);
+    font-weight: 500;
+    background-color: map-get($colors, "secondary");
+    color: map-get($colors, "white");
+    border-radius: 100%;
+
+    &:empty {
+        display: none;
+    }
+  }
 }
 
 .lb-icon-big {

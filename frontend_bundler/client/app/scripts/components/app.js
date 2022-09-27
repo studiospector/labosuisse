@@ -33,6 +33,9 @@ import Tabs from './Tabs'
 import SearchAutocomplete from './SearchAutocomplete'
 import AnimationReveal from './AnimationReveal'
 import GTMTracking from './GTMTracking'
+import AsyncCart from './AsyncCart'
+import Multicountry from './Multicountry'
+import MulticountryGeolocation from './MulticountryGeolocation'
 
 const components = {
     scrollbar: {
@@ -183,6 +186,21 @@ const components = {
     gtmTracking: {
         selector: '.js-gtm-tracking',
         type: GTMTracking,
+        optional: true
+    },
+    asyncCart: {
+        selector: '.js-async-cart',
+        type: AsyncCart,
+        optional: true
+    },
+    multicountry: {
+        selector: '.js-multicountry',
+        type: Multicountry,
+        optional: true
+    },
+    multicountryGeolocation: {
+        selector: '.js-multicountry-geolocation',
+        type: MulticountryGeolocation,
         optional: true
     },
 }

@@ -26,7 +26,7 @@
     {% endfor %}
 {% endif %}
 
-<section class="block-two-cards{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
+<section {{ sectionID ? 'id="' ~ sectionID ~ '" ' : '' }}class="block-two-cards{{ classes|length ? ' ' ~ classes|join(' ') : '' }} container js-animation-reveal">
     {% if infobox %}
         <div class="block-two-cards__infobox text-center">
             {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}

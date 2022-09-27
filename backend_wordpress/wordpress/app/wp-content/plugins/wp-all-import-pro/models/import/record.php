@@ -3479,7 +3479,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                     }
                                 }
 
-                                if (empty($image) || !preg_match('%\W(jpg|jpeg|png|gif|webp|svg)$%i', trim(basename($image)))) continue;
+                                if (empty($image) || !preg_match('%\W(jpg|jpeg|png|gif|webp|svg)$%i', strtok(trim(basename($image)), '?'))) continue;
 
                                 $attid = false;
 
