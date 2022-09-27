@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-09-26 15:35+0000\n"
+"PO-Revision-Date: 2022-09-27 14:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -19,6 +19,11 @@ msgstr ""
 #, php-format
 msgid "%1$sa partire da%2$s %3$s"
 msgstr "%1$sstarting from%2$s %3$s"
+
+#: woocommerce/myaccount/form-login.php:87
+#: woocommerce/myaccount/form-login.php:89
+msgid "Accedi"
+msgstr "Login"
 
 #: woocommerce/myaccount/lost-password-confirmation.php:26
 msgid "Accedi con la nuova password"
@@ -219,9 +224,15 @@ msgstr "Thank you!<br>your order has been processed"
 msgid "Hai bisogno di aiuto?"
 msgstr "Do you need help?"
 
+#: woocommerce/myaccount/form-login.php:99
 #: woocommerce/myaccount/form-lost-password.php:25
 msgid "Hai dimenticato la password?"
 msgstr "Did you forget your password?"
+
+#: woocommerce/checkout/terms.php:52
+#, php-format
+msgid "Ho letto e accetto %s del sito web."
+msgstr "I have read and agree to the website %s"
 
 #. URI of the theme
 #. Author URI of the theme
@@ -231,6 +242,31 @@ msgstr "https://caffeina.com/"
 #: woocommerce/myaccount/orders.php:27
 msgid "I miei ordini"
 msgstr "My orders"
+
+#: woocommerce/checkout/terms.php:32
+#, php-format
+#| msgid ""
+#| "I tuoi dati personali saranno utilizzati per elaborare il tuo ordine, "
+#| "supportare la tua esperienza su questo sito web e per altri scopi "
+#| "descritti nella nostra <a href=\"%1$s\" target=\"_blank\">%2$s</a>."
+msgid ""
+"I tuoi dati personali saranno utilizzati per elaborare il tuo ordine, "
+"supportare la tua esperienza su questo sito web e per altri scopi descritti "
+"nella nostra %s."
+msgstr ""
+"Your personal data will be used to ship your order, provide you the best "
+"experience in this website and to reach other purposes as described by our "
+"%s."
+
+#: woocommerce/myaccount/form-login.php:197
+#, php-format
+msgid ""
+"I tuoi dati personali verranno utilizzati per supportare la tua esperienza "
+"su questo sito web, per gestire l'accesso al tuo account e per altri scopi "
+"descritti nella nostra %s."
+msgstr ""
+"Your personal data will be used to support your experience in this website, "
+"to manage the account access and other purposes described on our %s."
 
 #: single-lb-job.php:36
 msgid "Il candidato"
@@ -244,6 +280,10 @@ msgstr "My account"
 #: woocommerce/checkout/form-shipping.php:34
 msgid "Indirizzo di spedizione"
 msgstr "Shipping address"
+
+#: woocommerce/myaccount/form-login.php:154
+msgid "Indirizzo email"
+msgstr "Email address"
 
 #: packages/caffeina/labo-suisse/src/Blocks/NewsletterSubscription.php:21
 msgid "Inserisci città, provincia, CAP,..."
@@ -326,6 +366,10 @@ msgstr "No results found"
 msgid "Newsletter"
 msgstr "Newsletter"
 
+#: woocommerce/myaccount/form-login.php:47
+msgid "Nome utente o indirizzo email"
+msgstr "Username or email address"
+
 #: woocommerce/myaccount/lost-password-confirmation.php:30
 msgid ""
 "Non hai ricevuto l’email? Controlla la tua posta indesiderata o fai clic di "
@@ -343,6 +387,11 @@ msgstr "Order #%s"
 #: woocommerce/myaccount/view-order.php:37
 msgid "Ordine N."
 msgstr "Order N."
+
+#: woocommerce/myaccount/form-login.php:63
+#: woocommerce/myaccount/form-login.php:173
+msgid "Password"
+msgstr "Password"
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:40
 msgid "Per Brand"
@@ -380,6 +429,10 @@ msgstr "For Area"
 msgid "Più informazioni"
 msgstr "More information"
 
+#: woocommerce/checkout/terms.php:36 woocommerce/myaccount/form-login.php:201
+msgid "privacy policy"
+msgstr "privacy policy"
+
 #: woocommerce/cart/mini-cart.php:99
 msgid "Procedi con l'ordine"
 msgstr "Proceed with the order"
@@ -408,6 +461,11 @@ msgstr "Stores"
 #: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:56
 msgid "Recensioni"
 msgstr "Reviews"
+
+#: woocommerce/myaccount/form-login.php:212
+#: woocommerce/myaccount/form-login.php:214
+msgid "Registrati"
+msgstr "Sign in"
 
 #: woocommerce/myaccount/form-reset-password.php:25
 msgid "Resetta password"
@@ -570,6 +628,10 @@ msgstr "Template Pagina WooCommerce"
 msgid "Template Ricerca"
 msgstr "Template Ricerca"
 
+#: woocommerce/checkout/terms.php:56
+msgid "termini e condizioni"
+msgstr "term and conditions"
+
 #: woocommerce/myaccount/lost-password-confirmation.php:27
 msgid "Ti abbiamo inviato un’email per reimpostare la password."
 msgstr "We have sent you an email to reset your password."
@@ -614,6 +676,10 @@ msgstr "All Brands"
 #, php-format
 msgid "Tutti i prodotti %s"
 msgstr "All products %s"
+
+#: woocommerce/myaccount/form-login.php:135
+msgid "Username"
+msgstr "Username"
 
 #: packages/caffeina/labo-suisse/src/Blocks/LatestNews.php:43
 msgid "Vai a news e media"
