@@ -370,6 +370,63 @@
             "max_size": "",
             "mime_types": "",
             "wpml_cf_preferences": 1
+        },
+        {
+            "key": "field_6332f471332a0",
+            "label": "Privacy & Terms",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_6332f482332a1",
+            "label": "Privacy Policy - Checkout",
+            "name": "lb_checkout_privacy_policy",
+            "type": "file",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "pdf"
+        },
+        {
+            "key": "field_6332f4ed332a2",
+            "label": "Privacy Policy - Registrazione",
+            "name": "lb_registration_privacy_policy",
+            "type": "file",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "url",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "pdf"
         }
     ],
     "location": [
@@ -390,5 +447,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1662479095
+    "modified": 1664286618
 }

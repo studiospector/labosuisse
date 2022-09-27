@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-09-26 15:35+0000\n"
+"PO-Revision-Date: 2022-09-27 13:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -223,6 +223,11 @@ msgstr "Do you need help?"
 msgid "Hai dimenticato la password?"
 msgstr "Did you forget your password?"
 
+#: woocommerce/checkout/terms.php:52
+#, php-format
+msgid "Ho letto e accetto %s del sito web."
+msgstr "I have read and agree to the website %s"
+
 #. URI of the theme
 #. Author URI of the theme
 msgid "https://caffeina.com/"
@@ -231,6 +236,21 @@ msgstr "https://caffeina.com/"
 #: woocommerce/myaccount/orders.php:27
 msgid "I miei ordini"
 msgstr "My orders"
+
+#: woocommerce/checkout/terms.php:32
+#, php-format
+#| msgid ""
+#| "I tuoi dati personali saranno utilizzati per elaborare il tuo ordine, "
+#| "supportare la tua esperienza su questo sito web e per altri scopi "
+#| "descritti nella nostra <a href=\"%1$s\" target=\"_blank\">%2$s</a>."
+msgid ""
+"I tuoi dati personali saranno utilizzati per elaborare il tuo ordine, "
+"supportare la tua esperienza su questo sito web e per altri scopi descritti "
+"nella nostra %s."
+msgstr ""
+"Your personal data will be used to ship your order, provide you the best "
+"experience in this website and to reach other purposes as described by our "
+"%s."
 
 #: single-lb-job.php:36
 msgid "Il candidato"
@@ -379,6 +399,10 @@ msgstr "For Area"
 #: woocommerce/single-product/short-description.php:36
 msgid "Più informazioni"
 msgstr "More information"
+
+#: woocommerce/checkout/terms.php:36
+msgid "privacy policy"
+msgstr "privacy policy"
 
 #: woocommerce/cart/mini-cart.php:99
 msgid "Procedi con l'ordine"
@@ -569,6 +593,10 @@ msgstr "Template Pagina WooCommerce"
 #. Name of the template
 msgid "Template Ricerca"
 msgstr "Template Ricerca"
+
+#: woocommerce/checkout/terms.php:56
+msgid "termini e condizioni"
+msgstr "term and conditions"
 
 #: woocommerce/myaccount/lost-password-confirmation.php:27
 msgid "Ti abbiamo inviato un’email per reimpostare la password."

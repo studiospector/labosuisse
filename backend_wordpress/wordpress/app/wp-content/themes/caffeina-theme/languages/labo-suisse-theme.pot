@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-26 15:32+0000\n"
+"POT-Creation-Date: 2022-09-27 13:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -215,6 +215,11 @@ msgstr ""
 msgid "Hai dimenticato la password?"
 msgstr ""
 
+#: woocommerce/checkout/terms.php:52
+#, php-format
+msgid "Ho letto e accetto %s del sito web."
+msgstr ""
+
 #. URI of the theme
 #. Author URI of the theme
 msgid "https://caffeina.com/"
@@ -222,6 +227,14 @@ msgstr ""
 
 #: woocommerce/myaccount/orders.php:27
 msgid "I miei ordini"
+msgstr ""
+
+#: woocommerce/checkout/terms.php:32
+#, php-format
+msgid ""
+"I tuoi dati personali saranno utilizzati per elaborare il tuo ordine, "
+"supportare la tua esperienza su questo sito web e per altri scopi descritti "
+"nella nostra %s."
 msgstr ""
 
 #: single-lb-job.php:36
@@ -365,6 +378,10 @@ msgstr ""
 
 #: woocommerce/single-product/short-description.php:36
 msgid "Più informazioni"
+msgstr ""
+
+#: woocommerce/checkout/terms.php:36
+msgid "privacy policy"
 msgstr ""
 
 #: woocommerce/cart/mini-cart.php:99
@@ -546,6 +563,10 @@ msgstr ""
 
 #. Name of the template
 msgid "Template Ricerca"
+msgstr ""
+
+#: woocommerce/checkout/terms.php:56
+msgid "termini e condizioni"
 msgstr ""
 
 #: woocommerce/myaccount/lost-password-confirmation.php:27
