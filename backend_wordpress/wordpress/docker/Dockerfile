@@ -53,6 +53,9 @@ COPY --chown=nobody ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/
 COPY --chown=nobody ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/views
 COPY --chown=nobody ./backend_wordpress/wordpress/app/robots.txt ${WP_CORE_DIR}/
 
+#index.html
+COPY --chown=nobody ./backend_wordpress/wordpress/app/index.html ${WP_CORE_DIR}/index.html
+
 # trafex stage (wrap it)
 # FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
 FROM trafex/php-nginx:2.4.0 AS production
