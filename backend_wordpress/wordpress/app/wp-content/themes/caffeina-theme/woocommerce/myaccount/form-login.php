@@ -44,7 +44,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                         'id' => 'username',
                         'name' => 'username',
                         'value' => ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : '',
-                        'label' => esc_html( 'Nome utente o indirizzo email', 'labo-suisse-theme' ) . '*',
+                        'label' => esc_html__( 'Nome utente o indirizzo email', 'labo-suisse-theme' ) . '*',
                         'autocomplete' => 'username',
                         'disabled' => false,
                         'required' => true,
@@ -60,7 +60,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                         'id' => 'password',
                         'name' => 'password',
                         'value' => '',
-                        'label' => esc_html( 'Password', 'labo-suisse-theme' ) . '*',
+                        'label' => esc_html__( 'Password', 'labo-suisse-theme' ) . '*',
                         'autocomplete' => 'current-password',
                         'disabled' => false,
                         'required' => true,
@@ -84,9 +84,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 				<?php wp_nonce_field( 'woocommerce-login', 'woocommerce-login-nonce' ); ?>
                 <?php
                     Timber::render('@PathViews/components/button.twig', [
-                        'title' => esc_html( 'Accedi', 'labo-suisse-theme' ),
+                        'title' => esc_html__( 'Accedi', 'labo-suisse-theme' ),
                         'name' => 'login',
-                        'value' => esc_attr( 'Accedi', 'labo-suisse-theme' ),
+                        'value' => esc_attr__( 'Accedi', 'labo-suisse-theme' ),
                         'type' => 'submit',
                         'class' => 'woocommerce-form-login__submit',
                         'variants' => ['primary'],
@@ -96,7 +96,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 			<p class="woocommerce-LostPassword lost_password">
                 <?php
                     Timber::render('@PathViews/components/button.twig', [
-                        'title' => esc_html( 'Hai dimenticato la password?', 'labo-suisse-theme' ),
+                        'title' => esc_html__( 'Hai dimenticato la password?', 'labo-suisse-theme' ),
                         'url' => esc_url( wp_lostpassword_url() ),
                         'variants' => ['quaternary'],
                     ]);
@@ -132,7 +132,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                                 'id' => 'reg_username',
                                 'name' => 'username',
                                 'value' => ( ! empty( $_POST['username'] ) ) ? esc_attr( wp_unslash( $_POST['username'] ) ) : '',
-                                'label' => esc_html( 'Username', 'labo-suisse-theme' ) . '*',
+                                'label' => esc_html__( 'Username', 'labo-suisse-theme' ) . '*',
                                 'autocomplete' => 'username',
                                 'disabled' => false,
                                 'required' => true,
@@ -151,7 +151,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                             'id' => 'reg_email',
                             'name' => 'email',
                             'value' => ( ! empty( $_POST['email'] ) ) ? esc_attr( wp_unslash( $_POST['email'] ) ) : '',
-                            'label' => esc_html( 'Indirizzo email', 'labo-suisse-theme' ) . '*',
+                            'label' => esc_html__( 'Indirizzo email', 'labo-suisse-theme' ) . '*',
                             'autocomplete' => 'email',
                             'disabled' => false,
                             'required' => true,
@@ -170,7 +170,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                                 'id' => 'reg_password',
                                 'name' => 'password',
                                 'value' => '',
-                                'label' => esc_html( 'Password', 'labo-suisse-theme' ) . '*',
+                                'label' => esc_html__( 'Password', 'labo-suisse-theme' ) . '*',
                                 'autocomplete' => 'new-password',
                                 'disabled' => false,
                                 'required' => true,
@@ -187,14 +187,31 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                 <?php endif; ?>
     
                 <?php do_action( 'woocommerce_register_form' ); ?>
+
+                <div class="woocommerce-privacy-policy-text">
+                    <p>
+                        <?php
+                            $privacy_link = get_field('lb_registration_privacy_policy', 'option');
+
+                            echo sprintf(
+                                __("I tuoi dati personali verranno utilizzati per supportare la tua esperienza su questo sito web, per gestire l'accesso al tuo account e per altri scopi descritti nella nostra %s.", 'labo-suisse-theme' ),
+                                sprintf(
+                                    '<a href="%1$s" target="_blank">%2$s</a>',
+                                    $privacy_link,
+                                    __('privacy policy', 'labo-suisse-theme')
+                                )
+                            );
+                        ?>
+                    </p>
+                </div>
     
                 <p class="woocommerce-form-row form-row">
                     <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
                     <?php
                         Timber::render('@PathViews/components/button.twig', [
-                            'title' => esc_html( 'Registrati', 'labo-suisse-theme' ),
+                            'title' => esc_html__( 'Registrati', 'labo-suisse-theme' ),
                             'name' => 'register',
-                            'value' => esc_attr( 'Registrati', 'labo-suisse-theme' ),
+                            'value' => esc_attr__( 'Registrati', 'labo-suisse-theme' ),
                             'type' => 'submit',
                             'class' => 'woocommerce-form-register__submit',
                             'variants' => ['primary'],
