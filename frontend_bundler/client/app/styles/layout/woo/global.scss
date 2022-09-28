@@ -277,13 +277,19 @@ body.lb-is-shop {
     
                     &.product-name {
                         flex: 1;
+                        display: block;
     
                         a {
                             text-decoration: none;
                         }
     
                         .product-quantity {
-                            margin-left: 5px;
+                            display: block;
+                            margin-top: 8px;
+                            color: map-get($colors, "grey-4");
+                            font-weight: 400;
+                            font-size: rem(11);
+                            line-height: rem(13);
                         }
     
                         .wc-item-meta {

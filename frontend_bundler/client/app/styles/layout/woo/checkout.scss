@@ -79,9 +79,29 @@
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
+                    font-size: rem(13);
 
                     &:not(:last-child) {
                         margin-bottom: 20px;
+                    }
+
+                    .product-thumbnail {
+                        margin-right: 15px;
+
+                        img {
+                            width: 51px;
+                        }
+                    }
+
+                    .product-name {
+                        .product-quantity {
+                            display: block;
+                            margin-top: 8px;
+                            color: map-get($colors, "grey-4");
+                            font-weight: 400;
+                            font-size: rem(11);
+                            line-height: rem(13);
+                        }
                     }
 
                     .variation {

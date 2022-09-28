@@ -28,14 +28,18 @@ defined( 'ABSPATH' ) || exit;
 
 		<?php if ( $order->has_status( 'failed' ) ) : ?>
 
-			<h1 class="infobox__subtitle h3 woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed"><?php esc_html_e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.', 'woocommerce' ); ?></h1>
+			<div class="woocommerce-notices-wrapper">
+				<p class="woocommerce-notice woocommerce-error woocommerce-notice--error woocommerce-thankyou-order-failed"><?php esc_html_e( 'Unfortunately your order cannot be processed as the originating bank/merchant has declined your transaction. Please attempt your purchase again.', 'woocommerce' ); ?></p>
+			</div>
 
+			<?php /*
 			<p class="woocommerce-notice woocommerce-notice--error woocommerce-thankyou-order-failed-actions">
 				<a href="<?php echo esc_url( $order->get_checkout_payment_url() ); ?>" class="button pay"><?php esc_html_e( 'Pay', 'woocommerce' ); ?></a>
 				<?php if ( is_user_logged_in() ) : ?>
 					<a href="<?php echo esc_url( wc_get_page_permalink( 'myaccount' ) ); ?>" class="button pay"><?php esc_html_e( 'My account', 'woocommerce' ); ?></a>
 				<?php endif; ?>
 			</p>
+			*/ ?>
 
 		<?php else : ?>
 
@@ -98,7 +102,7 @@ defined( 'ABSPATH' ) || exit;
 
             if ( is_user_logged_in() ) {
                 Timber::render('@PathViews/components/button.twig', [
-                    'title' => __('Continua lo shopping', 'woocommerce'),
+                    'title' => __('Vedi i tuoi ordini', 'woocommerce'),
                     'url' => wc_get_endpoint_url('orders', '', get_permalink(get_option('woocommerce_myaccount_page_id'))),
                     'variants' => ['quaternary'],
                 ]);
