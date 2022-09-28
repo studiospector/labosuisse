@@ -95,7 +95,6 @@ define('WP_HOME', $protocol . (getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEN
 
 define('ADMIN_URL', getenv('ADMIN_URL'));
 define('FRONTEND_URL', getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEND_URL') : getenv('ADMIN_URL'));
-// Added by W3 Total Cache
 define('WITH_REDIS', getenv('WITH_REDIS') === '1' ? 1 : 0);
 
 define('WP_CONTENT_DIR', getenv('WP_CONTENT_CUSTOM_DIR'));
