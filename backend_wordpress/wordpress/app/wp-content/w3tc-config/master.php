@@ -298,7 +298,7 @@
             ]
         }
     },
-    "stats.enabled": false,
+    "stats.enabled": true,
     "stats.slot_seconds": 60,
     "stats.slots_count": 60,
     "stats.cpu.enabled": false,
