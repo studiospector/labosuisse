@@ -1,4 +1,5 @@
 import Component from '@okiba/component'
+import { on, qsa, qs } from '@okiba/dom';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -215,6 +216,7 @@ export default class Application extends Component {
 
         if (!document.querySelector('body').classList.contains('wp-admin')) {
             this.scrollbarUpdate()
+            this.cardsProductHover()
         }
     }
 
@@ -244,5 +246,25 @@ export default class Application extends Component {
         }
 
         this.el.classList.add('ready')
+    }
+
+    /**
+     * Add/Remove class 'button-active' on product card status button
+     */
+    cardsProductHover = () => {
+        const cardsProduct = qsa('.lb-product-card')
+
+        on(cardsProduct, 'mouseenter', (ev) => {
+            let btn = qs('.lb-product-card__status .button', ev.target)
+            if (btn) {
+                btn.classList.add('button-active')
+            }
+        })
+        on(cardsProduct, 'mouseleave', (ev) => {
+            let btn = qs('.lb-product-card__status .button', ev.target)
+            if (btn) {
+                btn.classList.remove('button-active')
+            }
+        })
     }
 }
