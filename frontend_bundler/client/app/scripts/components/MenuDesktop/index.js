@@ -79,13 +79,13 @@ class MenuDesktop extends Component {
                     reserveScrollBarGap: true,
                 });
                 window.getCustomScrollbar.stop()
-                if (scrollBarGap > 0 && this.header && !this.mainLink && !this.previousHeaderPaddingRight) {
-                    const computedHeaderPaddingRight = parseInt(window.getComputedStyle(this.header).getPropertyValue('padding-right'), 10);
-                    this.previousHeaderPaddingRight = this.header.style.paddingRight;
-                    this.header.style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
+                // if (scrollBarGap > 0 && this.header && !this.mainLink && !this.previousHeaderPaddingRight) {
+                //     const computedHeaderPaddingRight = parseInt(window.getComputedStyle(this.header).getPropertyValue('padding-right'), 10);
+                //     this.previousHeaderPaddingRight = this.header.style.paddingRight;
+                //     this.header.style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
 
-                    // document.querySelector('.lb-statusbar').style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
-                }
+                //     // document.querySelector('.lb-statusbar').style.paddingRight = `${computedHeaderPaddingRight + scrollBarGap}px`;
+                // }
                 this.masterTL.clear();
                 this.activeMenu = submenu;
                 this.mainLink && this.mainLink.classList.remove('lb-menu__link--main-active');

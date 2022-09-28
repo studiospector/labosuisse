@@ -24,7 +24,7 @@ class Header extends Component {
         setTimeout(() => this.adjustMainContent(), 100)
         on(window, 'resize', this.adjustMainContent)
         
-        setTimeout(() => this.adjustMenu(), 100)
+        setTimeout(() => this.adjustMenu(), 200)
         on(window, 'resize', this.adjustMenu)
 
         setTimeout(() => on([this.ui.iconOpenSearch, qs('.lb-header__top__icons__item--search .custom-input .custom-input__icon--prev')], 'click', this.toggleSearch), 1000)
@@ -98,7 +98,7 @@ class Header extends Component {
 
     adjustMenu = () => {
         const headerHeight = this.el.getBoundingClientRect().height
-        const elems = qsa('.lb-menu__overlay, lb-menu--desktop .lb-menu__submenu')
+        const elems = qsa('.lb-menu__overlay')
         elems.forEach(elem => {
             elem.style.top = `${headerHeight}px`
         })
