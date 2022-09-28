@@ -2,6 +2,7 @@
 
 namespace Caffeina\LaboSuisse\Resources;
 
+use Caffeina\LaboSuisse\Services\Province;
 use Carbon\Carbon;
 
 class BeautySpecialist
@@ -11,7 +12,7 @@ class BeautySpecialist
 
     public function __construct()
     {
-        $this->city = $_GET['city'] ?? null;
+        $this->city = Province::getShortCode($_GET['city']) ?? null;
         $this->today  = Carbon::now()->format('Ymd');
     }
 
@@ -72,11 +73,12 @@ class BeautySpecialist
         $stores = new \WP_Query([
             'post_status' => 'publish',
             'post_type' => 'lb-store',
+            'posts_per_page' => -1,
             'fields' => 'ids',
             'meta_query' => [
                 [
-                    'key' => 'lb_stores_gmaps_point',
-                    'value' => $city,
+                    'key' => 'lb_stores_province',
+                    'value' => $this->city,
                     'compare' => 'LIKE'
                 ]
             ]
@@ -97,7 +99,8 @@ class BeautySpecialist
             ]],
             'meta_key' => 'lb_beauty_specialist_date',
             'orderby' => 'lb_beauty_specialist_date',
-            'order' => 'DESC'
+            'order' => 'DESC',
+            'posts_per_page' => -1
         ];
 
         if(!isset($_GET['show_expired'])) {
