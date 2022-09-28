@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-28 12:44+0000\n"
+"POT-Creation-Date: 2022-09-28 15:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -212,7 +212,7 @@ msgstr ""
 msgid "FAQ"
 msgstr ""
 
-#: woocommerce/checkout/thankyou.php:42
+#: woocommerce/checkout/thankyou.php:46
 msgid "Grazie!<br>il tuo ordine è stato preso in carico"
 msgstr ""
 
@@ -438,6 +438,12 @@ msgstr ""
 msgid "Punti vendita"
 msgstr ""
 
+#: woocommerce/checkout/review-order.php:39
+#: woocommerce/order/order-details-item.php:52
+#, php-format
+msgid "Quantità: %s"
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:56
 msgid "Recensioni"
 msgstr ""
@@ -455,7 +461,7 @@ msgstr ""
 msgid "Ricerca globale"
 msgstr ""
 
-#: woocommerce/checkout/thankyou.php:44
+#: woocommerce/checkout/thankyou.php:48
 msgid "Riceverai un’email di conferma appena sarà spedito."
 msgstr ""
 
