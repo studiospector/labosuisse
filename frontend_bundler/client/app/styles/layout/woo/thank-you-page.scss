@@ -3,6 +3,14 @@
     margin: 0 auto;
     text-align: center;
 
+    .woocommerce-notices-wrapper {
+        margin-bottom: 20px;
+
+        .woocommerce-error {
+            text-align: left;
+        }
+    }
+
     .woocommerce-order-overview {
         display: flex;
         justify-content: center;
