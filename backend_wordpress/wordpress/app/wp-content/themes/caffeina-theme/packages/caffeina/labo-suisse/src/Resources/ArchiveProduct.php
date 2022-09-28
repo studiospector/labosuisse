@@ -119,7 +119,12 @@ class ArchiveProduct
             $this->products[$brand->term_id]['brand_card'] = $this->getBrandCard($brand);
 
             foreach ($query->posts as $product) {
-                $this->products[$brand->term_id]['products'][] = Timber::get_post($product->ID);
+                $wc_product = wc_get_product($product->ID);
+
+                $product_data = Timber::get_post($product->ID);
+                $product_data->lb_is_available = ($wc_product->is_purchasable() && $wc_product->is_in_stock()) ? ['label' => __('Disponibile online', 'labo-suisse-theme')] : false;
+
+                $this->products[$brand->term_id]['products'][] = $product_data;
                 $this->totalPosts++;
             }
         }

@@ -92,6 +92,7 @@ $buttonsPropertyList: (
         }
     }
 
+    &.button-active,
     &:hover {
         .lb-icon {
             transition: all 0.2s;
@@ -143,6 +144,7 @@ $buttonsPropertyList: (
 
     }
 
+    &.button-active,
     &:hover {
         .button__label {
             & > span {
@@ -155,6 +157,21 @@ $buttonsPropertyList: (
                     opacity: 1;
                     transform: translate3d(0, 0, 0);
                 }
+            }
+        }
+    }
+}
+
+.button-tertiary {
+    &.button-active,
+    &:hover {
+        background-color: map-get($colors, "secondary");
+        border: 1px solid map-get($colors, "secondary");
+        color: map-get($colors, "white");
+
+        .lb-icon {
+            svg {
+                color: map-get($colors, "white");
             }
         }
     }

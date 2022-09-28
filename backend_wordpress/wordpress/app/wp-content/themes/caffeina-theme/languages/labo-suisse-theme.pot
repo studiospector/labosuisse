@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-09-27 14:21+0000\n"
+"POT-Creation-Date: 2022-09-28 12:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -184,6 +184,10 @@ msgstr ""
 msgid "Dipartimento"
 msgstr ""
 
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:125
+msgid "Disponibile online"
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:50
 msgid "Domande frequenti"
 msgstr ""
@@ -200,7 +204,7 @@ msgstr ""
 msgid "Esigenza"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:194
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:199
 msgid "Esigenze"
 msgstr ""
 
@@ -497,7 +501,7 @@ msgstr ""
 msgid "Scopri i trattamenti distribuiti"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:141
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:146
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:96
 #: packages/caffeina/labo-suisse/src/Resources/Posts/Product.php:23
 msgid "Scopri il brand"
@@ -605,7 +609,7 @@ msgstr ""
 msgid "Ti abbiamo inviato un’email per reimpostare la password."
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:196
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:201
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:139
 msgid "Tipi di prodotto"
 msgstr ""
@@ -691,6 +695,6 @@ msgstr ""
 msgid "Zona"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:192
+#: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:197
 msgid "Zone"
 msgstr ""

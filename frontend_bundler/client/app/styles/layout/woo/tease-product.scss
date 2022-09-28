@@ -1,13 +1,34 @@
 .lb-product-card {
     display: block;
+    position: relative;
     text-align: center;
     color: inherit;
     text-decoration: none;
 
     &:hover {
-        .button {
+        .button-quaternary {
             .lb-icon {
                 transform: translateX(5px);
+            }
+        }
+    }
+
+    &__status {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+
+        .button {
+            padding-top: 6px;
+            padding-bottom: 6px;
+
+            &__label {
+                font-size: rem(13);
+                text-transform: initial;
+            }
+
+            svg {
+                color: map-get($colors, "secondary");
             }
         }
     }
