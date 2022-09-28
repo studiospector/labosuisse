@@ -8,6 +8,8 @@
 
         ul {
             li {
+                white-space: nowrap;
+                
                 &:not(:last-child) {
                     margin-bottom: 20px;
 
