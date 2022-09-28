@@ -3,6 +3,16 @@
     {{ fn('timber_set_product', post) }}
 
     <div class="lb-product-card__content">
+        {% if post.lb_is_available %}
+            <div class="lb-product-card__status">
+                {% include '@PathViews/components/button.twig' with {
+                    title: post.lb_is_available.label,
+                    iconStart: { name: 'cart' },
+                    variants: ['tertiary', 'small'],
+                } only %}
+            </div>
+        {% endif %}
+
         {% do action('woocommerce_before_shop_loop_item_title') %}
 
         {% if post.title %}
