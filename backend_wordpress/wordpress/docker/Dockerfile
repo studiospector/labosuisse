@@ -91,6 +91,7 @@ USER nobody
 
 # overrides for nginx conf
 COPY ./backend_wordpress/config/php.ini /etc/php8/conf.d/custom.ini
+COPY ./backend_wordpress/config/memcache.ini /etc/php8/conf.d/memcache.ini
 COPY backend_wordpress/php-fpm.d/www.conf /etc/php8/php-fpm.d/www.conf
 COPY --chown=nobody ./backend_wordpress/nginx /etc/nginx
 
