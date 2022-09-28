@@ -24,7 +24,17 @@ if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_lo
 ?>
 <div class="lb-wc-product-form-login">
     <div class="woocommerce-form-login-toggle">
-        <?php wc_print_notice( apply_filters( 'woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'woocommerce' ) ) . ' <a href="#" class="showlogin js-scrollbar-management" data-management-type="click" data-management-delay="2000">' . esc_html__( 'Click here to login', 'woocommerce' ) . '</a>', 'notice' ); ?>
+        <?php
+        $btn_notice = Timber::compile('@PathViews/components/button.twig', [
+            'title' => esc_html__( 'Click here to login', 'woocommerce' ),
+            'url' => '#',
+            'class' => 'showlogin js-scrollbar-management',
+            'attributes' => 'data-management-type="click" data-management-delay="2000"',
+            'variants' => ['quaternary', 'small'],
+        ]);
+
+        wc_print_notice( apply_filters('woocommerce_checkout_login_message', esc_html__( 'Returning customer?', 'woocommerce' ) . $btn_notice), 'notice' );
+        ?>
     </div>
     <div class="row">
         <div class="col-12 col-md-8">

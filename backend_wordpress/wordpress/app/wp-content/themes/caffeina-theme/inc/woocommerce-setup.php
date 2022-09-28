@@ -262,3 +262,20 @@ function lb_wc_available_variation($args)
 
     return $args;
 }
+
+/**
+ * Add allowed tags to WC notices content
+ */
+add_filter('woocommerce_kses_notice_allowed_tags', 'lb_wc_kses_notice_allowed_tags');
+function lb_wc_kses_notice_allowed_tags($allowed_tags)
+{
+    return array_merge($allowed_tags, [
+        'svg' => array(
+            'aria-label' => true,
+            'xmlns' => true,
+        ),
+        'use' => [
+            'xlink:href' => true,
+        ]
+    ]);
+}
