@@ -23,7 +23,17 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
 
 ?>
 <div class="woocommerce-form-coupon-toggle">
-	<?php wc_print_notice( apply_filters( 'woocommerce_checkout_coupon_message', esc_html__( 'Have a coupon?', 'woocommerce' ) . ' <a href="#" class="showcoupon js-scrollbar-management" data-management-type="click" data-management-delay="2000">' . esc_html__( 'Click here to enter your code', 'woocommerce' ) . '</a>' ), 'notice' ); ?>
+	<?php
+    $btn_notice = Timber::compile('@PathViews/components/button.twig', [
+        'title' => esc_html__( 'Click here to enter your code', 'woocommerce' ),
+        'url' => '#',
+        'class' => 'showcoupon js-scrollbar-management',
+        'attributes' => 'data-management-type="click" data-management-delay="2000"',
+        'variants' => ['quaternary', 'small'],
+    ]);
+
+    wc_print_notice( apply_filters('woocommerce_checkout_coupon_message', esc_html__('Have a coupon?', 'woocommerce') . $btn_notice), 'notice' );
+    ?>
 </div>
 
 <div class="row">

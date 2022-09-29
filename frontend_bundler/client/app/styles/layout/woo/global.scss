@@ -126,25 +126,25 @@ body.lb-is-shop {
             margin: 5px 0;
         }
 
-        a {
-            order: 1;
-            float: none;
-            background-color: #b52a2d;
-            border-radius: 3.125rem;
-            border: 1px solid #b52a2d;
-            color: #ffffff;
-            text-transform: uppercase;
-            padding: 0.5rem 1rem;
-            font-size: rem(12);
-            text-decoration: none;
-            text-align: center;
+        // a {
+        //     order: 1;
+        //     float: none;
+        //     background-color: #b52a2d;
+        //     border-radius: 3.125rem;
+        //     border: 1px solid #b52a2d;
+        //     color: #ffffff;
+        //     text-transform: uppercase;
+        //     padding: 0.5rem 1rem;
+        //     font-size: rem(12);
+        //     text-decoration: none;
+        //     text-align: center;
 
-            &:hover {
-                background-color: #ffffff;
-                border: 0.0625rem solid #a43534;
-                color: #b52a2d;
-            }
-        }
+        //     &:hover {
+        //         background-color: #ffffff;
+        //         border: 0.0625rem solid #a43534;
+        //         color: #b52a2d;
+        //     }
+        // }
     }
 
     .woocommerce-error {
