@@ -78,6 +78,7 @@ RUN apk --no-cache add \
   libmemcached \
   libmemcached-libs \
   libmemcached-dev \
+  php8-pecl-memcache \
   php8-pecl-memcached \
   # required by NR agent
   pcre
@@ -86,6 +87,11 @@ COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /us
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
 COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
 COPY ./backend_wordpress/wordpress/docker/entrypoint.sh /entrypoint.sh
+
+#wp-cli
+RUN set -xe && curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar \
+    && chmod +x wp-cli.phar \
+    && mv wp-cli.phar /usr/local/bin/wp
 
 USER nobody
 
