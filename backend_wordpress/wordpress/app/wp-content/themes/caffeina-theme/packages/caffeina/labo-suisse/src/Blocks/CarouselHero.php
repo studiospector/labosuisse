@@ -62,12 +62,21 @@ class CarouselHero extends BaseBlock
         
         if (!empty($slides)) {
 
-            $preload_image = $slides[0]['images']['original'];
+            $original_img = $slides[0]['images']['original'] ? $slides[0]['images']['original'] : null;
+            $md_img = $slides[0]['images']['md'] ? $slides[0]['images']['md'] : null;
     
-            add_action('wp_head', function() use ($preload_image)  {
-                ?>
-                <link rel="preload" as="image" href="<?php echo $preload_image; ?>">
-                <?php
+            add_action('wp_head', function() use ($original_img, $md_img)  {
+                if ($original_img) {
+                    ?>
+                    <link rel="preload" as="image" media="(min-width: 801px)" href="<?php echo $original_img; ?>">
+                    <?php
+                }
+
+                if ($md_img) {
+                    ?>
+                    <link rel="preload" as="image" media="(max-width: 800px)" href="<?php echo $md_img; ?>">
+                    <?php 
+                }
             });
         }
     }
