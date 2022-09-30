@@ -7,9 +7,12 @@ class Assets
     public function __construct()
     {
         // Enqueue site scripts
-        add_action('wp_enqueue_scripts', [$this, 'lb_register_scripts'], 100);
+        add_action('wp_enqueue_scripts', [$this, 'lb_register_scripts'], 999);
         // Enqueue site style
-        add_action('wp_enqueue_scripts', [$this, 'lb_register_styles'], 100);
+        add_action('wp_enqueue_scripts', [$this, 'lb_register_styles'], 999);
+        add_action('wp_head', function() {
+            wp_dequeue_style('cbr-fronend-css');
+        }, 999);
         // Enqueue admin style
         add_action('admin_enqueue_scripts', [$this, 'lb_register_admin_styles']);
         // Enqueue admin login page style
@@ -74,8 +77,19 @@ class Assets
             wp_dequeue_script('wcml-front-scripts');
             wp_dequeue_script('cart-widget');
 
+            wp_dequeue_script('cbr-pro-front-js');
             wp_dequeue_script('select2-cbr');
+
+            wp_dequeue_script('awdr-main');
+            wp_dequeue_script('awdr-dynamic-price');
+
+            wp_dequeue_script('woo_discount_pro_script');
         }
+
+        // global $wp_scripts;
+        // echo '<pre>';
+        // var_dump( $wp_scripts->queue );
+        // die;
     }
 
 
@@ -110,6 +124,8 @@ class Assets
         }
 
         if (is_front_page()) {
+            wp_dequeue_style('global-styles');
+
             wp_dequeue_style('woocommerce_frontend_styles');
             wp_dequeue_style('woocommerce-general');
             wp_dequeue_style('woocommerce-layout');
@@ -117,12 +133,20 @@ class Assets
             wp_dequeue_style('woocommerce_fancybox_styles');
             wp_dequeue_style('woocommerce_chosen_styles');
             wp_dequeue_style('woocommerce_prettyPhoto_css');
+            wp_dequeue_style('woocommerce-inline');
 
             wp_dequeue_style('contact-form-7');
 
             wp_dequeue_style('cbr-pro-front-css');
             wp_dequeue_style('select2-cbr');
+
+            wp_dequeue_style('woo_discount_pro_style');
         }
+
+        // global $wp_styles;
+        // echo '<pre>';
+        // var_dump( $wp_styles->queue );
+        // die;
     }
 
 
