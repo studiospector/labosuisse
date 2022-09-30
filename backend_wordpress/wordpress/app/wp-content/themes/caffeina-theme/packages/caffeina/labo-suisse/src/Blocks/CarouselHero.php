@@ -23,9 +23,9 @@ class CarouselHero extends BaseBlock
                     // 'sm' => 'md-hero',
                     // 'xs' => 'md-hero'
                     'lg' => 'lg',
-                    'md' => 'lg',
-                    'sm' => 'lg',
-                    'xs' => 'lg'
+                    'md' => 'md-hero',
+                    'sm' => 'md-hero',
+                    'xs' => 'md-hero'
                 ];
 
                 $slides[] = [
