@@ -73,6 +73,8 @@ class Assets
             wp_dequeue_script('ppcp-smart-button');
             wp_dequeue_script('wcml-front-scripts');
             wp_dequeue_script('cart-widget');
+
+            wp_dequeue_script('select2-cbr');
         }
     }
 
