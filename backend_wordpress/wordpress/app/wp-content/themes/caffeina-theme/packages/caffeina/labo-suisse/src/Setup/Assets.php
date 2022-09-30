@@ -7,15 +7,20 @@ class Assets
     public function __construct()
     {
         // Enqueue site scripts
-        add_action('wp_enqueue_scripts', [$this, 'lb_register_scripts']);
+        add_action('wp_enqueue_scripts', [$this, 'lb_register_scripts'], 100);
         // Enqueue site style
-        add_action('wp_enqueue_scripts', [$this, 'lb_register_styles']);
+        add_action('wp_enqueue_scripts', [$this, 'lb_register_styles'], 100);
         // Enqueue admin style
         add_action('admin_enqueue_scripts', [$this, 'lb_register_admin_styles']);
         // Enqueue admin login page style
         add_action('login_enqueue_scripts', [$this, 'lb_enqueue_admin_login_scripts']);
         // Enqueue editor scripts and styles
         add_action('enqueue_block_assets', [$this, 'lb_enqueue_editor_assets']);
+
+        if (is_front_page()) {
+            add_filter('wpcf7_load_js', '__return_false');
+            add_filter('wpcf7_load_css', '__return_false');
+        }
     }
 
 
@@ -40,6 +45,9 @@ class Assets
         if (is_front_page()) {
             wp_dequeue_script('contact-form-7');
             wp_dequeue_script('contact-form-7-js-extra');
+
+            wp_dequeue_script('google-recaptcha');
+            wp_deregister_script('google-recaptcha');
 
             wp_dequeue_script('wc-add-payment-method');
             wp_dequeue_script('wc-lost-password');
