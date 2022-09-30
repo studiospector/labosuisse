@@ -33,7 +33,7 @@ class Hero extends BaseBlock
         // $this->context['data'] = array_merge($this->context['data'],$infobox);
         $this->setContext($payload);
         $this->addInfobox();
-        $this->linkToPreload($payload['images']);
+        // $this->linkToPreload($payload['images']);
     }
 
     public function linkToPreload($image) {
