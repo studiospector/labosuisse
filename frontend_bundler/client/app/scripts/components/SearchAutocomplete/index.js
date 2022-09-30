@@ -19,7 +19,7 @@ class SearchAutocomplete extends Component {
         this.labelResLess = this.el.dataset.labelResLess
         this.labelResMore = this.el.dataset.labelResMore
 
-        this.init()
+        // this.init()
 
         on(this.el, 'submit', (ev) => {
             if (this.ui.input.value.length <= 2) {

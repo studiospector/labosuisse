@@ -3,7 +3,7 @@
 
 {% if GTMKey %}
     <!-- Google Tag Manager -->
-    <script>
+    <script data-blockingmode="auto">
         (function(w,d,s,l,i){
             w[l] = w[l] || [];
             w[l].push({
@@ -29,7 +29,7 @@
             data-cbid="{{ cookiebotKey }}"
             data-layer-name="dataLayer"
             data-culture="{{ fn('lb_get_current_lang') }}"
-            defer
+            data-blockingmode="auto"
     ></script>
     <!-- / CookieBot -->
 {% endif %}
