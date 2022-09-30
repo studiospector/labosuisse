@@ -117,6 +117,9 @@ class Assets
             wp_dequeue_style('woocommerce_prettyPhoto_css');
 
             wp_dequeue_style('contact-form-7');
+
+            wp_dequeue_style('cbr-pro-front-css');
+            wp_dequeue_style('select2-cbr');
         }
     }
 
