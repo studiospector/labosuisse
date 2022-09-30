@@ -3,7 +3,7 @@
 
 {% if GTMKey %}
     <!-- Google Tag Manager -->
-    <script data-blockingmode="auto">
+    <script>
         (function(w,d,s,l,i){
             w[l] = w[l] || [];
             w[l].push({
@@ -29,7 +29,6 @@
             data-cbid="{{ cookiebotKey }}"
             data-layer-name="dataLayer"
             data-culture="{{ fn('lb_get_current_lang') }}"
-            data-blockingmode="auto"
             defer
     ></script>
     <!-- / CookieBot -->
@@ -37,7 +36,7 @@
 
 {% if GTMKey and cookiebotKey %}
     <!-- Cookiebot and Google Consent Mode -->
-    <script data-cookieconsent="ignore">
+    <script>
         (function(w,d,l){
             w[l] = w[l] || [];
             function gtag() {
