@@ -85,11 +85,6 @@ class Assets
 
             wp_dequeue_script('woo_discount_pro_script');
         }
-
-        // global $wp_scripts;
-        // echo '<pre>';
-        // var_dump( $wp_scripts->queue );
-        // die;
     }
 
 
@@ -142,11 +137,6 @@ class Assets
 
             wp_dequeue_style('woo_discount_pro_style');
         }
-
-        // global $wp_styles;
-        // echo '<pre>';
-        // var_dump( $wp_styles->queue );
-        // die;
     }
 
 

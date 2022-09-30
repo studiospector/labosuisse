@@ -236,7 +236,7 @@ export default class Application extends Component {
         ScrollTrigger.refresh()
 
         // Trigger 'resize' event to correct and prevent layout shifting
-        window.dispatchEvent(new Event('resize'))
+        // window.dispatchEvent(new Event('resize'))
 
         // Enable Scroll of page
         if (this.disableScrollbar) {
