@@ -18,7 +18,7 @@ class CarouselHero extends Component {
 
         // Init swiper
         this.swiper = new Swiper(this.el, {
-            modules: [ Pagination, Autoplay, EffectFade ],
+            modules: [ Pagination, EffectFade ],
             speed: 400,
             grabCursor: true,
             effect: 'fade',
@@ -31,9 +31,9 @@ class CarouselHero extends Component {
             },
             on: {
                 init: debounce((swiperObj) => {
-                    this.swiper.params.autoplay.delay = 8000
-                    this.swiper.params.autoplay.disableOnInteraction = false
-                    this.swiper.autoplay.start()
+                    // this.swiper.params.autoplay.delay = 8000
+                    // this.swiper.params.autoplay.disableOnInteraction = false
+                    // this.swiper.autoplay.start()
                 }, 1000),
                 slideChangeTransitionStart: (swiperObj) => {
                     this.transitionStart(swiperObj)
