@@ -283,11 +283,11 @@ function lb_wc_kses_notice_allowed_tags($allowed_tags)
 /**
  * Defer scripts JS
  */
-function lb_defer_parsing_of_js($url)
-{
-    if (strpos($url, 'jquery.min.js'))
-        return str_replace(' src', ' defer src', $url);
+// function lb_defer_parsing_of_js($url)
+// {
+//     if (strpos($url, 'jquery.min.js'))
+//         return str_replace(' src', ' defer src', $url);
 
-    return $url;
-}
-add_filter('script_loader_tag', 'lb_defer_parsing_of_js', 10);
+//     return $url;
+// }
+// add_filter('script_loader_tag', 'lb_defer_parsing_of_js', 10);
