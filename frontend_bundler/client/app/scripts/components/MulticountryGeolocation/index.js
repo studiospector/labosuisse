@@ -46,12 +46,13 @@ class MulticountryGeolocation extends Component {
         let response = []
         
         try {
-            const currentLang = getCookie('wp-wpml_current_language')
+            let currentLang = getCookie('wp-wpml_current_language')
 
             if (typeof currentLang !== 'string') {
-                throw "currentLang: Not a string";
+                currentLang = document.documentElement.lang
+                // throw "currentLang: Not a string";
             }
-            
+
             let { data } = await axiosClient.get('/wp-json/v1/multicountry-geolocation', {params: {lang: currentLang}})
             response = data
         } catch (error) {
