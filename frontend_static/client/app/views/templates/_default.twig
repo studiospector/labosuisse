@@ -24,6 +24,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, shrink-to-fit=no">
         <!-- / Mobile meta -->
 
+        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous" data-cookieconsent="ignore"></script>
+
         <!-- WP Head -->
 		{{ fn('wp_head') }}
         <!-- / WP Head -->
@@ -85,8 +87,6 @@
         </div>
 
         {% include 'components/symbols.twig' %}
-
-        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous" data-cookieconsent="ignore"></script>
 
         <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
 
