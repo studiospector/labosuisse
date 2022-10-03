@@ -32,6 +32,10 @@ body.ready {
     padding-top: 217px;
     overflow-y: initial!important;
     z-index: 2;
+
+    @include mq($until: lg) {
+        padding-top: 176px;
+    }
 }
 
 .c-scrollbar {
