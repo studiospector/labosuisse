@@ -22,10 +22,10 @@ class Header extends Component {
         this.headerProduct = qs('.lb-header-sticky-product')
         
         setTimeout(() => this.adjustMainContent(), 100)
-        on(window, 'resize', this.adjustMainContent)
+        // on(window, 'resize', this.adjustMainContent)
         
         setTimeout(() => this.adjustMenu(), 200)
-        on(window, 'resize', this.adjustMenu)
+        // on(window, 'resize', this.adjustMenu)
 
         setTimeout(() => on([this.ui.iconOpenSearch, qs('.lb-header__top__icons__item--search .custom-input .custom-input__icon--prev')], 'click', this.toggleSearch), 1000)
         on(document, 'click', this.closeSearchOnClickOutside)
