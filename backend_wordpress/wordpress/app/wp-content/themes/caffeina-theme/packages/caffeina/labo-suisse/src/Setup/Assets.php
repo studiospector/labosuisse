@@ -38,17 +38,22 @@ class Assets
         // Enqueue scripts
         // wp_enqueue_script('lb-main');
 
-        // Dequeue scripts
-        wp_deregister_script('jquery-core');
-        wp_dequeue_script('jquery-core');
+        // Dequeue jQuery
+        wp_deregister_script('jquery');
+        wp_dequeue_script('jquery');
 
-        if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {
+        // Enqueue jQuery
+        wp_register_script('jquery', 'https://code.jquery.com/jquery-3.6.1.min.js', [], '', false);
+        wp_enqueue_script('jquery');
+
+        // Dequeue other scripts
+        // if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {}
+        
+        if (is_front_page()) {
             wp_dequeue_script('selectWoo');
             wp_deregister_script('selectWoo');
             wp_dequeue_script('wcml-mc-scripts');
-        }
 
-        if (is_front_page()) {
             wp_dequeue_script('contact-form-7');
             wp_dequeue_script('contact-form-7-js-extra');
 
@@ -116,12 +121,12 @@ class Assets
             wp_deregister_style('dashicons');
         }
 
-        if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {
-            wp_dequeue_style('select2');
-	        wp_deregister_style('select2');
-        }
-
+        // if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {}
+        
         if (is_front_page()) {
+            wp_dequeue_style('select2');
+            wp_deregister_style('select2');
+
             wp_dequeue_style('global-styles');
 
             wp_dequeue_style('woocommerce_frontend_styles');

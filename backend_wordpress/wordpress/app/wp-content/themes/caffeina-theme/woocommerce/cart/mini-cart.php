@@ -31,7 +31,15 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
 			$_product   = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 			$product_id = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 
-			if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_widget_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
+            if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
+                continue;
+            }
+
+			if ( $_product &&
+                $_product->exists() && $cart_item['quantity'] > 0 &&
+                apply_filters( 'woocommerce_widget_cart_item_visible', true, $cart_item, $cart_item_key ) &&
+                (!isset($cart_item['wdr_free_product']) or $cart_item['wdr_free_product'] != 'Free')
+            ) {
 				$product_name      = apply_filters( 'woocommerce_cart_item_name', $_product->get_name(), $cart_item, $cart_item_key );
 				$thumbnail         = apply_filters( 'woocommerce_cart_item_thumbnail', $_product->get_image(), $cart_item, $cart_item_key );
 				$product_price     = apply_filters( 'woocommerce_cart_item_price', WC()->cart->get_product_price( $_product ), $cart_item, $cart_item_key );
@@ -101,7 +109,7 @@ do_action( 'woocommerce_before_mini_cart' ); ?>
                 'class' => 'checkout-button alt wc-forward',
                 'variants' => ['primary'],
             ]);
-            
+
             Timber::render('@PathViews/components/button.twig',[
                 'title' => __( 'Visualizza il carrello', 'labo-suisse-theme' ),
                 'url' => esc_url( wc_get_cart_url() ),
