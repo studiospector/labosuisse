@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-09-28 15:41+0000\n"
+"PO-Revision-Date: 2022-10-04 12:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -382,6 +382,10 @@ msgstr ""
 "Didn't receive the email? Check your junk mail or click below to resend the "
 "email."
 
+#: inc/woocommerce-setup.php:321
+msgid "Omaggio"
+msgstr "Free"
+
 #. %s: Order ID.
 #: woocommerce/emails/email-order-details.php:34
 #, php-format
@@ -437,7 +441,7 @@ msgstr "More information"
 msgid "privacy policy"
 msgstr "privacy policy"
 
-#: woocommerce/cart/mini-cart.php:99
+#: woocommerce/cart/mini-cart.php:107
 msgid "Procedi con l'ordine"
 msgstr "Proceed with the order"
 
@@ -726,7 +730,7 @@ msgstr ""
 msgid "Visualizza"
 msgstr "View"
 
-#: woocommerce/cart/mini-cart.php:106
+#: woocommerce/cart/mini-cart.php:114
 msgid "Visualizza il carrello"
 msgstr "View cart"
 
