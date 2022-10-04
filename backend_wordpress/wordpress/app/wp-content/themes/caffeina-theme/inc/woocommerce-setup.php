@@ -17,10 +17,10 @@ remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_pro
 /**
  * WC Support
  */
-add_action( 'init', 'lb_wc_support' );	 	 
-function lb_wc_support() {	 	 
+add_action( 'init', 'lb_wc_support' );
+function lb_wc_support() {
     add_post_type_support('product', 'page-attributes');
-    remove_theme_support('wc-product-gallery-lightbox');	 	 
+    remove_theme_support('wc-product-gallery-lightbox');
 }
 
 
@@ -135,7 +135,7 @@ add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2
 function lb_variable_product_price($v_price, $v_product)
 {
     $classes = !is_product() ? 'lb-product-card__price__desc' : 'lb-price-label infobox__paragraph--small';
-    
+
     $min_price = $v_product->get_variation_price('min', true);
 
     $price_html = sprintf(
@@ -160,7 +160,7 @@ function lb_custom_form_field_args($args, $key, $value)
         if (in_array($args['type'], ['text', 'number', 'email', 'tel', 'password'])) {
             $args['input_class'] = ['js-custom-input'];
             $args['placeholder'] = ($args['placeholder'] ? $args['placeholder'] : $args['label']) . ($args['required'] ? '*' : '');
-    
+
             $args['custom_attributes'] = [
                 'data-label' => ($args['label'] ? $args['label'] : $args['placeholder']) . ($args['required'] ? '*' : ''),
                 'data-variant' => 'tertiary',
@@ -291,3 +291,45 @@ function lb_wc_kses_notice_allowed_tags($allowed_tags)
 //     return $url;
 // }
 // add_filter('script_loader_tag', 'lb_defer_parsing_of_js', 10);
+
+
+//woo discount rules
+add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
+    if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
+        $item_data = [];
+    }
+
+    return $item_data;
+},100,2);
+
+add_filter('woocommerce_cart_item_quantity', function($product_quantity, $cart_item_key, $cart_item){
+    if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
+        return null;
+    }
+
+    return $product_quantity;
+}, 100, 3);
+
+add_filter('woocommerce_cart_item_subtotal', 'getCartItemQuantity', 100, 3);
+add_filter('woocommerce_widget_cart_item_quantity', 'getCartItemQuantity', 100, 3);
+
+function getCartItemQuantity($product_subtotal, $cart_item, $cart_item_key)
+{
+    if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
+        return '<span class="">Omaggio</span>';
+    }
+
+    return $product_subtotal;
+}
+
+add_filter('woocommerce_cart_contents_count', function() {
+    $cart_contents_count = 0;
+
+    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+        if(!isset($cart_item['wdr_free_product']) or $cart_item['wdr_free_product'] != 'Free') {
+            $cart_contents_count++;
+        }
+    }
+
+    return $cart_contents_count;
+});
