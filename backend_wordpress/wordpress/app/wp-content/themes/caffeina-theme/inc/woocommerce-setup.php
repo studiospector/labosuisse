@@ -316,7 +316,10 @@ add_filter('woocommerce_widget_cart_item_quantity', 'getCartItemQuantity', 100, 
 function getCartItemQuantity($product_subtotal, $cart_item, $cart_item_key)
 {
     if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
-        return '<span class="">Omaggio</span>';
+        return sprintf(
+            '<span class="">%s</span>',
+            __('Omaggio', 'labo-suisse-theme')
+        );
     }
 
     return $product_subtotal;
