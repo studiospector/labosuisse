@@ -70,7 +70,7 @@ add_filter('rest_url', function ($url) {
     $currentHost = "{$_SERVER['HTTP_X_FORWARDED_PROTO']}://{$_SERVER['HTTP_HOST']}";
 
     if ( $currentHost != home_url() ) {
-        $url = str_replace(home_url(), site_url() . "/", $url);
+        $url = str_replace(home_url(), site_url(), $url);
     }
 
     return $url;
