@@ -23,9 +23,12 @@ class AnimationReveal extends Component {
     constructor({el}) {
         super({el, ui})
 
-        this.revealType = this.el.dataset.revealType
+        const isAdmin = document.body.classList.contains('wp-admin')
 
-        this.init()
+        if (!isAdmin) {
+            this.revealType = this.el.dataset.revealType
+            this.init()
+        }
     }
 
     init = () => {
