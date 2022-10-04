@@ -38,10 +38,15 @@ class Assets
         // Enqueue scripts
         // wp_enqueue_script('lb-main');
 
-        // Dequeue scripts
-        wp_deregister_script('jquery-core');
-        wp_dequeue_script('jquery-core');
+        // Dequeue jQuery
+        wp_deregister_script('jquery');
+        wp_dequeue_script('jquery');
 
+        // Enqueue jQuery
+        wp_register_script('jquery', 'https://code.jquery.com/jquery-3.6.1.min.js', [], '', false);
+        wp_enqueue_script('jquery');
+
+        // Dequeue other scripts
         if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {
             wp_dequeue_script('selectWoo');
             wp_deregister_script('selectWoo');
