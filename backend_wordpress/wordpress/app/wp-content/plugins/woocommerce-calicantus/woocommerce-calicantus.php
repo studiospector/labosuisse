@@ -1647,8 +1647,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
             public function add_billing_custom_field($fields) {
                 $fields['billing']['billing_calicantus_cf'] = array(
                     'type' => 'text',
-                    'label' => __('Codice fiscale', 'woocommerce'),
-                    'placeholder' => _x('Codice fiscale', 'placeholder', 'woocommerce'),
+                    'label' => __('Codice fiscale', 'labo-suisse-theme'),
+                    'placeholder' => _x('Codice fiscale', 'placeholder', 'labo-suisse-theme'),
                     'required' => false,
                     'class' => array('calicantus-custom-input-cf'),
                     'show' => true,
