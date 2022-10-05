@@ -88,7 +88,7 @@
         .amount {
             font-size: rem(18);
             font-weight: 400;
-            color: map-get($colors, "primary-dark-1");
+            color: map-get($colors, "black");
 
             @include mq($until: md) {
                 font-size: rem(13);
