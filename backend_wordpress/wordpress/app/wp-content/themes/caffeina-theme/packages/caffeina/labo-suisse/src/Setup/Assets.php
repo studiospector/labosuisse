@@ -117,8 +117,9 @@ class Assets
         wp_dequeue_style('wcml-dropdown-0');
         wp_dequeue_style('wpml-legacy-horizontal-list-0');
 
-        if (!is_admin() || !is_user_logged_in()) {
+        if (!is_admin() && !is_user_logged_in()) {
             wp_deregister_style('dashicons');
+            wp_dequeue_style('global-styles');
         }
 
         // if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {}
@@ -126,8 +127,6 @@ class Assets
         if (is_front_page()) {
             wp_dequeue_style('select2');
             wp_deregister_style('select2');
-
-            wp_dequeue_style('global-styles');
 
             wp_dequeue_style('woocommerce_frontend_styles');
             wp_dequeue_style('woocommerce-general');

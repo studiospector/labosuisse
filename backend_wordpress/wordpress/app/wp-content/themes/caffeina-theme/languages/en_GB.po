@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-10-04 12:53+0000\n"
+"PO-Revision-Date: 2022-10-05 10:42+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -140,6 +140,9 @@ msgstr "Hello %1$s!"
 #: woocommerce/cart/cart.php:146
 msgid "Codice coupon"
 msgstr "Coupon code"
+
+msgid "Codice fiscale"
+msgstr "Fiscal Code"
 
 #: woocommerce/myaccount/orders.php:28
 msgid "Controlla lo stato dei tuoi ordini e lo storico degli ordini passati."
@@ -670,6 +673,10 @@ msgstr "Back to All my orders"
 #: 404.php:11
 msgid "Torna alla Homepage"
 msgstr "Back to Home Page"
+
+#: woocommerce/cart/cart-totals.php:25
+msgid "Totale carrello"
+msgstr "Cart total"
 
 #: woocommerce/single-product/add-to-cart/simple.php:27
 #: woocommerce/single-product/add-to-cart/simple.php:84
