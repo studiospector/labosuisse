@@ -10,10 +10,10 @@ class BeautySpecialist
     private $today = null;
     private $city = null;
 
-    public function __construct()
+    public function __construct($city)
     {
-        $this->city = Province::getShortCode($_GET['city']) ?? null;
-        $this->today  = Carbon::now()->format('Ymd');
+        $this->city = $city;
+        $this->today = Carbon::now()->format('Ymd');
     }
 
     public function all()

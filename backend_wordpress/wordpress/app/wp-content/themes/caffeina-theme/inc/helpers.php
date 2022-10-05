@@ -15,10 +15,10 @@ function lb_get_images($id, $sizes = [])
         $data = [
             'alt' => get_the_title($id),
             'original' => wp_get_attachment_url($id),
-            'lg' => (empty($sizes) && empty($sizes['lg'])) ? wp_get_attachment_image_src($id, 'lb-img-size-lg')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['lg']}")[0],
-            'md' => (empty($sizes) && empty($sizes['md'])) ? wp_get_attachment_image_src($id, 'lb-img-size-md')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['md']}")[0],
-            'sm' => (empty($sizes) && empty($sizes['sm'])) ? wp_get_attachment_image_src($id, 'lb-img-size-sm')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['sm']}")[0],
-            'xs' => (empty($sizes) && empty($sizes['xs'])) ? wp_get_attachment_image_src($id, 'lb-img-size-xs')[0] : wp_get_attachment_image_src($id, "lb-img-size-{$sizes['xs']}")[0],
+            'lg' => wp_get_attachment_image_src($id, !isset($sizes['lg']) ? 'lb-img-size-lg' : "lb-img-size-{$sizes['lg']}")[0] ?? null,
+            'md' => wp_get_attachment_image_src($id, !isset($sizes['md']) ? 'lb-img-size-lg' : "lb-img-size-{$sizes['md']}")[0] ?? null,
+            'sm' => wp_get_attachment_image_src($id, !isset($sizes['sm']) ? 'lb-img-size-lg' : "lb-img-size-{$sizes['sm']}")[0] ?? null,
+            'xs' => wp_get_attachment_image_src($id, !isset($sizes['xs']) ? 'lb-img-size-lg' : "lb-img-size-{$sizes['xs']}")[0] ?? null,
         ];
     }
 

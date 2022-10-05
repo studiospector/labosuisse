@@ -4,7 +4,11 @@ use Timber\Timber;
 
 $page_archive = get_field('lb_archive_beauty_specialist_page', 'option');
 
-$items = (new \Caffeina\LaboSuisse\Resources\BeautySpecialist())
+$city = !empty($_GET['city'])
+    ? $_GET['city']
+    : null;
+
+$items = (new \Caffeina\LaboSuisse\Resources\BeautySpecialist($city))
     ->all();
 
 $context = [
@@ -13,7 +17,7 @@ $context = [
         'type' => 'search',
         'name' => 'city',
         'label' => __('Inserisci provincia', 'labo-suisse-theme'),
-        'value' => !empty($_GET['city']) ? $_GET['city'] : null,
+        'value' => $city,
         'disabled' => false,
         'required' => false,
         'autocomplete' => 'off',
