@@ -57,7 +57,7 @@ class ThemeSetup extends Timber\Site
         add_filter('acf/settings/capability', [$this, 'lb_acf_capability']);
         add_filter('acf/settings/save_json', [$this, 'lb_acf_json_save_point']);
         add_filter('acf/settings/load_json', [$this, 'lb_acf_json_load_point']);
-        add_action('wp_logout', [$this, 'lb_logout_redirect']);
+        add_action('wp_logout', [$this, 'lb_logout_redirect'], 999);
         add_action('block_categories_all', [$this, 'lb_gutenberg_block_categories'], 10, 2);
         add_action('admin_footer', [$this, 'lb_add_symbols_to_admin']);
         add_action('init', array($this, 'lb_manage_thumbnails'));
