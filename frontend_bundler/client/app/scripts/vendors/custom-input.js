@@ -95,12 +95,16 @@ class CustomInput extends BasicElement {
 
             // NUMBER
             if (this.currInputType == 'number') {
+                let check = null
                 const min = Number(this.cs[i].min) >= 0 ? Number(this.cs[i].min) : 0
                 const max = Number(this.cs[i].max) <= 0 ? 100 : Number(this.cs[i].max)
                 const step = Number(this.cs[i].step) >= 1 ? Number(this.cs[i].step) : 1
                 
                 this.addIconPrev('minus', 'button')
                 this.addIconNext('plus', 'button')
+
+                this.inputInfo = this.createDOMElement('DIV', ['custom-input-info', 'custom-input-info--error'], null, null, {pos: 'beforeend', elem: this.mainContainer})
+                this.inputInfo.style.display = 'none'
 
                 if (this.cs[i].value < min) {
                     this.cs[i].value = min
@@ -115,6 +119,9 @@ class CustomInput extends BasicElement {
                     newVal = oldValue >= max ? oldValue : oldValue + step
 
                     this.cs[i].value = newVal
+
+                    const inputChangeEvent = new Event('change')
+                    this.currInputElem.dispatchEvent(inputChangeEvent)
 
                     if (this.settings.woocommerceQuantitySupport) {
                         jQuery(($) => {
@@ -131,6 +138,9 @@ class CustomInput extends BasicElement {
 
                     this.cs[i].value = newVal
 
+                    const inputChangeEvent = new Event('change')
+                    this.currInputElem.dispatchEvent(inputChangeEvent)
+
                     if (this.settings.woocommerceQuantitySupport) {
                         jQuery(($) => {
                             $(this.cs[i]).trigger('change')
@@ -141,6 +151,19 @@ class CustomInput extends BasicElement {
                 this.cs[i].addEventListener('change', (ev) => {
                     let newVal = null
                     let oldValue = parseFloat(ev.target.value || 0)
+
+                    if (oldValue >= max || oldValue <= min) {
+                        if (check || oldValue > max) {
+                            this.mainContainer.classList.add('custom-input--error')
+                            this.inputInfo.innerText = `Min: ${min} / Max: ${max}`
+                            this.inputInfo.style.display = 'block'
+                        }
+                        check = true
+                    } else {
+                        this.mainContainer.classList.remove('custom-input--error')
+                        this.inputInfo.style.display = 'none'
+                        check = null
+                    }
 
                     newVal = oldValue >= max ? max : oldValue
 

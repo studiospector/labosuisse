@@ -64,6 +64,19 @@
         transition: $transition__base-1;
     }
 
+    .custom-input-info {
+        position: absolute;
+        bottom: -15px;
+        margin-top: 3px;
+        font-size: rem(10);
+        line-height: 1;
+        color: map-get($colors, "grey-2");
+
+        &--error {
+            color: map-get($colors, "secondary");
+        }
+    }
+
     &.is-focus {
         input {
             padding-top: 25px;
@@ -237,5 +250,12 @@
     &--number {
         min-width: 120px;
         max-width: 120px;
+    }
+
+    &--error {
+        input,
+        textarea {
+            border: 1px solid map-get($colors, "secondary");
+        }
     }
 }
