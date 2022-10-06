@@ -914,7 +914,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         foreach ($availabilities as $availability) {
                             $sku = (string) $availability->sku;
                             $product_id = wc_get_product_id_by_sku($sku);
-                            
+
                             if ($product_id > 0) {
                                 $status = 'outofstock';
                                 if ($availability->availability > 0)
@@ -1490,7 +1490,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
                 $order = wc_get_order($order_id);
                 $user_id = $order->get_user_id();
-                if ($user_id == get_current_user_id() || current_user_can('administrator') || current_user_can('shop_manager')) {
+                if ($user_id == get_current_user_id() || current_user_can('administrator') || current_user_can('editor') ||  current_user_can('shop_manager')) {
                     if ($this->modalita == 'local') {
                         $fileurl = $directory . DIRECTORY_SEPARATOR . $file;
                         if (is_file($fileurl)) {
