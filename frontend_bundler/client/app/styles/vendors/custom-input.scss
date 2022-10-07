@@ -13,7 +13,9 @@
         border-radius: 4px;
         font-size: rem(13);
         font-weight: 400;
+    }
 
+    input {
         &::-webkit-input-placeholder {
             color: transparent;
         }
@@ -26,6 +28,10 @@
         &:-ms-input-placeholder {
             color: transparent;
         }
+    }
+
+    textarea {
+        font-family: "Suisse Intl", sans;
     }
 
     input[type="search"]::-webkit-search-decoration,
@@ -244,6 +250,12 @@
             &--prev {
                 width: 0;
             }
+        }
+    }
+
+    &--textarea {
+        .custom-input-label {
+            display: none;
         }
     }
 
