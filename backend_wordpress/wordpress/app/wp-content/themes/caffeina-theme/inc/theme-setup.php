@@ -479,7 +479,10 @@ class ThemeSetup extends Timber\Site
         if (!empty($datas)) {
             $id = $name = ($tag['basetype'] == 'select') ? "{$tag['name']}[]" : $tag['name'];
             add_filter('wpcf7_form_elements', function ($content) use ($name, $id, $datas) {
-                return str_replace($id, $name, str_replace("name=\"$id\"", "name=\"$name\" " . wpcf7_format_atts($datas), $content));
+                $custom_name = str_replace('[]', '', $name);
+                $custom_id = str_replace('[]', '', $id);
+                $html = str_replace($custom_id, $custom_name, str_replace("name=\"$custom_id\"", 'name="'. $custom_name .'" ' . wpcf7_format_atts($datas), $content));
+                return $html;
             });
         }
         return $tag;

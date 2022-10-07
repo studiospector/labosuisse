@@ -15,6 +15,16 @@
     }
 
     .wpcf7-form {
+        .custom-select {
+            .custom-select-label {
+                font-weight: 300;
+            }
+
+            .custom-select-container {
+                border: 1px solid map-get($colors, "black");
+            }
+        }
+
         .wpcf7-spinner {
             display: none;
         }
