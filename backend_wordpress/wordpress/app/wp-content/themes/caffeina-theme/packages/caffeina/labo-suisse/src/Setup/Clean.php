@@ -42,6 +42,18 @@ class Clean
         //     echo '<link rel="shortcut icon" href="' . $this->theme_options['abbrivio-site-favicon'] . '" type="image/x-icon">';
         // });
 
+        // Admin redirect
+        add_filter('init', function () {
+            if (is_admin()) {
+                global $pagenow;
+
+                if (($pagenow == 'profile.php') && (!lb_user_has_role('administrator'))) {
+                    wp_redirect(get_dashboard_url());
+                    exit;
+                }
+            }
+        });
+
         // Change the logo link from wordpress.org to my site
         add_filter('login_headerurl', function () {
             return home_url();
