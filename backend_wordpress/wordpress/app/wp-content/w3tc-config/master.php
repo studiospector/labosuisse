@@ -960,7 +960,7 @@
     },
     "extensions.active_dropin": [],
     "plugin.license_key": "xjHRAoWZp8GjVUCEoQgcfplbu26BElEz",
-    "plugin.type": "pro_dev",
+    "plugin.type": "",
     "jquerymigrate.disabled": false,
     "imageservice": {
         "compression": "lossy",
