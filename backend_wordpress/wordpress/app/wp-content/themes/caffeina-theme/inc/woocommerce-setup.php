@@ -336,3 +336,5 @@ add_filter('woocommerce_cart_contents_count', function() {
 
     return $cart_contents_count;
 });
+
+add_filter( 'woocommerce_adjust_non_base_location_prices', '__return_false' ) ;
