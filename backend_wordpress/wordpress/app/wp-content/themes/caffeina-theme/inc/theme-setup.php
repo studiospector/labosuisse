@@ -527,11 +527,27 @@ class ThemeSetup extends Timber\Site
      */
     public function lb_update_custom_roles()
     {
+        remove_role('lb_labo_media');
         if (get_option('lb_custom_roles_version') < 1) {
-            add_role('lb_labo_media', 'Labo Media', array(
+            add_role('lb_labo_media', 'Labo Media', [
                 'read' => true,
-                'level_0' => true
-            ));
+                'level_0' => true,
+
+                'manage_woocommerce' => true,
+                'view_admin_dashboard' => true,
+                'view_woocommerce_reports' => true,
+
+                'assign_product_terms' => true,
+                'edit_others_products' => true,
+                'edit_private_products' => true,
+                'edit_product' => true,
+                'edit_product_terms' => true,
+                'edit_products' => true,
+                'edit_published_products' => true,
+                'read_product' => true,
+                'read_private_product' => true,
+            ]);
+
             update_option('lb_custom_roles_version', 1);
         }
     }
