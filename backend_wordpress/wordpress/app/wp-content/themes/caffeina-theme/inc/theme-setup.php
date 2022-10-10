@@ -67,6 +67,7 @@ class ThemeSetup extends Timber\Site
         add_filter('wpcf7_form_tag', array($this, 'lb_parse_cf7_fields'));
         add_filter('wpseo_exclude_from_sitemap_by_post_ids', array($this, 'lb_exclude_specific_posts_from_sitemap'));
         add_filter('wpseo_sitemap_exclude_post_type', array($this, 'lb_exclude_post_types_from_sitemap'), 10, 2);
+        add_action('init', [$this, 'lb_update_custom_roles']);
 
         add_filter('woocommerce_enqueue_styles', '__return_empty_array', 999);
 
@@ -518,6 +519,21 @@ class ThemeSetup extends Timber\Site
     public function lb_exclude_post_types_from_sitemap($excluded, $post_type)
     {
         return $post_type === 'lb-distributor';
+    }
+
+
+    /**
+     * Add custom roles
+     */
+    public function lb_update_custom_roles()
+    {
+        if (get_option('lb_custom_roles_version') < 1) {
+            add_role('lb_labo_media', 'Labo Media', array(
+                'read' => true,
+                'level_0' => true
+            ));
+            update_option('lb_custom_roles_version', 1);
+        }
     }
 }
 
