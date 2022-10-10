@@ -527,7 +527,6 @@ class ThemeSetup extends Timber\Site
      */
     public function lb_update_custom_roles()
     {
-        remove_role('lb_labo_media');
         if (get_option('lb_custom_roles_version') < 1) {
             add_role('lb_labo_media', 'Labo Media', [
                 'read' => true,
