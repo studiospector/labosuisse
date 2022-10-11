@@ -77,3 +77,23 @@ add_filter('rest_url', function ($url) {
 
     return $url;
 });
+
+add_filter( 'wp_mail', function ($args) {
+    $excludedSubject = [
+        'contatto generico',
+        'candidatura',
+        'candidatura spontanea',
+        'richiesta concessionario'
+    ];
+
+    $regex = '(' . implode(')|(', $excludedSubject) . ')';
+
+    if (!preg_match("/{$regex}/i", $args['subject'])) {
+        $args['headers'] = [
+            'Reply-To: <noreply@labosuisse.com>'
+        ];
+    }
+
+    return $args;
+});
+
