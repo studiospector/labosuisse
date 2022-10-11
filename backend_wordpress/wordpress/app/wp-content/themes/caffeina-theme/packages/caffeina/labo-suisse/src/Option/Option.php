@@ -28,15 +28,26 @@ class Option
     {
         $links = $this->prepareLinks('lb_header_links');
 
+        $cart_items = is_object(WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
+
         $items = [];
         foreach ($links as $i => $link) {
             $items[] = [
                 'type' => 'icon',
-                'mobile' => $link['lb_header_links_mobile'],
+                'mobile_hide' => $link['lb_header_links_mobile'],
                 'icon' => ['name' => $link['lb_header_links_icon']],
                 'href' => $link['lb_header_links_link']
             ];
         }
+
+        $items = array_merge($items, [[
+            'type' => 'icon',
+            'mobile_hide' => false,
+            'desktop_hide' => true,
+            'icon' => ['name' => 'cart', 'counter' => $cart_items, 'counter_classes' => 'lb-wc-cart-total-count'],
+            'class' => 'js-open-offset-nav',
+            'attributes' => ['data-target-offset-nav="lb-offsetnav-async-cart"'],
+        ]]);
 
         return $items;
     }

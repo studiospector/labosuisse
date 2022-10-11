@@ -36,8 +36,8 @@
             {% endif %}
             {% if header.header_links.items %}
                 {% for link in header.header_links.items %}
-                    <div class="lb-header__top__icons__item{{ link.mobile ? ' lb-header__top__icons__item--mobile-hide' : '' }}">
-                        <a href="{{ link.href }}">
+                    <div class="lb-header__top__icons__item{{ link.mobile_hide ? ' lb-header__top__icons__item--mobile-hide' : '' }}{{ link.desktop_hide ? ' lb-header__top__icons__item--desktop-hide' : '' }}">
+                        <a {{ link.href ? 'href="' ~ link.href ~ '"' : '' }}{{ link.class ? ' class="' ~ link.class ~ '"' : '' }}{{ link.attributes ? ' ' ~ link.attributes|join(' ') : '' }}>
                             {% include '@PathViews/components/icon.twig' with link.icon only %}
                         </a>
                     </div>
