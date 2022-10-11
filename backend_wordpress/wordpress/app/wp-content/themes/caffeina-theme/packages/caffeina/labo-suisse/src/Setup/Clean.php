@@ -6,6 +6,9 @@ class Clean
 {
     public function __construct()
     {
+        // Disable REST API
+        $this->lb_disable_rest_api_users();
+
         // Remove trash action
         add_action('init', [$this, 'remove_trash_actions']);
 
@@ -143,6 +146,41 @@ class Clean
         add_action('load-index.php', [$this, 'always_show_welcome_panel']);
         remove_action('welcome_panel', 'wp_welcome_panel');
         add_action('welcome_panel', [$this, 'custom_welcome_panel']);
+    }
+
+
+    /**
+	 * Disable REST API
+	 */
+    public static function lb_disable_rest_api_users()
+    {
+        if (!is_user_logged_in() || !lb_user_has_role(['administrator', 'editor', 'shop_manager', 'lb_labo_media'])) {
+
+            remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
+            remove_action('wp_head', 'rest_output_link_wp_head', 10);
+            remove_action('template_redirect', 'rest_output_link_header', 11);
+
+            // Custom error message
+            // add_filter('rest_authentication_errors', function ($access) {
+            //     $error_message = esc_html__('Error: Restricted access to the REST API.');
+            //     if (is_wp_error($access)) {
+            //         $access->add('rest_cannot_access', $error_message, array('status' => rest_authorization_required_code()));
+            //         return $access;
+            //     }
+            //     return new \WP_Error('rest_cannot_access', $error_message, array('status' => rest_authorization_required_code()));
+            // }, 20);
+
+            // Restrict users endpoint
+            add_filter('rest_endpoints', function ($endpoints) {
+                if (isset($endpoints['/wp/v2/users'])) {
+                    unset($endpoints['/wp/v2/users']);
+                }
+                if (isset($endpoints['/wp/v2/users/(?P<id>[\d]+)'])) {
+                    unset($endpoints['/wp/v2/users/(?P<id>[\d]+)']);
+                }
+                return $endpoints;
+            });
+        }
     }
 
 
