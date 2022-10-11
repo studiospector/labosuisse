@@ -157,6 +157,12 @@
                     }
                 }
 
+                &--desktop-hide {
+                    @include mq($from: lg) {
+                        display: none;
+                    }
+                }
+
                 &--search,
                 &--btn-menu {
                     margin-right: 0;
