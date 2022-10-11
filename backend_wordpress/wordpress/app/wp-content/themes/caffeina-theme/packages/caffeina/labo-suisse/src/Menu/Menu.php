@@ -27,9 +27,9 @@ class Menu
 
     public static function mobile()
     {
-        $lang_selector = do_shortcode('[wpml_language_selector_widget]');
+        // $lang_selector = do_shortcode('[wpml_language_selector_widget]');
 
-        $cart_items = is_object(WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
+        // $cart_items = is_object(WC()->cart) ? WC()->cart->get_cart_contents_count() : 0;
 
         return [
             'children' => array_merge(
@@ -38,14 +38,14 @@ class Menu
                 (new DiscoverLabo())->get('mobile')
             ),
             'fixed' => [
-                [
-                    'type' => 'small-link',
-                    'label' => __('Carrello', 'labo-suisse-theme'),
-                    'icon' => ['name' => 'cart', 'counter' => $cart_items, 'counter_classes' => 'lb-wc-cart-total-count'],
-                    'href' => wc_get_cart_url(),
-                    // 'class' => 'js-open-offset-nav',
-                    // 'attributes' => ['data-target-offset-nav="lb-async-cart-nav"'],
-                ],
+                // [
+                //     'type' => 'small-link',
+                //     'label' => __('Carrello', 'labo-suisse-theme'),
+                //     'icon' => ['name' => 'cart', 'counter' => $cart_items, 'counter_classes' => 'lb-wc-cart-total-count'],
+                //     'href' => wc_get_cart_url(),
+                //     // 'class' => 'js-open-offset-nav',
+                //     // 'attributes' => ['data-target-offset-nav="lb-async-cart-nav"'],
+                // ],
                 [
                     'type' => 'small-link',
                     'label' => __('Profilo', 'labo-suisse-theme'),
