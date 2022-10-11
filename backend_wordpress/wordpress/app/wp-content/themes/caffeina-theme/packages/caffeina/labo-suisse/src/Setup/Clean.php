@@ -160,7 +160,10 @@ class Clean
             remove_action('wp_head', 'rest_output_link_wp_head', 10);
             remove_action('template_redirect', 'rest_output_link_header', 11);
 
-            // Custom error message
+            /**
+             * Filter all API
+             * @see https://developer.wordpress.org/reference/hooks/rest_authentication_errors/
+             */
             // add_filter('rest_authentication_errors', function ($access) {
             //     $error_message = esc_html__('Error: Restricted access to the REST API.');
             //     if (is_wp_error($access)) {
