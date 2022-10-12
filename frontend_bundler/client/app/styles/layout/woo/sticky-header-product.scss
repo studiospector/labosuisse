@@ -27,6 +27,10 @@
             display: none;
         }
 
+        .lb-price-label {
+            margin-top: 0;
+        }
+
         .button {
             width: 100%;
             justify-content: center;
@@ -118,7 +122,7 @@
     }
 
     &--adjust {
-        transform: translateY(100px);
+        transform: translateY(-100%);
 
         @include mq($until: md) {
             transform: translateY(0);
