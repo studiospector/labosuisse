@@ -37,7 +37,6 @@ class Scrollbar extends Component {
         // tell ScrollTrigger to use these proxy methods for the ".js-scrollbar" element since Locomotive Scroll is hijacking things
         ScrollTrigger.scrollerProxy(this.el, {
             scrollTop(value) {
-                console.log('scrollTop', value, arguments.length);
                 return arguments.length ? scrollbar.scrollTo(value, 0, 0) : scrollbar.scroll.instance.scroll.y;
             }, // we don't have to define a scrollLeft because we're only scrolling vertically.
             getBoundingClientRect() {
