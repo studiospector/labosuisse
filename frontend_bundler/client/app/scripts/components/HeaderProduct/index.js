@@ -23,56 +23,44 @@ class HeaderProduct extends Component {
 
         this.elemHeight = this.el.getBoundingClientRect().height
 
-        // const observer = new MutationObserver( (event) => {
-        //     let classes = event[0].target.classList
-        //     setTimeout(() => {
-        //         // if (classes.contains('lb-header--hide')) {
-        //             this.adjustElement(0, false, classes.contains('lb-header--hide'))
-        //         // }
-        //     }, 300);
-        // })
-        // observer.observe(qs('.lb-header'), {
-        //     attributes: true, 
-        //     attributeFilter: ['class'],
-        //     childList: false, 
-        //     characterData: false
-        // })
+        this.animation()
 
-        // this.animation()
-
-        // on(this.ui.button, 'click', this.scrollToAddToCart)
+        on(this.ui.button, 'click', this.scrollToAddToCart)
     }
 
     animation = () => {
-        const tl = gsap.timeline({
+        let matchMedia = window.matchMedia("screen and (max-width: 767px)")
+        gsap.timeline({
             scrollTrigger: {
                 trigger: ".js-single-product-details",
-                scroller: ".js-scrollbar",
+                scroller: matchMedia.matches ? "body" : ".js-scrollbar",
                 start: "top top",
-                // end: "+=100%",
                 onEnter: () => {
-                    this.adjustElement(0, true)
-                    // this.el.classList.add('lb-header-sticky-product--scrolled')
-                },
-                // onLeave: () => this.el.classList.add('lb-header-sticky-product--scrolled'),
-                onEnterBack: () => {
+                    this.el.classList.remove('lb-header-sticky-product--adjust')
                     setTimeout(() => {
-                        this.adjustElement(qs('.lb-header').getBoundingClientRect().height, true)
-                        // this.el.classList.remove('lb-header-sticky-product--scrolled')
-                    }, 300);
+                        if (matchMedia.matches) {
+                            this.el.style.bottom = 0
+                        } else {
+                            // this.adjustElement(0, true)
+                            this.el.style.top = `${qs('.lb-header').getBoundingClientRect().height}px`
+                        }
+                    }, 600);
                 },
-                // onLeaveBack: () => this.el.classList.remove('lb-header-sticky-product--scrolled'),
-                // onUpdate() {
-                //     console.log("Update")
-                // }
+                onEnterBack: () => {
+                    this.el.classList.add('lb-header-sticky-product--adjust')
+                    if (matchMedia.matches) {
+                        this.el.style.bottom = '-100%'
+                    } else {
+                        // this.adjustElement(qs('.lb-header').getBoundingClientRect().height, true)
+                        this.el.style.top = `0px`
+                    }
+                },
             }
         })
     }
 
     adjustElement = (elemHeight, height, isHide) => {
-        console.log('adjustElement', elemHeight, height, isHide);
         let matchMedia = window.matchMedia("screen and (max-width: 767px)")
-        // if (height || (isHide === undefined || isHide === false)) {
         if (height || (isHide === undefined || isHide === false || isHide === true)) {
             if (matchMedia.matches) {
                 const bottom = (elemHeight <= 0) ? 0 : '-100%'
