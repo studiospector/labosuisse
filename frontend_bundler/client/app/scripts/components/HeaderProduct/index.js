@@ -67,10 +67,10 @@ class HeaderProduct extends Component {
                 // }
             }
         })
-        // tl.fromTo(this.el, { backgroundColor: "#000" }, { backgroundColor: "#28a92b" })
     }
 
     adjustElement = (elemHeight, height, isHide) => {
+        console.log('adjustElement', elemHeight, height, isHide);
         let matchMedia = window.matchMedia("screen and (max-width: 767px)")
         // if (height || (isHide === undefined || isHide === false)) {
         if (height || (isHide === undefined || isHide === false || isHide === true)) {
