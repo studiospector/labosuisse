@@ -38,9 +38,9 @@ class HeaderProduct extends Component {
         //     characterData: false
         // })
 
-        this.animation()
+        // this.animation()
 
-        on(this.ui.button, 'click', this.scrollToAddToCart)
+        // on(this.ui.button, 'click', this.scrollToAddToCart)
     }
 
     animation = () => {
