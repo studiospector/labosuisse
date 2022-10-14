@@ -54,7 +54,7 @@ COPY --chown=nobody ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/
 COPY --chown=nobody ./backend_wordpress/wordpress/app/robots.txt ${WP_CORE_DIR}/
 
 # trafex stage (wrap it)
-# FROM registry.caffeina.co/devops/nador-images/docker-php-nginx/php-nginx
+# FROM registry.gitlab.com/never-sleep/devops/nador-images/docker-php-nginx/php-nginx
 FROM trafex/php-nginx:2.4.0 AS production
 
 ENV WP_CORE_DIR="/var/www/html"
@@ -83,9 +83,9 @@ RUN apk --no-cache add \
   # required by NR agent
   pcre
 
-COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
-COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
-COPY --from=registry.caffeina.co/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
+COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
+COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
+COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
 COPY ./backend_wordpress/wordpress/docker/entrypoint.sh /entrypoint.sh
 
 #wp-cli

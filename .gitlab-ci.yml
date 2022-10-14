@@ -9,31 +9,24 @@ variables:
 
 build:
   stage: build
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:up-to-date-compose
+  image: registry.gitlab.com/never-sleep/open-source/docker-gitlab-ci:up-to-date-compose
   variables:
     COMPOSE_DOCKER_CLI_BUILD: "0"
+  services:
+    - docker:dind
   before_script:
     - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
   script:
     # Env
     - printenv $(echo "n3_env") > ./.env
     - docker-compose -f ./docker/build.yml build --pull
-  only:
-    - develop
-
-push:
-  stage: push
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:up-to-date-compose
-  before_script:
-    - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
-  script:
     - docker-compose -f ./docker/build.yml push
   only:
     - develop
 
 deploy-n3:
   stage: deploy
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:up-to-date-compose
+  image: registry.gitlab.com/never-sleep/open-source/docker-gitlab-ci-vpn:1.29.2_001
   variables:
     DOCKER_TLS_VERIFY: "1"
     DOCKER_HOST: ${N3_DOCKER_HOST}
@@ -64,7 +57,7 @@ deploy-n3:
 
 n3-wipe-data-and-stop:
   stage: destroy
-  image: registry.caffeina.co/open-source/docker-gitlab-ci:up-to-date-compose
+  image: registry.gitlab.com/never-sleep/open-source/docker-gitlab-ci-vpn:1.29.2_001
   variables:
     DOCKER_TLS_VERIFY: "1"
     DOCKER_HOST: ${N3_DOCKER_HOST}
@@ -90,24 +83,24 @@ n3-wipe-data-and-stop:
   only:
     - develop
 
-deploy-preprod:
-  stage: push
-  image: registry.caffeina.co/devops/convox-gitlab-ci:latest
-  variables:
-    CONVOX_APP_NAME: ${PROJECT_NAME}
-    CONVOX_RACK: ${PREPROD_CONVOX_RACK}
-  script:
-    - convox deploy -a $CONVOX_APP_NAME
-  only:
-    - preprod
-
-deploy-prod:
-  stage: push
-  image: registry.caffeina.co/devops/convox-gitlab-ci:latest
-  variables:
-    CONVOX_APP_NAME: ${PROJECT_NAME}
-    CONVOX_RACK: ${PROD_CONVOX_RACK}
-  script:
-    - convox deploy -a $CONVOX_APP_NAME
-  only:
-    - master
+# deploy-preprod:
+#   stage: push
+#   image: registry.gitlab.com/never-sleep/devops/convox-gitlab-ci:latest
+#   variables:
+#     CONVOX_APP_NAME: ${PROJECT_NAME}
+#     CONVOX_RACK: ${PREPROD_CONVOX_RACK}
+#   script:
+#     - convox deploy -a $CONVOX_APP_NAME
+#   only:
+#     - preprod
+#
+# deploy-prod:
+#   stage: push
+#   image: registry.gitlab.com/never-sleep/devops/convox-gitlab-ci:latest
+#   variables:
+#     CONVOX_APP_NAME: ${PROJECT_NAME}
+#     CONVOX_RACK: ${PROD_CONVOX_RACK}
+#   script:
+#     - convox deploy -a $CONVOX_APP_NAME
+#   only:
+#     - master
