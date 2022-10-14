@@ -11,7 +11,8 @@ build:
   stage: build
   image: registry.gitlab.com/never-sleep/open-source/docker-gitlab-ci:up-to-date-compose
   variables:
-    COMPOSE_DOCKER_CLI_BUILD: "0"
+    DOCKER_BUILDKIT: "1"
+    COMPOSE_DOCKER_CLI_BUILD: 1
   services:
     - docker:dind
   before_script:
@@ -19,7 +20,7 @@ build:
   script:
     # Env
     - printenv $(echo "n3_env") > ./.env
-    - docker-compose -f ./docker/build.yml build --pull
+    - docker-compose -f ./docker/build.yml build  --build-arg BUILDKIT_INLINE_CACHE=1
     - docker-compose -f ./docker/build.yml push
   only:
     - develop
