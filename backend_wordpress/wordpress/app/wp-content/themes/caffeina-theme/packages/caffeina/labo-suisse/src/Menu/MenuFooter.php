@@ -25,6 +25,24 @@ class MenuFooter
 
         return [
             'prefooter' => $prefooter,
+            'pictograms' => [
+                [
+                    'icon' => ['name' => 'car'],
+                    'title' => __('Spedizione e resi gratuiti', 'labo-suisse-theme'),
+                ],
+                [
+                    'icon' => ['name' => 'samples'],
+                    'title' => __('Campioni omaggio', 'labo-suisse-theme'),
+                ],
+                [
+                    'icon' => ['name' => 'packaging'],
+                    'title' => __('Confezione esclusiva', 'labo-suisse-theme'),
+                ],
+                [
+                    'icon' => ['name' => 'lock'],
+                    'title' => __('Pagamento sicuro', 'labo-suisse-theme'),
+                ],
+            ],
             'footer' => [
                 'discover' => (new DiscoverLaboFooter())->get(),
                 'support' => (new Support())->get(),
