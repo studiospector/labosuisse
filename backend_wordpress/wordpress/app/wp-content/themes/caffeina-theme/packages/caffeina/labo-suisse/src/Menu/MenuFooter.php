@@ -2,6 +2,7 @@
 
 namespace Caffeina\LaboSuisse\Menu;
 
+use Caffeina\LaboSuisse\Api\Multicountry\Geolocation;
 use Caffeina\LaboSuisse\Menu\DiscoverLabo\DiscoverLaboFooter;
 use Caffeina\LaboSuisse\Menu\Support\Support;
 use Caffeina\LaboSuisse\Menu\Impressum\Impressum;
@@ -25,24 +26,7 @@ class MenuFooter
 
         return [
             'prefooter' => $prefooter,
-            'pictograms' => [
-                [
-                    'icon' => ['name' => 'car'],
-                    'title' => __('Spedizione e resi gratuiti', 'labo-suisse-theme'),
-                ],
-                [
-                    'icon' => ['name' => 'samples'],
-                    'title' => __('Campioni omaggio', 'labo-suisse-theme'),
-                ],
-                [
-                    'icon' => ['name' => 'packaging'],
-                    'title' => __('Confezione esclusiva', 'labo-suisse-theme'),
-                ],
-                [
-                    'icon' => ['name' => 'lock'],
-                    'title' => __('Pagamento sicuro', 'labo-suisse-theme'),
-                ],
-            ],
+            'pictograms' => self::pictograms(),
             'footer' => [
                 'discover' => (new DiscoverLaboFooter())->get(),
                 'support' => (new Support())->get(),
@@ -173,7 +157,7 @@ class MenuFooter
                 ],
             ];
         }
-        
+
         return array_merge([
             'subtitle' => $options['lb_prefooter_center_block_title'] ?? null,
             'paragraph' => $options['lb_prefooter_center_block_text'] ?? null,
@@ -199,5 +183,38 @@ class MenuFooter
                 'variants' => ['quaternary'],
             ])
         ];
+    }
+
+    private static function pictograms()
+    {
+        $payload = [];
+        $lang = wpml_get_current_language();
+        $availableCountry = ['BE', 'FR', 'DE', 'IE', 'NL', 'ES'];
+        $geoInfo = (new Geolocation($lang))->getInfo();
+
+        if ($lang == 'it' or
+            ($lang == 'en' and in_array($geoInfo['countryCode'], $availableCountry))
+        ) {
+            $payload = [
+                [
+                    'icon' => ['name' => 'car'],
+                    'title' => __('Spedizione e resi gratuiti', 'labo-suisse-theme'),
+                ],
+                [
+                    'icon' => ['name' => 'samples'],
+                    'title' => __('Campioni omaggio', 'labo-suisse-theme'),
+                ],
+                [
+                    'icon' => ['name' => 'packaging'],
+                    'title' => __('Confezione esclusiva', 'labo-suisse-theme'),
+                ],
+                [
+                    'icon' => ['name' => 'lock'],
+                    'title' => __('Pagamento sicuro', 'labo-suisse-theme'),
+                ],
+            ];
+        }
+
+        return $payload;
     }
 }
