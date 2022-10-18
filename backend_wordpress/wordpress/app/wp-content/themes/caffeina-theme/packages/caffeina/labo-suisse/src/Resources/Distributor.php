@@ -35,6 +35,14 @@ class Distributor
         }
 
         $this->links[] = $this->getLaboInTheWorldLinks();
+
+        $this->read_more = [
+            'title' => __('Leggi di più', 'labo-suisse-theme'),
+            'type' => 'button',
+            'class' => 'lb-template-distributor__map__infowindow__more-text js-infowindow-more-text',
+            'attributes' => ['data-more-text="'. __('Leggi di più', 'labo-suisse-theme') .'"', 'data-less-text="'. __('Vedi meno dettagli', 'labo-suisse-theme') .'"'],
+            'variants' => ['link', 'small']
+        ];
     }
 
     private function getBrands($post)

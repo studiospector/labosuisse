@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-14 09:48+0000\n"
+"POT-Creation-Date: 2022-10-18 14:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -48,7 +48,7 @@ msgid "Ambito:"
 msgstr ""
 
 #: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71
-#: template-distributor.php:31 template-lb-brand-archive.php:65
+#: template-distributor.php:33 template-lb-brand-archive.php:65
 #: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:147
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56
@@ -74,7 +74,7 @@ msgstr ""
 msgid "articolo"
 msgstr ""
 
-#: template-distributor.php:27
+#: template-distributor.php:29
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:40
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:127
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:105
@@ -89,7 +89,7 @@ msgstr ""
 msgid "Caffeina Theme"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:35
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:205
 msgid "Campioni omaggio"
 msgstr ""
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Cerca... (inserisci almeno 3 caratteri)"
 msgstr ""
 
-#: 404.php:11
+#: 404.php:8
 msgid "Ci dispiace, non riusciamo a trovare<br>la pagina che stai cercando. "
 msgstr ""
 
@@ -145,7 +145,7 @@ msgstr ""
 msgid "Codice coupon"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:39
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:209
 msgid "Confezione esclusiva"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Efficacia"
 msgstr ""
 
-#: 404.php:10
+#: 404.php:7
 msgid "Errore 404"
 msgstr ""
 
@@ -310,6 +310,8 @@ msgid "La tua ricerca per &ldquo;%s&rdquo; non ha prodotto alcun risultato"
 msgstr ""
 
 #: archive-lb-job.php:31
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:30
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:33
 #: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:178
 msgid "Leggi di più"
 msgstr ""
@@ -384,7 +386,7 @@ msgstr ""
 msgid "Ordine N."
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:43
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:213
 msgid "Pagamento sicuro"
 msgstr ""
 
@@ -519,7 +521,7 @@ msgstr ""
 msgid "Scopri di più"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:100
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:107
 msgid "Scopri i trattamenti distribuiti"
 msgstr ""
 
@@ -575,7 +577,7 @@ msgid ""
 "alla tua ricerca."
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:31
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:201
 msgid "Spedizione e resi gratuiti"
 msgstr ""
 
@@ -652,7 +654,7 @@ msgstr ""
 msgid "Torna a Tutti i miei ordini"
 msgstr ""
 
-#: 404.php:14
+#: 404.php:11
 msgid "Torna alla Homepage"
 msgstr ""
 
@@ -697,6 +699,10 @@ msgstr ""
 msgid "Vai alle indicazioni"
 msgstr ""
 
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:33
+msgid "Vedi meno dettagli"
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:114
 msgid "Vedi tutti i prodotti"
 msgstr ""
@@ -706,7 +712,7 @@ msgstr ""
 msgid "Vedi tutto"
 msgstr ""
 
-#: 404.php:12
+#: 404.php:9
 msgid ""
 "Verifica l'indirizzo e riprova, oppure clicca sul pulsante<br>sotto per "
 "continuare a navigare sul nostro sito."
