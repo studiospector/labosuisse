@@ -44,6 +44,11 @@ class Geolocation
         ];
     }
 
+    public function getInfo()
+    {
+        return $this->geolocate();
+    }
+
     private function geolocate()
     {
         $ip = \WC_Geolocation::get_ip_address();

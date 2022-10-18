@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-10-05 10:42+0000\n"
+"PO-Revision-Date: 2022-10-14 09:51+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -88,11 +88,15 @@ msgstr "Patents"
 msgid "Caffeina Theme"
 msgstr "Caffeina Theme"
 
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:35
+msgid "Campioni omaggio"
+msgstr "Free Gift Included"
+
 #: archive-lb-faq.php:71 archive-lb-job.php:87 home.php:93
 msgid "Carica altro"
 msgstr "Load more"
 
-#: inc/helpers.php:381 packages/caffeina/labo-suisse/src/Menu/Menu.php:43
+#: inc/helpers.php:381
 msgid "Carrello"
 msgstr "Cart"
 
@@ -116,7 +120,7 @@ msgstr "Search for a topic, product, line ..."
 msgid "Cerca un prodotto, una linea..."
 msgstr "Search for a product, a line ..."
 
-#: archive-lb-beauty-specialist.php:32
+#: archive-lb-beauty-specialist.php:36
 msgid "Cerca un’altra città a te vicina per scoprire le date a calendario."
 msgstr ""
 "Search for another city near you to find out the dates on the calendar."
@@ -127,7 +131,7 @@ msgstr ""
 msgid "Cerca... (inserisci almeno 3 caratteri)"
 msgstr "Search ... (enter at least 3 characters)"
 
-#: 404.php:8
+#: 404.php:11
 msgid "Ci dispiace, non riusciamo a trovare<br>la pagina che stai cercando. "
 msgstr "Sorry, we can't find<br>the page you are looking for."
 
@@ -141,8 +145,9 @@ msgstr "Hello %1$s!"
 msgid "Codice coupon"
 msgstr "Coupon code"
 
-msgid "Codice fiscale"
-msgstr "Fiscal Code"
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:39
+msgid "Confezione esclusiva"
+msgstr "Exclusive Packaging"
 
 #: woocommerce/myaccount/orders.php:28
 msgid "Controlla lo stato dei tuoi ordini e lo storico degli ordini passati."
@@ -206,7 +211,7 @@ msgstr "Frequent questions"
 msgid "Efficacia"
 msgstr "Effectiveness"
 
-#: 404.php:7
+#: 404.php:10
 msgid "Errore 404"
 msgstr "404 Error"
 
@@ -296,7 +301,7 @@ msgstr "Email address"
 msgid "Inserisci città, provincia, CAP,..."
 msgstr "Enter city, province, postcode, ..."
 
-#: archive-lb-beauty-specialist.php:15
+#: archive-lb-beauty-specialist.php:19
 msgid "Inserisci provincia"
 msgstr "Enter province"
 
@@ -360,7 +365,7 @@ msgstr "How to use"
 msgid "Modulo di candidatura"
 msgstr "Application form"
 
-#: archive-lb-beauty-specialist.php:31
+#: archive-lb-beauty-specialist.php:35
 #| msgid "Nessun evento previsto<br>prossimamente nella tua provincia."
 msgid "Nessun evento previsto<br>questo mese nella tua provincia."
 msgstr "No events planned<br>this month in your province."
@@ -398,6 +403,10 @@ msgstr "Order #%s"
 #: woocommerce/myaccount/view-order.php:37
 msgid "Ordine N."
 msgstr "Order N."
+
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:43
+msgid "Pagamento sicuro"
+msgstr "Secure Payment"
 
 #: woocommerce/myaccount/form-login.php:63
 #: woocommerce/myaccount/form-login.php:173
@@ -516,7 +525,7 @@ msgstr "Search results"
 msgid "risultati per"
 msgstr "results for"
 
-#: archive-lb-beauty-specialist.php:26 taxonomy-lb-brand.php:24
+#: archive-lb-beauty-specialist.php:30 taxonomy-lb-brand.php:24
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:74
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:172
 msgid "Risultati:"
@@ -597,6 +606,10 @@ msgid ""
 "alla tua ricerca."
 msgstr "We're sorry! We can't find any results that match your search."
 
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:31
+msgid "Spedizione e resi gratuiti"
+msgstr "Free Shipping and Returns"
+
 #. Author of the theme
 msgid "Stefano Iachetta | Giuseppe Gatto | Matteo Meloni"
 msgstr "Stefano Iachetta | Giuseppe Gatto | Matteo Meloni"
@@ -670,7 +683,7 @@ msgstr "Type of contract:"
 msgid "Torna a Tutti i miei ordini"
 msgstr "Back to All my orders"
 
-#: 404.php:11
+#: 404.php:14
 msgid "Torna alla Homepage"
 msgstr "Back to Home Page"
 
@@ -711,7 +724,7 @@ msgstr "Go to news and media"
 msgid "Vai al brand"
 msgstr "Go to the brand"
 
-#: archive-lb-beauty-specialist.php:25
+#: archive-lb-beauty-specialist.php:29
 msgid "Vai alle indicazioni"
 msgstr "Go to directions"
 
@@ -724,7 +737,7 @@ msgstr "See all products"
 msgid "Vedi tutto"
 msgstr "See all"
 
-#: 404.php:9
+#: 404.php:12
 msgid ""
 "Verifica l'indirizzo e riprova, oppure clicca sul pulsante<br>sotto per "
 "continuare a navigare sul nostro sito."

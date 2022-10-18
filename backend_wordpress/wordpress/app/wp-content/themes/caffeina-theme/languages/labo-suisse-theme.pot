@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-05 10:41+0000\n"
+"POT-Creation-Date: 2022-10-14 09:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -89,11 +89,15 @@ msgstr ""
 msgid "Caffeina Theme"
 msgstr ""
 
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:35
+msgid "Campioni omaggio"
+msgstr ""
+
 #: archive-lb-faq.php:71 archive-lb-job.php:87 home.php:93
 msgid "Carica altro"
 msgstr ""
 
-#: inc/helpers.php:381 packages/caffeina/labo-suisse/src/Menu/Menu.php:43
+#: inc/helpers.php:381
 msgid "Carrello"
 msgstr ""
 
@@ -117,7 +121,7 @@ msgstr ""
 msgid "Cerca un prodotto, una linea..."
 msgstr ""
 
-#: archive-lb-beauty-specialist.php:32
+#: archive-lb-beauty-specialist.php:36
 msgid "Cerca un’altra città a te vicina per scoprire le date a calendario."
 msgstr ""
 
@@ -127,7 +131,7 @@ msgstr ""
 msgid "Cerca... (inserisci almeno 3 caratteri)"
 msgstr ""
 
-#: 404.php:8
+#: 404.php:11
 msgid "Ci dispiace, non riusciamo a trovare<br>la pagina che stai cercando. "
 msgstr ""
 
@@ -139,6 +143,10 @@ msgstr ""
 
 #: woocommerce/cart/cart.php:146
 msgid "Codice coupon"
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:39
+msgid "Confezione esclusiva"
 msgstr ""
 
 #: woocommerce/myaccount/orders.php:28
@@ -196,7 +204,7 @@ msgstr ""
 msgid "Efficacia"
 msgstr ""
 
-#: 404.php:7
+#: 404.php:10
 msgid "Errore 404"
 msgstr ""
 
@@ -276,7 +284,7 @@ msgstr ""
 msgid "Inserisci città, provincia, CAP,..."
 msgstr ""
 
-#: archive-lb-beauty-specialist.php:15
+#: archive-lb-beauty-specialist.php:19
 msgid "Inserisci provincia"
 msgstr ""
 
@@ -340,7 +348,7 @@ msgstr ""
 msgid "Modulo di candidatura"
 msgstr ""
 
-#: archive-lb-beauty-specialist.php:31
+#: archive-lb-beauty-specialist.php:35
 msgid "Nessun evento previsto<br>questo mese nella tua provincia."
 msgstr ""
 
@@ -374,6 +382,10 @@ msgstr ""
 
 #: woocommerce/myaccount/view-order.php:37
 msgid "Ordine N."
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:43
+msgid "Pagamento sicuro"
 msgstr ""
 
 #: woocommerce/myaccount/form-login.php:63
@@ -489,7 +501,7 @@ msgstr ""
 msgid "risultati per"
 msgstr ""
 
-#: archive-lb-beauty-specialist.php:26 taxonomy-lb-brand.php:24
+#: archive-lb-beauty-specialist.php:30 taxonomy-lb-brand.php:24
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:74
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:172
 msgid "Risultati:"
@@ -561,6 +573,10 @@ msgstr ""
 msgid ""
 "Siamo spiacenti! Non riusciamo a trovare nessun risultato che corrisponda "
 "alla tua ricerca."
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:31
+msgid "Spedizione e resi gratuiti"
 msgstr ""
 
 #. Author of the theme
@@ -636,7 +652,7 @@ msgstr ""
 msgid "Torna a Tutti i miei ordini"
 msgstr ""
 
-#: 404.php:11
+#: 404.php:14
 msgid "Torna alla Homepage"
 msgstr ""
 
@@ -677,7 +693,7 @@ msgstr ""
 msgid "Vai al brand"
 msgstr ""
 
-#: archive-lb-beauty-specialist.php:25
+#: archive-lb-beauty-specialist.php:29
 msgid "Vai alle indicazioni"
 msgstr ""
 
@@ -690,7 +706,7 @@ msgstr ""
 msgid "Vedi tutto"
 msgstr ""
 
-#: 404.php:9
+#: 404.php:12
 msgid ""
 "Verifica l'indirizzo e riprova, oppure clicca sul pulsante<br>sotto per "
 "continuare a navigare sul nostro sito."
@@ -711,7 +727,4 @@ msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:197
 msgid "Zone"
-msgstr ""
-
-msgid "Codice fiscale"
 msgstr ""

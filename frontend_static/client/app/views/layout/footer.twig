@@ -60,7 +60,17 @@
             </div>
         </div>
     {% endif %}
-    <div class="footer">
+    {% if data.pictograms %}
+        <div class="lb-footer-pictograms">
+            {% for item in data.pictograms %}
+                <div class="lb-footer-pictograms__item">
+                    {% include '@PathViews/components/icon.twig' with item.icon only %}
+                    <h6 class="lb-footer-pictograms__item__title">{{ item.title }}</h6>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <div class="footer{{ not data.pictograms ? ' footer--margins' : '' }}">
         <div class="container">
             <div class="footer__top">
                 <div class="footer__top__shield lb-shield">
