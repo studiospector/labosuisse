@@ -189,7 +189,7 @@ class MenuFooter
     {
         $payload = [];
         $lang = wpml_get_current_language();
-        $availableCountry = ['BE', 'FR', 'DE', 'IE', 'NL', 'ES'];
+        $availableCountry = ['IT', 'BE', 'FR', 'DE', 'IE', 'NL', 'ES'];
         $geoInfo = (new Geolocation($lang))->getInfo();
 
         if ($lang == 'it' or
