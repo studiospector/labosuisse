@@ -29,6 +29,7 @@ class CarouselHero extends BaseBlock
                 ];
 
                 $slides[] = [
+                    'isSubElement' => true,
                     'images' => lb_get_images(get_sub_field('lb_block_carousel_hero_img'), $sizes),
                     'infoboxPosX' => get_sub_field('lb_block_carousel_hero_infoboxposx'),
                     'infoboxPosY' => get_sub_field('lb_block_carousel_hero_infoboxposy'),
