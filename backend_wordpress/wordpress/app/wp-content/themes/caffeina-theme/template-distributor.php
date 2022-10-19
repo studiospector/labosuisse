@@ -2,6 +2,8 @@
 
 /* Template Name: Template Distributori */
 
+$curr_lang = lb_get_current_lang();
+
 $brands = [];
 foreach (lb_get_brands() as $brand) {
     $brands[] = [
@@ -38,8 +40,8 @@ $context = [
         'hidden' => null
     ],
     'map' => [
-        'map_country' => 'IT',
-        'map_lang' => 'it',
+        'map_country' => strtoupper($curr_lang),
+        'map_lang' => $curr_lang,
     ],
     'content' => apply_filters('the_content', get_the_content()),
 ];

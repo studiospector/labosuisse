@@ -295,3 +295,12 @@ body.login-action-lostpassword #lostpasswordform,
 body.login-action-register #registerform {
     width: auto !important;
 }
+
+
+
+/**
+ * General
+ */
+.wp-admin .wp-list-table.fixed .column-icl_translations {
+    width: 3%;
+}
