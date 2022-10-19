@@ -1,4 +1,8 @@
 .lb-wc-myaccount {
+    @include mq($until: lg) {
+        margin-top: 30px;
+    }
+
     &__navigation {
         &__title {
             margin-bottom: 40px;

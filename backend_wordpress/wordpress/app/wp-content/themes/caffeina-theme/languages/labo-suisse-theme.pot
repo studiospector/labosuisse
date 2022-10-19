@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-10-18 14:11+0000\n"
+"POT-Creation-Date: 2022-10-19 06:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -145,6 +145,14 @@ msgstr ""
 msgid "Codice coupon"
 msgstr ""
 
+#: woocommerce/myaccount/form-edit-account.php:47
+msgid "Cognome"
+msgstr ""
+
+#: woocommerce/myaccount/form-edit-account.php:125
+msgid "Conferma la nuova password"
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Menu/MenuFooter.php:209
 msgid "Confezione esclusiva"
 msgstr ""
@@ -276,6 +284,10 @@ msgstr ""
 msgid "Indirizzo di spedizione"
 msgstr ""
 
+#: woocommerce/myaccount/form-edit-account.php:71
+msgid "Indirizzo e-mail"
+msgstr ""
+
 #: woocommerce/myaccount/form-login.php:154
 msgid "Indirizzo email"
 msgstr ""
@@ -310,8 +322,8 @@ msgid "La tua ricerca per &ldquo;%s&rdquo; non ha prodotto alcun risultato"
 msgstr ""
 
 #: archive-lb-job.php:31
-#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:30
-#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:33
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:40
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:43
 #: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:178
 msgid "Leggi di più"
 msgstr ""
@@ -362,6 +374,14 @@ msgstr ""
 msgid "Newsletter"
 msgstr ""
 
+#: woocommerce/myaccount/form-edit-account.php:35
+msgid "Nome"
+msgstr ""
+
+#: woocommerce/myaccount/form-edit-account.php:59
+msgid "Nome da visualizzare"
+msgstr ""
+
 #: woocommerce/myaccount/form-login.php:47
 msgid "Nome utente o indirizzo email"
 msgstr ""
@@ -372,7 +392,11 @@ msgid ""
 "seguito per inviare una nuovamente l’email."
 msgstr ""
 
-#: inc/woocommerce-setup.php:321
+#: woocommerce/myaccount/form-edit-account.php:113
+msgid "Nuova password (lascia vuoto per non modificare)"
+msgstr ""
+
+#: inc/woocommerce-setup.php:323
 msgid "Omaggio"
 msgstr ""
 
@@ -393,6 +417,10 @@ msgstr ""
 #: woocommerce/myaccount/form-login.php:63
 #: woocommerce/myaccount/form-login.php:173
 msgid "Password"
+msgstr ""
+
+#: woocommerce/myaccount/form-edit-account.php:101
+msgid "Password attuale (lascia vuoto per non modificare)"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:40
@@ -462,6 +490,12 @@ msgstr ""
 msgid "Quantità: %s"
 msgstr ""
 
+#: woocommerce/myaccount/form-edit-account.php:60
+msgid ""
+"Questo sarà il modo in cui il tuo nome verrà visualizzato nella sezione "
+"account e nelle recensioni"
+msgstr ""
+
 #: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:56
 msgid "Recensioni"
 msgstr ""
@@ -513,7 +547,8 @@ msgstr ""
 msgid "risultato per"
 msgstr ""
 
-#: inc/helpers.php:441
+#: inc/helpers.php:441 woocommerce/myaccount/form-edit-account.php:151
+#: woocommerce/myaccount/form-edit-account.php:153
 msgid "Salva"
 msgstr ""
 
@@ -521,7 +556,7 @@ msgstr ""
 msgid "Scopri di più"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:107
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:108
 msgid "Scopri i trattamenti distribuiti"
 msgstr ""
 
@@ -699,7 +734,7 @@ msgstr ""
 msgid "Vai alle indicazioni"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:33
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:43
 msgid "Vedi meno dettagli"
 msgstr ""
 
