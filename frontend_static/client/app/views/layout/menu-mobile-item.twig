@@ -13,7 +13,7 @@
 <div class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
 
 	{% if type == 'link' %}
-		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}">
+		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}" title="{{ label }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
 					{% if icon is iterable %}
@@ -100,7 +100,7 @@
 
 
 	{% if type == 'small-link' %}
-		<a class="lb-menu__link lb-menu__link--small" href="{{href}}" target="{{ target ? target : '_self' }}">
+		<a class="lb-menu__link lb-menu__link--small" href="{{href}}" target="{{ target ? target : '_self' }}" title="{{ label }}">
 			{% if icon or badge %}
 				<span class="lb-menu__item-icon">
                     {% if icon is iterable %}
