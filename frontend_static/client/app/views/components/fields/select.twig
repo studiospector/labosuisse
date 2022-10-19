@@ -14,7 +14,7 @@
     {{ label ? ' data-label="' ~ label ~ '"' : '' }}
     {{ confirmBtnLabel ? ' data-btn-confirm="' ~ confirmBtnLabel ~ '"' : '' }}
 >
-    <option value>{{ placeholder }}</option>
+    <option{{ placeholder ? '' : ' label="placeholder"' }} value>{{ placeholder }}</option>
     {% for option in options|default([]) %}
         <option value="{{ option.value }}"{{ option.selected ? ' selected="selected"' : '' }}{{ option.icon ? ' data-option-icon="' ~ option.icon ~ '"' : '' }}>{{ option.label }}</option>
     {% endfor %}
