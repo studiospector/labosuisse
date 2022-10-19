@@ -9,17 +9,17 @@
         {% endif %}
         
         {% if type == 'icon' %}
-            <a href="{{href}}" class="lb-menu__link lb-menu__link--icon" tabindex="0">
+            <a href="{{href}}" class="lb-menu__link lb-menu__link--icon" tabindex="0" title="{{ icon.name }}">
                 {% include '@PathViews/components/icon.twig' with icon only %}
             </a>
         {% endif %}
 
         {% if type == 'link' %}
-            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" target="{{ target ? target : '_self' }}" tabindex="0">{{label}}</a>
+            <a href="{{href}}" class="lb-menu__link lb-menu__link--main" target="{{ target ? target : '_self' }}" title="{{ label }}" tabindex="0">{{label}}</a>
         {% endif %}
 
         {% if type == 'submenu' %}
-            <a class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</a>
+            <a class="lb-menu__link lb-menu__link--main" title="{{ label }}" tabindex="0">{{label}}</a>
             <div class="lb-menu__submenu container">
                 <div class="lb-menu__wrapper">
                     <div class="lb-menu__close js-close-menu">
