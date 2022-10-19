@@ -220,6 +220,7 @@ a {
 	width: 100%;
 	position: relative;
 	padding: 50px 0;
+	background-size: cover;
 }
 
 .lb-header .lb-header__banner h1 {
