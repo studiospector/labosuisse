@@ -198,8 +198,6 @@ class Clean
         if (!lb_user_has_role('administrator')) {
             // Removes the profile.php admin color scheme options
             remove_action('admin_color_scheme_picker', 'admin_color_scheme_picker');
-            // Remove screen option (Impostazioni schermata) tab
-            add_filter('screen_options_show_screen', '__return_false');
             // Remove help (Aiuto) tab
             add_action('admin_head', function () {
                 $screen = get_current_screen();
@@ -212,6 +210,8 @@ class Clean
         if (!lb_user_has_role(array('administrator', 'editor'))) {
             // Remove admin bar
             show_admin_bar(false);
+            // Remove screen option (Impostazioni schermata) tab
+            add_filter('screen_options_show_screen', '__return_false');
         }
     }
 

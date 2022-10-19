@@ -293,7 +293,9 @@ function lb_wc_kses_notice_allowed_tags($allowed_tags)
 // add_filter('script_loader_tag', 'lb_defer_parsing_of_js', 10);
 
 
-//woo discount rules
+/**
+ * Woo discount rules
+ */
 add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
     if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
         $item_data = [];
@@ -338,3 +340,11 @@ add_filter('woocommerce_cart_contents_count', function() {
 });
 
 add_filter( 'woocommerce_adjust_non_base_location_prices', '__return_false' ) ;
+
+/**
+ * Enforce Password Strength
+ */
+add_filter('woocommerce_min_password_strength', 'lb_wc_change_password_strength', 30);
+function lb_wc_change_password_strength() {
+    return intval(2);
+}

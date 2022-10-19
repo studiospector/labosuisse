@@ -24,13 +24,7 @@
                 {% endif %}
             </p>
             <div class="p infobox__paragraph js-infowindow-content">{{ content }}</div>
-            {% include '@PathViews/components/button.twig' with {
-                title: 'Leggi di più',
-                type: 'button',
-                class: 'lb-template-distributor__map__infowindow__more-text js-infowindow-more-text',
-                attributes: ['data-more-text="Leggi di più"', 'data-less-text="Vedi meno dettagli"'],
-                variants: ['link', 'small']
-            } only %}
+            {% include '@PathViews/components/button.twig' with read_more only %}
         </div>
         {% if links|length > 0 %}
             <div class="links-list">
