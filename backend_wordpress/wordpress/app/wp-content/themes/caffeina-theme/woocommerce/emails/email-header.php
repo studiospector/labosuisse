@@ -19,6 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+$curr_lang = lb_get_current_lang();
+$banner_img = get_field('lb_email_banner_image', 'option');
+
 ?>
 <!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -50,7 +53,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 									<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
 										<tr>
 											<td id="header_wrapper">
-												<div class="lb-header__banner" style="background-image: url('https://static.labosuisse.com/uploads/2022/09/05170359/email-banner.jpg');">
+												<div class="lb-header__banner" style="background-image: url('<?php echo $banner_img; ?>');">
 													<h1><?php echo $email_heading; ?></h1>
 												</div>
 											</td>

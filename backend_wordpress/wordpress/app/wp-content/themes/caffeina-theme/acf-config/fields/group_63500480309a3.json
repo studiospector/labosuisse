@@ -1,0 +1,45 @@
+{
+    "key": "group_63500480309a3",
+    "title": "Campi personalizzati: Template – Blank Page",
+    "fields": [
+        {
+            "key": "field_63500496c0c77",
+            "label": "SEO - Heading H1",
+            "name": "lb_page_blank_heading_h1",
+            "type": "textarea",
+            "instructions": "Questo campo è inteso per essere un H1 non visibile all'utente ma solo per i Search engines.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": "br"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_template",
+                "operator": "==",
+                "value": "template-blank-page.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1666188710
+}
