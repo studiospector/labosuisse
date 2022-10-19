@@ -17,6 +17,7 @@
     {{ name ? ' name="' ~ name ~ '"' : '' }}
     {{ value ? ' value="' ~ value ~ '"' : '' }}
     {{ form ? ' form="' ~ form ~ '"' : '' }}
+    {{ tag == 'a' and title ? ' title="' ~ title ~ '"' : '' }}
 >
     {% if iconStart %}
         {% include '@PathViews/components/icon.twig' with iconStart only %}
