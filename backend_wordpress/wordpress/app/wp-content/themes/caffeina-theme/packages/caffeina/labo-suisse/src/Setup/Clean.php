@@ -207,7 +207,7 @@ class Clean
             });
         }
 
-        if (!lb_user_has_role(array('administrator', 'editor'))) {
+        if (!lb_user_has_role(['administrator', 'editor', 'shop_manager', 'lb_labo_media'])) {
             // Remove admin bar
             show_admin_bar(false);
             // Remove screen option (Impostazioni schermata) tab
