@@ -1,5 +1,5 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { on } from '@okiba/dom'
 
 const ui = {
     catalogOption: '#lb-catalog-selection',

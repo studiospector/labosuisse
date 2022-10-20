@@ -4,14 +4,10 @@ import { on } from '@okiba/dom';
 import MenuDesktop from '../MenuDesktop';
 import MenuMobile from '../MenuMobile';
 
-// import { stickyHeader, stickyHeaderScroll } from '../MenuMobile/animations';
-
 const ui = {
     hamburger: '.lb-header__hamburger',
     search: '.lb-header__search',
     input: '.lb-menu__search>input',
-    // logo: '.lb-header__logo',
-    // statusbar: '.lb-statusbar'
 }
 
 const components = {

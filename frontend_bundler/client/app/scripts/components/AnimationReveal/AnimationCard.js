@@ -1,6 +1,5 @@
 import Component from '@okiba/component'
 import EventManager from '@okiba/event-manager'
-import { qs } from '@okiba/dom'
 
 import isStorybook from '../../utils/isStorybook'
 import isScrollbarDisabled from '../../utils/isScrollbarDisabled'
