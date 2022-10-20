@@ -29,7 +29,7 @@ class WCSignInUpShortcode
             wc_get_template('myaccount/form-login.php');
             return (string) ob_get_clean();
         } else {
-            wp_safe_redirect(wc_get_account_endpoint_url('dashboard'));
+            wp_safe_redirect(wc_get_account_endpoint_url('dashboard'), 301);
             exit;
         }
     }

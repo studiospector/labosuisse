@@ -387,7 +387,7 @@ class ThemeSetup extends Timber\Site
      */
     public function lb_logout_redirect()
     {
-        wp_redirect(home_url());
+        wp_redirect(home_url(), 301);
         exit;
     }
 
