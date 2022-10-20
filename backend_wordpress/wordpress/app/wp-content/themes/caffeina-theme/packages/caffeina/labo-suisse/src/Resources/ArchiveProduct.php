@@ -86,7 +86,8 @@ class ArchiveProduct
     {
         if(count($this->filterItems) and $this->filterItems[0]['label'] === $this->term->name) {
             return wp_safe_redirect(
-                get_term_link(get_term_by('id', $this->filterItems[0]['value'],'product_cat'))
+                get_term_link(get_term_by('id', $this->filterItems[0]['value'],'product_cat')),
+                301
             );
         }
     }

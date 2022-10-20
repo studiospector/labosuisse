@@ -36,6 +36,7 @@ switch ($level) {
     case 4: // Tipologia
     default: // Default
         return wp_safe_redirect(
-            get_search_link()
+            get_search_link(),
+            301
         );
 }
