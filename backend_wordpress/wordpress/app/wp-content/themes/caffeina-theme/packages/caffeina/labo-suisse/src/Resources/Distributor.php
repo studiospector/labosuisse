@@ -28,10 +28,13 @@ class Distributor
         $this->links = [];
 
         foreach (get_field('lb_distributor_links', $post->ID) as $link) {
-            $this->links[] = [
-                'label' => $link['lb_distributor_links_label'],
-                'links' => $this->parseLinks($link['lb_distributor_links_list']),
-            ];
+            $links = $this->parseLinks($link['lb_distributor_links_list']);
+            if(!empty($links)) {
+                $this->links[] = [
+                    'label' => $link['lb_distributor_links_label'],
+                    'links' => $links,
+                ];
+            }
         }
 
         $this->links[] = $this->getLaboInTheWorldLinks();
@@ -63,17 +66,19 @@ class Distributor
             return [];
         }
 
-        return array_map(function ($item) {
-            if($item['lb_distributor_links_list_link']) {
-                return array_merge(
-                    $item['lb_distributor_links_list_link'],
-                    [
-                        'iconStart' => ['name' => $item['lb_distributor_links_list_icon'] == 'default' ? 'link' : $item['lb_distributor_links_list_icon'] ],
-                        'variants' => ['link'],
-                    ]
-                );
-            }
-        }, $links);
+        return array_filter(
+            array_map(function ($item) {
+                if ($item['lb_distributor_links_list_link'] != "") {
+                    return array_merge(
+                        $item['lb_distributor_links_list_link'],
+                        [
+                            'iconStart' => ['name' => $item['lb_distributor_links_list_icon'] == 'default' ? 'link' : $item['lb_distributor_links_list_icon']],
+                            'variants' => ['link'],
+                        ]
+                    );
+                }
+            }, $links)
+        );
     }
 
     private function getLaboInTheWorldLinks()
