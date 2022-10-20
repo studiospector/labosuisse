@@ -21,12 +21,15 @@ class Address
     public $formattedAddress = null;
     public $location = null;
     public $placeId = null;
+    private $lang;
 
-    public function __construct($address)
+    public function __construct($address, $lang = 'IT')
     {
         $this->apiKey = $this->retrieveApiKey();
+        $this->lang = $lang;
 
         $this->getAddressDetailsFromGoogle($address);
+
     }
 
     private function getAddressDetailsFromGoogle($address)
@@ -36,7 +39,7 @@ class Address
         $queryParams = http_build_query([
             'address' => $address,
             'key' => $this->apiKey,
-            'language' => 'IT'
+            'language' => $this->lang
         ]);
 
         curl_setopt_array($curl, array(
