@@ -3,9 +3,9 @@ import { on, qsa, qs } from '@okiba/dom';
 
 import { gsap } from "gsap"
 
-import { clearAllBodyScrollLocks, disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
+import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
-import { openBackgroundTimeline, openSubmenuTimeline, submenuTimeline } from './animations';
+import { openBackgroundTimeline, openSubmenuTimeline } from './animations';
 // import { stickyHeader } from "../MenuMobile/animations";
 
 const ui = {

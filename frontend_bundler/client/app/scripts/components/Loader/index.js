@@ -1,6 +1,5 @@
 import Component from '@okiba/component'
-import { on, qs, qsa } from '@okiba/dom'
-import { debounce } from '@okiba/functions'
+import { on, qs } from '@okiba/dom'
 
 class Loader extends Component {
 

@@ -1,5 +1,5 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
+import { qs, on } from '@okiba/dom'
 import { debounce } from '@okiba/functions'
 
 import CustomSelect from '../../vendors/custom-select'

@@ -1,5 +1,4 @@
 import Component from '@okiba/component'
-import { qsa } from '@okiba/dom'
 
 class OpenMapAppLink extends Component {
 

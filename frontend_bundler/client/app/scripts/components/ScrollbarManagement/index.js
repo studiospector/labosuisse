@@ -1,5 +1,5 @@
 import Component from '@okiba/component';
-import { on, qs } from '@okiba/dom';
+import { on } from '@okiba/dom';
 
 class ScrollbarManagement extends Component {
 
