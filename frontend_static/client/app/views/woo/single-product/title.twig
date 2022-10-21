@@ -1,14 +1,16 @@
 {# Brand Logo #}
 {% if brand_logo %}
     <div class="single-product-details__summary__brand">
-        <img src="{{ brand_logo }}" alt="{{ brand.name }}">
+        <h2>
+            <img src="{{ brand_logo }}" alt="{{ brand.name }}">
+        </h2>
     </div>
 {% endif %}
 
 {# Patent #}
 {% if patent %}
     <div class="single-product-details__summary__patent">
-        <img src="{{ patent }}">
+        <img src="{{ patent }}" alt="Patent">
     </div>
 {% endif %}
 
