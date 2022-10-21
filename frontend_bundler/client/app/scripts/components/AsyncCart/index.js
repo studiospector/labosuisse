@@ -1,13 +1,6 @@
 import Component from '@okiba/component'
-import { qs, on, off } from '@okiba/dom'
-import { debounce } from '@okiba/functions'
 
-const ui = {
-    // items: {
-    //     selector: '',
-    //     asArray: true
-    // }
-}
+const ui = {}
 
 class AsyncCart extends Component {
 
