@@ -9,11 +9,17 @@ class BeautySpecialist
 {
     private $today = null;
     private $city = null;
+    private $showExpired = false;
 
     public function __construct($city)
     {
-        $this->city = $city;
         $this->today = Carbon::now()->format('Ymd');
+
+        $this->showExpired = (isset($_GET['show_expired']) and $_GET['show_expired'] == true);
+
+        $this->city = ($city)
+            ? Province::getShortCode($city)
+            : null;
     }
 
     public function all()
@@ -25,9 +31,9 @@ class BeautySpecialist
             ];
         }
 
-        $stores = $this->getStores($_GET['city']);
+        $stores = $this->getStores($this->city);
 
-        if(count($stores) == 0) {
+        if (count($stores) == 0) {
             return [
                 'items' => [],
                 'count' => 0
@@ -63,9 +69,9 @@ class BeautySpecialist
 
     private function getDate($date)
     {
-        $localizedDate = Carbon::createFromFormat('Ymd',$date)->locale('it_IT');
+        $localizedDate = Carbon::createFromFormat('Ymd', $date)->locale('it_IT');
 
-        return ucfirst($localizedDate->dayName) .  ", {$localizedDate->day} " . ucfirst($localizedDate->monthName) . " {$localizedDate->year}" ;
+        return ucfirst($localizedDate->dayName) . ", {$localizedDate->day} " . ucfirst($localizedDate->monthName) . " {$localizedDate->year}";
     }
 
     private function getStores($city)
@@ -103,7 +109,7 @@ class BeautySpecialist
             'posts_per_page' => -1
         ];
 
-        if(!isset($_GET['show_expired'])) {
+        if (!$this->showExpired) {
             $args['meta_query'][] = [
                 'key' => 'lb_beauty_specialist_date',
                 'value' => $this->today,
