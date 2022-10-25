@@ -2,6 +2,8 @@
 
 namespace DeliciousBrains\WP_Offload_Media\Pro\Integrations;
 
+use AS3CF_Utils;
+
 use DeliciousBrains\WP_Offload_Media\Integrations\Integration;
 
 class Divi extends Integration {
@@ -11,7 +13,7 @@ class Divi extends Integration {
 	 *
 	 * @return bool
 	 */
-	public static function is_installed() {
+	public static function is_installed(): bool {
 		// This integration fixes problems introduced by Divi Page Builder as used by the Divi and related themes.
 		if ( defined( 'ET_BUILDER_VERSION' ) ) {
 			return true;
@@ -66,7 +68,7 @@ class Divi extends Integration {
 	 * @return bool
 	 */
 	private function doing_fetch_attachments() {
-		if ( defined( 'DOING_AJAX' ) && ! empty( $_POST['action'] ) && 'et_fb_fetch_attachments' === $_POST['action'] ) {
+		if ( AS3CF_Utils::is_ajax() && ! empty( $_POST['action'] ) && 'et_fb_fetch_attachments' === $_POST['action'] ) {
 			return true;
 		}
 

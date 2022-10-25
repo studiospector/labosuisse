@@ -79,11 +79,7 @@ export default function Modules() {
 						( root === 'settings' ||
 							module.onboard ||
 							( root === 'import' && dirty.includes( slug ) ) ) &&
-						( module.status.selected === 'active' ||
-							! validateModuleRequirements(
-								module,
-								'activate'
-							).hasErrors() )
+						shouldShowModuleRequirementsCheck( validateModuleRequirements, module )
 				),
 				'order'
 			),
@@ -128,6 +124,29 @@ export default function Modules() {
 			) }
 		</>
 	);
+}
+
+/**
+ * Checks if a module should be shown because it passes any requirements check.
+ *
+ * Active modules are always shown.
+ *
+ * @param {Function} validator The module requirement validator.
+ * @param {Object}   module    The module definition.
+ * @return {boolean} True if the module should be hidden.
+ */
+function shouldShowModuleRequirementsCheck( validator, module ) {
+	if ( module.status.selected === 'active' ) {
+		return true;
+	}
+
+	const result = validator( module, 'activate' );
+
+	if ( ! result.hasErrors() ) {
+		return true;
+	}
+
+	return result.getErrorCodes().some( ( code ) => result.getErrorData( code )[ 0 ].showMessageIfUnmet );
 }
 
 function ModuleTabPanel( { base, tabs } ) {
@@ -254,7 +273,9 @@ function Module( { module, statusToggle: StatusToggle } ) {
 					tagName="p"
 					id={ `itsec-module-description--${ module.id }` }
 				/>
-				<StatusToggle module={ module } />
+				{ ( module.status.selected === 'active' || ! validRequirements.hasErrors() ) && (
+					<StatusToggle module={ module } />
+				) }
 				<ErrorList
 					apiError={ apiError }
 					errors={ validRequirements.getAllErrorMessages() }

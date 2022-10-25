@@ -3,17 +3,21 @@
 namespace DeliciousBrains\WP_Offload_Media\Pro\Integrations;
 
 use Amazon_S3_And_CloudFront_Pro;
+use AS3CF_Error;
 use AS3CF_Utils;
 use DeliciousBrains\WP_Offload_Media\Integrations\Media_Library;
 use DeliciousBrains\WP_Offload_Media\Items\Download_Handler;
+use DeliciousBrains\WP_Offload_Media\Items\Item;
 use DeliciousBrains\WP_Offload_Media\Items\Media_Library_Item;
 use DeliciousBrains\WP_Offload_Media\Items\Remove_Local_Handler;
 use DeliciousBrains\WP_Offload_Media\Items\Upload_Handler;
 use DeliciousBrains\WP_Offload_Media\Pro\Items\Remove_Provider_Handler;
 use DeliciousBrains\WP_Offload_Media\Pro\Items\Update_Acl_Handler;
+use DeliciousBrains\WP_Offload_Media\Providers\Provider;
 use Exception;
 use WP_Error;
 use WP_Post;
+use WP_Query;
 use WP_User;
 
 class Media_Library_Pro extends Media_Library {
@@ -24,12 +28,40 @@ class Media_Library_Pro extends Media_Library {
 	/**
 	 * @var array
 	 */
-	protected $_user_can_use_media_actions;
+	protected $user_can_use_media_actions;
 
 	/**
 	 * @var Amazon_S3_And_CloudFront_Pro
 	 */
 	protected $as3cf;
+
+	/**
+	 * Keep track of media library columns managed by us.
+	 *
+	 * @var array
+	 */
+	private $managed_columns = array();
+
+	/**
+	 * Available media actions for the bucket column.
+	 *
+	 * @var array
+	 */
+	private $bucket_col_actions = array();
+
+	/**
+	 * Available media actions for the access column.
+	 *
+	 * @var array
+	 */
+	private $access_col_actions = array();
+
+	/**
+	 * Config for filters rendered in list and grid views
+	 *
+	 * @var array
+	 */
+	private $media_library_filters = array();
 
 	/**
 	 * Init Media Library Pro integration.
@@ -53,6 +85,20 @@ class Media_Library_Pro extends Media_Library {
 		add_filter( 'media_row_actions', array( $this, 'add_media_row_actions' ), 10, 2 );
 		add_action( 'admin_notices', array( $this, 'maybe_display_media_action_message' ) );
 		add_action( 'admin_init', array( $this, 'process_media_actions' ) );
+
+		// Columns and filters
+		if ( is_admin() ) {
+			add_filter( 'manage_media_columns', array( $this, 'add_media_library_columns' ) );
+			add_filter( 'manage_upload_sortable_columns', array( $this, 'add_media_library_sortable_columns' ) );
+			add_filter( 'manage_media_custom_column', array( $this, 'get_media_library_column_content' ), 10, 2 );
+			add_action( 'restrict_manage_posts', array( $this, 'add_media_library_filters' ) );
+			add_action( 'pre_get_posts', array( $this, 'media_library_filter_query' ) );
+
+			$this->managed_columns = array(
+				'as3cf_bucket' => _x( 'Bucket', 'Media Library column heading', 'amazon-s3-and-cloudfront' ),
+				'as3cf_access' => _x( 'Access', 'Media Library column heading', 'amazon-s3-and-cloudfront' ),
+			);
+		}
 	}
 
 	/**
@@ -76,7 +122,7 @@ class Media_Library_Pro extends Media_Library {
 
 		foreach ( $this->get_available_media_actions() as $action => $scopes ) {
 			foreach ( $scopes as $scope ) {
-				$nonces["{$scope}_{$action}"] = wp_create_nonce( "{$scope}-{$action}" );
+				$nonces[ $scope . '_' . $action ] = wp_create_nonce( "$scope-$action" );
 			}
 		}
 
@@ -91,6 +137,7 @@ class Media_Library_Pro extends Media_Library {
 				'default_acl' => $this->as3cf->get_storage_provider()->get_default_acl(),
 				'private_acl' => $this->as3cf->get_storage_provider()->get_private_acl(),
 			),
+			'filters'  => $this->get_media_library_filters_config(),
 		) );
 	}
 
@@ -107,7 +154,7 @@ class Media_Library_Pro extends Media_Library {
 		$nonces  = array();
 
 		foreach ( $actions as $action ) {
-			$nonces["singular_{$action}"] = wp_create_nonce( "singular-{$action}" );
+			$nonces[ 'singular_' . $action ] = wp_create_nonce( "singular-$action" );
 		}
 
 		wp_localize_script( 'as3cf-pro-attachment-script', 'as3cfpro_media', array(
@@ -196,7 +243,7 @@ class Media_Library_Pro extends Media_Library {
 		$strings = $this->get_media_action_strings();
 
 		foreach ( $this->get_available_media_actions( 'bulk' ) as $action ) {
-			$actions["bulk_as3cfpro_{$action}"] = $strings[ $action ];
+			$actions[ 'bulk_as3cfpro_' . $action ] = $strings[ $action ];
 		}
 
 		return $actions;
@@ -213,7 +260,7 @@ class Media_Library_Pro extends Media_Library {
 		$strings['copy']               = __( 'Copy to Bucket', 'amazon-s3-and-cloudfront' );
 		$strings['remove']             = __( 'Remove from Bucket', 'amazon-s3-and-cloudfront' );
 		$strings['remove_local']       = __( 'Remove from Server', 'amazon-s3-and-cloudfront' );
-		$strings['download']           = __( 'Copy to Server from Bucket', 'amazon-s3-and-cloudfront' );
+		$strings['download']           = __( 'Copy from Bucket to Server', 'amazon-s3-and-cloudfront' );
 		$strings['private_acl']        = __( 'Make Private in Bucket', 'amazon-s3-and-cloudfront' );
 		$strings['public_acl']         = __( 'Make Public in Bucket', 'amazon-s3-and-cloudfront' );
 		$strings['local_warning']      = __( 'This file does not exist locally so removing it from the bucket will result in broken links on your site. Are you sure you want to continue?', 'amazon-s3-and-cloudfront' );
@@ -237,6 +284,9 @@ class Media_Library_Pro extends Media_Library {
 	public function add_media_row_actions( array $actions, $post ) {
 		$available_actions = $this->get_available_media_actions( 'singular' );
 
+		$this->bucket_col_actions = array();
+		$this->access_col_actions = array();
+
 		if ( ! $available_actions ) {
 			return $actions;
 		}
@@ -248,7 +298,12 @@ class Media_Library_Pro extends Media_Library {
 
 		// If offloaded to another provider can not do anything.
 		if ( $as3cf_item && ! $as3cf_item->served_by_provider( true ) ) {
-			$actions['as3cfpro_wrong_provider'] = '<span title="' . __( 'Offloaded to a different provider than currently configured.', 'amazon-s3-and-cloudfront' ) . '">' . __( 'Wrong Provider', 'amazon-s3-and-cloudfront' ) . '</span>';
+			$this->bucket_col_actions['as3cfpro_wrong_provider'] = sprintf(
+				'<span title="%s" class="%s">%s</span>',
+				__( 'Offloaded to a different provider than currently configured.', 'amazon-s3-and-cloudfront' ),
+				'as3cf-warning',
+				__( 'Disconnected', 'amazon-s3-and-cloudfront' )
+			);
 
 			return $actions;
 		}
@@ -264,7 +319,11 @@ class Media_Library_Pro extends Media_Library {
 		}
 
 		if ( in_array( 'remove', $available_actions ) ) {
-			$this->add_media_row_action( $actions, $post_id, 'remove' );
+			if ( 'grid' === $this->render_context ) {
+				$this->add_media_row_action( $actions, $post_id, 'remove' );
+			} else {
+				$this->add_media_row_action( $this->bucket_col_actions, $post_id, 'remove' );
+			}
 		}
 
 		if ( in_array( 'download', $available_actions ) && ! $file_exists ) {
@@ -272,11 +331,19 @@ class Media_Library_Pro extends Media_Library {
 		}
 
 		if ( in_array( 'private_acl', $available_actions ) && ! $as3cf_item->is_private() ) {
-			$this->add_media_row_action( $actions, $post_id, 'private_acl' );
+			if ( 'grid' === $this->render_context ) {
+				$this->add_media_row_action( $actions, $post_id, 'private_acl' );
+			} else {
+				$this->add_media_row_action( $this->access_col_actions, $post_id, 'private_acl', __( 'Make Private', 'amazon-s3-and-cloudfront' ) );
+			}
 		}
 
 		if ( in_array( 'public_acl', $available_actions ) && $as3cf_item->is_private() ) {
-			$this->add_media_row_action( $actions, $post_id, 'public_acl' );
+			if ( 'grid' === $this->render_context ) {
+				$this->add_media_row_action( $actions, $post_id, 'public_acl' );
+			} else {
+				$this->add_media_row_action( $this->access_col_actions, $post_id, 'public_acl', __( 'Make Public', 'amazon-s3-and-cloudfront' ) );
+			}
 		}
 
 		if ( in_array( 'remove_local', $available_actions ) && $file_exists ) {
@@ -313,7 +380,7 @@ class Media_Library_Pro extends Media_Library {
 	 * Handler for single and bulk media actions
 	 */
 	public function process_media_actions() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( AS3CF_Utils::is_ajax() ) {
 			return;
 		}
 
@@ -361,7 +428,7 @@ class Media_Library_Pro extends Media_Library {
 
 		check_admin_referer( $referrer );
 
-		$sendback = isset( $_GET['sendback'] ) ? $_GET['sendback'] : admin_url( 'upload.php' );
+		$sendback = isset( $_GET['sendback'] ) ? $_GET['sendback'] : wp_get_referer();
 
 		$args = array(
 			'as3cfpro-action' => $action,
@@ -397,7 +464,7 @@ class Media_Library_Pro extends Media_Library {
 	 */
 	public function add_media_row_action( &$actions, $post_id, $action, $text = '', $show_warning = false ) {
 		$url   = $this->get_media_action_url( $action, $post_id );
-		$text  = $text ?: $this->get_media_action_strings( $action );
+		$text  = $text ? $text : $this->get_media_action_strings( $action );
 		$class = $action;
 		if ( $show_warning ) {
 			$class .= ' local-warning';
@@ -471,25 +538,25 @@ class Media_Library_Pro extends Media_Library {
 			$user = $user->ID;
 		}
 
-		if ( ! is_null( $this->_user_can_use_media_actions ) && isset( $this->_user_can_use_media_actions[ $user ] ) ) {
-			return $this->_user_can_use_media_actions[ $user ];
+		if ( ! is_null( $this->user_can_use_media_actions ) && isset( $this->user_can_use_media_actions[ $user ] ) ) {
+			return $this->user_can_use_media_actions[ $user ];
 		}
 
-		$this->_user_can_use_media_actions[ $user ] = false;
+		$this->user_can_use_media_actions[ $user ] = false;
 
 		if ( user_can( $user, 'use_as3cf_media_actions' ) ) {
-			$this->_user_can_use_media_actions[ $user ] = true;
+			$this->user_can_use_media_actions[ $user ] = true;
 		} else {
 			/**
 			 * The default capability for using on-demand S3 media actions.
 			 *
 			 * @param string $capability Registered capability identifier
 			 */
-			$capability                                 = apply_filters( 'as3cfpro_media_actions_capability', 'manage_options' );
-			$this->_user_can_use_media_actions[ $user ] = user_can( $user, $capability );
+			$capability                                = apply_filters( 'as3cfpro_media_actions_capability', 'manage_options' );
+			$this->user_can_use_media_actions[ $user ] = user_can( $user, $capability );
 		}
 
-		return $this->_user_can_use_media_actions[ $user ];
+		return $this->user_can_use_media_actions[ $user ];
 	}
 
 	/**
@@ -605,7 +672,8 @@ class Media_Library_Pro extends Media_Library {
 		}
 
 		if ( $error_count > 0 ) {
-			$type = $class = 'error';
+			$type  = 'error';
+			$class = $type;
 
 			// We have processed some successfully.
 			if ( $count > 0 ) {
@@ -750,7 +818,9 @@ class Media_Library_Pro extends Media_Library {
 
 				// Even if an upload was cancelled via a filter,
 				// if there was no error, then it was successfully processed.
-				if ( ! is_wp_error( $upload_result ) ) {
+				if ( is_wp_error( $upload_result ) ) {
+					AS3CF_Error::log( $upload_result->get_error_messages() );
+				} else {
 					$result['count']++;
 					continue;
 				}
@@ -795,6 +865,7 @@ class Media_Library_Pro extends Media_Library {
 			$remove_result = $remove_handler->handle( $as3cf_item );
 			if ( is_wp_error( $remove_result ) ) {
 				$result['errors']++;
+				AS3CF_Error::log( $remove_result->get_error_messages() );
 				continue;
 			}
 
@@ -955,6 +1026,7 @@ class Media_Library_Pro extends Media_Library {
 
 			if ( is_wp_error( $update_result ) ) {
 				$result['errors']++;
+				AS3CF_Error::log( $update_result->get_error_messages() );
 				continue;
 			}
 
@@ -1059,8 +1131,339 @@ class Media_Library_Pro extends Media_Library {
 	 * @param int|string $exit_code
 	 *
 	 * @return void
+	 *
+	 * phpcs:disable PSR2.Methods.MethodDeclaration.Underscore
 	 */
 	public function _exit( $exit_code = 0 ) {
 		exit( $exit_code );
+	}
+
+	/**
+	 * Add column with as3cf item details to the media library list view.
+	 *
+	 * @handles manage_media_columns
+	 *
+	 * @param array $columns
+	 *
+	 * @return array
+	 */
+	public function add_media_library_columns( array $columns ): array {
+		return array_merge( $columns, $this->managed_columns );
+	}
+
+	/**
+	 * Add our columns as sortable.
+	 *
+	 * @handles manage_upload_sortable_columns
+	 *
+	 * @param array $columns
+	 *
+	 * @return array
+	 */
+	public function add_media_library_sortable_columns( array $columns ): array {
+		foreach ( $this->managed_columns as $key => $caption ) {
+			$columns[ $key ] = $key;
+		}
+
+		return $columns;
+	}
+
+	/**
+	 * Render column content for individual media library item.
+	 *
+	 * @handles manage_media_custom_column
+	 *
+	 * @param string $column_name
+	 * @param string $post_id
+	 */
+	public function get_media_library_column_content( string $column_name, string $post_id ) {
+		if ( ! in_array( $column_name, array_keys( $this->managed_columns ) ) ) {
+			return;
+		}
+
+		$provider_object = $this->get_formatted_provider_info( $post_id );
+		if ( empty( $provider_object ) ) {
+			echo '—';
+
+			return;
+		}
+
+		// Bucket column.
+		if ( $column_name === 'as3cf_bucket' ) {
+			echo sprintf(
+				'%s<br>%s<br>%s',
+				$provider_object['provider_name'],
+				$provider_object['region'],
+				$provider_object['bucket']
+			);
+
+			if ( ! empty( $this->bucket_col_actions ) ) {
+				echo '<div class="row-actions">' . join( ' | ', $this->bucket_col_actions ) . '</div>';
+			}
+		}
+
+		// Access column.
+		if ( $column_name === 'as3cf_access' ) {
+			echo sprintf(
+				'%s',
+				$provider_object['acl']['name']
+			);
+
+			if ( ! empty( $this->access_col_actions ) ) {
+				echo '<div class="row-actions">' . join( ' | ', $this->access_col_actions ) . '</div>';
+			}
+		}
+	}
+
+	/**
+	 * Renders the filter dropdowns in the media library list view.
+	 *
+	 * @handles restrict_manage_posts
+	 */
+	public function add_media_library_filters() {
+		$screen = get_current_screen();
+		if ( 'upload' !== $screen->base ) {
+			return;
+		}
+
+		$filters = $this->get_media_library_filters_config();
+
+		echo AS3CF_Utils::make_dropdown( $filters['as3cf_location'] );
+		echo AS3CF_Utils::make_dropdown( $filters['as3cf_access'] );
+	}
+
+	/**
+	 * Filter the posts query when one of our filters are in use on the
+	 * media library screen.
+	 *
+	 * @handles pre_get_posts
+	 *
+	 * @param WP_Query $query
+	 *
+	 * @return WP_Query
+	 */
+	public function media_library_filter_query( WP_Query $query ): WP_Query {
+		global $pagenow;
+
+		if ( empty( $query->query_vars["post_type"] ) || 'attachment' !== $query->query_vars["post_type"] ) {
+			return $query;
+		}
+
+		if ( ! in_array( $pagenow, array( 'upload.php', 'admin-ajax.php' ) ) ) {
+			return $query;
+		}
+
+		$location = $this->selected_filter_value( 'as3cf_location', 'all' );
+		$access   = $this->selected_filter_value( 'as3cf_access', 'all' );
+		$orderby  = $query->get( 'orderby' );
+
+		// If none of our filters are in play and sorting isn't by one of our columns, exit out.
+		if ( 'all' === $location && 'all' === $access && ! in_array( $orderby, array_keys( $this->managed_columns ) ) ) {
+			return $query;
+		}
+
+		add_filter( 'posts_join', array( $this, 'query_join_items_table' ), 10, 2 );
+		add_filter( 'posts_where', array( $this, 'query_add_where' ), 10, 2 );
+		add_filter( 'posts_orderby', array( $this, 'query_add_orderby' ), 10, 2 );
+
+		return $query;
+	}
+
+	/**
+	 * Join in the items table in WP_Query.
+	 *
+	 * @handles posts_join
+	 *
+	 * @param string   $join
+	 * @param WP_Query $query
+	 *
+	 * @return string
+	 */
+	public function query_join_items_table( string $join, WP_Query $query ): string {
+		global $wpdb;
+
+		$table = $wpdb->get_blog_prefix() . Item::ITEMS_TABLE;
+		$join  .= " LEFT JOIN {$table} i ON (i.source_type = 'media-library' AND i.source_id = {$wpdb->posts}.ID) ";
+
+		return $join;
+	}
+
+	/**
+	 * Add where clauses to posts query.
+	 *
+	 * @handles posts_where
+	 *
+	 * @param string   $where
+	 * @param WP_Query $query
+	 *
+	 * @return string
+	 */
+	public function query_add_where( string $where, WP_Query $query ): string {
+		global $wpdb;
+
+		$location = $this->selected_filter_value( 'as3cf_location', 'all' );
+		switch ( $location ) {
+			case 'all':
+				// intentionally empty
+				break;
+			case 'offloaded':
+				$where .= ' AND i.id IS NOT NULL ';
+				break;
+			case 'not_offloaded':
+				$where .= ' AND i.id IS NULL ';
+				break;
+			default:
+				$parts = explode( '|', $location );
+				if ( count( $parts ) === 2 ) {
+					array_walk( $parts, 'sanitize_key' );
+					$where .= $wpdb->prepare( ' AND (i.provider = %s AND i.bucket = %s) ', $parts[0], $parts[1] );
+				}
+		}
+
+		$access = $this->selected_filter_value( 'as3cf_access', 'all' );
+		switch ( $access ) {
+			case 'all':
+				// intentionally empty
+				break;
+			case 'private':
+				$where .= ' AND i.is_private = 1 ';
+				break;
+			case 'public':
+				$where .= ' AND i.is_private = 0 ';
+				break;
+		}
+
+		return $where;
+	}
+
+	/**
+	 * Add ORDER BY clause to posts query.
+	 *
+	 * @handles posts_orderby
+	 *
+	 * @param string   $orderby
+	 * @param WP_Query $query
+	 *
+	 * @return string
+	 */
+	public function query_add_orderby( string $orderby, WP_Query $query ): string {
+		$direction = $query->get( 'order', 'ASC' );
+
+		switch ( $query->get( 'orderby' ) ) {
+			case 'as3cf_access':
+				$orderby = sprintf( 'i.is_private %s', $direction );
+				break;
+			case 'as3cf_bucket':
+				$orderby = sprintf( 'i.bucket %1$s, i.provider %1$s', $direction );
+				break;
+		}
+
+		return $orderby;
+	}
+
+	/**
+	 * Get all providers and buckets currently in use.
+	 *
+	 * @return array
+	 */
+	private function get_providers_and_buckets(): array {
+		global $wpdb;
+
+		$table = $wpdb->get_blog_prefix() . Item::ITEMS_TABLE;
+		$rows  = $wpdb->get_results( "SELECT DISTINCT provider, bucket FROM $table ORDER BY provider, bucket" );
+
+		$providers = array_unique( array_map( function ( $row ) {
+			return $row->provider;
+		}, $rows ) );
+
+		$all_buckets = array();
+		foreach ( $providers as $provider_key ) {
+			/** @var  Provider|null $provider_class */
+			$provider_class = $this->as3cf->get_provider_class( $provider_key );
+			$provider_name  = is_null( $provider_class ) ? $provider_key : $provider_class::get_provider_service_name();
+
+			foreach ( $rows as $row ) {
+				if ( $row->provider !== $provider_key ) {
+					continue;
+				}
+
+				$bucket_key = $row->provider . '|' . $row->bucket;
+
+				$all_buckets[ $provider_name ][ $bucket_key ] = $row->bucket;
+			}
+		}
+
+		return $all_buckets;
+	}
+
+	/**
+	 * Safely retrieve the selected filter value from a dropdown.
+	 *
+	 * @param string $key
+	 * @param string $default
+	 *
+	 * @return string
+	 */
+	private function selected_filter_value( string $key, string $default ): string {
+		if ( wp_doing_ajax() ) {
+			if ( isset( $_REQUEST['query'][ $key ] ) ) {
+				$value = sanitize_text_field( $_REQUEST['query'][ $key ] );
+			}
+		} else {
+			if ( ! isset( $_REQUEST['filter_action'] ) || $_REQUEST['filter_action'] !== 'Filter' ) {
+				return $default;
+			}
+
+			if ( ! isset( $_REQUEST[ $key ] ) ) {
+				return $default;
+			}
+
+			$value = sanitize_text_field( $_REQUEST[ $key ] );
+		}
+
+		return ! empty( $value ) ? $value : $default;
+	}
+
+	/**
+	 * Return values for the media filters.
+	 *
+	 * @return array
+	 */
+	private function get_media_library_filters_config(): array {
+		if ( ! empty( $this->media_library_filters ) ) {
+			return $this->media_library_filters;
+		}
+
+		// Locations dropdown.
+		$options = array(
+			'all'           => _x( 'All locations', 'Media Library Filter option', 'amazon-s3-and-cloudfront' ),
+			'offloaded'     => _x( 'Offloaded', 'Media Library Filter option', 'amazon-s3-and-cloudfront' ),
+			'not_offloaded' => _x( 'Not offloaded', 'Media Library Filter option', 'amazon-s3-and-cloudfront' ),
+		);
+
+		$options = array_merge( $options, $this->get_providers_and_buckets() );
+
+		$this->media_library_filters['as3cf_location'] = array(
+			'id'       => 'as3cf_location',
+			'name'     => 'as3cf_location',
+			'label'    => __( 'Filter by Offload Media location', 'amazon-s3-and-cloudfront' ),
+			'selected' => $this->selected_filter_value( 'as3cf_location', 'all' ),
+			'options'  => $options,
+		);
+
+		// Access dropdown.
+		$this->media_library_filters['as3cf_access'] = array(
+			'id'       => 'as3cf_access',
+			'name'     => 'as3cf_access',
+			'label'    => __( 'Filter by Offload Media access level', 'amazon-s3-and-cloudfront' ),
+			'selected' => $this->selected_filter_value( 'as3cf_access', 'all' ),
+			'options'  => array(
+				'all'     => _x( 'All access', 'Media Library Filter option', 'amazon-s3-and-cloudfront' ),
+				'public'  => _x( 'Public', 'Media Library Filter option', 'amazon-s3-and-cloudfront' ),
+				'private' => _x( 'Private', 'Media Library Filter option', 'amazon-s3-and-cloudfront' ),
+			),
+		);
+
+		return $this->media_library_filters;
 	}
 }

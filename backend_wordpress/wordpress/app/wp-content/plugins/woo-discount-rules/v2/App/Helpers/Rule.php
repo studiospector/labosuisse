@@ -392,84 +392,14 @@ class Rule
             $extra_data = apply_filters('advanced_woo_discount_rules_load_custom_filter_data', array(), $this);
             $filter_passed = $filter_helper->matchFilters($product, $filters, $sale_badge, $product_table, $extra_data);
             $conditions = $this->getConditions();
-            $purchase_first_order_passed = $filter_passed_purchase_first_order = $filter_passed_user_logged_in = $user_logged_in_passed = $filter_passed_user_role = $filter_passed_user_list = $user_role_passed = $user_list_passed = $has_other_conditions = false;
-            $condition_relationship = $this->getRelationship('condition', 'and');
             if($filter_passed){
-                if(!empty($conditions)){
-                    foreach($conditions as $condition){
-                        $cart = array();
-                        $options = isset($condition->options) ? $condition->options : array();
-                        $condition_type = isset($condition->type) ? $condition->type : array();
-                        if( !empty($condition_type) ){
-                            if (!empty($options) && isset($this->available_conditions[$condition_type]['object']) && is_object($this->available_conditions[$condition_type]['object']) && method_exists($this->available_conditions[$condition_type]['object'], 'check')) {
-                                $this->available_conditions[$condition_type]['object']->rule = $this;
-                                switch ($condition_type){
-                                    case 'user_role':
-                                        $user_role_passed = true;
-                                        $filter_passed_user_role = $this->available_conditions[$condition_type]['object']->check($cart, $options);
-                                        break;
-                                    case 'user_list':
-                                        $user_list_passed = true;
-                                        $filter_passed_user_list = $this->available_conditions[$condition_type]['object']->check($cart, $options);
-                                        break;
-                                    case 'user_logged_in':
-                                        $user_logged_in_passed = true;
-                                        $filter_passed_user_logged_in = $this->available_conditions[$condition_type]['object']->check($cart, $options);
-                                        break;
-                                    case 'purchase_first_order':
-                                        $purchase_first_order_passed = true;
-                                        $filter_passed_purchase_first_order = $this->available_conditions[$condition_type]['object']->check($cart, $options);
-                                        break;
-                                }
-                            }
-                        }
-
-                        if( !empty($condition_type) && !in_array($condition_type, array('user_role', 'user_list', 'user_logged_in', 'purchase_first_order'))){
-                            $has_other_conditions = true;
-                        }
-                    }
+                $cart = array();
+                $additional_conditions_passed = $this->isSpecificConditionsPassed(['user_role', 'user_list', 'user_logged_in', 'purchase_first_order'], $cart);
+                if (!$additional_conditions_passed) {
+                    $filter_passed = false;
+                    $conditionFailed = true;
                 }
-                if($user_role_passed || $user_list_passed || $user_logged_in_passed || $purchase_first_order_passed){
-                    if($filter_passed_user_role || $filter_passed_user_list || $filter_passed_user_logged_in || $filter_passed_purchase_first_order){
-                        if($condition_relationship == 'and'){
-                            if($user_role_passed && $user_logged_in_passed){
-                                if($filter_passed_user_role && $filter_passed_user_logged_in){
-                                }else{
-                                    $filter_passed = false;
-                                    $conditionFailed = true;
-                                }
-                            }
-                            if($user_list_passed && $user_logged_in_passed){
-                                if($filter_passed_user_list && $filter_passed_user_logged_in){
-                                }else{
-                                    $filter_passed = false;
-                                    $conditionFailed = true;
-                                }
-                            }
-                            if($purchase_first_order_passed && $user_logged_in_passed){
-                                if($filter_passed_purchase_first_order && $filter_passed_user_logged_in){
-                                }else{
-                                    $filter_passed = false;
-                                    $conditionFailed = true;
-                                }
-                            }
-                            //$this -> rule
-                            $filter_passed = apply_filters('advanced_woo_discount_rules_customer_condition_filter_passed', $filter_passed, $this, $product, $sale_badge, $product_table, $conditions);
-                        }
-                    } else {
-                        if($condition_relationship == 'or'){
-                            if($has_other_conditions){
-                            } else {
-                                $filter_passed = false;
-                                $conditionFailed = true;
-                            }
-                        } else {
-                            $filter_passed = false;
-                            $conditionFailed = true;
-                        }
-                    }
-                }
-
+                $filter_passed = apply_filters('advanced_woo_discount_rules_customer_condition_filter_passed', $filter_passed, $this, $product, $sale_badge, $product_table, $conditions);
             }
         } else {
             $filter_passed = false;
@@ -693,7 +623,7 @@ class Rule
             'product_bulk_discount' => $product_bulk_discount
         );
 
-        $discounts = apply_filters('advanced_woo_discount_rules_discounts_of_each_rule', $discounts, $rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart);
+        $discounts = apply_filters('advanced_woo_discount_rules_discounts_of_each_rule', $discounts, $rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart, $manual_request);
 
         $total_discount = array_sum($discounts);
         if ($total_discount <= 0) {
@@ -1052,16 +982,26 @@ class Rule
         $value = floatval($value);
         switch ($type) {
             case 'fixed_price':
-                $discount = $original_value - self::$woocommerce_helper->getConvertedFixedPrice($value, 'fixed_price');
+                $discount_value = self::$woocommerce_helper->getConvertedFixedPrice($value, 'fixed_price');
+                if ($discount_value > $original_value) {
+                    $discount_value = $original_value;
+                }
+                $discount = $original_value - $discount_value;
                 break;
             case 'percentage':
                 if (!empty($value)) {
+                    if ($value > 100) {
+                        $value = 100;
+                    }
                     $discount = $original_value * ($value / 100);
                 }
                 break;
             default:
             case 'flat':
                 $discount = self::$woocommerce_helper->getConvertedFixedPrice($value, 'flat');
+                if ($discount > $original_value) {
+                    $discount = $original_value;
+                }
                 break;
         }
         return $discount;

@@ -1,3 +1,4 @@
+/* exported ITSECLoginInterstitial */
 ( function( $ ) {
 
 	var VARS = [
@@ -92,7 +93,7 @@
 		} ).bind( this ) );
 	};
 
-	ITSECLoginInterstitial.prototype.submitToProceed = function() {
+	ITSECLoginInterstitial.prototype.submitToProceed = function( additionalFields = {} ) {
 
 		var $form = $( '<form />' )
 			.prop( 'method', 'post' )
@@ -112,6 +113,19 @@
 					.prop( 'type', 'hidden' )
 					.prop( 'name', VARS[ i ] )
 					.prop( 'value', this.vars[ VARS[ i ] ] ),
+			);
+		}
+
+		for ( var field in additionalFields ) {
+			if ( ! additionalFields.hasOwnProperty( field ) ) {
+				continue;
+			}
+
+			$form.append(
+				$( '<input />' )
+					.prop( 'type', 'hidden' )
+					.prop( 'name', field )
+					.prop( 'value', additionalFields[ field ] )
 			);
 		}
 

@@ -62,7 +62,6 @@ class AS3CF_Pro_Plugin_Installer {
 
 	/**
 	 * Get the plugins to be installed
-	 *
 	 */
 	public function get_plugins_to_install() {
 		return get_site_transient( 'as3cfpro_plugins_to_install_' . $this->process_key );
@@ -134,7 +133,7 @@ class AS3CF_Pro_Plugin_Installer {
 	 * Retry to install plugins if there has been a filesystem credential issue
 	 */
 	function maybe_install_plugins() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( AS3CF_Utils::is_ajax() ) {
 			return;
 		}
 
@@ -164,7 +163,6 @@ class AS3CF_Pro_Plugin_Installer {
 
 	/**
 	 * AJAX handler for installing the required plugins.
-	 *
 	 */
 	public function ajax_install_plugins() {
 		check_ajax_referer( 'install-plugins', 'nonce' );
@@ -191,7 +189,7 @@ class AS3CF_Pro_Plugin_Installer {
 	 * Redirect to the AWS or Offload Media page after successfully installing the plugins
 	 */
 	function installer_redirect() {
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+		if ( AS3CF_Utils::is_ajax() ) {
 			return;
 		}
 
@@ -231,8 +229,8 @@ class AS3CF_Pro_Plugin_Installer {
 	protected function install_plugin( $slug ) {
 		$status = array( 'slug' => $slug );
 
-		include_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
-		include_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
+		include_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
+		include_once ABSPATH . 'wp-admin/includes/plugin-install.php';
 
 		$api = plugins_api( 'plugin_information', array(
 			'slug'   => $slug,
@@ -252,7 +250,7 @@ class AS3CF_Pro_Plugin_Installer {
 			$this->end_install( $status );
 
 			return false;
-		} else if ( is_null( $result ) ) {
+		} elseif ( is_null( $result ) ) {
 			$status['error'] = __( 'Unable to connect to the filesystem. Please confirm your credentials.' );
 
 			$this->installer_notices['filesystem_error'] = true;

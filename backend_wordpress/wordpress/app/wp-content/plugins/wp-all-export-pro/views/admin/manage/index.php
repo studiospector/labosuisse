@@ -170,7 +170,8 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                 ?>
 
                 <?php $class = ('alternate' == $class) ? '' : 'alternate'; ?>
-                <tr class="<?php echo $class; ?> wpae-export-row-<?php echo $item['id']; ?>" valign="middle">
+                <tr class="<?php echo $class; ?> wpae-export-row-<?php echo $item['id']; ?> wpae-export-row"
+                    valign="middle">
                     <?php if (current_user_can(PMXE_Plugin::$capabilities)) { ?>
                         <th scope="row" class="check-column">
                             <input type="checkbox" id="item_<?php echo $item['id'] ?>" name="items[]"
@@ -234,18 +235,19 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                                             | <span class="update"><a class="update"
                                                                       href="<?php echo esc_url(add_query_arg(array('id' => $item['id'], 'action' => 'split_bundle', '_wpnonce' => wp_create_nonce('_wpnonce-download_split_bundle')), $this->baseUrl)) ?>"><?php printf(esc_html__('Split %ss', 'wp_all_export_plugin'), strtoupper(wp_all_export_get_export_format($item['options']))); ?></a></span> |
                                         <?php endif; ?>
-
+                                        
                                         <?php if (current_user_can(PMXE_Plugin::$capabilities)) { ?>
                                             | <span class="delete"><a class="delete"
                                                                       href="<?php echo esc_url(add_query_arg(array('id' => $item['id'], 'action' => 'delete'), $this->baseUrl)) ?>"><?php esc_html_e('Delete', 'wp_all_export_plugin') ?></a></span>
                                         <?php } ?>
                                     </div>
+
                                 </td>
                                 <?php
                                 break;
                             case 'info':
                                 ?>
-                                <td style="min-width: 180px;">
+                                <td style="min-width: 180px;max-width: 180px;">
                                     <?php if (current_user_can(PMXE_Plugin::$capabilities) && !$item['options']['enable_real_time_exports']) { ?>
                                         <a
                                             <?php
@@ -314,7 +316,7 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                                     ?>
                                     <?php
 
-                                    if(!$item['options']['enable_real_time_exports']) {
+                                    if (!$item['options']['enable_real_time_exports']) {
 
                                         if ($item['options']['export_to'] == 'csv'
                                             || (empty($item['options']['xml_template_type'])
@@ -341,29 +343,60 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                                     ?>
                                     <?php if (current_user_can(PMXE_Plugin::$capabilities && $item['client_mode_enabled'])) { ?>
                                         <span>Client mode enabled</span>
-                                        <?php if($item['options']['enable_real_time_exports']) { ?>
+                                        <?php if ($item['options']['enable_real_time_exports']) { ?>
                                             <br/>
                                         <?php } ?>
                                     <?php } ?>
                                     <?php if ($item['options']['enable_real_time_exports']) { ?>
-                                        <span>Real time export configured</span>
-                                        <span class="wpae-rt-export-enabled" <?php if(!$item['options']['enable_real_time_exports_running']) { ?> style="display: none;" <?php } ?>>
-                                            <br/>
-                                            <span>Status: <span style="color: green;">Enabled</span></span>
-                                            <span>
-                                                <a href="#help" class="wpallexport-help" style="position: relative; top: 0;"
-                                                   title="Any <?php if(isset($item['cpt'])) { echo wp_all_export_get_cpt_name($item['cpt'], 2); } ?> created while this export is disabled will not be processed.">?</a>
-							                </span>
-                                        </span>
 
-                                        <span class="wpae-rt-export-disabled" <?php if($item['options']['enable_real_time_exports_running']) { ?> style="display: none;" <?php } ?>>
-                                            <br/>
-                                            <span>Status: <span style="color: red;">Disabled</span></span>
-                                            <span>
-                                                <a href="#help" class="wpallexport-help" style="position: relative; top: 0;"
-                                                   title="Any <?php if(isset($item['cpt'])) { echo wp_all_export_get_cpt_name($item['cpt'], 2); } ?> created while this export is disabled will not be processed.">?</a>
-                                            </span>
-                                        </span>
+
+                                        <?php
+                                        $cpt_initial = $item['options']['cpt'];
+                                        $cpt_name = is_array($item['options']['cpt']) ? reset($item['options']['cpt']) : $item['options']['cpt'];
+
+                                        $display_cpt_name = $cpt_name;
+
+                                        $display_verb = 'created';
+
+                                        if ('advanced' !== $item['options']['export_type']) {
+
+                                            if ($display_cpt_name === 'users') {
+                                                $display_cpt_name = 'user';
+                                            }
+
+                                            $tooltip_cpt_name = strtolower(wp_all_export_get_cpt_name($cpt_initial));
+
+                                            if ($display_cpt_name === 'shop_order') {
+                                                $display_cpt_name = 'WooCommerce Order';
+                                                $display_verb = 'completed';
+                                            }
+
+                                            if ($display_cpt_name === 'shop_customer') {
+                                                $display_cpt_name = 'WooCommerce Customer';
+                                                $display_verb = 'created';
+                                            }
+
+                                            if ($display_cpt_name === 'custom_wpae-gf-addon') {
+                                                $display_cpt_name = 'Gravity Forms Entry';
+                                            }
+
+                                            if ($display_cpt_name === 'comments') {
+                                                $display_cpt_name = 'comment';
+                                            }
+                                        }
+
+                                        ?>
+
+
+
+                                            <span <?php if (!$item['options']['enable_real_time_exports_running']) { ?> style="display: none;" <?php } ?> class="wpallexport-real-time-export-configured-text wpae-rte-enabled">This export will run every time a new <?php echo $display_cpt_name; ?>
+                                                is <?php echo $display_verb; ?>.</span>
+
+
+                                            <span <?php if ($item['options']['enable_real_time_exports_running']) { ?> style="display: none;" <?php } ?> class="wpallexport-real-time-export-configured-text wpae-rte-disabled">This export is currently disabled.</br>
+                                                Enable it to run every time a new <?php echo $display_cpt_name; ?>
+                                                is <?php echo $display_verb; ?>.</span>
+
                                     <?php } ?>
 
                                 </td>
@@ -461,10 +494,12 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                                         printf(esc_html__('Last run: %s', 'wp_all_export_plugin'), ($item['registered_on'] == '0000-00-00 00:00:00') ? __('never', 'wp_all_export_plugin') : get_date_from_gmt($item['registered_on'], "m/d/Y g:i a"));
                                         echo '<br/>';
 
-                                        if($item['options']['enable_real_time_exports']) {
-                                            printf(esc_html__('%d Records Exported since', 'wp_all_export_plugin'),  $item['exported']);
+                                        if ($item['options']['enable_real_time_exports']) {
+                                            printf(esc_html__('%d Records Exported since', 'wp_all_export_plugin'), $item['exported']);
                                             echo "<br/>";
-                                            echo get_date_from_gmt($item['created_at'], "m/d/Y g:i a");
+
+
+                                            echo get_date_from_gmt($item['created_at_gmt'], "m/d/Y g:i a");
                                         } else {
                                             printf(esc_html__('%d Records Exported', 'wp_all_export_plugin'), $item['exported']);
                                         }
@@ -491,7 +526,7 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                             case 'actions':
                                 ?>
                                 <td style="min-width: 200px;">
-                                    <?php if(!$item['options']['enable_real_time_exports']) : ?>
+                                    <?php if (!$item['options']['enable_real_time_exports']) : ?>
                                         <?php if (!$item['processing'] and !$item['executing']): ?>
                                             <h2 style="float:left;"><a class="add-new-h2"
                                                                        href="<?php echo esc_url_raw(add_query_arg(array('id' => $item['id'], 'action' => 'update'), $this->baseUrl)); ?>"><?php esc_html_e('Run Export', 'wp_all_export_plugin'); ?></a>
@@ -506,13 +541,15 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                                             </h2>
                                         <?php endif; ?>
                                     <?php else: ?>
-                                        <?php if($item['options']['enable_real_time_exports_running']) : ?>
-                                            <h2 style="float:left;"><a class="add-new-h2 wpae-switch-real-time" data-item-id="<?php echo $item['id']; ?>"
-                                                                       href="#"><?php esc_html_e('Disable Real Time Exporting', 'wp_all_export_plugin'); ?></a>
+                                        <?php if ($item['options']['enable_real_time_exports_running']) : ?>
+                                            <h2 style="float:left;"><a class="add-new-h2 wpae-switch-real-time"
+                                                                       data-item-id="<?php echo $item['id']; ?>"
+                                                                       href="#"><?php esc_html_e('Disable Export', 'wp_all_export_plugin'); ?></a>
                                             </h2>
                                         <?php else: ?>
-                                            <h2 style="float:left;"><a class="add-new-h2 wpae-switch-real-time" data-item-id="<?php echo $item['id']; ?>"
-                                                                       href="#"><?php esc_html_e('Enable Real Time Exporting', 'wp_all_export_plugin'); ?></a>
+                                            <h2 style="float:left;"><a class="add-new-h2 wpae-switch-real-time"
+                                                                       data-item-id="<?php echo $item['id']; ?>"
+                                                                       href="#"><?php esc_html_e('Enable Export', 'wp_all_export_plugin'); ?></a>
                                             </h2>
                                         <?php endif; ?>
                                     <?php endif; ?>
@@ -523,6 +560,7 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                             default:
                                 ?>
                                 <td>
+
                                     <?php do_action('pmxe_manage_imports_column', $column_id, $item); ?>
                                 </td>
                                 <?php
@@ -530,6 +568,7 @@ $columns = apply_filters('pmxe_manage_imports_columns', $columns);
                         endswitch;
                         ?>
                     <?php endforeach; ?>
+
                 </tr>
             <?php endforeach; ?>
         <?php endif ?>

@@ -739,13 +739,13 @@ class DiscountCalculator extends Base
                             if(!isset(self::$total_discounts['ajax_product'][$rule_id])){
                                 self::$total_discounts['ajax_product'][$rule_id] = array();
                             }
-                            self::$total_discounts['ajax_product'][$rule_id] = apply_filters('advanced_woo_discount_rules_calculated_discounts_of_each_rule_for_ajax_price', self::$total_discounts['ajax_product'][$rule_id], $product_id, $rule_id, $filter_passed, $cart_item, $is_cart, $rule);
+                            self::$total_discounts['ajax_product'][$rule_id] = apply_filters('advanced_woo_discount_rules_calculated_discounts_of_each_rule_for_ajax_price', self::$total_discounts['ajax_product'][$rule_id], $product_id, $rule_id, $filter_passed, $cart_item, $is_cart, $rule, $manual_request);
                             $ajax_discounts[$rule_id] = $discounted_price;
                         }else{
                             if(!isset(self::$total_discounts[$matched_item_key][$rule_id])){
                                 self::$total_discounts[$matched_item_key][$rule_id] = array();
                             }
-                            self::$total_discounts[$matched_item_key][$rule_id] = apply_filters('advanced_woo_discount_rules_calculated_discounts_of_each_rule', self::$total_discounts[$matched_item_key][$rule_id], $product_id, $rule_id, $filter_passed, $cart_item, $is_cart, $rule);
+                            self::$total_discounts[$matched_item_key][$rule_id] = apply_filters('advanced_woo_discount_rules_calculated_discounts_of_each_rule', self::$total_discounts[$matched_item_key][$rule_id], $product_id, $rule_id, $filter_passed, $cart_item, $is_cart, $rule, $manual_request);
                             $discounts[$rule_id] = $discounted_price;
                         }
                     }

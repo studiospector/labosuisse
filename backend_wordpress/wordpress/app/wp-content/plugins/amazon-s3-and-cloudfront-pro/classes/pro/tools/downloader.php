@@ -29,39 +29,12 @@ class Downloader extends Background_Tool {
 		}
 
 		$this->maybe_render_deactivate_prompt();
-
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
-	}
-
-	/**
-	 * Get the details for the sidebar block
-	 *
-	 * @return array|bool
-	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return false;
-		}
-
-		return parent::get_sidebar_block_args();
-	}
-
-	/**
-	 * Load assets.
-	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script( 'as3cf-pro-downloader-script', 'assets/js/pro/tools/downloader', array(
-			'jquery',
-			'wp-util',
-		) );
 	}
 
 	/**
 	 * Maybe render deactivate plugin prompt.
 	 */
-	public function maybe_render_deactivate_prompt() {
+	private function maybe_render_deactivate_prompt() {
 		if ( self::$deactivate_prompt_rendered ) {
 			return;
 		}
@@ -78,12 +51,18 @@ class Downloader extends Background_Tool {
 
 	/**
 	 * Register the modal for plugin deactivation
+	 *
+	 * TODO: Could be replaced with Modal.svelte using REST-API for modal button's actions etc.
 	 */
 	public function deactivate_plugin_assets() {
-		$this->as3cf->enqueue_script( 'as3cf-pro-downloader-deactivate-plugin-script', 'assets/js/pro/tools/downloader-deactivate-plugin', array( 'as3cf-modal' ) );
+		$this->as3cf->enqueue_script(
+			'as3cf-pro-downloader-deactivate-plugin-script',
+			'assets/js/pro/tools/downloader-deactivate-plugin',
+			array( 'as3cf-modal', 'wp-api-request' )
+		);
 
 		wp_localize_script( 'as3cf-pro-downloader-deactivate-plugin-script', 'as3cfpro_downloader', array(
-			'plugin_url'  => $this->get_action_url( 'start' ),
+			'plugin_url'  => $this->as3cf->get_plugin_page_url( array( 'hash' => '/tools' ) ),
 			'plugin_slug' => $this->as3cf->get_plugin_row_slug(),
 		) );
 
@@ -105,7 +84,7 @@ class Downloader extends Background_Tool {
 	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */
@@ -122,6 +101,10 @@ class Downloader extends Background_Tool {
 	 * @return bool
 	 */
 	public function should_render() {
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
+		}
+
 		return (bool) $this->count_offloaded_media_files();
 	}
 
@@ -141,6 +124,25 @@ class Downloader extends Background_Tool {
 	 */
 	public static function get_more_info_text() {
 		return __( 'If you\'ve ever had the "Remove Files From Server" option on, some Media Library files are likely missing on your server. You can use this tool to download any missing files back to your server.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		global $as3cf;
+
+		$mesg = __( 'You\'ve disabled the "Remove Files From Server" option. Do you want to download all media files previously offloaded and removed from the server? This tool will not remove the media files from the bucket, and only downloads files that are missing from the server.', 'amazon-s3-and-cloudfront' );
+		$mesg .= ' ';
+		$mesg .= $as3cf::settings_more_info_link(
+			'remove-local-file',
+			'',
+			'remove+local+file'
+		);
+
+		return $mesg;
 	}
 
 	/**

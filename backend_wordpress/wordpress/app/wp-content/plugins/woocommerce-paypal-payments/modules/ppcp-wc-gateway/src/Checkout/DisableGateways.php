@@ -10,6 +10,7 @@ declare(strict_types=1);
 namespace WooCommerce\PayPalCommerce\WcGateway\Checkout;
 
 use WooCommerce\PayPalCommerce\Session\SessionHandler;
+use WooCommerce\PayPalCommerce\WcGateway\Gateway\CardButtonGateway;
 use WooCommerce\PayPalCommerce\WcGateway\Gateway\CreditCardGateway;
 use WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway;
 use Psr\Container\ContainerInterface;
@@ -59,9 +60,10 @@ class DisableGateways {
 		if ( ! isset( $methods[ PayPalGateway::ID ] ) && ! isset( $methods[ CreditCardGateway::ID ] ) ) {
 			return $methods;
 		}
-		if ( $this->disable_both_gateways() ) {
+		if ( $this->disable_all_gateways() ) {
 			unset( $methods[ PayPalGateway::ID ] );
 			unset( $methods[ CreditCardGateway::ID ] );
+			unset( $methods[ CardButtonGateway::ID ] );
 			return $methods;
 		}
 
@@ -77,24 +79,21 @@ class DisableGateways {
 			return $methods;
 		}
 
-		if ( $this->is_credit_card() ) {
-			return array(
-				CreditCardGateway::ID => $methods[ CreditCardGateway::ID ],
-				PayPalGateway::ID     => $methods[ PayPalGateway::ID ],
-			);
-		}
 		return array( PayPalGateway::ID => $methods[ PayPalGateway::ID ] );
 	}
 
 	/**
-	 * Whether both gateways should be disabled or not.
+	 * Whether all gateways should be disabled or not.
 	 *
 	 * @return bool
 	 */
-	private function disable_both_gateways() : bool {
-		if ( ! $this->settings->has( 'enabled' ) || ! $this->settings->get( 'enabled' ) ) {
-			return true;
+	private function disable_all_gateways() : bool {
+		foreach ( WC()->payment_gateways->payment_gateways() as $gateway ) {
+			if ( PayPalGateway::ID === $gateway->id && $gateway->enabled !== 'yes' ) {
+				return true;
+			}
 		}
+
 		if ( ! $this->settings->has( 'merchant_email' ) || ! is_email( $this->settings->get( 'merchant_email' ) ) ) {
 			return true;
 		}
@@ -110,22 +109,20 @@ class DisableGateways {
 	 * @return bool
 	 */
 	private function needs_to_disable_gateways(): bool {
-		return $this->session_handler->order() !== null;
-	}
-
-	/**
-	 * Whether the current PayPal session is done via DCC payment.
-	 *
-	 * @return bool
-	 */
-	private function is_credit_card(): bool {
 		$order = $this->session_handler->order();
 		if ( ! $order ) {
 			return false;
 		}
-		if ( ! $order->payment_source() || ! $order->payment_source()->card() ) {
-			return false;
+
+		$source = $order->payment_source();
+		if ( $source && $source->card() ) {
+			return false; // DCC.
 		}
+
+		if ( 'card' === $this->session_handler->funding_source() ) {
+			return false; // Card buttons.
+		}
+
 		return true;
 	}
 }

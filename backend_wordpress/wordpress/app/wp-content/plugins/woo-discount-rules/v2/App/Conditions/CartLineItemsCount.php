@@ -24,7 +24,7 @@ class CartLineItemsCount extends Base
             return false;
         }
         
-        if (isset($options->operator) && $options->value) {
+        if (isset($options->operator) && $options->value >= 0) {
             $operator = sanitize_text_field($options->operator);
             $value = $options->value;
             if($options->calculate_from == 'from_filter'){

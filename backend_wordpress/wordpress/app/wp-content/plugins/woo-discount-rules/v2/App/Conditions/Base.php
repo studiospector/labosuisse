@@ -236,8 +236,12 @@ abstract class Base
                 $result = ($operand1 <= $operand2);
                 break;
             case 'in_range';
-                if (!empty($operand3)) {
+                if (!empty($operand2) && !empty($operand3)) {
                     $result = (($operand1 >= $operand2) && ($operand1 <= $operand3));
+                } elseif (!empty($operand2) && empty($operand3)) {
+                    $result = $operand1 >= $operand2;
+                } elseif (empty($operand2) && !empty($operand3)) {
+                    $result = $operand1 <= $operand3;
                 }
                 break;
             default:

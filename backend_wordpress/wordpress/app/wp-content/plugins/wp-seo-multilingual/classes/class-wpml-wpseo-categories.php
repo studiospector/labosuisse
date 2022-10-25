@@ -1,5 +1,7 @@
 <?php
 
+use WPML\FP\Fns;
+
 class WPML_WPSEO_Categories implements IWPML_Action {
 
 	/**
@@ -7,8 +9,8 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 	 */
 	public function add_hooks() {
 		if ( $this->is_stripping_category_base() ) {
-			add_filter( 'category_rewrite_rules', array( $this, 'append_categories_hook' ), 1, 1 );
-			add_filter( 'category_rewrite_rules', array( $this, 'turn_off_get_terms_filter' ), PHP_INT_MAX, 1 );
+			add_filter( 'category_rewrite_rules', array( $this, 'append_categories_hook' ), -PHP_INT_MAX );
+			add_filter( 'category_rewrite_rules', array( $this, 'turn_off_get_terms_filter' ), PHP_INT_MAX );
 		}
 	}
 
@@ -67,7 +69,7 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 			WHERE tt.taxonomy = 'category'
 		";
 
-		return array_filter( array_map( array( $this, 'map_to_term' ), $wpdb->get_col( $sql ) ) ); // phpcs:ignore WordPress.WP.PreparedSQL.NotPrepared
+		return array_filter( array_map( array( $this, 'map_to_term' ), $wpdb->get_col( $sql ) ) ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 	}
 
 	/**
@@ -85,6 +87,12 @@ class WPML_WPSEO_Categories implements IWPML_Action {
 	 * @return false|WP_Term
 	 */
 	protected function map_to_term( $term_id ) {
-		return get_term_by( 'term_id', $term_id, 'category' );
+		$disableAdjustId = [ 'wpml_disable_term_adjust_id', Fns::always( true ) ];
+
+		add_filter( ...$disableAdjustId );
+		$term = get_term( $term_id, 'category' );
+		remove_filter( ...$disableAdjustId );
+
+		return $term;
 	}
 }

@@ -2,13 +2,15 @@
 
 namespace DeliciousBrains\WP_Offload_Media\Pro;
 
+use Amazon_S3_And_CloudFront_Pro;
 use AS3CF_Pro_Utils;
 use AS3CF_Utils;
+use DeliciousBrains\WP_Offload_Media\Items\Item;
 
 abstract class Tool {
 
 	/**
-	 * @var \Amazon_S3_And_CloudFront_Pro
+	 * @var Amazon_S3_And_CloudFront_Pro
 	 */
 	protected $as3cf;
 
@@ -20,7 +22,7 @@ abstract class Tool {
 	/**
 	 * @var string
 	 */
-	protected $tab = 'media';
+	protected $tab = 'tools';
 
 	/**
 	 * @var string
@@ -30,7 +32,7 @@ abstract class Tool {
 	/**
 	 * @var string
 	 */
-	protected $view = 'sidebar-block';
+	protected $view = 'tool';
 
 	/**
 	 * @var int
@@ -65,12 +67,12 @@ abstract class Tool {
 	/**
 	 * @var bool
 	 */
-	public static $assets_loaded = false;
+	protected static $requires_bucket_access = true;
 
 	/**
 	 * AS3CF_Tool constructor.
 	 *
-	 * @param \Amazon_S3_And_CloudFront_Pro $as3cf
+	 * @param Amazon_S3_And_CloudFront_Pro $as3cf
 	 */
 	public function __construct( $as3cf ) {
 		$this->as3cf             = $as3cf;
@@ -83,40 +85,34 @@ abstract class Tool {
 	 * Initialize the tool.
 	 */
 	public function init() {
-		// Assets
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
+		add_filter( 'as3cfpro_js_strings', array( $this, 'add_js_strings' ) );
 		add_filter( 'as3cfpro_js_settings', array( $this, 'add_js_settings' ) );
 
-		// Load sidebar block
-		add_action( 'as3cfpro_sidebar', array( $this, 'render_sidebar_block' ), $this->priority );
-
-		// Ajax notices
-		add_action( 'wp_ajax_as3cfpro_dismiss_errors_' . $this->tool_key, array( $this, 'ajax_dismiss_errors' ) );
+		// Notices.
+		add_filter( 'as3cf_get_notices', array( $this, 'maybe_add_tool_errors_to_notice' ), 10, 3 );
 	}
 
 	/**
-	 * Load the assets for the tool once
+	 * Add strings for the Tools to the Javascript
+	 *
+	 * @param array $strings
+	 *
+	 * @return array
+	 *
+	 * Note: To be overridden by a tool if required.
 	 */
-	public function load_assets() {
-		if ( ! self::$assets_loaded ) {
-			$this->as3cf->enqueue_style( 'as3cf-pro-tool-styles', 'assets/css/pro/tool', array( 'as3cf-pro-styles' ) );
-			$this->as3cf->enqueue_script( 'as3cf-pro-tool-script', 'assets/js/pro/tool', array( 'as3cf-pro-script', 'underscore' ) );
-
-			self::$assets_loaded = true;
-		}
+	public function add_js_strings( $strings ) {
+		return $strings;
 	}
 
 	/**
 	 * Add settings for the Tools to the Javascript
 	 *
-	 * @param $settings
+	 * @param array $settings
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public function add_js_settings( $settings ) {
-		// Global settings
-		$settings['errors_key_prefix'] = $this->errors_key_prefix;
-
 		return $settings;
 	}
 
@@ -152,55 +148,30 @@ abstract class Tool {
 	}
 
 	/**
-	 * Render sidebar block.
-	 */
-	public function render_sidebar_block() {
-		$args = $this->get_sidebar_block_args();
-
-		if ( false !== $args ) {
-			$args['id']       = $this->tool_key;
-			$args['tab']      = $this->tab;
-			$args['priority'] = $this->priority;
-			$args['slug']     = $this->tool_slug;
-			$args['type']     = $this->type;
-			$args['render']   = $this->should_render();
-
-			$this->as3cf->render_view( 'pre-sidebar-block', $args );
-			$this->as3cf->render_view( $this->view, $args );
-			$this->as3cf->render_view( 'post-sidebar-block', $args );
-		}
-	}
-
-	/**
-	 * Get sidebar block.
+	 * Get info for tool, including current status.
 	 *
-	 * @return string
+	 * @return array
 	 */
-	public function get_sidebar_block() {
-		ob_start();
-		$this->render_sidebar_block();
-		$block = ob_get_contents();
-		ob_end_clean();
-
-		return $block;
+	public function get_info() {
+		return array(
+			'id'                     => $this->tool_key,
+			'tab'                    => $this->tab,
+			'priority'               => $this->priority,
+			'slug'                   => $this->tool_slug,
+			'type'                   => $this->type,
+			'render'                 => $this->should_render(),
+			'is_processing'          => $this->is_processing(),
+			'requires_bucket_access' => $this->requires_bucket_access(),
+		);
 	}
 
 	/**
-	 * Should we render the sidebar block?
+	 * Should we render the tool's UI?
 	 *
 	 * @return bool
 	 */
 	public function should_render() {
 		return true;
-	}
-
-	/**
-	 * Get the sidebar block args.
-	 *
-	 * @return false|array
-	 */
-	protected function get_sidebar_block_args() {
-		return false;
 	}
 
 	/**
@@ -210,18 +181,6 @@ abstract class Tool {
 	 */
 	protected function is_processing() {
 		return false;
-	}
-
-	/**
-	 * Get status.
-	 *
-	 * @return array
-	 */
-	public function get_status() {
-		return array(
-			'should_render' => $this->should_render(),
-			'is_processing' => $this->is_processing(),
-		);
 	}
 
 	/**
@@ -261,7 +220,7 @@ abstract class Tool {
 			$errors = $this->get_errors();
 		}
 
-		if ( ! empty ( $errors ) ) {
+		if ( ! empty( $errors ) ) {
 			$args = array(
 				'type'              => 'error',
 				'class'             => 'tool-error',
@@ -270,9 +229,14 @@ abstract class Tool {
 				'only_show_on_tab'  => $this->tab,
 				'custom_id'         => $this->errors_key,
 				'user_capabilities' => array( 'as3cfpro', 'is_plugin_setup' ),
-				'show_callback'     => array( 'as3cfpro', 'render_tool_errors_callback' ),
-				'callback_args'     => array( $this->tool_key ),
 			);
+
+			// Try and re-use some of existing notice to avoid churn in db or front end.
+			$existing_notice = $this->as3cf->notices->find_notice_by_id( $this->errors_key );
+
+			if ( ! empty( $existing_notice ) ) {
+				$args = array_merge( $existing_notice, $args );
+			}
 
 			$message = $this->get_error_notice_message();
 
@@ -290,15 +254,14 @@ abstract class Tool {
 	}
 
 	/**
-	 * Dismiss one or more errors.
+	 * Dismiss one or all errors for a source item.
+	 *
+	 * @param int        $blog_id
+	 * @param string     $source_type
+	 * @param int        $source_id
+	 * @param string|int $errors Optional indicator of which error to dismiss for source item, default 'all'.
 	 */
-	public function ajax_dismiss_errors() {
-		check_ajax_referer( 'dismiss-errors-' . $this->tool_slug, 'nonce' );
-
-		$blog_id      = (int) filter_input( INPUT_POST, 'blog_id' );
-		$source_type  = filter_input( INPUT_POST, 'source_type' );
-		$source_id    = filter_input( INPUT_POST, 'source_id' );
-		$errors       = filter_input( INPUT_POST, 'errors' );
+	public function dismiss_errors( $blog_id, $source_type, $source_id, $errors = 'all' ) {
 		$saved_errors = $this->get_errors();
 
 		foreach ( $saved_errors as $idx => &$saved_error ) {
@@ -313,7 +276,7 @@ abstract class Tool {
 			// Remove all errors for this source item?
 			if ( $errors === 'all' ) {
 				unset( $saved_errors[ $idx ] );
-				continue;
+				break;
 			}
 
 			// If the saved error message for this item is an array, remove just the one index
@@ -325,92 +288,76 @@ abstract class Tool {
 				// If the array is now empty, remove the entire error item
 				if ( empty( $saved_error->messages ) ) {
 					unset( $saved_errors[ $idx ] );
+				} else {
+					// Force a reindex of the array to avoid issues with JSON encoding switching to Object if there's non-sequential numeric keys.
+					$saved_error->messages = array_values( $saved_error->messages );
 				}
 			}
+
+			// Whether we dismissed anything or not, we found and processed the expected source item's errors.
+			break;
 		}
 
 		$updated = AS3CF_Pro_Utils::array_prune_recursive( $saved_errors );
 		$this->update_errors( $updated );
 		$this->update_error_notice();
-
-		$this->as3cf->end_ajax( array(
-			'success' => true,
-		) );
 	}
 
 	/**
-	 * Get notices to be dynamically shown on settings page (where the tool "runs").
+	 * Maybe add error details to this tool's error notice.
 	 *
-	 * @return bool|array
+	 * @param array  $notices  An array of notices.
+	 * @param string $tab      Optionally restrict to notifications for a specific tab.
+	 * @param bool   $all_tabs Optionally return all tab specific notices regardless of tab.
+	 *
+	 * @return array
 	 */
-	public function get_notices() {
-		$notices = array();
+	public function maybe_add_tool_errors_to_notice( array $notices, $tab = '', $all_tabs = false ) {
+		if ( ! empty( $notices ) ) {
+			$errors = $this->get_errors();
 
-		$user_id           = get_current_user_id();
-		$dismissed_notices = get_user_meta( $user_id, 'as3cf_dismissed_notices', true );
-
-		if ( ! is_array( $dismissed_notices ) ) {
-			$dismissed_notices = array();
-		}
-
-		$notice_id = $this->get_tool_key() . '_completed';
-
-		$notice = $this->as3cf->notices->find_notice_by_id( $notice_id );
-
-		if ( $notice && ( $notice['only_show_to_user'] || ! in_array( $notice['id'], $dismissed_notices ) ) ) {
-			ob_start();
-			$this->as3cf->render_view( 'notice', $notice );
-			$notice_html = ob_get_contents();
-			ob_end_clean();
-
-			$notices[] = array(
-				'id'   => $notice['id'],
-				'html' => $notice_html,
-			);
-		}
-
-		if ( ! empty( $this->get_errors() ) ) {
-			$notice = $this->as3cf->notices->find_notice_by_id( $this->errors_key );
-
-			if ( $notice && ( $notice['only_show_to_user'] || ! in_array( $notice['id'], $dismissed_notices ) ) ) {
-				// Try and discourage dismissing the errors entirely on dynamically added error notices.
-				// It gets a bit messy otherwise with race conditions.
-				if ( $this->is_processing() ) {
-					$notice['dismissible'] = false;
-				}
-
-				ob_start();
-				$this->as3cf->render_view( 'notice', $notice );
-				$notice_html = ob_get_contents();
-				ob_end_clean();
-
-				ob_start();
-				$this->as3cf->render_tool_errors_callback( $this->tool_key );
-				$notice_contents = ob_get_contents();
-				ob_end_clean();
-
-				$notices[] = array(
-					'id'       => $notice['id'],
-					'html'     => $notice_html,
-					'contents' => $notice_contents,
-				);
+			if ( empty( $errors ) ) {
+				return $notices;
 			}
-		}
 
-		$custom_notices = $this->get_custom_notices_to_update();
+			foreach ( $notices as $idx => $notice ) {
+				if (
+					! empty( $notice['class'] ) &&
+					'tool-error' === $notice['class'] &&
+					! empty( $notice['id'] ) &&
+					$notice['id'] === $this->errors_key
+				) {
+					$details = array();
+					foreach ( $errors as $error ) {
+						// If the error is stored as an array, it's almost certainly stored
+						// in a previous format/structure that we can't render properly.
+						// This will be corrected by the upgrade process, but that process may
+						// not have completed yet.
+						if ( is_array( $error ) ) {
+							continue;
+						}
 
-		if ( ! empty( $custom_notices ) ) {
-			foreach ( $custom_notices as $notice ) {
-				if ( $notice && ( $notice['only_show_to_user'] || ! in_array( $notice['id'], $dismissed_notices ) ) ) {
-					ob_start();
-					$this->as3cf->render_view( 'notice', $notice );
-					$notice_html = ob_get_contents();
-					ob_end_clean();
+						/** @var Item $class */
+						$class = $this->as3cf->get_source_type_class( $error->source_type );
 
-					$notices[] = array(
-						'id'   => $notice['id'],
-						'html' => $notice_html,
+						$this->as3cf->switch_to_blog( $error->blog_id );
+
+						$details[] = array(
+							'blog_id'          => $error->blog_id,
+							'source_type'      => $error->source_type,
+							'source_type_name' => $this->as3cf->get_source_type_name( $error->source_type ),
+							'source_id'        => $error->source_id,
+							'edit_url'         => $class::admin_link( $error ),
+							'messages'         => $error->messages,
+						);
+
+						$this->as3cf->restore_current_blog();
+					}
+					$notices[ $idx ]['errors'] = array(
+						'tool_key' => $this->tool_key,
+						'details'  => $details,
 					);
+					break;
 				}
 			}
 		}
@@ -419,18 +366,9 @@ abstract class Tool {
 	}
 
 	/**
-	 * Allow child classes to inject custom notices to be updated in the DOM
-	 *
-	 * @return array
-	 */
-	protected function get_custom_notices_to_update() {
-		return array();
-	}
-
-	/**
 	 * Tool specific message for error notice.
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */
@@ -461,5 +399,14 @@ abstract class Tool {
 		}
 
 		return $count;
+	}
+
+	/**
+	 * Does the tool need authenticated access to the bucket?
+	 *
+	 * @return bool
+	 */
+	public static function requires_bucket_access(): bool {
+		return static::$requires_bucket_access;
 	}
 }

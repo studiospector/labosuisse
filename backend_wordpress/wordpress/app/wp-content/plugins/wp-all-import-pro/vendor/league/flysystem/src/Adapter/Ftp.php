@@ -139,7 +139,7 @@ class Ftp extends AbstractFtpAdapter
         }
 	    restore_error_handler();
 
-        if ( ! $this->connection) {
+        if ( ! (is_resource($this->connection ) || is_object( $this->connection )) ) {
             throw new ConnectionRuntimeException('Could not connect to host: ' . $this->getHost() . ', port:' . $this->getPort() . '<br/><br/>The FTP server address, username, or password is probably incorrect.');
         }
 
@@ -232,7 +232,7 @@ class Ftp extends AbstractFtpAdapter
      */
     public function disconnect()
     {
-        if (is_resource($this->connection)) {
+        if (is_resource($this->connection ) || is_object( $this->connection )) {
             @ftp_close($this->connection);
         }
 
@@ -535,7 +535,7 @@ class Ftp extends AbstractFtpAdapter
      */
     public function isConnected()
     {
-        return is_resource($this->connection)
+        return (is_resource($this->connection ) || is_object( $this->connection ))
             && $this->getRawExecResponseCode('NOOP') === 200;
     }
 
@@ -583,6 +583,23 @@ class Ftp extends AbstractFtpAdapter
 		    }
 	    } );
         $list = ftp_rawlist($connection, $options . ' ' . $path);
+
+	    // If connecting to FTPS try using cURL if ftp_rawlist() fails
+	    if(!is_array($list) && $this->ssl == true){
+		    $ch = curl_init();
+		    curl_setopt($ch, CURLOPT_URL, trim('ftp://'. $this->getHost(), '/').'/'.trim($path,'/').'/');
+		    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		    curl_setopt($ch, CURLOPT_FTP_SSL, CURLFTPSSL_ALL);
+		    curl_setopt($ch, CURLOPT_FTPSSLAUTH, CURLFTPAUTH_DEFAULT);
+		    curl_setopt($ch, CURLOPT_PORT, $this->getPort());
+		    curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+		    curl_setopt($ch, CURLOPT_USERPWD, $this->getUsername() .':'. $this->getPassword());
+		    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+		    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+
+		    $list = explode("\n",curl_exec($ch));
+	    }
+
         restore_error_handler();
 
         return $list;

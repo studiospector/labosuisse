@@ -21,7 +21,7 @@ class WPML_WPSEO_Redirection {
 			$url = trim( $_SERVER['REQUEST_URI'], '/' );
 
 			add_filter( 'wpml_skip_convert_url_string', '__return_true' );
-			$base_url_path = ltrim( wp_parse_url( home_url(), PHP_URL_PATH ), '/' );
+			$base_url_path = ltrim( (string) wp_parse_url( home_url(), PHP_URL_PATH ), '/' );
 			remove_filter( 'wpml_skip_convert_url_string', '__return_true' );
 
 			// The unfiltered URL got cached so we need to flush the group.

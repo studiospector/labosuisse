@@ -13,6 +13,7 @@ class Loaders {
 		$factories = [
 			\WPML_WPSEO_Main_Factory::class,
 			\WPML\WPSEO\PrimaryCategory\Hooks::class,
+			\WPML\WPSEO\Terms\AdminHooks::class,
 		];
 
 		if ( defined( 'WPML_ST_VERSION' ) ) {

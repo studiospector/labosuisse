@@ -942,9 +942,16 @@ class WPML_Elementor_Translatable_Nodes implements IWPML_Page_Builders_Translata
 					),
 				),
 				'integration-class' => [
-					'\WPML\PB\Elementor\Modules\MulitpleGallery',
+					'\WPML\PB\Elementor\Modules\MultipleGallery',
 				]
 			),
+			'hotspot'   => [
+				'conditions'        => [ self::TYPE => 'hotspot' ],
+				'fields'            => [],
+				'integration-class' => [
+					\WPML\PB\Elementor\Modules\Hotspot::class,
+				],
+			],
 		);
 	}
 

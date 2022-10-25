@@ -14,10 +14,15 @@ class ComposerStaticInit5ad073a7de8b1bb08996e6274fe48cad
         'p' => 
         array (
             'phpseclib\\' => 10,
+            'phpseclib3\\' => 11,
         ),
         'W' => 
         array (
             'Wpai\\' => 5,
+        ),
+        'P' => 
+        array (
+            'ParagonIE\\ConstantTime\\' => 23,
         ),
         'L' => 
         array (
@@ -29,11 +34,19 @@ class ComposerStaticInit5ad073a7de8b1bb08996e6274fe48cad
     public static $prefixDirsPsr4 = array (
         'phpseclib\\' => 
         array (
+            0 => __DIR__ . '/..' . '/phpseclib/phpseclib2_compat/src',
+        ),
+        'phpseclib3\\' => 
+        array (
             0 => __DIR__ . '/..' . '/phpseclib/phpseclib/phpseclib',
         ),
         'Wpai\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
         'League\\MimeTypeDetection\\' => 
         array (

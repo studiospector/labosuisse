@@ -244,7 +244,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
                             PMXI_Plugin::$is_csv = $upload_result['is_csv'];
                             if ( ! empty($upload_result['root_element']))
                                 $post['root_element'] = $upload_result['root_element'];
-                            $post['feed_type'] = $upload_result['feed_type'];
+                            $post['feed_type'] = $upload_result['feed_type'] ?? '';
                         }
                     } catch (Exception $e) {
                         $this->errors->add('form-validation', $e->getMessage());

@@ -1,8 +1,12 @@
 <?php
 
+use DeliciousBrains\WP_Offload_Media\API\V1\Settings;
+use DeliciousBrains\WP_Offload_Media\API\V1\State;
 use DeliciousBrains\WP_Offload_Media\Items\Item;
 use DeliciousBrains\WP_Offload_Media\Items\Item_Handler;
-use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Advanced_Custom_Fields;
+use DeliciousBrains\WP_Offload_Media\Pro\API\V1\Licences;
+use DeliciousBrains\WP_Offload_Media\Pro\API\V1\Tools;
+use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\Assets as Assets_Integration;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\BuddyBoss\BuddyBoss;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Core_Pro as Core_Pro_Integration;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Divi;
@@ -15,7 +19,7 @@ use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Woocommerce;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Wpml;
 use DeliciousBrains\WP_Offload_Media\Pro\Items\Remove_Provider_Handler;
 use DeliciousBrains\WP_Offload_Media\Pro\Items\Update_Acl_Handler;
-use DeliciousBrains\WP_Offload_Media\Pro\Sidebar_Presenter;
+use DeliciousBrains\WP_Offload_Media\Pro\Tools_Manager;
 use DeliciousBrains\WP_Offload_Media\Pro\Tools\Add_Metadata;
 use DeliciousBrains\WP_Offload_Media\Pro\Tools\Analyze_And_Repair\Reverse_Add_Metadata;
 use DeliciousBrains\WP_Offload_Media\Pro\Tools\Analyze_And_Repair\Verify_Add_Metadata;
@@ -42,14 +46,14 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	protected $licence;
 
 	/**
-	 * @var Sidebar_Presenter
+	 * @var Tools_Manager
 	 */
-	protected $sidebar;
+	protected $tools;
 
 	/**
 	 * @var array
 	 */
-	private $_is_pro_plugin_setup;
+	private $_is_pro_plugin_setup; // @phpcs:ignore
 
 	/**
 	 * @param string $plugin_file_path
@@ -57,7 +61,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 * @throws Exception
 	 */
 	public function __construct( $plugin_file_path ) {
-		$this->sidebar = Sidebar_Presenter::get_instance( $this );
+		$this->tools = Tools_Manager::get_instance( $this );
 
 		parent::__construct( $plugin_file_path, $this->plugin_slug );
 	}
@@ -75,18 +79,16 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 
 		parent::init( $plugin_file_path );
 
-		$this->plugin_title      = __( 'Offload Media', 'amazon-s3-and-cloudfront' );
-		$this->plugin_menu_title = __( 'Offload Media', 'amazon-s3-and-cloudfront' );
+		$this->plugin_title      = __( 'WP Offload Media', 'amazon-s3-and-cloudfront' );
+		$this->plugin_menu_title = __( 'WP Offload Media', 'amazon-s3-and-cloudfront' );
 
 		// Licence and updates handler
-		if ( is_admin() ) {
+		if ( is_admin() || AS3CF_Utils::is_rest_api() ) {
 			$this->licence = new AS3CF_Pro_Licences_Updates( $this );
 		}
 
 		// add our custom CSS classes to <body>
 		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
-		// load assets
-		add_action( 'as3cf_plugin_load', array( $this, 'load_assets' ) );
 
 		// Only enable the plugin if compatible,
 		// so we don't disable the license and updates functionality when disabled
@@ -99,9 +101,10 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 * Enable the complete plugin when compatible
 	 */
 	public function enable_plugin() {
-
-		add_filter( 'as3cf_settings_tabs', array( $this, 'settings_tabs' ) );
-		add_action( 'as3cf_after_settings', array( $this, 'settings_page' ) );
+		// Add some extra information into some standard REST API responses.
+		add_filter( $this->get_plugin_prefix() . '_api_response_get_' . Settings::name(), array( $this, 'api_get_settings' ) );
+		add_filter( $this->get_plugin_prefix() . '_api_response_put_' . Settings::name(), array( $this, 'api_get_settings' ) );
+		add_filter( $this->get_plugin_prefix() . '_api_response_get_' . State::name(), array( $this, 'api_get_state' ) );
 
 		// Pro customisations
 		add_filter( 'as3cf_lost_files_notice', array( $this, 'lost_files_notice' ) );
@@ -119,6 +122,9 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		// Add Pro integrations.
 		add_filter( 'as3cf_integrations', array( $this, 'add_integrations' ) );
 
+		// Add Pro API endpoints.
+		add_filter( 'as3cf_api_endpoints', array( $this, 'add_api_endpoints' ) );
+
 		// Include compatibility code for other plugins
 		$this->plugin_compat = new AS3CF_Pro_Plugin_Compatibility( $this );
 
@@ -135,19 +141,35 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 *
 	 * @return array
 	 */
-	public function add_integrations( array $integrations ) {
+	public function add_integrations( array $integrations ): array {
 		return array_merge( $integrations, array(
-			'core'  => new Core_Pro_Integration( $this ),
-			'mlib'  => new Media_Library_Pro_Integration( $this ),
-			'acf'   => new Advanced_Custom_Fields( $this ),
-			'divi'  => new Divi( $this ),
-			'edd'   => new Easy_Digital_Downloads( $this ),
-			'emr'   => new Enable_Media_Replace( $this ),
-			'msl'   => new Meta_Slider( $this ),
-			'woo'   => new Woocommerce( $this ),
-			'wpml'  => new Wpml( $this ),
-			'elem'  => new Elementor( $this ),
-			'bboss' => new BuddyBoss( $this ),
+			'core'   => new Core_Pro_Integration( $this ),
+			'mlib'   => new Media_Library_Pro_Integration( $this ),
+			'assets' => new Assets_Integration( $this ),
+			'divi'   => new Divi( $this ),
+			'edd'    => new Easy_Digital_Downloads( $this ),
+			'emr'    => new Enable_Media_Replace( $this ),
+			'msl'    => new Meta_Slider( $this ),
+			'woo'    => new Woocommerce( $this ),
+			'wpml'   => new Wpml( $this ),
+			'elem'   => new Elementor( $this ),
+			'bboss'  => new BuddyBoss( $this ),
+		) );
+	}
+
+	/**
+	 * Add Pro API endpoints.
+	 *
+	 * @handles as3cf_api_endpoints
+	 *
+	 * @param array $api_endpoints
+	 *
+	 * @return array
+	 */
+	public function add_api_endpoints( array $api_endpoints ): array {
+		return array_merge( $api_endpoints, array(
+			Licences::name() => new Licences( $this ),
+			Tools::name()    => new Tools( $this ),
 		) );
 	}
 
@@ -172,24 +194,24 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 * @param Amazon_S3_And_CloudFront_Pro $as3cfpro
 	 */
 	public function register_tools( Amazon_S3_And_CloudFront_Pro $as3cfpro ) {
-		if ( ! is_admin() && ! wp_doing_cron() ) {
+		if ( ! is_admin() && ! wp_doing_cron() && ! AS3CF_Utils::is_rest_api() ) {
 			return;
 		}
 
-		$this->sidebar->register_tool( new Uploader( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Downloader( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Download_And_Remover( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Remove_Local_Files( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Copy_Buckets( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Move_Objects( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Move_Public_Objects( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Move_Private_Objects( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Update_ACLs( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Add_Metadata( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Reverse_Add_Metadata( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Verify_Add_Metadata( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Woocommerce_Product_Urls( $as3cfpro ), 'background' );
-		$this->sidebar->register_tool( new Elementor_Analyze_And_Repair( $as3cfpro ), 'background' );
+		$this->tools->register_tool( new Uploader( $as3cfpro ) );
+		$this->tools->register_tool( new Downloader( $as3cfpro ) );
+		$this->tools->register_tool( new Download_And_Remover( $as3cfpro ) );
+		$this->tools->register_tool( new Remove_Local_Files( $as3cfpro ) );
+		$this->tools->register_tool( new Copy_Buckets( $as3cfpro ) );
+		$this->tools->register_tool( new Move_Objects( $as3cfpro ) );
+		$this->tools->register_tool( new Move_Public_Objects( $as3cfpro ) );
+		$this->tools->register_tool( new Move_Private_Objects( $as3cfpro ) );
+		$this->tools->register_tool( new Update_ACLs( $as3cfpro ) );
+		$this->tools->register_tool( new Add_Metadata( $as3cfpro ) );
+		$this->tools->register_tool( new Reverse_Add_Metadata( $as3cfpro ) );
+		$this->tools->register_tool( new Verify_Add_Metadata( $as3cfpro ) );
+		$this->tools->register_tool( new Woocommerce_Product_Urls( $as3cfpro ) );
+		$this->tools->register_tool( new Elementor_Analyze_And_Repair( $as3cfpro ) );
 	}
 
 	/**
@@ -204,29 +226,36 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	}
 
 	/**
-	 * Load the scripts and styles required for the plugin
+	 * Enqueue assets needed for settings UI.
+	 *
+	 * @param array $config Initial settings.
 	 */
-	public function load_assets() {
-		$this->enqueue_style( 'as3cf-pro-styles', 'assets/css/pro/styles', array( 'as3cf-styles' ) );
-		$this->enqueue_script( 'as3cf-pro-script', 'assets/js/pro/script', array( 'jquery', 'underscore' ) );
+	protected function load_settings_assets( $config = array() ) {
+		$this->enqueue_style( 'as3cf-pro-settings', 'assets/css/pro/settings' );
+		$this->enqueue_script( 'as3cf-pro-settings', 'assets/js/pro/settings', array(), false );
 
-		wp_localize_script( 'as3cf-pro-script', 'as3cfpro', array(
-			'settings' => apply_filters( 'as3cfpro_js_settings', array() ),
-			'strings'  => apply_filters( 'as3cfpro_js_strings', array() ),
-			'nonces'   => apply_filters( 'as3cfpro_js_nonces', array() ),
-		) );
+		$config['settings']      = apply_filters( 'as3cfpro_js_settings', $config['settings'] );
+		$config['strings']       = apply_filters( 'as3cfpro_js_strings', $config['strings'] );
+		$config['licences']      = $this->get_licences();
+		$config['documentation'] = $this->get_documentation();
+		$config['tools']         = $this->get_tools_info();
 
-		do_action( 'as3cfpro_load_assets' );
+		$config = apply_filters( 'as3cfpro_js_config', $config );
+
+		wp_localize_script( 'as3cf-pro-settings',
+			'as3cfpro_settings',
+			$config
+		);
 	}
 
 	/**
 	 * Add custom classes to the HTML body tag
 	 *
-	 * @param $classes
+	 * @param string $classes
 	 *
 	 * @return string
 	 */
-	function admin_body_class( $classes ) {
+	public function admin_body_class( $classes ) {
 		if ( ! $classes ) {
 			$classes = array();
 		} else {
@@ -247,42 +276,58 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	}
 
 	/**
+	 * Allowed settings keys for this plugin.
+	 *
+	 * @param bool $include_legacy Should legacy keys be included? Optional, default false.
+	 *
+	 * @return array
+	 */
+	public function get_allowed_settings_keys( bool $include_legacy = false ): array {
+		return array_merge(
+			parent::get_allowed_settings_keys( $include_legacy ),
+			array( 'licence' )
+		);
+	}
+
+	/**
+	 * Add license info into settings API responses.
+	 *
+	 * @param array $response
+	 *
+	 * @return array
+	 */
+	public function api_get_settings( $response ) {
+		if ( is_array( $response ) && isset( $response['settings'] ) ) {
+			$response['licences'] = $this->get_licences();
+		}
+
+		return $response;
+	}
+
+	/**
+	 * Add license info into state API responses.
+	 *
+	 * @param array $response
+	 *
+	 * @return array
+	 */
+	public function api_get_state( $response ) {
+		if ( is_array( $response ) && isset( $response['counts'] ) ) {
+			$response['licences'] = $this->get_licences();
+		}
+
+		return $response;
+	}
+
+	/**
 	 * Add bulk action explanation to lost files notice
 	 *
 	 * @param string $notice
 	 *
 	 * @return string
 	 */
-	function lost_files_notice( $notice ) {
+	public function lost_files_notice( $notice ) {
 		return $notice . ' ' . __( 'Alternatively, use the Media Library bulk action <strong>Copy to Server from Bucket</strong> to ensure the local files exist.', 'amazon-s3-and-cloudfront' );
-	}
-
-	/**
-	 * Add the Pro tabs to the UI.
-	 *
-	 * @param $tabs
-	 *
-	 * @return mixed
-	 */
-	public function settings_tabs( $tabs ) {
-		$new_tabs = array();
-
-		foreach ( $tabs as $slug => $tab ) {
-			$new_tabs[ $slug ] = $tab;
-
-			if ( 'addons' === $slug ) {
-				$new_tabs['licence'] = _x( 'License', 'Show the License tab', 'amazon-s3-and-cloudfront' );
-			}
-		}
-
-		return $new_tabs;
-	}
-
-	/**
-	 * Display the settings page content.
-	 */
-	public function settings_page() {
-		$this->render_view( 'licence' );
 	}
 
 	/**
@@ -292,7 +337,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 * @param string $view View filename without the extension
 	 * @param array  $args Arguments to pass to the view
 	 */
-	function render_view( $view, $args = array() ) {
+	public function render_view( $view, $args = array() ) {
 		extract( $args );
 		$view_file = $this->plugin_dir_path . '/view/pro/' . $view . '.php';
 		if ( file_exists( $view_file ) ) {
@@ -310,7 +355,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 *
 	 * @return array
 	 */
-	function get_blogs_data() {
+	public function get_blogs_data() {
 		global $wpdb;
 
 		$blogs = array();
@@ -340,7 +385,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 *
 	 * @return float
 	 */
-	function get_batch_limit( $max, $filter_handle = null ) {
+	public function get_batch_limit( $max, $filter_handle = null ) {
 		if ( ! is_null( $filter_handle ) ) {
 			$max = apply_filters( $filter_handle, $max );
 		}
@@ -417,7 +462,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		$limit   = absint( $media_limit_check['limit'] );
 		$allowed = $limit - $total;
 
-		if ( 0 === $limit || ( isset( $media_limit_check['counts_toward_limit'] ) && ! $media_limit_check['counts_toward_limit'] ) ) {
+		if ( ! $this->licence->counts_toward_limit( $media_limit_check ) ) {
 			// Unlimited uploads allowed or this site doesn't count.
 			return -1;
 		}
@@ -452,6 +497,16 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		}
 
 		if ( isset( $this->licence ) ) {
+			// If no license set, then Pro isn't set up.
+			if ( empty( $this->licence->get_licence_key() ) ) {
+				$this->_is_pro_plugin_setup[ $with_credentials ] = false;
+
+				// Ensure notice regarding license response issues is removed if there is no license.
+				$this->notices->remove_notice_by_id( 'as3cfpro-licence-response-missing' );
+
+				return $this->_is_pro_plugin_setup[ $with_credentials ];
+			}
+
 			// If there hasn't yet been a check of the licence, or it is not valid, Pro setup is not complete.
 			$licence_response = json_decode( get_site_transient( $this->licence->plugin->prefix . '_licence_response' ), true );
 			if ( empty( $licence_response ) || ! is_array( $licence_response ) || ! $this->is_valid_licence( false, true, $licence_response ) ) {
@@ -459,21 +514,27 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 				$this->_is_pro_plugin_setup[ $with_credentials ] = false;
 
 				// If we really should have had a license response, make sure user knows there's a problem.
-				if ( ! empty( $this->licence->get_licence_key() ) && ( empty( $licence_response ) || ! is_array( $licence_response ) ) ) {
+				if ( empty( $licence_response ) || ! is_array( $licence_response ) ) {
 					// Although the default, only_show_to_user included here to telegraph the fact this mode is used
 					// as it is less likely to be buggy compared to site transients, and therefore more likely to be seen.
 					// It's also a fraction faster for remove_notice_by_id as user meta is checked before site options.
-					$docURL = $this->dbrains_url(
+					$doc_url = $this->dbrains_url(
 						'/wp-offload-media/doc/non-essential-features/',
 						array(
 							'utm_campaign' => 'support+docs',
 							'utm_content'  => 'license-response-missing',
 						)
 					);
-					$mesg   = __( 'A problem occurred when trying to validate your license, therefore your <a href="%1$s">Pro features</a> have been disabled.', 'amazon-s3-and-cloudfront' );
-					$mesg   = sprintf( $mesg, $docURL );
-					$mesg   .= '&nbsp;';
-					$mesg   .= $this->more_info_link( '/wp-offload-media/doc/pro-features-disabled-notice/', 'license-response-missing' );
+
+					$mesg = __( 'A problem occurred when trying to validate your license, therefore your <a href="%1$s">Pro features</a> have been disabled.', 'amazon-s3-and-cloudfront' );
+					$mesg = sprintf( $mesg, $doc_url );
+					$mesg .= '&nbsp;';
+					$mesg .= $this->more_info_link( '/wp-offload-media/doc/pro-features-disabled-notice/', 'license-response-missing' );
+				} elseif ( ! empty( $licence_response['errors'] ) ) {
+					$mesg = $this->licence->get_licence_status_message( $licence_response );
+				}
+
+				if ( ! empty( $mesg ) ) {
 					$this->notices->add_notice(
 						$mesg,
 						array(
@@ -514,22 +575,16 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 *
 	 * @return string
 	 */
-	function diagnostic_info( $output = '' ) {
+	public function diagnostic_info( $output = '' ) {
 		$post_count = $this->get_diagnostic_post_count();
 		$output     .= 'Posts Count: ';
 		$output     .= number_format_i18n( $post_count );
 		$output     .= "\r\n\r\n";
 
-		$output      .= 'Pro Upgrade: ';
-		$output      .= "\r\n";
-		$output      .= 'License Status: ';
-		$status      = $this->licence->is_licence_expired();
-		$status_text = 'Valid';
-		if ( isset( $status['errors'] ) ) {
-			reset( $status['errors'] );
-			$status_text = key( $status['errors'] );
-		}
-		$output .= ucwords( str_replace( '_', ' ', $status_text ) );
+		$output .= 'Pro Upgrade: ';
+		$output .= "\r\n";
+		$output .= 'License Status: ';
+		$output .= $this->licence->licence_status_description();
 		$output .= "\r\n";
 		$output .= 'License Constant: ';
 		$output .= $this->licence->is_licence_constant() ? 'On' : 'Off';
@@ -567,7 +622,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 			foreach ( $jobs as $job ) {
 				$output .= $job->{$column};
 				$output .= "\r\n";
-				$output .= print_r( maybe_unserialize( $job->{$value_column} ), true );
+				$output .= print_r( maybe_unserialize( $job->{$value_column} ), true ); // phpcs:ignore
 				$output .= "\r\n";
 			}
 		}
@@ -589,7 +644,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 			$post_count     = 0;
 			$table_prefixes = $this->get_all_blog_table_prefixes();
 
-			foreach ( $table_prefixes as $blog_id => $table_prefix ) {
+			foreach ( $table_prefixes as $table_prefix ) {
 				$post_count += $wpdb->get_var( "SELECT COUNT(ID) FROM {$table_prefix}posts" );
 			}
 
@@ -600,30 +655,13 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	}
 
 	/**
-	 * Callback to render tool errors.
-	 *
-	 * @param string $name
-	 */
-	public function render_tool_errors_callback( $name ) {
-		$tool = $this->sidebar->get_tool( $name );
-
-		if ( ! $tool ) {
-			return;
-		}
-
-		$this->render_view( 'tool-errors', array(
-			'tool'   => $name,
-			'errors' => $tool->get_errors(),
-		) );
-	}
-
-	/**
 	 * Get object keys that exist on provider for items.
 	 *
 	 * It's possible that items belong to different buckets therefore they could have
 	 * different regions, so we have to build an array of clients and commands.
 	 *
-	 * @param array $source_ids
+	 * @param array  $source_ids
+	 * @param string $source_type
 	 *
 	 * @return array
 	 * @throws Exception
@@ -634,7 +672,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		$private_regions   = array();
 		$private_originals = array();
 
-		/* @var Item $class */
+		/** @var Item $class */
 		$class = $this->get_source_type_class( $source_type );
 
 		foreach ( $source_ids as $source_id ) {
@@ -752,5 +790,201 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		}
 
 		return $this->item_handlers[ $handler_type ];
+	}
+
+	/**
+	 * Get UTM source for plugin.
+	 *
+	 * @return string
+	 */
+	protected static function get_utm_source() {
+		return 'OS3+Paid';
+	}
+
+	/**
+	 * Get licence information that is safe to display.
+	 *
+	 * @param bool $skip_transient_check
+	 *
+	 * @return array
+	 */
+	public function get_licences( bool $skip_transient_check = false ): array {
+		if ( empty( $this->licence ) ) {
+			return array();
+		}
+
+		// We currently have one licence applied to a plugin install.
+		return array( $this->licence->get_licence_info( $skip_transient_check ) );
+	}
+
+	/**
+	 * Is the license key defined as a constant?
+	 *
+	 * @return bool
+	 */
+	public function is_licence_constant() {
+		return $this->licence->is_licence_constant();
+	}
+
+	/**
+	 * Activate a licence.
+	 *
+	 * @param string $licence_key
+	 *
+	 * @return bool|WP_Error
+	 */
+	public function activate_licence( $licence_key ) {
+		return $this->licence->activate( $licence_key );
+	}
+
+	/**
+	 * Remove the license.
+	 */
+	public function remove_licence() {
+		$this->licence->remove();
+	}
+
+	/**
+	 * Returns an array of title and url values to be used in documentation sidebar.
+	 *
+	 * @return array[]
+	 */
+	private function get_documentation() {
+		$response = get_site_transient( $this->licence->plugin->prefix . '_licence_response' );
+
+		if ( $response ) {
+			$decoded = json_decode( $response, true );
+
+			if ( ! empty( $decoded['documentation'] ) && is_array( $decoded['documentation'] ) ) {
+				return $decoded['documentation'];
+			}
+		}
+
+		// Fallback to hard-coded docs.
+		return array(
+			array(
+				'title' => __( 'Getting Started', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/getting-started/' ),
+			),
+			array(
+				'title' => __( 'How To', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/how-to/' ),
+			),
+			array(
+				'title' => __( 'Addons', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/addons/' ),
+			),
+			array(
+				'title' => __( 'Integrations', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/integrations/' ),
+			),
+			array(
+				'title' => __( 'Changelogs', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/changelogs/' ),
+			),
+			array(
+				'title' => __( 'Debugging', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/debugging/' ),
+			),
+			array(
+				'title' => __( 'Common Errors', 'amazon-s3-and-cloudfront' ),
+				'url'   => static::dbrains_url( '/wp-offload-media/docs/common-errors/' ),
+			),
+		);
+	}
+
+	/**
+	 * Get info for all tools, including current status.
+	 *
+	 * @return array
+	 */
+	public function get_tools_info() {
+		return $this->tools->get_tools_info();
+	}
+
+	/**
+	 * Try and perform the requested action for a tool identified by its key.
+	 *
+	 * @param string $tool_key
+	 * @param string $action
+	 *
+	 * @return bool
+	 */
+	public function perform_tool_action( $tool_key, $action ) {
+		return $this->tools->perform_action( $tool_key, $action );
+	}
+
+	/**
+	 * Dismiss one or all tool errors for a given tool.
+	 *
+	 * @param string     $tool_key
+	 * @param int        $blog_id
+	 * @param string     $source_type
+	 * @param int        $source_id
+	 * @param string|int $errors Optional indicator of which error to dismiss for source item, default 'all'.
+	 *
+	 * @return bool
+	 */
+	public function dismiss_tool_errors( $tool_key, $blog_id, $source_type, $source_id, $errors = 'all' ) {
+		$tool = $this->tools->get_tool( $tool_key );
+
+		if ( false === $tool ) {
+			return false;
+		}
+
+		$tool->dismiss_errors( $blog_id, $source_type, $source_id, $errors );
+
+		return true;
+	}
+
+	/**
+	 * Get URLs needed by the frontend.
+	 *
+	 * @return array
+	 */
+	public function get_js_urls(): array {
+		return apply_filters( 'as3cfpro_js_urls', parent::get_js_urls() );
+	}
+
+	/**
+	 * Is the given feature enabled?
+	 *
+	 * @param string $feature
+	 *
+	 * @return bool
+	 */
+	public function feature_enabled( string $feature ): bool {
+		$licences = $this->get_licences();
+
+		// Fall-back to transient if licence property not yet initialized.
+		if ( empty( $licences ) ) {
+			$decoded_licence = json_decode( get_site_transient( 'as3cfpro_licence_response' ), true );
+			$licences        = empty( $decoded_licence ) ? array() : array( $decoded_licence );
+		}
+
+		if ( empty( $licences ) ) {
+			return false;
+		}
+
+		foreach ( $licences as $licence ) {
+			// TODO: >>> Remove when https://github.com/deliciousbrains/site/issues/3287 implemented.
+			if ( empty( $licence['features'] ) && ! empty( $licence['plan'] ) && ! in_array( $licence['plan'], array( 'Bronze', 'Silver' ) ) ) {
+				$licence['features'][] = 'assets';
+			}
+			if ( empty( $licence['features'] ) && ! empty( $licence['licence_name'] ) && ! in_array( $licence['licence_name'], array( 'Bronze', 'Silver' ) ) ) {
+				$licence['features'][] = 'assets';
+			}
+			// TODO: <<< Remove when https://github.com/deliciousbrains/site/issues/3287 implemented.
+
+			if ( empty( $licence['features'] ) || ! is_array( $licence['features'] ) ) {
+				continue;
+			}
+
+			if ( in_array( $feature, $licence['features'] ) ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

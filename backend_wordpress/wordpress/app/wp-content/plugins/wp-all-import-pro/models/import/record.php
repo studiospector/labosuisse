@@ -4228,6 +4228,18 @@ class PMXI_Import_Record extends PMXI_Model_Record {
                                         $atch_url = str_replace(" ", "%20", trim($atch_url));
 
                                         $attachment_filename = urldecode(wp_all_import_basename(parse_url(trim($atch_url), PHP_URL_PATH)));
+
+                                        // If there is no file extension try to detect it.
+                                        $ext = pmxi_getExtension($attachment_filename);
+
+                                        if( empty($ext) ){
+                                        	$ext = pmxi_getExtension($atch_url);
+
+                                        	if( !empty($ext) ){
+                                        		$attachment_filename .= '.' . $ext;
+	                                        }
+                                        }
+
                                         $attachment_filepath = $targetDir . '/' . sanitize_file_name($attachment_filename);
 
                                         if ($this->options['is_search_existing_attach']){
@@ -5096,7 +5108,7 @@ class PMXI_Import_Record extends PMXI_Model_Record {
             return wp_set_object_terms($pid, $term_ids, $tx_name);
         }
 
-	    $term_ids = wp_get_object_terms( $pid, $tx_name, array( 'fields' => 'ids' ) );
+	    $term_ids = wp_get_object_terms( $pid, $tx_name, array( 'fields' => 'tt_ids' ) );
 
 		$assign_taxes = ( is_array( $assign_taxes ) ) ? array_filter( $assign_taxes ) : false;
 

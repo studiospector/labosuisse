@@ -1,4 +1,4 @@
-( function( $, _ ) {
+(function( $, _ ) {
 
 	var fileFrame;
 	var attachment;
@@ -10,7 +10,7 @@
 	/**
 	 * Render custom media uploader
 	 *
-	 * @param object row
+	 * @param row Object
 	 *
 	 * @return void
 	 */
@@ -73,4 +73,4 @@
 		} );
 	} );
 
-} )( jQuery, _ );
+})( jQuery, _ );

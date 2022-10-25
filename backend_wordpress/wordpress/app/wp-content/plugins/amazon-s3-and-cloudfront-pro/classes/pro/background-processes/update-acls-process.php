@@ -152,7 +152,7 @@ class Update_ACLs_Process extends Background_Tool_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished updating object ACLs in bucket.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished updating object ACLs in bucket.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

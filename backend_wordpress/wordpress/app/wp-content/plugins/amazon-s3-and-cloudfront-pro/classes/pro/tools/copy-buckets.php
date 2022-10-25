@@ -27,145 +27,29 @@ class Copy_Buckets extends Background_Tool {
 	);
 
 	/**
-	 * Initialize the tool.
-	 */
-	public function init() {
-		parent::init();
-
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return;
-		}
-
-		// Prompt
-		add_filter( 'as3cf_media_tab_storage_classes', array( $this, 'media_tab_storage_classes' ) );
-		add_action( 'as3cf_pre_media_settings', array( $this, 'render_modal' ) );
-		add_filter( 'as3cf_handle_post_request', array( $this, 'handle_post_request' ) );
-		add_filter( 'as3cf_action_for_changed_settings_key', array( $this, 'action_for_changed_settings_key' ), 10, 2 );
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
-		add_filter( 'as3cfpro_js_strings', array( $this, 'add_js_strings' ) );
-	}
-
-	/**
-	 * Get the details for the sidebar block
-	 *
-	 * @return array|bool
-	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return false;
-		}
-
-		return parent::get_sidebar_block_args();
-	}
-
-	/**
-	 * Maybe start copy buckets process via post request.
-	 *
-	 * @param array $changed_keys
-	 *
-	 * @return array
-	 */
-	public function handle_post_request( $changed_keys ) {
-		if (
-			! empty( $_GET['action'] ) &&
-			'copy-buckets' === $_GET['action'] &&
-			! $this->as3cf->get_storage_provider()->needs_access_keys() &&
-			$this->as3cf->get_setting( 'bucket' ) &&
-			! empty( $_POST['copy-buckets'] )
-		) {
-			$this->handle_start();
-		}
-
-		return $changed_keys;
-	}
-
-	/**
-	 * Should the Copy Buckets prompt be the next action?
-	 *
-	 * @param string $action
-	 * @param array  $changed_keys
-	 *
-	 * @return string
-	 */
-	public function action_for_changed_settings_key( $action, $changed_keys ) {
-		// If no previous step, or this step already processed, shortcut out.
-		if ( empty( $_GET['action'] ) || 'copy-buckets' === $_GET['action'] || ( ! empty( $_GET['prev_action'] ) && 'copy-buckets' === $_GET['prev_action'] ) ) {
-			return $action;
-		}
-
-		if ( empty( $action ) && ! empty( array_intersect( $changed_keys, array( 'bucket', 'region' ) ) ) && $this->count_offloaded_media_files() ) {
-
-			// Even if bucket has been changed and we have offloaded media, we can only copy between buckets in same provider.
-			if ( empty( $_GET['orig_provider'] ) || $this->as3cf->get_setting( 'provider', false ) === $_GET['orig_provider'] ) {
-				return 'copy-buckets';
-			}
-		}
-
-		return $action;
-	}
-
-	/**
-	 * Adjust media tab's class attribute.
-	 *
-	 * @param string $storage_classes Class names related to storage provider.
-	 *
-	 * @return string
-	 */
-	public function media_tab_storage_classes( $storage_classes ) {
-		if ( ! empty( $_GET['action'] ) && 'copy-buckets' === $_GET['action'] ) {
-			$storage_classes .= ' as3cf-copy-buckets';
-		}
-
-		return $storage_classes;
-	}
-
-	/**
-	 * Load assets.
-	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script( 'as3cf-pro-copy-buckets-script', 'assets/js/pro/tools/copy-buckets', array(
-			'jquery',
-			'wp-util',
-		) );
-	}
-
-	/**
-	 * Render modal in footer.
-	 */
-	public function render_modal() {
-		if ( ! empty( $_GET['action'] ) && 'copy-buckets' === $_GET['action'] ) {
-			$this->as3cf->render_view( 'modals/copy-buckets' );
-		}
-	}
-
-	/**
-	 * Add localized strings to Javascript.
-	 *
-	 * @param $strings
-	 *
-	 * @return array
-	 */
-	public function add_js_strings( $strings ) {
-		$strings['tools'][ $this->tool_key ] = array(
-			'error' => __( 'There was an error attempting to start the copy tool. Please try again.', 'amazon-s3-and-cloudfront' ),
-		);
-
-		return $strings;
-	}
-
-	/**
 	 * Should render.
 	 *
 	 * @return bool
 	 */
 	public function should_render() {
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
+		}
+
 		if ( false !== static::show_tool_constant() && constant( static::show_tool_constant() ) ) {
 			return true;
 		}
 
 		return $this->is_queued() || $this->is_processing() || $this->is_paused() || $this->is_cancelled();
+	}
+
+	/**
+	 * Get name.
+	 *
+	 * @return string
+	 */
+	public function get_name() {
+		return __( 'Copy Files', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -205,9 +89,39 @@ class Copy_Buckets extends Background_Tool {
 	}
 
 	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		global $as3cf;
+
+		$mesg = __( 'Would you like to copy media files from their current bucket to this new bucket?', 'amazon-s3-and-cloudfront' );
+		$mesg .= ' ';
+		$mesg .= $as3cf::more_info_link(
+			'/wp-offload-media/doc/how-to-copy-media-between-buckets/',
+			'copy+buckets',
+			'change'
+		);
+
+		return $mesg;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function get_doc_url() {
+		global $as3cf;
+
+		$args = array( 'utm_campaign' => 'copy+buckets' );
+
+		return $as3cf::dbrains_url( '/wp-offload-media/doc/how-to-copy-media-between-buckets/', $args, 'change' );
+	}
+
+	/**
 	 * Message for error notice.
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */

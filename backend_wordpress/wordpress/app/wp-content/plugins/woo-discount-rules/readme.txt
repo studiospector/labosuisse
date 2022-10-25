@@ -4,7 +4,7 @@ Donate link: https://flycart.org/
 Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
 Requires at least: 4.4.1
 Tested up to: 6.0
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -335,6 +335,13 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.4.5 - 27/09/22 =
+* Improvement: Additional param on the event advanced_woo_discount_rules_strikeout_price_html [Core].
+* Improvement: Backend field validation [Core and Pro].
+* Improvement: Condition and filter matches on any operation [Core and Pro].
+* Fix: Applying discount more than discount quantity on set and BXGY [Pro]
+* Fix: Quantity issue on set discount while manual request [Pro].
 
 = 2.4.4 - 09/08/22 =
 * Improvement: Event: advanced_woo_discount_rules_is_valid_filter_type

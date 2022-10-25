@@ -228,14 +228,39 @@ class PMXE_Admin_Manage extends PMXE_Controller_Admin
         $item->fix_template_options();
 
         $default = PMXE_Plugin::get_default_import_options();
-        $DefaultOptions = $item->options + $default;
+        $defaultOptions = $item->options + $default;
         if (empty($item->options['export_variations'])) {
-            $DefaultOptions['export_variations'] = XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION;
+            $defaultOptions['export_variations'] = XmlExportEngine::VARIABLE_PRODUCTS_EXPORT_PARENT_AND_VARIATION;
         }
         if (empty($item->options['export_variations_title'])) {
-            $DefaultOptions['export_variations_title'] = XmlExportEngine::VARIATION_USE_DEFAULT_TITLE;
+            $defaultOptions['export_variations_title'] = XmlExportEngine::VARIATION_USE_DEFAULT_TITLE;
         }
-        $this->data['post'] = $post = $this->input->post($DefaultOptions);
+
+
+	    if (current_user_can(PMXE_Plugin::$capabilities)) {
+		    // Allow administrators to modify any options.
+		    $this->data['post'] = $post = $this->input->post($defaultOptions);
+
+	    }else{
+		    // Restrict options that can be modified for client mode runs.
+		    // We provide the current default values so that the run screen displays properly.
+		    $allowedUserProvidedOptions = [
+			    'export_only_new_stuff' => $defaultOptions['export_only_new_stuff'],
+			    'export_only_modified_stuff' => $defaultOptions['export_only_modified_stuff'],
+			    'include_bom' => $defaultOptions['include_bom'],
+			    'creata_a_new_export_file' => $defaultOptions['creata_a_new_export_file'],
+			    'do_not_generate_file_on_new_records' => $defaultOptions['do_not_generate_file_on_new_records'],
+			    'split_large_exports' => $defaultOptions['split_large_exports'],
+			    'split_large_exports_count' => $defaultOptions['split_large_exports_count'],
+			    'records_per_iteration' => $defaultOptions['records_per_iteration']
+		    ];
+
+		    $post = $this->input->post($allowedUserProvidedOptions);
+
+		    // Add the non-client mode configurable options.
+		    $this->data['post'] = $post = array_merge( $defaultOptions, $post);
+	    }
+
         $this->data['iteration'] = $item->iteration;
 
         if ($this->input->post('is_confirmed')) {

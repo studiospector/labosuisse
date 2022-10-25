@@ -4,15 +4,15 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Project-Id-Version: Woo Discount Rules\n"
-"POT-Creation-Date: 2022-06-21\n"
-"PO-Revision-Date: 2022-06-21"
+"POT-Creation-Date: 2022-09-27\n"
+"PO-Revision-Date: 2022-09-27"
 "Language-Team: Flycart\n"
 "MIME-Version: 1.0\n"
 "Language: \n"
 "X-Generator: Loco https://localise.biz/\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;"
 
-#: common.php:9 v2/App/Controllers/Admin/WDRAjax.php:808
+#: common.php:9 v2/App/Controllers/Admin/WDRAjax.php:812
 msgid "Invalid request"
 msgstr ""
 
@@ -288,7 +288,7 @@ msgid ""
 "<p>Note : You can also exclude products/categories.</p>"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Settings.php:464 v2/App/Helpers/Rule.php:1261
+#: v2/App/Controllers/Admin/Settings.php:464 v2/App/Helpers/Rule.php:1204
 #: v2/App/Views/Admin/Rules/Discounts/Bulk.php:59
 #: v2/App/Views/Admin/Rules/Manage.php:242
 msgid "Discount"
@@ -624,7 +624,7 @@ msgstr ""
 msgid "Authentication required"
 msgstr ""
 
-#: v2/App/Controllers/Admin/WDRAjax.php:769
+#: v2/App/Controllers/Admin/WDRAjax.php:773
 msgid "Search State"
 msgstr ""
 
@@ -670,35 +670,35 @@ msgstr ""
 msgid "<span class=\"onsale\">Sale!</span>"
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:780
-#: v2/App/Controllers/ManageDiscount.php:1000
-#: v2/App/Controllers/ManageDiscount.php:1003 v2/App/Helpers/Helper.php:271
+#: v2/App/Controllers/ManageDiscount.php:787
+#: v2/App/Controllers/ManageDiscount.php:1007
+#: v2/App/Controllers/ManageDiscount.php:1010 v2/App/Helpers/Helper.php:271
 #: v2/App/Helpers/Helper.php:272
 msgid "Cart discount"
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1069
+#: v2/App/Controllers/ManageDiscount.php:1076
 #, php-format
 msgid "Coupon \"%s\" is currently not available!"
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1284
+#: v2/App/Controllers/ManageDiscount.php:1291
 #, php-format
 msgid ""
 "Sorry, it is not possible to apply coupon <b>\"%s\"</b> as you already have "
 "a discount applied in cart."
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1298
+#: v2/App/Controllers/ManageDiscount.php:1305
 msgid "Coupon code applied successfully."
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1726
+#: v2/App/Controllers/ManageDiscount.php:1733
 #: v2/App/Views/Admin/Tabs/settings.php:441
 msgid "Discount <strong>{{title}}</strong> has been applied to your cart."
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1856
+#: v2/App/Controllers/ManageDiscount.php:1863
 msgid "You saved {{total_discount}}"
 msgstr ""
 
@@ -966,7 +966,7 @@ msgstr ""
 msgid "Bundle (Set) Discount - PRO -"
 msgstr ""
 
-#: v2/App/Helpers/Rule.php:1339 v2/App/Helpers/Rule.php:1439
+#: v2/App/Helpers/Rule.php:1282 v2/App/Helpers/Rule.php:1383
 #: v2/App/Views/Admin/Tabs/ImportExport.php:101
 msgid "Untitled Rule"
 msgstr ""
@@ -1049,7 +1049,7 @@ msgid "Skip & Deactivate"
 msgstr ""
 
 #: v2/App/Helpers/Validation.php:146 v2/App/Helpers/Validation.php:151
-#: v2/App/Helpers/Validation.php:348 v2/App/Helpers/Validation.php:545
+#: v2/App/Helpers/Validation.php:463 v2/App/Helpers/Validation.php:660
 msgid "Invalid characters"
 msgstr ""
 
@@ -1070,153 +1070,183 @@ msgstr ""
 msgid "Accepts only hex color code"
 msgstr ""
 
-#: v2/App/Helpers/Validation.php:349
+#: v2/App/Helpers/Validation.php:285 v2/App/Helpers/Validation.php:300
+#: v2/App/Helpers/Validation.php:369
+msgid "Invalid date range"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:289 v2/App/Helpers/Validation.php:339
+#: v2/App/Helpers/Validation.php:361
+msgid "Invalid input range"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:295
+msgid "Invalid input"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:326 v2/App/Helpers/Validation.php:334
+msgid "Percentage discount value must be no more than 100"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:373
+msgid "Invalid domain"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:376
+msgid "Invalid city name"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:379
+msgid "Invalid zipcode"
+msgstr ""
+
+#: v2/App/Helpers/Validation.php:464
 msgid "Accept only yes, on, 1, true"
 msgstr ""
 
-#: v2/App/Helpers/Validation.php:350
+#: v2/App/Helpers/Validation.php:465
 msgid "Should not contain any tags"
 msgstr ""
 
-#: v2/App/Helpers/Validation.php:351
+#: v2/App/Helpers/Validation.php:466
 msgid "Should not contain any tags and special characters"
 msgstr ""
 
-#: v2/App/Helpers/Validation.php:352 v2/App/Helpers/Validation.php:353
+#: v2/App/Helpers/Validation.php:467 v2/App/Helpers/Validation.php:468
 msgid "Invalid inputs"
 msgstr ""
 
-#: v2/App/Helpers/Validation.php:519
+#: v2/App/Helpers/Validation.php:634
 msgid "Validation error"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:987
+#: v2/App/Helpers/Woocommerce.php:1009
 msgid "Sunday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:988
+#: v2/App/Helpers/Woocommerce.php:1010
 msgid "Monday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:989
+#: v2/App/Helpers/Woocommerce.php:1011
 msgid "Tuesday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:990
+#: v2/App/Helpers/Woocommerce.php:1012
 msgid "Wednesday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:991
+#: v2/App/Helpers/Woocommerce.php:1013
 msgid "Thursday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:992
+#: v2/App/Helpers/Woocommerce.php:1014
 msgid "Friday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:993
+#: v2/App/Helpers/Woocommerce.php:1015
 msgid "Saturday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1004
+#: v2/App/Helpers/Woocommerce.php:1026
 msgid ""
 "Woocommerce before main content(Archive / Shop / Cat Pages / single product)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1005
+#: v2/App/Helpers/Woocommerce.php:1027
 msgid "Woocommerce archive description(Archive / Shop / Cat Pages)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1006
+#: v2/App/Helpers/Woocommerce.php:1028
 msgid "Woocommerce before shop loop(Archive / Shop / Cat Pages)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1007
+#: v2/App/Helpers/Woocommerce.php:1029
 msgid "Woocommerce after shop loop(Archive / Shop / Cat Pages)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1008
+#: v2/App/Helpers/Woocommerce.php:1030
 msgid ""
 "Woocommerce after main content(Archive / Shop / Cat Pages / single product)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1009 v2/App/Views/Admin/Tabs/settings.php:230
+#: v2/App/Helpers/Woocommerce.php:1031 v2/App/Views/Admin/Tabs/settings.php:230
 #: v2/App/Views/Admin/Tabs/settings.php:248
 msgid "Woocommerce before single product"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1010 v2/App/Views/Admin/Tabs/settings.php:232
+#: v2/App/Helpers/Woocommerce.php:1032 v2/App/Views/Admin/Tabs/settings.php:232
 #: v2/App/Views/Admin/Tabs/settings.php:250
 msgid "Woocommerce before single product summary"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1011 v2/App/Views/Admin/Tabs/settings.php:231
+#: v2/App/Helpers/Woocommerce.php:1033 v2/App/Views/Admin/Tabs/settings.php:231
 #: v2/App/Views/Admin/Tabs/settings.php:249
 msgid "Woocommerce after single product summary"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1012 v2/App/Views/Admin/Tabs/settings.php:229
+#: v2/App/Helpers/Woocommerce.php:1034 v2/App/Views/Admin/Tabs/settings.php:229
 #: v2/App/Views/Admin/Tabs/settings.php:247
 msgid "Woocommerce after single product"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1013
+#: v2/App/Helpers/Woocommerce.php:1035
 msgid "Woocommerce before cart"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1014
+#: v2/App/Helpers/Woocommerce.php:1036
 msgid "Woocommerce before cart table"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1015
+#: v2/App/Helpers/Woocommerce.php:1037
 msgid "Woocommerce before cart contents"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1016
+#: v2/App/Helpers/Woocommerce.php:1038
 msgid "Woocommerce cart contents"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1017
+#: v2/App/Helpers/Woocommerce.php:1039
 msgid "Woocommerce after cart contents"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1018
+#: v2/App/Helpers/Woocommerce.php:1040
 msgid "Woocommerce after cart table"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1019
+#: v2/App/Helpers/Woocommerce.php:1041
 msgid "Woocommerce after cart"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1020
+#: v2/App/Helpers/Woocommerce.php:1042
 msgid "Woocommerce before checkout form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1022
+#: v2/App/Helpers/Woocommerce.php:1044
 msgid "Woocommerce before checkout billing form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1023
+#: v2/App/Helpers/Woocommerce.php:1045
 msgid "Woocommerce after checkout billing form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1024
+#: v2/App/Helpers/Woocommerce.php:1046
 msgid "Woocommerce before checkout shipping form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1025
+#: v2/App/Helpers/Woocommerce.php:1047
 msgid "Woocommerce after checkout shipping form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1026
+#: v2/App/Helpers/Woocommerce.php:1048
 msgid "Woocommerce before order notes"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1027
+#: v2/App/Helpers/Woocommerce.php:1049
 msgid "Woocommerce after order notes"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1561
+#: v2/App/Helpers/Woocommerce.php:1583
 msgid "Coupon already exists in WooCommerce. Please select another name"
 msgstr ""
 

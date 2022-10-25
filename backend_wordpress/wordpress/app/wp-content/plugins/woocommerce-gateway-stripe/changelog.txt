@@ -1,5 +1,32 @@
 *** Changelog ***
 
+= 6.9.0 - 2022-10-19 =
+* Tweak - Remove remaining traces of old Stripe settings.
+* Add - Add Boleto expiration setting.
+* Add - Declare incompatibility with HPOS.
+
+= 6.8.0 - 2022-09-28 =
+* Fix - Minor adjustments for Custom Order Tables compatibility.
+* Fix - Upgrade from Payment Element beta.
+
+= 6.7.0 - 2022-09-06 =
+* Fix - Check payment method before updating payment method title.
+* Fix - Use the eslint config at the root of the repo.
+
+= 6.6.0 - 2022-08-17 =
+* Fix - Fix "Pending" text instead of numeric amount on Payment Request button on iOS.
+
+= 6.5.1 - 2022-08-01 =
+* Fix - Stripe Link missing styles and logo for email trigger button.
+* Fix - Stripe Link fatal error on `get_upe_enabled_payment_method_ids` method.
+* Fix - Remove Link beta headers on checkout.
+
+= 6.5.0 - 2022-07-28 =
+* Add - Stripe Link: Add beta headers for Stripe server requests
+* Add - Stripe Link payment method option in admin
+* Add - Stripe Link payment method on checkout form
+* Add - Stripe Link payment method on blocks checkout form
+
 = 6.4.3 - 2022-06-30 =
 * Fix - Replace unnecessary throws with empty string when keys are invalid.
 

@@ -3,7 +3,7 @@
 Plugin Name: WP All Export Pro
 Plugin URI: http://www.wpallimport.com/export/
 Description: Export any post type to a CSV or XML file. Edit the exported data, and then re-import it later using WP All Import.
-Version: 1.7.8
+Version: 1.8.1
 Author: Soflyy
 */
 
@@ -46,7 +46,7 @@ if (class_exists('PMXE_Plugin') and PMXE_EDITION == "free") {
      */
     define('PMXE_PREFIX', 'pmxe_');
 
-    define('PMXE_VERSION', '1.7.8');
+    define('PMXE_VERSION', '1.8.1');
 
     define('PMXE_EDITION', 'paid');
 
@@ -420,6 +420,18 @@ Some of the features you used in WP All Export Pro now require paid add-ons. If 
             if (!$addons_not_included && $this->addons->acfExportsExistAndNotInstalled() && current_user_can('manage_options')) {
                 $this->showDismissibleNotice(__('<strong style="font-size:16px">WP All Export Pro requires the ACF Export Add-On Pro</strong><p>Exports that contain ACF fields will not be able to run until you install the ACF Export Add-On Pro for WP All Export Pro. That add-on has been added to all customer accounts which had a WP All Export license before this requirement, free of charge.</p>', PMXE_Plugin::LANGUAGE_DOMAIN)
                     . '<p><a class="button button-primary" href="https://wpallimport.com/portal/downloads" target="_blank">' . __('Download Add-On', PMXE_Plugin::LANGUAGE_DOMAIN) . '</a></p>', 'wpae_acf_addon_not_installed_notice');
+            }
+
+            if($this->addons->wooCommerceRealTimeExportsExistAndAddonNotInstalled() && current_user_can('manage_options')) {
+                $this->showDismissibleNotice(__('<strong>WP All Export Pro:</strong> An export configured to run in real time requires the WooCommerce Export Add-On and will not export newly created records while the add-on is deactivated.</p>'), 'wpae_real_time_woocommerce_addon_not_installed_notice');
+            }
+
+            if($this->addons->userRealTimeExportsExistAndAddonNotInstalled() && current_user_can('manage_options')) {
+                $this->showDismissibleNotice(__('<strong>WP All Export Pro:</strong> An export configured to run in real time requires the User Export Add-On and will not export newly created users while the add-on is deactivated.</p>'), 'wpae_real_time_woocommerce_addon_not_installed_notice');
+            }
+
+            if($this->addons->acfRealTimeExportsExistAndNotInstalled() && current_user_can('manage_options')) {
+                $this->showDismissibleNotice(__('<strong>WP All Export Pro:</strong> An export configured to run in real time requires the ACF Export Add-On and will not export newly created records while the add-on is deactivated.</p>'), 'wpae_real_time_woocommerce_addon_not_installed_notice');
             }
 
             $functions = $uploads['basedir'] . DIRECTORY_SEPARATOR . WP_ALL_EXPORT_UPLOADS_BASE_DIRECTORY . DIRECTORY_SEPARATOR . 'functions.php';
@@ -910,6 +922,7 @@ Some of the features you used in WP All Export Pro now require paid add-ons. If 
             $export_post_type = false;
             $client_mode_enabled = false;
             $created_at = false;
+            $created_at_gmt = false;
 
             // Check if field exists
             foreach ($tablefields as $tablefield) {
@@ -918,6 +931,7 @@ Some of the features you used in WP All Export Pro now require paid add-ons. If 
                 if ('export_post_type' == $tablefield->Field) $export_post_type = true;
                 if ('client_mode_enabled' == $tablefield->Field) $client_mode_enabled= true;
                 if ('created_at' == $tablefield->Field) $created_at = true;
+                if ('created_at_gmt' == $tablefield->Field) $created_at_gmt = true;
 
             }
 
@@ -938,6 +952,10 @@ Some of the features you used in WP All Export Pro now require paid add-ons. If 
             if ( ! $created_at ){
                 $wpdb->query("ALTER TABLE {$table} ADD `created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;");
                 $wpdb->query("UPDATE {$table} SET `created_at` = `registered_on` WHERE 1");
+            }
+
+            if ( ! $created_at_gmt ){
+                $wpdb->query("ALTER TABLE {$table} ADD `created_at_gmt` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00';");
             }
 
             update_option("wp_all_export_pro_db_version", PMXE_VERSION);

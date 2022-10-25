@@ -29,7 +29,7 @@ class Enable_Media_Replace extends Integration {
 	 *
 	 * @return bool
 	 */
-	public static function is_installed() {
+	public static function is_installed(): bool {
 		if ( class_exists( 'EnableMediaReplace\EnableMediaReplacePlugin' ) || function_exists( 'enable_media_replace_init' ) ) {
 			return true;
 		}

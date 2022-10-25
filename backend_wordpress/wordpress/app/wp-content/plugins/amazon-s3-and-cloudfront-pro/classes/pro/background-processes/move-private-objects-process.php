@@ -50,7 +50,7 @@ class Move_Private_Objects_Process extends Move_Objects_Process {
 						$as3cf_item->save();
 						continue 2;
 					case self::MOVE_YES:
-						$items_to_move[ $source_id ] = [ 'prefix' => $as3cf_item->normalized_path_dir(), 'private_prefix' => $new_private_prefix ];
+						$items_to_move[ $source_id ] = array( 'prefix' => $as3cf_item->normalized_path_dir(), 'private_prefix' => $new_private_prefix );
 						break;
 				}
 			} else {
@@ -71,6 +71,6 @@ class Move_Private_Objects_Process extends Move_Objects_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished moving media files to new private paths.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished moving media files to new private paths.', 'amazon-s3-and-cloudfront' );
 	}
 }

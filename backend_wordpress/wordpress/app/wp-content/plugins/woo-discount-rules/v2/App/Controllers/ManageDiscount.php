@@ -576,6 +576,8 @@ class ManageDiscount extends Base
     function getStrikeoutPrice($original_price, $discounted_price, $format_price = true, $is_variable_product = false, $initial_price_html=false)
     {
         $separator = ($is_variable_product) ? '<br>' : '&nbsp;';
+        $original_price_raw = $original_price;
+        $discounted_price_raw = $discounted_price;
         if ($original_price == $discounted_price) {
             if ($format_price) {
                 $discounted_price = self::$woocommerce_helper->formatPrice($discounted_price);
@@ -595,7 +597,7 @@ class ManageDiscount extends Base
                 $html = '<del>' . $original_price . '</del>' . $separator . '<ins>' . $discounted_price . '</ins>';
             }
         }
-        return apply_filters('advanced_woo_discount_rules_strikeout_price_html', $html, $original_price, $discounted_price, $is_variable_product, $initial_price_html, $separator);
+        return apply_filters('advanced_woo_discount_rules_strikeout_price_html', $html, $original_price, $discounted_price, $is_variable_product, $initial_price_html, $separator, $original_price_raw, $discounted_price_raw);
     }
 
     /**

@@ -8,7 +8,7 @@
 	var hasActiveLicense = false;
 
 		// Main accordion logic
-	$('input[name="scheduling_enable"]').change(function () {
+	$('input[name="scheduling_enable"]').on('change', function () {
 
 		if ($('input[name="scheduling_enable"]:checked').val() == 1) {
 			$('#automatic-scheduling').slideDown();
@@ -287,7 +287,7 @@
 		$('#monthly_days').val($(this).data('day'));
 	});
 
-	$('input[name="scheduling_run_on"]').change(function () {
+	$('input[name="scheduling_run_on"]').on('change', function () {
 		var val = $('input[name="scheduling_run_on"]:checked').val();
 		if (val == "weekly") {
 
@@ -528,5 +528,5 @@
             }
         });
     });
-	
+
 });})(jQuery);

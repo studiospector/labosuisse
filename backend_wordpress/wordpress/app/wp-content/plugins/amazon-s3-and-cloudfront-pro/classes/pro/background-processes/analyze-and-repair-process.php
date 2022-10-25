@@ -27,7 +27,7 @@ abstract class Analyze_And_Repair_Process extends Background_Tool_Process {
 	protected function process_items_chunk( $source_type, $source_ids, $blog_id ) {
 		$processed = $source_ids;
 
-		foreach ( $source_ids as $key => $source_id ) {
+		foreach ( $source_ids as $source_id ) {
 			if ( $this->as3cf->is_attachment_served_by_provider( $source_id, true, true ) ) {
 				$this->handle_item( $source_type, $source_id, $blog_id );
 			}

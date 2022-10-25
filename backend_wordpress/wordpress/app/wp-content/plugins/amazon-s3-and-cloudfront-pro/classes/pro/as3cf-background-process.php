@@ -3,7 +3,7 @@
 abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 
 	/**
-	 * @var
+	 * @var string
 	 */
 	protected $action = 'background-process';
 
@@ -33,7 +33,7 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 		parent::__construct( $as3cf );
 
 		add_action( $this->identifier . '_cron', array( $this, 'handle_cron_healthcheck' ) );
-		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) );
+		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) ); // phpcs:ignore WordPress.WP.CronInterval
 	}
 
 	/**
@@ -127,7 +127,7 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 	 */
 	public function cancel() {
 		if ( $this->is_process_running() ) {
-			update_site_option( $this->identifier . '_status', self::STATUS_CANCELLED );
+			update_site_option( $this->get_status_key(), self::STATUS_CANCELLED );
 		} else {
 			$this->delete_all();
 		}
@@ -520,7 +520,7 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 	/**
 	 * Add cron schedules.
 	 *
-	 * @param $schedules
+	 * @param array $schedules
 	 *
 	 * @return mixed
 	 */

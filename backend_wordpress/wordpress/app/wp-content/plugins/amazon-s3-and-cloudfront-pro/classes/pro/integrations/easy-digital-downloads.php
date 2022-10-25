@@ -20,7 +20,7 @@ class Easy_Digital_Downloads extends Integration {
 	 *
 	 * @return bool
 	 */
-	public static function is_installed() {
+	public static function is_installed(): bool {
 		if ( class_exists( 'Easy_Digital_Downloads' ) ) {
 			return true;
 		}
@@ -67,9 +67,9 @@ class Easy_Digital_Downloads extends Integration {
 	/**
 	 * Uses the secure S3 url for downloads of a file
 	 *
-	 * @param $file
-	 * @param $download_files
-	 * @param $file_key
+	 * @param string $file
+	 * @param array  $download_files
+	 * @param string $file_key
 	 *
 	 * @return mixed
 	 * @throws Exception
@@ -110,7 +110,7 @@ class Easy_Digital_Downloads extends Integration {
 	/**
 	 * Apply ACL to files uploaded outside of EDD on save of EDD download files
 	 *
-	 * @param $files
+	 * @param array $files
 	 *
 	 * @return mixed
 	 */
@@ -126,7 +126,7 @@ class Easy_Digital_Downloads extends Integration {
 		$acl_handler = $this->as3cf->get_item_handler( Update_Acl_Handler::get_item_handler_key_name() );
 
 		if ( is_array( $files ) ) {
-			foreach ( $files as $key => $file ) {
+			foreach ( $files as $file ) {
 				$new_attachment_ids[] = $file['attachment_id'];
 
 				$as3cf_item = Media_Library_Item::get_by_source_id( $file['attachment_id'] );

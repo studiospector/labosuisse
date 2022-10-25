@@ -5,6 +5,8 @@ var as3cfDeactivatePluginModal = (function( $, as3cfModal ) {
 		event: {}
 	};
 
+	var wpApiSettings = window.wpApiSettings;
+
 	/**
 	 * Open modal
 	 *
@@ -24,13 +26,31 @@ var as3cfDeactivatePluginModal = (function( $, as3cfModal ) {
 		as3cfModal.setLoadingState( false );
 		as3cfModal.close();
 
-		var url = modal.event.target;
-
 		if ( 1 === parseInt( download ) ) {
-			url = as3cfpro_downloader.plugin_url;
+			// Start tool and let it redirect to Tools page.
+			modal.startTool();
+		} else {
+			// Just let page do its thing.
+			window.location = modal.event.target;
 		}
+	};
 
-		window.location = url;
+	modal.startTool = function() {
+		$.ajax( {
+			url: wpApiSettings.root + 'wp-offload-media/v1/tool/',
+			method: 'POST',
+			beforeSend: function( xhr ) {
+				xhr.setRequestHeader( 'Accept', 'application/json' );
+				xhr.setRequestHeader( 'Content-Type', 'application/json' );
+				xhr.setRequestHeader( 'X-WP-Nonce', wpApiSettings.nonce );
+			},
+			data: JSON.stringify( {
+				'id': 'downloader',
+				'action': 'start'
+			} )
+		} ).done( function( response ) {
+			window.location = as3cfpro_downloader.plugin_url;
+		} );
 	};
 
 	// Setup click handlers

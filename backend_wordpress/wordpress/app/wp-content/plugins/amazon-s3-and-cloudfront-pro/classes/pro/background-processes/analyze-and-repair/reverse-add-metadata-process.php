@@ -45,7 +45,7 @@ class Reverse_Add_Metadata_Process extends Analyze_And_Repair_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished removing items previously created with the Add Metadata tool.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished removing items previously created with the Add Metadata tool.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

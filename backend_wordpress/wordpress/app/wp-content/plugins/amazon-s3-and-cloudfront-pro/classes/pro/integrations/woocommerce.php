@@ -31,7 +31,7 @@ class Woocommerce extends Integration {
 	 *
 	 * @return bool
 	 */
-	public static function is_installed() {
+	public static function is_installed(): bool {
 		if ( class_exists( 'WooCommerce' ) ) {
 			return true;
 		}
@@ -442,7 +442,11 @@ class Woocommerce extends Integration {
 				if ( $bucket_setting === $atts['bucket'] ) {
 					$region = $this->as3cf->get_setting( 'region' );
 				} else {
-					$region = $this->as3cf->get_bucket_region( $atts['bucket'], true );
+					$region = $this->as3cf->get_bucket_region( $atts['bucket'] );
+				}
+
+				if ( is_wp_error( $region ) ) {
+					return;
 				}
 
 				try {
@@ -487,7 +491,7 @@ class Woocommerce extends Integration {
 	/**
 	 * Filter handler for set_wp_die_handler.
 	 *
-	 * @param $handler
+	 * @param array $handler
 	 *
 	 * @return array
 	 */

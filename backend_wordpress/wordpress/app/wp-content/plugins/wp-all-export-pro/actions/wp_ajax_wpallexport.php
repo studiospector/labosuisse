@@ -393,7 +393,7 @@ function pmxe_wp_ajax_wpallexport()
             'iteration' => ++$export->iteration
         ))->save();
 
-        do_action('pmxe_after_export', $export->id, $export);
+        do_action('pmxe_after_export', $export->id, $export, PMXE_Plugin::$session->file);
 
         $queue_exports = empty($export->parent_id) ? array() : get_option('wp_all_export_queue_' . $export->parent_id);
 
