@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 4.1.0
+ * @version 6.0.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -114,17 +114,17 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
 	<div class="lb-wc-sign-in-up__form-signup col-12 col-md-6">
 
         <div class="lb-wc-box-grey-small">
-            
+
             <h2 class="infobox__subtitle h4"><?php esc_html_e( 'Register', 'woocommerce' ); ?></h2>
-    
+
             <p class="lb-wc-sign-in-up__form-info"><?php echo __('Se non hai ancora un profilo, inserisci il tuo indirizzo email e una password che ti serviranno per accedere al tuo account personale e avere a disposizione tutte le informazioni sui tuoi ordini.', 'labo-suisse-theme'); ?></p>
-    
+
             <form method="post" class="woocommerce-form woocommerce-form-register register" <?php do_action( 'woocommerce_register_form_tag' ); ?> >
-    
+
                 <?php do_action( 'woocommerce_register_form_start' ); ?>
-    
+
                 <?php if ( 'no' === get_option( 'woocommerce_registration_generate_username' ) ) : ?>
-    
+
                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                         <?php
                             Timber::render('@PathViews/components/fields/input.twig', [
@@ -141,9 +141,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                             ]);
                         ?>
                     </p>
-    
+
                 <?php endif; ?>
-    
+
                 <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                     <?php
                         Timber::render('@PathViews/components/fields/input.twig', [
@@ -160,9 +160,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                         ]);
                     ?>
                 </p>
-    
+
                 <?php if ( 'no' === get_option( 'woocommerce_registration_generate_password' ) ) : ?>
-    
+
                     <p class="woocommerce-form-row woocommerce-form-row--wide form-row form-row-wide">
                         <?php
                             Timber::render('@PathViews/components/fields/input.twig', [
@@ -179,13 +179,13 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                             ]);
                         ?>
                     </p>
-    
+
                 <?php else : ?>
-    
+
                     <p><?php esc_html_e( 'A link to set a new password will be sent to your email address.', 'woocommerce' ); ?></p>
-    
+
                 <?php endif; ?>
-    
+
                 <?php do_action( 'woocommerce_register_form' ); ?>
 
                 <div class="woocommerce-privacy-policy-text">
@@ -204,7 +204,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                         ?>
                     </p>
                 </div>
-    
+
                 <p class="woocommerce-form-row form-row">
                     <?php wp_nonce_field( 'woocommerce-register', 'woocommerce-register-nonce' ); ?>
                     <?php
@@ -218,9 +218,9 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                         ]);
                     ?>
                 </p>
-    
+
                 <?php do_action( 'woocommerce_register_form_end' ); ?>
-    
+
             </form>
 
         </div>
