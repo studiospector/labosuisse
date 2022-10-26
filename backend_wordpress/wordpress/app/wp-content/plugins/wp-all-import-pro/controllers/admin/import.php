@@ -1868,6 +1868,12 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			if ( @file_exists($functions) && PMXI_Plugin::$is_php_allowed)
 				require_once $functions;
 
+            if ($post['is_delete_missing'] && !empty($post['delete_missing_action']) && $post['delete_missing_action'] == 'keep') {
+                if (empty($post['is_send_removed_to_trash']) && empty($post['is_change_post_status_of_removed']) && empty($post['is_update_missing_cf']) && empty($post['missing_records_stock_status'])) {
+                    $this->errors->add('delete-missing-validation', __('At least one option must be selected.', 'wp_all_import_plugin'));
+                }
+            }
+
 			if ($post['is_import_specified']) {
 				if (empty($post['import_specified'])) {
 					$this->errors->add('form-validation', __('Records to import must be specified or uncheck `Import only specified records` option to process all records', 'wp_all_import_plugin'));
@@ -2060,7 +2066,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 
 						if ( (int) $loop === 0 ){
 
-							$this->warnings->add('root-element-validation', __('<strong>Warning:</strong> this file does not have the same structure as the last file associated with this import. WP All Import won\'t be able to import this file with your current settings. Probably you\'ll need to adjust your XPath in the "Configure Advanced Settings" box below, and reconfigure your import by clicking "Edit" on the Manage Imports page.', 'wp_all_import_plugin'));
+							$this->warnings->add('root-element-validation', __('<strong>Warning:</strong> this import file does not have the same structure as the last file associated with this import. WP All Import won\'t be able to import this file with your current settings. You\'ll probably need to adjust your XPath in the "Configure Advanced Settings" box below, and reconfigure your import by clicking "Edit" on the Manage Imports page.', 'wp_all_import_plugin'));
 
 							$file = new PMXI_Chunk($upload_result['filePath'], array('element' => ( ! empty($upload_result['root_element'])) ? $upload_result['root_element'] : ''));
 
@@ -2423,33 +2429,13 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 					'created' => 0,
 					'updated' => 0,
 					'skipped' => 0,
-					'deleted' => 0
+					'deleted' => 0,
+					'changed_missing' => 0
 				))->update();
 			}
 
 			// Add history log.
-            if ($import->options['custom_type'] == 'taxonomies') {
-                $tx = get_taxonomy($import->options['taxonomy_type']);
-                $custom_type = new stdClass();
-				$custom_type->labels = new stdClass();
-				$custom_type->labels->name = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
-				$custom_type->labels->singular_name = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
-            }
-            elseif ($import->options['custom_type'] == 'comments'){
-                $custom_type = new stdClass();
-                $custom_type->labels = new stdClass();
-                $custom_type->labels->name = __('Comments', 'wp_all_import_plugin');
-                $custom_type->labels->singular_name = __('Comment', 'wp_all_import_plugin');
-            }
-            elseif ($import->options['custom_type'] == 'woo_reviews'){
-                $custom_type = new stdClass();
-                $custom_type->labels = new stdClass();
-                $custom_type->labels->name = __('Reviews', 'wp_all_import_plugin');
-                $custom_type->labels->singular_name = __('Review', 'wp_all_import_plugin');
-            }
-            else{
-                $custom_type = get_post_type_object( $import->options['custom_type'] );
-            }
+            $custom_type = wp_all_import_custom_type_labels($import->options['custom_type'], $import->options['taxonomy_type']);
 
 			// Unlink previous logs.
 			$by = array();
@@ -2467,11 +2453,19 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 				}
 			}
 
+            $log_msg = sprintf(__("%d %s created %d updated %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->skipped);
+            if ($import->options['is_delete_missing']) {
+                if (empty($import->options['delete_missing_action']) || $import->options['delete_missing_action'] != 'remove') {
+                    $log_msg = sprintf(__("%d %s created %d updated %d changed missing %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->changed_missing, $import->skipped);
+                } else {
+                    $log_msg = sprintf(__("%d %s created %d updated %d deleted %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->deleted, $import->skipped);
+                }
+            }
 			$history_log->set(array(
 				'import_id' => $import->id,
 				'date' => date('Y-m-d H:i:s'),
 				'type' => ( PMXI_Plugin::$session->action != 'continue' ) ? 'manual' : 'continue',
-				'summary' => sprintf(__("%d %s created %d updated %d deleted %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->deleted, $import->skipped)
+				'summary' => $log_msg
 			))->save();
 
 			PMXI_Plugin::$session->set('history_id', $history_log->id);
@@ -2767,31 +2761,19 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 										$loop = 0;
 									} else {
 										if ( ! $history_log->isEmpty()) {
-                                            if ($import->options['custom_type'] == 'taxonomies') {
-                                                $tx = get_taxonomy($import->options['taxonomy_type']);
-                                                $custom_type = new stdClass();
-												$custom_type->labels = new stdClass();
-												$custom_type->labels->name = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
-												$custom_type->labels->singular_name = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
+                                            $custom_type = wp_all_import_custom_type_labels($import->options['custom_type'], $import->options['taxonomy_type']);
+                                            $log_msg = sprintf(__("%d %s created %d updated %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->skipped);
+                                            if ($import->options['is_delete_missing']) {
+                                                if (empty($import->options['delete_missing_action']) || $import->options['delete_missing_action'] != 'remove') {
+                                                    $log_msg = sprintf(__("%d %s created %d updated %d changed missing %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->changed_missing, $import->skipped);
+                                                } else {
+                                                    $log_msg = sprintf(__("%d %s created %d updated %d deleted %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->deleted, $import->skipped);
+                                                }
                                             }
-                                            elseif ($import->options['custom_type'] == 'comments'){
-                                                $custom_type = new stdClass();
-                                                $custom_type->labels = new stdClass();
-                                                $custom_type->labels->name = __('Comments', 'wp_all_import_plugin');
-                                                $custom_type->labels->singular_name = __('Comment', 'wp_all_import_plugin');
-                                            }
-                                            elseif ($import->options['custom_type'] == 'woo_reviews'){
-                                                $custom_type = new stdClass();
-                                                $custom_type->labels = new stdClass();
-                                                $custom_type->labels->name = __('Reviews', 'wp_all_import_plugin');
-                                                $custom_type->labels->singular_name = __('Review', 'wp_all_import_plugin');
-                                            }
-                                            else{
-                                                $custom_type = get_post_type_object( $import->options['custom_type'] );
-                                            }
+
 											$history_log->set(array(
 												'time_run' => time() - strtotime($history_log->date),
-												'summary' => sprintf(__("%d %s created %d updated %d deleted %d skipped", "wp_all_import_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->deleted, $import->skipped)
+												'summary' => $log_msg
 											))->update();
 										}
 										unset($file);
@@ -2812,6 +2794,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 											'skipped' => $import->skipped,
 											'skipped_by_hash' => PMXI_Plugin::$session->skipped,
                                             'deleted' => $import->deleted,
+                                            'changed_missing' => $import->changed_missing,
                                             'percentage' => ceil(($processed_records/$import->count) * 100),
 											'warnings' => PMXI_Plugin::$session->warnings,
 											'errors' => PMXI_Plugin::$session->errors,
@@ -2861,6 +2844,7 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 					'skipped' => $import->skipped,
                     'skipped_by_hash' => PMXI_Plugin::$session->skipped,
 					'deleted' => $import->deleted,
+					'changed_missing' => $import->changed_missing,
 					'percentage' => 99,
 					'warnings' => PMXI_Plugin::$session->warnings,
 					'errors' => PMXI_Plugin::$session->errors,
@@ -2895,31 +2879,19 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 			wp_defer_comment_counting(false);
 
 			// add history log
-            if ($import->options['custom_type'] == 'taxonomies'){
-                $tx = get_taxonomy($import->options['taxonomy_type']);
-                $custom_type = new stdClass();
-				$custom_type->labels = new stdClass();
-				$custom_type->labels->name = empty($tx->labels->name) ? __('Taxonomy Terms', 'wp_all_import_plugin') : $tx->labels->name;
-				$custom_type->labels->singular_name = empty($tx->labels->singular_name) ? __('Taxonomy Term', 'wp_all_import_plugin') : $tx->labels->singular_name;
+            $custom_type = wp_all_import_custom_type_labels($import->options['custom_type'], $import->options['taxonomy_type']);
+            $log_msg = sprintf(__("%d %s created %d updated %d skipped", "pmxi_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->skipped);
+            if ($import->options['is_delete_missing']) {
+                if (empty($import->options['delete_missing_action']) || $import->options['delete_missing_action'] != 'remove') {
+                    $log_msg = sprintf(__("%d %s created %d updated %d changed missing %d skipped", "pmxi_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->changed_missing, $import->skipped);
+                } else {
+                    $log_msg = sprintf(__("%d %s created %d updated %d deleted %d skipped", "pmxi_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->deleted, $import->skipped);
+                }
             }
-            elseif ($import->options['custom_type'] == 'comments'){
-                $custom_type = new stdClass();
-                $custom_type->labels = new stdClass();
-                $custom_type->labels->name = __('Comments', 'wp_all_import_plugin');
-                $custom_type->labels->singular_name = __('Comment', 'wp_all_import_plugin');
-            }
-            elseif ($import->options['custom_type'] == 'woo_reviews'){
-                $custom_type = new stdClass();
-                $custom_type->labels = new stdClass();
-                $custom_type->labels->name = __('Reviews', 'wp_all_import_plugin');
-                $custom_type->labels->singular_name = __('Review', 'wp_all_import_plugin');
-            }
-            else{
-                $custom_type = get_post_type_object( $import->options['custom_type'] );
-            }
+
 			$history_log->set(array(
 				'time_run' => time() - strtotime($history_log->date),
-				'summary' => sprintf(__("%d %s created %d updated %d deleted %d skipped", "pmxi_plugin"), $import->created, ( ($import->created == 1) ? $custom_type->labels->singular_name : $custom_type->labels->name ), $import->updated, $import->deleted, $import->skipped)
+				'summary' => $log_msg
 			))->update();
 
 			// clear import session
@@ -2938,8 +2910,8 @@ class PMXI_Admin_Import extends PMXI_Controller_Admin {
 echo <<<COMPLETE
 <script type="text/javascript">
 //<![CDATA[
-(function($){	
-	$('#status').html('$msg');	
+(function($){
+	$('#status').html('$msg');
 	window.onbeforeunload = false;
 })(jQuery);
 //]]>
@@ -2956,6 +2928,7 @@ COMPLETE;
 					'skipped' => $import->skipped,
                     'skipped_by_hash' => PMXI_Plugin::$session->skipped,
                     'deleted' => $import->deleted,
+                    'changed_missing' => $import->changed_missing,
                     'percentage' => 100,
 					'warnings' => PMXI_Plugin::$session->warnings,
 					'errors' => PMXI_Plugin::$session->errors,

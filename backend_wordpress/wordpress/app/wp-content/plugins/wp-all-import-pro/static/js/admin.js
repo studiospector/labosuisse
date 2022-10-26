@@ -2383,6 +2383,70 @@
     });
     // [\ Delete Import]
 
+	let get_delete_missing_notice_type = function() {
+		if (!$('input[name="is_delete_missing"]').is(':checked')) {
+			return 0;
+		}
+		if ($('input[name="delete_missing_logic"]:checked').val() == 'import' && $('input[name="delete_missing_action"]:checked').val() == 'keep' && $('input[name="is_send_removed_to_trash"]').is(':checked')) {
+			return 1;
+		}
+		if ($('input[name="delete_missing_logic"]:checked').val() == 'import' && $('input[name="delete_missing_action"]:checked').val() == 'keep' && $('input[name="is_change_post_status_of_removed"]').is(':checked')) {
+			return 2;
+		}
+		if ($('input[name="delete_missing_logic"]:checked').val() == 'import' && $('input[name="delete_missing_action"]:checked').val() == 'remove') {
+			return 3;
+		}
+		if ($('input[name="delete_missing_logic"]:checked').val() == 'all' && $('input[name="delete_missing_action"]:checked').val() == 'keep' && $('input[name="is_send_removed_to_trash"]').is(':checked')) {
+			return 4;
+		}
+		if ($('input[name="delete_missing_logic"]:checked').val() == 'all' && $('input[name="delete_missing_action"]:checked').val() == 'keep' && $('input[name="is_change_post_status_of_removed"]').is(':checked')) {
+			return 5;
+		}
+		if ($('input[name="delete_missing_logic"]:checked').val() == 'all' && $('input[name="delete_missing_action"]:checked').val() == 'remove') {
+			return 6;
+		}
+		return 0;
+	}
+
+	function is_valid_delete_missing_options() {
+		let is_valid = true;
+		if ( $('input[name="is_delete_missing"]').is(':checked') && $('input[name="delete_missing_action"]:checked').val() == 'keep' ) {
+			if ( ! $('input[name="is_send_removed_to_trash"]').is(':checked')
+				&& ! $('input[name="is_change_post_status_of_removed"]').is(':checked')
+				&& ! $('input[name="is_update_missing_cf"]').is(':checked')
+				&& ! $('input[name="missing_records_stock_status"]').is(':checked')
+			) {
+				is_valid = false;
+			}
+		}
+		return is_valid;
+	}
+
+	let delete_missing_helper_text = function() {
+		$('.helper-text').hide();
+		if ( is_valid_delete_missing_options() ) {
+			$('.delete-missing-error').addClass('hidden');
+			$('.switcher-target-delete_missing_action_keep').removeClass('delete-missing-error-wrapper');
+		} else {
+			$('.delete-missing-error').removeClass('hidden');
+			$('.switcher-target-delete_missing_action_keep').addClass('delete-missing-error-wrapper');
+		}
+		let notice_type = get_delete_missing_notice_type();
+		// Show notice if any.
+		if (notice_type) {
+			$('.helper-text-' + notice_type).find('.status_of_removed').html($('select[name="status_of_removed"]').val());
+			$('.helper-text-' + notice_type).show();
+		}
+	};
+
+	delete_missing_helper_text();
+	$('.switcher-target-is_delete_missing').find('input, select').on('change', function() {
+		delete_missing_helper_text();
+	});
+	$('#is_delete_missing').on('change', function() {
+		delete_missing_helper_text();
+	});
+
     if ($('.switcher-target-update_choosen_data').length) {
     	var $re_import_options = $('.switcher-target-update_choosen_data');
     	var $toggle_re_import_options = $('.wpallimport-trigger-options');

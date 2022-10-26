@@ -42,7 +42,7 @@
 							<h2><?php _e('First, specify how you want to import your data', 'wp_all_import_plugin'); ?></h2>
 							<?php else: ?>
 							<h2 style="margin-bottom: 10px;"><?php _e('First, specify previously exported file', 'wp_all_import_plugin'); ?></h2>
-							<h2 class="wp_all_import_subheadline"><?php _e('The data in this file can be modified, but the structure of the file (column/element names) should not change.', 'wp_all_import_plugin'); ?></h2>
+							<h2 class="wp_all_import_subheadline"><?php _e('The data in this import file can be modified, but the structure of the file (column/element names) should not change.', 'wp_all_import_plugin'); ?></h2>
 							<?php endif; ?>
 							<a class="wpallimport-import-from wpallimport-upload-type <?php echo ('upload' == $post['type']) ? 'selected' : '' ?>" rel="upload_type" href="javascript:void(0);">
 								<span class="wpallimport-icon"></span>
@@ -254,7 +254,7 @@
 
 								<input type="hidden" name="wizard_type" value="<?php echo $post['wizard_type']; ?>"/>
 
-								<h2 style="margin-top:0;"><?php _e('Import data from this file into...', 'wp_all_import_plugin'); ?></h2>
+								<h2 style="margin-top:0;"><?php _e('Import data from this import file into...', 'wp_all_import_plugin'); ?></h2>
 
 								<div class="wpallimport-choose-data-type">
 									<a class="wpallimport-import-to rad4 wpallimport-to-new-items <?php if ($post['wizard_type'] == 'new') echo 'wpallimport-import-to-checked'; ?>" rel="new" href="javascript:void(0);">
