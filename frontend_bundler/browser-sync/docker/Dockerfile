@@ -1,4 +1,4 @@
-FROM node:12-alpine
+FROM node:16.17.1-alpine
 RUN npm -g install browser-sync
 
 COPY ./docker/utils/wait-for.sh /usr/bin/wait-for
