@@ -1,6 +1,6 @@
 # Frontend stage
 
-FROM node:12-alpine as frontend_bundler
+FROM node:16.17.1-alpine as frontend_bundler
 
 ARG LB_API_TOKEN
 ARG LB_API_URL
