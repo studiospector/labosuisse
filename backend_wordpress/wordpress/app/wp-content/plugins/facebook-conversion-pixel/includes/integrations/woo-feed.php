@@ -36,15 +36,24 @@ function fca_pc_do_feed_footer() {
 }
 
 function fca_pc_do_feed_body( $options, $offset = 0 ) {
-
-	$search = array(
+    $search = array(
 		'post_type' => 'product',
 		'post_status' => 'publish',
 		'posts_per_page' => 100,
 		'offset' => 100 * $offset,
 		'orderby' => 'ID',
-		'order' => 'ASC'
+		'order' => 'ASC',
 	);
+
+    $lang = $_GET['lang'] ?? 'it';
+
+    if($lang and in_array($lang, ['it','en'])) {
+        global $sitepress;
+        $sitepress->switch_lang($lang);
+
+        $search['suppress_filters'] = false;
+        $search['language'] = $lang;
+    }
 
 	$products = get_posts( $search );
 
@@ -61,9 +70,9 @@ function fca_pc_do_feed_body( $options, $offset = 0 ) {
 		if ( count ( array_intersect( $cat_ids, $excluded_product_cats ) ) !== 0 ) {
 			continue;
 		}
-		
+
 		fca_pc_woo_feed_item( $wc_product, $options );
-		
+
 		clean_post_cache( $p->ID );
 	}
 
@@ -78,8 +87,8 @@ function fca_pc_woo_feed_item( $wc_product, $options ) {
 	$woo_desc_mode = empty( $options['woo_desc_mode'] ) ? 'description' : $options['woo_desc_mode'];
 	$description =  $woo_desc_mode == 'description' ? $wc_product->get_description() : $wc_product->get_short_description();
 	if ( empty( $description ) ) {
-		$description = esc_attr__('Description is not available.', 'fca_pc');	
-	}	
+		$description = esc_attr__('Description is not available.', 'fca_pc');
+	}
 	$product_link = $wc_product->get_permalink();
 	$product_image = fca_pc_woo_product_image( $wc_product->get_id() );
 
@@ -102,11 +111,11 @@ function fca_pc_woo_feed_item( $wc_product, $options ) {
 				<g:price><?php fca_pc_woo_feed_price( $wc_product, $variation ) ?></g:price>
 				<?php fca_pc_woo_feed_extra_fields( $wc_product, $variation[ 'attributes' ] ) ?>
 				<?php fca_pc_woo_feed_additional_images( $wc_product, $product_image, $variation ) ?>
-				<?php fca_pc_woo_feed_google_product_cateogry( $wc_product, $options ) ?>	
+				<?php fca_pc_woo_feed_google_product_cateogry( $wc_product, $options ) ?>
 			</item>
 		<?php }
-	} else { 
-	
+	} else {
+
 		?>
 		<item>
 			<g:id><?php echo fca_pc_encode_xml( $product_id ) ?></g:id>
@@ -122,7 +131,7 @@ function fca_pc_woo_feed_item( $wc_product, $options ) {
 			<?php fca_pc_woo_feed_additional_images( $wc_product, $product_image ) ?>
 			<?php fca_pc_woo_feed_google_product_cateogry( $wc_product, $options ) ?>
 		</item><?php
-	}	
+	}
 }
 
 function fca_pc_woo_feed_price( $wc_product, $variation = null ) {
@@ -185,9 +194,9 @@ function fca_pc_woo_feed_extra_fields( $wc_product, $attributes = null ) {
 }
 
 function fca_pc_woo_feed_google_product_cateogry( $wc_product, $options ) {
-	
+
 	$google_product_category = empty( $options['google_product_category'] ) ? $wc_product->get_attribute( 'google_product_category' ) : $options['google_product_category'];
-	
+
 	if ( $google_product_category ) {
 		echo '<g:google_product_category>' . fca_pc_encode_xml( $google_product_category ) . "</g:google_product_category>\n";
 	}
@@ -228,7 +237,7 @@ function fca_pc_expand_product_title( $variations ) {
 
 }
 function fca_pc_woo_feed_additional_images( $wc_product, $default_image, $variation = null ) {
-	
+
 	forEach ( fca_pc_get_additional_image_url( $wc_product, $variation ) as $image_url ) {
 		if ( $image_url && $image_url !== $default_image ) {
 			echo "\t<additional_image_link>". fca_pc_encode_xml( $image_url ) . "</additional_image_link>\n";
