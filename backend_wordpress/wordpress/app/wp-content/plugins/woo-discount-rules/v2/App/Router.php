@@ -144,8 +144,10 @@ class Router
                 }
             }
 
-            //Fix mini cart strikeout not displays while remove an cart item in cart.
-            add_action('woocommerce_before_mini_cart', array(self::$manage_discount, 'reCalculateCartTotal'), 10);
+            // ensure cart and mini-cart price and strikeout display
+            add_action('woocommerce_before_cart', array(self::$manage_discount, 'calculateCartTotalIfIsNotCalculated'), 10);
+            add_action('woocommerce_before_mini_cart', array(self::$manage_discount, 'calculateCartTotalIfIsNotCalculated'), 10);
+            add_action('woocommerce_before_mini_cart_contents', array(self::$manage_discount, 'calculateCartTotalIfIsNotCalculated'), 10);
             //cart
             add_action('woocommerce_before_calculate_totals', array(self::$manage_discount, 'applyCartProductDiscount'), 1000);
             add_action('woocommerce_cart_item_price', array(self::$manage_discount, 'getCartPriceHtml'), 1000, 3);

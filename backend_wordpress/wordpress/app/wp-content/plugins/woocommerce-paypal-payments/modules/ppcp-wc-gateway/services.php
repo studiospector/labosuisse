@@ -22,6 +22,7 @@ use WooCommerce\PayPalCommerce\Button\Helper\MessagesDisclaimers;
 use WooCommerce\PayPalCommerce\Onboarding\Environment;
 use WooCommerce\PayPalCommerce\Onboarding\Render\OnboardingOptionsRenderer;
 use WooCommerce\PayPalCommerce\Onboarding\State;
+use WooCommerce\PayPalCommerce\Subscription\Helper\SubscriptionHelper;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\FeesRenderer;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\OrderTablePaymentStatusColumn;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\PaymentStatusOrderDetail;
@@ -225,9 +226,9 @@ return array(
 	'wcgateway.settings.sections'                          => static function ( ContainerInterface $container ): array {
 		$sections = array(
 			Settings::CONNECTION_TAB_ID => __( 'Connection', 'woocommerce-paypal-payments' ),
-			PayPalGateway::ID           => __( 'PayPal Checkout', 'woocommerce-paypal-payments' ),
-			CreditCardGateway::ID       => __( 'PayPal Card Processing', 'woocommerce-paypal-payments' ),
-			CardButtonGateway::ID       => __( 'PayPal Card Button', 'woocommerce-paypal-payments' ),
+			PayPalGateway::ID           => __( 'Standard Payments', 'woocommerce-paypal-payments' ),
+			CreditCardGateway::ID       => __( 'Advanced Card Processing', 'woocommerce-paypal-payments' ),
+			CardButtonGateway::ID       => __( 'Standard Card Button', 'woocommerce-paypal-payments' ),
 			OXXOGateway::ID             => __( 'OXXO', 'woocommerce-paypal-payments' ),
 			PayUponInvoiceGateway::ID   => __( 'Pay upon Invoice', 'woocommerce-paypal-payments' ),
 		);
@@ -372,9 +373,9 @@ return array(
 
 		$sections = array(
 			Settings::CONNECTION_TAB_ID => __( 'Connection', 'woocommerce-paypal-payments' ),
-			PayPalGateway::ID           => __( 'PayPal Checkout', 'woocommerce-paypal-payments' ),
-			CreditCardGateway::ID       => __( 'PayPal Card Processing', 'woocommerce-paypal-payments' ),
-			CardButtonGateway::ID       => __( 'PayPal Card Button', 'woocommerce-paypal-payments' ),
+			PayPalGateway::ID           => __( 'Standard Payments', 'woocommerce-paypal-payments' ),
+			CreditCardGateway::ID       => __( 'Advanced Card Processing', 'woocommerce-paypal-payments' ),
+			CardButtonGateway::ID       => __( 'Standard Card Button', 'woocommerce-paypal-payments' ),
 		);
 
 		$current_page_id = $container->get( 'wcgateway.current-ppcp-settings-page-id' );
@@ -401,9 +402,12 @@ return array(
 		$onboarding_options_renderer = $container->get( 'onboarding.render-options' );
 		assert( $onboarding_options_renderer instanceof OnboardingOptionsRenderer );
 
+		$subscription_helper = $container->get( 'subscription.helper' );
+		assert( $subscription_helper instanceof SubscriptionHelper );
+
 		$fields              = array(
 			'checkout_settings_heading'              => array(
-				'heading'      => __( 'PayPal Checkout Settings', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Standard Payments Settings', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -432,7 +436,7 @@ return array(
 				'title'        => __( 'Enable/Disable', 'woocommerce-paypal-payments' ),
 				'desc_tip'     => true,
 				'description'  => __( 'Once enabled, the Credit Card option will show up in the checkout.', 'woocommerce-paypal-payments' ),
-				'label'        => __( 'Enable PayPal Card Processing', 'woocommerce-paypal-payments' ),
+				'label'        => __( 'Enable Advanced Card Processing', 'woocommerce-paypal-payments' ),
 				'type'         => 'checkbox',
 				'default'      => false,
 				'gateway'      => 'dcc',
@@ -614,7 +618,7 @@ return array(
 			'subscription_behavior_when_vault_fails' => array(
 				'title'                => __( 'Subscription capture behavior if Vault fails', 'woocommerce-paypal-payments' ),
 				'type'                 => 'select',
-				'class'                => array(),
+				'classes'              => $subscription_helper->plugin_is_active() ? array() : array( 'hide' ),
 				'input_class'          => array( 'wc-enhanced-select' ),
 				'default'              => 'void_auth',
 				'desc_tip'             => true,
@@ -656,7 +660,7 @@ return array(
 				'type'         => 'checkbox',
 				'desc_tip'     => true,
 				'label'        => __( 'Enable a separate payment gateway for the branded PayPal Debit or Credit Card button.', 'woocommerce-paypal-payments' ),
-				'description'  => __( 'By default, the Debit or Credit Card button is displayed in the PayPal Checkout payment gateway. This setting creates a second gateway for the Card button.', 'woocommerce-paypal-payments' ),
+				'description'  => __( 'By default, the Debit or Credit Card button is displayed in the Standard Payments payment gateway. This setting creates a second gateway for the Card button.', 'woocommerce-paypal-payments' ),
 				'default'      => $container->get( 'wcgateway.settings.allow_card_button_gateway.default' ),
 				'screens'      => array(
 					State::STATE_START,
@@ -668,7 +672,7 @@ return array(
 
 			// General button styles.
 			'button_style_heading'                   => array(
-				'heading'      => __( 'Checkout', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Checkout Buttons', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -676,7 +680,12 @@ return array(
 				),
 				'requirements' => array(),
 				'gateway'      => 'paypal',
-				'description'  => __( 'Customize the appearance of PayPal Checkout on the checkout page.', 'woocommerce-paypal-payments' ),
+				'description'  => sprintf(
+				// translators: %1$s and %2$s are the opening and closing of HTML <a> tag.
+					__( 'Customize the appearance of the PayPal smart buttons on the %1$sCheckout page%2$s.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#button-on-checkout" target="_blank">',
+					'</a>'
+				),
 			),
 			'button_enabled'                         => array(
 				'title'        => __( 'Enable buttons on Checkout', 'woocommerce-paypal-payments' ),
@@ -745,7 +754,7 @@ return array(
 				),
 				'options'      => array(
 					'paypal'   => __( 'PayPal', 'woocommerce-paypal-payments' ),
-					'checkout' => __( 'PayPal Checkout', 'woocommerce-paypal-payments' ),
+					'checkout' => __( 'Checkout', 'woocommerce-paypal-payments' ),
 					'buynow'   => __( 'PayPal Buy Now', 'woocommerce-paypal-payments' ),
 					'pay'      => __( 'Pay with PayPal', 'woocommerce-paypal-payments' ),
 				),
@@ -803,7 +812,7 @@ return array(
 				'gateway'      => 'paypal',
 			),
 			'message_heading'                        => array(
-				'heading'      => __( 'Pay Later on Checkout', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Pay Later messaging on Checkout', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -811,7 +820,14 @@ return array(
 				),
 				'requirements' => array( 'messages' ),
 				'gateway'      => 'paypal',
-				'description'  => str_replace( '<a>', '<a href="' . $messages_disclaimers->link_for_country() . '" target="_blank">', __( 'Displays Pay Later messaging for available offers. Restrictions apply. <a>Click here to learn more</a>. Pay Later button will show for eligible buyers and PayPal determines eligibility.', 'woocommerce-paypal-payments' ) ),
+				'description'  => sprintf(
+				// translators: %1$s, %2$s, %3$s and %4$s are the opening and closing of HTML <a> tag.
+					__( 'Displays Pay Later messaging on the Checkout page for available offers. Restrictions apply. %1$sClick here to learn more%2$s. This setting does not %3$sdisable the Pay Later button%4$s which will show for eligible buyers.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#pay-later-messaging" target="_blank">',
+					'</a>',
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#disable-pay-later" target="_blank">',
+					'</a>'
+				),
 				'class'        => array( 'ppcp-subheading' ),
 			),
 			'message_enabled'                        => array(
@@ -973,7 +989,7 @@ return array(
 
 			// Single product page.
 			'button_product_heading'                 => array(
-				'heading'      => __( 'Single Product Page', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Single Product Page Buttons', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -981,7 +997,12 @@ return array(
 				),
 				'requirements' => array(),
 				'gateway'      => 'paypal',
-				'description'  => __( 'Customize the appearance of PayPal Checkout on the single product page.', 'woocommerce-paypal-payments' ),
+				'description'  => sprintf(
+				// translators: %1$s and %2$s are the opening and closing of HTML <a> tag.
+					__( 'Customize the appearance of the PayPal smart buttons on the %1$sSingle Product Page%2$s.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#button-on-single-product" target="_blank">',
+					'</a>'
+				),
 			),
 			'button_product_enabled'                 => array(
 				'title'        => __( 'Enable buttons on Single Product', 'woocommerce-paypal-payments' ),
@@ -1050,7 +1071,7 @@ return array(
 				),
 				'options'      => array(
 					'paypal'   => __( 'PayPal', 'woocommerce-paypal-payments' ),
-					'checkout' => __( 'PayPal Checkout', 'woocommerce-paypal-payments' ),
+					'checkout' => __( 'Checkout', 'woocommerce-paypal-payments' ),
 					'buynow'   => __( 'PayPal Buy Now', 'woocommerce-paypal-payments' ),
 					'pay'      => __( 'Pay with PayPal', 'woocommerce-paypal-payments' ),
 				),
@@ -1109,7 +1130,7 @@ return array(
 			),
 
 			'message_product_heading'                => array(
-				'heading'      => __( 'Pay Later on Single Product Page', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Pay Later messaging on Single Product Page', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -1117,7 +1138,14 @@ return array(
 				),
 				'requirements' => array( 'messages' ),
 				'gateway'      => 'paypal',
-				'description'  => str_replace( '<a>', '<a href="' . $messages_disclaimers->link_for_country() . '" target="_blank">', __( 'Displays Pay Later messaging for available offers. Restrictions apply. <a>Click here to learn more</a>. Pay Later button will show for eligible buyers and PayPal determines eligibility.', 'woocommerce-paypal-payments' ) ),
+				'description'  => sprintf(
+				// translators: %1$s, %2$s, %3$s and %4$s are the opening and closing of HTML <a> tag.
+					__( 'Displays Pay Later messaging on the Single Product Page for available offers. Restrictions apply. %1$sClick here to learn more%2$s. This setting does not %3$sdisable the Pay Later button%4$s which will show for eligible buyers.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#pay-later-messaging" target="_blank">',
+					'</a>',
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#disable-pay-later" target="_blank">',
+					'</a>'
+				),
 				'class'        => array( 'ppcp-subheading' ),
 			),
 			'message_product_enabled'                => array(
@@ -1279,7 +1307,7 @@ return array(
 
 			// Cart settings.
 			'button_cart_heading'                    => array(
-				'heading'      => __( 'Cart', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Cart Buttons', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -1287,10 +1315,15 @@ return array(
 				),
 				'requirements' => array(),
 				'gateway'      => 'paypal',
-				'description'  => __( 'Customize the appearance of PayPal Checkout on the cart page.', 'woocommerce-paypal-payments' ),
+				'description'  => sprintf(
+				// translators: %1$s and %2$s are the opening and closing of HTML <a> tag.
+					__( 'Customize the appearance of the PayPal smart buttons %1$son the Cart page%2$s.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#button-on-cart" target="_blank">',
+					'</a>'
+				),
 			),
 			'button_cart_enabled'                    => array(
-				'title'        => __( 'Buttons on Cart', 'woocommerce-paypal-payments' ),
+				'title'        => __( 'Enable buttons on Cart', 'woocommerce-paypal-payments' ),
 				'type'         => 'checkbox',
 				'label'        => __( 'Enable on Cart', 'woocommerce-paypal-payments' ),
 				'default'      => true,
@@ -1356,7 +1389,7 @@ return array(
 				),
 				'options'      => array(
 					'paypal'   => __( 'PayPal', 'woocommerce-paypal-payments' ),
-					'checkout' => __( 'PayPal Checkout', 'woocommerce-paypal-payments' ),
+					'checkout' => __( 'Checkout', 'woocommerce-paypal-payments' ),
 					'buynow'   => __( 'PayPal Buy Now', 'woocommerce-paypal-payments' ),
 					'pay'      => __( 'Pay with PayPal', 'woocommerce-paypal-payments' ),
 				),
@@ -1415,7 +1448,7 @@ return array(
 			),
 
 			'message_cart_heading'                   => array(
-				'heading'      => __( 'Pay Later on Cart', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Pay Later messaging on Cart', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -1423,7 +1456,14 @@ return array(
 				),
 				'requirements' => array( 'messages' ),
 				'gateway'      => 'paypal',
-				'description'  => str_replace( '<a>', '<a href="' . $messages_disclaimers->link_for_country() . '" target="_blank">', __( 'Displays Pay Later messaging for available offers. Restrictions apply. <a>Click here to learn more</a>. Pay Later button will show for eligible buyers and PayPal determines eligibility.', 'woocommerce-paypal-payments' ) ),
+				'description'  => sprintf(
+				// translators: %1$s, %2$s, %3$s and %4$s are the opening and closing of HTML <a> tag.
+					__( 'Displays Pay Later messaging on the Cart page for available offers. Restrictions apply. %1$sClick here to learn more%2$s. This setting does not %3$sdisable the Pay Later button%4$s which will show for eligible buyers.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#pay-later-messaging" target="_blank">',
+					'</a>',
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#disable-pay-later" target="_blank">',
+					'</a>'
+				),
 				'class'        => array( 'ppcp-subheading' ),
 			),
 			'message_cart_enabled'                   => array(
@@ -1585,7 +1625,7 @@ return array(
 
 			// Mini cart settings.
 			'button_mini-cart_heading'               => array(
-				'heading'      => __( 'Mini Cart', 'woocommerce-paypal-payments' ),
+				'heading'      => __( 'Mini Cart Buttons', 'woocommerce-paypal-payments' ),
 				'type'         => 'ppcp-heading',
 				'screens'      => array(
 					State::STATE_START,
@@ -1593,10 +1633,15 @@ return array(
 				),
 				'requirements' => array(),
 				'gateway'      => 'paypal',
-				'description'  => __( 'Customize the appearance of PayPal Checkout on the Mini Cart.', 'woocommerce-paypal-payments' ),
+				'description'  => sprintf(
+				// translators: %1$s and %2$s are the opening and closing of HTML <a> tag.
+					__( 'Customize the appearance of the PayPal smart buttons %1$son the Mini Cart page%2$s.', 'woocommerce-paypal-payments' ),
+					'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#button-on-mini-cart" target="_blank">',
+					'</a>'
+				),
 			),
 			'button_mini-cart_enabled'               => array(
-				'title'        => __( 'Buttons on Mini Cart', 'woocommerce-paypal-payments' ),
+				'title'        => __( 'Enable buttons on Mini Cart', 'woocommerce-paypal-payments' ),
 				'type'         => 'checkbox',
 				'label'        => __( 'Enable on Mini Cart', 'woocommerce-paypal-payments' ),
 				'default'      => true,
@@ -1662,7 +1707,7 @@ return array(
 				),
 				'options'      => array(
 					'paypal'   => __( 'PayPal', 'woocommerce-paypal-payments' ),
-					'checkout' => __( 'PayPal Checkout', 'woocommerce-paypal-payments' ),
+					'checkout' => __( 'Checkout', 'woocommerce-paypal-payments' ),
 					'buynow'   => __( 'PayPal Buy Now', 'woocommerce-paypal-payments' ),
 					'pay'      => __( 'Pay with PayPal', 'woocommerce-paypal-payments' ),
 				),
@@ -2014,7 +2059,7 @@ return array(
 	'wcgateway.pay-upon-invoice-helper'                    => static function( ContainerInterface $container ): PayUponInvoiceHelper {
 		return new PayUponInvoiceHelper(
 			$container->get( 'wcgateway.checkout-helper' ),
-			$container->get( 'wcgateway.settings' )
+			$container->get( 'api.shop.country' )
 		);
 	},
 	'wcgateway.pay-upon-invoice-product-status'            => static function( ContainerInterface $container ): PayUponInvoiceProductStatus {
@@ -2039,7 +2084,8 @@ return array(
 			$container->get( 'wcgateway.pay-upon-invoice-product-status' ),
 			$container->get( 'wcgateway.pay-upon-invoice-helper' ),
 			$container->get( 'wcgateway.checkout-helper' ),
-			$container->get( 'api.factory.capture' )
+			$container->get( 'api.factory.capture' ),
+			$container->get( 'session.handler' )
 		);
 	},
 	'wcgateway.oxxo'                                       => static function( ContainerInterface $container ): OXXO {
@@ -2175,6 +2221,7 @@ return array(
 			return false;
 		}
 	},
+
 	'wcgateway.settings.should-disable-tracking-checkbox'  => static function ( ContainerInterface $container ): bool {
 		$pui_helper = $container->get( 'wcgateway.pay-upon-invoice-helper' );
 		assert( $pui_helper instanceof PayUponInvoiceHelper );
@@ -2185,14 +2232,19 @@ return array(
 			return true;
 		}
 
-		if ( $pui_helper->is_pui_enabled() ) {
+		if ( $pui_helper->is_pui_gateway_enabled() ) {
 			return true;
 		}
 
 		return false;
 	},
 	'wcgateway.settings.tracking-label'                    => static function ( ContainerInterface $container ): string {
-		$tracking_label = __( 'Enable tracking information feature on your store.', 'woocommerce-paypal-payments' );
+		$tracking_label = sprintf(
+		// translators: %1$s and %2$s are the opening and closing of HTML <a> tag.
+			__( 'Enable shipment tracking information to be sent to PayPal for seller protection features. Required when %1$sPay upon Invoice%2$s is used.', 'woocommerce-paypal-payments' ),
+			'<a href="https://woocommerce.com/document/woocommerce-paypal-payments/#pay-upon-invoice-PUI" target="_blank">',
+			'</a>'
+		);
 		$is_tracking_available = $container->get( 'order-tracking.is-tracking-available' );
 
 		if ( $is_tracking_available ) {
@@ -2281,7 +2333,7 @@ return array(
 
 		$pui_button_text = $pui_enabled
 			? esc_html__( 'Settings', 'woocommerce-paypal-payments' )
-			: esc_html__( 'Enable Pay Upon Invoice', 'woocommerce-paypal-payments' );
+			: esc_html__( 'Enable Pay upon Invoice', 'woocommerce-paypal-payments' );
 
 		return sprintf(
 			'<p>%1$s %2$s</p><p><a target="%3$s" href="%4$s" class="button">%5$s</a></p>',

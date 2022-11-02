@@ -643,6 +643,7 @@ class DiscountCalculator extends Base
                                             if(!empty($cart_item)) {
                                                 $price_as_cart_discount[$rule_id][$product_id] = array(
                                                     'discount_type' => 'wdr_simple_discount',
+                                                    'apply_type' => $simple_discount->type,
                                                     'discount_label' => wp_unslash($simple_discount->cart_label),
                                                     'discount_value' => $simple_discount->value,
                                                     'discounted_price' => $cart_discounted_price,
@@ -680,10 +681,12 @@ class DiscountCalculator extends Base
                                         if (isset($bulk_discount->apply_as_cart_rule) && !empty($bulk_discount->apply_as_cart_rule)) {
                                             $this_apply_as_cart_rule = true;
                                             if(!empty($cart_item)) {
+                                                $product_bulk_discount = $rule->calculateProductBulkDiscount($product_price, $quantity, $product, $price_display_condition, $is_cart, $manual_request);
                                                 $price_as_cart_discount[$rule_id][$product_id] = array(
                                                     'discount_type' => 'wdr_bulk_discount',
+                                                    'apply_type' => isset($product_bulk_discount['discount_type']) ? $product_bulk_discount['discount_type'] : '',
                                                     'discount_label' => wp_unslash($bulk_discount->cart_label),
-                                                    'discount_value' => 0,
+                                                    'discount_value' => isset($product_bulk_discount['discount_value']) ? $product_bulk_discount['discount_value'] : 0,
                                                     'discounted_price' => $cart_discounted_price,
                                                     'rule_name' => $rule->getTitle(),
                                                     'cart_item_key' => isset($cart_item['key']) ? $cart_item['key'] : '',
@@ -1053,6 +1056,7 @@ class DiscountCalculator extends Base
                     $label = (isset($detail['discount_label']) && !empty($detail['discount_label'])) ? $detail['discount_label'] : $detail['rule_name'];
                     $value = (isset($detail['discount_value']) && !empty($detail['discount_value'])) ? $detail['discount_value'] : 0;
                     $product_id = isset($detail['product_id']) ? $detail['product_id'] : 0;
+                    $apply_type = isset($detail['apply_type']) ? $detail['apply_type'] : '';
                     $rule_applied_product_id = array_merge($rule_applied_product_id, array($product_id));
                     $current_discounted_price = isset($detail['discounted_price']) ? $detail['discounted_price'] : 0 ;
                     $cart_discount_against_product[$product_id][$rule_id] = $current_discounted_price;
@@ -1062,6 +1066,7 @@ class DiscountCalculator extends Base
                 }
                 self::$cart_adjustments[$rule_id]['cart_discount'] = isset($value) ? $value : '';
                 self::$cart_adjustments[$rule_id]['cart_shipping'] = 'no';
+                self::$cart_adjustments[$rule_id]['cart_discount_type'] = isset($apply_type) ? $apply_type : '';
                 self::$cart_adjustments[$rule_id]['cart_discount_label'] = isset($label) ? $label : '';
                 self::$cart_adjustments[$rule_id]['cart_discount_price'] = $discount_value;
                 self::$cart_adjustments[$rule_id]['cart_discount_product_price'] = $cart_discount_against_product;
@@ -1107,7 +1112,10 @@ class DiscountCalculator extends Base
                                 continue;
                             }
                         }
-                        self::$applied_rules[$rule_id] = self::$rules[$rule_id];
+
+                        if (self::$woocommerce_helper->isCartNeedsShipping()) {
+                            self::$applied_rules[$rule_id] = self::$rules[$rule_id];
+                        }
                         return array('free_shipping'=>1);
                         //}
                     }

@@ -19,7 +19,7 @@ class PriceBasedOnCountryByOscarGare extends Base
                     // Pass the price to the currency conversion function provided by the Currency Switcher. This
                     // will ensure that the discount is converted correctly
                     if(function_exists('wcpbc_the_zone')) {
-                        if(method_exists(wcpbc_the_zone(), 'get_exchange_rate_price')) {
+                        if(is_object(wcpbc_the_zone()) && method_exists(wcpbc_the_zone(), 'get_exchange_rate_price')) {
                             // Return a price calculate by exchange rate
                             $price = wcpbc_the_zone()->get_exchange_rate_price($price, true, 'generic', null);
                         }

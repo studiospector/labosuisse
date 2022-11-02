@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-10-13 15:54:32+0000\n"
+"PO-Revision-Date: 2022-11-01 19:35:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -122,7 +122,7 @@ msgstr "Le e-mail \"Nuovo account\" vengono inviate quando un cliente si registr
 msgid "The WooCommerce Blocks plugin requires a more recent version of WooCommerce and has been deactivated. Please update to the latest version of WooCommerce."
 msgstr "Il plugin dei blocchi WooCommerce richiede una versione più recente di WooCommerce ed è stato disattivato. Effettua l'aggiornamento alla versione di WooCommerce più recente"
 
-#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:526
+#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:524
 msgid "Empty Mini Cart Message"
 msgstr "Messaggio Svuota Mini carrello"
 
@@ -2290,7 +2290,7 @@ msgstr "Attività non è una sottoclasse di \"Attività\""
 msgid "Number of employees of the store."
 msgstr "Numero di dipendenti del negozio."
 
-#: includes/class-woocommerce.php:970
+#: includes/class-woocommerce.php:973
 msgid "You have installed a development version of WooCommerce which requires files to be built and minified. From the plugin directory, run <code>pnpm install</code> and then <code>pnpm run build --filter=woocommerce</code> to build and minify assets."
 msgstr "Hai installato una versione di sviluppo di WooCommerce che richiede la creazione e la minimizzazione dei file. Dalla directory dei plugin, esegui <code>pnpm install</code> e poi <code>pnpm run build --filter=woocommerce</code> per creare e minimizzare le risorse."
 
@@ -2994,7 +2994,7 @@ msgstr "Usa `array_key_exists` per controllare meta_data su WC_Shipping_Rate per
 msgid "Product Reviews"
 msgstr "Recensioni del prodotto"
 
-#: includes/class-wc-ajax.php:2074
+#: includes/class-wc-ajax.php:2076
 msgid "There was an error generating your API Key."
 msgstr "Si è verificato un errore durante la generazione della tua chiave API."
 
@@ -3300,7 +3300,7 @@ msgstr "Se questo è un attributo predefinito"
 
 #. translators: %1$d is the number of products in the cart. %2$s is the cart
 #. total
-#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:370
+#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:368
 #: packages/woocommerce-blocks/build/mini-cart-component-frontend.js:5
 msgid "%1$d item in cart, total price of %2$s"
 msgid_plural "%1$d items in cart, total price of %2$s"
@@ -4321,7 +4321,7 @@ msgstr "Il prodotto selezionato non è una variante di %2$s, scegli le opzioni d
 
 #. translators: 1: page name 2: page ID
 #: includes/admin/class-wc-admin-settings.php:606
-#: includes/class-wc-ajax.php:1762
+#: includes/class-wc-ajax.php:1764
 msgid "%1$s (ID: %2$s)"
 msgstr "%1$s (ID: %2$s)"
 
@@ -5065,7 +5065,7 @@ msgid "WooCommerce Shipping"
 msgstr "WooCommerce Shipping"
 
 #. translators: 1: tax amount 2: country name
-#: includes/wc-cart-functions.php:322
+#: includes/wc-cart-functions.php:323
 msgid "(includes %1$s estimated for %2$s)"
 msgstr "(include %1$s stimato per %2$s)"
 
@@ -6711,7 +6711,7 @@ msgstr "Dalla bacheca del tuo account puoi visualizzare i tuoi <a href=\"%1$s\">
 msgid "Invalid admin note"
 msgstr "Nota dell'amministrazione non valida"
 
-#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:528
+#: packages/woocommerce-blocks/src/BlockTypes/MiniCart.php:526
 #: packages/woocommerce-blocks/build/cart.js:44
 msgid "Your cart is currently empty!"
 msgstr "Il carrello è attualmente vuoto."
@@ -10077,7 +10077,7 @@ msgstr "Pianificatore azione ha migrato i dati per personalizzare le tabelle; tu
 msgid "This data will be deleted in %s."
 msgstr "Questi dati verranno eliminati in %s."
 
-#: includes/wc-template-functions.php:2840
+#: includes/wc-template-functions.php:2843
 msgid "Update country / region"
 msgstr "Aggiorna il Paese/la regione"
 
@@ -10197,7 +10197,7 @@ msgstr "Paese/regione di fatturazione"
 #: includes/admin/class-wc-admin-profile.php:138
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:77
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:129
-#: includes/wc-template-functions.php:2832
+#: includes/wc-template-functions.php:2835
 #: templates/cart/shipping-calculator.php:32
 msgid "Select a country / region&hellip;"
 msgstr "Seleziona un Paese/una regione…"
@@ -10695,7 +10695,7 @@ msgid "Every 15 Days"
 msgstr "Ogni 15 giorni"
 
 #. translators: %s product name
-#: includes/class-wc-ajax.php:962
+#: includes/class-wc-ajax.php:964
 msgid "%s is a variable product parent and cannot be added."
 msgstr "%s è un genitore del prodotto della variabile e non può essere aggiunto."
 
@@ -11553,11 +11553,11 @@ msgstr "La classe fiscale richiede un nome valido"
 
 #. translators: 1: URL of WordPress.org Repository 2: URL of the GitHub
 #. Repository release page
-#: includes/class-woocommerce.php:973
+#: includes/class-woocommerce.php:976
 msgid "Or you can download a pre-built version of the plugin from the <a href=\"%1$s\">WordPress.org repository</a> or by visiting <a href=\"%2$s\">the releases page in the GitHub repository</a>."
 msgstr "Altrimenti, puoi scaricare una versione precompilata del plugin dalla <a href=\"%1$s\">repository di WordPress.org</a> o visitando <a href=\"%2$s\">la pagina dei rilasci nella repository di GitHub</a>."
 
-#: includes/class-wc-ajax.php:1345
+#: includes/class-wc-ajax.php:1347
 msgid "Order not editable"
 msgstr "Ordine non modificabile"
 
@@ -11715,25 +11715,25 @@ msgid "Your account was created successfully and a password has been sent to you
 msgstr "Il tuo account è stato creato correttamente e una nuova password è stata inviata al tuo indirizzo email."
 
 #. Translators: %d stock amount
-#: includes/class-wc-ajax.php:1566
+#: includes/class-wc-ajax.php:1568
 msgid "Stock: %d"
 msgstr "Magazzino: %d"
 
 #. translators: %1$s: item name %2$s: stock change
-#: includes/class-wc-ajax.php:1274
+#: includes/class-wc-ajax.php:1276
 msgid "Deleted %1$s and adjusted stock (%2$s)"
 msgstr "Eliminati %1$s e magazzino regolato (%2$s)"
 
-#: includes/class-wc-ajax.php:1239
+#: includes/class-wc-ajax.php:1241
 msgid "Invalid items"
 msgstr "Articoli non validi"
 
-#: includes/class-wc-ajax.php:1138
+#: includes/class-wc-ajax.php:1140
 msgid "Invalid rate"
 msgstr "Tariffa non valida"
 
 #. translators: %s item name.
-#: includes/class-wc-ajax.php:982
+#: includes/class-wc-ajax.php:984
 msgid "Added line items: %s"
 msgstr "Riga articoli aggiunta: %s"
 
@@ -12150,7 +12150,7 @@ msgstr "Aggiorna il database"
 msgid "Invoice for order #{order_number}"
 msgstr "Fattura per l'ordine #{order_number}"
 
-#: includes/class-wc-ajax.php:2020
+#: includes/class-wc-ajax.php:2022
 msgid "You do not have permission to assign API Keys to the selected user."
 msgstr "Non hai l'autorizzazione per assegnare le chiavi API all'utente selezionato."
 
@@ -12335,7 +12335,7 @@ msgstr "Inserisci il tuo indirizzo per visualizzare le opzioni di spedizione."
 msgid "Change address"
 msgstr "Modifica indirizzo"
 
-#: includes/wc-template-functions.php:1473
+#: includes/wc-template-functions.php:1474
 msgid "Sort by latest"
 msgstr "Ordina in base al più recente"
 
@@ -13424,7 +13424,7 @@ msgid "This action cannot be reversed. Are you sure you wish to erase personal d
 msgstr "Questa azione è irreversibile. Desideri eliminare i dati personali dagli ordini selezionati?"
 
 #. translators: %d: shipping package number
-#: includes/wc-cart-functions.php:231
+#: includes/wc-cart-functions.php:232
 msgctxt "shipping packages"
 msgid "Shipping %d"
 msgstr "Spedizione: %d"
@@ -13881,7 +13881,7 @@ msgid "Customer"
 msgstr "Cliente"
 
 #: includes/class-wc-frontend-scripts.php:553
-#: includes/wc-template-functions.php:2771
+#: includes/wc-template-functions.php:2774
 msgid "optional"
 msgstr "opzionale"
 
@@ -15104,7 +15104,7 @@ msgstr "Comune/Quartiere"
 msgid "%s is not a valid postcode / ZIP."
 msgstr "%s non è un codice postale/CAP valido."
 
-#: includes/class-wc-ajax.php:1899
+#: includes/class-wc-ajax.php:1901
 msgid "Error processing refund. Please try again."
 msgstr "Errore durante l'elaborazione del rimborso. Riprova."
 
@@ -15706,12 +15706,12 @@ msgstr "Mostra una lista di filtri prodotto attivi."
 msgid "Display the customer shopping cart."
 msgstr "Mostra il carrello del cliente."
 
-#: includes/wc-template-functions.php:1485
+#: includes/wc-template-functions.php:1486
 msgid "Relevance"
 msgstr "Pertinenza"
 
 #. translators: 1: wc_load_cart 2: woocommerce_init
-#: includes/wc-core-functions.php:2540
+#: includes/wc-core-functions.php:2541
 msgid "%1$s should not be called before the %2$s action."
 msgstr "%1$s non dovrebbe essere denominato prima dell'azione %2$s."
 
@@ -15778,7 +15778,7 @@ msgid "Fee has already been added."
 msgstr "La tariffa è già stata applicata."
 
 #. translators: %s fee amount
-#: includes/class-wc-ajax.php:1053
+#: includes/class-wc-ajax.php:1055
 msgid "%s fee"
 msgstr "%s tariffa"
 
@@ -16215,7 +16215,7 @@ msgid "Enter a fixed amount or percentage to apply as a fee."
 msgstr "Inserisci un importo fisso o una percentuale da applicare come tariffa."
 
 #: includes/abstracts/abstract-wc-order.php:1134
-#: includes/class-wc-ajax.php:1198 includes/class-wc-discounts.php:249
+#: includes/class-wc-ajax.php:1200 includes/class-wc-discounts.php:249
 #: src/Internal/Orders/CouponsController.php:62
 msgid "Invalid coupon"
 msgstr "Codice promozionale non valido"
@@ -16414,7 +16414,7 @@ msgstr "Prodotti ai quali il codice promozionale verrà applicato o che devono e
 #. translators: 1: rating 2: rating count
 #. translators: %1$s is referring to the average rating value, %2$s is
 #. referring to the number of ratings
-#: includes/wc-template-functions.php:3597
+#: includes/wc-template-functions.php:3601
 #: packages/woocommerce-blocks/assets/js/atomic/blocks/product-elements/rating/block.js:56
 #: packages/woocommerce-blocks/build/all-products.js:24
 #: packages/woocommerce-blocks/build/product-rating-frontend.js:5
@@ -16526,7 +16526,7 @@ msgstr "Tutti i Prodotti"
 msgid "House number and street name"
 msgstr "Via/Piazza e Numero Civico"
 
-#: includes/class-wc-ajax.php:2081
+#: includes/class-wc-ajax.php:2083
 msgid "API Key generated successfully. Make sure to copy your new keys now as the secret key will be hidden once you leave this page."
 msgstr "Chiave API generata correttamente. Assicurati di copiare le tue nuove chiavi poiché la chiave segreta verrà nascosta una volta lasciata questa pagina."
 
@@ -17506,7 +17506,7 @@ msgstr "Tassonomie: visibilità prodotto"
 msgid "%s (Copy)"
 msgstr "%s (Copia)"
 
-#: includes/class-wc-ajax.php:958 includes/class-wc-order-item-product.php:72
+#: includes/class-wc-ajax.php:960 includes/class-wc-order-item-product.php:72
 msgid "Invalid product ID"
 msgstr "ID prodotto non valido."
 
@@ -17723,7 +17723,7 @@ msgstr "%s non esiste."
 
 #. translators: %s: coupon code
 #. translators: %s Coupon code.
-#: includes/wc-cart-functions.php:264
+#: includes/wc-cart-functions.php:265
 #: packages/woocommerce-blocks/build/cart-blocks/order-summary-discount-frontend.js:11
 #: packages/woocommerce-blocks/build/cart.js:40
 #: packages/woocommerce-blocks/build/checkout-blocks/order-summary-discount-frontend.js:11
@@ -17732,7 +17732,7 @@ msgid "Coupon: %s"
 msgstr "Codice promozionale: %s"
 
 #. translators: %d: shipping package number
-#: includes/wc-cart-functions.php:231
+#: includes/wc-cart-functions.php:232
 msgctxt "shipping packages"
 msgid "Shipping"
 msgstr "Spedizione"
@@ -18139,9 +18139,9 @@ msgstr "Via e numero"
 msgid "You cannot add another \"%s\" to your cart."
 msgstr "Non puoi aggiungere un ulteriore \"%s\" nel carrello."
 
-#: includes/class-wc-cart.php:1164 includes/class-wc-cart.php:1227
+#: includes/class-wc-cart.php:1165 includes/class-wc-cart.php:1230
 #: includes/class-wc-frontend-scripts.php:578
-#: includes/wc-cart-functions.php:125 includes/wc-template-functions.php:2196
+#: includes/wc-cart-functions.php:126 includes/wc-template-functions.php:2198
 msgid "View cart"
 msgstr "Visualizza carrello"
 
@@ -18150,10 +18150,10 @@ msgstr "Visualizza carrello"
 msgid "In order for <strong>database caching</strong> to work with WooCommerce you must add %1$s to the \"Ignored Query Strings\" option in <a href=\"%2$s\">W3 Total Cache settings</a>."
 msgstr "Affinché <strong>la cache del database</strong>possa lavorare con WooCommerce è necessario aggiungere %1$s per l'opzione \"Stringhe query ignorate\" in <a href=\"%2$s\">impostazioni W3 Total Cache</a>."
 
-#: includes/class-wc-ajax.php:904 includes/class-wc-ajax.php:936
-#: includes/class-wc-ajax.php:1026 includes/class-wc-ajax.php:1090
-#: includes/class-wc-ajax.php:1132 includes/class-wc-ajax.php:1194
-#: includes/class-wc-ajax.php:1235 src/Internal/Orders/CouponsController.php:58
+#: includes/class-wc-ajax.php:906 includes/class-wc-ajax.php:938
+#: includes/class-wc-ajax.php:1028 includes/class-wc-ajax.php:1092
+#: includes/class-wc-ajax.php:1134 includes/class-wc-ajax.php:1196
+#: includes/class-wc-ajax.php:1237 src/Internal/Orders/CouponsController.php:58
 msgid "Invalid order"
 msgstr "Ordine non valido"
 
@@ -19463,7 +19463,7 @@ msgstr "Questa è la pagina negozio di WooCommerce. La pagina negozio è un arch
 #. translators: $1: customer name, $2 customer id, $3: customer email
 #: includes/admin/meta-boxes/class-wc-meta-box-order-data.php:311
 #: includes/admin/settings/views/html-keys-edit.php:43
-#: includes/class-wc-ajax.php:1668 src/Internal/Admin/Orders/ListTable.php:500
+#: includes/class-wc-ajax.php:1670 src/Internal/Admin/Orders/ListTable.php:500
 msgid "%1$s (#%2$s &ndash; %3$s)"
 msgstr "%1$s (#%2$s &ndash; %3$s)"
 
@@ -24245,7 +24245,7 @@ msgstr "Scellino Keniano"
 
 #. translators: %s: taxes
 #. translators: %s: tax amount
-#: includes/class-wc-order.php:178 includes/wc-cart-functions.php:325
+#: includes/class-wc-order.php:178 includes/wc-cart-functions.php:326
 msgid "(includes %s)"
 msgstr "(inclusi %s)"
 
@@ -25195,7 +25195,7 @@ msgid "Proceed to checkout"
 msgstr "Procedi con l'ordine"
 
 #: includes/customizer/class-wc-shop-customizer.php:678
-#: includes/wc-template-functions.php:2206
+#: includes/wc-template-functions.php:2209
 msgid "Checkout"
 msgstr "Pagamento"
 
@@ -25246,7 +25246,7 @@ msgstr "Subtotale"
 msgid "Cart totals"
 msgstr "Totale carrello"
 
-#: includes/wc-template-functions.php:3643
+#: includes/wc-template-functions.php:3647
 msgid "Your cart is currently empty."
 msgstr "Il tuo carrello è vuoto."
 
@@ -25526,49 +25526,49 @@ msgstr "Inserisci un nome utente valido per l'account."
 msgid "Select a category"
 msgstr "Seleziona una categoria"
 
-#: includes/wc-template-functions.php:2912
-#: includes/wc-template-functions.php:3081
-#: includes/wc-template-functions.php:3100
+#: includes/wc-template-functions.php:2915
+#: includes/wc-template-functions.php:3084
+#: includes/wc-template-functions.php:3103
 msgid "Choose an option"
 msgstr "Scegli un'opzione"
 
-#: includes/wc-template-functions.php:2357
+#: includes/wc-template-functions.php:2360
 msgid "Place order"
 msgstr "Effettua ordine"
 
-#: includes/wc-template-functions.php:2298
+#: includes/wc-template-functions.php:2301
 msgctxt "breadcrumb"
 msgid "Home"
 msgstr "Home"
 
 #. translators: %s: reviews count
-#: includes/wc-template-functions.php:1876
+#: includes/wc-template-functions.php:1877
 msgid "Reviews (%d)"
 msgstr "Recensioni (%d)"
 
-#: includes/wc-template-functions.php:1866
+#: includes/wc-template-functions.php:1867
 #: templates/checkout/form-shipping.php:57
 #: templates/single-product/tabs/additional-information.php:22
 msgid "Additional information"
 msgstr "Informazioni aggiuntive"
 
-#: includes/wc-template-functions.php:1475
+#: includes/wc-template-functions.php:1476
 msgid "Sort by price: high to low"
 msgstr "Prezzo: dal più caro"
 
-#: includes/wc-template-functions.php:1474
+#: includes/wc-template-functions.php:1475
 msgid "Sort by price: low to high"
 msgstr "Prezzo: dal più economico"
 
-#: includes/wc-template-functions.php:1472
+#: includes/wc-template-functions.php:1473
 msgid "Sort by average rating"
 msgstr "Valutazione media"
 
-#: includes/wc-template-functions.php:1471
+#: includes/wc-template-functions.php:1472
 msgid "Sort by popularity"
 msgstr "Popolarità"
 
-#: includes/wc-template-functions.php:1470
+#: includes/wc-template-functions.php:1471
 #: packages/woocommerce-blocks/build/all-products-frontend.js:9
 #: packages/woocommerce-blocks/build/all-products.js:34
 msgid "Default sorting"
@@ -25774,11 +25774,11 @@ msgstr "Dirham degli Emirati Arabi"
 msgid "Order &ndash; %s"
 msgstr "Ordine &ndash; %s"
 
-#: includes/wc-cart-functions.php:293
+#: includes/wc-cart-functions.php:294
 msgid "[Remove]"
 msgstr "[Elimina]"
 
-#: includes/wc-cart-functions.php:289
+#: includes/wc-cart-functions.php:290
 msgid "Free shipping coupon"
 msgstr "Codice promozionale per spedizione gratuita"
 
@@ -25786,7 +25786,7 @@ msgstr "Codice promozionale per spedizione gratuita"
 msgid "Coupon:"
 msgstr "Codice promozionale:"
 
-#: includes/wc-cart-functions.php:155
+#: includes/wc-cart-functions.php:156
 msgid "and"
 msgstr "e"
 
@@ -25797,7 +25797,7 @@ msgctxt "Item name in quotes"
 msgid "&ldquo;%s&rdquo;"
 msgstr "&ldquo;%s&rdquo;"
 
-#: includes/wc-cart-functions.php:123
+#: includes/wc-cart-functions.php:124
 msgid "Continue shopping"
 msgstr "Continua con gli acquisti"
 
@@ -27189,7 +27189,7 @@ msgid "Sorry, no products matched your selection. Please choose a different comb
 msgstr "Nessun prodotto corrisponde alla tua scelta. Prova con un'altra combinazione."
 
 #: includes/class-wc-frontend-scripts.php:552
-#: includes/wc-template-functions.php:2769 templates/checkout/terms.php:31
+#: includes/wc-template-functions.php:2772 templates/checkout/terms.php:31
 msgid "required"
 msgstr "obbligatorio"
 
@@ -27655,23 +27655,23 @@ msgid "Account username"
 msgstr "Nome utente dell'account"
 
 #. translators: 1: quantity in stock 2: current quantity
-#: includes/class-wc-cart.php:1229
+#: includes/class-wc-cart.php:1232
 msgid "You cannot add that amount to the cart &mdash; we have %1$s in stock and you already have %2$s in your cart."
 msgstr "Non puoi aggiungere questo quantitativo al carrello &mdash; ne abbiamo %1$s in magazzino e ne hai già %2$s nel tuo carrello."
 
 #. translators: 1: product name 2: quantity in stock
-#: includes/class-wc-cart.php:1201
+#: includes/class-wc-cart.php:1202
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/CartController.php:226
 msgid "You cannot add that amount of &quot;%1$s&quot; to the cart because there is not enough stock (%2$s remaining)."
 msgstr "Non puoi aggiungere questa quantità di &quot;%1$s&quot; al carrello perché le scorte di magazzino non sono sufficienti (disponibili %2$s)."
 
 #. translators: %s: product name
-#: includes/class-wc-cart.php:1184
+#: includes/class-wc-cart.php:1185
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/CartController.php:210
 msgid "You cannot add &quot;%s&quot; to the cart because the product is out of stock."
 msgstr "Non puoi aggiungere &quot;%s&quot; al carrello perché il prodotto è esaurito."
 
-#: includes/class-wc-cart.php:1169
+#: includes/class-wc-cart.php:1170
 #: packages/woocommerce-blocks/assets/js/atomic/blocks/product-elements/add-to-cart/shared/product-unavailable.js:7
 #: packages/woocommerce-blocks/build/all-products.js:20
 #: packages/woocommerce-blocks/build/product-add-to-cart-frontend.js:3
@@ -27820,24 +27820,24 @@ msgstr "Visualizza clienti"
 msgid "View coupons"
 msgstr "Visualizza codici promozionali"
 
-#: includes/class-wc-ajax.php:2170
+#: includes/class-wc-ajax.php:2172
 #: src/Internal/Admin/ProductReviews/ReviewsCommentsOverrides.php:92
 msgid "Dismiss this notice."
 msgstr "Ignora questo avviso."
 
-#: includes/class-wc-ajax.php:2046
+#: includes/class-wc-ajax.php:2048
 msgid "API Key updated successfully."
 msgstr "Chiavi API aggiornate con successo."
 
-#: includes/class-wc-ajax.php:2009
+#: includes/class-wc-ajax.php:2011
 msgid "Permissions is missing."
 msgstr "Il parametro Permissions è mancante."
 
-#: includes/class-wc-ajax.php:2006
+#: includes/class-wc-ajax.php:2008
 msgid "User is missing."
 msgstr "Il parametro User è mancante."
 
-#: includes/class-wc-ajax.php:2003
+#: includes/class-wc-ajax.php:2005
 msgid "Description is missing."
 msgstr "Il parametro Description è mancante."
 
@@ -27845,7 +27845,7 @@ msgstr "Il parametro Description è mancante."
 msgid "Refund failed."
 msgstr "Rimborso fallito."
 
-#: includes/class-wc-ajax.php:1895
+#: includes/class-wc-ajax.php:1897
 msgid "Invalid refund amount"
 msgstr "Cifra rimborso non valida"
 
@@ -28016,7 +28016,7 @@ msgid "You do not have permission to read this report"
 msgstr "Non hai l'autorizzazione per visualizzare questo rapporto"
 
 #. translators: %s item name.
-#: includes/class-wc-ajax.php:1277
+#: includes/class-wc-ajax.php:1279
 #: includes/legacy/api/v1/class-wc-api-resource.php:333
 #: includes/legacy/api/v2/class-wc-api-products.php:468
 #: includes/legacy/api/v2/class-wc-api-products.php:2176
@@ -28841,7 +28841,7 @@ msgid "Remote get"
 msgstr "Get Remote "
 
 #. translators: %s: error message
-#: includes/class-wc-ajax.php:969 includes/wc-rest-functions.php:98
+#: includes/class-wc-ajax.php:971 includes/wc-rest-functions.php:98
 msgid "Error: %s"
 msgstr "Errore: %s"
 
@@ -29399,7 +29399,7 @@ msgid "Consumer key"
 msgstr "Chiave Utente"
 
 #: includes/admin/settings/views/html-keys-edit.php:119
-#: includes/class-wc-ajax.php:2082
+#: includes/class-wc-ajax.php:2084
 msgid "Revoke key"
 msgstr "Revoca chiave"
 
@@ -31124,7 +31124,7 @@ msgid "Length"
 msgstr "Lunghezza"
 
 #: includes/admin/importers/class-wc-product-csv-importer-controller.php:689
-#: includes/wc-template-functions.php:3471
+#: includes/wc-template-functions.php:3475
 msgid "Dimensions"
 msgstr "Dimensioni"
 
@@ -31137,7 +31137,7 @@ msgstr "Peso in forma decimale"
 #: includes/admin/meta-boxes/views/html-product-data-variations.php:84
 #: includes/admin/views/html-bulk-edit-product.php:118
 #: includes/admin/views/html-quick-edit-product.php:98
-#: includes/wc-template-functions.php:3464
+#: includes/wc-template-functions.php:3468
 msgid "Weight"
 msgstr "Peso"
 
@@ -31438,7 +31438,7 @@ msgid "There are no notes yet."
 msgstr "Non c'è ancora nessuna nota."
 
 #: includes/admin/meta-boxes/views/html-order-notes.php:37
-#: includes/class-wc-ajax.php:1474
+#: includes/class-wc-ajax.php:1476
 msgid "Delete note"
 msgstr "Elimina nota"
 
@@ -31448,12 +31448,12 @@ msgstr "Elimina nota"
 #: includes/admin/class-wc-admin-status.php:430
 #: includes/admin/meta-boxes/views/html-order-notes.php:34
 #: includes/admin/views/html-admin-page-status-report.php:677
-#: includes/class-wc-ajax.php:1471 templates/content-widget-reviews.php:38
+#: includes/class-wc-ajax.php:1473 templates/content-widget-reviews.php:38
 msgid "by %s"
 msgstr "by %s"
 
 #. translators: $1: Date created, $2 Time created
-#: includes/class-wc-ajax.php:1465
+#: includes/class-wc-ajax.php:1467
 msgid "added on %1$s at %2$s"
 msgstr "aggiunto il %1$s alle %2$s"
 
@@ -33926,8 +33926,8 @@ msgstr "Seleziona alcuni prodotti."
 #: includes/admin/class-wc-admin-assets.php:466
 #: includes/admin/settings/views/html-webhooks-edit.php:68
 #: includes/class-wc-frontend-scripts.php:598
-#: includes/wc-template-functions.php:2859
-#: includes/wc-template-functions.php:2860
+#: includes/wc-template-functions.php:2862
+#: includes/wc-template-functions.php:2863
 #: templates/cart/shipping-calculator.php:58
 msgid "Select an option&hellip;"
 msgstr "Seleziona un'opzione&hellip;"
@@ -34181,7 +34181,7 @@ msgstr "Consumer Key che finisce in"
 #: includes/gateways/cheque/class-wc-gateway-cheque.php:71
 #: includes/gateways/cod/class-wc-gateway-cod.php:84
 #: includes/gateways/paypal/includes/settings-paypal.php:25
-#: includes/wc-template-functions.php:1857
+#: includes/wc-template-functions.php:1858
 #: src/Internal/Admin/Onboarding/OnboardingIndustries.php:67
 #: templates/single-product/tabs/description.php:22
 msgid "Description"
@@ -34192,8 +34192,8 @@ msgstr "Descrizione"
 #. translators: %s is referring to the average rating value
 #: includes/class-wc-embed.php:130
 #: includes/rest-api/Controllers/Version3/class-wc-rest-report-reviews-totals-controller.php:57
-#: includes/wc-template-functions.php:3577
-#: includes/wc-template-functions.php:3600
+#: includes/wc-template-functions.php:3581
+#: includes/wc-template-functions.php:3604
 #: includes/widgets/class-wc-widget-layered-nav-filters.php:104
 #: packages/woocommerce-blocks/assets/js/base/components/reviews/review-list-item/index.js:130
 #: packages/woocommerce-blocks/build/active-filters-frontend.js:11
@@ -34205,7 +34205,7 @@ msgstr "Descrizione"
 msgid "Rated %s out of 5"
 msgstr "Valutato %s su 5"
 
-#: includes/wc-template-functions.php:3615
+#: includes/wc-template-functions.php:3619
 msgctxt "min_price"
 msgid "From:"
 msgstr "A partire da:"
@@ -34356,7 +34356,7 @@ msgstr "WooCommerce"
 #: includes/class-wc-emails.php:449
 #: includes/legacy/abstract-wc-legacy-order.php:508
 #: includes/wc-account-functions.php:221
-#: includes/wc-template-functions.php:3417 assets/client/admin/chunks/5586.js:1
+#: includes/wc-template-functions.php:3421 assets/client/admin/chunks/5586.js:1
 #: assets/client/admin/chunks/analytics-report-downloads.js:1
 msgid "Download"
 msgid_plural "Downloads"
@@ -34366,7 +34366,7 @@ msgstr[1] ""
 #. translators: 1: current item count
 #. translators: %d: downloads count
 #: includes/legacy/abstract-wc-legacy-order.php:508
-#: includes/wc-template-functions.php:3417
+#: includes/wc-template-functions.php:3421
 msgid "Download %d"
 msgstr "Scarica %d"
 
@@ -34413,7 +34413,7 @@ msgid "Discount:"
 msgstr "Sconto:"
 
 #: includes/abstracts/abstract-wc-order.php:2089
-#: includes/wc-template-functions.php:2217
+#: includes/wc-template-functions.php:2220
 #: packages/woocommerce-blocks/build/cart-blocks/cart-express-payment-frontend.js:5
 #: packages/woocommerce-blocks/build/cart.js:38
 #: packages/woocommerce-blocks/build/checkout-blocks/express-payment-frontend.js:5
@@ -34423,7 +34423,7 @@ msgid "Subtotal:"
 msgstr "Subtotale:"
 
 #: includes/abstracts/abstract-wc-order.php:2060
-#: includes/class-wc-cart.php:1585 includes/class-wc-product-grouped.php:120
+#: includes/class-wc-cart.php:1588 includes/class-wc-product-grouped.php:120
 msgid "Free!"
 msgstr "Gratis!"
 

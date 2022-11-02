@@ -10,11 +10,13 @@ declare(strict_types=1);
 namespace WooCommerce\PayPalCommerce\WcGateway\Gateway\PayUponInvoice;
 
 use Psr\Log\LoggerInterface;
+use WC_Email;
 use WC_Order;
 use WooCommerce\PayPalCommerce\ApiClient\Endpoint\PayUponInvoiceOrderEndpoint;
 use WooCommerce\PayPalCommerce\ApiClient\Factory\CaptureFactory;
 use WooCommerce\PayPalCommerce\Button\Exception\RuntimeException;
 use WooCommerce\PayPalCommerce\Onboarding\Environment;
+use WooCommerce\PayPalCommerce\Session\SessionHandler;
 use WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway;
 use WooCommerce\PayPalCommerce\WcGateway\Helper\CheckoutHelper;
 use WooCommerce\PayPalCommerce\WcGateway\Helper\PayUponInvoiceHelper;
@@ -131,6 +133,13 @@ class PayUponInvoice {
 	protected $capture_factory;
 
 	/**
+	 * The session handler
+	 *
+	 * @var SessionHandler
+	 */
+	protected $session_handler;
+
+	/**
 	 * PayUponInvoice constructor.
 	 *
 	 * @param string                      $module_url The module URL.
@@ -147,6 +156,7 @@ class PayUponInvoice {
 	 * @param PayUponInvoiceHelper        $pui_helper The PUI helper.
 	 * @param CheckoutHelper              $checkout_helper The checkout helper.
 	 * @param CaptureFactory              $capture_factory The capture factory.
+	 * @param SessionHandler              $session_handler The session handler.
 	 */
 	public function __construct(
 		string $module_url,
@@ -162,7 +172,8 @@ class PayUponInvoice {
 		PayUponInvoiceProductStatus $pui_product_status,
 		PayUponInvoiceHelper $pui_helper,
 		CheckoutHelper $checkout_helper,
-		CaptureFactory $capture_factory
+		CaptureFactory $capture_factory,
+		SessionHandler $session_handler
 	) {
 		$this->module_url                    = $module_url;
 		$this->fraud_net                     = $fraud_net;
@@ -178,6 +189,7 @@ class PayUponInvoice {
 		$this->pui_helper                    = $pui_helper;
 		$this->checkout_helper               = $checkout_helper;
 		$this->capture_factory               = $capture_factory;
+		$this->session_handler               = $session_handler;
 	}
 
 	/**
@@ -189,7 +201,12 @@ class PayUponInvoice {
 		add_filter(
 			'ppcp_partner_referrals_data',
 			function ( array $data ): array {
-				if ( $this->settings->has( 'ppcp-onboarding-pui' ) && $this->settings->get( 'ppcp-onboarding-pui' ) !== '1' ) {
+				try {
+					$onboard_with_pui = $this->settings->get( 'ppcp-onboarding-pui' );
+					if ( $onboard_with_pui !== '1' ) {
+						return $data;
+					}
+				} catch ( NotFoundException $exception ) {
 					return $data;
 				}
 
@@ -228,6 +245,10 @@ class PayUponInvoice {
 			'ppcp_payment_capture_completed_webhook_handler',
 			function ( WC_Order $wc_order, string $order_id ) {
 				try {
+					if ( $wc_order->get_payment_method() !== PayUponInvoiceGateway::ID ) {
+						return;
+					}
+
 					$order = $this->pui_order_endpoint->order( $order_id );
 
 					$payment_instructions = array(
@@ -245,6 +266,11 @@ class PayUponInvoice {
 					$breakdown = $capture->seller_receivable_breakdown();
 					if ( $breakdown ) {
 						$wc_order->update_meta_data( PayPalGateway::FEES_META_KEY, $breakdown->to_array() );
+						$paypal_fee = $breakdown->paypal_fee();
+						if ( $paypal_fee ) {
+							$wc_order->update_meta_data( 'PayPal Transaction Fee', (string) $paypal_fee->value() );
+						}
+
 						$wc_order->save_meta_data();
 					}
 				} catch ( RuntimeException $exception ) {
@@ -257,8 +283,13 @@ class PayUponInvoice {
 
 		add_action(
 			'woocommerce_email_before_order_table',
-			function( WC_Order $order, bool $sent_to_admin ) {
-				if ( ! $sent_to_admin && PayUponInvoiceGateway::ID === $order->get_payment_method() && $order->has_status( 'processing' ) ) {
+			function( WC_Order $order, bool $sent_to_admin, bool $plain_text, WC_Email $email ) {
+				if (
+					! $sent_to_admin
+					&& PayUponInvoiceGateway::ID === $order->get_payment_method()
+					&& $order->has_status( 'processing' )
+					&& $email->id === 'customer_processing_order'
+				) {
 					$this->logger->info( "Adding Ratepay payment instructions to email for order #{$order->get_id()}." );
 
 					$instructions = $order->get_meta( 'ppcp_ratepay_payment_instructions_payment_reference' );
@@ -309,7 +340,7 @@ class PayUponInvoice {
 				}
 			},
 			10,
-			2
+			4
 		);
 
 		add_filter(
@@ -546,7 +577,7 @@ class PayUponInvoice {
 	public function register_assets(): void {
 		$gateway_settings = get_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings' );
 		$gateway_enabled  = $gateway_settings['enabled'] ?? '';
-		if ( $gateway_enabled === 'yes' && ( is_checkout() || is_checkout_pay_page() ) ) {
+		if ( $gateway_enabled === 'yes' && ! $this->session_handler->order() && ( is_checkout() || is_checkout_pay_page() ) ) {
 			wp_enqueue_script(
 				'ppcp-pay-upon-invoice',
 				trailingslashit( $this->module_url ) . 'assets/js/pay-upon-invoice.js',

@@ -29,17 +29,14 @@ class Statistics extends Base
         $available_conditions = $this->getAvailableConditions();
         $rules = $rule_helper->getAllRules($available_conditions);
         foreach ($rules as $rule){
-            $rule_discount_type = $rule->getRuleDiscountType();
-            if ($rule_discount_type != 'wdr_free_shipping') { // to remove free shipping rules data from statistics reports
-                $rule_id = $rule->getId();
-                $rule_title = $rule->getTitle();
-                $this->rule_details[$rule_id] = array(
-                    'handler' => new Reports\RuleNameDiscount($rule),
-                    'label'   => __( $rule_title , 'woo-discount-rules' ),
-                    'group'   => __( 'Rule Name', 'woo-discount-rules' ),
-                    'rule_id'   => $rule_id,
-                );
-            }
+            $rule_id = $rule->getId();
+            $rule_title = $rule->getTitle();
+            $this->rule_details[$rule_id] = array(
+                'handler' => new Reports\RuleNameDiscount($rule),
+                'label'   => __( $rule_title , 'woo-discount-rules' ),
+                'group'   => __( 'Rule Name', 'woo-discount-rules' ),
+                'rule_id'   => $rule_id,
+            );
         }
         $this->reports = array(
             'rule_amount_extra' => array(

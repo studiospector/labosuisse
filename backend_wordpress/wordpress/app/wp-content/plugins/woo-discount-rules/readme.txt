@@ -4,7 +4,7 @@ Donate link: https://flycart.org/
 Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
 Requires at least: 4.4.1
 Tested up to: 6.0
-Stable tag: 2.4.5
+Stable tag: 2.5.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -336,6 +336,20 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 
 == Changelog ==
 
+= 2.5.0 - 01/11/22 =
+* Improvement: Added applied discount info in order and order item meta _wdr_discounts [Core and Pro].
+* Improvement: Loading issue on shop page while having variable price strikeout improvement [Core].
+* Improvement: Set 3 for 10 fixed .1 difference on subtotal [Pro].
+* Improvement: Doing strikeout on cart while using third-party shortcode [Core].
+* Improvement: Show free shipping rule reports since v2.5.0 [Pro].
+* Improvement: Added order_item_id and other_discount columns in wdr_order_item_discounts table [Core].
+* Add: Show total order count and sales on report section [Core and Pro].
+* Fix: Disable coupon option doesn't working with free shipping [Pro].
+* Fix: Applied message is not displaying in cart for free shipping [Pro].
+* Fix: Limit option is not working with Free shipping [Pro].
+* Fix: Warning on PHP 8 [Core and Pro].
+* Fix: Fatal error on load order item meta [Core].
+
 = 2.4.5 - 27/09/22 =
 * Improvement: Additional param on the event advanced_woo_discount_rules_strikeout_price_html [Core].
 * Improvement: Backend field validation [Core and Pro].
@@ -369,8 +383,6 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Improvement: Event: advanced_woo_discount_rules_after_save_rule
 * Fix: Onsale page query improvement for on-sale filter.
 * Fix: Redirecting to list page on create rule instead of edit page.
-
-= 2.4.3 - 28/06/22 =
 * Fix: Sale page doesn't filters based on selected rules.
 * Improvement: Event: advanced_woo_discount_rules_get_price_of_cart_item_on_find_cheapest_item
 

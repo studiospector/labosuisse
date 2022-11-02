@@ -1547,7 +1547,7 @@ class Rule
         if (!empty($product_ids)) {
             foreach ($product_ids as $product_id) {
                 $product = Woocommerce::getProduct($product_id);
-                if (!empty($product) && method_exists($product, 'is_type')) {
+                if (!empty($product) && is_object($product) && method_exists($product, 'is_type')) {
                     if ($product->is_type(array('variable', 'variable-subscription'))) {
                         $additional_variants = Woocommerce::getProductChildren($product);
                         if (!empty($additional_variants) && is_array($additional_variants)) {

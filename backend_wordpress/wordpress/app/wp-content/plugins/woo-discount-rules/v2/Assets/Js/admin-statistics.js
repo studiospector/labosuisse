@@ -54,8 +54,8 @@ function init() {
     });
 
     jQuery(window).resize(function () {
-        if (response_content.data.columns.length > 1) {
-            renderChart(response_content.data);
+        if (response_content && response_content.data.chart.columns.length > 1) {
+            renderChart(response_content.data.chart);
         }
     });
 
@@ -110,6 +110,8 @@ function showChart(params) {
     let loader = jQuery('.woo_discount_loader');
     loader.show();
 
+    jQuery("#info-container").find("#total-orders, #total-revenue, #discounted-amount, #total-free-shipping").html("-");
+
     jQuery.post(
         ajaxurl,
         {
@@ -122,11 +124,19 @@ function showChart(params) {
             /*jQuery('.update-chart').prop('disabled', false);*/
           /*  jQuery('.chart-placeholder').removeClass('loading');*/
             if (response.success) {
-                if (response.data.columns.length > 1) {
+                if (response.data.chart.columns && response.data.chart.columns.length > 1) {
                     response_content = response;
-                    renderChart(response.data);
+                    renderChart(response.data.chart);
+                    jQuery("#info-container").show();
+                    if (response.data.other) {
+                        jQuery("#info-container #total-orders").html(response.data.other.total_orders);
+                        jQuery("#info-container #total-revenue").html(response.data.other.revenue);
+                        jQuery("#info-container #discounted-amount").html(response.data.other.discounted_amount);
+                        jQuery("#info-container #total-free-shipping").html(response.data.other.total_free_shipping);
+                    }
                 } else {
                     jQuery('#chart-container').html(wdr_data.localization_data.chart_data);
+                    jQuery("#info-container").hide();
                 }
             }else {
                 jQuery('#chart-container').html(wdr_data.localization_data.chart_data);

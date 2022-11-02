@@ -586,14 +586,14 @@ msgstr ""
 msgid "Recipe"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:14
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:15
 #: v2/App/Controllers/Admin/Tabs/Reports/RuleAmountWithCartDiscount.php:11
-#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:24
-msgid "Amount shown in default store currency"
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:25
+msgid "Discounted amount shown in default store currency"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:28
-#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:39
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleAmount.php:30
+#: v2/App/Controllers/Admin/Tabs/Reports/RuleNameDiscount.php:41
 msgid "Date"
 msgstr ""
 
@@ -601,24 +601,24 @@ msgstr ""
 msgid "Reports"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:39
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:37
 msgid "Rule Name"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:47
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:44
 msgid "All Rules"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:48
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:54
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:45
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:51
 msgid "Rule"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:53
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:50
 msgid "All Rules (except cart adjustment type)"
 msgstr ""
 
-#: v2/App/Controllers/Admin/Tabs/Statistics.php:121
+#: v2/App/Controllers/Admin/Tabs/Statistics.php:118
 #: v2/App/Controllers/Admin/WDRAjax.php:69
 #: v2/App/Controllers/Admin/WDRAjax.php:72
 msgid "Authentication required"
@@ -670,35 +670,35 @@ msgstr ""
 msgid "<span class=\"onsale\">Sale!</span>"
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:787
-#: v2/App/Controllers/ManageDiscount.php:1007
-#: v2/App/Controllers/ManageDiscount.php:1010 v2/App/Helpers/Helper.php:271
+#: v2/App/Controllers/ManageDiscount.php:818
+#: v2/App/Controllers/ManageDiscount.php:1075
+#: v2/App/Controllers/ManageDiscount.php:1078 v2/App/Helpers/Helper.php:271
 #: v2/App/Helpers/Helper.php:272
 msgid "Cart discount"
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1076
+#: v2/App/Controllers/ManageDiscount.php:1144
 #, php-format
 msgid "Coupon \"%s\" is currently not available!"
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1291
+#: v2/App/Controllers/ManageDiscount.php:1359
 #, php-format
 msgid ""
 "Sorry, it is not possible to apply coupon <b>\"%s\"</b> as you already have "
 "a discount applied in cart."
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1305
+#: v2/App/Controllers/ManageDiscount.php:1373
 msgid "Coupon code applied successfully."
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1733
+#: v2/App/Controllers/ManageDiscount.php:1744
 #: v2/App/Views/Admin/Tabs/settings.php:441
 msgid "Discount <strong>{{title}}</strong> has been applied to your cart."
 msgstr ""
 
-#: v2/App/Controllers/ManageDiscount.php:1863
+#: v2/App/Controllers/ManageDiscount.php:1874
 msgid "You saved {{total_discount}}"
 msgstr ""
 
@@ -1120,133 +1120,133 @@ msgstr ""
 msgid "Validation error"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1009
+#: v2/App/Helpers/Woocommerce.php:1036
 msgid "Sunday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1010
+#: v2/App/Helpers/Woocommerce.php:1037
 msgid "Monday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1011
+#: v2/App/Helpers/Woocommerce.php:1038
 msgid "Tuesday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1012
+#: v2/App/Helpers/Woocommerce.php:1039
 msgid "Wednesday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1013
+#: v2/App/Helpers/Woocommerce.php:1040
 msgid "Thursday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1014
+#: v2/App/Helpers/Woocommerce.php:1041
 msgid "Friday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1015
+#: v2/App/Helpers/Woocommerce.php:1042
 msgid "Saturday"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1026
+#: v2/App/Helpers/Woocommerce.php:1053
 msgid ""
 "Woocommerce before main content(Archive / Shop / Cat Pages / single product)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1027
+#: v2/App/Helpers/Woocommerce.php:1054
 msgid "Woocommerce archive description(Archive / Shop / Cat Pages)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1028
+#: v2/App/Helpers/Woocommerce.php:1055
 msgid "Woocommerce before shop loop(Archive / Shop / Cat Pages)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1029
+#: v2/App/Helpers/Woocommerce.php:1056
 msgid "Woocommerce after shop loop(Archive / Shop / Cat Pages)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1030
+#: v2/App/Helpers/Woocommerce.php:1057
 msgid ""
 "Woocommerce after main content(Archive / Shop / Cat Pages / single product)"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1031 v2/App/Views/Admin/Tabs/settings.php:230
+#: v2/App/Helpers/Woocommerce.php:1058 v2/App/Views/Admin/Tabs/settings.php:230
 #: v2/App/Views/Admin/Tabs/settings.php:248
 msgid "Woocommerce before single product"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1032 v2/App/Views/Admin/Tabs/settings.php:232
+#: v2/App/Helpers/Woocommerce.php:1059 v2/App/Views/Admin/Tabs/settings.php:232
 #: v2/App/Views/Admin/Tabs/settings.php:250
 msgid "Woocommerce before single product summary"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1033 v2/App/Views/Admin/Tabs/settings.php:231
+#: v2/App/Helpers/Woocommerce.php:1060 v2/App/Views/Admin/Tabs/settings.php:231
 #: v2/App/Views/Admin/Tabs/settings.php:249
 msgid "Woocommerce after single product summary"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1034 v2/App/Views/Admin/Tabs/settings.php:229
+#: v2/App/Helpers/Woocommerce.php:1061 v2/App/Views/Admin/Tabs/settings.php:229
 #: v2/App/Views/Admin/Tabs/settings.php:247
 msgid "Woocommerce after single product"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1035
+#: v2/App/Helpers/Woocommerce.php:1062
 msgid "Woocommerce before cart"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1036
+#: v2/App/Helpers/Woocommerce.php:1063
 msgid "Woocommerce before cart table"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1037
+#: v2/App/Helpers/Woocommerce.php:1064
 msgid "Woocommerce before cart contents"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1038
+#: v2/App/Helpers/Woocommerce.php:1065
 msgid "Woocommerce cart contents"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1039
+#: v2/App/Helpers/Woocommerce.php:1066
 msgid "Woocommerce after cart contents"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1040
+#: v2/App/Helpers/Woocommerce.php:1067
 msgid "Woocommerce after cart table"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1041
+#: v2/App/Helpers/Woocommerce.php:1068
 msgid "Woocommerce after cart"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1042
+#: v2/App/Helpers/Woocommerce.php:1069
 msgid "Woocommerce before checkout form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1044
+#: v2/App/Helpers/Woocommerce.php:1071
 msgid "Woocommerce before checkout billing form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1045
+#: v2/App/Helpers/Woocommerce.php:1072
 msgid "Woocommerce after checkout billing form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1046
+#: v2/App/Helpers/Woocommerce.php:1073
 msgid "Woocommerce before checkout shipping form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1047
+#: v2/App/Helpers/Woocommerce.php:1074
 msgid "Woocommerce after checkout shipping form"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1048
+#: v2/App/Helpers/Woocommerce.php:1075
 msgid "Woocommerce before order notes"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1049
+#: v2/App/Helpers/Woocommerce.php:1076
 msgid "Woocommerce after order notes"
 msgstr ""
 
-#: v2/App/Helpers/Woocommerce.php:1583
+#: v2/App/Helpers/Woocommerce.php:1642
 msgid "Coupon already exists in WooCommerce. Please select another name"
 msgstr ""
 
@@ -2334,33 +2334,44 @@ msgstr ""
 msgid "Subtotal tiered discount - sample"
 msgstr ""
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:33
-msgid ""
-"<strong>Note</strong> : Free Shipping rules will not be shown in reports."
-msgstr ""
-
-#: v2/App/Views/Admin/Tabs/Statistics.php:40
+#: v2/App/Views/Admin/Tabs/Statistics.php:73
 msgid "This Week"
 msgstr ""
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:41
+#: v2/App/Views/Admin/Tabs/Statistics.php:74
 msgid "This Month"
 msgstr ""
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:42
+#: v2/App/Views/Admin/Tabs/Statistics.php:75
 msgid "Custom Range"
 msgstr ""
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:50
+#: v2/App/Views/Admin/Tabs/Statistics.php:82
 msgid "From: yyyy/mm/dd"
 msgstr ""
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:61
+#: v2/App/Views/Admin/Tabs/Statistics.php:92
 msgid "To: yyyy/mm/dd"
 msgstr ""
 
-#: v2/App/Views/Admin/Tabs/Statistics.php:92
+#: v2/App/Views/Admin/Tabs/Statistics.php:111
 msgid "Update Chart"
+msgstr ""
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:118
+msgid "Discounted orders"
+msgstr ""
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:122
+msgid "Total sales"
+msgstr ""
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:126
+msgid "Discounted Amount"
+msgstr ""
+
+#: v2/App/Views/Admin/Tabs/Statistics.php:131
+msgid "Orders used free shipping rule"
 msgstr ""
 
 #: v2/App/Views/Admin/Tabs/compatible.php:12
