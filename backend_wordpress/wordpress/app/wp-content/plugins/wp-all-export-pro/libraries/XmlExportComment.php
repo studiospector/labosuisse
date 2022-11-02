@@ -2,6 +2,7 @@
 
 if (!class_exists('XmlExportComment')) {
     final class XmlExportComment {
+		private static $engine = false;
 
         private $init_fields = array(
             array(
@@ -331,10 +332,17 @@ if (!class_exists('XmlExportComment')) {
                     $combineMultipleFieldsValue = stripslashes($combineMultipleFieldsValue);
                     $snippetParser = new \Wpae\App\Service\SnippetParser();
                     $snippets = $snippetParser->parseSnippets($combineMultipleFieldsValue);
-                    $engine = new XmlExportEngine(XmlExportEngine::$exportOptions);
-                    $engine->init_available_data();
-                    $engine->init_additional_data();
-                    $snippets = $engine->get_fields_options($snippets);
+
+                    // Re-use the engine object if we've already initialized it as it's costly.
+	                if(!is_object(self::$engine)){
+
+		                self::$engine = new XmlExportEngine(XmlExportEngine::$exportOptions);
+		                self::$engine->init_available_data();
+		                self::$engine->init_additional_data();
+
+	                }
+
+                    $snippets = self::$engine->get_fields_options($snippets);
 
                     $articleData = self::prepare_data($comment, $snippets, $xmlWriter = false, $implode_delimiter, $preview);
 

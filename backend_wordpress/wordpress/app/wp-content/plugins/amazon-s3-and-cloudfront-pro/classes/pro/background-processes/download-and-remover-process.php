@@ -36,7 +36,17 @@ class Download_And_Remover_Process extends Downloader_Process {
 			// and not had to record any errors for display,
 			// we can skip confirming that files exist on local,
 			// or that the remove from provider succeeded.
-			$remove_handler->handle( $as3cf_item, array( 'verify_exists_on_local' => false ) );
+			$result = $remove_handler->handle( $as3cf_item, array( 'verify_exists_on_local' => false ) );
+
+			if ( is_wp_error( $result ) ) {
+				foreach ( $result->get_error_messages() as $error_message ) {
+					$error_msg = sprintf( __( 'Error removing from bucket - %s', 'amazon-s3-and-cloudfront' ), $error_message );
+					$this->record_error( $blog_id, $source_type, $source_id, $error_msg );
+				}
+
+				return false;
+			}
+
 			$as3cf_item->delete();
 
 			return true;
@@ -79,6 +89,6 @@ class Download_And_Remover_Process extends Downloader_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished removing media files from bucket.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished removing media files from bucket.', 'amazon-s3-and-cloudfront' );
 	}
 }

@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { useMemo } from '@wordpress/element';
+import { useMemo, useState } from '@wordpress/element';
 import { __, sprintf } from '@wordpress/i18n';
 import { Button, Card, CardBody } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
@@ -14,7 +14,7 @@ import {
 	MarkPro,
 	VulnerabilityReport as VulnerabilityReportGraphic,
 } from '@ithemes/security-style-guide';
-import { TabPanel } from '@ithemes/security-components';
+import { ControlledTabPanel } from '@ithemes/security-components';
 import { useAsync } from '@ithemes/security-hocs';
 import { CORE_STORE_NAME } from '@ithemes/security.packages.data';
 import './style.scss';
@@ -35,22 +35,26 @@ export default function App() {
 }
 
 function ProUpgrade() {
+	const [ currentTab, selectTab ] = useState( 'one' );
 	const tabs = useMemo(
 		() => [
 			{
 				name: 'one',
 				title: __( '1 Site', 'better-wp-security' ),
-				price: '80',
+				price: '99',
+				link: 'https://ithem.es/security-1-site-plan',
+			},
+			{
+				name: 'five',
+				title: __( '5 Sites', 'better-wp-security' ),
+				price: '199',
+				link: 'https://ithem.es/security-5-site-plan',
 			},
 			{
 				name: 'ten',
 				title: __( '10 Sites', 'better-wp-security' ),
-				price: '127',
-			},
-			{
-				name: 'unlimited',
-				title: __( 'Unlimited', 'better-wp-security' ),
-				price: '199',
+				price: '299',
+				link: 'https://ithem.es/security-10-site-plan',
 			},
 		],
 		[]
@@ -69,7 +73,7 @@ function ProUpgrade() {
 						'better-wp-security'
 					) }
 				</p>
-				<TabPanel isStyled tabs={ tabs }>
+				<ControlledTabPanel isStyled tabs={ tabs } selected={ currentTab } onSelect={ selectTab }>
 					{ ( { price } ) => (
 						<>
 							<span className="itsec-promo-pro-upgrade__price">
@@ -83,11 +87,11 @@ function ProUpgrade() {
 							</span>
 						</>
 					) }
-				</TabPanel>
+				</ControlledTabPanel>
 				<Button
 					isPrimary
 					className="itsec-promo-pro-upgrade__button"
-					href="https://ithem.es/go-security-pro-now"
+					href={ tabs.find( ( tab ) => tab.name === currentTab )?.link || 'https://ithem.es/go-security-pro-now' }
 				>
 					{ __( 'Go Pro Now', 'better-wp-security' ) }
 				</Button>

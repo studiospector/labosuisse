@@ -65,6 +65,9 @@ if($is_rapid_addon_export) {
 				<input type="hidden" name="sub_post_type_to_export" value="<?php echo $post['sub_post_type_to_export'];?>">
 				<input type="hidden" name="export_only_modified_stuff" value="<?php echo $post['export_only_modified_stuff'];?>" />
 				<input type="hidden" name="export_only_new_stuff" value="<?php echo $post['export_only_new_stuff'];?>" />
+                <?php if(isset($post['enable_real_time_exports']) && $post['enable_real_time_exports']) { ?>
+                    <input type="hidden" name="enable_real_time_exports" id="enable_real_time_exports" value="1" />
+                <?php } ?>
 
 				<?php 
 				$selected_post_type = '';
@@ -632,7 +635,7 @@ if($is_rapid_addon_export) {
                                class="back rad3"><?php esc_html_e('Back', 'wp_all_export_plugin') ?></a>
                         <?php endif; ?>
                         <input type="submit" class="button button-primary button-hero wpallexport-large-button"
-                               value="<?php esc_html_e(($this->isWizard) ? 'Continue' : 'Update Template', 'wp_all_export_plugin') ?>"/>
+                               value="<?php esc_html_e(($this->isWizard) ? 'Continue' : (isset($post['enable_real_time_exports']) && $post['enable_real_time_exports']  ? 'Save &amp; Run Export' : 'Update Template'), 'wp_all_export_plugin') ?>"/>
                     </div>
 
                 </div>

@@ -72,6 +72,8 @@ class StatusReportModule implements ModuleInterface {
 
 				$had_ppec_plugin = PPECHelper::is_plugin_configured();
 
+				$is_tracking_available = $c->get( 'order-tracking.is-tracking-available' );
+
 				$items = array(
 					array(
 						'label'          => esc_html__( 'Onboarded', 'woocommerce-paypal-payments' ),
@@ -96,9 +98,9 @@ class StatusReportModule implements ModuleInterface {
 						),
 					),
 					array(
-						'label'          => esc_html__( 'PayPal card processing available in country', 'woocommerce-paypal-payments' ),
-						'exported_label' => 'PayPal card processing available in country',
-						'description'    => esc_html__( 'Whether PayPal card processing is available in country or not.', 'woocommerce-paypal-payments' ),
+						'label'          => esc_html__( 'Advanced Card Processing available in country', 'woocommerce-paypal-payments' ),
+						'exported_label' => 'Advanced Card Processing available in country',
+						'description'    => esc_html__( 'Whether Advanced Card Processing is available in country or not.', 'woocommerce-paypal-payments' ),
 						'value'          => $this->bool_to_html(
 							$dcc_applies->for_country_currency()
 						),
@@ -148,6 +150,12 @@ class StatusReportModule implements ModuleInterface {
 						'value'          => $this->bool_to_html(
 							$had_ppec_plugin
 						),
+					),
+					array(
+						'label'          => esc_html__( 'Tracking enabled', 'woocommerce-paypal-payments' ),
+						'exported_label' => 'Tracking enabled',
+						'description'    => esc_html__( 'Whether tracking is enabled on PayPal account or not.', 'woocommerce-paypal-payments' ),
+						'value'          => $this->bool_to_html( $is_tracking_available ),
 					),
 				);
 

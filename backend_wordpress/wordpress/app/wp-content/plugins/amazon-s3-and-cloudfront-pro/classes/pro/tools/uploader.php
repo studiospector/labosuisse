@@ -21,15 +21,18 @@ class Uploader extends Background_Tool {
 		parent::init();
 
 		$this->error_setting_migration();
-
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
 	}
 
 	/**
-	 * Migrate old upload errors to new setting key
+	 * Migrate old upload errors to new setting key.
+	 *
+	 * TODO: Move this into next migration so it no longer fires
+	 * TODO: every time the plugin serves a request for tool state!
 	 */
 	protected function error_setting_migration() {
-		if ( false !== ( $errors = $this->as3cf->get_setting( 'bulk_upload_errors', false ) ) ) {
+		$errors = $this->as3cf->get_setting( 'bulk_upload_errors', false );
+
+		if ( ! empty( $errors ) ) {
 			$this->update_errors( $errors );
 			$this->as3cf->remove_setting( 'bulk_upload_errors' );
 			$this->as3cf->save_settings();
@@ -37,57 +40,28 @@ class Uploader extends Background_Tool {
 	}
 
 	/**
-	 * Get the details for the sidebar block
+	 * Get info for tool, including current status.
 	 *
-	 * @return array|false
+	 * @return array
 	 * @throws Exception
 	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
-			// Don't show tool if pro not setup
-			return false;
-		}
-
-		// Don't show upload tool if bucket isn't writable
-		$can_write = $this->as3cf->check_write_permission();
-		if ( ! $can_write || is_wp_error( $can_write ) ) {
-			return false;
-		}
-
-		$media_counts = $this->as3cf->media_counts();
-
-		// Don't show upload tool if media library empty.
-		if ( 0 === $media_counts['total'] ) {
-			return false;
-		}
-
+	public function get_info() {
+		$media_counts     = $this->as3cf->media_counts();
 		$human_percentage = $this->percent_offloaded();
 
-		// Required for JS.
-		$states = array(
-			0   => 'initial',
-			1   => 'partial_complete',
-			100 => 'complete',
-		);
-
-		// Required for JS.
-		$i18n = array(
-			'title_initial'           => __( 'Your Media Library needs to be offloaded', 'amazon-s3-and-cloudfront' ),
-			'title_partial_complete'  => __( "%s%% of your Media Library has been offloaded", 'amazon-s3-and-cloudfront' ),
-			'title_complete'          => __( '100% of your Media Library has been offloaded, congratulations!', 'amazon-s3-and-cloudfront' ),
-			'upload_initial'          => __( 'Offload Now', 'amazon-s3-and-cloudfront' ),
-			'upload_partial_complete' => __( 'Offload Remaining Now', 'amazon-s3-and-cloudfront' ),
+		$strings = array(
+			'title_initial'          => __( 'Your Media Library needs to be offloaded', 'amazon-s3-and-cloudfront' ),
+			'title_partial_complete' => __( '<strong>%s%%</strong> of your Media Library has been offloaded', 'amazon-s3-and-cloudfront' ),
+			'title_complete'         => __( '<strong>100%</strong> of your Media Library has been offloaded, congratulations!', 'amazon-s3-and-cloudfront' ),
 		);
 
 		switch ( $human_percentage ) {
-			case 0 : // Entire library needs uploading
-				$title              = $i18n['title_initial'];
-				$upload_button_text = $i18n['upload_initial'];
+			case 0: // Entire library needs uploading
+				$progress_description = $strings['title_initial'];
 				break;
 
-			case 100 : // Entire media library uploaded
-				$title              = $i18n['title_complete'];
-				$upload_button_text = $i18n['upload_partial_complete'];
+			case 100: // Entire media library uploaded
+				$progress_description = $strings['title_complete'];
 
 				// Remove previous errors
 				$this->clear_errors();
@@ -95,23 +69,17 @@ class Uploader extends Background_Tool {
 				break;
 
 			default: // Media library upload partially complete
-				$title              = sprintf( $i18n['title_partial_complete'], $human_percentage );
-				$upload_button_text = $i18n['upload_partial_complete'];
+				$progress_description = sprintf( $strings['title_partial_complete'], $human_percentage );
 		}
 
 		$args = array(
-			'title'             => $title,
-			'total_progress'    => $human_percentage,
-			'progress'          => $this->get_progress(),
-			'total_on_provider' => (int) $media_counts['offloaded'],
-			'total_items'       => (int) $media_counts['total'],
-			'button'            => $upload_button_text,
-			'pie_chart'         => 1,
-			'i18n'              => $i18n,
-			'states'            => $states,
+			'total_progress'       => $human_percentage,
+			'total_processed'      => (int) $media_counts['offloaded'],
+			'total_items'          => (int) $media_counts['total'],
+			'progress_description' => $progress_description,
 		);
 
-		return array_merge( parent::get_sidebar_block_args(), $args );
+		return array_merge( parent::get_info(), $args );
 	}
 
 	/**
@@ -125,9 +93,7 @@ class Uploader extends Background_Tool {
 		if ( is_null( $human_percentage ) ) {
 			$media_counts = $this->as3cf->media_counts();
 
-			if ( empty( $media_counts['total'] ) ) {
-				$human_percentage = 100;
-			} elseif ( empty( $media_counts['offloaded'] ) ) {
+			if ( empty( $media_counts['total'] ) || empty( $media_counts['offloaded'] ) ) {
 				$human_percentage = 0;
 			} else {
 				$uploaded_percentage = (float) $media_counts['offloaded'] / $media_counts['total'];
@@ -144,27 +110,30 @@ class Uploader extends Background_Tool {
 	}
 
 	/**
-	 * Retrieve the license notice so it can be refreshed behind the tool modal
+	 * Should the tool be rendered?
 	 *
-	 * @return array
+	 * @return bool
 	 */
-	protected function get_custom_notices_to_update() {
-		$notices = parent::get_custom_notices_to_update();
-
-		$notice_id = $this->get_tool_key() . '_license_limit';
-		$notice    = $this->as3cf->notices->find_notice_by_id( $notice_id );
-
-		if ( ! empty( $notice ) ) {
-			$notices[] = $notice;
+	public function should_render() {
+		// Don't show tool if pro not set up.
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
 		}
 
-		return $notices;
+		$media_counts = $this->as3cf->media_counts();
+
+		// Don't show upload tool if media library empty.
+		if ( 0 === $media_counts['total'] ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */
@@ -173,21 +142,6 @@ class Uploader extends Background_Tool {
 		$message = empty( $message ) ? __( 'Previous attempts at offloading your media library have resulted in errors.', 'amazon-s3-and-cloudfront' ) : $message;
 
 		return sprintf( '<strong>%s</strong> &mdash; %s', $title, $message );
-	}
-
-	/**
-	 * Get status.
-	 *
-	 * @return array
-	 */
-	public function get_status() {
-		$media_counts = $this->as3cf->media_counts();
-
-		return array_merge( parent::get_status(), array(
-			'total_progress'    => $this->percent_offloaded(),
-			'total_on_provider' => (int) $media_counts['offloaded'],
-			'total_items'       => (int) $media_counts['total'],
-		) );
 	}
 
 	/**
@@ -201,15 +155,12 @@ class Uploader extends Background_Tool {
 	}
 
 	/**
-	 * Load assets.
+	 * Get the tool's name.
+	 *
+	 * @return string
 	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script( 'as3cf-pro-uploader-script', 'assets/js/pro/tools/uploader', array(
-			'jquery',
-			'wp-util',
-		) );
+	public function get_name() {
+		return __( 'Offload Media', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -218,7 +169,54 @@ class Uploader extends Background_Tool {
 	 * @return string
 	 */
 	public function get_title_text() {
-		return '';
+		return __( 'Your Media Library needs to be offloaded', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get title text for when tool is partially complete.
+	 *
+	 * @return string
+	 */
+	public function get_title_text_partial_complete() {
+		return __( 'Offload Media', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get title text for when tool is complete.
+	 *
+	 * @return string
+	 */
+	public function get_title_text_complete() {
+		return __( 'Offload Media', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get more info text.
+	 *
+	 * @return string
+	 */
+	public static function get_more_info_text() {
+		return __( 'This tool goes through all your media items and offloads their files to the bucket.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 * Defaults to more info text.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		global $as3cf;
+
+		$mesg = __( 'You\'ve enabled the "Copy Files to Bucket" option. Do you want to copy all yet to be offloaded media files to the bucket?', 'amazon-s3-and-cloudfront' );
+		$mesg .= ' ';
+		$mesg .= $as3cf::settings_more_info_link(
+			'copy-to-s3',
+			'',
+			'copy+to+s3'
+		);
+
+		return $mesg;
 	}
 
 	/**
@@ -227,7 +225,16 @@ class Uploader extends Background_Tool {
 	 * @return string
 	 */
 	public function get_button_text() {
-		return '';
+		return __( 'Offload Now', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get button text for when tool is partially complete.
+	 *
+	 * @return string
+	 */
+	public function get_button_text_partial_complete() {
+		return __( 'Offload Remaining Now', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

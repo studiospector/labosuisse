@@ -49,7 +49,15 @@ class Utils {
 	 * @return bool
 	 */
 	public static function isFrontPageWithPosts() {
-		return is_front_page() && 'posts' === get_option( 'show_on_front' );;
+		return is_front_page() && 'posts' === get_option( 'show_on_front' );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function isUsingDomains() {
+		return apply_filters( 'wpml_setting', [], 'language_domains' )
+			&& constant( 'WPML_LANGUAGE_NEGOTIATION_TYPE_DOMAIN' ) === (int) apply_filters( 'wpml_setting', 1, 'language_negotiation_type' );
 	}
 }
 

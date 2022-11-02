@@ -6,7 +6,7 @@
 	 *   update-core.php : #update-plugins-table
 	 * @type {Object}
 	 */
-	var $listTable = $( '#update-plugins-table,.wp-list-table.plugins' );
+	const $listTable = $( '#update-plugins-table,.wp-list-table.plugins' );
 
 	/**
 	 * Class representing a single plugin in the context of a list table of plugin updates.
@@ -15,7 +15,7 @@
 	 * @param {Plugin|undefined} parent
 	 * @constructor
 	 */
-	var Plugin = function( data, parent ) {
+	const Plugin = function( data, parent ) {
 
 		/**
 		 * Data provided by the server.
@@ -58,7 +58,7 @@
 	 * @returns {string}
 	 */
 	Plugin.prototype.checkAgainLink = function() {
-		return ' <span class="dbrains-check-my-licence-again"><a href="#">' + dbrains.strings.check_licence_again + '</a></span>';
+		return ' <span class="as3cf-dbrains-check-my-licence-again"><a href="#">' + as3cf_dbrains.strings.check_licence_again + '</a></span>';
 	};
 
 	/**
@@ -67,9 +67,9 @@
 	 * @returns {boolean}
 	 */
 	Plugin.prototype.hasLicenseErrors = function() {
-		var license = this.isAddon() ? this.parent.data.license : this.data.license;
+		const license = this.isAddon() ? this.parent.data.license : this.data.license;
 
-		return ! _.isEmpty( license.errors );
+		return !_.isEmpty( license.errors );
 	};
 
 	/**
@@ -104,7 +104,7 @@
 		this.$noticeContainer.find( '.as3cf-licence-notice' ).remove();
 		this.$noticeContainer.append(
 			'<div class="as3cf-licence-notice update-message notice inline notice-warning notice-alt">' +
-				'<p class="as3cf-before">' + html + this.checkAgainLink() + '</p>' +
+			'<p class="as3cf-before">' + html + this.checkAgainLink() + '</p>' +
 			'</div>'
 		);
 	};
@@ -113,8 +113,8 @@
 	 * Fade out our license notice and remove it, then restore WP update notices, if any.
 	 */
 	Plugin.prototype.clearNotice = function() {
-		var plugin  = this;
-		var $notice = this.$noticeContainer.find( '.as3cf-licence-notice' );
+		const plugin = this;
+		const $notice = this.$noticeContainer.find( '.as3cf-licence-notice' );
 
 		$.when( $notice.fadeOut() ).done( function() {
 			$notice.remove();
@@ -137,7 +137,7 @@
 			this.clearNotice();
 		}
 
-		if ( ! this.isAddon() ) {
+		if ( !this.isAddon() ) {
 			_.invoke( this.addons, 'render' );
 		}
 	};
@@ -151,25 +151,25 @@
 		}
 
 		// Check if it is the Plugins update table
-		if ( ! $listTable.is( '#update-plugins-table' ) ) {
+		if ( !$listTable.is( '#update-plugins-table' ) ) {
 
 			// Check for an existing plugin-update notice row to use.
-			var $noticeRow = $listTable.find( '.plugin-update-tr[data-plugin="' + this.data.basename + '"]' );
+			const $noticeRow = $listTable.find( '.plugin-update-tr[data-plugin="' + this.data.basename + '"]' );
 
 			if ( $noticeRow.length ) {
 				this.$noticeContainer = $noticeRow.find( '.plugin-update' );
 			} else {
 
-				var colspan = this.$row.children().length;
+				const colspan = this.$row.children().length;
 
 				// If there is no plugin-update row, the plugin did not have an update, so inject a row to use.
 				this.$row.after(
 					'<tr class="plugin-update-tr ' + this.$row.attr( 'class' ) + '" ' +
-						'id="' + this.data.slug + '-update" ' +
-						'data-slug="' + this.data.slug + '" ' +
-						'data-plugin="' + this.data.basename + '" ' +
+					'id="' + this.data.slug + '-update" ' +
+					'data-slug="' + this.data.slug + '" ' +
+					'data-plugin="' + this.data.basename + '" ' +
 					'>' +
-						'<td colspan="' + colspan + '" class="plugin-update colspanchange"></td>' +
+					'<td colspan="' + colspan + '" class="plugin-update colspanchange"></td>' +
 					'</tr>'
 				);
 
@@ -184,7 +184,7 @@
 		}
 
 		// Finally, bind the click handler for ajax license checking
-		this.$noticeContainer.on( 'click', '.dbrains-check-my-licence-again a', _.bind( this.checkLicenseAgain, this ) );
+		this.$noticeContainer.on( 'click', '.as3cf-dbrains-check-my-licence-again a', _.bind( this.checkLicenseAgain, this ) );
 	};
 
 	/**
@@ -193,11 +193,17 @@
 	 * @returns {string}
 	 */
 	Plugin.prototype.getLicenseNotice = function() {
-		if ( this.isAddon() ) {
-			return dbrains.strings.requires_parent_licence.replace( '%s', this.parent.data.name );
+		let message = '';
+
+		if ( this.data.update_available ) {
+			message = as3cf_dbrains.strings.update_available + ' ';
 		}
 
-		return _.values( this.data.license.errors ).join( '' );
+		if ( this.isAddon() ) {
+			return message + as3cf_dbrains.strings.requires_parent_licence.replace( '%s', this.parent.data.name );
+		}
+
+		return message + _.values( this.data.license.errors ).join( '' );
 	};
 
 	/**
@@ -206,9 +212,9 @@
 	 * @param {Event} event
 	 */
 	Plugin.prototype.checkLicenseAgain = function( event ) {
-		var plugin   = this;
-		var $link    = $( event.target );
-		var $spinner = $( '<span class="spinner is-active dbrains-licence-check-spinner" style="float:none; margin-top: -3px;"></span>' );
+		const plugin = this;
+		const $link = $( event.target );
+		const $spinner = $( '<span class="spinner is-active as3cf-dbrains-licence-check-spinner" style="float:none; margin-top: -3px;"></span>' );
 
 		event.preventDefault();
 
@@ -225,7 +231,7 @@
 				}
 			} )
 			.fail( function() {
-				plugin.setNotice( dbrains.strings.licence_check_problem );
+				plugin.setNotice( as3cf_dbrains.strings.licence_check_problem );
 			} )
 			.always( function() {
 				$spinner.remove();
@@ -239,7 +245,7 @@
 	 * @return {jqXHR} jQuery XHR Promise object
 	 */
 	Plugin.prototype.ajaxCheckLicense = function() {
-		var prefix = this.isAddon() ? this.parent.data.prefix : this.data.prefix;
+		const prefix = this.isAddon() ? this.parent.data.prefix : this.data.prefix;
 
 		return $.ajax( {
 			url: ajaxurl,
@@ -248,7 +254,7 @@
 			cache: false,
 			data: {
 				action: prefix + '_check_licence',
-				nonce: dbrains.nonces.check_licence
+				nonce: as3cf_dbrains.nonces.check_licence
 			}
 		} );
 	};
@@ -259,7 +265,7 @@
 	Plugin.prototype.init = function() {
 		this.render();
 
-		if ( ! this.isAddon() ) {
+		if ( !this.isAddon() ) {
 			this.initAddons();
 		}
 	};
@@ -270,14 +276,14 @@
 	 * @returns {boolean}
 	 */
 	Plugin.prototype.isAddon = function() {
-		return !! this.parent;
+		return !!this.parent;
 	};
 
 	/**
 	 * Initialize Plugin add-ons.
 	 */
 	Plugin.prototype.initAddons = function() {
-		var parent = this;
+		const parent = this;
 
 		this.addons = _.map( this.data.addons, function( addonData ) {
 			return new Plugin( addonData, parent );
@@ -290,7 +296,7 @@
 	 * Instantiate and initialize plugin instances.
 	 */
 	function initialize() {
-		_.chain( dbrains.plugins )
+		_.chain( as3cf_dbrains.plugins )
 			.map( function( pluginData ) {
 				return new Plugin( pluginData );
 			} )
@@ -301,4 +307,3 @@
 		$( initialize );
 	}
 })( jQuery );
-

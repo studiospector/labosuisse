@@ -90,6 +90,7 @@ class DBTable
         $order_item_discount_table_query = "CREATE TABLE $order_item_discount_table_name (
 				 `id` int(11) NOT NULL AUTO_INCREMENT,
                  `order_id` int(11) DEFAULT NULL,
+                 `order_item_id` int(11) DEFAULT NULL,
                  `rule_id` int(11) DEFAULT NULL,
                  `item_id` int(11) DEFAULT NULL,
                  `item_price` float NOT NULL,
@@ -100,13 +101,17 @@ class DBTable
                  `bulk_discount` float NOT NULL,
                  `set_discount` float NOT NULL,
                  `cart_discount` float NOT NULL,
+                 `other_discount` float NOT NULL DEFAULT '0',
                  `has_free_shipping` enum('yes','no') NOT NULL DEFAULT 'no',
                  `cart_discount_label` varchar(255) DEFAULT NULL,
                  `other_price` float NOT NULL DEFAULT '0',
                  `created_at` datetime	 DEFAULT NULL,
                  `updated_at` datetime	 DEFAULT NULL,
                  `extra` longtext DEFAULT NULL,
-                 PRIMARY KEY (`id`)
+                 PRIMARY KEY (`id`),
+                 INDEX `index_rule_id` (`rule_id`),
+                 INDEX `index_created_at` (`created_at`),
+                 INDEX `index_rule_order_id` (`rule_id`, `order_id`)
 			) $charset_collate;";
         if(strtolower($wpdb->get_var("show tables like '$rules_table_name'")) != strtolower($rules_table_name)){
             dbDelta($rules_table_query);
@@ -335,18 +340,28 @@ class DBTable
     /**
      * save the order item discount
      * @param $order_id
+     * @param $order_item_id
      * @param $item_id
      * @param $item_price
      * @param $discounted_price
      * @param $discount
      * @param $quantity
+     * @param $rule_id
+     * @param $simple_discount
+     * @param $bulk_discount
+     * @param $set_discount
+     * @param $cart_discount
+     * @param $other_discount
+     * @param $cart_discount_label
+     * @param bool $is_free_shipping
      * @return int
      */
-    static function saveOrderItemDiscounts($order_id, $item_id, $item_price, $discounted_price, $discount, $quantity, $rule_id, $simple_discount, $bulk_discount, $set_discount, $cart_discount, $cart_discount_label, $cart_shipping_method )
+    static function saveOrderItemDiscounts($order_id, $order_item_id, $item_id, $item_price, $discounted_price, $discount, $quantity, $rule_id, $simple_discount, $bulk_discount, $set_discount, $cart_discount, $other_discount, $cart_discount_label, $is_free_shipping = false)
     {
         global $wpdb;
         $order_item_discount_table_name = $wpdb->prefix . self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
         $order_id = intval($order_id);
+        $order_item_id = intval($order_item_id);
         $rule_id = intval($rule_id);
         $item_id = intval($item_id);
         $item_price = floatval($item_price);
@@ -357,19 +372,20 @@ class DBTable
         $bulk_discount = floatval($bulk_discount);
         $set_discount = floatval($set_discount);
         $cart_discount = floatval($cart_discount);
+        $other_discount = floatval($other_discount);
         $cart_discount_label = esc_sql($cart_discount_label);
-        $cart_shipping_method = esc_sql($cart_shipping_method);
-        $select_query = "SELECT id FROM {$order_item_discount_table_name} WHERE order_id= {$order_id} AND item_id={$item_id} AND rule_id={$rule_id}";
+        $has_free_shipping = $is_free_shipping ? "yes" : "no";
+        $select_query = "SELECT id FROM {$order_item_discount_table_name} WHERE order_id={$order_id} AND item_id={$item_id} AND rule_id={$rule_id}";
         $order_discounts = $wpdb->get_row($select_query, OBJECT);
         $current_time = current_time('mysql', true);
 
         if (empty($order_discounts)) {
-            $insert_query = "INSERT INTO {$order_item_discount_table_name} (order_id, rule_id, item_id, item_price, discounted_price, discount, quantity, simple_discount, bulk_discount, set_discount, cart_discount, has_free_shipping, cart_discount_label, created_at, updated_at) VALUES ({$order_id}, {$rule_id}, {$item_id}, {$item_price}, {$discounted_price}, {$discount}, {$quantity}, {$simple_discount}, {$bulk_discount}, {$set_discount}, {$cart_discount}, '{$cart_shipping_method}', '{$cart_discount_label}', '{$current_time}', '{$current_time}')";
+            $insert_query = "INSERT INTO {$order_item_discount_table_name} (order_id, order_item_id, rule_id, item_id, item_price, discounted_price, discount, quantity, simple_discount, bulk_discount, set_discount, cart_discount, other_discount, has_free_shipping, cart_discount_label, created_at, updated_at) VALUES ({$order_id}, {$order_item_id}, {$rule_id}, {$item_id}, {$item_price}, {$discounted_price}, {$discount}, {$quantity}, {$simple_discount}, {$bulk_discount}, {$set_discount}, {$cart_discount}, {$other_discount}, '{$has_free_shipping}', '{$cart_discount_label}', '{$current_time}', '{$current_time}')";
             $wpdb->query($insert_query);
             $row_id = $wpdb->insert_id;
         } else {
             $row_id = $order_discounts->id;
-            $update_query = "UPDATE {$order_item_discount_table_name} SET order_id={$order_id}, rule_id={$rule_id}, item_id={$item_id}, item_price={$item_price}, discounted_price={$discounted_price}, discount={$discount}, quantity={$quantity}, simple_discount={$simple_discount}, bulk_discount={$bulk_discount}, set_discount={$set_discount}, cart_discount={$cart_discount}, has_free_shipping='{$cart_shipping_method}', cart_discount_label='{$cart_discount_label}', updated_at='{$current_time}' WHERE id={$row_id}";
+            $update_query = "UPDATE {$order_item_discount_table_name} SET order_id={$order_id}, order_item_id={$order_item_id}, rule_id={$rule_id}, item_id={$item_id}, item_price={$item_price}, discounted_price={$discounted_price}, discount={$discount}, quantity={$quantity}, simple_discount={$simple_discount}, bulk_discount={$bulk_discount}, set_discount={$set_discount}, cart_discount={$cart_discount}, other_discount={$other_discount}, has_free_shipping='{$has_free_shipping}', cart_discount_label='{$cart_discount_label}', updated_at='{$current_time}' WHERE id={$row_id}";
             $wpdb->query($update_query);
         }
         return $row_id;
@@ -435,7 +451,7 @@ class DBTable
 			FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats
 			ON rules.id = rules_stats.rule_id
 			WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s AND rules.id IN ({$placeholders})
-			GROUP BY date_rep, rule_id, title
+			GROUP BY date_rep, rule_id
 			HAVING value>0
 			ORDER BY value DESC",
             array_merge( array( $params['from'], $params['to'] ), $top )
@@ -443,7 +459,24 @@ class DBTable
 
         $rows = $wpdb->get_results( $query );
 
-        return $rows;
+        $query_info = $wpdb->prepare(
+            "SELECT COUNT(results.order_id) AS total_orders, 
+                SUM(results.discounted_amount) AS discounted_amount,
+                SUM(results.revenue) AS revenue, SUM(results.free_shipping) as total_free_shipping
+            FROM (
+                SELECT rules_stats.order_id, 
+                       SUM({$summary_field}) AS discounted_amount, post_meta.meta_value as revenue, 
+                       SUM(CASE WHEN rules_stats.has_free_shipping = 'yes' THEN 1 ELSE 0 END) as free_shipping
+                FROM {$table_stats} AS rules_stats LEFT JOIN {$wpdb->postmeta} as post_meta
+			    ON (rules_stats.order_id = post_meta.post_id AND post_meta.meta_key = '_order_total')
+			    WHERE DATE(rules_stats.created_at) BETWEEN %s AND %s
+			    GROUP BY rules_stats.order_id
+            ) AS results",
+            array( $params['from'], $params['to'])
+        );
+        $info = $wpdb->get_row( $query_info );
+
+        return ['stats' => $rows, 'other' => $info];
     }
 
     /**
@@ -480,38 +513,36 @@ class DBTable
         $table_items = $wpdb->prefix.self::RULES_TABLE_NAME;
         $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
 
-        $query_total = $wpdb->prepare(
-            "SELECT rules.id AS rule_id, SUM({$summary_field}) AS value
-			FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats
-			ON rules.id = rules_stats.rule_id
-			WHERE rules.id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s
-			GROUP BY rules.id
-			HAVING value>0
-			ORDER BY value DESC
-			LIMIT %d",
-            array( $params['from'], $params['to'], (int) $params['limit'] )
-        );
-        $top = $wpdb->get_col( $query_total );
-        if ( empty( $top ) ) {
-            return false;
-        }
-
-        $placeholders = array_fill( 0, count( $top ), '%d' );
-        $placeholders = implode( ', ', $placeholders );
         $query = $wpdb->prepare(
             "SELECT DATE(rules_stats.created_at) as date_rep, rules.id AS rule_id, CONCAT('#', rules.id, ' ', rules.title) AS title, SUM({$summary_field}) AS value
 			FROM {$table_items} AS rules LEFT JOIN {$table_stats} AS rules_stats
 			ON rules.id = rules_stats.rule_id
-			WHERE rules.id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s AND rules.id IN ({$placeholders})
+			WHERE rules.id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s
 			GROUP BY date_rep, rule_id, title
-			HAVING value>0
 			ORDER BY value DESC",
-            array_merge( array( $params['from'], $params['to'] ), $top )
+            array( $params['from'], $params['to'] )
         );
 
         $rows = $wpdb->get_results( $query );
 
-        return $rows;
+        $query_info = $wpdb->prepare(
+            "SELECT COUNT(results.order_id) AS total_orders, 
+                SUM(results.discounted_amount) AS discounted_amount,
+                SUM(results.revenue) AS revenue, SUM(results.free_shipping) as total_free_shipping
+            FROM (
+                SELECT rules_stats.order_id, 
+                       SUM({$summary_field}) AS discounted_amount, post_meta.meta_value as revenue, 
+                       SUM(CASE WHEN rules_stats.has_free_shipping = 'yes' THEN 1 ELSE 0 END) as free_shipping
+                FROM {$table_stats} AS rules_stats LEFT JOIN {$wpdb->postmeta} as post_meta
+			    ON (rules_stats.order_id = post_meta.post_id AND post_meta.meta_key = '_order_total')
+			    WHERE rules_stats.rule_id={$rule_id} AND DATE(rules_stats.created_at) BETWEEN %s AND %s
+			    GROUP BY rules_stats.order_id
+            ) AS results",
+            array($params['from'], $params['to'])
+        );
+        $info = $wpdb->get_row( $query_info );
+
+        return ['stats' => $rows, 'other' => $info];
     }
 
     /**
@@ -583,6 +614,42 @@ class DBTable
                  PRIMARY KEY (`id`)
 			) $charset_collate;";
             dbDelta($rules_table_query);
+
+            $order_item_discount_table_name = $wpdb->prefix . self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
+            /**
+             * Added `order_item_id` column (since v2.5.0)
+             * Added `other_discount` column (since v2.5.0)
+             * Added `index_rule_id` index (since v2.5.0)
+             * Added `index_created_at` index (since v2.5.0)
+             * Added `index_rule_order_id` index (since v2.5.0)
+             */
+            $order_item_discount_table_query = "CREATE TABLE $order_item_discount_table_name (
+				 `id` int(11) NOT NULL AUTO_INCREMENT,
+                 `order_id` int(11) DEFAULT NULL,
+                 `order_item_id` int(11) DEFAULT NULL,
+                 `rule_id` int(11) DEFAULT NULL,
+                 `item_id` int(11) DEFAULT NULL,
+                 `item_price` float NOT NULL,
+                 `discounted_price` float NOT NULL,
+                 `discount` float NOT NULL,
+                 `quantity` int(11) NOT NULL,
+                 `simple_discount` float NOT NULL,
+                 `bulk_discount` float NOT NULL,
+                 `set_discount` float NOT NULL,
+                 `cart_discount` float NOT NULL,
+                 `other_discount` float NOT NULL DEFAULT '0',
+                 `has_free_shipping` enum('yes','no') NOT NULL DEFAULT 'no',
+                 `cart_discount_label` varchar(255) DEFAULT NULL,
+                 `other_price` float NOT NULL DEFAULT '0',
+                 `created_at` datetime	 DEFAULT NULL,
+                 `updated_at` datetime	 DEFAULT NULL,
+                 `extra` longtext DEFAULT NULL,
+                 PRIMARY KEY (`id`),
+                 INDEX `index_rule_id` (`rule_id`),
+                 INDEX `index_created_at` (`created_at`),
+                 INDEX `index_rule_order_id` (`rule_id`, `order_id`)
+			) $charset_collate;";
+            dbDelta($order_item_discount_table_query);
 
             update_option('awdr_activity_log_version', $current_version);
         }

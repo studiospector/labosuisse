@@ -157,7 +157,7 @@ class Uploader_Process extends Background_Tool_Process {
 	 */
 	protected function get_reached_license_limit_message() {
 		$account_link = sprintf( '<a href="%s" target="_blank">%s</a>', $this->as3cf->get_my_account_url(), __( 'My Account', 'amazon-s3-and-cloudfront' ) );
-		$notice_msg   = __( "<strong>WP Offload Media</strong> &mdash; You've reached your license limit so we've had to stop your offload. To offload the rest of your media, please upgrade your license from %s and simply start the offload again. It will start from where it stopped.", 'amazon-s3-and-cloudfront' );
+		$notice_msg   = __( "You've reached your license limit so we've had to stop your offload. To offload the rest of your media, please upgrade your license from %s and simply start the offload again. It will start from where it stopped.", 'amazon-s3-and-cloudfront' );
 
 		return sprintf( $notice_msg, $account_link );
 	}
@@ -220,6 +220,6 @@ class Uploader_Process extends Background_Tool_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished offloading media to bucket.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished offloading media to bucket.', 'amazon-s3-and-cloudfront' );
 	}
 }

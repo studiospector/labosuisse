@@ -2,7 +2,6 @@
 /**
  * Plugin Class
  *
- *
  * @package     deliciousbrains
  * @subpackage  api/plugin
  * @copyright   Copyright (c) 2015, Delicious Brains
@@ -88,6 +87,10 @@ class Delicious_Brains_API_Plugin {
 	 * @var string URL to purchase a license for the plugin
 	 */
 	public $purchase_url;
+	/**
+	 * @var string URL to view licenses
+	 */
+	public $licenses_url;
 	/**
 	 * @var string URL to access My Account of Delicious Brains
 	 */

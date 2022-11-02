@@ -2,7 +2,6 @@
 /**
  * Updates Class
  *
- *
  * @package     deliciousbrains
  * @subpackage  api/updates
  * @copyright   Copyright (c) 2015, Delicious Brains
@@ -34,11 +33,16 @@ class Delicious_Brains_API_Updates {
 	 */
 	private $plugin_notices = array();
 
+	/**
+	 * Initiate update class
+	 *
+	 * @param Delicious_Brains_API_Licences $licences
+	 */
 	function __construct( Delicious_Brains_API_Licences $licences ) {
 		$this->licences = $licences;
 
-		if ( ! is_multisite() || is_network_admin() ) {
-			add_filter( 'delicious_brains_plugins', array( $this, 'register_plugin_for_updates' ) );
+		if ( ( ! is_multisite() && is_admin() ) || is_network_admin() ) {
+			add_filter( 'as3cf_plugins', array( $this, 'register_plugin_for_updates' ) );
 			add_filter( 'site_transient_update_plugins', array( $this, 'site_transient_update_plugins' ) );
 			add_filter( 'plugins_api', array( $this, 'short_circuit_wordpress_org_plugin_info_request' ), 10, 3 );
 			add_filter( 'http_response', array( $this, 'verify_download' ), 10, 3 );
@@ -48,8 +52,6 @@ class Delicious_Brains_API_Updates {
 			add_action( 'admin_print_scripts-update-core.php', array( $this, 'enqueue_plugin_update_script' ) );
 			add_action( 'current_screen', array( $this, 'check_again_clear_transients' ) );
 			add_action( 'install_plugins_pre_plugin-information', array( $this, 'plugin_update_popup' ) );
-
-			add_action( 'load-plugins.php', array( $this, 'clear_licence_transient' ) );
 		}
 
 		$this->add_plugin_notice( $this->licences->plugin->basename );
@@ -65,35 +67,37 @@ class Delicious_Brains_API_Updates {
 	}
 
 	/**
-	 * Add handlers for displaying update notices for a plugin on our settings page
+	 * Add handlers for displaying update notices for a plugin on our settings page.
 	 *
 	 * @param string $basename
 	 */
-	function add_plugin_notice( $basename ) {
-		if ( ! empty( $basename ) ) {
-			if ( empty( $this->plugin_notices ) ) {
-				add_action( $this->licences->plugin->notices_hook, array( $this, 'handle_plugin_notices' ) );
-			}
-			$this->plugin_notices[ $basename ] = $basename;
+	public function add_plugin_notice( string $basename ) {
+		if ( empty( $basename ) ) {
+			return;
 		}
+
+		$this->plugin_notices[ $basename ] = $basename;
 	}
 
 	/**
-	 * Display update notices for a plugin on our settings page
+	 * Return update notice info for a plugin on our settings page.
+	 *
+	 * @return array
 	 */
-	function handle_plugin_notices() {
+	public function get_plugin_update_notices(): array {
+		$notices = array();
+
 		if ( ! empty( $this->plugin_notices ) ) {
 			foreach ( $this->plugin_notices as $basename ) {
-				$this->version_update_notice( $basename );
+				$notice = $this->version_update_notice( $basename );
+
+				if ( ! empty( $notice ) ) {
+					$notices[] = $notice;
+				}
 			}
 		}
-	}
 
-	/**
-	 * Clear the license response on the plugins page so we get up to date license info
-	 */
-	function clear_licence_transient() {
-		delete_site_transient( $this->licences->plugin->prefix . '_licence_response' );
+		return $notices;
 	}
 
 	/**
@@ -107,8 +111,9 @@ class Delicious_Brains_API_Updates {
 		$plugins[ $this->licences->plugin->slug ] = array_merge(
 			(array) $this->licences->plugin,
 			array(
-				'addons'  => $this->licences->addons,
-				'license' => $this->licences->is_licence_expired(),
+				'addons'           => $this->licences->addons,
+				'license'          => $this->licences->is_licence_expired(),
+				'update_available' => $this->update_available( $this->licences->plugin->slug ),
 			)
 		);
 
@@ -177,6 +182,10 @@ class Delicious_Brains_API_Updates {
 					$trans->response[ $plugin_basename ]->requires_php = $upgrade_data['requires_php'];
 				}
 
+				if ( isset( $upgrade_data['tested'] ) ) {
+					$trans->response[ $plugin_basename ]->tested = $upgrade_data['tested'];
+				}
+
 				if ( isset( $upgrade_data['icon_url'] ) ) {
 					$trans->response[ $plugin_basename ]->icons['svg'] = $upgrade_data['icon_url'];
 				}
@@ -190,7 +199,7 @@ class Delicious_Brains_API_Updates {
 	 * Add some custom JS into the plugin page for our updates process
 	 */
 	public function enqueue_plugin_update_script() {
-		$handle = 'dbrains-plugin-update-script';
+		$handle = 'as3cf-dbrains-plugin-update-script';
 
 		// This script should only be enqueued once if the site has multiple
 		// Delicious Brains plugins installed
@@ -205,17 +214,18 @@ class Delicious_Brains_API_Updates {
 		wp_enqueue_script( $handle, $src, array( 'jquery', 'underscore' ), $version, true );
 
 		wp_localize_script( $handle,
-			'dbrains',
+			'as3cf_dbrains',
 			array(
 				'nonces'  => array(
 					'check_licence' => wp_create_nonce( 'check-licence' ),
 				),
 				'strings' => array(
-					'check_licence_again'     => __( 'Check My License Again', 'amazon-s3-and-cloudfront' ),
-					'licence_check_problem'   => __( 'A problem occurred when trying to check the license, please try again.', 'amazon-s3-and-cloudfront' ),
-					'requires_parent_licence' => __( 'Requires a valid license for %s.', 'amazon-s3-and-cloudfront' ),
+					'check_licence_again'     => __( 'Check My License Again' ),
+					'licence_check_problem'   => __( 'A problem occurred when trying to check the license, please try again.' ),
+					'requires_parent_licence' => __( 'Requires a valid license for %s.' ),
+					'update_available'        => __( 'New version available for active subscriptions.' ),
 				),
-				'plugins' => apply_filters( 'delicious_brains_plugins', array() ),
+				'plugins' => apply_filters( 'as3cf_plugins', array() ),
 			)
 		);
 
@@ -284,7 +294,7 @@ class Delicious_Brains_API_Updates {
 			return;
 		}
 
-		$error_msg = '<p>' . __( 'Could not retrieve version details. Please try again.', 'amazon-s3-and-cloudfront' ) . '</p>';
+		$error_msg = '<p>' . __( 'Could not retrieve version details. Please try again.' ) . '</p>';
 
 		$latest_version = $this->get_latest_version( $slug );
 
@@ -326,10 +336,10 @@ class Delicious_Brains_API_Updates {
 		}
 
 		// The $response['body'] is blank but output is actually saved to a file in this case
-		$data = @file_get_contents( $response['filename'] );
+		$data = @file_get_contents( $response['filename'] ); //phpcs:ignore
 
 		if ( ! $data ) {
-			return new WP_Error( $this->licences->plugin->prefix . '_download_error_empty', sprintf( __( 'Error retrieving download from deliciousbrain.com. Please try again or download manually from <a href="%1$s">%2$s</a>.', 'amazon-s3-and-cloudfront' ), $this->licences->plugin->account_url, _x( 'My Account', 'Delicious Brains account', 'amazon-s3-and-cloudfront' ) ) );
+			return new WP_Error( $this->licences->plugin->prefix . '_download_error_empty', sprintf( __( 'Error retrieving download from deliciousbrain.com. Please try again or download manually from <a href="%1$s">%2$s</a>.' ), $this->licences->plugin->account_url, _x( 'My Account', 'Delicious Brains account' ) ) );
 		}
 
 		$decoded_data = json_decode( $data, true );
@@ -409,10 +419,11 @@ class Delicious_Brains_API_Updates {
 
 		// Return the latest beta version if the installed version is beta
 		// and the API returned a beta version and it's newer than the latest stable version
-		if ( $installed_version
-		     && ( $this->is_beta_version( $installed_version ) || $this->is_beta_version( $required_version ) )
-		     && isset( $data[ $slug ]['beta_version'] )
-		     && version_compare( $data[ $slug ]['version'], $data[ $slug ]['beta_version'], '<' )
+		if (
+			$installed_version
+			&& ( $this->is_beta_version( $installed_version ) || $this->is_beta_version( $required_version ) )
+			&& isset( $data[ $slug ]['beta_version'] )
+			&& version_compare( $data[ $slug ]['version'], $data[ $slug ]['beta_version'], '<' )
 		) {
 			return $data[ $slug ]['beta_version'];
 		}
@@ -428,6 +439,7 @@ class Delicious_Brains_API_Updates {
 	function get_upgrade_data() {
 		$info = get_site_transient( $this->licences->plugin->prefix . '_upgrade_data' );
 
+		// Remove old format upgrade data.
 		if ( isset( $info['version'] ) ) {
 			delete_site_transient( $this->licences->plugin->prefix . '_licence_response' );
 			delete_site_transient( $this->licences->plugin->prefix . '_upgrade_data' );
@@ -458,7 +470,7 @@ class Delicious_Brains_API_Updates {
 
 		if ( isset( $data['errors'] ) ) {
 			set_site_transient( $this->licences->plugin->prefix . '_upgrade_data', $default_upgrade_data, $this->licences->transient_retry_timeout );
-			$this->licences->log_error( __( 'Error trying to get upgrade data.', 'amazon-s3-and-cloudfront' ), $data['errors'] );
+			$this->licences->log_error( __( 'Error trying to get upgrade data.' ), $data['errors'] );
 
 			return false;
 		}
@@ -499,11 +511,13 @@ class Delicious_Brains_API_Updates {
 	 * Display custom version update notices to the top of our plugin page
 	 *
 	 * @param string $basename
+	 *
+	 * @return array
 	 */
-	function version_update_notice( $basename ) {
+	private function version_update_notice( string $basename ): array {
 		// We don't want to show both the "Update Required" and "Update Available" messages at the same time
 		if ( $this->is_addon( $basename ) && $this->is_addon_outdated( $basename ) ) {
-			return;
+			return array();
 		}
 
 		$slug = current( explode( '/', $basename ) );
@@ -511,32 +525,34 @@ class Delicious_Brains_API_Updates {
 		// To reduce UI clutter we hide addon update notices if the core plugin has updates available
 		if ( $this->is_addon( $basename ) && $this->core_update_available() ) {
 			// Core update is available, don't show update notices for addons until core is updated
-			return;
+			return array();
 		}
-
-		$licence          = $this->licences->get_licence_key();
-		$licence_response = $this->licences->is_licence_expired();
-		$licence_problem  = isset( $licence_response['errors'] );
-
-		$update_url = wp_nonce_url( $this->licences->admin_url( 'update.php?action=upgrade-plugin&plugin=' . urlencode( $basename ) ), 'upgrade-plugin_' . $basename );
 
 		$installed_version = $this->get_installed_version( $slug );
 		$latest_version    = $this->get_latest_version( $slug, $installed_version );
-		$plugin_name       = ( isset( $this->licences->addons[ $basename ] ) ) ? $this->licences->addons[ $basename ]['name'] : $this->licences->plugin->name;
 
-		if ( version_compare( $installed_version, $latest_version, '<' ) ) { ?>
-			<div style="display: block;" class="updated warning inline-message">
-				<strong><?php _ex( 'Update Available', 'A new version of the plugin is available', 'amazon-s3-and-cloudfront' ); ?></strong> &mdash;
-				<?php
-				$message = sprintf( __( '%1$s %2$s is now available. You currently have %3$s installed.', 'amazon-s3-and-cloudfront' ), $plugin_name, $latest_version, $installed_version );
-				if ( ! empty( $licence ) && ! $licence_problem ) {
-					$message .= ' ' . sprintf( '<a href="%1$s">%2$s</a>', $update_url, _x( 'Update Now', 'Download and install a new version of the plugin', 'amazon-s3-and-cloudfront' ) );
-				}
-				echo $message;
-				?>
-			</div>
-			<?php
+		if ( version_compare( $installed_version, $latest_version, '<' ) ) {
+			$plugin_name = ( isset( $this->licences->addons[ $basename ] ) ) ? $this->licences->addons[ $basename ]['name'] : $this->licences->plugin->name;
+			$heading     = _x( 'Update Available', 'A new version of the plugin is available' );
+			$message     = sprintf( __( '%1$s %2$s is now available. You currently have %3$s installed.' ), $plugin_name, $latest_version, $installed_version );
+
+			$licence          = $this->licences->get_licence_key();
+			$licence_response = $this->licences->is_licence_expired();
+			$licence_problem  = isset( $licence_response['errors'] );
+
+			if ( ! empty( $licence ) && ! $licence_problem ) {
+				$update_url = wp_nonce_url( $this->licences->admin_url( 'update.php?action=upgrade-plugin&plugin=' . urlencode( $basename ) ), 'upgrade-plugin_' . $basename );
+				$message    .= ' ' . sprintf( '<a href="%1$s">%2$s</a>', $update_url, _x( 'Update Now', 'Download and install a new version of the plugin' ) );
+			}
+
+			return array(
+				'slug'    => $slug,
+				'heading' => $heading,
+				'message' => $message,
+			);
 		}
+
+		return array();
 	}
 
 	/**
@@ -551,16 +567,26 @@ class Delicious_Brains_API_Updates {
 	}
 
 	/**
+	 * Is there an update available for the given plugin slug?
+	 *
+	 * @param string $slug
+	 *
+	 * @return bool
+	 */
+	private function update_available( string $slug ): bool {
+		$installed_version = $this->get_installed_version( $slug );
+		$latest_version    = $this->get_latest_version( $slug, $installed_version );
+
+		return version_compare( $installed_version, $latest_version, '<' );
+	}
+
+	/**
 	 * Is there an update for the core plugin?
 	 *
 	 * @return bool
 	 */
-	function core_update_available() {
-		$core_installed_version = $this->licences->plugin->version;
-		$core_latest_version    = $this->get_latest_version( $this->licences->plugin->slug, $core_installed_version );
-		$needs_update           = version_compare( $core_installed_version, $core_latest_version, '<' );
-
-		return $needs_update;
+	private function core_update_available(): bool {
+		return $this->update_available( $this->licences->plugin->slug );
 	}
 
 	/**
@@ -601,8 +627,8 @@ class Delicious_Brains_API_Updates {
 	 * Hook into the plugin install process and inject addon download url
 	 *
 	 * @param stdClass $res
-	 * @param          $action
-	 * @param          $args
+	 * @param string   $action
+	 * @param stdClass $args
 	 *
 	 * @return stdClass
 	 */

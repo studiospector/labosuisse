@@ -292,10 +292,13 @@ jQuery(document).ready(function ($) {
 
     /*Remove Section*/
     $(document).on('click', '.wdr_discount_remove', function () {
-        wdr_buildrule.remove_wdr_field_group({
-            parentsRow: '.wdr-discount-group',
-            thisObject: this,
-        });
+        let rows_count = $(this).closest('.wdr-discount-group').parent().find('.wdr-discount-group').length;
+        if (rows_count > 1) {
+            wdr_buildrule.remove_wdr_field_group({
+                parentsRow: '.wdr-discount-group',
+                thisObject: this,
+            });
+        }
     });
 
     /*Discounts Tabs navigation*/
@@ -838,6 +841,8 @@ jQuery(document).ready(function ($) {
         }
         let loader = $('.woo_discount_loader');
 
+        $("#wdr-save-rule .awdr-validation-attention").css("border", "1px solid #7e8993");
+
         $.ajax({
             data: $(this).serialize(),
             type: 'post',
@@ -876,6 +881,17 @@ jQuery(document).ready(function ($) {
                                     notify(message, 'error',alert_counter);
                                 });
                             }
+
+                            let name = '', names;
+                            names = key.split('.');
+                            names.forEach(function(value, index) {
+                                if (names.length !== 1) {
+                                    name += (index + 1 !== 1) ? '[' + value + ']' : value;
+                                } else {
+                                    name += value;
+                                }
+                            });
+                            $('#wdr-save-rule [name="' + name + '"]').css("border", "1px solid red").focus().addClass('awdr-validation-attention');
                         }
                     }
                 }
@@ -1106,15 +1122,6 @@ jQuery(document).ready(function ($) {
                     let free_qty = $(element).find('.bxgx-qty').val();
                     let select_type = $(element).find('.buyx_getx_discount_select').val();
                     let max_val = $(element).find('.bxgx-value').val();
-                    if ($(element).find('.awdr-bogo-recurcive').prop("checked") == true) {
-                        if (min_qty == '') {
-                            discount_array.push("fails");
-                            $(element).find('.bxgx-min').css("border", "1px solid red");
-                            $(element).find('.bxgx-min').focus();
-                        } else {
-                            $(element).find('.bxgx-min').css("border", "1px solid #7e8993");
-                        }
-                    }
                     if (min_qty == '' && max_qty == '') {
                         discount_array.push("fails");
                         $(element).find('.bxgx-min').css("border", "1px solid red");
@@ -1124,6 +1131,15 @@ jQuery(document).ready(function ($) {
                     } else {
                         $(element).find('.bxgx-min').css("border", "1px solid #7e8993");
                         $(element).find('.bxgx-max').css("border", "1px solid #7e8993");
+                    }
+                    if ($(element).find('.awdr-bogo-recurcive').prop("checked") == true) {
+                        if (min_qty == '') {
+                            discount_array.push("fails");
+                            $(element).find('.bxgx-min').css("border", "1px solid red");
+                            $(element).find('.bxgx-min').focus();
+                        } else {
+                            $(element).find('.bxgx-min').css("border", "1px solid #7e8993");
+                        }
                     }
                     if (free_qty == '') {
                         discount_array.push("fails");
@@ -1177,15 +1193,6 @@ jQuery(document).ready(function ($) {
                         $('.select_bxgy_type').css("border", "1px solid #7e8993");
                     }
 
-                    if ($(element).find('.awdr-bogo-recurcive').prop("checked") == true) {
-                        if (min_qty == '') {
-                            discount_array.push("fails");
-                            $(element).find('.bxgy-min').css("border", "1px solid red");
-                            $(element).find('.bxgy-min').focus();
-                        } else {
-                            $(element).find('.bxgy-min').css("border", "1px solid #7e8993");
-                        }
-                    }
                     if (min_qty == '' && max_qty == '') {
                         discount_array.push("fails");
                         $(element).find('.bxgy-min').css("border", "1px solid red");
@@ -1195,6 +1202,15 @@ jQuery(document).ready(function ($) {
                     } else {
                         $(element).find('.bxgy-min').css("border", "1px solid #7e8993");
                         $(element).find('.bxgy-max').css("border", "1px solid #7e8993");
+                    }
+                    if ($(element).find('.awdr-bogo-recurcive').prop("checked") == true) {
+                        if (min_qty == '') {
+                            discount_array.push("fails");
+                            $(element).find('.bxgy-min').css("border", "1px solid red");
+                            $(element).find('.bxgy-min').focus();
+                        } else {
+                            $(element).find('.bxgy-min').css("border", "1px solid #7e8993");
+                        }
                     }
                     if (free_qty == '') {
                         discount_array.push("fails");
@@ -1583,7 +1599,7 @@ jQuery(document).ready(function ($) {
                         let status_for_product_qty = $(element).find('.wdr-wc-order-status').val();
                         let amount_for_product_qty = $(element).find('.float_only_field').val();
                         let product_ordered = $(element).find('.specific_product').val();
-                        if (!product_ordered) {
+                        if (product_ordered.length == 0) {
                             condition_array.push("fails");
                             $(element).find('.wdr-previous-order-product-selector .select2-selection').css("border", "1px solid red");
                             $(element).find('.wdr-previous-order-product-selector .select2-selection').focus();

@@ -108,7 +108,7 @@ class Verify_Add_Metadata_Process extends Analyze_And_Repair_Process {
 			return true;
 		}
 
-		foreach ( $size_paths as $size => $path ) {
+		foreach ( $size_paths as $path ) {
 			$key = $as3cf_item->key( wp_basename( $path ) );
 
 			if ( ! $provider_client->does_object_exist( $bucket, $key ) ) {
@@ -125,7 +125,7 @@ class Verify_Add_Metadata_Process extends Analyze_And_Repair_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished checking or removing items previously created with the Add Metadata tool.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished checking or removing items previously created with the Add Metadata tool.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

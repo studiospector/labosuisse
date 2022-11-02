@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 class AS3CF_Pro_Plugin_Compatibility extends AS3CF_Plugin_Compatibility {
 
 	/**
-	 * @var
+	 * @var array
 	 */
 	protected $plugin_functions_abort_upload;
 
@@ -105,7 +105,7 @@ class AS3CF_Pro_Plugin_Compatibility extends AS3CF_Plugin_Compatibility {
 			return $pre;
 		}
 
-		$callers = debug_backtrace();
+		$callers = debug_backtrace(); // phpcs:ignore
 		foreach ( $callers as $caller ) {
 			if ( isset( $caller['function'] ) && in_array( $caller['function'], $this->plugin_functions_abort_upload ) ) {
 				if ( $this->as3cf->get_setting( 'remove-local-file' ) || ! file_exists( get_attached_file( $post_id, true ) ) ) {

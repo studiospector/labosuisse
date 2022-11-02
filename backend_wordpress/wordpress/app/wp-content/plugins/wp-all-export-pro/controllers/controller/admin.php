@@ -94,6 +94,12 @@ abstract class PMXE_Controller_Admin extends PMXE_Controller {
 
     public function add_admin_scripts() {
         $cm_settings['codeEditor'] = wp_enqueue_code_editor(['type' => 'php']);
+
+	    // Use our modified function if user has disabled the syntax editor.
+	    if(false === $cm_settings['codeEditor']){
+		    $cm_settings['codeEditor'] = wpae_wp_enqueue_code_editor(['type' => 'php']);
+	    }
+
         wp_localize_script('jquery', 'wpae_cm_settings', $cm_settings);
     }
 

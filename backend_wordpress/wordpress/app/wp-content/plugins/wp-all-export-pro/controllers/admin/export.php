@@ -316,7 +316,12 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
                         }
                     }
 
-                    wp_redirect(esc_url_raw(add_query_arg(array('page' => 'pmxe-admin-manage', 'pmxe_nt' => urlencode(__('Options updated', 'pmxi_plugin'))) + array_intersect_key($_GET, array_flip($this->baseUrlParamNames)), admin_url('admin.php'))));
+                    if(isset($this->data['export']['options']['enable_real_time_exports']) && $this->data['export']['options']['enable_real_time_exports']) {
+                        wp_redirect(esc_url_raw(add_query_arg(array('page' => 'pmxe-admin-export', 'id'=> $this->data['export']->id, 'action' => 'process') + array_intersect_key($_GET, array_flip($this->baseUrlParamNames)), admin_url('admin.php'))));
+
+                    } else {
+                        wp_redirect(esc_url_raw(add_query_arg(array('page' => 'pmxe-admin-manage', 'pmxe_nt' => urlencode(__('Options updated', 'pmxi_plugin'))) + array_intersect_key($_GET, array_flip($this->baseUrlParamNames)), admin_url('admin.php'))));
+                    }
                     die();
                 }
             }
@@ -393,8 +398,9 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
                         'options' => $post,
                         'client_mode_enabled' => $post['allow_client_mode'],
                         'friendly_name' => $this->getFriendlyName($post),
-                        'last_activity' => date('Y-m-d H:i:s')
-                )
+                        'last_activity' => date('Y-m-d H:i:s'),
+                        'created_at_gmt' => date('Y-m-d H:i:s')
+                    )
                 )->save();
 
                 PMXE_Plugin::$session->set('update_previous', $export->id);
@@ -464,7 +470,11 @@ class PMXE_Admin_Export extends PMXE_Controller_Admin
                     if (!empty($post['friendly_name'])) {
                         $this->data['export']->set(array('friendly_name' => $post['friendly_name'], 'scheduled' => (($post['is_scheduled']) ? $post['scheduled_period'] : ''), 'client_mode_enabled' => $post['allow_client_mode']))->save();
                     }
-                    wp_redirect(add_query_arg(array('page' => 'pmxe-admin-manage', 'pmxe_nt' => urlencode(__('Options updated', 'wp_all_export_plugin'))) + array_intersect_key($_GET, array_flip($this->baseUrlParamNames)), admin_url('admin.php')));
+                    if(isset($post['enable_real_time_exports']) && $post['enable_real_time_exports']) {
+                        wp_redirect(esc_url_raw(add_query_arg(array('page' => 'pmxe-admin-export', 'id'=> $this->data['export']->id, 'action' => 'process') + array_intersect_key($_GET, array_flip($this->baseUrlParamNames)), admin_url('admin.php'))));
+                    } else {
+                        wp_redirect(add_query_arg(array('page' => 'pmxe-admin-manage', 'pmxe_nt' => urlencode(__('Options updated', 'wp_all_export_plugin'))) + array_intersect_key($_GET, array_flip($this->baseUrlParamNames)), admin_url('admin.php')));
+                    }
                     die();
                 }
             }

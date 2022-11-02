@@ -39,7 +39,7 @@ class Move_Public_Objects_Process extends Move_Objects_Process {
 				$new_prefix = $this->get_new_public_prefix( $as3cf_item, $old_prefix );
 
 				if ( $new_prefix !== $old_prefix ) {
-					$items_to_move[ $source_id ] = [ 'prefix' => $new_prefix, 'private_prefix' => $as3cf_item->private_prefix() ];
+					$items_to_move[ $source_id ] = array( 'prefix' => $new_prefix, 'private_prefix' => $as3cf_item->private_prefix() );
 				}
 			} else {
 				$name = $this->as3cf->get_source_type_name( $source_type );
@@ -59,6 +59,6 @@ class Move_Public_Objects_Process extends Move_Objects_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished moving media files to new storage paths.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished moving media files to new storage paths.', 'amazon-s3-and-cloudfront' );
 	}
 }

@@ -78,6 +78,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter implements IWPML_Action {
 		add_filter( 'wpseo_build_sitemap_post_type', [ $this, 'wpseo_build_sitemap_post_type_filter' ] );
 		add_action( 'wpseo_xmlsitemaps_config', [ $this, 'list_domains' ] );
 		add_filter( 'wpseo_exclude_from_sitemap_by_post_ids', [ $this, 'exclude_translations_of_static_pages' ], 10, 3 );
+		add_filter( 'wpseo_exclude_from_sitemap_by_term_ids', [ $this, 'excludeHiddenLanguagesTerms' ] );
 	}
 
 	/**
@@ -140,7 +141,7 @@ class WPML_WPSEO_XML_Sitemaps_Filter implements IWPML_Action {
 				case 'post':
 					$post_id = $this->get_post_id_for_option( 'page_for_posts', $lang_code );
 
-					// if $post_id is null, we won't insert the translation
+					// if $post_id is null, we won't insert the translation.
 					if ( ! self::isIndexable( $post_id ) ) {
 						continue 2;
 					}
@@ -293,6 +294,33 @@ class WPML_WPSEO_XML_Sitemaps_Filter implements IWPML_Action {
 		}
 
 		return $url;
+	}
+
+	public function excludeHiddenLanguagesTerms( $termIds ) {
+		global $wpdb;
+		$hiddenLanguages = $this->sitepress->get_setting( 'hidden_languages', [] );
+
+		if ( empty( $hiddenLanguages ) ) {
+			return $termIds;
+		}
+
+		foreach ( $hiddenLanguages as $language ) {
+			// phpcs:disable
+			$query = $wpdb->prepare(
+				"SELECT wptt.term_id
+				FROM {$wpdb->prefix}term_taxonomy AS wptt
+				JOIN {$wpdb->prefix}icl_translations AS iclt
+					ON iclt.element_id = wptt.term_taxonomy_id
+				WHERE language_code=%s AND element_type like 'tax_%'",
+				$language
+			);
+			$terms   = $wpdb->get_col( $query );
+			// phpcs:enable
+
+			$termIds = array_merge( $termIds, array_map( 'intval', $terms ) );
+		}
+
+		return $termIds;
 	}
 
 	/**

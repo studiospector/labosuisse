@@ -23,51 +23,9 @@ class Woocommerce_Product_Urls extends Background_Tool {
 	);
 
 	/**
-	 * Initialize Downloader
-	 */
-	public function init() {
-		parent::init();
-
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return;
-		}
-
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
-	}
-
-	/**
-	 * Get the details for the sidebar block
-	 *
-	 * @return array|bool
-	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return false;
-		}
-
-		return parent::get_sidebar_block_args();
-	}
-
-	/**
-	 * Load assets.
-	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script(
-			'as3cf-pro-woocommerce-product-urls-script',
-			'assets/js/pro/tools/woocommerce-product-urls',
-			array(
-				'jquery',
-				'wp-util',
-			)
-		);
-	}
-
-	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */
@@ -84,6 +42,10 @@ class Woocommerce_Product_Urls extends Background_Tool {
 	 * @return bool
 	 */
 	public function should_render() {
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
+		}
+
 		if ( defined( 'AS3CF_SHOW_WOOCOMMERCE_TOOL' ) && AS3CF_SHOW_WOOCOMMERCE_TOOL ) {
 			return true;
 		}
@@ -97,6 +59,15 @@ class Woocommerce_Product_Urls extends Background_Tool {
 		}
 
 		return (bool) $this->count_offloaded_media_files();
+	}
+
+	/**
+	 * Get the tool's name.
+	 *
+	 * @return string
+	 */
+	public function get_name() {
+		return __( 'WooCommerce Analyze &amp; Repair', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

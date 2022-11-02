@@ -19,6 +19,7 @@ return array(
     'WPML\\WPSEO\\RankMathSEO\\Sitemap\\Hooks' => $baseDir . '/classes/RankMathSEO/Sitemap/Hooks.php',
     'WPML\\WPSEO\\RankMathSEO\\Sitemap\\LangMode\\DirectoryHooks' => $baseDir . '/classes/RankMathSEO/Sitemap/LangMode/DirectoryHooks.php',
     'WPML\\WPSEO\\SlugTranslation\\Hooks' => $baseDir . '/classes/SlugTranslation/Hooks.php',
+    'WPML\\WPSEO\\Terms\\AdminHooks' => $baseDir . '/classes/Terms/AdminHooks.php',
     'WPML\\WPSEO\\Utils' => $baseDir . '/classes/Utils.php',
     'WPML_Core_Version_Check' => $vendorDir . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
     'WPML_Dependencies' => $vendorDir . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-dependencies.php',

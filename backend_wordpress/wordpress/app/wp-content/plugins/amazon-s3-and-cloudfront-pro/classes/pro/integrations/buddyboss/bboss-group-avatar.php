@@ -39,7 +39,7 @@ class BBoss_Group_Avatar extends BBoss_Item {
 	protected static $folder = 'group-avatars';
 
 	/**
-	 * sprintf pattern for creating prefix based on source_id
+	 * The sprintf() pattern for creating prefix based on source_id.
 	 *
 	 * @var string
 	 */

@@ -31,12 +31,38 @@ class AWS_CloudFront_Pro extends AWS_CloudFront {
 	);
 
 	/**
-	 * A short description of what features the delivery provider enables.
+	 * @inheritDoc
+	 */
+	public static function signed_urls_support_desc() {
+		return __( 'Private Media Supported', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Title used in various places for enabling Signed URLs.
 	 *
 	 * @return string
 	 */
-	public function features_description() {
-		return __( 'Fast, Private Media Supported', 'amazon-s3-and-cloudfront' );
+	public static function signed_urls_option_name() {
+		return __( 'Serve Private Media from CloudFront', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Description used in various places for enabling Signed URLs.
+	 *
+	 * @return string
+	 */
+	public static function signed_urls_option_description() {
+		global $as3cf;
+
+		$signed_urls_doc = $as3cf::dbrains_url(
+			'/wp-offload-media/doc/serve-private-media-signed-cloudfront-urls/',
+			array( 'utm_campaign' => 'support+docs' )
+		);
+
+		return sprintf(
+			__( 'Prevents public access to certain media files by ensuring they are only accessible via signed URLs that expire shortly after delivery. <a href="%1$s" target="_blank">How to configure private media in CloudFront</a>', 'amazon-s3-and-cloudfront' ),
+			$signed_urls_doc
+		);
 	}
 
 	/**
@@ -45,7 +71,7 @@ class AWS_CloudFront_Pro extends AWS_CloudFront {
 	 * @return string
 	 */
 	public static function signed_urls_key_id_name() {
-		return __( 'CloudFront Key Pair Access Key ID', 'amazon-s3-and-cloudfront' );
+		return __( 'Public Key ID', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -54,7 +80,7 @@ class AWS_CloudFront_Pro extends AWS_CloudFront {
 	 * @return string
 	 */
 	public static function signed_urls_key_id_description() {
-		return __( 'Any files set to private need a signed URL that includes the Access Key ID from a CloudFront Key Pair.', 'amazon-s3-and-cloudfront' );
+		return __( "Any files set to private need a signed URL that includes the Public Key ID from a Public Key that has been added to a CloudFront distribution's Trusted Key Group.", 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -63,7 +89,7 @@ class AWS_CloudFront_Pro extends AWS_CloudFront {
 	 * @return string
 	 */
 	public static function signed_urls_key_file_path_name() {
-		return __( 'CloudFront Private Key File Path', 'amazon-s3-and-cloudfront' );
+		return __( 'Private Key File Path', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -72,7 +98,7 @@ class AWS_CloudFront_Pro extends AWS_CloudFront {
 	 * @return string
 	 */
 	public static function signed_urls_key_file_path_description() {
-		return __( 'Any files set to private need to have their URLs signed with the Private Key File downloaded from the CloudFront Key Pair.', 'amazon-s3-and-cloudfront' );
+		return __( "Any files set to private need to have their URLs signed with the Private Key File whose Public Key has been uploaded to CloudFront and added to a distribution's Trusted Key Group.", 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -81,11 +107,11 @@ class AWS_CloudFront_Pro extends AWS_CloudFront {
 	 * @return string
 	 */
 	public static function signed_urls_object_prefix_description() {
-		return __( 'Any files set to private will be stored at this path prepended to the path configured above. An Amazon CloudFront behaviour is then set up to restrict public access to the files at this path.', 'amazon-s3-and-cloudfront' );
+		return __( 'Any files set to private will be stored with this path prepended to the configured bucket path. An Amazon CloudFront behaviour must then be set up to restrict public access to the files at this path.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
-	 * @inheritDoc
+	 * {@inheritDoc}
 	 */
 	public function get_signed_url( Item $as3cf_item, $path, $domain, $scheme, $timestamp, $headers = array() ) {
 		if ( static::use_signed_urls_key_file() ) {

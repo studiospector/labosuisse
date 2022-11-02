@@ -44,7 +44,7 @@ class BBoss_User_Cover extends BBoss_Item {
 	protected static $folder = 'buddypress/members';
 
 	/**
-	 * sprintf pattern for creating prefix based on source_id
+	 * The sprintf() pattern for creating prefix based on source_id.
 	 *
 	 * @var string
 	 */

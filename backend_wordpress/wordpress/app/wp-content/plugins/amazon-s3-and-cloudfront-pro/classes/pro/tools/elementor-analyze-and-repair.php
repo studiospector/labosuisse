@@ -15,6 +15,11 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 	protected $tool_key = 'elementor_analyze_and_repair';
 
 	/**
+	 * @var bool
+	 */
+	protected static $requires_bucket_access = false;
+
+	/**
 	 * Limit the item types that this tool handles.
 	 *
 	 * @var array
@@ -33,7 +38,6 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 			return;
 		}
 
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
 		$this->maybe_show_notice();
 	}
 
@@ -85,7 +89,7 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 		$this->as3cf->notices->add_notice(
 			sprintf(
 				__(
-					'<strong>WP Offload Media</strong> &mdash; There is content created with Elementor
+					'There is content created with Elementor
 						that may need to be checked for broken media links. Go to the WP Offload Media settings page and run the
 						Elementor Analyze and repair tool. <a href="%s">Get started&nbsp;&raquo;</a>',
 					'amazon-s3-and-cloudfront'
@@ -102,38 +106,9 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 	}
 
 	/**
-	 * Get the details for the sidebar block
-	 *
-	 * @return array|bool
-	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return false;
-		}
-
-		return parent::get_sidebar_block_args();
-	}
-
-	/**
-	 * Load assets.
-	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script(
-			'as3cf-pro-elementor-analyze-and-repair-script',
-			'assets/js/pro/tools/elementor-analyze-and-repair',
-			array(
-				'jquery',
-				'wp-util',
-			)
-		);
-	}
-
-	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */
@@ -150,6 +125,10 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 	 * @return bool
 	 */
 	public function should_render() {
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
+		}
+
 		if ( defined( 'AS3CF_SHOW_ELEMENTOR_TOOL' ) && AS3CF_SHOW_ELEMENTOR_TOOL ) {
 			return true;
 		}
@@ -163,6 +142,15 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 		}
 
 		return (bool) $this->count_offloaded_media_files();
+	}
+
+	/**
+	 * Get the tool's name.
+	 *
+	 * @return string
+	 */
+	public function get_name() {
+		return __( 'Elementor Analyze &amp; Repair', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -214,4 +202,3 @@ class Elementor_Analyze_And_Repair extends Background_Tool {
 		return new Elementor_Analyze_And_Repair_Process( $this->as3cf, $this );
 	}
 }
-

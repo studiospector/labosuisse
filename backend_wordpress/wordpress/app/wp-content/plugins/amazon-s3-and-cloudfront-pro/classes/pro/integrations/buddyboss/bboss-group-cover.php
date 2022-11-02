@@ -49,7 +49,7 @@ class BBoss_Group_Cover extends BBoss_Item {
 	protected static $folder = 'buddypress/groups';
 
 	/**
-	 * sprintf pattern for creating prefix based on source_id
+	 * The sprintf() pattern for creating prefix based on source_id.
 	 *
 	 * @var string
 	 */

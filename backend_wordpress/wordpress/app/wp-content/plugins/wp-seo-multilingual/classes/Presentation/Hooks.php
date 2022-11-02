@@ -25,6 +25,8 @@ class Hooks implements \IWPML_Frontend_Action {
 		add_filter( 'wpseo_breadcrumb_indexables', [ $this, 'translateBreadcrumbs' ] );
 
 		add_filter( 'wpseo_frontend_presentation', [ $this, 'translatePermalinks' ] );
+
+		add_filter( 'wpseo_frontend_presentation', [ $this, 'setSchemaGraphData' ], 10, 2 );
 	}
 
 	public function init() {
@@ -177,6 +179,24 @@ class Hooks implements \IWPML_Frontend_Action {
 	}
 
 	/**
+	 *
+	 * @param Indexable_Presention $presentation The indexable presentation.
+	 * @param object               $context      The Meta Tags Context.
+	 *
+	 * @return Indexable_Presention
+	 */
+	public function setSchemaGraphData( $presentation, $context ) {
+		$context->site_url = apply_filters( 'wpml_permalink', $context->site_url );
+
+		if ( Utils::isUsingDomains() && ! empty( $context->company_logo_meta ) ) {
+			$translateImg                      = wp_get_attachment_image_src( $context->company_logo_meta['id'], 'full' );
+			$context->company_logo_meta['url'] = ! empty( $translateImg[0] ) ? $translateImg[0] : $context->company_logo_meta['url'];
+		}
+
+		return $presentation;
+	}
+
+	/**
 	 * @param \WP_Post|int $post
 	 * @param string       $fallback
 	 *
@@ -184,7 +204,7 @@ class Hooks implements \IWPML_Frontend_Action {
 	 */
 	private static function getPermalink( $post, $fallback ) {
 		return Maybe::fromNullable( get_permalink( $post ) )
-		     ->getOrElse( $fallback );
+			->getOrElse( $fallback );
 	}
 
 	/**
@@ -195,8 +215,8 @@ class Hooks implements \IWPML_Frontend_Action {
 	 */
 	private static function getTermLink( $term, $fallback ) {
 		return Maybe::fromNullable( get_term_link( $term ) )
-		     ->filter( pipe( Logic::not(), 'is_wp_error' ) )
-		     ->getOrElse( $fallback );
+			->filter( pipe( 'is_wp_error', Logic::not() ) )
+			->getOrElse( $fallback );
 	}
 
 	/**
@@ -207,6 +227,6 @@ class Hooks implements \IWPML_Frontend_Action {
 	 */
 	private static function getPostTypeArchiveLink( $postType, $fallback ) {
 		return Maybe::fromNullable( get_post_type_archive_link( $postType ) )
-		     ->getOrElse( $fallback );
+			->getOrElse( $fallback );
 	}
 }

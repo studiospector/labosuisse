@@ -79,7 +79,7 @@ class WPML_WPSEO_Filters implements IWPML_Action {
 			$url = $this->canonicals->get_canonical_url( $url, $obj, '' );
 		}
 
-		if ( null === $obj ) {
+		if ( null === $obj || $obj instanceof WP_User ) {
 			$url = $this->canonicals->get_general_canonical_url( $url );
 		}
 

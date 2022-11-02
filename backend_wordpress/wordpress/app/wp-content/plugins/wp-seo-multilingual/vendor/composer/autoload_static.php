@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitb70b31b4cc6732195d5c9b8dfa38efaf
+class ComposerStaticInitf4d491a096941134d1aaa451da114adb
 {
     public static $classMap = array (
         'OTGS_Assets_Handles' => __DIR__ . '/..' . '/otgs/ui/src/php/OTGS_Assets_Handles.php',
@@ -20,6 +20,7 @@ class ComposerStaticInitb70b31b4cc6732195d5c9b8dfa38efaf
         'WPML\\WPSEO\\RankMathSEO\\Sitemap\\Hooks' => __DIR__ . '/../..' . '/classes/RankMathSEO/Sitemap/Hooks.php',
         'WPML\\WPSEO\\RankMathSEO\\Sitemap\\LangMode\\DirectoryHooks' => __DIR__ . '/../..' . '/classes/RankMathSEO/Sitemap/LangMode/DirectoryHooks.php',
         'WPML\\WPSEO\\SlugTranslation\\Hooks' => __DIR__ . '/../..' . '/classes/SlugTranslation/Hooks.php',
+        'WPML\\WPSEO\\Terms\\AdminHooks' => __DIR__ . '/../..' . '/classes/Terms/AdminHooks.php',
         'WPML\\WPSEO\\Utils' => __DIR__ . '/../..' . '/classes/Utils.php',
         'WPML_Core_Version_Check' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
         'WPML_Dependencies' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-dependencies.php',
@@ -36,7 +37,7 @@ class ComposerStaticInitb70b31b4cc6732195d5c9b8dfa38efaf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitb70b31b4cc6732195d5c9b8dfa38efaf::$classMap;
+            $loader->classMap = ComposerStaticInitf4d491a096941134d1aaa451da114adb::$classMap;
 
         }, null, ClassLoader::class);
     }

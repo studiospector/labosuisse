@@ -2,7 +2,6 @@
 /**
  * API Wrapper Class
  *
- *
  * @package     deliciousbrains
  * @subpackage  api
  * @copyright   Copyright (c) 2015, Delicious Brains
@@ -49,6 +48,9 @@ class Delicious_Brains_API {
 	 */
 	public $transient_retry_timeout;
 
+	/**
+	 * Initiate API wrapper.
+	 */
 	function __construct() {
 		$this->transient_timeout       = HOUR_IN_SECONDS * 12;
 		$this->transient_retry_timeout = HOUR_IN_SECONDS * 2;
@@ -63,9 +65,9 @@ class Delicious_Brains_API {
 	/**
 	 * Default request arguments passed to an HTTP request
 	 *
-	 * @see wp_remote_request() For more information on the available arguments.
-	 *
 	 * @return array
+	 *
+	 * @see wp_remote_request() For more information on the available arguments.
 	 */
 	protected function get_default_request_args() {
 		return array(

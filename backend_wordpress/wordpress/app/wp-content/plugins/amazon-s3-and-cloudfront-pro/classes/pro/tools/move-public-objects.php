@@ -20,92 +20,22 @@ class Move_Public_Objects extends Move_Objects {
 	);
 
 	/**
-	 * Register tool specific action hooks.
-	 */
-	protected function register_actions() {
-		// Later priority so that move both public and private tool has first dibs.
-		add_filter( 'as3cf_action_for_changed_settings_key', array( $this, 'action_for_changed_settings_key' ), 20, 2 );
-	}
-
-	/**
-	 * Maybe start move public objects process via post request.
+	 * Add notice strings for when tool will not prompt.
 	 *
-	 * @param array $changed_keys
+	 * @param array $strings
 	 *
 	 * @return array
 	 */
-	public function handle_post_request( $changed_keys ) {
-		if (
-			! empty( $_GET['action'] ) &&
-			( 'move-public-objects' === $_GET['action'] || 'move-objects' === $_GET['action'] ) &&
-			! $this->as3cf->get_storage_provider()->needs_access_keys() &&
-			$this->as3cf->get_setting( 'bucket' ) &&
-			! empty( $_POST['move-public-objects'] ) &&
-			empty( $_POST['move-private-objects'] )
-		) {
-			$this->handle_start();
-		}
+	public function add_js_strings( $strings ) {
+		global $as3cf;
 
-		return $changed_keys;
-	}
+		$notice_link = $as3cf::more_info_link( '/wp-offload-media/doc/how-to-move-media-to-a-new-bucket-path/', 'error-media+move+objects' );
+		$notice_msg  = __( '<strong>Warning</strong> &mdash; Because you\'ve turned off %1$s, we will not offer to move existing media to the new path as it could result in overwriting some media in your bucket. %2$s', 'amazon-s3-and-cloudfront' );
 
-	/**
-	 * Should the Move Objects prompt be the next action?
-	 *
-	 * @param string $action
-	 * @param array  $changed_keys
-	 *
-	 * @return string
-	 */
-	public function action_for_changed_settings_key( $action, $changed_keys ) {
-		// If this step already processed, shortcut out.
-		if (
-			( ! empty( $_GET['action'] ) && in_array( $_GET['action'], array( 'move-public-objects', 'move-objects' ) ) ) ||
-			( ! empty( $_GET['prev_action'] ) && in_array( $_GET['prev_action'], array( 'move-public-objects', 'move-objects' ) ) )
-		) {
-			return 'move-public-objects' === $action ? null : $action;
-		}
+		$strings['no_move_objects_year_month_notice']        = sprintf( $notice_msg, __( 'Year/Month', 'amazon-s3-and-cloudfront' ), $notice_link );
+		$strings['no_move_objects_object_versioning_notice'] = sprintf( $notice_msg, __( 'Object Versioning', 'amazon-s3-and-cloudfront' ), $notice_link );
 
-		if (
-			empty( $action ) &&
-			! empty( array_intersect( $changed_keys, array( 'enable-object-prefix', 'object-prefix', 'use-yearmonth-folders', 'object-versioning' ) ) ) &&
-			$this->move_public_objects_is_safe( $changed_keys ) &&
-			$this->count_offloaded_media_files()
-		) {
-			return 'move-public-objects';
-		}
-
-		return $action;
-	}
-
-	/**
-	 * Adjust media tab's class attribute.
-	 *
-	 * @param string $storage_classes Class names related to storage provider.
-	 *
-	 * @return string
-	 */
-	public function media_tab_storage_classes( $storage_classes ) {
-		if ( ! empty( $_GET['action'] ) && 'move-public-objects' === $_GET['action'] ) {
-			$storage_classes .= ' as3cf-move-objects as3cf-move-public-objects';
-		}
-
-		return $storage_classes;
-	}
-
-	/**
-	 * Render modal in footer.
-	 */
-	public function render_modal() {
-		if ( ! empty( $_GET['action'] ) && 'move-public-objects' === $_GET['action'] ) {
-			$this->as3cf->render_view(
-				'modals/move-objects',
-				array(
-					'as3cf_move_public_objects'  => true,
-					'as3cf_move_private_objects' => false,
-				)
-			);
-		}
+		return $strings;
 	}
 
 	/**
@@ -136,9 +66,44 @@ class Move_Public_Objects extends Move_Objects {
 	}
 
 	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		global $as3cf;
+
+		$mesg = '<h3>' . __( 'Storage Path Updated: Would you like to move existing media to the new path?', 'amazon-s3-and-cloudfront' ) . '</h3>';
+		$mesg .= '<br>';
+		$mesg .= '<p>' . __( 'You just updated the storage path. Any new media you offload from now on will use this new path.', 'amazon-s3-and-cloudfront' ) . '</p>';
+		$mesg .= '<p>';
+		$mesg .= __( 'You can also move existing media to this new path. Beware however that moving existing media will update URLs and will result in 404s for any sites embedding or linking to your media. It could also have a negative impact on SEO. If you\'re unsure about this, we recommend not moving existing media to the new path.', 'amazon-s3-and-cloudfront' );
+		$mesg .= ' ';
+		$mesg .= $as3cf::more_info_link(
+			'/wp-offload-media/doc/how-to-move-media-to-a-new-bucket-path/',
+			'move+objects',
+			'public-path'
+		);
+		$mesg .= '</p>';
+
+		return $mesg;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function get_doc_url() {
+		global $as3cf;
+
+		$args = array( 'utm_campaign' => 'move+objects' );
+
+		return $as3cf::dbrains_url( '/wp-offload-media/doc/how-to-move-media-to-a-new-bucket-path/', $args, 'public-path' );
+	}
+
+	/**
 	 * Message for error notice.
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */

@@ -15,6 +15,9 @@ class Core_Pro extends Core {
 	 */
 	protected $as3cf;
 
+	/**
+	 * Init integration.
+	 */
 	public function init() {
 		parent::init();
 

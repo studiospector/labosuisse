@@ -14,120 +14,9 @@ class Remove_Local_Files extends Background_Tool {
 	protected $tool_key = 'remove_local_files';
 
 	/**
-	 * @var string
+	 * @var bool
 	 */
-	protected $tab = 'media';
-
-	/**
-	 * Initialize the tool.
-	 */
-	public function init() {
-		parent::init();
-
-		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
-			return;
-		}
-
-		add_filter( 'as3cf_media_tab_storage_classes', array( $this, 'media_tab_storage_classes' ) );
-		add_action( 'as3cf_pre_media_settings', array( $this, 'render_modal' ) );
-		add_filter( 'as3cf_handle_post_request', array( $this, 'handle_post_request' ) );
-		add_filter( 'as3cf_action_for_changed_settings_key', array( $this, 'action_for_changed_settings_key' ), 10, 2 );
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
-	}
-
-	/**
-	 * Get the details for the sidebar block
-	 *
-	 * @return array|bool
-	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
-			return false;
-		}
-
-		return parent::get_sidebar_block_args();
-	}
-
-	/**
-	 * Load assets.
-	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script( 'as3cf-pro-remove-local-files-script', 'assets/js/pro/tools/remove-local-files', array(
-			'jquery',
-			'wp-util',
-		) );
-	}
-
-	/**
-	 * Maybe start remove local files process via post request.
-	 *
-	 * @param array $changed_keys
-	 *
-	 * @return array
-	 */
-	public function handle_post_request( $changed_keys ) {
-		if (
-			! empty( $_GET['action'] ) &&
-			'remove-local-files' === $_GET['action'] &&
-			! $this->as3cf->get_storage_provider()->needs_access_keys() &&
-			$this->as3cf->get_setting( 'bucket' ) &&
-			! empty( $_POST['remove-local-files'] )
-		) {
-			$this->handle_start();
-		}
-
-		return $changed_keys;
-	}
-
-	/**
-	 * Should the Remove all files from server prompt be the next action?
-	 *
-	 * @param string $action
-	 * @param array  $changed_keys
-	 *
-	 * @return string
-	 */
-	public function action_for_changed_settings_key( $action, $changed_keys ) {
-		// If this step already processed, shortcut out.
-		if (
-			( ! empty( $_GET['action'] ) && 'remove-local-files' === $_GET['action'] ) ||
-			( ! empty( $_GET['prev_action'] ) && 'remove-local-files' === $_GET['prev_action'] )
-		) {
-			return $action;
-		}
-
-		if ( empty( $action ) && in_array( 'remove-local-file', $changed_keys ) && $this->should_render() ) {
-			return 'remove-local-files';
-		}
-
-		return $action;
-	}
-
-	/**
-	 * Adjust media tab's class attribute.
-	 *
-	 * @param string $storage_classes Class names related to storage provider.
-	 *
-	 * @return string
-	 */
-	public function media_tab_storage_classes( $storage_classes ) {
-		if ( ! empty( $_GET['action'] ) && 'remove-local-files' === $_GET['action'] ) {
-			$storage_classes .= ' as3cf-remove-local-files';
-		}
-
-		return $storage_classes;
-	}
-
-	/**
-	 * Render modal in footer.
-	 */
-	public function render_modal() {
-		if ( ( ! empty( $_GET['action'] ) && 'remove-local-files' === $_GET['action'] ) || $this->should_render() ) {
-			$this->as3cf->render_view( 'modals/remove-local-files' );
-		}
-	}
+	protected static $requires_bucket_access = false;
 
 	/**
 	 * Should render.
@@ -135,7 +24,11 @@ class Remove_Local_Files extends Background_Tool {
 	 * @return bool
 	 */
 	public function should_render() {
-		return (bool) $this->as3cf->get_setting( 'remove-local-file', false ) && $this->count_offloaded_media_files();
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
+		}
+
+		return $this->as3cf->get_setting( 'remove-local-file', false ) && $this->count_offloaded_media_files();
 	}
 
 	/**
@@ -154,6 +47,25 @@ class Remove_Local_Files extends Background_Tool {
 	 */
 	public static function get_more_info_text() {
 		return __( 'You can use this tool to delete all Media Library files from your local server that have already been offloaded.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		global $as3cf;
+
+		$mesg = __( 'You\'ve enabled the "Remove Files From Server" option. Do you want to remove all existing files from the server that have already been offloaded?', 'amazon-s3-and-cloudfront' );
+		$mesg .= ' ';
+		$mesg .= $as3cf::settings_more_info_link(
+			'remove-local-file',
+			'',
+			'remove+local+files'
+		);
+
+		return $mesg;
 	}
 
 	/**
@@ -177,7 +89,7 @@ class Remove_Local_Files extends Background_Tool {
 	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */

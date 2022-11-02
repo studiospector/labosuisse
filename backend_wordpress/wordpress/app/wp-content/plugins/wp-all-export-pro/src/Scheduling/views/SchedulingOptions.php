@@ -424,26 +424,17 @@ $options = \PMXE_Plugin::getInstance()->getOption();
                     formData.push({name: 'element_id', value: <?php echo intval($export_id); ?>});
                     formData.push({name: 'scheduling_enable', value: $('input[name="scheduling_enable"]:checked').val()});
 
-                    $button.find('.easing-spinner').toggle();
-
                     $.ajax({
                         type: 'POST',
                         url: ajaxurl,
                         data: formData,
                         success: function (response) {
-                            $button.find('.easing-spinner').toggle();
-                            $button.find('.save-text').html(initialValue);
-                            $button.find('svg').show();
 
-                            setTimeout(function(){
-                                var submitEvent = $.Event('wpae-scheduling-options-form:submit');
-                                $(document).trigger(submitEvent);
-                            }, 1000);
+                            var submitEvent = $.Event('wpae-scheduling-options-form:submit');
+                            $(document).trigger(submitEvent);
 
                         },
                         error: function () {
-                            $button.find('.easing-spinner').toggle();
-                            $button.find('.save-text').html(initialValue);
                         }
                     });
                 });

@@ -29,7 +29,7 @@ class Woocommerce
     static function productTypeIs($product, $type)
     {
         if(!empty($product))
-            if (method_exists($product, 'is_type')) {
+            if (is_object($product) && method_exists($product, 'is_type')) {
                 return $product->is_type($type);
             }
         return false;
@@ -48,7 +48,7 @@ class Woocommerce
      */
     static function orderHasShippingMethod($order, $method)
     {
-        if (method_exists($order, 'has_shipping_method')) {
+        if (is_object($order) && method_exists($order, 'has_shipping_method')) {
             return $order->has_shipping_method($method);
         }
         return false;
@@ -61,7 +61,7 @@ class Woocommerce
      */
     static function getOrderTotal($order)
     {
-        if (method_exists($order, 'get_total')) {
+        if (is_object($order) && method_exists($order, 'get_total')) {
             return $order->get_total();
         }
         return 0;
@@ -84,6 +84,19 @@ class Woocommerce
     }
 
     /**
+     * get order object from order item
+     * @param $order_item
+     * @return null|WC_Order|WC_Order_Refund
+     */
+    static function getOrderByItem($order_item)
+    {
+        if (is_object($order_item) && method_exists($order_item, 'get_order')) {
+            return $order_item->get_order();
+        }
+        return NULL;
+    }
+
+    /**
      * get the product ID
      * @param $product - woocommerce product object
      * @return null
@@ -91,7 +104,7 @@ class Woocommerce
     static function getProductId($product)
     {
         if(!empty($product)){
-            if (method_exists($product, 'get_id')) {
+            if (is_object($product) && method_exists($product, 'get_id')) {
                 return $product->get_id();
             } elseif (isset($product->id)) {
                 $product_id = $product->id;
@@ -177,7 +190,7 @@ class Woocommerce
     {
         if(!empty($product))
             if (self::isProductInSale($product)) {
-                if (method_exists($product, 'get_sale_price')) {
+                if (is_object($product) && method_exists($product, 'get_sale_price')) {
                     $price = $product->get_sale_price();
                     return apply_filters('advanced_woo_discount_rules_get_sale_price', $price, $product);
                 }
@@ -194,7 +207,7 @@ class Woocommerce
     static function isProductInSale($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'is_on_sale') && method_exists($product, 'get_sale_price')) {
+            if (is_object($product) && method_exists($product, 'is_on_sale') && method_exists($product, 'get_sale_price')) {
                 if($product->is_on_sale('')){
                     if($product->get_sale_price()){
                         return apply_filters('advanced_woo_discount_rules_is_on_sale', true, $product);
@@ -213,7 +226,7 @@ class Woocommerce
      */
     static function isProductHasStock($product)
     {
-        if(!empty($product) && method_exists($product, 'is_in_stock')) {
+        if(!empty($product) && is_object($product) && method_exists($product, 'is_in_stock')) {
             return $product->is_in_stock();
         }
         return false;
@@ -227,7 +240,7 @@ class Woocommerce
     static function getProductRegularPrice($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'get_regular_price')) {
+            if (is_object($product) && method_exists($product, 'get_regular_price')) {
                 $price = $product->get_regular_price();
                 return apply_filters('advanced_woo_discount_rules_get_regular_price', $price, $product);
             }
@@ -242,7 +255,7 @@ class Woocommerce
     static function getProductPrice($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'get_price')) {
+            if (is_object($product) && method_exists($product, 'get_price')) {
                 $price = $product->get_price();
                 return apply_filters('advanced_woo_discount_rules_get_price', $price, $product);
             }
@@ -258,7 +271,7 @@ class Woocommerce
     {
         $categories = $variant = array();
         if(!empty($product))
-            if (method_exists($product, 'get_category_ids')) {
+            if (is_object($product) && method_exists($product, 'get_category_ids')) {
                 if (self::productTypeIs($product, 'variation')) {
                     $variant = $product;
                     $parent_id = self::getProductParentId($product);
@@ -277,7 +290,7 @@ class Woocommerce
     static function getProductTags($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'get_tag_ids')) {
+            if (is_object($product) && method_exists($product, 'get_tag_ids')) {
                 return $product->get_tag_ids();
             }
         return array();
@@ -291,7 +304,7 @@ class Woocommerce
     static function getProductAttributes($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'get_attributes')) {
+            if (is_object($product) && method_exists($product, 'get_attributes')) {
                 return $product->get_attributes();
             }
         return array();
@@ -305,7 +318,7 @@ class Woocommerce
     static function getProductChildren($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'get_children')) {
+            if (is_object($product) && method_exists($product, 'get_children')) {
                 return $product->get_children();
             }
         return array();
@@ -319,7 +332,7 @@ class Woocommerce
     static function getProductSku($product)
     {
         if(!empty($product))
-            if (method_exists($product, 'get_sku')) {
+            if (is_object($product) && method_exists($product, 'get_sku')) {
                 return $product->get_sku();
             }
         return NULL;
@@ -335,7 +348,7 @@ class Woocommerce
     static function getProductPriceSuffix($product, $price = '', $discount_prices = array())
     {
         if(!empty($product))
-            if (method_exists($product, 'get_price_suffix')) {
+            if (is_object($product) && method_exists($product, 'get_price_suffix')) {
                 return apply_filters('advanced_woo_discount_rules_price_suffix', $product->get_price_suffix($price), $product, $price, $discount_prices);
             }
         return NULL;
@@ -348,7 +361,7 @@ class Woocommerce
      */
     static function getAttributeName($attribute)
     {
-        if (method_exists($attribute, 'get_name')) {
+        if (is_object($attribute) && method_exists($attribute, 'get_name')) {
             return $attribute->get_name();
         }
         return NULL;
@@ -361,7 +374,7 @@ class Woocommerce
      */
     static function getAttributeOption($attribute)
     {
-        if (method_exists($attribute, 'get_options')) {
+        if (is_object($attribute) && method_exists($attribute, 'get_options')) {
             return $attribute->get_options();
         }
         return array();
@@ -374,10 +387,24 @@ class Woocommerce
      */
     static function getAttributeVariation($attribute)
     {
-        if (method_exists($attribute, 'get_variation')) {
+        if (is_object($attribute) && method_exists($attribute, 'get_variation')) {
             return $attribute->get_variation();
         }
         return true;
+    }
+
+    /**
+     * Get variation prices for variable product
+     * @param \WC_Product_Variable $product
+     * @param bool $for_display
+     * @return array|false
+     */
+    static function getVariationPrices($product, $for_display = false)
+    {
+        if (is_object($product) && method_exists($product, 'get_variation_prices')) {
+            return $product->get_variation_prices($for_display);
+        }
+        return false;
     }
 
     /**
@@ -502,7 +529,7 @@ class Woocommerce
         $cart = array();
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null){
-                if (method_exists(WC()->cart, 'get_cart')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_cart')) {
                     if (did_action('wp_loaded')) {
                         $cart = WC()->cart->get_cart();
                     }
@@ -520,7 +547,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null){
-                if (method_exists(WC()->cart, 'calculate_totals')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'calculate_totals')) {
                     WC()->cart->calculate_totals();
                 }
             }
@@ -541,7 +568,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'get_shipping_packages')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_shipping_packages')) {
                     return WC()->cart->get_shipping_packages();
                 }
             }
@@ -572,7 +599,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'add_to_cart')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'add_to_cart')) {
                     return WC()->cart->add_to_cart($product_id, $quantity, $variation_id, $variation, $cart_item_data);
                 }
             }
@@ -593,7 +620,7 @@ class Woocommerce
     public static function set_quantity( $cart_item_key, $quantity = 1, $refresh_totals = true ){
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'set_quantity')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'set_quantity')) {
                     return WC()->cart->set_quantity($cart_item_key, $quantity, $refresh_totals);
                 }
             }
@@ -612,7 +639,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'remove_cart_item')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'remove_cart_item')) {
                     return WC()->cart->remove_cart_item($_cart_item_key);
                 }
             }
@@ -632,7 +659,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'remove_coupon')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'remove_coupon')) {
                     return WC()->cart->remove_coupon($code);
                 }
             }
@@ -699,7 +726,7 @@ class Woocommerce
             $product = self::getProduct($product);
         }
         if(!empty($product))
-            if (method_exists($product, 'get_parent_id')) {
+            if (is_object($product) && method_exists($product, 'get_parent_id')) {
                 $parent_id = $product->get_parent_id();
             }
         return apply_filters('advanced_woo_discount_rules_get_product_parent_id', $parent_id, $product);
@@ -713,7 +740,7 @@ class Woocommerce
     static function getCartItems($cart)
     {
         $cart_items = array();
-        if (method_exists($cart, 'get_cart_contents')) {
+        if (is_object($cart) && method_exists($cart, 'get_cart_contents')) {
             $cart_items = $cart->get_cart_contents();
         }
         return apply_filters('advanced_woo_discount_rules_get_cart_items', $cart_items, $cart);
@@ -728,13 +755,13 @@ class Woocommerce
         if (function_exists('WC')) {
             $subtotal = 0;
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'get_subtotal')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_subtotal')) {
                     $tax_display_type = get_option('woocommerce_tax_display_cart');
                     if ($tax_display_type === 'excl') {
                         $subtotal = WC()->cart->get_subtotal();
                     } else {
                         $subtotal = WC()->cart->get_subtotal();
-                        if (method_exists(WC()->cart, 'get_subtotal_tax')) {
+                        if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_subtotal_tax')) {
                             $subtotal_tax = WC()->cart->get_subtotal_tax();
                             $subtotal = $subtotal+$subtotal_tax;
                         }
@@ -776,7 +803,7 @@ class Woocommerce
      */
     static function addCartFee($cart, $name, $fee)
     {
-        if (method_exists($cart, 'add_fee')) {
+        if (is_object($cart) && method_exists($cart, 'add_fee')) {
             if(apply_filters('advanced_discount_rules_do_add_fee', true, $cart)){
                 if(!apply_filters('advanced_discount_rules_calculate_tax_with_fee', true, $name, $cart)){
                     add_filter('woocommerce_cart_totals_get_fees_from_cart_taxes', function ($fee_taxes, $fee, $cart) use ($name) {
@@ -820,7 +847,7 @@ class Woocommerce
      */
     static function getCouponCode($coupon)
     {
-        if (method_exists($coupon, 'get_code')) {
+        if (is_object($coupon) && method_exists($coupon, 'get_code')) {
             return $coupon->get_code();
         }
         return NULL;
@@ -834,7 +861,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->cart) && WC()->cart != null) {
-                if (method_exists(WC()->cart, 'get_applied_coupons')) {
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_applied_coupons')) {
                     return WC()->cart->get_applied_coupons();
                 }
             }
@@ -850,7 +877,7 @@ class Woocommerce
      */
     static function addCouponDiscount($cart, $code)
     {
-        if (method_exists($cart, 'add_discount')) {
+        if (is_object($cart) && method_exists($cart, 'add_discount')) {
             return $cart->add_discount($code);
         }
         return array();
@@ -864,7 +891,7 @@ class Woocommerce
      */
     static function hasCouponInCart($cart, $code)
     {
-        if (method_exists($cart, 'has_discount')) {
+        if (is_object($cart) && method_exists($cart, 'has_discount')) {
             return $cart->has_discount($code);
         }
         return array();
@@ -878,7 +905,7 @@ class Woocommerce
      */
     static function setCartProductPrice($cart_item_object, $price)
     {
-        if (method_exists($cart_item_object, 'set_price')) {
+        if (is_object($cart_item_object) && method_exists($cart_item_object, 'set_price')) {
             return $cart_item_object->set_price($price);
         }
         return false;
@@ -908,7 +935,7 @@ class Woocommerce
         if(!empty($product)){
             if (function_exists('wc_get_price_including_tax')) {
                 $price = wc_get_price_including_tax($product, array('qty' => $quantity, 'price' => $original_price));
-            } else if (method_exists($product, 'get_price_including_tax')) {
+            } else if (is_object($product) && method_exists($product, 'get_price_including_tax')) {
                 $price = $product->get_price_including_tax($quantity, $original_price);
             } else {
                 $price = $original_price;
@@ -932,7 +959,7 @@ class Woocommerce
         if(!empty($product)){
             if (function_exists('wc_get_price_excluding_tax')) {
                 $price = wc_get_price_excluding_tax($product, array('qty' => $quantity, 'price' => $original_price));
-            } else if (method_exists($product, 'get_price_excluding_tax')) {
+            } else if (is_object($product) && method_exists($product, 'get_price_excluding_tax')) {
                 $price = $product->get_price_excluding_tax($quantity, $original_price);
             } else {
                 $price = $original_price;
@@ -964,7 +991,7 @@ class Woocommerce
     static function getCountriesList()
     {
         if (function_exists('WC')) {
-            if (isset(WC()->countries) && method_exists(WC()->countries, 'get_countries')) {
+            if (isset(WC()->countries) && is_object(WC()->countries) && method_exists(WC()->countries, 'get_countries')) {
                 return WC()->countries->get_countries();
             }
         }
@@ -978,7 +1005,7 @@ class Woocommerce
     static function getStatesList()
     {
         if (function_exists('WC')) {
-            if (isset(WC()->countries) && method_exists(WC()->countries, 'get_states')) {
+            if (isset(WC()->countries) && is_object(WC()->countries) && method_exists(WC()->countries, 'get_states')) {
                 return WC()->countries->get_states();
             }
         }
@@ -992,7 +1019,7 @@ class Woocommerce
     static function getPaymentMethodList()
     {
         if (function_exists('WC')) {
-            if (method_exists(WC()->payment_gateways, 'payment_gateways')) {
+            if (is_object(WC()->payment_gateways) && method_exists(WC()->payment_gateways, 'payment_gateways')) {
                 return WC()->payment_gateways->payment_gateways();
             }
         }
@@ -1063,7 +1090,7 @@ class Woocommerce
     static function getWeight($item)
     {
         if (!empty($item)) {
-            if (method_exists($item, 'get_weight')) {
+            if (is_object($item) && method_exists($item, 'get_weight')) {
                 return $item->get_weight();
             }
         }
@@ -1100,7 +1127,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->session) && WC()->session != null) {
-                if (method_exists(WC()->session, 'get')) {
+                if (is_object(WC()->session) && method_exists(WC()->session, 'get')) {
                     return WC()->session->get($key);
                 }
             }
@@ -1117,7 +1144,7 @@ class Woocommerce
     {
         if (function_exists('WC')) {
             if(isset(WC()->session) && WC()->session != null) {
-                if (method_exists(WC()->session, 'set')) {
+                if (is_object(WC()->session) && method_exists(WC()->session, 'set')) {
                     WC()->session->set($key, $value);
                 }
             }
@@ -1144,7 +1171,7 @@ class Woocommerce
     static function getShippingCountry()
     {
         if (function_exists('WC') && WC()->customer) {
-            if (method_exists(WC()->customer, 'get_shipping_country')) {
+            if (is_object(WC()->customer) && method_exists(WC()->customer, 'get_shipping_country')) {
                 return WC()->customer->get_shipping_country();
             }
         }
@@ -1158,7 +1185,7 @@ class Woocommerce
     static function getShippingState()
     {
         if (function_exists('WC') && WC()->customer) {
-            if (method_exists(WC()->customer, 'get_shipping_state')) {
+            if (is_object(WC()->customer) && method_exists(WC()->customer, 'get_shipping_state')) {
                 return WC()->customer->get_shipping_state();
             }
         }
@@ -1172,7 +1199,7 @@ class Woocommerce
     static function getShippingCity()
     {
         if (function_exists('WC') && WC()->customer) {
-            if (method_exists(WC()->customer, 'get_shipping_city')) {
+            if (is_object(WC()->customer) && method_exists(WC()->customer, 'get_shipping_city')) {
                 return WC()->customer->get_shipping_city();
             }
         }
@@ -1186,7 +1213,7 @@ class Woocommerce
     static function getBillingCity()
     {
         if (function_exists('WC') && WC()->customer) {
-            if (method_exists(WC()->customer, 'get_billing_city')) {
+            if (is_object(WC()->customer) && method_exists(WC()->customer, 'get_billing_city')) {
                 return WC()->customer->get_billing_city();
             }
         }
@@ -1200,7 +1227,7 @@ class Woocommerce
     static function getShippingZipCode()
     {
         if (function_exists('WC') && WC()->customer) {
-            if (method_exists(WC()->customer, 'get_shipping_postcode')) {
+            if (is_object(WC()->customer) && method_exists(WC()->customer, 'get_shipping_postcode')) {
                 return WC()->customer->get_shipping_postcode();
             }
         }
@@ -1312,7 +1339,7 @@ class Woocommerce
      */
     static function getOrderItems($order)
     {
-        if (method_exists($order, 'get_items')) {
+        if (is_object($order) && method_exists($order, 'get_items')) {
             return $order->get_items();
         }
         return array();
@@ -1325,8 +1352,27 @@ class Woocommerce
      */
     static function getOrderCurrency($order)
     {
-        if (method_exists($order, 'get_currency')) {
+        if (is_object($order) && method_exists($order, 'get_currency')) {
             return $order->get_currency();
+        }
+        return NULL;
+    }
+
+    /**
+     * Set order meta
+     * @param $order
+     * @param $key
+     * @param $value
+     * @return array
+     */
+    static function setOrderMeta($order, $key, $value)
+    {
+        if (is_object($order) && method_exists($order, 'add_meta_data')) {
+            $status = $order->add_meta_data($key, $value, true);
+            if (method_exists($order, 'save_meta_data')) {
+                $order->save_meta_data();
+            }
+            return $status;
         }
         return NULL;
     }
@@ -1340,8 +1386,21 @@ class Woocommerce
      */
     static function setOrderItemMeta($item, $key, $value)
     {
-        if (method_exists($item, 'add_meta_data')) {
+        if (is_object($item) && method_exists($item, 'add_meta_data')) {
             return $item->add_meta_data($key, $value, true);
+        }
+        return NULL;
+    }
+
+    /**
+     * Get order item data
+     * @param $item
+     * @return array
+     */
+    static function getOrderItemData($item)
+    {
+        if (is_object($item) && method_exists($item, 'get_data')) {
+            return $item->get_data();
         }
         return NULL;
     }
@@ -1354,7 +1413,7 @@ class Woocommerce
      */
     static function getOrderItemMeta($item, $key)
     {
-        if (method_exists($item, 'get_meta')) {
+        if (is_object($item) && method_exists($item, 'get_meta')) {
             return $item->get_meta($key);
         }
         return NULL;
@@ -1367,7 +1426,7 @@ class Woocommerce
      */
     static function getItemId($item)
     {
-        if (method_exists($item, 'get_product_id') && method_exists($item, 'get_variation_id')) {
+        if (is_object($item) && method_exists($item, 'get_product_id') && method_exists($item, 'get_variation_id')) {
             if ($product_id = $item->get_variation_id()) {
                 return $product_id;
             } else {
@@ -1597,7 +1656,7 @@ class Woocommerce
     static function getPriceHtml($product){
         $html = false;
         if(!empty($product))
-            if (method_exists($product, 'get_price_html')) {
+            if (is_object($product) && method_exists($product, 'get_price_html')) {
                 $html = $product->get_price_html();
             }
         return apply_filters('advanced_woo_discount_rules_get_price_html', $html, $product);
@@ -1645,7 +1704,7 @@ class Woocommerce
             if(function_exists('WC')){
                 $session = WC()->session;
                 if(!empty($session)){
-                    if(method_exists($session, 'get')){
+                    if(is_object($session) && method_exists($session, 'get')){
                         $customer = $session->get('customer');
                         if(isset($customer['email']) && !empty($customer['email'])){
                             $user_email = $customer['email'];
@@ -1693,7 +1752,7 @@ class Woocommerce
      */
     public static function get_variation_regular_price($product, $min_or_max = 'min', $for_display = false){
         if(!empty($product))
-            if(method_exists($product, 'get_variation_regular_price')){
+            if(is_object($product) && method_exists($product, 'get_variation_regular_price')){
                 return  $product->get_variation_regular_price($min_or_max, $for_display);
             }
         return 0;
@@ -1719,7 +1778,7 @@ class Woocommerce
         $available_variations = array();
         $is_variable_product = self::productTypeIs($product, 'variable');
         if(!empty($product))
-            if ($is_variable_product && method_exists($product, 'get_available_variations')){
+            if ($is_variable_product && is_object($product) && method_exists($product, 'get_available_variations')){
                 $available_variations = $product->get_available_variations();
             }
         self::$product_variations[$product_id] = $available_variations;
@@ -1744,7 +1803,7 @@ class Woocommerce
     static function variationIsVisible($product)
     {
         if(!empty($product)){
-            if (method_exists($product, 'variation_is_visible')) {
+            if (is_object($product) && method_exists($product, 'variation_is_visible')) {
                 return $product->variation_is_visible();
             }
         }
@@ -1791,5 +1850,22 @@ class Woocommerce
         }
 
         return $product_title;
+    }
+
+    /**
+     * Check cart needs shipping
+     *
+     * @return bool
+     */
+    static function isCartNeedsShipping()
+    {
+        if (function_exists('WC')) {
+            if(isset(WC()->cart) && WC()->cart != null){
+                if (is_object(WC()->cart) && method_exists(WC()->cart, 'needs_shipping')) {
+                    return WC()->cart->needs_shipping();
+                }
+            }
+        }
+        return false;
     }
 }
