@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit8f50069c2a506e3c993e569784ed54cf
+class ComposerStaticInit10a7e53e988fdcc279b8c0e97d7d08e0
 {
     public static $files = array (
         'b45b351e6b6f7487d819961fef2fda77' => __DIR__ . '/..' . '/jakeasmith/http_build_url/src/http_build_url.php',
@@ -68,6 +68,7 @@ class ComposerStaticInit8f50069c2a506e3c993e569784ed54cf
         'WPML\\PB\\Elementor\\DataConvert' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/DataConvert.php',
         'WPML\\PB\\Elementor\\DynamicContent\\Field' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/DynamicContent/Field.php',
         'WPML\\PB\\Elementor\\DynamicContent\\Strings' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/DynamicContent/Strings.php',
+        'WPML\\PB\\Elementor\\Helper\\Node' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Helper/Node.php',
         'WPML\\PB\\Elementor\\Helper\\StringFormat' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Helper/StringFormat.php',
         'WPML\\PB\\Elementor\\Hooks\\DomainsWithMultisite' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/DomainsWithMultisite.php',
         'WPML\\PB\\Elementor\\Hooks\\DynamicElements' => __DIR__ . '/../..' . '/classes/Integrations/Elementor/Hooks/DynamicElements.php',
@@ -120,6 +121,7 @@ class ComposerStaticInit8f50069c2a506e3c993e569784ed54cf
         'WPML\\PB\\Gutenberg\\StringsInBlock\\DOMHandler\\DOMHandle' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/dom-handler/dom-handle.php',
         'WPML\\PB\\Gutenberg\\StringsInBlock\\DOMHandler\\HtmlBlock' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/dom-handler/html-block.php',
         'WPML\\PB\\Gutenberg\\StringsInBlock\\DOMHandler\\ListBlock' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/dom-handler/list-block.php',
+        'WPML\\PB\\Gutenberg\\StringsInBlock\\DOMHandler\\ListItemBlock' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/dom-handler/list-item-block.php',
         'WPML\\PB\\Gutenberg\\StringsInBlock\\DOMHandler\\StandardBlock' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/dom-handler/standard-block.php',
         'WPML\\PB\\Gutenberg\\StringsInBlock\\HTML' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/class-html.php',
         'WPML\\PB\\Gutenberg\\StringsInBlock\\StringsInBlock' => __DIR__ . '/../..' . '/classes/Integrations/Gutenberg/strings-in-block/interface-strings-in-block.php',
@@ -296,7 +298,7 @@ class ComposerStaticInit8f50069c2a506e3c993e569784ed54cf
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit8f50069c2a506e3c993e569784ed54cf::$classMap;
+            $loader->classMap = ComposerStaticInit10a7e53e988fdcc279b8c0e97d7d08e0::$classMap;
 
         }, null, ClassLoader::class);
     }
