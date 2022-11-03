@@ -12,7 +12,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.5.0
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -151,6 +151,7 @@ do_action( 'woocommerce_before_edit_account_form' ); ?>
                 'title' => esc_html__( 'Salva', 'labo-suisse-theme' ),
                 'name' => 'save_account_details',
                 'value' => esc_attr__( 'Salva', 'labo-suisse-theme' ),
+                'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                 'type' => 'submit',
                 'variants' => ['primary'],
             ]);

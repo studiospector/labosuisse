@@ -12,7 +12,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.5.2
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -52,6 +52,7 @@ do_action( 'woocommerce_before_lost_password_form' );
                 Timber::render('@PathViews/components/button.twig', [
                     'title' => esc_html( 'Reimposta password', 'labo-suisse-theme' ),
                     'value' => esc_attr( 'Reimposta password', 'labo-suisse-theme' ),
+                    'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                     'type' => 'submit',
                     'variants' => ['primary'],
                 ]);

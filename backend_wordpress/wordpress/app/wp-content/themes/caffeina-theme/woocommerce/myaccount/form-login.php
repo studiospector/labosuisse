@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 6.0.0
+ * @version 7.0.1
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -88,7 +88,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                         'name' => 'login',
                         'value' => esc_attr__( 'Accedi', 'labo-suisse-theme' ),
                         'type' => 'submit',
-                        'class' => 'woocommerce-form-login__submit',
+                        'class' => 'woocommerce-form-login__submit' . esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                         'variants' => ['primary'],
                     ]);
                 ?>
@@ -213,7 +213,7 @@ do_action( 'woocommerce_before_customer_login_form' ); ?>
                             'name' => 'register',
                             'value' => esc_attr__( 'Registrati', 'labo-suisse-theme' ),
                             'type' => 'submit',
-                            'class' => 'woocommerce-form-register__submit',
+                            'class' => 'woocommerce-form-register__submit' . esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                             'variants' => ['primary'],
                         ]);
                     ?>

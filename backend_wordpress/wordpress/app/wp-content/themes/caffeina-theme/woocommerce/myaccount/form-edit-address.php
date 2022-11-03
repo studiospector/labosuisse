@@ -12,7 +12,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.6.0
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -50,6 +50,7 @@ do_action( 'woocommerce_before_edit_account_address_form' ); ?>
                         'title' => esc_html( 'Salva indirizzo', 'labo-suisse-theme' ),
                         'name' => 'save_address',
                         'value' => esc_attr( 'Salva indirizzo', 'labo-suisse-theme' ),
+						'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                         'type' => 'submit',
                         'variants' => ['primary'],
                     ]);

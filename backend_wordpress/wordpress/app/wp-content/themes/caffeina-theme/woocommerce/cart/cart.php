@@ -4,9 +4,6 @@
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/cart/cart.php.
  * 
- * CAFFEINA Changes:
- * - row 26 - Added ".lb-wc-cart-wrapper" <div>
- *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
@@ -15,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.8.0
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -163,6 +160,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                                             'name' => 'apply_coupon',
                                             'value' => esc_attr($button_label),
                                             'type' => 'submit',
+                                            'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                                             'variants' => ['secondary'],
                                         ]);
                                     ?>
@@ -188,6 +186,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                                 'name' => 'update_cart',
                                 'value' => esc_attr( 'Update cart', 'woocommerce' ),
                                 'type' => 'submit',
+                                'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                                 'variants' => ['tertiary'],
                             ]);
                         ?>
