@@ -368,14 +368,23 @@ function lb_set_extra_schema_product($schema, $product)
 /**
  * Set extra Product data in GTM items
  */
-add_filter('gtm_ecommerce_woo_item', 'lb_gtm_woo_pro_extra_data', 100, 2);
-function lb_gtm_woo_pro_extra_data($item, $product)
-{
-    $brands = get_the_terms($product->get_id(), 'lb-brand');
-
+add_filter('gtm_ecommerce_woo_item', function ($item, $product) {
+    // Add Brand
+    $brands = (get_class($product) === 'WC_Product_Variation') ? get_the_terms($product->get_parent_id(), 'lb-brand') : get_the_terms($product->get_id(), 'lb-brand');
     if ($brands) {
         $item->setItemBrand($brands[0]->name);
     }
 
+    // Add Product cats
+    $productCats = (get_class($product) === 'WC_Product_Variation') ? get_the_terms($product->get_parent_id(), 'product_cat') : get_the_terms($product->get_id(), 'product_cat');
+    if ( is_array( $productCats ) ) {
+        $categories = array_map(
+            function( $category ) {
+                return $category->name; },
+            $productCats
+        );
+        $item->setItemCategories( $categories );
+    }
+
     return $item;
-}
+}, 999, 2);
