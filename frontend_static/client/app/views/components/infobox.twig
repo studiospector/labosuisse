@@ -15,53 +15,52 @@
 {% if class %}
   {% set classes = classes|merge([class]) %}
 {% endif %}
-
 <div class="infobox{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
-    {% if image or tagline or title or subtitle or paragraph %}
+    {%- if image or tagline or title or subtitle or paragraph -%}
         <div class="infobox__text-wrap">
             <div class="js-infobox-text">
-                {% if image %}
+                {%- if image -%}
                     <img src="{{ image }}">
-                {% endif %}
-                {% if date %}
+                {%- endif -%}
+                {%- if date -%}
                     <p class="infobox__date">{{ date }}</p>
-                {% endif %}
-                {% if tagline %}
+                {%- endif -%}
+                {%- if tagline -%}
                     <p class="infobox__tagline">{{ tagline }}</p>
-                {% endif %}
-                {% if title %}
+                {%- endif -%}
+                {%- if title -%}
                     <h2 class="infobox__title">{{ title }}</h2>
-                {% endif %}
-                {% if subtitle %}
+                {%- endif -%}
+                {%- if subtitle -%}
                     <h4 class="infobox__subtitle">{{ subtitle }}</h4>
-                {% endif %}
-                {% if location %}
+                {%- endif -%}
+                {%- if location -%}
                     <p class="infobox__location">
-                        {% include '@PathViews/components/icon.twig' with {name: (location.isHeadquarter) ? 'shield-icon' : 'pin'} only %}
+                        {%- include '@PathViews/components/icon.twig' with {name: (location.isHeadquarter) ? 'shield-icon' : 'pin'} only -%}
                         <span class="infobox__location__label">{{ location.label }}</span>
                     </p>
-                {% endif %}       
-                {% if scope %}
+                {%- endif -%}       
+                {%- if scope -%}
                     <p class="infobox__scope">
                         <span class="infobox__scope__label">{{ scope.label }}</span>
                         <span class="infobox__scope__value">{{ scope.value }}</span>
                     </p>
-                {% endif %}
-                {% if items is iterable %}
-                    {% include '@PathViews/components/list-arrow.twig' with {items: items} only %}
-                {% endif %}
-                {% if paragraph %}
+                {%- endif -%}
+                {%- if items is iterable -%}
+                    {%- include '@PathViews/components/list-arrow.twig' with {items: items} only -%}
+                {%- endif -%}
+                {%- if paragraph -%}
                     <p class="infobox__paragraph">{{ paragraph|raw }}</p>
-                {% endif %}
-                {% if paragraph_small %}
+                {%- endif -%}
+                {%- if paragraph_small -%}
                     <p class="infobox__paragraph infobox__paragraph--small">{{ paragraph_small|raw }}</p>
-                {% endif %}
+                {%- endif -%}
             </div>
         </div>
-    {% endif %}
-	{% if cta and (cta.url or cta.title) %}
+    {%- endif -%}
+	{%- if cta and (cta.url or cta.title) -%}
 		<div class="infobox__cta">
-            {% include '@PathViews/components/button.twig' with cta only %}
+            {%- include '@PathViews/components/button.twig' with cta only -%}
 		</div>
-	{% endif %}
+	{%- endif -%}
 </div>

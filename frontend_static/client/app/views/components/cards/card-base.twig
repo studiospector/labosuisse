@@ -1,44 +1,42 @@
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-{% set tag = 'article' %}
+{%- set tag = 'article' -%}
 
-{% if infobox.cta %}
+{%- if infobox.cta -%}
     {% set tag = infobox.cta.url ? 'a' : 'article' %}
-{% endif %}
+{%- endif -%}
 
-{% set classes = [] %}
-{% for variant in variants|default([])|merge([type]) %}
+{%- set classes = [] -%}
+{%- for variant in variants|default([])|merge([type]) -%}
   {% set classes = classes|merge(['card--' ~ variant]) %}
-{% endfor %}
-{% if class %}
+{%- endfor -%}
+{%- if class -%}
   {% set classes = classes|merge([class]) %}
-{% endif %}
-
+{%- endif -%}
 <{{ tag }}
-    {{ tag == 'a' ? ' href="' ~ infobox.cta.url|default('#') ~ '"' : '' }}
-    {{ tag == 'a' ? ' target="' ~ infobox.cta.target|default('_self') ~ '"' : '' }} 
-    class="card{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
-    {{ attributes ? ' ' ~ attributes|join(' ') : '' }}
-    {{ (tag == 'a') and (infobox.title or infobox.subtitle) ? ' title="' ~ (infobox.title ? infobox.title|striptags : infobox.subtitle|striptags) ~ '"' : '' }}
-    {{ color ? ' style="background-color: ' ~ color ~ ';"' : '' }}
->
-    {% if images|length > 0 %}
+    {{- tag == 'a' ? ' href="' ~ infobox.cta.url|default('#') ~ '"' : ' ' -}}
+    {{- tag == 'a' ? ' target="' ~ infobox.cta.target|default('_self') ~ '"' : ' ' -}} 
+    class="card{{ classes|length ? ' ' ~ classes|join(' ') : ' ' }}"
+    {{- attributes ? ' ' ~ attributes|join(' ') : ' ' -}}
+    {{- (tag == 'a') and (infobox.title or infobox.subtitle) ? ' title="' ~ (infobox.title ? infobox.title|striptags : infobox.subtitle|striptags) ~ '"' : ' ' -}}
+    {{- color ? ' style="background-color: ' ~ color ~ ';"' : ' ' -}}>
+    {%- if images|length > 0 -%}
         <div class="card-img">
             {{ lbPicture(images) }}
             {% if date %}
                 <div class="card-date">{{ date }}</div>
             {% endif %}
         </div>
-    {% endif %}
+    {%- endif -%}
 
-    {% if infobox %}
+    {%- if infobox -%}
         {% if (infobox.cta is defined) and (infobox.cta is not null) %}
             {% set infobox = infobox|merge({cta: infobox.cta|merge({url: null})}) %}
         {% endif %}
         <div class="card-infobox">
             {% block blockInfobox %}{% endblock %}
         </div>
-    {% endif %}
+    {%- endif -%}
 
-    {% block blockInfoboxAfter %}{% endblock %}
+    {%- block blockInfoboxAfter %}{% endblock -%}
 </{{ tag }}>

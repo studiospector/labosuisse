@@ -1,39 +1,34 @@
 <div class="lb-menu__item lb-menu__item--subitem"{{ (type == 'submenu' and trigger) ? ' data-submenu-trigger="' ~ trigger ~ '"' : '' }}>
-	{% if type == 'link' %}
+	{%- if type == 'link' -%}
 		<a class="lb-menu__link" href="{{href}}" title="{{ label }}" tabindex="0" target="{{ target ? target : '_self' }}">{{label}}</a>
-	{% endif %}
-
-    {% if type == 'link-spaced' %}
+	{%- endif -%}
+    {%- if type == 'link-spaced' -%}
         <a href="{{href}}" target="{{ target ? target : '_self' }}" class="lb-menu__link lb-menu__link--spaced" title="{{ label }}" tabindex="0">{{label}}</a>
-    {% endif %}
-
-	{% if type == 'card' %}
-		{% include '@PathViews/components/card.twig' with data only %}
-	{% endif %}
-
-	{% if type == 'submenu' %}
-        {% if label %}
+    {%- endif -%}
+	{%- if type == 'card' -%}
+		{%- include '@PathViews/components/card.twig' with data only -%}
+	{%- endif -%}
+	{%- if type == 'submenu' -%}
+        {%- if label -%}
             <h6 class="lb-menu__header">{{label}}</h6>
-        {% endif %}
+        {%- endif -%}
 		<div>
-			{% for item in children %}
-				{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
-			{% endfor %}
+			{%- for item in children -%}
+				{%- include '@PathViews/layout/menu-desktop-subitem.twig' with item only -%}
+			{%- endfor -%}
 		</div>
-	{% endif %}
-
-    {% if type == 'submenu-link' %}
+	{%- endif -%}
+    {%- if type == 'submenu-link' -%}
 		<span class="lb-menu__link lb-menu__submenu-link" tabindex="0" data-submenu-trigger="{{trigger}}">{{label}}</span>
-	{% endif %}
-
-    {% if type == 'submenu-second' %}
-        {% if label %}
+	{%- endif -%}
+    {%- if type == 'submenu-second' -%}
+        {%- if label -%}
             <h6 class="lb-menu__header">{{label}}</h6>
-        {% endif %}
+        {%- endif -%}
 		<div>
-			{% for item in children %}
-				{% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
-			{% endfor %}
+			{%- for item in children -%}
+				{%- include '@PathViews/layout/menu-desktop-subitem.twig' with item only -%}
+			{%- endfor -%}
 		</div>
-	{% endif %}
+	{%- endif -%}
 </div>

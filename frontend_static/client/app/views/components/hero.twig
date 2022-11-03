@@ -1,36 +1,35 @@
 {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 
-{% set classes = [] %}
-{% if container %}
+{%- set classes = [] -%}
+{%- if container -%}
     {% set variants = variants|merge(['containerized']) %}
-{% endif %}
-{% if whiteText %}
+{%- endif -%}
+{%- if whiteText -%}
     {% set variants = variants|merge(['white-text']) %}
-{% endif %}
-{% for variant in variants|default([]) %}
+{%- endif -%}
+{%- for variant in variants|default([]) -%}
 	{% set classes = classes|merge(['hero--' ~ variant]) %}
-{% endfor %}
-{% if class %}
+{%- endfor -%}
+{%- if class -%}
 	{% set classes = classes|merge([class]) %}
-{% endif %}
+{%- endif -%}
 
-{% set noReveal = noReveal|default(false) %}
+{%- set noReveal = noReveal|default(false) -%}
 
-{% if infobox %}
+{%- if infobox -%}
 	{% set _infoboxPosX = (infoboxPosX == 'left') ? '' : (infoboxPosX == 'center' ? ' offset-md-3 text-center' : ' offset-md-7') %}
 	{% set _infoboxPosY = (infoboxPosY == 'center') ? '' : (infoboxPosY == 'bottom' ? ' hero--infobox-' ~ infoboxPosY : '') %}
-{% endif %}
+{%- endif -%}
 
 <{{ isSubElement ? 'div' : 'section' }} {{ sectionID ? 'id="' ~ sectionID ~ '" ' : '' }}class="hero{{ container ? ' container' : '' }}{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ _infoboxPosY }} js-hero{{ not noReveal ? ' js-animation-reveal' : '' }}"{{ animationType|default('default') != 'default' ? 'data-reveal-type="' ~ animationType ~ '"' : '' }}>
-	{% if infobox %}
+	{%- if infobox -%}
 		<div class="hero__infobox container">
             <div class="h-100 col-12 col-md-{{ infoboxPosX == 'center' ? '6' : '5' }}{{ _infoboxPosX }}">
                 {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: not noReveal}) only %}
             </div>
 		</div>
-	{% endif %}
-
+	{%- endif -%}
 	<div class="hero__img{{ container ? ' container' : '' }}">
-		{{ lbPicture(images, true, infoboxPosX, not noReveal) }}
+		{{- lbPicture(images, true, infoboxPosX, not noReveal) -}}
 	</div>
 </{{ isSubElement ? 'div' : 'section' }}>
