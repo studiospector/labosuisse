@@ -1672,6 +1672,11 @@ class TranslationManagement {
 	private function get_translation_job_info( $trid ) {
 		global $wpdb;
 
+		// Cache key must be integer or non-empty string, WP_Object_Cache::get will crash with empty $trid.
+		if( ! $trid ) {
+			return [];
+		}
+
 		$found    = false;
 		$cache    = $this->cache_factory->get( 'TranslationManagement::get_translation_job_id' );
 		$job_info = $cache->get( $trid, $found );

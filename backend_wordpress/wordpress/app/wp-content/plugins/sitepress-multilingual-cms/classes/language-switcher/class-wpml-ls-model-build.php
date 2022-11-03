@@ -144,7 +144,7 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 		$languages = $this->sitepress->get_ls_languages( $get_ls_args );
 		$languages = is_array( $languages ) ? $languages : [];
 
-		$languages = $this->order_languages( $languages, $slot->get( 'language_order_by' ), $slot->get( 'language_order_by' ) );
+		$languages = $this->order_languages( $languages, $this->sitepress->get_current_language() );
 
 		if ( $languages ) {
 
@@ -207,10 +207,9 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 
 				if ( $slot->is_menu() ) {
 					$ret[ $code ]['db_id']            = $this->get_menu_item_id( $code, $slot );
-					$ret[ $code ]['menu_item_parent'] = $slot->get( 'is_hierarchical' ) && ! $is_current_language
-						? $this->get_menu_item_id( $this->sitepress->get_current_language(), $slot ) : 0;
-					$ret[ $code ]['is_parent']        = $slot->get( 'is_hierarchical' ) && $is_current_language
-						? true : false;
+					$ret[ $code ]['menu_item_parent'] = $slot->get( 'is_hierarchical' ) && ! $is_current_language && $slot->get( 'display_link_for_current_lang' )
+							? $this->get_menu_item_id( $this->sitepress->get_current_language(), $slot ) : 0;
+					$ret[ $code ]['is_parent']        = $slot->get( 'is_hierarchical' ) && $is_current_language;
 
 					array_unshift( $css_classes, 'menu-item' );
 					array_push( $css_classes, $this->css_prefix . 'menu-item' );
@@ -249,25 +248,19 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 	}
 
 	/**
-	 * @param array  $languages
-	 * @param string $order_by
-	 * @param string $order_way
+	 * @param array $languages
 	 *
 	 * @return array
 	 */
-	private function order_languages( $languages, $order_by, $order_way ) {
-		$ret = $languages;
-
-		if ( ! empty( $order_by ) && ! empty( $order_way ) ) {
-			$method = 'order_by_' . $order_by;
-			if ( is_callable( [ $this, $method ] ) ) {
-				uasort( $ret, [ $this, 'order_by_' . $order_by ] );
-			}
-
-			$ret = strtoupper( $order_way ) === 'ASC' ? array_reverse( $ret ) : $ret;
+	private function order_languages( $languages, $current_language ) {
+		if ( isset( $languages[$current_language] ) ) {
+			$current_language_value = $languages[$current_language];
+			unset($languages[$current_language]);
+			return array_merge([$current_language => $current_language_value], $languages);
+		} else {
+			return $languages;
 		}
 
-		return $ret;
 	}
 
 	/**

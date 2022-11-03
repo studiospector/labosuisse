@@ -1,5 +1,5 @@
 <footer{{ not scrollbarDisabled ? ' data-scroll-section' : '' }}>
-    {% if prefooterConfig.show %}
+    {%- if prefooterConfig.show -%}
         <div class="lb-prefooter{{ prefooterConfig.line ? ' lb-prefooter--line' : '' }}">
             <div class="container">
                 <div class="lb-prefooter__desktop">
@@ -59,89 +59,79 @@
                 } only %}
             </div>
         </div>
-    {% endif %}
-    {% if data.pictograms %}
+    {%- endif -%}
+    {%- if data.pictograms -%}
         <div class="lb-footer-pictograms">
-            {% for item in data.pictograms %}
+            {%- for item in data.pictograms -%}
                 <div class="lb-footer-pictograms__item">
-                    {% include '@PathViews/components/icon.twig' with item.icon only %}
+                    {%- include '@PathViews/components/icon.twig' with item.icon only -%}
                     <h6 class="lb-footer-pictograms__item__title">{{ item.title }}</h6>
                 </div>
-            {% endfor %}
+            {%- endfor -%}
         </div>
-    {% endif %}
+    {%- endif -%}
     <div class="footer{{ not data.pictograms ? ' footer--margins' : '' }}">
         <div class="container">
             <div class="footer__top">
                 <div class="footer__top__shield lb-shield">
-                    {% include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only %}
+                    {%- include '@PathViews/components/icon.twig' with {name: 'logo-shield'} only -%}
                 </div>
                 <div class="footer__top__logo lb-logo">
-                    {% include '@PathViews/components/icon.twig' with {name: 'logo'} only %}
+                    {%- include '@PathViews/components/icon.twig' with {name: 'logo'} only -%}
                 </div>
             </div>
             <div class="footer__bottom">
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.discover.title }}</h6>
                     <ul class="footer__menu">
-                        {% for item in data.footer.discover.items %}
-                            <li class="footer__menu__item">
-                                {% include '@PathViews/components/button.twig' with item only %}
-                            </li>
-                        {% endfor %}
+                        {%- for item in data.footer.discover.items -%}
+                            <li class="footer__menu__item">{%- include '@PathViews/components/button.twig' with item only -%}</li>
+                        {%- endfor -%}
                     </ul>
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.support.title }}</h6>
                     <ul class="footer__menu">
-                        {% for item in data.footer.support.items %}
-                            <li class="footer__menu__item">
-                                {% include '@PathViews/components/button.twig' with item only %}
-                            </li>
-                        {% endfor %}
+                        {%- for item in data.footer.support.items -%}
+                            <li class="footer__menu__item">{%- include '@PathViews/components/button.twig' with item only -%}</li>
+                        {%- endfor -%}
                     </ul>
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.search.title }}</h6>
-                    {% if data.footer.search.items %}
+                    {%- if data.footer.search.items -%}
                         <ul class="footer__menu">
-                            {% for item in data.footer.search.items %}
-                                <li class="footer__menu__item">
-                                    {% include '@PathViews/components/button.twig' with item only %}
-                                </li>
-                            {% endfor %}
+                            {%- for item in data.footer.search.items -%}
+                                <li class="footer__menu__item">{%- include '@PathViews/components/button.twig' with item only -%}</li>
+                            {%- endfor -%}
                         </ul>
-                    {% endif %}
-                    {% if data.footer.search.form %}
+                    {%- endif -%}
+                    {%- if data.footer.search.form -%}
                         <form action="{{ data.footer.search.form.action }}" method="get">
-                            {% include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only %}
+                            {%- include '@PathViews/components/fields/input.twig' with data.footer.search.form.input only -%}
                         </form>
-                    {% endif %}
+                    {%- endif -%}
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.newsletter.title }}</h6>
                     <p class="infobox__paragraph">{{ data.footer.newsletter.text }}</p>
-                    {% include '@PathViews/components/button.twig' with data.footer.newsletter.cta only %}
+                    {%- include '@PathViews/components/button.twig' with data.footer.newsletter.cta only -%}
                 </div>
                 <div class="footer__bottom__item">
                     <h6 class="infobox__tagline">{{ data.footer.social.title }}</h6>
                     <ul class="footer__menu-icon">
-                        {% for item in data.footer.social.items %}
-                            <li class="footer__menu-icon__item">
-                                <a href="{{ item.url }}" target="_blank">
-                                    {% include '@PathViews/components/icon.twig' with {name: item.icon} only %}
-                                </a>
-                            </li>
-                        {% endfor %}
+                        {%- for item in data.footer.social.items -%}
+                            <li class="footer__menu-icon__item"><a href="{{ item.url }}" target="_blank">{%- include '@PathViews/components/icon.twig' with {name: item.icon} only -%}</a></li>
+                        {%- endfor -%}
                     </ul>
                 </div>
             </div>
             <div class="footer__impressum">
                 <p class="footer__impressum__text">{{ data.footer.impressum.text }}</p>
                 <div class="footer__impressum__menu">
-                    {% for item in data.footer.impressum.items %}
-                        {% include '@PathViews/components/button.twig' with item only %}
-                    {% endfor %}
+                    {%- for item in data.footer.impressum.items -%}
+                        {%- include '@PathViews/components/button.twig' with item only -%}
+                    {%- endfor -%}
                 </div>
             </div>
         </div>

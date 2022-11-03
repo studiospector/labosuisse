@@ -1,35 +1,35 @@
-{% macro lbPicture(images, isParallax, position, reveal) %}
+{%- macro lbPicture(images, isParallax, position, reveal) -%}
 
-    {% set position = position|default('center') %}
+    {%- set position = position|default('center') -%}
 
-	{% set classes = [] %}
+	{%- set classes = [] -%}
 
-	{% if isParallax %}
+	{%- if isParallax -%}
         {% set parallaxVariant = 'parallax' %}
         {% set classes = classes|merge(['js-parallax']) %}
-    {% endif %}
+    {%- endif -%}
 
-    {% if reveal %}
+    {%- if reveal -%}
         {% set revealVariant = 'reveal' %}
-    {% endif %}
+    {%- endif -%}
 
-	{% for variant in images.variants|default([parallaxVariant, revealVariant]) %}
+	{%- for variant in images.variants|default([parallaxVariant, revealVariant]) -%}
 		{% set classes = classes|merge(['lb-picture--' ~ variant]) %}
-	{% endfor %}
+	{%- endfor -%}
 
-    {% set classes = classes|merge(['lb-picture--infobox-' ~ position]) %}
+    {%- set classes = classes|merge(['lb-picture--infobox-' ~ position]) -%}
 
-	{% if class %}
+	{%- if class -%}
 		{% set classes = classes|merge([class]) %}
-	{% endif %}
+	{%- endif -%}
 
-    {% if isParallax or reveal %}<div class="lb-picture-wrapper{{ reveal ? ' js-image-reveal' : '' }}">{% endif %}
+    {%- if isParallax or reveal -%}<div class="lb-picture-wrapper{{ reveal ? ' js-image-reveal' : '' }}">{%- endif -%}
 	    <picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ (isParallax) ? ' data-scroll data-scroll-speed="1" data-scroll-delay="0.1"' : '' }}>
             <source media="(min-width: 801px) and (max-width: 1200px)" data-srcset="{{images.lg}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             <source media="(min-width: 401px) and (max-width: 800px)" data-srcset="{{images.md}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             <source media="(max-width: 400px)" data-srcset="{{images.sm}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             <img data-src="{{images.original}}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" alt="{{ images.alt }}" class="lazyload"/>
 	    </picture>
-        {% if reveal %}<div class="lb-picture-overlay"></div>{% endif %}
-    {% if isParallax or reveal %}</div>{% endif %}
-{% endmacro %}
+        {%- if reveal -%}<div class="lb-picture-overlay"></div>{%- endif -%}
+    {%- if isParallax or reveal -%}</div>{%- endif -%}
+{%- endmacro -%}

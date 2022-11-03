@@ -1,33 +1,30 @@
-{% if type == 'separator' %}
+{%- if type == 'separator' -%}
     <div class="lb-menu__item lb-menu__item--separator"></div>
-{% else %}
+{%- else -%}
     <div class="lb-menu__item">
-        {% if type == 'nav' %}
+        {%- if type == 'nav' -%}
             <div class="lb-menu__link-nav lb-menu__link--icon{{ class ? ' ' ~ class : '' }}" tabindex="0"{{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
                 {% include '@PathViews/components/icon.twig' with icon only %}
             </div>
-        {% endif %}
-        
-        {% if type == 'icon' %}
+        {%- endif -%}
+        {%- if type == 'icon' -%}
             <a href="{{href}}" class="lb-menu__link lb-menu__link--icon" tabindex="0" title="{{ icon.name }}">
                 {% include '@PathViews/components/icon.twig' with icon only %}
             </a>
-        {% endif %}
-
-        {% if type == 'link' %}
+        {%- endif -%}
+        {%- if type == 'link' -%}
             <a href="{{href}}" class="lb-menu__link lb-menu__link--main" target="{{ target ? target : '_self' }}" title="{{ label }}" tabindex="0">{{label}}</a>
-        {% endif %}
-
-        {% if type == 'submenu' %}
+        {%- endif -%}
+        {%- if type == 'submenu' -%}
             <span class="lb-menu__link lb-menu__link--main" tabindex="0">{{label}}</span>
             <div class="lb-menu__submenu container">
                 <div class="lb-menu__wrapper">
                     <div class="lb-menu__close js-close-menu">
                         {% include '@PathViews/components/icon.twig' with {name: 'close-circle'} only %}
                     </div>
-                    {% for item in children %}
+                    {%- for item in children -%}
                         {% include '@PathViews/layout/menu-desktop-subitem.twig' with item only %}
-                    {% endfor %}
+                    {%- endfor -%}
                     {% if fixed|default([])|length > 0 %}
                         <div class="lb-menu__images">
                             {% for item in fixed %}
@@ -37,6 +34,6 @@
                     {% endif %}
                 </div>
             </div>
-        {% endif %}
+        {%- endif -%}
     </div>
-{% endif %}
+{%- endif -%}

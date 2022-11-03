@@ -345,6 +345,46 @@ add_filter( 'woocommerce_adjust_non_base_location_prices', '__return_false' ) ;
  * Enforce Password Strength
  */
 add_filter('woocommerce_min_password_strength', 'lb_wc_change_password_strength', 30);
-function lb_wc_change_password_strength() {
+function lb_wc_change_password_strength()
+{
     return intval(2);
 }
+
+/**
+ * Set extra Product Schema
+ */
+add_filter('woocommerce_structured_data_product', 'lb_set_extra_schema_product', 20, 2);
+function lb_set_extra_schema_product($schema, $product)
+{
+    $brands = get_the_terms($product->get_id(), 'lb-brand');
+
+    if ($brands) {
+        $schema['brand'] = $brands[0]->name;
+    }
+
+    return $schema;
+}
+
+/**
+ * Set extra Product data in GTM items
+ */
+add_filter('gtm_ecommerce_woo_item', function ($item, $product) {
+    // Add Brand
+    $brands = (get_class($product) === 'WC_Product_Variation') ? get_the_terms($product->get_parent_id(), 'lb-brand') : get_the_terms($product->get_id(), 'lb-brand');
+    if ($brands) {
+        $item->setItemBrand($brands[0]->name);
+    }
+
+    // Add Product cats
+    $productCats = (get_class($product) === 'WC_Product_Variation') ? get_the_terms($product->get_parent_id(), 'product_cat') : get_the_terms($product->get_id(), 'product_cat');
+    if ( is_array( $productCats ) ) {
+        $categories = array_map(
+            function( $category ) {
+                return $category->name; },
+            $productCats
+        );
+        $item->setItemCategories( $categories );
+    }
+
+    return $item;
+}, 999, 2);

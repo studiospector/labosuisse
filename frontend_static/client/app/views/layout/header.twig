@@ -5,15 +5,12 @@
 {% if class %}
 	{% set classes = classes|merge([class]) %}
 {% endif %}
-
 <header class="lb-header lb-header js-header js-menu {{classes|length ? ' ' ~ classes|join(' ') : '' }}">
-
     {% if header.pre.text %}
         <div class="lb-header__pre">
             <p>{{ header.pre.text ? header.pre.text : '' }}</p>
         </div>
     {% endif %}
-
     <div class="lb-header__top container">
         <div class="lb-header__top__shield lb-shield">
             <a href="{{ fn('home_url') }}">
@@ -51,22 +48,10 @@
             </div>
             <!-- Btn Menu Mobile -->
             <div class="lb-header__top__icons__item lb-header__top__icons__item--btn-menu">
-                <div class="lb-header__hamburger">
-                    <div class="lb-header__hamburger__wrap">
-                        <span></span>
-                        <span></span>
-                    </div>
-                    <svg>
-                        <use xlink:href="#menu-path"></use>
-                    </svg>
-                    <svg>
-                        <use xlink:href="#menu-path"></use>
-                    </svg>
-                </div>
+                <div class="lb-header__hamburger"><div class="lb-header__hamburger__wrap"><span></span><span></span></div><svg><use xlink:href="#menu-path"></use></svg><svg><use xlink:href="#menu-path"></use></svg></div>
             </div>
         </div>
     </div>
-
 	<div class="lb-header__bottom container">
         <!-- Menu Desktop -->
 		<div class="lb-header__wrapper lb-header__wrapper--desktop">
@@ -82,5 +67,4 @@
 		    {% include "@PathViews/layout/menu-mobile.twig" with header.menu_mobile only %}
         {% endif %}
 	</div>
-
 </header>

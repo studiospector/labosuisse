@@ -1,44 +1,44 @@
-{% embed '@PathViews/components/offset-nav.twig' %}
+{%- embed '@PathViews/components/offset-nav.twig' -%}
     
     {% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
 	
-    {% block offsetNavContent %}
+    {%- block offsetNavContent -%}
 
-        {% for item in data %}
+        {%- for item in data -%}
 
-            {% if item.type == 'faq' %}
+            {%- if item.type == 'faq' -%}
 
-                {% include '@PathViews/components/accordion.twig' with {items: item.items} only %}
+                {%- include '@PathViews/components/accordion.twig' with {items: item.items} only -%}
 
-            {% else %}
+            {%- else -%}
                 
                 <div class="lb-offset-nav__content__item lb-offset-nav__content__item--{{ item.type }}">
-                    {% if item.type == 'text' %}
-                        {% if item.data.title %}
+                    {%- if item.type == 'text' -%}
+                        {%- if item.data.title -%}
                             <h4 class="infobox__subtitle">{{ item.data.title }}</h4>
-                        {% endif %}
-                        {% if item.data.subtitle %}
+                        {%- endif -%}
+                        {%- if item.data.subtitle -%}
                             <p class="infobox__paragraph p p-big">{{ item.data.subtitle }}</p>
-                        {% endif %}
-                        {% if item.data.paragraph_small %}
+                        {%- endif -%}
+                        {%- if item.data.paragraph_small -%}
                             <p class="infobox__paragraph infobox__paragraph--small">{{ item.data.paragraph_small }}</p>
-                        {% endif %}
-                        {% if item.data.text %}
+                        {%- endif -%}
+                        {%- if item.data.text -%}
                             <p class="infobox__paragraph p-small">{{ item.data.text }}</p>
-                        {% endif %}
-                    {% elseif item.type == 'table' %}
-                        {% if item.data.title %}
+                        {%- endif -%}
+                    {%- elseif item.type == 'table' -%}
+                        {%- if item.data.title -%}
                             <h4 class="infobox__subtitle">{{ item.data.title }}</h4>
-                        {% endif %}
-                        {% if item.data.subtitle %}
+                        {%- endif -%}
+                        {%- if item.data.subtitle -%}
                             <p class="infobox__paragraph p p-big">{{ item.data.subtitle }}</p>
-                        {% endif %}
-                        {% if item.data.text %}
+                        {%- endif -%}
+                        {%- if item.data.text -%}
                             <p class="infobox__paragraph p-small">{{ item.data.text }}</p>
-                        {% endif %}
-                        {% if item.data.table %}
+                        {%- endif -%}
+                        {%- if item.data.table -%}
                             <div class="lb-offset-nav__table">
-                                {% for tableItem in item.data.table %}
+                                {%- for tableItem in item.data.table -%}
                                     <div class="row">
                                         <div class="col-9 col-md-11">
                                             <p class="lb-offset-nav__table__prop p-small">{{ tableItem.title }}</p>
@@ -47,22 +47,22 @@
                                             <p class="lb-offset-nav__table__value p-small">{{ tableItem.value }}</p>
                                         </div>
                                     </div>
-                                {% endfor %}
+                                {%- endfor -%}
                             </div>
-                        {% endif %}
-                    {% elseif item.type == 'unordered-arrow-list' %}
+                        {%- endif -%}
+                    {%- elseif item.type == 'unordered-arrow-list' -%}
                         {% include '@PathViews/components/list-arrow.twig' with item.data only %}
-                    {% elseif item.type == 'button' %}
+                    {%- elseif item.type == 'button' -%}
                         {% include '@PathViews/components/button.twig' with item.data.cta only %}
-                    {% elseif item.type == 'image' %}
+                    {%- elseif item.type == 'image' -%}
                         {{ lbPicture(item.data.image) }}
-                    {% elseif item.type == 'html' %}
+                    {%- elseif item.type == 'html' -%}
                         {{ item.data|raw }}
-                    {% endif %}
+                    {%- endif -%}
                 </div>
 
-            {% endif %}
-        {% endfor %}
+            {%- endif -%}
+        {%- endfor -%}
 
-	{% endblock %}
-{% endembed %}
+	{%- endblock -%}
+{%- endembed -%}

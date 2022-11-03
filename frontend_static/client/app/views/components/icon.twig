@@ -5,12 +5,11 @@
 {% if class %}
     {% set classes = classes|merge([class]) %}
 {% endif %}
-
+{% apply spaceless %}
 <span class="lb-icon{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
-    {% if (counter matches '/^\\d+$/') and (counter >= 0) %}
+    {%- if (counter matches '/^\\d+$/') and (counter >= 0) -%}
         <span class="lb-icon__counter{{ counter_classes ? ' ' ~ counter_classes : '' }}">{{(counter > 0) ? counter : ''}}</span>
-    {% endif %}
-    <svg aria-label="{{ name }}" xmlns="http://www.w3.org/2000/svg">
-        <use xlink:href="#{{ name }}"></use>
-    </svg>
+    {%- endif -%}
+    <svg aria-label="{{ name }}" xmlns="http://www.w3.org/2000/svg"><use xlink:href="#{{ name }}"></use></svg>
 </span>
+{% endapply %}
