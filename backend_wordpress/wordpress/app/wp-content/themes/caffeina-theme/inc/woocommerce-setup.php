@@ -362,3 +362,15 @@ function lb_set_extra_schema_product( $schema, $product ) {
 
     return $schema;
 }
+
+add_filter('gtm_ecommerce_woo_item', 'lb_gtm_woo_pro_extra_data', 10, 2);
+function lb_gtm_woo_pro_extra_data( $item, $product ) {
+
+    $brands = get_the_terms( $product->get_id(), 'lb-brand' );
+
+    if ($brands) {
+        $item->setItemBrand($brands[0]->name);
+    }
+    
+    return $item;
+}
