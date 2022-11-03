@@ -345,16 +345,18 @@ add_filter( 'woocommerce_adjust_non_base_location_prices', '__return_false' ) ;
  * Enforce Password Strength
  */
 add_filter('woocommerce_min_password_strength', 'lb_wc_change_password_strength', 30);
-function lb_wc_change_password_strength() {
+function lb_wc_change_password_strength()
+{
     return intval(2);
 }
 
 /**
  * Set extra Product Schema
  */
-add_filter( 'woocommerce_structured_data_product', 'lb_set_extra_schema_product', 20, 2 );
-function lb_set_extra_schema_product( $schema, $product ) {
-    $brands = get_the_terms( $product->get_id(), 'lb-brand' );
+add_filter('woocommerce_structured_data_product', 'lb_set_extra_schema_product', 20, 2);
+function lb_set_extra_schema_product($schema, $product)
+{
+    $brands = get_the_terms($product->get_id(), 'lb-brand');
 
     if ($brands) {
         $schema['brand'] = $brands[0]->name;
@@ -363,14 +365,17 @@ function lb_set_extra_schema_product( $schema, $product ) {
     return $schema;
 }
 
-add_filter('gtm_ecommerce_woo_item', 'lb_gtm_woo_pro_extra_data', 10, 2);
-function lb_gtm_woo_pro_extra_data( $item, $product ) {
-
-    $brands = get_the_terms( $product->get_id(), 'lb-brand' );
+/**
+ * Set extra Product data in GTM items
+ */
+add_filter('gtm_ecommerce_woo_item', 'lb_gtm_woo_pro_extra_data', 100, 2);
+function lb_gtm_woo_pro_extra_data($item, $product)
+{
+    $brands = get_the_terms($product->get_id(), 'lb-brand');
 
     if ($brands) {
         $item->setItemBrand($brands[0]->name);
     }
-    
+
     return $item;
 }
