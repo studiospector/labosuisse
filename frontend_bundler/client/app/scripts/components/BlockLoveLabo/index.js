@@ -15,11 +15,11 @@ class BlockLoveLabo extends Component {
 
         // Only for Variant Full
         if (this.el.classList.contains('lovelabo--full')) {
-            this.placeScoller()
+            this.placeScroller()
         }
     }
 
-    placeScoller() {
+    placeScroller() {
         const secondItemsCoordinates = this.ui.items[1].getBoundingClientRect()
         this.ui.scroller.scrollLeft = secondItemsCoordinates.left / 2
     }
