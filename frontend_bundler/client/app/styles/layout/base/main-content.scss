@@ -310,3 +310,132 @@ ul.lb-arrow-list {
     display: inline-block;
     will-change: transform;
 }
+
+
+/**
+ * Custom table element
+ */
+.lb-custom-table {
+    overflow-x: auto;
+
+    @include mq($until: md) {
+        &::before{
+            content: "Scroll ->";
+            display: block;
+            text-align: right;
+            font-size: 11px;
+            color: map-get($colors, "black");
+            padding: 0 0 10px;
+        }
+    }
+    
+    table {
+        font-size: 14px;
+        font-weight: normal;
+        border: none;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        // white-space: nowrap;
+        background-color: map-get($colors, "white");
+
+        @include mq($until: md) {
+            display: block;
+            width: 100%;
+        }
+
+        thead {
+            border: 1px solid map-get($colors, "grey-2");
+
+            @include mq($until: md)  {
+                display: block;
+                float: left;
+            }
+
+            th {
+                font-weight: 700;
+                text-align: center;
+                color: map-get($colors, "black");
+                background: map-get($colors, "grey-1");
+
+                @include mq($until: md)  {
+                    width: 120px;
+                    display: block;
+                    text-align: left;
+                    border-bottom: 1px solid #f7f7f9;
+
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            border: 1px solid map-get($colors, "grey-2");
+
+            @include mq($until: md)  {
+                width: auto;
+                display: block;
+                position: relative;
+                overflow-x: auto;
+
+                tr {
+                    display: table-cell;
+
+                    &:nth-child(odd) {
+                        background: none;
+                    }
+                }
+
+                td {
+                    display: block;
+                    text-align: left;
+                }
+            }
+
+            tr:not(:last-child) {
+                border-bottom: 1px solid map-get($colors, "grey-2");
+            }
+        }
+
+        tr {
+            @include mq($until: md) {
+                &:nth-child(even) {
+                    background: transparent;
+                }
+
+                td:nth-child(odd) {
+                    background: #F8F8F8;
+                    border-right: 1px solid #E6E4E4;
+                }
+
+                td:nth-child(even) {
+                    border-right: 1px solid #E6E4E4;
+                }
+            }
+        }
+        
+        td,
+        th {
+            padding: 8px;
+
+            @include mq($until: md) {
+                width: auto;
+                height: 200px;
+                font-size: 13px;
+                vertical-align: middle;
+                box-sizing: border-box;
+                // text-overflow: ellipsis;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+        }
+
+        td {
+            border-right: 1px solid map-get($colors, "grey-2");
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
+}
