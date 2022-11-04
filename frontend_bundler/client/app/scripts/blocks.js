@@ -19,9 +19,10 @@ const lbSetExtraPropsToBlockType = (props, blockType, attributes) => {
     }
     else if (
         blockType.name === 'core/embed'
+        || blockType.name === 'core/table'
     ) {
         return Object.assign(props, {
-            className: notDefined ? `container` : `container ${props.className}`,
+            className: notDefined ? `lb-custom-table container` : `lb-custom-table container ${props.className}`,
         })
     }
 
