@@ -4,6 +4,7 @@ use Caffeina\LaboSuisse\Setup\Clean;
 use Caffeina\LaboSuisse\Setup\Assets;
 use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 use Caffeina\LaboSuisse\Shortcodes\WCSignInUpShortcode;
+use Caffeina\LaboSuisse\Services\MC4WP\SettingsMC4WP;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -557,6 +558,7 @@ new Clean();
 new Assets();
 new CookiebotDeclarationShortcode;
 new WCSignInUpShortcode;
+new SettingsMC4WP;
 
 
 
