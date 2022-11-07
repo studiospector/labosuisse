@@ -120,6 +120,7 @@ trait CheapestCommon {
         if(isset($buy_x_get_y_ranges->ranges) && !empty($buy_x_get_y_ranges->ranges)){
             $matched_rule = Cheapest::getMatchedRule($buy_x_get_y_ranges->ranges, $quantity, $product);
         }
+        
         if(!empty($matched_rule)){
             $matched_rule = Cheapest::setFreeDiscountInMatchedRule($matched_rule);
             $discount_quantity = $matched_rule->free_qty;
@@ -277,7 +278,7 @@ trait CheapestCommon {
                                     $quantity = (isset($cart_item['key']))? $cart_item['quantity']: $product_quantity;
                                     $matched_rule = $cheapest_item_data_values['matched_rule'];
                                     $discount_price = Cheapest::calculateDiscountPriceFromRuleRange($matched_rule, $price, $quantity_to_apply, $quantity, $product);
-                                    $discount_value = $matched_rule->free_value;
+                                    $discount_value = Cheapest::getDiscountValueFromRule($matched_rule, $price);
                                     $discount_type = $matched_rule->free_type;
                                     $return_value = array(
                                         "discount_type" => $discount_type,

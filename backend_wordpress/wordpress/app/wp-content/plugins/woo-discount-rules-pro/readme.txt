@@ -4,7 +4,7 @@ Donate link: https://flycart.org/
 Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
 Requires at least: 4.4.1
 Tested up to: 6.0
-Stable tag: 2.4.4
+Stable tag: 2.5.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -335,6 +335,22 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.5.0 - 01/11/22 =
+* Improvement: Added applied discount info in order and order item meta _wdr_discounts.
+* Improvement: Set 3 for 10 fixed .1 difference on subtotal.
+* Improvement: Show free shipping rule reports since v2.5.0.
+* Add: Show total order count and sales on report section.
+* Fix: Disable coupon option doesn't working with free shipping.
+* Fix: Applied message is not displaying in cart for free shipping.
+* Fix: Limit option is not working with Free shipping.
+* Fix: Warning on PHP 8.
+
+= 2.4.5 - 27/09/22 =
+* Improvement: Backend field validation.
+* Improvement: Condition and filter matches on any operation.
+* Fix: Applying discount more than discount quantity on set and BXGY.
+* Fix: Quantity issue on set discount while manual request.
 
 = 2.4.4 - 09/08/22 =
 * Fix: Onsale page query improvement for on-sale filter.

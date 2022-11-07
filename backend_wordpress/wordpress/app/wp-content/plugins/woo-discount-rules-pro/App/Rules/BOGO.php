@@ -8,6 +8,7 @@ use Wdr\App\Controllers\DiscountCalculator;
 use Wdr\App\Helpers\Helper;
 use Wdr\App\Helpers\Rule;
 use Wdr\App\Helpers\Woocommerce;
+use WDRPro\App\Helpers\CoreMethodCheck;
 
 class BOGO
 {
@@ -312,17 +313,17 @@ class BOGO
      * @return boolean
      * */
     public static function isVariantPurchasableForBXGY($product, $quantity, $bogo_product_id, $variation_id){
-        if(method_exists($product, 'is_purchasable')){
+        if(is_object($product) && method_exists($product, 'is_purchasable')){
             if ( ! $product->is_purchasable() ) {
                 return false;
             }
         }
-        if(method_exists($product, 'is_in_stock')) {
+        if(is_object($product) && method_exists($product, 'is_in_stock')) {
             if (!$product->is_in_stock()) {
                 return false;
             }
         }
-        if(method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
+        if(is_object($product) && method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
             if ($product->get_manage_stock()) {
                 if('no' === $product->get_backorders()){
                     if($product->get_stock_quantity() < $quantity){
@@ -351,7 +352,7 @@ class BOGO
             //Check WPML language
             if(apply_filters( 'advanced_woo_discount_rules_check_wpml_language_for_product_before_auto_add', true, $product, $variation_id)){
                 global $sitepress;
-                if(!empty($sitepress) && method_exists($sitepress, 'get_current_language')){
+                if(is_object($sitepress) && method_exists($sitepress, 'get_current_language')){
                     //$current_lang = $sitepress->get_current_language();
                     $post_language_information = apply_filters( 'wpml_post_language_details', NULL, Woocommerce::getProductId($product));
                     if(isset($post_language_information['different_language'])){
@@ -363,17 +364,17 @@ class BOGO
             }
         }
 
-        if(method_exists($product, 'is_purchasable')){
+        if(is_object($product) && method_exists($product, 'is_purchasable')){
             if ( ! $product->is_purchasable() ) {
                 return false;
             }
         }
-        if(method_exists($product, 'is_in_stock')) {
+        if(is_object($product) && method_exists($product, 'is_in_stock')) {
             if (!$product->is_in_stock()) {
                 return false;
             }
         }
-        if(method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
+        if(is_object($product) && method_exists($product, 'get_stock_quantity') && method_exists($product, 'get_manage_stock') && method_exists($product, 'get_backorders')) {
             if ($product->get_manage_stock()) {
                 if('no' === $product->get_backorders()){
                     if($check_existing_qty == true){
@@ -609,11 +610,13 @@ class BOGO
             if(!empty($matched_rule->free_type)){
                 if($matched_rule->free_type == "percentage"){
                     if($matched_rule->free_value > 0){
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $matched_rule->free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 } else if($matched_rule->free_type == "flat"){
                     if($matched_rule->free_value > 0){
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $matched_rule->free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 }
             }
@@ -621,6 +624,39 @@ class BOGO
         }
 
         return $discount_price;
+    }
+
+    /**
+     * Get discount value from matched rule
+     *
+     * @param $matched_rule object
+     * @param $price int/float
+     * @return int/float
+     */
+    public static function getDiscountValueFromRule($matched_rule, $price)
+    {
+        $discount_value = 0;
+        if(!empty($matched_rule)){
+            if(!empty($matched_rule->free_type)){
+                if($matched_rule->free_type == "percentage"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = $matched_rule->free_value;
+                        if ($discount_value > 100) {
+                            $discount_value = 100;
+                        }
+                    }
+                } else if($matched_rule->free_type == "flat"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = CoreMethodCheck::getConvertedFixedPrice($matched_rule->free_value, 'flat');
+                        if ($discount_value > $price) {
+                            $discount_value = $price;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $discount_value;
     }
 
     /**
