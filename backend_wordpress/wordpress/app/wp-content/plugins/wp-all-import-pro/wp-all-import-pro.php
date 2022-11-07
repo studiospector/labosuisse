@@ -3,7 +3,8 @@
 Plugin Name: WP All Import Pro
 Plugin URI: http://www.wpallimport.com/
 Description: The most powerful solution for importing XML and CSV files to WordPress. Import to Posts, Pages, and Custom Post Types. Support for imports that run on a schedule, ability to update existing imports, and much more.
-Version: 4.7.5
+Version: 4.7.8
+Requires PHP: 7.2.5
 Author: Soflyy
 */
 
@@ -15,7 +16,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 
     include_once __DIR__.'/src/WordPress/AdminNotice.php';
     include_once __DIR__.'/src/WordPress/AdminErrorNotice.php';
-    $notice = new \Wpai\WordPress\AdminErrorNotice(printf(__('Please de-activate and remove the free version of WP All Import before activating the paid version.', 'wp_all_import_plugin')));
+    $notice = new \Wpai\WordPress\AdminErrorNotice(__('Please de-activate and remove the free version of WP All Import before activating the paid version.', 'wp_all_import_plugin'));
     $notice->render();
 
     deactivate_plugins( str_replace('\\', '/', dirname(__FILE__)) . '/wp-all-import-pro.php' );
@@ -25,7 +26,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
     /**
      *
      */
-    define('PMXI_VERSION', '4.7.5');
+    define('PMXI_VERSION', '4.7.8');
 
     /**
      *
@@ -689,6 +690,26 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
                 // Update WooCommerce Reviews custom type.
                 $options['custom_type'] = 'woo_reviews';
             }
+            if ( version_compare($version, '4.7.8') < 0 ) {
+                $options['delete_missing_logic'] = 'import';
+                $options['is_send_removed_to_trash'] = 0;
+                $options['status_of_removed_products'] = 'outofstock';
+                if (empty($options['is_delete_missing']) || (!empty($options['is_update_missing_cf']) || !empty($options['set_missing_to_draft']) || !empty($options['missing_records_stock_status']))) {
+                    $options['delete_missing_action'] = 'keep';
+                    if ($options['set_missing_to_draft']) {
+                        $options['is_change_post_status_of_removed'] = 1;
+                        $options['status_of_removed'] = 'draft';
+                    }
+                } else {
+                    $options['delete_missing_action'] = 'remove';
+                }
+                // Set default option if no other options selected.
+                if (empty($options['is_update_missing_cf']) && empty($options['is_change_post_status_of_removed']) && empty($options['missing_records_stock_status'])) {
+                    $options['is_send_removed_to_trash'] = 1;
+                }
+                $options['is_delete_attachments'] = !$options['is_keep_attachments'];
+                $options['is_delete_imgs'] = !$options['is_keep_imgs'];
+            }
 		}
 
 		/**
@@ -1241,6 +1262,7 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 				'parent_import_id',
 				'iteration',
 				'deleted',
+				'changed_missing',
 				'executing',
 				'canceled',
 				'canceled_on',
@@ -1272,6 +1294,9 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 						case 'deleted':
 							$wpdb->query("ALTER TABLE {$table} ADD `deleted` BIGINT(20) NOT NULL DEFAULT 0;");
 							break;
+                        case 'changed_missing':
+                            $wpdb->query("ALTER TABLE {$table} ADD `changed_missing` BIGINT(20) NOT NULL DEFAULT 0;");
+                            break;
 						case 'executing':
 							$wpdb->query("ALTER TABLE {$table} ADD `executing` BOOL NOT NULL DEFAULT 0;");
 							break;
@@ -1427,10 +1452,16 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 				'create_new_records' => 1,
 				'is_selective_hashing' => 1,
 				'is_delete_missing' => 0,
+                'delete_missing_logic' => 'import',
+                'delete_missing_action' => 'keep',
+                'is_send_removed_to_trash' => 1,
+                'is_change_post_status_of_removed' => 0,
+                'status_of_removed' => 'draft',
+                'status_of_removed_products' => 'outofstock',
 				'set_missing_to_draft' => 0,
 				'is_update_missing_cf' => 0,
-				'update_missing_cf_name' => '',
-				'update_missing_cf_value' => '',
+				'update_missing_cf_name' => [],
+				'update_missing_cf_value' => [],
 
 				'is_keep_former_posts' => 'no',
 				'is_update_status' => 1,
@@ -1455,7 +1486,9 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 				'is_update_menu_order' => 1,
 				'is_update_parent' => 1,
 				'is_keep_attachments' => 0,
+				'is_delete_attachments' => 0,
 				'is_keep_imgs' => 0,
+				'is_delete_imgs' => 0,
 				'do_not_remove_images' => 1,
 
 				'is_update_custom_fields' => 1,
@@ -1680,7 +1713,6 @@ if ( is_plugin_active('wp-all-import/plugin.php') ){
 	    if (class_exists('PMXI_Updater')) {
             // retrieve our license key from the DB
             $wp_all_import_options = get_option('PMXI_Plugin_Options');
-
             // setup the updater
             $updater = new PMXI_Updater( $wp_all_import_options['info_api_url'], __FILE__, array(
                     'version' 	=> PMXI_VERSION,		// current version number

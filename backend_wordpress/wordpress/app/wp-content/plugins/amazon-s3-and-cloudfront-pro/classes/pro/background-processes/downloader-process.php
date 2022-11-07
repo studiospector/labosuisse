@@ -76,7 +76,7 @@ class Downloader_Process extends Background_Tool_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished downloading media files to local server.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished downloading media files to local server.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

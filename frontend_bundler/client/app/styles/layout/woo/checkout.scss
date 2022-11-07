@@ -45,6 +45,18 @@
         }
     }
 
+    .woocommerce-billing-fields {
+        .mc4wp-checkbox {
+            padding-bottom: 0;
+            
+            label {
+                font-size: rem(16);
+                color: map-get($colors, "black");
+                margin: 0;
+            }
+        }
+    }
+
     .woocommerce-additional-fields {
         margin-top: 60px;
     }

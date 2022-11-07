@@ -6,21 +6,15 @@
 {% if class %}
 	{% set classes = classes|merge([class]) %}
 {% endif %}
-
-<input 
-    type="{{ type|default('text') }}"
-    id="{{ id ? id : name }}"
-    name="{{ name }}"
-    value="{{ value }}"
-    {{ disabled ? ' disabled="disabled"' : '' }}
-    {{ required ? ' required="required"' : '' }}
-    {{ autocomplete ? ' autocomplete="' ~ autocomplete ~ '"' : '' }}
-    {{ (step matches '/^\\d+$/' and step|number_format >= 0) ? ' step="' ~ step|number_format ~ '"' : '' }}
-    {{ (min matches '/^\\d+$/' and min|number_format >= 0) ? ' min="' ~ min|number_format ~ '"' : '' }}
-    {{ (max matches '/^\\d+$/' and max|number_format >= 0) ? ' max="' ~ max|number_format ~ '"' : '' }}
-    placeholder="{{ label }}"
-    class="js-custom-input{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"
-    {{ dataVariants|length > 0 ? ' ' ~ dataVariants|join(' ') : '' }}
-    {{ buttonTypeNext ? ' data-button-type-next="' ~ buttonTypeNext ~ '"' : '' }}
-    {{ buttonVariantNext ? ' data-button-variant-next="' ~ buttonVariantNext ~ '"' : '' }}
-/>
+<input type="{{ type|default('text') }}" id="{{ id ? id : name }}" name="{{ name }}" value="{{ value }}"
+    {{- disabled ? ' disabled="disabled"' : ' ' -}}
+    {{- required ? ' required="required"' : ' ' -}}
+    {{- autocomplete ? ' autocomplete="' ~ autocomplete ~ '"' : ' ' -}}
+    {{- (step matches '/^\\d+$/' and step|number_format >= 0) ? ' step="' ~ step|number_format ~ '"' : ' ' -}}
+    {{- (min matches '/^\\d+$/' and min|number_format >= 0) ? ' min="' ~ min|number_format ~ '"' : ' ' -}}
+    {{- (max matches '/^\\d+$/' and max|number_format >= 0) ? ' max="' ~ max|number_format ~ '"' : ' ' -}}
+    {{- 'placeholder="' ~ label ~ '" ' -}}
+    class="js-custom-input{{ classes|length ? ' ' ~ classes|join(' ') : ' ' }}"
+    {{- dataVariants|length > 0 ? ' ' ~ dataVariants|join(' ') : ' ' -}}
+    {{- buttonTypeNext ? ' data-button-type-next="' ~ buttonTypeNext ~ '"' : ' ' -}}
+    {{- buttonVariantNext ? ' data-button-variant-next="' ~ buttonVariantNext ~ '"' : ' ' -}}/>

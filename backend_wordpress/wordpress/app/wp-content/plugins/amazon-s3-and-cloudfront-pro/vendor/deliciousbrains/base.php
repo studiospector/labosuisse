@@ -2,7 +2,6 @@
 /**
  * API Base Class
  *
- *
  * @package     deliciousbrains
  * @subpackage  api/base
  * @copyright   Copyright (c) 2015, Delicious Brains
@@ -143,18 +142,18 @@ class Delicious_Brains_API_Base extends Delicious_Brains_API {
 	 * @return string
 	 */
 	protected function connection_failed_response() {
-		$connection_failed_message = __( '<strong>Could not connect to deliciousbrains.com</strong> &mdash; You will not receive update notifications or be able to activate your license until this is fixed.', 'amazon-s3-and-cloudfront' );
+		$connection_failed_message = __( '<strong>Could not connect to deliciousbrains.com</strong> &mdash; You will not receive update notifications or be able to activate your license until this is fixed.' );
 		$connection_failed_message .= '</p><p>';
 
 		if ( defined( 'WP_HTTP_BLOCK_EXTERNAL' ) && WP_HTTP_BLOCK_EXTERNAL ) {
 			$url_parts = parse_url( $this->api_base );
 			$host      = $url_parts['host'];
 			if ( ! defined( 'WP_ACCESSIBLE_HOSTS' ) || strpos( WP_ACCESSIBLE_HOSTS, $host ) === false ) {
-				$connection_failed_message .= sprintf( __( 'We\'ve detected that <code>WP_HTTP_BLOCK_EXTERNAL</code> is enabled and the host <strong>%1$s</strong> has not been added to <code>WP_ACCESSIBLE_HOSTS</code>. Please disable <code>WP_HTTP_BLOCK_EXTERNAL</code> or add <strong>%1$s</strong> to <code>WP_ACCESSIBLE_HOSTS</code> to continue. <a href="%2$s" target="_blank">More information</a>', 'amazon-s3-and-cloudfront' ), esc_attr( $host ), 'https://deliciousbrains.com/wp-migrate-db-pro/doc/wp_http_block_external/' );
+				$connection_failed_message .= sprintf( __( 'We\'ve detected that <code>WP_HTTP_BLOCK_EXTERNAL</code> is enabled and the host <strong>%1$s</strong> has not been added to <code>WP_ACCESSIBLE_HOSTS</code>. Please disable <code>WP_HTTP_BLOCK_EXTERNAL</code> or add <strong>%1$s</strong> to <code>WP_ACCESSIBLE_HOSTS</code> to continue. <a href="%2$s" target="_blank">More information</a>' ), esc_attr( $host ), 'https://deliciousbrains.com/wp-migrate-db-pro/doc/wp_http_block_external/' );
 			}
 		} else {
-			$disable_ssl_url = $this->admin_url( $this->plugin->settings_url_path . '&nonce=' . wp_create_nonce( $this->plugin->prefix . '-disable-ssl' ) . '&' . $this->plugin->prefix . '-disable-ssl=1' );
-			$connection_failed_message .= sprintf( __( 'This issue is often caused by an improperly configured SSL server (https). We recommend <a href="%1$s" target="_blank">fixing the SSL configuration on your server</a>, but if you need a quick fix you can:%2$s', 'amazon-s3-and-cloudfront' ), 'https://deliciousbrains.com/wp-migrate-db-pro/doc/could-not-connect-deliciousbrains-com/', sprintf( '<p><a href="%1$s" class="temporarily-disable-ssl button">%2$s</a></p>', $disable_ssl_url, __( 'Temporarily disable SSL for connections to deliciousbrains.com', 'amazon-s3-and-cloudfront' ) ) );
+			$disable_ssl_url           = $this->admin_url( $this->plugin->settings_url_path . '&nonce=' . wp_create_nonce( $this->plugin->prefix . '-disable-ssl' ) . '&' . $this->plugin->prefix . '-disable-ssl=1' );
+			$connection_failed_message .= sprintf( __( 'This issue is often caused by an improperly configured SSL server (https). We recommend <a href="%1$s" target="_blank">fixing the SSL configuration on your server</a>, but if you need a quick fix you can:%2$s' ), 'https://deliciousbrains.com/wp-migrate-db-pro/doc/could-not-connect-deliciousbrains-com/', sprintf( '<p><a href="%1$s" class="temporarily-disable-ssl button">%2$s</a></p>', $disable_ssl_url, __( 'Temporarily disable SSL for connections to deliciousbrains.com' ) ) );
 		}
 
 		return json_encode( array( 'errors' => array( 'connection_failed' => $connection_failed_message ) ) );
@@ -206,16 +205,16 @@ class Delicious_Brains_API_Base extends Delicious_Brains_API {
 	 * @return string
 	 */
 	protected function get_down_message( $response ) {
-		$message = __( "<strong>Delicious Brains API is Down — </strong>Unfortunately we're experiencing some problems with our server.", 'amazon-s3-and-cloudfront' );
+		$message = __( "<strong>Delicious Brains API is Down — </strong>Unfortunately we're experiencing some problems with our server." );
 
 		if ( ! empty( $response['updated'] ) ) {
 			$updated     = $response['updated'];
-			$updated_ago = sprintf( _x( '%s ago', 'ex. 2 hours ago', 'amazon-s3-and-cloudfront' ), human_time_diff( strtotime( $updated ) ) );
+			$updated_ago = sprintf( _x( '%s ago', 'ex. 2 hours ago' ), human_time_diff( strtotime( $updated ) ) );
 		}
 
 		if ( ! empty( $response['message'] ) ) {
 			$message .= '<br />';
-			$message .= __( "Here's the most recent update on its status", 'amazon-s3-and-cloudfront' );
+			$message .= __( "Here's the most recent update on its status" );
 			if ( ! empty( $updated_ago ) ) {
 				$message .= ' (' . $updated_ago . ')';
 			}
@@ -228,9 +227,9 @@ class Delicious_Brains_API_Base extends Delicious_Brains_API {
 	/**
 	 * Default request arguments passed to an HTTP request
 	 *
-	 * @see wp_remote_request() For more information on the available arguments.
-	 *
 	 * @return array
+	 *
+	 * @see wp_remote_request() For more information on the available arguments.
 	 */
 	protected function get_default_request_args() {
 		return array(
@@ -260,6 +259,8 @@ class Delicious_Brains_API_Base extends Delicious_Brains_API {
 
 	/**
 	 * Error log method
+	 *
+	 * phpcs:disable WordPress.PHP.DevelopmentFunctions
 	 *
 	 * @param mixed $error
 	 * @param bool  $additional_error_var

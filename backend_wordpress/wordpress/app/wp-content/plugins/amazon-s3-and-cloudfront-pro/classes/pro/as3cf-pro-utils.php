@@ -74,7 +74,7 @@ class AS3CF_Pro_Utils {
 	/**
 	 * Recursively collapses an empty array structure.
 	 *
-	 * @param $array
+	 * @param mixed $array
 	 *
 	 * @return mixed
 	 */
@@ -86,7 +86,7 @@ class AS3CF_Pro_Utils {
 		foreach ( $array as $key => &$value ) {
 			$value = self::array_prune_recursive( $value );
 
-			if ( empty ( $value ) && ! is_numeric( $value ) ) {
+			if ( empty( $value ) && ! is_numeric( $value ) ) {
 				unset( $array[ $key ] );
 			}
 		}

@@ -9,8 +9,6 @@ declare(strict_types=1);
 
 namespace WooCommerce\PayPalCommerce\WcGateway\Assets;
 
-use WooCommerce\PayPalCommerce\ApiClient\Exception\RuntimeException;
-
 /**
  * Class SettingsPageAssets
  */
@@ -95,6 +93,13 @@ class SettingsPageAssets {
 			array(),
 			$this->version,
 			true
+		);
+
+		// Intent is configured with Authorize and Capture Virtual-Only Orders is not set.
+		wp_localize_script(
+			'ppcp-gateway-settings',
+			'PayPalCommerceGatewaySettings',
+			array()
 		);
 	}
 }

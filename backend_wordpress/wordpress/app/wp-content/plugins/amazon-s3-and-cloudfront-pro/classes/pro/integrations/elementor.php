@@ -20,7 +20,7 @@ class Elementor extends Integration {
 	 *
 	 * @return bool
 	 */
-	public static function is_installed() {
+	public static function is_installed(): bool {
 		if ( defined( 'ELEMENTOR_VERSION' ) ) {
 			return true;
 		}
@@ -97,7 +97,6 @@ class Elementor extends Integration {
 	 * @param Element_Base $element
 	 *
 	 * @handles elementor/frontend/before_render
-	 *
 	 */
 	public function frontend_before_render( $element ) {
 		$element->set_settings(

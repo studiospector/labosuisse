@@ -1,5 +1,5 @@
 <?php exit; ?>{
-    "version": "2.2.4",
+    "version": "2.2.7",
     "cluster.messagebus.debug": false,
     "cluster.messagebus.enabled": false,
     "cluster.messagebus.sns.region": "",
@@ -960,7 +960,7 @@
     },
     "extensions.active_dropin": [],
     "plugin.license_key": "xjHRAoWZp8GjVUCEoQgcfplbu26BElEz",
-    "plugin.type": "",
+    "plugin.type": "pro_dev",
     "jquerymigrate.disabled": false,
     "imageservice": {
         "compression": "lossy",

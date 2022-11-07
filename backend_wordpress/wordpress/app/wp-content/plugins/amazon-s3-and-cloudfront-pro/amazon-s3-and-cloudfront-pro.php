@@ -1,10 +1,11 @@
 <?php
 /*
 Plugin Name: WP Offload Media
-Plugin URI:  https://deliciousbrains.com/wp-offload-media/
+Plugin URI: https://deliciousbrains.com/wp-offload-media/
+Update URI: https://deliciousbrains.com/wp-offload-media/
 Description: Speed up your WordPress site by offloading your media and assets to Amazon S3, DigitalOcean Spaces or Google Cloud Storage and a CDN.
 Author: Delicious Brains
-Version: 2.6.2
+Version: 3.0.2
 Author URI: https://deliciousbrains.com/
 Network: True
 Text Domain: amazon-s3-and-cloudfront
@@ -22,6 +23,8 @@ Domain Path: /languages/
 // **********************************************************************
 //
 */
+
+// phpcs:disable SlevomatCodingStandard.Variables.UnusedVariable
 
 require_once dirname( __FILE__ ) . '/version.php';
 require_once dirname( __FILE__ ) . '/classes/as3cf-compatibility-check.php';
@@ -58,6 +61,7 @@ function as3cf_pro_init() {
 
 	// Autoloader.
 	require_once $abspath . '/wp-offload-media-autoloader.php';
+	new WP_Offload_Media_Autoloader( 'WP_Offload_Media', $abspath );
 
 	// Lite files
 	require_once $abspath . '/include/functions.php';
@@ -78,8 +82,6 @@ function as3cf_pro_init() {
 	require_once $abspath . '/classes/pro/as3cf-pro-utils.php';
 	require_once $abspath . '/classes/pro/as3cf-async-request.php';
 	require_once $abspath . '/classes/pro/as3cf-background-process.php';
-
-	new WP_Offload_Media_Autoloader( 'WP_Offload_Media', $abspath );
 
 	$as3cf    = new Amazon_S3_And_CloudFront_Pro( __FILE__ );
 	$as3cfpro = $as3cf; // Pro global alias

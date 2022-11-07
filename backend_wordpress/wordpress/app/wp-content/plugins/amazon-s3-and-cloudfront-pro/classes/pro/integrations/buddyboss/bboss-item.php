@@ -17,7 +17,7 @@ class BBoss_Item extends Item {
 	const CAN_USE_OBJECT_VERSIONING = false;
 
 	/**
-	 * sprintf pattern for creating prefix based on source_id
+	 * The sprintf() pattern for creating prefix based on source_id.
 	 *
 	 * @var string
 	 */
@@ -301,7 +301,7 @@ class BBoss_Item extends Item {
 		// Bail out with empty values if we are a group class and the groups component is not active
 		if ( static::$is_group ) {
 			$active_bp_components = apply_filters( 'bp_active_components', bp_get_option( 'bp-active-components' ) );
-			if ( empty ( $active_bp_components['groups'] ) ) {
+			if ( empty( $active_bp_components['groups'] ) ) {
 				return $count ? 0 : array();
 			}
 		}
@@ -321,9 +321,9 @@ class BBoss_Item extends Item {
 
 		for ( $i = $upper_bound; $i >= 0; $i -= self::$chunk_size ) {
 			$args   = array();
-			$sql    = " 
-			SELECT t.id as ID from $source_table as t 
-              LEFT OUTER JOIN " . static::items_table() . " as i 
+			$sql    = "
+			SELECT t.id as ID from $source_table as t
+              LEFT OUTER JOIN " . static::items_table() . " as i
                 ON (i.source_id = t.ID AND i.source_type=%s)";
 			$args[] = static::source_type();
 
@@ -374,7 +374,7 @@ class BBoss_Item extends Item {
 	/**
 	 * Setter for item's path & original path values
 	 *
-	 * @param $path
+	 * @param string $path
 	 */
 	public function set_path( $path ) {
 		$path = static::remove_size_from_filename( $path );

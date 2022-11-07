@@ -5,8 +5,6 @@ namespace DeliciousBrains\WP_Offload_Media\Pro\Tools;
 use DeliciousBrains\WP_Offload_Media\Pro\Background_Processes\Add_Metadata_Process;
 use DeliciousBrains\WP_Offload_Media\Pro\Background_Processes\Background_Tool_Process;
 use DeliciousBrains\WP_Offload_Media\Pro\Background_Tool;
-use DeliciousBrains\WP_Offload_Media\Pro\Tools\Analyze_And_Repair\Reverse_Add_Metadata;
-use DeliciousBrains\WP_Offload_Media\Pro\Tools\Analyze_And_Repair\Verify_Add_Metadata;
 
 class Add_Metadata extends Background_Tool {
 
@@ -23,6 +21,11 @@ class Add_Metadata extends Background_Tool {
 	);
 
 	/**
+	 * @var bool
+	 */
+	protected static $requires_bucket_access = false;
+
+	/**
 	 * Limit the item types that this tool handles.
 	 *
 	 * @var array
@@ -32,45 +35,21 @@ class Add_Metadata extends Background_Tool {
 	);
 
 	/**
-	 * Initialize Add_Metadata
-	 */
-	public function init() {
-		parent::init();
-
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return;
-		}
-
-		add_action( 'as3cfpro_load_assets', array( $this, 'load_assets' ) );
-	}
-
-	/**
-	 * Get the details for the sidebar block
+	 * Get a list of key names for tools that are related to the current tool.
 	 *
-	 * @return array|bool
+	 * @return array
 	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_pro_plugin_setup( true ) ) {
-			return false;
-		}
-
+	public function get_related_tools() {
 		$last_started = get_site_option( $this->prefix . '_' . $this->get_tool_key() . '_last_started' );
 
 		if ( empty( $last_started ) ) {
-			return parent::get_sidebar_block_args();
+			return array();
 		}
 
-		$footer_content = '<p>';
-		$footer_content .= '<a href="#" class="start" data-tool-override="reverse_add_metadata" title="' . Reverse_Add_Metadata::get_more_info_text() . '">Remove all metadata added by this tool</a>';
-		$footer_content .= '<br><br>';
-		$footer_content .= '<a href="#" class="start" data-tool-override="verify_add_metadata" title="' . Verify_Add_Metadata::get_more_info_text() . '">Find items with files missing in bucket and remove metadata, mark others verified</a>';
-		$footer_content .= '</p>';
-
-		$args = array(
-			'footer_content' => htmlspecialchars( $footer_content ),
+		return array(
+			'reverse_add_metadata',
+			'verify_add_metadata',
 		);
-
-		return array_merge( parent::get_sidebar_block_args(), $args );
 	}
 
 	/**
@@ -83,28 +62,29 @@ class Add_Metadata extends Background_Tool {
 	}
 
 	/**
-	 * Load assets.
-	 */
-	public function load_assets() {
-		parent::load_assets();
-
-		$this->as3cf->enqueue_script( 'as3cf-pro-add-metadata-script', 'assets/js/pro/tools/add-metadata', array(
-			'jquery',
-			'wp-util',
-		) );
-	}
-
-	/**
 	 * Should render.
 	 *
 	 * @return bool
 	 */
 	public function should_render() {
+		if ( ! $this->as3cf->is_pro_plugin_setup() ) {
+			return false;
+		}
+
 		if ( false !== static::show_tool_constant() && constant( static::show_tool_constant() ) ) {
 			return true;
 		}
 
 		return $this->is_queued() || $this->is_processing() || $this->is_paused() || $this->is_cancelled();
+	}
+
+	/**
+	 * Get the tool's name. Defaults to its title text.
+	 *
+	 * @return string
+	 */
+	public function get_name() {
+		return __( 'Add Metadata', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -146,7 +126,7 @@ class Add_Metadata extends Background_Tool {
 	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */

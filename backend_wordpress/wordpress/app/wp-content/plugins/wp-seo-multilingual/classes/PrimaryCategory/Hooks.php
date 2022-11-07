@@ -4,18 +4,23 @@ namespace WPML\WPSEO\PrimaryCategory;
 
 class Hooks implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 
+	const META_KEYS_MAPPING = [
+		'_yoast_wpseo_primary_category'    => 'category',
+		'_yoast_wpseo_primary_product_cat' => 'product_cat',
+	];
+
 	/**
 	 * Add hooks.
 	 */
 	public function add_hooks() {
-		add_filter( 'get_post_metadata', [ $this, 'translate' ], 20, 4 );
+		add_filter( 'get_post_metadata', [ $this, 'translateTermId' ], 20, 4 );
 	}
 
 	/**
 	 * Removes hooks (to avoid loops).
 	 */
 	public function remove_hooks() {
-		remove_filter( 'get_post_metadata', [ $this, 'translate' ], 20 );
+		remove_filter( 'get_post_metadata', [ $this, 'translateTermId' ], 20 );
 	}
 
 	/**
@@ -28,8 +33,8 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 	 *
 	 * @return Indexable
 	 */
-	public function translate( $value, $postId, $key, $single ) {
-		if ( '_yoast_wpseo_primary_category' === $key ) {
+	public function translateTermId( $value, $postId, $key, $single ) {
+		if ( in_array( $key, array_keys( self::META_KEYS_MAPPING ), true ) ) {
 			$this->remove_hooks();
 			$value = get_post_meta( $postId, $key, true );
 			$this->add_hooks();
@@ -39,7 +44,7 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 				'element_type' => get_post_type( $postId ),
 			];
 			$language = apply_filters( 'wpml_element_language_code', false, $args );
-			$value    = apply_filters( 'wpml_object_id', $value, 'category', true, $language );
+			$value    = apply_filters( 'wpml_object_id', $value, self::META_KEYS_MAPPING[ $key ], true, $language );
 
 			if ( ! $single ) {
 				$value = [ $value ];
@@ -48,5 +53,4 @@ class Hooks implements \IWPML_Frontend_Action, \IWPML_Backend_Action {
 
 		return $value;
 	}
-
 }

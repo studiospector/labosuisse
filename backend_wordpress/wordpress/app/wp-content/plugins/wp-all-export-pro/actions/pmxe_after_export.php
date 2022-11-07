@@ -13,9 +13,9 @@ function pmxe_prepend($string, $orig_filename) {
 	rename($temp_filename, $orig_filename);
 }
 
-function pmxe_pmxe_after_export($export_id, $export)
+function pmxe_pmxe_after_export($export_id, $export, $file = false)
 {
-	if ( ! empty(PMXE_Plugin::$session) and PMXE_Plugin::$session->has_session() )
+    if ( ! empty(PMXE_Plugin::$session) and PMXE_Plugin::$session->has_session() )
 	{
 		PMXE_Plugin::$session->set('file', '');
 		PMXE_Plugin::$session->save_data();
@@ -219,7 +219,7 @@ function pmxe_pmxe_after_export($export_id, $export)
 						    $rowCount++;
 						}
 						fclose($in);	
-						fclose($out);	
+						fclose($out);
 
 						// convert splitted files into XLS format
 						if ( ! empty($exportOptions['split_files_list']) && ! empty($export->options['export_to_sheet']) and $export->options['export_to_sheet'] != 'csv' )

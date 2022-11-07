@@ -275,6 +275,23 @@ function pmxe_wp_ajax_scheduling_dialog_content()
                         }
                     }
 
+                    updateSaveButtonState = function() {
+                        var howToRun = $('input[name="scheduling_enable"]:checked').val();
+
+                        if(parseInt(howToRun) === 1 && !hasActiveLicense) {
+                            $('.save-changes').addClass('disabled');
+                        } else {
+                            $('.save-changes').removeClass('disabled');
+                        }
+                    };
+
+                    updateSaveButtonState();
+
+                    $('input[name="scheduling_enable"]').change(function(){
+                        updateSaveButtonState();
+                    });
+
+
                     window.pmxeValidateSchedulingForm = function () {
 
                         var schedulingEnabled = $('input[name="scheduling_enable"]:checked').val() == 1;

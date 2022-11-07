@@ -200,7 +200,17 @@ class PMXE_Export_Record extends PMXE_Model_Record {
                 if(strpos($this->options['cpt'][0], 'custom_') === 0) {
 
                     if(isset($post_id) && $post_id) {
-                        $filter_args = array ( 'filter_rules_hierarhy' => '[{"item_id":"1","left":2,"right":3,"parent_id":null,"element":"id","title":"ID","condition":"equals","value":"' . $post_id . '","clause":false}]', 'product_matching_mode' => 'strict', 'taxonomy_to_export' => '', 'sub_post_type_to_export' => '1', );
+
+                        $filter_rules_hierarhy = json_decode($filter_args['filter_rules_hierarhy'], true);
+                        if(count($filter_rules_hierarhy)) {
+                            $filter_rules_hierarhy[count($filter_rules_hierarhy) - 1]['clause'] = 'AND';
+                        } else {
+                        }
+
+
+                        $filter_rules_hierarhy[] = ["item_id" => "12345","left" => 2,"right" => 3,"parent_id" => null,"element" => "id","title" => "ID","condition" => "equals","value" => $post_id, "clause" => null];
+                        $filter_args['filter_rules_hierarhy'] = json_encode($filter_rules_hierarhy);
+
                         $addon = GF_Export_Add_On::get_instance();
                         $addon->run();
                         $exportQuery = $addon->add_on->get_query($this->exported,  0, $filter_args );
@@ -416,6 +426,10 @@ class PMXE_Export_Record extends PMXE_Model_Record {
                 break;
         }
 
+        if($post_id) {
+            $postCount = 1;
+        }
+
         $this->set(array(
             'exported' => $this->exported + $postCount,
             'last_activity' => date('Y-m-d H:i:s'),
@@ -459,7 +473,7 @@ class PMXE_Export_Record extends PMXE_Model_Record {
                 }
             }
 
-            do_action('pmxe_after_export', $this->id, $this);
+            do_action('pmxe_after_export', $this->id, $this, wp_get_attachment_url($this->attch_id));
         }
         elseif ( (! $postCount or $foundPosts == $this->exported) || $post_id )
         {
@@ -512,7 +526,7 @@ class PMXE_Export_Record extends PMXE_Model_Record {
                 'iteration' => ++$this->iteration
             ))->update();
 
-            do_action('pmxe_after_export', $this->id, $this);
+            do_action('pmxe_after_export', $this->id, $this, $file_path);
         } else {
             do_action('pmxe_after_iteration', $this->id, $this);
         }

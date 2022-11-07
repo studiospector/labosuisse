@@ -261,11 +261,126 @@ class Validation
             'discount_badge.badge_color_picker',
             'discount_badge.badge_text_color_picker',
         ));
+
+        // to run additional rule validation scripts
+        $run_additional_rule_validations = apply_filters('advanced_woo_discount_rules_run_additional_rule_validations', true);
+        if ($run_additional_rule_validations) {
+            $input_validator = self::runAdditionalRuleValidations($input_validator, $post_values);
+        }
         if ($input_validator->validate()) {
             return true;
         } else {
             return $input_validator->errors();
         }
+    }
+
+    /**
+     * To run additional rule validation scripts
+     */
+    protected static function runAdditionalRuleValidations($validator, $post)
+    {
+        // rules
+        Validator::addRule('checkDateRange', function ($field, $value, array $params) {
+            return isset($params[0]) && strtotime($value) >= strtotime($params[0]);
+        }, __('Invalid date range', 'woo-discount-rules'));
+
+        Validator::addRule('checkRange', function ($field, $value, array $params) {
+            return isset($params[0]) && $value >= $params[0];
+        }, __('Invalid input range', 'woo-discount-rules'));
+
+        Validator::addRule('checkIsNotEmpty', function ($field, $value) {
+            $values = explode(',', $value);
+            $passes = array_map(function($value) { return !empty(trim($value)); }, $values);
+            return !in_array(false, $passes);
+        }, __('Invalid input', 'woo-discount-rules'));
+
+        // validate date
+        if (!empty($post['date_from']) && !empty($post['date_to'])) {
+            $validator->rule('checkDateRange', 'date_to', $post['date_from'])
+                ->message(__('Invalid date range', 'woo-discount-rules'));
+        }
+
+        // validate discounts
+        $validator = self::validateRuleDiscounts($validator, $post, [
+            'product_adjustments', 'cart_adjustments',
+            'bulk_adjustments', 'set_adjustments',
+            'buyx_getx_adjustments', 'buyx_gety_adjustments',
+        ]);
+
+        // validate conditions
+        $validator = self::validateRuleConditions($validator, $post);
+
+        return $validator;
+    }
+
+    /**
+     * Validate rule discounts
+     */
+    protected static function validateRuleDiscounts($validator, $post, $fields)
+    {
+        foreach ($fields as $field) {
+            if (in_array($field, ['product_adjustments', 'cart_adjustments']) && !empty($post[$field]['type'])) {
+                // validate percentage
+                if ($post[$field]['type'] == 'percentage') {
+                    $validator->rule('max', $field . '.value', 100)
+                        ->message(__('Percentage discount value must be no more than 100', 'woo-discount-rules'));
+                }
+            } elseif (!empty($post[$field]['ranges'])) {
+                $prefix = strpos($field, 'buyx_') !== false ? 'free_' : '';
+                foreach ($post[$field]['ranges'] as $key => $range) {
+                    // validate percentage
+                    if (isset($range[$prefix . 'type']) && $range[$prefix . 'type'] == 'percentage') {
+                        $validator->rule('max', $field . '.ranges.' . $key . '.' . $prefix . 'value', 100)
+                            ->message(__('Percentage discount value must be no more than 100', 'woo-discount-rules'));
+                    }
+                    // validate range
+                    if (!isset($range['recursive']) && isset($range['from']) && $range['from'] != '' && isset($range['to']) && $range['to'] != '') {
+                        $validator->rule('checkRange', $field . '.ranges.' . $key . '.to', $range['from'])
+                            ->message(__('Invalid input range', 'woo-discount-rules'));
+                    }
+                }
+            }
+        }
+        return $validator;
+    }
+
+    /**
+     * Validate rule conditions
+     */
+    protected static function validateRuleConditions($validator, $post)
+    {
+        if (isset($post['conditions'])) {
+            foreach ($post['conditions'] as $key => $condition) {
+                if (!isset($condition['type'])) { continue; }
+                $type = $condition['type'];
+
+                // validate based on range
+                if (isset($condition['options']['operator']) && $condition['options']['operator'] == 'in_range') {
+                    if ($condition['options']['from'] != '' && $condition['options']['to'] != '') {
+                        $validator->rule('checkRange', 'conditions.' . $key . '.options.to', $condition['options']['from'])
+                            ->message(__('Invalid input range', 'woo-discount-rules'));
+                    }
+                }
+
+                // validate based on type
+                if (in_array($type, ['order_date', 'order_date_and_time', /*'order_time'*/])) { // validate date range
+                    if (!empty($condition['options']['from']) && !empty($condition['options']['to'])) {
+                        $validator->rule('checkDateRange', 'conditions.' . $key . '.options.to', $condition['options']['from'])
+                            ->message(__('Invalid date range', 'woo-discount-rules'));
+                    }
+                } elseif ($type == 'user_email') { // validate domain
+                    $validator->rule('checkIsNotEmpty', 'conditions.' . $key . '.options.value', $condition['options']['operator'])
+                        ->message(__('Invalid domain', 'woo-discount-rules'));
+                } elseif (in_array($type, ['shipping_city', 'Billing_city'])) { // validate city
+                    $validator->rule('checkIsNotEmpty', 'conditions.' . $key . '.options.value')
+                        ->message(__('Invalid city name', 'woo-discount-rules'));
+                } elseif ($type == 'shipping_zipcode') { // validate zipcode
+                    $validator->rule('checkIsNotEmpty', 'conditions.' . $key . '.options.value')
+                        ->message(__('Invalid zipcode', 'woo-discount-rules'));
+                }
+            }
+        }
+        return $validator;
     }
 
     /**

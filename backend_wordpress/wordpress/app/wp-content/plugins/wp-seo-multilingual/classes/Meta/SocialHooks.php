@@ -45,6 +45,8 @@ class SocialHooks implements \IWPML_Frontend_Action {
 	 * @return string
 	 */
 	private static function translate( $type, $originalText ) {
-		return Obj::propOr( $originalText, 'og_frontpage_' . $type, get_option( self::OPTION_KEY ) );
+		return Obj::prop( 'og_frontpage_' . $type, get_option( self::OPTION_KEY ) ) // before 16.5.
+			?: Obj::prop( 'open_graph_frontpage_' . $type, get_option( \WPML\WPSEO\Presentation\Hooks::OPTION_KEY ) ) // starting from 16.5.
+			?: $originalText;
 	}
 }

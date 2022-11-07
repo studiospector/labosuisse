@@ -117,17 +117,19 @@ class WDRAjax extends Base
             if($product){
                 $price = Woocommerce::getProductPrice($product);
                 $custom_price = $this->input->post('custom_price', '');
-                $custom_price = str_replace('&nbsp;', '', $custom_price);
-                //A non breaking space is U+00A0 (Unicode) but encoded as C2A0 in UTF-8
-                $custom_price = preg_replace('~\x{00a0}~siu', '', $custom_price);
-                $custom_price = trim($custom_price);
-                if(function_exists('wc_get_price_thousand_separator')){
-                    $price_thousand_separator = wc_get_price_thousand_separator();
-                    $custom_price = str_replace($price_thousand_separator, "", $custom_price);
-                }
-                if(function_exists('wc_get_price_decimal_separator')){
-                    $price_decimal_separator = wc_get_price_decimal_separator();
-                    $custom_price = str_replace($price_decimal_separator, ".", $custom_price);
+                if (!is_numeric($custom_price)) { // parse price only if is not a numeric value
+                    $custom_price = str_replace('&nbsp;', '', $custom_price);
+                    //A non breaking space is U+00A0 (Unicode) but encoded as C2A0 in UTF-8
+                    $custom_price = preg_replace('~\x{00a0}~siu', '', $custom_price);
+                    $custom_price = trim($custom_price);
+                    if(function_exists('wc_get_price_thousand_separator')){
+                        $price_thousand_separator = wc_get_price_thousand_separator();
+                        $custom_price = str_replace($price_thousand_separator, "", $custom_price);
+                    }
+                    if(function_exists('wc_get_price_decimal_separator')){
+                        $price_decimal_separator = wc_get_price_decimal_separator();
+                        $custom_price = str_replace($price_decimal_separator, ".", $custom_price);
+                    }
                 }
                 $custom_price = floatval($custom_price);
                 $result = apply_filters('advanced_woo_discount_rules_get_product_discount_price_from_custom_price', $price, $product, $quantity, $custom_price, 'all', true);

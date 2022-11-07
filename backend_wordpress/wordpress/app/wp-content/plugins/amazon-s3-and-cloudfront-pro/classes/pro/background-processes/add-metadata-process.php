@@ -72,7 +72,7 @@ class Add_Metadata_Process extends Uploader_Process {
 	 */
 	protected function get_reached_license_limit_message() {
 		$account_link = sprintf( '<a href="%s" target="_blank">%s</a>', $this->as3cf->get_my_account_url(), __( 'My Account', 'amazon-s3-and-cloudfront' ) );
-		$notice_msg   = __( "<strong>WP Offload Media</strong> &mdash; You've reached your license limit so we've had to stop adding metadata. To add metadata to the rest of your Media Library, please upgrade your license from %s and simply start the add metadata tool again. It will start from where it stopped.", 'amazon-s3-and-cloudfront' );
+		$notice_msg   = __( "You've reached your license limit so we've had to stop adding metadata. To add metadata to the rest of your Media Library, please upgrade your license from %s and simply start the add metadata tool again. It will start from where it stopped.", 'amazon-s3-and-cloudfront' );
 
 		return sprintf( $notice_msg, $account_link );
 	}
@@ -83,7 +83,7 @@ class Add_Metadata_Process extends Uploader_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished adding metadata to Media Library.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished adding metadata to Media Library.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

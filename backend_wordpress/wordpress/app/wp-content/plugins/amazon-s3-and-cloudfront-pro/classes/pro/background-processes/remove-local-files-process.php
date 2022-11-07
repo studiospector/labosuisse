@@ -60,7 +60,7 @@ class Remove_Local_Files_Process extends Background_Tool_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished removing media files from local server.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished removing media files from local server.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

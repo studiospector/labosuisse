@@ -47,6 +47,15 @@ export const getRoles = {
 	},
 };
 
+export const getRequirementsInfo = {
+	*fulfill() {
+		yield controls.resolveSelect( 'ithemes-security/core', 'getIndex' );
+	},
+	isFulfilled( state ) {
+		return !! state.index;
+	},
+};
+
 export const getUser = {
 	*fulfill( userId ) {
 		const user = yield apiFetch( {
@@ -111,7 +120,7 @@ export const getActors = {
 export const getSiteInfo = {
 	*fulfill() {
 		const response = yield apiFetch( {
-			path: '/?_fields=name,description,url,home',
+			path: '/?_fields=name,description,url,home,multisite',
 		} );
 		yield receiveSiteInfo( response );
 	},

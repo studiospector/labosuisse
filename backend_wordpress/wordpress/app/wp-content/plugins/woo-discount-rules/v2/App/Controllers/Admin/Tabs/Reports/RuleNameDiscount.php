@@ -1,6 +1,7 @@
 <?php
 namespace Wdr\App\Controllers\Admin\Tabs\Reports;
 
+use Wdr\App\Helpers\Woocommerce;
 use Wdr\App\Models\DBTable;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,7 +22,7 @@ class RuleNameDiscount extends Base {
     }
 
     public function get_subtitle() {
-        return __( 'Amount shown in default store currency', 'woo-discount-rules' );
+        return __( 'Discounted amount shown in default store currency', 'woo-discount-rules' );
     }
 
     public function get_type() {
@@ -33,7 +34,8 @@ class RuleNameDiscount extends Base {
 
         $params = $this->prepare_params( $params );
 
-        $rule_amount_stats = $this->load_raw_data( $params,  $rule_id);
+        $data = $this->load_raw_data( $params,  $rule_id);
+        $rule_amount_stats = $data['stats'];
 
         $rules   = array_unique( array_column( $rule_amount_stats, 'title' ) );
         $columns = array_merge( array( __( 'Date', 'woo-discount-rules' ) ), $rules );
@@ -59,28 +61,40 @@ class RuleNameDiscount extends Base {
             $rows[ $date ][ $column_key ] = (float) $rule_amount_item->value;
         }
 
-        $ret = $this->prepare_data( $columns, $rows );
+        $res = $this->prepare_data( $columns, $rows, $data['other'] );
 
-        return $ret;
+        return $res;
     }
 
-    protected function prepare_data( $columns, $rows ) {
-        $ret = array(
+    protected function prepare_data( $columns, $rows, $other ) {
+        $data['chart'] = array(
             'title'    => $this->get_title(),
             'subtitle' => $this->get_subtitle(),
             'type'     => $this->get_type(),
             'columns'  => $columns,
             'rows'     => $rows,
         );
-        return $ret;
+
+        if (!empty($other)) {
+            $data['other'] = [
+                'total_orders' => (int) $other->total_orders,
+                'revenue' => Woocommerce::formatPrice($other->revenue),
+                'discounted_amount' => Woocommerce::formatPrice($other->discounted_amount),
+                'total_free_shipping' => (int) $other->total_free_shipping,
+            ];
+        }
+        return $data;
     }
 
     protected function load_raw_data( $params, $rule_id = 0 ) {
-        $rule_amount_stats = DBTable::get_rule_rows_summary( $params, $rule_id );
-        if ( empty( $rule_amount_stats ) ) {
-            $rule_amount_stats = array();
+        $data = DBTable::get_rule_rows_summary( $params, $rule_id );
+        if ( empty( $data['stats'] ) ) {
+            $data['stats'] = array();
         }
-        return $rule_amount_stats;
+        if ( empty( $data['other'] ) ) {
+            $data['other'] = array();
+        }
+        return $data;
     }
 
     protected function prepare_params( $params ) {

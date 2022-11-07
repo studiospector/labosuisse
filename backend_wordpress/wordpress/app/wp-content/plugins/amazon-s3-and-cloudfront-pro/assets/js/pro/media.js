@@ -44,7 +44,7 @@
 		toggleDisabled: function() {
 			var selection = this.controller.state().get( 'selection' ).length > 0;
 
-			if ( ! selection ) {
+			if ( !selection ) {
 				this.$el.addClass( 'disabled' );
 			} else {
 				this.$el.removeClass( 'disabled' );
@@ -55,9 +55,10 @@
 			e.preventDefault();
 
 			var selection = this.controller.state().get( 'selection' );
-			var models    = selection.models;
+			var models = selection.models;
+			var library = this.controller.state().get( 'library' );
 
-			if ( this.$el.hasClass( 'disabled' ) || ! selection.length ) {
+			if ( this.$el.hasClass( 'disabled' ) || !selection.length ) {
 				return;
 			}
 
@@ -76,6 +77,9 @@
 						// Refresh the attributes for each model from the server.
 						model.fetch();
 					} );
+
+					// Refresh the grid view
+					library._requery( true );
 				} );
 		},
 
@@ -153,7 +157,7 @@
 			var $toggle = $( '.media-toolbar .offload-buttons__toggle' );
 			var $submenu = $( '.media-toolbar .offload-buttons__submenu' );
 
-			if ( $toggle.hasClass( 'opened' ) && ! $submenu.parent().is( ':active, :hover' ) ) {
+			if ( $toggle.hasClass( 'opened' ) && !$submenu.parent().is( ':active, :hover' ) ) {
 				$submenu.addClass( 'hidden' );
 				$toggle.removeClass( 'opened' );
 			}
@@ -161,9 +165,9 @@
 
 		toggleDisabled: function() {
 			var selection = this.controller.state().get( 'selection' ).length > 0;
-			this.model.set( 'disabled', ! selection );
+			this.model.set( 'disabled', !selection );
 
-			if ( ! selection ) {
+			if ( !selection ) {
 				this.$el.addClass( 'disabled' );
 			} else {
 				this.$el.removeClass( 'disabled' );
@@ -201,7 +205,85 @@
 	} );
 
 	/**
-	 * Extend the AttachmentsBrowser toolbar to add the offload dropdown button
+	 * A filter for Locations
+	 */
+	media.view.OffloadLocationFilter = wp.media.view.AttachmentFilters.extend( {
+		id: 'media-attachment-as3cf-location-filter',
+
+		// We override the default initialize function to support optgroups
+		initialize: function() {
+			this.createFilters();
+			_.extend( this.filters, this.options.filters );
+
+			var html = '';
+			_( as3cfpro_media.filters.as3cf_location.options ).each( function( option, key ) {
+				if ( typeof option === 'string' ) {
+					html += $( '<option></option>' ).val( key ).html( option ).wrap( '<p>' ).parent().html();
+				} else {
+					html += '<optgroup label="' + key + '">';
+					_( option ).each( function( sub_option, sub_key ) {
+						html += $( '<option></option>' ).val( sub_key ).html( sub_option ).wrap( '<p>' ).parent().html();
+					} );
+					html += '</optgroup>';
+				}
+			} );
+
+			this.$el.html( html );
+
+			this.listenTo( this.model, 'change', this.select );
+			this.select();
+		},
+
+
+		createFilters: function() {
+			var filters = {};
+
+			_( as3cfpro_media.filters.as3cf_location.options ).each( function( option, key ) {
+				if ( typeof option === 'string' ) {
+					filters[ key ] = {
+						text: option,
+						props: { as3cf_location: key },
+						priority: 10,
+					};
+				} else {
+					_( option ).each( function( sub_option, sub_key ) {
+						filters[ sub_key ] = {
+							text: sub_option,
+							props: { as3cf_location: sub_key },
+							priority: 10,
+						};
+					} );
+				}
+			} );
+
+			this.filters = filters;
+		},
+	} );
+
+	/**
+	 * A filter for Access
+	 */
+	media.view.OffloadAccessFilter = wp.media.view.AttachmentFilters.extend( {
+		id: 'media-attachment-as3cf-access-filter',
+
+		createFilters: function() {
+			var filters = {};
+
+			_( as3cfpro_media.filters.as3cf_access.options ).each( function( value, key ) {
+				filters[ key ] = {
+					text: value,
+					props: { as3cf_access: key },
+					priority: 10,
+				};
+			} );
+
+			this.filters = filters;
+		},
+	} );
+
+	/**
+	 * Extend the AttachmentsBrowser toolbar to add the offload dropdown button and
+	 * our filters for location and access
 	 */
 	var wpAttachmentsBrowser = media.view.AttachmentsBrowser;
 	media.view.AttachmentsBrowser = wpAttachmentsBrowser.extend( {
@@ -240,21 +322,29 @@
 					classes: 'offload-buttons__submenu hidden'
 				} ).render();
 
+				// Add the buttons
 				this.toolbar.set( 'OffloadButtons', new media.view.ButtonGroup( {
 					buttons: [default_button, buttons_submenu, dropdown_toggle],
 					classes: 'offload-buttons',
 					priority: -80
-				} ).render() );
-			} else {
-				this.toolbar.set( 'OffloadButtons', new media.view.OffloadButton( {
-					action: default_button_action,
-					scope: 'bulk',
-					classes: 'offload-buttons',
-					priority: -80,
-					controller: this.controller
-				} ).render() );
+				} ) );
 			}
 
+			// Add the locations filter
+			this.toolbar.set( 'offloadLocationFilter', new media.view.OffloadLocationFilter( {
+				controller: this.controller,
+				model: this.collection.props,
+				priority: -75
+			} ) );
+
+			// Add the access filter
+			this.toolbar.set( 'offloadAccessFilter', new media.view.OffloadAccessFilter( {
+				controller: this.controller,
+				model: this.collection.props,
+				priority: -75
+			} ) );
+
+			this.toolbar.render();
 		}
 	} );
 })( jQuery, _ );

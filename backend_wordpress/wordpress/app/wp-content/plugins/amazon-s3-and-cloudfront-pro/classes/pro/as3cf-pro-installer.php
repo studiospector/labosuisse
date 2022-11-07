@@ -3,7 +3,7 @@
 class AS3CF_Pro_Installer extends AS3CF_Compatibility_Check {
 
 	/**
-	 * @var
+	 * @var array
 	 */
 	protected $required_plugins;
 
@@ -15,7 +15,7 @@ class AS3CF_Pro_Installer extends AS3CF_Compatibility_Check {
 	/**
 	 * AS3CF_Pro_Installer constructor.
 	 *
-	 * @param $plugin_file_path
+	 * @param string $plugin_file_path
 	 */
 	public function __construct( $plugin_file_path ) {
 		parent::__construct(
@@ -75,8 +75,7 @@ class AS3CF_Pro_Installer extends AS3CF_Compatibility_Check {
 	 */
 	public function get_required_plugins() {
 		if ( is_null( $this->required_plugins ) ) {
-			$this->required_plugins = array(
-			);
+			$this->required_plugins = array();
 		}
 
 		return $this->required_plugins;
@@ -100,7 +99,6 @@ class AS3CF_Pro_Installer extends AS3CF_Compatibility_Check {
 
 		return $plugins;
 	}
-
 
 	/**
 	 * Check if any of the required plugins are activated

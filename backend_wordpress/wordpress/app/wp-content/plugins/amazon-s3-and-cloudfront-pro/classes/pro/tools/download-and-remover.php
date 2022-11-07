@@ -13,22 +13,9 @@ class Download_And_Remover extends Downloader {
 	protected $tool_key = 'download_and_remover';
 
 	/**
-	 * Get the details for the sidebar block
-	 *
-	 * @return array|bool
-	 */
-	protected function get_sidebar_block_args() {
-		if ( ! $this->as3cf->is_plugin_setup( true ) ) {
-			return false;
-		}
-
-		return $this->default_sidebar_block_args();
-	}
-
-	/**
 	 * Message for error notice
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */
@@ -45,6 +32,10 @@ class Download_And_Remover extends Downloader {
 	 * @return bool
 	 */
 	public function should_render() {
+		if ( ! $this->as3cf->is_plugin_setup() ) {
+			return false;
+		}
+
 		return (bool) $this->count_offloaded_media_files();
 	}
 

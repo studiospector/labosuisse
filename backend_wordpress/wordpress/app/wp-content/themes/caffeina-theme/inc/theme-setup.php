@@ -1,9 +1,13 @@
 <?php
 
+use Caffeina\LaboSuisse\Option\Option;
+use Caffeina\LaboSuisse\Setup\CustomPostType;
+use Caffeina\LaboSuisse\Setup\CustomTaxonomy;
 use Caffeina\LaboSuisse\Setup\Clean;
 use Caffeina\LaboSuisse\Setup\Assets;
 use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 use Caffeina\LaboSuisse\Shortcodes\WCSignInUpShortcode;
+use Caffeina\LaboSuisse\Services\MC4WP\SettingsMC4WP;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -54,6 +58,7 @@ class ThemeSetup extends Timber\Site
         add_filter('timber/loader/loader', array($this, 'lb_add_to_twig_loader'));
         add_action('init', [$this, 'lb_unregister_taxonomies'], 999);
         add_action('pre_get_posts', [$this, 'lb_post_filters']);
+        add_action('acf/init', [$this, 'lb_set_services_api_key']);
         add_filter('acf/settings/capability', [$this, 'lb_acf_capability']);
         add_filter('acf/settings/save_json', [$this, 'lb_acf_json_save_point']);
         add_filter('acf/settings/load_json', [$this, 'lb_acf_json_load_point']);
@@ -355,6 +360,15 @@ class ThemeSetup extends Timber\Site
     }
 
     /**
+     * ACF register Services API Key
+     */
+    public function lb_set_services_api_key()
+    {
+        // Google
+        acf_update_setting('google_api_key', (new Option())->getApiKey('lb_api_key_google_maps'));
+    }
+
+    /**
      * ACF Config Capability
      */
     public function lb_acf_capability($cap)
@@ -553,10 +567,13 @@ class ThemeSetup extends Timber\Site
 }
 
 new ThemeSetup();
-new Clean();
-new Assets();
+new CustomPostType;
+new CustomTaxonomy;
+new Clean;
+new Assets;
 new CookiebotDeclarationShortcode;
 new WCSignInUpShortcode;
+new SettingsMC4WP;
 
 
 

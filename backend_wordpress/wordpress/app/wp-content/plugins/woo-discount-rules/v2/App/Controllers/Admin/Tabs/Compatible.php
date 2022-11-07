@@ -103,7 +103,7 @@ class Compatible extends Base
         $available_classes = $this->getAvailableCompatibilityClasses();
         if(!empty($available_classes)){
             foreach ($available_classes as $available_class){
-                if(method_exists($available_class, 'loadFields')){
+                if(is_object($available_class) && method_exists($available_class, 'loadFields')){
                     $available_class->loadFields($has_compatibility_plugin);
                 }
             }
@@ -117,7 +117,7 @@ class Compatible extends Base
         $available_classes = $this->getAvailableCompatibilityClasses();
         if(!empty($available_classes)){
             foreach ($available_classes as $available_class){
-                if(method_exists($available_class, 'run')){
+                if(is_object($available_class) && method_exists($available_class, 'run')){
                     $available_class->run();
                 }
             }

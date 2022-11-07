@@ -4,7 +4,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.4.0
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -41,7 +41,7 @@ $labo_in_the_world_link = get_page_link(get_field('lb_labo_in_the_world_page', '
 
         Timber::render('@PathViews/components/button.twig', [
             'title' => esc_html( $product->single_add_to_cart_text() ),
-            'class' => 'single_add_to_cart_button alt',
+            'class' => 'single_add_to_cart_button alt' . esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
             'type' => 'button',
             'variants' => ['primary'],
         ]);

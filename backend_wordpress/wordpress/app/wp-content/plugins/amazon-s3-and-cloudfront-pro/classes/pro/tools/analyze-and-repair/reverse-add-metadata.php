@@ -26,7 +26,7 @@ class Reverse_Add_Metadata extends Analyze_And_Repair {
 	 * @return string
 	 */
 	public function get_title_text() {
-		return __( 'Remove Metadata', 'amazon-s3-and-cloudfront' );
+		return __( 'Remove metadata added by the Add Metadata tool', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

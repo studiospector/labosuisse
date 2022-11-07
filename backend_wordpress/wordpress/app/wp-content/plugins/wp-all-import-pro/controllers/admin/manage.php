@@ -91,7 +91,8 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
 					'created'  => 0,
 					'updated'  => 0,
 					'skipped'  => 0,
-					'deleted'  => 0
+					'deleted'  => 0,
+					'changed_missing'  => 0
 				))->save();
 			}
 		}
@@ -121,7 +122,8 @@ class PMXI_Admin_Manage extends PMXI_Controller_Admin {
                     'created'  => 0,
                     'updated'  => 0,
                     'skipped'  => 0,
-                    'deleted'  => 0
+                    'deleted'  => 0,
+                    'changed_missing'  => 0
                 ))->save();
             }
             wp_redirect(esc_url_raw(add_query_arg(array('id' => $import->id, 'action' => 'update'), $this->baseUrl))); die();

@@ -41,7 +41,7 @@
 			<link rel="stylesheet" href="{{ criticalCss }}">
 		{% endif %} #}
 
-		<link rel="stylesheet" data-deferstart="true" data-href="{{ mainCss }}" media="all">
+		<link rel="stylesheet" data-deferStart="true" data-href="{{ mainCss }}" media="all">
 
         {% include 'various/tracking-head.twig' %}
         
@@ -89,7 +89,7 @@
 
         {% include 'components/symbols.twig' %}
 
-        <script data-deferstart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
+        <script data-deferStart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
 
         <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
         {# {% if production %}

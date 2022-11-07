@@ -4,7 +4,7 @@ ARG CI_COMMIT_REF_NAME
 
 FROM ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler:latest AS frontend_bundler
 
-FROM node:12-alpine AS modules
+FROM node:16.17.1-alpine AS modules
 WORKDIR /app
 
 RUN apk add --no-cache git --update

@@ -207,6 +207,6 @@ class Woocommerce_Product_Urls_Process extends Background_Tool_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished updating and verifying WooCommerce downloads.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished updating and verifying WooCommerce downloads.', 'amazon-s3-and-cloudfront' );
 	}
 }

@@ -102,7 +102,9 @@ class PMXI_CsvParser
         if (!empty($options['xml_path'])) $this->xml_path = $options['xml_path'];
 
         @ini_set( "display_errors", 0);
-        @ini_set('auto_detect_line_endings', true);
+        if (version_compare(phpversion(), '8.1', '<')) {
+            @ini_set( 'auto_detect_line_endings', true );
+        }
 
         $file_params = self::analyse_file($options['filename'], 1);
 

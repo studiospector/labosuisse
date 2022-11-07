@@ -18,7 +18,7 @@ class CurrencySwitcherByRealmag777 extends Base
                 if(!empty($discount_prices) && isset($discount_prices['discounted_price'])){
                     global $WOOCS;
                     if(isset($WOOCS)){
-                        if (method_exists($WOOCS, 'get_currencies')){
+                        if (is_object($WOOCS) && method_exists($WOOCS, 'get_currencies')){
                             $currencies = $WOOCS->get_currencies();
                             $convert_to_current_currency = false;
                             if(isset($WOOCS->is_geoip_manipulation) && $WOOCS->is_geoip_manipulation){

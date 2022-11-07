@@ -24,11 +24,10 @@ abstract class Background_Tool extends Tool {
 	 */
 	protected $background_process;
 
-	protected $actions = array(
-		'start',
-		'pause_resume',
-		'cancel',
-	);
+	/**
+	 * @var null|array
+	 */
+	private $batch = null;
 
 	/**
 	 * Limit the item types that this tool handles. Leave empty to handle all registered item types
@@ -43,80 +42,65 @@ abstract class Background_Tool extends Tool {
 	public function init() {
 		parent::init();
 
-		// JS data
-		add_filter( 'as3cfpro_js_nonces', array( $this, 'add_js_nonces' ) );
-		add_action( "wp_ajax_as3cfpro_{$this->tool_key}_start", array( $this, 'ajax_handle_start' ) );
-		add_action( "wp_ajax_as3cfpro_{$this->tool_key}_cancel", array( $this, 'ajax_handle_cancel' ) );
-		add_action( "wp_ajax_as3cfpro_{$this->tool_key}_pause_resume", array( $this, 'ajax_handle_pause_resume' ) );
-
-		// Settings Tab
-		add_action( 'as3cf_pre_tab_render', array( $this, 'pre_tab_render' ) );
-
 		$this->background_process = $this->get_background_process_class();
 
 		// During an upgrade, cancel all background processes.
 		if ( Upgrade::is_locked() && ( $this->is_processing() || $this->is_queued() ) ) {
 			$this->handle_cancel();
 		}
-
-		$this->maybe_handle_action_url();
 	}
 
 	/**
-	 * Get the sidebar notice details
-	 *
-	 * @return false|array
-	 */
-	protected function get_sidebar_block_args() {
-		return $this->default_sidebar_block_args();
-	}
-
-	/**
-	 * Get the default sidebar notice details
-	 *
-	 * @return false|array
-	 */
-	public function default_sidebar_block_args() {
-		return array(
-			'title'              => $this->get_title_text(),
-			'more_info'          => $this->get_more_info_text(),
-			'status_description' => $this->get_status_description(),
-			'busy_description'   => $this->get_busy_description(),
-			'button'             => $this->get_button_text(),
-			'is_queued'          => $this->is_queued(),
-			'is_paused'          => $this->is_paused(),
-			'is_cancelled'       => $this->is_cancelled(),
-			'is_upgrading'       => Upgrade::is_locked(),
-			'total_progress'     => $this->get_progress(),
-			'progress'           => $this->get_progress(),
-			'queue'              => $this->get_queue_counts(),
-		);
-	}
-
-	/**
-	 * Get status.
+	 * Get info for tool, including current status.
 	 *
 	 * @return array
 	 */
-	public function get_status() {
-		$status = array(
-			'should_render'  => $this->should_render(),
-			'total_progress' => $this->get_progress(),
-			'progress'       => $this->get_progress(),
-			'is_queued'      => $this->is_queued(),
-			'is_processing'  => $this->is_processing(),
-			'is_paused'      => $this->is_paused(),
-			'is_cancelled'   => $this->is_cancelled(),
-			'is_upgrading'   => Upgrade::is_locked(),
-			'description'    => $this->get_status_description(),
-			'queue'          => $this->get_queue_counts(),
+	public function get_info() {
+		$info = $this->get_default_info();
+
+		$this->maybe_add_loopback_request_notice( $info );
+
+		return array_merge( parent::get_info(), $info );
+	}
+
+	/**
+	 * Get a list of key names for tools that are related to the current tool.
+	 *
+	 * @return array
+	 */
+	public function get_related_tools() {
+		return array();
+	}
+
+	/**
+	 * Get default info for tool, including current status.
+	 *
+	 * @return array
+	 */
+	public function get_default_info() {
+		return array(
+			'name'                    => $this->get_name(),
+			'title'                   => $this->get_title_text(),
+			'title_partial_complete'  => $this->get_title_text_partial_complete(),
+			'title_complete'          => $this->get_title_text_complete(),
+			'more_info'               => $this->get_more_info_text(),
+			'related_tools'           => $this->get_related_tools(),
+			'prompt'                  => $this->get_prompt_text(),
+			'doc_url'                 => $this->get_doc_url(),
+			'doc_desc'                => $this->get_doc_desc(),
+			'status_description'      => $this->get_status_description(),
+			'busy_description'        => $this->get_busy_description(),
+			'locked_notification'     => $this->get_locked_notification(),
+			'button'                  => $this->get_button_text(),
+			'button_partial_complete' => $this->get_button_text_partial_complete(),
+			'button_complete'         => $this->get_button_text_complete(),
+			'is_queued'               => $this->is_queued(),
+			'is_paused'               => $this->is_paused(),
+			'is_cancelled'            => $this->is_cancelled(),
+			'is_upgrading'            => Upgrade::is_locked(),
+			'progress'                => $this->get_progress(),
+			'queue'                   => $this->get_queue_counts(),
 		);
-
-		$this->maybe_add_loopback_request_notice( $status );
-
-		$status['notices'] = $this->get_notices();
-
-		return $status;
 	}
 
 	/**
@@ -185,28 +169,44 @@ abstract class Background_Tool extends Tool {
 	}
 
 	/**
-	 * Add general background tool notices, but allow child classes to inject custom notices to be updated in the DOM.
-	 *
-	 * @return array
-	 */
-	protected function get_custom_notices_to_update() {
-		$notices = parent::get_custom_notices_to_update();
-
-		$notice = $this->as3cf->notices->find_notice_by_id( $this->errors_key_prefix . 'loopback_test' );
-
-		if ( ! empty( $notice ) ) {
-			$notices[] = $notice;
-		}
-
-		return $notices;
-	}
-
-	/**
 	 * Get more info text.
 	 *
 	 * @return string
 	 */
 	public static function get_more_info_text() {
+		return '';
+	}
+
+	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 * Defaults to more info text.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		return static::get_more_info_text();
+	}
+
+	/**
+	 * Returns doc URL for use in UI help buttons etc.
+	 *
+	 * @return string
+	 *
+	 * Note: Should be overridden if a dedicated help doc is available for the tool.
+	 */
+	public function get_doc_url() {
+		return '';
+	}
+
+	/**
+	 * Returns doc description for use in UI help buttons etc.
+	 *
+	 * @return string
+	 *
+	 * Note: Should be overridden if a dedicated doc description is required for the tool.
+	 *       However, the UI will use a reasonable default in none supplied here.
+	 */
+	public function get_doc_desc() {
 		return '';
 	}
 
@@ -241,87 +241,24 @@ abstract class Background_Tool extends Tool {
 	}
 
 	/**
-	 * Add the nonces to the JavaScript.
-	 *
-	 * @param array $js_nonces
-	 *
-	 * @return array
-	 */
-	public function add_js_nonces( $js_nonces ) {
-		$js_nonces['tools'][ $this->tool_key ]            = $this->create_tool_nonces( $this->actions );
-		$js_nonces[ 'dismiss_errors_' . $this->tool_key ] = wp_create_nonce( 'dismiss-errors-' . $this->tool_slug );
-
-		return $js_nonces;
-	}
-
-	/**
-	 * Create tool nonces.
-	 *
-	 * @param array $actions
-	 *
-	 * @return array
-	 */
-	protected function create_tool_nonces( $actions ) {
-		$nonces = array();
-
-		foreach ( $actions as $action ) {
-			$nonces[ $action ] = wp_create_nonce( $this->tool_key . '_' . $action );
-		}
-
-		return $nonces;
-	}
-
-	/**
-	 * Get a valid URL that may trigger the given action for the tool.
-	 *
-	 * @param string $action One of 'start', 'pause_resume' or 'cancel'.
+	 * Get description for locked notification.
 	 *
 	 * @return string
 	 */
-	protected function get_action_url( $action ) {
-		if ( ! in_array( $action, $this->actions ) ) {
-			return '';
-		}
-
-		return $this->as3cf->get_plugin_page_url(
-			array(
-				'tool'   => $this->tool_key,
-				'action' => $action,
-				'nonce'  => wp_create_nonce( $this->tool_key . '_' . $action ),
-			)
+	public function get_locked_notification() {
+		return sprintf(
+			__(
+				'<strong>Settings Locked</strong> &mdash; You can\'t change any of your settings until the "%s" tool has completed.',
+				'amazon-s3-and-cloudfront'
+			),
+			$this->get_name()
 		);
 	}
 
 	/**
-	 * Check request for tool action and calls handler if all in order.
-	 */
-	protected function maybe_handle_action_url() {
-		if (
-			! empty( $_REQUEST['tool'] ) &&
-			$_REQUEST['tool'] === $this->tool_key &&
-			! empty( $_REQUEST['action'] ) &&
-			in_array( $_REQUEST['action'], $this->actions ) &&
-			! empty( $_REQUEST['nonce'] ) &&
-			method_exists( $this, 'ajax_handle_' . $_REQUEST['action'] ) &&
-			wp_verify_nonce( $_REQUEST['nonce'], $this->tool_key . '_' . $_REQUEST['action'] )
-		) {
-			call_user_func( array( $this, "handle_{$_REQUEST['action']}" ) );
-
-			wp_redirect( $this->as3cf->get_plugin_page_url() );
-		}
-	}
-
-	/**
-	 * AJAX handle start.
-	 */
-	public function ajax_handle_start() {
-		check_ajax_referer( $this->tool_key . '_start', 'nonce' );
-
-		$this->handle_start();
-	}
-
-	/**
 	 * Handle start.
+	 *
+	 * Note: Dynamically called by `DeliciousBrains\WP_Offload_Media\Pro\Tools_Manager::perform_action`.
 	 */
 	public function handle_start() {
 		if ( $this->is_queued() ) {
@@ -337,16 +274,9 @@ abstract class Background_Tool extends Tool {
 	}
 
 	/**
-	 * AJAX handle cancel.
-	 */
-	public function ajax_handle_cancel() {
-		check_ajax_referer( $this->tool_key . '_cancel', 'nonce' );
-
-		$this->handle_cancel();
-	}
-
-	/**
 	 * Handle cancel.
+	 *
+	 * Note: Dynamically called by `DeliciousBrains\WP_Offload_Media\Pro\Tools_Manager::perform_action`.
 	 */
 	public function handle_cancel() {
 		if ( ! $this->is_queued() ) {
@@ -354,19 +284,17 @@ abstract class Background_Tool extends Tool {
 		}
 
 		$this->background_process->cancel();
-	}
 
-	/**
-	 * AJAX handle pause resume.
-	 */
-	public function ajax_handle_pause_resume() {
-		check_ajax_referer( $this->tool_key . '_pause_resume', 'nonce' );
-
-		$this->handle_pause_resume();
+		// Force this process to think there is no current batch
+		// as this process will not be processing one anyway.
+		// This ensures subsequent in-process checks don't return a mixed view.
+		$this->batch = null;
 	}
 
 	/**
 	 * Handle pause resume.
+	 *
+	 * Note: Dynamically called by `DeliciousBrains\WP_Offload_Media\Pro\Tools_Manager::perform_action`.
 	 */
 	public function handle_pause_resume() {
 		if ( ! $this->is_queued() || $this->is_cancelled() ) {
@@ -514,42 +442,26 @@ abstract class Background_Tool extends Tool {
 	 * @return array
 	 */
 	protected function get_batch() {
-		static $batch;
-
-		if ( is_null( $batch ) ) {
+		if ( is_null( $this->batch ) ) {
 			$batch = $this->background_process->get_batches( 1 );
 
 			if ( empty( $batch ) ) {
-				$batch = array();
+				$this->batch = array();
 			} else {
-				$batch = array_shift( $batch );
+				$this->batch = array_shift( $batch );
 			}
 		}
 
-		return $batch;
+		return $this->batch;
 	}
 
 	/**
-	 * Maybe add notices etc. at top of settings tab.
+	 * Get the tool's name. Defaults to its title text.
 	 *
-	 * @param string $tab
-	 *
-	 * @handles as3cf_pre_tab_render filter
+	 * @return string
 	 */
-	public function pre_tab_render( $tab ) {
-		if ( 'media' === $tab ) {
-			$tool_title = $this->get_title_text();
-			$tool_title = empty( $tool_title ) ? "Offloader" : $tool_title;
-
-			$lock_settings_args = array(
-				'message' => sprintf( __( '<strong>Settings Locked Temporarily</strong> &mdash; You can\'t change any of your settings until the "%s" tool has completed.', 'amazon-s3-and-cloudfront' ), $tool_title ),
-				'id'      => 'as3cf-media-settings-locked-' . $this->tool_key,
-				'inline'  => true,
-				'type'    => 'notice-warning',
-				'style'   => 'display: none',
-			);
-			$this->as3cf->render_view( 'notice', $lock_settings_args );
-		}
+	public function get_name() {
+		return $this->get_title_text();
 	}
 
 	/**
@@ -560,11 +472,47 @@ abstract class Background_Tool extends Tool {
 	abstract public function get_title_text();
 
 	/**
+	 * Get title text for when tool is partially complete.
+	 *
+	 * @return string
+	 */
+	public function get_title_text_partial_complete() {
+		return $this->get_title_text();
+	}
+
+	/**
+	 * Get title text for when tool is complete.
+	 *
+	 * @return string
+	 */
+	public function get_title_text_complete() {
+		return $this->get_title_text();
+	}
+
+	/**
 	 * Get button text.
 	 *
 	 * @return string
 	 */
 	abstract public function get_button_text();
+
+	/**
+	 * Get button text for when tool is partially complete.
+	 *
+	 * @return string
+	 */
+	public function get_button_text_partial_complete() {
+		return $this->get_button_text();
+	}
+
+	/**
+	 * Get button text for when tool is complete.
+	 *
+	 * @return string
+	 */
+	public function get_button_text_complete() {
+		return $this->get_button_text();
+	}
 
 	/**
 	 * Get queued status text.

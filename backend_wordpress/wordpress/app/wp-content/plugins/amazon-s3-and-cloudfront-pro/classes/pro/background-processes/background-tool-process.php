@@ -342,7 +342,15 @@ abstract class Background_Tool_Process extends AS3CF_Background_Process {
 	 * @return string
 	 */
 	protected function get_complete_with_errors_message() {
-		return $this->get_complete_message() . ' ' . __( 'Some errors were recorded.', 'amazon-s3-and-cloudfront' );
+		$msg = $this->get_complete_message() . ' ';
+		$msg .= sprintf(
+			'<a href="%1$s">',
+			$this->as3cf->get_plugin_page_url( array( 'hash' => '/tools/' ) )
+		);
+		$msg .= __( 'Some errors were recorded.', 'amazon-s3-and-cloudfront' );
+		$msg .= '</a>';
+
+		return $msg;
 	}
 
 	/**

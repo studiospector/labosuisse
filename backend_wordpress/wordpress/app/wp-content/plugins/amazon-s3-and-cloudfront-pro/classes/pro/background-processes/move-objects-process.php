@@ -78,7 +78,7 @@ class Move_Objects_Process extends Background_Tool_Process {
 				}
 
 				if ( $update ) {
-					$items_to_move[ $source_id ] = [ 'prefix' => $new_prefix, 'private_prefix' => $private_prefix ];
+					$items_to_move[ $source_id ] = array( 'prefix' => $new_prefix, 'private_prefix' => $private_prefix );
 				}
 			} else {
 				$name = $this->as3cf->get_source_type_name( $source_type );
@@ -94,6 +94,8 @@ class Move_Objects_Process extends Background_Tool_Process {
 
 	/**
 	 * Returns new public prefix if required, otherwise returns old prefix.
+	 *
+	 * phpcs:disable Generic.PHP.DiscourageGoto.Found
 	 *
 	 * @param Item   $as3cf_item
 	 * @param string $old_prefix
@@ -423,7 +425,7 @@ class Move_Objects_Process extends Background_Tool_Process {
 	 * @return string
 	 */
 	protected function get_complete_message() {
-		return __( '<strong>WP Offload Media</strong> &mdash; Finished moving media files to new paths.', 'amazon-s3-and-cloudfront' );
+		return __( 'Finished moving media files to new paths.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

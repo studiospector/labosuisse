@@ -20,97 +20,6 @@ class Move_Private_Objects extends Move_Objects {
 	);
 
 	/**
-	 * Register tool specific action hooks.
-	 */
-	protected function register_actions() {
-		// Later priority so that move both public and private tool has first dibs.
-		add_filter( 'as3cf_action_for_changed_settings_key', array( $this, 'action_for_changed_settings_key' ), 20, 2 );
-	}
-
-	/**
-	 * Maybe start move public objects process via post request.
-	 *
-	 * @param array $changed_keys
-	 *
-	 * @return array
-	 */
-	public function handle_post_request( $changed_keys ) {
-		if (
-			! empty( $_GET['action'] ) &&
-			( 'move-private-objects' === $_GET['action'] || 'move-objects' === $_GET['action'] ) &&
-			! $this->as3cf->get_storage_provider()->needs_access_keys() &&
-			$this->as3cf->get_setting( 'bucket' ) &&
-			empty( $_POST['move-public-objects'] ) &&
-			! empty( $_POST['move-private-objects'] )
-		) {
-			$this->handle_start();
-		}
-
-		return $changed_keys;
-	}
-
-	/**
-	 * Should the Move Objects prompt be the next action?
-	 *
-	 * @param string $action
-	 * @param array  $changed_keys
-	 *
-	 * @return string
-	 */
-	public function action_for_changed_settings_key( $action, $changed_keys ) {
-		// If this step already processed, shortcut out.
-		if (
-			( ! empty( $_GET['action'] ) && in_array( $_GET['action'], array( 'move-private-objects', 'move-objects' ) ) ) ||
-			( ! empty( $_GET['prev_action'] ) && in_array( $_GET['prev_action'], array( 'move-private-objects', 'move-objects' ) ) )
-		) {
-			return 'move-private-objects' === $action ? null : $action;
-		}
-
-		if (
-			empty( $action ) &&
-			(
-				! empty( array_intersect( $changed_keys, array( 'enable-signed-urls', 'signed-urls-object-prefix' ) ) ) ||
-				( ! empty( array_intersect( $changed_keys, array( 'enable-delivery-domain' ) ) ) && $this->as3cf->get_setting( 'enable-signed-urls' ) )
-			) &&
-			$this->count_offloaded_media_files()
-		) {
-			return 'move-private-objects';
-		}
-
-		return $action;
-	}
-
-	/**
-	 * Adjust media tab's class attribute.
-	 *
-	 * @param string $storage_classes Class names related to storage provider.
-	 *
-	 * @return string
-	 */
-	public function media_tab_storage_classes( $storage_classes ) {
-		if ( ! empty( $_GET['action'] ) && 'move-private-objects' === $_GET['action'] ) {
-			$storage_classes .= ' as3cf-move-objects as3cf-move-private-objects';
-		}
-
-		return $storage_classes;
-	}
-
-	/**
-	 * Render modal in footer.
-	 */
-	public function render_modal() {
-		if ( ! empty( $_GET['action'] ) && 'move-private-objects' === $_GET['action'] ) {
-			$this->as3cf->render_view(
-				'modals/move-objects',
-				array(
-					'as3cf_move_public_objects'  => false,
-					'as3cf_move_private_objects' => true,
-				)
-			);
-		}
-	}
-
-	/**
 	 * Get title text.
 	 *
 	 * @return string
@@ -138,9 +47,44 @@ class Move_Private_Objects extends Move_Objects {
 	}
 
 	/**
+	 * Get prompt text for when tool could be run in response to settings change.
+	 *
+	 * @return string
+	 */
+	public static function get_prompt_text() {
+		global $as3cf;
+
+		$mesg = '<h3>' . __( 'Private Path Updated: Would you like to move existing media to the new private path?', 'amazon-s3-and-cloudfront' ) . '</h3>';
+		$mesg .= '<br>';
+		$mesg .= '<p>' . __( 'You just updated the private media path. Any media you make private from now on will use this new path.', 'amazon-s3-and-cloudfront' ) . '</p>';
+		$mesg .= '<p>';
+		$mesg .= __( 'You can also move existing private media to this new path. We recommend keeping the path consistent across all private media.', 'amazon-s3-and-cloudfront' );
+		$mesg .= ' ';
+		$mesg .= $as3cf::more_info_link(
+			'/wp-offload-media/doc/how-to-move-media-to-a-new-bucket-path/',
+			'move+objects',
+			'private-path'
+		);
+		$mesg .= '</p>';
+
+		return $mesg;
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function get_doc_url() {
+		global $as3cf;
+
+		$args = array( 'utm_campaign' => 'move+objects' );
+
+		return $as3cf::dbrains_url( '/wp-offload-media/doc/how-to-move-media-to-a-new-bucket-path/', $args, 'private-path' );
+	}
+
+	/**
 	 * Message for error notice.
 	 *
-	 * @param null $message Optional message to override the default for the tool.
+	 * @param string|null $message Optional message to override the default for the tool.
 	 *
 	 * @return string
 	 */

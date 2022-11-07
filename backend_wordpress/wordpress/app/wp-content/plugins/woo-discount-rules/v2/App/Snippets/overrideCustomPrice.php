@@ -25,7 +25,7 @@ add_action('plugins_loaded', function (){
 
     add_action('advanced_woo_discount_rules_after_apply_discount', function (){
         if (function_exists('WC')) {
-            if (method_exists(WC()->cart, 'get_cart')) {
+            if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_cart')) {
                 $cart_items = WC()->cart->get_cart();
                 if(!empty($cart_items)){
                     foreach ($cart_items as $key => $item){

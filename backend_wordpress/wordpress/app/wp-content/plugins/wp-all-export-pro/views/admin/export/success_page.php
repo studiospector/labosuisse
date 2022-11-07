@@ -124,7 +124,7 @@ if (current_user_can(PMXE_Plugin::$capabilities)) {
                             <input placeholder="Click generate to generate a secure URL" type="text" id="wpae-secure-url" style=""
                             value="<?php
                             if($update_previous->options['security_token']) {
-                                $urlToExport = site_url() . '/wp-load.php?security_key=' . $update_previous->options['security_token'] . '&export_id=' . $export_id . '&action=get_data';
+                                $urlToExport = site_url() . '/wp-load.php?security_key=' . $update_previous->options['security_token'] . '&export_id=' . $update_previous->id . '&action=get_data';
                                 echo esc_attr($urlToExport);
                             }
                             ?>"
@@ -229,13 +229,13 @@ if (current_user_can(PMXE_Plugin::$capabilities)) {
         <p>
             <?php if (XmlExportEngine::$exportOptions['export_to'] == XmlExportEngine::EXPORT_TYPE_XML && XmlExportEngine::$exportOptions['xml_template_type'] == XmlExportEngine::EXPORT_TYPE_GOOLE_MERCHANTS) { ?>
                 <button class="button button-primary button-hero wpallexport-large-button download_data"
-                        rel="<?php echo esc_url_raw(add_query_arg(array('page' => 'pmxe-admin-manage', 'action' => 'download', 'id' => $update_previous->id, '_wpnonce' => wp_create_nonce('_wpnonce-download_feed')), $this->baseUrl)); ?>"><?php esc_html_e('Download', 'wp_all_export_plugin'); ?>
+                        rel="<?php echo esc_url_raw(add_query_arg(array('page' => 'pmxe-admin-manage', 'action' => 'download', 'id' => $update_previous->id, '_wpnonce' => wp_create_nonce('_wpnonce-download_feed')), $this->baseUrl)); ?>"><?php esc_html_e('Download ', 'wp_all_export_plugin'); ?>
                     TXT
                 </button>
 
             <?php } else { ?>
                 <button class="button button-primary button-hero wpallexport-large-button download_data"
-                        rel="<?php echo esc_url_raw(add_query_arg(array('action' => 'download', 'id' => $update_previous->id, '_wpnonce' => wp_create_nonce('_wpnonce-download_feed')), $this->baseUrl)); ?>"><?php esc_html_e('Download', 'wp_all_export_plugin'); ?><?php echo esc_html(strtoupper(wp_all_export_get_export_format($update_previous->options))); ?></button>
+                        rel="<?php echo esc_url_raw(add_query_arg(array('action' => 'download', 'id' => $update_previous->id, '_wpnonce' => wp_create_nonce('_wpnonce-download_feed')), $this->baseUrl)); ?>"><?php esc_html_e('Download ', 'wp_all_export_plugin'); ?><?php echo esc_html(strtoupper(wp_all_export_get_export_format($update_previous->options))); ?></button>
 
             <?php } ?>
         </p>

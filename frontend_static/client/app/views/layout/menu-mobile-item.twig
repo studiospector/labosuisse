@@ -9,12 +9,10 @@
 {% if class %}
 	{% set classes = classes|merge([class]) %}
 {% endif %}
-
 <div class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
-
-	{% if type == 'link' %}
+	{%- if type == 'link' -%}
 		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}" title="{{ label }}">
-			{% if icon or badge %}
+			{%- if icon or badge -%}
 				<span class="lb-menu__item-icon">
 					{% if icon is iterable %}
                         {% include '@PathViews/components/icon.twig' with icon only %}
@@ -23,85 +21,81 @@
                     {% endif %}
 					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
 				</span>
-			{% endif %}
-			<span>{{label}}</span>
+			{%- endif -%}
+			{{- "<span>" ~ label ~ "</span>" -}}
 		</a>
-	{% endif %}
-
-
-	{% if type == 'submenu' %}
+	{%- endif -%}
+	{%- if type == 'submenu' -%}
 		<button class="lb-menu__button">
 			<span>
-				{% if icon %}
-					{% include '@PathViews/components/icon.twig' with {name: icon} only %}
-				{% endif %}
-				<span>{{label}}</span>
+				{%- if icon -%}
+					{%- include '@PathViews/components/icon.twig' with {name: icon} only -%}
+				{%- endif -%}
+				{{- "<span>" ~ label ~ "</span>" -}}
 			</span>
-			{% include "@PathViews/components/icon.twig" with {name: 'arrow-right'} only %}
+			{%- include "@PathViews/components/icon.twig" with {name: 'arrow-right'} only -%}
 		</button>
 		<div class="lb-menu__submenu">
 			<div class="lb-menu__item lb-menu__header">
 				<button class="lb-menu__button lb-menu__back">
-					{% include "@PathViews/components/icon.twig" with {name: 'arrow-left'} only %}
-					<span class="lb-h5">{{label}}</span>
+					{%- include "@PathViews/components/icon.twig" with {name: 'arrow-left'} only -%}
+					{{- '<span class="lb-h5">' ~ label ~ '</span>' -}}
 				</button>
 			</div>
 			<div class="lb-menu-scroller">
 				<div body-scroll-lock-ignore class="lb-menu__main">
-                    {% if subLabel %}
+                    {%- if subLabel -%}
                         <div class="lb-menu__item lb-menu__item--sublabel">
                             <div class="lb-menu__link">
                                 <span class="lb-h5">{{subLabel}}</span>
                             </div>
                         </div>
-                    {% endif %}
-					{% for subitem in children %}
-						{% include "@PathViews/layout/menu-mobile-item.twig" with subitem only %}
-					{% endfor %}
+                    {%- endif -%}
+					{%- for subitem in children -%}
+						{%- include "@PathViews/layout/menu-mobile-item.twig" with subitem only -%}
+					{%- endfor -%}
 				</div>
-				<div class="lb-menu__fixed">
-					{% for item in fixed %}
-						{% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
-					{% endfor %}
-				</div>
+				{%- if fixed.length > 0 -%}
+					<div class="lb-menu__fixed">
+						{%- for item in fixed -%}
+							{%- include "@PathViews/layout/menu-mobile-item.twig" with item only -%}
+						{%- endfor -%}
+					</div>
+				{%- endif -%}
 			</div>
 		</div>
-	{% endif %}
-
-
-	{% if type == 'small-submenu' %}
+	{%- endif -%}
+	{%- if type == 'small-submenu' -%}
 		<button class="lb-menu__button lb-menu__button--small">
-			{% if icon %}
+			{%- if icon -%}
 				{% include '@PathViews/components/icon.twig' with {name: icon} only %}
-			{% endif %}
-			<span>{{label}}</span>
+			{%- endif -%}
+			{{- "<span>" ~ label ~ "</span>" -}}
 		</button>
 		<div class="lb-menu__submenu">
 			<div class="lb-menu__item lb-menu__header">
 				<button class="lb-menu__button lb-menu__back">
-					{% include "@PathViews/components/icon.twig" with {name: 'arrow', variants: ['-left']}  only  %}
-					<span>{{label}}</span>
+					{%- include "@PathViews/components/icon.twig" with {name: 'arrow', variants: ['-left']} only -%}
+					{{- "<span>" ~ label ~ "</span>" -}}
 				</button>
 			</div>
 			<div class="lb-menu-scroller">
 				<div body-scroll-lock-ignore class="lb-menu__main">
-					{% for subitem in children %}
-						{% include "@PathViews/layout/menu-mobile-item.twig" with subitem only %}
-					{% endfor %}
+					{%- for subitem in children -%}
+						{%- include "@PathViews/layout/menu-mobile-item.twig" with subitem only -%}
+					{%- endfor -%}
 				</div>
 				<div class="lb-menu__fixed">
-					{% for item in fixed %}
-						{% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
-					{% endfor %}
+					{%- for item in fixed -%}
+						{%- include "@PathViews/layout/menu-mobile-item.twig" with item only -%}
+					{%- endfor -%}
 				</div>
 			</div>
 		</div>
-	{% endif %}
-
-
-	{% if type == 'small-link' %}
+	{%- endif -%}
+	{%- if type == 'small-link' -%}
 		<a class="lb-menu__link lb-menu__link--small" href="{{href}}" target="{{ target ? target : '_self' }}" title="{{ label }}">
-			{% if icon or badge %}
+			{%- if icon or badge -%}
 				<span class="lb-menu__item-icon">
                     {% if icon is iterable %}
                         {% include '@PathViews/components/icon.twig' with icon only %}
@@ -110,19 +104,18 @@
                     {% endif %}
 					<span class="lb-badge {{badge is defined ? '' : 'lb-badge--hidden' }}">{{badge is defined ? badge : ''}}</span>
 				</span>
-			{% endif %}
-			<span>{{label}}</span>
-			{% if selected %}
-				{% include '@PathViews/components/icon.twig' with {name: 'check', variants: ['-right']} only %}
-			{% endif %}
+			{%- endif -%}
+			{{- "<span>" ~ label ~ "</span>" -}}
+			{%- if selected -%}
+				{%- include '@PathViews/components/icon.twig' with {name: 'check', variants: ['-right']} only -%}
+			{%- endif -%}
 		</a>
-	{% endif %}
-
-    {% if type == 'lang-selector' %}
-        {% if language_selector %}
+	{%- endif -%}
+    {%- if type == 'lang-selector' -%}
+        {%- if language_selector -%}
             <div class="lb-menu__link lb-menu__link--small lb-menu__link--lang-selector js-open-offset-nav" data-target-offset-nav="lb-offsetnav-multicountry">
                 <span class="lb-menu__item-icon">
-                    {% include '@PathViews/components/icon.twig' with {name: 'earth'} only %}
+                    {%- include '@PathViews/components/icon.twig' with {name: 'earth'} only -%}
                 </span>
 				<span>{{ language_selector.label }}</span>
                 {# {{ fn('do_shortcode', '[wpml_language_selector_widget]') }} #}
@@ -134,11 +127,9 @@
                 {% endif %}
                 <span>{{label}}</span> #}
             </div>
-        {% endif %}
-	{% endif %}
-
-    {% if type == 'card' %}
-		{% include '@PathViews/components/card.twig' with data only %}
-	{% endif %}
-    
+        {%- endif -%}
+	{%- endif -%}
+    {%- if type == 'card' -%}
+		{%- include '@PathViews/components/card.twig' with data only -%}
+	{%- endif -%}
 </div>

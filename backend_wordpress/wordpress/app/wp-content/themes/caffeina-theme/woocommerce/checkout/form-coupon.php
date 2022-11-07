@@ -12,7 +12,7 @@
  *
  * @see https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 3.4.4
+ * @version 7.0.1
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -61,6 +61,7 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
                         'title' => esc_html('Apply coupon', 'woocommerce'),
                         'name' => 'apply_coupon',
                         'value' => esc_attr('Apply coupon', 'woocommerce'),
+                        'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
                         'type' => 'submit',
                         'variants' => ['secondary'],
                     ]);
