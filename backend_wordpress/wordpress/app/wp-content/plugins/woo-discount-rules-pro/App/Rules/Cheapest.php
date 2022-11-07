@@ -86,12 +86,13 @@ class Cheapest
             if(!empty($matched_rule->free_type)){
                 if($matched_rule->free_type == "percentage"){
                     if($matched_rule->free_value > 0){
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $matched_rule->free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedPercentageDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 } else if($matched_rule->free_type == "flat"){
                     if($matched_rule->free_value > 0){
-                        $free_value = CoreMethodCheck::getConvertedFixedPrice($matched_rule->free_value, 'flat');
-                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $free_value, $discount_quantity);
+                        $discount_value = self::getDiscountValueFromRule($matched_rule, $price);
+                        $discount_price = self::getDiscountPriceForProductFromQuantityBasedFlatDiscount($product, $price, $quantity, $discount_value, $discount_quantity);
                     }
                 }
             }
@@ -99,6 +100,39 @@ class Cheapest
         }
 
         return $discount_price;
+    }
+
+    /**
+     * Get discount value from matched rule
+     *
+     * @param $matched_rule object
+     * @param $price int/float
+     * @return int/float
+     */
+    public static function getDiscountValueFromRule($matched_rule, $price)
+    {
+        $discount_value = 0;
+        if(!empty($matched_rule)){
+            if(!empty($matched_rule->free_type)){
+                if($matched_rule->free_type == "percentage"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = $matched_rule->free_value;
+                        if ($discount_value > 100) {
+                            $discount_value = 100;
+                        }
+                    }
+                } else if($matched_rule->free_type == "flat"){
+                    if($matched_rule->free_value > 0){
+                        $discount_value = CoreMethodCheck::getConvertedFixedPrice($matched_rule->free_value, 'flat');
+                        if ($discount_value > $price) {
+                            $discount_value = $price;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $discount_value;
     }
 
     /**
