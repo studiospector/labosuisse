@@ -25,13 +25,13 @@ class Set
      * */
     protected static function hooks(){
         add_filter('advanced_woo_discount_rules_has_any_discount', array(__CLASS__, 'hasAdjustment'), 10, 2);
-        add_filter('advanced_woo_discount_rules_discounts_of_each_rule', array(__CLASS__, 'setDiscountValue'), 10, 9);
+        add_filter('advanced_woo_discount_rules_discounts_of_each_rule', array(__CLASS__, 'setDiscountValue'), 10, 10);
         add_filter('advanced_woo_discount_rules_bulk_table_range_based_on_rule', array(__CLASS__, 'setDiscountTable'), 10, 5);
         add_filter('advanced_woo_discount_rules_advance_table_based_on_rule', array(__CLASS__, 'addAdvanceTable'), 10, 6);
         add_filter('advanced_woo_discount_rules_apply_the_discount_as_fee_in_cart', array(__CLASS__, 'applyDiscountAsFee'), 10, 2);
         add_filter('advanced_woo_discount_rules_fee_values', array(__CLASS__, 'buildFeeDetails'), 10, 5);
-        add_filter('advanced_woo_discount_rules_calculated_discounts_of_each_rule', array(__CLASS__, 'setCalculatedDiscountValue'), 10, 7);
-        add_filter('advanced_woo_discount_rules_calculated_discounts_of_each_rule_for_ajax_price', array(__CLASS__, 'setCalculatedDiscountValue'), 10, 7);
+        add_filter('advanced_woo_discount_rules_calculated_discounts_of_each_rule', array(__CLASS__, 'setCalculatedDiscountValue'), 10, 8);
+        add_filter('advanced_woo_discount_rules_calculated_discounts_of_each_rule_for_ajax_price', array(__CLASS__, 'setCalculatedDiscountValue'), 10, 8);
         add_filter('advanced_woo_discount_rules_is_rule_passed_with_out_discount_for_exclusive_rule', array(__CLASS__, 'setExclusiveRule'), 10, 4);
     }
 
@@ -208,13 +208,14 @@ class Set
      * @param $ajax_price
      * @param $cart_item
      * @param $price_display_condition
-     * @param $is_cart
+     * @param bool $is_cart
+     * @param bool $manual_request
      * @return mixed
      */
-    public static function setDiscountValue($discounts, $rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart){
+    public static function setDiscountValue($discounts, $rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart, $manual_request = false){
         $set_discount = 0;
         if (self::hasDiscount($rule->rule)) {
-            $set_discount = self::calculateDiscount($rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart);
+            $set_discount = self::calculateDiscount($rule, $product_price, $quantity, $product, $ajax_price, $cart_item, $price_display_condition, $is_cart, $manual_request);
         }
 
         $discounts['product_set_discount'] = $set_discount;
@@ -232,7 +233,7 @@ class Set
      * @param $ajax_price
      * @return mixed
      * */
-    public static function calculateDiscount($rule, $price, $quantity, $product, $ajax_price = false, $cart_item = array(), $price_display_condition='show_when_matched', $is_cart=false){
+    public static function calculateDiscount($rule, $price, $quantity, $product, $ajax_price = false, $cart_item = array(), $price_display_condition = 'show_when_matched', $is_cart = false, $manual_request = false){
         $return_value = array();
         if ( $set_discount_data = self::getAdjustments($rule) ) {
             $operator = (isset($set_discount_data->operator) && !empty($set_discount_data->operator)) ? $set_discount_data->operator : false;
@@ -248,7 +249,7 @@ class Set
             $current_product_qty = $quantity;
             $current_product_parent_id = Woocommerce::getProductParentId($product);
             $process_reached = true;
-            $valid_ranges = self::getMatchedDiscount($rule, $product, $price, $operator, $set_ranges, $quantity, $ajax_price, $price_display_condition, $is_cart);
+            $valid_ranges = self::getMatchedDiscount($rule, $product, $price, $operator, $set_ranges, $quantity, $ajax_price, $price_display_condition, $is_cart, $manual_request);
             if (empty($valid_ranges)) {
                 return 0;
             }
@@ -351,7 +352,9 @@ class Set
                             if($max_quantity > 0){
                                 $per_product_price = $value / $max_quantity;
                             }
-                            $per_product_price = CoreMethodCheck::wc_format_decimal($per_product_price);
+                            $per_product_price = Woocommerce::round($per_product_price);
+                            $price_difference = Woocommerce::round($value - ($per_product_price * $max_quantity));
+                            $per_product_price += $price_difference / $current_product_qty;
                             $discount_per_item_for_all_range = $price - $per_product_price;
                             $total_qty_in_cart_discounted_price = $discount_per_item_for_all_range;
                         } elseif ($completed_quantity > $max_quantity) {
@@ -359,10 +362,12 @@ class Set
                             if($max_quantity > 0){
                                 $per_product_price = $value / $max_quantity;
                             }
-                            $per_product_price = CoreMethodCheck::wc_format_decimal($per_product_price);
-                            $discount_per_item_for_all_range = $price - $per_product_price;
                             $original_price_qty = $completed_quantity - $max_quantity;
                             $discount_price_qty = $quantity - $original_price_qty;
+                            $per_product_price = Woocommerce::round($per_product_price);
+                            $price_difference = Woocommerce::round($value - ($per_product_price * $max_quantity));
+                            $per_product_price += $price_difference / $discount_price_qty;
+                            $discount_per_item_for_all_range = $price - $per_product_price;
                             $discounted_prices = $discount_price_qty * $discount_per_item_for_all_range;
                             if ($discounted_prices <= 0) {
                                 return 0;
@@ -375,7 +380,7 @@ class Set
                         if($max_quantity > 0){
                             $per_product_price = $value / $max_quantity;
                         }
-                        $per_product_price = CoreMethodCheck::wc_format_decimal($per_product_price);
+                        $per_product_price = Woocommerce::round($per_product_price);
                         $discount_per_item_for_all_range = $price - $per_product_price;
                         $total_qty_in_cart_discounted_price = $discount_per_item_for_all_range;
                     }
@@ -499,7 +504,7 @@ class Set
         return 0;
     }
 
-    public static function setCalculatedDiscountValue($total_discounts, $product_id, $rule_id, $filter_passed, $cart_item, $is_cart, $rule = false){
+    public static function setCalculatedDiscountValue($total_discounts, $product_id, $rule_id, $filter_passed, $cart_item, $is_cart, $rule = false, $manual_request = false){
         if(self::getAdjustments($rule)){
             if(!empty(self::$set_discounts)){
                 $set_discounts = self::$set_discounts;
@@ -519,18 +524,20 @@ class Set
      * @param $ajax_price
      * @return float|int
      */
-    protected static function getMatchedDiscount($rule, $product, $price, $operator, $ranges, $quantity, $ajax_price = false, $price_display_condition='show_when_matched', $is_cart=false)
+    protected static function getMatchedDiscount($rule, $product, $price, $operator, $ranges, $quantity, $ajax_price = false, $price_display_condition = 'show_when_matched', $is_cart = false, $manual_request = false)
     {
         if (empty($ranges)) {
             return 0;
         }
         $cart_items = Woocommerce::getCart();
-        if($price_display_condition == "show_when_matched" && !$is_cart){
-            $quantity = 1;
-        }else if($price_display_condition == "show_after_matched" || $is_cart){
-            $quantity = 0;
-        }else{
-            $quantity = isset($_POST['qty']) ? $_POST['qty'] : 1;
+        if (!$manual_request) {
+            if ($price_display_condition == "show_when_matched" && !$is_cart) {
+                $quantity = 1;
+            } else if ($price_display_condition == "show_after_matched" || $is_cart) {
+                $quantity = 0;
+            } else {
+                $quantity = isset($_POST['qty']) ? $_POST['qty'] : 1;
+            }
         }
 
         switch ($operator) {
@@ -702,11 +709,13 @@ class Set
     public static function buildFeeDetails(array $price_as_cart_discount, $rule, $cart_discounted_price, $product_id, $cart_item){
         $set_discount = self::getAdjustments($rule);
         $rule_id = isset($rule->rule->id) ? $rule->rule->id : '';
+        $product_set_discount = self::$set_discounts[$product_id];
         if( $set_discount && isset($set_discount->apply_as_cart_rule) && !empty($set_discount->apply_as_cart_rule) && !empty($cart_item)){
             $price_as_cart_discount[$rule_id][$product_id] = array(
                 'discount_type' => 'wdr_set_discount',
+                'apply_type' => isset($product_set_discount['discount_type']) ? $product_set_discount['discount_type'] : '',
                 'discount_label' => wp_unslash($set_discount->cart_label),
-                'discount_value' => 0,
+                'discount_value' => isset($product_set_discount['discount_value']) ? $product_set_discount['discount_value'] : 0,
                 'discounted_price' => $cart_discounted_price,
                 'rule_name' => isset($rule->rule->title) ? $rule->rule->title : '',
                 'cart_item_key' => isset($cart_item['key']) ? $cart_item['key'] : '',
