@@ -37,6 +37,11 @@ $context['post'] = Timber::get_post();
 
 // Base Product
 $product = wc_get_product($context['post']->ID);
+
+if($product->get_catalog_visibility() == 'hidden') {
+    wp_safe_redirect('/404', 301);
+}
+
 $context['product'] = $product;
 
 // Sticky Header

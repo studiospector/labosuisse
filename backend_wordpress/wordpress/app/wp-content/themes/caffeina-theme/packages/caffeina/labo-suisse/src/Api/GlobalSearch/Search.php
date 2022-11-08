@@ -17,7 +17,7 @@ class Search
     {
         $items = [];
 
-        if($this->search) {
+        if ($this->search) {
             $items = [
                 $this->products(),
                 $this->brands(),
@@ -135,7 +135,14 @@ class Search
 
         $products = $this->getArchive('product', [
             'orderby' => 'menu_order',
-            'order' => 'ASC'
+            'order' => 'ASC',
+            'meta_query' => [
+                [
+                    'key' => '_visibility',
+                    'value' => 'hidden',
+                    'compare' => '!=',
+                ]
+            ]
         ]);
 
         foreach ($products as $item) {
