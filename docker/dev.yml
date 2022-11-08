@@ -16,6 +16,7 @@ services:
       front-tier: null
     environment:
       DEBUG: '${DEBUG}'
+      WP_ENVIRONMENT_TYPE: '${WP_ENVIRONMENT_TYPE}'
       W3TC_PRO_DEV_MODE: '${W3TC_PRO_DEV_MODE}'
       W3TC_PRO_KEY: ${W3TC_PRO_KEY}
       MEMCACHED_URL: ${MEMCACHED_URL}
@@ -81,6 +82,7 @@ services:
       front-tier: null
     environment:
       DEBUG: '${DEBUG}'
+      WP_ENVIRONMENT_TYPE: '${WP_ENVIRONMENT_TYPE}'
       W3TC_PRO_DEV_MODE: '${W3TC_PRO_DEV_MODE}'
       W3TC_PRO_KEY: ${W3TC_PRO_KEY}
       MEMCACHED_URL: ${MEMCACHED_URL}

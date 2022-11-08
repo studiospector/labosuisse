@@ -21,6 +21,8 @@
 define('WP_DEBUG', getenv('DEBUG') === 'true');
 define('WP_DEBUG_LOG', getenv('DEBUG') === 'true');
 
+define('WP_ENVIRONMENT_TYPE', getenv('WP_ENVIRONMENT_TYPE'));
+
 $dsn = (object) parse_url(getenv('DATABASE_URL'));
 
 define('DB_NAME', substr($dsn->path, 1));

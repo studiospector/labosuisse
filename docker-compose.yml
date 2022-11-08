@@ -11,6 +11,7 @@ services:
     volumes:
       - 'backend_media:/uploads'
     environment:
+      WP_ENVIRONMENT_TYPE: '${WP_ENVIRONMENT_TYPE}'
       W3TC_PRO_DEV_MODE: '${W3TC_PRO_DEV_MODE}'
       W3TC_PRO_KEY: ${W3TC_PRO_KEY}
       MEMCACHED_URL: ${MEMCACHED_URL}
@@ -52,6 +53,7 @@ services:
       volumes:
         - 'backend_media:/uploads'
       environment:
+        WP_ENVIRONMENT_TYPE: '${WP_ENVIRONMENT_TYPE}'
         W3TC_PRO_DEV_MODE: '${W3TC_PRO_DEV_MODE}'
         W3TC_PRO_KEY: ${W3TC_PRO_KEY}
         MEMCACHED_URL: ${MEMCACHED_URL}
