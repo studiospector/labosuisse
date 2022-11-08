@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-01 19:35:43+0000\n"
+"PO-Revision-Date: 2022-11-07 20:30:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -112,7 +112,7 @@ msgstr "Registra se la nota viene letta o meno"
 
 #: src/Admin/API/MobileAppMagicLink.php:96
 msgid "Jetpack is not connected."
-msgstr "Jetpack è connesso."
+msgstr "Jetpack non è connesso."
 
 #: packages/woocommerce-blocks/src/Domain/Services/Email/CustomerNewAccount.php:58
 msgid "“New Account” emails are sent when a customer signs up via the checkout flow."
@@ -209,6 +209,10 @@ msgstr "<b>Raggruppato –</b> una raccolta di prodotti correlati che possono es
 #: includes/admin/class-wc-admin-assets.php:384
 msgid "<b>Simple –</b> covers the vast majority of any products you may sell. Simple products are shipped and have no options. For example, a book."
 msgstr "<b>Semplice –</b> copre la stragrande maggioranza di tutti i prodotti che potresti vendere. I prodotti semplici vengono spediti e non hanno opzioni. Ad esempio, un libro."
+
+#: i18n/states.php:177
+msgid "Sofia District"
+msgstr "Distretto di Sofia"
 
 #: packages/woocommerce-blocks/assets/js/blocks/products/all-products/block.json
 #: packages/woocommerce-blocks/build/all-products/block.json
@@ -983,6 +987,12 @@ msgstr "Errore: non puoi rispondere a una recensione su un prodotto in bozza."
 msgid "Error: Please type your review text."
 msgstr "Errore: digita il testo della recensione."
 
+#. translators: 1: Month name, 2: 4-digit year.
+#: src/Internal/Admin/Orders/ListTable.php:468
+msgctxt "order dates dropdown"
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
 #: src/Internal/Admin/Orders/ListTable.php:462
 msgid "All dates"
 msgstr "Tutte le date"
@@ -1075,6 +1085,12 @@ msgstr "Attiva modalità guidata"
 msgctxt "block title"
 msgid "Featured Product"
 msgstr "Prodotto in evidenza"
+
+#: packages/woocommerce-blocks/assets/js/blocks/featured-items/featured-category/block.json
+#: packages/woocommerce-blocks/build/featured-category/block.json
+msgctxt "block title"
+msgid "Featured Category"
+msgstr "Categoria in evidenza"
 
 #: src/Internal/Utilities/HtmlSanitizer.php:79
 msgid "String processors must be an array of valid callbacks."
@@ -1404,7 +1420,7 @@ msgstr "Modulo codice promozionale"
 #. translators: %s is the URL.
 #: src/Internal/Utilities/URL.php:116
 msgid "%s is not a valid URL."
-msgstr "%s non è un URL valido"
+msgstr "%s non è un URL valido."
 
 #. translators: %s is a URL, %d is a product ID.
 #: src/Internal/ProductDownloads/ApprovedDirectories/Synchronize.php:240
@@ -4393,7 +4409,7 @@ msgstr "Il numero di telefono fornito non è valido"
 
 #: packages/woocommerce-blocks/src/StoreApi/Schemas/V1/BillingAddressSchema.php:76
 msgid "The provided email address is not valid"
-msgstr "L'indirizzo email fornito non è valido."
+msgstr "L'indirizzo email fornito non è valido"
 
 #. translators: %s Field label.
 #: packages/woocommerce-blocks/src/StoreApi/Utilities/OrderController.php:367
@@ -4981,6 +4997,10 @@ msgstr "Questo strumento reimposta i valori memorizzati nella cache utilizzati i
 #: assets/client/admin/app/index.js:2
 msgid "WooCommerce Home"
 msgstr "Home di WooCommerce"
+
+#: src/Internal/Admin/CustomerEffortScoreTracks.php:340
+msgid "How easy was it to add a product?"
+msgstr "Quanto è stato facile aggiungere un prodotto?"
 
 #: src/Internal/Admin/CustomerEffortScoreTracks.php:487
 msgid "How easy was it to import products?"
@@ -6497,7 +6517,7 @@ msgstr "Categoria non aggiunta."
 
 #: includes/class-wc-post-types.php:508
 msgid "Category updated."
-msgstr "Categoria aggiornata"
+msgstr "Categoria aggiornata."
 
 #: includes/class-wc-post-types.php:507
 msgid "Category deleted."
@@ -9204,7 +9224,7 @@ msgstr "Stato della rigenerazione."
 
 #: src/Admin/API/Reports/Export/Controller.php:82
 msgid "When true, email a link to download the export to the requesting user."
-msgstr "Se vero, invia un link tramite e-mail per scaricare l'esportazione all'utente richiedente."
+msgstr "Se vero, invia un link tramite email per scaricare l'esportazione all'utente richiedente."
 
 #: src/Admin/API/Reports/Export/Controller.php:77
 msgid "Parameters to pass on to the exported report."
@@ -33280,7 +33300,7 @@ msgstr "Shop base"
 msgid "Product"
 msgid_plural "Products"
 msgstr[0] "Prodotto"
-msgstr[1] ""
+msgstr[1] "Prodotti"
 
 #: includes/admin/class-wc-admin-permalink-settings.php:116
 #: includes/admin/class-wc-admin-taxonomies.php:129
