@@ -3,7 +3,7 @@
  * Plugin Name: Google Tag Manager for WooCommerce PRO
  * Plugin URI: https://tagconcierge.com/google-tag-manager-for-woocommerce/
  * Description: Push WooCommerce eCommerce (Enhanced Ecommerce and GA4) information to GTM DataLayer. Use any GTM integration to measure your customers' activites.
- * Version:     1.7.2
+ * Version:     1.7.3
  * Author:      Handcraft Byte
  * Author URI:  https://handcraftbyte.com/
  * License:     GPLv2 or later
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  *
  * WC requires at least: 4.0
- * WC tested up to: 6.8.1
+ * WC tested up to: 7.0.0
  * Woo: 7424130:288e08109d3061ad3a8886a94db87d9b
  */
 
