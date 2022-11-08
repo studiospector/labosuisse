@@ -17,16 +17,17 @@ class SettingsService extends \GtmEcommerceWoo\Lib\Service\SettingsService {
 		$this->tagConciergeApiUrl = $tagConciergeApiUrl;
 		$this->tagConciergeMonitorPreset = 'presets/tag-concierge-monitor-advanced';
 		$this->pluginVersion = $pluginVersion;
+		$this->filter = 'advanced';
 	}
 
 
-	public function ajaxGetPresets() {
-		$uuid     = $this->wpSettingsUtil->getOption( 'uuid' );
-		$response = wp_remote_get( $this->tagConciergeApiUrl . '/v2/presets?filter=advanced&uuid=' . $uuid );
-		$body     = wp_remote_retrieve_body( $response );
-		wp_send_json( json_decode( $body ) );
-		wp_die();
-	}
+	// public function ajaxGetPresets() {
+	// 	$uuid     = $this->wpSettingsUtil->getOption( 'uuid' );
+	// 	$response = wp_remote_get( $this->tagConciergeApiUrl . '/v2/presets?filter=advanced&uuid=' . $uuid );
+	// 	$body     = wp_remote_retrieve_body( $response );
+	// 	wp_send_json( json_decode( $body ) );
+	// 	wp_die();
+	// }
 
 	public function ajaxPostPresets() {
 		$uuid            = $this->wpSettingsUtil->getOption( 'uuid' );

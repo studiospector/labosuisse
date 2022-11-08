@@ -1,5 +1,9 @@
 *** Google Tag Manager for WooCommerce PRO ***
 
+2022-10-29 - version 1.7.3
+* fix issue with downloading advanced presets
+* test with latest versions of WordPress and WooCommerce
+
 2022-10-17 - version 1.7.2
 * fix remove_from_cart to prevent errors
 * more robust begin_checkout tracking
