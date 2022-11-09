@@ -3,8 +3,8 @@ Contributors: flycart
 Donate link: https://flycart.org/
 Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
 Requires at least: 4.4.1
-Tested up to: 6.0
-Stable tag: 2.5.0
+Tested up to: 6.1
+Stable tag: 2.5.2
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -335,6 +335,12 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.5.2 - 09/11/22 =
+* Improvement: Event: advanced_woo_discount_rules_exclude_coupon_while_remove_third_party_coupon [Core].
+* Improvement: Updated code on check free shipping [Core].
+* Add: Support for WordPress 6.1 [Core and Pro].
+* Fix: SKU filter displays wrong value, when having space in SKU [Pro].
 
 = 2.5.0 - 01/11/22 =
 * Improvement: Added applied discount info in order and order item meta _wdr_discounts [Core and Pro].
