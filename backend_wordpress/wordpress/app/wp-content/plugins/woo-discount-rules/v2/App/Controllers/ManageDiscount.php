@@ -1311,7 +1311,10 @@ class ManageDiscount extends Base
                 }
                 foreach ($applied_coupons as $applied_coupon){
                     if(empty($used_coupons) || !in_array($applied_coupon, $used_coupons)){
-                        $this->removeAppliedCoupon($applied_coupon);
+                        $exclude_coupon = apply_filters('advanced_woo_discount_rules_exclude_coupon_while_remove_third_party_coupon', false, $applied_coupon);
+                        if ($exclude_coupon === false) {
+                            $this->removeAppliedCoupon($applied_coupon);
+                        }
                     }
                 }
             }

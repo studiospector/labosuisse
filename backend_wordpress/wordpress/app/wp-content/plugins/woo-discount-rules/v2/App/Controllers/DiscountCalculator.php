@@ -1086,39 +1086,34 @@ class DiscountCalculator extends Base
      * @return array
      */
     public static function getFreeshippingMethod(){
-        /* For filter exclusive rule */
-        $manage_discount = Router::$manage_discount;
-        $discount_calculator = $manage_discount::$calculator;
-        $discount_calculator->filterExclusiveRule(1, false, true, false);
-        foreach (self::$rules as $rule) {
-            $language_helper_object = self::$language_helper;
-            $chosen_languages = $rule->getLanguages();
-            if (!empty($chosen_languages)) {
-                $current_language = $language_helper_object::getCurrentLanguage();
-                if (!in_array($current_language, $chosen_languages)) {
-                    continue;
-                }
-            }
-            //$rule_id = $rule->getId();
-            $discount_type = $rule->getRuleDiscountType();
-            $rule_id = $rule->rule->id;
-            if ($discount_type == "wdr_free_shipping") {
-                $cart_items = self::$woocommerce_helper->getCart();
-                if(!empty($cart_items)){
-                    foreach ($cart_items as $cart_item){
-                        //if ($rule->isFilterPassed($cart_item['data'])) {
-                        if ($rule->hasConditions()) {
-                            if (!$rule->isCartConditionsPassed($cart_items)) {
-                                continue;
-                            }
-                        }
-
-                        if (self::$woocommerce_helper->isCartNeedsShipping()) {
-                            self::$applied_rules[$rule_id] = self::$rules[$rule_id];
-                        }
-                        return array('free_shipping'=>1);
-                        //}
+        $cart_items = self::$woocommerce_helper->getCart();
+        if(!empty($cart_items)){
+            /* For filter exclusive rule */
+            $manage_discount = Router::$manage_discount;
+            $discount_calculator = $manage_discount::$calculator;
+            $discount_calculator->filterExclusiveRule(1, false, true, false);
+            foreach (self::$rules as $rule) {
+                $language_helper_object = self::$language_helper;
+                $chosen_languages = $rule->getLanguages();
+                if (!empty($chosen_languages)) {
+                    $current_language = $language_helper_object::getCurrentLanguage();
+                    if (!in_array($current_language, $chosen_languages)) {
+                        continue;
                     }
+                }
+                $discount_type = $rule->getRuleDiscountType();
+                $rule_id = $rule->rule->id;
+                if ($discount_type == "wdr_free_shipping") {
+                    if ($rule->hasConditions()) {
+                        if (!$rule->isCartConditionsPassed($cart_items)) {
+                            continue;
+                        }
+                    }
+
+                    if (self::$woocommerce_helper->isCartNeedsShipping()) {
+                        self::$applied_rules[$rule_id] = self::$rules[$rule_id];
+                    }
+                    return array('free_shipping' => 1);
                 }
             }
         }
