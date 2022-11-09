@@ -21,6 +21,7 @@ services:
       W3TC_PRO_KEY: ${W3TC_PRO_KEY}
       MEMCACHED_URL: ${MEMCACHED_URL}
       WP_CONTENT_CUSTOM_DIR: '${WP_CONTENT_CUSTOM_DIR}'
+      DOMAIN: '${DOMAIN}'
       VIRTUAL_HOST: '${VIRTUAL_HOST}.localhost,www.${VIRTUAL_HOST}.localhost'
       DATABASE_URL: '${DATABASE_URL}'
       MYSQL_HOST: storage_mysql
@@ -87,6 +88,7 @@ services:
       W3TC_PRO_KEY: ${W3TC_PRO_KEY}
       MEMCACHED_URL: ${MEMCACHED_URL}
       WP_CONTENT_CUSTOM_DIR: '${WP_CONTENT_CUSTOM_DIR}'
+      DOMAIN: '${DOMAIN}'
       VIRTUAL_HOST: 'cms.${VIRTUAL_HOST}.localhost'
       DATABASE_URL: '${DATABASE_URL}'
       MYSQL_HOST: storage_mysql

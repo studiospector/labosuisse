@@ -96,10 +96,18 @@ define('WP_SITEURL', $protocol . getenv('ADMIN_URL'));
 define('WP_HOME', $protocol . (getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEND_URL') : getenv('ADMIN_URL')));
 
 define('ADMIN_URL', getenv('ADMIN_URL'));
+define('ADMIN_SITEURL', getenv('ADMIN_URL'));
 define('FRONTEND_URL', getenv('WITH_FRONTEND') === '1' ? getenv('FRONTEND_URL') : getenv('ADMIN_URL'));
 define('WITH_REDIS', getenv('WITH_REDIS') === '1' ? 1 : 0);
 
+define('ADMIN_COOKIE_PATH', '/wp-admin');
+define('COOKIEPATH', '/');
+define('SITECOOKIEPATH', '.' . getenv('DOMAIN'));
+define('COOKIE_DOMAIN', '.' . getenv('DOMAIN'));
+define('COOKIEHASH', md5(getenv('DOMAIN')) );
+
 define('WP_CONTENT_DIR', getenv('WP_CONTENT_CUSTOM_DIR'));
+define('WP_CONTENT_URL', getenv('ADMIN_URL') . "/wp-content-custom");
 define('WP_DEFAULT_THEME', 'caffeina-starter');
 
 define('POSTINO_CAFF_SMTP_SECURE', 'tls');
