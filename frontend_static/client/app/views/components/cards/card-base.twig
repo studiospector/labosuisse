@@ -14,8 +14,8 @@
   {% set classes = classes|merge([class]) %}
 {%- endif -%}
 <{{ tag }}
-    {{- tag == 'a' ? ' href="' ~ infobox.cta.url|default('#') ~ '"' : ' ' -}}
-    {{- tag == 'a' ? ' target="' ~ infobox.cta.target|default('_self') ~ '"' : ' ' -}} 
+    {{- tag == 'a' ? ' href="' ~ infobox.cta.url|default('#') ~ '" ' : ' ' -}}
+    {{- tag == 'a' ? ' target="' ~ infobox.cta.target|default('_self') ~ '" ' : ' ' -}} 
     class="card{{ classes|length ? ' ' ~ classes|join(' ') : ' ' }}"
     {{- attributes ? ' ' ~ attributes|join(' ') : ' ' -}}
     {{- (tag == 'a') and (infobox.title or infobox.subtitle) ? ' title="' ~ (infobox.title ? infobox.title|striptags : infobox.subtitle|striptags) ~ '"' : ' ' -}}
