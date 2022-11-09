@@ -31,7 +31,7 @@
 
     {%- if infobox -%}
         {% if (infobox.cta is defined) and (infobox.cta is not null) %}
-            {% set infobox = infobox|merge({cta: infobox.cta|merge({url: null})}) %}
+            {% set infobox = infobox|merge({cta: infobox.cta|merge({url: null, inset: true})}) %}
         {% endif %}
         <div class="card-infobox">
             {% block blockInfobox %}{% endblock %}

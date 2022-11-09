@@ -1,4 +1,7 @@
 {% set tag = url ? 'a' : 'button' %}
+{% if inset %}
+    {% set tag = 'div' %}
+{% endif %}
 {% set classes = [] %}
 {% for variant in variants|default([]) %}
     {% set classes = classes|merge(['button-' ~ variant]) %}
