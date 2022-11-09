@@ -41,7 +41,9 @@ class FreeShipping
      * Set free shipping on $applied_rules so we can display message and update used count
      * */
     public static function setFreeShippingInAppliedRules(){
+        remove_action('woocommerce_after_calculate_totals', array(__CLASS__, 'setFreeShippingInAppliedRules'), 11);
         DiscountCalculator::getFreeshippingMethod();
+        add_action('woocommerce_after_calculate_totals', array(__CLASS__, 'setFreeShippingInAppliedRules'), 11);
     }
 
     /**
