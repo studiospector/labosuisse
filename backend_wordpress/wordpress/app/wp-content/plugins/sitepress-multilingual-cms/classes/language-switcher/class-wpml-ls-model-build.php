@@ -144,8 +144,6 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 		$languages = $this->sitepress->get_ls_languages( $get_ls_args );
 		$languages = is_array( $languages ) ? $languages : [];
 
-		$languages = $this->order_languages( $languages, $this->sitepress->get_current_language() );
-
 		if ( $languages ) {
 
 			foreach ( $languages as $code => $data ) {
@@ -242,25 +240,26 @@ class WPML_LS_Model_Build extends WPML_SP_User {
 				$lang = $this->sanitize_vars( $lang, $this->allowed_language_vars );
 				$i++;
 			}
+
+			$ret = $this->order_menu_items( $ret, $this->sitepress->get_current_language() );
 		}
 
 		return $ret;
 	}
 
 	/**
-	 * @param array $languages
+	 * @param array $menu_items
 	 *
 	 * @return array
 	 */
-	private function order_languages( $languages, $current_language ) {
-		if ( isset( $languages[$current_language] ) ) {
-			$current_language_value = $languages[$current_language];
-			unset($languages[$current_language]);
-			return array_merge([$current_language => $current_language_value], $languages);
+	private function order_menu_items( $menu_items, $current_language ) {
+		if ( isset( $menu_items[$current_language] ) ) {
+			$current_language_value = $menu_items[$current_language];
+			unset($menu_items[$current_language]);
+			return array_merge([$current_language => $current_language_value], $menu_items);
 		} else {
-			return $languages;
+			return $menu_items;
 		}
-
 	}
 
 	/**

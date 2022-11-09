@@ -85,7 +85,7 @@ if (in_array($filter->type, $common_filters)) {
             if (!empty($item_name)) {
                 $option_value = esc_attr($option);
                 $option_html = esc_html($item_name);
-                $selected_options .= "<option value={$option_value} selected>{$option_html}</option>";
+                $selected_options .= "<option value='{$option_value}' selected>{$option_html}</option>";
             }
         }
     }
@@ -140,7 +140,7 @@ if (in_array($filter->type, $common_filters)) {
                 if (!empty($item_name)) {
                     $option_value = esc_attr($option);
                     $option_html = esc_html($item_name);
-                    $selected_options .= "<option value={$option_value} selected>{$option_html}</option>";
+                    $selected_options .= "<option value='{$option_value}' selected>{$option_html}</option>";
                 }
             }
         }
