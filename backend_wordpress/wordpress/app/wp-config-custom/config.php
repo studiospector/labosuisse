@@ -107,7 +107,7 @@ define('COOKIE_DOMAIN', '.' . getenv('DOMAIN'));
 define('COOKIEHASH', md5(getenv('DOMAIN')) );
 
 define('WP_CONTENT_DIR', getenv('WP_CONTENT_CUSTOM_DIR'));
-define('WP_CONTENT_URL', getenv('ADMIN_URL') . "/wp-content-custom");
+//define('WP_CONTENT_URL', getenv('ADMIN_URL') . "/wp-content-custom");
 define('WP_DEFAULT_THEME', 'caffeina-starter');
 
 define('POSTINO_CAFF_SMTP_SECURE', 'tls');
