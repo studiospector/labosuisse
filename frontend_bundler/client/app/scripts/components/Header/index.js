@@ -83,23 +83,25 @@ class Header extends Component {
         if (direction === 2 && curScroll > headerHeight) {
             this.el.classList.add('lb-header--hide')
             if (this.headerProduct) {
-                setTimeout(() => {
-                    let matchMedia = window.matchMedia("screen and (max-width: 767px)")
-                    if (!matchMedia.matches) {
-                        this.headerProduct.style.top = `${this.el.getBoundingClientRect().height}px`
-                    }
-                }, 550);
+                this.headerProduct.classList.remove('lb-header-sticky-product--adjust')
+                // setTimeout(() => {
+                //     let matchMedia = window.matchMedia("screen and (max-width: 767px)")
+                //     if (!matchMedia.matches) {
+                //         this.headerProduct.style.top = `${this.el.getBoundingClientRect().height}px`
+                //     }
+                // }, 550);
             }
             this.prevDirection = direction
         } else if (direction === 1) {
             this.el.classList.remove('lb-header--hide')
             if (this.headerProduct) {
-                setTimeout(() => {
-                    let matchMedia = window.matchMedia("screen and (max-width: 767px)")
-                    if (!matchMedia.matches) {
-                        this.headerProduct.style.top = `${this.el.getBoundingClientRect().height}px`
-                    }
-                }, 550);
+                this.headerProduct.classList.add('lb-header-sticky-product--adjust')
+                // setTimeout(() => {
+                //     let matchMedia = window.matchMedia("screen and (max-width: 767px)")
+                //     if (!matchMedia.matches) {
+                //         this.headerProduct.style.top = `${this.el.getBoundingClientRect().height}px`
+                //     }
+                // }, 550);
             }
             this.prevDirection = direction
         }
