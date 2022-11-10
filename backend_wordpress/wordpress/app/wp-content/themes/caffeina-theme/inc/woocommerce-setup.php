@@ -411,29 +411,19 @@ function lb_force_checkout_update()
             jQuery('form.checkout').trigger('update');
         });
 
-        console.log('form.checkout', jQuery('form.checkout'));
-        console.log('body', jQuery('body'));
-
-        jQuery('form.checkout').on('update', function(ev) {
-            console.log('update', ev);
-            jQuery('form.checkout .place-order').addClass('place-order--error');
-        });
-
-        jQuery('form.checkout').on('validate', function(ev) {
-            console.log('validate', ev);
-
-            var errorContainer = jQuery('.woocommerce-NoticeGroup-checkout > .woocommerce-error');
-
-            if (errorContainer) {
-                jQuery('form.checkout .place-order').addClass('place-order--error');
+        const lbCheckErrors = () => {
+            var errorContainer = jQuery('form.checkout .woocommerce-NoticeGroup-updateOrderReview ul > li');
+            if (errorContainer.length > 0) {
+                jQuery('form.checkout .lb-wc-payment-actions').addClass('lb-wc-payment-actions--error');
             } else {
-                jQuery('form.checkout .place-order').removeClass('place-order--error');
+                jQuery('form.checkout .lb-wc-payment-actions').removeClass('lb-wc-payment-actions--error');
             }
-        });
+        }
 
-        jQuery('body').on('update_checkout', function(ev) {
-            console.log('update_checkout', ev);
-        });
+        // On validate form fields
+        jQuery('form.checkout').on('validate', lbCheckErrors);
+        // On update checkout fields
+        jQuery('body').on('updated_checkout', lbCheckErrors);
     </script>
     <?php
 }
