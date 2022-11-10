@@ -147,6 +147,7 @@
             }
 
             .place-order {
+                position: relative;
                 padding-bottom: 0;
 
                 .woocommerce-terms-and-conditions-wrapper {
@@ -161,6 +162,20 @@
                 .button {
                     width: 100%;
                     justify-content: center;
+                }
+
+                &--error {
+                    &::after {
+                        content: '';
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        left: 0;
+                        top: 0;
+                        background-color: map-get($colors, "primary-light-1");
+                        opacity: 0.5;
+                        z-index: 1;
+                    }
                 }
             }
 
