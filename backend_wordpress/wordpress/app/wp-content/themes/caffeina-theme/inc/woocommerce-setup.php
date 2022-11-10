@@ -14,6 +14,17 @@ add_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to
 remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
 
+
+
+/**
+ * Conditional Shipping checks on checkout trigger on order update
+ */
+// add_filter( 'woocommerce_csp_validate_shipping_method_on_update_order_review', '__return_true' );
+// add_filter( 'woocommerce_csp_validate_payment_gateway_on_update_order_review', '__return_true' );
+add_filter('woocommerce_csp_validate_shipping_destination_on_update_order_review', '__return_true');
+
+
+
 /**
  * WC Support
  */
@@ -389,41 +400,3 @@ add_filter('gtm_ecommerce_woo_item', function ($item, $product) {
 
     return $item;
 }, 999, 2);
-
-
-
-
-
-
-
-
-
-// add_filter( 'woocommerce_csp_validate_shipping_method_on_update_order_review', '__return_true' );
-// add_filter( 'woocommerce_csp_validate_payment_gateway_on_update_order_review', '__return_true' );
-add_filter('woocommerce_csp_validate_shipping_destination_on_update_order_review', '__return_true');
-
-add_action('wp_footer', 'lb_force_checkout_update', 0);
-function lb_force_checkout_update()
-{
-    ?>
-    <script type="text/javascript">
-        jQuery('body').on('init_checkout', function() {
-            jQuery('form.checkout').trigger('update');
-        });
-
-        const lbCheckErrors = () => {
-            var errorContainer = jQuery('form.checkout .woocommerce-NoticeGroup-updateOrderReview ul > li');
-            if (errorContainer.length > 0) {
-                jQuery('form.checkout .lb-wc-payment-actions').addClass('lb-wc-payment-actions--error');
-            } else {
-                jQuery('form.checkout .lb-wc-payment-actions').removeClass('lb-wc-payment-actions--error');
-            }
-        }
-
-        // On validate form fields
-        jQuery('form.checkout').on('validate', lbCheckErrors);
-        // On update checkout fields
-        jQuery('body').on('updated_checkout', lbCheckErrors);
-    </script>
-    <?php
-}
