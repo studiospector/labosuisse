@@ -403,16 +403,34 @@ add_filter('gtm_ecommerce_woo_item', function ($item, $product) {
 
 
 
-add_filter('woocommerce_countries', 'lb_filter_country_in_checkout');
-function lb_filter_country_in_checkout($countries)
+// add_filter('woocommerce_countries', 'lb_filter_country_in_checkout');
+// function lb_filter_country_in_checkout($countries)
+// {
+//     // BE, IT, FR, IE, ES, NL, DE
+//     $accepted_en = array('BE' => null, 'FR' => null, 'IE' => null, 'ES' => null, 'NL' => null, 'DE' => null);
+//     $accepted_it = array('IT' => null);
+
+//     $accepted = lb_get_current_lang() == 'it' ? $accepted_it : $accepted_en;
+
+//     $result = array_intersect_key($countries, $accepted);
+
+//     return $result;
+// }
+
+
+add_filter('woocommerce_countries_allowed_countries', 'lb_filter_wc_allowed_countries', 10, 1);
+function lb_filter_wc_allowed_countries($countries)
 {
-    // BE, IT, FR, IE, ES, NL, DE
-    $accepted_en = array('BE' => null, 'FR' => null, 'IE' => null, 'ES' => null, 'NL' => null, 'DE' => null);
-    $accepted_it = array('IT' => null);
+    // Cart or checkout page
+    if (is_cart() || is_checkout()) {
+        // BE, IT, FR, IE, ES, NL, DE
+        $accepted_en = array('BE' => null, 'FR' => null, 'IE' => null, 'ES' => null, 'NL' => null, 'DE' => null);
+        $accepted_it = array('IT' => null);
 
-    $accepted = lb_get_current_lang() == 'it' ? $accepted_it : $accepted_en;
+        $accepted = lb_get_current_lang() == 'it' ? $accepted_it : $accepted_en;
 
-    $result = array_intersect_key($countries, $accepted);
+        $countries = array_intersect_key($countries, $accepted);
+    }
 
-    return $result;
+    return $countries;
 }
