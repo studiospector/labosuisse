@@ -54,7 +54,7 @@ class Caffeina_Country_Based_Restrictions
 	 */
 	function admin_error_notice()
 	{
-		$message = esc_html('Caffeina Country Based Restrictions requires WooCommerce 3.0 or newer', 'caffeina-country-based-restrictions');
+		$message = esc_html__('Caffeina Country Based Restrictions richiede WooCommerce 3.0 o successivo', 'caffeina-country-based-restrictions');
 		echo "<div class='error'><p>$message</p></div>";
 	}
 
@@ -96,8 +96,8 @@ class Caffeina_Country_Based_Restrictions
 			<p>
 				<?php
 				printf(
-					esc_html(
-						'Please install and activate %sWooCommerce%s for Caffeina Country Based Restrictions!',
+					esc_html__(
+						'Installa e attiva %sWooCommerce%s per Caffeina Country Based Restrictions!',
 						'caffeina-country-based-restrictions'
 					),
 					'<a href="' . admin_url('plugin-install.php?tab=search&s=WooCommerce&plugin-search-input=Search+Plugins') . '">',
