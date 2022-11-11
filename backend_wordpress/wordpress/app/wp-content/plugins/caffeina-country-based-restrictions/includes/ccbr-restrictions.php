@@ -61,9 +61,10 @@ class CCBR_Restrictions
 		// Callback on activate plugin
 		register_activation_hook(__FILE__, array($this, 'on_activation'));
 
-		// Hook for geolocation_update_database	
+		// Hook for geolocation_update_database 
 		add_filter('woocommerce_maxmind_geolocation_update_database_periodically', array($this, 'update_geo_database'), 10, 1);
 
+		// Check if product is purchasable
 		add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 100, 2);
 		add_filter('woocommerce_variation_is_purchasable', array($this, 'is_purchasable'), 100, 2);
 	}
