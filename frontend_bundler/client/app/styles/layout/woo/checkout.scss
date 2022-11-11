@@ -61,6 +61,23 @@
         margin-top: 60px;
     }
 
+    #billing_country_field,
+    #shipping_country_field {
+        .woocommerce-input-wrapper {
+            & > strong {
+                display: block;
+                padding: 16.5px;
+                background-color: map-get($colors, "white");
+                border: 1px solid map-get($colors, "grey-3");
+                border-radius: 4px;
+                font-size: rem(13);
+                font-weight: 400;
+                line-height: 1.2;
+                font-weight: 400;
+            }
+        }
+    }
+
     &__details {
         border-radius: 3px;
         background-color: map-get($colors, "primary-light-1");
