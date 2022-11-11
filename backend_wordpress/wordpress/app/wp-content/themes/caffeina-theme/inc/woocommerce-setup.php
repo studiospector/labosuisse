@@ -17,15 +17,6 @@ remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_pro
 
 
 /**
- * Conditional Shipping checks on checkout trigger on order update
- */
-// add_filter( 'woocommerce_csp_validate_shipping_method_on_update_order_review', '__return_true' );
-// add_filter( 'woocommerce_csp_validate_payment_gateway_on_update_order_review', '__return_true' );
-add_filter('woocommerce_csp_validate_shipping_destination_on_update_order_review', '__return_true');
-
-
-
-/**
  * WC Support
  */
 add_action('init', 'lb_wc_support');
@@ -401,23 +392,9 @@ add_filter('gtm_ecommerce_woo_item', function ($item, $product) {
     return $item;
 }, 999, 2);
 
-
-
-// add_filter('woocommerce_countries', 'lb_filter_country_in_checkout');
-// function lb_filter_country_in_checkout($countries)
-// {
-//     // BE, IT, FR, IE, ES, NL, DE
-//     $accepted_en = array('BE' => null, 'FR' => null, 'IE' => null, 'ES' => null, 'NL' => null, 'DE' => null);
-//     $accepted_it = array('IT' => null);
-
-//     $accepted = lb_get_current_lang() == 'it' ? $accepted_it : $accepted_en;
-
-//     $result = array_intersect_key($countries, $accepted);
-
-//     return $result;
-// }
-
-
+/**
+ * Allowed Countries
+ */
 add_filter('woocommerce_countries_allowed_countries', 'lb_filter_wc_allowed_countries', 10, 1);
 function lb_filter_wc_allowed_countries($countries)
 {
