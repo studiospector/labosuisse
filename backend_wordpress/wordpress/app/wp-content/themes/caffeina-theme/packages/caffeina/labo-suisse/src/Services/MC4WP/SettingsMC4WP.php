@@ -22,7 +22,7 @@ class SettingsMC4WP
     /**
      * Set site lang on all subscribers
      */
-    private function lb_set_mc4wp_subscriber_lang(\MC4WP_MailChimp_Subscriber $subscriber)
+    public function lb_set_mc4wp_subscriber_lang(\MC4WP_MailChimp_Subscriber $subscriber)
     {
         // do nothing if WPML is not activated
         if (!defined('ICL_LANGUAGE_CODE')) {
@@ -37,7 +37,7 @@ class SettingsMC4WP
     /**
      * Tell MC4WP to subscribe to a certain list based on the WPML language that is being viewed
      */
-    private function lb_filter_mc4wp_lists($lists)
+    public function lb_filter_mc4wp_lists($lists)
     {
         // do nothing if WPML is not activated
         if (!defined('ICL_LANGUAGE_CODE')) {
@@ -60,7 +60,7 @@ class SettingsMC4WP
     /**
      * Set tag to all new subscribers added using WooCommerce Checkout integration
      */
-    private function lb_set_mc4wp_tag_on_checkout(\MC4WP_MailChimp_Subscriber $subscriber)
+    public function lb_set_mc4wp_tag_on_checkout(\MC4WP_MailChimp_Subscriber $subscriber)
     {
         // do nothing if WPML is not activated
         if (!defined('ICL_LANGUAGE_CODE')) {
