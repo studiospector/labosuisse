@@ -37,7 +37,6 @@ import GTMTracking from './GTMTracking'
 import AsyncCart from './AsyncCart'
 import Multicountry from './Multicountry'
 import MulticountryGeolocation from './MulticountryGeolocation'
-import LbWcCheckout from './Checkout'
 
 const components = {
     scrollbar: {
@@ -203,11 +202,6 @@ const components = {
     multicountryGeolocation: {
         selector: '.js-multicountry-geolocation',
         type: MulticountryGeolocation,
-        optional: true
-    },
-    lbWcCheckout: {
-        selector: '.js-lb-wc-checkout',
-        type: LbWcCheckout,
         optional: true
     },
 }
