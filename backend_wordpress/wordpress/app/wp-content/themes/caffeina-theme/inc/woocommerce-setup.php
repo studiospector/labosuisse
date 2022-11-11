@@ -135,20 +135,29 @@ add_filter('woocommerce_quantity_input_classes', function ($value, $product) {
  */
 add_filter('woocommerce_variable_sale_price_html', 'lb_variable_product_price', 10, 2);
 add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2);
-function lb_variable_product_price($v_price, $v_product)
+function lb_variable_product_price($price, $product)
 {
+    if (is_admin()) {
+        return $price;
+    }
+
+    if (!$product->is_purchasable()) {
+        return null;
+    }
+
+    // Classes for price in single product page or cards in archive
     $classes = !is_product() ? 'lb-product-card__price__desc' : 'lb-price-label infobox__paragraph--small';
+    // Get min price
+    $min_price = $product->get_variation_price('min', true);
 
-    $min_price = $v_product->get_variation_price('min', true);
-
-    $price_html = sprintf(
+    $custom_price = sprintf(
         __('%1$sa partire da%2$s %3$s', 'labo-suisse-theme'),
         '<span class="' . $classes . '">',
         '</span>',
         wc_price($min_price),
     );
 
-    return $price_html;
+    return $custom_price;
 }
 
 
