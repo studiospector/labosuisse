@@ -18,6 +18,7 @@
 defined( 'ABSPATH' ) || exit;
 
 if ( ! wp_doing_ajax() ) {
+    ?><div class="lb-wc-payment-actions"><?php
 	do_action( 'woocommerce_review_order_before_payment' );
 }
 ?>
@@ -81,4 +82,5 @@ if ( ! wp_doing_ajax() ) {
 <?php
 if ( ! wp_doing_ajax() ) {
 	do_action( 'woocommerce_review_order_after_payment' );
+    ?></div><?php
 }

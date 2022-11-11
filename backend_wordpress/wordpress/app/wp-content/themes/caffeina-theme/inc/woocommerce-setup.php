@@ -3,22 +3,25 @@
 /**
  * Re add action of WooCommerce hooks because of ajax call
  */
-add_action( 'woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10 );
+add_action('woocommerce_before_shop_loop_item_title', 'woocommerce_template_loop_product_thumbnail', 10);
 
-add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );
-add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5 );
+add_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10);
+add_action('woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_rating', 5);
 
-add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
-add_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+add_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
+add_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10);
 
 remove_action('woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10);
 remove_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5);
 
+
+
 /**
  * WC Support
  */
-add_action( 'init', 'lb_wc_support' );
-function lb_wc_support() {
+add_action('init', 'lb_wc_support');
+function lb_wc_support()
+{
     add_post_type_support('product', 'page-attributes');
     remove_theme_support('wc-product-gallery-lightbox');
 }
@@ -140,7 +143,7 @@ function lb_variable_product_price($v_price, $v_product)
 
     $price_html = sprintf(
         __('%1$sa partire da%2$s %3$s', 'labo-suisse-theme'),
-        '<span class="'. $classes .'">',
+        '<span class="' . $classes . '">',
         '</span>',
         wc_price($min_price),
     );
@@ -166,11 +169,9 @@ function lb_custom_form_field_args($args, $key, $value)
                 'data-variant' => 'tertiary',
             ];
             $args['label'] = '';
-        }
-        else if (in_array($args['type'], ['country', 'state'])) {
+        } else if (in_array($args['type'], ['country', 'state'])) {
             $args['label_class'] = ['lb-wc-label'];
-        }
-        else if (in_array($args['type'], ['textarea'])) {
+        } else if (in_array($args['type'], ['textarea'])) {
             $args['class'] = ['custom-input', 'custom-field'];
             $args['label_class'] = ['lb-wc-label'];
         }
@@ -224,16 +225,17 @@ function lb_add_account_orders_column_rows($order)
 /**
  * Ajax Fragments
  */
-add_filter( 'woocommerce_add_to_cart_fragments', 'lb_wc_header_add_to_cart_fragment' );
-function lb_wc_header_add_to_cart_fragment( $fragments ) {
-	global $woocommerce;
+add_filter('woocommerce_add_to_cart_fragments', 'lb_wc_header_add_to_cart_fragment');
+function lb_wc_header_add_to_cart_fragment($fragments)
+{
+    global $woocommerce;
 
-	ob_start();
-	?>
-	<span class="lb-wc-cart-total-count lb-icon__counter"><?php echo $woocommerce->cart->cart_contents_count > 0 ? $woocommerce->cart->cart_contents_count : ''; ?></span>
-	<?php
-	$fragments['span.lb-wc-cart-total-count'] = ob_get_clean();
-	return $fragments;
+    ob_start();
+?>
+    <span class="lb-wc-cart-total-count lb-icon__counter"><?php echo $woocommerce->cart->cart_contents_count > 0 ? $woocommerce->cart->cart_contents_count : ''; ?></span>
+<?php
+    $fragments['span.lb-wc-cart-total-count'] = ob_get_clean();
+    return $fragments;
 }
 
 /**
@@ -296,15 +298,15 @@ function lb_wc_kses_notice_allowed_tags($allowed_tags)
 /**
  * Woo discount rules
  */
-add_filter('woocommerce_get_item_data', function($item_data, $cart_item) {
+add_filter('woocommerce_get_item_data', function ($item_data, $cart_item) {
     if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
         $item_data = [];
     }
 
     return $item_data;
-},100,2);
+}, 100, 2);
 
-add_filter('woocommerce_cart_item_quantity', function($product_quantity, $cart_item_key, $cart_item){
+add_filter('woocommerce_cart_item_quantity', function ($product_quantity, $cart_item_key, $cart_item) {
     if (isset($cart_item['wdr_free_product']) and $cart_item['wdr_free_product'] == 'Free') {
         return null;
     }
@@ -327,11 +329,11 @@ function getCartItemQuantity($product_subtotal, $cart_item, $cart_item_key)
     return $product_subtotal;
 }
 
-add_filter('woocommerce_cart_contents_count', function() {
+add_filter('woocommerce_cart_contents_count', function () {
     $cart_contents_count = 0;
 
-    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
-        if(!isset($cart_item['wdr_free_product']) or $cart_item['wdr_free_product'] != 'Free') {
+    foreach (WC()->cart->get_cart() as $cart_item_key => $cart_item) {
+        if (!isset($cart_item['wdr_free_product']) or $cart_item['wdr_free_product'] != 'Free') {
             $cart_contents_count++;
         }
     }
@@ -339,7 +341,7 @@ add_filter('woocommerce_cart_contents_count', function() {
     return $cart_contents_count;
 });
 
-add_filter( 'woocommerce_adjust_non_base_location_prices', '__return_false' ) ;
+add_filter('woocommerce_adjust_non_base_location_prices', '__return_false');
 
 /**
  * Enforce Password Strength
@@ -377,14 +379,35 @@ add_filter('gtm_ecommerce_woo_item', function ($item, $product) {
 
     // Add Product cats
     $productCats = (get_class($product) === 'WC_Product_Variation') ? get_the_terms($product->get_parent_id(), 'product_cat') : get_the_terms($product->get_id(), 'product_cat');
-    if ( is_array( $productCats ) ) {
+    if (is_array($productCats)) {
         $categories = array_map(
-            function( $category ) {
-                return $category->name; },
+            function ($category) {
+                return $category->name;
+            },
             $productCats
         );
-        $item->setItemCategories( $categories );
+        $item->setItemCategories($categories);
     }
 
     return $item;
 }, 999, 2);
+
+/**
+ * Allowed Countries
+ */
+add_filter('woocommerce_countries_allowed_countries', 'lb_filter_wc_allowed_countries', 10, 1);
+function lb_filter_wc_allowed_countries($countries)
+{
+    // Cart or checkout page
+    if (is_cart() || is_checkout()) {
+        // BE, IT, FR, IE, ES, NL, DE
+        $accepted_en = array('BE' => null, 'FR' => null, 'IE' => null, 'ES' => null, 'NL' => null, 'DE' => null);
+        $accepted_it = array('IT' => null);
+
+        $accepted = lb_get_current_lang() == 'it' ? $accepted_it : $accepted_en;
+
+        $countries = array_intersect_key($countries, $accepted);
+    }
+
+    return $countries;
+}

@@ -148,6 +148,7 @@ body.lb-is-shop {
     }
 
     .woocommerce-error {
+        flex-direction: column;
         border-top: 5px solid map-get($colors, "secondary");
 
         &::before {
