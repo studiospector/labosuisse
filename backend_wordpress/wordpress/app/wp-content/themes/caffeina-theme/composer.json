@@ -5,7 +5,8 @@
   "require": {
     "timber/timber": "^1.19.1",
     "caffeina/labo-suisse":"@dev",
-    "nesbot/carbon": "^2.57.0"
+    "nesbot/carbon": "^2.57.0",
+    "jenssegers/agent": "^v2.6.4"
   },
   "license": "MIT",
   "repositories": {
