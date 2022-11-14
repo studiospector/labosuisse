@@ -242,7 +242,8 @@
         "woocommerce_items_in_cart",
         "woocommerce_cart_hash",
         "wp_woocommerce_session_",
-        "wordpress_logged_in"
+        "wordpress_logged_in",
+        "country"
     ],
     "pgcache.reject.request_head": false,
     "pgcache.purge.front_page": false,
