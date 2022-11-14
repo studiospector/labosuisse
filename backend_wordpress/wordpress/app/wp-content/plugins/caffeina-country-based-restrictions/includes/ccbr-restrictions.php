@@ -109,9 +109,6 @@ class CCBR_Restrictions
     {
         if (!is_admin()) {
             $geolocation = $this->geolocate();
-//            $geolocation = [
-//                'countryCode' => 'IT'
-//            ];
 
             global $sitepress;
 
@@ -121,10 +118,10 @@ class CCBR_Restrictions
             $wpml_product_details = apply_filters('wpml_post_language_details', null, $product->get_id());
 
             // Check for IT Catalog => Countries -> IT
-            if ($current_lang == 'it' && ($current_lang == $wpml_product_details['language_code']) && $geolocation != 'IT') {
+            if ($current_lang == 'it' && ($current_lang == $wpml_product_details['language_code']) && $geolocation['countryCode'] != 'IT') {
                 return false;
                 // Check for EN Catalog => Countries -> BE, IT, FR, IE, ES, NL, DE
-            } elseif ($current_lang == 'en' && ($current_lang == $wpml_product_details['language_code']) && !in_array($geolocation, $this->availableCountries)) {
+            } elseif ($current_lang == 'en' && ($current_lang == $wpml_product_details['language_code']) && !in_array($geolocation['countryCode'], $this->availableCountries)) {
                 return false;
             }
         }
@@ -134,23 +131,13 @@ class CCBR_Restrictions
 
     private function geolocate()
     {
-        if (isset($_COOKIE['country'])) {
-            return $_COOKIE['country'];
-        }
-
-        $ip = \WC_Geolocation::get_ip_address();
-        $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
-
-        //for local environment
-        if (empty($geolocationInfo['country'])) {
+        if (wp_get_environment_type() == 'local') {
             $ip = \WC_Geolocation::get_external_ip_address();
-            $geolocationInfo = \WC_Geolocation::geolocate_ip($ip);
+        } else {
+            $ip = \WC_Geolocation::get_ip_address();
         }
 
-        $geolocation = array_merge($geolocationInfo, $this->getLocationInfo($ip));
-        setcookie('country',  $geolocation['countryCode'], time()+31556926);
-
-        return $geolocation;
+        return $this->getLocationInfo($ip);
     }
 
     private function getLocationInfo($ip)

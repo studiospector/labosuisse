@@ -242,8 +242,7 @@
         "woocommerce_items_in_cart",
         "woocommerce_cart_hash",
         "wp_woocommerce_session_",
-        "wordpress_logged_in",
-        "country"
+        "wordpress_logged_in"
     ],
     "pgcache.reject.request_head": false,
     "pgcache.purge.front_page": false,
@@ -961,7 +960,7 @@
     },
     "extensions.active_dropin": [],
     "plugin.license_key": "xjHRAoWZp8GjVUCEoQgcfplbu26BElEz",
-    "plugin.type": "pro_dev",
+    "plugin.type": "",
     "jquerymigrate.disabled": false,
     "imageservice": {
         "compression": "lossy",
