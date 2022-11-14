@@ -26,8 +26,9 @@ class CCBR_Restrictions
      */
     private static $instance;
 
+	private $country;
+
     private $availableCountries = [
-        'IT',
         'BE',
         'FR',
         'DE',
@@ -58,7 +59,8 @@ class CCBR_Restrictions
      */
     public function __construct()
     {
-        $this->init();
+		$this->init();
+		$this->country = null;
     }
 
     /**
@@ -68,6 +70,10 @@ class CCBR_Restrictions
      */
     public function init()
     {
+		add_action('init', function() {
+			$this->country = $this->geolocate();
+		});
+		
         // Callback on activate plugin
         register_activation_hook(__FILE__, array($this, 'on_activation'));
 
@@ -75,8 +81,8 @@ class CCBR_Restrictions
         add_filter('woocommerce_maxmind_geolocation_update_database_periodically', array($this, 'update_geo_database'), 10, 1);
 
         // Check if product is purchasable
-        add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 100, 2);
-        add_filter('woocommerce_variation_is_purchasable', array($this, 'is_purchasable'), 100, 2);
+        add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 1, 2);
+        // add_filter('woocommerce_variation_is_purchasable', array($this, 'is_purchasable'), 1, 2);
     }
 
     /**
@@ -108,8 +114,6 @@ class CCBR_Restrictions
     public function is_purchasable($is_purchasable, $product)
     {
         if (!is_admin()) {
-            $geolocation = $this->geolocate();
-
             global $sitepress;
 
             // Current site lang
@@ -118,10 +122,10 @@ class CCBR_Restrictions
             $wpml_product_details = apply_filters('wpml_post_language_details', null, $product->get_id());
 
             // Check for IT Catalog => Countries -> IT
-            if ($current_lang == 'it' && ($current_lang == $wpml_product_details['language_code']) && $geolocation['countryCode'] != 'IT') {
+            if ($current_lang == 'it' && ($current_lang == $wpml_product_details['language_code']) && $this->country != 'IT') {
                 return false;
                 // Check for EN Catalog => Countries -> BE, IT, FR, IE, ES, NL, DE
-            } elseif ($current_lang == 'en' && ($current_lang == $wpml_product_details['language_code']) && !in_array($geolocation['countryCode'], $this->availableCountries)) {
+            } elseif ($current_lang == 'en' && ($current_lang == $wpml_product_details['language_code']) && !in_array($this->country, $this->availableCountries)) {
                 return false;
             }
         }
@@ -131,6 +135,10 @@ class CCBR_Restrictions
 
     private function geolocate()
     {
+		if (isset($_COOKIE['country'])) {
+			return $_COOKIE['country'];
+		}
+
         if (wp_get_environment_type() == 'local') {
             $ip = \WC_Geolocation::get_external_ip_address();
         } else {
@@ -157,9 +165,6 @@ class CCBR_Restrictions
 
 		setcookie('country', $response->countryCode, time()+31556926);
 
-        return [
-            'country' => $response->country,
-            'countryCode' => $response->countryCode
-        ];
+        return $response->countryCode;
     }
 }
