@@ -155,6 +155,8 @@ class CCBR_Restrictions
 
         curl_close($curl);
 
+		setcookie('country', $response->countryCode, time()+31556926);
+
         return [
             'country' => $response->country,
             'countryCode' => $response->countryCode
