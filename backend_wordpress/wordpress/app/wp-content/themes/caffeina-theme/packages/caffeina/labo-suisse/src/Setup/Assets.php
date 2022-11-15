@@ -97,6 +97,12 @@ class Assets
             // Woo discount rules Pro plugin
             wp_dequeue_script('woo_discount_pro_script');
         }
+
+        if (!is_checkout()) {
+            // Stripe
+            wp_dequeue_script('stripe');
+            wp_dequeue_script('woocommerce_stripe');
+        }
     }
 
 
@@ -144,6 +150,11 @@ class Assets
 
             // Woo discount rules Pro plugin
             wp_dequeue_style('woo_discount_pro_style');
+        }
+
+        if (!is_checkout()) {
+            // Stripe
+            wp_dequeue_style('stripe_styles');
         }
     }
 
