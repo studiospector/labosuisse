@@ -220,7 +220,11 @@
         "\/carrello",
         "\/en\/cart",
         "\/carrello\/pagamento",
-        "\/en\/cart\/checkout"
+        "\/en\/cart\/checkout",
+        "\/categoria-prodotto*",
+        "\/en\/product-category*",
+        "\/prodotto*",
+        "\/en\/product*"
     ],
     "pgcache.reject.categories": [
         ""
@@ -242,8 +246,7 @@
         "woocommerce_items_in_cart",
         "woocommerce_cart_hash",
         "wp_woocommerce_session_",
-        "wordpress_logged_in",
-        "country"
+        "wordpress_logged_in"
     ],
     "pgcache.reject.request_head": false,
     "pgcache.purge.front_page": false,
