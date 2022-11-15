@@ -224,7 +224,9 @@
         "\/categoria-prodotto*",
         "\/en\/product-category*",
         "\/prodotto*",
-        "\/en\/product*"
+        "\/en\/product*",
+        "\/brands*",
+        "\/en\/brands*"
     ],
     "pgcache.reject.categories": [
         ""
