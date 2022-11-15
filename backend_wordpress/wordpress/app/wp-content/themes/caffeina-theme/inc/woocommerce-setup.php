@@ -420,3 +420,34 @@ function lb_filter_wc_allowed_countries($countries)
 
     return $countries;
 }
+
+/**
+ * Filters the list of attachment image attributes
+ */
+add_filter('wp_get_attachment_image_attributes', 'lb_filter_wp_get_attachment_image_attributes', 10, 3);
+function lb_filter_wp_get_attachment_image_attributes($attr, $attachment, $size)
+{
+    if ((is_product() || is_product_category() || is_tax('lb-brand') && !is_admin())) {
+        $attr['class'] .= ' lazyload';
+
+        if (!empty($attr['src'])) {
+            $attr['data-src'] = $attr['src'];
+            unset($attr['src']);
+        }
+
+        if (!empty($attr['srcset'])) {
+            $attr['data-srcset'] = $attr['srcset'];
+            unset($attr['srcset']);
+        }
+
+        if (!empty($attr['loading'])) {
+            unset($attr['loading']);
+        }
+
+        if (!empty($attr['decoding'])) {
+            unset($attr['decoding']);
+        }
+    }
+
+    return $attr;
+}

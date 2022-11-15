@@ -10,9 +10,6 @@ class Assets
         add_action('wp_enqueue_scripts', [$this, 'lb_register_scripts'], 999);
         // Enqueue site style
         add_action('wp_enqueue_scripts', [$this, 'lb_register_styles'], 999);
-        add_action('wp_head', function() {
-            wp_dequeue_style('cbr-fronend-css');
-        }, 999);
         // Enqueue admin style
         add_action('admin_enqueue_scripts', [$this, 'lb_register_admin_styles']);
         // Enqueue admin login page style
@@ -20,7 +17,7 @@ class Assets
         // Enqueue editor scripts and styles
         add_action('enqueue_block_assets', [$this, 'lb_enqueue_editor_assets']);
 
-        if (is_front_page()) {
+        if (is_front_page() || is_product()) {
             add_filter('wpcf7_load_js', '__return_false');
             add_filter('wpcf7_load_css', '__return_false');
         }
@@ -47,25 +44,33 @@ class Assets
         wp_enqueue_script('jquery');
 
         // Dequeue other scripts
-        // if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {}
-        
-        if (is_front_page()) {
+        if (is_front_page() || is_product()) {
+            // WooCommerce
+            // wp_deregister_script('jquery-blockui');
+            // wp_dequeue_script('jquery-blockui');
+            wp_dequeue_script('zoom');
+            wp_dequeue_script('flexslider');
+            // wp_deregister_script('underscore');
+            // wp_dequeue_script('underscore');
             wp_dequeue_script('selectWoo');
             wp_deregister_script('selectWoo');
-            wp_dequeue_script('wcml-mc-scripts');
 
+            // CF7
             wp_dequeue_script('contact-form-7');
             wp_dequeue_script('contact-form-7-js-extra');
 
+            // Recaptcha plugin
             wp_dequeue_script('google-recaptcha');
             wp_deregister_script('google-recaptcha');
+        }
 
+        if (is_front_page()) {
+            // Woocommerce
             wp_dequeue_script('wc-add-payment-method');
             wp_dequeue_script('wc-lost-password');
             wp_dequeue_script('wc_price_slider');
             wp_dequeue_script('wc-single-product');
             wp_dequeue_script('wc-add-to-cart');
-            // wp_dequeue_script('wc-cart-fragments');
             wp_dequeue_script('wc-credit-card-form');
             wp_dequeue_script('wc-checkout');
             wp_dequeue_script('wc-add-to-cart-variation');
@@ -75,22 +80,21 @@ class Assets
             wp_dequeue_script('woocommerce');
             wp_dequeue_script('prettyPhoto');
             wp_dequeue_script('prettyPhoto-init');
-            // wp_dequeue_script('jquery-blockui');
-            // wp_dequeue_script('jquery-placeholder');
-            // wp_dequeue_script('jquery-payment');
             wp_dequeue_script('fancybox');
             wp_dequeue_script('jqueryui');
 
+            // Paypal buttons
             wp_dequeue_script('ppcp-smart-button');
+
+            // WooCommerce multilingual plugin
             wp_dequeue_script('wcml-front-scripts');
+            wp_dequeue_script('wcml-mc-scripts');
             wp_dequeue_script('cart-widget');
-
-            wp_dequeue_script('cbr-pro-front-js');
-            wp_dequeue_script('select2-cbr');
-
+            
+            // Woo discount rules plugin
             wp_dequeue_script('awdr-main');
             wp_dequeue_script('awdr-dynamic-price');
-
+            // Woo discount rules Pro plugin
             wp_dequeue_script('woo_discount_pro_script');
         }
     }
@@ -107,14 +111,13 @@ class Assets
         // Enqueue style
         // wp_enqueue_style('lb-main');
 
-        // Dequeue styles
+        // WP styles
         wp_dequeue_style('wp-block-library');
         wp_dequeue_style('wp-block-library-theme');
-        // wp_dequeue_style('wp-block-library-css');
         wp_dequeue_style('classic-theme-styles');
-
         wp_dequeue_style('wc-blocks-style');
 
+        // Woocommerce multilingual plugin
         wp_dequeue_style('wcml-dropdown-0');
         wp_dequeue_style('wpml-legacy-horizontal-list-0');
 
@@ -123,12 +126,8 @@ class Assets
             wp_dequeue_style('global-styles');
         }
 
-        // if (!is_admin() && (!is_cart() || !is_checkout() || !is_account_page())) {}
-        
-        if (is_front_page()) {
-            wp_dequeue_style('select2');
-            wp_deregister_style('select2');
-
+        if (is_front_page() || is_product()) {
+            // WooCommerce
             wp_dequeue_style('woocommerce_frontend_styles');
             wp_dequeue_style('woocommerce-general');
             wp_dequeue_style('woocommerce-layout');
@@ -137,12 +136,13 @@ class Assets
             wp_dequeue_style('woocommerce_chosen_styles');
             wp_dequeue_style('woocommerce_prettyPhoto_css');
             wp_dequeue_style('woocommerce-inline');
-
+            wp_dequeue_style('select2');
+            wp_deregister_style('select2');
+            
+            // CF7
             wp_dequeue_style('contact-form-7');
 
-            wp_dequeue_style('cbr-pro-front-css');
-            wp_dequeue_style('select2-cbr');
-
+            // Woo discount rules Pro plugin
             wp_dequeue_style('woo_discount_pro_style');
         }
     }
