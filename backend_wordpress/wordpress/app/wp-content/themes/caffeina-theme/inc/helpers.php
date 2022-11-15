@@ -316,9 +316,8 @@ function lb_pagination()
 function lb_header()
 {
     // $lang_selector = do_shortcode('[wpml_language_selector_widget]');
-    $agent = new Jenssegers\Agent\Agent();
 
-    $header = [
+    return array(
         'pre' => [
             'text' => get_field('lb_preheader_text', 'option'),
         ],
@@ -336,17 +335,10 @@ function lb_header()
             'required' => false,
             'buttonTypeNext' => 'button',
             'variants' => ['secondary'],
-        ]
-    ];
-
-    if($agent->isDesktop()) {
-        $header['menu_desktop'] = ['items' => Menu::desktop()];
-    } else {
-        $header['menu_mobile'] = ['items' => Menu::mobile()];
-    }
-
-    return $header;
-
+        ],
+        'menu_desktop' => ['items' => Menu::desktop()],
+        'menu_mobile' => ['items' => Menu::mobile()],
+    );
 }
 
 /**
