@@ -135,20 +135,29 @@ add_filter('woocommerce_quantity_input_classes', function ($value, $product) {
  */
 add_filter('woocommerce_variable_sale_price_html', 'lb_variable_product_price', 10, 2);
 add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2);
-function lb_variable_product_price($v_price, $v_product)
+function lb_variable_product_price($price, $product)
 {
+    if (is_admin()) {
+        return $price;
+    }
+
+    if (!$product->is_purchasable()) {
+        return null;
+    }
+
+    // Classes for price in single product page or cards in archive
     $classes = !is_product() ? 'lb-product-card__price__desc' : 'lb-price-label infobox__paragraph--small';
+    // Get min price
+    $min_price = $product->get_variation_price('min', true);
 
-    $min_price = $v_product->get_variation_price('min', true);
-
-    $price_html = sprintf(
+    $custom_price = sprintf(
         __('%1$sa partire da%2$s %3$s', 'labo-suisse-theme'),
         '<span class="' . $classes . '">',
         '</span>',
         wc_price($min_price),
     );
 
-    return $price_html;
+    return $custom_price;
 }
 
 
@@ -410,4 +419,35 @@ function lb_filter_wc_allowed_countries($countries)
     }
 
     return $countries;
+}
+
+/**
+ * Filters the list of attachment image attributes
+ */
+add_filter('wp_get_attachment_image_attributes', 'lb_filter_wp_get_attachment_image_attributes', 10, 3);
+function lb_filter_wp_get_attachment_image_attributes($attr, $attachment, $size)
+{
+    if ((is_product() || is_product_category() || is_tax('lb-brand') && !is_admin())) {
+        $attr['class'] .= ' lazyload';
+
+        if (!empty($attr['src'])) {
+            $attr['data-src'] = $attr['src'];
+            unset($attr['src']);
+        }
+
+        if (!empty($attr['srcset'])) {
+            $attr['data-srcset'] = $attr['srcset'];
+            unset($attr['srcset']);
+        }
+
+        if (!empty($attr['loading'])) {
+            unset($attr['loading']);
+        }
+
+        if (!empty($attr['decoding'])) {
+            unset($attr['decoding']);
+        }
+    }
+
+    return $attr;
 }

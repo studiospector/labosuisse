@@ -220,7 +220,13 @@
         "\/carrello",
         "\/en\/cart",
         "\/carrello\/pagamento",
-        "\/en\/cart\/checkout"
+        "\/en\/cart\/checkout",
+        "\/categoria-prodotto*",
+        "\/en\/product-category*",
+        "\/prodotto*",
+        "\/en\/product*",
+        "\/brands*",
+        "\/en\/brands*"
     ],
     "pgcache.reject.categories": [
         ""

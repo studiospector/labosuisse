@@ -73,6 +73,7 @@ class ThemeSetup extends Timber\Site
         add_filter('wpseo_exclude_from_sitemap_by_post_ids', array($this, 'lb_exclude_specific_posts_from_sitemap'));
         add_filter('wpseo_sitemap_exclude_post_type', array($this, 'lb_exclude_post_types_from_sitemap'), 10, 2);
         add_action('init', [$this, 'lb_update_custom_roles']);
+        add_action('init', [$this, 'lb_update_editor_role']);
 
         add_filter('woocommerce_enqueue_styles', '__return_empty_array', 999);
 
@@ -563,6 +564,64 @@ class ThemeSetup extends Timber\Site
 
             update_option('lb_custom_roles_version', 1);
         }
+    }
+
+    public function lb_update_editor_role()
+    {
+        $editor = get_role('editor');
+        $editor->add_cap('assign_product_terms');
+        $editor->add_cap('assign_shop_coupon_terms');
+        $editor->add_cap('assign_shop_order_terms');
+        $editor->add_cap('delete_others_products');
+        $editor->add_cap('delete_others_shop_coupons');
+        $editor->add_cap('delete_others_shop_orders');
+        $editor->add_cap('delete_private_products');
+        $editor->add_cap('delete_private_shop_coupons');
+        $editor->add_cap('delete_private_shop_orders');
+        $editor->add_cap('delete_product');
+        $editor->add_cap('delete_product_terms');
+        $editor->add_cap('delete_products');
+        $editor->add_cap('delete_published_products');
+        $editor->add_cap('delete_published_shop_coupons');
+        $editor->add_cap('delete_published_shop_orders');
+        $editor->add_cap('delete_shop_coupon');
+        $editor->add_cap('delete_shop_coupon_terms');
+        $editor->add_cap('delete_shop_coupons');
+        $editor->add_cap('delete_shop_order');
+        $editor->add_cap('delete_shop_order_terms');
+        $editor->add_cap('delete_shop_orders');
+        $editor->add_cap('edit_others_products');
+        $editor->add_cap('edit_others_shop_coupons');
+        $editor->add_cap('edit_others_shop_orders');
+        $editor->add_cap('edit_private_products');
+        $editor->add_cap('edit_private_shop_coupons');
+        $editor->add_cap('edit_private_shop_orders');
+        $editor->add_cap('edit_product');
+        $editor->add_cap('edit_product_terms');
+        $editor->add_cap('edit_products');
+        $editor->add_cap('edit_published_products');
+        $editor->add_cap('edit_published_shop_coupons');
+        $editor->add_cap('edit_published_shop_orders');
+        $editor->add_cap('edit_shop_coupon');
+        $editor->add_cap('edit_shop_coupon_terms');
+        $editor->add_cap('edit_shop_coupons');
+        $editor->add_cap('edit_shop_order');
+        $editor->add_cap('edit_shop_order_terms');
+        $editor->add_cap('edit_shop_orders');
+        $editor->add_cap('manage_product_terms');
+        $editor->add_cap('manage_shop_coupon_terms');
+        $editor->add_cap('manage_shop_order_terms');
+        $editor->add_cap('manage_woocommerce');
+        $editor->add_cap('publish_products');
+        $editor->add_cap('publish_shop_coupons');
+        $editor->add_cap('publish_shop_orders');
+        $editor->add_cap('read_private_products');
+        $editor->add_cap('read_private_shop_coupons');
+        $editor->add_cap('read_private_shop_orders');
+        $editor->add_cap('read_product');
+        $editor->add_cap('read_shop_coupon');
+        $editor->add_cap('read_shop_order');
+        $editor->add_cap('view_woocommerce_reports');
     }
 }
 
