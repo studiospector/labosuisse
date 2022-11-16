@@ -536,3 +536,8 @@ function lb_move_array_element(&$array, $a, $b, $key)
 
     return $array;
 }
+
+function isCli()
+{
+    return (defined('WP_CLI') or defined('DOING_CRON'));
+}

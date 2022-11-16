@@ -70,10 +70,14 @@ class CCBR_Restrictions
      */
     public function init()
     {
-		add_action('init', function() {
-			$this->country = $this->geolocate();
-		});
-		
+        if ((defined('WP_CLI') or defined('DOING_CRON'))) {
+            return null;
+        }
+
+        add_action('init', function () {
+            $this->country = $this->geolocate();
+        });
+
         // Callback on activate plugin
         register_activation_hook(__FILE__, array($this, 'on_activation'));
 

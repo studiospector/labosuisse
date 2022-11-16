@@ -66,6 +66,10 @@ foreach ( $acf_blocks_files as $file ) {
 }
 
 add_filter('rest_url', function ($url) {
+    if(isCli()) {
+        return $url;
+    }
+
     $currentHost = "{$_SERVER['HTTP_X_FORWARDED_PROTO']}://{$_SERVER['HTTP_HOST']}";
     $siteUrl = preg_replace('/(http(s)?:\/\/)|(\/.*){1}/', '${1}', site_url());
     $homeUrl = preg_replace('/(http(s)?:\/\/)|(\/.*){1}$/', '${1}', home_url());
