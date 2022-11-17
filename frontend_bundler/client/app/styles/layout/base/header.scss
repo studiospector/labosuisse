@@ -70,7 +70,7 @@
         opacity: 1;
         transition: all 0.4s ease;
 
-        @include mq($until: md) {
+        @include mq($until: lg) {
             height: 32px;
         }
 
@@ -81,14 +81,14 @@
             line-height: 1;
             margin: 0;
 
-            @include mq($until: md) {
+            @include mq($until: lg) {
                 font-size: rem(10);
             }
 
             b {
                 font-weight: 700;
 
-                @include mq($until: md) {
+                @include mq($until: lg) {
                     font-weight: 600;
                 }
             }
