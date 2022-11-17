@@ -59,22 +59,39 @@
     }
 
     &__pre {
-        height: 30px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         text-align: center;
         text-transform: uppercase;
-        background-color: map-get($colors, "grey-1");
-        padding-top: 9px;
-        padding-bottom: 9px;
+        background-color: map-get($colors, "secondary");
         visibility: visible;
         opacity: 1;
         transition: all 0.4s ease;
 
+        @include mq($until: md) {
+            height: 32px;
+        }
+
         p {
-            color: map-get($colors, "black");
+            color: map-get($colors, "white");
             font-weight: 400;
             font-size: rem(12);
             line-height: 1;
             margin: 0;
+
+            @include mq($until: md) {
+                font-size: rem(10);
+            }
+
+            b {
+                font-weight: 700;
+
+                @include mq($until: md) {
+                    font-weight: 600;
+                }
+            }
         }
     }
 
