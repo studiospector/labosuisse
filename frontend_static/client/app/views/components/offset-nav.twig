@@ -6,7 +6,7 @@
 	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-<div id="{{ id }}" class="lb-offset-nav{{ classes|length ? ' ' ~ classes|join(' ') : '' }}" {{ noClose ? ' data-no-close' : '' }}>
+<div id="{{ id }}" class="lb-offset-nav{{ classes|length ? ' ' ~ classes|join(' ') : '' }}" {{ noClose ? ' data-no-close' : '' }} {{ 'popup' in variants ? ' data-offset-nav-popup' : '' }}>
 	<div class="lb-offset-nav__dialog lb-offset-nav__dialog-{{ size|default('small') }}">
         {% if title or not noClose %}
             <div class="lb-offset-nav__header">
