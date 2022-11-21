@@ -27,6 +27,8 @@ class OffsetNav extends Component {
     constructor({ options = {}, ...props }) {
         super({ ...props, ui, components: options.initComponents ? components : null })
 
+        this.isPopup = 'offsetNavPopup' in this.el.dataset ? true : false
+
         this.headerStickyProduct = qs('.lb-header-sticky-product')
 
         this.ui.closeTriggers.forEach(trigger => on(trigger, 'click', this.close))
@@ -45,7 +47,9 @@ class OffsetNav extends Component {
     }
 
     open = () => {
-        qs('.lb-header').classList.add('lb-header--offsetnav-open')
+        if (!this.isPopup) {
+            qs('.lb-header').classList.add('lb-header--offsetnav-open')
+        }
         if (this.headerStickyProduct) {
             qs('.lb-header-sticky-product').classList.add('lb-header-sticky-product--offsetnav-open')
         }
@@ -55,7 +59,9 @@ class OffsetNav extends Component {
 
     close = () => {
         this.el.classList.remove('is-open')
-        qs('.lb-header').classList.remove('lb-header--offsetnav-open')
+        if (!this.isPopup) {
+            qs('.lb-header').classList.remove('lb-header--offsetnav-open')
+        }
         if (this.headerStickyProduct) {
             qs('.lb-header-sticky-product').classList.remove('lb-header-sticky-product--offsetnav-open')
         }

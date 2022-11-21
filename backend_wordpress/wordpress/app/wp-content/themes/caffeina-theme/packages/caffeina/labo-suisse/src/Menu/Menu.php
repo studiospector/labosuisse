@@ -5,6 +5,7 @@ namespace Caffeina\LaboSuisse\Menu;
 use Caffeina\LaboSuisse\Menu\Brands\Brands;
 use Caffeina\LaboSuisse\Menu\Product\Macro;
 use Caffeina\LaboSuisse\Menu\DiscoverLabo\DiscoverLabo;
+use Caffeina\LaboSuisse\Menu\LaboInTheWorld\LaboInTheWorld;
 use Caffeina\LaboSuisse\Option\Option;
 
 class Menu
@@ -15,7 +16,8 @@ class Menu
             (new Macro())->get(),
             [['type' => 'separator']],
             (new Brands())->get(),
-            (new DiscoverLabo())->get()
+            (new DiscoverLabo())->get(),
+            (new LaboInTheWorld())->get(),
         );
 
         // if (is_woocommerce()) {
@@ -35,7 +37,8 @@ class Menu
             'children' => array_merge(
                 (new Macro())->get('mobile'),
                 (new Brands())->get('mobile'),
-                (new DiscoverLabo())->get('mobile')
+                (new DiscoverLabo())->get('mobile'),
+                (new LaboInTheWorld())->get('mobile'),
             ),
             'fixed' => [
                 // [

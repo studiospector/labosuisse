@@ -6,6 +6,7 @@
             "key": "field_6175def456d7e",
             "label": "Carousel",
             "name": "lb_block_carousel_hero",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
                     "key": "field_618ad2c7e734f",
                     "label": "Infobox",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -37,12 +39,14 @@
                     },
                     "wpml_cf_preferences": 0,
                     "placement": "top",
-                    "endpoint": 0
+                    "endpoint": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_61828eb05dd2f",
                     "label": "Tagline",
                     "name": "lb_block_carousel_hero_infobox_tagline",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -57,12 +61,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_6182a6615dd30",
                     "label": "Titolo",
                     "name": "lb_block_carousel_hero_infobox_title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -77,12 +83,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_6182a6d25dd31",
                     "label": "Sottotitolo",
                     "name": "lb_block_carousel_hero_infobox_subtitle",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -97,12 +105,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_6182a7105dd32",
                     "label": "Paragrafo",
                     "name": "lb_block_carousel_hero_infobox_paragraph",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -117,12 +127,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": ""
+                    "new_lines": "",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_6182a99f5dd33",
                     "label": "Bottone",
                     "name": "lb_block_carousel_hero_infobox_btn",
+                    "aria-label": "",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -133,12 +145,14 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 2,
-                    "return_format": "array"
+                    "return_format": "array",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_6175e1b156d82",
                     "label": "Variante bottone",
                     "name": "lb_block_carousel_hero_infobox_btn_variants",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -160,12 +174,14 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_618acf0600bf5",
                     "label": "Immagine",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -177,12 +193,34 @@
                     },
                     "wpml_cf_preferences": 0,
                     "placement": "top",
-                    "endpoint": 0
+                    "endpoint": 0,
+                    "parent_repeater": "field_6175def456d7e"
+                },
+                {
+                    "key": "field_637658afc0a4f",
+                    "label": "Help",
+                    "name": "",
+                    "aria-label": "",
+                    "type": "message",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "message": "La scelta dell'immagine da usare del software si basa sul fatto che:\r\n- se <b>Immagine Desktop<\/b> e <b>Immagine Mobile<\/b> sono entrambe inserite, in frontend verrà visualizzata \"Immagine Desktop\" per il Desktop e \"Immagine Mobile\" per il Mobile\r\n- se è inserita solo <b>Immagine Desktop<\/b>, in Desktop verrà visualizzata \"Immagine Desktop\" e in Mobile sempre \"Immagine Desktop\" ma ridimensionata con dimensioni più piccole\r\n\r\n<b>Attenzione!<\/b>\r\nNon inserire mai solo \"Immagine Mobile\" perchè al contrario non verrà usata per il Desktop.",
+                    "new_lines": "wpautop",
+                    "esc_html": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_617149048e148",
-                    "label": "Immagine",
+                    "label": "Immagine Desktop",
                     "name": "lb_block_carousel_hero_img",
+                    "aria-label": "",
                     "type": "image",
                     "instructions": "",
                     "required": 0,
@@ -194,7 +232,6 @@
                     },
                     "wpml_cf_preferences": 2,
                     "return_format": "id",
-                    "preview_size": "medium",
                     "library": "all",
                     "min_width": "",
                     "min_height": "",
@@ -202,12 +239,42 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": ""
+                    "mime_types": "",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_6175def456d7e"
+                },
+                {
+                    "key": "field_63765887c0a4e",
+                    "label": "Immagine Mobile",
+                    "name": "lb_block_carousel_hero_img_mobile",
+                    "aria-label": "",
+                    "type": "image",
+                    "instructions": "<b>Attenzione!<\/b> Usa solo se hai già inserito <b>Immagine Desktop<\/b>.\r\n<br><br>\r\n<b>Istruzioni:<\/b><br>\r\nLarghezza massima: <b>800px<\/b><br>\r\nFormato file: <b>.webp<\/b>",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 2,
+                    "return_format": "id",
+                    "library": "all",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": 800,
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": "webp",
+                    "preview_size": "medium",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_61f27afd4b20b",
                     "label": "Impostazioni",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -219,12 +286,14 @@
                     },
                     "wpml_cf_preferences": 0,
                     "placement": "top",
-                    "endpoint": 0
+                    "endpoint": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_61f27b164b20c",
                     "label": "Allineamento Orizzontale Infobox",
                     "name": "lb_block_carousel_hero_infoboxposx",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -245,12 +314,14 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_61f27b7a4b20d",
                     "label": "Allineamento Verticale Infobox",
                     "name": "lb_block_carousel_hero_infoboxposy",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -271,12 +342,14 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_61f27be64b20e",
                     "label": "Container",
                     "name": "lb_block_carousel_hero_container",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "Se si vuole la Hero all'interno di un container e non full-width.",
                     "required": 0,
@@ -291,12 +364,14 @@
                     "default_value": 0,
                     "ui": 1,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_624acad610c69",
                     "label": "Testo su immagine  con sfondo nero",
                     "name": "lb_block_carousel_hero_text_white",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "Se l'immagine di sfondo è nera, attivare l'opzione.\r\nQuesto rende il testo di colore bianco.",
                     "required": 0,
@@ -311,12 +386,14 @@
                     "default_value": 0,
                     "ui": 1,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_6175def456d7e"
                 },
                 {
                     "key": "field_61f27c474b20f",
                     "label": "Variante",
                     "name": "lb_block_carousel_hero_variants",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -337,9 +414,11 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_6175def456d7e"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -360,5 +439,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649069191
+    "modified": 1668701524
 }
