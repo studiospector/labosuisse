@@ -70,6 +70,10 @@ class CCBR_Restrictions
      */
     public function init()
     {
+        if ((defined('WP_CLI') or defined('DOING_CRON'))) {
+            return null;
+        }
+
         // Callback on activate plugin
         register_activation_hook(__FILE__, array($this, 'on_activation'));
 
