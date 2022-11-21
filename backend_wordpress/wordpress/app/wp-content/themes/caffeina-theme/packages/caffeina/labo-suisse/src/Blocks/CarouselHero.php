@@ -28,9 +28,19 @@ class CarouselHero extends BaseBlock
                     'xs' => 'md-hero'
                 ];
 
+                $images_arr = lb_get_images(get_sub_field('lb_block_carousel_hero_img'), $sizes);
+
+                $img_mobile = get_sub_field('lb_block_carousel_hero_img_mobile');
+                if (!empty($img_mobile)) {
+                    $img_mobile_url = wp_get_attachment_url($img_mobile);
+                    $images_arr['md'] = $img_mobile_url;
+                    $images_arr['sm'] = $img_mobile_url;
+                    $images_arr['xs'] = $img_mobile_url;
+                }
+
                 $slides[] = [
                     'isSubElement' => true,
-                    'images' => lb_get_images(get_sub_field('lb_block_carousel_hero_img'), $sizes),
+                    'images' => $images_arr,
                     'infoboxPosX' => get_sub_field('lb_block_carousel_hero_infoboxposx'),
                     'infoboxPosY' => get_sub_field('lb_block_carousel_hero_infoboxposy'),
                     'container' => get_sub_field('lb_block_carousel_hero_container'),

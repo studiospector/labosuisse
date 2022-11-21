@@ -70,19 +70,25 @@ class CCBR_Restrictions
      */
     public function init()
     {
-		add_action('init', function() {
-			$this->country = $this->geolocate();
-		});
-		
+        if ((defined('WP_CLI') or defined('DOING_CRON'))) {
+            return null;
+        }
+
         // Callback on activate plugin
         register_activation_hook(__FILE__, array($this, 'on_activation'));
 
         // Hook for geolocation_update_database
         add_filter('woocommerce_maxmind_geolocation_update_database_periodically', array($this, 'update_geo_database'), 10, 1);
 
-        // Check if product is purchasable
-        add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 1, 2);
-        // add_filter('woocommerce_variation_is_purchasable', array($this, 'is_purchasable'), 1, 2);
+        if (!is_admin()) {
+            add_action('init', function() {
+                $this->country = $this->geolocate();
+            });
+
+            // Check if product is purchasable
+            add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 1, 2);
+            // add_filter('woocommerce_variation_is_purchasable', array($this, 'is_purchasable'), 1, 2);
+        }
     }
 
     /**

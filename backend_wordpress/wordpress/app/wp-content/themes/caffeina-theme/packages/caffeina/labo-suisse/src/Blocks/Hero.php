@@ -19,9 +19,19 @@ class Hero extends BaseBlock
             'xs' => 'lg'
         ];
 
+        $images_arr = lb_get_images(get_field('lb_block_hero_img'), $sizes);
+
+        $img_mobile = get_field('lb_block_hero_img_mobile');
+        if (!empty($img_mobile)) {
+            $img_mobile_url = wp_get_attachment_url($img_mobile);
+            $images_arr['md'] = $img_mobile_url;
+            $images_arr['sm'] = $img_mobile_url;
+            $images_arr['xs'] = $img_mobile_url;
+        }
+
         $payload = [
             'sectionID' => $sectionID ?? null,
-            'images' => lb_get_images(get_field('lb_block_hero_img'), $sizes),
+            'images' => $images_arr,
             'infoboxPosX' => get_field('lb_block_hero_infoboxposx'),
             'infoboxPosY' => get_field('lb_block_hero_infoboxposy'),
             'container' => get_field('lb_block_hero_container'),
