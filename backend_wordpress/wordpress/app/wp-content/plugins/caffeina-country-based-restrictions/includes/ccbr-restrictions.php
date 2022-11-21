@@ -80,7 +80,7 @@ class CCBR_Restrictions
             add_action('init', function() {
                 $this->country = $this->geolocate();
             });
-    
+
             // Check if product is purchasable
             add_filter('woocommerce_is_purchasable', array($this, 'is_purchasable'), 1, 2);
             // add_filter('woocommerce_variation_is_purchasable', array($this, 'is_purchasable'), 1, 2);
