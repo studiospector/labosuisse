@@ -17,6 +17,27 @@
                 "id": ""
             },
             "wpml_cf_preferences": 3,
+            "default_value": "lb_product_color_taxonomy_color_name",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6384cb6d04473",
+            "label": "Nome Colore",
+            "name": "lb_product_color_taxonomy_color_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 1,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -42,5 +63,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1669625184
+    "modified": 1669647330
 }
