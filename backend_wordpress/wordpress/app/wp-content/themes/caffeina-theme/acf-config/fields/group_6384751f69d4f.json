@@ -1,10 +1,10 @@
 {
-    "key": "group_6380e2316872c",
-    "title": "Campo Personalizzato: Tassonia - Colore",
+    "key": "group_6384751f69d4f",
+    "title": "Campi Personalizzati: Tassonomia - Colore",
     "fields": [
         {
-            "key": "field_6380e2310560d",
-            "label": "lb_product_color_taxonomy_exadecimal",
+            "key": "field_6384751fce967",
+            "label": "Colore",
             "name": "lb_product_color_taxonomy_exadecimal",
             "aria-label": "",
             "type": "text",
@@ -16,7 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "wpml_cf_preferences": 1,
+            "wpml_cf_preferences": 3,
             "default_value": "",
             "maxlength": "",
             "placeholder": "",
@@ -42,5 +42,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1669390992
+    "modified": 1669625184
 }

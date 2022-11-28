@@ -451,3 +451,21 @@ function lb_filter_wp_get_attachment_image_attributes($attr, $attachment, $size)
 
     return $attr;
 }
+//
+//add_action('woocommerce_dropdown_variation_attribute_options_args', function($args) {
+//
+//    if($args['attribute'] == 'pa_colore') {
+//        $colors = [];
+//
+//        foreach ($args['options'] as $option) {
+//            $colors[] = str_replace('#','',get_field('esadecimale', get_term_by('name', $option, 'pa_colore')));
+//        }
+//
+//        print_r($colors);
+////        $args['options'] = $colors;
+//    }
+//
+//    print_r($args['options']);
+//    return $args;
+//});
+
