@@ -93,6 +93,14 @@ class CustomSelect extends BasicElement {
                     this.mainContainer.classList.add(`custom-select--with-icons`);
                 }
 
+                // Add icon
+                const optionColor = this.currSelectElem.options[j].dataset.optionColor
+                if (optionColor) {
+                    this.optionItemColor = this.createDOMElement('SPAN', ['custom-select-items__item__color'], null, null, {pos: 'afterbegin', elem: this.optionItem})
+                    this.optionItemColor.style.backgroundColor = `#${optionColor}`
+                    this.mainContainer.classList.add(`custom-select--with-colors`);
+                }
+
                 // Check icon only for 'primary' variant
                 if (this.selectVariant == 'primary' || this.selectVariant == 'secondary' || this.selectVariant == 'tertiary') {
                     this.createDOMElement('DIV', ['custom-select-items__item__check'], null, null, {pos: 'afterbegin', elem: this.optionItem})
@@ -169,6 +177,7 @@ class CustomSelect extends BasicElement {
         let elem = ev.target.closest('.custom-select-items__item')
         let elemValue = elem.querySelector('.custom-select-items__item__value').innerText
         let elemIcon = elem.querySelector('.custom-select-items__item__icon')
+        let elemColor = elem.querySelector('.custom-select-items__item__color')
         let select = elem.parentNode.parentNode.getElementsByTagName('select')[0]
         let selectLength = select.length
         // let selectSelected = elem.parentNode.previousSibling
@@ -206,7 +215,7 @@ class CustomSelect extends BasicElement {
                 // For normal <select>
                 } else {
                     select.selectedIndex = i
-                    this.setSelectedValue(elemValue, elemIcon)
+                    this.setSelectedValue(elemValue, elemIcon, elemColor)
                     multiSelected[0] = elemValue
                     // Remove 'active' class from all custom options
                     let selectOptions = [...this.optionsList.children]
@@ -252,7 +261,7 @@ class CustomSelect extends BasicElement {
      * Set selected value
      * @param {string} value Current <option>s selected
      */
-    setSelectedValue(value = null, icon = null) {
+    setSelectedValue(value = null, icon = null, color = null) {
         // If is first init of custom select
         if (!value) {
             this.itemSelectedValue = this.createDOMElement('SPAN', ['custom-select-value', 'custom-select-value--default'], null, null, {pos: 'beforeend', elem: this.itemSelected})
@@ -272,9 +281,12 @@ class CustomSelect extends BasicElement {
 
         // If only change value of select
         } else {
+            if (color) {
+                color.classList.add('custom-select-value__color')
+            }
             this.mainContainer.classList.add('is-selected')
             this.itemSelectedValue.classList.remove('custom-select-value--default')
-            this.itemSelectedValue.innerHTML = (icon ? icon.innerHTML : '') + value
+            this.itemSelectedValue.innerHTML = (icon ? icon.innerHTML : '') + (color ? color.outerHTML : '') + value
         }
     }
 

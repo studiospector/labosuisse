@@ -288,6 +288,34 @@ const dataQuaternary = {
     variants: ['quaternary']
 }
 
+// Colors
+const dataColors = {
+    id: 'test-select',
+    label: 'Test label',
+    placeholder: 'Test placeholder',
+    multiple: false,
+    required: false,
+    disabled: false,
+    options: [
+        {
+            value: 'grey',
+            label: 'Grigio',
+            color: 'ccc',
+        },
+        {
+            value: 'black',
+            label: 'Nero',
+            color: '000',
+        },
+        {
+            value: 'bisque',
+            label: 'Bisque',
+            color: 'ffe4c4',
+        },
+    ],
+    variants: ['tertiary']
+}
+
 storiesOf('UIKit|Select', module)
     .addDecorator(storyFn => {
         useEffect(() => {
@@ -328,3 +356,5 @@ storiesOf('UIKit|Select', module)
     .add('Tertiary', () => renderSelect(dataTertiary))
     // Quaternary
     .add('Quaternary', () => renderSelect(dataQuaternary))
+    // Colors
+    .add('Colors', () => renderSelect(dataColors))

@@ -47,6 +47,10 @@
                 margin-right: 8px;
             }
 
+            &__color {
+                margin-right: 8px;
+            }
+
             strong {
                 margin-left: 3px;
             }
@@ -154,6 +158,12 @@
                     width: 16px;
                     height: 16px;
                 }
+            }
+
+            &__color {
+                width: 36px;
+                height: 36px;
+                border-radius: 100%;
             }
 
             &:hover,
@@ -545,6 +555,25 @@
         .custom-select-items__item__value {
             padding-left: 30px;
         }
+    }
+
+    &--with-colors {
+        .custom-select-container {
+            padding-top: 18.21px;
+            padding-bottom: 18.21px;
+        }
+
+        .custom-select-items__item__value {
+            padding-left: 10px;
+        }
+
+        &.is-selected {
+            .custom-select-container {
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
+        }
+
     }
 }
 
