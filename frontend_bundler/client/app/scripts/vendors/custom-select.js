@@ -89,7 +89,7 @@ class CustomSelect extends BasicElement {
                 // Add icon
                 const optionIcon = this.currSelectElem.options[j].dataset.optionIcon
                 if (optionIcon) {
-                    this.optionItemIcon = this.createDOMElement('SPAN', ['custom-select-items__item__icon'], null, this.getOptionIcon(optionIcon), {pos: 'afterbegin', elem: this.optionItem})
+                    this.optionItemIcon = this.createDOMElement('SPAN', ['custom-select-items__item__icon'], null, this.getIcon(optionIcon), {pos: 'afterbegin', elem: this.optionItem})
                     this.mainContainer.classList.add(`custom-select--with-icons`);
                 }
 
@@ -102,8 +102,10 @@ class CustomSelect extends BasicElement {
                 }
 
                 // Check icon only for 'primary' variant
-                if (this.selectVariant == 'primary' || this.selectVariant == 'secondary' || this.selectVariant == 'tertiary') {
+                if (this.selectVariant == 'primary') {
                     this.createDOMElement('DIV', ['custom-select-items__item__check'], null, null, {pos: 'afterbegin', elem: this.optionItem})
+                } else if(this.selectVariant == 'secondary' || this.selectVariant == 'tertiary') {
+                    this.createDOMElement('DIV', ['custom-select-items__item__check'], null, this.getIcon('check'), {pos: 'afterbegin', elem: this.optionItem})
                 }
 
                 // DISABLED <option>
@@ -267,7 +269,7 @@ class CustomSelect extends BasicElement {
             this.itemSelectedValue = this.createDOMElement('SPAN', ['custom-select-value', 'custom-select-value--default'], null, null, {pos: 'beforeend', elem: this.itemSelected})
             // Icon
             if (this.currSelectElem.options[this.currSelectElem.selectedIndex]) {
-                icon = this.getOptionIcon(this.currSelectElem.options[this.currSelectElem.selectedIndex].dataset.optionIcon)
+                icon = this.getIcon(this.currSelectElem.options[this.currSelectElem.selectedIndex].dataset.optionIcon)
             }
             // Set as value the current option selected(in case of 'selected' attribute as default)
             if (this.currSelectElem.selectedIndex != -1 && this.currSelectElem.selectedIndex != 0) {
@@ -305,7 +307,7 @@ class CustomSelect extends BasicElement {
     /**
      * Get option icon
      */
-    getOptionIcon = (optionIcon) => {
+    getIcon = (optionIcon) => {
         let html = null
 
         if (optionIcon) {
