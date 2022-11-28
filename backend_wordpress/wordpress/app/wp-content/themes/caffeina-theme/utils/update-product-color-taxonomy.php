@@ -62,13 +62,13 @@ function update()
     $colors = getTerms();
 
     foreach ($colors as $color) {
-        $exadecimal = getColor($color->name);
+        $colorInfo = getColor($color->name);
 
-        if($exadecimal) {
-            update_field('lb_product_color_taxonomy_exadecimal', "#{$exadecimal['code']}", "pa_colore_" . $color->term_id);
-            update_field('lb_product_color_taxonomy_color_name', "{$exadecimal['name']}", "pa_colore_" . $color->term_id);
+        if($colorInfo) {
+            update_field('lb_product_color_taxonomy_hexadecimal', "{$colorInfo['code']}", "pa_colore_" . $color->term_id);
+            update_field('lb_product_color_taxonomy_color_name', "{$colorInfo['name']}", "pa_colore_" . $color->term_id);
         }
-        echo 'update = > ' . get_field('lb_product_color_taxonomy_exadecimal',$color->term_id) . "\n";
+        echo 'update = > ' . get_field('lb_product_color_taxonomy_hexadecimal',$color->term_id) . "\n";
         echo 'update = > ' . get_field('lb_product_color_taxonomy_color_name',$color->term_id) . "\n";
     }
 }

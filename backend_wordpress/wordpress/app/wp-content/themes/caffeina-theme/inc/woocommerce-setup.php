@@ -65,10 +65,10 @@ function lb_set_custom_data_attribute_product_variations($html, $args)
     preg_match_all($regex, $html, $matches);
     foreach ($matches[0] as $match) {
         $match = str_replace(['[',']'],'', $match);
-        $exadecimal = get_field('lb_product_color_taxonomy_exadecimal', get_term_by('name', $match, 'pa_colore'));
+        $hexadecimal = get_field('lb_product_color_taxonomy_hexadecimal', get_term_by('name', $match, 'pa_colore'));
         $colorName = get_field('lb_product_color_taxonomy_color_name', get_term_by('name', $match, 'pa_colore'));
         $search = "<option value=\"{$match}\" >[[{$match}]]</option>";
-        $replace = "<option value=\"{$match}\" data-option-color=\"{$exadecimal}\">{$colorName}</option>";
+        $replace = "<option value=\"{$match}\" data-option-color=\"{$hexadecimal}\">{$colorName}</option>";
 
         $html = str_replace($search, $replace, $html);
     }
