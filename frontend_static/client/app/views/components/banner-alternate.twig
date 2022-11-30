@@ -15,16 +15,16 @@
 
 <section 
     {{ sectionID ? 'id="' ~ sectionID ~ '" ' : '' }}
-    class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }} js-banner-alternate js-animation-reveal"
+    class="banner-alternate{{ classes|length ? ' ' ~ classes|join(' ') : '' }}{{ noContainer == true ? '' : ' container' }} js-banner-alternate{{ animations ? ' js-animation-reveal' : '' }}"
     {{ dataVariants|length ? ' ' ~ dataVariants|join(' ') : '' }}
 >
     <div class="banner-alternate__img">
-		{{ lbPicture(images, true, null, true) }}
+		{{ lbPicture(images, true, null, animations) }}
 	</div>
 
     {% if infobox %}
         <div class="banner-alternate__infobox">
-            {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: true}) only %}
+            {% include '@PathViews/components/infobox.twig' with infobox|merge({reveal: animations}) only %}
         </div>
     {% endif %}
 </section>
