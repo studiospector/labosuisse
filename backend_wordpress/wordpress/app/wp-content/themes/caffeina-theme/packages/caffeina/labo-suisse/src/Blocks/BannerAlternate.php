@@ -15,10 +15,13 @@ class BannerAlternate extends BaseBlock
             'xs' => 'lg'
         ];
 
+        $disable_animation = get_field('lb_block_banner_alternate_disable_animation');
+
         $payload = [
             'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_banner_alternate_img'), $sizes),
             'imageBig' => get_field('lb_block_banner_alternate_img_big'),
+            'animations' => $disable_animation ? false : true,
             'variants' => [get_field('lb_block_banner_alternate_variants_lr'), get_field('lb_block_banner_alternate_variants_hcb')],
         ];
 
