@@ -65,21 +65,27 @@ class AsyncCart extends Component {
 
                 $(document.body).trigger('adding_to_cart', [$thisbutton, data])
 
+                const cartEndpoint = woocommerce_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart')
+
+                console.log('url', process.env.LB_API_URL + cartEndpoint);
+                console.log('data', data);
+
                 $.ajax({
                     type: 'POST',
-                    url: woocommerce_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart'),
+                    url: process.env.LB_API_URL + cartEndpoint,
                     data: data,
                     beforeSend: function (response) {
                         $thisbutton.removeClass('added').addClass('button-loading');
                         $('#lb-offsetnav-async-cart .lb-offset-nav__content').addClass('lb-offset-nav__content--loading');
                         $thisbutton.attr('disabled', true);
                     },
-                    complete: function (response) {
-                        $thisbutton.addClass('added').removeClass('button-loading');
-                        $('#lb-offsetnav-async-cart .lb-offset-nav__content').removeClass('lb-offset-nav__content--loading');
-                        $thisbutton.attr('disabled', false);
+                    error: function (request, status, error) {
+                        console.log('error request', request);
+                        console.log('error status', status);
+                        console.log('error error', error);
                     },
                     success: function (response) {
+                        console.log('success', response);
                         if (response.error && response.product_url) {
                             window.location = response.product_url;
                             return;
@@ -96,6 +102,12 @@ class AsyncCart extends Component {
                         $(document).on('removed_from_cart', function (e) {
                             $('#lb-offsetnav-async-cart .lb-offset-nav__content').removeClass('lb-offset-nav__content--loading');
                         })
+                    },
+                    complete: function (response) {
+                        console.log('complete', response);
+                        $thisbutton.addClass('added').removeClass('button-loading');
+                        $('#lb-offsetnav-async-cart .lb-offset-nav__content').removeClass('lb-offset-nav__content--loading');
+                        $thisbutton.attr('disabled', false);
                     },
                 })
 
