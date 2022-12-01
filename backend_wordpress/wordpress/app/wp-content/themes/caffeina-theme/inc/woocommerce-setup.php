@@ -60,10 +60,27 @@ function lb_set_custom_data_attribute_product_variations($html, $args)
 
     $html = str_replace("id=\"{$args['attribute']}\"", "id=\"{$args['attribute']}\" " . "data-variant=\"tertiary\" data-label=\"$label\" data-wc-variations-support=\"true\"", $html);
 
+    $regex = '/\[\[\d{1,3}]\]/';
+    $matches = [];
+    preg_match_all($regex, $html, $matches);
+    foreach ($matches[0] as $match) {
+        $match = str_replace(['[',']'],'', $match);
+        $hexadecimal = get_field('lb_product_color_taxonomy_hexadecimal', get_term_by('name', $match, 'pa_colore'));
+        $colorName = get_field('lb_product_color_taxonomy_color_name', get_term_by('name', $match, 'pa_colore'));
+        $search = "<option value=\"{$match}\" >[[{$match}]]</option>";
+        $replace = "<option value=\"{$match}\" data-option-color=\"{$hexadecimal}\">{$colorName}</option>";
+
+        $html = str_replace($search, $replace, $html);
+    }
     return $html;
 }
 
-
+add_action('woocommerce_variation_option_name',function ($option, $options, $attribute, $product) {
+    if ($attribute == 'pa_colore') {
+        $option = "[[{$option}]]";
+    }
+    return $option;
+},1000,4);
 
 /**
  * Customize WC breadcrumb
@@ -451,3 +468,22 @@ function lb_filter_wp_get_attachment_image_attributes($attr, $attachment, $size)
 
     return $attr;
 }
+
+//
+//add_action('woocommerce_dropdown_variation_attribute_options_args', function($args) {
+//
+//    if($args['attribute'] == 'pa_colore') {
+//        $colors = [];
+//
+//        foreach ($args['options'] as $option) {
+//            $colors[] = str_replace('#','',get_field('esadecimale', get_term_by('name', $option, 'pa_colore')));
+//        }
+//
+//        print_r($colors);
+////        $args['options'] = $colors;
+//    }
+//
+//    print_r($args['options']);
+//    return $args;
+//});
+

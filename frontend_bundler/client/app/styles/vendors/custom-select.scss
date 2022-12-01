@@ -47,6 +47,10 @@
                 margin-right: 8px;
             }
 
+            &__color {
+                margin-right: 8px;
+            }
+
             strong {
                 margin-left: 3px;
             }
@@ -154,6 +158,12 @@
                     width: 16px;
                     height: 16px;
                 }
+            }
+
+            &__color {
+                width: 36px;
+                height: 36px;
+                border-radius: 100%;
             }
 
             &:hover,
@@ -329,27 +339,15 @@
                 }
 
                 &__check {
-                    width: 18px;
-                    height: 18px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    padding: 8px;
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+
                     margin-right: 8px;
                     cursor: pointer;
-
-                    &::after {
-                        content: '';
-                        width: calc(100% - 4px);
-                        height: calc(100% - 4px);
-                        position: absolute;
-                        font-size: rem(20);
-                        font-weight: 300;
-                        background-color: transparent;
-                        transform: scaleX(-1) rotate(-35deg) translate(0, -7px);
-                        transition: all .3s ease-in-out;
-                    }
+                    visibility: hidden;
+                    opacity: 0;
                 }
 
                 &--active {
@@ -358,10 +356,9 @@
                     .custom-select-items {
                         &__item {
                             &__check {
-                                &::after {
-                                    content: 'L';
-                                    transition: all .3s ease-in-out;
-                                }
+                                visibility: visible;
+                                opacity: 1;
+                                transition: all .3s ease-in-out;
                             }
                         }
                     }
@@ -417,27 +414,15 @@
                 position: relative;
                 
                 &__check {
-                    width: 18px;
-                    height: 18px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    position: relative;
-                    padding: 8px;
+                    svg {
+                        width: 18px;
+                        height: 18px;
+                    }
+
                     margin-right: 8px;
                     cursor: pointer;
-
-                    &::after {
-                        content: '';
-                        width: calc(100% - 4px);
-                        height: calc(100% - 4px);
-                        position: absolute;
-                        font-size: rem(20);
-                        font-weight: 300;
-                        background-color: transparent;
-                        transform: scaleX(-1) rotate(-35deg) translate(0, -7px);
-                        transition: all .3s ease-in-out;
-                    }
+                    visibility: hidden;
+                    opacity: 0;
                 }
 
                 &--active {
@@ -446,10 +431,9 @@
                     .custom-select-items {
                         &__item {
                             &__check {
-                                &::after {
-                                    content: 'L';
-                                    transition: all .3s ease-in-out;
-                                }
+                                visibility: visible;
+                                opacity: 1;
+                                transition: all .3s ease-in-out;
                             }
                         }
                     }
@@ -545,6 +529,25 @@
         .custom-select-items__item__value {
             padding-left: 30px;
         }
+    }
+
+    &--with-colors {
+        .custom-select-container {
+            padding-top: 18.21px;
+            padding-bottom: 18.21px;
+        }
+
+        .custom-select-items__item__value {
+            padding-left: 10px;
+        }
+
+        &.is-selected {
+            .custom-select-container {
+                padding-top: 7px;
+                padding-bottom: 7px;
+            }
+        }
+
     }
 }
 
