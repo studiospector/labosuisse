@@ -7,7 +7,7 @@ class AsyncCart extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
-        this.refreshFragmentsOnPageLoad()
+        // this.refreshFragmentsOnPageLoad()
 
         jQuery(document).ready(($) => {
             // $(document.body).on('wc_fragments_refreshed', function(){
