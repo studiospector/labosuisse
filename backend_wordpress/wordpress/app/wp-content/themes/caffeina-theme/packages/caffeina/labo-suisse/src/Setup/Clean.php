@@ -242,7 +242,7 @@ class Clean
             remove_meta_box('wp_mail_smtp_reports_widget_lite', 'dashboard', 'normal');
             // Remove MC4WP metabox
             remove_meta_box('mc4wp_log_widget', 'dashboard', 'normal');
-            
+
         }
     }
 
@@ -333,14 +333,24 @@ class Clean
     /**
      * Redirect admin pages
      */
-    function lb_disallowed_admin_pages() {
-
-        // global $pagenow;
+    function lb_disallowed_admin_pages()
+    {
+         global $pagenow;
 
         if (!lb_user_has_role('administrator') && is_admin()) {
             // W3TC pages
-            if ( isset($_GET['page']) && preg_match("/w3tc_/i", $_GET['page']) ) {
-                wp_redirect( admin_url( '/index.php' ) );
+            if (isset($_GET['page']) && (
+                preg_match("/w3tc_/i", $_GET['page']) or
+                preg_match("/pmxi/i", $_GET['page']) or
+                preg_match("/wp-mail-smtp/i", $_GET['page'])
+                )
+            ) {
+                wp_redirect(admin_url('/index.php'));
+                exit;
+            }
+
+            if(preg_match('/options/i', $pagenow)) {
+                wp_redirect(admin_url('/index.php'));
                 exit;
             }
         }
@@ -373,7 +383,7 @@ class Clean
             // W3TC
             remove_menu_page('w3tc_dashboard');
         }
-        
+
         if (lb_user_has_role('shop_manager')) {
             // Tools
             remove_menu_page('export-personal-data.php');
@@ -391,6 +401,25 @@ class Clean
             // Separator
             remove_menu_page('separator2');
         }
+
+        if (lb_user_has_role('editor')) {
+            // Tools
+            remove_menu_page('export-personal-data.php');
+            // Settings
+            remove_menu_page('options-general.php');
+            // WP Mail SMTP
+            remove_menu_page('wp-mail-smtp');
+            // Mailchimp
+            remove_menu_page('mailchimp-for-wp');
+            // Under construction
+            remove_menu_page('under-construction');
+            // Pixel cat
+            remove_menu_page('fca_pc_settings_page');
+            // security
+            remove_menu_page('itsec-dashboard');
+            // WP All Import/Export
+            remove_menu_page('pmxi-admin-home');
+        }
     }
 
 
@@ -403,7 +432,7 @@ class Clean
 
         $acf_menu_key = lb_recursive_array_search('edit.php?post_type=acf-field-group', $menu);
         $cf7_menu_key = lb_recursive_array_search('wpcf7', $menu);
-        
+
         if ($acf_menu_key) {
             $menu[$acf_menu_key][0] = 'ACF Pro';
         }
@@ -419,7 +448,7 @@ class Clean
      */
     function lb_custom_menu_order( $menu_ord ) {
         if ( !$menu_ord ) return true;
-    
+
         if (lb_user_has_role('administrator')) {
             return array(
                 'index.php', // Dashboard

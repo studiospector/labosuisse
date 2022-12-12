@@ -569,6 +569,7 @@ class ThemeSetup extends Timber\Site
     public function lb_update_editor_role()
     {
         $editor = get_role('editor');
+        $editor->add_cap('manage_options');
         $editor->add_cap('assign_product_terms');
         $editor->add_cap('assign_shop_coupon_terms');
         $editor->add_cap('assign_shop_order_terms');
