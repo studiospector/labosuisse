@@ -299,6 +299,21 @@ class Option
         return $this->getOption($service);
     }
 
+    public function getOrderExportMailingList()
+    {
+        $recipients = [];
+
+        $items = $this->getOption('lb_order_export_mailing_list');
+
+        if ($items) {
+            foreach ($items as $item) {
+                $recipients[] = $item['lb_order_export_mailing_list_item'];
+            }
+        }
+
+        return $recipients;
+    }
+
     private function prepareLinks($name)
     {
         $links = $this->getOption($name);

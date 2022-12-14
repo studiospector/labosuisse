@@ -2,6 +2,7 @@
 
 namespace Caffeina\LaboSuisse\Resources\Woocommerce;
 
+use Caffeina\LaboSuisse\Option\Option;
 use WC_Order;
 use WC_Order_Query;
 
@@ -119,9 +120,7 @@ class OrderExport
      */
     private function sendMail(?string $filePath): void
     {
-        $to = [
-            'matteo.meloni@caffeina.com'
-        ];
+        $to = (new Option())->getOrderExportMailingList();
 
         $subject = 'Export ordini - ' . date('Y-m-d H:i');
 
