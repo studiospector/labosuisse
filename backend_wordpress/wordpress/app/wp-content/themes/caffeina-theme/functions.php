@@ -3,6 +3,9 @@
 /**
  * Constants
  */
+
+use Caffeina\LaboSuisse\Resources\Woocommerce\OrderExport;
+
 if (!defined('LB_DIR_PATH')) {
 	define('LB_DIR_PATH', untrailingslashit(get_template_directory()));
 }
@@ -98,5 +101,14 @@ add_filter( 'wp_mail', function ($args) {
     }
 
     return $args;
+});
+
+if(!wp_next_scheduled('daily_orders_export')) {
+    wp_schedule_event(strtotime('08:00:00'), 'daily', 'daily_orders_export');
+}
+
+add_action('daily_orders_export', function(){
+    $export = new OrderExport();
+    $export->start();
 });
 
