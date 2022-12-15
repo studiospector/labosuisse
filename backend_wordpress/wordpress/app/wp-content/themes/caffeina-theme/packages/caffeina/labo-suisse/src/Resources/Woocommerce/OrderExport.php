@@ -56,6 +56,7 @@ class OrderExport
     {
         return [
             'order_id' => $order_id,
+            'created_at' => $order->get_date_created(),
             'shipping_name' => ucfirst($order->get_shipping_first_name()) . " " . ucfirst($order->get_shipping_last_name()),
             'shipping_address' => $order->get_shipping_address_1() . " " . $order->get_shipping_address_2(),
             'shipping_city' => $order->get_shipping_city(),
