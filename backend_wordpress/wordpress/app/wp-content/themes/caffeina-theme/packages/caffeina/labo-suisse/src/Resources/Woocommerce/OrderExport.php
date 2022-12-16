@@ -45,10 +45,10 @@ class OrderExport
             'limit' => -1,
             'return' => 'ids',
             'status' => 'processing',
-            'date_query' => array(
-                'after' => date('Y-m-d', strtotime('-1 days')),
-                'before' => date('Y-m-d', strtotime('today'))
-            )
+//            'date_query' => array(
+//                'after' => date('Y-m-d', strtotime('-1 days')),
+//                'before' => date('Y-m-d', strtotime('today'))
+//            )
         ]);
 
         return $query->get_orders();
