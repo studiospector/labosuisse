@@ -8,43 +8,78 @@ use WC_Order_Query;
 
 class OrderExport
 {
+    /**
+     * @var bool
+     */
+    private bool $enable;
+
+    public function __construct()
+    {
+        $this->enable = (new Option())->orderExportIsActive();
+    }
+
     public function start()
     {
-        $orders = [];
-        foreach ($this->orders() as $order_id) {
-            $order = wc_get_order($order_id);
-            $orderDetails = $this->getOrderDetails($order_id, $order);
-            $products = $this->getProductsDetails($order);
-
-            $items = array_map(function ($items) use ($orderDetails) {
-                return array_merge($orderDetails, $items);
-            }, $products);
-
-            $orders = array_merge($orders, $items);
+        if (!$this->enable) {
+            return null;
         }
 
-        $filePath = $this->makeFile($orders);
+        $orders = $this->getOrders();
 
-        $this->sendMail($filePath);
-
-        unlink($filePath);
+        if (empty($orders)) {
+            $this->sendMail('Nessun ordine da esportare', null);
+        } else {
+            $filePath = $this->makeFile($orders);
+            $this->sendMail('Export Ordini', $filePath);
+            unlink($filePath);
+        }
     }
 
     /**
      * @return array|object
      * @throws \Exception
      */
-    private function orders(): array|object
+    private function executeQuery(): array|object
     {
         $query = new WC_Order_Query([
             'limit' => -1,
             'return' => 'ids',
-//            'date_completed' => '2018-10-01...2018-10-10',
-            'status' => 'processing'
+            'status' => 'processing',
+            'date_query' => array(
+                'after' => date('Y-m-d', strtotime('-1 days')),
+                'before' => date('Y-m-d', strtotime('today'))
+            )
         ]);
 
         return $query->get_orders();
+    }
 
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    private function getOrders()
+    {
+        $orders = $this->executeQuery();
+
+        if (empty($orders)) {
+            return [];
+        }
+
+        $items = [];
+        foreach ($orders as $order_id) {
+            $order = wc_get_order($order_id);
+            $orderDetails = $this->getOrderDetails($order_id, $order);
+            $products = $this->getProductsDetails($order);
+
+            $data = array_map(function ($items) use ($orderDetails) {
+                return array_merge($orderDetails, $items);
+            }, $products);
+
+            $items = array_merge($items, $data);
+        }
+
+        return $items;
     }
 
     /**
@@ -116,15 +151,16 @@ class OrderExport
     }
 
     /**
+     * @param string $message
      * @param string|null $filePath
      * @return void
      */
-    private function sendMail(?string $filePath): void
+    private function sendMail(string $message, ?string $filePath): void
     {
         $to = (new Option())->getOrderExportMailingList();
 
         $subject = 'Export ordini - ' . date('Y-m-d H:i');
 
-        wp_mail($to, $subject, 'Export Ordini', null, $filePath);
+        wp_mail($to, $subject, $message, null, $filePath);
     }
 }

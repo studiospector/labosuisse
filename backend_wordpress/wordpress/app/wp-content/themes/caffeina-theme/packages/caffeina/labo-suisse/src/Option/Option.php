@@ -299,6 +299,11 @@ class Option
         return $this->getOption($service);
     }
 
+    public function orderExportIsActive()
+    {
+        return $this->getOption('lb_order_export_is_active') ?? false;
+    }
+
     public function getOrderExportMailingList()
     {
         $recipients = [];

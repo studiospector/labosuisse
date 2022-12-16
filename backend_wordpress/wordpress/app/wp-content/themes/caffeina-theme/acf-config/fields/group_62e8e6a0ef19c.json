@@ -517,6 +517,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_639c3d887fcdf",
+            "label": "Attivo",
+            "name": "lb_order_export_is_active",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
             "key": "field_6399da18e829c",
             "label": "Mailing List",
             "name": "lb_order_export_mailing_list",
@@ -582,5 +603,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1671028225
+    "modified": 1671183920
 }
