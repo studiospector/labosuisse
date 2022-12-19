@@ -83,7 +83,7 @@
 
     {% if miniatures %}
         {% include '@PathViews/components/block-love-labo.twig' with miniatures only %}
-        {% if shipping_info %}
+        {% if shipping_info or routine %}
             {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
         {% endif %}
     {% endif %}
