@@ -34,10 +34,10 @@ class InformationBoxes extends BaseBlock
             }
         }
 
-        $payload = [
+        $payload = !empty($items) ? [
             'sectionID' => $sectionID ?? null,
             'items' => $items,
-        ];
+        ] : [];
 
         $this->setContext($payload);
     }
