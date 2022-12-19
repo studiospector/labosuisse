@@ -6,6 +6,7 @@
             "key": "field_630889d5b5576",
             "label": "Generale",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -23,6 +24,7 @@
             "key": "field_630889e2b5577",
             "label": "Pagina Login\/Registrazione",
             "name": "lb_shop_login_registration_page",
+            "aria-label": "",
             "type": "page_link",
             "instructions": "",
             "required": 1,
@@ -45,6 +47,7 @@
             "key": "field_63174f824b107",
             "label": "Prodotto",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -62,6 +65,7 @@
             "key": "field_63174fb34b109",
             "label": "Info spedizione",
             "name": "lb_product_shipping_info",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -76,12 +80,13 @@
             "min": 0,
             "max": 3,
             "layout": "row",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "sub_fields": [
                 {
                     "key": "field_631750834b10b",
                     "label": "Titolo",
                     "name": "lb_product_shipping_info_title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -96,12 +101,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": 5,
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_63174fb34b109"
                 },
                 {
                     "key": "field_631750a94b10c",
                     "label": "Testo",
                     "name": "lb_product_shipping_info_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -116,12 +123,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": 5,
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_63174fb34b109"
                 },
                 {
                     "key": "field_631750dd4b10d",
                     "label": "Link",
                     "name": "lb_product_shipping_info_link",
+                    "aria-label": "",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -132,14 +141,17 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 2,
-                    "return_format": "array"
+                    "return_format": "array",
+                    "parent_repeater": "field_63174fb34b109"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_62e8e6fc7a265",
             "label": "Carrello",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -157,6 +169,7 @@
             "key": "field_62e8e94495f8a",
             "label": "Carrello - Vuoto",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -175,6 +188,7 @@
             "key": "field_62e8ea4e95f8f",
             "label": "Immagine",
             "name": "lb_shop_page_empty_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -200,6 +214,7 @@
             "key": "field_62e8e9f895f8d",
             "label": "Titolo",
             "name": "lb_shop_page_empty_title",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 1,
@@ -220,6 +235,7 @@
             "key": "field_62e8ea3495f8e",
             "label": "Testo",
             "name": "lb_shop_page_empty_text",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 1,
@@ -240,6 +256,7 @@
             "key": "field_62e8e7857a266",
             "label": "Link",
             "name": "lb_shop_page_empty_link",
+            "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 1,
@@ -256,6 +273,7 @@
             "key": "field_62e8e98595f8b",
             "label": "Carrello - Pieno",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -274,6 +292,7 @@
             "key": "field_62e8ec16f037b",
             "label": "Back link",
             "name": "lb_shop_page_back_link",
+            "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 1,
@@ -290,6 +309,7 @@
             "key": "field_62e8eabd95f90",
             "label": "Immagine pagamenti",
             "name": "lb_shop_page_image_payments",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -315,6 +335,7 @@
             "key": "field_62e8e9aa95f8c",
             "label": "Carrello Accordions --- Endpoint",
             "name": "",
+            "aria-label": "",
             "type": "accordion",
             "instructions": "",
             "required": 0,
@@ -333,6 +354,7 @@
             "key": "field_6306385bd4282",
             "label": "Account",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -350,6 +372,7 @@
             "key": "field_6306386dd4283",
             "label": "Immagine Placeholder",
             "name": "lb_account_page_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -375,6 +398,7 @@
             "key": "field_634edd3da344e",
             "label": "Email",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -392,6 +416,7 @@
             "key": "field_634edd6ba344f",
             "label": "Banner",
             "name": "lb_email_banner_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -417,6 +442,7 @@
             "key": "field_6332f471332a0",
             "label": "Privacy & Terms",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -434,6 +460,7 @@
             "key": "field_6332f482332a1",
             "label": "Privacy Policy - Checkout",
             "name": "lb_checkout_privacy_policy",
+            "aria-label": "",
             "type": "file",
             "instructions": "",
             "required": 1,
@@ -454,6 +481,7 @@
             "key": "field_6332f4ed332a2",
             "label": "Privacy Policy - Registrazione",
             "name": "lb_registration_privacy_policy",
+            "aria-label": "",
             "type": "file",
             "instructions": "",
             "required": 1,
@@ -469,6 +497,92 @@
             "min_size": "",
             "max_size": "",
             "mime_types": "pdf"
+        },
+        {
+            "key": "field_6399d966e829b",
+            "label": "Export Ordini",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "top",
+            "endpoint": 0
+        },
+        {
+            "key": "field_639c3d887fcdf",
+            "label": "Attivo",
+            "name": "lb_order_export_is_active",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": "",
+            "message": "",
+            "default_value": 0,
+            "ui": 0,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_6399da18e829c",
+            "label": "Mailing List",
+            "name": "lb_order_export_mailing_list",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "layout": "table",
+            "pagination": 0,
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Aggiungi Riga",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_6399da67e829d",
+                    "label": "Destinatari",
+                    "name": "lb_order_export_mailing_list_item",
+                    "aria-label": "",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "wpml_cf_preferences": 0,
+                    "default_value": "",
+                    "maxlength": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "parent_repeater": "field_6399da18e829c"
+                }
+            ]
         }
     ],
     "location": [
@@ -489,5 +603,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1666113024
+    "modified": 1671183920
 }
