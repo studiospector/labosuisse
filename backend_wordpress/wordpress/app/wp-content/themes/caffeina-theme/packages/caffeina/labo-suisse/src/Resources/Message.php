@@ -25,8 +25,6 @@ class Message
                 'title' => $message['lb_messages_item_title'],
                 'message' => $message['lb_messages_item_message']
             ];
-
-            echo $message['lb_messages_item_message'] . "\n";
         }
 
         return $messages;
