@@ -4,6 +4,7 @@
  * Constants
  */
 
+use Caffeina\LaboSuisse\Resources\Message;
 use Caffeina\LaboSuisse\Resources\Woocommerce\OrderExport;
 
 if (!defined('LB_DIR_PATH')) {
@@ -112,3 +113,4 @@ add_action('daily_orders_export', function(){
     $export->start();
 });
 
+Message::register();
