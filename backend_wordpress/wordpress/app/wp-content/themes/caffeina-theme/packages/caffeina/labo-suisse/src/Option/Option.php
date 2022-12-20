@@ -319,6 +319,17 @@ class Option
         return $recipients;
     }
 
+    public function getMessages()
+    {
+        $messages = $this->getOption('lb_messages');
+
+        if (empty($messages)) {
+            return [];
+        }
+
+        return $messages;
+    }
+
     private function prepareLinks($name)
     {
         $links = $this->getOption($name);
