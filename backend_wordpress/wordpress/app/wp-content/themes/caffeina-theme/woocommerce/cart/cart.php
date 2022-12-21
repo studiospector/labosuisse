@@ -17,6 +17,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+do_action('lb_get_messages_cart');
+
 do_action( 'woocommerce_before_cart' ); ?>
 
 <div class="lb-wc-cart row">

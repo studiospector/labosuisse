@@ -1,0 +1,25 @@
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-messages--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% if items %}
+  <div class="lb-messages{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
+    {% for item in items %}
+      {% set itemClasses = [] %}
+      {% for itemVariant in item.variants|default([]) %}
+        {% set itemClasses = itemClasses|merge(['lb-messages__item--' ~ itemVariant]) %}
+      {% endfor %}
+      <div class="lb-messages__item{{ itemClasses|length ? ' ' ~ itemClasses|join(' ') : '' }}">
+        <h6 class="lb-messages__item__title infobox__tagline">
+          {% include '@PathViews/components/icon.twig' with {name: 'warning'} only %}
+          <span>{{item.title}}</span>
+        </h6>
+        <div class="lb-messages__item__message">{{item.message}}</div>
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
