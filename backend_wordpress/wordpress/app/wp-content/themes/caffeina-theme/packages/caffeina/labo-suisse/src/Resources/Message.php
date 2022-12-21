@@ -3,6 +3,7 @@
 namespace Caffeina\LaboSuisse\Resources;
 
 use Caffeina\LaboSuisse\Option\Option;
+use Timber\Timber;
 
 class Message
 {
@@ -13,21 +14,19 @@ class Message
         $this->location = $location;
     }
 
-    /**
-     * @return array
-     */
-    public function get(): array
+    public function get()
     {
-        $messages = [];
+        $context = [];
 
         foreach ($this->query() as $message) {
-            $messages[] = [
+            $context['items'][] = [
                 'title' => $message['lb_messages_item_title'],
-                'message' => $message['lb_messages_item_message']
+                'message' => $message['lb_messages_item_message'],
+                'variants' => ['error'],
             ];
         }
 
-        return $messages;
+        Timber::render('@PathViews/components/messages.twig', $context);
     }
 
     /**
@@ -71,11 +70,11 @@ class Message
 
     public static function register()
     {
-        $locations = ['cart', 'single_product', 'archive_product'];
+        $locations = ['cart', 'checkout'];
 
         foreach ($locations as $location) {
-            add_action("get_messages_{$location}", function () use ($location) {
-                return (new self($location))->get();
+            add_action("lb_get_messages_{$location}", function () use ($location) {
+                (new self($location))->get();
             });
         }
     }

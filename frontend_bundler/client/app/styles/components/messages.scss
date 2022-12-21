@@ -1,0 +1,51 @@
+.lb-messages {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    width: 100%;
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+    
+    @include mq($until: md) {
+      width: auto;
+      padding-right: 16px;
+      padding-left: 16px;
+      margin-bottom: 10px;
+    }
+
+    &:last-child {
+      margin-bottom: 30px;
+    }
+
+    &__title {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+
+    &__message {
+      p {
+        margin: 0;
+      }
+    }
+
+    &--error {
+      background-color: rgba(164, 53, 52, 0.1);
+      color: map-get($colors, "secondary");
+
+      .lb-icon {
+        margin-right: 8px;
+
+        svg {
+          path {
+            fill: map-get($colors, "secondary");
+          }
+        }
+      }
+    }
+  }
+}
