@@ -7,6 +7,7 @@ use Caffeina\LaboSuisse\Resources\Posts\Faq;
 use Caffeina\LaboSuisse\Resources\Posts\Magazine;
 use Caffeina\LaboSuisse\Resources\Posts\Product;
 use Timber\Timber;
+use WP_Query;
 
 class Search
 {
@@ -136,11 +137,11 @@ class Search
         $products = $this->getArchive('product', [
             'orderby' => 'menu_order',
             'order' => 'ASC',
-            'tax_query'   => [[
-                'taxonomy'  => 'product_visibility',
-                'terms'     => ['exclude-from-catalog'],
-                'field'     => 'name',
-                'operator'  => 'NOT IN',
+            'tax_query' => [[
+                'taxonomy' => 'product_visibility',
+                'terms' => ['exclude-from-catalog'],
+                'field' => 'name',
+                'operator' => 'NOT IN',
             ]]
         ]);
 
@@ -179,10 +180,21 @@ class Search
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'post_type' => $type,
-            's' => $this->search
+            'title_like' => $this->search
         ]);
 
-        $query = new \WP_Query($query);
+        add_filter('posts_where', function ($where, $wp_query) {
+            global $wpdb;
+            if ($search_term = $wp_query->get('title_like')) {
+                $string = esc_sql($wpdb->esc_like($search_term));
+                $where .= " AND {$wpdb->posts}.post_title LIKE '%{$string}%'";
+            }
+            return $where;
+        }, 10, 2);
+
+        $query = new WP_Query($query);
+
+        remove_filter('posts_where', 'title_filter', 10, 2);
 
         return $query->get_posts();
     }
