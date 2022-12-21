@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-11-17 13:59+0000\n"
+"PO-Revision-Date: 2022-12-21 12:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -15,11 +15,12 @@ msgstr ""
 "X-Loco-Version: 2.6.2; wp-5.9.3\n"
 "X-Domain: labo-suisse-theme"
 
-#: inc/woocommerce-setup.php:154
+#: inc/woocommerce-setup.php:171
 #, php-format
 msgid "%1$sa partire da%2$s %3$s"
 msgstr "%1$sstarting from%2$s %3$s"
 
+#: woocommerce/checkout/form-login.php:29
 #: woocommerce/myaccount/form-login.php:87
 #: woocommerce/myaccount/form-login.php:89
 msgid "Accedi"
@@ -56,12 +57,12 @@ msgstr "Scope:"
 msgid "Applica"
 msgstr "Apply"
 
-#: inc/woocommerce-setup.php:212
+#: inc/woocommerce-setup.php:229
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:47
 msgid "Articoli"
 msgstr "Articles"
 
-#: inc/woocommerce-setup.php:230
+#: inc/woocommerce-setup.php:247
 msgid "articoli"
 msgstr "items"
 
@@ -69,7 +70,7 @@ msgstr "items"
 msgid "Articolo"
 msgstr "Article"
 
-#: inc/woocommerce-setup.php:228
+#: inc/woocommerce-setup.php:245
 msgid "articolo"
 msgstr "item"
 
@@ -313,6 +314,10 @@ msgstr "Email address"
 msgid "Inserisci città, provincia, CAP,..."
 msgstr "Enter city, province, postcode, ..."
 
+#: woocommerce/checkout/form-coupon.php:28
+msgid "Inserisci codice"
+msgstr "Enter code"
+
 #: archive-lb-beauty-specialist.php:19
 msgid "Inserisci provincia"
 msgstr "Enter province"
@@ -421,7 +426,7 @@ msgstr ""
 msgid "Nuova password (lascia vuoto per non modificare)"
 msgstr "New password (leave blank to not change)"
 
-#: inc/woocommerce-setup.php:334
+#: inc/woocommerce-setup.php:351
 msgid "Omaggio"
 msgstr "Free"
 
