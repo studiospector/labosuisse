@@ -22,7 +22,7 @@
             "min": 0,
             "max": 0,
             "collapsed": "",
-            "button_label": "Aggiungi Riga",
+            "button_label": "Aggiungi Messaggio",
             "rows_per_page": 20,
             "sub_fields": [
                 {
@@ -180,5 +180,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1671617277
+    "modified": 1671630771
 }
