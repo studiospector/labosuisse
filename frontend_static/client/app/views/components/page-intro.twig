@@ -5,7 +5,7 @@
                 <p class="infobox__tagline">{{ tagline }}</p>
             {% endif %}
             {% if title %}
-                <h1 class="infobox__subtitle h3">{{ title }}</h1>
+                <h1 class="infobox__subtitle h3{{ not description ? ' mb-0' : '' }}">{{ title }}</h1>
             {% endif %}
             {% if description %}
                 {# <p class="infobox__paragraph">{{ fn('nl2br', description) }}</p> #}

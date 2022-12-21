@@ -1,5 +1,9 @@
 .lb-wc-product-form-login {
-    margin-bottom: 60px;
+    margin-bottom: 20px;
+    
+    @include mq($until: md) {
+        margin-bottom: 10px;
+    }
 
     .woocommerce-form-login-toggle {
         margin-bottom: 0;
@@ -7,6 +11,12 @@
 
     .lb-wc-form-login {
         margin-top: 30px;
+    }
+}
+
+.woocommerce-form-coupon-toggle {
+    .button {
+        white-space: nowrap;
     }
 }
 

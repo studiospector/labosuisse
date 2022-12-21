@@ -8,6 +8,7 @@ use Caffeina\LaboSuisse\Setup\Assets;
 use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 use Caffeina\LaboSuisse\Shortcodes\WCSignInUpShortcode;
 use Caffeina\LaboSuisse\Services\MC4WP\SettingsMC4WP;
+use Caffeina\LaboSuisse\Resources\Message;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -158,6 +159,14 @@ class ThemeSetup extends Timber\Site
         acf_add_options_sub_page(array(
             'page_title' => 'Impostazioni Tema - Shop',
             'menu_title' => 'Shop',
+            'parent_slug' => 'lb-theme-general-settings',
+            'update_button' => 'Aggiorna',
+            'updated_message' => 'Impostazioni aggiornate.',
+        ));
+
+        acf_add_options_sub_page(array(
+            'page_title' => 'Impostazioni Tema - Messaggi',
+            'menu_title' => 'Messaggi',
             'parent_slug' => 'lb-theme-general-settings',
             'update_button' => 'Aggiorna',
             'updated_message' => 'Impostazioni aggiornate.',
@@ -634,8 +643,7 @@ new Assets;
 new CookiebotDeclarationShortcode;
 new WCSignInUpShortcode;
 new SettingsMC4WP;
-
-
+Message::register();
 
 // function filter_wp_image_editors( $array ) {
 //     return array('WP_Image_Editor_Imagick');
