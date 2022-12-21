@@ -113,14 +113,11 @@ class OrderExport
             $productId = $item->get_variation_id()
                 ? $item->get_variation_id()
                 : $item->get_product_id();
-
             $items[] = [
-                'product_id' => $productId,
                 'sku' => wc_get_product($productId)->get_sku(),
                 'product_name' => strip_tags($item->get_name()),
                 'quantity' => $item->get_quantity(),
-                'subtotal' => $item->get_subtotal(),
-                'total' => $item->get_total(),
+                'total' => round($item->get_total(),2),
             ];
         }
 
