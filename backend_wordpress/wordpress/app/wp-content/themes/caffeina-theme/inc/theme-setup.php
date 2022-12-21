@@ -8,6 +8,7 @@ use Caffeina\LaboSuisse\Setup\Assets;
 use Caffeina\LaboSuisse\Shortcodes\CookiebotDeclarationShortcode;
 use Caffeina\LaboSuisse\Shortcodes\WCSignInUpShortcode;
 use Caffeina\LaboSuisse\Services\MC4WP\SettingsMC4WP;
+use Caffeina\LaboSuisse\Resources\Message;
 
 $composer_autoload = __DIR__ . '/../vendor/autoload.php';
 if (file_exists($composer_autoload)) {
@@ -642,8 +643,7 @@ new Assets;
 new CookiebotDeclarationShortcode;
 new WCSignInUpShortcode;
 new SettingsMC4WP;
-
-
+Message::register();
 
 // function filter_wp_image_editors( $array ) {
 //     return array('WP_Image_Editor_Imagick');
