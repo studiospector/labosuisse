@@ -57,6 +57,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     'id' => 'ups',
                     'name' => 'UPS',
                 ),
+                array(
+                    'id' => 'AMZN_IT',
+                    'name' => 'Amazon Shipping',
+                ),
             );
             private $carriers_shipping_service = array(
                 array(
