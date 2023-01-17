@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-11-08 19:55:51+0000\n"
+"PO-Revision-Date: 2022-12-07 12:55:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -100,6 +100,15 @@ msgstr "⚠ Questo plugin è incompatibile con la funzionalità WooCommerce abil
 #: src/Internal/Features/FeaturesController.php:840
 msgid "<a href='%1$s'>View all plugins</a> - <a href='%2$s'>Manage WooCommerce features</a>"
 msgstr "<a href='%1$s'>Visualizza tutti i plugin</a> - <a href='%2$s'>Gestisci le funzionalità WooCommerce</a>"
+
+#. translators: %s is a feature name.
+#: src/Internal/Features/FeaturesController.php:834
+msgid "You are viewing the active plugins that are incompatible with the '%s' feature."
+msgstr "Stai visualizzando i plugin attivi compatibili con la funzionalità \"%s\"."
+
+#: src/Internal/Features/FeaturesController.php:831
+msgid "You are viewing active plugins that are incompatible with currently enabled WooCommerce features."
+msgstr "Stai visualizzando i plugin attivi incompatibili con le funzionalità di WooCommerce attualmente abilitate."
 
 #: src/Internal/Features/FeaturesController.php:788
 msgid "WooCommerce has detected that some of your active plugins are incompatible with currently enabled WooCommerce features. Please <a>review the details</a>."
@@ -26037,7 +26046,7 @@ msgstr "Inserisci un nome utente o indirizzo email."
 
 #: templates/myaccount/form-login.php:54
 msgid "Log in"
-msgstr "Log in"
+msgstr "Accedi"
 
 #: includes/shortcodes/class-wc-shortcode-checkout.php:313
 msgid "The order totals have been updated. Please confirm your order by pressing the \"Place order\" button at the bottom of the page."

@@ -19,20 +19,23 @@ class Ftps {
             $this->port = $port;
         $this->user = $user;
         $this->password = $password;
-        $this->ftp_conn = ftp_ssl_connect($this->host, $this->port);
+        $this->ftp_conn = ftp_ssl_connect($this->host, $this->port, 30);
     }
 
     /**
      * Controlla che la connessione FTPS sia corretta
      */
     public function checkConnection(){
-        $login_result = ftp_login($this->ftp_conn, $this->user, $this->password);
-        ftp_pasv($this->ftp_conn, true);
-        if($login_result){
-            return true;
-        }else{
-            return false;
+        if ($this->ftp_conn !== false) {
+            $login_result = ftp_login($this->ftp_conn, $this->user, $this->password);
+            ftp_pasv($this->ftp_conn, true);
+            if($login_result){
+                return true;
+            }
         }
+        
+        error_log('checkConnection() false');
+        return false;
     }
 
     /**
