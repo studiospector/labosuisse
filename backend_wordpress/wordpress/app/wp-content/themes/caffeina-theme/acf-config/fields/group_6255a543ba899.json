@@ -6,6 +6,7 @@
             "key": "field_6255a56d43f44",
             "label": "Accordion",
             "name": "lb_template_accordion_list",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
                     "key": "field_6261b4d9dc0bb",
                     "label": "ID",
                     "name": "lb_template_accordion_list_id",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 0,
@@ -47,6 +49,7 @@
                         "CN": "CINA",
                         "CY": "CIPRO",
                         "DK": "DANIMARCA",
+                        "EC": "ECUADOR",
                         "AE": "EMIRATI ARABI UNITI",
                         "EE": "ESTONIA",
                         "PH": "FILIPPINE",
@@ -71,6 +74,7 @@
                         "OM": "OMAN",
                         "PK": "PAKISTAN",
                         "PY": "PARAGUAY",
+                        "PE": "PERU",
                         "PL": "POLONIA",
                         "PT": "PORTOGALLO",
                         "QA": "QATAR",
@@ -82,20 +86,23 @@
                         "SK": "REPUBBLICA SLOVACCA",
                         "LK": "SRI LANKA",
                         "HU": "UNGHERIA",
-                        "UY": "URUGUAY"
+                        "UY": "URUGUAY",
+                        "VN": "VIETNAM"
                     },
                     "default_value": false,
-                    "allow_null": 0,
+                    "return_format": "value",
                     "multiple": 0,
+                    "allow_null": 0,
                     "ui": 1,
                     "ajax": 0,
-                    "return_format": "value",
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_6255a56d43f44"
                 },
                 {
                     "key": "field_6255a66f43f46",
                     "label": "Icona",
                     "name": "lb_template_accordion_list_icon",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 0,
@@ -117,6 +124,7 @@
                         "flag-cina": "Cina",
                         "flag-cipro": "Cipro",
                         "flag-danimarca": "Danimarca",
+                        "flag-ecuador": "Ecuador",
                         "flag-emirati-arabi-uniti": "Emirati Arabi Uniti",
                         "flag-estonia": "Estonia",
                         "flag-filippine": "Filippine",
@@ -141,6 +149,7 @@
                         "flag-oman": "Oman",
                         "flag-pakistan": "Pakistan",
                         "flag-paraguay": "Paraguay",
+                        "flag-peru": "Peru",
                         "flag-polonia": "Polonia",
                         "flag-portogallo": "Portogallo",
                         "flag-qatar": "Qatar",
@@ -152,20 +161,23 @@
                         "flag-slovacchia": "Slovacchia",
                         "flag-sri-lanka": "Sri Lanka",
                         "flag-ungheria": "Ungheria",
-                        "flag-uruguay": "Uruguay"
+                        "flag-uruguay": "Uruguay",
+                        "flag-vietnam": "Vietnam"
                     },
                     "default_value": false,
-                    "allow_null": 0,
+                    "return_format": "value",
                     "multiple": 0,
+                    "allow_null": 0,
                     "ui": 1,
                     "ajax": 0,
-                    "return_format": "value",
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_6255a56d43f44"
                 },
                 {
                     "key": "field_6255a5bc43f45",
                     "label": "Titolo",
                     "name": "lb_template_accordion_list_title",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -180,12 +192,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_6255a56d43f44"
                 },
                 {
                     "key": "field_6255cb92fba87",
                     "label": "Links Row",
                     "name": "lb_template_accordion_list_row",
+                    "aria-label": "",
                     "type": "repeater",
                     "instructions": "",
                     "required": 0,
@@ -206,6 +220,7 @@
                             "key": "field_6255cbd0fba8a",
                             "label": "Label",
                             "name": "lb_template_accordion_list_row_label",
+                            "aria-label": "",
                             "type": "text",
                             "instructions": "",
                             "required": 0,
@@ -220,12 +235,14 @@
                             "placeholder": "",
                             "prepend": "",
                             "append": "",
-                            "maxlength": ""
+                            "maxlength": "",
+                            "parent_repeater": "field_6255cb92fba87"
                         },
                         {
                             "key": "field_6255a7a143f47",
                             "label": "Links",
                             "name": "lb_template_accordion_list_links",
+                            "aria-label": "",
                             "type": "repeater",
                             "instructions": "",
                             "required": 0,
@@ -246,6 +263,7 @@
                                     "key": "field_6255a7cb43f49",
                                     "label": "Icona",
                                     "name": "lb_template_accordion_list_links_icon",
+                                    "aria-label": "",
                                     "type": "select",
                                     "instructions": "",
                                     "required": 0,
@@ -271,12 +289,14 @@
                                     "ui": 1,
                                     "ajax": 0,
                                     "return_format": "value",
-                                    "placeholder": ""
+                                    "placeholder": "",
+                                    "parent_repeater": "field_6255a7a143f47"
                                 },
                                 {
                                     "key": "field_6255a7c343f48",
                                     "label": "Link",
                                     "name": "lb_template_accordion_list_links_link",
+                                    "aria-label": "",
                                     "type": "link",
                                     "instructions": "",
                                     "required": 0,
@@ -287,13 +307,19 @@
                                         "id": ""
                                     },
                                     "return_format": "array",
-                                    "wpml_cf_preferences": 2
+                                    "wpml_cf_preferences": 2,
+                                    "parent_repeater": "field_6255a7a143f47"
                                 }
-                            ]
+                            ],
+                            "rows_per_page": 20,
+                            "parent_repeater": "field_6255cb92fba87"
                         }
-                    ]
+                    ],
+                    "rows_per_page": 20,
+                    "parent_repeater": "field_6255a56d43f44"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -314,5 +340,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1657886216
+    "modified": 1675182990
 }
