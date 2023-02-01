@@ -381,6 +381,7 @@ class DistributorsMap extends Component {
     addInfowindowInside = async (marker, markerData, i) => {
         // Load twig template
         const template = await templateLoader('components/distributor-infowindow.twig')
+        markerData.lang = this.lang
         const html = template.render(markerData)
 
         // Init new GMap Infowindow
