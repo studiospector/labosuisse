@@ -20,7 +20,8 @@ build:
   script:
     # Env
     - printenv $(echo "n3_env") > ./.env
-    - docker-compose -f ./docker/build.yml build  --build-arg BUILDKIT_INLINE_CACHE=1
+#     - docker-compose -f ./docker/build.yml build  --build-arg BUILDKIT_INLINE_CACHE=1
+    - docker-compose -f ./docker/build.yml build
     - docker-compose -f ./docker/build.yml push
   only:
     - develop
