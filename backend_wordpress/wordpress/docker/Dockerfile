@@ -46,6 +46,8 @@ COPY --from=wordpress-base --chown=nobody /wordpress_dir $WP_CORE_DIR
 COPY --chown=nobody ./backend_wordpress/wordpress/app/wp-content ${WP_CONTENT_CUSTOM_DIR}
 RUN cd ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme && composer install -n
 
+COPY --chown=nobody ./backend_wordpress/wordpress/app/test_call.php ${WP_CORE_DIR}/test_call.php
+
 COPY --chown=nobody ./backend_wordpress/wordpress/app/wp-config-custom ${WP_CORE_DIR}/wp-config-custom
 COPY --chown=nobody ./backend_wordpress/wordpress/app/wp-config.php ${WP_CORE_DIR}/wp-config.php
 COPY --chown=nobody --from=frontend_bundler /app/dist/public ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/static
