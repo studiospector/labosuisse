@@ -213,6 +213,13 @@
             .added_to_cart {
                 display: none;
             }
+
+            .lb-button-group {
+                a, button {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
         }
 
         &__variations {
