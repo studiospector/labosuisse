@@ -216,8 +216,10 @@
 
             .lb-button-group {
                 a, button {
-                    width: 100%;
-                    justify-content: center;
+                    @include mq($until: lg) {
+                        width: 100%;
+                        justify-content: center;
+                    }
                 }
             }
         }
