@@ -102,18 +102,28 @@
         font-weight: 600;
         line-height: rem(28);
         letter-spacing: 0.02em;
-        // text-transform: uppercase;
         margin-right: 40px;
 
-        @include mq($until: md) {
+        @include mq($until: lg) {
             display: flex;
             flex-direction: column;
+
+            .lb-price-label {
+                margin: 0;
+            }
+        }
+
+        @include mq($until: md) {
             align-items: flex-end;
             justify-content: center;
             font-size: rem(16);
             font-weight: 500;
             margin-right: 0;
             line-height: 1;
+
+            .lb-price-label {
+                margin: auto;
+            }
         }
 
         .lb-price-label {

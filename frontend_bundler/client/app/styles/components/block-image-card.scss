@@ -26,26 +26,28 @@
     &__card {
         flex: 1 1 50%;
 
-        .infobox {
-            &__title,
-            &__subtitle {
-                font-weight: 600;
-                font-size: rem(30);
-                line-height: rem(38);
-                letter-spacing: 0.02em;
+        .card {
+            .infobox {
+                &__subtitle {
+                    font-weight: 600;
+                    font-size: rem(26);
+                }
+    
+                &__paragraph {
+                    opacity: 1;
+                }
+            }
+    
+            @include mq($until: md) {
+                flex: 1;
+                text-align: center;
+                
+                .card-img {
+                    order: 1;
+                    margin-top: 20px;
+                    margin-bottom: 0;
+                }
             }
         }
-
-        @include mq($until: md) {
-            flex: 1;
-            text-align: center;
-            
-            .card-img {
-                order: 1;
-                margin-top: 20px;
-                margin-bottom: 0;
-            }
-        }
-
     }
 }
