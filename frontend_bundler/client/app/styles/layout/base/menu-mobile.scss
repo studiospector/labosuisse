@@ -10,8 +10,9 @@
     z-index: 100;
 
     @include mq($from: md, $until: lg) {
-        // width: rem(400px);
+        width: rem(400px);
         right: unset;
+        border-right: 1px solid map-get($colors, 'primary-light-1');
     }
 
     @include mq($from: lg) {
