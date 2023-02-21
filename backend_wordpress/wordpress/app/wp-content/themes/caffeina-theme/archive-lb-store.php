@@ -13,7 +13,7 @@ $context = [
         'description' => $options['description'],
     ],
     'store_locator' => [
-        'map_country' => strtoupper($curr_lang),
+        'map_country' => 'IT',
         'map_lang' => $curr_lang,
         'not_found' => sprintf(__('Nessuna farmacia trovata. %s Naviga la mappa per trovare i punti vendita autorizzati Labo più vicini.', 'labo-suisse-theme'), '<br>'),
         'search' => [
