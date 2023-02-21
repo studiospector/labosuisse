@@ -73,7 +73,9 @@ class Brands
         $items  = [
             'type' => 'submenu',
             'label' => __('Tutti i Brand', 'labo-suisse-theme'),
-            'children' => [],
+            'children' => [
+                ['type' => 'link', 'label' => __('Tutti i Brand', 'labo-suisse-theme'), 'href' => $this->option->getArchiveBrandLink()]
+            ],
         ];
 
         foreach ($this->brands as $i => $brand) {

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-02-11 10:08+0000\n"
-"PO-Revision-Date: 2022-12-21 12:12+0000\n"
+"PO-Revision-Date: 2023-02-21 15:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: English (UK)\n"
 "Language: en_GB\n"
@@ -38,7 +38,7 @@ msgstr "Add to Cart"
 msgid "Aggiungi il tuo ID Cookiebot per mostrare le dichiarazioni sui cookie."
 msgstr "Add your Cookiebot ID to show cookie declarations."
 
-#: woocommerce/cart/cart.php:175
+#: woocommerce/cart/cart.php:177
 msgid "Aggiungi un codice promozionale"
 msgstr "Add a promotional code"
 
@@ -49,7 +49,7 @@ msgstr "Scope:"
 
 #: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71
 #: template-distributor.php:33 template-lb-brand-archive.php:65
-#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:144
+#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:146
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:131
@@ -58,7 +58,7 @@ msgid "Applica"
 msgstr "Apply"
 
 #: inc/woocommerce-setup.php:229
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:47
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:48
 msgid "Articoli"
 msgstr "Articles"
 
@@ -77,7 +77,7 @@ msgstr "item"
 #: template-distributor.php:29
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:40
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:127
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:105
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:106
 msgid "Brand"
 msgstr "Brand"
 
@@ -142,7 +142,7 @@ msgstr "Sorry, we can't find<br>the page you are looking for."
 msgid "Ciao %1$s!"
 msgstr "Hello %1$s!"
 
-#: woocommerce/cart/cart.php:143
+#: woocommerce/cart/cart.php:145
 msgid "Codice coupon"
 msgstr "Coupon code"
 
@@ -232,7 +232,7 @@ msgstr "Need"
 msgid "Esigenze"
 msgstr "Need"
 
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:76
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:77
 msgid "FAQ"
 msgstr "FAQ"
 
@@ -309,6 +309,10 @@ msgstr "Email address"
 #: woocommerce/myaccount/form-login.php:154
 msgid "Indirizzo email"
 msgstr "Email address"
+
+#: archive-lb-store.php:22
+msgid "Inserisci città, provincia, CAP"
+msgstr "Enter city, province, zip code"
 
 #: packages/caffeina/labo-suisse/src/Blocks/NewsletterSubscription.php:21
 msgid "Inserisci città, provincia, CAP,..."
@@ -397,6 +401,15 @@ msgstr "No events planned<br>this month in your province."
 #: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:226
 msgid "Nessun risultato trovato"
 msgstr "No results found"
+
+#: archive-lb-store.php:18
+#, php-format
+msgid ""
+"Nessuna farmacia trovata. %s Naviga la mappa per trovare i punti vendita "
+"autorizzati Labo più vicini."
+msgstr ""
+"No pharmacy found. %s Navigate the map to find the nearest authorized Labo "
+"sales points."
 
 #: inc/helpers.php:360
 msgid "Newsletter"
@@ -601,7 +614,7 @@ msgstr "Discover the treatments distributed"
 msgid "Scopri il brand"
 msgstr "Discover the brand"
 
-#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:99
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:101
 msgid "Scopri la linea"
 msgstr "Discover the line"
 
@@ -748,6 +761,7 @@ msgstr "Find a distributor"
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:36
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:42
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:75
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:77
 msgid "Tutti i Brand"
 msgstr "All Brands"
 
@@ -780,7 +794,7 @@ msgstr "Go to directions"
 msgid "Vedi meno dettagli"
 msgstr "See less details"
 
-#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:114
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:116
 msgid "Vedi tutti i prodotti"
 msgstr "See all products"
 

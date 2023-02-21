@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-12-21 12:10+0000\n"
+"POT-Creation-Date: 2023-02-21 15:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -39,7 +39,7 @@ msgstr ""
 msgid "Aggiungi il tuo ID Cookiebot per mostrare le dichiarazioni sui cookie."
 msgstr ""
 
-#: woocommerce/cart/cart.php:175
+#: woocommerce/cart/cart.php:177
 msgid "Aggiungi un codice promozionale"
 msgstr ""
 
@@ -50,7 +50,7 @@ msgstr ""
 
 #: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71
 #: template-distributor.php:33 template-lb-brand-archive.php:65
-#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:144
+#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:146
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:131
@@ -59,7 +59,7 @@ msgid "Applica"
 msgstr ""
 
 #: inc/woocommerce-setup.php:229
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:47
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:48
 msgid "Articoli"
 msgstr ""
 
@@ -78,7 +78,7 @@ msgstr ""
 #: template-distributor.php:29
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:40
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:127
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:105
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:106
 msgid "Brand"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "Ciao %1$s!"
 msgstr ""
 
-#: woocommerce/cart/cart.php:143
+#: woocommerce/cart/cart.php:145
 msgid "Codice coupon"
 msgstr ""
 
@@ -225,7 +225,7 @@ msgstr ""
 msgid "Esigenze"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:76
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:77
 msgid "FAQ"
 msgstr ""
 
@@ -291,6 +291,10 @@ msgstr ""
 
 #: woocommerce/myaccount/form-login.php:154
 msgid "Indirizzo email"
+msgstr ""
+
+#: archive-lb-store.php:22
+msgid "Inserisci città, provincia, CAP"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Blocks/NewsletterSubscription.php:21
@@ -378,6 +382,13 @@ msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:226
 msgid "Nessun risultato trovato"
+msgstr ""
+
+#: archive-lb-store.php:18
+#, php-format
+msgid ""
+"Nessuna farmacia trovata. %s Naviga la mappa per trovare i punti vendita "
+"autorizzati Labo più vicini."
 msgstr ""
 
 #: inc/helpers.php:360
@@ -576,7 +587,7 @@ msgstr ""
 msgid "Scopri il brand"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:99
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:101
 msgid "Scopri la linea"
 msgstr ""
 
@@ -716,6 +727,7 @@ msgstr ""
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:36
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:42
 #: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:75
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:77
 msgid "Tutti i Brand"
 msgstr ""
 
@@ -748,7 +760,7 @@ msgstr ""
 msgid "Vedi meno dettagli"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:114
+#: packages/caffeina/labo-suisse/src/Menu/Brands/Brands.php:116
 msgid "Vedi tutti i prodotti"
 msgstr ""
 
