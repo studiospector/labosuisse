@@ -6,10 +6,18 @@
     border-radius: 7px;
 
     --plyr-color-main: #b52a2d;
+
+    @include mq($from: md) {
+      height: auto;
+    }
   }
   
   iframe {
     height: 425px;
     max-width: 754px;
+
+    @include mq($from: md) {
+      height: auto;
+    }
   }
 }
