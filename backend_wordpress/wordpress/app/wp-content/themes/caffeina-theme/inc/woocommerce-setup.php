@@ -60,15 +60,16 @@ function lb_set_custom_data_attribute_product_variations($html, $args)
 
     $html = str_replace("id=\"{$args['attribute']}\"", "id=\"{$args['attribute']}\" " . "data-variant=\"tertiary\" data-label=\"$label\" data-wc-variations-support=\"true\"", $html);
 
-    $regex = '/\[\[\d{1,3}]\]/';
+    $regex = '/\[\[\w\d{1,3}\]\]/';
     $matches = [];
     preg_match_all($regex, $html, $matches);
     foreach ($matches[0] as $match) {
         $match = str_replace(['[',']'],'', $match);
         $hexadecimal = get_field('lb_product_color_taxonomy_hexadecimal', get_term_by('name', $match, 'pa_colore'));
         $colorName = get_field('lb_product_color_taxonomy_color_name', get_term_by('name', $match, 'pa_colore'));
-        $search = "<option value=\"{$match}\" >[[{$match}]]</option>";
-        $replace = "<option value=\"{$match}\" data-option-color=\"{$hexadecimal}\">{$colorName}</option>";
+        $slug = strtolower($match);
+        $search =  "<option value=\"{$slug}\" >[[{$match}]]</option>";
+        $replace = "<option value=\"{$slug}\" data-option-color=\"{$hexadecimal}\">{$colorName}</option>";
 
         $html = str_replace($search, $replace, $html);
     }
