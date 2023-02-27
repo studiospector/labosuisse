@@ -5,6 +5,7 @@
 @import "variables/main";
 
 // VENDORS AND MIXINS
+@import "../node_modules/plyr/dist/plyr";
 @import "../node_modules/sass-mq/mq";
 @import "vendors/custom-input";
 @import "vendors/custom-radio";

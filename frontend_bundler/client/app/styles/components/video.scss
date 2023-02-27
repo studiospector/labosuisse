@@ -1,0 +1,15 @@
+.lb-video {
+  .plyr {
+    height: 425px;
+    max-width: 754px;
+    margin: 0 auto;
+    border-radius: 7px;
+
+    --plyr-color-main: #b52a2d;
+  }
+  
+  iframe {
+    height: 425px;
+    max-width: 754px;
+  }
+}
