@@ -9,21 +9,14 @@ class Video extends Component {
   constructor({ options, ...props }) {
     super({ ...props, ui });
 
-    console.log('this.ui.video', this.ui.video);
-
     if (this.ui.video) {
       const player = new Plyr(this.ui.video);
 
-      console.log("player", player);
-      window.player = player
-
-      if (player) {
-        player.on("ended", (event) => {
-          const instance = event.detail.plyr;
-          instance.restart();
-          setTimeout(() => instance.pause(), 100);
-        });
-      }
+      player.on("ended", (event) => {
+        const instance = event.detail.plyr;
+        instance.restart();
+        setTimeout(() => instance.pause(), 100);
+      });
     }
   }
 }
