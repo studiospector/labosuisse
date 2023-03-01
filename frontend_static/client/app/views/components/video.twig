@@ -7,7 +7,5 @@
 {% endif %}
 
 <section class="lb-video container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-video">
-	{% if video_id %}
-		<div data-video data-plyr-provider="{{ provider }}" data-plyr-embed-id="{{ video_id }}"></div>
-	{% endif %}
+	<div class="lb-video__player" data-video data-plyr-provider="{{ provider }}" data-plyr-embed-id="{{ video_id }}"></div>
 </section>
