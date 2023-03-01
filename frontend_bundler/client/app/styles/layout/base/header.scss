@@ -267,12 +267,12 @@
                 height: 72px;
                 position: relative;
                 opacity: 1;
-                overflow: hidden;
             }
         }
 
         &--desktop {
             justify-content: space-between;
+            overflow: hidden;
 
             @include mq($until: lg) {
                 display: none;

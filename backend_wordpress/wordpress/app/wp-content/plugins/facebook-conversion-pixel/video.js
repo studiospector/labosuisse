@@ -432,14 +432,16 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 	FCA_PC_Video.prototype.__proto__ = EventEmitter.prototype;
 
 	function onYouTubeIframeAPIReady() {
-
-		fcaPcVideos.forEach(video => {
-			if (video.type !== 'YOUTUBE') {
-				return
-			}
-
-			video.emit('api_youtube_loaded')	
-		})
+		
+		if (typeof fcaPcVideos !== 'undefined') {
+			fcaPcVideos.forEach(video => {
+				if (video.type !== 'YOUTUBE') {
+					return
+				}
+	
+				video.emit('api_youtube_loaded')	
+			})
+		}
 		
 	}
 

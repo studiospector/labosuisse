@@ -4,6 +4,182 @@
 // FUNCTIONS
 ////////////////////////////
 
+//INSERT PIXEL
+function fca_pc_parse_pixels( $options ) {
+	$parsed_pixels = array();
+	$options_pixels = empty( $options['pixels'] ) ? array() : $options['pixels'];
+	
+	foreach( $options_pixels as $p ) {
+		$parsed_pixels[] = json_decode( stripslashes_deep( $p ), true );
+	}
+	
+	return $parsed_pixels;
+}
+
+function fca_pc_maybe_add_pixel() {
+
+	$options = get_option( 'fca_pc', array() );
+
+	$pixels = fca_pc_parse_pixels( $options );
+	
+	if ( fca_pc_role_check( $options ) ) {
+
+		//HOOK IN OTHER INTEGRATIONS/FEATURES
+		do_action( 'fca_pc_start_pixel_output', $options );
+
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'fca_pc_client_js' );
+
+		wp_enqueue_script( 'fca_pc_video_js', FCA_PC_PLUGINS_URL . '/video.js', array(), false, true );
+
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcEvents', fca_pc_get_active_events() );
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcPost', fca_pc_post_parameters() );
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcCAPI', array( 
+			'pixels' => $pixels,
+			'ajax_url' => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'fca_pc_capi_nonce' ),
+			'debug' => FCA_PC_DEBUG,
+		));
+
+		//ONLY USE DEFAULT SEARCH IF WE DIDNT USE WOO OR EDD SPECIFIC
+		if ( is_search() && $options['search_integration'] == 'on' ) {
+			wp_localize_script( 'fca_pc_client_js', 'fcaPcSearchQuery', array( 'search_string' => get_search_query() ) );
+		}
+		
+		if ( !empty( $options['user_parameters'] ) ) {
+			wp_localize_script( 'fca_pc_client_js', 'fcaPcUserParams', fca_pc_user_parameters() );
+		}
+		
+		fca_pc_add_pixels( $options );
+	}
+}
+add_action( 'wp_head', 'fca_pc_maybe_add_pixel', 1 );
+
+function fca_pc_role_check( $options ) {
+	$roles = wp_get_current_user()->roles;
+	$exclude = empty ( $options['exclude'] ) ? array() : str_replace( ' ', '_', $options['exclude'] );
+	$roles_check_passed = 0 === count( array_intersect( array_map( 'strtolower', $roles ), array_map( 'strtolower', $exclude ) ) );
+	return $roles_check_passed;
+}
+
+function fca_pc_add_pixels( $options ) {
+	
+	$pixels = fca_pc_parse_pixels( $options );
+	
+	$facebook_pixels = array();
+	$ga3_pixels[] = array();
+	$ga4_pixels[] = array();
+	
+	forEach( $pixels as $pixel ) {
+		$type = empty( $pixel['type'] ) ? '' : $pixel['type'];
+		
+		switch( $type ) {
+			case 'GA3':
+				$ga3_pixels[] = $pixel;
+				break;
+				
+			case 'GA4':
+				$ga4_pixels[] = $pixel;
+				break;
+				
+			case 'Custom Header Script':
+				$header_pixels[] = $pixel;
+				break;
+			
+			
+			default:
+				$facebook_pixels[] = $pixel;
+		}
+		
+	};
+		
+	if ( !empty( $ga4_pixels ) OR !empty( $ga3_pixels ) ) {
+		fca_pc_add_google_pixels( array_merge( $ga3_pixels, $ga4_pixels ), $options );
+		wp_localize_script( 'fca_pc_client_js', 'fcaPcGA', array(			
+			'debug' => FCA_PC_DEBUG,
+		));
+	}
+	
+	if ( !empty( $facebook_pixels ) ) {		
+		fca_pc_add_facebook_pixels( $facebook_pixels, $options );
+	}
+	if ( !empty( $header_pixels ) ) {		
+		fca_pc_add_header_pixels( $header_pixels, $options );
+	}
+	
+}
+
+function fca_pc_add_header_pixels( $header_pixels, $options ) {
+	forEach ( $header_pixels as $pixel ) {
+		$paused = empty( $pixel['paused'] ) ? false : true;
+		if( !$paused ) {
+			$name = esc_html( $pixel['pixel'] );
+			echo "<!-- begin $name -->";
+			$code = $pixel['capi'];
+			echo htmlspecialchars_decode( $code );
+			echo "<!-- end $name -->";			
+		}
+		
+	}
+}
+
+function fca_pc_add_facebook_pixels( $facebook_pixels, $options ) {
+	
+	$advanced_matching = empty( $options['advanced_matching'] ) ? false : true;
+	$code = ''; //INIT CODE FOR PIXEL
+	
+	forEach ( $facebook_pixels as $pixel ) {		
+		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
+		$paused = empty( $pixel['paused'] ) ? false : true;
+		if( !$paused && $pixel_id ){
+			if ( $advanced_matching ) {
+				$code .= "fbq( 'init', '$pixel_id', " . fca_pc_advanced_matching() . " );";
+			} else {
+				$code .= "fbq( 'init', '$pixel_id' );";
+			}
+		}
+	}
+	ob_start(); ?>
+	<!-- Facebook Pixel Code -->
+	<script>
+	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+	n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+	t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+	document,'script','https://connect.facebook.net/en_US/fbevents.js' );
+	<?php echo $code ?>
+	</script>
+	<!-- DO NOT MODIFY -->
+	<!-- End Facebook Pixel Code -->
+	<?php 
+	echo ob_get_clean();
+	
+}
+
+function fca_pc_add_google_pixels( $google_pixels ) {
+	
+	forEach ( $google_pixels as $pixel ) {		
+		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
+		$paused = empty( $pixel['paused'] ) ? false : true;
+		if( !$paused && $pixel_id ){
+			
+			ob_start(); ?>
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $pixel_id ?>"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag( 'config', '<?php echo $pixel_id ?>' );
+			</script>
+			<?php 
+			echo ob_get_clean();
+			
+		}
+	}
+		
+}
+
 function fca_pc_post_parameters() {
 	global $post;
 
@@ -336,4 +512,39 @@ function fca_pc_tag_name_fiter ( $tag ) {
 }
 function fca_pc_term_id_fiter ( $obj ) {
 	return $obj->term_id;
+}
+
+
+
+function fca_pc_get_woo_product ( $product_id = '' ) {
+	$p = empty( $product_id ) ? wc_get_product() : wc_get_product( $product_id );
+	if ( $p ) {
+		return $p;
+	}
+	return false;
+}
+
+function fca_pc_get_woo_ltv( $email ) {
+	
+	$ltv = 0;
+	
+	$args = array(
+		'post_type'      => 'shop_order',
+		'post_status'    => 'wc-completed',
+		'meta_key'       => '_billing_email',
+		'meta_value'     => $email,
+		'posts_per_page' => -1,
+	);
+
+	$orders_query = new WP_Query( $args );
+
+	foreach( $orders_query->posts as $order ) {
+		$WC_Order = new WC_Order( $order );
+		$ltv += $WC_Order->get_total();
+	}
+
+	wp_reset_query();
+	
+	return $ltv;
+	
 }
