@@ -1,8 +1,8 @@
 <?php
 /*
-	Plugin Name: Pixel Cat Lite
+	Plugin Name: Pixel Cat Lite - ATTENZIONE! Plugin modificato. Leggere descrizione.
 	Plugin URI: https://fatcatapps.com/pixel-cat
-	Description: Provides an easy way to embed Facebook pixels
+	Description: Modifica fatta nel file "includes/integrations/woo-feed.php". Aggiunte righe da 49 a 57. Per filtrare i feed tra lingua italiana e inglese con WPML.
 	Text Domain: facebook-conversion-pixel
 	Domain Path: /languages
 	Author: Fatcat Apps
