@@ -433,7 +433,9 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 	function onYouTubeIframeAPIReady() {
 
+		console.log(fcaPcVideos);
 		if (fcaPcVideos) {
+			console.log(fcaPcVideos);
 			fcaPcVideos.forEach(video => {
 				if (video.type !== 'YOUTUBE') {
 					return
