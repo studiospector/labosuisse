@@ -433,6 +433,16 @@ if ( typeof fcaPcPost === 'object' && fcaPcPost.video_enabled === "1" ) {
 
 	function onYouTubeIframeAPIReady() {
 		
+		if (fcaPcVideos !== undefined) {
+			fcaPcVideos.forEach(video => {
+				if (video.type !== 'YOUTUBE') {
+					return
+				}
+	
+				video.emit('api_youtube_loaded')	
+			})
+		}
+		
 	}
 
 	window.fcaPcVideos = [];
