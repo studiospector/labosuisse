@@ -15,6 +15,7 @@ class Video extends Component {
       const player = new Plyr(this.ui.video);
 
       console.log("player", player);
+      window.player = player
 
       if (player) {
         player.on("ended", (event) => {

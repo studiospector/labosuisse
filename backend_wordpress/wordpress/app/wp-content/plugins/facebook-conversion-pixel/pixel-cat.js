@@ -11,18 +11,18 @@ jQuery( document ).ready(function($) {
 			var triggerType = fcaPcEvents[i].triggerType
 			var trigger = fcaPcEvents[i].trigger
 			var apiAction = fcaPcEvents[i].apiAction
-
+			
 			switch ( triggerType ) {
 				case 'css':
 					$( trigger ).on( 'click', { name: eventName, params: parameters, apiAction: apiAction }, function( e ){
-						fca_pc_fb_api_call( e.data.apiAction, e.data.name, e.data.params )
+						fca_pc_trigger_event( e.data.apiAction, e.data.name, e.data.params )
 					})
 					break
 
 				case 'hover':
 
 					$( trigger ).on( 'mouseenter', { name: eventName, params: parameters, apiAction: apiAction, trigger: trigger }, function( e ){
-						fca_pc_fb_api_call( e.data.apiAction, e.data.name, e.data.params )
+						fca_pc_trigger_event( e.data.apiAction, e.data.name, e.data.params )
 						$( e.data.trigger ).off( 'mouseenter' )
 					})
 
@@ -35,20 +35,20 @@ jQuery( document ).ready(function($) {
 								'scrollTarget': scrollTarget,
 								'apiAction': apiAction,
 								'eventName': eventName,
-								'parameters': parameters
+								'parameters': parameters,
 								}, function( e ) {
 									if ( e.data.scrollTarget <= scrolled_percent() ) {
 										$( window ).off( e )
-										fca_pc_fb_api_call( apiAction, eventName, parameters )
+										fca_pc_trigger_event( apiAction, eventName, parameters )
 									}
-							}).scroll()
+							}).trigger( 'scroll' )
 						}, fcaPcEvents[i].delay * 1000, fcaPcEvents[i].scroll, apiAction, eventName, parameters  )
 
 
 					} else if ( fcaPcEvents[i].hasOwnProperty( 'delay' ) ) {
-						setTimeout( fca_pc_fb_api_call, fcaPcEvents[i].delay * 1000, apiAction, eventName, parameters  )
+						setTimeout( fca_pc_trigger_event, fcaPcEvents[i].delay * 1000, apiAction, eventName, parameters  )
 					} else {
-						fca_pc_fb_api_call( apiAction, eventName, parameters )
+						fca_pc_trigger_event( apiAction, eventName, parameters )
 					}
 					break
 
@@ -56,7 +56,7 @@ jQuery( document ).ready(function($) {
 					$( 'a' ).each(function(){
 						if ( $(this).attr( 'href' ) === trigger ) {
 							$(this).on( 'click', { name: eventName, params: parameters, apiAction: apiAction }, function( e ){
-								fca_pc_fb_api_call( e.data.apiAction, e.data.name, e.data.params )
+								fca_pc_trigger_event( e.data.apiAction, e.data.name, e.data.params )
 							})
 						}
 					})
@@ -67,16 +67,16 @@ jQuery( document ).ready(function($) {
 	})()
 
 	// fb initial pageview
-	fca_pc_fb_api_call( 'track', 'PageView' )
+	fca_pc_trigger_event( 'track', 'PageView' )
 
 	//SEARCH INTEGRATION
 	if ( typeof fcaPcSearchQuery !== 'undefined' ) {
-		fca_pc_fb_api_call( 'track', 'Search', fcaPcSearchQuery )
+		fca_pc_trigger_event( 'track', 'Search', fcaPcSearchQuery )
 	}
 	//LANDING PAGE CAT INTEGRATION
 	if ( typeof fcaPcLandingPageCatEnabled !== 'undefined' ) {
 
-		$( '#fca-lpc-optin-button' ).click( function( e ){
+		$( '#fca-lpc-optin-button' ).on( 'click', function( e ){
 
 			var is_consent_checked
 
@@ -95,7 +95,7 @@ jQuery( document ).ready(function($) {
 				}
 
 				if ( is_consent_checked ) {
-					fca_pc_fb_api_call( 'track', 'Lead', { 'content_name': fcaPcPost.title } )	
+					fca_pc_trigger_event( 'track', 'Lead', { 'content_name': fcaPcPost.title } )	
 					return true
 				}
 				
@@ -130,14 +130,14 @@ jQuery( document ).ready(function($) {
 			}
 			
 			if ( email && send_api_request ) {
-				fca_pc_fb_api_call( 'track', 'Lead', { 'content_name': fcaPcPost.title, 'form_id': $(this).find( '#fca_eoi_form_id' ).val() } )
+				fca_pc_trigger_event( 'track', 'Lead', { 'content_name': fcaPcPost.title, 'form_id': $(this).find( '#fca_eoi_form_id' ).val() } )
 			}
 		})
 	}
 
 	//EPT INTEGRATION
 	if ( typeof fcaPcEptEnabled !== 'undefined' ) {
-		$( '.ptp-checkout-button, .ptp-button, .fca-ept-button' ).click( function( e ){
+		$( '.ptp-checkout-button, .ptp-button, .fca-ept-button' ).on( 'click', function( e ){
 
 			//THIS IS HANDLED BY THE 1-CLICK INTEGRATION, DONT FIRE THIS EVENT
 			if (  $(this).attr( 'href' ).indexOf( '?edd_action=add_to_cart&download_id' ) !== -1 && fcaPcPost.edd_enabled ) {
@@ -147,7 +147,7 @@ jQuery( document ).ready(function($) {
 				return
 			}
 
-			fca_pc_fb_api_call( 'track', 'InitiateCheckout', {
+			fca_pc_trigger_event( 'track', 'InitiateCheckout', {
 				'content_name': fcaPcPost.title,
 				'pricing_table_id': get_ept_table_id( $(this) ),
 				'plan_name' : get_ept_plan_name( $(this) ),
@@ -159,21 +159,21 @@ jQuery( document ).ready(function($) {
 	//QUIZ CAT INTEGRATION
 	if ( typeof fcaPcQuizCatEnabled !== 'undefined' ) {
 
-		$( '.fca_qc_start_button' ).click( function( e ){
+		$( '.fca_qc_start_button' ).on( 'click', function( e ){
 			var id = parseInt ( $(this).closest( '.fca_qc_quiz' ).prop( 'id' ).replace( 'fca_qc_quiz_', '' ) )
 			var name = $(this).closest( '.fca_qc_quiz' ).find( '.fca_qc_quiz_title' ).text()
-			fca_pc_fb_api_call( 'trackCustom', 'QuizStart', { 'quiz_id': id, 'quiz_name': name } )
+			fca_pc_trigger_event( 'trackCustom', 'QuizStart', { 'quiz_id': id, 'quiz_name': name } )
 			return true
 		})
 
-		$( '.fca_qc_share_link' ).click( function( e ){
+		$( '.fca_qc_share_link' ).on( 'click', function( e ){
 			var id = parseInt ( $(this).closest( '.fca_qc_quiz' ).prop( 'id' ).replace( 'fca_qc_quiz_', '' ) )
 			var name = $(this).closest( '.fca_qc_quiz' ).find( '.fca_qc_quiz_title' ).text()
-			fca_pc_fb_api_call( 'trackCustom', 'QuizShare', { 'quiz_id': id, 'quiz_name': name } )
+			fca_pc_trigger_event( 'trackCustom', 'QuizShare', { 'quiz_id': id, 'quiz_name': name } )
 			return true
 		})
 
-		$( '.fca_qc_submit_email_button' ).click( function( e ){
+		$( '.fca_qc_submit_email_button' ).on( 'click', function( e ){
 
 			var is_consent_checked
 
@@ -195,7 +195,7 @@ jQuery( document ).ready(function($) {
 				}
 
 				if ( is_consent_checked ) {
-					fca_pc_fb_api_call( 'track', 'Lead', { 'quiz_id': id, 'quiz_name': name } )
+					fca_pc_trigger_event( 'track', 'Lead', { 'quiz_id': id, 'quiz_name': name } )
 					return true
 				}
 
@@ -207,7 +207,7 @@ jQuery( document ).ready(function($) {
 				$(this).data( 'pixelcat', true)
 				var id = parseInt ( $(this).closest( '.fca_qc_quiz' ).prop( 'id' ).replace( 'fca_qc_quiz_', '' ) )
 				var name = $(this).closest( '.fca_qc_quiz' ).find( '.fca_qc_quiz_title' ).text()
-				fca_pc_fb_api_call( 'trackCustom', 'QuizCompletion', { 'quiz_id': id, 'quiz_name': name, 'quiz_result': $(this).text() } )
+				fca_pc_trigger_event( 'trackCustom', 'QuizCompletion', { 'quiz_id': id, 'quiz_name': name, 'quiz_result': $(this).text() } )
 			}
 			return true
 		})
@@ -215,11 +215,11 @@ jQuery( document ).ready(function($) {
 
 	//EDD INTEGRATION
 	if ( typeof fcaPcEddCheckoutCart !== 'undefined' ) {
-		fca_pc_fb_api_call( 'track', 'InitiateCheckout', fcaPcEddCheckoutCart)
+		fca_pc_trigger_event( 'track', 'InitiateCheckout', fcaPcEddCheckoutCart)
 
 		//ADDPAYMENTINFO
 		$( '#edd_purchase_form' ).on( 'submit', function( e ){
-			fca_pc_fb_api_call( 'track', 'AddPaymentInfo', fcaPcEddCheckoutCart )
+			fca_pc_trigger_event( 'track', 'AddPaymentInfo', fcaPcEddCheckoutCart )
 			return true
 		})
 	}
@@ -227,25 +227,60 @@ jQuery( document ).ready(function($) {
 	if ( typeof fcaPcEddProduct !== 'undefined' ) {
 		//VIEWCONTENT
 		if( fcaPcPost.edd_delay ) {
-			setTimeout( fca_pc_fb_api_call, fcaPcPost.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProduct  )
+			setTimeout( fca_pc_trigger_event, fcaPcPost.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProduct  )
 		} else {
-			fca_pc_fb_api_call( 'track', 'ViewContent', fcaPcEddProduct )
+			fca_pc_trigger_event( 'track', 'ViewContent', fcaPcEddProduct )
 		}
 
 		//ADD TO CART
-		$( '.edd-add-to-cart' ).click( function( e ){
-			fca_pc_fb_api_call( 'track', 'AddToCart', fcaPcEddProduct )
+		$( '.edd-add-to-cart' ).on( 'click', function( e ){
+			fca_pc_trigger_event( 'track', 'AddToCart', fcaPcEddProduct )
 		})
 		//WISHLIST ( TODO )
-		$( '.wl-add-to, .add_to_wishlist' ).click( function( e ){
-			fca_pc_fb_api_call( 'track', 'AddToWishlist', fcaPcEddProduct )
+		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+			fca_pc_trigger_event( 'track', 'AddToWishlist', fcaPcEddProduct )
 		})
 	}
 
 	//PURCHASE
 	if ( get_cookie( 'fca_pc_edd_purchase' ) ) {
-		fca_pc_fb_api_call( 'track', 'Purchase', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase' ).replace(/\+/g, '%20' ) ) ) )
+		fca_pc_trigger_event( 'track', 'Purchase', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase' ).replace(/\+/g, '%20' ) ) ) )
 		set_cookie( 'fca_pc_edd_purchase', '' )
+	}
+	
+	//EDD GOOGLE ANALYTICS INTEGRATION
+	if ( typeof fcaPcEddCheckoutCartGA !== 'undefined' ) {
+		fca_pc_trigger_event( 'track', 'InitiateCheckoutGA', fcaPcEddCheckoutCartGA )
+
+		//ADDPAYMENTINFO
+		$( '#edd_purchase_form' ).on( 'submit', function( e ){
+			fca_pc_trigger_event( 'track', 'AddPaymentInfoGA', fcaPcEddCheckoutCartGA )
+			return true
+		})
+	}
+
+	if ( typeof fcaPcEddProductGA !== 'undefined' ) {
+		//VIEWCONTENT
+		if( fcaPcPost.edd_delay ) {
+			setTimeout( fca_pc_trigger_event, fcaPcPost.edd_delay * 1000, 'track', 'ViewContent', fcaPcEddProductGA )
+		} else {
+			fca_pc_trigger_event( 'track', 'ViewContentGA', fcaPcEddProductGA )
+		}
+
+		//ADD TO CART
+		$( '.edd-add-to-cart' ).on( 'click', function( e ){
+			fca_pc_trigger_event( 'track', 'AddToCartGA', fcaPcEddProductGA )
+		})
+		//WISHLIST ( TODO )
+		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+			fca_pc_trigger_event( 'track', 'AddToWishlistGA', fcaPcEddProductGA )
+		})
+	}
+
+	//PURCHASE
+	if ( get_cookie( 'fca_pc_edd_purchase_ga' ) ) {
+		fca_pc_trigger_event( 'track', 'PurchaseGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_edd_purchase_ga' ).replace(/\+/g, '%20' ) ) ) )
+		set_cookie( 'fca_pc_edd_purchase_ga', '' )
 	}
 
 	//REMOVE ADVANCED MATCHING COOKIE IF APPLICABLE
@@ -266,7 +301,7 @@ jQuery( document ).ready(function($) {
 			type: "POST",
 			data: ajax_data,
 			success: ( function( data ){
-				fca_pc_fb_api_call( 'track', 'AddToCart', data )
+				fca_pc_trigger_event( 'track', 'AddToCart', data )
 			})
 		})
 
@@ -275,33 +310,65 @@ jQuery( document ).ready(function($) {
 
 	//WOO INTEGRATION
 	if ( get_cookie( 'fca_pc_woo_add_to_cart' ) ) {
-		fca_pc_fb_api_call( 'track', 'AddToCart', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart' ).replace(/\+/g, '%20' ) ) ) )
+		fca_pc_trigger_event( 'track', 'AddToCart', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart' ).replace(/\+/g, '%20' ) ) ) )
 		set_cookie( 'fca_pc_woo_add_to_cart', '' )
 	}
 
 	if ( typeof fcaPcWooCheckoutCart !== 'undefined' ) {
-		fca_pc_fb_api_call( 'track', 'InitiateCheckout', fcaPcWooCheckoutCart)
+		fca_pc_trigger_event( 'track', 'InitiateCheckout', fcaPcWooCheckoutCart)
 
 		$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
-			fca_pc_fb_api_call( 'track', 'AddPaymentInfo', fcaPcWooCheckoutCart )
+			fca_pc_trigger_event( 'track', 'AddPaymentInfo', fcaPcWooCheckoutCart )
 			return true
 		})
 	}
 
 	if ( typeof fcaPcWooPurchase !== 'undefined' ) {
-		fca_pc_fb_api_call( 'track', 'Purchase', fcaPcWooPurchase)
+		fca_pc_trigger_event( 'track', 'Purchase', fcaPcWooPurchase)
 	}
 
 	if ( typeof fcaPcWooProduct !== 'undefined' ) {
 		if( fcaPcPost.woo_delay ) {
-			setTimeout( fca_pc_fb_api_call, fcaPcPost.woo_delay * 1000, 'track', 'ViewContent', fcaPcWooProduct  )
+			setTimeout( fca_pc_trigger_event, fcaPcPost.woo_delay * 1000, 'track', 'ViewContent', fcaPcWooProduct  )
 		} else {
-			fca_pc_fb_api_call( 'track', 'ViewContent', fcaPcWooProduct )
+			fca_pc_trigger_event( 'track', 'ViewContent', fcaPcWooProduct )
 		}
 
 		//WISHLIST
-		$( '.wl-add-to, .add_to_wishlist' ).click( function( e ){
-			fca_pc_fb_api_call( 'track', 'AddToWishlist', fcaPcWooProduct )
+		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+			fca_pc_trigger_event( 'track', 'AddToWishlist', fcaPcWooProduct )
+		})
+	}
+	
+	//WOO GOOGLE ANALYTICS INTEGRATION
+	if ( get_cookie( 'fca_pc_woo_add_to_cart_ga' ) ) {
+		fca_pc_trigger_event( 'track', 'AddToCartGA', JSON.parse( decodeURIComponent ( get_cookie( 'fca_pc_woo_add_to_cart_ga' ).replace(/\+/g, '%20' ) ) ) )
+		set_cookie( 'fca_pc_woo_add_to_cart_ga', '' )
+	}
+
+	if ( typeof fcaPcWooCheckoutCartGA !== 'undefined' ) {
+		fca_pc_trigger_event( 'track', 'InitiateCheckoutGA', fcaPcWooCheckoutCartGA )
+
+		$( 'form.checkout' ).on( 'checkout_place_order', function( e ){
+			fca_pc_trigger_event( 'track', 'AddPaymentInfoGA', fcaPcWooCheckoutCartGA )
+			return true
+		})
+	}
+
+	if ( typeof fcaPcWooPurchaseGA !== 'undefined' ) {
+		fca_pc_trigger_event( 'track', 'PurchaseGA', fcaPcWooPurchaseGA )
+	}
+
+	if ( typeof fcaPcWooProductGA !== 'undefined' ) {
+		if( fcaPcPost.woo_delay ) {
+			setTimeout( fca_pc_trigger_event, fcaPcPost.woo_delay * 1000, 'track', 'ViewContentGA', fcaPcWooProductGA  )
+		} else {
+			fca_pc_trigger_event( 'track', 'ViewContentGA', fcaPcWooProductGA )
+		}
+
+		//WISHLIST
+		$( '.wl-add-to, .add_to_wishlist' ).on( 'click', function( e ){
+			fca_pc_trigger_event( 'track', 'AddToWishlistGA', fcaPcWooProductGA )
 		})
 	}
 
@@ -311,7 +378,7 @@ jQuery( document ).ready(function($) {
 
 		fcaPcVideos.forEach(function (video) {
 			video.on( 'pixel_event', function( name, action, params ) {
-				fca_pc_fb_api_call( name, action, params )
+				fca_pc_trigger_event( name, action, params )
 			} )
 		})
 	}
@@ -394,7 +461,7 @@ jQuery( document ).ready(function($) {
 
 		var active_pixels = fcaPcCAPI.pixels
 		for( i=0; i<active_pixels.length; i++ ){
-			var pixel = JSON.parse( active_pixels[i] )
+			var pixel = active_pixels[i]
 			if( pixel.type === 'Conversions API' && !pixel.paused ){
 				return true
 			}
@@ -402,24 +469,51 @@ jQuery( document ).ready(function($) {
 		return false
 	}
 
-	function fca_pc_fb_api_call( name, action, params ) {
+	function fca_pc_trigger_event( name, action, params ) {
 
-		if( $.isFunction( fbq ) ){
+		var event_params = params ? add_auto_event_params( params ) : null
+		
+		if( typeof( fbq ) !== 'undefined' ){
 
 			var eventID = fca_pc_generate_id()
 			var externalID = fca_pc_check_cookie()
-			var event_params = params ? add_auto_event_params( params ) : null
-
-			// always send the pixel event
+			
 			fbq( name, action, event_params, { event_id: eventID, external_id: externalID } )
-
+			
+			
 			// Check if Conversions API is enabled in any of the active pixels
 			if( fca_pc_capi_enabled() ){
 				fca_pc_fb_conversions_api( action, event_params, eventID )
 			}
 
 		}
-
+		
+		if( typeof( fcaPcGA ) !== 'undefined' ) {
+			if( name === 'track' ) { //STANDARD/AUTOMATIC EVENTS
+				var events_map = new Map([
+					[ "AddToCartGA", "add_to_cart" ],
+					[ "AddPaymentInfoGA", "add_payment_info" ],
+					[ "AddToWishlistGA", "add_to_wishlist" ],
+					[ "PurchaseGA", "purchase" ],
+					[ "InitiateCheckoutGA", "begin_checkout" ],
+					//[ "Lead", "generate_lead" ], TO DO?
+					[ "ViewContentGA", "view_item" ],
+					//[ "Search", "search" ], TO DO?
+					//[ "CompleteRegistration", "sign_up" ], TO DO?
+				])
+				
+				var gtag_action = events_map.get( action )
+				
+				if ( gtag_action ) {
+					console.log( gtag_action )
+					gtag( 'event', gtag_action, event_params  )				
+				}
+			} 
+			if ( name === 'trackCustom' ) {
+				gtag( 'event', action, event_params  )
+			}
+		}
+		
 	}
 
 	function set_cookie( name, value ) {

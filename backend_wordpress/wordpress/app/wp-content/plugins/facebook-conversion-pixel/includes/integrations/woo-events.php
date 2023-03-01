@@ -180,11 +180,7 @@ function fca_pc_purchase( $options ) {
 						$cart_data[$value] = $order->$key();
 					}	
 				}
-				
-				if ( $order->get_used_coupons() ) {
-					$cart_data['discount_code'] = $order->get_used_coupons();
-				}
-				
+								
 			}
 			
 			if ( count( $content_category ) > 0 ) {
@@ -217,37 +213,3 @@ function fca_pc_woocommerce_search() {
 	}
 }
 add_action( 'fca_pc_start_pixel_output', 'fca_pc_woocommerce_search', 10, 1 );
-
-
-function fca_pc_get_woo_product ( $product_id = '' ) {
-	$p = empty( $product_id ) ? wc_get_product() : wc_get_product( $product_id );
-	if ( $p ) {
-		return $p;
-	}
-	return false;
-}
-
-function fca_pc_get_woo_ltv( $email ) {
-	
-	$ltv = 0;
-	
-	$args = array(
-		'post_type'      => 'shop_order',
-		'post_status'    => 'wc-completed',
-		'meta_key'       => '_billing_email',
-		'meta_value'     => $email,
-		'posts_per_page' => -1,
-	);
-
-	$orders_query = new WP_Query( $args );
-
-	foreach( $orders_query->posts as $order ) {
-		$WC_Order = new WC_Order( $order );
-		$ltv += $WC_Order->get_total();
-	}
-
-	wp_reset_query();
-	
-	return $ltv;
-	
-}

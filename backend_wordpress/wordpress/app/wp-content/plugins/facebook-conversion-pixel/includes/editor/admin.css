@@ -66,6 +66,12 @@ img[src=''] {
 #fca_pc_new_event {
 	margin-bottom: 30px;
 }
+
+#fca-pc-events-table.disabled {
+	opacity: 0.5;
+	pointer-events : none;
+}
+
 .fca_deletable_item td:last-child {
 	text-align: right;
 }
@@ -115,6 +121,9 @@ img[src=''] {
 	width: 100%;
 	max-width: 600px;
 	margin-top: 40px;
+}
+.fca_pc_modal_table {
+	margin-bottom: 16px;
 }
 .fca_pc_setting_table input, .fca_pc_setting_table textarea, .fca_pc_setting_table select {
 	width: 100%;
@@ -229,24 +238,27 @@ img[src=''] {
 	left: 0;
 	z-index: 99999;
 	background-color: rgba( 0, 0, 0, 0.8 );
+	
 }
 
 #fca-pc-event-modal, #fca-pc-pixel-modal {
 	position: fixed; /* or absolute */
 	box-sizing: border-box;
-	top: calc(20% - 100px);
-	left: calc(50% - 288px);
+	top: 5%;
+	left: calc(50% - 297px);
 	z-index: 100000;
 	background-color: #fff;
-	padding: 14px 25px 20px 20px;
-	width: 575px;
-	border: 1px solid #CCC;
-	max-height: calc(100vh - 100px);
+	padding: 24px 32px;
+	width: 594px;
+	border-radius: 15px;
+	max-height: calc(96vh - 48px);
+    scrollbar-width: none;
 	overflow-y: auto;
 }
-#fca-pc-event-modal h3, #fca-pc-pixel-modal h3 {
+#fca-pc-event-modal h3,
+#fca-pc-pixel-modal h3 {
 	margin-top: 0;
-	margin-bottom: 14px;
+	margin-bottom: 20px;
 }
 
 #fca-pc-modal-trigger-type-input,
@@ -273,6 +285,14 @@ select.fca-pc-input-select {
 	margin: 0px;
 	margin-right: 5px;
 }
+
+#fca-pc-pixel-cancel,
+#fca-pc-event-cancel {
+	float: right;
+	cursor: pointer;
+	font-size: 24px;
+	padding: 2px 0 0 0;
+} 
 
 .fca-pc-field-number {
 	display: inline-block;

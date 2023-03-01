@@ -43,12 +43,14 @@ function fca_pc_admin_enqueue() {
 	}
 	$admin_data = array (
 		'ajaxurl' => admin_url ( 'admin-ajax.php' ),
+		'protip' => esc_attr__("This option is available only with Pixel Cat Pro. Click the blue button on the right-hand side to learn more.", 'facebook-conversion-pixel' ),
 		'nonce' => wp_create_nonce( 'fca_pc_admin_nonce' ),
 		'pixelTemplate' => fca_pc_pixel_row_html(),
 		'eventTemplate' => fca_pc_event_row_html(),
 		'premium' => function_exists ( 'fca_pc_editor_premium_data' ),
 		'edd_active' => is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ),
 		'woo_active' => is_plugin_active( 'woocommerce/woocommerce.php' ),
+		//'code_editor' => wp_enqueue_code_editor( [ 'type' => 'application/javascript', 'codemirror' => [ 'autoRefresh' => true, 'lineWrapping' => true ] ] ),
 		'debug' => FCA_PC_DEBUG,
 	);
 	wp_localize_script( 'fca_pc_admin_js', 'fcaPcAdminData', $admin_data );
@@ -78,53 +80,38 @@ function fca_pc_settings_page() {
 	$options['events'] = empty ( $options['events'] ) ? array() : $options['events'];
 
 	fca_pc_admin_enqueue();
-
-	$html = "<div id='fca-pc-overlay' style='display:none'></div>";
-
-	$html .= "<form novalidate style='display: none' action='' method='post' id='fca_pc_main_form' class='$form_class'>";
-
-		$html .= wp_nonce_field( 'fca_pc_admin_nonce', 'fca_pc[nonce]' );
-
-		$html .= '<h1>' .  esc_attr__( 'Pixel Cat', 'facebook-conversion-pixel' ) . '</h1>';
-
-		$html .= '<p>' . esc_attr__( 'Help: ', 'facebook-conversion-pixel' );
-			$html .= '<a href="https://fatcatapps.com/facebook-pixel/#Option_2_Install_a_Facebook_Pixel_WordPress_plugin_recommended" target="_blank">' . esc_attr__( 'Setup Instructions', 'facebook-conversion-pixel' ) . '</a> | ';
-			$html .= '<a href="https://fatcatapps.com/knowledge-base/testing-facebook-pixel/" target="_blank">' . esc_attr__( 'How To Check If Your Pixel Is Working', 'facebook-conversion-pixel' ) . '</a> | ';
-			$html .= '<a href="https://fatcatapps.com/facebook-pixel/" target="_blank">' . esc_attr__( 'FB Pixel: The Definitive Guide', 'facebook-conversion-pixel' ) . '</a> | ';
-			$html .= '<a href="https://wordpress.org/support/plugin/facebook-conversion-pixel" target="_blank">' . esc_attr__( 'Support Forum', 'facebook-conversion-pixel' ) . '</a>';
-		$html .= '</p>';
-
-		$html .= "<h1 class='nav-tab-wrapper fca-pc-nav $form_class'>";
-			$html .= '<a href="#" data-target="#fca-pc-main-table, #fca-pc-active-pixels-table, #fca-pc-events-table" class="nav-tab">' . esc_attr__( 'Main', 'facebook-conversion-pixel' ) . '</a>';
-			$html .= '<a href="#" data-target="#fca_pc_settings_table" class="nav-tab">' . esc_attr__( 'Settings', 'facebook-conversion-pixel' ) . '</a>';
-			$html .= '<a href="#" data-target="#fca-pc-e-commerce" class="nav-tab">' . esc_attr__( 'E-commerce', 'facebook-conversion-pixel' ) . '</a>';
-			$html .= '<a href="#" data-target="#fca_pc_integrations_table" class="nav-tab">' . esc_attr__( 'More Integrations', 'facebook-conversion-pixel' ) . '</a>';
-
-		$html .= '</h1>';
-
-		$html .= fca_pc_active_pixels_table( $options );
-
-		$html .= fca_pc_event_panel( $options );
-
-		$html .= fca_pc_add_settings_table( $options );
-
-		$html .= fca_pc_add_e_commerce_integrations( $options );
-
-		$html .= fca_pc_add_more_integrations( $options );
-
-		$html .= '<button id="fca_pc_save" type="submit" style="margin-top: 20px;" name="fca_pc_save" class="button button-primary">' . esc_attr__( 'Save', 'facebook-conversion-pixel' ) . '</button>';
-
-		$html .= fca_pc_add_pixel_form();
-
-		$html .= fca_pc_add_event_form();
-
-	$html .= '</form>';
-
+	ob_start();	?>
+	<div id='fca-pc-overlay' style='display:none'></div>
+	<form novalidate style='display: none' action='' method='post' id='fca_pc_main_form' class='<?php echo $form_class ?>'>
+		<?php echo wp_nonce_field( 'fca_pc_admin_nonce', 'fca_pc[nonce]' ) ?>
+		<h1><?php esc_attr_e( 'Pixel Cat', 'facebook-conversion-pixel' ) ?></h1>
+		
+		<h1 class='nav-tab-wrapper fca-pc-nav <?php echo $form_class ?>'>
+			<a href="#" data-target="#fca-pc-main-table, #fca-pc-active-pixels-table, #fca-pc-events-table" class="nav-tab"><?php esc_attr_e( 'Main', 'facebook-conversion-pixel' ) ?></a>
+			<a href="#" data-target="#fca-pc-e-commerce" class="nav-tab"><?php esc_attr_e( 'E-commerce', 'facebook-conversion-pixel' ) ?></a>
+			<a href="#" data-target="#fca_pc_settings" class="nav-tab"><?php esc_attr_e( 'Settings', 'facebook-conversion-pixel' ) ?></a>
+			<a href="#" data-target="#fca_pc_integrations_table" class="nav-tab"><?php esc_attr_e( 'More Integrations', 'facebook-conversion-pixel' ) ?></a>
+		</h1>
+		
+		<?php 
+		echo fca_pc_active_pixels_table( $options );
+		echo fca_pc_event_panel( $options );
+		echo fca_pc_add_settings_table( $options );
+		echo fca_pc_add_e_commerce_integrations( $options );
+		echo fca_pc_add_more_integrations( $options );
+		?>
+		<button id="fca_pc_save" type="submit" style="margin-top: 20px;" name="fca_pc_save" class="button button-primary"><?php esc_attr_e( 'Save All Settings', 'facebook-conversion-pixel' ) ?></button>
+		<?php 
+		echo fca_pc_add_pixel_form();
+		echo fca_pc_add_event_form();
+		?>
+	</form>
+	<?php
 	if ( FCA_PC_PLUGIN_PACKAGE === 'Lite' ) {
-		$html .= fca_pc_marketing_metabox();
+		echo fca_pc_marketing_metabox();
 	}
-
-	echo $html;
+	
+	echo ob_get_clean();
 }
 
 function fca_pc_add_event_form() {
@@ -137,7 +124,16 @@ function fca_pc_add_event_form() {
 		'InitiateCheckout' => 'InitiateCheckout',
 		'AddPaymentInfo' => 'AddPaymentInfo',
 		'Purchase' => 'Purchase',
-		'CompleteRegistration' => 'CompleteRegistration'
+		'CompleteRegistration' => 'CompleteRegistration',
+		
+		'ViewContentGA' => 'ViewContent',
+		'AddToCartGA' => 'AddToCart',
+		'AddToWishlistGA' => 'AddToWishlist',
+		'InitiateCheckoutGA' => 'InitiateCheckout',
+		'AddPaymentInfoGA' => 'AddPaymentInfo',
+		'PurchaseGA' => 'Purchase',
+		//'Lead' => 'Lead',
+		//'CompleteRegistration' => 'CompleteRegistration'
 	);
 
 	$triggers = array(
@@ -197,13 +193,16 @@ function fca_pc_add_event_form() {
 		'hover' => 'Hover over Element',
 		'url' => 'URL Click',
 	);
-
+	
+	
 	ob_start(); ?>
 	<div id='fca-pc-event-modal' style='display: none;'>
-		<h3><?php esc_attr_e( 'Edit Event', 'facebook-conversion-pixel' ) ?></h3>
+		<span id='fca-pc-event-cancel' title="<?php esc_attr_e( 'Cancel', 'facebook-conversion-pixel' ) ?>" class="dashicons dashicons-no-alt"></span>
+		<input id='fca-pc-modal-event-pixel-type' type='hidden' >
+		<h3><?php esc_attr_e( 'Edit', 'facebook-conversion-pixel' ) ?> <span id='fca-pc-event-pixel-type-span'></span> <?php esc_attr_e( 'Event', 'facebook-conversion-pixel' ) ?></h3>
 		<table class="fca_pc_modal_table">
 			<tr>
-				<span style="padding-left: 3px;" class='fca_pc_hint'><?php esc_attr_e("Note: Looking to add WooCommerce events? Add them all ", 'facebook-conversion-pixel') ?></span> <a href="#" class='fca_pc_hint' id="fca_pc_woo_toggle_link"> <?php esc_attr_e("with a single click!", 'facebook-conversion-pixel') ?></a>
+				<span class='fca_pc_hint'><?php esc_attr_e("Note: Looking to add WooCommerce events? Add them all ", 'facebook-conversion-pixel') ?></span> <a href="#" class='fca_pc_hint' id="fca_pc_woo_toggle_link"> <?php esc_attr_e("with a single click!", 'facebook-conversion-pixel') ?></a>
 			</tr>
 			<tr>
 				<th><?php esc_attr_e( 'Trigger', 'facebook-conversion-pixel' ) ?></th>
@@ -240,7 +239,7 @@ function fca_pc_add_event_form() {
 						<option value='custom' id='custom-event-option' class='fca-bold'><?php esc_attr_e( 'Custom Event', 'facebook-conversion-pixel' ) ?></option>
 					</select>
 				</td>
-			</tr>
+			</tr>			
 			<tr id='fca_pc_param_event_name'>
 				<th><?php esc_attr_e( 'Event Name', 'facebook-conversion-pixel' ); echo fca_pc_tooltip( esc_attr__( 'Choose the name of the Custom Event.  Max 50 characters', 'facebook-conversion-pixel' ) ) ?></th>
 				<td><?php echo fca_pc_input ( 'event_name', '', '', 'text' ) ?></td>
@@ -267,8 +266,8 @@ function fca_pc_add_event_form() {
 			</tr>
 		</table>
 
-		<button type='button' id='fca-pc-event-save' class='button button-primary' style='margin-right: 8px'><?php esc_attr_e( 'Add', 'facebook-conversion-pixel' ) ?></button>
-		<button type='button' id='fca-pc-event-cancel' class='button button-secondary'><?php esc_attr_e( 'Cancel', 'facebook-conversion-pixel' ) ?></button>
+		<button type='button' id='fca-pc-event-save' class='button button-primary' style='margin-right: 8px'><?php esc_attr_e( 'Save', 'facebook-conversion-pixel' ) ?></button>
+		
 
 	</div>
 
@@ -374,18 +373,24 @@ function fca_pc_add_pixel_form() {
 
 	$types = array(
 		'Facebook Pixel' => 'Facebook Pixel',
-		'Conversions API' => 'Conversions API'
+		'Conversions API' => 'Facebook Conversions API',
+		'GA3' => 'Google Universal Analytics (GA3)',
+		'GA4' => 'Google Analytics (GA4)',
+		//'Custom Header Script' => 'Custom Header Script',
+		
 	);
 
 	ob_start(); ?>
 	<div id='fca-pc-pixel-modal' style='display: none;'>
-		<h3><?php esc_attr_e( 'Pixel settings', 'facebook-conversion-pixel' ) ?></h3>
+		<span id='fca-pc-pixel-cancel' title="<?php esc_attr_e( 'Cancel', 'facebook-conversion-pixel' ) ?>" class="dashicons dashicons-no-alt"></span>
+		
+		<h3><?php esc_attr_e( 'Add a Pixel', 'facebook-conversion-pixel' ) ?></h3>
 		<table class="fca_pc_pixel_modal_table">
 			<tr>
-				<th><?php esc_attr_e( 'Type of pixel', 'facebook-conversion-pixel' ); ?></th>
+				<th><?php esc_attr_e( 'Type of Pixel', 'facebook-conversion-pixel' ); ?></th>
 				<td>
 					<select id='fca-pc-modal-type-select' class='fca_pc_select' style='width: 100%' >
-						<optgroup label='<?php esc_attr_e( 'Type of pixel', 'facebook-conversion-pixel' ) ?>'>
+						<optgroup label='<?php esc_attr_e( 'Type of Pixel', 'facebook-conversion-pixel' ) ?>'>
 						<?php
 						forEach ( $types as $key => $value ) {
 							echo "<option value='" . esc_attr( $key ) . "'>$value</option>";
@@ -398,13 +403,13 @@ function fca_pc_add_pixel_form() {
 				<th style="top: 0;"><?php esc_attr_e( 'Pixel ID', 'facebook-conversion-pixel' ); echo fca_pc_tooltip( esc_attr__( 'Enter your Facebook Pixel ID here', 'facebook-conversion-pixel' ) ) ?>
 					<br><a class="fca_pc_hint" href="https://fatcatapps.com/knowledge-base/facebook-pixel-id/" target="_blank"> <?php echo esc_attr__( 'What is my Pixel ID?', 'facebook-conversion-pixel' ) ?></a>
 				</th>
-				<td id="fca-pc-helptext" title="<?php echo esc_attr__('Your Facebook Pixel ID should only contain numbers', 'facebook-conversion-pixel' ) ?>">
+				<td id="fca-pc-pixel-helptext" class="fca-pc-validation-helptext" title="<?php echo esc_attr__('Your Facebook Pixel ID should only contain numbers', 'facebook-conversion-pixel' ) ?>">
 					<input id='fca-pc-modal-pixel-input' type='text' placeholder='e.g. 1234567890' class='fca-pc-input-text' style='width: 100%'>
 				</td>
 			</tr>
 			<tr id='fca-pc-capi-input-tr'>
 				<th style="top: 0;"><?php esc_attr_e( 'Conversions API Token', 'facebook-conversion-pixel' ); echo fca_pc_tooltip( esc_attr__( 'Enter your Conversions API Token here', 'facebook-conversion-pixel' ) ) ?>
-					<br><a class="fca_pc_hint" href="https://developers.facebook.com/docs/marketing-api/conversions-api/get-started#access-token" target="_blank"> <?php echo esc_attr__( 'Where do i get this?', 'facebook-conversion-pixel' ) ?></a>
+					<br><a class="fca_pc_hint" href="https://developers.facebook.com/docs/marketing-api/conversions-api/get-started#access-token" target="_blank"> <?php echo esc_attr__( 'Where can I find this?', 'facebook-conversion-pixel' ) ?></a>
 				</th>
 				<td>
 					<input id='fca-pc-modal-capi-input' type='text' placeholder='e.g. EAAMHTc1Wx2UBADK0r...' class='fca-pc-input-text' style='width: 100%'>
@@ -416,12 +421,40 @@ function fca_pc_add_pixel_form() {
 					<input id='fca-pc-modal-test-input' type='text' placeholder='optional - e.g. TEST12345' class='fca-pc-input-text' style='width: 100%'>
 				</td>
 			</tr>
+			<tr id='fca-pc-ga3-input-tr'>
+				<th style="top: 0;"><?php esc_attr_e( 'Universal ID', 'facebook-conversion-pixel' ); echo fca_pc_tooltip( esc_attr__( 'Enter your Google Universal Analytics ID here', 'facebook-conversion-pixel' ) ) ?>
+					<br><a class="fca_pc_hint" href="hhttps://support.google.com/analytics/answer/10269537" target="_blank"> <?php echo esc_attr__( 'How do I get a Univesral Analytics ID?', 'facebook-conversion-pixel' ) ?></a>
+				</th>
+				<td id="fca-pc-ga3-helptext" class="fca-pc-validation-helptext"  title="<?php echo esc_attr__('Your GA3/Universal Analytics ID should start with "UA-" and contain a series of numbers and/or letters, like this: UA-123456789.', 'facebook-conversion-pixel' ) ?>">
+					<input id='fca-pc-modal-ga3-input' type='text' placeholder='e.g. UA-123456789' class='fca-pc-input-text' style='width: 100%'>
+				</td>
+			</tr>
+			<tr id='fca-pc-ga4-input-tr'>
+				<th style="top: 0;"><?php esc_attr_e( 'Property ID', 'facebook-conversion-pixel' ); echo fca_pc_tooltip( esc_attr__( 'Enter your Google Analytics Property ID here', 'facebook-conversion-pixel' ) ) ?>
+					<br><a class="fca_pc_hint" href="https://support.google.com/analytics/answer/10089681" target="_blank"> <?php echo esc_attr__( 'How do I get a GA4 Property ID?', 'facebook-conversion-pixel' ) ?></a>
+				</th>
+				
+				<td id="fca-pc-ga4-helptext" class="fca-pc-validation-helptext"  title="<?php echo esc_attr__('Your GA4 Property ID should start with "G-" and contain a series of numbers and/or letters, like this: G-JJJKKKLLLL.', 'facebook-conversion-pixel' ) ?>">
+					<input id='fca-pc-modal-ga4-input' type='text' placeholder='e.g. G-JJJKKKLLLL' class='fca-pc-input-text' style='width: 100%'>
+				</td>
+			</tr>
+			<tr class='fca-pc-header-input-tr'>
+				<th style="top: 0;"><?php esc_attr_e( 'Header Name', 'facebook-conversion-pixel' ) ?></th>				
+				<td>
+					<input id='fca-pc-modal-header-input' placeholder='e.g. My Custom Header' type='text' class='fca-pc-input-text' style='width: 100%'>
+				</td>
+			</tr>
+			<tr class='fca-pc-header-input-tr'>
+				<th style="top: 0;"><?php esc_attr_e( 'Header Script', 'facebook-conversion-pixel' ) ?></th>				
+				<td id="fca-pc-header-helptext" class="fca-pc-validation-helptext"  title="<?php echo esc_attr__('Add any custom code to your site header. E.g. <script>alert("Hello World")</script>.', 'facebook-conversion-pixel' ) ?>">
+					<textarea rows=4 id='fca-pc-modal-header-code' placeholder='e.g. &lt;script&gt;alert("Hello World")&lt;/script&gt;' style='width: 100%'></textarea>
+				</td>
+			</tr>			
 		</table>
 		<span id="fca_pc_capi_info" class="fca_pc_hint"><?php esc_attr_e( 'Important: Even with the Conversions API active, events will also be sent through the Conversions Pixel. In case the Pixel gets blocked by an ad blocker the Conversions API will kick in and make sure the event is still logged and sent to Facebook' , 'facebook-conversion-pixel' ); ?><br></span> 
 		<br>
-		<button type='button' id='fca-pc-pixel-save' class='button button-primary' style='margin-right: 8px'><?php esc_attr_e( 'Add', 'facebook-conversion-pixel' ) ?></button>
-		<button type='button' id='fca-pc-pixel-cancel' class='button button-secondary'><?php esc_attr_e( 'Cancel', 'facebook-conversion-pixel' ) ?></button>
-
+		<button type='button' id='fca-pc-pixel-save' class='button button-primary' style='margin-right: 8px'><?php esc_attr_e( 'Save', 'facebook-conversion-pixel' ) ?></button>
+		
 	</div>
 
 	<?php
@@ -437,14 +470,21 @@ function fca_pc_active_pixels_table( $options ){
 
 		<div id="fca-pc-active-pixels-table">
 			<div id="fca-pc-active-pixels-content">
-				<h3> <?php echo esc_attr__( 'Pixels', 'facebook-conversion-pixel' ) ?></h3>
+				<h3><?php echo esc_attr__( 'Pixels', 'facebook-conversion-pixel' ) ?></h3>
+				<p><?php esc_attr_e( 'Add a tracking code (aka "Pixel") to track website behavior or ecommerce events.', 'facebook-conversion-pixel' ) ?>
+				<p><?php esc_attr_e( 'Need Help? Check out our knowledge base here: ', 'facebook-conversion-pixel' ) ?>
+					<a href="https://fatcatapps.com/facebook-pixel/#Option_2_Install_a_Facebook_Pixel_WordPress_plugin_recommended" target="_blank"><?php esc_attr_e( 'Setup Instructions', 'facebook-conversion-pixel' ) ?></a> | 
+					<a href="https://fatcatapps.com/knowledge-base/testing-facebook-pixel/" target="_blank"><?php esc_attr_e( 'How To Check If Your Pixel Is Working', 'facebook-conversion-pixel' ) ?></a> | 
+					<a href="https://fatcatapps.com/facebook-pixel/" target="_blank"><?php esc_attr_e( 'FB Pixel: The Definitive Guide', 'facebook-conversion-pixel' ) ?></a> | 
+					<a href="https://wordpress.org/support/plugin/facebook-conversion-pixel" target="_blank"><?php esc_attr_e( 'Support Forum', 'facebook-conversion-pixel' ) ?></a>
+				</p>
 				<table id="fca-pc-pixels" class="widefat">
 					<tr id="fca-pc-pixel-table-heading">
 						<th style="display:none;"></th>
 						<th style="width: 67px;"><?php echo esc_attr__( 'Status', 'facebook-conversion-pixel' ) ?></th>
 						<th style="width: 30%;"><?php echo esc_attr__( 'Pixel Type', 'facebook-conversion-pixel' ) ?></th>
-						<th style="width: 30%;"><?php echo esc_attr__( 'Pixel ID', 'facebook-conversion-pixel' ) ?></th>
-						<th style="width: calc( 30% - 150px );"><?php echo esc_attr__( 'Conversions API token', 'facebook-conversion-pixel' ) ?></th>
+						<th style="width: calc( 70% - 150px );"><?php echo esc_attr__( 'Pixel ID', 'facebook-conversion-pixel' ) ?></th>
+					
 						<th style="text-align: right; width: 67px;"></th>
 					</tr><?php
 					if( $pixels ){
@@ -453,9 +493,12 @@ function fca_pc_active_pixels_table( $options ){
 						}
 					} ?>
 				</table>
-				<button type="button" id="fca_pc_new_pixel_id" class="button button-secondary" title=" <?php echo esc_attr__( 'Add another Pixel', 'facebook-conversion-pixel' ) ?> ">
+				<button type="button" id="fca_pc_new_pixel_id" class="button button-secondary" title=" <?php echo esc_attr__( 'Add a Pixel', 'facebook-conversion-pixel' ) ?> ">
 					<span class="dashicons dashicons-plus" style="vertical-align: middle;"></span>Add Pixel
-				</button> </br></br>
+				</button>
+				<img class="fca_pc_onboarding" src="<?php echo FCA_PC_PLUGINS_URL . '/assets/onboarding-arrow.png'?>" >
+				<img class="fca_pc_onboarding" style="display:block;" src="<?php echo FCA_PC_PLUGINS_URL . '/assets/onboarding-text.png'?>" >
+				</br></br>
 
 			</div>
 		</div>
@@ -470,14 +513,13 @@ function fca_pc_pixel_row_html( $pixel = '' ) {
 	ob_start(); ?>
 
 	<tr id='{{ID}}' class='fca_pc_pixel_row fca_deletable_item'>
-		<td class='fca-pc-json-td' style='display:none;'><input type='hidden' class='fca-pc-input-hidden fca-pc-pixel-json' name='fca_pc[pixel_json][]' value='<?php echo esc_attr( stripslashes_deep( $pixel ) ) ?>' /></td>
+		<td class='fca-pc-json-td' style='display:none;'><input type='hidden' class='fca-pc-input-hidden fca-pc-pixel-json' name='fca_pc[pixel_json][]' value='<?php echo esc_attr( htmlspecialchars( stripslashes_deep( $pixel ) ) ) ?>' /></td>
 		<td class='fca-pc-controls-td'>
 			<span class='dashicons dashicons-controls-pause fca_controls_icon fca_controls_icon_pixel_play' title='<?php esc_attr_e( 'Paused - Click to Activate', 'facebook-conversion-pixel' ) ?>' style='display:none;' ></span>
 			<span class='dashicons dashicons-controls-play fca_controls_icon fca_controls_icon_pixel_pause' title='<?php esc_attr_e( 'Active - Click to Pause', 'facebook-conversion-pixel' ) ?>' ></span>
 		</td>
 		<td class='fca-pc-type-td'>{{TYPE}}</td>
-		<td class='fca-pc-pixel-td'>{{PIXEL}}</td>
-		<td class='fca-pc-capi-td'>{{CAPI}}</td>
+		<td class='fca-pc-pixel-td'>{{PIXEL}}</td>		
 		<td class='fca-pc-delete-td'><?php echo fca_pc_delete_icons() ?></td>
 	</tr>
 
@@ -488,27 +530,31 @@ function fca_pc_pixel_row_html( $pixel = '' ) {
 function fca_pc_event_panel( $options ) {
 
 	$events = empty( $options['events'] ) ? array() : $options['events'];
-
-	$html = '<div id="fca-pc-events-table">';
-		$html .= "<h3>" . esc_attr__( 'Events', 'facebook-conversion-pixel' ) . "</h3>";
-		$html .= "<h4>" . esc_attr__( 'Events based on user behavior', 'facebook-conversion-pixel' ) . "</h4>";
-		$html .= '<table id="fca-pc-events" class="widefat">';
-			$html .= '<tr id="fca-pc-event-table-heading">';
-				//HIDDEN COLUMN FOR JSON
-				$html .= '<th style="display:none;"></th>';
-				$html .= '<th style="width: 67px;">' . esc_attr__( 'Status', 'facebook-conversion-pixel' ) . '</th>';
-				$html .= '<th style="width: 30%;">' . esc_attr__( 'Event', 'facebook-conversion-pixel' ) . '</th>';
-				$html .= '<th style="width: calc( 70% - 150px );">' . esc_attr__( 'Trigger', 'facebook-conversion-pixel' ) . '</th>';
-				$html .= '<th style="text-align: right; width: 67px;"></th>';
-			$html .= '</tr>';
-			forEach ( $events as $event ) {
-				$html .= fca_pc_event_row_html( $event );
-			}
-		$html .= '</table>';
-		$html .= '<button type="button" id="fca_pc_new_event" class="button button-secondary"><span class="dashicons dashicons-plus" style="vertical-align: middle;"></span>' . esc_attr__( 'Add New', 'facebook-conversion-pixel' ) . '</button><br>';
-	$html .= '</div>';
-
-	return $html;
+	ob_start(); ?>
+	<div id="fca-pc-events-table">
+		<h3><?php esc_attr_e( 'Events', 'facebook-conversion-pixel' ) ?></h3>
+		<p><?php esc_attr_e( 'Trigger events based on user behavior, like a visit to a checkout page, or clicking on a sign up button.', 'facebook-conversion-pixel' ) ?></p>
+		<br>
+		<table id="fca-pc-events" class="widefat">
+			<tr id="fca-pc-event-table-heading">			
+				<th style="display:none;"></th>
+				<th style="width: 67px;"><?php esc_attr_e( 'Status', 'facebook-conversion-pixel' ) ?></th>
+				<th style="width: 30%;"><?php esc_attr_e( 'Pixel Type', 'facebook-conversion-pixel' ) ?></th>
+				<th style="width: 30%;"><?php esc_attr_e( 'Event', 'facebook-conversion-pixel' ) ?></th>
+				<th style="width: calc( 40% - 150px );"><?php esc_attr_e( 'Trigger', 'facebook-conversion-pixel' ) ?></th>
+				<th style="text-align: right; width: 67px;"></th>
+			</tr>
+			<?php forEach ( $events as $event ) {
+				echo fca_pc_event_row_html( $event );
+			}?>
+		</table>
+		<button type="button" id="fca_pc_new_fb_event" class="button button-secondary"><span class="dashicons dashicons-plus" style="vertical-align: middle;"></span><?php esc_attr_e( 'Add Facebook Event', 'facebook-conversion-pixel' ) ?></button>
+		
+		<button type="button" id="fca_pc_new_ga_event" class="button button-secondary"><span class="dashicons dashicons-plus" style="vertical-align: middle;"></span><?php esc_attr_e( 'Add Google Analytics Event', 'facebook-conversion-pixel' ) ?></button>
+		<br>
+	</div>
+	<?php
+	return ob_get_clean();
 }
 
 //EVENT TABLE ROW TEMPLATE
@@ -520,6 +566,7 @@ function fca_pc_event_row_html( $event = '' ) {
 			<span class='dashicons dashicons-controls-pause fca_controls_icon fca_controls_icon_play' title='<?php esc_attr_e( 'Paused - Click to Activate', 'facebook-conversion-pixel' ) ?>' style='display:none;' ></span>
 			<span class='dashicons dashicons-controls-play fca_controls_icon fca_controls_icon_pause' title='<?php esc_attr_e( 'Active - Click to Pause', 'facebook-conversion-pixel' ) ?>' ></span>
 		</td>
+		<td class='fca-pc-event-pixel-td'>{{TYPE}}</td>
 		<td class='fca-pc-event-td'>{{EVENT}}</td>
 		<td class='fca-pc-trigger-td'>{{TRIGGER}}</td>
 		<td class='fca-pc-delete-td'><?php echo fca_pc_delete_icons() ?></td>
@@ -535,8 +582,8 @@ function fca_pc_settings_save() {
 		echo '<p><strong>' . esc_attr__( "Settings saved.", 'facebook-conversion-pixel' ) . '</strong></p>';
 	echo '</div>';
 
-	$data['pixels'] = empty( $_POST['fca_pc']['pixel_json'] ) ? array() : array_map( 'fca_pc_sanitize_text_array', $_POST['fca_pc']['pixel_json'] );
-	$data['events'] = empty( $_POST['fca_pc']['event_json'] ) ? array() : array_map( 'fca_pc_sanitize_text_array', $_POST['fca_pc']['event_json'] );
+	$data['pixels'] = empty( $_POST['fca_pc']['pixel_json'] ) ? array() : array_map( 'sanitize_text_field', $_POST['fca_pc']['pixel_json'] );
+	$data['events'] = empty( $_POST['fca_pc']['event_json'] ) ? array() : array_map( 'sanitize_text_field', $_POST['fca_pc']['event_json'] );
 
 	$data['exclude'] = empty( $_POST['fca_pc']['exclude'] ) ? array() : array_map( 'fca_pc_sanitize_text_array', $_POST['fca_pc']['exclude'] );
 
@@ -585,41 +632,46 @@ function fca_pc_add_settings_table( $options ) {
 		$role_name = esc_attr( $role['name'] );
 		$role_options[ $role_name ] = $role_name;
 	}
-	$pro_tooltip = FCA_PC_PLUGIN_PACKAGE !== 'Lite' ? '' : 'class="fca_pc_pro_tooltip" title="' . esc_attr__("This option is available only with Pixel Cat Pro. Click the blue button on the right-hand side to learn more.", 'facebook-conversion-pixel' ) . '"';
-					
+	
+	$pro_tooltip_class = FCA_PC_PLUGIN_PACKAGE !== 'Lite' ? '' : 'fca_pc_pro_tooltip';
+	
 	ob_start(); ?>
-
-	<table id="fca_pc_settings_table" class='fca_pc_setting_table fca_pc_integrations_table'>
+	<div id="fca_pc_settings"> 
+	<table class='fca_pc_setting_table fca_pc_integrations_table'>
+		<h3><?php esc_attr_e( 'General Settings', 'facebook-conversion-pixel' ) ?></h3>
 		<tr>
 			<th><?php esc_attr_e( 'Exclude Users', 'facebook-conversion-pixel' ) ?></th>
 			<td><?php echo fca_pc_select_multiple( 'exclude', $exclude, $role_options ) ?>
 			<span class='fca_pc_hint'><?php esc_attr_e("Logged in users selected above will not trigger your pixel.", 'facebook-conversion-pixel' ) ?></span></td>
 		</tr>
 
-		<tr <?php echo esc_attr( $pro_tooltip ) ?>>
-			<th><?php esc_attr_e( 'Advanced Matching', 'facebook-conversion-pixel' ) ?></th>
-			<td><?php echo fca_pc_input( 'advanced_matching', '', $advanced_matching, 'checkbox' ) ?>
-			<span class='fca_pc_hint'><?php esc_attr_e("Enable Advanced Matching for all events. According to Facebook, advertisers using advanced matching can expect a 10% increase in attributed conversions and 20% increase in reach.", 'facebook-conversion-pixel' ) ?></span></td>
-		</tr>
-		<tr <?php echo esc_attr( $pro_tooltip ) ?>>
+		<tr class="<?php echo $pro_tooltip_class ?>">
 			<th><?php esc_attr_e( 'Additional user information', 'facebook-conversion-pixel' ) ?></th>
 			<td><?php echo fca_pc_input( 'user_parameters', '', $user_parameters_on, 'checkbox' ) ?>
 			<span class='fca_pc_hint'><?php esc_attr_e("Send HTTP referrer, user language, post categories and tags as event parameters, so you can create better custom audiences.", 'facebook-conversion-pixel' ) ?></span></td>
 		</tr>
-		<tr <?php echo esc_attr( $pro_tooltip ) ?>>
+		<tr class="<?php echo $pro_tooltip_class ?>">
 			<th><?php esc_attr_e( 'UTM Tag support', 'facebook-conversion-pixel' ) ?></th>
 			<td><?php echo fca_pc_input( 'utm_support', '', $utm_support_on, 'checkbox' ) ?>
 			<span class='fca_pc_hint'><?php esc_attr_e("Send Google UTM source, medium, campaign, term, and content as event parameters, so you can target your visitors based on Google Analytics data.", 'facebook-conversion-pixel' ) ?></span></td>
 		</tr>
-
-		<tr <?php echo esc_attr( $pro_tooltip ) ?>>
+	</table>
+	<h3><?php esc_attr_e( 'Facebook Settings', 'facebook-conversion-pixel' ) ?></h3>
+	<table class='fca_pc_setting_table fca_pc_integrations_table'>
+		
+		<tr class="<?php echo $pro_tooltip_class ?>">
+			<th><?php esc_attr_e( 'Advanced Matching', 'facebook-conversion-pixel' ) ?> </th>
+			<td><?php echo fca_pc_input( 'advanced_matching', '', $advanced_matching, 'checkbox' ) ?>
+			<span class='fca_pc_hint'><?php esc_attr_e("Enable Advanced Matching for all events. According to Facebook, advertisers using advanced matching can expect a 10% increase in attributed conversions and 20% increase in reach.", 'facebook-conversion-pixel' ) ?></span></td>
+		</tr>
+		<tr class="<?php echo $pro_tooltip_class ?>">
 			<th><?php esc_attr_e( 'AMP support', 'facebook-conversion-pixel' ) ?></th>
 			<td><?php echo fca_pc_input( 'amp_integration', '', $amp_on, 'checkbox' ) ?>
 			<span class='fca_pc_hint'><?php esc_attr_e("Make sure your pixel fires on AMP pages.", 'facebook-conversion-pixel' ) ?></span></td>
 		</tr>
 
 	</table>
-
+	</div>
 	<?php
 	return ob_get_clean();
 }
@@ -748,10 +800,8 @@ function fca_pc_add_more_integrations( $options ) {
 				</td>
 			<?php } ?>
 			</tr>
-			<?php if ( FCA_PC_PLUGIN_PACKAGE === 'Lite' ) { 
-				$tooltip = esc_attr__("This option is available only with Pixel Cat Pro. Click the blue button on the right-hand side to learn more.", 'facebook-conversion-pixel' );
-				?>
-				<tr class='fca-pc-integration-disabled fca_pc_pro_tooltip' title="<?php echo $tooltip ?>" >
+			<?php if ( FCA_PC_PLUGIN_PACKAGE === 'Lite' ) { ?>
+				<tr class='fca-pc-integration-disabled fca_pc_pro_tooltip'>
 					<th >
 						<?php esc_attr_e( 'Video Events', 'facebook-conversion-pixel' ) ?>
 					</th>
@@ -804,6 +854,7 @@ function fca_pc_add_woo_integrations( $options ) {
 	$woo_active = $woo_is_active && $version_ok;
 
 	$woo_integration_on = empty( $options['woo_integration'] ) ? '' : 'on';
+	$woo_ga_integration_on = empty( $options['woo_integration_ga'] ) ? '' : 'on';
 	$woo_extra_params = empty( $options['woo_extra_params'] ) ? '' : 'on';
 	$woo_delay = empty( $options['woo_delay'] ) ? 0 : intVal($options['woo_delay']);
 	$woo_feed_on = empty( $options['woo_feed'] ) ? '' : 'on';
@@ -825,7 +876,7 @@ function fca_pc_add_woo_integrations( $options ) {
 	$categories = fca_pc_woo_product_cat_and_tags();
 
 	$google_product_category = empty( $options['google_product_category'] ) ? '' : $options['google_product_category'];
-	$pro_tooltip = FCA_PC_PLUGIN_PACKAGE !== 'Lite' ? '' : 'class="fca_pc_pro_tooltip" title="' . esc_attr__("This option is available only with Pixel Cat Pro. Click the blue button on the right-hand side to learn more.", 'facebook-conversion-pixel' ) . '"';
+	$pro_tooltip_class = FCA_PC_PLUGIN_PACKAGE !== 'Lite' ? '' : 'fca_pc_pro_tooltip';
 
 	ob_start(); ?>
 	<div id='fca-pc-woo-table'>
@@ -841,19 +892,22 @@ function fca_pc_add_woo_integrations( $options ) {
 				<?php esc_attr_e( 'WooCommerce Integration', 'facebook-conversion-pixel' ) ?>
 				<span class="installed-text installed"><div alt="f147" class="dashicons dashicons-yes"></div><?php esc_attr_e( 'Installed', 'facebook-conversion-pixel' ) ?></span>
 			</h3>
-
+			<p><?php esc_attr_e( 'Automatically send WooCommerce events: Add&nbsp;To&nbsp;Cart, Add&nbsp;Payment&nbsp;Info, Purchase, View&nbsp;Content, Search, and Add&nbsp;to&nbsp;Wishlist.', 'facebook-conversion-pixel' ) ?></p>
 			<table class='fca_pc_integrations_table'>
 				<tr>
-					<th><?php esc_attr_e('Track Shopping Events', 'facebook-conversion-pixel') ?></th>
+					<th><?php esc_attr_e('WooCommerce events for Facebook Pixel', 'facebook-conversion-pixel') ?></th>
 						<td><?php echo fca_pc_input( 'woo_integration', '', $woo_integration_on, 'checkbox' ) ?>
-					<span class='fca_pc_hint'><?php esc_attr_e("Automatically send the following events to Facebook: Add&nbsp;To&nbsp;Cart, Add&nbsp;Payment&nbsp;Info, Purchase, View&nbsp;Content, Search, and Add&nbsp;to&nbsp;Wishlist.", 'facebook-conversion-pixel') ?></span></td>
 				</tr>
-				<tr <?php echo $pro_tooltip; ?>>
+				<tr>
+					<th><?php esc_attr_e('WooCommerce events for Google&nbsp;Analytics', 'facebook-conversion-pixel') ?></th>
+						<td><?php echo fca_pc_input( 'woo_integration_ga', '', $woo_ga_integration_on, 'checkbox' ) ?>
+				</tr>
+				<tr class="<?php echo $pro_tooltip_class ?>" >
 					<th><?php esc_attr_e( 'Delay ViewContent Event', 'facebook-conversion-pixel' ) ?></th>
 						<td><?php echo fca_pc_input( 'woo_delay', '', $woo_delay, 'number', "min='0' max='100' step='1'" ) ?>seconds<br>
 					<span class='fca_pc_hint'><?php esc_attr_e("Exclude bouncing visitors by delaying the ViewContent event on product pages.", 'facebook-conversion-pixel' ) ?></span></td>
 				</tr>
-				<tr <?php echo $pro_tooltip; ?>>
+				<tr class="<?php echo $pro_tooltip_class ?>">
 					<th><?php esc_attr_e( 'Send Extra Info with Purchase Event', 'facebook-conversion-pixel' ) ?></th>
 						<td><?php echo fca_pc_input( 'woo_extra_params', '', $woo_extra_params, 'checkbox' ) ?>
 					<span class='fca_pc_hint'><?php esc_attr_e("Sends LTV (lifetime value), coupon codes (if used) and shipping info as parameters of your purchase event, so you can build better, more targeted custom audiences.", 'facebook-conversion-pixel' ) ?></span></td>
@@ -911,6 +965,7 @@ function fca_pc_add_edd_integrations( $options ) {
 
 	$edd_active = is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' );
 	$edd_integration_on = empty( $options['edd_integration'] ) ? '' : 'on';
+	$edd_ga_integration_on = empty( $options['edd_integration_ga'] ) ? '' : 'on';
 	$edd_extra_params = empty( $options['edd_extra_params'] ) ? '' : 'on';
 	$edd_delay = empty( $options['edd_delay'] ) ? 0 : intVal($options['edd_delay']);
 	$edd_feed_on = empty( $options['edd_feed'] ) ? '' : 'on';
@@ -923,8 +978,7 @@ function fca_pc_add_edd_integrations( $options ) {
 
 	$excluded_categories = empty( $options['edd_excluded_categories'] ) ? array() : $options['edd_excluded_categories'];
 	$categories = fca_pc_edd_product_cat_and_tags();
-	$pro_tooltip = FCA_PC_PLUGIN_PACKAGE !== 'Lite' ? '' : 'class="fca_pc_pro_tooltip" title="' . esc_attr__("This option is available only with Pixel Cat Pro. Click the blue button on the right-hand side to learn more.", 'facebook-conversion-pixel' ) . '"';
-
+	
 	ob_start();	?>
 
 	<div id='fca-pc-edd-table'>
@@ -945,17 +999,21 @@ function fca_pc_add_edd_integrations( $options ) {
 			</h3>
 			<table class='fca_pc_integrations_table'>
 				<tr>
-					<th><?php esc_attr_e( 'Track EDD Events', 'facebook-conversion-pixel' ) ?></th>
+					<th><?php esc_attr_e( 'Track EDD Events with Facebook Pixel', 'facebook-conversion-pixel' ) ?></th>
 						<td><?php echo fca_pc_input( 'edd_integration', '', $edd_integration_on, 'checkbox' ) ?>
 					<span class='fca_pc_hint'><?php esc_attr_e("Automatically send the following Easy Digital Downloads events to Facebook: Add To Cart, Add&nbsp;Payment&nbsp;Info, Purchase, View&nbsp;Content, Search, and Add&nbsp;to&nbsp;Wishlist.", 'facebook-conversion-pixel' ) ?></span></td>
 				</tr>
-
-				<tr <?php echo $pro_tooltip ?>>
+				<tr>
+					<th><?php esc_attr_e( 'Track EDD Events with Google Analytics', 'facebook-conversion-pixel' ) ?></th>
+						<td><?php echo fca_pc_input( 'edd_integration_ga', '', $edd_ga_integration_on, 'checkbox' ) ?>
+					<span class='fca_pc_hint'><?php esc_attr_e("Automatically send the following Easy Digital Downloads events to Google Analytics: Add To Cart, Add&nbsp;Payment&nbsp;Info, Purchase, View&nbsp;Content, Search, and Add&nbsp;to&nbsp;Wishlist.", 'facebook-conversion-pixel' ) ?></span></td>
+				</tr>
+				<tr class="<?php echo $pro_tooltip_class ?>" >
 					<th><?php esc_attr_e( 'Delay ViewContent Event', 'facebook-conversion-pixel' ) ?></th>
 						<td><?php echo fca_pc_input( 'edd_delay', '', $edd_delay, 'number', "min='0' max='100' step='1'" ) ?>seconds<br>
 					<span class='fca_pc_hint'><?php esc_attr_e("Exclude bouncing visitors by delaying the ViewContent event on download pages.", 'facebook-conversion-pixel' ) ?></span></td>
 				</tr>
-				<tr <?php echo $pro_tooltip ?>>
+				<tr class="<?php echo $pro_tooltip_class ?>" >
 					<th><?php esc_attr_e( 'Send Extra Info with Purchase Event', 'facebook-conversion-pixel' ) ?></th>
 						<td><?php echo fca_pc_input( 'edd_extra_params', '', $edd_extra_params, 'checkbox' ) ?>
 					<span class='fca_pc_hint'><?php esc_attr_e("Sends LTV (lifetime value), coupon codes (if used) and shipping info as parameters of your purchase event, so you can build better, more targeted custom audiences.", 'facebook-conversion-pixel' ) ?></span></td>
@@ -999,7 +1057,6 @@ function fca_pc_marketing_metabox() {
 			<li><div class="dashicons dashicons-yes"></div> <?php _e( 'Dynamic Events, so you can build <strong>powerful custom audiences</strong>', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Advanced Matching for improved reach', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Powerful Custom Events & Parameters', 'facebook-conversion-pixel' ); ?></li>
-			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Multiple Pixels', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( 'Google AMP Integration', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( '1-Click WooCommerce Integration', 'facebook-conversion-pixel' ); ?></li>
 			<li><div class="dashicons dashicons-yes"></div> <?php esc_attr_e( '1-Click Easy Digital Downloads Integration', 'facebook-conversion-pixel' ); ?></li>
