@@ -7,7 +7,7 @@
 
     --plyr-color-main: #b52a2d;
 
-    @include mq($from: md) {
+    @include mq($until: md) {
       height: auto;
     }
   }
@@ -16,7 +16,7 @@
     height: 425px;
     max-width: 754px;
 
-    @include mq($from: md) {
+    @include mq($until: md) {
       height: auto;
     }
   }
