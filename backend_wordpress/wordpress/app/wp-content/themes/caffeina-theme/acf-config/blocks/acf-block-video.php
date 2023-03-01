@@ -7,7 +7,7 @@ function lb_init_block_video() {
 
         acf_register_block_type(array(
             'name'              => 'lb-video',
-            'title'             => __('Video'),
+            'title'             => __('Video Labo'),
             'description'       => __('Caffeina Block - Video.'),
             'render_template'   => 'gutenberg-blocks/video.php',
             'category'          => 'caffeina-theme',
