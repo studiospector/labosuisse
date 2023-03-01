@@ -46,6 +46,16 @@ function fca_pc_do_feed_body( $options, $offset = 0 ) {
 		'order' => 'ASC'
 	);
 
+	$lang = $_GET['lang'] ?? 'it';
+
+	if($lang and in_array($lang, ['it','en'])) {
+		global $sitepress;
+		$sitepress->switch_lang($lang);
+
+		$search['suppress_filters'] = false;
+		$search['language'] = $lang;
+	}
+
 	$products = get_posts( $search );
 
 	$excluded_product_cats = empty( $options['woo_excluded_categories'] ) ? array() : $options['woo_excluded_categories'];
