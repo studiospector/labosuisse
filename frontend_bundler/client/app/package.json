@@ -57,6 +57,7 @@
         "lodash.clonedeep": "^4.5.0",
         "node-fetch": "^2.6.0",
         "photoswipe": "^5.2.0-beta.2",
+        "plyr": "^3.7.3",
         "raw-loader": "^4.0.1",
         "sass": "^1.49.7",
         "sass-mq": "^6.0.0",

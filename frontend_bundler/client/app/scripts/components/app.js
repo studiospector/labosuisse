@@ -37,6 +37,7 @@ import GTMTracking from './GTMTracking'
 import AsyncCart from './AsyncCart'
 import Multicountry from './Multicountry'
 import MulticountryGeolocation from './MulticountryGeolocation'
+import Video from './Video'
 
 const components = {
     scrollbar: {
@@ -202,6 +203,11 @@ const components = {
     multicountryGeolocation: {
         selector: '.js-multicountry-geolocation',
         type: MulticountryGeolocation,
+        optional: true
+    },
+    video: {
+        selector: '.js-video',
+        type: Video,
         optional: true
     },
 }

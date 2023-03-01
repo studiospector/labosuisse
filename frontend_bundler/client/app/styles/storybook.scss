@@ -5,6 +5,7 @@
 @import "variables/critical";
 
 // VENDORS
+@import "../node_modules/plyr/dist/plyr";
 @import "../node_modules/sass-mq/mq";
 @import '../node_modules/swiper/swiper-bundle';
 @import "vendors/custom-input";

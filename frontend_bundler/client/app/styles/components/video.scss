@@ -1,0 +1,23 @@
+.lb-video {
+  .plyr {
+    height: 425px;
+    max-width: 754px;
+    margin: 0 auto;
+    border-radius: 7px;
+
+    --plyr-color-main: #b52a2d;
+
+    @include mq($until: md) {
+      height: auto;
+    }
+  }
+  
+  iframe {
+    height: 425px;
+    max-width: 754px;
+
+    @include mq($until: md) {
+      height: auto;
+    }
+  }
+}

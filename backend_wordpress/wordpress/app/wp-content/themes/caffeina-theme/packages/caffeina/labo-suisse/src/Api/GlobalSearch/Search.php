@@ -180,21 +180,22 @@ class Search
             'post_status' => 'publish',
             'posts_per_page' => -1,
             'post_type' => $type,
-            'title_like' => $this->search
+            // 'title_like' => $this->search
+            's' => $this->search
         ]);
 
-        add_filter('posts_where', function ($where, $wp_query) {
-            global $wpdb;
-            if ($search_term = $wp_query->get('title_like')) {
-                $string = esc_sql($wpdb->esc_like($search_term));
-                $where .= " AND {$wpdb->posts}.post_title LIKE '%{$string}%'";
-            }
-            return $where;
-        }, 10, 2);
+        // add_filter('posts_where', function ($where, $wp_query) {
+        //     global $wpdb;
+        //     if ($search_term = $wp_query->get('title_like')) {
+        //         $string = esc_sql($wpdb->esc_like($search_term));
+        //         $where .= " AND {$wpdb->posts}.post_title LIKE '%{$string}%'";
+        //     }
+        //     return $where;
+        // }, 10, 2);
 
         $query = new WP_Query($query);
 
-        remove_filter('posts_where', 'title_filter', 10, 2);
+        // remove_filter('posts_where', 'title_filter', 10, 2);
 
         return $query->get_posts();
     }
