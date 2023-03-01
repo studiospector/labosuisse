@@ -96,5 +96,5 @@ services:
 timers:
   wpcron:
     command: "php /var/www/html/wp-cron.php"
-    schedule: "* * * * *"
+    schedule: "*/5 * * * *"
     service: cms
