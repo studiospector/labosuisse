@@ -6,15 +6,7 @@
     --plyr-color-main: #b52a2d;
 
     @include mq($from: md) {
-      height: 425px;
       max-width: 754px;
-    }
-    
-    iframe {
-      @include mq($from: md) {
-        height: 425px;
-        max-width: 754px;
-      }
     }
   }
   

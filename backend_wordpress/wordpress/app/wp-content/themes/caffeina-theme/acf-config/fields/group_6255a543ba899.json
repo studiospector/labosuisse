@@ -48,7 +48,10 @@
                         "CA": "CANADA",
                         "CN": "CINA",
                         "CY": "CIPRO",
+                        "CL": "CILE",
+                        "CO": "COLOMBIA",
                         "DK": "DANIMARCA",
+                        "DO": "REPUBBLICA DOMINICANA",
                         "EC": "ECUADOR",
                         "AE": "EMIRATI ARABI UNITI",
                         "EE": "ESTONIA",
@@ -87,6 +90,7 @@
                         "LK": "SRI LANKA",
                         "HU": "UNGHERIA",
                         "UY": "URUGUAY",
+                        "VE": "VENEZUELA",
                         "VN": "VIETNAM"
                     },
                     "default_value": false,
@@ -123,7 +127,10 @@
                         "flag-canada": "Canada",
                         "flag-cina": "Cina",
                         "flag-cipro": "Cipro",
+                        "flag-cile": "Cile",
+                        "flag-colombia": "Colombia",
                         "flag-danimarca": "Danimarca",
+                        "flag-repubblica-dominicana": "Repubblica Dominicana",
                         "flag-ecuador": "Ecuador",
                         "flag-emirati-arabi-uniti": "Emirati Arabi Uniti",
                         "flag-estonia": "Estonia",
@@ -162,6 +169,7 @@
                         "flag-sri-lanka": "Sri Lanka",
                         "flag-ungheria": "Ungheria",
                         "flag-uruguay": "Uruguay",
+                        "flag-venezuela": "Venezuela",
                         "flag-vietnam": "Vietnam"
                     },
                     "default_value": false,
@@ -340,5 +348,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1675182990
+    "modified": 1678811846
 }
