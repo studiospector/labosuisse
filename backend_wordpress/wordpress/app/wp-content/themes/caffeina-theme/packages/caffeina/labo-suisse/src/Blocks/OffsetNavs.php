@@ -17,7 +17,7 @@ class OffsetNavs extends BaseBlock
                 'description' => [
                     'active' => get_field('lb_block_offsetnav_state_description'), // true, false
                     'id' => 'lb-offsetnav-product-description',
-                    'title' => __('Descrizione e INCI', 'labo-suisse-theme'),
+                    'title' => __('Descrizione e ingredienti', 'labo-suisse-theme'),
                     'data' => $this->filldata('description')
                 ],
                 'technology' => [
