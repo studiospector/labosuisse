@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 15:46+0000\n"
+"POT-Creation-Date: 2023-03-22 10:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Loco-Version: 2.5.8; wp-5.8\n"
 "X-Domain: labo-suisse-theme"
 
-#: inc/woocommerce-setup.php:171
+#: inc/woocommerce-setup.php:172
 #, php-format
 msgid "%1$sa partire da%2$s %3$s"
 msgstr ""
@@ -58,12 +58,12 @@ msgstr ""
 msgid "Applica"
 msgstr ""
 
-#: inc/woocommerce-setup.php:229
+#: inc/woocommerce-setup.php:230
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:48
 msgid "Articoli"
 msgstr ""
 
-#: inc/woocommerce-setup.php:247
+#: inc/woocommerce-setup.php:248
 msgid "articoli"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Articolo"
 msgstr ""
 
-#: inc/woocommerce-setup.php:245
+#: inc/woocommerce-setup.php:246
 msgid "articolo"
 msgstr ""
 
@@ -190,7 +190,7 @@ msgid "Descrizione del ruolo:"
 msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:20
-msgid "Descrizione e INCI"
+msgid "Descrizione e ingredienti"
 msgstr ""
 
 #: woocommerce/loop/add-to-cart.php:41
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Nuova password (lascia vuoto per non modificare)"
 msgstr ""
 
-#: inc/woocommerce-setup.php:351
+#: inc/woocommerce-setup.php:352
 msgid "Omaggio"
 msgstr ""
 
