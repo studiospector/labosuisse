@@ -104,7 +104,7 @@ add_filter( 'wp_mail', function ($args) {
 });
 
 if(!wp_next_scheduled('daily_orders_export')) {
-    wp_schedule_event(strtotime('08:00:00'), 'daily', 'daily_orders_export');
+    wp_schedule_event(strtotime('07:00:00'), 'daily', 'daily_orders_export');
 }
 
 add_action('daily_orders_export', function(){
