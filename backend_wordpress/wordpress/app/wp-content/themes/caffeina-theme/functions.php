@@ -103,11 +103,15 @@ add_filter( 'wp_mail', function ($args) {
     return $args;
 });
 
-if(!wp_next_scheduled('daily_orders_export')) {
-    wp_schedule_event(strtotime('07:00:00'), 'daily', 'daily_orders_export');
+if(wp_next_scheduled('daily_orders_export')) {
+    wp_clear_scheduled_hook('daily_orders_export');
 }
 
-add_action('daily_orders_export', function(){
+if(!wp_next_scheduled('daily_orders_export_v2')) {
+    wp_schedule_event(strtotime('06:00:00'), 'daily', 'daily_orders_export_v2');
+}
+
+add_action('daily_orders_export_v2', function(){
     $export = new OrderExport();
     $export->start();
 });
