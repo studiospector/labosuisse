@@ -84,10 +84,10 @@ RUN apk --no-cache add \
   php8-pecl-memcached \
   # required by NR agent
   pcre
-
-COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
-COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
-COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
+#
+# COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/lib/php8/modules/newrelic.so /usr/lib/php8/modules/newrelic.so
+# COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /etc/php8/conf.d/newrelic.ini /etc/php8/conf.d/newrelic.ini
+# COPY --from=registry.gitlab.com/never-sleep/devops/newrelic-php-agent-alpine:9.18.1.303 /usr/bin/newrelic-daemon /usr/bin/newrelic-daemon
 COPY ./backend_wordpress/wordpress/docker/entrypoint.sh /entrypoint.sh
 
 #wp-cli
