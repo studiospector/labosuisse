@@ -46,6 +46,7 @@ class BeautySpecialist
         foreach ($posts as $post) {
             $store = get_post(get_field('lb_beauty_specialist_store', $post->ID));
             $date = get_field('lb_beauty_specialist_date', $post->ID);
+            [$address, $formattedAddress] = $this->getAddress($store->ID);
 
             $items[$date]['date'] = $this->getDate($date);
             $items[$date]['items'][] = [
@@ -53,9 +54,9 @@ class BeautySpecialist
                 'expired' => strtotime($date) < strtotime('now'),
                 'date' => $date,
                 'store' => $store->post_title,
-                'address' => $store->post_content,
+                'address' => $formattedAddress,
                 'phone' => get_field('lb_stores_phone_number', $store->ID),
-                'geo_location' => get_field('lb_stores_gmaps_point', $store->ID),
+                'geo_location' => $address,
             ];
         }
 
@@ -120,5 +121,24 @@ class BeautySpecialist
         $query = new \WP_Query($args);
 
         return $query->get_posts();
+    }
+
+    private function getAddress($storeId)
+    {
+        $address = get_field('lb_stores_gmaps_point', $storeId);
+
+        $streetName = $address['street_name'] ?? null;
+        $streetNumber = $address['street_number'] ?? null;
+        $city = $address['city'] ?? null;
+        $postCode = $address['post_code'] ?? null;
+        $stateShort = $address['state_short'] ?? null;
+
+
+        $formatedAddress =  "{$streetName}, {$streetNumber} - {$postCode} - {$city} ({$stateShort})";
+
+        return [
+            $address,
+            $formatedAddress
+        ];
     }
 }
