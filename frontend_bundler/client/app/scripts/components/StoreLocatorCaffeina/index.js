@@ -666,15 +666,15 @@ class StoreLocatorCaffeina extends Component {
 
             // If the place has a geometry, then show it on a map
             } else {
-                if (place.geometry.viewport) {
-                    this.map.fitBounds(place.geometry.viewport)
-                    this.map.setZoom(12)
-                } else {
-                    this.map.setCenter(place.geometry.location)
-                    this.map.setZoom(6)
-                }
-                // bindMap(newMap)
-                // handleSearch(place, this.map, this.google)
+                this.map.setCenter(place.geometry.location)
+                this.map.setZoom(12)
+                // if (place.geometry.viewport) {
+                //     this.map.fitBounds(place.geometry.viewport)
+                //     this.map.setZoom(12)
+                // } else {
+                //     this.map.setCenter(place.geometry.location)
+                //     this.map.setZoom(6)
+                // }
             }
         })
     }
