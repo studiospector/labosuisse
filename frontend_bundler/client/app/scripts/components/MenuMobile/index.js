@@ -30,8 +30,9 @@ class MenuMobile extends Component {
         logoElement: '.lb-header__logo'
     } }) {
         super({ el, ui })
-        on(this.ui.buttons, 'click', this.next);
-        on(this.ui.back, 'click', this.back);
+        this.touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+        on(this.ui.buttons, this.touchEvent, this.next);
+        on(this.ui.back, this.touchEvent, this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
         this.slider = gsap.timeline();
@@ -47,8 +48,8 @@ class MenuMobile extends Component {
     }
 
     onDestroy() {
-        off(this.ui.buttons, 'click', this.next);
-        off(this.ui.back, 'click', this.back);
+        off(this.ui.buttons, this.touchEvent, this.next);
+        off(this.ui.back, this.touchEvent, this.back);
     }
 
     updateNavigation(elem = this.el) {

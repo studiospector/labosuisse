@@ -70,6 +70,10 @@
                     right: 6%;
                     background: map-get($colors, 'primary-light-1');
                 }
+
+                span {
+                    pointer-events: none;
+                }
             }
 
             &--with-button {
