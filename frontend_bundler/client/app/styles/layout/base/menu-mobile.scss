@@ -59,6 +59,8 @@
 
 
         &__item {
+            pointer-events: all;
+
             .lb-menu__button,
             .lb-menu__link {
                 &:after {
