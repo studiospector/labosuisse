@@ -65,6 +65,7 @@ class MenuMobile extends Component {
     }
 
     next = (event) => {
+        console.log('next');
         const item = event.target.closest('.lb-menu__item');
         const menu = item && item.querySelector('.lb-menu__submenu');
         const parent = item.parentElement;
