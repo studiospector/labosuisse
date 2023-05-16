@@ -30,11 +30,14 @@ class MenuMobile extends Component {
         logoElement: '.lb-header__logo'
     } }) {
         super({ el, ui })
-        this.touchEvent = 'click' in window ? 'click' : 'ontouchstart';
-        console.log('touchEvent', this.touchEvent);
-        console.log('this.ui.buttons', this.ui.buttons);
-        on(this.ui.buttons, this.touchEvent, this.next);
-        on(this.ui.back, this.touchEvent, this.back);
+
+        // let elements = document.querySelectorAll('.lb-menu__button:not(.lb-menu__back)');
+        // elements.forEach((item) => {
+        //     item.addEventListener('click', this.next)
+        // });
+
+        on(this.ui.buttons, 'click', this.next);
+        on(this.ui.back, 'click', this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
         this.slider = gsap.timeline();
@@ -50,8 +53,8 @@ class MenuMobile extends Component {
     }
 
     onDestroy() {
-        off(this.ui.buttons, this.touchEvent, this.next);
-        off(this.ui.back, this.touchEvent, this.back);
+        off(this.ui.buttons, 'click', this.next);
+        off(this.ui.back, 'click', this.back);
     }
 
     updateNavigation(elem = this.el) {
