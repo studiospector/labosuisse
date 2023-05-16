@@ -59,12 +59,10 @@
 
 
         &__item {
-            pointer-events: none;
+            // pointer-events: all;
 
             .lb-menu__button,
             .lb-menu__link {
-                pointer-events: all;
-                
                 &:after {
                     position: absolute;
                     content: '';

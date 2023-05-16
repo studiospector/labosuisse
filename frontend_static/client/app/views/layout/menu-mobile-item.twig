@@ -9,7 +9,7 @@
 {% if class %}
 	{% set classes = classes|merge([class]) %}
 {% endif %}
-<div class="{{classes|length ? ' ' ~ classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
+<div class="{{classes|length ? classes|join(' ') : '' }}{% if isActive %} js-active-submenu{% endif %}">
 	{%- if type == 'link' -%}
 		<a class="lb-menu__link" href="{{href}}" target="{{ target ? target : '_self' }}" title="{{ label }}">
 			{%- if icon or badge -%}
