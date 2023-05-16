@@ -1,7 +1,7 @@
 <nav class="lb-menu lb-menu--mobile">
 	<div class="lb-menu__wrapper">
         <div class="lb-menu-scroller">
-            <div body-scroll-lock-ignore class="lb-menu__main">
+            <div class="lb-menu__main">
                 {% for item in items.children %}
                     {% include "@PathViews/layout/menu-mobile-item.twig" with item only %}
                 {% endfor %}

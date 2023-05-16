@@ -3,11 +3,11 @@ import { on, off, qs } from '@okiba/dom'
 
 import { gsap } from "gsap";
 
-import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+// import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
 
 import ClassNamePlugin from "../../plugin/ClassNamePlugin";
 
-import { allowTouchMove } from "../../utils/touchmove";
+// import { allowTouchMove } from "../../utils/touchmove";
 
 import { openMenu } from './animations';
 
@@ -131,7 +131,7 @@ class MenuMobile extends Component {
         this.isOpen = true;
         this.master.clear();
         this.master.to(this.tl, { progress: 1, duration: this.tl.duration() });
-        disableBodyScroll(this.ui.main, { allowTouchMove });
+        // disableBodyScroll(this.ui.main, { allowTouchMove });
         window.getCustomScrollbar.stop()
         document.body.style.overflow = 'hidden';
     }
@@ -140,7 +140,7 @@ class MenuMobile extends Component {
         qs(this.opt.headerElement).classList.remove('lb-header--hide')
         qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
         this.isOpen = false;
-        enableBodyScroll(this.ui.main);
+        // enableBodyScroll(this.ui.main);
         window.getCustomScrollbar.start()
         document.body.style.overflow = 'auto';
         this.master.to(this.tl, {
