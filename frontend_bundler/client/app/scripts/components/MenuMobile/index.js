@@ -30,8 +30,9 @@ class MenuMobile extends Component {
         logoElement: '.lb-header__logo'
     } }) {
         super({ el, ui })
-        this.touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
+        this.touchEvent = 'click' in window ? 'click' : 'ontouchstart';
         console.log('touchEvent', this.touchEvent);
+        console.log('this.ui.buttons', this.ui.buttons);
         on(this.ui.buttons, this.touchEvent, this.next);
         on(this.ui.back, this.touchEvent, this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
