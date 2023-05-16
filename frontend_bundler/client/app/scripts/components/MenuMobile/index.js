@@ -35,12 +35,21 @@ class MenuMobile extends Component {
         console.log('elements', elements);
         console.log('this.ui.buttons', this.ui.buttons);
         elements.forEach((item) => {
-            item.addEventListener('click', this.next)
+            item.addEventListener('touchend', this.next)
         });
         console.log('elements listener', elements);
 
+        let menuRoot = document.querySelector('.lb-menu--mobile');
+        on(menuRoot, 'click', (ev) => {
+            console.log('menuRoot target', ev.target);
+        });
+
+        on(this.ui.main, 'click', (ev) => {
+            console.log('this.ui.main target', ev.target);
+        });
+
         // on(this.ui.buttons, 'click', this.next);
-        on(this.ui.back, 'click', this.back);
+        on(this.ui.back, 'touchend', this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
         this.slider = gsap.timeline();
@@ -55,10 +64,10 @@ class MenuMobile extends Component {
         setTimeout(() => this.updateNavigation(), 400)
     }
 
-    onDestroy() {
-        off(this.ui.buttons, 'click', this.next);
-        off(this.ui.back, 'click', this.back);
-    }
+    // onDestroy() {
+    //     off(this.ui.buttons, 'touchend', this.next);
+    //     off(this.ui.back, 'touchend', this.back);
+    // }
 
     updateNavigation(elem = this.el) {
         const hasActiveSubmenu = elem.querySelector('.js-active-submenu')
