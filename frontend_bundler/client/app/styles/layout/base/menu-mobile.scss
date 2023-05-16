@@ -59,7 +59,7 @@
 
 
         &__item {
-            pointer-events: all;
+            // pointer-events: all;
 
             .lb-menu__button,
             .lb-menu__link {
@@ -73,9 +73,9 @@
                     background: map-get($colors, 'primary-light-1');
                 }
 
-                span {
-                    pointer-events: none;
-                }
+                // span {
+                //     pointer-events: none;
+                // }
             }
 
             &--with-button {
