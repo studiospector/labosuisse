@@ -37,6 +37,7 @@ class MenuMobile extends Component {
         elements.forEach((item) => {
             item.addEventListener('click', this.next)
         });
+        console.log('elements listener', elements);
 
         // on(this.ui.buttons, 'click', this.next);
         on(this.ui.back, 'click', this.back);
