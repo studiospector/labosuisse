@@ -32,6 +32,8 @@ class MenuMobile extends Component {
         super({ el, ui })
 
         let elements = document.querySelectorAll('.lb-menu__button:not(.lb-menu__back)');
+        console.log('elements', elements);
+        console.log('this.ui.buttons', this.ui.buttons);
         elements.forEach((item) => {
             item.addEventListener('click', this.next)
         });
