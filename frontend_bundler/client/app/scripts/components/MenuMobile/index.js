@@ -31,12 +31,12 @@ class MenuMobile extends Component {
     } }) {
         super({ el, ui })
 
-        // let elements = document.querySelectorAll('.lb-menu__button:not(.lb-menu__back)');
-        // elements.forEach((item) => {
-        //     item.addEventListener('click', this.next)
-        // });
+        let elements = document.querySelectorAll('.lb-menu__button:not(.lb-menu__back)');
+        elements.forEach((item) => {
+            item.addEventListener('click', this.next)
+        });
 
-        on(this.ui.buttons, 'click', this.next);
+        // on(this.ui.buttons, 'click', this.next);
         on(this.ui.back, 'click', this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
