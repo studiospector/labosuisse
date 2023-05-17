@@ -140,7 +140,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.5rem;
+            padding: rem(24);
             font-size: rem(13);
             font-weight: 300;
             text-decoration: none;
@@ -148,7 +148,6 @@
             color: map-get($colors, "black");
             background-color: map-get($colors, "white");
             border: 0;
-            pointer-events: all;
 
             &--small {
                 padding: 1rem 1.5rem;
