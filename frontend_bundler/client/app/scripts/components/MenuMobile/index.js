@@ -30,9 +30,20 @@ class MenuMobile extends Component {
         logoElement: '.lb-header__logo'
     } }) {
         super({ el, ui })
-        this.touchEvent = 'ontouchstart' in window ? 'touchstart' : 'click';
-        on(this.ui.buttons, this.touchEvent, this.next);
-        on(this.ui.back, this.touchEvent, this.back);
+
+        let menuRoot = document.querySelector('.lb-menu--mobile');
+        on(menuRoot, 'click', (ev) => {
+            console.log('menuRoot target', ev.target);
+            console.log('');
+        });
+
+        on(this.ui.main, 'click', (ev) => {
+            console.log('');
+            console.log('this.ui.main target', ev.target);
+        });
+
+        on(this.ui.buttons, 'click', this.next);
+        on(this.ui.back, 'click', this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
         this.slider = gsap.timeline();
@@ -48,8 +59,8 @@ class MenuMobile extends Component {
     }
 
     onDestroy() {
-        off(this.ui.buttons, this.touchEvent, this.next);
-        off(this.ui.back, this.touchEvent, this.back);
+        off(this.ui.buttons, 'click', this.next);
+        off(this.ui.back, 'click', this.back);
     }
 
     updateNavigation(elem = this.el) {
@@ -63,9 +74,14 @@ class MenuMobile extends Component {
     }
 
     next = (event) => {
+        console.log('next');
         const item = event.target.closest('.lb-menu__item');
         const menu = item && item.querySelector('.lb-menu__submenu');
         const parent = item.parentElement;
+        console.log('event', event.target, event);
+        console.log('menu', menu);
+        console.log('item', item);
+        console.log('parent', parent);
         if (!parent || !parent.classList.contains('lb-menu__main--active')) {
             this.activate(
                 menu,
@@ -83,6 +99,7 @@ class MenuMobile extends Component {
     }
 
     activate = (menu, parent) => {
+        console.log('activate');
         this.stack.push([menu, parent]);
         menu.classList.add('lb-menu__submenu--active');
         this.slide(() => null, menu == this.submenu);

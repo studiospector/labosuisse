@@ -99,9 +99,10 @@
   -webkit-appearance: none;
 }
 
+/* transform-style not working on iOS 16.4 */
 @mixin boost-performance ($translate: true) {
   backface-visibility: hidden;
-  transform-style: preserve-3d;
+  // transform-style: preserve-3d;
 
   @if ($translate) {
     transform: translate3d(0, 0, 0);

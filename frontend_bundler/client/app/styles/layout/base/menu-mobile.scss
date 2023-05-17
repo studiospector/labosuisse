@@ -70,10 +70,6 @@
                     right: 6%;
                     background: map-get($colors, 'primary-light-1');
                 }
-
-                span {
-                    pointer-events: none;
-                }
             }
 
             &--with-button {
@@ -144,7 +140,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.5rem;
+            padding: rem(24);
             font-size: rem(13);
             font-weight: 300;
             text-decoration: none;
