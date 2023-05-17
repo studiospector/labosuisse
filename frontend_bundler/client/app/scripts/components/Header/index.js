@@ -12,12 +12,8 @@ class Header extends Component {
     constructor({ options, ...props }) {
         super({ ...props, ui })
 
-        this.curScroll = null
-        this.prevScroll = window.scrollY
-        this.direction = 0
-        this.prevDirection = 0
-        this.firstUp = false
-        this.tempScrollUp = null
+        this.timeout = 0
+        this.lastScrollTop = 0
 
         this.headerProduct = qs('.lb-header-sticky-product')
         
@@ -35,76 +31,31 @@ class Header extends Component {
         }
 
         // On scroll trigger with Locomotive
-        window.getCustomScrollbar.on('scroll', this.checkScroll)
+        window.getCustomScrollbar.on('scroll', this.handleScroll)
     }
 
+    handleScroll = (instance) => {
+        if (this.timeout) {
+            clearTimeout(this.timeout)
+        }
 
-    /**
-     * Find the direction of scroll:
-     * 0 - initial
-     * 1 - up
-     * 2 - down
-     */
-    checkScroll = (instance) => {
-        this.curScroll = instance.scroll.y
+        this.timeout = setTimeout(() => {
+            let scrollTop = instance.scroll.y
 
-        // Scrolled up
-        if (this.curScroll > this.prevScroll) {
-            this.direction = 2
-            if (this.direction != this.prevDirection) {
-                this.toggleHeader(this.direction, this.curScroll)
-            }
-            this.firstUp = false
-
-        // Scrolled down
-        } else if (this.curScroll < this.prevScroll) {
-            this.direction = 1
-
-            if (this.firstUp == false) {
-                this.firstUp = true
-                this.tempScrollUp = this.curScroll - 100
-            }
-
-            if (this.firstUp == true && (this.curScroll < this.tempScrollUp)) {
-                if (this.direction != this.prevDirection) {
-                    this.toggleHeader(this.direction, this.curScroll)
+            if (scrollTop > this.lastScrollTop && instance.scroll.y > 100 && instance.direction == 'down') {
+                this.el.classList.add('lb-header--hide')
+                if (this.headerProduct) {
+                    this.headerProduct.classList.remove('lb-header-sticky-product--adjust')
                 }
-            } else {
-                return
+            } else if (scrollTop < this.lastScrollTop && instance.direction == 'up') {
+                this.el.classList.remove('lb-header--hide')
+                if (this.headerProduct) {
+                    this.headerProduct.classList.add('lb-header-sticky-product--adjust')
+                }
             }
-        }
 
-        this.prevScroll = this.curScroll
-    }
-
-
-    toggleHeader(direction, curScroll) {
-        const headerHeight = this.el.getBoundingClientRect().height
-        if (direction === 2 && curScroll > headerHeight) {
-            this.el.classList.add('lb-header--hide')
-            if (this.headerProduct) {
-                this.headerProduct.classList.remove('lb-header-sticky-product--adjust')
-                // setTimeout(() => {
-                //     let matchMedia = window.matchMedia("screen and (max-width: 767px)")
-                //     if (!matchMedia.matches) {
-                //         this.headerProduct.style.top = `${this.el.getBoundingClientRect().height}px`
-                //     }
-                // }, 550);
-            }
-            this.prevDirection = direction
-        } else if (direction === 1) {
-            this.el.classList.remove('lb-header--hide')
-            if (this.headerProduct) {
-                this.headerProduct.classList.add('lb-header-sticky-product--adjust')
-                // setTimeout(() => {
-                //     let matchMedia = window.matchMedia("screen and (max-width: 767px)")
-                //     if (!matchMedia.matches) {
-                //         this.headerProduct.style.top = `${this.el.getBoundingClientRect().height}px`
-                //     }
-                // }, 550);
-            }
-            this.prevDirection = direction
-        }
+            this.lastScrollTop = scrollTop <= 0 ? 0 : scrollTop
+        }, 10)
     }
 
 
