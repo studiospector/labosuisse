@@ -59,8 +59,6 @@
 
 
         &__item {
-            // pointer-events: all;
-
             .lb-menu__button,
             .lb-menu__link {
                 &:after {
@@ -72,10 +70,6 @@
                     right: 6%;
                     background: map-get($colors, 'primary-light-1');
                 }
-
-                // span {
-                //     pointer-events: none;
-                // }
             }
 
             &--with-button {
@@ -154,6 +148,7 @@
             color: map-get($colors, "black");
             background-color: map-get($colors, "white");
             border: 0;
+            pointer-events: all;
 
             &--small {
                 padding: 1rem 1.5rem;

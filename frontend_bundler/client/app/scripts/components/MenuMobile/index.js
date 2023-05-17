@@ -3,11 +3,11 @@ import { on, off, qs } from '@okiba/dom'
 
 import { gsap } from "gsap";
 
-// import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
+import { enableBodyScroll, disableBodyScroll } from 'body-scroll-lock';
 
 import ClassNamePlugin from "../../plugin/ClassNamePlugin";
 
-// import { allowTouchMove } from "../../utils/touchmove";
+import { allowTouchMove } from "../../utils/touchmove";
 
 import { openMenu } from './animations';
 
@@ -31,25 +31,19 @@ class MenuMobile extends Component {
     } }) {
         super({ el, ui })
 
-        let elements = document.querySelectorAll('.lb-menu__button:not(.lb-menu__back)');
-        console.log('elements', elements);
-        console.log('this.ui.buttons', this.ui.buttons);
-        elements.forEach((item) => {
-            item.addEventListener('touchend', this.next)
-        });
-        console.log('elements listener', elements);
-
         let menuRoot = document.querySelector('.lb-menu--mobile');
         on(menuRoot, 'click', (ev) => {
             console.log('menuRoot target', ev.target);
+            console.log('');
         });
 
         on(this.ui.main, 'click', (ev) => {
+            console.log('');
             console.log('this.ui.main target', ev.target);
         });
 
-        // on(this.ui.buttons, 'click', this.next);
-        on(this.ui.back, 'touchend', this.back);
+        on(this.ui.buttons, 'click', this.next);
+        on(this.ui.back, 'click', this.back);
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
         this.slider = gsap.timeline();
@@ -64,10 +58,10 @@ class MenuMobile extends Component {
         setTimeout(() => this.updateNavigation(), 400)
     }
 
-    // onDestroy() {
-    //     off(this.ui.buttons, 'touchend', this.next);
-    //     off(this.ui.back, 'touchend', this.back);
-    // }
+    onDestroy() {
+        off(this.ui.buttons, 'click', this.next);
+        off(this.ui.back, 'click', this.back);
+    }
 
     updateNavigation(elem = this.el) {
         const hasActiveSubmenu = elem.querySelector('.js-active-submenu')
@@ -140,7 +134,7 @@ class MenuMobile extends Component {
         this.isOpen = true;
         this.master.clear();
         this.master.to(this.tl, { progress: 1, duration: this.tl.duration() });
-        // disableBodyScroll(this.ui.main, { allowTouchMove });
+        disableBodyScroll(this.ui.main, { allowTouchMove });
         window.getCustomScrollbar.stop()
         document.body.style.overflow = 'hidden';
     }
@@ -149,7 +143,7 @@ class MenuMobile extends Component {
         qs(this.opt.headerElement).classList.remove('lb-header--hide')
         qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
         this.isOpen = false;
-        // enableBodyScroll(this.ui.main);
+        enableBodyScroll(this.ui.main);
         window.getCustomScrollbar.start()
         document.body.style.overflow = 'auto';
         this.master.to(this.tl, {
