@@ -184,8 +184,8 @@ class CustomInput extends BasicElement {
                 }
 
                 // Custom method to update state
-                this.cs[i].updateState = (state) => {
-                    this.updateState(state)
+                this.cs[i].updateState = (state, loading = false) => {
+                    this.updateState(state, loading)
                 }
 
                 // Events on <input> focus
@@ -203,13 +203,19 @@ class CustomInput extends BasicElement {
      * 
      * @param {String} state 'disable' or 'active'
      */
-    updateState = (state) => {
+    updateState = (state, loading) => {
         if (state === 'disable') {
             this.currInputElem.disabled = true
             this.mainContainer.classList.add('custom-input--disabled')
+            if (loading) {
+                this.toggleLoader(true)
+            }
         } else if (state === 'active') {
             this.currInputElem.disabled = false
             this.mainContainer.classList.remove('custom-input--disabled')
+            if (loading) {
+                this.toggleLoader(false)
+            }
         }
     }
 
@@ -302,6 +308,19 @@ class CustomInput extends BasicElement {
             this.currInputElem.type = 'password'
             iconSVG.setAttribute('aria-label', 'eye-on')
             iconXLink.setAttribute('xlink:href', '#eye-on')
+        }
+    }
+
+
+
+    /**
+     * Show hide loader
+     */
+    toggleLoader = (show) => {
+        if (show) {
+            this.loader = this.createDOMElement('DIV', ['custom-input__loader'], null, `<span class="lb-loader-spinner"></span>`, {pos: 'beforeend', elem: this.mainContainer})
+        } else {
+            this.loader.remove()
         }
     }
 }

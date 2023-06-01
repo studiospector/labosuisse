@@ -16,10 +16,16 @@ class SearchAutocomplete extends Component {
 
         this.lang = document.documentElement.lang
 
+        this.isLoaded = false
+
         this.labelResLess = this.el.dataset.labelResLess
         this.labelResMore = this.el.dataset.labelResMore
 
-        this.init()
+        on(this.ui.input, 'focus', () => {
+            if (!this.isLoaded) {
+                this.init()
+            }
+        })
 
         on(this.el, 'submit', (ev) => {
             if (this.ui.input.value.length <= 2) {
@@ -32,9 +38,7 @@ class SearchAutocomplete extends Component {
 
     init = () => {
         const autoCompleteJS = new autoComplete({
-            selector: () => {
-                return this.ui.input
-            },
+            selector: () => this.ui.input,
             submit: true,
             wrapper: false,
             data: {
@@ -42,11 +46,15 @@ class SearchAutocomplete extends Component {
                 cache: true,
                 src: async () => {
                     try {
-                        this.ui.input.updateState('disable')
+                        this.ui.input.updateState('disable', true)
 
                         const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/global-search/autocomplete`)
 
-                        this.ui.input.updateState('active')
+                        this.ui.input.updateState('active', true)
+
+                        this.isLoaded = true
+
+                        this.ui.input.focus()
                         
                         return data
                     } catch (error) {
