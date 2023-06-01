@@ -136,6 +136,19 @@
         cursor: not-allowed;
     }
 
+    &__loader {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        right: 50px;
+        
+        .lb-loader-spinner {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+    }
+
     &--secondary {
         input {
             background-color: transparent;

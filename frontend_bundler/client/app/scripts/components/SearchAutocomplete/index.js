@@ -46,11 +46,11 @@ class SearchAutocomplete extends Component {
                 cache: true,
                 src: async () => {
                     try {
-                        this.ui.input.updateState('disable')
+                        this.ui.input.updateState('disable', true)
 
                         const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/global-search/autocomplete`)
 
-                        this.ui.input.updateState('active')
+                        this.ui.input.updateState('active', true)
 
                         this.isLoaded = true
 
