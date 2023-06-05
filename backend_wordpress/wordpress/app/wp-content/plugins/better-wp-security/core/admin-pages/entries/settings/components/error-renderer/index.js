@@ -33,11 +33,11 @@ export default function ErrorRenderer( { error } ) {
 			<CardFooter isShady>
 				{ __( 'An unexpected error occurred.', 'better-wp-security' ) }
 				<FlexSpacer />
-				<Button isSecondary onClick={ () => window.location.reload() }>
+				<Button variant="secondary" onClick={ () => window.location.reload() }>
 					{ __( 'Refresh', 'better-wp-security' ) }
 				</Button>
 				<ClipboardButton
-					isPrimary
+					variant="primary"
 					text={ `Page: ${ pathname }\nError: ${ error.stack }` }
 				>
 					{ __( 'Copy Error', 'better-wp-security' ) }

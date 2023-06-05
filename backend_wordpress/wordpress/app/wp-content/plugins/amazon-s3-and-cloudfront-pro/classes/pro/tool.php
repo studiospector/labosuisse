@@ -184,6 +184,24 @@ abstract class Tool {
 	}
 
 	/**
+	 * Is queued?
+	 *
+	 * @return bool
+	 */
+	public function is_queued(): bool {
+		return false;
+	}
+
+	/**
+	 * Is the tool currently active, e.g. starting, working, paused or finishing up?
+	 *
+	 * @return bool
+	 */
+	public function is_active(): bool {
+		return false;
+	}
+
+	/**
 	 * Get the errors created by the tool
 	 *
 	 * @param array $default

@@ -107,8 +107,17 @@ class Woocommerce_Product_Urls extends Background_Tool {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
+	public function get_queued_status(): string {
 		return __( 'Verify and update WooCommerce downloadable files', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Repairing…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

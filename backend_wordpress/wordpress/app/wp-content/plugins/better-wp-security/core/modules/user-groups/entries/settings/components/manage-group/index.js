@@ -154,7 +154,7 @@ export default function ManageGroup( { groupId, showSave } ) {
 					<FlexSpacer />
 					<FlexItem>
 						<Button
-							isSecondary
+							variant="secondary"
 							onClick={ onReset }
 							disabled={ ! isDirty }
 						>
@@ -163,7 +163,7 @@ export default function ManageGroup( { groupId, showSave } ) {
 					</FlexItem>
 					<FlexItem>
 						<Button
-							isPrimary
+							variant="primary"
 							onClick={ onSave }
 							isBusy={ isSaving }
 							disabled={ isSaving || ! isDirty }
@@ -198,7 +198,7 @@ function ManageGroupRoute( { groupId, base, tabs, highlight, moduleFilter } ) {
 						component={ withNavigate( Button ) }
 						icon="arrow-left"
 						text={ __( 'All Features', 'better-wp-security' ) }
-						isLink
+						variant="link"
 					/>
 				</CardHeader>
 				<TabSettings

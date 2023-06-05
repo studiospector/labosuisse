@@ -62,7 +62,7 @@ function EnableModal() {
 					<a href="https://www.liquidweb.com/about-us/policies/privacy-policy/">
 						{ __( 'Privacy Policy', 'better-wp-security' ) }
 					</a>
-					<Button isBusy={ isBusy } onClick={ onContinue } isPrimary>
+					<Button isBusy={ isBusy } onClick={ onContinue } variant="primary">
 						{ __( 'Continue', 'better-wp-security' ) }
 					</Button>
 				</footer>

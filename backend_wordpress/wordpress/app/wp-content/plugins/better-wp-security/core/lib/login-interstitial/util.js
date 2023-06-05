@@ -42,6 +42,7 @@
 		this.vars = {};
 		this.intervalId = null;
 		this.currentState = [];
+		this.isSubmitting = false;
 	}
 
 	/**
@@ -94,6 +95,11 @@
 	};
 
 	ITSECLoginInterstitial.prototype.submitToProceed = function( additionalFields = {} ) {
+		if ( this.isSubmitting ) {
+			return;
+		}
+
+		this.isSubmitting = true;
 
 		var $form = $( '<form />' )
 			.prop( 'method', 'post' )

@@ -874,16 +874,24 @@ final class ITSEC_Lockout {
 			$message = apply_filters( "itsec_{$slug}_lockout_message", $message, $context );
 		}
 
-		wp_clear_auth_cookie();
-
 		$current_user = wp_get_current_user();
 
-		if ( $current_user instanceof WP_User && $current_user->exists() ) {
-			wp_logout();
-		}
+		if ( headers_sent() ) {
+			wp_destroy_current_session();
+			wp_set_current_user( 0 );
 
-		@header( 'HTTP/1.0 403 Forbidden' );
-		ITSEC_Lib::no_cache();
+			if ( $current_user instanceof WP_User && $current_user->exists() ) {
+				do_action( 'wp_logout', $current_user->ID );
+			}
+		} else {
+			if ( $current_user instanceof WP_User && $current_user->exists() ) {
+				wp_logout();
+			}
+
+			wp_clear_auth_cookie();
+			status_header( 403 );
+			ITSEC_Lib::no_cache();
+		}
 
 		if ( ITSEC_Lib::is_wp_version_at_least( '5.7' ) ) {
 			add_filter( 'wp_robots', 'wp_robots_sensitive_page' );

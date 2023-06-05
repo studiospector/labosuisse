@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace WooCommerce\PayPalCommerce\Compat;
 
-use Psr\Container\ContainerInterface;
+use WooCommerce\PayPalCommerce\Vendor\Psr\Container\ContainerInterface;
 use WooCommerce\PayPalCommerce\Compat\Assets\CompatAssets;
 use WooCommerce\PayPalCommerce\WcGateway\Settings\Settings;
 
@@ -54,15 +54,6 @@ return array(
 
 	'compat.gzd.is_supported_plugin_version_active' => function (): bool {
 		return function_exists( 'wc_gzd_get_shipments_by_order' ); // 3.0+
-	},
-
-	'compat.gzd.tracking_statuses_map'              => function ( ContainerInterface $container ): array {
-		return array(
-			'draft'      => 'ON_HOLD',
-			'processing' => 'SHIPPED',
-			'shipped'    => 'SHIPPED',
-			'delivered'  => 'DELIVERED',
-		);
 	},
 
 	'compat.module.url'                             => static function ( ContainerInterface $container ): string {

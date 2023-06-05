@@ -1,95 +1,144 @@
-document.addEventListener('DOMContentLoaded', function () {
-  [].forEach.call(document.querySelectorAll('.mc4wp-form.autocomplete input[type="email"]'), (e)=>{
-    mc4wpAutocomplete(e, mc4wp_autocomplete_vars.domains);
-  });
-}, false);
+/**
+ * @type {string[]}
+ */
+const suggestions = window.mc4wp_autocomplete_vars.domains;
 
-function mc4wpAutocomplete(inputEl, suggestions) {
-  var mc4wpCurrentFocus;
-  inputEl.addEventListener("input", function(evt) {
-    const atPos = this.value.indexOf('@')
-    if(atPos <= 0) {
+/**
+ * Set up a new Autocompleter instance
+ *
+ * @param {HTMLInputElement} inputEl
+ * @constructor
+ */
+function Autocompleter(inputEl) {
+  this.input = inputEl;
+  this.focus = -1;
+  this.autocompleteEl = null;
+  inputEl.addEventListener('input', this.onInput.bind(this));
+  inputEl.addEventListener('keydown', this.onKeyDown.bind(this));
+
+  // clicking anywhere closes the suggestions box
+  // this click could be on a suggestion, in
+  document.addEventListener('click', this.close.bind(this));
+}
+
+/**
+ * Removes the list of autocomplete suggestions from the DOM
+ */
+Autocompleter.prototype.close = function () {
+  if (!this.autocompleteEl) return;
+  this.autocompleteEl.parentNode.removeChild(this.autocompleteEl);
+  this.autocompleteEl = null;
+};
+
+/**
+ * Handler for `input.input` events
+ * Creates a new list of suggestions and adds it to the DOM.
+ */
+Autocompleter.prototype.onInput = function () {
+  const { input } = this;
+  const { value } = input;
+  const atPos = value.indexOf('@');
+  if (atPos <= 0) {
+    return;
+  }
+
+  const emailPart = value.substring(0, atPos);
+  const domainPrefix = value.substring(atPos + 1);
+  if (!domainPrefix) {
+    return;
+  }
+
+  // remove previous list of suggestions
+  this.close();
+
+  // create HTML for new list of suggestions
+  const clickEventHandler = this.onSuggestionClick.bind(this);
+  const autocompleteList = document.createElement('div');
+  autocompleteList.setAttribute('class', 'mc4wp-autocomplete-items');
+  autocompleteList.style.width = `${input.offsetWidth}px`;
+  autocompleteList.style.left = `${input.offsetLeft}px`;
+  suggestions.forEach((suggestion) => {
+    // only add suggestion to list if prefix matches
+    if (suggestion.substring(0, domainPrefix.length).toUpperCase() !== domainPrefix.toUpperCase()) {
       return;
     }
 
-    const emailPart = this.value.substring(0, atPos).replaceAll(/<.*>/g, '');
-    const domainPrefix = this.value.substring(atPos + 1);
-    mc4wpCloseAllLists();
-    if (!domainPrefix) { return false;}
-    mc4wpCurrentFocus = -1;
-    let autocompleteList = document.createElement("div");
-    autocompleteList.setAttribute("id", this.id + "mc4wp-autocomplete-list");
-    autocompleteList.setAttribute("class", "mc4wp-autocomplete-items");
-    autocompleteList.style.width = inputEl.offsetWidth + "px";
-    autocompleteList.style.left = inputEl.offsetLeft + "px";
-    let autocompleteListHtml = "";
-    suggestions.forEach(suggestion => {
-      // only add suggestion to list if prefix matches
-      if (suggestion.substr(0, domainPrefix.length).toUpperCase() !== domainPrefix.toUpperCase()) {
+    const el = document.createElement('div');
+    el.setAttribute('data-value', `${emailPart}@${suggestion}`);
+    el.appendChild(document.createTextNode(`${emailPart}@`));
+    const matchedDomainEl = document.createElement('strong');
+    matchedDomainEl.textContent = suggestion.substring(0, domainPrefix.length);
+    el.appendChild(matchedDomainEl);
+    el.appendChild(document.createTextNode(suggestion.substring(domainPrefix.length)));
+    el.addEventListener('click', clickEventHandler);
+    autocompleteList.appendChild(el);
+  });
+
+  // set HTML for list of suggestions & add to DOM
+  this.input.parentNode.appendChild(autocompleteList);
+  this.focus = -1;
+  this.autocompleteEl = autocompleteList;
+};
+
+/**
+ * @param {MouseEvent} evt
+ */
+Autocompleter.prototype.onSuggestionClick = function (evt) {
+  this.input.value = evt.target.getAttribute('data-value');
+};
+
+/**
+ * Handler for `input.keydown` events
+ *
+ * @param {KeyboardEvent} evt
+ */
+Autocompleter.prototype.onKeyDown = function (evt) {
+  if (!this.autocompleteEl) {
+    return;
+  }
+  switch (evt.code) {
+    case 'ArrowDown': {
+      this.focus++;
+      evt.preventDefault();
+      break;
+    }
+    case 'ArrowUp': {
+      this.focus--;
+      evt.preventDefault();
+      break;
+    }
+    case 'Tab':
+    case 'Escape':
+      // Close the list of suggestions when ESCAPE or TAB key was pressed in this input's context
+      this.close();
+      return;
+    case 'Enter': {
+      // if RETURN was pressed and a suggestion has focus
+      // simulate a click event on it to copy it to the input field
+      if (this.focus > -1) {
+        evt.preventDefault();
+        this.autocompleteEl.children[this.focus].click();
         return;
       }
-
-      autocompleteListHtml+= "<div>";
-      autocompleteListHtml+=  emailPart + "@" + "<strong>" + suggestion.substr(0, domainPrefix.length) + "</strong>";
-      autocompleteListHtml+=  suggestion.substr(domainPrefix.length);
-      autocompleteListHtml+=  "<input type='hidden' value='" + emailPart + "@" + suggestion + "'>";
-      autocompleteListHtml+= "</div>";
-    })
-
-    // set HTML for list of suggestions & add to DOM
-    autocompleteList.innerHTML = autocompleteListHtml;
-    this.parentNode.appendChild(autocompleteList);
-
-    document.querySelectorAll('.mc4wp-form #mc4wp-autocomplete-list div').forEach((item, index) => {
-      item.addEventListener("click", function(e) {
-        inputEl.value = item.getElementsByTagName("input")[0].value;
-        mc4wpCloseAllLists();
-      })
-    });
-  });
-  inputEl.addEventListener("keydown", function(evt) {
-    var autocompleteList = document.getElementById(this.id + "mc4wp-autocomplete-list");
-    if (autocompleteList) autocompleteList = autocompleteList.getElementsByTagName("div");
-    switch (evt.code) {
-      case 'ArrowDown': {
-        mc4wpCurrentFocus++;
-        mc4wpAddActive(autocompleteList);
-        break;
-      }
-      case 'ArrowUp': {
-        mc4wpCurrentFocus--;
-        mc4wpAddActive(autocompleteList);
-        break;
-      }
-      case 'Enter': {
-        evt.preventDefault();
-        if (mc4wpCurrentFocus > -1) {
-          if (autocompleteList) autocompleteList[mc4wpCurrentFocus].click();
-        }
-        break;
-      }
+      break;
     }
-  });
+    default: break;
+  }
 
-  function mc4wpAddActive(autocompleteList) {
-    if (!autocompleteList) return false;
-    mc4wpRemoveActive(autocompleteList);
-    if (mc4wpCurrentFocus >= autocompleteList.length) mc4wpCurrentFocus = 0;
-    if (mc4wpCurrentFocus < 0) mc4wpCurrentFocus = (autocompleteList.length - 1);
-    autocompleteList[mc4wpCurrentFocus].classList.add("mc4wp-autocomplete-active");
+  this.focus = Math.max(0, this.focus);
+  this.focus = Math.min(this.autocompleteEl.children.length - 1, this.focus);
+  this.addClassToFocused();
+};
+
+/**
+ * Adds an HTML class attribute to the focused suggestion
+ */
+Autocompleter.prototype.addClassToFocused = function () {
+  for (let i = 0; i < this.autocompleteEl.children.length; i++) {
+    this.autocompleteEl.children[i].classList.toggle('mc4wp-autocomplete-active', i === this.focus);
   }
-  function mc4wpRemoveActive(autocompleteList) {
-    for (var i = 0; i < autocompleteList.length; i++) {
-      autocompleteList[i].classList.remove("mc4wp-autocomplete-active");
-    }
-  }
-  function mc4wpCloseAllLists(elmnt) {
-    var autocompleteList = document.getElementsByClassName("mc4wp-autocomplete-items");
-    for (var i = 0; i < autocompleteList.length; i++) {
-      if (elmnt != autocompleteList[i]) {
-        autocompleteList[i].parentNode.removeChild(autocompleteList[i]);
-      }
-    }
-  }
-  document.addEventListener("click", evt => mc4wpCloseAllLists(evt.target));
-}
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  [].forEach.call(document.querySelectorAll('.mc4wp-form.autocomplete input[type="email"]'), (el) => new Autocompleter(el));
+});

@@ -159,21 +159,28 @@ class Base
         }
         foreach ($ruleConditionsTypes as $key => $options){
             if(!empty($options) && is_array($options)) {
-                if ($key === "Cart") {
-                    $default_first = $options['cart_subtotal'];
-                    $default_second = $options['cart_items_quantity'];
-                    $default_thired = $options['cart_coupon'];
-                    $default_last = $options['cart_line_items_count'];
-                    unset($options['cart_subtotal'], $options['cart_items_quantity'], $options['cart_coupon'], $options['cart_line_items_count']);
-                    $options = array(
-                                'cart_subtotal' => $default_first,
-                                'cart_items_quantity' => $default_second,
-                                'cart_coupon' => $default_thired,
-                                )+$options+array('cart_line_items_count' => $default_last);
-                    $cart_item_condition[$key] = $options;
-                } elseif ($key === "Billing"){
+                if ($key == "Cart" || $key == __("Cart", 'woo-discount-rules') || $key == __("Cart", 'woo-discount-rules-pro')) {
+                    $sortedOptions = $lastOption = [];
+                    if (isset($options['cart_subtotal'])) {
+                        $sortedOptions['cart_subtotal'] = $options['cart_subtotal'];
+                        unset($options['cart_subtotal']);
+                    }
+                    if (isset($options['cart_items_quantity'])) {
+                        $sortedOptions['cart_items_quantity'] = $options['cart_items_quantity'];
+                        unset($options['cart_items_quantity']);
+                    }
+                    if (isset($options['cart_coupon'])) {
+                        $sortedOptions['cart_coupon'] = $options['cart_coupon'];
+                        unset($options['cart_coupon']);
+                    }
+                    if (isset($options['cart_line_items_count'])) {
+                        $lastOption['cart_line_items_count'] = $options['cart_line_items_count'];
+                        unset($options['cart_line_items_count']);
+                    }
+                    $cart_item_condition[$key] = $sortedOptions + $options + $lastOption;
+                } elseif ($key == "Billing" || $key == __("Billing", 'woo-discount-rules') || $key == __("Billing", 'woo-discount-rules-pro')) {
                     $billing[$key] = $options;
-                } elseif ($key === "Customer"){
+                } elseif ($key == "Customer" || $key == __("Customer", 'woo-discount-rules') || $key == __("Customer", 'woo-discount-rules-pro')) {
                     $customer[$key] = $options;
                 } else {
                     $sortedConditionsTypes[$key] = $options;

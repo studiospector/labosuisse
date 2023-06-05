@@ -1,9 +1,11 @@
 <script>
 	import {strings, urls} from "../js/stores";
 	import {assetsSettings, assetsDefinedSettings} from "./stores";
+	import AssetsSettingsHeaderRow from "./AssetsSettingsHeaderRow.svelte";
 	import Panel from "../components/Panel.svelte";
 	import SettingsPanelOption from "../components/SettingsPanelOption.svelte";
-	import AssetsCheckDomain from "./AssetsCheckDomain.svelte";
+	import SettingsValidationStatusRow
+		from "../components/SettingsValidationStatusRow.svelte";
 
 	/**
 	 * Potentially returns a reason that the provided domain name is invalid.
@@ -31,7 +33,9 @@
 	}
 </script>
 
-<Panel name="settings" class="assets-panel">
+<Panel name="settings" class="assets-panel" heading={$strings.assets_title} helpKey="assets-pull">
+	<AssetsSettingsHeaderRow/>
+	<SettingsValidationStatusRow section="assets"/>
 	<SettingsPanelOption
 		heading={$strings.assets_rewrite_urls}
 		description={$strings.assets_rewrite_urls_desc}
@@ -40,18 +44,14 @@
 		bind:toggle={$assetsSettings["rewrite-urls"]}
 		textName="domain"
 		bind:text={$assetsSettings["domain"]}
-		alwaysShowText={true}
 		definedSettings={assetsDefinedSettings}
 		{validator}
 	>
-		<AssetsCheckDomain domain={$assetsSettings["domain"]}/>
 	</SettingsPanelOption>
-</Panel>
 
-<Panel name="settings" class="assets-panel">
 	<SettingsPanelOption
-		heading={$strings.force_https}
-		description={$strings.force_https_desc}
+		heading={$strings.assets_force_https}
+		description={$strings.assets_force_https_desc}
 		toggleName="force-https"
 		bind:toggle={$assetsSettings["force-https"]}
 		definedSettings={assetsDefinedSettings}

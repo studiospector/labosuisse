@@ -418,6 +418,7 @@ abstract class Delicious_Brains_API_Licences extends Delicious_Brains_API_Base {
 		delete_site_transient( $this->plugin->prefix . '_upgrade_data' );
 		delete_site_transient( $this->plugin->prefix . '_licence_response' );
 		delete_site_transient( $this->plugin->prefix . '_addons_available' );
+		delete_site_transient( $this->plugin->prefix . '_licence_media_check' );
 
 		do_action( $this->plugin->prefix . '_http_remove_licence' );
 	}

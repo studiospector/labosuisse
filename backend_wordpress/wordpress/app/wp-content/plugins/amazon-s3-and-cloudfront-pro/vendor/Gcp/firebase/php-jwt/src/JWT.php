@@ -3,15 +3,14 @@
 namespace DeliciousBrains\WP_Offload_Media\Gcp\Firebase\JWT;
 
 use ArrayAccess;
+use DateTime;
 use DomainException;
 use Exception;
 use InvalidArgumentException;
 use OpenSSLAsymmetricKey;
 use OpenSSLCertificate;
-use TypeError;
-use UnexpectedValueException;
-use DateTime;
 use stdClass;
+use UnexpectedValueException;
 /**
  * JSON Web Token implementation, based on this spec:
  * https://tools.ietf.org/html/rfc7519
@@ -49,12 +48,12 @@ class JWT
     /**
      * @var array<string, string[]>
      */
-    public static $supported_algs = ['ES384' => ['openssl', 'SHA384'], 'ES256' => ['openssl', 'SHA256'], 'HS256' => ['hash_hmac', 'SHA256'], 'HS384' => ['hash_hmac', 'SHA384'], 'HS512' => ['hash_hmac', 'SHA512'], 'RS256' => ['openssl', 'SHA256'], 'RS384' => ['openssl', 'SHA384'], 'RS512' => ['openssl', 'SHA512'], 'EdDSA' => ['sodium_crypto', 'EdDSA']];
+    public static $supported_algs = ['ES384' => ['openssl', 'SHA384'], 'ES256' => ['openssl', 'SHA256'], 'ES256K' => ['openssl', 'SHA256'], 'HS256' => ['hash_hmac', 'SHA256'], 'HS384' => ['hash_hmac', 'SHA384'], 'HS512' => ['hash_hmac', 'SHA512'], 'RS256' => ['openssl', 'SHA256'], 'RS384' => ['openssl', 'SHA384'], 'RS512' => ['openssl', 'SHA512'], 'EdDSA' => ['sodium_crypto', 'EdDSA']];
     /**
      * Decodes a JWT string into a PHP object.
      *
      * @param string                 $jwt            The JWT
-     * @param Key|array<string, Key> $keyOrKeyArray  The Key or associative array of key IDs (kid) to Key objects.
+     * @param Key|array<string,Key> $keyOrKeyArray  The Key or associative array of key IDs (kid) to Key objects.
      *                                               If the algorithm used is asymmetric, this is the public key
      *                                               Each Key object contains an algorithm and matching key.
      *                                               Supported algorithms are 'ES384','ES256', 'HS256', 'HS384',
@@ -62,7 +61,7 @@ class JWT
      *
      * @return stdClass The JWT's payload as a PHP object
      *
-     * @throws InvalidArgumentException     Provided key/key-array was empty
+     * @throws InvalidArgumentException     Provided key/key-array was empty or malformed
      * @throws DomainException              Provided JWT is malformed
      * @throws UnexpectedValueException     Provided JWT was invalid
      * @throws SignatureInvalidException    Provided JWT was invalid because the signature verification failed
@@ -81,7 +80,7 @@ class JWT
             throw new InvalidArgumentException('Key may not be empty');
         }
         $tks = \explode('.', $jwt);
-        if (\count($tks) != 3) {
+        if (\count($tks) !== 3) {
             throw new UnexpectedValueException('Wrong number of segments');
         }
         list($headb64, $bodyb64, $cryptob64) = $tks;
@@ -113,8 +112,8 @@ class JWT
             // See issue #351
             throw new UnexpectedValueException('Incorrect key for this algorithm');
         }
-        if ($header->alg === 'ES256' || $header->alg === 'ES384') {
-            // OpenSSL expects an ASN.1 DER sequence for ES256/ES384 signatures
+        if (\in_array($header->alg, ['ES256', 'ES256K', 'ES384'], \true)) {
+            // OpenSSL expects an ASN.1 DER sequence for ES256/ES256K/ES384 signatures
             $sig = self::signatureToDER($sig);
         }
         if (!self::verify("{$headb64}.{$bodyb64}", $sig, $key->getKeyMaterial(), $header->alg)) {
@@ -138,12 +137,12 @@ class JWT
         return $payload;
     }
     /**
-     * Converts and signs a PHP object or array into a JWT string.
+     * Converts and signs a PHP array into a JWT string.
      *
      * @param array<mixed>          $payload PHP array
      * @param string|resource|OpenSSLAsymmetricKey|OpenSSLCertificate $key The secret key.
-     * @param string                $alg     Supported algorithms are 'ES384','ES256', 'HS256', 'HS384',
-     *                                       'HS512', 'RS256', 'RS384', and 'RS512'
+     * @param string                $alg     Supported algorithms are 'ES384','ES256', 'ES256K', 'HS256',
+     *                                       'HS384', 'HS512', 'RS256', 'RS384', and 'RS512'
      * @param string                $keyId
      * @param array<string, string> $head    An array with header elements to attach
      *
@@ -174,8 +173,8 @@ class JWT
      *
      * @param string $msg  The message to sign
      * @param string|resource|OpenSSLAsymmetricKey|OpenSSLCertificate  $key  The secret key.
-     * @param string $alg  Supported algorithms are 'ES384','ES256', 'HS256', 'HS384',
-     *                    'HS512', 'RS256', 'RS384', and 'RS512'
+     * @param string $alg  Supported algorithms are 'ES384','ES256', 'ES256K', 'HS256',
+     *                    'HS384', 'HS512', 'RS256', 'RS384', and 'RS512'
      *
      * @return string An encrypted message
      *
@@ -198,9 +197,9 @@ class JWT
                 $success = \openssl_sign($msg, $signature, $key, $algorithm);
                 // @phpstan-ignore-line
                 if (!$success) {
-                    throw new DomainException("OpenSSL unable to sign data");
+                    throw new DomainException('OpenSSL unable to sign data');
                 }
-                if ($alg === 'ES256') {
+                if ($alg === 'ES256' || $alg === 'ES256K') {
                     $signature = self::signatureFromDER($signature, 256);
                 } elseif ($alg === 'ES384') {
                     $signature = self::signatureFromDER($signature, 384);
@@ -217,6 +216,9 @@ class JWT
                     // The last non-empty line is used as the key.
                     $lines = \array_filter(\explode("\n", $key));
                     $key = \base64_decode((string) \end($lines));
+                    if (\strlen($key) === 0) {
+                        throw new DomainException('Key cannot be empty string');
+                    }
                     return \sodium_crypto_sign_detached($msg, $key);
                 } catch (Exception $e) {
                     throw new DomainException($e->getMessage(), 0, $e);
@@ -249,7 +251,8 @@ class JWT
                 // @phpstan-ignore-line
                 if ($success === 1) {
                     return \true;
-                } elseif ($success === 0) {
+                }
+                if ($success === 0) {
                     return \false;
                 }
                 // returns 1 on success, 0 on failure, -1 on error.
@@ -265,6 +268,12 @@ class JWT
                     // The last non-empty line is used as the key.
                     $lines = \array_filter(\explode("\n", $keyMaterial));
                     $key = \base64_decode((string) \end($lines));
+                    if (\strlen($key) === 0) {
+                        throw new DomainException('Key cannot be empty string');
+                    }
+                    if (\strlen($signature) === 0) {
+                        throw new DomainException('Signature cannot be empty string');
+                    }
                     return \sodium_crypto_sign_verify_detached($signature, $msg, $key);
                 } catch (Exception $e) {
                     throw new DomainException($e->getMessage(), 0, $e);
@@ -356,7 +365,7 @@ class JWT
     /**
      * Determine if an algorithm has been provided for each Key
      *
-     * @param Key|array<string, Key> $keyOrKeyArray
+     * @param Key|ArrayAccess<string,Key>|array<string,Key> $keyOrKeyArray
      * @param string|null            $kid
      *
      * @throws UnexpectedValueException
@@ -368,13 +377,12 @@ class JWT
         if ($keyOrKeyArray instanceof Key) {
             return $keyOrKeyArray;
         }
-        foreach ($keyOrKeyArray as $keyId => $key) {
-            if (!$key instanceof Key) {
-                throw new TypeError('$keyOrKeyArray must be an instance of Firebase\\JWT\\Key key or an ' . 'array of Firebase\\JWT\\Key keys');
-            }
-        }
-        if (!isset($kid)) {
+        if (empty($kid)) {
             throw new UnexpectedValueException('"kid" empty, unable to lookup correct key');
+        }
+        if ($keyOrKeyArray instanceof CachedKeySet) {
+            // Skip "isset" check, as this will automatically refresh if not set
+            return $keyOrKeyArray[$kid];
         }
         if (!isset($keyOrKeyArray[$kid])) {
             throw new UnexpectedValueException('"kid" invalid, unable to lookup correct key');
@@ -437,7 +445,7 @@ class JWT
     {
         // Separate the signature into r-value and s-value
         $length = \max(1, (int) (\strlen($sig) / 2));
-        list($r, $s) = \str_split($sig, $length > 0 ? $length : 1);
+        list($r, $s) = \str_split($sig, $length);
         // Trim leading zeros
         $r = \ltrim($r, "\x00");
         $s = \ltrim($s, "\x00");
@@ -519,7 +527,7 @@ class JWT
             }
         }
         // Value
-        if ($type == self::ASN1_BIT_STRING) {
+        if ($type === self::ASN1_BIT_STRING) {
             $pos++;
             // Skip the first contents octet (padding indicator)
             $data = \substr($der, $pos, $len - 1);

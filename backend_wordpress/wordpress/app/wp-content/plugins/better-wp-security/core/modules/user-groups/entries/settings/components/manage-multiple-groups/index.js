@@ -57,7 +57,7 @@ export default function ManageMultipleGroups( { groupIds, showSave = true } ) {
 					<FlexSpacer />
 					<FlexItem>
 						<Button
-							isSecondary
+							variant="secondary"
 							onClick={ onReset }
 							disabled={ ! isDirty }
 						>
@@ -66,7 +66,7 @@ export default function ManageMultipleGroups( { groupIds, showSave = true } ) {
 					</FlexItem>
 					<FlexItem>
 						<Button
-							isPrimary
+							variant="primary"
 							onClick={ onSave }
 							isBusy={ isSaving }
 							disabled={ isSaving || ! isDirty }

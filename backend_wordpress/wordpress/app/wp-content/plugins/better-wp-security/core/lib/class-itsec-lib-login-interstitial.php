@@ -245,7 +245,7 @@ class ITSEC_Lib_Login_Interstitial {
 	 * @internal
 	 */
 	public function enqueue() {
-		wp_register_script( 'itsec-login-interstitial-util', plugin_dir_url( __FILE__ ) . 'login-interstitial/util.js', array( 'jquery', 'wp-util' ), 2 );
+		wp_register_script( 'itsec-login-interstitial-util', plugin_dir_url( __FILE__ ) . 'login-interstitial/util.js', array( 'jquery', 'wp-util' ), 3 );
 		wp_add_inline_script(
 			'itsec-login-interstitial-util',
 			'(function() { window.itsecLoginInterstitial = new ITSECLoginInterstitial(); window.itsecLoginInterstitial.init() })();'
@@ -261,13 +261,17 @@ class ITSEC_Lib_Login_Interstitial {
 	 * @param WP_User $user
 	 */
 	public function wp_login( $username, $user = null ) {
-		$user = $user ? $user : wp_get_current_user();
+		$user = $user ?: wp_get_current_user();
 
 		if ( ! $user || ! $user->exists() ) {
 			return;
 		}
 
-		foreach ( $this->get_applicable_interstitials( $user ) as $action => $opts ) {
+		foreach ( $this->get_applicable_interstitials( $user ) as $action => $interstitial ) {
+			if ( $interstitial->show_on_wp_login_only( $user ) && isset( $_REQUEST['interim-login'] ) ) {
+				continue;
+			}
+
 			$session = ITSEC_Login_Interstitial_Session::create( $user, $action );
 
 			if ( is_wp_error( $session ) ) {
@@ -942,12 +946,24 @@ class ITSEC_Lib_Login_Interstitial {
 	private function get_next_interstitial( ITSEC_Login_Interstitial_Session $session ) {
 
 		foreach ( $this->get_applicable_interstitials( $session->get_user() ) as $action => $interstitial ) {
+			if ( $interstitial->show_on_wp_login_only( $session->get_user() ) && $session->is_interim_login() ) {
+				continue;
+			}
+
 			if ( ! $session->is_interstitial_completed( $action ) ) {
 				return $action;
 			}
 		}
 
 		foreach ( $session->get_show_after() as $action ) {
+			if (
+				$session->is_interim_login() &&
+				isset( $this->registered[ $action ] ) &&
+				$this->registered[ $action ]->show_on_wp_login_only( $session->get_user() )
+			) {
+				continue;
+			}
+
 			if ( ! $session->is_interstitial_completed( $action ) ) {
 				return $action;
 			}

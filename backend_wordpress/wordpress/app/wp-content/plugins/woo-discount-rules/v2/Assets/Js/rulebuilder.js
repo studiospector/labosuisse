@@ -95,6 +95,36 @@ var wdr_buildrule;
         },
 
         /**
+         * change the discount range Bulk discount, Bundle set discount, Buy x get x && Buy x get y.
+         */
+        re_index_ranges : function (){
+            let i = 1;
+            let all_discount_range = $('#bulk_adjustment_sortable > .wdr-discount-group')
+            all_discount_range.each(function (range_index, value){
+                let row_index = $(this).attr('data-index');
+                let input_data = $(this).find('input');
+                let select_data = $(this).find('select');
+                if (select_data){
+                    select_data.each(function (index, value){
+                        let option = $(this).attr('name');
+                        if (typeof option !== 'undefined' && option !== false) {
+                            $(this).attr('name', option.replace('['+row_index+']', '['+ (range_index + 1) +']'));
+                        }
+                    })
+                }
+                if (input_data) {
+                    input_data.each(function (index, value) {
+                        let input = $(this).attr('name');
+                        if (typeof input !== 'undefined' && input !== false) {
+                            $(this).attr('name', input.replace('[' + row_index + ']', '[' + (range_index + 1) + ']'));
+                        }
+                    })
+                }
+                $(this).attr('data-index', i++);
+            })
+        },
+
+        /**
          * @summary Handles show & hide rule groups.
          *
          * show tab group if click button.

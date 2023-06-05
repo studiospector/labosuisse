@@ -26,6 +26,18 @@ final class ITSEC_Security_Check_Pro_Utility {
 			return;
 		}
 
+		if ( isset( $_POST['pid'] ) && is_array( $_POST['pid'] ) ) {
+			ITSEC_Log::add_process_update( $_POST['pid'], [
+				'post'   => $_POST,
+				'server' => ITSEC_Lib::get_server_snapshot(),
+			] );
+		} else {
+			ITSEC_Log::add_debug( 'security-check-pro', 'scan-request', [
+				'post'   => $_POST,
+				'server' => ITSEC_Lib::get_server_snapshot(),
+			] );
+		}
+
 		$ip_header = [
 			'name'              => '',
 			'position_from_end' => - 1,
@@ -59,6 +71,13 @@ final class ITSEC_Security_Check_Pro_Utility {
 
 		ITSEC_Modules::set_settings( 'security-check-pro', $settings );
 		ITSEC_Storage::save();
+
+		if ( isset( $_POST['pid'] ) && is_array( $_POST['pid'] ) ) {
+			ITSEC_Log::add_process_update( $_POST['pid'], [
+				'ssl_supported' => $ssl_supported,
+				'ip_header'     => $ip_header,
+			] );
+		}
 
 		header( 'Content-Type: text/plain' );
 		echo "<response>{$_POST['expect']}:" . ( empty( $ip_header['name'] ) ? 'false' : 'true' ) . ':' . ( $ssl_supported ? 'true' : 'false' ) . '</response>';
@@ -125,27 +144,28 @@ final class ITSEC_Security_Check_Pro_Utility {
 			return false;
 		}
 
-		if ( $_SERVER[ $var ] === $ip ) {
+		$header = trim( $_SERVER[ $var ] );
+
+		if ( $header === $ip ) {
 			return $var;
 		}
 
-		$value            = trim( $_SERVER[ $var ] );
-		$ip_regex_pattern = '/' . preg_quote( $ip, '/' ) . '/';
+		if ( strpos( $header, $ip ) === false ) {
+			return false;
+		}
 
-		if ( preg_match( $ip_regex_pattern, $value ) ) {
-			$potential_ips = preg_split( '/[, ]+/', $value );
+		$potential_ips = preg_split( '/[, ]+/', $header );
 
-			foreach ( array_reverse( $potential_ips ) as $index => $potential_ip ) {
-				if ( $ip === $potential_ip ) {
-					return array( $var, $index );
-				}
+		foreach ( array_reverse( $potential_ips ) as $index => $potential_ip ) {
+			if ( $ip === $potential_ip ) {
+				return array( $var, $index );
 			}
+		}
 
-			if ( preg_match_all( '{(?:for)=(?:"?\[?)([a-z0-9\.:_\-/]*)}i', $value, $matches, PREG_SET_ORDER ) ) {
-				foreach ( array_reverse( $matches ) as $index => $match ) {
-					if ( $ip === $match[1] ) {
-						return array( $var, $index );
-					}
+		if ( preg_match_all( '{(?:for)=(?:"?\[?)([a-z0-9\.:_\-/]*)}i', $header, $matches, PREG_SET_ORDER ) ) {
+			foreach ( array_reverse( $matches ) as $index => $match ) {
+				if ( $ip === $match[1] ) {
+					return array( $var, $index );
 				}
 			}
 		}
@@ -160,9 +180,11 @@ final class ITSEC_Security_Check_Pro_Utility {
 	 *                        and a `ssl_supported` entry if SSL is supported.
 	 */
 	public static function get_server_response() {
+		$pid  = ITSEC_Log::add_process_start( 'security-check-pro', 'start-scan' );
 		$data = array(
 			'site' => get_home_url(),
 			'key'  => self::get_key(),
+			'pid'  => $pid,
 		);
 
 		$remote_post_args = array(
@@ -173,6 +195,8 @@ final class ITSEC_Security_Check_Pro_Utility {
 		$response = wp_remote_post( self::$api_url, $remote_post_args );
 
 		if ( is_wp_error( $response ) ) {
+			ITSEC_Log::add_process_stop( $pid, $response );
+
 			if ( 'connect() timed out!' === $response->get_error_message() ) {
 				return new WP_Error( 'http_request_failed', __( 'The server was unable to be contacted.', 'better-wp-security' ) );
 			}
@@ -181,10 +205,21 @@ final class ITSEC_Security_Check_Pro_Utility {
 		}
 
 		if ( '' === trim( $response['body'] ) ) {
-			return new WP_Error( 'itsec-security-check-pro-empty-response', __( 'An error occurred when communicating with the iThemes Security Check server: The server returned a blank response.', 'better-wp-security' ) );
+			ITSEC_Log::add_process_stop( $pid, [
+				'status' => wp_remote_retrieve_response_code( $response ),
+				'body'   => $response['body'],
+			] );
+
+			return new WP_Error( 'itsec-security-check-pro-empty-response', __( 'An error occurred when communicating with the iThemes Security Check server: The server returned a blank response.', 
+'better-wp-security' ) );
 		}
 
 		$body = json_decode( $response['body'], true );
+
+		ITSEC_Log::add_process_stop( $pid, [
+			'status' => wp_remote_retrieve_response_code( $response ),
+			'body'   => $body,
+		] );
 
 		if ( is_null( $body ) ) {
 			return new WP_Error( 'itsec-security-check-pro-non-json-response', __( 'An error occurred when communicating with the iThemes Security Check server: The server did not return JSON data when JSON data was expected.', 'better-wp-security' ) );

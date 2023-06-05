@@ -1,35 +1,31 @@
-'use strict';
+const AccordionElement = require('./_accordion-element.js');
 
-var AccordionElement = require('./_accordion-element.js');
-
+/**
+ * @param {HTMLElement} element
+ * @constructor
+ */
 function Accordion(element) {
+  const accordions = [];
 
-	var accordions = [],
-		accordionElements;
+  // add class to container
+  element.className += ' accordion-container';
 
-	// add class to container
-	element.className+= " accordion-container";
+  // find accordion blocks
+  const accordionElements = element.children;
 
-	// find accordion blocks
-	accordionElements = element.children;
+  // hide all content blocks
+  for (let i = 0; i < accordionElements.length; i++) {
+    // only act on direct <div> children
+    if (accordionElements[i].tagName.toUpperCase() !== 'DIV') {
+      continue;
+    }
 
-	// hide all content blocks
-	for( var i=0; i < accordionElements.length; i++) {
+    // create new accordion and add to list of accordions
+    accordions.push(new AccordionElement(accordionElements[i]));
+  }
 
-		// only act on direct <div> children
-		if( accordionElements[i].tagName.toUpperCase() !== 'DIV' ) {
-			continue;
-		}
-
-		// create new accordion
-		var acEl = new AccordionElement(accordionElements[i]);
-
-		// add to list of accordions
-		accordions.push(acEl);
-	}
-
-	// open first accordion
-	accordions[0].open();
+  // open first accordion
+  accordions[0].open();
 }
 
 module.exports = Accordion;

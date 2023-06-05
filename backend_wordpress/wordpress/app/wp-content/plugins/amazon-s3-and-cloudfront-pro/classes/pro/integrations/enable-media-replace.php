@@ -41,6 +41,13 @@ class Enable_Media_Replace extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		$this->media_library = $this->as3cf->get_integration_manager()->get_integration( 'mlib' );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		// Make sure EMR allows OME to filter get_attached_file.
 		add_filter( 'emr_unfiltered_get_attached_file', '__return_false' );
 
@@ -65,8 +72,6 @@ class Enable_Media_Replace extends Integration {
 			// Add our potentially downloaded primary file to the list files to remove.
 			add_filter( 'as3cf_remove_local_files', array( $this, 'filter_remove_local_files' ) );
 		}
-
-		$this->media_library = $this->as3cf->get_integration_manager()->get_integration( 'mlib' );
 	}
 
 	/**

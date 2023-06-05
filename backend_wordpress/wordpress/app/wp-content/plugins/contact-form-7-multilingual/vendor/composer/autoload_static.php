@@ -4,13 +4,16 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit49f66112d057cd554cb7d6fefcddac00
+class ComposerStaticInit80cdb48008ca596e10d7fabe003a3268
 {
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'WPML\\CF7\\Constants' => __DIR__ . '/../..' . '/classes/constants.php',
         'WPML\\CF7\\Language_Metabox' => __DIR__ . '/../..' . '/classes/language-metabox.php',
         'WPML\\CF7\\Locale' => __DIR__ . '/../..' . '/classes/Locale.php',
+        'WPML\\CF7\\Placeholders' => __DIR__ . '/../..' . '/classes/Placeholders.php',
         'WPML\\CF7\\Shortcodes' => __DIR__ . '/../..' . '/classes/shortcodes.php',
+        'WPML\\CF7\\Templates' => __DIR__ . '/../..' . '/classes/Templates.php',
         'WPML\\CF7\\TranslationReview' => __DIR__ . '/../..' . '/classes/TranslationReview.php',
         'WPML\\CF7\\Translations' => __DIR__ . '/../..' . '/classes/translations.php',
         'WPML_Core_Version_Check' => __DIR__ . '/..' . '/wpml-shared/wpml-lib-dependencies/src/dependencies/class-wpml-core-version-check.php',
@@ -21,7 +24,7 @@ class ComposerStaticInit49f66112d057cd554cb7d6fefcddac00
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit49f66112d057cd554cb7d6fefcddac00::$classMap;
+            $loader->classMap = ComposerStaticInit80cdb48008ca596e10d7fabe003a3268::$classMap;
 
         }, null, ClassLoader::class);
     }

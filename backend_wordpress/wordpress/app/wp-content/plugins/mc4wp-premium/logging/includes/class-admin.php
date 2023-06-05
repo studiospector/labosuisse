@@ -134,7 +134,6 @@ class MC4WP_Logging_Admin
      */
     public function register_dashboard_widget()
     {
-
         // only show widget to people with required capability
         // @todo use real cap
         if (! current_user_can('manage_options')) {
@@ -322,7 +321,7 @@ class MC4WP_Logging_Admin
     }
 
     /**
-    * Set-up the schedule to periodically delete all log items older than X days
+    * Set up the schedule to periodically delete all log items older than X days
     */
     public function set_purge_schedule()
     {

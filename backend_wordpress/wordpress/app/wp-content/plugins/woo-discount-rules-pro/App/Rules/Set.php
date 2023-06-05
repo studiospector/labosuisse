@@ -75,6 +75,7 @@ class Set
     {
         $discount_text = '';
         $discounted_price_text = '';
+        $save_amount = '';
         switch ($type) {
             case 'flat':
                 if (!empty($value)) {
@@ -82,6 +83,7 @@ class Set
                     $discount = $product_price - $value;
                     $discount_text = Woocommerce::formatPrice($value);
                     $discounted_price_text = Woocommerce::formatPrice($discount);
+                    $save_amount = Woocommerce::formatPrice($discount_price);
                 }
                 break;
             case 'fixed_set_price':
@@ -94,6 +96,7 @@ class Set
                     $discount = $product_price - $discounted_price;
                     $discount_text = Woocommerce::formatPrice($value);
                     $discounted_price_text = Woocommerce::formatPrice($discount);
+                    $save_amount = Woocommerce::formatPrice($discount);
                 }
                 break;
             case 'percentage':
@@ -101,13 +104,14 @@ class Set
                     $discount = $product_price - $discount_price;
                     $discount_text = $value . '%';
                     $discounted_price_text = Woocommerce::formatPrice($discount);
+                    $save_amount = Woocommerce::formatPrice($discount_price);
                 }
                 break;
         }
         if (!empty($discount_text) && !empty($discounted_price_text)) {
             $dont_allow_duplicate = true;
-            $searchForReplace = array('{{title}}', '{{min_quantity}}', '{{discount}}', '{{discounted_price}}');
-            $string_to_replace = array($discounted_title_text, $min, $discount_text, $discounted_price_text);
+            $searchForReplace = array('{{title}}', '{{min_quantity}}', '{{discount}}', '{{discounted_price}}','{{save_amount}}');
+            $string_to_replace = array($discounted_title_text, $min, $discount_text, $discounted_price_text, $save_amount);
             $html_content = str_replace($searchForReplace, $string_to_replace, $html_content);
             $searchForRemove = array('/{{max_quantity}}/');
             $replacements = array('');
@@ -335,7 +339,7 @@ class Set
             }
             $value = isset($valid_ranges->value) ? $valid_ranges->value : 0;
             $discount_type = isset($valid_ranges->type) ? $valid_ranges->type : 0;
-            if (empty($value) || empty($max_quantity)) return 0;
+            if ($value < 0 || empty($max_quantity)) return 0;
             /**
              * Set discount calculator
              */

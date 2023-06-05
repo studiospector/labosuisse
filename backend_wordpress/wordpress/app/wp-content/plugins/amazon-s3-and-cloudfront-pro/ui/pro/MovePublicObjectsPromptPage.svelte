@@ -1,6 +1,5 @@
 <script>
 	import {createEventDispatcher, setContext} from "svelte";
-	import {pop} from "svelte-spa-router";
 	import {settingsLocked} from "../js/stores";
 	import {tools} from "./stores";
 	import Page from "../components/Page.svelte";
@@ -34,14 +33,13 @@
 	 * @return {Promise<void>}
 	 */
 	async function handleNext() {
-		await tools.start( tool.id );
+		await tools.start( tool );
 		dispatch( "routeEvent", { event: "next", default: "/" } );
 	}
 </script>
 
 <Page {name} subpage on:routeEvent>
 	<Notifications tab="media" component={ToolNotification}/>
-	<h2 class="page-title">{tool.name}</h2>
 
 	<Panel
 		heading={tool.name}

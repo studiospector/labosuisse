@@ -52,8 +52,8 @@ class Move_Public_Objects extends Move_Objects {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
-		return __( 'Moving Media Library items to new storage path.', 'amazon-s3-and-cloudfront' );
+	public function get_queued_status(): string {
+		return __( 'Moving media items to new storage path.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

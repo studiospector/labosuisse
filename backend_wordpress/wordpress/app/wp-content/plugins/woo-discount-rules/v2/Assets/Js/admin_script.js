@@ -298,6 +298,7 @@ jQuery(document).ready(function ($) {
                 parentsRow: '.wdr-discount-group',
                 thisObject: this,
             });
+            wdr_buildrule.re_index_ranges();
         }
     });
 
@@ -473,6 +474,7 @@ jQuery(document).ready(function ($) {
             $.ajax({
                 data: {
                     rowid: $(this).data('delete-rule'),
+                    priority: $(this).data('priority'),
                     awdr_nonce: $(this).data('awdr_nonce'),
                     method: 'delete_rule',
                     action: 'wdr_ajax'
@@ -736,7 +738,7 @@ jQuery(document).ready(function ($) {
 
     function run_preload_values(){
         $('.append-preloaded-values').selectWoo();
-       // $('.append-preloaded-values').parent().find('.select2-search__field').css('width', '100%');
+        // $('.append-preloaded-values').parent().find('.select2-search__field').css('width', '100%');
     }
     /**
      * ajax edit pre_loaded search function in document ready
@@ -1740,13 +1742,13 @@ jQuery(document).ready(function ($) {
      */
     $('#configuration-form').submit(function (e) {
         e.preventDefault();
-       /* $("#awdr_banner_editor-html").click();
-        $("#awdr_banner_editor-tmce").click();
-        let awdr_banner_editer = $('#awdr_banner_editor').val();*/
+        /* $("#awdr_banner_editor-html").click();
+         $("#awdr_banner_editor-tmce").click();
+         let awdr_banner_editer = $('#awdr_banner_editor').val();*/
         /*$('.customize_banner_content').val(awdr_banner_editer);*/
         let values = $(this).serialize();
         let loader = $('.woo_discount_loader');
-       /* values += "&banner_content=" + awdr_banner_editer;*/
+        /* values += "&banner_content=" + awdr_banner_editer;*/
         $.ajax({
             data: values,
             type: 'post',
@@ -1932,7 +1934,7 @@ jQuery(document).ready(function ($) {
                 } else {
                     notify(wdr_data.localization_data.error, 'error', alert_counter);
                 }
-                window.location.replace(wdr_data.admin_url);
+                redirectParams();
             }
         });
     });
@@ -1940,14 +1942,63 @@ jQuery(document).ready(function ($) {
     /**
      * Display page search action on top
      */
-    $('#wdr-search-top').submit(function (e) {
+
+    $(document).on("submit", "#wdr-search-top", function (e) {
         e.preventDefault();
-        var search_value = $(this).serializeArray();
-        var adminUrl = search_value[0].value;
-        var searchQry = search_value[1].value;
-        var redirectUrl = adminUrl + '&name=' + searchQry;
-        window.location.replace(redirectUrl);
+        redirectParams({name: $('#awdr-name').val(),page_no: 1});
     });
+
+    /**
+     * Display page limit action on top
+     */
+
+    $(document).on('click', '#awdr_limit', function(e) {
+        e.preventDefault();
+        redirectParams({limit: $(this).val()});
+    });
+
+    /**
+     * Display page order action on heading
+     */
+    $(document).on('click', '#awdr_re_order', function (e) {
+        e.preventDefault();
+        var params = new URLSearchParams(window.location.search).get('re_order');
+        if (params == null){
+            redirectParams({re_order: 1});
+        } else {
+            redirectParams({re_order: 0});
+        }
+    });
+
+    /**
+     * Display pagination input field
+     */
+    $(document).on('keyup', '.current-page',function(event) {
+        if (event.keyCode === 13) {
+            redirectParams({page_no: $(this).val()});
+        }
+    });
+
+    /**
+     * Get current url and redirect page
+     */
+    function redirectParams(args = {}){
+        var params = new URLSearchParams(window.location.search);
+        ['re_order','name','page_no','limit'].forEach(function (key){
+            if (key in args) {
+                if (!args[key]) {
+                    delete args[key];
+                }
+            } else {
+                let url_value = params.get(key)
+                if (url_value){
+                    args[key] = url_value
+                }
+            }
+        })
+        var redirectUrl = wdr_data.admin_url + '&' + $.param(args);
+        window.location.replace(redirectUrl);
+    }
 
     /**
      * Number Validation
@@ -1975,18 +2026,26 @@ jQuery(document).ready(function ($) {
     $('[data-class="start_dateonly"]').datetimepicker({
         timepicker: false,
         format: 'Y-m-d',
-        onShow: function (ct) {
+        onShow: function (ct, el) {
+            let end_el = $(el).closest('form').find('[data-class="end_dateonly"]');
+            if (end_el.length !== 1) {
+                end_el = $('[data-class="end_dateonly"]')
+            }
             this.setOptions({
-                maxDate: $('[data-class="end_dateonly"]').val() ? $('[data-class="end_dateonly"]').val() : false
+                maxDate: end_el.val() ? end_el.val() : false
             })
         },
     });
     $('[data-class="end_dateonly"]').datetimepicker({
         timepicker: false,
         format: 'Y-m-d',
-        onShow: function (ct) {
+        onShow: function (ct, el) {
+            let start_el = $(el).closest('form').find('[data-class="start_dateonly"]');
+            if (start_el.length !== 1) {
+                start_el = $('[data-class="start_dateonly"]')
+            }
             this.setOptions({
-                minDate: $('[data-class="start_dateonly"]').val() ? $('[data-class="start_dateonly"]').val() : false
+                minDate: start_el.val() ? start_el.val() : false
             })
         },
     });
@@ -2175,15 +2234,49 @@ jQuery(document).ready(function ($) {
         || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) {
         isMobile = true;
     }
+
+    $(document).ready(function(){
+        sortableRuleTable();
+    })
+
+    function sortableRuleTable(){
+        var sort = new URLSearchParams(window.location.search).get('re_order');
+        if (sort == 1){
+            desktopDrogAndDrop();
+            $( "#sortable" ).sortable("enable");
+            $(".dashicons-menu").css({'color':'black'});
+            $(".awdr-listing-rule-tr").css({'color':'black'});
+            $(".wdr-ruleboard").css({'cursor':'move'});
+        } else {
+            $( "#sortable" ).sortable({ disabled: true });
+            $(".dashicons-menu").css({'color':'darkgray'});
+        }
+    }
+
     function desktopDrogAndDrop(){
+        var prev_id = 0;
+        var prev_priority = 0 ;
+        let loader = $('.woo_discount_loader');
         $("#sortable").sortable({
             delay: 150,
-            stop: function (event, ui) {
-                var selectedData = new Array();
-                $('#sortable>tr').each(function () {
-                    selectedData.push($(this).attr("id"));
-                });
-                updatePriorityOrder(selectedData);
+            start: function(event, ui) {
+                prev_priority = ui.item.attr('data-priority');
+            },
+            update: function (event, ui) {
+                if (ui.originalPosition.top - ui.offset.top < 0) {
+                    var item = ui.item.prev();
+                } else {
+                    var item = ui.item.next();
+                }
+                var new_priority = item.attr('data-priority');
+                var data = {
+                    drag_position: prev_priority,
+                    drop_position: new_priority,
+                };
+                if (new_priority > 0 && prev_priority > 0){
+                    updatePriorityOrder(data);
+                    loader.show();
+                }
             }
         });
     }
@@ -2192,27 +2285,57 @@ jQuery(document).ready(function ($) {
         $('#sortable').sortable({
             handle: ".awdr-sortable-handle",
             delay: 150,
-            stop: function (event, ui) {
-                var selectedData = new Array();
-                $('#sortable>tr').each(function () {
-                    selectedData.push($(this).attr("id"));
-                });
-                updatePriorityOrder(selectedData);
+            start: function(event, ui) {
+                var prev_id = ui.item.attr('id');
+                var prev_priority = ui.item.attr('data-priority');
+                if (prev_id && prev_priority) {
+                    selectedData.push(prev_id);
+                    selectedPriority.push(prev_priority);
+                }
+            },
+            update: function (event, ui) {
+                if (ui.originalPosition.top - ui.offset.top < 0) {
+                    var item = ui.item.prev();
+                } else {
+                    var item = ui.item.next();
+                }
+                var new_id = item.attr('id');
+                var new_priority = item.attr('data-priority');
+                if (new_id && new_priority){
+                    selectedData.push(new_id);
+                    selectedPriority.push(new_priority);
+                    //updatePriorityOrder(selectedData,selectedPriority);
+                }
             }
         });
     }
 
-    if($(window).width() > 1024){
-        if(isMobile == true){
-            responsiveDrogAndDrop();
-        }else{
-            desktopDrogAndDrop();
-        }
-    }else{
-        responsiveDrogAndDrop();
-    }
+    // if($(window).width() > 1024){
+    //     if(isMobile == true){
+    //        // responsiveDrogAndDrop();
+    //     }else{
+    //         // desktopDrogAndDrop();
+    //     }
+    // }else{
+    //     responsiveDrogAndDrop();
+    // }
 
     function updatePriorityOrder(data) {
+        var args = {};
+        let loader = $('.woo_discount_loader');
+        var params = new URLSearchParams(window.location.search);
+        ['re_order','name','page_no','limit'].forEach(function (key){
+            if (key in args) {
+                if (!args[key]) {
+                    delete args[key];
+                }
+            } else {
+                let url_value = params.get(key)
+                if (url_value){
+                    args[key] = url_value
+                }
+            }
+        })
         $.ajax({
             data: {
                 position: data,
@@ -2221,11 +2344,14 @@ jQuery(document).ready(function ($) {
                 awdr_nonce: $("input[name=awdr_rule_list_nonce]").val()
             },
             type: 'post',
-            url: ajaxurl,
+            url: ajaxurl + '?' + $.param(args),
             error: function (request, error) {
                 notify(wdr_data.localization_data.error, 'error', alert_counter);
             },
             success: function (data) {
+                $('.wdr_settings_container').html(data.html);
+                sortableRuleTable();
+                loader.hide();
                 if (data === false) {
                     notify(wdr_data.localization_data.error, 'error', alert_counter);
                 } else {
@@ -2750,10 +2876,11 @@ jQuery(document).ready(function ($) {
 
     $(document).on('click', '.awdr-hidden-search', function () {
         let search_string = $('.awdr-hidden-name').val();
+        let limit = $('.awdr-hidden-rule-limit').val();
+        $('.wdr-rule-limit-key').val(limit);
         $('.wdr-rule-search-key').val(search_string);
         $('#wdr-search-top').submit();
     });
-
     /**
      * Rule limit dynamic message
      */
@@ -2791,10 +2918,10 @@ jQuery(document).ready(function ($) {
         return true;
     });
 
-   $(document).on('change', '.get_awdr_state_based_country', function (){
+    $(document).on('change', '.get_awdr_state_based_country', function (){
         let selected_country = $(this).val();
         if(!selected_country || selected_country == '' || selected_country.length == 0){
-           return false;
+            return false;
         }
         let selected_index = $(this).parents('.wdr-conditions-container').attr('data-index');
         let append_data = $(this).parents('.wdr_shipping_state_group');
@@ -2822,7 +2949,7 @@ jQuery(document).ready(function ($) {
             success: function (response) {
                 remove_data.remove();
                 append_data.append("<div class='wdr-shipping-state-value wdr-select-filed-hight wdr-search-box' style='width: min-content;'>"+
-                   response.data +"<span class='wdr_select2_desc_text'>"+wdr_data.localization_data.select_state+"</span> </div>");
+                    response.data +"<span class='wdr_select2_desc_text'>"+wdr_data.localization_data.select_state+"</span> </div>");
                 run_preload_values();
 
             },
@@ -2917,5 +3044,10 @@ jQuery(document).ready(function ($) {
             $(this).parents('.wdr_cart_coupon_group').find('.wdr-cart-coupon-url-all').css("display", "none");
         }
     });
+
+    /* Re-index whling Change the discount range draggable */
+    $("#bulk_adjustment_sortable").on( "sortstop", function( event, ui ) {
+        wdr_buildrule.re_index_ranges();
+    } );
 
 });

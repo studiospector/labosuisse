@@ -1,6 +1,26 @@
 Changelog
 ==========
 
+#### 4.9.3 - Feb 10, 2023
+
+- E-commerce: use `DateTime::ATOM` as ISO8601 datetime format to prevent an issue with order dates on some PHP versions.
+
+
+#### 4.9.2 - Jan 13, 2023 
+
+- Forms: Add defer attribute to AJAX forms script.
+- Add Mailchimp Activity feature plugin.
+- Updated compatibility with Mailchimp for WordPress v4.9.0.
+
+
+#### 4.9.1 - Dec 06, 2022
+
+- Forms: Minor improvements to autocomplete feature for improved performance & decreased memory usage.
+- E-commerce: Bail early if guest cart has no valid email address yet.
+- E-commerce: Shrink size of cart tracking script by 30%.
+- In general, more minor performance, memory use and size optimizations for all bundled JavaScript code.
+
+
 #### 4.9 - Jul 26, 2022
 
 - Forms: add autocomplete feature for common email domains.

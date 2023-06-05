@@ -3,7 +3,6 @@
 namespace DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\API\V1;
 
 use DeliciousBrains\WP_Offload_Media\Pro\API\API;
-use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\Assets;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\Domain_Check_Response;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -28,16 +27,6 @@ class Assets_Domain_Check extends API {
 				'permission_callback' => '__return_true', // public access
 			)
 		);
-
-		register_rest_route(
-			static::api_namespace(),
-			static::route(),
-			array(
-				'methods'             => 'POST',
-				'callback'            => array( $this, 'post_domain_check' ),
-				'permission_callback' => array( $this, 'check_permissions' ),
-			)
-		);
 	}
 
 	/**
@@ -55,23 +44,6 @@ class Assets_Domain_Check extends API {
 		$response->header( 'X-As3cf-Signature', $response->hashed_signature() );
 
 		return $this->rest_ensure_response( 'get', static::name(), $response );
-	}
-
-	/**
-	 * Processes a REST POST request to check supplied domain.
-	 *
-	 * @param WP_REST_Request $request
-	 *
-	 * @return WP_REST_Response|mixed
-	 */
-	public function post_domain_check( WP_REST_Request $request ) {
-		/** @var Assets */
-		$assets   = $this->as3cf->get_integration_manager()->get_integration( 'assets' );
-		$data     = $request->get_json_params();
-		$domain   = empty( $data['domain'] ) ? '' : $data['domain'];
-		$response = $assets->check_domain( $domain );
-
-		return $this->rest_ensure_response( 'post', static::name(), $response );
 	}
 
 	/**

@@ -35,6 +35,7 @@ domReady( () => {
 
 export * from './settings/components';
 export { ToolFill } from './settings/pages/tools';
+export { SecureSiteEndFill } from './settings/pages/secure-site';
 export {
 	Page,
 	ChildPages,

@@ -46,7 +46,7 @@ class Remove_Local_Files extends Background_Tool {
 	 * @return string
 	 */
 	public static function get_more_info_text() {
-		return __( 'You can use this tool to delete all Media Library files from your local server that have already been offloaded.', 'amazon-s3-and-cloudfront' );
+		return __( 'You can use this tool to delete all media files from your local server that have already been offloaded.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -57,7 +57,7 @@ class Remove_Local_Files extends Background_Tool {
 	public static function get_prompt_text() {
 		global $as3cf;
 
-		$mesg = __( 'You\'ve enabled the "Remove Files From Server" option. Do you want to remove all existing files from the server that have already been offloaded?', 'amazon-s3-and-cloudfront' );
+		$mesg = __( 'You\'ve enabled the "Remove Local Media" option. Do you want to remove all existing files from the server that have already been offloaded?', 'amazon-s3-and-cloudfront' );
 		$mesg .= ' ';
 		$mesg .= $as3cf::settings_more_info_link(
 			'remove-local-file',
@@ -82,8 +82,17 @@ class Remove_Local_Files extends Background_Tool {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
-		return __( 'Removing Media Library files from your local server.', 'amazon-s3-and-cloudfront' );
+	public function get_queued_status(): string {
+		return __( 'Removing media files from your local server.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Removing local…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

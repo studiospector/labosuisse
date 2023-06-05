@@ -52,6 +52,34 @@ class BuddyBoss extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		$this->source_types = array(
+			'bboss-user-avatar'  => array(
+				'class' => BBoss_Item::get_item_class( 'user', 'avatar' ),
+			),
+			'bboss-user-cover'   => array(
+				'class' => BBoss_Item::get_item_class( 'user', 'cover' ),
+			),
+			'bboss-group-avatar' => array(
+				'class' => BBoss_Item::get_item_class( 'group', 'avatar' ),
+			),
+			'bboss-group-cover'  => array(
+				'class' => BBoss_Item::get_item_class( 'group', 'cover' ),
+			),
+		);
+
+		// Register our item source types with the global as3cf object.
+		foreach ( $this->source_types as $key => $source_type ) {
+			$this->as3cf->register_source_type( $key, $source_type['class'] );
+		}
+
+		// Register our item summary types with the global as3cf object.
+		$this->as3cf->register_summary_type( BBoss_Item::summary_type(), BBoss_Item::class );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		// URL Rewriting.
 		add_filter( 'bp_core_fetch_avatar_url_check', array( $this, 'fetch_avatar' ), 10, 2 );
 		add_filter( 'bp_core_fetch_gravatar_url_check', array( $this, 'fetch_default_avatar' ), 99, 2 );
@@ -80,26 +108,6 @@ class BuddyBoss extends Integration {
 		add_filter( 'as3cf_get_provider_url_for_item_source', array( $this, 'filter_get_provider_url_for_item_source' ), 10, 3 );
 		add_filter( 'as3cf_get_local_url_for_item_source', array( $this, 'filter_get_local_url_for_item_source' ), 10, 3 );
 		add_filter( 'as3cf_strip_image_edit_suffix_and_extension', array( $this, 'filter_strip_image_edit_suffix_and_extension' ), 10, 2 );
-
-		$this->source_types = array(
-			'bboss-user-avatar'  => array(
-				'class' => BBoss_Item::get_item_class( 'user', 'avatar' ),
-			),
-			'bboss-user-cover'   => array(
-				'class' => BBoss_Item::get_item_class( 'user', 'cover' ),
-			),
-			'bboss-group-avatar' => array(
-				'class' => BBoss_Item::get_item_class( 'group', 'avatar' ),
-			),
-			'bboss-group-cover'  => array(
-				'class' => BBoss_Item::get_item_class( 'group', 'cover' ),
-			),
-		);
-
-		// Register our item types with the global as3cf object
-		foreach ( $this->source_types as $key => $source_type ) {
-			$this->as3cf->register_source_type( $key, $source_type['class'] );
-		}
 	}
 
 	/**

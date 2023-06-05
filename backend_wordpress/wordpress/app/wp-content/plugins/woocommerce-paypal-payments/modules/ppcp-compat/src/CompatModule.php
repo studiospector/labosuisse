@@ -9,17 +9,18 @@ declare(strict_types=1);
 
 namespace WooCommerce\PayPalCommerce\Compat;
 
-use Dhii\Container\ServiceProvider;
-use Dhii\Modular\Module\ModuleInterface;
+use WooCommerce\PayPalCommerce\Vendor\Dhii\Container\ServiceProvider;
+use WooCommerce\PayPalCommerce\Vendor\Dhii\Modular\Module\ModuleInterface;
 use Exception;
-use Interop\Container\ServiceProviderInterface;
-use Psr\Container\ContainerInterface;
+use WooCommerce\PayPalCommerce\Vendor\Interop\Container\ServiceProviderInterface;
+use WooCommerce\PayPalCommerce\Vendor\Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 use Vendidero\Germanized\Shipments\Shipment;
 use WC_Order;
 use WooCommerce\PayPalCommerce\Compat\Assets\CompatAssets;
 use WooCommerce\PayPalCommerce\OrderTracking\Endpoint\OrderTrackingEndpoint;
 use WooCommerce\PayPalCommerce\WcGateway\Exception\NotFoundException;
+use WooCommerce\PayPalCommerce\WcGateway\Settings\Settings;
 
 /**
  * Class CompatModule
@@ -53,6 +54,9 @@ class CompatModule implements ModuleInterface {
 
 		add_action( 'init', array( $asset_loader, 'register' ) );
 		add_action( 'admin_enqueue_scripts', array( $asset_loader, 'enqueue' ) );
+
+		$this->migrate_pay_later_settings( $c );
+		$this->migrate_smart_button_settings( $c );
 	}
 
 	/**
@@ -127,17 +131,10 @@ class CompatModule implements ModuleInterface {
 		$logger = $c->get( 'woocommerce.logger.woocommerce' );
 		assert( $logger instanceof LoggerInterface );
 
-		$status_map = $c->get( 'compat.gzd.tracking_statuses_map' );
-
 		add_action(
-			'woocommerce_gzd_shipment_after_save',
-			static function( Shipment $shipment ) use ( $endpoint, $logger, $status_map ) {
+			'woocommerce_gzd_shipment_status_shipped',
+			static function( int $shipment_id, Shipment $shipment ) use ( $endpoint, $logger ) {
 				if ( ! apply_filters( 'woocommerce_paypal_payments_sync_gzd_tracking', true ) ) {
-					return;
-				}
-
-				$gzd_shipment_status = $shipment->get_status();
-				if ( ! array_key_exists( $gzd_shipment_status, $status_map ) ) {
 					return;
 				}
 
@@ -153,12 +150,16 @@ class CompatModule implements ModuleInterface {
 
 				$tracking_data = array(
 					'transaction_id' => $transaction_id,
-					'status'         => (string) $status_map[ $gzd_shipment_status ],
+					'status'         => 'SHIPPED',
 				);
 
 				$provider = $shipment->get_shipping_provider();
 				if ( ! empty( $provider ) && $provider !== 'none' ) {
-					$tracking_data['carrier'] = 'DHL_DEUTSCHE_POST';
+					/**
+					 * The filter allowing to change the default Germanized carrier for order tracking,
+					 * such as DHL_DEUTSCHE_POST, DPD_DE, ...
+					 */
+					$tracking_data['carrier'] = (string) apply_filters( 'woocommerce_paypal_payments_default_gzd_carrier', 'DHL_DEUTSCHE_POST', $provider );
 				}
 
 				try {
@@ -166,16 +167,156 @@ class CompatModule implements ModuleInterface {
 
 					$tracking_data['tracking_number'] = $tracking_information['tracking_number'] ?? '';
 
-					if ( $shipment->has_tracking() ) {
+					if ( $shipment->get_tracking_id() ) {
 						$tracking_data['tracking_number'] = $shipment->get_tracking_id();
 					}
 
 					! $tracking_information ? $endpoint->add_tracking_information( $tracking_data, $wc_order->get_id() ) : $endpoint->update_tracking_information( $tracking_data, $wc_order->get_id() );
 				} catch ( Exception $exception ) {
 					$logger->error( "Couldn't sync tracking information: " . $exception->getMessage() );
-					$shipment->add_note( "Couldn't sync tracking information: " . $exception->getMessage() );
-					throw $exception;
 				}
+			},
+			500,
+			2
+		);
+	}
+
+	/**
+	 * Migrates the old Pay Later button and messaging settings for new Pay Later Tab.
+	 *
+	 * The migration will be done on plugin upgrade if it hasn't already done.
+	 *
+	 * @param ContainerInterface $c The Container.
+	 * @throws NotFoundException When setting was not found.
+	 */
+	protected function migrate_pay_later_settings( ContainerInterface $c ): void {
+		$is_pay_later_settings_migrated_option_name = 'woocommerce_ppcp-is_pay_later_settings_migrated';
+		$is_pay_later_settings_migrated             = get_option( $is_pay_later_settings_migrated_option_name );
+
+		if ( $is_pay_later_settings_migrated ) {
+			return;
+		}
+
+		add_action(
+			'woocommerce_paypal_payments_gateway_migrate_on_update',
+			function () use ( $c, $is_pay_later_settings_migrated_option_name ) {
+				$settings = $c->get( 'wcgateway.settings' );
+				assert( $settings instanceof Settings );
+
+				$disable_funding = $settings->has( 'disable_funding' ) ? $settings->get( 'disable_funding' ) : array();
+
+				$available_messaging_locations = array_keys( $c->get( 'wcgateway.settings.pay-later.messaging-locations' ) );
+				$available_button_locations    = array_keys( $c->get( 'wcgateway.button.locations' ) );
+
+				if ( in_array( 'credit', $disable_funding, true ) ) {
+					$settings->set( 'pay_later_button_enabled', false );
+				} else {
+					$settings->set( 'pay_later_button_enabled', true );
+					$selected_button_locations = $this->selected_locations( $settings, $available_button_locations, 'button' );
+					if ( ! empty( $selected_button_locations ) ) {
+						$settings->set( 'pay_later_button_locations', $selected_button_locations );
+					}
+				}
+
+				$selected_messaging_locations = $this->selected_locations( $settings, $available_messaging_locations, 'message' );
+
+				if ( ! empty( $selected_messaging_locations ) ) {
+					$settings->set( 'pay_later_messaging_enabled', true );
+					$settings->set( 'pay_later_messaging_locations', $selected_messaging_locations );
+					$settings->set( 'pay_later_enable_styling_per_messaging_location', true );
+
+					foreach ( $selected_messaging_locations as $location ) {
+						$this->migrate_message_styling_settings_by_location( $settings, $location );
+					}
+				} else {
+					$settings->set( 'pay_later_messaging_enabled', false );
+				}
+
+				$settings->persist();
+
+				update_option( $is_pay_later_settings_migrated_option_name, true );
+			}
+		);
+	}
+
+	/**
+	 * Migrates the messages styling setting by given location.
+	 *
+	 * @param Settings $settings The settings.
+	 * @param string   $location The location.
+	 * @throws NotFoundException When setting was not found.
+	 */
+	protected function migrate_message_styling_settings_by_location( Settings $settings, string $location ): void {
+
+		$old_location = $location === 'checkout' ? '' : "_{$location}";
+
+		$layout        = $settings->has( "message{$old_location}_layout" ) ? $settings->get( "message{$old_location}_layout" ) : 'text';
+		$logo_type     = $settings->has( "message{$old_location}_logo" ) ? $settings->get( "message{$old_location}_logo" ) : 'primary';
+		$logo_position = $settings->has( "message{$old_location}_position" ) ? $settings->get( "message{$old_location}_position" ) : 'left';
+		$text_color    = $settings->has( "message{$old_location}_color" ) ? $settings->get( "message{$old_location}_color" ) : 'black';
+		$style_color   = $settings->has( "message{$old_location}_flex_color" ) ? $settings->get( "message{$old_location}_flex_color" ) : 'blue';
+		$ratio         = $settings->has( "message{$old_location}_flex_ratio" ) ? $settings->get( "message{$old_location}_flex_ratio" ) : '1x1';
+
+		$settings->set( "pay_later_{$location}_message_layout", $layout );
+		$settings->set( "pay_later_{$location}_message_logo", $logo_type );
+		$settings->set( "pay_later_{$location}_message_position", $logo_position );
+		$settings->set( "pay_later_{$location}_message_color", $text_color );
+		$settings->set( "pay_later_{$location}_message_flex_color", $style_color );
+		$settings->set( "pay_later_{$location}_message_flex_ratio", $ratio );
+	}
+
+	/**
+	 * Finds from old settings the selected locations for given type.
+	 *
+	 * @param Settings $settings The settings.
+	 * @param string[] $all_locations The list of all available locations.
+	 * @param string   $type The setting type: 'button' or 'message'.
+	 * @return string[] The list of locations, which should be selected.
+	 */
+	protected function selected_locations( Settings $settings, array $all_locations, string $type ): array {
+		$button_locations = array();
+
+		foreach ( $all_locations as $location ) {
+			$location_setting_name_part = $location === 'checkout' ? '' : "_{$location}";
+			$setting_name               = "{$type}{$location_setting_name_part}_enabled";
+
+			if ( $settings->has( $setting_name ) && $settings->get( $setting_name ) ) {
+				$button_locations[] = $location;
+			}
+		}
+
+		return $button_locations;
+	}
+
+	/**
+	 * Migrates the old smart button settings.
+	 *
+	 * The migration will be done on plugin upgrade if it hasn't already done.
+	 *
+	 * @param ContainerInterface $c The Container.
+	 */
+	protected function migrate_smart_button_settings( ContainerInterface $c ): void {
+		$is_smart_button_settings_migrated_option_name = 'woocommerce_ppcp-is_smart_button_settings_migrated';
+		$is_smart_button_settings_migrated             = get_option( $is_smart_button_settings_migrated_option_name );
+
+		if ( $is_smart_button_settings_migrated ) {
+			return;
+		}
+
+		add_action(
+			'woocommerce_paypal_payments_gateway_migrate_on_update',
+			function () use ( $c, $is_smart_button_settings_migrated_option_name ) {
+				$settings = $c->get( 'wcgateway.settings' );
+				assert( $settings instanceof Settings );
+
+				$available_button_locations = array_keys( $c->get( 'wcgateway.button.locations' ) );
+				$selected_button_locations  = $this->selected_locations( $settings, $available_button_locations, 'button' );
+				if ( ! empty( $selected_button_locations ) ) {
+					$settings->set( 'smart_button_locations', $selected_button_locations );
+					$settings->persist();
+				}
+
+				update_option( $is_smart_button_settings_migrated_option_name, true );
 			}
 		);
 	}

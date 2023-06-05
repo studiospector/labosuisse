@@ -45,6 +45,7 @@ class Tools_Manager {
 	 */
 	private function init( $as3cf ) {
 		add_filter( 'as3cfpro_js_strings', array( $this, 'add_strings' ) );
+		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) ); // phpcs:ignore WordPress.WP.CronInterval
 		add_filter( $as3cf->get_plugin_prefix() . '_api_response_get_' . State::name(), array( $this, 'api_response' ) );
 	}
 
@@ -66,13 +67,40 @@ class Tools_Manager {
 			'edit_item'                   => _x( 'Edit', 'Link title', 'amazon-s3-and-cloudfront' ),
 			'dismiss_all'                 => _x( 'Dismiss All', 'Link title', 'amazon-s3-and-cloudfront' ),
 			'dismiss'                     => _x( 'Dismiss', 'Link title', 'amazon-s3-and-cloudfront' ),
-			'show_details'                => _x( 'Show Details', 'Button title', 'amazon-s3-and-cloudfront' ),
-			'hide_details'                => _x( 'Hide Details', 'Button title', 'amazon-s3-and-cloudfront' ),
 
 			// No tools to show yet
 			'no_tools_header'             => _x( 'No Tools Available (Yet)', 'No tools graphic', 'amazon-s3-and-cloudfront' ),
 			'no_tools_description'        => _x( 'Once an active license and media items are detected, the following tools will become available for bulk management between this server and the storage provider.', 'No tools graphic', 'amazon-s3-and-cloudfront' ),
 		) );
+	}
+
+	/**
+	 * Add cron schedules.
+	 *
+	 * @param array $schedules
+	 *
+	 * @return mixed
+	 */
+	public function cron_schedules( $schedules ) {
+		if ( property_exists( $this, 'cron_interval' ) ) {
+			$interval = apply_filters( 'as3cf_tool_cron_interval', $this->cron_interval );
+		} else {
+			$interval = apply_filters( 'as3cf_tool_cron_interval', 1 );
+		}
+
+		if ( 1 === $interval ) {
+			$display = __( 'Every Minute', 'amazon-s3-and-cloudfront' );
+		} else {
+			$display = sprintf( __( 'Every %d Minutes', 'amazon-s3-and-cloudfront' ), $interval );
+		}
+
+		// Adds our schedule to the existing schedules.
+		$schedules['as3cf_tool_cron_interval'] = array(
+			'interval' => MINUTE_IN_SECONDS * $interval,
+			'display'  => $display,
+		);
+
+		return $schedules;
 	}
 
 	/**

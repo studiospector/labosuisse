@@ -196,8 +196,6 @@ __( 'Hide Security Menu in Admin Bar', 'better-wp-security' );
 __( 'Remove the Security Messages Menu from the admin bar. Notifications will only appear on the iThemes Security dashboard and settings pages.', 'better-wp-security' );
 __( 'Show Error Codes', 'better-wp-security' );
 __( 'Each error message in iThemes Security has an associated error code that can help diagnose an issue. Changing this setting to “Yes” causes these codes to display. This setting should be left set to “No” unless iThemes Security support requests that you change it.', 'better-wp-security' );
-__( 'Enable Grade Report', 'better-wp-security' );
-__( 'The Grade Report feature can help you identify vulnerabilities on the site. Visit the Notification Center to select which users receive emails from this feature.', 'better-wp-security' );
 __( 'Lockouts', 'better-wp-security' );
 __( 'Lockout Messages', 'better-wp-security' );
 __( 'Authorized Hosts', 'better-wp-security' );

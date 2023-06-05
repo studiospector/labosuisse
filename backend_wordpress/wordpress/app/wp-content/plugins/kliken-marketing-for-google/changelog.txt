@@ -1,4 +1,11 @@
-*** Google Ads & Marketing by Kliken Changelog ***
+*** AI Powered Marketing Changelog ***
+
+2023-04-19 - version 1.2.0
+* Support latest WordPress and WooCommerce version.
+
+2022-12-08 - version 1.1.0
+* Name and text changes.
+* Support latest WordPress and WooCommerce version.
 
 2022-01-25 - version 1.0.8
 * Minor bug fixes.

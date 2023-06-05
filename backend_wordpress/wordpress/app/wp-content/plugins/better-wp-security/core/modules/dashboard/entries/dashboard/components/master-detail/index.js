@@ -162,7 +162,7 @@ function MasterDetail( {
 	if ( hasNext ) {
 		const nextButton = (
 			<Button
-				isLink
+				variant="link"
 				onClick={ loadNext }
 				disabled={ isQuerying }
 				isBusy={ isQuerying }

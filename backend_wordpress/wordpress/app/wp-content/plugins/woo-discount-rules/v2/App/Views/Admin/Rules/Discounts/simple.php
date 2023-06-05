@@ -26,7 +26,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                     <input name="product_adjustments[value]"
                            type="number"
                            class="product_discount_value"
-                           value="<?php echo (isset($product_adjustments->value)) ? esc_attr($product_adjustments->value) : ''; ?>"
+                           value="<?php echo (isset($product_adjustments->value) && $product_adjustments->value >= 0) ? esc_attr(floatval($product_adjustments->value)) : ''; ?>"
                            placeholder="0.00" min="0" step="any" style="width: 100%;">
                     <span class="wdr_desc_text"><?php _e('Value', 'woo-discount-rules'); ?></span>
                 </div>

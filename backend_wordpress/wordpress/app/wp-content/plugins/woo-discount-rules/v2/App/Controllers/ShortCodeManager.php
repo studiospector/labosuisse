@@ -360,7 +360,9 @@ class ShortCodeManager extends ManageDiscount
                         $query_arguments['post__in'] = $onsale_list['list'];
                     }
                 }
-                if(apply_filters('advanced_woo_discount_rules_exclude_out_of_stock_product_on_sale_page', false)){
+                // Exclude_out_of_stock_products_for_on_sale_page
+                $exclude_out_of_stock_products_for_on_sale_page = self::$config->getConfig('exclude_out_of_stock_products_for_on_sale_page', apply_filters('advanced_woo_discount_rules_exclude_out_of_stock_product_on_sale_page', 0));
+                if(!empty($exclude_out_of_stock_products_for_on_sale_page)){
                     $exclude_out_of_stock = array('meta_query' => array(
                         array(
                             'key' => '_stock_status',

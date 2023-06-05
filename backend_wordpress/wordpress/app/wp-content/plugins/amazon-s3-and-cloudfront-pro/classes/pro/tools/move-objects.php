@@ -34,7 +34,7 @@ class Move_Objects extends Background_Tool {
 			return true;
 		}
 
-		return $this->is_queued() || $this->is_processing() || $this->is_paused() || $this->is_cancelled();
+		return $this->is_active();
 	}
 
 	/**
@@ -60,8 +60,17 @@ class Move_Objects extends Background_Tool {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
-		return __( 'Moving Media Library items to new path prefix.', 'amazon-s3-and-cloudfront' );
+	public function get_queued_status(): string {
+		return __( 'Moving media items to new path prefix.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Moving…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

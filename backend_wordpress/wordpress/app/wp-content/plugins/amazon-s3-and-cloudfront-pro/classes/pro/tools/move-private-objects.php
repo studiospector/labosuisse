@@ -33,8 +33,8 @@ class Move_Private_Objects extends Move_Objects {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
-		return __( 'Moving Media Library items to new private path.', 'amazon-s3-and-cloudfront' );
+	public function get_queued_status(): string {
+		return __( 'Moving media items to new private path.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

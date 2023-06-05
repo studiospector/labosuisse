@@ -1,63 +1,60 @@
-'use strict';
+function Option(element) {
+  this.element = element;
+  this.$element = window.jQuery(element);
+}
 
-var Option = function( element ) {
-	this.element = element;
-	this.$element = window.jQuery(element);
+Option.prototype.getColorValue = function () {
+  this.element.value = this.element.value.trim();
+
+  if (this.element.value.length > 0) {
+    if (this.element.className.indexOf('wp-color-picker') !== -1) {
+      return this.$element.wpColorPicker('color');
+    }
+    return this.element.value;
+  }
+
+  return '';
 };
 
-Option.prototype.getColorValue = function() {
-	this.element.value = this.element.value.trim();
+Option.prototype.getPxOrPercentageValue = function (fallback) {
+  let value = this.element.value.trim();
 
-	if( this.element.value.length > 0 ) {
-		if( this.element.className.indexOf('wp-color-picker') !== -1) {
-			return this.$element.wpColorPicker('color');
-		} else {
-			return this.element.value;
-		}
-	}
+  if (value.length > 0) {
+    if (value.substring(value.length - 2, value.length) !== 'px' && value.substring(value.length - 1, value.length) !== '%') {
+      value = `${parseInt(value, 10)}px`;
+    }
+    return value;
+  }
 
-	return '';
+  return fallback || '';
 };
 
-Option.prototype.getPxOrPercentageValue = function(fallback) {
-	var value = this.element.value.trim();
+Option.prototype.getPxValue = function (fallback) {
+  this.element.value = this.element.value.trim();
 
-	if( value.length > 0 ) {
-		if( value.substring(value.length-2, value.length) !== 'px' && value.substring(value.length-1, value.length) !== '%') {
-			value = parseInt(value) + 'px';
-		}
-		return value;
-	}
+  if (this.element.value.length > 0) {
+    return `${parseInt(this.element.value, 10)}px`;
+  }
 
-	return fallback || '';
+  return fallback || '';
 };
 
-Option.prototype.getPxValue = function(fallback) {
-	this.element.value = this.element.value.trim();
+Option.prototype.getValue = function (fallback) {
+  this.element.value = this.element.value.trim();
 
-	if( this.element.value.length > 0 ) {
-		return parseInt( this.element.value ) + "px";
-	}
+  if (this.element.value.length > 0) {
+    return this.element.value;
+  }
 
-	return fallback || '';
+  return fallback || '';
 };
 
-Option.prototype.getValue = function(fallback) {
-	this.element.value = this.element.value.trim();
-
-	if( this.element.value.length > 0 ) {
-		return this.element.value;
-	}
-
-	return fallback || '';
+Option.prototype.clear = function () {
+  this.element.value = '';
 };
 
-Option.prototype.clear = function() {
-	this.element.value = '';
-};
-
-Option.prototype.setValue = function(value) {
-	this.element.value = value;
+Option.prototype.setValue = function (value) {
+  this.element.value = value;
 };
 
 module.exports = Option;

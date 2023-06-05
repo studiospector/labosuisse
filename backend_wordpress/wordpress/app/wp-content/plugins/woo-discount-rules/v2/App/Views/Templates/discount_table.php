@@ -163,7 +163,11 @@ if (!empty($ranges) && !empty($woocommerce)) {
                             $for_text = ' +';
                         }
                         if (isset($range['from']) && !empty($range['from']) && isset($range['to']) && !empty($range['to'])) {
-                            $discount_range = $range['from'] . ' - ' . $range['to'];
+                            if($range['from'] == $range['to']) {
+                                $discount_range = $range['from'];
+                            } else {
+                                $discount_range = $range['from'] . ' - ' . $range['to'];
+                            }
                         } elseif (isset($range['from']) && !empty($range['from']) && isset($range['to']) && empty($range['to'])) {
                             $discount_range = $range['from']. $for_text;
                         } elseif (isset($range['from']) && empty($range['from']) && isset($range['to']) && !empty($range['to'])) {

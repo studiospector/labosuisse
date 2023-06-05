@@ -57,10 +57,6 @@ class MC4WP_Autocomplete {
 	}
 
 	/**
-	 * Enqueues the AJAX script whenever a form is outputted with AJAX enabled.
-	 *
-	 * This also fetches the "general error" text of the first form it encounters with AJAX enabled. Not optimal, but does the trick.
-	 *
 	 * @param MC4WP_Form $form
 	 */
 	public function maybe_enqueue_script( MC4WP_Form $form ) {
@@ -173,7 +169,6 @@ class MC4WP_Autocomplete {
 			"live.ca",
 			"aim.com",
 			"bigpond.net.au",
-			"mc4wp.com"
 		);
 
 		$domains = (array) apply_filters( 'mc4wp_forms_email_domain_suggestions', $domains );

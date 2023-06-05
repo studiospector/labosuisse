@@ -1,14 +1,14 @@
-=== Discount Rules for WooCommerce ===
+=== Discount Rules for WooCommerce - Create Smart WooCommerce Coupons & Discounts ===
 Contributors: flycart
 Donate link: https://flycart.org/
-Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
+Tags: woocommerce, coupons, discounts, dynamic pricing, woocommerce coupon, Buy One Get One Free, pricing deals, bulk discount, discount rules, auto-apply coupons, category discounts, url coupons
 Requires at least: 4.4.1
-Tested up to: 6.1
-Stable tag: 2.5.2
+Tested up to: 6.2
+Stable tag: 2.6.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Create simple to complex discount rules, dynamic pricing and discounts. A flexible and powerful WooCommerce discount & WooCommerce coupon plugin.
+Create simple and flexible WooCommerce discounts, dynamic pricing discounts, BOGO discounts and more. A powerful WooCommerce discount & WooCommerce coupon plugin.
 
 == Description ==
 
@@ -335,6 +335,54 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.6.0 - 08/05/23 =
+* Add: Pagination on backend rule listing [Core].
+* Add: Support WooCommerce High-Performance order storage feature [Core and Pro].
+* Add: Tab for display Addons [Core].
+* Add: Option to exclude out of stock product on on-sale page [Core].
+* Improvement: Query optimization while load coupon in backend [Pro].
+* Improvement: Show message in plugin page when a major release is available [Core].
+* Improvement: Allow span, div and p tag on HTML accepted fields [Core].
+* Improvement: Changed TEXT to LONGTEXT for the columns filters, conditions [Core].
+* Improvement: Display single value on discount table when start and end range is same [Core].
+* Improvement: Licence URL update [Pro].
+* Improvement: Load individual product count through the event advanced_woo_discount_rules_include_cart_item_to_count_quantity [Core].
+* Improvement: Support {{cart_subtotal}} shortcode on promotion message. [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_product_discount_price [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_product_discount_details [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_product_discount_percentage [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_product_save_amount [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_cart_item_discount_price [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_cart_item_discount_details [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_cart_item_saved_amount [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_order_item_discount_price [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_order_item_discount_details [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_order_item_saved_amount [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_order_discount_details [Core].
+* Improvement: Event: advanced_woo_discount_rules_get_order_saved_amount [Core].
+* Improvement: Event: advanced_woo_discount_rules_cart_subtotal_promotion_message [Core].
+* Fix: Warning when regular price in not entered on product [Core].
+* Fix: Loading range on backend - disappear when remove the first one [Core and Pro].
+* Fix: Wrong calculation in cart discount while enable apply all matched rule with Apply discount sequentially option [Core].
+* Fix: Showing wrong strikeout on product page [Core].
+* Fix: Adding discount info meta field even if no discount applied [Core].
+
+= 2.5.4 - 30/01/23 =
+* Fix: Discount data is not stored for analytics when change language using WPML [Core].
+* Fix: Discount value is incorrect on coupon report for fixed discount type [Core].
+* Fix: Dynamic strikeout not working for variable product [Core].
+
+= 2.5.3 - 16/01/23 =
+* Improvement: Show used coupon report [Core]
+* Improvement: Dynamic strikeout script update to check the target first with in form [Core].
+* Improvement: Updated JQuery UI version [Core].
+* Fix: Validation fix on creating rules [Pro].
+* Fix: Warning when on rule conditions due to translation [Core].
+* Fix: The cheapest product does not receive a discount when variant together option is enabled [Pro].
+* Fix: Error on variation is not an array [Pro].
+* Fix: Condition doesn't matches when have Match any option with user role condition [Pro].
+* Fix: On-sale page shows incorrect data while have attribute in filters [Pro].
 
 = 2.5.2 - 09/11/22 =
 * Improvement: Event: advanced_woo_discount_rules_exclude_coupon_while_remove_third_party_coupon [Core].

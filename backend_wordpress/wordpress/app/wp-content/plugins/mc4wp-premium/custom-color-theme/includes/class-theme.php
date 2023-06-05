@@ -59,9 +59,9 @@ class MC4WP_Custom_Color_Theme
      * @param string $darkest_color
      * @param string $font_color
      */
-    public function print_css_template($form_id, $color, $darker_color, $darkest_color, $font_color = 'white')
+    public function print_css_template($form_id, $color, $darker_color, $darkest_color, $font_color)
     {
-        echo '<style type="text/css">';
+        echo '<style>';
         include __DIR__ . '/../views/custom-css.php';
         echo '</style>';
     }

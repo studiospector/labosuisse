@@ -9,19 +9,23 @@ declare(strict_types=1);
 
 namespace WooCommerce\PayPalCommerce\WcGateway;
 
-use Dhii\Container\ServiceProvider;
-use Dhii\Modular\Module\ModuleInterface;
+use Psr\Log\LoggerInterface;
+use Throwable;
+use WooCommerce\PayPalCommerce\ApiClient\Exception\RuntimeException;
+use WooCommerce\PayPalCommerce\ApiClient\Helper\Cache;
+use WooCommerce\PayPalCommerce\Vendor\Dhii\Container\ServiceProvider;
+use WooCommerce\PayPalCommerce\Vendor\Dhii\Modular\Module\ModuleInterface;
 use WC_Order;
 use WooCommerce\PayPalCommerce\AdminNotices\Repository\Repository;
 use WooCommerce\PayPalCommerce\ApiClient\Entity\Capture;
 use WooCommerce\PayPalCommerce\ApiClient\Entity\OrderStatus;
 use WooCommerce\PayPalCommerce\ApiClient\Helper\DccApplies;
-use WooCommerce\PayPalCommerce\ApiClient\Repository\PayPalRequestIdRepository;
 use WooCommerce\PayPalCommerce\Onboarding\State;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\FeesRenderer;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\OrderTablePaymentStatusColumn;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\PaymentStatusOrderDetail;
 use WooCommerce\PayPalCommerce\WcGateway\Admin\RenderAuthorizeAction;
+use WooCommerce\PayPalCommerce\WcGateway\Assets\FraudNetAssets;
 use WooCommerce\PayPalCommerce\WcGateway\Assets\SettingsPageAssets;
 use WooCommerce\PayPalCommerce\WcGateway\Checkout\CheckoutPayPalAddressPreset;
 use WooCommerce\PayPalCommerce\WcGateway\Checkout\DisableGateways;
@@ -31,6 +35,7 @@ use WooCommerce\PayPalCommerce\WcGateway\Gateway\CreditCardGateway;
 use WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway;
 use WooCommerce\PayPalCommerce\WcGateway\Helper\DCCProductStatus;
 use WooCommerce\PayPalCommerce\WcGateway\Helper\PayUponInvoiceProductStatus;
+use WooCommerce\PayPalCommerce\WcGateway\Helper\SettingsStatus;
 use WooCommerce\PayPalCommerce\WcGateway\Notice\ConnectAdminNotice;
 use WooCommerce\PayPalCommerce\WcGateway\Notice\GatewayWithoutPayPalAdminNotice;
 use WooCommerce\PayPalCommerce\WcGateway\Processor\AuthorizedPaymentsProcessor;
@@ -39,8 +44,8 @@ use WooCommerce\PayPalCommerce\WcGateway\Settings\SectionsRenderer;
 use WooCommerce\PayPalCommerce\WcGateway\Settings\Settings;
 use WooCommerce\PayPalCommerce\WcGateway\Settings\SettingsListener;
 use WooCommerce\PayPalCommerce\WcGateway\Settings\SettingsRenderer;
-use Interop\Container\ServiceProviderInterface;
-use Psr\Container\ContainerInterface;
+use WooCommerce\PayPalCommerce\Vendor\Interop\Container\ServiceProviderInterface;
+use WooCommerce\PayPalCommerce\Vendor\Psr\Container\ContainerInterface;
 
 /**
  * Class WcGatewayModule
@@ -147,6 +152,12 @@ class WCGatewayModule implements ModuleInterface {
 				if ( ! $wc_order instanceof WC_Order ) {
 					return;
 				}
+				/**
+				 * The filter can be used to remove the rows with PayPal fees in WC orders.
+				 */
+				if ( ! apply_filters( 'woocommerce_paypal_payments_show_fees_on_order_admin_page', true, $wc_order ) ) {
+					return;
+				}
 
 				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 				echo $fees_renderer->render( $wc_order );
@@ -154,9 +165,23 @@ class WCGatewayModule implements ModuleInterface {
 		);
 
 		if ( $c->has( 'wcgateway.url' ) ) {
+			$settings_status = $c->get( 'wcgateway.settings.status' );
+			assert( $settings_status instanceof SettingsStatus );
+
+			$settings = $c->get( 'wcgateway.settings' );
+			assert( $settings instanceof Settings );
+
 			$assets = new SettingsPageAssets(
 				$c->get( 'wcgateway.url' ),
-				$c->get( 'ppcp.asset-version' )
+				$c->get( 'ppcp.asset-version' ),
+				$c->get( 'subscription.helper' ),
+				$c->get( 'button.client_id_for_admin' ),
+				$c->get( 'api.shop.currency' ),
+				$c->get( 'api.shop.country' ),
+				$c->get( 'onboarding.environment' ),
+				$settings_status->is_pay_later_button_enabled(),
+				$settings->has( 'disable_funding' ) ? $settings->get( 'disable_funding' ) : array(),
+				$c->get( 'wcgateway.settings.funding-sources' )
 			);
 			$assets->register_assets();
 		}
@@ -200,7 +225,6 @@ class WCGatewayModule implements ModuleInterface {
 			'woocommerce_paypal_commerce_gateway_deactivate',
 			static function () use ( $c ) {
 				delete_option( Settings::KEY );
-				delete_option( PayPalRequestIdRepository::KEY );
 				delete_option( 'woocommerce_' . PayPalGateway::ID . '_settings' );
 				delete_option( 'woocommerce_' . CreditCardGateway::ID . '_settings' );
 			}
@@ -222,6 +246,8 @@ class WCGatewayModule implements ModuleInterface {
 		add_action(
 			'woocommerce_paypal_payments_gateway_migrate',
 			static function () use ( $c ) {
+				delete_option( 'ppcp-request-ids' );
+
 				$settings = $c->get( 'wcgateway.settings' );
 				assert( $settings instanceof Settings );
 
@@ -237,15 +263,35 @@ class WCGatewayModule implements ModuleInterface {
 		);
 
 		add_action(
-			'init',
+			'woocommerce_paypal_payments_gateway_migrate_on_update',
+			static function() use ( $c ) {
+				$dcc_status_cache = $c->get( 'dcc.status-cache' );
+				assert( $dcc_status_cache instanceof Cache );
+				$pui_status_cache = $c->get( 'pui.status-cache' );
+				assert( $pui_status_cache instanceof Cache );
+
+				$dcc_status_cache->delete( DCCProductStatus::DCC_STATUS_CACHE_KEY );
+				$pui_status_cache->delete( PayUponInvoiceProductStatus::PUI_STATUS_CACHE_KEY );
+
+				$settings = $c->get( 'wcgateway.settings' );
+				$settings->set( 'products_dcc_enabled', false );
+				$settings->set( 'products_pui_enabled', false );
+				$settings->persist();
+			}
+		);
+
+		add_action(
+			'wp_loaded',
 			function () use ( $c ) {
 				if ( 'DE' === $c->get( 'api.shop.country' ) ) {
 					( $c->get( 'wcgateway.pay-upon-invoice' ) )->init();
 				}
 
-				if ( defined( 'PPCP_FLAG_OXXO' ) && PPCP_FLAG_OXXO === true ) {
-					( $c->get( 'wcgateway.oxxo' ) )->init();
-				}
+				( $c->get( 'wcgateway.oxxo' ) )->init();
+
+				$fraudnet_assets = $c->get( 'wcgateway.fraudnet-assets' );
+				assert( $fraudnet_assets instanceof FraudNetAssets );
+				$fraudnet_assets->register_assets();
 			}
 		);
 
@@ -279,13 +325,60 @@ class WCGatewayModule implements ModuleInterface {
 		add_action(
 			'wc_ajax_ppc-oxxo',
 			static function () use ( $c ) {
-				if ( defined( 'PPCP_FLAG_OXXO' ) && PPCP_FLAG_OXXO === false ) {
-					return;
-				}
-
 				$endpoint = $c->get( 'wcgateway.endpoint.oxxo' );
 				$endpoint->handle_request();
 			}
+		);
+
+		add_action(
+			'woocommerce_order_status_changed',
+			static function ( int $order_id, string $from, string $to ) use ( $c ) {
+				$wc_order = wc_get_order( $order_id );
+				if ( ! $wc_order instanceof WC_Order ) {
+					return;
+				}
+
+				$settings = $c->get( 'wcgateway.settings' );
+				assert( $settings instanceof ContainerInterface );
+
+				if ( ! $settings->has( 'capture_on_status_change' ) || ! $settings->get( 'capture_on_status_change' ) ) {
+					return;
+				}
+
+				$intent   = strtoupper( (string) $wc_order->get_meta( PayPalGateway::INTENT_META_KEY ) );
+				$captured = wc_string_to_bool( $wc_order->get_meta( AuthorizedPaymentsProcessor::CAPTURED_META_KEY ) );
+				if ( $intent !== 'AUTHORIZE' || $captured ) {
+					return;
+				}
+
+				/**
+				 * The filter returning the WC order statuses which trigger capturing of payment authorization.
+				 */
+				$capture_statuses = apply_filters( 'woocommerce_paypal_payments_auto_capture_statuses', array( 'processing', 'completed' ), $wc_order );
+				if ( ! in_array( $to, $capture_statuses, true ) ) {
+					return;
+				}
+
+				$authorized_payment_processor = $c->get( 'wcgateway.processor.authorized-payments' );
+				assert( $authorized_payment_processor instanceof AuthorizedPaymentsProcessor );
+
+				try {
+					if ( $authorized_payment_processor->capture_authorized_payment( $wc_order ) ) {
+						return;
+					}
+				} catch ( Throwable $error ) {
+					$logger = $c->get( 'woocommerce.logger.woocommerce' );
+					assert( $logger instanceof LoggerInterface );
+					$logger->error( "Capture failed. {$error->getMessage()} {$error->getFile()}:{$error->getLine()}" );
+				}
+
+				$wc_order->update_status(
+					'failed',
+					__( 'Could not capture the payment.', 'woocommerce-paypal-payments' )
+				);
+			},
+			10,
+			3
 		);
 	}
 
@@ -355,7 +448,7 @@ class WCGatewayModule implements ModuleInterface {
 					$methods[] = $container->get( 'wcgateway.pay-upon-invoice-gateway' );
 				}
 
-				if ( defined( 'PPCP_FLAG_OXXO' ) && PPCP_FLAG_OXXO === true && 'MX' === $shop_country ) {
+				if ( 'MX' === $shop_country ) {
 					$methods[] = $container->get( 'wcgateway.oxxo-gateway' );
 				}
 
@@ -380,14 +473,30 @@ class WCGatewayModule implements ModuleInterface {
 			'admin_init',
 			static function () use ( $container ) {
 				$listener = $container->get( 'wcgateway.settings.listener' );
-				/**
-				 * The settings listener.
-				 *
-				 * @var SettingsListener $listener
-				 */
+				assert( $listener instanceof SettingsListener );
+
 				$listener->listen_for_merchant_id();
-				$listener->listen_for_vaulting_enabled();
-				$listener->listen_for_tracking_enabled();
+
+				try {
+					$listener->listen_for_vaulting_enabled();
+					$listener->listen_for_tracking_enabled();
+				} catch ( RuntimeException $exception ) {
+					add_action(
+						'admin_notices',
+						function () use ( $exception ) {
+							printf(
+								'<div class="notice notice-error"><p>%1$s</p><p>%2$s</p></div>',
+								esc_html__( 'Authentication with PayPal failed: ', 'woocommerce-paypal-payments' ) . esc_attr( $exception->getMessage() ),
+								wp_kses_post(
+									__(
+										'Please verify your API Credentials and try again to connect your PayPal business account. Visit the <a href="https://docs.woocommerce.com/document/woocommerce-paypal-payments/" target="_blank">plugin documentation</a> for more information about the setup.',
+										'woocommerce-paypal-payments'
+									)
+								)
+							);
+						}
+					);
+				}
 			}
 		);
 

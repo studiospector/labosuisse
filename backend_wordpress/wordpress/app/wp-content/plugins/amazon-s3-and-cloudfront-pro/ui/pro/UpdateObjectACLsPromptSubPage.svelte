@@ -34,7 +34,7 @@
 	 * @return {Promise<void>}
 	 */
 	async function handleNext() {
-		await tools.start( tool.id );
+		await tools.start( tool );
 		dispatch( "routeEvent", { event: "next", default: "/" } );
 	}
 </script>

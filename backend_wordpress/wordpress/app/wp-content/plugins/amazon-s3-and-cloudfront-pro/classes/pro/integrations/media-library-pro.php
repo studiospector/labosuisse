@@ -64,10 +64,10 @@ class Media_Library_Pro extends Media_Library {
 	private $media_library_filters = array();
 
 	/**
-	 * Init Media Library Pro integration.
+	 * @inheritDoc
 	 */
-	public function init() {
-		parent::init();
+	public function setup() {
+		parent::setup();
 
 		add_action( 'load-upload.php', array( $this, 'load_media_pro_assets' ), 11 );
 		add_action( 'as3cf_load_attachment_assets', array( $this, 'load_attachment_js' ) );
@@ -78,6 +78,10 @@ class Media_Library_Pro extends Media_Library {
 
 		// Pro customisations
 		add_filter( 'as3cf_media_action_strings', array( $this, 'media_action_strings' ) );
+
+		if ( ! is_multisite() ) {
+			add_filter( 'as3cf_get_summary_counts', array( $this, 'add_urls_to_summary_counts' ) );
+		}
 
 		// Media row actions
 		add_filter( 'wp_prepare_attachment_for_js', array( $this, 'enrich_attachment_model' ), 10, 2 );
@@ -180,7 +184,7 @@ class Media_Library_Pro extends Media_Library {
 		check_ajax_referer( 'singular-update_acl' );
 
 		$id         = $this->as3cf->filter_input( 'id', INPUT_POST, FILTER_VALIDATE_INT ); // input var ok
-		$acl        = $this->as3cf->filter_input( 'acl', INPUT_POST, FILTER_SANITIZE_STRING ); // input var ok
+		$acl        = sanitize_text_field( $_REQUEST['acl'] ); // input var ok
 		$title      = $this->get_media_action_strings( 'change_to_public' );
 		$is_private = true;
 
@@ -1465,5 +1469,34 @@ class Media_Library_Pro extends Media_Library {
 		);
 
 		return $this->media_library_filters;
+	}
+
+	/**
+	 * Add URL entries for our summary counts.
+	 *
+	 * @handles as3cf_get_summary_counts
+	 *
+	 * @param array $summaries
+	 *
+	 * @return array
+	 */
+	public function add_urls_to_summary_counts( array $summaries ): array {
+		$attachments_url = add_query_arg(
+			array(
+				'mode'          => 'list',
+				'filter_action' => 'Filter',
+			),
+			admin_url( 'upload.php' )
+		);
+
+		foreach ( $summaries as $idx => $summary ) {
+			if ( ! empty( $summary['type'] ) && Media_Library_Item::summary_type() === $summary['type'] ) {
+				$summaries[ $idx ]['offloaded_url']     = add_query_arg( 'as3cf_location', 'offloaded', $attachments_url );
+				$summaries[ $idx ]['not_offloaded_url'] = add_query_arg( 'as3cf_location', 'not_offloaded', $attachments_url );
+				break;
+			}
+		}
+
+		return $summaries;
 	}
 }

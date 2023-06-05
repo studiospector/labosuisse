@@ -23,7 +23,7 @@ function CardUnknown( { card, removing, canRemove, remove } ) {
 				) }
 			</p>
 			{ canRemove && (
-				<Button isSecondary isBusy={ removing } onClick={ remove }>
+				<Button variant="secondary" isBusy={ removing } onClick={ remove }>
 					{ __( 'Remove Card', 'better-wp-security' ) }
 				</Button>
 			) }

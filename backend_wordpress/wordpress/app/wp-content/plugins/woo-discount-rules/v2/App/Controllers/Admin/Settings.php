@@ -2,6 +2,7 @@
 
 namespace Wdr\App\Controllers\Admin;
 
+use Wdr\App\Controllers\Admin\Tabs\Addons;
 use Wdr\App\Controllers\Admin\Tabs\Compatible;
 use Wdr\App\Controllers\Admin\Tabs\DiscountRules;
 use Wdr\App\Controllers\Admin\Tabs\Help;
@@ -23,6 +24,10 @@ class Settings extends Base
 {
     public $tabs;
 
+    private static $addons, $addons_list;
+
+    const ADDONS_LIST_JSON_FILE_URL = 'https://cdn.jsdelivr.net/gh/flycartinc/wdr-addons@master/list.json';
+
     function __construct()
     {
         parent::__construct();
@@ -43,6 +48,42 @@ class Settings extends Base
                 'manage_woocommerce', WDR_SLUG,
                 array($this, 'adminTabs')
             );
+        }
+    }
+
+    /**
+     * To handle addon activation and deactivation
+     */
+    function handleActions()
+    {
+        if (isset($_GET['activate_addon'])) {
+            $activated = 0;
+            $nonce = $this->input->get('nonce');
+            $addon = sanitize_text_field($this->input->get('activate_addon'));
+            if ($nonce && wp_verify_nonce($nonce,'awdr_addon_activate')) {
+                $addons = self::getAvailableAddons();
+                if (isset($addons[$addon]) && !empty($addons[$addon]['plugin_file'])) {
+                    activate_plugins(array($addons[$addon]['plugin_file']));
+                    $activated = 1;
+                }
+            }
+            $redirect_url = admin_url('admin.php?page=woo_discount_rules&tab=addons');
+            wp_redirect(add_query_arg('addon_activated', $activated, $redirect_url));
+            exit;
+        } elseif (isset($_GET['deactivate_addon'])) {
+            $deactivated = 0;
+            $nonce = $this->input->get('nonce');
+            $addon = sanitize_text_field($this->input->get('deactivate_addon'));
+            if ($nonce && wp_verify_nonce($nonce,'awdr_addon_deactivate')) {
+                $addons = self::getAvailableAddons();
+                if (isset($addons[$addon]) && !empty($addons[$addon]['plugin_file'])) {
+                    deactivate_plugins(array($addons[$addon]['plugin_file']));
+                    $deactivated = 1;
+                }
+            }
+            $redirect_url = admin_url('admin.php?page=woo_discount_rules&tab=addons');
+            wp_redirect(add_query_arg('addon_deactivated', $deactivated, $redirect_url));
+            exit;
         }
     }
 
@@ -78,6 +119,18 @@ class Settings extends Base
         $tabs = $this->getTabs();
         $page = $this->getPageTask();
         $handler = isset($tabs[$current_tab]) ? $tabs[$current_tab] : $tabs[$this->getDefaultTab()];
+        if ($current_tab == 'addons') {
+            $current_addon = $this->getCurrentAddon();
+            $active_addons = $this->getActiveAddons();
+            $available_addons = $this->getAvailableAddons();
+            if ($current_addon) {
+                if (isset($active_addons[$current_addon]) && is_object($active_addons[$current_addon])) {
+                    $handler = $active_addons[$current_addon];
+                } else {
+                    // TODO: show error message if an addon page is not found
+                }
+            }
+        }
         $params = array(
             'tabs' => $tabs,
             'handler' => $handler,
@@ -111,6 +164,16 @@ class Settings extends Base
     }
 
     /**
+     * get current active addon
+     * @return mixed|string
+     */
+    private function getCurrentAddon()
+    {
+        $current_addon = $this->input->get('addon');
+        return isset($current_addon) ? $current_addon : '';
+    }
+
+    /**
      * Default tab for admin
      * @return string
      */
@@ -133,7 +196,8 @@ class Settings extends Base
             'compatible' => new Compatible(),
             'importexport' => new ImportExport(),
             'help' => new Help(),
-            'recipe' => new Recipe()
+            'recipe' => new Recipe(),
+            'addons' => new Addons(),
         ));
         uasort($tabs, function ($tab1, $tab2) {
             $priority1 = (int)isset($tab1->priority) ? $tab1->priority : 1000;
@@ -145,6 +209,69 @@ class Settings extends Base
             }
         });
         return $this->tabs = $tabs;
+    }
+
+    /**
+     * Get active addons
+     * @return mixed
+     */
+    private static function getActiveAddons()
+    {
+        if (isset(self::$addons)) {
+            return self::$addons;
+        }
+        return self::$addons = apply_filters('advanced_woo_discount_rules_page_addons', array());
+    }
+
+    /**
+     * Get active addons
+     * @return mixed
+     */
+    public static function getAvailableAddons()
+    {
+        if (isset(self::$addons_list)) {
+            return self::$addons_list;
+        }
+        $addons = get_transient('awdr_addons_list');
+        if (empty($addons)) {
+            $response = wp_remote_get(self::ADDONS_LIST_JSON_FILE_URL);
+            if (!is_wp_error($response)) {
+                $addons = (array) json_decode(wp_remote_retrieve_body($response), true);
+                set_transient('awdr_addons_list', $addons, 24 * 60 * 60);
+            } else {
+                $addons = array();
+            }
+        }
+
+        if (!empty($addons)) {
+            $active_plugins = apply_filters('active_plugins', get_option('active_plugins', array()));
+            if (is_multisite()) {
+                $active_plugins = array_merge($active_plugins, get_site_option('active_sitewide_plugins', array()));
+            }
+            $available_plugins = array_keys(get_plugins());
+            $active_addons = self::getActiveAddons();
+            foreach ($addons as $slug => $addon) {
+                $addons[$slug]['page_url'] = self::parseAddonUrl(isset($addon['page_url']) ? $addon['page_url'] : '', $slug);
+                $addons[$slug]['settings_url'] = self::parseAddonUrl(isset($addon['settings_url']) ? $addon['settings_url'] : '', $slug);
+
+                $addons[$slug]['is_active'] = isset($active_addons[$slug]) || (!empty($addon["plugin_file"]) && in_array($addon["plugin_file"], $active_plugins));
+                $addons[$slug]['is_installed'] = !empty($addon["plugin_file"]) && in_array($addon["plugin_file"], $available_plugins);
+            }
+        }
+        return self::$addons_list = $addons;
+    }
+
+    /**
+     * Page addon url
+     */
+    private static function parseAddonUrl($url, $slug)
+    {
+        if (empty($url)) {
+            return $url;
+        }
+        $wdr_page_url = admin_url('admin.php?page=woo_discount_rules');
+        $addon_page_url = admin_url('admin.php?page=woo_discount_rules&tab=addons&addon=' . $slug);
+        return str_replace(['{admin_page}', '{wdr_page}', '{addon_page}'], [admin_url(), $wdr_page_url, $addon_page_url], $url);
     }
 
     /**

@@ -97,6 +97,21 @@ class Woocommerce
     }
 
     /**
+     * get order item
+     * @param int $id
+     * @return \WC_Order_Item|false
+     */
+    static function getOrderItem($id)
+    {
+        if (function_exists('WC') && isset(WC()->order_factory)) {
+            if (method_exists(WC()->order_factory, 'get_order_item')) {
+                return WC()->order_factory->get_order_item($id);
+            }
+        }
+        return false;
+    }
+
+    /**
      * get the product ID
      * @param $product - woocommerce product object
      * @return null
@@ -165,7 +180,7 @@ class Woocommerce
 
     /**
      * Get the product from Cart item data/product id
-     * @param $cart_item object
+     * @param $cart_item array
      * @param $product_id int
      * @return mixed
      */
@@ -405,6 +420,30 @@ class Woocommerce
             return $product->get_variation_prices($for_display);
         }
         return false;
+    }
+
+    /**
+     * Get first visible child variation product of variable product
+     * @param object|\WC_Product_Variable $product
+     * @return false|\WC_Product_Variation
+     */
+    static function getFirstChildOfVariableProduct($product)
+    {
+        $variation_product = false;
+        $variations = self::getProductChildren($product);
+        if (!empty($variations)) {
+            foreach ($variations as $variation_id) {
+                if (empty($variation_id)) {
+                    continue;
+                }
+                $variation_product = self::getProduct($variation_id);
+                $visible_variation = self::variationIsVisible($product);
+                if($visible_variation){
+                    break;
+                }
+            }
+        }
+        return $variation_product;
     }
 
     /**
@@ -744,6 +783,21 @@ class Woocommerce
             $cart_items = $cart->get_cart_contents();
         }
         return apply_filters('advanced_woo_discount_rules_get_cart_items', $cart_items, $cart);
+    }
+
+    /**
+     * get cart item
+     * @param string $key
+     * @return array|false
+     */
+    static function getCartItem($key)
+    {
+        if (function_exists('WC') && isset(WC()->cart) && WC()->cart != null) {
+            if (is_object(WC()->cart) && method_exists(WC()->cart, 'get_cart_item')) {
+                return WC()->cart->get_cart_item($key);
+            }
+        }
+        return false;
     }
 
     /**
@@ -1369,7 +1423,9 @@ class Woocommerce
     {
         if (is_object($order) && method_exists($order, 'add_meta_data')) {
             $status = $order->add_meta_data($key, $value, true);
-            if (method_exists($order, 'save_meta_data')) {
+            if (self::customOrdersTableIsEnabled() && method_exists($order, 'save')) {
+                $order->save();
+            } elseif (method_exists($order, 'save_meta_data')) {
                 $order->save_meta_data();
             }
             return $status;
@@ -1865,6 +1921,33 @@ class Woocommerce
                     return WC()->cart->needs_shipping();
                 }
             }
+        }
+        return false;
+    }
+
+    /**
+     * Check the product is purchasable or not
+     * @param $product
+     * @return bool
+     */
+    static function checkProductIsPurchasable($product) {
+        if(is_object($product) && method_exists($product, 'is_purchasable')) {
+            return $product->is_purchasable();
+        }
+        return false;
+    }
+
+    /**
+     * Check custom order table feature (HPOS) is enabled or not
+     *
+     * @since 2.6.0
+     *
+     * @return bool
+     */
+    static function customOrdersTableIsEnabled()
+    {
+        if (class_exists('Automattic\WooCommerce\Utilities\OrderUtil') && method_exists('Automattic\WooCommerce\Utilities\OrderUtil', 'custom_orders_table_usage_is_enabled')) {
+            return \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled();
         }
         return false;
     }

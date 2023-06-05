@@ -14,6 +14,8 @@ class DiscountCalculator extends Base
     public static $original_price_of_product = array(), $filtered_exclusive_rule = false, $rules, $applied_rules = array(), $total_discounts = array(), $cart_adjustments = array(), $price_discount_apply_as_cart_discount = array(), $tax_display_type = NULL;
     public $is_cart = false;
 
+    private static $total_based_on_filter = array();
+
     /**
      * Initialize the cart calculator with rule list
      * @param $rules
@@ -324,6 +326,7 @@ class DiscountCalculator extends Base
     {
         $discount_text = '';
         $discounted_price_text = '';
+        $save_amount = '';
         switch ($type) {
             case 'fixed_price':
                 if (!empty($value) && !empty($product_price)) {
@@ -334,6 +337,7 @@ class DiscountCalculator extends Base
                     $discount = $product_price - $value;
                     $discount_text = Woocommerce::formatPrice($discount);
                     $discounted_price_text = Woocommerce::formatPrice($value);
+                    $save_amount = Woocommerce::formatPrice($discount_price);
                 }
                 break;
             case 'fixed_set_price':
@@ -350,6 +354,7 @@ class DiscountCalculator extends Base
                     $discount_text = Woocommerce::formatPrice($discount);
                     $discounted_price = $this->mayHaveTax($product, $discounted_price);
                     $discounted_price_text = Woocommerce::formatPrice($discounted_price);
+                    $save_amount = Woocommerce::formatPrice($discount_price);
                 }
                 break;
             case 'percentage':
@@ -361,6 +366,7 @@ class DiscountCalculator extends Base
                     $discount_text = $value . '%';
                     $discount = $this->mayHaveTax($product, $discount);
                     $discounted_price_text = Woocommerce::formatPrice($discount);
+                    $save_amount = Woocommerce::formatPrice($discount_price);
                 }
                 break;
             case 'free_shipping':
@@ -378,18 +384,19 @@ class DiscountCalculator extends Base
                     $value = $this->mayHaveTax($product, $value);
                     $discount_text = Woocommerce::formatPrice($value);
                     $discounted_price_text = Woocommerce::formatPrice($discount);
+                    $save_amount = Woocommerce::formatPrice($discount_price);
                 }
                 break;
         }
         //if (!empty($discount_text) && !empty($discounted_price_text)) {
         $dont_allow_duplicate = true;
         if ($discount_method == "bulk_discount") {
-            $searchForReplace = array('{{title}}', '{{min_quantity}}', '{{max_quantity}}', '{{discount}}', '{{discounted_price}}');//, '{{min_quantity}}', '{{max_quantity}}', '{{discount}}', '{{discounted_price}}'
-            $string_to_replace = array($discounted_title_text, $min, $max, $discount_text, $discounted_price_text); //, $min, $max, $discount_text, $discounted_price_text
+            $searchForReplace = array('{{title}}', '{{min_quantity}}', '{{max_quantity}}', '{{discount}}', '{{discounted_price}}', '{{save_amount}}');//, '{{min_quantity}}', '{{max_quantity}}', '{{discount}}', '{{discounted_price}}', '{{save_amount}}'
+            $string_to_replace = array($discounted_title_text, $min, $max, $discount_text, $discounted_price_text, $save_amount); //, $min, $max, $discount_text, $discounted_price_text
             $html_content = str_replace($searchForReplace, $string_to_replace, $html_content);
         } elseif ($discount_method == "set_discount") {
-            $searchForReplace = array('{{title}}', '{{min_quantity}}', '{{discount}}', '{{discounted_price}}'); //, '{{min_quantity}}', '{{discount}}', '{{discounted_price}}'
-            $string_to_replace = array($discounted_title_text, $min, $discount_text, $discounted_price_text);//, $min, $discount_text, $discounted_price_text
+            $searchForReplace = array('{{title}}', '{{min_quantity}}', '{{discount}}', '{{discounted_price}}','{{save_amount}}'); //, '{{min_quantity}}', '{{discount}}', '{{discounted_price}}', '{{save_amount}}'
+            $string_to_replace = array($discounted_title_text, $min, $discount_text, $discounted_price_text, $save_amount);//, $min, $discount_text, $discounted_price_text
             $html_content = str_replace($searchForReplace, $string_to_replace, $html_content);
             $searchForRemove = array('/{{max_quantity}}/');
             $replacements = array('');
@@ -398,12 +405,12 @@ class DiscountCalculator extends Base
             $searchForReplace = array('{{title}}');
             $string_to_replace = array($discounted_title_text);
             $html_content = str_replace($searchForReplace, $string_to_replace, $html_content);
-            $searchForRemove = array('/{{min_quantity}}/', '/{{max_quantity}}/', '/{{discount}}/', '/{{discounted_price}}/');
+            $searchForRemove = array('/{{min_quantity}}/', '/{{max_quantity}}/', '/{{discount}}/', '/{{discounted_price}}/', '/{{save_amount}}/');
             $replacements = array('', '');
             $html_content = preg_replace($searchForRemove, $replacements, $html_content);
         }else {
-            $searchForReplace = array('{{title}}', '{{discount}}', '{{discounted_price}}');//, '{{discount}}', '{{discounted_price}}'
-            $string_to_replace = array($discounted_title_text, $discount_text, $discounted_price_text);//, $discount_text, $discounted_price_text
+            $searchForReplace = array('{{title}}', '{{discount}}', '{{discounted_price}}','{{save_amount}}');//, '{{discount}}', '{{discounted_price}}', '{{save_amount}}'
+            $string_to_replace = array($discounted_title_text, $discount_text, $discounted_price_text, $save_amount);//, $discount_text, $discounted_price_text
             $html_content = str_replace($searchForReplace, $string_to_replace, $html_content);
             $searchForRemove = array('/{{min_quantity}}/', '/{{max_quantity}}/');
             $replacements = array('', '');
@@ -612,6 +619,21 @@ class DiscountCalculator extends Base
                                     if($discounted_price_array[0]['discount_type'] != "flat_in_subtotal"){
                                         $cart_discount_for_single_qty_from_array = $discounted_price;
                                         $discounted_price = $discounted_price * $quantity;
+                                    } else {
+                                        if (!isset(self::$total_based_on_filter[$rule_id]['total_price'])) {
+                                            self::$total_based_on_filter[$rule_id]['total_price'] = 0;
+                                            foreach (self::$woocommerce_helper->getCart() as $item) {
+                                                $item_product = self::$woocommerce_helper->getProductFromCartItem($item);
+                                                if ($item_product && $rule->isFilterPassed($item_product)) {
+                                                    if ($item_price = $this->getProductPriceFromConfig($item_product, $calculate_discount_from, false)) {
+                                                        self::$total_based_on_filter[$rule_id]['total_price'] += $item_price * $item['quantity'];
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        if (!empty(self::$total_based_on_filter[$rule_id]['total_price']) && !empty($original_product_price)) {
+                                            $cart_fixed_discount_for_per_item_from_array = ($original_product_price / self::$total_based_on_filter[$rule_id]['total_price']) * $discounted_price;
+                                        }
                                     }
                                 }
                             }
@@ -627,6 +649,8 @@ class DiscountCalculator extends Base
                                 } else {
                                     if(!empty($cart_discount_for_single_qty_from_array)){
                                         $product_price = $product_price - $cart_discount_for_single_qty_from_array;
+                                    }elseif(!empty($cart_fixed_discount_for_per_item_from_array)) {
+                                        $product_price = $product_price - $cart_fixed_discount_for_per_item_from_array;
                                     }else{
                                         $product_price = $product_price - $discounted_price;
                                     }

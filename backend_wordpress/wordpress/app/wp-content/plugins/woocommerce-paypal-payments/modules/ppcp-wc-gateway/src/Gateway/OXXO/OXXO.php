@@ -63,7 +63,15 @@ class OXXO {
 
 		add_filter(
 			'woocommerce_available_payment_gateways',
-			function ( array $methods ): array {
+			/**
+			 * Param types removed to avoid third-party issues.
+			 *
+			 * @psalm-suppress MissingClosureParamType
+			 */
+			function ( $methods ) {
+				if ( ! is_array( $methods ) ) {
+					return $methods;
+				}
 
 				if ( ! $this->checkout_allowed_for_oxxo() ) {
 					unset( $methods[ OXXOGateway::ID ] );
@@ -81,12 +89,12 @@ class OXXO {
 		add_filter(
 			'woocommerce_thankyou_order_received_text',
 			/**
-			 * Order can be null.
+			 * Param types removed to avoid third-party issues.
 			 *
 			 * @psalm-suppress MissingClosureParamType
 			 */
-			function( string $message, $order ) {
-				if ( ! $order instanceof WC_Order ) {
+			function( $message, $order ) {
+				if ( ! is_string( $message ) || ! $order instanceof WC_Order ) {
 					return $message;
 				}
 
@@ -105,7 +113,16 @@ class OXXO {
 
 		add_action(
 			'woocommerce_email_before_order_table',
-			function ( WC_Order $order, bool $sent_to_admin ) {
+			/**
+			 * Param types removed to avoid third-party issues.
+			 *
+			 * @psalm-suppress MissingClosureParamType
+			 */
+			function ( $order, $sent_to_admin ) {
+				if ( ! is_a( $order, WC_Order::class ) || ! is_bool( $sent_to_admin ) ) {
+					return;
+				}
+
 				if (
 					! $sent_to_admin
 					&& $order->get_payment_method() === OXXOGateway::ID
@@ -138,7 +155,8 @@ class OXXO {
 			'add_meta_boxes',
 			function( string $post_type ) {
 				if ( $post_type === 'shop_order' ) {
-					$post_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_STRING );
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$post_id = wc_clean( wp_unslash( $_GET['post'] ?? '' ) );
 					$order   = wc_get_order( $post_id );
 					if ( is_a( $order, WC_Order::class ) && $order->get_payment_method() === OXXOGateway::ID ) {
 						$payer_action = $order->get_meta( 'ppcp_oxxo_payer_action' );
@@ -182,7 +200,8 @@ class OXXO {
 			return false;
 		}
 
-		$billing_country = filter_input( INPUT_POST, 'country', FILTER_SANITIZE_STRING ) ?? null;
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$billing_country = wc_clean( wp_unslash( $_POST['country'] ?? '' ) );
 		if ( $billing_country && 'MX' !== $billing_country ) {
 			return false;
 		}

@@ -59,7 +59,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                            placeholder="<?php _e('Discount', 'woo-discount-rules'); ?>"
                            min="0"
                            step="any"
-                           value="<?php echo (isset($range_value->value) && !empty($range_value->value)) ? esc_attr($range_value->value) : 0;?>">
+                           value="<?php echo (isset($range_value->value) && $range_value->value >= 0) ? esc_attr(floatval($range_value->value)) : 0;?>">
                     <span class="wdr_desc_text"><?php _e('Discount Value', 'woo-discount-rules'); ?></span>
                 </div>
                 <div class="bulk_amount">

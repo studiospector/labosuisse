@@ -43,6 +43,13 @@ class Woocommerce extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		// Nothing to do.
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 		add_action( 'woocommerce_process_product_file_download_paths', array( $this, 'make_files_private_on_provider' ), 10, 3 );
 		add_filter( 'woocommerce_file_download_path', array( $this, 'woocommerce_file_download_path' ), 20, 1 );

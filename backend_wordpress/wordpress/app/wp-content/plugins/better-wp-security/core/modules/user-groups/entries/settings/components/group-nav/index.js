@@ -89,7 +89,7 @@ export default function GroupNav() {
 				<Route path={ `${ path }/:child` }>
 					<NavigationFill>
 						<Button
-							isLink
+							variant="link"
 							onClick={ onAdd }
 							className="itsec-add-new-user-group-link"
 						>
@@ -225,7 +225,7 @@ function GroupNavRoute( { root } ) {
 						<FlexItem>
 							<Link
 								component={ withNavigate( Button ) }
-								isTertiary
+								variant="tertiary"
 								type="button"
 								to={ previous }
 							>
@@ -239,7 +239,7 @@ function GroupNavRoute( { root } ) {
 							<FlexItem>
 								<Link
 									component={ withNavigate( Button ) }
-									isPrimary
+									variant="primary"
 									to={ next }
 								>
 									{ __( 'Next', 'better-wp-security' ) }
@@ -248,7 +248,7 @@ function GroupNavRoute( { root } ) {
 							<FlexItem>
 								<Link
 									component={ withNavigate( Button ) }
-									isPrimary
+									variant="primary"
 									to={ nextPage }
 									text={ __( 'Skip User Groups', 'better-wp-security' ) }
 									icon="arrow-right-alt"

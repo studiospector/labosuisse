@@ -39,6 +39,13 @@ class Meta_Slider extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		$this->media_library = $this->as3cf->get_integration_manager()->get_integration( 'mlib' );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		add_filter( 'metaslider_attachment_url', array( $this, 'metaslider_attachment_url' ), 10, 2 );
 		add_filter( 'sanitize_post_meta_amazonS3_info', array( $this, 'layer_slide_sanitize_post_meta' ), 10, 3 );
 		add_filter( 'as3cf_pre_update_attachment_metadata', array( $this, 'layer_slide_abort_upload' ), 10, 4 );
@@ -52,8 +59,6 @@ class Meta_Slider extends Integration {
 		// Filter HTML in layer sliders when they are saved and fetched.
 		add_filter( 'sanitize_post_meta_ml-slider_html', array( $this, 'sanitize_layer_slider_html' ) );
 		add_filter( 'get_post_metadata', array( $this, 'filter_get_post_metadata' ), 10, 4 );
-
-		$this->media_library = $this->as3cf->get_integration_manager()->get_integration( 'mlib' );
 	}
 
 	/**
@@ -259,13 +264,13 @@ class Meta_Slider extends Integration {
 		// we never nest deeper than one level.
 		if ( 0 === $this->get_postmeta_recursion_level ) {
 			$this->get_postmeta_recursion_level++;
-			$meta_value = get_metadata( 'post', $object_id, $meta_key, true );
-			$meta_value = $this->as3cf->filter_local->filter_post( $meta_value );
+			$new_meta_value = get_metadata( 'post', $object_id, $meta_key, true );
+			$new_meta_value = $this->as3cf->filter_local->filter_post( $new_meta_value );
 
 			// Reset recursion.
 			$this->get_postmeta_recursion_level = 0;
 
-			return $meta_value;
+			return $new_meta_value;
 		}
 
 		return $check;

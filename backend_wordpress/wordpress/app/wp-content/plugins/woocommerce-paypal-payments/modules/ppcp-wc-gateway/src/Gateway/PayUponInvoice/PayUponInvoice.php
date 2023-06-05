@@ -17,6 +17,7 @@ use WooCommerce\PayPalCommerce\ApiClient\Factory\CaptureFactory;
 use WooCommerce\PayPalCommerce\Button\Exception\RuntimeException;
 use WooCommerce\PayPalCommerce\Onboarding\Environment;
 use WooCommerce\PayPalCommerce\Session\SessionHandler;
+use WooCommerce\PayPalCommerce\WcGateway\FraudNet\FraudNet;
 use WooCommerce\PayPalCommerce\WcGateway\Gateway\PayPalGateway;
 use WooCommerce\PayPalCommerce\WcGateway\Helper\CheckoutHelper;
 use WooCommerce\PayPalCommerce\WcGateway\Helper\PayUponInvoiceHelper;
@@ -33,20 +34,6 @@ use WP_Error;
 class PayUponInvoice {
 
 	use TransactionIdHandlingTrait;
-
-	/**
-	 * The module URL.
-	 *
-	 * @var string
-	 */
-	protected $module_url;
-
-	/**
-	 * The FraudNet entity.
-	 *
-	 * @var FraudNet
-	 */
-	protected $fraud_net;
 
 	/**
 	 * The pui order endpoint.
@@ -70,20 +57,6 @@ class PayUponInvoice {
 	protected $settings;
 
 	/**
-	 * The environment.
-	 *
-	 * @var Environment
-	 */
-	protected $environment;
-
-	/**
-	 * The asset version.
-	 *
-	 * @var string
-	 */
-	protected $asset_version;
-
-	/**
 	 * The PUI helper.
 	 *
 	 * @var PayUponInvoiceHelper
@@ -96,13 +69,6 @@ class PayUponInvoice {
 	 * @var State
 	 */
 	protected $state;
-
-	/**
-	 * Whether the current page is the PPCP settings page.
-	 *
-	 * @var bool
-	 */
-	protected $is_ppcp_settings_page;
 
 	/**
 	 * Current PayPal settings page id.
@@ -133,63 +99,38 @@ class PayUponInvoice {
 	protected $capture_factory;
 
 	/**
-	 * The session handler
-	 *
-	 * @var SessionHandler
-	 */
-	protected $session_handler;
-
-	/**
 	 * PayUponInvoice constructor.
 	 *
-	 * @param string                      $module_url The module URL.
-	 * @param FraudNet                    $fraud_net The FraudNet entity.
 	 * @param PayUponInvoiceOrderEndpoint $pui_order_endpoint The PUI order endpoint.
 	 * @param LoggerInterface             $logger The logger.
 	 * @param Settings                    $settings The settings.
-	 * @param Environment                 $environment The environment.
-	 * @param string                      $asset_version The asset version.
 	 * @param State                       $state The onboarding state.
-	 * @param bool                        $is_ppcp_settings_page Whether page is PayPal settings poge.
 	 * @param string                      $current_ppcp_settings_page_id Current PayPal settings page id.
 	 * @param PayUponInvoiceProductStatus $pui_product_status The PUI product status.
 	 * @param PayUponInvoiceHelper        $pui_helper The PUI helper.
 	 * @param CheckoutHelper              $checkout_helper The checkout helper.
 	 * @param CaptureFactory              $capture_factory The capture factory.
-	 * @param SessionHandler              $session_handler The session handler.
 	 */
 	public function __construct(
-		string $module_url,
-		FraudNet $fraud_net,
 		PayUponInvoiceOrderEndpoint $pui_order_endpoint,
 		LoggerInterface $logger,
 		Settings $settings,
-		Environment $environment,
-		string $asset_version,
 		State $state,
-		bool $is_ppcp_settings_page,
 		string $current_ppcp_settings_page_id,
 		PayUponInvoiceProductStatus $pui_product_status,
 		PayUponInvoiceHelper $pui_helper,
 		CheckoutHelper $checkout_helper,
-		CaptureFactory $capture_factory,
-		SessionHandler $session_handler
+		CaptureFactory $capture_factory
 	) {
-		$this->module_url                    = $module_url;
-		$this->fraud_net                     = $fraud_net;
 		$this->pui_order_endpoint            = $pui_order_endpoint;
 		$this->logger                        = $logger;
 		$this->settings                      = $settings;
-		$this->environment                   = $environment;
-		$this->asset_version                 = $asset_version;
 		$this->state                         = $state;
-		$this->is_ppcp_settings_page         = $is_ppcp_settings_page;
 		$this->current_ppcp_settings_page_id = $current_ppcp_settings_page_id;
 		$this->pui_product_status            = $pui_product_status;
 		$this->pui_helper                    = $pui_helper;
 		$this->checkout_helper               = $checkout_helper;
 		$this->capture_factory               = $capture_factory;
-		$this->session_handler               = $session_handler;
 	}
 
 	/**
@@ -198,6 +139,11 @@ class PayUponInvoice {
 	 * @throws NotFoundException When setting is not found.
 	 */
 	public function init(): void {
+		if ( $this->pui_helper->is_pui_gateway_enabled() ) {
+			$this->settings->set( 'fraudnet_enabled', true );
+			$this->settings->persist();
+		}
+
 		add_filter(
 			'ppcp_partner_referrals_data',
 			function ( array $data ): array {
@@ -237,11 +183,6 @@ class PayUponInvoice {
 		);
 
 		add_action(
-			'wp_enqueue_scripts',
-			array( $this, 'register_assets' )
-		);
-
-		add_action(
 			'ppcp_payment_capture_completed_webhook_handler',
 			function ( WC_Order $wc_order, string $order_id ) {
 				try {
@@ -251,16 +192,24 @@ class PayUponInvoice {
 
 					$order = $this->pui_order_endpoint->order( $order_id );
 
-					$payment_instructions = array(
-						$order->payment_source->pay_upon_invoice->payment_reference,
-						$order->payment_source->pay_upon_invoice->deposit_bank_details,
-					);
-					$wc_order->update_meta_data(
-						'ppcp_ratepay_payment_instructions_payment_reference',
-						$payment_instructions
-					);
-					$wc_order->save_meta_data();
-					$this->logger->info( "Ratepay payment instructions added to order #{$wc_order->get_id()}." );
+					if (
+						property_exists( $order, 'payment_source' )
+						&& property_exists( $order->payment_source, 'pay_upon_invoice' )
+						&& property_exists( $order->payment_source->pay_upon_invoice, 'payment_reference' )
+						&& property_exists( $order->payment_source->pay_upon_invoice, 'deposit_bank_details' )
+					) {
+
+						$payment_instructions = array(
+							$order->payment_source->pay_upon_invoice->payment_reference,
+							$order->payment_source->pay_upon_invoice->deposit_bank_details,
+						);
+						$wc_order->update_meta_data(
+							'ppcp_ratepay_payment_instructions_payment_reference',
+							$payment_instructions
+						);
+						$wc_order->save_meta_data();
+						$this->logger->info( "Ratepay payment instructions added to order #{$wc_order->get_id()}." );
+					}
 
 					$capture   = $this->capture_factory->from_paypal_response( $order->purchase_units[0]->payments->captures[0] );
 					$breakdown = $capture->seller_receivable_breakdown();
@@ -283,12 +232,17 @@ class PayUponInvoice {
 
 		add_action(
 			'woocommerce_email_before_order_table',
-			function( WC_Order $order, bool $sent_to_admin, bool $plain_text, WC_Email $email ) {
+			/**
+			 * WC_Email type removed to avoid third-party issues.
+			 *
+			 * @psalm-suppress MissingClosureParamType
+			 */
+			function( WC_Order $order, bool $sent_to_admin, bool $plain_text, $email ) {
 				if (
 					! $sent_to_admin
 					&& PayUponInvoiceGateway::ID === $order->get_payment_method()
 					&& $order->has_status( 'processing' )
-					&& $email->id === 'customer_processing_order'
+					&& is_a( $email, WC_Email::class ) && $email->id === 'customer_processing_order'
 				) {
 					$this->logger->info( "Adding Ratepay payment instructions to email for order #{$order->get_id()}." );
 
@@ -296,6 +250,8 @@ class PayUponInvoice {
 
 					$gateway_settings = get_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings' );
 					$merchant_name    = $gateway_settings['brand_name'] ?? '';
+
+					$order_total = wc_price( $order->get_total(), array( 'currency' => $order->get_currency() ) );
 
 					$order_date = $order->get_date_created();
 					if ( null === $order_date ) {
@@ -322,7 +278,7 @@ class PayUponInvoice {
 
 					echo wp_kses_post( "<p>Für Ihre Bestellung #{$order->get_id()} ({$order_purchase_date} $order_time) bei {$merchant_name} haben Sie die Zahlung mittels “Rechnungskauf mit Ratepay“ gewählt." );
 					echo '<br>Bitte benutzen Sie die folgenden Informationen für Ihre Überweisung:</br>';
-					echo wp_kses_post( "<p>Bitte überweisen Sie den Betrag in Höhe von {$order->get_currency()}{$order->get_total()} bis zum {$order_date_30d} auf das unten angegebene Konto. Wichtig: Bitte geben Sie unbedingt als Verwendungszweck {$payment_reference} an, sonst kann die Zahlung nicht zugeordnet werden.</p>" );
+					echo wp_kses_post( "<p>Bitte überweisen Sie den Betrag in Höhe von {$order_total} bis zum {$order_date_30d} auf das unten angegebene Konto. Wichtig: Bitte geben Sie unbedingt als Verwendungszweck {$payment_reference} an, sonst kann die Zahlung nicht zugeordnet werden.</p>" );
 
 					echo '<ul>';
 					echo wp_kses_post( "<li>Empfänger: {$account_holder_name}</li>" );
@@ -345,7 +301,16 @@ class PayUponInvoice {
 
 		add_filter(
 			'woocommerce_gateway_description',
-			function( string $description, string $id ): string {
+			/**
+			 * Param types removed to avoid third-party issues.
+			 *
+			 * @psalm-suppress MissingClosureParamType
+			 */
+			function( $description, $id ): string {
+				if ( ! is_string( $description ) || ! is_string( $id ) ) {
+					return $description;
+				}
+
 				if ( PayUponInvoiceGateway::ID === $id ) {
 					ob_start();
 
@@ -408,8 +373,18 @@ class PayUponInvoice {
 
 		add_action(
 			'woocommerce_after_checkout_validation',
-			function( array $fields, WP_Error $errors ) {
-				$payment_method = filter_input( INPUT_POST, 'payment_method', FILTER_SANITIZE_STRING );
+			/**
+			 * Param types removed to avoid third-party issues.
+			 *
+			 * @psalm-suppress MissingClosureParamType
+			 */
+			function( $fields, WP_Error $errors ) {
+				if ( ! is_array( $fields ) ) {
+					return;
+				}
+
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$payment_method = wc_clean( wp_unslash( $_POST['payment_method'] ?? '' ) );
 				if ( PayUponInvoiceGateway::ID !== $payment_method ) {
 					return;
 				}
@@ -418,12 +393,14 @@ class PayUponInvoice {
 					$errors->add( 'validation', __( 'Billing country not available.', 'woocommerce-paypal-payments' ) );
 				}
 
-				$birth_date = filter_input( INPUT_POST, 'billing_birth_date', FILTER_SANITIZE_STRING );
-				if ( ( $birth_date && ! $this->checkout_helper->validate_birth_date( $birth_date ) ) || $birth_date === '' ) {
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$birth_date = wc_clean( wp_unslash( $_POST['billing_birth_date'] ?? '' ) );
+				if ( ( $birth_date && is_string( $birth_date ) && ! $this->checkout_helper->validate_birth_date( $birth_date ) ) || $birth_date === '' ) {
 					$errors->add( 'validation', __( 'Invalid birth date.', 'woocommerce-paypal-payments' ) );
 				}
 
-				$national_number = filter_input( INPUT_POST, 'billing_phone', FILTER_SANITIZE_STRING );
+				// phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$national_number = wc_clean( wp_unslash( $_POST['billing_phone'] ?? '' ) );
 				if ( ! $national_number ) {
 					$errors->add( 'validation', __( 'Phone field cannot be empty.', 'woocommerce-paypal-payments' ) );
 				}
@@ -440,8 +417,18 @@ class PayUponInvoice {
 
 		add_filter(
 			'woocommerce_available_payment_gateways',
-			function ( array $methods ): array {
-				if ( State::STATE_ONBOARDED !== $this->state->current_state() ) {
+			/**
+			 * Param types removed to avoid third-party issues.
+			 *
+			 * @psalm-suppress MissingClosureParamType
+			 */
+			function ( $methods ) {
+				if (
+					! is_array( $methods )
+					|| State::STATE_ONBOARDED !== $this->state->current_state()
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					|| ! ( is_checkout() || isset( $_GET['pay_for_order'] ) && $_GET['pay_for_order'] === 'true' )
+				) {
 					return $methods;
 				}
 
@@ -452,22 +439,65 @@ class PayUponInvoice {
 					unset( $methods[ PayUponInvoiceGateway::ID ] );
 				}
 
+				if (
+					isset( $_GET['pay_for_order'] ) && $_GET['pay_for_order'] === 'true'
+					&& ! $this->pui_helper->is_pay_for_order_ready_for_pui()
+				) {
+					unset( $methods[ PayUponInvoiceGateway::ID ] );
+				}
+
 				return $methods;
 			}
 		);
 
 		add_action(
-			'woocommerce_settings_checkout',
+			'woocommerce_update_options_checkout_ppcp-pay-upon-invoice-gateway',
 			function () {
+				$gateway = WC()->payment_gateways()->payment_gateways()[ PayUponInvoiceGateway::ID ];
+				if ( $gateway && $gateway->get_option( 'customer_service_instructions' ) === '' ) {
+					$gateway->update_option( 'enabled', 'no' );
+				}
+			}
+		);
+
+		add_action(
+			'woocommerce_settings_checkout',
+			function() {
 				if (
-					PayUponInvoiceGateway::ID === $this->current_ppcp_settings_page_id
-					&& ! $this->pui_product_status->pui_is_active()
+				PayUponInvoiceGateway::ID === $this->current_ppcp_settings_page_id
+				&& $this->pui_product_status->pui_is_active()
 				) {
-					$gateway_settings = get_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings' );
-					$gateway_enabled  = $gateway_settings['enabled'] ?? '';
-					if ( 'yes' === $gateway_enabled ) {
-						$gateway_settings['enabled'] = 'no';
-						update_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings', $gateway_settings );
+					$error_messages = array();
+					$pui_gateway    = WC()->payment_gateways->payment_gateways()[ PayUponInvoiceGateway::ID ];
+					if ( $pui_gateway->get_option( 'brand_name' ) === '' ) {
+						$error_messages[] = esc_html__( 'Could not enable gateway because "Brand name" field is empty.', 'woocommerce-paypal-payments' );
+					}
+					if ( $pui_gateway->get_option( 'logo_url' ) === '' ) {
+						$error_messages[] = esc_html__( 'Could not enable gateway because "Logo URL" field is empty.', 'woocommerce-paypal-payments' );
+					}
+					if ( $pui_gateway->get_option( 'customer_service_instructions' ) === '' ) {
+						$error_messages[] = esc_html__( 'Could not enable gateway because "Customer service instructions" field is empty.', 'woocommerce-paypal-payments' );
+					}
+					if ( count( $error_messages ) > 0 ) {
+						$pui_gateway->update_option( 'enabled', 'no' );
+						?>
+						<div class="notice notice-error">
+							<?php
+							array_map(
+								static function( $message ) {
+									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+									echo '<p>' . $message . '</p>';
+								},
+								$error_messages
+							)
+							?>
+						</div>
+						<?php
+					}
+				} elseif ( PayUponInvoiceGateway::ID === $this->current_ppcp_settings_page_id ) {
+					$pui_gateway = WC()->payment_gateways->payment_gateways()[ PayUponInvoiceGateway::ID ];
+					if ( 'yes' === $pui_gateway->get_option( 'enabled' ) ) {
+						$pui_gateway->update_option( 'enabled', 'no' );
 						$redirect_url = admin_url( 'admin.php?page=wc-settings&tab=checkout&section=ppcp-pay-upon-invoice-gateway' );
 						wp_safe_redirect( $redirect_url );
 						exit;
@@ -482,62 +512,11 @@ class PayUponInvoice {
 		);
 
 		add_action(
-			'woocommerce_update_options_checkout_ppcp-pay-upon-invoice-gateway',
-			function () {
-				$customer_service_instructions = filter_input( INPUT_POST, 'woocommerce_ppcp-pay-upon-invoice-gateway_customer_service_instructions', FILTER_SANITIZE_STRING );
-				if ( '' === $customer_service_instructions ) {
-					$gateway_settings = get_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings' );
-					$gateway_enabled  = $gateway_settings['enabled'] ?? '';
-					if ( 'yes' === $gateway_enabled ) {
-						$gateway_settings['enabled'] = 'no';
-						update_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings', $gateway_settings );
-
-						$redirect_url = admin_url( 'admin.php?page=wc-settings&tab=checkout&section=ppcp-pay-upon-invoice-gateway' );
-						wp_safe_redirect( $redirect_url );
-						exit;
-					}
-				}
-			}
-		);
-
-		add_action(
-			'woocommerce_settings_checkout',
-			function() {
-				if (
-				PayUponInvoiceGateway::ID === $this->current_ppcp_settings_page_id
-				&& $this->pui_product_status->pui_is_active()
-				) {
-					$error_messages = array();
-					$pui_gateway    = WC()->payment_gateways->payment_gateways()[ PayUponInvoiceGateway::ID ];
-					if ( $pui_gateway->get_option( 'logo_url' ) === '' ) {
-						$error_messages[] = esc_html__( 'Could not enable gateway because "Logo URL" field is empty.', 'woocommerce-paypal-payments' );
-					}
-					if ( $pui_gateway->get_option( 'customer_service_instructions' ) === '' ) {
-						$error_messages[] = esc_html__( 'Could not enable gateway because "Customer service instructions" field is empty.', 'woocommerce-paypal-payments' );
-					}
-					if ( count( $error_messages ) > 0 ) { ?>
-						<div class="notice notice-error">
-							<?php
-							array_map(
-								static function( $message ) {
-									// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-									echo '<p>' . $message . '</p>';
-								},
-								$error_messages
-							)
-							?>
-						</div>
-						<?php
-					}
-				}
-			}
-		);
-
-		add_action(
 			'add_meta_boxes',
 			function( string $post_type ) {
 				if ( $post_type === 'shop_order' ) {
-					$post_id = filter_input( INPUT_GET, 'post', FILTER_SANITIZE_STRING );
+					// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+					$post_id = wc_clean( wp_unslash( $_GET['post'] ?? '' ) );
 					$order   = wc_get_order( $post_id );
 					if ( is_a( $order, WC_Order::class ) && $order->get_payment_method() === PayUponInvoiceGateway::ID ) {
 						$instructions = $order->get_meta( 'ppcp_ratepay_payment_instructions_payment_reference' );
@@ -569,32 +548,5 @@ class PayUponInvoice {
 				}
 			}
 		);
-	}
-
-	/**
-	 * Registers PUI assets.
-	 */
-	public function register_assets(): void {
-		$gateway_settings = get_option( 'woocommerce_ppcp-pay-upon-invoice-gateway_settings' );
-		$gateway_enabled  = $gateway_settings['enabled'] ?? '';
-		if ( $gateway_enabled === 'yes' && ! $this->session_handler->order() && ( is_checkout() || is_checkout_pay_page() ) ) {
-			wp_enqueue_script(
-				'ppcp-pay-upon-invoice',
-				trailingslashit( $this->module_url ) . 'assets/js/pay-upon-invoice.js',
-				array(),
-				$this->asset_version,
-				true
-			);
-
-			wp_localize_script(
-				'ppcp-pay-upon-invoice',
-				'FraudNetConfig',
-				array(
-					'f'       => $this->fraud_net->session_id(),
-					's'       => $this->fraud_net->source_website_id(),
-					'sandbox' => $this->environment->current_environment_is( Environment::SANDBOX ),
-				)
-			);
-		}
 	}
 }

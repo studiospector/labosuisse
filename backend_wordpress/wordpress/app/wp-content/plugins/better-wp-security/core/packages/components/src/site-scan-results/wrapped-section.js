@@ -68,7 +68,7 @@ export default function WrappedSection( {
 						{ statusEl }
 						{ description }
 						<Button
-							isLink
+							variant="link"
 							className="itsec-site-scan-toggle-details"
 							onClick={ () =>
 								setIsShowing( ! isShowing )

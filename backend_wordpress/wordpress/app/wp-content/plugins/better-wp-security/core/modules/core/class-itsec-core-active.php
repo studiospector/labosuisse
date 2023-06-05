@@ -20,6 +20,7 @@ class ITSEC_Core_Active {
 		add_action( 'admin_footer', array( $this, 'add_live_reload' ), 1000 );
 		add_action( 'itsec_register_tools', array( $this, 'register_tools' ) );
 		add_action( 'itsec_encryption_rotate_user_keys', array( $this, 'rotate_encrypted_user_keys' ), 10, 2 );
+		add_action( 'itsec_scheduled_enable-encryption', array( $this, 'enable_encryption' ) );
 	}
 
 	public function rest_api_init() {
@@ -139,7 +140,7 @@ class ITSEC_Core_Active {
 				}
 
 				if ( in_array( 'wp-i18n', $deps, true ) ) {
-					wp_set_script_translations( $handle, 'LION', '' );
+					wp_set_script_translations( $handle, 'better-wp-security', '' );
 				}
 
 				if ( $is_js && ! empty( $config['runtime'] ) ) {
@@ -375,6 +376,36 @@ class ITSEC_Core_Active {
 
 		foreach ( array_flip( $users_to_clear ) as $user_id ) {
 			wp_cache_delete( $user_id, 'user_meta' );
+		}
+	}
+
+	public function enable_encryption() {
+		if ( ITSEC_Lib_Encryption::is_available() || ! ITSEC_Files::can_write_to_files() ) {
+			return;
+		}
+
+		if ( ! ITSEC_Lib_Feature_Flags::is_enabled( 'enable_encryption' ) ) {
+			return;
+		}
+
+		if ( get_site_option( 'itsec-enable-encryption-failed' ) ) {
+			return;
+		}
+
+		try {
+			ITSEC_Log::add_debug( 'core', 'try-enable-encryption' );
+			$secret = ITSEC_Lib_Encryption::generate_secret();
+			$result = ITSEC_Lib_Encryption::save_secret_key( $secret );
+
+			if ( $result->is_success() ) {
+				ITSEC_Log::add_debug( 'core', 'enabled-encryption' );
+			} else {
+				update_site_option( 'itsec-enable-encryption-failed', ITSEC_Core::get_current_time_gmt() );
+				ITSEC_Log::add_warning( 'core', 'enable-encryption-failed', $result->get_error() );
+			}
+		} catch ( \Exception $e ) {
+			update_site_option( 'itsec-enable-encryption-failed', ITSEC_Core::get_current_time_gmt() );
+			ITSEC_Log::add_warning( 'core', 'enable-encryption-failed', new WP_Error( 'itsec.encryption.cannot-generate-secret', $e->getMessage() ) );
 		}
 	}
 }

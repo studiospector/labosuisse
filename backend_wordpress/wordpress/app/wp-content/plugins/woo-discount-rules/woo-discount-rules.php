@@ -1,17 +1,17 @@
 <?php
 /**
  * Plugin name: Woo Discount Rules
- * Plugin URI: http://www.flycart.org
+ * Plugin URI: https://www.flycart.org
  * Description: Simple to complex discount rules for your WooCommerce store. Core package.
  * Author: Flycart
  * Author URI: https://www.flycart.org
- * Version: 2.5.2
+ * Version: 2.6.0
  * Slug: woo-discount-rules
  * Text Domain: woo-discount-rules
  * Domain Path: /i18n/languages/
  * Requires at least: 4.6.1
  * WC requires at least: 3.0
- * WC tested up to: 7.1
+ * WC tested up to: 7.6
  */
 if (!defined('ABSPATH')) {
     exit;
@@ -21,7 +21,7 @@ if (!defined('ABSPATH')) {
  * Current version of our app
  */
 if (!defined('WDR_VERSION')) {
-    define('WDR_VERSION', '2.5.2');
+    define('WDR_VERSION', '2.6.0');
 }
 
 global $awdr_load_version;
@@ -190,3 +190,12 @@ if ($awdr_load_version == "v2") {
     }
     include_once(__DIR__ . "/v1/index.php");
 }
+
+/**
+ * To set plugin is compatible for WC Custom Order Table (HPOS) feature.
+ */
+add_action('before_woocommerce_init', function() {
+    if (class_exists(\Automattic\WooCommerce\Utilities\FeaturesUtil::class)) {
+        \Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility('custom_order_tables', __FILE__, true);
+    }
+});

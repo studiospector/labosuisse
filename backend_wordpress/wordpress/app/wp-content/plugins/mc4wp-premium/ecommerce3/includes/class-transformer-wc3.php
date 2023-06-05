@@ -266,7 +266,7 @@ class MC4WP_Ecommerce_Object_Transformer_WC3 implements MC4WP_Ecommerce_Object_T
 
         $date_created = $order->get_date_created();
         if ($date_created !== null) {
-            $order_data['processed_at_foreign'] = $date_created->setTimezone(new \DateTimeZone('UTC'))->format(DateTime::ISO8601);
+            $order_data['processed_at_foreign'] = $date_created->setTimezone(new \DateTimeZone('UTC'))->format(DateTime::ATOM);
         }
 
         // add tracking code(s)

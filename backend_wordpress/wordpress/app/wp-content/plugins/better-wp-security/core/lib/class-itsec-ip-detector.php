@@ -75,18 +75,31 @@ class ITSEC_IP_Detector {
 				continue;
 			}
 
-			if ( $this->allow_private ) {
-				$ip = filter_var( $ip, FILTER_VALIDATE_IP );
-			} else {
-				$ip = filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE );
-			}
-
-			if ( $ip ) {
-				return (string) $ip;
+			if ( $this->is_valid_ip( $ip ) ) {
+				return $ip;
 			}
 		}
 
 		return '';
+	}
+
+	/**
+	 * Checks if the IP address is valid.
+	 *
+	 * Will accept a private IP only if we in the allow private IP loop.
+	 *
+	 * @param string $ip
+	 *
+	 * @return bool
+	 */
+	private function is_valid_ip( string $ip ): bool {
+		$flags = 0;
+
+		if ( ! $this->allow_private ) {
+			$flags |= FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_NO_PRIV_RANGE;
+		}
+
+		return (bool) filter_var( $ip, FILTER_VALIDATE_IP, $flags );
 	}
 
 	/**
@@ -106,7 +119,15 @@ class ITSEC_IP_Detector {
 		$value = trim( $this->server[ $header ] );
 
 		if ( - 1 === $position ) {
-			return ITSEC_Lib::last( explode( ',', $value ) );
+			$ips = array_reverse( array_map( 'trim', explode( ',', $value ) ) );
+
+			foreach ( $ips as $ip ) {
+				if ( $this->is_valid_ip( $ip ) ) {
+					return $ip;
+				}
+			}
+
+			return '';
 		}
 
 		// Handle Forwarded: header syntax https://tools.ietf.org/html/rfc7239#section-4
@@ -120,7 +141,7 @@ class ITSEC_IP_Detector {
 			}
 		}
 
-		$parts = preg_split( '/[, ]/', $value );
+		$parts = preg_split( '/[, ]+/', $value );
 
 		if ( $from === self::FROM_RIGHT ) {
 			$parts = array_reverse( $parts );

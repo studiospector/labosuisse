@@ -125,7 +125,7 @@ class Uploader_Process extends Background_Tool_Process {
 			$this->as3cf->update_media_library_total();
 			$this->license_limit = $this->as3cf->get_total_allowed_media_items_to_upload();
 
-			if ( 0 == $this->license_limit ) {
+			if ( 0 === $this->license_limit ) {
 				$this->cancel();
 
 				$notice_id = $this->tool->get_tool_key() . '_license_limit';

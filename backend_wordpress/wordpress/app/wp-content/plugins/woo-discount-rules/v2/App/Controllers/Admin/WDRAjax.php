@@ -3,6 +3,7 @@
 namespace Wdr\App\Controllers\Admin;
 
 use WC_Data_Store;
+use Wdr\App\Controllers\Admin\Tabs\DiscountRules;
 use Wdr\App\Controllers\Base;
 use Wdr\App\Controllers\Configuration;
 use Wdr\App\Controllers\ManageDiscount;
@@ -12,6 +13,7 @@ use Wdr\App\Helpers\Migration;
 use Wdr\App\Helpers\Rule;
 use Wdr\App\Helpers\Validation;
 use Wdr\App\Helpers\Woocommerce;
+use Wdr\App\Models\DBTable;
 use Wdr\App\Models\Recipes;
 use Wdr\App\Router;
 
@@ -97,9 +99,9 @@ class WDRAjax extends Base
      * */
     public function wdr_ajax_skip_v1_v2_migration(){
         wp_send_json_success(true);
-       /*$migration = new Migration(); //Removed for now
-       $migration->updateMigrationInfo(array('skipped_migration' => 1));
-       wp_send_json_success(true);*/
+        /*$migration = new Migration(); //Removed for now
+        $migration->updateMigrationInfo(array('skipped_migration' => 1));
+        wp_send_json_success(true);*/
     }
 
     /**
@@ -157,15 +159,15 @@ class WDRAjax extends Base
         remove_all_filters('woocommerce_data_stores');
         $data_store = WC_Data_Store::load('product');
         $ids = $data_store->search_products($query, '', true, false, $this->search_result_limit);
-            return array_values(array_map( function ( $post_id ) {
-                $product = Woocommerce::getProduct($post_id);
-                $product_title = Woocommerce::getTitleOfProduct($product);
+        return array_values(array_map( function ( $post_id ) {
+            $product = Woocommerce::getProduct($post_id);
+            $product_title = Woocommerce::getTitleOfProduct($product);
 
-                return array(
-                    'id'   => (string) $post_id,
-                    'text' => '#' . $post_id . ' ' . $product_title,
-                );
-            }, array_filter( $ids ) ));
+            return array(
+                'id'   => (string) $post_id,
+                'text' => '#' . $post_id . ' ' . $product_title,
+            );
+        }, array_filter( $ids ) ));
     }
 
     /**
@@ -290,9 +292,9 @@ class WDRAjax extends Base
                     }
                 }
             }
-           if(empty( $p_title )){
+            if(empty( $p_title )){
                 $p_title =  'SKU: ' . $result->meta_value;
-           }
+            }
             return array(
                 'id' => (string)$result->meta_value,
                 'text' => $p_title,
@@ -357,26 +359,21 @@ class WDRAjax extends Base
     public function wdr_ajax_cart_coupon()
     {
         Helper::validateRequest('wdr_ajax_select2');
-        $posts_raw = get_posts(array(
-            'posts_per_page' => '-1',
+        $query = $this->input->post('query');
+        $post_ids = get_posts(array(
             'post_type' => 'shop_coupon',
-            'post_status' => array('publish'),
+            'post_status' => 'publish',
+            's' => $query,
             'fields' => 'ids',
+            'numberposts' => $this->search_result_limit,
         ));
-        $items = array_map(function ($post_id) {
+        return array_map(function ($post_id) {
             $code = get_the_title($post_id);
             return array(
                 'id' => strtolower($code),
                 'text' => $code
             );
-        }, $posts_raw);
-        $query = $this->input->post('query');
-        if (!empty($query)) {
-            $items = array_filter($items, function ($item) use ($query) {
-                return stripos($item['text'], $query) !== FALSE;
-            });
-        }
-        return array_values($items);
+        }, $post_ids);
     }
 
     /**
@@ -499,6 +496,7 @@ class WDRAjax extends Base
                     '%d'
                 )
             );
+            DBTable::updatePriorityOnDeleteRule($row_id);
             OnSaleShortCode::updateOnsaleRebuildPageStatus($row_id);
             do_action('advanced_woo_discount_rules_after_delete_rule', $row_id);
         }
@@ -518,6 +516,14 @@ class WDRAjax extends Base
         $duplicated_id = 'failed';
         $row_id = $this->input->post('rowid', '');
         $row_id = intval($row_id);
+        $current_user = get_current_user_id();
+        $current_user_id = intval($current_user);
+        $current_date_time = '';
+        if (function_exists('current_time')) {
+            $current_time = current_time('timestamp');
+            $current_date_time = date('Y-m-d H:i:s', $current_time);
+        }
+        $created_on = esc_sql($current_date_time);
         if (!empty($row_id)) {
             Helper::validateRequest('wdr_ajax_duplicate_rule'.$row_id);
             $rule_title = $wpdb->get_row("SELECT title FROM " . $wpdb->prefix . self::$wdr_rules_table . " WHERE id=" . $row_id);
@@ -528,8 +534,8 @@ class WDRAjax extends Base
             }
             $rule_title = !empty($rule_title) && isset($rule_title->title) ? $rule_title->title : '';
             $rule_title = addslashes($rule_title);
-            $sql = "INSERT INTO " . $wpdb->prefix . self::$wdr_rules_table . " (enabled, exclusive, title, priority, filters, conditions, product_adjustments, cart_adjustments, buy_x_get_x_adjustments, buy_x_get_y_adjustments, bulk_adjustments, set_adjustments, other_discounts, date_from, date_to, usage_limits, rule_language, additional, max_discount_sum, advanced_discount_message, discount_type, used_coupons ) 
-                    SELECT 0, exclusive, '" . $rule_title . " - copy'," . $priority . ", filters, conditions, product_adjustments, cart_adjustments, buy_x_get_x_adjustments, buy_x_get_y_adjustments, bulk_adjustments, set_adjustments, other_discounts, date_from, date_to, usage_limits, rule_language,  additional, max_discount_sum, advanced_discount_message, discount_type, used_coupons   
+            $sql = "INSERT INTO " . $wpdb->prefix . self::$wdr_rules_table . " (enabled, exclusive, title, priority, filters, conditions, product_adjustments, cart_adjustments, buy_x_get_x_adjustments, buy_x_get_y_adjustments, bulk_adjustments, set_adjustments, other_discounts, date_from, date_to, usage_limits, rule_language, additional, max_discount_sum, advanced_discount_message, discount_type, used_coupons, created_by, created_on ) 
+                    SELECT 0, exclusive, '" . $rule_title . " - copy'," . $priority . ", filters, conditions, product_adjustments, cart_adjustments, buy_x_get_x_adjustments, buy_x_get_y_adjustments, bulk_adjustments, set_adjustments, other_discounts, date_from, date_to, usage_limits, rule_language,  additional, max_discount_sum, advanced_discount_message, discount_type, used_coupons, ".$current_user_id.", '".$created_on."'   
                     FROM " . $wpdb->prefix . self::$wdr_rules_table . " 
                     WHERE id = " . $row_id;
             $wpdb->query($sql);
@@ -662,6 +668,7 @@ class WDRAjax extends Base
                         )
                     );
                 }
+                DBTable::resetRulePriorities();
                 do_action('advanced_woo_discount_rules_after_delete_rules', $saved_rules);
                 wp_send_json(
                     array(
@@ -683,28 +690,53 @@ class WDRAjax extends Base
     public function wdr_ajax_update_priority_order()
     {
         Helper::validateRequest('awdr_rule_list');
-        global $wpdb;
-        $new_priority_order = $this->input->post('position', '');
-        $priority = 1;
-        $priority_updated = false;
-        foreach ($new_priority_order as $key => $value) {
-            $priority_updated = $wpdb->update($wpdb->prefix . self::$wdr_rules_table,
-                array(
-                    'priority' => $priority
-                ),
-                array(
-                    'id' => intval($value)
-                ),
-                array(
-                    '%d'
-                ),
-                array(
-                    '%d'
-                )
-            );
-            $priority++;
+        $positions = $this->input->post('position', '');
+        if (!empty($positions) || is_array($positions)){
+            $positions['drag_position'] = (int) $positions['drag_position'];
+            $positions['drop_position'] = (int) $positions['drop_position'];
+            $update = DBTable::dragDropPriorities($positions);
+            if ($update){
+                $data = $this->get_rules_table_html();
+                if (!empty($data)){
+                    wp_send_json($data);
+                } else {
+                    wp_send_json(false);
+                }
+            } else {
+                wp_send_json(false);
+            }
         }
-        wp_send_json($priority_updated);
+        else {
+            wp_send_json(false);
+        }
+    }
+
+    /**
+     * @return array|void
+     */
+    public function get_rules_table_html (){
+
+        $positions = $this->input->post('position', '');
+        $rule_helper = new Rule();
+        $available_conditions = (new DiscountRules)->getAvailableConditions();
+        if (!empty($positions) && is_array($positions)){
+            $positions['has_migration'] = false;
+            $positions['name'] =  stripslashes(sanitize_text_field($this->input->get('name', '')));
+            $positions['limit'] =$this->input->get('limit', 20);
+            $positions['sort'] = $this->input->get('re_order', 0);
+            $positions['current_page'] = (int)$this->input->get('page_no', 1);
+            $offset = ( $positions['current_page'] - 1 ) * $positions['limit'];
+            $update = $rule_helper->adminPagination($available_conditions,$positions['limit'],$offset,$positions['sort'],$positions['name']);
+            $positions['rules'] = $update['result'];
+            $positions['rule_count'] = $update['count'];
+            $positions['input'] = $this->input;
+            $positions['site_languages'] = (new DiscountRules)->getAvailableLanguages();
+            $positions['total_count'] = ceil($positions['rule_count'] /  $positions['limit']);
+            $template_helper = self::$template_helper;
+            return ['html' => $template_helper->setPath(WDR_PLUGIN_PATH . 'App/Views/Admin/Tabs/DiscountRule.php')->setData($positions)->render()];
+        } else {
+            return array();
+        }
     }
 
     /**
@@ -726,7 +758,8 @@ class WDRAjax extends Base
                 remove_filter('woocommerce_get_price_html', array(Router::$manage_discount, 'getPriceHtml'), 100);
                 $original_html = self::$woocommerce_helper->getPriceHtml($product);
                 if(empty($price_html)){
-                    $price_html = $original_html;
+                    $product_price = Woocommerce::getProductPrice($product);
+                    $price_html = !empty(Woocommerce::getProductSalePrice($product)) ? $original_html : Woocommerce::formatPrice($product_price);
                 }
                 $price_html = apply_filters('advanced_woo_discount_rules_dynamic_get_price_html', $price_html, $product, $awdr_request = true);
             }

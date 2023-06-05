@@ -13,7 +13,7 @@ function googleChartsLoadCallback() {
 
 jQuery(document).ready(function () {
     isjQueryReady = true;
-    jQuery('.chart-type').select2();
+    jQuery('.chart-type').select2({width: "260px"});
     init();
 
 });
@@ -25,23 +25,25 @@ function init() {
     isInitialized = true;
 
     jQuery('.chart-period').change(function () {
-        var val = jQuery('.chart-period').val();
+        var val = jQuery(this).val();
+        var start_date = jQuery(this).closest('form').find('.chart-period-start');
+        var end_date = jQuery(this).closest('form').find('.chart-period-end');
         var now = new Date();
         if (val === 'this_week') {
             now.setDate(now.getDate() - now.getDay() + 1);
-            jQuery('.chart-period-start').val(format_date(now));
+            start_date.val(format_date(now));
             now.setDate(now.getDate() + 6);
-            jQuery('.chart-period-end').val(format_date(now));
+            end_date.val(format_date(now));
         } else if (val === 'this_month') {
             var start_month = new Date(now.getFullYear(), now.getMonth(), 1);
-            jQuery('.chart-period-start').val(format_date(start_month));
-            var end_month = new Date(now.getFullYear(), now.getMonth() + 1, -1);
-            jQuery('.chart-period-end').val(format_date(end_month));
+            start_date.val(format_date(start_month));
+            var end_month = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+            end_date.val(format_date(end_month));
         }
     });
 
     jQuery('.chart-period-start, .chart-period-end').change(function () {
-        jQuery('.chart-period').val('custom');
+        jQuery(this).closest('form').find('.chart-period').val('custom');
     });
 
     jQuery('.chart-options').submit(function (e) {
@@ -53,6 +55,25 @@ function init() {
         return false;
     });
 
+    jQuery('.coupon-options').submit(function (e) {
+        e.preventDefault();
+
+        var params = jQuery(this).serialize();
+        loadCouponDetails(params);
+
+        return false;
+    });
+
+    jQuery('#wdr-statistics-tabs li a').click(function() {
+        if (!jQuery(this).hasClass('active')){
+            jQuery('#wdr-statistics-tabs li a').removeClass('active');
+            jQuery(this).addClass('active');
+
+            jQuery('.wdr-statistics-container').hide();
+            jQuery(jQuery(this).data('target')).fadeIn('slow');
+        }
+    });
+
     jQuery(window).resize(function () {
         if (response_content && response_content.data.chart.columns.length > 1) {
             renderChart(response_content.data.chart);
@@ -61,6 +82,7 @@ function init() {
 
     jQuery('.chart-period').change();
     jQuery('.chart-options').submit();
+    jQuery('.coupon-options').submit();
 }
 
 function renderChart(data) {
@@ -105,7 +127,7 @@ function renderChart(data) {
 }
 
 function showChart(params) {
-   /* jQuery('.update-chart').prop('disabled', true);*/
+    /*jQuery('.update-chart').prop('disabled', true);*/
     /*jQuery('.chart-placeholder').addClass('loading');*/
     let loader = jQuery('.woo_discount_loader');
     loader.show();
@@ -122,24 +144,48 @@ function showChart(params) {
         function (response) {
             loader.hide();
             /*jQuery('.update-chart').prop('disabled', false);*/
-          /*  jQuery('.chart-placeholder').removeClass('loading');*/
-            if (response.success) {
-                if (response.data.chart.columns && response.data.chart.columns.length > 1) {
-                    response_content = response;
-                    renderChart(response.data.chart);
-                    jQuery("#info-container").show();
-                    if (response.data.other) {
-                        jQuery("#info-container #total-orders").html(response.data.other.total_orders);
-                        jQuery("#info-container #total-revenue").html(response.data.other.revenue);
-                        jQuery("#info-container #discounted-amount").html(response.data.other.discounted_amount);
-                        jQuery("#info-container #total-free-shipping").html(response.data.other.total_free_shipping);
-                    }
-                } else {
-                    jQuery('#chart-container').html(wdr_data.localization_data.chart_data);
-                    jQuery("#info-container").hide();
+            /*jQuery('.chart-placeholder').removeClass('loading');*/
+            if (response.success && response.data.chart.columns && response.data.chart.columns.length > 1) {
+                response_content = response;
+                renderChart(response.data.chart);
+                jQuery("#info-container").show();
+                if (response.data.other) {
+                    jQuery("#info-container #total-orders").html(response.data.other.total_orders);
+                    jQuery("#info-container #total-revenue").html(response.data.other.revenue);
+                    jQuery("#info-container #discounted-amount").html(response.data.other.discounted_amount);
+                    jQuery("#info-container #total-free-shipping").html(response.data.other.total_free_shipping);
                 }
+            } else {
+                jQuery("#chart-container").html(wdr_data.localization_data.chart_data);
+                jQuery("#info-container").hide();
+            }
+        },
+        'json'
+    );
+}
+
+function loadCouponDetails(params) {
+    let loader = jQuery('.woo_discount_loader');
+    loader.show();
+    jQuery.post(
+        ajaxurl,
+        {
+            action: 'wdr_admin_statistics',
+            method: 'get_coupon_data',
+            params: params,
+        },
+        function (response) {
+            loader.hide();
+            if (response.success && response.data && response.data.length) {
+                jQuery("#coupon-container .no-data").hide();
+                jQuery("#coupon-container .list-coupons").show();
+                jQuery("#coupon-container table tbody").html('');
+                response.data.forEach(function(row) {
+                    jQuery("#coupon-container table tbody").append('<tr><td>' + row.name + '</td><td>' + row.orders + '</td><td>' + row.amount + '</td></tr>')
+                });
             }else {
-                jQuery('#chart-container').html(wdr_data.localization_data.chart_data);
+                jQuery('#coupon-container .list-coupons').hide();
+                jQuery('#coupon-container .no-data').html(wdr_data.localization_data.chart_data).show();
             }
         },
         'json'

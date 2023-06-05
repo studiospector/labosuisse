@@ -526,7 +526,7 @@ function ModuleLinks( { module } ) {
 			<Link
 				to={ `/settings/user-groups?module=${ module.id }` }
 				component={ withNavigate( Button ) }
-				isLink
+				variant="link"
 				text={ text }
 				icon="groups"
 			/>

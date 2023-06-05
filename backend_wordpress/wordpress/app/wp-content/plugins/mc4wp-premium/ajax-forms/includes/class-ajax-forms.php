@@ -77,7 +77,7 @@ class MC4WP_AJAX_Forms
         }
 
         wp_enqueue_script('mc4wp-ajax-forms', plugins_url('/assets/js/ajax-forms.js', $this->plugin_file), array( 'mc4wp-forms-api' ), MC4WP_PREMIUM_VERSION, true);
-
+        add_filter( 'script_loader_tag', array( $this, 'add_defer_attribute' ), 10, 2 );
         // default loading character
         $character = "&bull;";
 
@@ -104,6 +104,18 @@ class MC4WP_AJAX_Forms
 
         $this->is_script_enqueued = true;
     }
+
+    /**
+     * Adds defer attribute to our <script> element
+     */
+    public function add_defer_attribute( $tag, $handle ) {
+        if ( $handle !== 'mc4wp-ajax-forms' ) {
+            return $tag;
+        }
+
+        return str_replace( ' src=', ' defer src=', $tag );
+    }
+
 
     /**
      * @param MC4WP_Form $form

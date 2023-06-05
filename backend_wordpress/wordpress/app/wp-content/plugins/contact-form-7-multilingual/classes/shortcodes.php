@@ -4,6 +4,9 @@ namespace WPML\CF7;
 
 class Shortcodes implements \IWPML_Frontend_Action {
 
+	/**
+	 * @return void
+	 */
 	public function add_hooks() {
 		add_filter( 'shortcode_atts_wpcf7', [ $this, 'translate_shortcode_form_id' ] );
 	}

@@ -7,6 +7,8 @@ use Wdr\App\Helpers\Helper;
 use Wdr\App\Helpers\Rule;
 use Wdr\App\Controllers\Admin\Tabs\Reports;
 use Wdr\App\Helpers\Validation;
+use Wdr\App\Helpers\Woocommerce;
+use Wdr\App\Models\DBTable;
 
 if (!defined('ABSPATH')) exit; // Exit if accessed directly
 
@@ -71,8 +73,25 @@ class Statistics extends Base
             $charts[ $group ][ $k ] = $item['label'];
         }
 
+        $coupon_type = __('Coupon', 'woo-discount-rules');
+        $coupon_label = __('Coupon Label', 'woo-discount-rules');
+        $coupons = array(
+            $coupon_type => array(
+                'awdr_all_coupons' => __('All coupons', 'woo-discount-rules'),
+                'awdr_custom_coupons' => __('Coupon discount (create your own coupon option)', 'woo-discount-rules'),
+                'awdr_discount_coupons' => __('All Cart discounts (discount label)', 'woo-discount-rules'),
+            )
+        );
+        $applied_coupons = DBTable::get_coupons_for_report();
+        foreach ($applied_coupons as $row) {
+            if (!empty($row->cart_discount_label)) {
+                $coupons[$coupon_label][] = $row->cart_discount_label;
+            }
+        }
+
         $params = array(
-          'charts' => $charts,
+            'charts' => $charts,
+            'coupons' => $coupons,
         );
         self::$template_helper->setPath(WDR_PLUGIN_PATH . 'App/Views/Admin/Tabs/Statistics.php')->setData($params)->display();
     }
@@ -119,4 +138,32 @@ class Statistics extends Base
         }
     }
 
+    /**
+     * Get discount coupon data for analytics
+     */
+    protected function ajax_get_coupon_data()
+    {
+        parse_str( $_POST['params'], $params );
+        $awdr_nonce = isset($params['awdr_nonce'])? $params['awdr_nonce']: '';
+        Helper::validateRequest('wdr_ajax_report', $awdr_nonce);
+        if(Helper::hasAdminPrivilege()) {
+            if (!Validation::validateReportTabFields($params, false)) {
+                wp_send_json_error();
+            }
+            $results = [];
+            $data = DBTable::get_coupon_data($params);
+            if (!empty($data) && is_array($data)) {
+                foreach ($data as $row) {
+                    $results [] = [
+                        'name' => $row->coupon_name,
+                        'orders' => $row->total_orders,
+                        'amount' => Woocommerce::formatPrice($row->discounted_amount),
+                    ];
+                }
+            }
+            wp_send_json_success($results);
+        } else {
+            die(__('Authentication required', 'woo-discount-rules'));
+        }
+    }
 }

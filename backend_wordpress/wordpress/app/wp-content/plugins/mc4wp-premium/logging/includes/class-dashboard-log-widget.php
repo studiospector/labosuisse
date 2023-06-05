@@ -36,7 +36,7 @@ class MC4WP_Dashboard_Log_Widget
             echo '<p>' . __("No log entries found.", 'mailchimp-for-wp') . '</p>';
         } else {
             ?>
-			<style type="text/css">
+			<style>
 				.mc4wp-dashboard-table {
 					table-layout: fixed;
 					width: 100%;

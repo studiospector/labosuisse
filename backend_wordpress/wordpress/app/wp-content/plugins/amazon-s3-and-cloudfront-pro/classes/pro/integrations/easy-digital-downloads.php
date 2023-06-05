@@ -32,6 +32,13 @@ class Easy_Digital_Downloads extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		// Nothing to do.
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		// Set download method to redirect
 		add_filter( 'edd_file_download_method', array( $this, 'set_download_method' ) );
 		// Disable using symlinks for download.

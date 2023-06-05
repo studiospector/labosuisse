@@ -153,7 +153,7 @@ class Delicious_Brains_API_Base extends Delicious_Brains_API {
 			}
 		} else {
 			$disable_ssl_url           = $this->admin_url( $this->plugin->settings_url_path . '&nonce=' . wp_create_nonce( $this->plugin->prefix . '-disable-ssl' ) . '&' . $this->plugin->prefix . '-disable-ssl=1' );
-			$connection_failed_message .= sprintf( __( 'This issue is often caused by an improperly configured SSL server (https). We recommend <a href="%1$s" target="_blank">fixing the SSL configuration on your server</a>, but if you need a quick fix you can:%2$s' ), 'https://deliciousbrains.com/wp-migrate-db-pro/doc/could-not-connect-deliciousbrains-com/', sprintf( '<p><a href="%1$s" class="temporarily-disable-ssl button">%2$s</a></p>', $disable_ssl_url, __( 'Temporarily disable SSL for connections to deliciousbrains.com' ) ) );
+			$connection_failed_message .= sprintf( __( 'This issue is often caused by an improperly configured SSL server (https). We recommend <a href="%1$s" target="_blank" class="help">fixing the SSL configuration on your server</a>, but if you need a quick fix you can %2$s' ), 'https://deliciousbrains.com/wp-migrate-db-pro/doc/could-not-connect-deliciousbrains-com/', sprintf( '<a href="%1$s" class="temporarily-disable-ssl">%2$s</a>', $disable_ssl_url, __( 'temporarily disable SSL for connections to deliciousbrains.com.' ) ) );
 		}
 
 		return json_encode( array( 'errors' => array( 'connection_failed' => $connection_failed_message ) ) );

@@ -1,17 +1,17 @@
 <script>
-	import {tweened} from "svelte/motion";
-	import {cubicOut} from 'svelte/easing';
-	import {Confetti} from "svelte-confetti";
 	import {bucket_writable, strings, urls} from "../js/stores";
 	import {running, tools, toolsLocked} from "./stores";
 	import Panel from "../components/Panel.svelte";
 	import PanelRow from "../components/PanelRow.svelte";
 	import Button from "../components/Button.svelte";
+	import ProgressBar from "../components/ProgressBar.svelte";
+	import ToolRunningButtons from "./ToolRunningButtons.svelte";
+	import {numToString} from "../js/numToString";
 
 	export let tool = {};
 
 	// Total processed related variables.
-	$: showTotal = tool.hasOwnProperty( "total_progress" );
+	$: showTotal = !!tool.hasOwnProperty( "total_progress" );
 	$: initial = !!(showTotal && tool.total_progress < 1);
 	$: partialComplete = !!(showTotal && tool.total_progress > 0 && tool.total_progress < 100);
 	$: complete = !!(showTotal && !initial && !partialComplete);
@@ -23,20 +23,16 @@
 	$: disabled = ($running && $running !== tool.id) || (tool.is_processing && tool.is_paused) || tool.is_cancelled || $toolsLocked;
 	$: disabled_bucket_access = tool.requires_bucket_access && !$bucket_writable;
 
-	let progress = tweened( 0, {
-		duration: 400,
-		easing: cubicOut
-	} );
-
 	/**
 	 * Returns the numeric percentage progress for the running job.
 	 *
 	 * @param {Object} tool
 	 * @param {boolean} isRunning
+	 * @param {boolean} showTotal
 	 *
 	 * @return {number}
 	 */
-	function getProgress( tool, isRunning ) {
+	function getPercentComplete( tool, isRunning, showTotal ) {
 		if ( isRunning ) {
 			return tool.progress;
 		} else if ( showTotal ) {
@@ -46,7 +42,7 @@
 		return 0;
 	}
 
-	$: progress.set( getProgress( tool, isRunning ) );
+	$: percentComplete = getPercentComplete( tool, isRunning, showTotal );
 
 	/**
 	 * Returns state dependent icon for tool.
@@ -94,9 +90,7 @@
 	 * @param {Object} tool
 	 */
 	function handleStartTool( tool ) {
-		$running = tool.id;
-		tool.is_queued = true;
-		tools.start( tool.id );
+		tools.start( tool );
 	}
 
 	/**
@@ -104,22 +98,6 @@
 	 */
 	function handleStart() {
 		handleStartTool( tool );
-	}
-
-	/**
-	 * Handles a Pause or Resume button click.
-	 */
-	function handlePauseResume() {
-		tool.is_paused = !tool.is_paused;
-		tools.pauseResume( tool.id );
-	}
-
-	/**
-	 * Handles a Cancel button click.
-	 */
-	function handleCancel() {
-		tool.is_cancelled = true;
-		tools.cancel( tool.id );
 	}
 </script>
 
@@ -139,18 +117,10 @@
 		{/if}
 		<div class="buttons-right">
 			{#if isRunning}
-				<Button outline {disabled} class="pause" on:click={handlePauseResume}>
-					{#if tool.is_paused}
-						{$strings.resume_button}
-					{:else}
-						{$strings.pause_button}
-					{/if}
-				</Button>
-				<Button outline {disabled} on:click={handleCancel}>{$strings.cancel_button}</Button>
+				<ToolRunningButtons {tool} {disabled}/>
 			{:else}
 				{#if complete}
-					<span class="emoji-party">🎉</span>
-					<Confetti x={[0.3, 1.2]} y={[0.3, 1.2]} rounded cone/>
+					<!-- 🎉 -->
 				{:else if disabled_bucket_access}
 					<Button primary disabled={true} title={$strings.disabled_tool_bucket_access}>{@html partialComplete ? tool.button_partial_complete : tool.button}</Button>
 				{:else if initial}
@@ -164,11 +134,11 @@
 		</div>
 	</PanelRow>
 	{#if complete || partialComplete || isRunning}
-		<PanelRow class="body flex-row progress-bar">
+		<PanelRow class="body flex-row show-progress">
 			<div class="status">
 				{#if isRunning}
 					<h4>
-						<strong>{getProgress( tool, isRunning )}%</strong> ({tool.queue.processed} / {tool.queue.total})
+						<strong>{getPercentComplete( tool, isRunning, showTotal )}%</strong> ({numToString( tool.queue.processed )}/{numToString( tool.queue.total )})
 						{@html tool.status_description ? " " + tool.status_description : " " + tool.busy_description}
 					</h4>
 				{:else }
@@ -176,14 +146,13 @@
 				{/if}
 				<slot name="status-right" {isRunning}/>
 			</div>
-			<div
-				class="progress"
-				class:stripe={isRunning && ! tool.is_paused}
-				class:animate={starting}
-				title={! isRunning && showTotal ? "(" + tool.total_processed + " / " + tool.total_items + ")" : ""}
-			>
-				<span class="indicator animate" class:complete class:running={isRunning} style="width: {$progress}%"></span>
-			</div>
+			<ProgressBar
+				{percentComplete}
+				{starting}
+				running={isRunning}
+				paused={tool.is_paused}
+				title={! isRunning && showTotal ? "(" + numToString(tool.total_processed) + "/" + numToString(tool.total_items) + ")" : ""}
+			/>
 		</PanelRow>
 	{/if}
 	{#if !complete && !partialComplete && !isRunning}

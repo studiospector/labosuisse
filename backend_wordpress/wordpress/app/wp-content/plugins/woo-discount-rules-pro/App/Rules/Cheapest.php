@@ -231,7 +231,7 @@ class Cheapest
                             $current_item_price = apply_filters('advanced_woo_discount_rules_get_price_of_cart_item_on_find_cheapest_item', $current_item_price, $cart_item_product, $item);
                             if($cheapest_price === null || self::isConditionMatched($condition, $cheapest_price, $current_item_price)){
                                 $current_qty = $item['quantity'];
-                                if(isset($product_page_data['count_type']) && $product_page_data['count_type'] = 'individual'){
+                                if(isset($product_page_data['count_type']) && $product_page_data['count_type'] == 'individual'){
                                     $applied_qty = self::getAppliedQty($key, $rule->rule->id, $product_page_data);
                                     if($applied_qty > 0){
                                         $current_qty = $current_qty - $applied_qty;

@@ -5,6 +5,7 @@ use Wdr\App\Controllers\Configuration;
 use Wdr\App\Controllers\OnSaleShortCode;
 use Wdr\App\Helpers\Migration;
 use Wdr\App\Helpers\Rule;
+use Wdr\App\Models\DBTable;
 
 if (!defined('ABSPATH')) exit;
 
@@ -12,6 +13,7 @@ class DiscountRules extends Base
 {
     public $priority = 10;
     protected $tab = 'rules';
+    public static $available_rules = array();
 
     /**
      * DiscountRules constructor.
@@ -51,15 +53,24 @@ class DiscountRules extends Base
             if($params['has_migration']){
                 $params['migration_rule_count'] =$this->getV1RuleCount();
             }
-
-            $name = $this->input->get('name', '');
-            if (empty($name)) {
-                $params['rules'] = $rule_helper->getAllRules($available_conditions);
-            } else {
-                $params['rules'] = $rule_helper->searchRuleByName($name, $available_conditions);
-            }
+            $params['name'] = stripslashes(sanitize_text_field($this->input->get('name', '')));
+            $params['limit']= (int)$this->input->get('limit', 20);
+            $params['sort'] = (int)$this->input->get('re_order', 0);
+            $params['current_page'] = (int)$this->input->get('page_no', 1);
+            $offset = ( $params['current_page'] - 1 ) *  $params['limit'];
+            $data = $rule_helper->adminPagination($available_conditions, $params['limit'],$offset,$params['sort'],$params['name']);
+            $params['rules'] = $params['rule_count'] = $params['total_count'] = array();
+           if (!empty($data) && isset($data['result']) && isset($data['count']) && $params['limit'] > 1){
+               $params['rules'] = $data['result'];
+               $params['rule_count'] = $data['count'];
+               $params['total_count'] = ceil($params['rule_count'] /  $params['limit']);
+               if ($params['total_count'] < $params['current_page'] && $params['rule_count'] > 1){
+                   $redirect_url = remove_query_arg('page_no');
+                   wp_redirect($redirect_url);
+                   exit();
+               }
+           }
             $params['input'] = $this->input;
-
             self::$template_helper->setPath(WDR_PLUGIN_PATH . 'App/Views/Admin/Tabs/DiscountRule.php')->setData($params)->display();
         }
     }

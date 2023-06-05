@@ -602,10 +602,6 @@ LEVEL 3. SETTINGS
     cursor: pointer;
 }
 
-.wdr-ruleboard{
-    cursor: move;
-}
-
 .wdr-loader {
     display: none!important;
     width: 64px;
@@ -664,9 +660,6 @@ LEVEL 3. SETTINGS
 .wdr-customizer-grid > div {
     padding: 0px 0;
 }
-/*.wdr_customize_table{
-    text-align: center;
-}*/
 .popup-bulk-table
 {
     padding: 0px 0;
@@ -890,12 +883,6 @@ td.wdr_bulk_table_td,th.wdr_bulk_table_td{
 }
 .wdr_customize_table table tbody tr > td:first-child {
     width: auto !important;
-}
-.awdr-listing-rule-tr:hover{
-    background-color: #ddf2ff;
-}
-tr.awdr-listing-rule-tr td {
-    vertical-align: middle;
 }
 .awdr-text-warning {
     color: #8a6d3b;
@@ -1215,10 +1202,7 @@ tr.awdr-listing-rule-tr td {
     cursor: move;
 }
 .dashicons-menu{
-    color:darkgray !important;
-}
-.dashicons-menu:hover{
-    color: black !important;
+    color:darkgray;
 }
 .awdr_admin_discount_bar{
     padding: 10px;
@@ -1580,4 +1564,14 @@ div.awdr_recipe_main_card{
 .wdr-coupon-url-group input:focus{
     border: 1px dashed #0a4b78;
     box-shadow: none;
+}
+.tablenav-pages {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 15px;
+}
+
+.displaying-num {
+    margin-left: 100px
 }
