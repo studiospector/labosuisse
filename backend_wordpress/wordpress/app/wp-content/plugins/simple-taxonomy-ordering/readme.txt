@@ -2,7 +2,7 @@
 Contributors: yikesinc, eherman24, liljimmi, yikesitskevin
 Tags: admin, term, meta, simple, order, taxonomy, metadata, termmeta, reorder
 Requires at least: 4.4
-Tested up to: 5.9
+Tested up to: 6.2
 Stable tag: 2.3.4
 
 Quickly and easily reorder taxonomy terms with an easy to use and intuitive drag and drop interface.
@@ -82,13 +82,13 @@ On the front end of the site your taxonomy terms will display in the order set i
 = 1.2.5 =
 * Fixed an issue where terms weren't being returned if the termmeta table was empty. A big thanks to @doppiogancio on GitHub for finding this and helping us reach the solution.
 
-= 1.2.4 = 
+= 1.2.4 =
 * Fixed a JS issue that occurs when HTML is added to category description. A big thanks to @mateuszbajak for finding this and fixing it!
 
-= 1.2.3 = 
+= 1.2.3 =
 * Fixed a bug where the same SQL join statement was being added to a query twice on the front end (props to @burisk for calling this out)
 
-= 1.2.2 = 
+= 1.2.2 =
 * Added a CAST call to order taxonomies as integers instead of strings (props to Timothy Couckuyt / @devplus_timo for calling this out)
 
 = 1.2.1 =

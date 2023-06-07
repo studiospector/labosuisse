@@ -2,9 +2,25 @@
 
 namespace GtmEcommerceWooPro\Lib\EventStrategy;
 
-abstract class AbstractServerEventStrategy extends \GtmEcommerceWoo\Lib\EventStrategy\AbstractEventStrategy {
+use GtmEcommerceWoo\Lib\EventStrategy\AbstractEventStrategy;
+use GtmEcommerceWooPro\Lib\Util\MpClientUtil;
+use GtmEcommerceWooPro\Lib\Util\WcOutputUtil;
 
+abstract class AbstractServerEventStrategy extends AbstractEventStrategy {
+
+	/**
+	 * WcOutputUtil
+	 *
+	 * @var WcOutputUtil
+	 */
 	protected $wcOutput;
+
+	/**
+	 * MpClientUtil
+	 *
+	 * @var MpClientUtil
+	 */
+	protected $mpClient;
 
 	public function __construct( $wcTransformer, $wcOutput, $mpClient ) {
 		$this->mpClient = $mpClient;

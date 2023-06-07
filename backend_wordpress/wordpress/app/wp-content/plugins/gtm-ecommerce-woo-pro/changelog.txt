@@ -1,4 +1,57 @@
 *** Google Tag Manager for WooCommerce PRO ***
+2023-05-28 - version 1.10.3
+* add - added `abandon_cart` and `abandon_checkout` events after tab/browser close
+* fix - fixed 'gtm_ecommerce_woo_event_after_processing' filter
+* tweak - tested against the latest version of WordPress
+
+2023-05-19 - version 1.10.2
+* add - added 'gtm_ecommerce_woo_event_after_processing' filter after event object data processing
+* add - added Google Tag Manager dataLayer clearing before pushing ecommerce events
+* add - added 'currency' property to ecommerce events
+* tweak - tested against the latest version of WordPress
+
+2023-05-12 - version 1.10.1
+* tweak - tested compatibility with the latest versions of WordPress and WooCommerce
+
+2023-04-21 - version 1.10.0
+* add - added `item_brand` support compatible with WooCommerce Brands, Yith WooCommerce Brands and Yith WooCommerce Brands Premium
+
+2023-04-14 - version 1.9.0
+* add - added support for WooCommerce Quick View plugin-related events: `select_item`, `view_item` and `add_to_cart`
+* tweak - tested compatibility with the latest versions of WordPress and WooCommerce
+
+2023-04-10 - version 1.8.3
+* add - declare compatibility with WooCommerce High-Performance Order Storage (HPOS)
+
+2023-04-07 - version 1.8.2
+* add - added support for `view_cart`, `add_payment_info` and `add_shipping_info` events in GTM preset
+* fix - fixed Google Analytics 4 `user_id` feature
+* fix - fixed Google Ads Dynamic Remarketing issue with item `id` in GTM preset
+* tweak - tested compatibility with the latest versions of WordPress and WooCommerce
+
+2023-03-31 - version 1.8.1
+* fix - fixed issue with preset download
+* tweak - tested compatibility with the latest versions of WordPress and WooCommerce
+
+2023-03-24 - version 1.8.0
+* new - added logged-in client id tracking
+* fix - fixed `select_item` event - now works with `view products` and `select options` in grouped products and products variants
+* delete - removed beta features - Theme Validator and Monitor
+
+2023-03-18 - version 1.7.6
+* fix issue with casting `value` to float
+
+2023-03-17 - version 1.7.5
+* add missing `coupon` param to events: `add_billing_info`, `add_payment_info`, `add_shipping_info`, `begin_checkout`
+* fix `value` param when coupon is applied to cart
+* split events with large item list (with more than 25 items) into multiple events to avoid exceeding the http request size limit
+* test with the latest versions of WordPress and WooCommerce
+
+2023-03-10 - version 1.7.4
+* fix issue with `remove_from_cart`
+* introduce global javascript object as product data storage that fixes missing/broken product data in some contexts
+* remove unsupported scheduled event
+* test with latest versions of WordPress and WooCommerce
 
 2022-10-29 - version 1.7.3
 * fix issue with downloading advanced presets

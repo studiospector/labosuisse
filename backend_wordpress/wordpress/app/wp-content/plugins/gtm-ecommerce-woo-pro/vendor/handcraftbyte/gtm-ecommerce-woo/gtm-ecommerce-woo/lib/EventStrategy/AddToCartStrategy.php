@@ -2,6 +2,8 @@
 
 namespace GtmEcommerceWoo\Lib\EventStrategy;
 
+use GtmEcommerceWoo\Lib\GaEcommerceEntity\Event;
+
 /**
  * AddToCart event
  */
@@ -62,18 +64,23 @@ class AddToCartStrategy extends AbstractEventStrategy {
 	 * Supports the button that is supposed to live in a form object
 	 */
 	public function onCartSubmitScript( $item) {
-		$this->wcOutput->globalVariable('gtm_ecommerce_woo_item', $item);
-		$this->wcOutput->script(<<<'EOD'
-jQuery(document).on('click', '.cart .single_add_to_cart_button', function(ev) {
-	var $form = jQuery(ev.currentTarget).parents('form.cart');
-	var quantity = jQuery('[name="quantity"]', $form).val();
-	var product_id = jQuery('[name="add-to-cart"]', $form).val();
+		$jsonItem = json_encode($item);
 
-	var item = gtm_ecommerce_woo_item;
+		$this->wcOutput->script(<<<EOD
+jQuery(document).on('click', '.cart .single_add_to_cart_button', function(ev) {
+	var form = jQuery(ev.currentTarget).parents('form.cart');
+	var quantity = jQuery('[name="quantity"]', form).val();
+	var product_id = jQuery('[name="add-to-cart"]', form).val();
+
+	var item = ${jsonItem};
 	item.quantity = parseInt(quantity);
+
+	let event = {$this->getStringifiedEvent()};
+
 	dataLayer.push({
-	  'event': 'add_to_cart',
+		...event,
 	  'ecommerce': {
+		...event.ecommerce,
 		'value': (item.price * quantity),
 		'items': [item]
 	  }
@@ -88,16 +95,39 @@ EOD
 	 * Supports a single link that's present on product lists
 	 */
 	public function onCartLinkClick( $items) {
-		$this->wcOutput->globalVariable('gtm_ecommerce_woo_items_by_product_id', $items);
-		$this->wcOutput->script(<<<'EOD'
+		if (true === method_exists($this->wcOutput, 'addItems')) {
+			$this->wcOutput->addItems($items, 'product_id');
+		} else {
+			$this->wcOutput->globalVariable('gtm_ecommerce_woo_items_by_product_id', $items);
+		}
+
+		$this->wcOutput->script(<<<EOD
 jQuery(document).on('click', '.ajax_add_to_cart', function(ev) {
-	var quantity = jQuery(ev.currentTarget).data('quantity');
-	var product_id = jQuery(ev.currentTarget).data('product_id');
-	var item = gtm_ecommerce_woo_items_by_product_id[product_id];
-	item.quantity =  parseInt(quantity);
+    var targetElement = jQuery(ev.currentTarget);
+    if (0 === targetElement.length) {
+        return;
+    }
+    var product_id = targetElement.data('product_id');
+    if (undefined === product_id) {
+        return;
+    }
+	var quantity = targetElement.data('quantity') ?? 1;
+	var item = {};
+
+	if ('undefined' === typeof gtm_ecommerce_pro) {
+	    item = gtm_ecommerce_woo_items_by_product_id[product_id];
+	} else {
+	    item = gtm_ecommerce_pro.getItemByProductId(product_id);
+	}
+
+	item.quantity = parseInt(quantity);
+
+	let event = {$this->getStringifiedEvent()};
+
 	dataLayer.push({
-	  'event': 'add_to_cart',
+		...event,
 	  'ecommerce': {
+		...event.ecommerce,
 		'value': (item.price * quantity),
 		'items': [item]
 	  }
@@ -105,5 +135,9 @@ jQuery(document).on('click', '.ajax_add_to_cart', function(ev) {
 });
 EOD
 );
+	}
+
+	protected function getStringifiedEvent() {
+		return json_encode(['event' => 'add_to_cart', 'ecommerce' => ['currency' => get_woocommerce_currency()]]);
 	}
 }

@@ -2,69 +2,77 @@
 
 namespace GtmEcommerceWooPro\Lib;
 
-use GtmEcommerceWoo\Lib\EventStrategy;
-use GtmEcommerceWooPro\Lib\Service\EventStrategiesService;
-use GtmEcommerceWooPro\Lib\Service\GtmSnippetService;
-use GtmEcommerceWooPro\Lib\Service\SettingsService;
-use GtmEcommerceWooPro\Lib\Service\PluginService;
-use GtmEcommerceWoo\Lib\Service\ThemeValidatorService;
+use GtmEcommerceWoo\Lib\Container as FreeContainer;
 use GtmEcommerceWoo\Lib\Service\EventInspectorService;
-use GtmEcommerceWooPro\Lib\Service\MonitorService;
-
 use GtmEcommerceWoo\Lib\Util\WpSettingsUtil;
-use GtmEcommerceWoo\Lib\Util\WcOutputUtil;
-use GtmEcommerceWooPro\Lib\Util\WcTransformerUtil;
+use GtmEcommerceWooPro\Lib\Service\EventStrategiesService;
+use GtmEcommerceWooPro\Lib\Service\ExtensionService;
+use GtmEcommerceWooPro\Lib\Service\GtmSnippetService;
+use GtmEcommerceWooPro\Lib\Service\PluginService;
+use GtmEcommerceWooPro\Lib\Service\SettingsService;
 use GtmEcommerceWooPro\Lib\Util\MpClientUtil;
+use GtmEcommerceWooPro\Lib\Util\WcOutputUtil;
+use GtmEcommerceWooPro\Lib\Util\WcTransformerUtil;
 
-use GtmEcommerceWooPro\Lib\EventStrategy as EventStrategyPro;
+use GtmEcommerceWooPro\Lib\EventStrategy\Browser as BrowserEventStrategy;
+use GtmEcommerceWooPro\Lib\EventStrategy\Server as ServerEventStrategy;
 
-class Container extends \GtmEcommerceWoo\Lib\Container {
+class Container extends FreeContainer {
+	/**
+	 * ExtensionService
+	 *
+	 * @var ExtensionService
+	 */
+	private $extensionService;
+
 	public function __construct( $pluginVersion ) {
 		$snakeCaseNamespace = 'gtm_ecommerce_woo';
 		$spineCaseNamespace = 'gtm-ecommerce-woo';
 		$tagConciergeApiUrl = getenv('TAG_CONCIERGE_API_URL') ? getenv('TAG_CONCIERGE_API_URL') : 'https://api.tagconcierge.com';
-		$tagConciergeEdgeUrl = getenv('TAG_CONCIERGE_EDGE_URL') ? getenv('TAG_CONCIERGE_EDGE_URL') : 'https://edge.tagconcierge.com';
 
-
-		$wpSettingsUtil    = new WpSettingsUtil( $snakeCaseNamespace, $spineCaseNamespace );
+		$wpSettingsUtil = new WpSettingsUtil( $snakeCaseNamespace, $spineCaseNamespace );
 		$wcTransformerUtil = new WcTransformerUtil();
-		$wcOutputUtil      = new WcOutputUtil();
-		$mpClientUtil      = new MpClientUtil( $snakeCaseNamespace, $spineCaseNamespace );
+		$wcOutputUtil = new WcOutputUtil($pluginVersion);
+		$mpClientUtil = new MpClientUtil( $snakeCaseNamespace, $spineCaseNamespace );
 
-		$eventStrategies = array(
-			new EventStrategyPro\ViewItemListStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\SelectItemStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\ViewItemStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\AddToCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\ViewCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\RemoveFromCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\BeginCheckoutStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\AddBillingInfoStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\AddPaymentInfoStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\AddShippingInfoStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			new EventStrategyPro\PurchaseStrategy( $wcTransformerUtil, $wcOutputUtil ),
-			// new EventStrategyPro\AddToCartServerStrategy( $wcTransformerUtil, $wcOutputUtil, $mpClientUtil ),
-			new EventStrategyPro\PurchaseServerStrategy( $wcTransformerUtil, $wcOutputUtil, $mpClientUtil ),
-			// new EventStrategyPro\RemoveFromCartServerStrategy( $wcTransformerUtil, $wcOutputUtil, $mpClientUtil ),
-			// new EventStrategyPro\RefundStrategy($wcTransformerUtil, $wcOutputUtil),
-		);
+		$this->extensionService = new ExtensionService($wcTransformerUtil, $wcOutputUtil);
+		$this->extensionService->loadExtensions();
 
-		$events = array_reduce($eventStrategies, function( $agg, $eventStrategy ) {
+		$eventStrategies = array_merge([
+			new BrowserEventStrategy\ViewItemListStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\SelectItemStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\ViewItemStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\AddToCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\ViewCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\RemoveFromCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\BeginCheckoutStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\AddBillingInfoStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\AddPaymentInfoStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\AddShippingInfoStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\PurchaseStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\AbandonCartStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			new BrowserEventStrategy\AbandonCheckoutStrategy( $wcTransformerUtil, $wcOutputUtil ),
+			// new ServerEventStrategy\AddToCartStrategy( $wcTransformerUtil, $wcOutputUtil, $mpClientUtil ),
+			new ServerEventStrategy\PurchaseStrategy( $wcTransformerUtil, $wcOutputUtil, $mpClientUtil ),
+			// new ServerEventStrategy\RemoveFromCartStrategy( $wcTransformerUtil, $wcOutputUtil, $mpClientUtil ),
+			// new BrowserEventStrategy\RefundStrategy($wcTransformerUtil, $wcOutputUtil),
+		], $this->extensionService->getEventStrategies());
+
+		$events = array_reduce($eventStrategies, static function( $agg, $eventStrategy ) {
 			if ('server' === $eventStrategy->getEventType()) {
 				$agg['server'][] = $eventStrategy->getEventName();
 			} else {
-				$agg['web'][] = $eventStrategy->getEventName();
+				$agg['browser'][] = $eventStrategy->getEventName();
 			}
 			return $agg;
-		}, ['web' => [], 'server' => []]);
+		}, ['browser' => [], 'server' => []]);
 
-		$this->eventStrategiesService = new EventStrategiesService( $wpSettingsUtil, $eventStrategies );
-		$this->gtmSnippetService      = new GtmSnippetService( $wpSettingsUtil );
-		$this->settingsService        = new SettingsService( $wpSettingsUtil, $events['web'], [], $events['server'], $tagConciergeApiUrl, $pluginVersion);
-		$this->pluginService          = new PluginService($spineCaseNamespace, $wpSettingsUtil, $pluginVersion);
-		$this->themeValidatorService  = new ThemeValidatorService($snakeCaseNamespace, $spineCaseNamespace, $wcTransformerUtil, $wpSettingsUtil, $wcOutputUtil, $events, $tagConciergeApiUrl, $pluginVersion );
-		$this->eventInspectorService  = new EventInspectorService( $wpSettingsUtil );
-		$this->monitorService = new MonitorService($snakeCaseNamespace, $spineCaseNamespace, $wcTransformerUtil, $wpSettingsUtil, $wcOutputUtil, $tagConciergeApiUrl, $tagConciergeEdgeUrl );
+		$this->eventStrategiesService = new EventStrategiesService( $wpSettingsUtil, $wcOutputUtil, $eventStrategies );
+		$this->gtmSnippetService = new GtmSnippetService( $wpSettingsUtil );
+		$this->settingsService = new SettingsService( $wpSettingsUtil, $events['browser'], [], $events['server'], $tagConciergeApiUrl, $pluginVersion);
+		$this->pluginService = new PluginService($spineCaseNamespace, $wpSettingsUtil, $wcOutputUtil, $pluginVersion);
+		$this->eventInspectorService = new EventInspectorService( $wpSettingsUtil, $wcOutputUtil );
+
 		add_action( 'init', function () {
 			/**
 			 * Hook that allows to get access to all objects within plugin's dependency injection container

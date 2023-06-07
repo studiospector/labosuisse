@@ -2,22 +2,50 @@
 
 namespace GtmEcommerceWoo\Lib\Service;
 
+use GtmEcommerceWoo\Lib\Util\SanitizationUtil;
+use GtmEcommerceWoo\Lib\Util\WpSettingsUtil;
+
 /**
  * Logic related to working with settings and options
  */
 class SettingsService {
+	/** @var WpSettingsUtil */
+	protected $wpSettingsUtil;
 
-	public function __construct( $wpSettingsUtil, $events, $proEvents, $serverEvents, $tagConciergeApiUrl, $pluginVersion) {
+	/** @var array */
+	protected $events;
+
+	/** @var array */
+	protected $proEvents;
+
+	/** @var array */
+	protected $serverEvents;
+
+	/** @var string */
+	protected $uuidPrefix = 'gtm-ecommerce-woo-basic';
+
+	/** @var string */
+	protected $tagConciergeApiUrl;
+
+	/** @var string */
+	protected $pluginVersion;
+
+	/** @var false */
+	protected $allowServerTracking = false;
+
+	/** @var string */
+	protected $filter = 'basic';
+
+	/** @var array */
+	protected $eventsConfig = [];
+
+	public function __construct( WpSettingsUtil $wpSettingsUtil, array $events, array $proEvents, array $serverEvents, string $tagConciergeApiUrl, string $pluginVersion) {
 		$this->wpSettingsUtil = $wpSettingsUtil;
 		$this->events = $events;
 		$this->proEvents = $proEvents;
 		$this->serverEvents = $serverEvents;
-		$this->uuidPrefix = 'gtm-ecommerce-woo-basic';
 		$this->tagConciergeApiUrl = $tagConciergeApiUrl;
-		$this->tagConciergeMonitorPreset = 'presets/tag-concierge-monitor-basic';
 		$this->pluginVersion = $pluginVersion;
-		$this->allowServerTracking = false;
-		$this->filter = 'basic';
 	}
 
 	public function initialize() {
@@ -43,11 +71,6 @@ class SettingsService {
 		);
 
 		$this->wpSettingsUtil->addTab(
-			'tag_concierge',
-			'Tag Concierge <pre style="display: inline; text-transform: uppercase;">beta</pre>'
-		);
-
-		$this->wpSettingsUtil->addTab(
 			'support',
 			'Support',
 			false
@@ -60,19 +83,18 @@ class SettingsService {
 	}
 
 	public function ajaxPostPresets() {
+		$sanitizedPreset = esc_url_raw($_GET['preset'] ?? '');
+
+		// bypassing sanitization...
+		$preset = str_replace('http://', '', $sanitizedPreset);
+
 		$uuid = $this->wpSettingsUtil->getOption('uuid');
-		$disabled = $this->wpSettingsUtil->getOption('disabled');
-		$gtmSnippetHead = $this->wpSettingsUtil->getOption('gtm_snippet_head');
-		$gtmSnippetBody = $this->wpSettingsUtil->getOption('gtm_snippet_body');
-		$presetName = str_replace('presets/', '', $_GET['preset']) . '.json';
+		$presetName = str_replace('presets/', '', $preset) . '.json';
 		$args = [
 			'body' => json_encode([
-				'preset' => $_GET['preset'],
+				'preset' => $preset,
 				'uuid' => $uuid,
 				'version' => $this->pluginVersion,
-				'disabled' => $disabled,
-				'gtm_snippet_head' => sha1($gtmSnippetHead),
-				'gtm_snippet_body' => sha1($gtmSnippetBody)
 			]),
 			'headers' => [
 				'content-type' => 'application/json'
@@ -96,7 +118,7 @@ class SettingsService {
 		wp_enqueue_script( 'wp-pointer' );
 		wp_enqueue_style( 'wp-pointer' );
 		wp_enqueue_script( 'gtm-ecommerce-woo-admin', plugin_dir_url( __DIR__ . '/../../../' ) . 'js/admin.js', [], $this->pluginVersion );
-		wp_add_inline_script( 'gtm-ecommerce-woo-admin', "var params = "
+		wp_add_inline_script( 'gtm-ecommerce-woo-admin', 'var params = '
 		. json_encode([
 			'filter' => $this->filter,
 			'uuid' => $this->wpSettingsUtil->getOption( 'uuid' )
@@ -120,10 +142,6 @@ class SettingsService {
 			$previousUuids[] = $uuid;
 			$this->wpSettingsUtil->updateOption('previous_uuids', $previousUuids);
 			$this->wpSettingsUtil->updateOption('uuid', $this->uuidPrefix . '_' . bin2hex(random_bytes(20)));
-		}
-
-		if ($this->wpSettingsUtil->getOption('theme_validator_enabled') === false) {
-			$this->wpSettingsUtil->updateOption('theme_validator_enabled', 1);
 		}
 
 		$this->wpSettingsUtil->addSettingsSection(
@@ -162,13 +180,6 @@ class SettingsService {
 		);
 
 		$this->wpSettingsUtil->addSettingsSection(
-			'tag_concierge',
-			'Tag Concierge',
-			'Want to learn more? <a href="https://tagconcierge.com/platform/" target="_blank">See overview here</a>',
-			'tag_concierge'
-		);
-
-		$this->wpSettingsUtil->addSettingsSection(
 			'gtm_container_jsons',
 			'Google Tag Manager presets',
 			'It\'s time to define what to do with tracked eCommerce events. We know that settings up GTM workspace may be cumbersome. That\'s why the plugin comes with a set of presets you can import to your GTM workspace to create all required Tags, Triggers and Variables. Select a preset in dropdown below, download the JSON file and import it in Admin panel in your GTM workspace, see plugin <a href="https://docs.tagconcierge.com/" target="_blank">Documentation</a> for details):<br /><br />
@@ -191,15 +202,6 @@ class SettingsService {
 			'tools'
 		);
 
-		$this->wpSettingsUtil->addSettingsSection(
-			'theme_validator',
-			'Theme Validator',
-			'Theme Validator allows to assess if all events supported by this plugin can be tracked on your current theme: <strong>' . ( wp_get_theme() )->get('Name') . '</strong>. Your WordPress site must be publicly available to perform this test. Clicking the button below will send URL of this WordPress site to our servers to perform a remote static analysis. It will ensure all WordPress/WooCommerce internal hooks/actions and correct HTML elements are present in order to track all supported events. It cannot detect issues with dynamic scripts and elements, for full testing the Event Inspector available above can be used. It is mostly automated service, but processing times can get up to few hours. <br />
-			<div style="text-align: center" id="gtm-ecommerce-woo-validator-section"><button id="gtm-ecommerce-woo-theme-validator" class="button">Request Theme Validation</button></div>
-			<div style="text-align: center; display: none" id="gtm-ecommerce-woo-validator-sent">Your Theme Validation request was sent, please check link below if results are ready.</div><br /><div style="text-align: center;"><a href="https://app.tagconcierge.com/theme-validator?uuid=' . $uuid . '" target="_blank">See results in Tag Concierge</a></div>',
-			'tools'
-		);
-
 		$this->wpSettingsUtil->addSettingsField(
 			'disabled',
 			'Disable?',
@@ -209,12 +211,12 @@ class SettingsService {
 		);
 
 		$this->wpSettingsUtil->addSettingsField(
-			'theme_validator_enabled',
-			'Enable Theme Validator?',
+			'track_user_id',
+			'Track user id?',
 			[$this, 'checkboxField'],
-			'theme_validator',
-			'Allow the plugin and the support team to validate theme by issuing a special HTTP request. Provide them with following information: `uuid_hash:'
-			. md5($this->wpSettingsUtil->getOption('uuid')) . '`.'
+			'basic',
+			$this->allowServerTracking ? 'When checked the plugin will send logged client id to dataLayer.' : '<a style="font-size: 0.7em" href="https://go.tagconcierge.com/MSm8e" target="_blank">Upgrade to PRO to track user id.</a>',
+			['disabled' => !$this->allowServerTracking, 'title' => $this->allowServerTracking ? '' : 'Upgrade to PRO to use user tracking']
 		);
 
 		$this->wpSettingsUtil->addSettingsField(
@@ -268,16 +270,6 @@ class SettingsService {
 			['rows'        => 6]
 		);
 
-
-		$this->wpSettingsUtil->addSettingsField(
-			'monitor_enabled',
-			'Enable Tag Concierge Monitor?',
-			[$this, 'checkboxField'],
-			'tag_concierge',
-			'Enable sending the eCommerce events to Tag Concierge Monitor for active tracking monitoring. <br />Make sure that you have downloaded and installed <a class="download" href="#" data-id="' . $this->tagConciergeMonitorPreset . '">Monitoring GTM preset</a> too.<br />Then <a href="https://app.tagconcierge.com/?uuid=' . $this->wpSettingsUtil->getOption('uuid') . '" target="_blank">Open Tag Concierge App</a>'
-		);
-
-
 		$this->wpSettingsUtil->addSettingsField(
 			'gtm_server_container_url',
 			'GTM Server Container URL',
@@ -302,10 +294,11 @@ class SettingsService {
 				'event_' . $eventName,
 				$eventName,
 				[$this, 'checkboxField'],
-				'events'
+				'events',
+				isset($this->eventsConfig[$eventName]['description']) ? $this->eventsConfig[$eventName]['description'] : ''
 			);
 			if ($this->wpSettingsUtil->getOption('event_' . $eventName) === false) {
-				$this->wpSettingsUtil->updateOption('event_' . $eventName, 1);
+				$this->wpSettingsUtil->updateOption('event_' . $eventName, isset($this->eventsConfig[$eventName]['default_disabled']) ? 0 : 1);
 			}
 		}
 
@@ -344,12 +337,12 @@ class SettingsService {
 		disabled="disabled"
 		<?php endif; ?>
 		<?php if (@$args['title']) : ?>
-		title="<?php echo $args['title']; ?>"
+		title="<?php echo esc_attr($args['title']); ?>"
 		<?php endif; ?>
 		value="1"
 		<?php checked( $value, 1 ); ?> />
 	  <p class="description">
-		<?php echo $args['description']; ?>
+		<?php echo wp_kses($args['description'], SanitizationUtil::WP_KSES_ALLOWED_HTML, SanitizationUtil::WP_KSES_ALLOWED_PROTOCOLS); ?>
 	  </p>
 		<?php
 	}
@@ -375,7 +368,7 @@ class SettingsService {
 		<?php endforeach ?>
 		</select>
 	  <p class="description">
-		<?php echo $args['description']; ?>
+		<?php echo wp_kses($args['description'], SanitizationUtil::WP_KSES_ALLOWED_HTML, SanitizationUtil::WP_KSES_ALLOWED_PROTOCOLS); ?>
 	  </p>
 		<?php
 	}
@@ -389,7 +382,7 @@ class SettingsService {
 		id="<?php echo esc_attr( $args['label_for'] ); ?>"
 		class="large-text code"
 		rows="<?php echo esc_html( $args['rows'] ); ?>"
-		name="<?php echo esc_attr( $args['label_for'] ); ?>"><?php echo $value; ?></textarea>
+		name="<?php echo esc_attr( $args['label_for'] ); ?>"><?php echo wp_kses($value, SanitizationUtil::WP_KSES_ALLOWED_HTML, SanitizationUtil::WP_KSES_ALLOWED_PROTOCOLS); ?></textarea>
 	  <p class="description">
 		<?php echo esc_html( $args['description'] ); ?>
 	  </p>
@@ -407,7 +400,7 @@ class SettingsService {
 		<?php if (true === @$args['disabled']) : ?>
 		disabled="disabled"
 		<?php endif; ?>
-		value="<?php echo $value; ?>"
+		value="<?php echo esc_html($value); ?>"
 		placeholder="<?php echo esc_html( $args['placeholder'] ); ?>"
 		name="<?php echo esc_attr( $args['label_for'] ); ?>" />
 	  <p class="description">
@@ -419,7 +412,7 @@ class SettingsService {
 	public function optionsPage() {
 		$this->wpSettingsUtil->addSubmenuPage(
 			'options-general.php',
-			'Google Tag Manager for WooCommerce FREE',
+			$this->allowServerTracking ? 'Google Tag Manager for WooCommerce PRO' : 'Google Tag Manager for WooCommerce FREE',
 			'Google Tag Manager',
 			'manage_options'
 		);

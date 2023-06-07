@@ -2,10 +2,12 @@
 
 namespace GtmEcommerceWooPro\Lib\Util;
 
+use GtmEcommerceWoo\Lib\Util\WpSettingsUtil;
+
 /**
  * MeasurementProtocol Utility
  */
-class MpClientUtil extends \GtmEcommerceWoo\Lib\Util\WpSettingsUtil {
+class MpClientUtil extends WpSettingsUtil {
 	public function getClientId() {
 		if (isset($_COOKIE['_ga'])) {
 			return str_replace('GA1.2.', '', sanitize_key($_COOKIE['_ga']));
