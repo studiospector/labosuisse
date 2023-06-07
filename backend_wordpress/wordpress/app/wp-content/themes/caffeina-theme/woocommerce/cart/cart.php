@@ -3,7 +3,7 @@
  * Cart Page
  *
  * This template can be overridden by copying it to yourtheme/woocommerce/cart/cart.php.
- * 
+ *
  * HOWEVER, on occasion WooCommerce will need to update template files and you
  * (the theme developer) will need to copy the new files to your theme to
  * maintain compatibility. We try to do this as little as possible, but it does
@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates
- * @version 7.0.1
+ * @version 7.4.0
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -84,20 +84,24 @@ do_action( 'woocommerce_before_cart' ); ?>
                             <td class="product-quantity" data-title="<?php esc_attr_e( 'Quantity', 'woocommerce' ); ?>">
                             <?php
                             if ( $_product->is_sold_individually() ) {
-                                $product_quantity = sprintf( '1 <input type="hidden" name="cart[%s][qty]" value="1" />', $cart_item_key );
+                                $min_quantity = 1;
+                                $max_quantity = 1;
                             } else {
-                                $product_quantity = woocommerce_quantity_input(
-                                    array(
-                                        'input_name'   => "cart[{$cart_item_key}][qty]",
-                                        'input_value'  => $cart_item['quantity'],
-                                        'max_value'    => $_product->get_max_purchase_quantity(),
-                                        'min_value'    => '0',
-                                        'product_name' => '',
-                                    ),
-                                    $_product,
-                                    false
-                                );
+                                $min_quantity = 0;
+                                $max_quantity = $_product->get_max_purchase_quantity();
                             }
+    
+                            $product_quantity = woocommerce_quantity_input(
+                                array(
+                                    'input_name'   => "cart[{$cart_item_key}][qty]",
+                                    'input_value'  => $cart_item['quantity'],
+                                    'max_value'    => $max_quantity,
+                                    'min_value'    => $min_quantity,
+                                    'product_name' => $_product->get_name(),
+                                ),
+                                $_product,
+                                false
+                            );
 
                             echo apply_filters( 'woocommerce_cart_item_quantity', $product_quantity, $cart_item_key, $cart_item ); // PHPCS: XSS ok.
                             ?>
@@ -162,7 +166,7 @@ do_action( 'woocommerce_before_cart' ); ?>
                                             'name' => 'apply_coupon',
                                             'value' => esc_attr($button_label),
                                             'type' => 'submit',
-                                            'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ),
+                                            'class' => esc_attr( wc_wp_theme_get_element_class_name( 'button' ) ? ' ' . wc_wp_theme_get_element_class_name( 'button' ) : '' ),
                                             'variants' => ['secondary'],
                                         ]);
                                     ?>

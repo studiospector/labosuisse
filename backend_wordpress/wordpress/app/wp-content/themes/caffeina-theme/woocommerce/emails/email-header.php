@@ -12,7 +12,7 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce\Templates\Emails
- * @version 4.0.0
+ * @version 7.4.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -27,49 +27,54 @@ $banner_img = get_field('lb_email_banner_image', 'option');
 <html <?php language_attributes(); ?>>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php bloginfo( 'charset' ); ?>" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport">
 		<title><?php echo get_bloginfo( 'name', 'display' ); ?></title>
 	</head>
 	<body <?php echo is_rtl() ? 'rightmargin' : 'leftmargin'; ?>="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
-		<div id="wrapper" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td align="center" valign="top">
-						<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_container">
-							<tr>
-								<td align="center" valign="top" class="lb-header">
-									<!-- Logos -->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
-										<tr class="lb-header__logos">
-											<td class="lb-header__logos__patent">
-												<img src="https://static.labosuisse.com/uploads/2022/09/05162834/email-patent.png" alt="Patent">
-											</td>
-											<td class="lb-header__logos__logo">
-												<img src="https://static.labosuisse.com/uploads/2022/09/05162836/email-logo.png" alt="Logo">
-											</td>
-										</tr>
-									</table>
-									<!-- End Logos -->
-									<!-- Header -->
-									<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
-										<tr>
-											<td id="header_wrapper">
-												<div class="lb-header__banner" style="background-image: url('<?php echo $banner_img; ?>');">
-													<h1><?php echo $email_heading; ?></h1>
-												</div>
-											</td>
-										</tr>
-									</table>
-									<!-- End Header -->
-								</td>
-							</tr>
+		<table width="100%" id="outer_wrapper">
+			<tr>
+				<td><!-- Deliberately empty to support consistent sizing and layout across multiple email clients. --></td>
+				<td width="600">
+					<div id="wrapper" dir="<?php echo is_rtl() ? 'rtl' : 'ltr'; ?>">
+						<table border="0" cellpadding="0" cellspacing="0" width="100%">
 							<tr>
 								<td align="center" valign="top">
-									<!-- Body -->
-									<table border="0" cellpadding="0" cellspacing="0" width="600" id="template_body">
+									<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_container">
 										<tr>
-											<td valign="top" id="body_content">
-												<!-- Content -->
-												<table border="0" cellpadding="20" cellspacing="0" width="100%">
+											<td align="center" valign="top" class="lb-header">
+												<!-- Logos -->
+												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
+													<tr class="lb-header__logos">
+														<td class="lb-header__logos__patent">
+															<img src="https://static.labosuisse.com/uploads/2022/09/05162834/email-patent.png" alt="Patent">
+														</td>
+														<td class="lb-header__logos__logo">
+															<img src="https://static.labosuisse.com/uploads/2022/09/05162836/email-logo.png" alt="Logo">
+														</td>
+													</tr>
+												</table>
+												<!-- End Logos -->
+												<!-- Header -->
+												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_header">
 													<tr>
-														<td valign="top">
-															<div id="body_content_inner">
+														<td id="header_wrapper">
+															<div class="lb-header__banner" style="background-image: url('<?php echo $banner_img; ?>');">
+																<h1><?php echo esc_html( $email_heading ); ?></h1>
+															</div>
+														</td>
+													</tr>
+												</table>
+												<!-- End Header -->
+											</td>
+										</tr>
+										<tr>
+											<td align="center" valign="top">
+												<!-- Body -->
+												<table border="0" cellpadding="0" cellspacing="0" width="100%" id="template_body">
+													<tr>
+														<td valign="top" id="body_content">
+															<!-- Content -->
+															<table border="0" cellpadding="20" cellspacing="0" width="100%">
+																<tr>
+																	<td valign="top">
+																		<div id="body_content_inner">
