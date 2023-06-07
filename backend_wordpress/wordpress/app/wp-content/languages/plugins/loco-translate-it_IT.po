@@ -2,18 +2,18 @@
 # This file is distributed under the same license as the Plugins - Loco Translate - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2022-09-17 18:08:33+0000\n"
+"PO-Revision-Date: 2023-03-08 15:15:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/4.0.0-alpha.2\n"
+"X-Generator: GlotPress/4.0.0-alpha.4\n"
 "Language: it\n"
 "Project-Id-Version: Plugins - Loco Translate - Stable (latest release)\n"
 
 #. Translators: Shown when a PO file's Plural-Forms header has a different
 #. formula from the Unicode CLDR rules
-#: src/Locale.php:527
+#: src/Locale.php:528
 msgid "Plural forms differ from Loco Translate's built in rules for this language"
 msgstr "Le forme plurali sono diverse dalle regole incluse in Loco Translate per questa lingua"
 
@@ -45,7 +45,7 @@ msgstr "Percorso relativo per il file del template"
 msgid "Save"
 msgstr "Salva"
 
-#: tpl/admin/file/conf.php:48 tpl/admin/init/init-po.php:163
+#: tpl/admin/file/conf.php:48 tpl/admin/init/init-po.php:164
 msgid "Merge strings from related JSON files"
 msgstr "Unisci le stringhe dai file JSON correlati"
 
@@ -66,7 +66,7 @@ msgid_plural "%s strings"
 msgstr[0] "%s stringa"
 msgstr[1] "%s stringhe"
 
-#: src/admin/file/MoveController.php:85
+#: src/admin/file/MoveController.php:86
 msgid "%s file moved"
 msgid_plural "%s files moved"
 msgstr[0] "%s file spostato"
@@ -78,11 +78,11 @@ msgid_plural "%s words"
 msgstr[0] "%s parola"
 msgstr[1] "%s parole"
 
-#: src/gettext/Compiler.php:232
+#: src/gettext/Compiler.php:251
 msgid "PO file saved and MO/JSON files compiled"
 msgstr "File PO salvato e file MO/JSON compilati"
 
-#: src/gettext/Compiler.php:136 src/gettext/Compiler.php:194
+#: src/gettext/Compiler.php:132 src/gettext/Compiler.php:191
 msgid "JSON compilation failed for %s"
 msgstr "Compilazione JSON non riuscita per %s"
 
@@ -364,11 +364,11 @@ msgstr "Questa operazione di spostamento richiede l'autorizzazione"
 msgid "This directory is managed by WordPress. Removed files may be restored during updates"
 msgstr "Questa directory è gestita da WordPress. I file rimossi possono essere ripristinati durante gli aggiornamenti"
 
-#: src/admin/file/MoveController.php:106 src/admin/file/MoveController.php:133
+#: src/admin/file/MoveController.php:108 src/admin/file/MoveController.php:136
 msgid "Move %s"
 msgstr "Sposta %s"
 
-#: src/admin/file/MoveController.php:89
+#: src/admin/file/MoveController.php:90
 msgid "%s file could not be moved"
 msgid_plural "%s files could not be moved"
 msgstr[0] "Impossibile spostare %s file"
@@ -418,7 +418,7 @@ msgstr "Sola lettura"
 msgid "Scan JavaScript files with extensions:"
 msgstr "Scansiona i file JavaScript con estensioni:"
 
-#: src/admin/init/InitPoController.php:243
+#: src/admin/init/InitPoController.php:240
 msgid "Assign template"
 msgstr "Assegna un template"
 
@@ -616,12 +616,12 @@ msgid "Creating this file requires permission"
 msgstr "La creazione di questo file richiede le autorizzazioni"
 
 #. Translators: Plural category for zero quantity
-#: src/Locale.php:412
+#: src/Locale.php:410
 msgctxt "Plural category"
 msgid "Zero"
 msgstr "Zero"
 
-#: src/admin/init/InitPoController.php:321 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:318 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr "Che cos'è questo?"
 
@@ -651,31 +651,31 @@ msgid "Child theme declares the same Text Domain as the parent theme"
 msgstr "Il tema figlio dichiara lo stesso Text Domain del tema genitore"
 
 #. Translators: General plural category not covered by other forms
-#: src/Locale.php:422
+#: src/Locale.php:420
 msgctxt "Plural category"
 msgid "Other"
 msgstr "Altre"
 
 #. Translators: Plural category used in some multi-plural languages
-#: src/Locale.php:420
+#: src/Locale.php:418
 msgctxt "Plural category"
 msgid "Many"
 msgstr "Tante"
 
 #. Translators: Plural category used in some multi-plural languages
-#: src/Locale.php:418
+#: src/Locale.php:416
 msgctxt "Plural category"
 msgid "Few"
 msgstr "Alcune"
 
 #. Translators: Plural category used in some multi-plural languages
-#: src/Locale.php:416
+#: src/Locale.php:414
 msgctxt "Plural category"
 msgid "Two"
 msgstr "Due"
 
 #. Translators: Plural category for singular quantity
-#: src/Locale.php:414
+#: src/Locale.php:412
 msgctxt "Plural category"
 msgid "One"
 msgstr "Una"
@@ -769,60 +769,60 @@ msgstr "%s su disco"
 msgid "Source files to scan:"
 msgstr "File sorgente da analizzare:"
 
-#: tpl/admin/init/init-po.php:183
+#: tpl/admin/init/init-po.php:184
 msgid "Start translating"
 msgstr "Inizia a tradurre"
 
-#: tpl/admin/init/init-po.php:173
+#: tpl/admin/init/init-po.php:174
 msgid "Use this file as template when running Sync"
 msgstr "Usa questo file come template quando esegui la sincronizzazione"
 
-#: tpl/admin/file/conf.php:38 tpl/admin/init/init-po.php:153
+#: tpl/admin/file/conf.php:38 tpl/admin/init/init-po.php:154
 msgid "Just copy English source strings"
 msgstr "Copia soltanto le stringhe di origine in inglese"
 
-#: tpl/admin/file/conf.php:32 tpl/admin/init/init-po.php:147
+#: tpl/admin/file/conf.php:32 tpl/admin/init/init-po.php:148
 msgid "Copy target translations from \"%s\""
 msgstr "Copia traduzioni di destinazione da \"%s\""
 
-#: tpl/admin/file/conf.php:12 tpl/admin/init/init-po.php:136
+#: tpl/admin/file/conf.php:12 tpl/admin/init/init-po.php:137
 msgid "Template options"
 msgstr "Opzioni template"
 
-#: tpl/admin/init/init-po.php:93 tpl/admin/init/upload.php:15
+#: tpl/admin/init/init-po.php:94 tpl/admin/init/upload.php:15
 msgid "Choose a location"
 msgstr "Scegli una posizione"
 
-#: tpl/admin/init/init-po.php:79
+#: tpl/admin/init/init-po.php:80
 msgid "Custom language"
 msgstr "Lingua personalizzata"
 
-#: tpl/admin/init/init-po.php:67
+#: tpl/admin/init/init-po.php:68
 msgid "Available languages"
 msgstr "Lingue disponibili"
 
 #: src/admin/bundle/LocaleController.php:116
-#: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:61
+#: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:62
 msgid "Installed languages"
 msgstr "Lingue installate"
 
-#: tpl/admin/init/init-po.php:60
+#: tpl/admin/init/init-po.php:61
 msgid "No language selected"
 msgstr "Nessuna lingua selezionata"
 
-#: tpl/admin/init/init-po.php:55
+#: tpl/admin/init/init-po.php:56
 msgid "WordPress language"
 msgstr "Lingua WordPress"
 
-#: tpl/admin/init/init-po.php:48
+#: tpl/admin/init/init-po.php:49
 msgid "Choose a language"
 msgstr "Scegli una lingua"
 
-#: tpl/admin/init/init-po.php:13
+#: tpl/admin/init/init-po.php:14
 msgid "Create template instead"
 msgstr "Crea invece un template"
 
-#: tpl/admin/init/init-po.php:12
+#: tpl/admin/init/init-po.php:13
 msgid "You're creating translations directly from source code"
 msgstr "Stai creando le traduzioni direttamente dal codice sorgente"
 
@@ -1364,7 +1364,7 @@ msgstr "Vai al Core di WordPress"
 msgid "\"Hello Dolly\" is part of the WordPress core"
 msgstr "\"Hello Dolly\" fa parte del core di WordPress"
 
-#: src/package/Plugin.php:233
+#: src/package/Plugin.php:232
 msgid "Plugin not found: %s"
 msgstr "Plugin non trovato: %s"
 
@@ -1377,7 +1377,7 @@ msgstr "Visita il sito ufficiale"
 msgid "\"%s\" %s by %s"
 msgstr "\"%s\" %s di %s"
 
-#: src/package/Debugger.php:205
+#: src/package/Debugger.php:195
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] "Il dominio configurato non ha stringhe estraibili"
@@ -1385,7 +1385,7 @@ msgstr[1] "I %u domini configurati non hanno stringhe estraibili"
 
 #. translators: 1: Number of strings; 2: Text Domain; e.g. 100 strings
 #. extracted from source code for "loco-translate"
-#: src/package/Debugger.php:187
+#: src/package/Debugger.php:177
 msgid "%1$s string extracted from source code for \"%2$s\""
 msgid_plural "%1$s strings extracted from source code for \"%2$s\""
 msgstr[0] "%1$s stringa estratta dal codice sorgente per \"%2$s\""
@@ -1428,19 +1428,19 @@ msgstr "A/m/g"
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Non hai autorizzazioni sufficienti per accedere a questa pagina."
 
-#: src/mvc/AjaxRouter.php:202
+#: src/mvc/AjaxRouter.php:200
 msgid "Download controller returned empty output"
 msgstr "Il controller dei download ha restituito un output vuoto"
 
-#: src/mvc/AjaxRouter.php:197
+#: src/mvc/AjaxRouter.php:195
 msgid "Download action not found"
 msgstr "Azione di download non trovata"
 
-#: src/mvc/AjaxRouter.php:174
+#: src/mvc/AjaxRouter.php:172
 msgid "Ajax controller returned empty JSON"
 msgstr "Il controller Ajax ha restituito un JSON vuoto"
 
-#: src/mvc/AjaxRouter.php:169
+#: src/mvc/AjaxRouter.php:167
 msgid "Ajax route not found: \"%s\""
 msgstr "Percorso Ajax non trovato: \"%s\""
 
@@ -1499,12 +1499,12 @@ msgctxt "Editor"
 msgid "Source text not loaded"
 msgstr "Testo sorgente non caricato"
 
-#: src/js/Strings.php:143 src/Locale.php:404
+#: src/js/Strings.php:143 src/Locale.php:402
 msgctxt "Editor"
 msgid "Plural"
 msgstr "Plurale"
 
-#: src/js/Strings.php:140 src/Locale.php:403
+#: src/js/Strings.php:140 src/Locale.php:401
 msgctxt "Editor"
 msgid "Single"
 msgstr "Singolare"
@@ -1551,7 +1551,7 @@ msgstr "Traduci"
 
 #. translators: Error thrown when attempting to parse a file that is not PO,
 #. POT or MO
-#: src/gettext/Data.php:23
+#: src/gettext/Data.php:22
 msgid "%s is not a Gettext file"
 msgstr "%s non è un file Gettext"
 
@@ -1644,7 +1644,7 @@ msgstr "OK"
 msgid "Notice"
 msgstr "Avvertimento"
 
-#: src/error/Exception.php:164 src/js/Strings.php:102
+#: src/error/Exception.php:163 src/js/Strings.php:102
 msgid "Error"
 msgstr "Errore"
 
@@ -1653,11 +1653,11 @@ msgctxt "User role"
 msgid "Translator"
 msgstr "Traduttore"
 
-#: src/config/XMLModel.php:42
+#: src/config/XMLModel.php:54
 msgid "XML supplied is empty"
 msgstr "L'XML fornito è vuoto"
 
-#: src/config/FormModel.php:146
+#: src/config/FormModel.php:147
 msgid "Text Domain cannot be empty"
 msgstr "Il text domain non può essere vuoto"
 
@@ -1674,11 +1674,11 @@ msgstr "%s esiste già in questa cartella"
 msgid "Template file created"
 msgstr "File template creato"
 
-#: src/gettext/Compiler.php:107
+#: src/gettext/Compiler.php:103
 msgid "PO file saved, but MO file compilation failed"
 msgstr "File PO salvato, ma la compilazione del file MO è fallita"
 
-#: src/gettext/Compiler.php:235
+#: src/gettext/Compiler.php:254
 msgid "PO file saved and MO file compiled"
 msgstr "File PO salvato e file MO compilato"
 
@@ -1702,15 +1702,15 @@ msgstr "Traduci temi"
 msgid "Translate plugins"
 msgstr "Traduci plugin"
 
-#: src/admin/init/InitPotController.php:106
+#: src/admin/init/InitPotController.php:105
 msgid "New translations template for \"%s\""
 msgstr "Nuovo template di traduzioni per \"%s\""
 
-#: src/admin/init/InitPotController.php:105
+#: src/admin/init/InitPotController.php:104
 msgid "New template file"
 msgstr "Nuovo file di template"
 
-#: src/admin/init/InitPotController.php:57
+#: src/admin/init/InitPotController.php:56
 msgid "Template file already exists"
 msgstr "Il file del template esiste già"
 
@@ -1718,12 +1718,12 @@ msgstr "Il file del template esiste già"
 msgid "New template"
 msgstr "Nuovo template"
 
-#: src/admin/init/InitPoController.php:233
+#: src/admin/init/InitPoController.php:230
 msgid "Skip template"
 msgstr "Salta template"
 
 #. translators: Were %s is number of source files that will be scanned
-#: src/admin/init/InitPoController.php:227
+#: src/admin/init/InitPoController.php:224
 msgid "%s source file will be scanned for translatable strings"
 msgid_plural "%s source files will be scanned for translatable strings"
 msgstr[0] "Sarà esaminato %s file sorgente per cercare stringhe traducibili"
@@ -1731,17 +1731,17 @@ msgstr[1] "Saranno esaminati %s file sorgente per cercare stringhe traducibili"
 
 #. translators: 1: Number of strings; 2: Name of POT file; e.g. "100 strings
 #. found in file.pot"
-#: src/admin/init/InitPoController.php:198
+#: src/admin/init/InitPoController.php:194
 msgid "%1$s string found in %2$s"
 msgid_plural "%1$s strings found in %2$s"
 msgstr[0] "%1$s stringa trovata in %2$s"
 msgstr[1] "%1$s stringhe trovate in %2$s"
 
-#: src/admin/init/InitPoController.php:112
+#: src/admin/init/InitPoController.php:109
 msgid "Initializing new translations in unknown set"
 msgstr "Inizializzazione nuova traduzione in un set sconosciuto"
 
-#: src/admin/init/InitPoController.php:108
+#: src/admin/init/InitPoController.php:105
 msgid "Initializing new translations in \"%s\""
 msgstr "Inizializzazione nuova traduzione in \"%s\""
 
@@ -1820,18 +1820,18 @@ msgstr "Le traduzioni non corrispondono al template. Esegui la sincronizzazione 
 msgid "Editing %1$s in %2$s"
 msgstr "Modifica di %1$s in %2$s"
 
-#: src/admin/file/DeleteController.php:99
+#: src/admin/file/DeleteController.php:100
 msgid "%s dependent file will also be deleted"
 msgid_plural "%s dependent files will also be deleted"
 msgstr[0] "Sarà eliminato anche %s file dipendente"
 msgstr[1] "Saranno eliminati anche %s file dipendenti"
 
-#: src/admin/file/DeleteController.php:76
-#: src/admin/file/DeleteController.php:94
+#: src/admin/file/DeleteController.php:77
+#: src/admin/file/DeleteController.php:95
 msgid "Delete %s"
 msgstr "Elimina %s"
 
-#: src/admin/file/DeleteController.php:57 src/admin/file/DiffController.php:45
+#: src/admin/file/DeleteController.php:58 src/admin/file/DiffController.php:45
 msgid "File deleted"
 msgid_plural "%u files deleted"
 msgstr[0] "File eliminato"
@@ -1886,7 +1886,7 @@ msgid "Site options"
 msgstr "Opzioni sito"
 
 #: src/admin/bundle/ViewController.php:132
-#: src/admin/init/InitPoController.php:217 tpl/admin/init/init-pot.php:40
+#: src/admin/init/InitPoController.php:214 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr "Crea template"
 
@@ -1896,7 +1896,7 @@ msgstr "Modifica template"
 
 #: src/admin/bundle/ViewController.php:98 src/admin/file/BaseController.php:142
 #: src/admin/init/InitPoController.php:16
-#: src/admin/init/InitPoController.php:115
+#: src/admin/init/InitPoController.php:112
 msgid "New language"
 msgstr "Nuova lingua"
 
@@ -1937,26 +1937,26 @@ msgstr "Scheda avanzate"
 msgid "Configure %s"
 msgstr "Configura %s"
 
-#: src/admin/bundle/BaseController.php:113
+#: src/admin/bundle/BaseController.php:126
 #: src/admin/config/BaseController.php:24
 #: src/admin/config/DebugController.php:12 src/error/Debug.php:19
 msgid "Debug"
 msgstr "Debug"
 
-#: src/admin/bundle/BaseController.php:110 tpl/admin/file/conf.php:58
+#: src/admin/bundle/BaseController.php:123 tpl/admin/file/conf.php:58
 #: tpl/admin/file/move.php:26
 msgid "Advanced"
 msgstr "Avanzate"
 
-#: src/admin/bundle/BaseController.php:109
+#: src/admin/bundle/BaseController.php:122
 msgid "Setup"
 msgstr "Configurazione"
 
-#: src/admin/bundle/BaseController.php:53
+#: src/admin/bundle/BaseController.php:66
 msgid "Configuration reset"
 msgstr "Configurazione reimpostata"
 
-#: src/admin/bundle/BaseController.php:38
+#: src/admin/bundle/BaseController.php:51
 msgid "Configuration saved"
 msgstr "Configurazione salvata"
 
@@ -1965,7 +1965,7 @@ msgstr "Configurazione salvata"
 msgid "Loco Translate %s"
 msgstr "Loco Translate %s"
 
-#: src/admin/bundle/BaseController.php:108
+#: src/admin/bundle/BaseController.php:121
 #: src/admin/bundle/LocaleController.php:34
 #: src/admin/bundle/ViewController.php:25
 #: src/admin/config/BaseController.php:41 src/admin/file/EditController.php:27
@@ -1986,11 +1986,11 @@ msgstr "Plugin"
 msgid "Themes"
 msgstr "Temi"
 
-#: src/Locale.php:330
+#: src/Locale.php:329
 msgid "Invalid locale"
 msgstr "Locale non valido"
 
-#: loco.php:141
+#: loco.php:137
 msgid "Loco Translate requires the \"%s\" PHP extension. Ask your hosting provider to install it"
 msgstr "Loco Translate richiede l'estensione PHP \"%s\". Richiedi al tuo fornitore di hosting di installarla"
 
@@ -2073,7 +2073,7 @@ msgid "Merged from %s"
 msgstr "Uniti da %s"
 
 #. translators: Where %s is either PO or POT
-#: src/admin/file/HeadController.php:80 src/gettext/Compiler.php:239
+#: src/admin/file/HeadController.php:80 src/gettext/Compiler.php:258
 msgid "%s file saved"
 msgstr "File %s salvato"
 
