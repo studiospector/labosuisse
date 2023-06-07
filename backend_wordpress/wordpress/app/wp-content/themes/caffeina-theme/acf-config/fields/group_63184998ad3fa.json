@@ -6,6 +6,7 @@
             "key": "field_631849b4eb7b5",
             "label": "Boxes",
             "name": "lb_block_information_boxes",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -19,13 +20,14 @@
             "min": 0,
             "max": 0,
             "layout": "row",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "wpml_cf_preferences": 3,
             "sub_fields": [
                 {
                     "key": "field_631849f3eb7b6",
                     "label": "Titolo",
                     "name": "lb_block_information_boxes_title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -40,12 +42,14 @@
                     "maxlength": "",
                     "rows": 5,
                     "new_lines": "br",
-                    "wpml_cf_preferences": 2
+                    "wpml_cf_preferences": 2,
+                    "parent_repeater": "field_631849b4eb7b5"
                 },
                 {
                     "key": "field_63184a75eb7b7",
                     "label": "Testo",
                     "name": "lb_block_information_boxes_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -60,12 +64,14 @@
                     "maxlength": "",
                     "rows": 5,
                     "new_lines": "br",
-                    "wpml_cf_preferences": 2
+                    "wpml_cf_preferences": 2,
+                    "parent_repeater": "field_631849b4eb7b5"
                 },
                 {
                     "key": "field_63184ac1eb7b8",
                     "label": "Link",
                     "name": "lb_block_information_boxes_link",
+                    "aria-label": "",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -76,9 +82,11 @@
                         "id": ""
                     },
                     "return_format": "array",
-                    "wpml_cf_preferences": 2
+                    "wpml_cf_preferences": 2,
+                    "parent_repeater": "field_631849b4eb7b5"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -99,5 +107,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1662536430
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_63184998ad3fa.json",
+    "acfml_field_group_mode": "advanced"
 }

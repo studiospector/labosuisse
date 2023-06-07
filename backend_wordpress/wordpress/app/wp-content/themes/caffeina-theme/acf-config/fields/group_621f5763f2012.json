@@ -6,6 +6,7 @@
             "key": "field_621f579d319e2",
             "label": "Campi personalizzati",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -23,6 +24,7 @@
             "key": "field_621f57b9319e3",
             "label": "Headquarter",
             "name": "lb_job_location_headquarter",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "Lo scopo del campo è semplicemente aggiungere l'icona dello \"scudetto\" accanto alla Location al posto del \"pin\" di default.",
             "required": 0,
@@ -58,5 +60,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646221387
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_621f5763f2012.json",
+    "acfml_field_group_mode": "advanced"
 }

@@ -68,5 +68,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1677517620
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_63fcd59607813.json",
+    "acfml_field_group_mode": "advanced"
 }

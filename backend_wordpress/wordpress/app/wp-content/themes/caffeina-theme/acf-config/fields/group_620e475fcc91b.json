@@ -6,6 +6,7 @@
             "key": "field_620e4910072dc",
             "label": "Header",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -23,6 +24,7 @@
             "key": "field_632d78df391ab",
             "label": "Pre Header - Testo",
             "name": "lb_preheader_text",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -43,6 +45,7 @@
             "key": "field_620e4e3d072e2",
             "label": "Links",
             "name": "lb_header_links",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -56,13 +59,14 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "wpml_cf_preferences": 3,
             "sub_fields": [
                 {
                     "key": "field_620e49a7072dd",
                     "label": "Link",
                     "name": "lb_header_links_link",
+                    "aria-label": "",
                     "type": "page_link",
                     "instructions": "",
                     "required": 1,
@@ -86,12 +90,14 @@
                     "allow_null": 0,
                     "allow_archives": 1,
                     "multiple": 0,
-                    "wpml_cf_preferences": 2
+                    "wpml_cf_preferences": 2,
+                    "parent_repeater": "field_620e4e3d072e2"
                 },
                 {
                     "key": "field_620e4e72072e3",
                     "label": "Icona",
                     "name": "lb_header_links_icon",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 1,
@@ -126,12 +132,14 @@
                     "ui": 1,
                     "ajax": 0,
                     "return_format": "value",
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_620e4e3d072e2"
                 },
                 {
                     "key": "field_621e43ad5343d",
                     "label": "Mobile Hide",
                     "name": "lb_header_links_mobile",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "Non mostrare il link in Mobile.",
                     "required": 0,
@@ -146,14 +154,17 @@
                     "default_value": 0,
                     "ui": 1,
                     "ui_on_text": "",
-                    "ui_off_text": ""
+                    "ui_off_text": "",
+                    "parent_repeater": "field_620e4e3d072e2"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_620e4ad7072df",
             "label": "Menu",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -171,6 +182,7 @@
             "key": "field_620e500434111",
             "label": "Links Shop",
             "name": "lb_menu_shop_links",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -185,12 +197,13 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "sub_fields": [
                 {
                     "key": "field_623de9bd68b72",
                     "label": "Link",
                     "name": "lb_menu_shop_links_link",
+                    "aria-label": "",
                     "type": "page_link",
                     "instructions": "",
                     "required": 1,
@@ -214,12 +227,14 @@
                     "taxonomy": "",
                     "allow_null": 0,
                     "allow_archives": 1,
-                    "multiple": 0
+                    "multiple": 0,
+                    "parent_repeater": "field_620e500434111"
                 },
                 {
                     "key": "field_620e500434113",
                     "label": "Icona",
                     "name": "lb_menu_shop_links_icon",
+                    "aria-label": "",
                     "type": "select",
                     "instructions": "",
                     "required": 1,
@@ -254,14 +269,17 @@
                     "ui": 1,
                     "ajax": 0,
                     "return_format": "value",
-                    "placeholder": ""
+                    "placeholder": "",
+                    "parent_repeater": "field_620e500434111"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_62a1ffde60310",
             "label": "Fixed Card - Brands",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -279,6 +297,7 @@
             "key": "field_62a2005560314",
             "label": "Immagine",
             "name": "lb_menu_fixed_card_brands_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -304,6 +323,7 @@
             "key": "field_62a1fff560311",
             "label": "Sottotitolo",
             "name": "lb_menu_fixed_card_brands_subtitle",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 1,
@@ -324,6 +344,7 @@
             "key": "field_62a2002460312",
             "label": "Paragrafo",
             "name": "lb_menu_fixed_card_brands_paragraph",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 1,
@@ -344,6 +365,7 @@
             "key": "field_62a2003960313",
             "label": "Bottone",
             "name": "lb_menu_fixed_card_brands_btn",
+            "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 1,
@@ -360,6 +382,7 @@
             "key": "field_62c404c23f21f",
             "label": "Fixed Card - Scopri Labo",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -377,6 +400,7 @@
             "key": "field_62c404d73f220",
             "label": "Immagine",
             "name": "lb_menu_fixed_card_discoverlabo_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 1,
@@ -402,6 +426,7 @@
             "key": "field_62c404f93f221",
             "label": "Sottotitolo",
             "name": "lb_menu_fixed_card_discoverlabo_subtitle",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 1,
@@ -422,6 +447,7 @@
             "key": "field_62c405083f222",
             "label": "Paragrafo",
             "name": "lb_menu_fixed_card_discoverlabo_paragraph",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 1,
@@ -442,6 +468,7 @@
             "key": "field_62c405123f223",
             "label": "Bottone",
             "name": "lb_menu_fixed_card_discoverlabo_btn",
+            "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 1,
@@ -473,5 +500,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1663924511
+    "modified": 1686125021,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_620e475fcc91b.json",
+    "acfml_field_group_mode": "advanced"
 }

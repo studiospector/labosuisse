@@ -22,6 +22,7 @@
             "max": 0,
             "layout": "row",
             "button_label": "Aggiungi Accordion",
+            "rows_per_page": 20,
             "sub_fields": [
                 {
                     "key": "field_6261b4d9dc0bb",
@@ -223,6 +224,8 @@
                     "max": 0,
                     "layout": "row",
                     "button_label": "Aggiungi Riga",
+                    "rows_per_page": 20,
+                    "parent_repeater": "field_6255a56d43f44",
                     "sub_fields": [
                         {
                             "key": "field_6255cbd0fba8a",
@@ -266,6 +269,8 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Link",
+                            "rows_per_page": 20,
+                            "parent_repeater": "field_6255cb92fba87",
                             "sub_fields": [
                                 {
                                     "key": "field_6255a7cb43f49",
@@ -318,16 +323,11 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_6255a7a143f47"
                                 }
-                            ],
-                            "rows_per_page": 20,
-                            "parent_repeater": "field_6255cb92fba87"
+                            ]
                         }
-                    ],
-                    "rows_per_page": 20,
-                    "parent_repeater": "field_6255a56d43f44"
+                    ]
                 }
-            ],
-            "rows_per_page": 20
+            ]
         }
     ],
     "location": [
@@ -348,5 +348,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1678811846
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_6255a543ba899.json",
+    "acfml_field_group_mode": "advanced"
 }

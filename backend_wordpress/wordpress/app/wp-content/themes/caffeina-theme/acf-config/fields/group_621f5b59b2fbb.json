@@ -6,6 +6,7 @@
             "key": "field_621f5b63ab589",
             "label": "Ambito",
             "name": "lb_job_scope",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
             "key": "field_621f80dc30814",
             "label": "Tipologia di Contratto",
             "name": "lb_job_contract_typology",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -61,5 +63,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646231808
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_621f5b59b2fbb.json",
+    "acfml_field_group_mode": "advanced"
 }

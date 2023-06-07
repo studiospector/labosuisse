@@ -6,6 +6,7 @@
             "key": "field_6283b2f65d011",
             "label": "Navs",
             "name": "lb_navs_template_items",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
                     "key": "field_6283b3625d012",
                     "label": "ID",
                     "name": "lb_navs_template_item_id",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "Inserire un ID relativo alla seguente Nav.\r\n<br>\r\nLo stesso ID sarà da inserire come referenza nel Link che dovrà aprire questa Nav.\r\n<br><br>\r\nEs. \"test-1\"",
                     "required": 1,
@@ -40,12 +42,14 @@
                     "placeholder": "",
                     "prepend": "lb-offsetnav-",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_6283b2f65d011"
                 },
                 {
                     "key": "field_6283b3f05d013",
                     "label": "Titolo",
                     "name": "lb_navs_template_item_title",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -60,12 +64,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_6283b2f65d011"
                 },
                 {
                     "key": "field_6283b59880fc4",
                     "label": "Contenuto",
                     "name": "lb_navs_template_item_content",
+                    "aria-label": "",
                     "type": "flexible_content",
                     "instructions": "",
                     "required": 0,
@@ -87,6 +93,7 @@
                                     "key": "field_6283b60e80fc5",
                                     "label": "Titolo",
                                     "name": "lb_navs_template_item_content_text_title",
+                                    "aria-label": "",
                                     "type": "textarea",
                                     "instructions": "",
                                     "required": 0,
@@ -107,6 +114,7 @@
                                     "key": "field_6283b64580fc6",
                                     "label": "Sottotitolo",
                                     "name": "lb_navs_template_item_content_text_subtitle",
+                                    "aria-label": "",
                                     "type": "textarea",
                                     "instructions": "",
                                     "required": 0,
@@ -127,6 +135,7 @@
                                     "key": "field_6283b65780fc7",
                                     "label": "Testo piccolo",
                                     "name": "lb_navs_template_item_content_text_paragraph_small",
+                                    "aria-label": "",
                                     "type": "textarea",
                                     "instructions": "",
                                     "required": 0,
@@ -147,6 +156,7 @@
                                     "key": "field_6283b67280fc8",
                                     "label": "Testo",
                                     "name": "lb_navs_template_item_content_text_paragraph",
+                                    "aria-label": "",
                                     "type": "textarea",
                                     "instructions": "",
                                     "required": 0,
@@ -177,6 +187,7 @@
                                     "key": "field_628613df617be",
                                     "label": "Lista",
                                     "name": "lb_navs_template_item_content_list",
+                                    "aria-label": "",
                                     "type": "repeater",
                                     "instructions": "",
                                     "required": 0,
@@ -190,13 +201,14 @@
                                     "min": 0,
                                     "max": 0,
                                     "layout": "row",
-                                    "button_label": "",
+                                    "button_label": "Aggiungi Riga",
                                     "wpml_cf_preferences": 3,
                                     "sub_fields": [
                                         {
                                             "key": "field_62861426617bf",
                                             "label": "Testo",
                                             "name": "lb_navs_template_item_content_list_text",
+                                            "aria-label": "",
                                             "type": "text",
                                             "instructions": "",
                                             "required": 0,
@@ -211,9 +223,11 @@
                                             "placeholder": "",
                                             "prepend": "",
                                             "append": "",
-                                            "maxlength": ""
+                                            "maxlength": "",
+                                            "parent_repeater": "field_628613df617be"
                                         }
-                                    ]
+                                    ],
+                                    "rows_per_page": 20
                                 }
                             ],
                             "min": "",
@@ -222,9 +236,11 @@
                     },
                     "button_label": "Aggiungi Blocco",
                     "min": "",
-                    "max": ""
+                    "max": "",
+                    "parent_repeater": "field_6283b2f65d011"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -245,5 +261,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1652954178
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_6283aa3863b7a.json",
+    "acfml_field_group_mode": "advanced"
 }

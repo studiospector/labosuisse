@@ -339,6 +339,7 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_61f00a809d095",
@@ -384,8 +385,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_61f00a809d094"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -613,6 +613,7 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_61f009561054a",
@@ -658,8 +659,7 @@
                                     "maxlength": "",
                                     "parent_repeater": "field_61f0095610549"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -908,6 +908,7 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_627a5bbc5a75d",
@@ -953,8 +954,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_627a5bbc5a75c"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -1245,6 +1245,7 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_61f0071ae1ee8",
@@ -1290,8 +1291,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_61f0071ae1ee7"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -1582,6 +1582,7 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_61f0059990ca0",
@@ -1627,8 +1628,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_61f0059990c9f"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -1856,6 +1856,7 @@
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
                             "wpml_cf_preferences": 3,
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_61e9b69eeef3a",
@@ -1901,8 +1902,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_61e9b634eef39"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -2170,6 +2170,7 @@
                             "max": 0,
                             "layout": "table",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_620bcc20bb283",
@@ -2215,8 +2216,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_620bcc20bb282"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -2547,6 +2547,7 @@
                             "max": 0,
                             "layout": "row",
                             "button_label": "Aggiungi Riga",
+                            "rows_per_page": 20,
                             "sub_fields": [
                                 {
                                     "key": "field_620bcc9fbb28d",
@@ -2592,8 +2593,7 @@
                                     "wpml_cf_preferences": 2,
                                     "parent_repeater": "field_620bcc9fbb28c"
                                 }
-                            ],
-                            "rows_per_page": 20
+                            ]
                         }
                     ],
                     "min": "",
@@ -2686,5 +2686,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1679480090
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_6204dfe7d0b15.json",
+    "acfml_field_group_mode": "advanced"
 }

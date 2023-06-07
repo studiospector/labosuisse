@@ -6,6 +6,7 @@
             "key": "field_6214f6f0b2313",
             "label": "Logo",
             "name": "lb_faq_logo",
+            "aria-label": "",
             "type": "image",
             "instructions": "<b>ATTENZIONE!<\/b><br>\r\nSe viene inserito il Logo non verrà visualizzato il Titolo.",
             "required": 0,
@@ -31,6 +32,7 @@
             "key": "field_6214f5c2b230f",
             "label": "FAQs",
             "name": "lb_faq_items",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -44,13 +46,14 @@
             "min": 0,
             "max": 0,
             "layout": "row",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "wpml_cf_preferences": 3,
             "sub_fields": [
                 {
                     "key": "field_6214f60cb2310",
                     "label": "Domanda",
                     "name": "lb_faq_item_question",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 1,
@@ -65,12 +68,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": 5,
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_6214f5c2b230f"
                 },
                 {
                     "key": "field_6214f64bb2311",
                     "label": "Risposta",
                     "name": "lb_faq_item_answer",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 1,
@@ -85,9 +90,11 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": 5,
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_6214f5c2b230f"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -108,5 +115,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645545941
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_6214f5b4e09c4.json",
+    "acfml_field_group_mode": "advanced"
 }

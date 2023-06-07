@@ -6,6 +6,7 @@
             "key": "field_61f7bd37ddd66",
             "label": "Titolo",
             "name": "lb_block_carousel_centered_title",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
             "key": "field_61f7bd0bd9701",
             "label": "Carousel",
             "name": "lb_block_carousel_centered",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -46,6 +48,7 @@
                     "key": "field_61f7bd0bde990",
                     "label": "Immagine",
                     "name": "lb_block_carousel_centered_img",
+                    "aria-label": "",
                     "type": "image",
                     "instructions": "",
                     "required": 1,
@@ -65,12 +68,14 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": ""
+                    "mime_types": "",
+                    "parent_repeater": "field_61f7bd0bd9701"
                 },
                 {
                     "key": "field_61f7bea4ddd67",
                     "label": "Sottotitolo",
                     "name": "lb_block_carousel_centered_subtitle",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -85,12 +90,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61f7bd0bd9701"
                 },
                 {
                     "key": "field_61f7beceddd68",
                     "label": "Testo",
                     "name": "lb_block_carousel_centered_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -105,9 +112,11 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61f7bd0bd9701"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -128,5 +137,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645120832
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61f7bd0bb3bf7.json",
+    "acfml_field_group_mode": "advanced"
 }

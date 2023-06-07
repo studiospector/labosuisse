@@ -6,6 +6,7 @@
             "key": "field_61dc45aea02fb",
             "label": "Campi personalizzati",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -23,6 +24,7 @@
             "key": "field_6202a29773100",
             "label": "Pagina Brand",
             "name": "lb_brand_page",
+            "aria-label": "",
             "type": "post_object",
             "instructions": "",
             "required": 0,
@@ -46,6 +48,7 @@
             "key": "field_6204ee9562485",
             "label": "Colore Brand",
             "name": "lb_brand_color",
+            "aria-label": "",
             "type": "color_picker",
             "instructions": "",
             "required": 0,
@@ -64,6 +67,7 @@
             "key": "field_61dc456d74af3",
             "label": "Logo Brand",
             "name": "lb_brand_logo",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -89,6 +93,7 @@
             "key": "field_62054fab201a4",
             "label": "Immagine Brand",
             "name": "lb_brand_image",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -129,5 +134,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646156194
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61dc44e9adc5c.json",
+    "acfml_field_group_mode": "advanced"
 }

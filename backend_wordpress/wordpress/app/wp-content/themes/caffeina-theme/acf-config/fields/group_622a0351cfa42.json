@@ -6,6 +6,7 @@
             "key": "field_622a03acee568",
             "label": "Farmacia",
             "name": "lb_beauty_specialist_store",
+            "aria-label": "",
             "type": "post_object",
             "instructions": "",
             "required": 0,
@@ -29,6 +30,7 @@
             "key": "field_622a073917456",
             "label": "Data Evento",
             "name": "lb_beauty_specialist_date",
+            "aria-label": "",
             "type": "date_picker",
             "instructions": "",
             "required": 0,
@@ -47,6 +49,7 @@
             "key": "field_623c7cc863a31",
             "label": "Id Farmacia",
             "name": "lb_beauty_specialist_store_id",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -67,6 +70,7 @@
             "key": "field_623c7d7663a32",
             "label": "Numero Telefono Farmacia",
             "name": "lb_beauty_specialist_store_phone_number",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -102,5 +106,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1648131906
+    "modified": 1686125018,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_622a0351cfa42.json",
+    "acfml_field_group_mode": "advanced"
 }
