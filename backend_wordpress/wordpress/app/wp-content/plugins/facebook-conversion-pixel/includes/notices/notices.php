@@ -21,22 +21,9 @@ https://wordpress.org/plugins/quiz-cat/
 https://wordpress.org/plugins/easy-pricing-tables/
 </div></figure><figure class="wp-block-embed is-type-wp-embed is-provider-plugin-directory wp-block-embed-plugin-directory"><div class="wp-block-embed__wrapper">
 https://wordpress.org/plugins/landing-page-cat/
-</div></figure><figure class="wp-block-embed is-type-wp-embed is-provider-plugin-directory wp-block-embed-plugin-directory"><div class="wp-block-embed__wrapper">
-https://wordpress.org/plugins/analytics-cat/
 </div></figure>';
-
-	?>
-	<style>
-		.fca-featured-plugins {
-			
-		}
-		
-		.fca-featured-plugins > figure {
-			display: inline-block;
-			margin: 0px 6px;
-			vertical-align: top;
-		}		
-	</style>
+	wp_enqueue_style( 'fca_pc_admin_stylesheet', FCA_PC_PLUGINS_URL . '/includes/editor/admin.css', array(), FCA_PC_PLUGIN_VER );
+	echo fca_pc_admin_header_nav() ?>
 	<div class="wrap">
 		<h2><?php esc_html_e( 'Featured Plugins', 'facebook-conversion-pixel' ) ?></h2>	
 		<p><?php esc_html_e( 'Problems, Suggestions?', 'facebook-conversion-pixel' ) ?> 

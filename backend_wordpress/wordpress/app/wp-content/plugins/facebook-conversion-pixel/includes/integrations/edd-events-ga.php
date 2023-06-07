@@ -89,7 +89,7 @@ function fca_pc_edd_format_cart_data_ga( $payment_id = false, $extra_params = fa
 	
 	$ga_data = array(
 		'value' => $value,
-		'currency' => get_woocommerce_currency(),
+		'currency' => edd_get_option( 'currency', 'USD' ),
 		'items' => $items,
 		'transaction_id' => $payment_id,
 	);

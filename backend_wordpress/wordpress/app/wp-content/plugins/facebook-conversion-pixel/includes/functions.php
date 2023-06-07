@@ -16,11 +16,53 @@ function fca_pc_parse_pixels( $options ) {
 	return $parsed_pixels;
 }
 
+function fca_pc_get_active_pixels( $options ) {
+	$parsed_pixels = fca_pc_parse_pixels( $options );
+	$active_pixels = array();
+	
+	if ( empty( $parsed_pixels ) ) {
+		return $active_pixels;
+	}
+		
+	$post_id = get_the_ID();
+	$categories = wp_get_post_categories( $post_id );
+	$tags = wp_get_post_tags( $post_id );
+
+	
+	forEach ( $parsed_pixels as $pixel ) {
+		$type = empty( $pixel['type'] ) ? '' : $pixel['type'];
+		$paused = empty( $pixel['paused'] ) ? false : true;
+		$excludes = empty( $pixel['excludes'] ) ? array() : $pixel['excludes'];
+		
+		if ( $paused ) {
+			//skip this one
+			continue;
+		}
+
+		if ( !empty( $excludes ) ) {
+			$post_id_match = in_array( $post_id, $excludes );
+			//CHECK CATEGORIES & TAGS
+			$category_match = count( array_intersect( array_map( 'fca_pc_cat_id_fiter', $categories ), $excludes ) ) > 0;
+			$tag_match = count( array_intersect( array_map( 'fca_pc_tag_id_fiter', $tags ), $excludes ) ) > 0;
+			$front_page_match = is_front_page() && in_array( 'front', $excludes );
+			$blog_page_match = is_home() && in_array( 'blog', $excludes );
+			if ( in_array( 'all', $excludes ) OR $post_id_match OR $category_match OR $front_page_match OR $blog_page_match OR $tag_match ) {
+				continue;
+			}
+		}
+		
+		$active_pixels[] = $pixel;
+		
+
+	}
+	
+
+	return $active_pixels;
+}
+
 function fca_pc_maybe_add_pixel() {
 
 	$options = get_option( 'fca_pc', array() );
-
-	$pixels = fca_pc_parse_pixels( $options );
 	
 	if ( fca_pc_role_check( $options ) ) {
 
@@ -35,7 +77,7 @@ function fca_pc_maybe_add_pixel() {
 		wp_localize_script( 'fca_pc_client_js', 'fcaPcEvents', fca_pc_get_active_events() );
 		wp_localize_script( 'fca_pc_client_js', 'fcaPcPost', fca_pc_post_parameters() );
 		wp_localize_script( 'fca_pc_client_js', 'fcaPcCAPI', array( 
-			'pixels' => $pixels,
+			'pixels' => fca_pc_get_active_pixels( $options ),
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce' => wp_create_nonce( 'fca_pc_capi_nonce' ),
 			'debug' => FCA_PC_DEBUG,
@@ -64,11 +106,13 @@ function fca_pc_role_check( $options ) {
 
 function fca_pc_add_pixels( $options ) {
 	
-	$pixels = fca_pc_parse_pixels( $options );
+	$pixels = fca_pc_get_active_pixels( $options );
 	
 	$facebook_pixels = array();
-	$ga3_pixels[] = array();
-	$ga4_pixels[] = array();
+	$ga3_pixels = array();
+	$ga4_pixels = array();
+	$pinterest_pixels = array();
+	$snapchat_pixels = array();
 	
 	forEach( $pixels as $pixel ) {
 		$type = empty( $pixel['type'] ) ? '' : $pixel['type'];
@@ -86,13 +130,20 @@ function fca_pc_add_pixels( $options ) {
 				$header_pixels[] = $pixel;
 				break;
 			
-			
+			case 'Pinterest':
+				$pinterest_pixels[] = $pixel;
+				break;
+				
+			case 'Snapchat':
+				$snapchat_pixels[] = $pixel;
+				break;
+						
 			default:
 				$facebook_pixels[] = $pixel;
 		}
 		
 	};
-		
+	
 	if ( !empty( $ga4_pixels ) OR !empty( $ga3_pixels ) ) {
 		fca_pc_add_google_pixels( array_merge( $ga3_pixels, $ga4_pixels ), $options );
 		wp_localize_script( 'fca_pc_client_js', 'fcaPcGA', array(			
@@ -100,6 +151,12 @@ function fca_pc_add_pixels( $options ) {
 		));
 	}
 	
+	if ( !empty( $pinterest_pixels ) ) {		
+		fca_pc_add_pinterest_pixels( $pinterest_pixels, $options );
+	}
+	if ( !empty( $snapchat_pixels ) ) {		
+		fca_pc_add_snapchat_pixels( $snapchat_pixels, $options );
+	}
 	if ( !empty( $facebook_pixels ) ) {		
 		fca_pc_add_facebook_pixels( $facebook_pixels, $options );
 	}
@@ -110,16 +167,9 @@ function fca_pc_add_pixels( $options ) {
 }
 
 function fca_pc_add_header_pixels( $header_pixels, $options ) {
-	forEach ( $header_pixels as $pixel ) {
-		$paused = empty( $pixel['paused'] ) ? false : true;
-		if( !$paused ) {
-			$name = esc_html( $pixel['pixel'] );
-			echo "<!-- begin $name -->";
-			$code = $pixel['capi'];
-			echo htmlspecialchars_decode( $code );
-			echo "<!-- end $name -->";			
-		}
-		
+	forEach ( $header_pixels as $pixel ) {			
+		$code = $pixel['capi'];
+		echo html_entity_decode( $code, ENT_QUOTES );
 	}
 }
 
@@ -130,8 +180,8 @@ function fca_pc_add_facebook_pixels( $facebook_pixels, $options ) {
 	
 	forEach ( $facebook_pixels as $pixel ) {		
 		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
-		$paused = empty( $pixel['paused'] ) ? false : true;
-		if( !$paused && $pixel_id ){
+		
+		if( $pixel_id ){
 			if ( $advanced_matching ) {
 				$code .= "fbq( 'init', '$pixel_id', " . fca_pc_advanced_matching() . " );";
 			} else {
@@ -140,7 +190,7 @@ function fca_pc_add_facebook_pixels( $facebook_pixels, $options ) {
 		}
 	}
 	ob_start(); ?>
-	<!-- Facebook Pixel Code -->
+	<!-- Pixel Cat Facebook Pixel Code -->
 	<script>
 	!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 	n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
@@ -160,11 +210,11 @@ function fca_pc_add_google_pixels( $google_pixels ) {
 	
 	forEach ( $google_pixels as $pixel ) {		
 		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
-		$paused = empty( $pixel['paused'] ) ? false : true;
-		if( !$paused && $pixel_id ){
+		
+		if( $pixel_id ){
 			
 			ob_start(); ?>
-			<!-- Global site tag (gtag.js) - Google Analytics -->
+			<!-- Pixel Cat  Global site tag (gtag.js) - Google Analytics -->
 			<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $pixel_id ?>"></script>
 			<script>
 				window.dataLayer = window.dataLayer || [];
@@ -178,6 +228,74 @@ function fca_pc_add_google_pixels( $google_pixels ) {
 		}
 	}
 		
+}
+
+function fca_pc_add_pinterest_pixels( $pinterest_pixels, $options ) {
+	
+	$advanced_matching = empty( $options['advanced_matching'] ) ? false : true;
+	$code = ''; //INIT CODE FOR PIXEL
+	
+	forEach ( $pinterest_pixels as $pixel ) {		
+		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
+		
+		if( $pixel_id ){
+			if ( $advanced_matching ) {
+				$code .= "pintrk( 'load', '$pixel_id', " . fca_pc_advanced_matching() . " );";
+			} else {
+				$code .= "pintrk( 'load', '$pixel_id' );";
+			}
+		}
+	}
+	ob_start(); ?>
+	<!-- Pixel Cat Pinterest Tag -->
+	<script>
+	!function(e){if(!window.pintrk){window.pintrk = function () {
+	window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+	  n=window.pintrk;n.queue=[],n.version="3.0";var
+	  t=document.createElement("script");t.async=!0,t.src=e;var
+	  r=document.getElementsByTagName("script")[0];
+	  r.parentNode.insertBefore(t,r)}}("https://s.pinimg.com/ct/core.js");
+	<?php echo $code ?>
+	pintrk('page');
+	</script>
+	<noscript>
+	<img height="1" width="1" style="display:none;" alt=""
+	  src="https://ct.pinterest.com/v3/?event=init&tid=2613944587473&pd[em]=<hashed_email_address>&noscript=1" />
+	</noscript>
+	<!-- end Pinterest Tag -->
+	<?php 
+	echo ob_get_clean();
+	
+}
+
+function fca_pc_add_snapchat_pixels( $snapchat_pixels, $options ) {
+	
+	$code = ''; //INIT CODE FOR PIXEL
+	
+	forEach ( $snapchat_pixels as $pixel ) {		
+		$pixel_id = empty( $pixel['pixel'] ) ? '' : $pixel['pixel'];
+		
+		if( $pixel_id ){			
+			$code .= "snaptr('init', '$pixel_id' );";
+		}
+	}
+	
+	ob_start(); ?>
+<!-- Pixel Cat Snap Pixel Code -->
+<script type='text/javascript'>
+(function(e,t,n){if(e.snaptr)return;var a=e.snaptr=function()
+{a.handleRequest?a.handleRequest.apply(a,arguments):a.queue.push(arguments)};
+a.queue=[];var s='script';r=t.createElement(s);r.async=!0;
+r.src=n;var u=t.getElementsByTagName(s)[0];
+u.parentNode.insertBefore(r,u);})(window,document,
+'https://sc-static.net/scevent.min.js');
+<?php echo $code ?>
+snaptr( 'track', 'PAGE_VIEW' );
+</script>
+<!-- End Snap Pixel Code -->
+	<?php 
+	echo ob_get_clean();
+	
 }
 
 function fca_pc_post_parameters() {
@@ -547,4 +665,76 @@ function fca_pc_get_woo_ltv( $email ) {
 	
 	return $ltv;
 	
+}
+
+function fca_pc_get_post_triggers() {
+	
+
+	$triggers = array(
+		'all' => esc_attr__( 'All Pages', 'facebook-conversion-pixel' ),
+		'front' => esc_attr__( 'Front Page', 'facebook-conversion-pixel' ),
+		'blog' => esc_attr__( 'Blog Page', 'facebook-conversion-pixel' )
+	);
+
+	$custom_post_type_triggers = apply_filters( 'fca_pc_custom_post_support', array() );
+
+	if ( is_array( $custom_post_type_triggers ) && count( $custom_post_type_triggers ) > 0 ) {
+		forEach ( $custom_post_type_triggers as $cpt_slug ) {
+			$cpt_obj = get_post_type_object( $cpt_slug );
+
+			if ( $cpt_obj ) {
+				$cpt_name = $cpt_obj->labels->singular_name;
+
+				forEach ( get_posts( array( 'posts_per_page' => -1, 'post_type' => $cpt_slug ) ) as $p ) {
+					$triggers[$p->ID] = $cpt_name . ' ' . $p->ID . ' - ' . $p->post_title;
+				}
+			}
+		}
+	}
+
+	forEach ( get_posts( array( 'posts_per_page' => -1, 'post_type' => 'product' ) ) as $product ) {
+		$triggers[$product->ID] = 'Product ' . $product->ID . ' - ' . $product->post_title;
+	}
+
+	forEach ( get_posts( array( 'posts_per_page' => -1, 'post_type' => 'download' ) ) as $download ) {
+		$triggers[$download->ID] = 'Download ' . $download->ID . ' - ' . $download->post_title;
+	}
+
+	forEach ( get_pages( array( 'posts_per_page' => -1 ) ) as $page ) {
+		$triggers[$page->ID] = 'Page ' . $page->ID . ' - ' . $page->post_title;
+	}
+	forEach ( get_posts( array( 'posts_per_page' => -1 ) ) as $post ) {
+		$triggers[$post->ID] = 'Post ' . $post->ID . ' - ' . $post->post_title;
+	}
+
+	forEach ( get_categories() as $cat ) {
+		$triggers['cat' . $cat->cat_ID] = 'Category ' . $cat->cat_ID . ' - ' . $cat->category_nicename;
+	}
+
+	forEach ( get_tags() as $tag ) {
+		$triggers['tag' . $tag->term_id] = 'Tag ' . $tag->term_id  . ' - ' . $tag->name;
+	}
+
+	//REMOVE BLOG PAGE FROM OPTIONS - USE BLOG SETTING INSTEAD
+	$blog_id = get_option( 'page_for_posts' );
+	if ( $blog_id !== 0 ) {
+		unset ( $triggers[$blog_id] );
+	}
+	
+	return $triggers;
+}
+
+function fca_pc_admin_header_nav(){
+		
+	ob_start();?>
+<div class='fca_pc_admin_header' >
+	<img height=60 width=60 style='float:left;margin-right:16px;' src='<?php echo FCA_PC_PLUGINS_URL . '/assets/fatcatapps-logo.png' ?>'>
+	<h1>Pixel Cat</h1>
+	<?php if ( FCA_PC_PLUGIN_PACKAGE === 'Lite' ) { ?>
+	<a target='_blank' style='color:white;' class='highlighted' href='https://fatcatapps.com/pixelcat/premium/?utm_medium=plugin&utm_source=Pixel%20Cat%20Free&utm_campaign=free-plugin'><span class="dashicons dashicons-dashboard"></span><?php esc_attr_e( 'Upgrade to Premium', 'facebook-conversion-pixel' ) ?></a>	
+	<?php } ?>
+</div>	
+<?php 
+	echo ob_get_clean();
+
 }
