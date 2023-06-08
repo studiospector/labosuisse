@@ -17,7 +17,7 @@ class BannerVideo extends BaseBlock
                     'type' => 'html',
                     'data' => Timber::compile('@PathViews/components/video.twig', [
                         'provider' => 'youtube',
-                        'video_id' => get_field('lb_block_banner_video_id'),
+                        'video_id' => get_field('lb_block_banner_video_yt_id'),
                     ]),
                 ]
             ],
@@ -27,9 +27,9 @@ class BannerVideo extends BaseBlock
 
         $payload = [
             'video' => [
-                'provider' => 'youtube',
-                'video_id' => get_field('lb_block_banner_video_id'),
-                'attributes' => ['data-no-controls="true"', 'data-autoplay="true"', 'data-loop="true"'],
+                'provider' => 'html5',
+                'video_id' => get_field('lb_block_banner_video_bg'),
+                // 'attributes' => ['data-no-controls="true"', 'data-autoplay="true"', 'data-loop="true"'],
             ],
             'btnLabel' => get_field('lb_block_banner_video_infobox_btn_label'),
             'btnVariant' => get_field('lb_block_banner_video_infobox_btn_variants'),
