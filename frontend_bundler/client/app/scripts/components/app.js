@@ -38,6 +38,7 @@ import AsyncCart from './AsyncCart'
 import Multicountry from './Multicountry'
 import MulticountryGeolocation from './MulticountryGeolocation'
 import Video from './Video'
+import BannerVideo from './BannerVideo'
 
 const components = {
     scrollbar: {
@@ -208,6 +209,11 @@ const components = {
     video: {
         selector: '.js-video',
         type: Video,
+        optional: true
+    },
+    bannerVideo: {
+        selector: '.js-banner-video',
+        type: BannerVideo,
         optional: true
     },
 }
