@@ -1,0 +1,48 @@
+{% set classes = [] %}
+{% if infoboxBgColorTransparent %}
+	{% set variants = variants|merge(['bg-transparent']) %}
+{% endif %}
+
+{% set infobox = infobox|merge({
+	cta: {
+		title: btnLabel,
+		url: '',
+		iconStart: { name: 'play' },
+		attributes: ['data-target-offset-nav="lb-offsetnav-banner-video"'],
+		class: 'js-open-offset-nav',
+		variants: [btnVariant],
+	}
+}) %}
+
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['banner--' ~ variant]) %}
+	{% if variant == 'right' and not infobox.cta %}
+		{% set classes = classes|merge(['without-cta']) %}
+	{% endif %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+{% if infobox %}
+	{% set _infoboxTextAlignment = (infoboxTextAlignment == 'left') ? '' : (infoboxTextAlignment == 'center' ? ' text-center' : ' text-right') %}
+{% endif %}
+
+<section class="banner banner-video container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-animation-reveal js-banner-video">
+	{% if infobox %}
+		<div class="banner__infobox">
+			<div class="container">
+				<div class="h-100 col-12{{ _infoboxTextAlignment }}">
+					{% include '@PathViews/components/infobox.twig' with {reveal: true}|merge(infobox) only %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+
+	<div class="banner-video__video container">
+		{% include '@PathViews/components/video.twig' with video only %}
+	</div>
+
+	{# This Nav is appended on init to .js-scrollbar element #}
+	{% include '@PathViews/components/offset-nav/default.twig' with nav only %}
+</section>
