@@ -7,5 +7,11 @@
 {% endif %}
 
 <section class="lb-video container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-video" {{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
-	<div class="lb-video__player" data-video data-plyr-provider="{{ provider }}" data-plyr-embed-id="{{ video_id }}"></div>
+	{% if provider == 'html5' %}
+		<video class="lb-video__player" crossorigin autoplay muted poster="{{video_poster}}">
+			<source src="{{ video_id.url }}" type="{{video_id.mime_type}}">
+		</video>
+	{% else %}
+		<div class="lb-video__player" data-video data-plyr-provider="{{ provider }}" data-plyr-embed-id="{{ video_id }}"></div>
+	{% endif %}
 </section>
