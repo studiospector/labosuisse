@@ -29,8 +29,7 @@ class BannerVideo extends BaseBlock
             'video' => [
                 'provider' => 'html5',
                 'video_id' => get_field('lb_block_banner_video_bg'),
-                'video_poster' => get_field('lb_block_banner_video_bg_poster'),
-                'attributes' => ['data-no-controls="true"', 'data-autoplay="true"', 'data-loop="true"'],
+                // 'attributes' => ['data-no-controls="true"', 'data-autoplay="true"', 'data-loop="true"'],
             ],
             'btnLabel' => get_field('lb_block_banner_video_infobox_btn_label'),
             'btnVariant' => get_field('lb_block_banner_video_infobox_btn_variants'),

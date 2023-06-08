@@ -63,32 +63,6 @@
             "mime_types": "mp4,webm"
         },
         {
-            "key": "field_6481e52402297",
-            "label": "Video Poster",
-            "name": "lb_block_banner_video_bg_poster",
-            "aria-label": "",
-            "type": "image",
-            "instructions": "",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "wpml_cf_preferences": 2,
-            "return_format": "url",
-            "library": "all",
-            "min_width": "",
-            "min_height": "",
-            "min_size": "",
-            "max_width": "",
-            "max_height": "",
-            "max_size": "",
-            "mime_types": "",
-            "preview_size": "medium"
-        },
-        {
             "key": "field_648086ad21ee6",
             "label": "Infobox",
             "name": "",
@@ -330,5 +304,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1686234463
+    "modified": 1686241572
 }
