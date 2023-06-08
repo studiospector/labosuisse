@@ -6,6 +6,6 @@
 	{% set classes = classes|merge([class]) %}
 {% endif %}
 
-<section class="lb-video container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-video">
+<section class="lb-video container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-video" {{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
 	<div class="lb-video__player" data-video data-plyr-provider="{{ provider }}" data-plyr-embed-id="{{ video_id }}"></div>
 </section>
