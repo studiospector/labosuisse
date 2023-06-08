@@ -9,14 +9,28 @@ class Video extends Component {
   constructor({ options, ...props }) {
     super({ ...props, ui });
 
-    if (this.ui.video) {
-      const player = new Plyr(this.ui.video);
+    this.noControls = this.el.dataset?.noControls
+    this.autoplay = this.el.dataset?.autoplay
+    this.loop = this.el.dataset?.loop
 
-      player.on("ended", (event) => {
-        const instance = event.detail.plyr;
-        instance.restart();
-        setTimeout(() => instance.pause(), 100);
-      });
+    const plyrProps = Object.assign(
+      {},
+      !!this.noControls ? { controls: [] } : null,
+      !!this.autoplay ? { autoplay: true } : null,
+      !!this.autoplay ? { muted: true } : null,
+      !!this.loop ? { loop: {active: true} } : null,
+    )
+
+    if (this.ui.video) {
+      const player = new Plyr(this.ui.video, plyrProps);
+
+      if (!this.loop) {
+        player.on("ended", (event) => {
+          const instance = event.detail.plyr;
+          instance.restart();
+          setTimeout(() => instance.pause(), 100);
+        });
+      }
     }
   }
 }
