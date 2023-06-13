@@ -45,6 +45,13 @@ class Clean
         //     echo '<link rel="shortcut icon" href="' . $this->theme_options['abbrivio-site-favicon'] . '" type="image/x-icon">';
         // });
 
+        // Disable Admin Notification of User Password Change
+        if ( ! function_exists( 'wp_password_change_notification' ) ) {
+            function wp_password_change_notification( $user ) {
+                return;
+            }
+        }
+
         // Admin redirect
         add_filter('init', function () {
             if (is_admin()) {
