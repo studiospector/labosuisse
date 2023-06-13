@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WooCommerce - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2023-05-25 15:54:11+0000\n"
+"PO-Revision-Date: 2023-06-08 11:54:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4688,7 +4688,7 @@ msgstr "Elenco di attività deprecate estese dal filtro laterale del client."
 
 #: includes/emails/class-wc-email-customer-on-hold-order.php:33
 msgid "This is an order notification sent to customers containing order details after an order is placed on-hold from Pending, Cancelled or Failed order status."
-msgstr "Si tratta di una notifica d'ordine inviata ai clienti contenente i dettagli dell'ordine dopo che un ordine è stato contrassegnato come In sospeso, Annullato o Non riuscito."
+msgstr "Si tratta di una notifica dell'ordine inviata ai clienti contenente i dettagli dell'ordine dopo che un ordine è stato contrassegnato come In sospeso, Annullato o Non riuscito."
 
 #: includes/class-wc-shipping-rate.php:69
 msgid "Use `array_key_exists` to check for meta_data on WC_Shipping_Rate to get the correct result."
@@ -25754,7 +25754,7 @@ msgstr "Pagamento dell'ordine %s rimborsato"
 
 #: includes/emails/class-wc-email-cancelled-order.php:32
 msgid "Cancelled order emails are sent to chosen recipient(s) when orders have been marked cancelled (if they were previously processing or on-hold)."
-msgstr "Le email di annullamento dell'ordine vengono inviate ai destinatari selezionati quando gli ordini vengono annullati (se in precedenza erano in lavorazione o in sospeso)."
+msgstr "Le e-mail di annullamento dell'ordine vengono inviate ai destinatari selezionati quando gli ordini vengono annullati (se in precedenza erano in lavorazione o in sospeso)."
 
 #. translators: %s is product title
 #: templates/single-product-reviews.php:75
