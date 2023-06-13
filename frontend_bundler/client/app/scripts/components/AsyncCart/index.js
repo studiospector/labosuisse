@@ -67,8 +67,8 @@ class AsyncCart extends Component {
 
                 const cartEndpoint = woocommerce_params.wc_ajax_url.toString().replace('%%endpoint%%', 'add_to_cart')
 
-                console.log('url', process.env.LB_API_URL + cartEndpoint);
-                console.log('data', data);
+                // console.log('url', process.env.LB_API_URL + cartEndpoint);
+                // console.log('data', data);
 
                 $.ajax({
                     type: 'POST',
@@ -85,7 +85,7 @@ class AsyncCart extends Component {
                         console.log('error error', error);
                     },
                     success: function (response) {
-                        console.log('success', response);
+                        // console.log('success', response);
                         if (response.error && response.product_url) {
                             window.location = response.product_url;
                             return;
@@ -104,7 +104,7 @@ class AsyncCart extends Component {
                         })
                     },
                     complete: function (response) {
-                        console.log('complete', response);
+                        // console.log('complete', response);
                         $thisbutton.addClass('added').removeClass('button-loading');
                         $('#lb-offsetnav-async-cart .lb-offset-nav__content').removeClass('lb-offset-nav__content--loading');
                         $thisbutton.attr('disabled', false);
