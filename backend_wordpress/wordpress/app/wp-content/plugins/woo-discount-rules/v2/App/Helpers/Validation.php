@@ -525,6 +525,7 @@ class Validation
                 'disable_recalculate_total_when_coupon_apply',
                 'wdr_hide_other_shipping',
                 'run_rebuild_on_sale_index_cron',
+                'exclude_out_of_stock_products_for_on_sale_page',
             )
         );
         //validate slug may contains a-zA-Z0-9_-
@@ -626,21 +627,23 @@ class Validation
      * validate Report Tab Fields
      *
      * @param $post_values
+     * @param bool $validate_type
      * @return bool
      */
-    static function validateReportTabFields($post_values)
+    static function validateReportTabFields($post_values, $validate_type = true)
     {
         $report_fields_validator = new Validator($post_values);
         Validator::addRule('reportFields', array(__CLASS__, 'validateReportFields'), __('Validation error', 'woo-discount-rules'));
         //Validation condition values
-        $report_fields_validator->rule('reportFields',
-            array(
-                'period',
-                'from',
-                'to',
-                'type',
-            )
+        $fields = array(
+            'period',
+            'from',
+            'to',
         );
+        if ($validate_type) {
+            $fields[] = 'type';
+        }
+        $report_fields_validator->rule('reportFields', $fields);
         if ($report_fields_validator->validate()) {
             return true;
         } else {

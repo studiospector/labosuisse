@@ -32,7 +32,11 @@ class Renderer {
                 if (fundingSource !== 'paypal') {
                     style = {
                         shape: style.shape,
+                        color: style.color,
                     };
+                    if (fundingSource !== 'paylater') {
+                        delete style.color;
+                    }
                 }
 
                 this.renderButtons(
@@ -45,7 +49,9 @@ class Renderer {
             }
         }
 
-        this.creditCardRenderer.render(settings.hosted_fields.wrapper, contextConfig);
+        if (this.creditCardRenderer) {
+            this.creditCardRenderer.render(settings.hosted_fields.wrapper, contextConfig);
+        }
 
         for (const [fundingSource, data] of Object.entries(enabledSeparateGateways)) {
             this.renderButtons(
@@ -91,24 +97,6 @@ class Renderer {
             return document.querySelector(wrapper).hasChildNodes();
         }
         return this.renderedSources.has(wrapper + fundingSource ?? '');
-    }
-
-    hideButtons(element) {
-        const domElement = document.querySelector(element);
-        if (! domElement ) {
-            return false;
-        }
-        domElement.style.display = 'none';
-        return true;
-    }
-
-    showButtons(element) {
-        const domElement = document.querySelector(element);
-        if (! domElement ) {
-            return false;
-        }
-        domElement.style.display = 'block';
-        return true;
     }
 
     disableCreditCardFields() {

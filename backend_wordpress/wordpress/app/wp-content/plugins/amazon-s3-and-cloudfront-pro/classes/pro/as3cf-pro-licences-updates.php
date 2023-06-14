@@ -127,11 +127,28 @@ class AS3CF_Pro_Licences_Updates extends Delicious_Brains_API_Licences {
 		$user_email       = empty( $result['user_email'] ) ? '' : '&lt;' . $result['user_email'] . '&gt;';
 		$email            = empty( $result['user_email'] ) ? array() : array( $result['user_email'] );
 		$customer         = trim( $display_name . ' ' . $user_email );
-		$support_contacts = empty( $result['support_contacts'] ) ? $email : array_unique( array_merge( $email, $result['support_contacts'] ) );
+		$support_contacts = empty( $result['support_contacts'] ) ? $email : array_values( array_unique( array_merge( $email, $result['support_contacts'] ) ) );
 		$errors           = empty( $result['errors'] ) ? array() : $result['errors'];
 		$features         = empty( $result['features'] ) ? array() : $result['features'];
 
 		$customer = empty( $customer ) && ! empty( $email ) ? $email[0] : $customer;
+
+		$plan_usage = _x( 'No License', 'Licence status', 'amazon-s3-and-cloudfront' );
+		$limit_info = $this->as3cf->get_total_and_limit_for_licence();
+
+		if ( ! empty( $limit_info ) && isset( $limit_info['total'] ) && isset( $limit_info['limit'] ) ) {
+			if ( 0 === $limit_info['limit'] ) {
+				$plan_usage = sprintf( _x( '%s / Unlimited', 'Plan usage details', 'amazon-s3-and-cloudfront' ), number_format_i18n( $limit_info['total'] ) );
+			} else {
+				$plan_usage = sprintf( _x( '%1$s / %2$s media items', 'Plan usage details', 'amazon-s3-and-cloudfront' ), number_format_i18n( $limit_info['total'] ), number_format_i18n( $limit_info['limit'] ) );
+			}
+		} else {
+			$limit_info = array(
+				'total'               => -1,
+				'limit'               => -1,
+				'counts_toward_limit' => true,
+			);
+		}
 
 		return array(
 			'is_defined'              => $this->is_licence_constant(),
@@ -151,6 +168,8 @@ class AS3CF_Pro_Licences_Updates extends Delicious_Brains_API_Licences {
 			'support_url'             => $this->get_support_url(),
 			'errors'                  => $errors,
 			'features'                => $features,
+			'plan_usage'              => $plan_usage,
+			'limit_info'              => $limit_info,
 		);
 	}
 
@@ -231,12 +250,12 @@ class AS3CF_Pro_Licences_Updates extends Delicious_Brains_API_Licences {
 			'licence_error'                  => __( 'License error', 'amazon-s3-and-cloudfront' ),
 			'please_enter_licence'           => __( 'Please enter a valid license key.', 'amazon-s3-and-cloudfront' ),
 			'once_licence_entered'           => __( 'Once entered, you can view your support details.', 'amazon-s3-and-cloudfront' ),
-			'fetching_licence'               => __( 'Fetching license details, please wait&hellip;', 'amazon-s3-and-cloudfront' ),
+			'fetching_licence'               => __( 'Fetching license details, please wait…', 'amazon-s3-and-cloudfront' ),
 			'activate_licence_problem'       => __( 'An error occurred when trying to reactivate your license. Please contact support.', 'amazon-s3-and-cloudfront' ),
-			'attempting_to_activate_licence' => __( 'Attempting to activate your license, please wait&hellip;', 'amazon-s3-and-cloudfront' ),
+			'attempting_to_activate_licence' => __( 'Attempting to activate your license, please wait…', 'amazon-s3-and-cloudfront' ),
 			'status'                         => _x( 'Status', 'Current request status', 'amazon-s3-and-cloudfront' ),
 			'response'                       => _x( 'Response', 'The message the server responded with', 'amazon-s3-and-cloudfront' ),
-			'licence_reactivated'            => __( 'License successfully activated, please wait&hellip;', 'amazon-s3-and-cloudfront' ),
+			'licence_reactivated'            => __( 'License successfully activated, please wait…', 'amazon-s3-and-cloudfront' ),
 			'temporarily_activated_licence'  => __( "<strong>We've temporarily activated your licence and will complete the activation once the Delicious Brains API is available again.</strong><br />Please refresh this page to continue.", 'amazon-s3-and-cloudfront' ),
 			'valid'                          => _x( 'Valid', 'Licence status', 'amazon-s3-and-cloudfront' ),
 			'no_licence'                     => _x( 'No License', 'Licence status', 'amazon-s3-and-cloudfront' ),
@@ -245,6 +264,10 @@ class AS3CF_Pro_Licences_Updates extends Delicious_Brains_API_Licences {
 			'no_activations_left'            => _x( 'No Activations Left', 'Licence status', 'amazon-s3-and-cloudfront' ),
 			'activation_failed'              => _x( 'Activation Failed', 'Licence status', 'amazon-s3-and-cloudfront' ),
 			'subscription_expired'           => _x( 'Expired', 'Licence status', 'amazon-s3-and-cloudfront' ),
+			'licence_limit_reached'          => _x( 'The total number of offloaded media items has reached the limit for your license.', 'Licence status', 'amazon-s3-and-cloudfront' ),
+			'licence_limit_exceeded'         => _x( 'The total number of offloaded media items has exceeded the limit for your license.', 'Licence status', 'amazon-s3-and-cloudfront' ),
+			'plan_usage_title'               => _x( 'Plan usage', 'Section title', 'amazon-s3-and-cloudfront' ),
+			'upgrade_plan_cta'               => _x( 'Upgrade plan', 'Upsell call to action', 'amazon-s3-and-cloudfront' ),
 			'email_support_title'            => _x( 'Email Support', 'Page title', 'amazon-s3-and-cloudfront' ),
 			'select_email'                   => __( 'Select email address...', 'amazon-s3-and-cloudfront' ),
 			'email_note'                     => sprintf(

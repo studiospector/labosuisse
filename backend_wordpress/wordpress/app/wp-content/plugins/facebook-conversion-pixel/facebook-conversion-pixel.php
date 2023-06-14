@@ -2,13 +2,13 @@
 /*
 	Plugin Name: Pixel Cat Lite - ATTENZIONE! Plugin modificato. Leggere descrizione.
 	Plugin URI: https://fatcatapps.com/pixel-cat
-	Description: Modifica fatta nel file "includes/integrations/woo-feed.php". Aggiunte righe da 49 a 57. Per filtrare i feed tra lingua italiana e inglese con WPML.
+	Description: Modifica fatta nel file "includes/integrations/woo-feed.php". Aggiunte righe da 49 a 57 nella funzione fca_pc_do_feed_body. Per filtrare i feed tra lingua italiana e inglese con WPML.
 	Text Domain: facebook-conversion-pixel
 	Domain Path: /languages
 	Author: Fatcat Apps
 	Author URI: https://fatcatapps.com/
 	License: GPLv2
-	Version: 2.6.8
+	Version: 3.0.0
 */
 
 
@@ -29,9 +29,9 @@ if ( !defined( 'FCA_PC_PLUGIN_DIR' ) ) {
 	define( 'FCA_PC_PLUGIN_NAME', 'Pixel Cat Premium: ' . FCA_PC_PLUGIN_PACKAGE );
 
 	if ( FCA_PC_DEBUG ) {
-		define( 'FCA_PC_PLUGIN_VER', '2.6.' . time() );
+		define( 'FCA_PC_PLUGIN_VER', '3.0.' . time() );
 	} else {
-		define( 'FCA_PC_PLUGIN_VER', '2.6.8' );
+		define( 'FCA_PC_PLUGIN_VER', '3.0.0' );
 	}
 
 	//LOAD CORE
@@ -46,6 +46,12 @@ if ( !defined( 'FCA_PC_PLUGIN_DIR' ) ) {
 	}
 	if ( !empty( $options['woo_integration_ga'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-events-ga.php' ) ) {
 		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-events-ga.php' );
+	}	
+	if ( !empty( $options['woo_integration_pinterest'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-events-pinterest.php' ) ) {
+		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-events-pinterest.php' );
+	}
+	if ( !empty( $options['woo_integration_snapchat'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-events-snapchat.php' ) ) {
+		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-events-snapchat.php' );
 	}
 	if ( !empty( $options['woo_feed'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-feed.php' ) ) {
 		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/woo-feed.php' );
@@ -55,6 +61,12 @@ if ( !defined( 'FCA_PC_PLUGIN_DIR' ) ) {
 	}
 	if ( !empty( $options['edd_integration_ga'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-events-ga.php' ) ) {
 		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-events-ga.php' );
+	}
+	if ( !empty( $options['edd_integration_pinterest'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-events-pinterest.php' ) ) {
+		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-events-pinterest.php' );
+	}
+	if ( !empty( $options['edd_integration_snapchat'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-events-snapchat.php' ) ) {
+		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-events-snapchat.php' );
 	}
 	if ( !empty( $options['edd_feed'] ) && file_exists ( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-feed.php' ) ) {
 		include_once( FCA_PC_PLUGIN_DIR . '/includes/integrations/edd-feed.php' );

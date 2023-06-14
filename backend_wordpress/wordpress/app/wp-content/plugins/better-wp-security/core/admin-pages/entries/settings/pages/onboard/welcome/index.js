@@ -44,7 +44,7 @@ export default function WelcomePage( { onDismiss } ) {
 						icon="arrow-right-alt"
 						text={ __( 'Start', 'better-wp-security' ) }
 						iconPosition="right"
-						isPrimary
+						variant="primary"
 						className="itsec-button-icon-right"
 					/>
 					<Link to={ next }>{ __( 'Skip Setup', 'better-wp-security' ) }</Link>

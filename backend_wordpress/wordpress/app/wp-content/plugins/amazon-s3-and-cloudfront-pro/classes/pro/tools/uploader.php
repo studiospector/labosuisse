@@ -50,9 +50,9 @@ class Uploader extends Background_Tool {
 		$human_percentage = $this->percent_offloaded();
 
 		$strings = array(
-			'title_initial'          => __( 'Your Media Library needs to be offloaded', 'amazon-s3-and-cloudfront' ),
-			'title_partial_complete' => __( '<strong>%s%%</strong> of your Media Library has been offloaded', 'amazon-s3-and-cloudfront' ),
-			'title_complete'         => __( '<strong>100%</strong> of your Media Library has been offloaded, congratulations!', 'amazon-s3-and-cloudfront' ),
+			'title_initial'          => __( 'Your media needs to be offloaded', 'amazon-s3-and-cloudfront' ),
+			'title_partial_complete' => __( '<strong>%s%%</strong> of your media has been offloaded', 'amazon-s3-and-cloudfront' ),
+			'title_complete'         => __( '<strong>100%</strong> of your media has been offloaded, congratulations!', 'amazon-s3-and-cloudfront' ),
 		);
 
 		switch ( $human_percentage ) {
@@ -62,10 +62,6 @@ class Uploader extends Background_Tool {
 
 			case 100: // Entire media library uploaded
 				$progress_description = $strings['title_complete'];
-
-				// Remove previous errors
-				$this->clear_errors();
-				$this->as3cf->notices->remove_notice_by_id( $this->errors_key );
 				break;
 
 			default: // Media library upload partially complete
@@ -169,7 +165,7 @@ class Uploader extends Background_Tool {
 	 * @return string
 	 */
 	public function get_title_text() {
-		return __( 'Your Media Library needs to be offloaded', 'amazon-s3-and-cloudfront' );
+		return __( 'Your media needs to be offloaded', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -208,7 +204,7 @@ class Uploader extends Background_Tool {
 	public static function get_prompt_text() {
 		global $as3cf;
 
-		$mesg = __( 'You\'ve enabled the "Copy Files to Bucket" option. Do you want to copy all yet to be offloaded media files to the bucket?', 'amazon-s3-and-cloudfront' );
+		$mesg = __( 'You\'ve enabled the "Offload Media" option. Do you want to copy all yet to be offloaded media files to the bucket?', 'amazon-s3-and-cloudfront' );
 		$mesg .= ' ';
 		$mesg .= $as3cf::settings_more_info_link(
 			'copy-to-s3',
@@ -242,8 +238,17 @@ class Uploader extends Background_Tool {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
-		return __( 'Offloading Media Library items to bucket.', 'amazon-s3-and-cloudfront' );
+	public function get_queued_status(): string {
+		return __( 'Offloading media items to bucket.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Offloading…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

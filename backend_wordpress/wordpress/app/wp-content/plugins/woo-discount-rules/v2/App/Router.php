@@ -2,6 +2,7 @@
 
 namespace Wdr\App;
 
+use Wdr\App\Controllers\Admin\Messages;
 use Wdr\App\Controllers\Admin\Settings;
 use Wdr\App\Controllers\Admin\Tabs\AdvancedSection;
 use Wdr\App\Controllers\Admin\WDRAjax;
@@ -18,7 +19,7 @@ class Router
      * Contains all major class objects to manage plugin
      * @var
      */
-    public static $admin, $manage_discount, $ajax_requests, $chart_data_request, $short_code_manager;
+    public static $admin, $manage_discount, $ajax_requests, $chart_data_request, $short_code_manager, $review_messages;
 
     /**
      * Router constructor.
@@ -26,6 +27,7 @@ class Router
     public function __construct()
     {
         self::$admin = (!empty(self::$admin)) ? self::$admin : new Settings();
+        self::$review_messages = (!empty(self::$review_messages)) ? self::$review_messages : new Messages();
         self::$ajax_requests = (!empty(self::$ajax_requests)) ? self::$ajax_requests : new WDRAjax();
         self::$chart_data_request = (!empty(self::$chart_data_request)) ? self::$chart_data_request : new Tabs\Statistics();
         do_action('advanced_woo_discount_rules_before_initialize');
@@ -47,6 +49,7 @@ class Router
         // All hooks needed for Admin
         if (is_admin() || wp_doing_ajax()) {
             add_action('admin_menu', array(self::$admin, 'AddMenu'));
+            add_action('admin_init', array(self::$admin, 'handleActions'));
             add_action('admin_enqueue_scripts', array(self::$admin, 'adminScripts'), 100);
             add_filter('plugin_action_links_' . WDR_PLUGIN_BASENAME, array( self::$admin, 'wdr_action_link' ));
             add_action('admin_notices', array(self::$admin, 'adminNotices'), 100);
@@ -62,8 +65,25 @@ class Router
          * All hooks needed for both admin and site
          */
         $manage_discount_class = self::$manage_discount = (!empty(self::$manage_discount)) ? self::$manage_discount : new ManageDiscount();
-        add_filter('advanced_woo_discount_rules_get_product_discount_price', array(self::$manage_discount, 'calculateProductDiscountPrice'), 100, 3);
         add_filter('advanced_woo_discount_rules_get_product_discount_price_from_custom_price', array(self::$manage_discount, 'calculateProductDiscountPrice'), 100, 7);
+
+        // Filter hooks since v2.6.0
+        add_filter('advanced_woo_discount_rules_get_product_discount_price', array(self::$manage_discount, 'getDiscountPriceOfAProduct'), 10, 4);
+        add_filter('advanced_woo_discount_rules_get_product_discount_details', array(self::$manage_discount, 'getDiscountDetailsOfAProduct'), 10, 4);
+        add_filter('advanced_woo_discount_rules_get_product_discount_percentage', array(self::$manage_discount, 'getDiscountPercentageOfAProduct'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_product_save_amount', array(self::$manage_discount, 'getSaveAmountOfAProduct'), 10, 2);
+
+        add_filter('advanced_woo_discount_rules_get_cart_item_discount_price', array(self::$manage_discount, 'getDiscountPriceFromCartItem'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_cart_item_discount_details', array(self::$manage_discount, 'getDiscountDetailsFromCartItem'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_cart_item_saved_amount', array(self::$manage_discount, 'getSavedAmountFromCartItem'), 10, 2);
+
+        add_filter('advanced_woo_discount_rules_get_order_item_discount_price', array(self::$manage_discount, 'getDiscountPriceFromOrderItem'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_order_item_discount_details', array(self::$manage_discount, 'getDiscountDetailsFromOrderItem'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_order_item_saved_amount', array(self::$manage_discount, 'getSavedAmountFromOrderItem'), 10, 2);
+
+        add_filter('advanced_woo_discount_rules_get_order_discount_details', array(self::$manage_discount, 'getDiscountDetailsFromOrder'), 10, 2);
+        add_filter('advanced_woo_discount_rules_get_order_saved_amount', array(self::$manage_discount, 'getSavedAmountFromOrder'), 10, 2);
+
         //Showing you saved text
         $display_saving_text = $manage_discount_class::$config->getConfig('display_saving_text', 'disabled');
         add_action('woocommerce_checkout_create_order_line_item', array(self::$manage_discount, 'onCreateWoocommerceOrderLineItem'), 10, 4);
@@ -214,5 +234,10 @@ class Router
             $shortcode_manager = new OnSaleShortCode();
             add_action('advanced_woo_discount_rules_scheduled_rebuild_on_sale_index_event', array($shortcode_manager, 'rebuildOnSaleList'));
         }
+
+        //admin review notification for 100+ sales
+        add_action( 'admin_init', array(self::$review_messages, 'checkAdminReviewConditions'));
+        //major release message
+        add_action( 'in_plugin_update_message-'.WDR_PLUGIN_BASENAME, array(self::$review_messages, 'majorReleaseMessage'), 10, 2);
     }
 }

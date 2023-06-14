@@ -134,6 +134,111 @@ var supported_params = {
 		'custom': 1
 	},
 	
+	'ViewContentPinterest': {
+		'value': 1,
+		'currency': 1,
+		'content_name': 1,
+		'content_type': 1,
+		'content_ids': 1,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+
+	'AddToCartPinterest': {
+		'value': 1,
+		'currency': 1,
+		'content_name': 1,
+		'content_type': 1,
+		'content_ids': 1,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+
+	'PurchasePinterest': {
+		'value': 2,
+		'currency': 2,
+		'content_name': 1,
+		'content_type': 1,
+		'content_ids': 1,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 1,
+		'status': 0,
+		'custom': 1
+	},
+
+	'LeadPinterest': {
+		'value': 1,
+		'currency': 1,
+		'content_name': 1,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 1,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+	
+	'CompleteRegistrationPinterest': {
+		'value': 1,
+		'currency': 1,
+		'content_name': 1,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 1,
+		'custom': 1
+	},
+	
+	'ViewContentSnapchat': {
+		'value': 0,
+		'currency': 1,
+		'content_name': 0,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+
+	'PurchaseSnapchat': {
+		'value': 0,
+		'currency': 1,
+		'content_name': 0,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+
+	
+	'AddToCartSnapchat': {
+		'value': 0,
+		'currency': 1,
+		'content_name': 0,
+		'content_type': 0,
+		'content_ids': 0,
+		'content_category': 0,
+		'search_string': 0,
+		'num_items': 0,
+		'status': 0,
+		'custom': 1
+	},
+	
 	'AddPaymentInfoGA': {
 		'value': 1,
 		'currency': 1,
@@ -250,13 +355,15 @@ jQuery(document).ready(function($){
 			'.fca-pc-edd_extra_params, ' +
 			'.fca-pc-edd_delay, ' +
 			'.fca-pc-advanced_matching, ' +
-			'.fca-pc-amp_integration'
+			'.fca-pc-amp_integration,' +
+			'.fca-pc-video_events,' +
+			'.fca-pc-edd_integration_pinterest,' +
+			'.fca-pc-edd_integration_snapchat,' +
+			'.fca-pc-woo_integration_pinterest,' +
+			'.fca-pc-woo_integration_snapchat,' +
+			'#fca-pc-pixel-excluded-pages'
 		).prop('checked', false).prop('disabled', true).closest('tr').addClass('fca-pc-integration-disabled')
-
-		$( '#mode-option-css, #mode-option-hover, #mode-option-url, #custom-event-option' ).each( function() {
-			$(this).text( $(this).text() + ' - Pro Only' ).prop('disabled', true )
-		})
-
+		
 	} else {
 
 		//PREMIUM BUILDS
@@ -290,8 +397,8 @@ jQuery(document).ready(function($){
 
 	$('.fca_pc_multiselect').select2()
 	$('.fca-pc-validation-helptext').not('.tooltipstered').tooltipster( { trigger: 'custom', timer: 6000, maxWidth: 350, theme: ['tooltipster-borderless', 'tooltipster-pixel-cat'] } )
-	$('.fca_pc_pro_tooltip').attr('title', fcaPcAdminData.protip )
-	$('.fca_pc_pro_tooltip, .fca_pc_tooltip, .fca_pc_event_tooltip, .fca_delete_icon, .fca_controls_icon, #fca_pc_new_pixel_id').not('.tooltipstered').tooltipster( { contentAsHTML: true, theme: ['tooltipster-borderless', 'tooltipster-pixel-cat'] } )
+	
+	$('.fca_pc_tooltip, .fca_pc_event_tooltip, .fca_delete_icon, .fca_controls_icon, #fca_pc_new_pixel_id').not('.tooltipstered').tooltipster( { contentAsHTML: true, theme: ['tooltipster-borderless', 'tooltipster-pixel-cat'] } )
 
 	//////////////////
 	//EVENT HANDLERS
@@ -305,6 +412,17 @@ jQuery(document).ready(function($){
 		if ( !(/^\d+$/.test(value) ) && value !== '' ) {
 			$(this).val( value.replace(/[^0-9\.]+/g,"") )
 			$('#fca-pc-pixel-helptext').tooltipster('open')
+		}
+	})
+	
+	//PINTEREST TAG ID VALIDATION
+	$('#fca-pc-modal-pinterest-input').on( 'input', function(e){
+		var value = $(this).val()
+		$('#fca-pc-pinterest-helptext').tooltipster('hide')
+		
+		if ( !(/^\d+$/.test(value) ) && value !== '' ) {
+			$(this).val( value.replace(/[^0-9\.]+/g,"") )
+			$('#fca-pc-pinterest-helptext').tooltipster('open')
 		}
 	})
 
@@ -330,8 +448,8 @@ jQuery(document).ready(function($){
 
 	//NAV
 	$('.fca-pc-nav a').on( 'click', function(){
-		$('.nav-tab-active').removeClass('nav-tab-active')
-		$(this).addClass('nav-tab-active')
+		$('.fca-pc-nav a.selected').removeClass('selected')
+		$(this).addClass('selected')
 		$('.fca-pc-nav a').each(function(){
 			$( $(this).data('target') ).hide()
 		})
@@ -412,6 +530,66 @@ jQuery(document).ready(function($){
 
 	})
 	
+	$('#fca_pc_new_pinterest_event').on( 'click', function(){
+		$('#fca-pc-event-save').data('eventID', '')
+
+		//SET DEFAULTS
+		$('.fca-pc-content_name').val('{post_title}')
+		$('.fca-pc-content_type').val('product')
+		$('.fca-pc-content_ids').val('{post_id}')
+		$('.fca-pc-content_category').val('{post_category}')
+		$('.fca-pc-search_string').val('')
+		$('.fca-pc-num_items').val('')
+		$('.fca-pc-status').val('')
+		$('.fca-pc-value').val('')
+		$('.fca-pc-currency').val('')
+		$('.fca-pc-event_name' ).val('')
+		
+		$('#fca-pc-modal-post-trigger-input').val('').trigger( 'change' )
+		$('#fca-pc-modal-css-trigger-input').val('')
+		$('#fca-pc-modal-url-trigger-input').val('')
+		$('#fca-pc-modal-delay-input').val(0)
+		$('#fca-pc-modal-scroll-input').val(0)
+
+		
+		fca_pc_filter_events( "Pinterest" )
+		$('#fca-pc-modal-event-pixel-type').val("Pinterest")
+		$('#fca-pc-event-pixel-type-span').text("Pinterest")
+		$('#fca-pc-modal-event-input').val('ViewContentPinterest').trigger( 'change' )
+		//SET VISIBILITY BY TRIGGERING SHOW/HIDE CLICK HANDLER
+		$('.fca-pc-param-toggle').not(':visible').trigger('click')
+		
+		$('#fca-pc-event-modal').show()
+		$('#fca-pc-overlay').show()
+
+	})
+	
+	$('#fca_pc_new_snapchat_event').on( 'click', function(){
+		$('#fca-pc-event-save').data('eventID', '')
+
+		//SET DEFAULTS
+		$('.fca-pc-currency').val('')
+		$('.fca-pc-event_name' ).val('')
+		
+		$('#fca-pc-modal-post-trigger-input').val('').trigger( 'change' )
+		$('#fca-pc-modal-css-trigger-input').val('')
+		$('#fca-pc-modal-url-trigger-input').val('')
+		$('#fca-pc-modal-delay-input').val(0)
+		$('#fca-pc-modal-scroll-input').val(0)
+
+		
+		fca_pc_filter_events( "Snapchat" )
+		$('#fca-pc-modal-event-pixel-type').val("Snapchat")
+		$('#fca-pc-event-pixel-type-span').text("Snapchat")
+		$('#fca-pc-modal-event-input').val('ViewContentSnapchat').trigger( 'change' )
+		//SET VISIBILITY BY TRIGGERING SHOW/HIDE CLICK HANDLER
+		$('.fca-pc-param-toggle').not(':visible').trigger('click')
+		
+		$('#fca-pc-event-modal').show()
+		$('#fca-pc-overlay').show()
+
+	})
+	
 	//ONLY SHOW EVENTS FOR THIS API/PIXEL TYPE
 	function fca_pc_filter_events( pixel_type ) {
 		//DEFAULT TO VIEW CONTENT EVENT
@@ -441,6 +619,26 @@ jQuery(document).ready(function($){
 					'PurchaseGA',
 					//'LeadGA',
 					//'CompleteRegistrationGA',
+					'custom'
+				]
+				break	
+
+			case "Pinterest":
+				supported_events = [
+					'ViewContentPinterest',
+					'AddToCartPinterest',
+					'PurchasePinterest',
+					'CompleteRegistrationPinterest',
+					'LeadPinterest',
+					'custom'
+				]
+				break
+				
+			case "Snapchat":
+				supported_events = [
+					'ViewContentSnapchat',
+					'AddToCartSnapchat',
+					'PurchaseSnapchat',
 					'custom'
 				]
 				break
@@ -474,8 +672,9 @@ jQuery(document).ready(function($){
 		$('#fca-pc-modal-test-input').val( '' )
 		$('#fca-pc-modal-ga3-input').val( '' )
 		$('#fca-pc-modal-ga4-input').val( '' )
-		$('#fca-pc-modal-header-input').val( '' )
+		$('#fca-pc-modal-pinterest-input').val( '' )
 		$('#fca-pc-modal-header-code').val( '' )
+		$('#fca-pc-pixel-excluded-pages').val( '' ).trigger('change')
 		
 		//Hide CAPI inputs by default
 		$('#fca-pc-capi-input-tr').hide()
@@ -496,6 +695,8 @@ jQuery(document).ready(function($){
 		$('#fca-pc-ga4-input-tr').hide()
 		$('.fca-pc-header-input-tr').hide()
 		$('#fca_pc_capi_info').hide()
+		$('#fca-pc-pinterest-input-tr').hide()
+		$('#fca-pc-snapchat-input-tr').hide()
 		
 		switch( input_value ) {
 			case 'Conversions API':
@@ -515,6 +716,14 @@ jQuery(document).ready(function($){
 				
 			case 'GA4':
 				$('#fca-pc-ga4-input-tr').show()
+				break
+				
+			case 'Pinterest':
+				$('#fca-pc-pinterest-input-tr').show()
+				break
+				
+			case 'Snapchat':
+				$('#fca-pc-snapchat-input-tr').show()
 				break
 				
 			case 'Custom Header Script':
@@ -589,6 +798,27 @@ jQuery(document).ready(function($){
 			$(this).prop('checked', false)
 		}
 	})
+	
+	//MAKE SURE WE HAVE A PINTEREST SETUP
+	$('.fca-pc-woo_integration_pinterest').on( 'click', function(){
+		var active_pixels = fca_pc_get_active_pixel_types()
+		if( active_pixels.indexOf("Pinterest") !== -1 ) {
+			//OK
+		} else {
+			alert("Please set up your Pinterest Tag ID to use this feature")
+			$(this).prop('checked', false)
+		}
+	})
+	//MAKE SURE WE HAVE A PINTEREST SETUP
+	$('.fca-pc-edd_integration_pinterest').on( 'click', function(){
+		var active_pixels = fca_pc_get_active_pixel_types()
+		if( active_pixels.indexOf("Pinterest") !== -1 ) {
+			//OK
+		} else {
+			alert("Please set up your Pinterest Tag ID to use this feature")
+			$(this).prop('checked', false)
+		}
+	})
 
 	//KEYBINDS
 	$( document ).on( 'keyup', function(e) {
@@ -612,6 +842,10 @@ jQuery(document).ready(function($){
 		if( pixelType === 'Facebook Pixel' && $('#fca-pc-modal-pixel-input').val() == '' ){
 			alert( 'Please enter the Pixel ID' )
 			return
+		}
+		if( pixelType === 'Pinterest' && $('#fca-pc-modal-pinterest-input').val() == '' ){
+			alert( 'Please enter the Pixel ID' )
+			return
 		} 
 		if ( pixelType === 'Conversions API' && $('#fca-pc-modal-capi-input').val() == '' ) {
 			alert( 'Conversions API Token is required for this pixel type' )
@@ -625,54 +859,66 @@ jQuery(document).ready(function($){
 			alert( 'Google Analytics Property ID is required for this pixel type' )
 			return
 		}
-		if ( pixelType === 'Custom Header Script' && $('#fca-pc-modal-header-input').val() == '' ) {
-			alert( 'Please enter a value for header name' )
-			return
-		}
-		
+				
 		if ( pixelType === 'Custom Header Script' && $('#fca-pc-modal-header-code').val() == '' ) {
 			alert( 'Please enter a value for header script' )
 			return
 		}
 		
-		var fbPixel = {}
-
+		var newPixel = {}
 		// GET VALUES
-		fbPixel.type = $('#fca-pc-modal-type-select').val()
-		fbPixel.pixel = $('#fca-pc-modal-pixel-input').val()
+		newPixel.type = $('#fca-pc-modal-type-select').val()
+		newPixel.capi = ''
+		newPixel.test = ''
 		
-		// On edit & type change, clear capi & test fields
-		if( fbPixel.type === 'Conversions API' ){
-			fbPixel.test = $('#fca-pc-modal-test-input').val()
-			fbPixel.capi = $('#fca-pc-modal-capi-input').val()
-		} else {
-			fbPixel.capi = ''
-			fbPixel.test = ''
+		switch( newPixel.type ) {
+			case 'Conversions API':
+				newPixel.test = $('#fca-pc-modal-test-input').val()
+				newPixel.pixel = $('#fca-pc-modal-pixel-input').val()
+				newPixel.capi = $('#fca-pc-modal-capi-input').val()
+				break
+				
+			case 'GA3':
+				newPixel.pixel = $('#fca-pc-modal-ga3-input').val()
+				break
+				
+			case 'GA4':
+				newPixel.pixel = $('#fca-pc-modal-ga4-input').val()
+				break
+				
+			case 'Pinterest':
+				newPixel.pixel = $('#fca-pc-modal-pinterest-input').val()
+				break
+				
+			case 'Snapchat':
+				newPixel.pixel = $('#fca-pc-modal-snapchat-input').val()
+				break
+				
+			case 'Custom Header Script':
+				newPixel.capi = escape_html( $('#fca-pc-modal-header-code').val() )
+				newPixel.pixel = escape_html( $('#fca-pc-modal-header-code').val().substr(0, 48) )
+				break
+				
+			default:
+				newPixel.pixel = $('#fca-pc-modal-pixel-input').val()
+
 		}
 		
-		if( fbPixel.type === 'GA3' ){
-			fbPixel.pixel = $('#fca-pc-modal-ga3-input').val()
-		}
-		if( fbPixel.type === 'GA4' ){
-			fbPixel.pixel = $('#fca-pc-modal-ga4-input').val()
-		}
-		
-		if( fbPixel.type === 'Custom Header Script' ){
-			fbPixel.pixel = $('#fca-pc-modal-header-input').val()
-			fbPixel.capi = escape_html( $('#fca-pc-modal-header-code').val() )
-		}
+		newPixel.excludes = $('#fca-pc-pixel-excluded-pages').val()
+				
 		//ID
 		if ( $(this).data('pixelID') ) {
-			fbPixel.ID = $(this).data('pixelID')
+			newPixel.ID = $(this).data('pixelID')
 			//PAUSED
-			fbPixel.paused = $('#' + fbPixel.ID ).hasClass('paused')
-			draw_pixel( $('#' + fbPixel.ID ), fbPixel )
+			newPixel.paused = $('#' + newPixel.ID ).hasClass('paused')
+			draw_pixel( $('#' + newPixel.ID ), newPixel )
 			
 		} else {
-			fbPixel.paused = false
-			fbPixel.ID = fca_pc_new_GUID()
-			draw_pixel( false, fbPixel )
+			newPixel.paused = false
+			newPixel.ID = fca_pc_new_GUID()
+			draw_pixel( false, newPixel )
 		}
+		
 		$('.fca_pc_onboarding').hide()
 		$('#fca-pc-events-table').removeClass('disabled')
 		$('#fca-pc-overlay').hide()
@@ -687,20 +933,42 @@ jQuery(document).ready(function($){
 		var valid = true
 		//DATA VALIDATION / TOOLTIPS
 		$('.fca_pc_tooltip').tooltipster('hide')
-		if ( !$('#fca-pc-modal-post-trigger-input').val() && $('#fca-pc-modal-trigger-type-input').val() === 'post' ) {
-			$('#fca-pc-modal-post-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
-			valid = false
+		var trigger = $('#fca-pc-modal-trigger-type-input').val()
+		switch( trigger ) {
+			case 'post':
+				selected = $('#fca-pc-modal-post-trigger-input').val()
+				if( selected.length === 0 ) {
+					$('#fca-pc-modal-post-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
+					valid = false	
+				}
+				break
+				
+			case 'css':
+				selected = $('#fca-pc-modal-css-trigger-input').val()
+				if( selected.length === 0 ) {
+					$('#fca-pc-modal-css-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
+					valid = false	
+				}
+				break
+				
+			case 'hover':
+				selected = $('#fca-pc-modal-css-trigger-input').val()
+				if( selected.length === 0 ) {
+					$('#fca-pc-modal-css-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
+					valid = false	
+				}
+				break
+				
+			case 'url':
+				selected = $('#fca-pc-modal-url-trigger-input').val()
+				if( selected.length === 0 ) {
+					$('#fca-pc-modal-url-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
+					valid = false	
+				}
+				break			
+			
 		}
-		if ( !$('#fca-pc-modal-css-trigger-input').val() && $('#fca-pc-modal-trigger-type-input').val() === 'css' ) {
-			$('#fca-pc-modal-css-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
-			valid = false
-		}
-
-		if ( !$('#fca-pc-modal-url-trigger-input').val() && $('#fca-pc-modal-trigger-type-input').val() === 'url' ) {
-			$('#fca-pc-modal-url-trigger-input').closest('tr').find('.fca_pc_tooltip').tooltipster('show')
-			valid = false
-		}
-
+		
 		$('.fca-required-param').each( function(){
 			if ( !$(this).find('input').val() ) {
 				$('#fca-pc-show-param').trigger('click')
@@ -927,6 +1195,7 @@ jQuery(document).ready(function($){
 		$('.fca_delete_icon_confirm').off( 'click' )
 		$('.fca_delete_icon_confirm').on( 'click', function( e ){
 			//DONT SHOW OVERLAY IF YOU CLICK DELETE
+			confirmUnload = true
 			e.stopPropagation()
 			$( this ).closest( '.fca_deletable_item' ).hide( 'fast', function() {
 				$( this ).remove()
@@ -937,7 +1206,7 @@ jQuery(document).ready(function($){
 		$('.fca_controls_icon_pixel_pause').off( 'click' )
 		$('.fca_controls_icon_pixel_pause').on( 'click', function( e ){
 			e.stopPropagation()
-
+			confirmUnload = true
 			var $jsonInput = $(this).closest('.fca_pc_pixel_row').find('.fca-pc-pixel-json')
 			var pixel = JSON.parse( $jsonInput.val() )
 
@@ -952,6 +1221,7 @@ jQuery(document).ready(function($){
 		$('.fca_controls_icon_pixel_play').off( 'click' )
 		$('.fca_controls_icon_pixel_play').on( 'click', function( e ){
 			e.stopPropagation()
+			confirmUnload = true
 			var $jsonInput = $(this).closest('.fca_pc_pixel_row').find('.fca-pc-pixel-json')
 			var pixel = JSON.parse( $jsonInput.val() )
 
@@ -968,7 +1238,7 @@ jQuery(document).ready(function($){
 		$('.fca_controls_icon_pause').off( 'click' )
 		$('.fca_controls_icon_pause').on( 'click', function( e ){
 			e.stopPropagation()
-
+			confirmUnload = true
 			var $jsonInput = $(this).closest('.fca_pc_event_row').find('.fca-pc-json')
 			var event = JSON.parse( $jsonInput.val() )
 
@@ -983,6 +1253,7 @@ jQuery(document).ready(function($){
 		$('.fca_controls_icon_play').off( 'click' )
 		$('.fca_controls_icon_play').on( 'click', function( e ){
 			e.stopPropagation()
+			confirmUnload = true
 			var $jsonInput = $(this).closest('.fca_pc_event_row').find('.fca-pc-json')
 			var event = JSON.parse( $jsonInput.val() )
 
@@ -998,6 +1269,7 @@ jQuery(document).ready(function($){
 		$('.fca_delete_icon_cancel').off( 'click' )
 		$('.fca_delete_icon_cancel').on( 'click', function( e ){
 			e.stopPropagation()
+			
 			$(this).hide()
 			$(this).siblings('.fca_delete_icon').hide()
 			$(this).siblings('.fca_delete_button').show()
@@ -1006,6 +1278,7 @@ jQuery(document).ready(function($){
 		$('.fca_delete_button').off( 'click' )
 		$('.fca_delete_button').on( 'click', function( e ){
 			e.stopPropagation()
+			
 			$(this).hide().siblings('.fca_delete_icon').show()
 
 		})
@@ -1034,8 +1307,15 @@ jQuery(document).ready(function($){
 					$('#fca-pc-modal-ga4-input').val( pixel.pixel )
 					break
 					
+				case 'Pinterest':
+					$('#fca-pc-modal-pinterest-input').val( pixel.pixel )
+					break
+					
+				case 'Snapchat':
+					$('#fca-pc-modal-snapchat-input').val( pixel.pixel )
+					break
+					
 				case 'Custom Header Script':
-					$('#fca-pc-modal-header-input').val( pixel.pixel )
 					$('#fca-pc-modal-header-code').val( unescape_html ( pixel.capi ) )
 					break
 					
@@ -1044,6 +1324,7 @@ jQuery(document).ready(function($){
 			}
 			
 			$('#fca-pc-modal-type-select').val( pixel.type ).trigger('change')
+			$('#fca-pc-pixel-excluded-pages').val( pixel.excludes ).trigger('change')
 			$('#fca-pc-pixel-modal').show()
 			$('#fca-pc-overlay').show()
 
@@ -1068,14 +1349,14 @@ jQuery(document).ready(function($){
 	attach_row_actions()
 
 	//TRIGGER NAVIGATION CONFIRM PROMPT FOR THIS PAGE
-	var confirmUnload = true
+	var confirmUnload = null
+	window.onbeforeunload = function() {
+		return confirmUnload
+	}
 
 	$('input, select').on( 'input, change', function() {
-		window.onbeforeunload = function() {
-			return confirmUnload
-		}
+		confirmUnload = true
 	})
-
 
 	$('#fca_pc_save').on( 'click', function() {
 		confirmUnload = null
@@ -1090,7 +1371,6 @@ jQuery(document).ready(function($){
 		$('#fca-pc-events-table').addClass('disabled')
 	} else {
 		$('.fca_pc_onboarding').hide()
-		
 	}
 	
 	set_event_button_state()
@@ -1098,6 +1378,8 @@ jQuery(document).ready(function($){
 		var pixel_types = []
 		$('#fca_pc_new_fb_event').hide()
 		$('#fca_pc_new_ga_event').hide()
+		$('#fca_pc_new_snapchat_event').hide()
+		$('#fca_pc_new_pinterest_event').hide()
 		
 		$('.fca-pc-pixel-json').each(function(){
 			var pixel = JSON.parse( $(this).val() )
@@ -1106,6 +1388,12 @@ jQuery(document).ready(function($){
 		
 		if ( pixel_types.indexOf("GA3") !== -1 || pixel_types.indexOf("GA4") !== -1 ) {
 			$('#fca_pc_new_ga_event').show()
+		}
+		if ( pixel_types.indexOf("Pinterest") !== -1 ) {
+			$('#fca_pc_new_pinterest_event').show()
+		}
+		if ( pixel_types.indexOf("Snapchat") !== -1 ) {
+			$('#fca_pc_new_snapchat_event').show()
 		}
 		if ( pixel_types.indexOf("Facebook Pixel") !== -1 || pixel_types.indexOf("Conversions API") !== -1 ) {
 			$('#fca_pc_new_fb_event').show()
@@ -1133,7 +1421,7 @@ jQuery(document).ready(function($){
 			}
 			
 			$target.find('.fca-pc-type-td').text( type )
-			$target.find('.fca-pc-pixel-td').text( pixel.pixel )
+			$target.find('.fca-pc-pixel-td').text( unescape_html( pixel.pixel ) )
 			
 			$target.removeClass('paused')
 			$target.find('.fca_controls_icon_pixel_play').hide().siblings('.fca_controls_icon_pixel_pause').show()

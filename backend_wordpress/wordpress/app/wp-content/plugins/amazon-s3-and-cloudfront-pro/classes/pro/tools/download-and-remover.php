@@ -54,7 +54,7 @@ class Download_And_Remover extends Downloader {
 	 * @return string
 	 */
 	public static function get_more_info_text() {
-		return __( 'This tool goes through all your Media Library attachments and deletes files from the bucket. If the file doesn\'t exist on your server, it will download it before deleting.', 'amazon-s3-and-cloudfront' );
+		return __( 'This tool goes through all your media and deletes files from the bucket. If the file doesn\'t exist on your server, it will download it before deleting.', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -71,8 +71,17 @@ class Download_And_Remover extends Downloader {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
-		return __( 'Removing Media Library from bucket', 'amazon-s3-and-cloudfront' );
+	public function get_queued_status(): string {
+		return __( 'Removing media from bucket', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Removing…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

@@ -4,15 +4,23 @@ namespace GtmEcommerceWooPro\Lib\Util;
 
 use GtmEcommerceWoo\Lib\GaEcommerceEntity\Event;
 use GtmEcommerceWoo\Lib\GaEcommerceEntity\Item;
+use GtmEcommerceWoo\Lib\Util\WcTransformerUtil as FreeWcTransformerUtil;
+use GtmEcommerceWooPro\Lib\Type\EventType;
+use WC_Order;
 
 /**
  * Logic to handle embedding Gtm Snippet
  */
-class WcTransformerUtil extends \GtmEcommerceWoo\Lib\Util\WcTransformerUtil {
+class WcTransformerUtil extends FreeWcTransformerUtil {
 
-	public function getRefundFromOrderId( $orderId, $refunds ) {
+	public function getRefundFromOrderId( $orderId, array $refunds ) {
 		$order = wc_get_order( $orderId );
-		$event = new Event( 'refund' );
+
+		return $this->getRefundFromOrder($order, $refunds);
+	}
+
+	public function getRefundFromOrder( WC_Order $order, array $refunds) {
+		$event = new Event( EventType::REFUND );
 		$event->setTransactionId( $order->get_order_number() );
 
 		foreach ( $refunds as $refund ) {
@@ -45,7 +53,7 @@ class WcTransformerUtil extends \GtmEcommerceWoo\Lib\Util\WcTransformerUtil {
 		$productCats = get_the_terms( $product->get_id(), 'product_cat' );
 		if ( is_array( $productCats ) ) {
 			$categories = array_map(
-				function( $category ) {
+				static function( $category ) {
 					return $category->name; },
 				$productCats
 			);
@@ -56,7 +64,6 @@ class WcTransformerUtil extends \GtmEcommerceWoo\Lib\Util\WcTransformerUtil {
 		 *
 		 * @since 1.6.0
 		 */
-		$item = apply_filters('gtm_ecommerce_woo_item', $item, $product);
-		return $item;
+		return apply_filters('gtm_ecommerce_woo_item', $item, $product);
 	}
 }

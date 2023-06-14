@@ -178,7 +178,7 @@ function RunTool( { tool, setSchemaError, isRunning } ) {
 			<Flex className="itsec-tool__actions" justify="flex-start">
 				<FlexItem>
 					<Button
-						isPrimary
+						variant="primary"
 						className="itsec-tool__trigger"
 						type={ tool.form ? 'submit' : 'button' }
 						form={ tool.form ? id : undefined }

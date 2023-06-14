@@ -55,7 +55,7 @@ export default function PrimaryForm( {
 				{ ( onCancel || cancelHref ) && (
 					<FlexItem>
 						<Button
-							isTertiary
+							variant="tertiary"
 							onClick={ onCancel }
 							href={ cancelHref }
 						>
@@ -73,7 +73,7 @@ export default function PrimaryForm( {
 
 				<FlexItem>
 					<Button
-						isPrimary
+						variant="primary"
 						isBusy={ isSaving }
 						disabled={ saveDisabled }
 						form={ id }

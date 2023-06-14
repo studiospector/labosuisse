@@ -6,6 +6,7 @@
             "key": "field_6225f06a518b7",
             "label": "Shortcode Modulo di richiesta",
             "name": "lb_template_dealer_form_shortcode",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -41,5 +42,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646653616
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_6225f06a3eaa1.json",
+    "acfml_field_group_mode": "advanced"
 }

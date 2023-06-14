@@ -17,6 +17,7 @@
  */
 namespace DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth;
 
+use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\Credentials\ImpersonatedServiceAccountCredentials;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\Credentials\InsecureCredentials;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\Credentials\ServiceAccountCredentials;
 use DeliciousBrains\WP_Offload_Media\Gcp\Google\Auth\Credentials\UserRefreshCredentials;
@@ -111,7 +112,7 @@ abstract class CredentialsLoader implements FetchAuthTokenInterface, UpdateMetad
      *   user-defined scopes exist, expressed either as an Array or as a
      *   space-delimited string.
      *
-     * @return ServiceAccountCredentials|UserRefreshCredentials
+     * @return ServiceAccountCredentials|UserRefreshCredentials|ImpersonatedServiceAccountCredentials
      */
     public static function makeCredentials($scope, array $jsonKey, $defaultScope = null)
     {
@@ -125,6 +126,10 @@ abstract class CredentialsLoader implements FetchAuthTokenInterface, UpdateMetad
         if ($jsonKey['type'] == 'authorized_user') {
             $anyScope = $scope ?: $defaultScope;
             return new UserRefreshCredentials($anyScope, $jsonKey);
+        }
+        if ($jsonKey['type'] == 'impersonated_service_account') {
+            $anyScope = $scope ?: $defaultScope;
+            return new ImpersonatedServiceAccountCredentials($anyScope, $jsonKey);
         }
         throw new \InvalidArgumentException('invalid value in the type field');
     }
@@ -161,7 +166,7 @@ abstract class CredentialsLoader implements FetchAuthTokenInterface, UpdateMetad
      */
     public function getUpdateMetadataFunc()
     {
-        return array($this, 'updateMetadata');
+        return [$this, 'updateMetadata'];
     }
     /**
      * Updates metadata with the authorization token.
@@ -178,11 +183,12 @@ abstract class CredentialsLoader implements FetchAuthTokenInterface, UpdateMetad
             return $metadata;
         }
         $result = $this->fetchAuthToken($httpHandler);
-        if (!isset($result['access_token'])) {
-            return $metadata;
-        }
         $metadata_copy = $metadata;
-        $metadata_copy[self::AUTH_METADATA_KEY] = array('Bearer ' . $result['access_token']);
+        if (isset($result['access_token'])) {
+            $metadata_copy[self::AUTH_METADATA_KEY] = ['Bearer ' . $result['access_token']];
+        } elseif (isset($result['id_token'])) {
+            $metadata_copy[self::AUTH_METADATA_KEY] = ['Bearer ' . $result['id_token']];
+        }
         return $metadata_copy;
     }
     /**

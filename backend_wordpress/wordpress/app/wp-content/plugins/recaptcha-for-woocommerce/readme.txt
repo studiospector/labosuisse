@@ -2,9 +2,9 @@
 Contributors:nik00726
 Tags:Recaptcha
 Requires at least:3.0
-Tested up to:6.0
-Version:2.38
-Stable tag:2.38
+Tested up to:6.2
+Version:2.44
+Stable tag:2.44
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -14,7 +14,6 @@ Protect your eCommerce site with google reCaptcha.
 
 
 Protect your eCommerce site with google recptcha. 
-
 
 
 **=Features=**
@@ -57,6 +56,8 @@ Protect your eCommerce site with google recptcha.
 
 19.Bypass reCAPTCHA (do not show captcha) using IP or IP-Range for specific clients/users
 
+20.Captcha For Jetpack Forms
+
 
 
 
@@ -78,9 +79,9 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 ### Usage ###
 
-1.Use of plugin "reCaptcha for WooCommerce " is easy.
+1.Use of plugin “reCaptcha for WooCommerce” is easy.
 
-2.You can goto settings screen of WooCommerce where you can see reCaptcha tab"
+2.You can goto settings screen of WooCommerce where you can see reCaptcha tab
 
 3.Now set reCaptcha keys and enabled reCaptcha on required places.
 
@@ -88,6 +89,46 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 
 == Changelog ==
+
+= 2.45 =
+
+* Fixed recent version did not worked with Intuit Payments
+* Fixed nonce vulnerabilities
+
+
+= 2.44 =
+
+* Fixed compatibility with WooCommerce phone order plugin
+* Fixed nonce vulnerabilities
+* Tested with WordPress 6.2
+
+
+= 2.43 =
+
+* Fixed JetPack reCaptcha throw error after successfully sent email. Attempt to read property nodeValue on null
+
+
+= 2.42 =
+
+* Fixed PayPal standard got stuck in a loop if reCaptcha expired in between
+
+
+= 2.41 =
+
+
+* Improvements on Jetpack Forms Captcha
+
+= 2.40 =
+
+* New feature jetpack forms captcha
+* Fixed order track captcha not working with new WooCommerce
+* Improvements on jquery functions
+
+
+= 2.39 =
+
+* Plugin is compitible with WooCommerce new feature HPOS(High-Performance Order Storage)
+
 
 = 2.38 =
 
@@ -263,7 +304,7 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 * Added support for Elavon payment processor
 
-* Added new option "Disable on the fly reCAPTCHA v3 token generation" that will allow you to use this option if two submit button fighting for taking control. So use only if you have problem 
+* Added new option “Disable on the fly reCAPTCHA v3 token generation” that will allow you to use this option if two submit button fighting for taking control. So use only if you have problem
   with submit button.
   
 * Fixed problem with javascript errors, When the html of page is minified.
@@ -276,7 +317,7 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 = 2.5 =
 
-* Added support for custom login form that built using "wp_login_form" function
+* Added support for custom login form that built using “wp_login_form” function
 
 = 2.4 =
 
@@ -299,7 +340,7 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 = 2.0 =
 
-* Now "recaptcha for woocommerce" support google latest version of greCAPTCHA V3
+* Now “recaptcha for woocommerce” support google latest version of greCAPTCHA V3
 * This version never disturb user, ReCaptcha V3 Uses a behind-the-scenes scoring system to detect abusive traffic, and lets you decide the minimum passing score. Please note that there is no user interaction shown in reRecapcha V3 meaning that no recaptcha challenge is shown to solve. 
 
 = 1.0.17 =
@@ -376,7 +417,7 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 = 1.0.4 =
 
-* Added new option "No-conflict" mode. This will helpful when there is conflict is Recaptcha js
+* Added new option “No-conflict” mode. This will helpful when there is conflict is Recaptcha js
 
 
 = 1.0.3 =
@@ -386,7 +427,7 @@ This plugin is easy to install like other plug-ins of Wordpress as you need to j
 
 = 1.0.2 =
 
-* Fixed error shown in console "reCaptcha already rendered"
+* Fixed error shown in console “reCaptcha already rendered”
 * Added option to refresh reCaptcha on checkout page
 
 = 1.0.1 =

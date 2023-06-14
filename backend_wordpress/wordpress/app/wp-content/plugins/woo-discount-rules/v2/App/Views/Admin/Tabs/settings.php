@@ -135,7 +135,7 @@
                     <tr>
                         <td scope="row">
                             <label for="" class="awdr-left-align"><?php _e('On-sale badge', 'woo-discount-rules') ?></label>
-                            <span class="wdr_settings_desc_text awdr-clear-both"><?php esc_attr_e('show on-sale badge', 'woo-discount-rules'); ?> - <a href="https://docs.flycart.org/en/articles/4098969-sale-page-discount-rules-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=show_on_sale_badge_setting" target="_blank"><?php esc_html_e('Read Docs', 'woo-discount-rules'); ?></a></span>
+                            <span class="wdr_settings_desc_text awdr-clear-both"><?php esc_attr_e('show on-sale badge', 'woo-discount-rules'); ?> - <a href="https://docs.flycart.org/en/articles/4179583-sale-tag-dynamic-sale-badge-2-0?utm_source=woo-discount-rules-v2&utm_campaign=doc&utm_medium=text-click&utm_content=show_on_sale_badge_setting" target="_blank"><?php esc_html_e('Read Docs', 'woo-discount-rules'); ?></a></span>
                         </td>
                         <td>
                             <?php
@@ -534,6 +534,24 @@
                         </td>
                     </tr>
                     <?php if($is_pro){ ?>
+                    <tr>
+                        <td scope="row">
+                            <label for="" class="awdr-left-align"><?php _e('Exclude out of stock products', 'woo-discount-rules') ?></label>
+                            <span class="wdr_settings_desc_text awdr-clear-both"><?php _e('This setting will exclude out of stock products on On-Sale page.', 'woo-discount-rules'); ?></span>
+                        </td>
+
+                        <td>
+                            <input type="radio" name="exclude_out_of_stock_products_for_on_sale_page" class="settings_option_show_hide"
+                                   id="awdr_exclude_out_of_stock_products_for_on_sale_page_1"
+                                   value="1" <?php echo($configuration->getConfig('exclude_out_of_stock_products_for_on_sale_page', 0) ? 'checked' : '') ?>><label
+                                    for="awdr_exclude_out_of_stock_products_for_on_sale_page_1"><?php _e('Yes', 'woo-discount-rules'); ?></label>
+
+                            <input type="radio" name="exclude_out_of_stock_products_for_on_sale_page" class="settings_option_show_hide"
+                                   id="awdr_exclude_out_of_stock_products_for_on_sale_page_0"
+                                   value="0" <?php echo(!$configuration->getConfig('exclude_out_of_stock_products_for_on_sale_page', 0) ? 'checked' : '') ?>><label
+                                    for="awdr_exclude_out_of_stock_products_for_on_sale_page_0"><?php _e('No', 'woo-discount-rules'); ?></label>
+                        </td>
+                    </tr>
                     <tr>
                         <td scope="row">
                             <label for="" class="awdr-left-align"><?php _e('Select cron to run daily', 'woo-discount-rules') ?></label>

@@ -260,7 +260,7 @@ function ActiveLockouts( {
 					{ isReleaseAvailable &&
 						<span className="itsec-card-footer__action">
 							<Button
-								isPrimary
+								variant="primary"
 								isSmall
 								aria-disabled={ releasingIds.includes(
 									selectedId
@@ -275,7 +275,7 @@ function ActiveLockouts( {
 					{ isBannable &&
 						<span className="itsec-card-footer__action">
 							<Button
-								isPrimary
+								variant="primary"
 								isSmall
 								aria-disabled={ banningIds.includes(
 									selectedId

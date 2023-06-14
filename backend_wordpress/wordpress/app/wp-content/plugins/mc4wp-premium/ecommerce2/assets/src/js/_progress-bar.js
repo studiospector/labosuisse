@@ -1,46 +1,46 @@
-function ProgressBar( element, count ) {
-	var wrapper = element,
-		bar = document.createElement('div'),
-		step_size = 100 / count,
-		progress = 0;
+function ProgressBar(element, count) {
+  const wrapper = element;
+  const bar = document.createElement('div');
+  const stepSize = 100 / count;
+  let progress = 0;
 
-	wrapper.style.height = "40px";
-	wrapper.style.width = "100%";
-	wrapper.style.border = "1px solid #ccc";
-	wrapper.style.lineHeight = "40px";
+  wrapper.style.height = '40px';
+  wrapper.style.width = '100%';
+  wrapper.style.border = '1px solid #ccc';
+  wrapper.style.lineHeight = '40px';
 
-	bar.style.boxSizing = 'border-box';
-	bar.style.backgroundColor = '#cc4444';
-	bar.style.textAlign = 'center';
-	bar.style.fontWeight = 'bold';
-	bar.style.height = "100%";
-	bar.style.color = 'white';
-	bar.style.fontSize = '16px';
-	bar.style.width = progress + "%";
-	wrapper.appendChild( bar );
+  bar.style.boxSizing = 'border-box';
+  bar.style.backgroundColor = '#cc4444';
+  bar.style.textAlign = 'center';
+  bar.style.fontWeight = 'bold';
+  bar.style.height = '100%';
+  bar.style.color = 'white';
+  bar.style.fontSize = '16px';
+  bar.style.width = `${progress}%`;
+  wrapper.appendChild(bar);
 
-	function tick( ticks ) {
-		if( done() ) { return; }
+  function tick(ticks) {
+    if (done()) { return; }
 
-		ticks = ticks === undefined ? 1 : ticks;
-		progress += ( step_size * ticks );
-		bar.style.width = progress + "%";
+    ticks = ticks === undefined ? 1 : ticks;
+    progress += (stepSize * ticks);
+    bar.style.width = `${progress}%`;
 
-		bar.innerText = parseInt( progress ) + "%";
+    bar.innerText = `${parseInt(progress, 10)}%`;
 
-		if( done() ) {
-			bar.innerText = 'Done!';
-		}
-	}
+    if (done()) {
+      bar.innerText = 'Done!';
+    }
+  }
 
-	function done() {
-		return progress >= 100;
-	}
+  function done() {
+    return progress >= 100;
+  }
 
-	return {
-		'tick': tick,
-		'done': done
-	}
+  return {
+    tick,
+    done,
+  };
 }
 
 module.exports = ProgressBar;

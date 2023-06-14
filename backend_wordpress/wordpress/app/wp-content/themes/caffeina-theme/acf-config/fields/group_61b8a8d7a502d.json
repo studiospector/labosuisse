@@ -6,6 +6,7 @@
             "key": "field_61b8a9554a9ab",
             "label": "Titolo",
             "name": "lb_block_numbers_title",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
             "key": "field_61b8a9874a9ac",
             "label": "Variante",
             "name": "lb_block_numbers_variants",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -51,6 +53,7 @@
             "key": "field_61b8ab134a9ad",
             "label": "Lista Numeri",
             "name": "lb_block_numbers_list",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -65,12 +68,13 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "sub_fields": [
                 {
                     "key": "field_61b8af54b70f8",
                     "label": "Titolo",
                     "name": "lb_block_numbers_list_title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -85,12 +89,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61b8ab134a9ad"
                 },
                 {
                     "key": "field_61b8af6cb70f9",
                     "label": "Testo",
                     "name": "lb_block_numbers_list_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -105,9 +111,11 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61b8ab134a9ad"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -128,5 +136,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644485985
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61b8a8d7a502d.json",
+    "acfml_field_group_mode": "advanced"
 }

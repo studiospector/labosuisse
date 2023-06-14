@@ -48,7 +48,7 @@ class Elementor_Analyze_And_Repair_Process extends Background_Tool_Process {
 		$original_json = get_post_meta( $post_id, '_elementor_data', true );
 		$skip_values   = array( 'true', 'false', 'null' );
 
-		if ( empty( $original_json ) || in_array( trim( $original_json ), $skip_values, true ) ) {
+		if ( empty( $original_json ) || ( is_string( $original_json ) && in_array( trim( $original_json ), $skip_values, true ) ) ) {
 			return true;
 		}
 

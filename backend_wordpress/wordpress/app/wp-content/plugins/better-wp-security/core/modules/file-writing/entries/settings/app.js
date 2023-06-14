@@ -40,7 +40,7 @@ function Copy( { rules } ) {
 
 	return (
 		<ClipboardButton
-			isSecondary
+			variant="secondary"
 			text={ rules }
 			onCopy={ () => setCopied( true ) }
 			onFinishCopy={ () => setCopied( false ) }

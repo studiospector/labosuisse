@@ -47,13 +47,13 @@ class OAuth2 implements FetchAuthTokenInterface
      *
      * @var array<string>
      */
-    public static $knownSigningAlgorithms = array('HS256', 'HS512', 'HS384', 'RS256');
+    public static $knownSigningAlgorithms = ['HS256', 'HS512', 'HS384', 'RS256'];
     /**
      * The well known grant types.
      *
      * @var array<string>
      */
-    public static $knownGrantTypes = array('authorization_code', 'refresh_token', 'password', 'client_credentials');
+    public static $knownGrantTypes = ['authorization_code', 'refresh_token', 'password', 'client_credentials'];
     /**
      * - authorizationUri
      *   The authorization server's HTTP endpoint capable of
@@ -183,6 +183,12 @@ class OAuth2 implements FetchAuthTokenInterface
      * @var string
      */
     private $idToken;
+    /**
+     * The scopes granted to the current access token
+     *
+     * @var string
+     */
+    private $grantedScope;
     /**
      * The lifetime in seconds of the current access token.
      *
@@ -339,7 +345,7 @@ class OAuth2 implements FetchAuthTokenInterface
      * @throws \Firebase\JWT\ExpiredException If the token has expired.
      * @return null|object
      */
-    public function verifyIdToken($publicKey = null, $allowed_algs = array())
+    public function verifyIdToken($publicKey = null, $allowed_algs = [])
     {
         $idToken = $this->getIdToken();
         if (\is_null($idToken)) {
@@ -403,7 +409,7 @@ class OAuth2 implements FetchAuthTokenInterface
             throw new \DomainException('No token credential URI was set.');
         }
         $grantType = $this->getGrantType();
-        $params = array('grant_type' => $grantType);
+        $params = ['grant_type' => $grantType];
         switch ($grantType) {
             case 'authorization_code':
                 $params['code'] = $this->getCode();
@@ -451,6 +457,9 @@ class OAuth2 implements FetchAuthTokenInterface
         $response = $httpHandler($this->generateCredentialsRequest());
         $credentials = $this->parseTokenResponse($response);
         $this->updateToken($credentials);
+        if (isset($credentials['scope'])) {
+            $this->setGrantedScope($credentials['scope']);
+        }
         return $credentials;
     }
     /**
@@ -482,7 +491,7 @@ class OAuth2 implements FetchAuthTokenInterface
     {
         $body = (string) $resp->getBody();
         if ($resp->hasHeader('Content-Type') && $resp->getHeaderLine('Content-Type') == 'application/x-www-form-urlencoded') {
-            $res = array();
+            $res = [];
             \parse_str($body, $res);
             return $res;
         }
@@ -529,7 +538,7 @@ class OAuth2 implements FetchAuthTokenInterface
      */
     public function updateToken(array $config)
     {
-        $opts = \array_merge(['extensionParams' => [], 'access_token' => null, 'id_token' => null, 'expires_in' => null, 'expires_at' => null, 'issued_at' => null], $config);
+        $opts = \array_merge(['extensionParams' => [], 'access_token' => null, 'id_token' => null, 'expires_in' => null, 'expires_at' => null, 'issued_at' => null, 'scope' => null], $config);
         $this->setExpiresAt($opts['expires_at']);
         $this->setExpiresIn($opts['expires_in']);
         // By default, the token is issued at `Time.now` when `expiresIn` is set,
@@ -1129,6 +1138,25 @@ class OAuth2 implements FetchAuthTokenInterface
     public function setIdToken($idToken)
     {
         $this->idToken = $idToken;
+    }
+    /**
+     * Get the granted scopes (if they exist) for the last fetched token.
+     *
+     * @return string|null
+     */
+    public function getGrantedScope()
+    {
+        return $this->grantedScope;
+    }
+    /**
+     * Sets the current ID token.
+     *
+     * @param string $grantedScope
+     * @return void
+     */
+    public function setGrantedScope($grantedScope)
+    {
+        $this->grantedScope = $grantedScope;
     }
     /**
      * Gets the refresh token associated with the current access token.

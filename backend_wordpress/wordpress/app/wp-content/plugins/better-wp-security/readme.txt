@@ -2,8 +2,8 @@
 Contributors: ithemes, timothyblynjacobs, layotte, jthillithemes, lisacee.
 Tags: security plugin, malware scanner, security, malware prevention, two-factor authentication, brute force protection, scanner, password protection, ban, bad bots, audit log
 Requires at least: 5.9
-Tested up to: 6.1
-Stable tag: 8.1.3
+Tested up to: 6.2
+Stable tag: 8.1.6
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -150,6 +150,22 @@ Manage more than one WordPress site? Release lockouts and keep your themes, plug
 7. Advanced Security Tools
 
 == Changelog ==
+
+= 8.1.6 =
+* Bug Fix: Fallback to the homepage when Enforce SSL encounters a non-safelisted redirect destination.
+* Bug Fix: IP Detection on sites behind Load Balancers that appended their IP address to X-Forwarded-For and did not provide a Real IP header.
+
+= 8.1.5 =
+* Security Hardening: Prevent open redirects attacks against the Enforce SSL module. This attack requires spoofing the Host header which requires additional conditions to exploit. Thanks to nlpro for reporting the issue. Read More: https://ithemes.com/?p=84309
+* Bug Fix: Update Password Strength library to the latest version. This fixes discrepancies between the realtime password strength estimation and the enforced password strength.
+
+= 8.1.4 =
+* Tweak: Add "All" tab to the Features page.
+* Tweak: Don't show "Ban" buttons in Security Dashboard if the user won't be able to create a ban.
+* Bug Fix: Prevent Headers Already Sent warning when a lockout occurs during a WP Cron request on some server setups.
+* Bug Fix: Manually load Sodium Polyfill for servers that have an older version of libsodium installed.
+* Bug Fix: Error when saving the File Change settings when the "notify_admin" setting was set.
+* Bug Fix: Prevent a redirect loop when logging in on sites that take more than 5 seconds to load the Dashboard.
 
 = 8.1.3 =
 * Important: iThemes Security now requires PHP 7.3 and WordPress 5.9 or later.
@@ -674,5 +690,5 @@ Manage more than one WordPress site? Release lockouts and keep your themes, plug
 
 == Upgrade Notice ==
 
-= 8.1.3 =
-Version 8.1.3 includes important security updates.
+= 8.1.6 =
+Version 8.1.6 includes important bug fixes and is recommended for all users.

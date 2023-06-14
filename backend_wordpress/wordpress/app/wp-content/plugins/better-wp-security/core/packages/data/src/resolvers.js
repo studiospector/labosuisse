@@ -57,9 +57,10 @@ export const getRequirementsInfo = {
 };
 
 export const getUser = {
-	*fulfill( userId ) {
+	*fulfill( id ) {
+		const currentUserId = yield select( 'ithemes-security/core', 'getCurrentUserId' );
 		const user = yield apiFetch( {
-			path: `/wp/v2/users/${ userId }`,
+			path: `/wp/v2/users/${ id === currentUserId ? 'me' : id }?context=edit`,
 		} );
 
 		yield receiveUser( user );

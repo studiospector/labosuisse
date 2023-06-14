@@ -4,11 +4,12 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
+class ComposerStaticInit1eb8bdaadee5729fa13db3fc6d350415
 {
     public static $files = array (
-        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         '7b11c4dc42b3b3023073cb14e519683c' => __DIR__ . '/..' . '/ralouphie/getallheaders/src/getallheaders.php',
+        'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
+        'ad27a566e2c29b3589d96cf971fa8042' => __DIR__ . '/../..' . '/api/order-functions.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -18,7 +19,9 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
             'WooCommerce\\WooCommerce\\Logging\\' => 32,
             'WooCommerce\\PayPalCommerce\\Webhooks\\' => 36,
             'WooCommerce\\PayPalCommerce\\WcGateway\\' => 37,
+            'WooCommerce\\PayPalCommerce\\Vendor\\' => 34,
             'WooCommerce\\PayPalCommerce\\Vaulting\\' => 36,
+            'WooCommerce\\PayPalCommerce\\Uninstall\\' => 37,
             'WooCommerce\\PayPalCommerce\\Subscription\\' => 40,
             'WooCommerce\\PayPalCommerce\\StatusReport\\' => 40,
             'WooCommerce\\PayPalCommerce\\Session\\' => 35,
@@ -29,7 +32,7 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
             'WooCommerce\\PayPalCommerce\\ApiClient\\' => 37,
             'WooCommerce\\PayPalCommerce\\AdminNotices\\' => 40,
             'WooCommerce\\PayPalCommerce\\' => 27,
-            'Wikimedia\\Composer\\' => 19,
+            'Wikimedia\\Composer\\Merge\\V2\\' => 28,
         ),
         'S' => 
         array (
@@ -51,8 +54,6 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
             'Dhii\\Util\\String\\' => 17,
             'Dhii\\Package\\' => 13,
             'Dhii\\Modular\\Module\\' => 20,
-            'Dhii\\Container\\' => 15,
-            'Dhii\\Collection\\' => 16,
         ),
     );
 
@@ -73,9 +74,17 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
         array (
             0 => __DIR__ . '/../..' . '/modules/ppcp-wc-gateway/src',
         ),
+        'WooCommerce\\PayPalCommerce\\Vendor\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/lib/packages',
+        ),
         'WooCommerce\\PayPalCommerce\\Vaulting\\' => 
         array (
             0 => __DIR__ . '/../..' . '/modules/ppcp-vaulting/src',
+        ),
+        'WooCommerce\\PayPalCommerce\\Uninstall\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/modules/ppcp-uninstall/src',
         ),
         'WooCommerce\\PayPalCommerce\\Subscription\\' => 
         array (
@@ -117,7 +126,7 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
         array (
             0 => __DIR__ . '/../..' . '/src',
         ),
-        'Wikimedia\\Composer\\' => 
+        'Wikimedia\\Composer\\Merge\\V2\\' => 
         array (
             0 => __DIR__ . '/..' . '/wikimedia/composer-merge-plugin/src',
         ),
@@ -157,18 +166,11 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
         array (
             0 => __DIR__ . '/..' . '/dhii/module-interface/src',
         ),
-        'Dhii\\Container\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dhii/containers/src',
-        ),
-        'Dhii\\Collection\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/dhii/collections-interface/src',
-        ),
     );
 
     public static $classMap = array (
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'Stringable' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Stringable.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
@@ -178,9 +180,9 @@ class ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit1a8c86e25bbcf00e1cae24192c8a742f::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit1eb8bdaadee5729fa13db3fc6d350415::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit1eb8bdaadee5729fa13db3fc6d350415::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit1eb8bdaadee5729fa13db3fc6d350415::$classMap;
 
         }, null, ClassLoader::class);
     }

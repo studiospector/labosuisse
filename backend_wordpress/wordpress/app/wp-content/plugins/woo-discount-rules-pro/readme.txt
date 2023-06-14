@@ -1,14 +1,14 @@
 === Discount Rules Pro for WooCommerce ===
 Contributors: flycart
 Donate link: https://flycart.org/
-Tags: woocommerce, coupons, discounts, dynamic pricing, Buy One Get One Free, pricing deals, bulk discount, discount
+Tags: woocommerce, coupons, discounts, dynamic pricing, woocommerce coupon, Buy One Get One Free, pricing deals, bulk discount, discount rules, auto-apply coupons, category discounts, url coupons
 Requires at least: 4.4.1
-Tested up to: 6.1
-Stable tag: 2.5.2
+Tested up to: 6.2
+Stable tag: 2.6.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Create simple to complex discount rules, dynamic pricing and discounts. A flexible and powerful WooCommerce discount & WooCommerce coupon plugin.
+Create simple and flexible WooCommerce discounts, dynamic pricing discounts, BOGO discounts and more. A powerful WooCommerce discount & WooCommerce coupon plugin.
 
 == Description ==
 
@@ -335,6 +335,19 @@ Note : Enable recursive checkbox if the discounts should be applied in sequentia
 * Dutch Translation - [@mvdburg1971](https://profiles.wordpress.org/mvdburg1971) - Michael van der Burg
 
 == Changelog ==
+
+= 2.6.0 - 08/05/23 =
+* Add: Support WooCommerce High-Performance order storage feature [Core and Pro].
+* Improvement: Query optimization while load coupon in backend [Pro].
+* Improvement: Licence URL update [Pro].
+* Fix: Loading range on backend - disappear when remove the first one [Core and Pro].
+
+= 2.5.3 - 16/01/23 =
+* Fix: Validation fix on creating rules [Pro].
+* Fix: The cheapest product does not receive a discount when variant together option is enabled [Pro].
+* Fix: Error on variation is not an array [Pro].
+* Fix: Condition doesn't match when have Match any option with user role condition [Pro].
+* Fix: On-sale page shows incorrect data while have attribute in filters [Pro].
 
 = 2.5.2 - 09/11/22 =
 * Add: Support for WordPress 6.1.

@@ -995,3 +995,16 @@
 	Bug Fix: Preliminary PHP 8.1 compatibility.
 
 	Thanks to Calvin Alkan for reporting the security issues fixed in this release.
+8.1.4 - 2022-12-01 - Timothy Jacobs, Lisa Canini, Jared Hill
+	Tweak: Add "All" tab to the Features page.
+	Tweak: Don't show "Ban" buttons in Security Dashboard if the user won't be able to create a ban.
+	Bug Fix: Prevent Headers Already Sent warning when a lockout occurs during a WP Cron request on some server setups.
+	Bug Fix: Manually load Sodium Polyfill for servers that have an older version of libsodium installed.
+	Bug Fix: Error when saving the File Change settings when the "notify_admin" setting was set.
+	Bug Fix: Prevent a redirect loop when logging in on sites that take more than 5 seconds to load the Dashboard.
+8.1.5 - 2023-03-23 - Timothy Jacobs, Lisa Canini, Jared Hill
+	Security Hardening: Prevent open redirects attacks against the Enforce SSL module. This attack requires spoofing the Host header which requires additional conditions to exploit. Thanks to nlpro for reporting the issue.
+	Bug Fix: Update Password Strength library to the latest version. This fixes discrepancies between the realtime password strength estimation and the enforced password strength.
+8.1.6 - 2023-04-20 - Timothy Jacobs, Lisa Canini, Jared Hill
+	Bug Fix: Fallback to the homepage when Enforce SSL encounters a non-safelisted redirect destination.
+	Bug Fix: IP Detection on sites behind Load Balancers that appended their IP address to X-Forwarded-For and did not provide a Real IP header.

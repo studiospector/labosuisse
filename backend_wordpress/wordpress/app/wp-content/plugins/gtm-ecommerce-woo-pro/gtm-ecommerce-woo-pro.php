@@ -3,7 +3,7 @@
  * Plugin Name: Google Tag Manager for WooCommerce PRO
  * Plugin URI: https://tagconcierge.com/google-tag-manager-for-woocommerce/
  * Description: Push WooCommerce eCommerce (Enhanced Ecommerce and GA4) information to GTM DataLayer. Use any GTM integration to measure your customers' activites.
- * Version:     1.7.3
+ * Version:     1.10.3
  * Author:      Handcraft Byte
  * Author URI:  https://handcraftbyte.com/
  * License:     GPLv2 or later
@@ -12,7 +12,7 @@
  * Domain Path: /languages
  *
  * WC requires at least: 4.0
- * WC tested up to: 7.0.0
+ * WC tested up to: 7.7.0
  * Woo: 7424130:288e08109d3061ad3a8886a94db87d9b
  */
 
@@ -20,10 +20,17 @@ namespace GtmEcommerceWooPro;
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Automattic\WooCommerce\Utilities\FeaturesUtil;
 use GtmEcommerceWooPro\Lib\Container;
 
 $pluginData = get_file_data(__FILE__, array('Version' => 'Version'), false);
 $pluginVersion = $pluginData['Version'];
+
+add_action( 'before_woocommerce_init', function() {
+	if ( class_exists( FeaturesUtil::class ) ) {
+		FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
+	}
+});
 
 
 $container = new Container($pluginVersion);
@@ -33,11 +40,6 @@ $container->getGtmSnippetService()->initialize();
 $container->getEventStrategiesService()->initialize();
 $pluginService = $container->getPluginService();
 $pluginService->initialize();
-$container->getThemeValidatorService()->initialize();
 $container->getEventInspectorService()->initialize();
 
-$monitorService = $container->getMonitorService();
-$monitorService->initialize();
-
-register_activation_hook( __FILE__, array( $pluginService, 'activationHook' ) );
-register_deactivation_hook( __FILE__, [$monitorService, 'deactivationHook'] );
+register_activation_hook( __FILE__, [ $pluginService, 'activationHook' ] );

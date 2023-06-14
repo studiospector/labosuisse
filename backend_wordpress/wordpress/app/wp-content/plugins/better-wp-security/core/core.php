@@ -699,6 +699,10 @@ if ( ! class_exists( 'ITSEC_Core' ) ) {
 		 * @return string
 		 */
 		public static function get_install_type() {
+			if ( defined( 'ITSEC_FORCE_INSTALL_TYPE' ) && ITSEC_FORCE_INSTALL_TYPE === 'free' ) {
+				return 'free';
+			}
+
 			if ( self::is_pro() ) {
 				return 'pro';
 			}

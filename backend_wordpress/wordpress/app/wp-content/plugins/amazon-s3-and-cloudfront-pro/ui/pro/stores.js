@@ -6,6 +6,9 @@ import {objectsDiffer} from "../js/objectsDiffer";
 // We currently have one licence applied to a plugin install.
 export const licence = derived( config, $config => $config.hasOwnProperty( "licences" ) ? $config.licences.at( 0 ) : [] );
 
+// Convenience readable store of offload remaining with count message, derived from config.
+export const offloadRemainingWithCount = derived( config, $config => $config.offload_remaining_with_count );
+
 // Convenience readable store of documentation, derived from config.
 export const documentation = derived( config, $config => $config.documentation );
 
@@ -47,42 +50,65 @@ function createTools() {
 	return {
 		subscribe,
 		set,
-		async action( id, action ) {
+		async action( tool, action ) {
 			state.pausePeriodicFetch();
 
+			// Set the status text to the default busy description
+			// until the API returns a calculated status description.
+			tool.status_description = tool.busy_description;
+			tool.short_status_description = tool.busy_description;
+
+			// Ensure all subscribers know the tool status is changing.
+			update( _tools => {
+				_tools[ tool.id ] = tool;
+
+				return _tools;
+			} );
+
 			let result = {};
-			const json = await api.put( "tools", { id: id, action: action } );
+			const json = await api.put( "tools", {
+				id: tool.id,
+				action: action
+			} );
 
 			if ( json.hasOwnProperty( "ok" ) ) {
 				result = json;
 			}
 
-			state.resumePeriodicFetch();
+			await state.resumePeriodicFetch();
 			return result;
 		},
-		async start( id ) {
-			return await this.action( id, "start" );
+		async start( tool ) {
+			// Ensure all subscribers know that a tool is running.
+			running.update( _running => tool.id );
+			tool.is_queued = true;
+
+			return await this.action( tool, "start" );
 		},
-		async cancel( id ) {
-			return await this.action( id, "cancel" );
+		async cancel( tool ) {
+			tool.is_cancelled = true;
+
+			return await this.action( tool, "cancel" );
 		},
-		async pauseResume( id ) {
-			return await this.action( id, "pause_resume" );
+		async pauseResume( tool ) {
+			tool.is_paused = !tool.is_paused;
+
+			return await this.action( tool, "pause_resume" );
 		},
 		updateTools( json ) {
 			if ( json.hasOwnProperty( "tools" ) ) {
 				// Update our understanding of what the server's tools status is.
-				update( $tools => {
+				update( _tools => {
 					return { ...json.tools };
 				} );
 
 				// Update our understanding of the currently running tool.
-				const runningTool = Object.values( json.tools ).filter( ( tool ) => tool.is_processing || tool.is_queued ).shift();
+				const runningTool = Object.values( json.tools ).find( ( tool ) => tool.is_processing || tool.is_queued || tool.is_paused || tool.is_cancelled );
 
 				if ( runningTool ) {
-					running.update( $running => runningTool.id );
+					running.update( _running => runningTool.id );
 				} else {
-					running.update( $running => "" );
+					running.update( _running => "" );
 				}
 			}
 		},

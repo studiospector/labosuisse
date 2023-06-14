@@ -13,10 +13,10 @@ defined( 'ABSPATH' ) or exit;
 		<span class="current-crumb"><strong>User Sync</strong></span>
 	</p>
 
-	<div class="main-content mc4wp-row">
+	<div class="mc4wp-row">
 
 		<!-- Main Content -->
-		<div class="main-content col mc4wp-col-4">
+		<div class="main-content mc4wp-col">
 			<h1 class="mc4wp-page-title">Mailchimp User Sync</h1>
 
             <?php if (isset($_GET['webhook-created']) && (int) $_GET['webhook-created'] === 0 ) {

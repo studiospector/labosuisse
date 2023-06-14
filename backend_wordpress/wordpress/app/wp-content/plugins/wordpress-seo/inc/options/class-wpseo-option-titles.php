@@ -331,9 +331,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 				$enriched_defaults[ 'social-image-url-tax-' . $tax->name ]   = ''; // Hidden input field.
 				$enriched_defaults[ 'social-image-id-tax-' . $tax->name ]    = 0; // Hidden input field.
 
-				if ( ! $tax->_builtin ) {
-					$enriched_defaults[ 'taxonomy-' . $tax->name . '-ptparent' ] = 0; // Select box;.
-				}
+				$enriched_defaults[ 'taxonomy-' . $tax->name . '-ptparent' ] = 0; // Select box;.
 			}
 		}
 
@@ -766,12 +764,10 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 		}
 		unset( $old_option );
 
-
 		// Fix wrongness created by buggy version 1.2.2.
 		if ( isset( $option_value['title-home'] ) && $option_value['title-home'] === '%%sitename%% - %%sitedesc%% - 12345' ) {
 			$option_value['title-home-wpseo'] = '%%sitename%% - %%sitedesc%%';
 		}
-
 
 		/*
 		 * Renaming these options to avoid ever overwritting these if a (bloody stupid) user /
@@ -800,7 +796,6 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 			}
 		}
 		unset( $rename, $old, $new );
-
 
 		/*
 		 * {@internal This clean-up action can only be done effectively once the taxonomies

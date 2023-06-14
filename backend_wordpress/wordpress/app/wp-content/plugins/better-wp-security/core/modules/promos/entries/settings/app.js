@@ -1,4 +1,9 @@
 /**
+ * External dependencies
+ */
+import { useParams } from 'react-router-dom';
+
+/**
  * WordPress dependencies
  */
 import { useMemo, useState } from '@wordpress/element';
@@ -9,7 +14,7 @@ import { useSelect } from '@wordpress/data';
 /**
  * Internal dependencies
  */
-import { AsideFill, useConfigContext } from '@ithemes/security.pages.settings';
+import { AsideFill, useConfigContext, SecureSiteEndFill } from '@ithemes/security.pages.settings';
 import {
 	MarkPro,
 	VulnerabilityReport as VulnerabilityReportGraphic,
@@ -17,6 +22,7 @@ import {
 import { ControlledTabPanel } from '@ithemes/security-components';
 import { useAsync } from '@ithemes/security-hocs';
 import { CORE_STORE_NAME } from '@ithemes/security.packages.data';
+import Onboarding from './components/onboarding';
 import './style.scss';
 
 export default function App() {
@@ -27,10 +33,15 @@ export default function App() {
 	}
 
 	return (
-		<AsideFill>
-			<ProUpgrade />
-			<VulnerabilityReport />
-		</AsideFill>
+		<>
+			<AsideFill>
+				<ProUpgrade />
+				<VulnerabilityReport />
+			</AsideFill>
+			<SecureSiteEndFill>
+				<OnboardingEndFill />
+			</SecureSiteEndFill>
+		</>
 	);
 }
 
@@ -89,7 +100,7 @@ function ProUpgrade() {
 					) }
 				</ControlledTabPanel>
 				<Button
-					isPrimary
+					variant="primary"
 					className="itsec-promo-pro-upgrade__button"
 					href={ tabs.find( ( tab ) => tab.name === currentTab )?.link || 'https://ithem.es/go-security-pro-now' }
 				>
@@ -132,7 +143,7 @@ function VulnerabilityReport() {
 					) }
 				</p>
 				<Button
-					isPrimary
+					variant="primary"
 					className="itsec-promo itsec-promo-vulnerability-report__button"
 					isBusy={ status === 'pending' }
 					onClick={ () => execute( email ) }
@@ -180,4 +191,14 @@ function signupToList( email ) {
 
 			return response;
 		} );
+}
+
+function OnboardingEndFill() {
+	const { root } = useParams();
+
+	if ( root !== 'onboard' ) {
+		return null;
+	}
+
+	return <Onboarding />;
 }

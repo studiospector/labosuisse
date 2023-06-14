@@ -9,10 +9,10 @@ declare(strict_types=1);
 
 namespace WooCommerce\PayPalCommerce\StatusReport;
 
-use Dhii\Container\ServiceProvider;
-use Dhii\Modular\Module\ModuleInterface;
-use Interop\Container\ServiceProviderInterface;
-use Psr\Container\ContainerInterface;
+use WooCommerce\PayPalCommerce\Vendor\Dhii\Container\ServiceProvider;
+use WooCommerce\PayPalCommerce\Vendor\Dhii\Modular\Module\ModuleInterface;
+use WooCommerce\PayPalCommerce\Vendor\Interop\Container\ServiceProviderInterface;
+use WooCommerce\PayPalCommerce\Vendor\Psr\Container\ContainerInterface;
 use WooCommerce\PayPalCommerce\ApiClient\Authentication\Bearer;
 use WooCommerce\PayPalCommerce\ApiClient\Endpoint\BillingAgreementsEndpoint;
 use WooCommerce\PayPalCommerce\ApiClient\Exception\RuntimeException;
@@ -20,7 +20,7 @@ use WooCommerce\PayPalCommerce\ApiClient\Helper\DccApplies;
 use WooCommerce\PayPalCommerce\Button\Helper\MessagesApply;
 use WooCommerce\PayPalCommerce\Compat\PPEC\PPECHelper;
 use WooCommerce\PayPalCommerce\Onboarding\State;
-use WooCommerce\PayPalCommerce\Webhooks\WebhookInfoStorage;
+use WooCommerce\PayPalCommerce\Webhooks\WebhookEventStorage;
 
 /**
  * Class StatusReportModule
@@ -62,7 +62,7 @@ class StatusReportModule implements ModuleInterface {
 				$messages_apply = $c->get( 'button.helper.messages-apply' );
 
 				$last_webhook_storage = $c->get( 'webhook.last-webhook-storage' );
-				assert( $last_webhook_storage instanceof WebhookInfoStorage );
+				assert( $last_webhook_storage instanceof WebhookEventStorage );
 
 				$billing_agreements_endpoint = $c->get( 'api.endpoint.billing-agreements' );
 				assert( $billing_agreements_endpoint instanceof BillingAgreementsEndpoint );

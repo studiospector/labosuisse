@@ -41,7 +41,7 @@ function FooterSchemaActions( { card, callingRpcs, onComplete, children } ) {
 				<span className="itsec-card-footer__action" key={ link.href }>
 					<Button
 						isSmall
-						isPrimary={ i === 0 }
+						variant={ i === 0 ? 'primary' : 'secondary' }
 						onClick={ () =>
 							! callingRpcs.includes( link.href ) &&
 							onClick( link.href )
@@ -55,7 +55,7 @@ function FooterSchemaActions( { card, callingRpcs, onComplete, children } ) {
 			) ) }
 			{ links.map( ( link ) => (
 				<span className="itsec-card-footer__action" key={ link.href }>
-					<Button isSmall isLink href={ link.href }>
+					<Button isSmall variant="link" href={ link.href }>
 						{ link.title }
 					</Button>
 				</span>

@@ -6,6 +6,7 @@
             "key": "field_62208ab149833",
             "label": "Shortcode Modulo di Candidatura",
             "name": "lb_template_application_form_shortcode",
+            "aria-label": "",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -41,5 +42,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1646653654
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_62208a9a41e2e.json",
+    "acfml_field_group_mode": "advanced"
 }

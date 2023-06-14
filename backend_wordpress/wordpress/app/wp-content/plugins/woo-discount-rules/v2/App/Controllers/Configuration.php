@@ -74,6 +74,7 @@ class Configuration
         'disable_recalculate_total_when_coupon_apply' => 0, // 0,1
         'wdr_hide_other_shipping' => 0, // 0,1
         'run_rebuild_on_sale_index_cron' => 0, // 0,1
+        'exclude_out_of_stock_products_for_on_sale_page' => 0, // 0,1
     );
     private static $default_advanced_section_config = array(
         'wdr_override_custom_price' => 0, // 0,1

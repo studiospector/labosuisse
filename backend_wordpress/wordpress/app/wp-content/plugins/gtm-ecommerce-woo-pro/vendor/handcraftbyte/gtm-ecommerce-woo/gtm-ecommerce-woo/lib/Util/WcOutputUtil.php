@@ -3,13 +3,20 @@
 namespace GtmEcommerceWoo\Lib\Util;
 
 class WcOutputUtil {
-
+	protected $pluginDir = __DIR__;
+	protected $pluginVersion = '';
 	protected $scripts = [];
 	protected $scriptFiles = [];
 
-	public function __construct() {
+	public function __construct( $pluginVersion) {
+		$this->pluginVersion = $pluginVersion;
 		add_action( 'wp_footer', [$this, 'wpFooter'], 20 );
 		add_action( 'wp_enqueue_scripts', [$this, 'wpEnqueueScripts'] );
+		add_filter( 'safe_style_css', function( $styles ) {
+			$styles[] = 'display';
+
+			return $styles;
+		} );
 	}
 
 	public function wpFooter() {
@@ -17,11 +24,12 @@ class WcOutputUtil {
 			echo '<!-- gtm-ecommerce-woo no-scripts -->';
 			return;
 		}
-		echo '<script type="text/javascript" data-gtm-ecommerce-woo-scripts>';
-		echo 'window.dataLayer = window.dataLayer || [];';
+		echo "<script type=\"text/javascript\" data-gtm-ecommerce-woo-scripts>\n";
+		echo "window.dataLayer = window.dataLayer || [];\n";
+		echo "window.dataLayer.push({ ecommerce: null });\n";
 		echo "(function(dataLayer, jQuery) {\n";
 		foreach ($this->scripts as $script) {
-			echo $script . "\n";
+			echo filter_var($script, FILTER_FLAG_STRIP_BACKTICK) . "\n";
 		}
 		echo '})(dataLayer, jQuery);';
 		echo "</script>\n";
@@ -55,9 +63,9 @@ class WcOutputUtil {
 		foreach ($this->scriptFiles as $scriptFile) {
 			wp_enqueue_script(
 				$scriptFile['name'],
-				plugins_url( 'js/' . $scriptFile['name'] . '.js', MAIN_FILE ),
+				plugin_dir_url( dirname( $this->pluginDir ) ) . 'js/' . $scriptFile['name'] . '.js',
 				$scriptFile['deps'],
-				'1.0.0',
+				$this->pluginVersion,
 				$scriptFile['in_footer']
 			);
 		}

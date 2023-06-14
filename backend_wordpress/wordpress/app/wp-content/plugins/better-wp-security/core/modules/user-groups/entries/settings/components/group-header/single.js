@@ -101,7 +101,7 @@ export default function SingleGroupHeader( { groupId, moduleFilter } ) {
 				<Button
 					onClick={ onDelete }
 					isBusy={ isDeleting }
-					isLink
+					variant="link"
 					isDestructive
 				>
 					{ __( 'Delete Group', 'better-wp-security' ) }

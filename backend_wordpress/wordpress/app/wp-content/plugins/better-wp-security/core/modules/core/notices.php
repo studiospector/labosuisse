@@ -5,7 +5,7 @@ ITSEC_Lib_Admin_Notices::register(
 		new ITSEC_Admin_Notice_Managers_Only(
 			new class implements ITSEC_Admin_Notice {
 				public function get_id() {
-					return 'release-passkeys';
+					return 'release-turnstile';
 				}
 
 				public function get_title() {
@@ -13,7 +13,7 @@ ITSEC_Lib_Admin_Notices::register(
 				}
 
 				public function get_message() {
-					return __( 'Passkeys are here! Learn how to login with biometrics like Face ID, Touch ID and Windows Hello.', 'better-wp-security' );
+					return __( 'New Turnstile and hCaptcha Support', 'better-wp-security' );
 				}
 
 				public function get_meta() {
@@ -36,7 +36,7 @@ ITSEC_Lib_Admin_Notices::register(
 							ITSEC_Admin_Notice_Action::S_PRIMARY,
 							function () {
 								$this->handle_dismiss();
-								$url = 'https://ithemes.com/?p=80134';
+								$url = 'https://ithemes.com/?p=82867';
 
 								wp_redirect( $url );
 								die;

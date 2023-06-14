@@ -2,6 +2,8 @@
 
 namespace WPML\CF7;
 
+use WPML\API\Sanitize;
+
 class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	/**
 	 * Instance of Sitepress.
@@ -13,7 +15,7 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	/**
 	 * Instance of $wpml_post_translations.
 	 *
-	 * @var \WPML_post_translation
+	 * @var \WPML_Post_Translation
 	 */
 	private $wpml_post_translations;
 
@@ -21,9 +23,9 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	 * Language_Metabox constructor.
 	 *
 	 * @param \SitePress             $sitepress              An instance of SitePress class.
-	 * @param \WPML_post_translation $wpml_post_translations An instance of WPML_post_translation class.
+	 * @param \WPML_Post_Translation $wpml_post_translations An instance of WPML_Post_Translation class.
 	 */
-	public function __construct( \SitePress $sitepress, \WPML_post_translation $wpml_post_translations ) {
+	public function __construct( \SitePress $sitepress, \WPML_Post_Translation $wpml_post_translations ) {
 		$this->sitepress              = $sitepress;
 		$this->wpml_post_translations = $wpml_post_translations;
 	}
@@ -38,6 +40,11 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 		add_filter( 'wpml_enable_language_meta_box', [ $this, 'wpml_enable_language_meta_box_filter' ] );
 	}
 
+	/**
+	 * @param bool $enable
+	 *
+	 * @return bool
+	 */
 	public function wpml_enable_language_meta_box_filter( $enable ) {
 		if ( $this->enableScript() ) {
 			return true;
@@ -130,7 +137,7 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 	/**
 	 * Check if we are in CF7 admin page.
 	 *
-	 * @return int
+	 * @return bool
 	 */
 	private function is_wpcf7_page() {
 		global $pagenow;
@@ -142,6 +149,9 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 		return $is_admin_page && $is_wpcf7_page;
 	}
 
+	/**
+	 * @return string
+	 */
 	private function get_plugin_page() {
 		global $plugin_page;
 
@@ -149,10 +159,7 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 			return $plugin_page;
 		}
 
-		$page = filter_input( INPUT_GET, 'page', FILTER_SANITIZE_STRING );
-		$page = plugin_basename( $page );
-
-		return $page;
+		return plugin_basename( (string) Sanitize::stringProp( 'page', $_GET ) );
 	}
 
 	/**
@@ -183,7 +190,7 @@ class Language_Metabox implements \IWPML_Backend_Action, \IWPML_DIC_Action {
 			];
 		} else {
 			// Rewrite link to create contact form translation.
-			$trid                 = $this->wpml_post_translations->get_element_trid( $post_id, Constants::POST_TYPE );
+			$trid                 = $this->wpml_post_translations->get_element_trid( $post_id );
 			$source_language_code = $this->wpml_post_translations->get_element_lang_code( $post_id );
 
 			$args = [

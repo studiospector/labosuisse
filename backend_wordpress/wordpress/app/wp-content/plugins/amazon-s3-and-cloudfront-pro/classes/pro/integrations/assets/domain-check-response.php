@@ -3,7 +3,7 @@
 namespace DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets;
 
 use AS3CF_Utils;
-use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\Exceptions\Signature_Verification_Exception;
+use DeliciousBrains\WP_Offload_Media\Settings\Exceptions\Signature_Verification_Exception;
 use WP_REST_Response;
 
 class Domain_Check_Response extends WP_REST_Response {

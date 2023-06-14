@@ -19,17 +19,17 @@ if (! defined('DONOTCDN')) {
 <html>
 <head>
     <meta charset="utf-8" />
-	<link type="text/css" rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" />
+	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" />
 	<?php wp_head(); ?>
-    
-    <style type="text/css">
-        html, 
-        body{ 
-            min-height: 100% !important; 
-            height: auto !important; 
+
+    <style>
+        html,
+        body{
+            min-height: 100% !important;
+            height: auto !important;
         }
 
-        body{ 
+        body{
             background:white;
             width: 100%;
 	        max-width: 100%;
@@ -37,9 +37,9 @@ if (! defined('DONOTCDN')) {
 
         /* hide other elements */
         body > *:not(#form-preview),
-        #blackbox-web-debug, 
-        #wpadminbar{ 
-            display:none !important; 
+        #blackbox-web-debug,
+        #wpadminbar{
+            display:none !important;
         }
 
         #form-preview {
@@ -51,11 +51,7 @@ if (! defined('DONOTCDN')) {
     </style>
 
 	<!-- Container for custom CSS created by the Styles Builder interface -->
-    <style type="text/css" id="custom-css"></style>
-
-    <!--[if IE]>
-        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+    <style id="custom-css"></style>
 </head>
 <body <?php body_class(); ?>>
 	<div id="form-preview">

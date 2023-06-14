@@ -1,18 +1,14 @@
-'use strict';
+/**
+ * @param {Event} evt
+ */
+function askForConfirmation(evt) {
+  const sure = window.confirm(evt.target.getAttribute('data-confirm') || window.mc4wp_ecommerce.i18n.confirmation);
+  if (!sure) {
+    evt.preventDefault();
+  }
+}
 
-module.exports = function(i18n) {
-    var confirmationElements = document.querySelectorAll('[data-confirm]');
-    for( var i=0; i<confirmationElements.length; i++ ) {
-        var element = confirmationElements[i];
-        element.addEventListener(element.tagName === 'FORM' ? 'submit' : 'click', function(e) {
-            var sure = confirm(e.target.getAttribute('data-confirm') || i18n.confirmation);
-
-            if( ! sure ) {
-                e.preventDefault();
-                return false;
-            }
-
-            return true;
-        });
-    }
-};
+const confirmationElements = document.querySelectorAll('[data-confirm]');
+for (let i = 0; i < confirmationElements.length; i++) {
+  confirmationElements[i].addEventListener(confirmationElements[i].tagName === 'FORM' ? 'submit' : 'click', askForConfirmation);
+}

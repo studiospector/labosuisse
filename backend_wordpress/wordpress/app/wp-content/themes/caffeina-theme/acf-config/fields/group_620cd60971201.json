@@ -6,6 +6,7 @@
             "key": "field_620cd60997a43",
             "label": "Carousel Post Banner Alternate",
             "name": "lb_block_carousel_post_banner_alternate",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -26,6 +27,7 @@
                     "key": "field_620cd87ebee4e",
                     "label": "Articolo",
                     "name": "lb_block_carousel_post_banner_alternate_item",
+                    "aria-label": "",
                     "type": "post_object",
                     "instructions": "",
                     "required": 0,
@@ -43,12 +45,14 @@
                     "multiple": 0,
                     "return_format": "object",
                     "wpml_cf_preferences": 2,
-                    "ui": 1
+                    "ui": 1,
+                    "parent_repeater": "field_620cd60997a43"
                 },
                 {
                     "key": "field_620cfc0402223",
                     "label": "impostazioni",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -60,12 +64,14 @@
                     },
                     "placement": "top",
                     "endpoint": 0,
-                    "wpml_cf_preferences": 0
+                    "wpml_cf_preferences": 0,
+                    "parent_repeater": "field_620cd60997a43"
                 },
                 {
                     "key": "field_620cfc2c02224",
                     "label": "Posizione Infobox",
                     "name": "lb_block_carousel_post_banner_alternate_variants_lr",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -85,12 +91,14 @@
                     "layout": "vertical",
                     "return_format": "value",
                     "wpml_cf_preferences": 2,
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_620cd60997a43"
                 },
                 {
                     "key": "field_620cfc6c02225",
                     "label": "Altezza Infobox",
                     "name": "lb_block_carousel_post_banner_alternate_variants_hcb",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -111,12 +119,14 @@
                     "layout": "vertical",
                     "return_format": "value",
                     "wpml_cf_preferences": 2,
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_620cd60997a43"
                 },
                 {
                     "key": "field_620cfccc02226",
                     "label": "Immagine grande",
                     "name": "lb_block_carousel_post_banner_alternate_img_big",
+                    "aria-label": "",
                     "type": "true_false",
                     "instructions": "",
                     "required": 0,
@@ -131,9 +141,11 @@
                     "ui": 1,
                     "ui_on_text": "",
                     "ui_off_text": "",
-                    "wpml_cf_preferences": 2
+                    "wpml_cf_preferences": 2,
+                    "parent_repeater": "field_620cd60997a43"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -154,5 +166,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645018425
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_620cd60971201.json",
+    "acfml_field_group_mode": "advanced"
 }

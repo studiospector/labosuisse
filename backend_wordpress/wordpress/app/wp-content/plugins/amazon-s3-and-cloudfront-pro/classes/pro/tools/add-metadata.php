@@ -75,7 +75,7 @@ class Add_Metadata extends Background_Tool {
 			return true;
 		}
 
-		return $this->is_queued() || $this->is_processing() || $this->is_paused() || $this->is_cancelled();
+		return $this->is_active();
 	}
 
 	/**
@@ -119,8 +119,17 @@ class Add_Metadata extends Background_Tool {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
+	public function get_queued_status(): string {
 		return __( 'Adding metadata to Media Library', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Adding metadata…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

@@ -80,7 +80,7 @@ function BannedUsers( { card, config, eqProps } ) {
 					<>
 						<span className="itsec-card-footer__action">
 							<Button
-								isLink
+								variant="link"
 								isSmall
 								disabled={ isSaving }
 								onClick={ () => setCreating( false ) }
@@ -90,7 +90,7 @@ function BannedUsers( { card, config, eqProps } ) {
 						</span>
 						<span className="itsec-card-footer__action">
 							<Button
-								isPrimary
+								variant="primary"
 								isSmall
 								form={ formId }
 								type="submit"
@@ -105,7 +105,7 @@ function BannedUsers( { card, config, eqProps } ) {
 				{ ! isCreating && (
 					<>
 						{ schema?.links
-							.filter( ( link ) => link.rel === 'create-form' )
+							.filter( ( link ) => link.rel === 'create-form' && ( ! link.targetHints?.allow || link.targetHints.allow.includes( 'POST' ) ) )
 							.map( ( createForm ) => (
 								<span
 									key={ createForm.href }
@@ -113,7 +113,7 @@ function BannedUsers( { card, config, eqProps } ) {
 								>
 									<Button
 										isSmall
-										isPrimary
+										variant="primary"
 										onClick={ () =>
 											setCreating(
 												isCreating ? false : createForm

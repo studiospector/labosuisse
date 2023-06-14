@@ -612,15 +612,16 @@ final class ITSEC_Lib {
 	 * @param string $password
 	 * @param array  $penalty_strings Additional strings that if found within the password, will decrease the strength.
 	 *
-	 * @return ITSEC_Zxcvbn_Results
+	 * @return array
 	 */
 	public static function get_password_strength_results( $password, $penalty_strings = array() ) {
-		if ( ! isset( $GLOBALS['itsec_zxcvbn'] ) ) {
-			require_once( ITSEC_Core::get_core_dir() . '/lib/itsec-zxcvbn-php/zxcvbn.php' );
-			$GLOBALS['itsec_zxcvbn'] = new ITSEC_Zxcvbn();
+		global $itsec_zxcvbn;
+
+		if ( ! $itsec_zxcvbn ) {
+			$itsec_zxcvbn = new \iThemesSecurity\Strauss\ZxcvbnPhp\Zxcvbn();
 		}
 
-		return $GLOBALS['itsec_zxcvbn']->test_password( $password, $penalty_strings );
+		return $itsec_zxcvbn->passwordStrength( $password, $penalty_strings );
 	}
 
 	/**

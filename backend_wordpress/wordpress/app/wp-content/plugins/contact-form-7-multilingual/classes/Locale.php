@@ -6,6 +6,9 @@ use WPML\FP\Obj;
 
 class Locale implements \IWPML_Frontend_Action {
 
+	/**
+	 * @return void
+	 */
 	public function add_hooks() {
 		add_filter( 'get_post_metadata', [ $this, 'getFormLocale' ], 10, 3 );
 	}

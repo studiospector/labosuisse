@@ -6,6 +6,7 @@
             "key": "field_62334f37e13a1",
             "label": "Elementi",
             "name": "lb_block_checklist_items",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -19,13 +20,14 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "wpml_cf_preferences": 3,
             "sub_fields": [
                 {
                     "key": "field_62334fb0e13a2",
                     "label": "Elemento",
                     "name": "lb_block_checklist_items_item",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -40,9 +42,11 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_62334f37e13a1"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -63,5 +67,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1647530069
+    "modified": 1686125018,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_62334ec18e787.json",
+    "acfml_field_group_mode": "advanced"
 }

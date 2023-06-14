@@ -178,12 +178,6 @@
         "description": "Each error message in iThemes Security has an associated error code that can help diagnose an issue. Changing this setting to “Yes” causes these codes to display. This setting should be left set to “No” unless iThemes Security support requests that you change it.",
         "readonly": true
       },
-      "enable_grade_report": {
-        "type": "boolean",
-        "default": false,
-        "title": "Enable Grade Report",
-        "description": "The Grade Report feature can help you identify vulnerabilities on the site. Visit the Notification Center to select which users receive emails from this feature."
-      },
       "build": {
         "type": "integer",
         "minimum": 0,
@@ -343,8 +337,7 @@
           "title": "UI Tweaks",
           "fields": [
             "hide_admin_bar",
-            "show_error_codes",
-            "enable_grade_report"
+            "show_error_codes"
           ]
         }
       ]
@@ -423,9 +416,6 @@
       "server-type": [
         "nginx"
       ]
-    },
-    "enable_grade_report": {
-      "install-type": "pro"
     }
   },
   "removed-settings": [
@@ -440,7 +430,8 @@
     "digest_last_sent",
     "digest_messages",
     "show_new_dashboard_notice",
-    "infinitewp_compatibility"
+    "infinitewp_compatibility",
+    "enable_grade_report"
   ],
   "onboard-settings": [
     "lockout_white_list",

@@ -24,14 +24,14 @@ RUN npm run build
 
 
 # WORDPRESS STAGE
-FROM wordpress:6.1.0-php7.4-fpm-alpine AS wordpress-base
+FROM wordpress:6.2.2-php8.0-fpm-alpine AS wordpress-base
 
 WORKDIR /wordpress_dir
 RUN cp -r /var/www/html /wordpress_dir
 RUN cp /bin/sh /usr/local/sbin/php-fpm
 RUN /usr/local/bin/docker-entrypoint.sh php-fpm || true
 
-FROM trafex/php-nginx:2.4.0 AS wordpress
+FROM trafex/php-nginx:2.5.0 AS wordpress
 
 ENV WP_CORE_DIR="/var/www/html"
 ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"
@@ -57,7 +57,7 @@ COPY --chown=nobody ./backend_wordpress/wordpress/app/robots.txt ${WP_CORE_DIR}/
 
 # trafex stage (wrap it)
 # FROM registry.gitlab.com/never-sleep/devops/nador-images/docker-php-nginx/php-nginx
-FROM trafex/php-nginx:2.4.0 AS production
+FROM trafex/php-nginx:2.5.0 AS production
 
 ENV WP_CORE_DIR="/var/www/html"
 ENV WP_CONTENT_CUSTOM_DIR="/var/www/html/wp-content-custom"

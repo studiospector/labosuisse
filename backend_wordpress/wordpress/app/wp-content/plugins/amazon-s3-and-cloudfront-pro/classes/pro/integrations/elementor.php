@@ -32,6 +32,13 @@ class Elementor extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		// Nothing to do.
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		add_filter( 'elementor/editor/localize_settings', array( $this, 'localize_settings' ) );
 		add_action( 'elementor/frontend/before_render', array( $this, 'frontend_before_render' ) );
 		add_filter( 'update_post_metadata', array( $this, 'update_post_metadata' ), 10, 5 );

@@ -82,7 +82,7 @@ function useDetectedIp() {
 function ProxyIP( { label, detectIp } ) {
 	return (
 		<div className="itsec-global-detected-ip">
-			<Button isSecondary onClick={ detectIp }>
+			<Button variant="secondary" onClick={ detectIp }>
 				{ __( 'Check IP', 'better-wp-security' ) }
 			</Button>
 			<span>{ label }</span>
@@ -97,7 +97,7 @@ function AuthorizedHosts( { value, onChange, ip } ) {
 
 	return (
 		<Button
-			isSecondary
+			variant="secondary"
 			onClick={ onClick }
 			disabled={ ! ip }
 			className="itsec-global-add-authorized-ip"

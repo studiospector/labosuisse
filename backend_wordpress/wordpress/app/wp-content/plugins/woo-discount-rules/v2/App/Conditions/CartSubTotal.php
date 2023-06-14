@@ -74,7 +74,9 @@ class CartSubTotal extends Base
                     if($difference_amount > 0){
                         $message = __($options->subtotal_promotion_message, 'woo-discount-rules');
                         $difference_amount = Woocommerce::formatPrice($difference_amount);
+                        $message = apply_filters('advanced_woo_discount_rules_cart_subtotal_promotion_message', $message, $this->rule->rule, $options->subtotal_promotion_from, $cart_sub_total, $min_value);
                         $message = str_replace('{{difference_amount}}', $difference_amount, $message);
+                        $message = str_replace('{{cart_subtotal}}', Woocommerce::formatPrice($cart_sub_total), $message);
                         Helper::setPromotionMessage($message, $this->rule->rule->id);
                     }
                 }

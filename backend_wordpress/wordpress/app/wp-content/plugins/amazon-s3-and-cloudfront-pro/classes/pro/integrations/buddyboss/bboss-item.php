@@ -17,6 +17,20 @@ class BBoss_Item extends Item {
 	const CAN_USE_OBJECT_VERSIONING = false;
 
 	/**
+	 * Item's summary type name.
+	 *
+	 * @var string
+	 */
+	protected static $summary_type_name = 'BuddyBoss';
+
+	/**
+	 * Item's summary type.
+	 *
+	 * @var string
+	 */
+	protected static $summary_type = 'bboss';
+
+	/**
 	 * The sprintf() pattern for creating prefix based on source_id.
 	 *
 	 * @var string
@@ -44,16 +58,6 @@ class BBoss_Item extends Item {
 	 * @var bool
 	 */
 	protected static $is_group = false;
-
-	/**
-	 * @var array
-	 */
-	private static $item_counts = array();
-
-	/**
-	 * @var array
-	 */
-	private static $item_count_skips = array();
 
 	/**
 	 * @var int
@@ -242,49 +246,6 @@ class BBoss_Item extends Item {
 	}
 
 	/**
-	 * Count avatars and cover images on current site.
-	 *
-	 * @param bool $skip_transient Whether to force database query and skip transient, default false
-	 * @param bool $force          Whether to force database query and skip static cache, implies $skip_transient, default false
-	 *
-	 * @return array Keys:
-	 *               total: Total item count for site (current blog id)
-	 *               offloaded: Count of offloaded items for site (current blog id)
-	 *               not_offloaded: Difference between total and offloaded
-	 */
-	public static function count_items( $skip_transient, $force ) {
-		global $wpdb;
-
-		$transient_key = 'as3cf_' . get_current_blog_id() . '_attachment_counts_' . static::$source_type;
-
-		// Been here, done it, won't do it again!
-		// Well, unless this is the first transient skip for the prefix, then we need to do it.
-		if ( ! $force && ! empty( self::$item_counts[ $transient_key ] ) && ( false === $skip_transient || ! empty( self::$item_count_skips[ $transient_key ] ) ) ) {
-			return self::$item_counts[ $transient_key ];
-		}
-
-		if ( $force || $skip_transient || false === ( $result = get_site_transient( $transient_key ) ) ) {
-			$sql             = 'SELECT count(id) FROM ' . static::items_table() . ' WHERE source_type = %s';
-			$sql             = $wpdb->prepare( $sql, static::$source_type );
-			$offloaded_count = (int) $wpdb->get_var( $sql );
-			$missing_count   = static::get_missing_source_ids( null, 0, true );
-
-			$result = array(
-				'total'         => $offloaded_count + $missing_count,
-				'offloaded'     => $offloaded_count,
-				'not_offloaded' => $missing_count,
-			);
-
-			set_site_transient( $transient_key, $result, 5 * MINUTE_IN_SECONDS );
-			self::$item_count_skips[ $transient_key ] = true;
-		}
-
-		self::$item_counts[ $transient_key ] = $result;
-
-		return $result;
-	}
-
-	/**
 	 * Get an array of un-managed source_ids in descending order.
 	 *
 	 * While source id isn't strictly unique, it is by source type, which is always used in queries based on called class.
@@ -452,5 +413,28 @@ class BBoss_Item extends Item {
 	 */
 	public static function get_prefix_pattern() {
 		return static::$prefix_pattern;
+	}
+
+	/**
+	 * Count total, offloaded and not offloaded items on current site.
+	 *
+	 * @return array Keys:
+	 *               total: Total media count for site (current blog id)
+	 *               offloaded: Count of offloaded media for site (current blog id)
+	 *               not_offloaded: Difference between total and offloaded
+	 */
+	protected static function get_item_counts(): array {
+		global $wpdb;
+
+		$sql             = 'SELECT count(id) FROM ' . static::items_table() . ' WHERE source_type = %s';
+		$sql             = $wpdb->prepare( $sql, static::$source_type );
+		$offloaded_count = (int) $wpdb->get_var( $sql );
+		$missing_count   = static::get_missing_source_ids( 0, 0, true );
+
+		return array(
+			'total'         => $offloaded_count + $missing_count,
+			'offloaded'     => $offloaded_count,
+			'not_offloaded' => $missing_count,
+		);
 	}
 }

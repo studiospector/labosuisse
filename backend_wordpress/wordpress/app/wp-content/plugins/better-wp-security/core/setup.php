@@ -217,10 +217,6 @@ final class ITSEC_Setup {
 			ITSEC_Files::regenerate_server_config( false );
 		}
 
-		if ( null === get_site_option( 'itsec-enable-grade-report', null ) ) {
-			update_site_option( 'itsec-enable-grade-report', ITSEC_Modules::get_setting( 'global', 'enable_grade_report' ) );
-		}
-
 		ITSEC_Core::get_scheduler()->register_events();
 
 		// Update stored build number.

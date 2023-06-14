@@ -6,6 +6,7 @@
             "key": "field_61f7c4e7f1816",
             "label": "Immagine Sticky Header",
             "name": "lb_product_stickyheader_img",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -31,6 +32,7 @@
             "key": "field_61f3c56247939",
             "label": "Brevetto",
             "name": "lb_product_patent",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -56,6 +58,7 @@
             "key": "field_61dc497ea0355",
             "label": "Vantaggi",
             "name": "lb_product_benefits",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -76,6 +79,7 @@
                     "key": "field_61dc49aba0356",
                     "label": "Vantaggio",
                     "name": "lb_product_benefit_item",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -90,14 +94,17 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_61dc497ea0355"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_630cae802652f",
             "label": "Link scroll to help section",
             "name": "lb_product_link_scrollto_help",
+            "aria-label": "",
             "type": "select",
             "instructions": "Componente che spiega le varianti del prodotto.",
             "required": 0,
@@ -145,5 +152,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1661778641
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61dc4971eae02.json",
+    "acfml_field_group_mode": "advanced"
 }

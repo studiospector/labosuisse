@@ -26,6 +26,13 @@ class Divi extends Integration {
 	 * Init integration.
 	 */
 	public function init() {
+		// Nothing to do.
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
 		add_filter( 'et_fb_load_raw_post_content', function ( $content ) {
 			return apply_filters( 'as3cf_filter_post_local_to_provider', $content );
 		} );

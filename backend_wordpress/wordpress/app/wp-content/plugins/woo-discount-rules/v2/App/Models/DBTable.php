@@ -27,8 +27,8 @@ class DBTable
                 restore_current_blog();
             }
         } else {*/
-            // activated on a single site
-            $this->createTable();
+        // activated on a single site
+        $this->createTable();
         /*}*/
     }
 
@@ -50,8 +50,8 @@ class DBTable
                  `title` varchar(255) DEFAULT NULL,
                  `priority` int(11) DEFAULT NULL,
                  `apply_to` text,
-                 `filters` text NOT NULL,
-                 `conditions` text,
+                 `filters` longtext NOT NULL,
+                 `conditions` longtext,
                  `product_adjustments` text,
                  `cart_adjustments` text,
                  `buy_x_get_x_adjustments` text,
@@ -137,7 +137,7 @@ class DBTable
                     }
                 }
             }
-            $back_end_ajax_actions = array();
+            $back_end_ajax_actions = array('wdr_admin_statistics');
             $back_end_ajax_actions = apply_filters('advanced_woo_discount_rules_backend_end_ajax_actions', $back_end_ajax_actions);
             if(!empty($back_end_ajax_actions) && is_array($back_end_ajax_actions)){
                 if(isset($_REQUEST['action'])){
@@ -236,6 +236,39 @@ class DBTable
         return false;
     }
 
+
+    /**
+     * get rules with pagination for Admin page
+     * @return array|false
+     */
+    static function getRulesWithPagination($limit,$offset,$sort,$name = NULL)
+    {
+        global $wpdb;
+        $wpdb->hide_errors();
+        $rules_table_name = $wpdb->prefix . self::RULES_TABLE_NAME;
+        /**
+         * Need for Admin
+         */
+        if (!is_admin()) {
+            return array();
+        }
+        $where = "deleted = 0";
+        if (!empty($name)){
+            $where .= " AND title LIKE '%{$name}%'";
+        }
+        $query['count'] = $wpdb->get_var("SELECT COUNT(*) as total FROM {$rules_table_name} WHERE {$where} ORDER BY created_on DESC");
+        if ($sort == 1){
+            if((int)get_option('awdr_priority_reset',0) === 0){
+                self::resetRulePriorities();
+                update_option('awdr_priority_reset', 1);
+            }
+            $query['result'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE {$where} ORDER BY priority ASC LIMIT {$limit} OFFSET {$offset}");
+        } else {
+            $query['result'] = $wpdb->get_results("SELECT * FROM {$rules_table_name} WHERE {$where} ORDER BY created_on DESC LIMIT {$limit} OFFSET {$offset}");
+        }
+        return $query;
+    }
+
     /**
      * Get rules for on sale list (indexing)
      *
@@ -271,7 +304,6 @@ class DBTable
      */
     static function saveRule($format, $values, $rule_id = NULL)
     {
-
         global $wpdb;
         $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
         if (!is_null($rule_id) && !empty($rule_id)) {
@@ -280,9 +312,84 @@ class DBTable
         } else {
             $wpdb->insert($rules_table_name, $values, $format);
             $rule_id = $wpdb->insert_id;
-            $wpdb->update($rules_table_name, array('priority' => $rule_id), array('id' => $rule_id), array('%d'), array('%d'));
+            $update_query = "UPDATE {$rules_table_name} as rule JOIN (SELECT (CASE WHEN (MAX(priority) IS NOT NULL) THEN MAX(priority) +1 ELSE 1 END) as max_priority FROM {$rules_table_name} WHERE deleted = 0) as rule_priority  SET rule.priority = rule_priority.max_priority WHERE id = {$rule_id}";
+            $wpdb->query($update_query);
         }
         return $rule_id;
+    }
+
+    /**
+     * update priority on after delete rule
+     * @param $rule_id
+     * @return mixed
+     */
+    static function updatePriorityOnDeleteRule($rule_id)
+    {
+        if((int)get_option('awdr_priority_reset',0) === 0){
+            self::resetRulePriorities();
+            update_option('awdr_priority_reset', 1);
+        } else {
+            global $wpdb;
+            $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
+            $priority = $wpdb->get_var("SELECT priority FROM {$rules_table_name} WHERE id = {$rule_id}");
+            $update_query = "UPDATE {$rules_table_name} SET priority = priority - 1 WHERE priority > {$priority} AND deleted = 0 AND id != {$rule_id}";
+            $wpdb->query($update_query);
+        }
+    }
+
+    /**
+     * update all priority based on row number
+     * @return void
+     */
+    static function resetRulePriorities()
+    {
+        global $wpdb;
+        $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
+        $update_query = "UPDATE {$rules_table_name} AS t JOIN (SELECT @rownum:=@rownum+1 rownum, id, priority deleted FROM {$rules_table_name}
+        CROSS JOIN (select @rownum := 0) rn WHERE deleted = 0 ORDER BY priority) AS r ON t.id = r.id SET t.priority = r.rownum";
+        $wpdb->query($update_query);
+    }
+
+    /**
+     * @param $rule_id
+     * @param $new_priority
+     * @return false|void
+     */
+    static function dragDropPriorities($position)
+    {
+        global $wpdb;
+        $rules_table_name = $wpdb->prefix.self::RULES_TABLE_NAME;
+        if (!is_array($position) || empty($position['drag_position']) || empty($position['drop_position']) || ($position['drag_position'] == $position['drop_position'])){
+            return false;
+        }
+
+        $old_priority = $position['drag_position'];
+        $new_priority = $position['drop_position'];
+        $rule_id = $wpdb->get_var("SELECT id FROM {$rules_table_name} WHERE priority = {$position['drag_position']} AND deleted = 0");
+        $old_rule_id = (int)$rule_id;
+
+        // Moving small to high priority
+        if ($old_rule_id){
+            if ($old_priority < $new_priority){
+                $update = "UPDATE {$rules_table_name} SET priority = {$new_priority} WHERE id={$old_rule_id}";
+                $update_query = "UPDATE {$rules_table_name} SET priority = priority - 1 WHERE priority > {$old_priority} AND priority <= {$new_priority} AND id != {$old_rule_id}";
+            }
+
+//        // Moving high to small priority
+            elseif ($old_priority > $new_priority) {
+                $update = "UPDATE {$rules_table_name} SET priority = '{$new_priority}' WHERE id={$old_rule_id}";
+                $update_query = "UPDATE {$rules_table_name} SET priority = priority + 1 WHERE priority >= {$new_priority} AND priority < {$old_priority} AND id != {$old_rule_id}";
+            }
+            $result1 = $wpdb->query($update);
+            $result2 = $wpdb->query($update_query);
+            if($result1 != false && $result2 != false){
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -546,6 +653,74 @@ class DBTable
     }
 
     /**
+     * get all coupons
+     */
+    public static function get_coupons_for_report()
+    {
+        global $wpdb;
+        $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
+        $coupons = $wpdb->get_results("SELECT cart_discount_label FROM {$table_stats} WHERE cart_discount_label != '' GROUP BY cart_discount_label LIMIT 1000");
+        if ($coupons) {
+            return $coupons;
+        }
+        return [];
+    }
+
+    /**
+     * get combine rule data
+     *
+     * @param $params
+     * @return array|bool|object|null
+     */
+    public static function get_coupon_data( $params ) {
+        global $wpdb;
+        if ( empty( $params['from'] ) || empty( $params['to'] || empty( $params['type'] ) ) ) {
+            return false;
+        }
+        $type = sanitize_text_field($params['type']);
+
+        $table_stats = $wpdb->prefix.self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
+
+        $order_by = 'SUM(results.discounted_amount) DESC';
+        switch ($type) {
+            case 'awdr_all_coupons':
+                $where_query = "cart_discount_label != ''";
+                break;
+            case 'awdr_custom_coupons':
+                $where_query = "cart_discount_label != '' AND cart_discount = 0";
+                $order_by = 'COUNT(results.order_id) DESC';
+                break;
+            case 'awdr_discount_coupons':
+                $where_query = "cart_discount_label != '' AND cart_discount != 0";
+                break;
+            default:
+                $where_query = $wpdb->prepare("cart_discount_label = '%s'", array($type));
+        }
+
+        $query = $wpdb->prepare(
+            "SELECT results.cart_discount_label as coupon_name,
+                COUNT(results.order_id) AS total_orders,
+                SUM(results.discounted_amount) AS discounted_amount
+            FROM (
+                SELECT order_id, SUM(`cart_discount`) AS discounted_amount, cart_discount_label
+                FROM {$table_stats}
+			    WHERE {$where_query} AND DATE(created_at) BETWEEN %s AND %s
+			    GROUP BY order_id, cart_discount_label
+            ) AS results 
+            GROUP BY results.cart_discount_label 
+            ORDER BY {$order_by}
+            LIMIT 10",
+            array( $params['from'], $params['to'])
+        );
+
+        $data = $wpdb->get_results( $query );
+        if ($data) {
+            return $data;
+        }
+        return [];
+    }
+
+    /**
      * update new table structure
      */
     function updateDBTables(){
@@ -561,8 +736,8 @@ class DBTable
                 restore_current_blog();
             }
         } else {*/
-            // activated on a single site
-            $this->updateTable();
+        // activated on a single site
+        $this->updateTable();
         /*}*/
     }
 
@@ -588,8 +763,8 @@ class DBTable
                  `title` varchar(255) DEFAULT NULL,
                  `priority` int(11) DEFAULT NULL,
                  `apply_to` text,
-                 `filters` text NOT NULL,
-                 `conditions` text,
+                 `filters` longtext NOT NULL,
+                 `conditions` longtext,
                  `product_adjustments` text,
                  `cart_adjustments` text,
                  `buy_x_get_x_adjustments` text,
@@ -652,6 +827,25 @@ class DBTable
             dbDelta($order_item_discount_table_query);
 
             update_option('awdr_activity_log_version', $current_version);
+        }
+    }
+
+    /**
+     * Get order count for 100+ sales review notification
+     * @return float|int|string
+     */
+    public static function getOrderCount()
+    {
+        $order_count_from_transient = get_transient('awdr_sale_count');
+        if (is_numeric($order_count_from_transient)) {
+            return $order_count_from_transient;
+        } else {
+            global $wpdb;
+            $order_item_discount_table_name = $wpdb->prefix . self::ORDER_ITEM_DISCOUNT_TABLE_NAME;
+            $sale_result = $wpdb->get_results("SELECT count(order_id) FROM $order_item_discount_table_name GROUP BY order_id ");
+            $sale_count_result = isset($sale_result) ? count($sale_result) : 0 ;
+            set_transient('awdr_sale_count', $sale_count_result, 24 * 60 * 60);
+            return $sale_count_result;
         }
     }
 }

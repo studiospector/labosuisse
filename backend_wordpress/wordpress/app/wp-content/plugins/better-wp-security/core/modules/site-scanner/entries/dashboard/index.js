@@ -88,7 +88,7 @@ function MalwareScan( { card, config } ) {
 									</td>
 									<td>
 										<Button
-											isLink
+											variant="link"
 											aria-pressed={ viewEntry === id }
 											onClick={ () => setViewEntry( id ) }
 										>
@@ -123,7 +123,7 @@ function MalwareScan( { card, config } ) {
 												/>
 												<Button
 													className="itsec-card-malware-scan__raw-details-toggle"
-													isLink
+													variant="link"
 													onClick={ () =>
 														setShowRawDetails(
 															! showRawDetails

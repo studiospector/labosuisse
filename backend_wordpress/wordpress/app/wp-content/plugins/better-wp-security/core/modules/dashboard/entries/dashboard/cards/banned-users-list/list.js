@@ -98,7 +98,7 @@ function DetailRender( { master: ban } ) {
 					) && (
 						<li>
 							<Button
-								isLink
+								variant="link"
 								isBusy={ isDeleting }
 								onClick={ () => deleteBan( ban ) }
 								icon="dismiss"

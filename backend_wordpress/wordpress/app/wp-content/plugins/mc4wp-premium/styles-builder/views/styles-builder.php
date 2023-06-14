@@ -29,7 +29,7 @@ $form_id = esc_attr( $form_id );
     ?>
 
 	<div class="mc4wp-row mc4wp-margin-s">
-		<div class="main-content mc4wp-col mc4wp-col-3">
+		<div class="main-content mc4wp-col">
 			<!-- Main Content -->
 
 			<p>

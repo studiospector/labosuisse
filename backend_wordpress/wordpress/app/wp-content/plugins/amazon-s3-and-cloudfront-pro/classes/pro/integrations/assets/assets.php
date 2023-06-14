@@ -3,21 +3,26 @@
 namespace DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets;
 
 use Amazon_S3_And_CloudFront_Pro;
-use AS3CF_Error;
 use AS3CF_Utils;
 use DeliciousBrains\WP_Offload_Media\API\V1\State;
 use DeliciousBrains\WP_Offload_Media\Integrations\Integration;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\API\V1\Assets_Domain_Check;
 use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\API\V1\Assets_Settings;
-use DeliciousBrains\WP_Offload_Media\Pro\Integrations\Assets\Exceptions\Domain_Check_Exception;
+use DeliciousBrains\WP_Offload_Media\Settings\Domain_Check;
+use DeliciousBrains\WP_Offload_Media\Settings\Exceptions\Domain_Check_Exception;
+use DeliciousBrains\WP_Offload_Media\Settings\Validator_Interface;
 use DeliciousBrains\WP_Offload_Media\Settings_Interface;
 use DeliciousBrains\WP_Offload_Media\Settings_Trait;
+use DeliciousBrains\WP_Offload_Media\Settings_Validator_Trait;
 use Exception;
+use WP_Error as AS3CF_Result;
 
-class Assets extends Integration implements Settings_Interface {
+class Assets extends Integration implements Settings_Interface, Validator_Interface {
 	use Settings_Trait;
+	use Settings_Validator_Trait;
 
-	const SETTINGS_KEY = 'as3cf_assets_pull';
+	const SETTINGS_KEY  = 'as3cf_assets_pull';
+	const VALIDATOR_KEY = 'assets';
 
 	/**
 	 * @var Amazon_S3_And_CloudFront_Pro
@@ -77,6 +82,7 @@ class Assets extends Integration implements Settings_Interface {
 
 		// UI - Enabled
 		add_filter( 'as3cfpro_js_config', array( $this, 'add_js_config' ) );
+		add_filter( 'as3cf_get_docs', array( $this, 'get_docs' ) );
 
 		// REST-API
 		add_filter( 'as3cf_api_endpoints', array( $this, 'add_api_endpoints' ) );
@@ -88,13 +94,32 @@ class Assets extends Integration implements Settings_Interface {
 		// Support
 		add_filter( 'as3cf_diagnostic_info', array( $this, 'diagnostic_info' ) );
 
-		// URL Rewriting
-		if ( $this->should_rewrite_urls() ) {
-			add_filter( 'style_loader_src', array( $this, 'rewrite_src' ), 10, 2 );
-			add_filter( 'script_loader_src', array( $this, 'rewrite_src' ), 10, 2 );
-			add_filter( 'as3cf_get_asset', array( $this, 'rewrite_src' ) );
-			add_filter( 'wp_resource_hints', array( $this, 'register_resource_hints' ), 10, 2 );
+		// Keep track of whether the settings we're responsible for are currently being saved.
+		add_action( 'as3cf_pre_save_assets_settings', function () {
+			$this->set_saving_settings( true );
+		} );
+		add_action( 'as3cf_post_save_assets_settings', function () {
+			$this->set_saving_settings( false );
+		} );
+
+		// Register this instance as a validator.
+		$this->as3cf->validation_manager->register_validator( self::VALIDATOR_KEY, $this );
+	}
+
+	/**
+	 * @inheritDoc
+	 */
+	public function setup() {
+		// Don't enable the hooks unless integration and URL rewriting enabled.
+		if ( ! $this->is_enabled() || ! $this->should_rewrite_urls() ) {
+			return;
 		}
+
+		// URL Rewriting.
+		add_filter( 'style_loader_src', array( $this, 'rewrite_src' ), 10, 2 );
+		add_filter( 'script_loader_src', array( $this, 'rewrite_src' ), 10, 2 );
+		add_filter( 'as3cf_get_asset', array( $this, 'rewrite_src' ) );
+		add_filter( 'wp_resource_hints', array( $this, 'register_resource_hints' ), 10, 2 );
 	}
 
 	/*
@@ -198,17 +223,13 @@ class Assets extends Integration implements Settings_Interface {
 	 */
 	public function add_js_strings( array $strings ): array {
 		return array_merge( $strings, array(
+			'assets_panel_header'         => _x( 'Assets Pull', 'Assets panel title', 'amazon-s3-and-cloudfront' ),
+			'assets_panel_header_details' => _x( 'Deliver scripts, styles, fonts and other assets from a content delivery network.', 'Assets panel details', 'amazon-s3-and-cloudfront' ),
 			'assets_rewrite_urls'         => _x( 'Rewrite Asset URLs', 'Setting title', 'amazon-s3-and-cloudfront' ),
-			'assets_rewrite_urls_desc'    => _x( 'Change the URLs of any enqueued asset files to the following domain.', 'Setting description', 'amazon-s3-and-cloudfront' ),
-			'assets_delivery_domain'      => _x( 'Domain', 'Setting title', 'amazon-s3-and-cloudfront' ),
-			'assets_check_again'          => _x( 'Check Again', 'Link text', 'amazon-s3-and-cloudfront' ),
-			'assets_checking'             => _x( 'Checking domain...', 'Domain check status text', 'amazon-s3-and-cloudfront' ),
-			'assets_check_updated_domain' => _x( 'Check Updated Domain', 'Link text', 'amazon-s3-and-cloudfront' ),
+			'assets_rewrite_urls_desc'    => _x( 'Change the URLs of any enqueued asset files to use a CDN domain.', 'Setting description', 'amazon-s3-and-cloudfront' ),
+			'assets_force_https'          => _x( 'Force HTTPS', 'Setting title', 'amazon-s3-and-cloudfront' ),
+			'assets_force_https_desc'     => _x( 'Uses HTTPS for every rewritten asset URL instead of using the scheme of the current page.', 'Setting description', 'amazon-s3-and-cloudfront' ),
 			'assets_domain_same_as_site'  => __( "Domain cannot be the same as the site's domain; use a subdomain instead.", 'amazon-s3-and-cloudfront' ),
-			'assets_quick_start_guide'    => sprintf(
-				__( 'Need help configuring a CDN for your assets? <a href="%s" target="_blank">View the Assets Quick Start Guide</a>', 'amazon-s3-and-cloudfront' ),
-				$this->as3cf::dbrains_url( '/wp-offload-media/doc/assets-quick-start-guide', array( 'utm_campaign' => 'WP+Offload+S3', 'assets+doc' => 'assets-tab' ) )
-			),
 		) );
 	}
 
@@ -224,11 +245,26 @@ class Assets extends Integration implements Settings_Interface {
 			$config,
 			$this->as3cf->get_api_manager()->get_api_endpoint(
 				Assets_Settings::name()
-			)->common_response(),
-			array(
-				'assets_domain_check' => $this->get_domain_check_result(),
-			)
+			)->common_response()
 		);
+	}
+
+	/**
+	 * Add doc links for this integration.
+	 *
+	 * @handles as3cf_docs_data
+	 *
+	 * @param array $docs_data
+	 *
+	 * @return array
+	 */
+	public function get_docs( array $docs_data ): array {
+		$docs_data['assets-pull'] = array(
+			'url'  => $this->as3cf::dbrains_url( '/wp-offload-media/doc/assets-quick-start-guide', array( 'utm_campaign' => 'WP+Offload+S3', 'assets+doc' => 'assets-tab' ) ),
+			'desc' => _x( 'Click to view help doc on our site', 'Help icon alt text', 'amazon-s3-and-cloudfront' ),
+		);
+
+		return $docs_data;
 	}
 
 	/*
@@ -263,10 +299,7 @@ class Assets extends Integration implements Settings_Interface {
 			$response,
 			$this->as3cf->get_api_manager()->get_api_endpoint(
 				Assets_Settings::name()
-			)->common_response(),
-			array(
-				'assets_domain_check' => $this->get_domain_check_result(),
-			)
+			)->common_response()
 		);
 	}
 
@@ -344,14 +377,8 @@ class Assets extends Integration implements Settings_Interface {
 		try {
 			$this->run_domain_check( $check );
 		} catch ( Exception $e ) {
-			// Cache domain check failure for frontend, but return error for diagnostics.
-			$this->get_domain_check_failure( $e, $check );
-
 			return $e->getMessage();
 		}
-
-		// Cache domain check success for frontend, but return simple status for diagnostics.
-		$this->get_domain_check_success( $check );
 
 		return 'OK';
 	}
@@ -373,95 +400,22 @@ class Assets extends Integration implements Settings_Interface {
 		try {
 			$this->run_domain_check( $check );
 		} catch ( Exception $e ) {
-			return $this->get_domain_check_failure( $e, $check );
+			return array(
+				'success'   => false,
+				'domain'    => $check->domain(),
+				'message'   => _x( 'Assets cannot be delivered from the CDN.', 'Assets domain check error', 'amazon-s3-and-cloudfront' ),
+				'error'     => $e->getMessage(),
+				'link'      => $this->domain_check_more_info_link( $e ),
+				'timestamp' => current_time( 'timestamp' ),
+			);
 		}
 
-		return $this->get_domain_check_success( $check );
-	}
-
-	/**
-	 * Prepare a response for a successful domain configuration check.
-	 *
-	 * @param Domain_Check $check
-	 *
-	 * @return array
-	 */
-	protected function get_domain_check_success( Domain_Check $check ): array {
-		$result = array(
-			'domain'  => $check->domain(),
-			'message' => sprintf( _x( 'Assets are serving from "%s"', 'Assets domain check success', 'amazon-s3-and-cloudfront' ), $check->domain() ),
-		);
-
-		return $this->save_domain_check_result( true, $result );
-	}
-
-	/**
-	 * Prepare a response for a failed domain configuration check.
-	 *
-	 * @param Exception    $exception
-	 * @param Domain_Check $check
-	 *
-	 * @return array
-	 */
-	protected function get_domain_check_failure( Exception $exception, Domain_Check $check ): array {
-		AS3CF_Error::log( $exception->getMessage(), 'Assets Domain Check Error' ); // not translated for support
-
-		$result = array(
-			'domain'  => $check->domain(),
-			'message' => sprintf( _x( 'Error while checking "%s"', 'Assets domain check error', 'amazon-s3-and-cloudfront' ), $check->domain() ),
-			'error'   => $exception->getMessage() . ' ' . $this->domain_check_more_info_link( $exception ),
-		);
-
-		return $this->save_domain_check_result( false, $result );
-	}
-
-	/**
-	 * Save the result of a domain check.
-	 *
-	 * @param bool  $success
-	 * @param array $result
-	 *
-	 * @return array
-	 */
-	protected function save_domain_check_result( bool $success, array $result = array() ): array {
-		$value = array_merge( $result, array(
-			'success'   => $success,
+		return array(
+			'success'   => true,
+			'domain'    => $check->domain(),
+			'message'   => _x( 'Assets are serving from the CDN with the configured domain name.', 'Assets domain check success for active domain', 'amazon-s3-and-cloudfront' ),
 			'timestamp' => current_time( 'timestamp' ),
-		) );
-
-		// Human-readable version.
-		$value['last_checked_at']      = static::last_checked_datetime( $value['timestamp'] );
-		$value['last_checked_message'] = sprintf( _x( 'Last checked %s', 'Assets domain check datetime', 'amazon-s3-and-cloudfront' ), $value['last_checked_at'] );
-
-		set_site_transient( 'as3cf_assets_pull_last_checked', $value );
-
-		return $value;
-	}
-
-	/**
-	 * Returns the last domain check result if it exists.
-	 *
-	 * @return array
-	 */
-	protected function get_domain_check_result(): array {
-		$result = get_site_transient( 'as3cf_assets_pull_last_checked' );
-
-		if ( is_wp_error( $result ) || empty( $result ) || ! is_array( $result ) ) {
-			return array();
-		}
-
-		return $result;
-	}
-
-	/**
-	 * Helper function for formatting the last checked at date time for the given timestamp.
-	 *
-	 * @param int $timestamp
-	 *
-	 * @return string
-	 */
-	public static function last_checked_datetime( int $timestamp ): string {
-		return date( _x( 'Y-m-d H:i:s', 'last checked datetime format', 'amazon-s3-and-cloudfront' ), $timestamp ) . ' ' . get_site_option( 'timezone_string' );
+		);
 	}
 
 	/**
@@ -521,7 +475,7 @@ class Assets extends Integration implements Settings_Interface {
 		$test_endpoint = add_query_arg( compact( 'ver' ), $test_endpoint );
 		$test_endpoint = $this->rewrite_url( $test_endpoint );
 
-		$response = $check->test_endpoint( $test_endpoint );
+		$response = $check->test_rest_endpoint( $test_endpoint );
 
 		$expected = new Domain_Check_Response( compact( 'key', 'ver' ) );
 		$expected->verify_signature( wp_remote_retrieve_header( $response, 'x-as3cf-signature' ) );
@@ -537,11 +491,16 @@ class Assets extends Integration implements Settings_Interface {
 	 * @return bool
 	 */
 	public function should_rewrite_urls(): bool {
+		// TODO: cache result and reuse.
+
 		if ( ! $this->get_setting( 'rewrite-urls' ) ) {
 			return false;
 		}
 
-		if ( ! Domain_Check::is_valid( $this->get_setting( 'domain' ) ) ) {
+		if (
+			! Domain_Check::is_valid( $this->get_setting( 'domain' ) ) ||
+			$this->as3cf->validation_manager->section_has_error( self::VALIDATOR_KEY )
+		) {
 			return false;
 		}
 
@@ -653,5 +612,58 @@ class Assets extends Integration implements Settings_Interface {
 		}
 
 		return $hints;
+	}
+
+	/**
+	 * Validate settings for Assets.
+	 *
+	 * @param bool $force Force time resource consuming or state altering tests to run.
+	 *
+	 * @return AS3CF_Result
+	 */
+	public function validate_settings( bool $force = false ): AS3CF_Result {
+		if ( $this->get_setting( 'rewrite-urls' ) ) {
+			$domain_check_result = $this->check_domain( $this->get_setting( 'domain' ) );
+
+			// Did the domain check fail?
+			if ( ! $domain_check_result['success'] ) {
+				return new AS3CF_Result(
+					Validator_Interface::AS3CF_STATUS_MESSAGE_ERROR,
+					sprintf(
+						_x( '%1$s %2$s In the meantime local assets are being served. %3$s', 'Assets notice for domain issue', 'amazon-s3-and-cloudfront' ),
+						$domain_check_result['message'],
+						$domain_check_result['error'],
+						$domain_check_result['link']
+					)
+				);
+			}
+
+			// All good.
+			return new AS3CF_Result(
+				Validator_Interface::AS3CF_STATUS_MESSAGE_SUCCESS,
+				$domain_check_result['message']
+			);
+		} else {
+			return new AS3CF_Result(
+				Validator_Interface::AS3CF_STATUS_MESSAGE_WARNING,
+				sprintf(
+					__(
+						'Assets cannot be delivered from the CDN until <strong>Rewrite Asset URLs</strong> is enabled. In the meantime, local assets are being served. <a href="%1$s" target="_blank">View Assets Quick Start Guide</a>',
+						'amazon-s3-and-cloudfront'
+					),
+					$this->as3cf::dbrains_url( '/wp-offload-media/doc/assets-quick-start-guide', array( 'utm_campaign' => 'WP+Offload+S3', 'assets+doc' => 'assets-tab' ) )
+				)
+			);
+		}
+	}
+
+	/**
+	 * Get the name of the actions that are fired when the settings that the validator
+	 * is responsible for are saved.
+	 *
+	 * @return array
+	 */
+	public function post_save_settings_actions(): array {
+		return array( 'as3cf_post_save_assets_settings' );
 	}
 }

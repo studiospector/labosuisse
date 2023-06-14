@@ -6,6 +6,7 @@
             "key": "field_63500496c0c77",
             "label": "SEO - Heading H1",
             "name": "lb_page_blank_heading_h1",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "Questo campo è inteso per essere un H1 non visibile all'utente ma solo per i Search engines.",
             "required": 0,
@@ -41,5 +42,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1666188710
+    "modified": 1686125020,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_63500480309a3.json",
+    "acfml_field_group_mode": "advanced"
 }

@@ -6,7 +6,19 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit35a2bd4feb347da0d3ea2d8ef023082f
 {
+    public static $files = array (
+        '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+    );
+
     public static $prefixLengthsPsr4 = array (
+        'Z' => 
+        array (
+            'ZxcvbnPhp\\' => 10,
+        ),
+        'S' => 
+        array (
+            'Symfony\\Polyfill\\Mbstring\\' => 26,
+        ),
         'P' => 
         array (
             'Psr\\Container\\' => 14,
@@ -14,6 +26,14 @@ class ComposerStaticInit35a2bd4feb347da0d3ea2d8ef023082f
     );
 
     public static $prefixDirsPsr4 = array (
+        'ZxcvbnPhp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src',
+        ),
+        'Symfony\\Polyfill\\Mbstring\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
+        ),
         'Psr\\Container\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/container/src',
@@ -239,20 +259,6 @@ class ComposerStaticInit35a2bd4feb347da0d3ea2d8ef023082f
         'ITSEC_WordPress_Tweaks_Config_Generators' => __DIR__ . '/../..' . '/core/modules/wordpress-tweaks/config-generators.php',
         'ITSEC_WordPress_Tweaks_Setup' => __DIR__ . '/../..' . '/core/modules/wordpress-tweaks/setup.php',
         'ITSEC_Wordpress_Tweaks_Settings' => __DIR__ . '/../..' . '/core/modules/wordpress-tweaks/settings.php',
-        'ITSEC_Zxcvbn' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/zxcvbn.php',
-        'ITSEC_Zxcvbn_Bruteforce_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/bruteforce.php',
-        'ITSEC_Zxcvbn_Date_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/date.php',
-        'ITSEC_Zxcvbn_Dictionary_L33t_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/dictionary-l33t.php',
-        'ITSEC_Zxcvbn_Dictionary_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/dictionary.php',
-        'ITSEC_Zxcvbn_Dictionary_Reverse_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/dictionary-reverse.php',
-        'ITSEC_Zxcvbn_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matcher.php',
-        'ITSEC_Zxcvbn_Matcher' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matcher.php',
-        'ITSEC_Zxcvbn_Regex_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/regex.php',
-        'ITSEC_Zxcvbn_Repeat_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/repeat.php',
-        'ITSEC_Zxcvbn_Results' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/results.php',
-        'ITSEC_Zxcvbn_Scorer' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/scorer.php',
-        'ITSEC_Zxcvbn_Sequence_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/sequence.php',
-        'ITSEC_Zxcvbn_Spatial_Match' => __DIR__ . '/../..' . '/core/lib/itsec-zxcvbn-php/matchers/spatial.php',
         'Ithemes_Sync_Verb_ITSEC_Authorize_Two_Factor_User' => __DIR__ . '/../..' . '/core/modules/two-factor/sync-verbs/itsec-authorize-two-factor-user.php',
         'Ithemes_Sync_Verb_ITSEC_Do_Security_Check' => __DIR__ . '/../..' . '/core/modules/security-check/sync-verbs/itsec-do-security-check.php',
         'Ithemes_Sync_Verb_ITSEC_Get_Security_Check_Feedback_Response' => __DIR__ . '/../..' . '/core/modules/security-check/sync-verbs/itsec-get-security-check-feedback-response.php',
@@ -403,6 +409,30 @@ class ComposerStaticInit35a2bd4feb347da0d3ea2d8ef023082f
         'iThemesSecurity\\Strauss\\Psr\\Container\\ContainerExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerExceptionInterface.php',
         'iThemesSecurity\\Strauss\\Psr\\Container\\ContainerInterface' => __DIR__ . '/..' . '/psr/container/src/ContainerInterface.php',
         'iThemesSecurity\\Strauss\\Psr\\Container\\NotFoundExceptionInterface' => __DIR__ . '/..' . '/psr/container/src/NotFoundExceptionInterface.php',
+        'iThemesSecurity\\Strauss\\Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Feedback' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Feedback.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matcher' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matcher.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\BaseMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/BaseMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\Bruteforce' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/Bruteforce.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\DateMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/DateMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\DictionaryMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/DictionaryMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\L33tMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/L33tMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\MatchInterface' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/MatchInterface.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\RepeatMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/RepeatMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\ReverseDictionaryMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/ReverseDictionaryMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\SequenceMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/SequenceMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\SpatialMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/SpatialMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Matchers\\YearMatch' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Matchers/YearMatch.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\Binomial' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/Binomial.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\BinomialProvider' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/BinomialProvider.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\Impl\\AbstractBinomialProvider' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/Impl/AbstractBinomialProvider.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\Impl\\AbstractBinomialProviderWithFallback' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/Impl/AbstractBinomialProviderWithFallback.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\Impl\\BinomialProviderFloat64' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/Impl/BinomialProviderFloat64.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\Impl\\BinomialProviderInt64' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/Impl/BinomialProviderInt64.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Math\\Impl\\BinomialProviderPhp73Gmp' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Math/Impl/BinomialProviderPhp73Gmp.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Scorer' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Scorer.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\TimeEstimator' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/TimeEstimator.php',
+        'iThemesSecurity\\Strauss\\ZxcvbnPhp\\Zxcvbn' => __DIR__ . '/..' . '/bjeavons/zxcvbn-php/src/Zxcvbn.php',
         'iThemesSecurity\\TwoFactor\\Application_Passwords_Core' => __DIR__ . '/../..' . '/core/modules/two-factor/Application_Passwords_Core.php',
         'iThemesSecurity\\User_Groups\\All_Users' => __DIR__ . '/../..' . '/core/modules/user-groups/All_Users.php',
         'iThemesSecurity\\User_Groups\\Default_Matcher' => __DIR__ . '/../..' . '/core/modules/user-groups/Match/Default_Matcher.php',

@@ -1,6 +1,5 @@
 <script>
 	import {createEventDispatcher, setContext} from "svelte";
-	import {pop} from "svelte-spa-router";
 	import {settingsLocked} from "../js/stores";
 	import {tools} from "./stores";
 	import Page from "../components/Page.svelte";
@@ -47,14 +46,13 @@
 			tool = movePublicObjects ? movePublicObjectsTool : movePrivateObjectsTool;
 		}
 
-		await tools.start( tool.id );
+		await tools.start( tool );
 		dispatch( "routeEvent", { event: "next", default: "/" } );
 	}
 </script>
 
 <Page {name} subpage on:routeEvent>
 	<Notifications tab="media" component={ToolNotification}/>
-	<h2 class="page-title">{moveObjectsTool.name}</h2>
 
 	<Panel
 		class="toggle-header"

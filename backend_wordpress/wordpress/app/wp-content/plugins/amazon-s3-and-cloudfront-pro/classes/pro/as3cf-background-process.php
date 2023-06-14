@@ -33,7 +33,6 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 		parent::__construct( $as3cf );
 
 		add_action( $this->identifier . '_cron', array( $this, 'handle_cron_healthcheck' ) );
-		add_filter( 'cron_schedules', array( $this, 'cron_schedules' ) ); // phpcs:ignore WordPress.WP.CronInterval
 	}
 
 	/**
@@ -126,11 +125,10 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 	 * Cancel job on next batch.
 	 */
 	public function cancel() {
-		if ( $this->is_process_running() ) {
-			update_site_option( $this->get_status_key(), self::STATUS_CANCELLED );
-		} else {
-			$this->delete_all();
-		}
+		update_site_option( $this->get_status_key(), self::STATUS_CANCELLED );
+
+		// Just in case the job was paused at the time.
+		$this->dispatch();
 	}
 
 	/**
@@ -240,6 +238,8 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 		}
 
 		if ( $this->is_cancelled() ) {
+			$this->clear_cron_healthcheck();
+
 			$this->delete_all();
 
 			wp_die();
@@ -434,6 +434,9 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 					break;
 				}
 
+				// Keep the batch up to date while processing it.
+				$this->update( $batch->key, $batch->data );
+
 				$task = $this->task( $value );
 
 				if ( false !== $task ) {
@@ -518,33 +521,10 @@ abstract class AS3CF_Background_Process extends AS3CF_Async_Request {
 	abstract protected function completed();
 
 	/**
-	 * Add cron schedules.
-	 *
-	 * @param array $schedules
-	 *
-	 * @return mixed
-	 */
-	public function cron_schedules( $schedules ) {
-		$interval = apply_filters( $this->identifier . '_cron_interval', 5 );
-
-		if ( property_exists( $this, 'cron_interval' ) ) {
-			$interval = apply_filters( $this->identifier . '_cron_interval', $this->cron_interval );
-		}
-
-		// Adds every 5 minutes to the existing schedules.
-		$schedules[ $this->identifier . '_cron_interval' ] = array(
-			'interval' => MINUTE_IN_SECONDS * $interval,
-			'display'  => sprintf( __( 'Every %d Minutes', 'amazon-s3-and-cloudfront' ), $interval ),
-		);
-
-		return $schedules;
-	}
-
-	/**
 	 * Schedule cron health check.
 	 */
 	protected function schedule_cron_healthcheck() {
-		$this->as3cf->schedule_event( $this->identifier . '_cron', $this->identifier . '_cron_interval' );
+		$this->as3cf->schedule_event( $this->identifier . '_cron', 'as3cf_tool_cron_interval' );
 	}
 
 	/**

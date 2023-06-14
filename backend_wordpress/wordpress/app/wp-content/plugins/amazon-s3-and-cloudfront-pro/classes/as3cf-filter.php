@@ -23,7 +23,7 @@ abstract class AS3CF_Filter {
 	/**
 	 * @var array IDs which have already been purged this request.
 	 */
-	protected static $purged_ids = array();
+	private $purged_ids = array();
 
 	/**
 	 * @var Amazon_S3_And_CloudFront
@@ -42,17 +42,22 @@ abstract class AS3CF_Filter {
 	public function __construct( $as3cf ) {
 		$this->as3cf = $as3cf;
 
-		// Purge on attachment delete
-		add_action( 'delete_attachment', array( $this, 'purge_cache_on_attachment_delete' ) );
-
 		$this->init();
 	}
 
 	/**
-	 * Initialize the filter.
+	 * Initialize the filter handler.
 	 */
 	protected function init() {
-		// Optionally override in a sub-class.
+		add_action( 'as3cf_setup', array( $this, 'setup' ) );
+	}
+
+	/**
+	 * Set up the filter handler.
+	 */
+	public function setup() {
+		// Purge on attachment delete.
+		add_action( 'delete_attachment', array( $this, 'purge_cache_on_attachment_delete' ) );
 	}
 
 	/**
@@ -286,14 +291,18 @@ abstract class AS3CF_Filter {
 
 			$url = $src[1];
 
+			if ( ! AS3CF_Utils::usable_url( $url ) ) {
+				continue;
+			}
+
 			if ( ! $this->url_needs_replacing( $url ) ) {
 				// URL already correct, skip
 				continue;
 			}
 
-			$url = AS3CF_Utils::reduce_url( $url );
+			$bare_url = AS3CF_Utils::reduce_url( $url );
 
-			$item_sources[ $url ] = array(
+			$item_sources[ $bare_url ] = array(
 				'id'          => absint( $class_id[1] ),
 				'source_type' => Media_Library_Item::source_type(),
 			);
@@ -348,20 +357,12 @@ abstract class AS3CF_Filter {
 		foreach ( $matches as $url ) {
 			$url = preg_replace( '/[^a-zA-Z0-9]$/', '', $url );
 
+			if ( ! AS3CF_Utils::usable_url( $url ) ) {
+				continue;
+			}
+
 			if ( ! $this->url_needs_replacing( $url ) ) {
 				// URL already correct, skip
-				continue;
-			}
-
-			$parts = AS3CF_Utils::parse_url( $url );
-
-			if ( ! isset( $parts['path'] ) ) {
-				// URL doesn't have a path, continue
-				continue;
-			}
-
-			if ( ! pathinfo( $parts['path'], PATHINFO_EXTENSION ) ) {
-				// URL doesn't have a file extension, continue
 				continue;
 			}
 
@@ -440,8 +441,12 @@ abstract class AS3CF_Filter {
 	 *
 	 * @return bool
 	 */
-	public function item_matches_src( $item_source, $url ) {
-		if ( Item::is_empty_item_source( $item_source ) || Media_Library_Item::source_type() !== $item_source['source_type'] ) {
+	public function item_matches_src( array $item_source, string $url ): bool {
+		if (
+			Item::is_empty_item_source( $item_source ) ||
+			Media_Library_Item::source_type() !== $item_source['source_type'] ||
+			get_post_type( $item_source['id'] ) !== 'attachment'
+		) {
 			return false;
 		}
 		$meta = get_post_meta( $item_source['id'], '_wp_attachment_metadata', true );
@@ -737,13 +742,13 @@ abstract class AS3CF_Filter {
 	 * @param int $post_id
 	 */
 	public function purge_cache_on_attachment_delete( $post_id ) {
-		if ( ! in_array( $post_id, self::$purged_ids ) ) {
+		if ( ! in_array( $post_id, $this->purged_ids ) ) {
 			$item_source = array(
 				'id'          => $post_id,
 				'source_type' => Media_Library_Item::source_type(),
 			);
 			$this->purge_from_cache( $this->get_url( $item_source ) );
-			self::$purged_ids[] = $post_id;
+			$this->purged_ids[] = $post_id;
 		}
 	}
 

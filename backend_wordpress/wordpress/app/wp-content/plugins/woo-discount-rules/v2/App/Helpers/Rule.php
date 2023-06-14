@@ -153,6 +153,21 @@ class Rule
     }
 
     /**
+     * get all rules with pagination and set object
+     * @param $available_conditions array
+     * @return array
+     */
+    function adminPagination($available_conditions,$limit,$offset,$sort,$name = NULL)
+    {
+        $available_rules = DBTable::getRulesWithPagination($limit,$offset,$sort,$name);
+        if (empty($available_rules)){
+            return array();
+        }
+        $available_rules['result'] = $this->getRuleObject($available_rules['result'], $available_conditions);
+        return $available_rules;
+    }
+
+    /**
      * get particular and set object
      * @param $rule_id int
      * @param $available_conditions array
@@ -395,7 +410,7 @@ class Rule
             if($filter_passed){
                 $cart = array();
                 $additional_conditions_passed = $this->isSpecificConditionsPassed(['user_role', 'user_list', 'user_logged_in', 'purchase_first_order'], $cart);
-                if (!$additional_conditions_passed) {
+                if (!$additional_conditions_passed || !self::$woocommerce_helper->checkProductIsPurchasable($product)) {
                     $filter_passed = false;
                     $conditionFailed = true;
                 }
@@ -668,7 +683,7 @@ class Rule
         }
         $cart_items = self::$woocommerce_helper->getCart();
         $discount = $this->getProductAdjustments();
-        if(isset($discount->type) && !empty($discount->type) && isset($discount->value) && !empty($discount->value)){
+        if(isset($discount->type) && !empty($discount->type) && isset($discount->value) && $discount->value >= 0){
             if(($price_display_condition == "show_when_matched" && !$is_cart) || ($price_display_condition == "show_dynamically" && !$is_cart)){
                 if($manual_request === false){
                     $quantity = 1;
@@ -780,9 +795,11 @@ class Rule
                 $product_id = self::$woocommerce_helper->getProductId($product);
                 if(!empty($cart_items)){
                     foreach ($cart_items as $cart_item){
-                        $cart_item_product_id = self::$woocommerce_helper->getProductIdFromCartItem($cart_item);
-                        if($cart_item_product_id == $product_id){
-                            $quantity += isset($cart_item['quantity']) ? $cart_item['quantity'] : 0;
+                        if(Helper::isCartItemConsideredForCalculation(true, $cart_item, 'individual_product_count')) {
+                            $cart_item_product_id = self::$woocommerce_helper->getProductIdFromCartItem($cart_item);
+                            if ($cart_item_product_id == $product_id) {
+                                $quantity += isset($cart_item['quantity']) ? $cart_item['quantity'] : 0;
+                            }
                         }
                     }
                 }
@@ -797,7 +814,7 @@ class Rule
         if(is_object($matched_row)){
             $type = (isset($matched_row->type) && !empty($matched_row->type)) ? $matched_row->type : false;
             $value = (isset($matched_row->value) && !empty($matched_row->value)) ? $matched_row->value : 0;
-            if ($type && !empty($value)) {
+            if ($type && $value >= 0) {
                 //return $this->calculator($matched_row->type, $price, $matched_row->value);
                 $discount_price = $this->calculator($matched_row->type, $price, $matched_row->value);
                 return array(
@@ -929,7 +946,7 @@ class Rule
     function getBulkDiscountFromRanges($ranges, $quantity)
     {
         foreach ($ranges as $range) {
-            if (isset($range->value) && !empty($range->value)) {
+            if (isset($range->value) && $range->value >= 0) {
                 $from = intval(isset($range->from) ? $range->from : 0);
                 $to = intval(isset($range->to) ? $range->to : 0);
                 if (empty($to) && empty($from)) {
@@ -975,7 +992,7 @@ class Rule
     function calculator($type, $original_value, $value)
     {
         $discount = 0;
-        if (empty($value) || empty($original_value)) {
+        if ($value < 0 || empty($original_value)) {
             return $discount;
         }
         $original_value = floatval($original_value);
@@ -1066,6 +1083,7 @@ class Rule
             if($dont_check_condition){
                 return apply_filters('advanced_woo_discount_rules_is_conditions_passed', true, $rule_object, $this->rule);
             }
+            $has_other_conditions = false;
             foreach ($conditions as $condition) {
                 $type = isset($condition->type) ? $condition->type : NULL;
                 if (empty($condition_types) || (is_array($condition_types) && in_array($type, $condition_types))) {
@@ -1124,7 +1142,12 @@ class Rule
                             $conditions_result[] = false;
                         }
                     }
+                } else {
+                    $has_other_conditions = true;
                 }
+            }
+            if (!empty($condition_types) && $condition_relationship == "or" && $has_other_conditions) {
+                return apply_filters('advanced_woo_discount_rules_is_conditions_passed', true, $rule_object, $this->rule);
             }
         }
         if (in_array(false, $conditions_result)) {
@@ -1436,10 +1459,10 @@ class Rule
             $allowed_html = array(
                 'br' => array(),
                 'strong' => array(),
-                'span' => array('class' => array()),
-                'div' => array('class' => array()),
-                'p' => array('class' => array()),
-                'table' => array('class' => array(), 'border' => array(), 'cellpadding' => array(), 'cellspacing' => array()),
+                'span' => array('class' => array(), 'style' => array()),
+                'div' => array('class' => array(), 'style' => array()),
+                'p' => array('class' => array(), 'style' => array()),
+                'table' => array('class' => array(), 'style' => array(), 'border' => array(), 'cellpadding' => array(), 'cellspacing' => array()),
                 'tr' => array('class' => array()),
                 'td' => array('class' => array()),
                 'th' => array('class' => array()),

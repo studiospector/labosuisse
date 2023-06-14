@@ -23,7 +23,7 @@ function TabCreateGroup( { hasEdits, save, isSaving } ) {
 				<FlexItem>
 					<Button
 						disabled={ ! hasEdits }
-						isPrimary
+						variant="primary"
 						onClick={ save }
 						isBusy={ isSaving }
 					>

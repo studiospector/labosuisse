@@ -1,22 +1,33 @@
-### MC4WP: Premium Bundle
+# MC4WP: Mailchimp for WordPress Premium
 
-This plugin contains all [premium features](https://www.mc4wp.com/features/) for [Mailchimp for WordPress](https://www.mc4wp.com/).
+This plugin contains all [premium features](https://www.mc4wp.com/#premium-features) for the [Mailchimp for WordPress](https://www.mc4wp.com/) plugin.
 
-- AJAX Forms
-- Multiple Forms
-- Custom Color Form Theme
-- Logging
-- Statistics
-- Email Notifications
-- E-Commerce
 
-Not sure how to install this plugin? Please have a look at the [installation guide](https://www.mc4wp.com/kb/installation-instructions/).
+### Installing
 
-More help articles can be found in [our knowledge base](https://www.mc4wp.com/kb/) or in our [code snippets repository](https://github.com/ibericode/mc4wp-snippets).
+Take a look at the [installation instructions](https://www.mc4wp.com/kb/installation-instructions/).
 
-Enjoy!
+More help can be found in [our knowledge base](https://www.mc4wp.com/kb/) or in our example [code snippets directory](https://github.com/ibericode/mailchimp-for-wordpress/tree/master/sample-code-snippets).
 
-Danny, Harish & Arne
-[mc4wp.com](https://www.mc4wp.com/)
+### Building from source
 
-Mailchimp for WordPress is a product by [ibericode](https://ibericode.com/)
+1. Clone this git repository:
+    ```bash
+    git clone git@github.com:dannyvankooten/mc4wp-premium.git
+    ```
+2. Create the PHP autoloader using [Composer](https://getcomposer.org/):
+    ```bash
+    composer install 
+    ```
+3. Install JS dependencies using [NPM](https://www.npmjs.com/):
+    ```bash 
+    npm install
+    ```
+4. Build assets (JS, CSS, ..):
+    ```bash
+    npm run build
+    ```
+
+### License
+
+GPLv2 or later.

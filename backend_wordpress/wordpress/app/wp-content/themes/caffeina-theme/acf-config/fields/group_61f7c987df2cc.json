@@ -6,6 +6,7 @@
             "key": "field_61f7c9b1b236a",
             "label": "Scudetto",
             "name": "lb_block_focus_numbers_shield",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -31,6 +32,7 @@
             "key": "field_61f7ca0bb236b",
             "label": "Immagine",
             "name": "lb_block_focus_numbers_img",
+            "aria-label": "",
             "type": "image",
             "instructions": "",
             "required": 0,
@@ -56,6 +58,7 @@
             "key": "field_61f7c98815e0f",
             "label": "Sottotitolo",
             "name": "lb_block_focus_numbers_subtitle",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -76,6 +79,7 @@
             "key": "field_61f7ca6db236c",
             "label": "Testo",
             "name": "lb_block_focus_numbers_text",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -96,6 +100,7 @@
             "key": "field_61f7c98815ecc",
             "label": "Focuses",
             "name": "lb_block_focus_numbers_focuses",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -116,6 +121,7 @@
                     "key": "field_61f7cad6b236d",
                     "label": "Numero",
                     "name": "lb_block_focus_numbers_focuses_number",
+                    "aria-label": "",
                     "type": "text",
                     "instructions": "",
                     "required": 0,
@@ -130,12 +136,14 @@
                     "placeholder": "",
                     "prepend": "",
                     "append": "",
-                    "maxlength": ""
+                    "maxlength": "",
+                    "parent_repeater": "field_61f7c98815ecc"
                 },
                 {
                     "key": "field_61f7c98827114",
                     "label": "Titolo",
                     "name": "lb_block_focus_numbers_focuses_title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -150,12 +158,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61f7c98815ecc"
                 },
                 {
                     "key": "field_61f7c988271bc",
                     "label": "Testo",
                     "name": "lb_block_focus_numbers_focuses_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -170,9 +180,11 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61f7c98815ecc"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         }
     ],
     "location": [
@@ -193,5 +205,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1645121453
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61f7c987df2cc.json",
+    "acfml_field_group_mode": "advanced"
 }

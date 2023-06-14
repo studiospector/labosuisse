@@ -43,8 +43,17 @@ class Verify_Add_Metadata extends Analyze_And_Repair {
 	 *
 	 * @return string
 	 */
-	public function get_queued_status() {
+	public function get_queued_status(): string {
 		return __( 'Finding items with files missing in bucket and removing their metadata, marking others as verified.', 'amazon-s3-and-cloudfront' );
+	}
+
+	/**
+	 * Get short queued status text.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Verifying…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**

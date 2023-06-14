@@ -6,6 +6,7 @@
             "key": "field_62d836150819c",
             "label": "Infobox",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -23,6 +24,7 @@
             "key": "field_6203a4cc9cc49",
             "label": "Tagline",
             "name": "lb_block_cards_grid_tagline",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -43,6 +45,7 @@
             "key": "field_61fd3cf2e2186",
             "label": "Titolo",
             "name": "lb_block_cards_grid_title",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -63,6 +66,7 @@
             "key": "field_6203a4e29cc4a",
             "label": "Paragrafo",
             "name": "lb_block_cards_grid_paragraph",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -83,6 +87,7 @@
             "key": "field_61fd3d2ce2187",
             "label": "Bottone",
             "name": "lb_block_cards_grid_btn",
+            "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -99,6 +104,7 @@
             "key": "field_61fd3d62e2188",
             "label": "Variante bottone",
             "name": "lb_block_cards_grid_btn_variants",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -126,6 +132,7 @@
             "key": "field_62d8368f0819e",
             "label": "Cards",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -143,6 +150,7 @@
             "key": "field_61fd3c8116d7d",
             "label": "Cards Grid",
             "name": "lb_block_cards_grid_carousel",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -163,6 +171,7 @@
                     "key": "field_61fd3c811feaf",
                     "label": "Infobox",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -174,12 +183,14 @@
                     },
                     "wpml_cf_preferences": 0,
                     "placement": "top",
-                    "endpoint": 0
+                    "endpoint": 0,
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c811ff69",
                     "label": "Tagline",
                     "name": "lb_block_cards_grid_carousel_infobox_tagline",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -194,12 +205,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c8120021",
                     "label": "Titolo",
                     "name": "lb_block_cards_grid_carousel_infobox_title",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -214,12 +227,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c81201c3",
                     "label": "Sottotitolo",
                     "name": "lb_block_cards_grid_carousel_infobox_subtitle",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -234,12 +249,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c812026f",
                     "label": "Paragrafo",
                     "name": "lb_block_cards_grid_carousel_infobox_paragraph",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -254,12 +271,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_6255499bd2d6a",
                     "label": "Paragrafo piccolo",
                     "name": "lb_block_cards_grid_carousel_infobox_paragraph_small",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -274,12 +293,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c8120337",
                     "label": "Bottone",
                     "name": "lb_block_cards_grid_carousel_infobox_btn",
+                    "aria-label": "",
                     "type": "link",
                     "instructions": "",
                     "required": 0,
@@ -290,12 +311,14 @@
                         "id": ""
                     },
                     "wpml_cf_preferences": 2,
-                    "return_format": "array"
+                    "return_format": "array",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c8120409",
                     "label": "Variante bottone",
                     "name": "lb_block_cards_grid_carousel_infobox_btn_variants",
+                    "aria-label": "",
                     "type": "radio",
                     "instructions": "",
                     "required": 0,
@@ -317,12 +340,14 @@
                     "default_value": "",
                     "layout": "vertical",
                     "return_format": "value",
-                    "save_other_choice": 0
+                    "save_other_choice": 0,
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c81204d2",
                     "label": "Immagine",
                     "name": "",
+                    "aria-label": "",
                     "type": "tab",
                     "instructions": "",
                     "required": 0,
@@ -334,12 +359,14 @@
                     },
                     "wpml_cf_preferences": 0,
                     "placement": "top",
-                    "endpoint": 0
+                    "endpoint": 0,
+                    "parent_repeater": "field_61fd3c8116d7d"
                 },
                 {
                     "key": "field_61fd3c8120597",
                     "label": "Immagine",
                     "name": "lb_block_cards_grid_carousel_img",
+                    "aria-label": "",
                     "type": "image",
                     "instructions": "",
                     "required": 0,
@@ -359,14 +386,17 @@
                     "max_width": "",
                     "max_height": "",
                     "max_size": "",
-                    "mime_types": ""
+                    "mime_types": "",
+                    "parent_repeater": "field_61fd3c8116d7d"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_62d836440819d",
             "label": "Impostazioni",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -384,6 +414,7 @@
             "key": "field_61fd3d92e2189",
             "label": "Variante Cards",
             "name": "lb_block_cards_grid_cards_variants",
+            "aria-label": "",
             "type": "select",
             "instructions": "",
             "required": 0,
@@ -415,6 +446,7 @@
             "key": "field_62554a00725f2",
             "label": "Allineamento testo nelle Cards",
             "name": "lb_block_cards_grid_text_align",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -440,6 +472,7 @@
             "key": "field_62d91943965cf",
             "label": "Immagini Full size Mobile",
             "name": "lb_block_cards_grid_image_full_size_mobile",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -475,5 +508,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1658395067
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61fd3c80c6c36.json",
+    "acfml_field_group_mode": "advanced"
 }

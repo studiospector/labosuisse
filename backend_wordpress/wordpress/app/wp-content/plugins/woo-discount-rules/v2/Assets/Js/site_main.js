@@ -22,6 +22,27 @@
     $(document).ready(function ($) {
         function init_events() {
             if (awdr_params.enable_update_price_with_qty == 'show_dynamically') {
+                function getWDRDPTarget(form, target, is_variable){
+                    let $price_place = '';
+                    if (form.find(target).length) {
+                        $price_place = form.find(target).first();
+                        if(is_variable === true){
+                            if (!form.find(target+' .price').length) {
+                                $price_place.html("<div class='price'></div>");
+                            }
+                            $price_place = form.find(target+' .price').first();
+                        }
+                    } else {
+                        $price_place = $(target).first();
+                        if(is_variable === true){
+                            if (!$(target+' .price').length) {
+                                $price_place.html("<div class='price'></div>");
+                            }
+                            $price_place = $(target+' .price').first();
+                        }
+                    }
+                    return $price_place;
+                }
                 $(document).on('change', '[name="quantity"]', function (){
                     var awdr_qty_object = $(this);
                     setTimeout(function(){
@@ -30,14 +51,14 @@
                         var $price_place = "";
                         var form = awdr_qty_object.closest("form");
                         if (form.find('button[name="add-to-cart"]').length) {
-                            $product_id = form.find('button[name="add-to-cart"]').val();
+                            $product_id = form.find('button[name="add-to-cart"]').first().val();
                             var target = 'div.product p.price';
                             if(awdr_params.custom_target_simple_product != undefined){
                                 if(awdr_params.custom_target_simple_product != ""){
                                     target = awdr_params.custom_target_simple_product;
                                 }
                             }
-                            $price_place = $(target).first();
+                            $price_place = getWDRDPTarget(form, target, false);
                         } else if (form.find('input[name="variation_id"]').length) {
                             $product_id = form.find('input[name="variation_id"]').val();
                             var target = 'div.product .woocommerce-variation-price';
@@ -46,12 +67,16 @@
                                     target = awdr_params.custom_target_variable_product;
                                 }
                             }
-                            $price_place = $(target);
-                            if (!$(target+' .price').length) {
-                                $price_place.html("<div class='price'></div>");
+                            $price_place = getWDRDPTarget(form, target, true);
+                        } else if (form.find('input[name="add-to-cart"]').length) {
+                            $product_id = form.find('input[name="add-to-cart"]').first().val();
+                            var target = 'div.product p.price';
+                            if(awdr_params.custom_target_simple_product != undefined){
+                                if(awdr_params.custom_target_simple_product != ""){
+                                    target = awdr_params.custom_target_simple_product;
+                                }
                             }
-
-                            $price_place = $(target+' .price')
+                            $price_place = getWDRDPTarget(form, target, false);
                         }
                         if(!$product_id || $product_id == 0){
                             if(awdr_params.custom_simple_product_id_selector != undefined){
@@ -64,7 +89,7 @@
                                             target = awdr_params.custom_target_simple_product;
                                         }
                                     }
-                                    $price_place = $(target).first();
+                                    $price_place = getWDRDPTarget(form, target, false);
                                 }
                             }
 
@@ -78,10 +103,7 @@
                                             target = awdr_params.custom_target_variable_product;
                                         }
                                     }
-                                    if (!$(target+' .price').length) {
-                                        $price_place.html("<div class='price'></div>");
-                                    }
-                                    $price_place = $(target+' .price')
+                                    $price_place = getWDRDPTarget(form, target, true);
                                 }
                             }
                         }
@@ -116,12 +138,7 @@
                         });
                     }, 0);
                 });
-                /*Removed as it trigger multiple time - the change event */
-                /*$( ".single_variation_wrap" ).on( "show_variation", function ( event, variation, purchasable ) {
-                    $(this).closest('form').find('input[name="quantity"]').trigger('change');
-                });*/
             }
-
         }
 
         if (awdr_params.js_init_trigger) {
@@ -190,4 +207,3 @@
         }
     });
 })(jQuery);
-

@@ -1,5 +1,4 @@
 <script>
-	import {strings} from "../js/stores";
 	import {
 		assetsSettings,
 		assetsSettingsChanged,
@@ -22,14 +21,9 @@
 
 <Page {name} on:routeEvent initialSettings={currentAssetsSettings}>
 	<Notifications tab={name}/>
-	<h2 class="page-title">{$strings.assets_title}</h2>
 	<div class="assets-page wrapper">
 		{#if $enableAssets}
 			<AssetsSettings/>
-
-			<div class="notice notice-qsg">
-				<p>{@html $strings.assets_quick_start_guide}</p>
-			</div>
 		{:else}
 			<AssetsUpgrade/>
 		{/if}

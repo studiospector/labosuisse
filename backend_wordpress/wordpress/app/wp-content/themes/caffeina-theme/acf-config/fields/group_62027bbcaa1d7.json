@@ -6,6 +6,7 @@
             "key": "field_62027bfb08891",
             "label": "Titolo",
             "name": "lb_block_latest_news_title",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -41,5 +42,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644399648
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_62027bbcaa1d7.json",
+    "acfml_field_group_mode": "advanced"
 }

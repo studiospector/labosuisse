@@ -32,7 +32,16 @@ final class User_Encryption_Sodium implements User_Encryption {
 	 *
 	 * @param string $secret Random bytes.
 	 */
-	public function __construct( string $secret ) { $this->secret = $secret; }
+	public function __construct( string $secret ) {
+		$this->secret = $secret;
+
+		if (
+			! function_exists( 'sodium_crypto_aead_xchacha20poly1305_ietf_encrypt' ) &&
+			! function_exists( 'sodiumCompatAutoloader' )
+		) {
+			require_once ABSPATH . WPINC . '/sodium_compat/autoload.php';
+		}
+	}
 
 	public static function is_encrypted( string $message ): bool {
 		if ( strlen( $message ) < 40 ) {

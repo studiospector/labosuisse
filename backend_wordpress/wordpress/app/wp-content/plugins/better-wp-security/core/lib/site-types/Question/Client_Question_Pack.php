@@ -27,7 +27,7 @@ final class Client_Question_Pack implements Questions_Provider {
 				}
 
 				public function get_description(): string {
-					return __( 'If you are setting up iThemes Security for a client, we will ask you to select which users are theirs. Identifying your clients allows you to control their access to things like the security settings or if they are allowed to view the security grade report.', 'better-wp-security' );
+					return __( 'If you are setting up iThemes Security for a client, we will ask you to select which users are theirs. Identifying your clients allows you to control their access to things like the security settings or if they are allowed to view the Security Dashboard', 'better-wp-security' );
 				}
 
 				public function get_answer_schema(): array {
@@ -59,8 +59,8 @@ final class Client_Question_Pack implements Questions_Provider {
 					return __( 'Which users are your clients?', 'better-wp-security' );
 				}
 
-				public function get_description(): string { 
-					return __( 'iThemes Security Pro will group client users together, allowing you to manage their access to sensitive information and which security settings you enable for them.', 'better-wp-security' ); 
+				public function get_description(): string {
+					return __( 'iThemes Security Pro will group client users together, allowing you to manage their access to sensitive information and which security settings you enable for them.', 'better-wp-security' );
 				}
 
 				public function get_answer_schema(): array {
@@ -182,8 +182,8 @@ final class Client_Question_Pack implements Questions_Provider {
 					return __( 'Should your clients be able to view and make changes to the iThemes Security settings?', 'better-wp-security' );
 				}
 
-				public function get_description(): string { 
-					return __( 'Restricting client access to the security settings will prevent them from making unwanted changes and seeing security notifications they may not understand.', 'better-wp-security' ); 
+				public function get_description(): string {
+					return __( 'Restricting client access to the security settings will prevent them from making unwanted changes and seeing security notifications they may not understand.', 'better-wp-security' );
 				}
 
 				public function get_answer_schema(): array {
@@ -192,7 +192,7 @@ final class Client_Question_Pack implements Questions_Provider {
 						'title'    => __( 'Yes, allow managing of iThemes Security', 'better-wp-security' ),
 						'default'  => false,
 						'uiSchema' => [
-							'ui:widget' => 'ToggleWidget',	
+							'ui:widget' => 'ToggleWidget',
 						],
 					];
 				}

@@ -6,6 +6,7 @@
             "key": "field_61e0623b2c4e3",
             "label": "Variante",
             "name": "lb_block_separator_variants",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -32,6 +33,7 @@
             "key": "field_6256e6cd7521d",
             "label": "Linea",
             "name": "lb_block_separator_line",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -52,6 +54,7 @@
             "key": "field_62574b9534660",
             "label": "Container",
             "name": "lb_block_separator_container",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -87,5 +90,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1649889931
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61e0621073c50.json",
+    "acfml_field_group_mode": "advanced"
 }

@@ -234,11 +234,12 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		$this->enqueue_style( 'as3cf-pro-settings', 'assets/css/pro/settings' );
 		$this->enqueue_script( 'as3cf-pro-settings', 'assets/js/pro/settings', array(), false );
 
-		$config['settings']      = apply_filters( 'as3cfpro_js_settings', $config['settings'] );
-		$config['strings']       = apply_filters( 'as3cfpro_js_strings', $config['strings'] );
-		$config['licences']      = $this->get_licences();
-		$config['documentation'] = $this->get_documentation();
-		$config['tools']         = $this->get_tools_info();
+		$config['settings']                     = apply_filters( 'as3cfpro_js_settings', $config['settings'] );
+		$config['strings']                      = apply_filters( 'as3cfpro_js_strings', $config['strings'] );
+		$config['licences']                     = $this->get_licences();
+		$config['offload_remaining_with_count'] = $this->get_offload_remaining_with_count_message();
+		$config['documentation']                = $this->get_documentation();
+		$config['tools']                        = $this->get_tools_info();
 
 		$config = apply_filters( 'as3cfpro_js_config', $config );
 
@@ -298,7 +299,8 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 */
 	public function api_get_settings( $response ) {
 		if ( is_array( $response ) && isset( $response['settings'] ) ) {
-			$response['licences'] = $this->get_licences();
+			$response['licences']                     = $this->get_licences();
+			$response['offload_remaining_with_count'] = $this->get_offload_remaining_with_count_message();
 		}
 
 		return $response;
@@ -313,7 +315,8 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	 */
 	public function api_get_state( $response ) {
 		if ( is_array( $response ) && isset( $response['counts'] ) ) {
-			$response['licences'] = $this->get_licences();
+			$response['licences']                     = $this->get_licences();
+			$response['offload_remaining_with_count'] = $this->get_offload_remaining_with_count_message();
 		}
 
 		return $response;
@@ -365,7 +368,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		);
 
 		if ( is_multisite() ) {
-			$blog_ids = $this->get_blog_ids();
+			$blog_ids = AS3CF_Utils::get_blog_ids();
 
 			foreach ( $blog_ids as $blog_id ) {
 				$blogs[ $blog_id ] = array(
@@ -437,38 +440,72 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 	}
 
 	/**
-	 * Get the number of media items allowed to be uploaded for the license
+	 * Get the total number of media items offloaded, the limit for the license,
+	 * and whether the site counts towards the limit.
 	 *
-	 * @return bool|int
+	 * @return array
 	 */
-	public function get_total_allowed_media_items_to_upload() {
+	public function get_total_and_limit_for_licence(): array {
+		if ( ! $this->licence->is_valid_licence() ) {
+			return array();
+		}
+
 		$cached_media_limit_check = get_site_transient( $this->licence->plugin->prefix . '_licence_media_check' );
 
 		$media_limit_check = $this->licence->check_licence_media_limit();
 
-		if ( ! isset( $media_limit_check['total'] ) || ! isset( $media_limit_check['limit'] ) ) {
-			// Can't use latest API call
-
-			if ( ! isset( $cached_media_limit_check['total'] ) || ! isset( $cached_media_limit_check['limit'] ) ) {
+		if (
+			! is_array( $media_limit_check ) ||
+			! isset( $media_limit_check['total'] ) ||
+			! isset( $media_limit_check['limit'] )
+		) {
+			// Can't use latest API call.
+			if (
+				! is_array( $cached_media_limit_check ) ||
+				! isset( $cached_media_limit_check['total'] ) ||
+				! isset( $cached_media_limit_check['limit'] )
+			) {
 				// Cached data failed
-				return false;
+				return array();
 			}
 
 			// Use cached data
 			$media_limit_check = $cached_media_limit_check;
 		}
 
-		$total   = absint( $media_limit_check['total'] );
-		$limit   = absint( $media_limit_check['limit'] );
-		$allowed = $limit - $total;
+		return array(
+			'total'               => absint( $media_limit_check['total'] ),
+			'limit'               => absint( $media_limit_check['limit'] ),
+			'counts_toward_limit' => $this->licence->counts_toward_limit( $media_limit_check ),
+		);
+	}
 
-		if ( ! $this->licence->counts_toward_limit( $media_limit_check ) ) {
-			// Unlimited uploads allowed or this site doesn't count.
+	/**
+	 * Get the number of media items allowed to be uploaded for the license.
+	 *
+	 * @return int
+	 */
+	public function get_total_allowed_media_items_to_upload(): int {
+		$result = $this->get_total_and_limit_for_licence();
+
+		if ( empty( $result ) ) {
+			return 0;
+		}
+
+		if ( ! isset( $result['total'] ) || ! isset( $result['limit'] ) || ! isset( $result['counts_toward_limit'] ) ) {
+			// Something weird is going on, bail.
+			return 0;
+		}
+
+		if ( empty( $result['limit'] ) || false === $result['counts_toward_limit'] ) {
+			// No limit.
 			return -1;
 		}
 
+		$allowed = $result['limit'] - $result['total'];
+
 		if ( $allowed < 0 ) {
-			// Upload limit reached
+			// Upload limit exceeded.
 			return 0;
 		}
 
@@ -642,7 +679,7 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 			global $wpdb;
 
 			$post_count     = 0;
-			$table_prefixes = $this->get_all_blog_table_prefixes();
+			$table_prefixes = AS3CF_Utils::get_all_blog_table_prefixes();
 
 			foreach ( $table_prefixes as $table_prefix ) {
 				$post_count += $wpdb->get_var( "SELECT COUNT(ID) FROM {$table_prefix}posts" );
@@ -986,5 +1023,22 @@ class Amazon_S3_And_CloudFront_Pro extends Amazon_S3_And_CloudFront {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Get a message promoting that there is media that could be offloaded.
+	 *
+	 * @return string
+	 */
+	public function get_offload_remaining_with_count_message(): string {
+		$counts = $this->media_counts();
+
+		if ( ! empty( $counts['not_offloaded'] ) && 1 === $counts['not_offloaded'] ) {
+			return sprintf( _x( 'Offload Remaining %s Item', 'Button text (singular)', 'amazon-s3-and-cloudfront' ), number_format_i18n( $counts['not_offloaded'] ) );
+		} elseif ( ! empty( $counts['not_offloaded'] ) && 0 < $counts['not_offloaded'] ) {
+			return sprintf( _x( 'Offload Remaining %s Items', 'Button text (plural)', 'amazon-s3-and-cloudfront' ), number_format_i18n( $counts['not_offloaded'] ) );
+		} else {
+			return _x( 'Offload Remaining', 'Button text', 'amazon-s3-and-cloudfront' );
+		}
 	}
 }

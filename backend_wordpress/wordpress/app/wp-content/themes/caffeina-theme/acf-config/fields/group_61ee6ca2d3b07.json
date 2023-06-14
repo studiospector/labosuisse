@@ -6,6 +6,7 @@
             "key": "field_61f814e8f1f5c",
             "label": "Visibilitá",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -23,6 +24,7 @@
             "key": "field_61f814f9f1f5d",
             "label": "Visibile",
             "name": "lb_block_routine_visibility",
+            "aria-label": "",
             "type": "true_false",
             "instructions": "",
             "required": 0,
@@ -43,6 +45,7 @@
             "key": "field_61f854714cb46",
             "label": "Contenuto",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -60,6 +63,7 @@
             "key": "field_61ee6d17807ae",
             "label": "Titolo",
             "name": "lb_block_routine_title",
+            "aria-label": "",
             "type": "textarea",
             "instructions": "",
             "required": 0,
@@ -80,6 +84,7 @@
             "key": "field_6202b8cf22d94",
             "label": "Bottone",
             "name": "lb_block_routine_btn",
+            "aria-label": "",
             "type": "link",
             "instructions": "",
             "required": 0,
@@ -96,6 +101,7 @@
             "key": "field_6202b97422d95",
             "label": "Variante bottone",
             "name": "lb_block_routine_btn_variants",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -123,6 +129,7 @@
             "key": "field_61ee783f807af",
             "label": "Prodotti",
             "name": "lb_block_routine_carousel",
+            "aria-label": "",
             "type": "repeater",
             "instructions": "",
             "required": 0,
@@ -137,12 +144,13 @@
             "min": 3,
             "max": 3,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Aggiungi Riga",
             "sub_fields": [
                 {
                     "key": "field_61ee78cf807b0",
                     "label": "Testo",
                     "name": "lb_block_routine_carousel_text",
+                    "aria-label": "",
                     "type": "textarea",
                     "instructions": "",
                     "required": 0,
@@ -157,12 +165,14 @@
                     "placeholder": "",
                     "maxlength": "",
                     "rows": "",
-                    "new_lines": "br"
+                    "new_lines": "br",
+                    "parent_repeater": "field_61ee783f807af"
                 },
                 {
                     "key": "field_61ee7917807b1",
                     "label": "Prodotto",
                     "name": "lb_block_routine_carousel_product",
+                    "aria-label": "",
                     "type": "post_object",
                     "instructions": "",
                     "required": 0,
@@ -180,14 +190,17 @@
                     "allow_null": 0,
                     "multiple": 0,
                     "return_format": "object",
-                    "ui": 1
+                    "ui": 1,
+                    "parent_repeater": "field_61ee783f807af"
                 }
-            ]
+            ],
+            "rows_per_page": 20
         },
         {
             "key": "field_6202b659f87fa",
             "label": "Impostazioni",
             "name": "",
+            "aria-label": "",
             "type": "tab",
             "instructions": "",
             "required": 0,
@@ -205,6 +218,7 @@
             "key": "field_6202b610f87f9",
             "label": "Variante",
             "name": "lb_block_routine_variants",
+            "aria-label": "",
             "type": "radio",
             "instructions": "",
             "required": 0,
@@ -252,5 +266,7 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1644485760
+    "modified": 1686125019,
+    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_61ee6ca2d3b07.json",
+    "acfml_field_group_mode": "advanced"
 }

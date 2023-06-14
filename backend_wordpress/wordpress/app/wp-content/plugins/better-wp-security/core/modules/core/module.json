@@ -15,6 +15,18 @@
     "purge-lockouts": {
       "schedule": "daily",
       "type": "recurring"
+    },
+    "enable-encryption": {
+      "schedule": "daily",
+      "type": "recurring"
+    }
+  },
+  "feature-flags": {
+    "enable_encryption": {
+      "remote": true,
+      "title": "Enable Encryption",
+      "description": "Automatically enables encryption for Two-Factor if available.",
+      "documentation": "https://ithemes.com/?p=84653"
     }
   },
   "tools": {

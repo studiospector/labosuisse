@@ -107,7 +107,7 @@ export function PrimarySchemaFormActions( {
 		<Flex>
 			{ onCancel && (
 				<FlexItem>
-					<Button isTertiary type="button" onClick={ onCancel }>
+					<Button variant="tertiary" type="button" onClick={ onCancel }>
 						{ cancelLabel }
 					</Button>
 				</FlexItem>
@@ -117,7 +117,7 @@ export function PrimarySchemaFormActions( {
 				<FlexItem>
 					<Link
 						component={ withNavigate( Button ) }
-						isTertiary
+						variant="tertiary"
 						type="button"
 						to={ cancelRoute }
 					>
@@ -133,7 +133,7 @@ export function PrimarySchemaFormActions( {
 			{ onUndo && (
 				<FlexItem>
 					<Button
-						isSecondary
+						variant="secondary"
 						disabled={ undoDisabled }
 						onClick={ onUndo }
 					>
@@ -144,7 +144,7 @@ export function PrimarySchemaFormActions( {
 
 			<FlexItem>
 				<Button
-					isPrimary
+					variant="primary"
 					isBusy={ isSaving }
 					disabled={ isSaving || saveDisabled }
 					form={ id }

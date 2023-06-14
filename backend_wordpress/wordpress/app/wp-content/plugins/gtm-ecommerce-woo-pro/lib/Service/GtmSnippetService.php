@@ -25,6 +25,11 @@ class GtmSnippetService extends \GtmEcommerceWoo\Lib\Service\GtmSnippetService {
 		);
 	}
 
+	public function headSnippet() {
+		$this->pushUserId();
+		parent::headSnippet();
+	}
+
 	public function container( $data ) {
 		$scriptString = 'dataLayer.push(' . base64_decode( $data['event'] ) . ');';
 		// get event from data
@@ -47,5 +52,24 @@ $scriptString
 EOD
 );
 		wp_die();
+	}
+
+	private function pushUserId() {
+		$isUserTrackingEnabled = (bool) $this->wpSettingsUtil->getOption('track_user_id');
+
+		if (false === $isUserTrackingEnabled) {
+			return;
+		}
+
+		$userId = get_current_user_id();
+
+		if (0 === $userId) {
+			return;
+		}
+
+		echo sprintf(
+			'<script>var dataLayer = dataLayer || [];dataLayer.push({"event":"user_id","user_id":"%s"});</script>',
+			(int) $userId
+		);
 	}
 }

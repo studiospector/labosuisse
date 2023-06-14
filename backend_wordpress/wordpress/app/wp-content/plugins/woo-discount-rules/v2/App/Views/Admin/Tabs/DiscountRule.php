@@ -1,7 +1,8 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-$rules_count = count($rules);
+$rules_count = isset($rule_count) && !empty($rule_count) ? $rule_count : 0 ;
+$total_page = isset($total_count) && !empty($total_count) ? $total_count : 0 ;
 $is_pro = \Wdr\App\Helpers\Helper::hasPro();
 ?>
 <br>
@@ -72,10 +73,14 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
         <form id="wdr-search-top" method="get" style="display: none">
             <input type="hidden" name="adminUrl"
                    value="<?php echo esc_url(admin_url('admin.php?page=woo_discount_rules')); ?>">
-                <input type="hidden" name="name" value="" class="wdr-rule-search-key">
+                <input type="hidden" name="name" value="<?php echo esc_attr($input->get('name')); ?>" class="wdr-rule-search-key">
+                 <input type="hidden" name="limit" value="<?php echo esc_attr($input->get('limit')); ?>" class="wdr-rule-limit-key">
+                 <input type="hidden" name="total_page" value="<?php echo esc_attr($total_page); ?>" class="wdr-rule-limit-key">
                 <input type="hidden" name="awdr_nonce" value="<?php echo esc_attr(\Wdr\App\Helpers\Helper::create_nonce('awdr_ajax_search_rule')); ?>">
                 <input type="submit" class="button" class="wdr-trigger-search-key"
                        value="<?php _e('Search Rules', 'woo-discount-rules'); ?>">
+            <input type="submit" class="button" class="wdr-trigger-limit-key"
+                   value="<?php _e('Limit', 'woo-discount-rules'); ?>">
         </form>
         <form id="wdr-bulk-action-top" method="post">
             <div class="tablenav top">
@@ -90,16 +95,24 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                     </select>
                     <input type="submit" id="doaction" class="button action"
                            value="<?php _e('Apply', 'woo-discount-rules'); ?>">
-                    <input type="search" name="awdr-hidden-name" class="awdr-hidden-name"
+                    <input type="search" name="awdr-hidden-name" id="awdr-name" class="awdr-hidden-name"
                            value="<?php echo esc_attr($input->get('name')); ?>">
                     <input type="hidden" name="awdr_nonce"
                            value="<?php echo esc_attr(\Wdr\App\Helpers\Helper::create_nonce('awdr_ajax_rule_bulk_actions')); ?>">
                     <input type="button" class="button awdr-hidden-search"
                            value="<?php _e('Search Rules', 'woo-discount-rules'); ?>">
+<!--                    <input type="button" class="button awdr-hidden-search"-->
+<!--                           value="--><?php //_e('Limit', 'woo-discount-rules'); ?><!--">-->
+                    <select name="awdr-hidden-limit" id="awdr_limit" class="awdr-hidden-rule-limit page_limit">
+                        <option value="20" <?php echo ($input->get('limit') == 20) ? 'selected' : '';?> >20</option>
+                        <option value="50" <?php echo ($input->get('limit') == 50) ? 'selected' : '';?> >50</option>
+                        <option value="100" <?php echo ($input->get('limit') == 100) ? 'selected' : '';?> >100</option>
+                    </select>
                 </div>
                 <div class="tablenav-pages one-page">
                 <span class="displaying-num"><?php echo esc_html($rules_count) . ' ';
                     ($rules_count == 0 || $rules_count == 1) ? _e('item', 'woo-discount-rules') : _e('items', 'woo-discount-rules'); ?></span>
+                    <?php include 'pagination.php'; ?>
                 </div>
                 <br class="clear">
             </div>
@@ -108,17 +121,15 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 <thead>
                 <tr>
                     <td id="cb" class="manage-column column-cb check-column">
-                    </td>
-                    <td id="cb" class="manage-column column-cb check-column">
                         <input name="bulk_check[]" class="wdr-rules-select" type="checkbox" value="off"/>
                     </td>
-
-                    <th scope="col" id="title" class="manage-column column-title column-primary sortable desc">
-                        <a href="javascript:void(0);">
-                            <span><?php _e('Title', 'woo-discount-rules'); ?></span>
-                            <span class="sorting-indicator"></span>
-                        </a>
-                    </th>
+                    <th scope="col" id="re_order" style="width: 100px"
+                        class="manage-column column-author column-primary sortable asc">
+                        <a href="javascript:void(0);" id="awdr_re_order" >
+                            <span><?php _e('Re - Order', 'woo-discount-rules'); ?></span>
+                        </a></th>
+                    <th scope="col" id="title"
+                        class="manage-column column-title"><span><?php _e('Title', 'woo-discount-rules'); ?></span></th>
                     <th scope="col" id="author"
                         class="manage-column column-author"><?php _e('Discount Type', 'woo-discount-rules'); ?></th>
                     <th scope="col" id="author"
@@ -145,14 +156,14 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 <tbody class="wdr-ruleboard" id="sortable"><?php
                 if ($rules) {
                     foreach ($rules as $rule_row) { ?>
-                        <tr id="<?php echo esc_attr($rule_row->getId()); ?>" class="awdr-listing-rule-tr">
-                            <th scope="row" class="check-column awdr-listing-rule-check-box-align">
-                                <span class="dashicons dashicons-menu awdr-sortable-handle" style="padding-left: 5px;"></span>
-                            </th>
+                        <tr id="<?php echo esc_attr($rule_row->getId()); ?>"  data-priority="<?php echo esc_attr($rule_row->rule->priority); ?>" class="awdr-listing-rule-tr">
                             <th scope="row" class="check-column awdr-listing-rule-check-box-align">
                                 <input id="cb-select-<?php echo esc_attr($rule_row->getId()); ?>" class="wdr-rules-selector"
                                        type="checkbox" name="saved_rules[]"
                                        value="<?php echo esc_attr($rule_row->getId()); ?>">
+                            </th>
+                            <th scope="row" class="check-column awdr-listing-rule-check-box-align" aria-disabled="false">
+                                <span class="dashicons dashicons-menu awdr-sortable-handle" style="padding-left: 25px;"></span>
                             </th>
                             <td class="title column-title has-row-actions column-primary page-title"
                                 data-colname="Title">
@@ -327,6 +338,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                                    data-awdr_nonce="<?php echo esc_attr(\Wdr\App\Helpers\Helper::create_nonce('wdr_ajax_duplicate_rule' . $rule_row->getId())); ?>"><?php _e('Duplicate', 'woo-discount-rules'); ?></a>
                                 <a class="btn btn-danger wdr_delete_rule"
                                    data-delete-rule="<?php echo esc_attr($rule_row->getId()); ?>"
+                                   data-priority="<?php echo esc_attr($rule_row->rule->priority); ?>"
                                    data-awdr_nonce="<?php echo esc_attr(\Wdr\App\Helpers\Helper::create_nonce('wdr_ajax_delete_rule' . $rule_row->getId())); ?>">
                                     <?php _e('Delete', 'woo-discount-rules'); ?></a>
                             </td>
@@ -346,15 +358,12 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 <tfoot>
                 <tr>
                     <td class="manage-column column-cb check-column">
-                    </td>
-                    <td class="manage-column column-cb check-column">
                         <input name="bulk_check[]" class="wdr-rules-select" type="checkbox" value="off"/>
                     </td>
-                    <th scope="col" id="title" class="manage-column column-title column-primary sortable desc">
-                        <a href="javascript:void(0);">
+                    <td class="manage-column column-cb check-column">
+                    </td>
+                    <th scope="col" id="title" class="manage-column column-title">
                             <span><?php _e('Title', 'woo-discount-rules'); ?></span>
-                            <span class="sorting-indicator"></span>
-                        </a>
                     </th>
                     <th scope="col" id="author"
                         class="manage-column column-author"><?php _e('Discount Type', 'woo-discount-rules'); ?></th>
@@ -396,6 +405,7 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 </div>
                 <div class="tablenav-pages one-page"><span class="displaying-num"><?php echo esc_html($rules_count) . ' ';
                         ($rules_count == 0 || $rules_count == 1) ? _e('item', 'woo-discount-rules') : _e('items', 'woo-discount-rules'); ?></span></span>
+                    <?php include 'pagination.php'; ?>
                 </div>
                 <br class="clear">
             </div>
@@ -439,5 +449,16 @@ $is_pro = \Wdr\App\Helpers\Helper::hasPro();
                 </div>
             </div>
         </div>
+
     <?php } ?>
+
+
 </div>
+<?php
+if ($input->get('re_order') == 1 ) { ?>
+<style>
+    .awdr-listing-rule-tr:hover{
+        background-color: #ddf2ff;
+    }
+</style>
+<?php } ?>

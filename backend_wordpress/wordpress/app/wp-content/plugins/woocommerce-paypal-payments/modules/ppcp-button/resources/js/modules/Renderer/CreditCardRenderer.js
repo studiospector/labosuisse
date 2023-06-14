@@ -233,10 +233,16 @@ class CreditCardRenderer {
                 this.spinner.unblock();
                 this.errorHandler.clear();
 
-                if (err.details?.length) {
-                    this.errorHandler.message(err.details.map(d => `${d.issue} ${d.description}`).join('<br/>'), true);
+                if (err.data?.details?.length) {
+                    this.errorHandler.message(err.data.details.map(d => `${d.issue} ${d.description}`).join('<br/>'));
+                } else if (err.details?.length) {
+                    this.errorHandler.message(err.details.map(d => `${d.issue} ${d.description}`).join('<br/>'));
+                } else if (err.data?.errors?.length > 0) {
+                    this.errorHandler.messages(err.data.errors);
+                } else if (err.data?.message) {
+                    this.errorHandler.message(err.data.message);
                 } else if (err.message) {
-                    this.errorHandler.message(err.message, true);
+                    this.errorHandler.message(err.message);
                 } else {
                     this.errorHandler.genericError();
                 }

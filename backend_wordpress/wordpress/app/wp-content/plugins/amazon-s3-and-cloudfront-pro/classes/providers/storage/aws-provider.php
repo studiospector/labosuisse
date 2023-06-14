@@ -121,6 +121,7 @@ class AWS_Provider extends Storage_Provider {
 		'af-south-1'     => 'Africa (Cape Town)',
 		'ap-east-1'      => 'Asia Pacific (Hong Kong)',
 		'ap-south-1'     => 'Asia Pacific (Mumbai)',
+		'ap-south-2'     => 'Asia Pacific (Hyderabad)',
 		'ap-northeast-2' => 'Asia Pacific (Seoul)',
 		'ap-northeast-3' => 'Asia Pacific (Osaka)',
 		'ap-southeast-1' => 'Asia Pacific (Singapore)',
@@ -130,12 +131,15 @@ class AWS_Provider extends Storage_Provider {
 		'cn-north-1'     => 'China (Beijing)',
 		'cn-northwest-1' => 'China (Ningxia)',
 		'eu-central-1'   => 'EU (Frankfurt)',
+		'eu-central-2'   => 'EU (Zurich)',
 		'eu-west-1'      => 'EU (Ireland)',
 		'eu-west-2'      => 'EU (London)',
 		'eu-south-1'     => 'EU (Milan)',
+		'eu-south-2'     => 'EU (Spain)',
 		'eu-west-3'      => 'EU (Paris)',
 		'eu-north-1'     => 'EU (Stockholm)',
 		'me-south-1'     => 'Middle East (Bahrain)',
+		'me-central-1'   => 'Middle East (UAE)',
 		'sa-east-1'      => 'South America (São Paulo)',
 	);
 
@@ -241,14 +245,14 @@ class AWS_Provider extends Storage_Provider {
 	public function prepare_bucket_error( WP_Error $object, bool $single = true ): string {
 		if ( false !== strpos( $object->get_error_message(), 'InvalidAccessKeyId' ) ) {
 			return sprintf(
-				__( 'The current Access Key ID is not valid, please <a href="%1$s">update it</a>.', 'amazon-s3-and-cloudfront' ),
+				__( 'Media cannot be offloaded due to an invalid Access Key ID. <a href="%1$s">Update access keys</a>', 'amazon-s3-and-cloudfront' ),
 				'#/storage/provider'
 			);
 		}
 
 		if ( false !== strpos( $object->get_error_message(), 'SignatureDoesNotMatch' ) ) {
 			return sprintf(
-				__( 'The current Access Key ID and Secret Access Key are not a valid combination, please <a href="%1$s">update them</a>.', 'amazon-s3-and-cloudfront' ),
+				__( 'Media cannot be offloaded due to an invalid Secret Access Key. <a href="%1$s">Update access keys</a>', 'amazon-s3-and-cloudfront' ),
 				'#/storage/provider'
 			);
 		}
@@ -265,6 +269,26 @@ class AWS_Provider extends Storage_Provider {
 			false !== strpos( $object->get_error_message(), 'BucketAlreadyExists' )
 		) {
 			return __( 'The bucket name already exists in another account. Please enter a different bucket name.', 'amazon-s3-and-cloudfront' );
+		}
+
+		if (
+			false !== strpos( $object->get_error_message(), 'GetBucketLocation' ) &&
+			false !== strpos( $object->get_error_message(), 'NoSuchBucket' )
+		) {
+			return sprintf(
+				__( 'Media cannot be offloaded because a bucket with the configured name does not exist. <a href="%1$s">Enter a different bucket</a>', 'amazon-s3-and-cloudfront' ),
+				'#/storage/bucket'
+			);
+		}
+
+		if (
+			false !== strpos( $object->get_error_message(), 'GetBucketLocation' ) &&
+			false !== strpos( $object->get_error_message(), 'InvalidBucketName' )
+		) {
+			return sprintf(
+				__( 'Media cannot be offloaded because the bucket name is not valid. <a href="%1$s">Enter a different bucket name</a>.', 'amazon-s3-and-cloudfront' ),
+				'#/storage/bucket'
+			);
 		}
 
 		// Fallback to generic error parsing.
@@ -328,7 +352,7 @@ class AWS_Provider extends Storage_Provider {
 	 *
 	 * @return S3Client
 	 */
-	protected function init_service_client( array $args ) {
+	protected function init_service_client( array $args = array() ) {
 		if ( empty( $args['region'] ) || $args['region'] === static::get_default_region() ) {
 			$this->s3_client = $this->aws_client->createMultiRegionS3( $args );
 		} else {
@@ -378,6 +402,14 @@ class AWS_Provider extends Storage_Provider {
 		}
 
 		$this->s3_client->createBucket( $args );
+
+		if ( static::block_public_access_supported() ) {
+			$this->block_public_access( $args['Bucket'], false );
+		}
+
+		if ( static::object_ownership_supported() ) {
+			$this->enforce_object_ownership( $args['Bucket'], false );
+		}
 	}
 
 	/**

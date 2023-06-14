@@ -332,9 +332,9 @@ class Helper
 
     public static function displayCompatibleCheckMessages()
     {
-        if (version_compare(WDR_VERSION, '2.5.2', '>=')) {
+        if (version_compare(WDR_VERSION, '2.6.0', '>=')) {
             if (defined('WDR_PRO_VERSION')) {
-                if (version_compare(WDR_PRO_VERSION, '2.5.2', '<')) {
+                if (version_compare(WDR_PRO_VERSION, '2.6.0', '<')) {
                     $url = esc_url(admin_url() . "plugins.php");
                     $plugin_page = '<a target="_blank" href="' . $url . '">' . __('Update now', 'woo-discount-rules') . '</a>';
                     ?>
@@ -367,10 +367,12 @@ class Helper
             $allowed_html = array(
                 'br' => array(),
                 'strong' => array(),
-                'span' => array('class' => array()),
-                'div' => array('class' => array()),
-                'p' => array('class' => array()),
+                'span' => array('class' => array(), 'style' => array()),
+                'div' => array('class' => array(), 'style' => array()),
+                'p' => array('class' => array(), 'style' => array()),
             );
+            // Since v2.5.5
+            $allowed_html = apply_filters( 'advanced_woo_discount_rules_allowed_html_elements_and_attributes', $allowed_html);
             return wp_kses($html, $allowed_html);
         } catch (\Exception $e) {
             return '';

@@ -77,29 +77,30 @@ abstract class Background_Tool extends Tool {
 	 *
 	 * @return array
 	 */
-	public function get_default_info() {
+	public function get_default_info(): array {
 		return array(
-			'name'                    => $this->get_name(),
-			'title'                   => $this->get_title_text(),
-			'title_partial_complete'  => $this->get_title_text_partial_complete(),
-			'title_complete'          => $this->get_title_text_complete(),
-			'more_info'               => $this->get_more_info_text(),
-			'related_tools'           => $this->get_related_tools(),
-			'prompt'                  => $this->get_prompt_text(),
-			'doc_url'                 => $this->get_doc_url(),
-			'doc_desc'                => $this->get_doc_desc(),
-			'status_description'      => $this->get_status_description(),
-			'busy_description'        => $this->get_busy_description(),
-			'locked_notification'     => $this->get_locked_notification(),
-			'button'                  => $this->get_button_text(),
-			'button_partial_complete' => $this->get_button_text_partial_complete(),
-			'button_complete'         => $this->get_button_text_complete(),
-			'is_queued'               => $this->is_queued(),
-			'is_paused'               => $this->is_paused(),
-			'is_cancelled'            => $this->is_cancelled(),
-			'is_upgrading'            => Upgrade::is_locked(),
-			'progress'                => $this->get_progress(),
-			'queue'                   => $this->get_queue_counts(),
+			'name'                     => $this->get_name(),
+			'title'                    => $this->get_title_text(),
+			'title_partial_complete'   => $this->get_title_text_partial_complete(),
+			'title_complete'           => $this->get_title_text_complete(),
+			'more_info'                => $this->get_more_info_text(),
+			'related_tools'            => $this->get_related_tools(),
+			'prompt'                   => $this->get_prompt_text(),
+			'doc_url'                  => $this->get_doc_url(),
+			'doc_desc'                 => $this->get_doc_desc(),
+			'status_description'       => $this->get_status_description(),
+			'short_status_description' => $this->get_short_status_description(),
+			'busy_description'         => $this->get_busy_description(),
+			'locked_notification'      => $this->get_locked_notification(),
+			'button'                   => $this->get_button_text(),
+			'button_partial_complete'  => $this->get_button_text_partial_complete(),
+			'button_complete'          => $this->get_button_text_complete(),
+			'is_queued'                => $this->is_queued(),
+			'is_paused'                => $this->is_paused(),
+			'is_cancelled'             => $this->is_cancelled(),
+			'is_upgrading'             => Upgrade::is_locked(),
+			'progress'                 => $this->get_progress(),
+			'queue'                    => $this->get_queue_counts(),
 		);
 	}
 
@@ -215,7 +216,7 @@ abstract class Background_Tool extends Tool {
 	 *
 	 * @return string
 	 */
-	public function get_status_description() {
+	public function get_status_description(): string {
 		if ( $this->is_processing() && ( $this->is_cancelled() || $this->is_paused() ) ) {
 			return __( 'Completing current batch.', 'amazon-s3-and-cloudfront' );
 		}
@@ -232,12 +233,37 @@ abstract class Background_Tool extends Tool {
 	}
 
 	/**
+	 * Get short status description.
+	 *
+	 * @return string
+	 */
+	public function get_short_status_description(): string {
+		if ( $this->is_processing() && $this->is_cancelled() ) {
+			return _x( 'Stopping…', 'Short tool stopping message', 'amazon-s3-and-cloudfront' );
+		}
+
+		if ( $this->is_processing() && $this->is_paused() ) {
+			return _x( 'Pausing…', 'Short tool pausing message', 'amazon-s3-and-cloudfront' );
+		}
+
+		if ( $this->is_paused() ) {
+			return _x( 'Paused', 'Short tool paused message', 'amazon-s3-and-cloudfront' );
+		}
+
+		if ( $this->is_queued() ) {
+			return $this->get_short_queued_status();
+		}
+
+		return $this->get_status_description();
+	}
+
+	/**
 	 * Get busy description.
 	 *
 	 * @return string
 	 */
 	public function get_busy_description() {
-		return __( 'Initiating&hellip;', 'amazon-s3-and-cloudfront' );
+		return _x( 'Processing…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
 	}
 
 	/**
@@ -248,7 +274,7 @@ abstract class Background_Tool extends Tool {
 	public function get_locked_notification() {
 		return sprintf(
 			__(
-				'<strong>Settings Locked</strong> &mdash; You can\'t change any of your settings until the "%s" tool has completed.',
+				'<strong>Settings Locked</strong> &mdash; You can\'t change any of your settings until the "<a href="#/tools">%s</a>" tool has completed.',
 				'amazon-s3-and-cloudfront'
 			),
 			$this->get_name()
@@ -266,6 +292,7 @@ abstract class Background_Tool extends Tool {
 		}
 
 		$this->clear_errors();
+		$this->as3cf->notices->dismiss_notice( $this->errors_key );
 
 		$session = $this->create_session();
 
@@ -330,7 +357,7 @@ abstract class Background_Tool extends Tool {
 			'blogs'           => array(),
 		);
 
-		foreach ( $this->as3cf->get_all_blog_table_prefixes() as $blog_id => $prefix ) {
+		foreach ( AS3CF_Utils::get_all_blog_table_prefixes() as $blog_id => $prefix ) {
 			$session['blogs'][ $blog_id ] = array(
 				'prefix'         => $prefix,
 				'processed'      => $source_types,
@@ -369,7 +396,7 @@ abstract class Background_Tool extends Tool {
 	 *
 	 * @return bool
 	 */
-	public function is_queued() {
+	public function is_queued(): bool {
 		$batch = $this->get_batch();
 
 		if ( empty( $batch ) ) {
@@ -456,6 +483,15 @@ abstract class Background_Tool extends Tool {
 	}
 
 	/**
+	 * Is the tool currently active, e.g. starting, working, paused or cleaning up?
+	 *
+	 * @return bool
+	 */
+	public function is_active(): bool {
+		return $this->is_queued() || $this->is_processing() || $this->is_paused() || $this->is_cancelled();
+	}
+
+	/**
 	 * Get the tool's name. Defaults to its title text.
 	 *
 	 * @return string
@@ -519,7 +555,16 @@ abstract class Background_Tool extends Tool {
 	 *
 	 * @return string
 	 */
-	abstract public function get_queued_status();
+	abstract public function get_queued_status(): string;
+
+	/**
+	 * Get a shortened queued status message.
+	 *
+	 * @return string
+	 */
+	public function get_short_queued_status(): string {
+		return _x( 'Processing…', 'Short tool running message', 'amazon-s3-and-cloudfront' );
+	}
 
 	/**
 	 * Get background process class.

@@ -53,6 +53,7 @@ import {
 	useModuleRequirementsValidator,
 	getModuleTypes,
 	useNavigateTo,
+	useConfigContext,
 } from '../../utils';
 import './style.scss';
 
@@ -60,6 +61,7 @@ export default function Modules() {
 	const { url, path } = useRouteMatch();
 	const { root } = useParams();
 	const validateModuleRequirements = useModuleRequirementsValidator();
+	const { installType } = useConfigContext();
 	const { modules, dirty } = useSelect(
 		( select ) => ( {
 			modules: select( MODULES_STORE_NAME ).getEditedModules(),
@@ -89,6 +91,19 @@ export default function Modules() {
 				tab.modules.length > 0 &&
 				( root === 'settings' || tab.name !== 'advanced' )
 		);
+	const allModules = sortBy(
+		tabs.reduce( ( acc, tab ) => acc.concat( tab.modules ), [] ),
+		( { title } ) => title.toLowerCase()
+	);
+	if ( allModules.length > 0 ) {
+		const allTab = { name: 'all', title: __( 'All', 'better-wp-security' ), modules: allModules };
+		if ( installType === 'free' ) {
+			tabs.unshift( allTab );
+		} else {
+			tabs.push( allTab );
+		}
+	}
+
 	const help = __(
 		'Features is the home base of iThemes Security. Enabling a security feature will unlock the related User Group, Configure, and Notification settings. Disabling a security feature will hide the related options throughout the plugin.',
 		'better-wp-security'
@@ -179,7 +194,7 @@ function Navigation() {
 			<FlexItem>
 				<Link
 					component={ withNavigate( Button ) }
-					isPrimary
+					variant="primary"
 					to={ next }
 				>
 					{ __( 'Next', 'better-wp-security' ) }

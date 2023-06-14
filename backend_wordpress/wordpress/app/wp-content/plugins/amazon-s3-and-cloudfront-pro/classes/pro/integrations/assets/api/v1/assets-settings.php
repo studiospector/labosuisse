@@ -39,7 +39,7 @@ class Assets_Settings extends Settings {
 
 		do_action( 'as3cf_pre_save_assets_settings' );
 
-		/** @var Assets */
+		/** @var Assets $assets */
 		$assets = $this->as3cf->get_integration_manager()->get_integration( 'assets' );
 
 		$allowed      = $assets->get_allowed_settings_keys();
@@ -69,11 +69,7 @@ class Assets_Settings extends Settings {
 		// Great success ...
 		$assets->save_settings();
 
-		// If the domain changed, check it, and let state update pick up the result.
-		// In the future we could maybe schedule this or async dispatch.
-		if ( in_array( 'domain', $changed_keys ) ) {
-			$assets->check_domain( $new_settings['domain'] );
-		}
+		do_action( 'as3cf_post_save_assets_settings', true );
 
 		return $changed_keys;
 	}

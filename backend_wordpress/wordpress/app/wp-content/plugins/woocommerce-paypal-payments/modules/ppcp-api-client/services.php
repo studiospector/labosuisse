@@ -9,7 +9,8 @@ declare(strict_types=1);
 
 namespace WooCommerce\PayPalCommerce\ApiClient;
 
-use Psr\Container\ContainerInterface;
+use WooCommerce\PayPalCommerce\Session\SessionHandler;
+use WooCommerce\PayPalCommerce\Vendor\Psr\Container\ContainerInterface;
 use WooCommerce\PayPalCommerce\ApiClient\Authentication\Bearer;
 use WooCommerce\PayPalCommerce\ApiClient\Authentication\PayPalBearer;
 use WooCommerce\PayPalCommerce\ApiClient\Endpoint\BillingAgreementsEndpoint;
@@ -54,7 +55,6 @@ use WooCommerce\PayPalCommerce\ApiClient\Repository\CustomerRepository;
 use WooCommerce\PayPalCommerce\ApiClient\Repository\OrderRepository;
 use WooCommerce\PayPalCommerce\ApiClient\Repository\PartnerReferralsData;
 use WooCommerce\PayPalCommerce\ApiClient\Repository\PayeeRepository;
-use WooCommerce\PayPalCommerce\ApiClient\Repository\PayPalRequestIdRepository;
 use WooCommerce\PayPalCommerce\WcGateway\Settings\Settings;
 
 return array(
@@ -118,8 +118,7 @@ return array(
 			$container->get( 'api.factory.payment-token' ),
 			$container->get( 'api.factory.payment-token-action-links' ),
 			$container->get( 'woocommerce.logger.woocommerce' ),
-			$container->get( 'api.repository.customer' ),
-			$container->get( 'api.repository.paypal-request-id' )
+			$container->get( 'api.repository.customer' )
 		);
 	},
 	'api.endpoint.webhook'                      => static function ( ContainerInterface $container ) : WebhookEndpoint {
@@ -179,15 +178,15 @@ return array(
 		$patch_collection_factory = $container->get( 'api.factory.patch-collection-factory' );
 		$logger                   = $container->get( 'woocommerce.logger.woocommerce' );
 
-		/**
-		 * The settings.
-		 *
-		 * @var Settings $settings
-		 */
-		$settings                       = $container->get( 'wcgateway.settings' );
+		$session_handler = $container->get( 'session.handler' );
+		assert( $session_handler instanceof SessionHandler );
+		$bn_code         = $session_handler->bn_code();
+
+		$settings = $container->get( 'wcgateway.settings' );
+		assert( $settings instanceof Settings );
+
 		$intent                         = $settings->has( 'intent' ) && strtoupper( (string) $settings->get( 'intent' ) ) === 'AUTHORIZE' ? 'AUTHORIZE' : 'CAPTURE';
 		$application_context_repository = $container->get( 'api.repository.application-context' );
-		$paypal_request_id              = $container->get( 'api.repository.paypal-request-id' );
 		$subscription_helper = $container->get( 'subscription.helper' );
 		return new OrderEndpoint(
 			$container->get( 'api.host' ),
@@ -197,8 +196,10 @@ return array(
 			$intent,
 			$logger,
 			$application_context_repository,
-			$paypal_request_id,
-			$subscription_helper
+			$subscription_helper,
+			$container->get( 'wcgateway.is-fraudnet-enabled' ),
+			$container->get( 'wcgateway.fraudnet' ),
+			$bn_code
 		);
 	},
 	'api.endpoint.billing-agreements'           => static function ( ContainerInterface $container ): BillingAgreementsEndpoint {
@@ -207,9 +208,6 @@ return array(
 			$container->get( 'api.bearer' ),
 			$container->get( 'woocommerce.logger.woocommerce' )
 		);
-	},
-	'api.repository.paypal-request-id'          => static function( ContainerInterface $container ) : PayPalRequestIdRepository {
-		return new PayPalRequestIdRepository();
 	},
 	'api.repository.application-context'        => static function( ContainerInterface $container ) : ApplicationContextRepository {
 

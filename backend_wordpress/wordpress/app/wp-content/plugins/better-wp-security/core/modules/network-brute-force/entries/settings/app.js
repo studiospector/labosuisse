@@ -23,7 +23,7 @@ function ResetApiKey() {
 	};
 
 	return (
-		<Button isSecondary onClick={ onReset }>
+		<Button variant="secondary" onClick={ onReset }>
 			{ __( 'Reset API Key', 'better-wp-security' ) }
 		</Button>
 	);

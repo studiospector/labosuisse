@@ -125,15 +125,17 @@ trait CheapestCommon {
             $matched_rule = Cheapest::setFreeDiscountInMatchedRule($matched_rule);
             $discount_quantity = $matched_rule->free_qty;
             if($buy_x_get_y_ranges->operator == 'variation'){
+                $product_page_data['count_type'] = 'variation';
                 $_key = self::getDiscountKey($rule, $buy_x_get_y_ranges->operator, $cart_item['data']);
             } else {
+                $product_page_data['count_type'] = 'individual';
                 $_key = self::getDiscountKey($rule, $buy_x_get_y_ranges->operator, $product);
             }
             $cheapest_items_based_on_type = $is_cart? self::$cheapest_items: self::$cheapest_products;
             $type = self::getType($matched_rule);
             $product_page_data['product'] = $product;
             $product_page_data['quantity'] = $product_quantity;
-            $product_page_data['count_type'] = 'individual';
+//            $product_page_data['count_type'] = 'individual';
             $product_page_data['already_applied'] = $cheapest_items_based_on_type;
             $cheapest = Cheapest::getCheapestItemsFromCart($rule, $matched_rule, $discount_quantity, $buy_x_get_y_ranges->mode, $type, array(), array(), $is_cart, $product_page_data);
             if(isset($cheapest_items_based_on_type[$_key])){
