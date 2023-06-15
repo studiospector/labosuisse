@@ -74,24 +74,24 @@
     &__price {
         margin-bottom: 8px;
 
-        &__desc {
-            font-size: rem(14);
-            font-weight: 300;
-            color: map-get($colors, "primary-dark-1");
-            margin-right: 5px;
+        .lb-wc-price {
+            &__desc {
+                font-size: rem(14);
+                font-weight: 300;
 
-            @include mq($until: md) {
-                font-size: rem(11);
+                @include mq($until: md) {
+                    font-size: rem(11);
+                }
             }
-        }
 
-        .amount {
-            font-size: rem(18);
-            font-weight: 400;
-            color: map-get($colors, "black");
-
-            @include mq($until: md) {
-                font-size: rem(13);
+            del {
+                font-size: rem(16);
+                font-weight: 300;
+            }
+    
+            ins {
+                font-size: rem(18);
+                font-weight: 400;
             }
         }
     }
