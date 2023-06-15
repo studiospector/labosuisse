@@ -151,8 +151,8 @@ add_filter('woocommerce_quantity_input_classes', function ($value, $product) {
 /**
  * Change Price Range for Variable Products
  */
-add_filter('woocommerce_get_price_html', 'lb_variable_product_price', 10, 2);
-function lb_variable_product_price($price, $product)
+add_filter('woocommerce_get_price_html', 'lb_product_price_html', 10, 2);
+function lb_product_price_html($price, $product)
 {
     if (is_admin()) {
         return $price;
