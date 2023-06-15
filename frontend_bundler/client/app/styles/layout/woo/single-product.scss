@@ -153,30 +153,33 @@
         }
 
         .price {
-            display: flex;
-            align-items: center;
             margin-bottom: 40px;
-            font-size: rem(26);
-            letter-spacing: 0.02em;
             
             @include mq($until: md) {
                 margin-bottom: 30px;
-                font-size: rem(18);
                 text-align: left;
             }
 
-            del {
-                margin-right: 15px;
-            }
+            .lb-wc-price {
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.02em;
 
-            bdi {
-                font-weight: 600;
-                color: map-get($colors, "black");
-            }
-
-            .lb-price-label {
-                margin: 0;
-                margin-right: 8px;
+                &__desc {
+                    font-size: rem(14);
+                    font-weight: 300;
+                }
+    
+                del {
+                    font-size: rem(26);
+                    font-weight: 300;
+                    margin-right: 16px;
+                }
+        
+                ins {
+                    font-size: rem(26);
+                    font-weight: 600;
+                }
             }
 
             &:empty {

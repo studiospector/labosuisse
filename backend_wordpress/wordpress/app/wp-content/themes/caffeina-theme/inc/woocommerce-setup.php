@@ -151,8 +151,7 @@ add_filter('woocommerce_quantity_input_classes', function ($value, $product) {
 /**
  * Change Price Range for Variable Products
  */
-add_filter('woocommerce_variable_sale_price_html', 'lb_variable_product_price', 10, 2);
-add_filter('woocommerce_variable_price_html', 'lb_variable_product_price', 10, 2);
+add_filter('woocommerce_get_price_html', 'lb_variable_product_price', 10, 2);
 function lb_variable_product_price($price, $product)
 {
     if (is_admin()) {
@@ -163,17 +162,37 @@ function lb_variable_product_price($price, $product)
         return null;
     }
 
-    // Classes for price in single product page or cards in archive
-    $classes = !is_product() ? 'lb-product-card__price__desc' : 'lb-price-label infobox__paragraph--small';
-    // Get min price
-    $min_price = $product->get_variation_price('min', true);
-
-    $custom_price = sprintf(
-        __('%1$sa partire da%2$s %3$s', 'labo-suisse-theme'),
-        '<span class="' . $classes . '">',
-        '</span>',
-        wc_price($min_price),
-    );
+    if ($product->is_type('variable')) {
+        $regular_price = $product->get_variation_regular_price('min');
+        $sale_price = $product->get_variation_sale_price('min');
+    
+        $wc_regular_price = $regular_price ? wc_price($regular_price) : null;
+        $wc_sale_price = $sale_price && $sale_price != $regular_price ? wc_price($sale_price) : null;
+    
+        $custom_price = sprintf(
+            __('%1$s %2$sa partire da%3$s%4$s %5$s %6$s', 'labo-suisse-theme'),
+            '<span class="lb-wc-price">',
+            '<span class="lb-wc-price__desc">',
+            '</span>',
+            $wc_sale_price ? "<del>$wc_regular_price</del>" : '',
+            !$wc_sale_price ? "<ins>$wc_regular_price</ins>" : "<ins>$wc_sale_price</ins>",
+            '</span>',
+        );
+    } else {
+        $regular_price = $product->get_regular_price();
+        $sale_price = $product->get_sale_price();
+    
+        $wc_regular_price = $regular_price ? wc_price($regular_price) : null;
+        $wc_sale_price = $sale_price && $sale_price != $regular_price ? wc_price($sale_price) : null;
+    
+        $custom_price = sprintf(
+            '%1$s %2$s %3$s %4$s',
+            '<span class="lb-wc-price">',
+            $wc_sale_price ? "<del>$wc_regular_price</del>" : '',
+            !$wc_sale_price ? "<ins>$wc_regular_price</ins>" : "<ins>$wc_sale_price</ins>",
+            '</span>',
+        );
+    }
 
     return $custom_price;
 }
