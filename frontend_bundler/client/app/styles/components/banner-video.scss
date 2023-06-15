@@ -30,12 +30,6 @@
         &__poster {
           background-size: cover;
         }
-
-        iframe {
-          @include mq($until: md) {
-            transform: scale(2.1);
-          }
-        }
       }
     }    
   }

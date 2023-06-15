@@ -12,5 +12,10 @@
   
   &__native-video {
     width: 100%;
+
+    @include mq($until: md) {
+      height: 100%;
+      object-fit: cover;
+    }
   }
 }
