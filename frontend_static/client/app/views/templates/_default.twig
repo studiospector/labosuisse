@@ -1,12 +1,12 @@
-{% set criticalCss = fn(['ThemeSetup', 'revision_files'], 'css/critical.css') %}
-{% set criticalCssProd = '/css/critical.css' %}
-{% set mainCss = fn(['ThemeSetup', 'revision_files'], 'css/main.css') %}
-{% set criticalJs = '/js/critical.js' %}
-{% set criticalJsModern = fn(['ThemeSetup', 'revision_files'], 'js/critical.modern.js') %}
-{% set mainJs = fn(['ThemeSetup', 'revision_files'], 'js/main.js') %}
-{% set mainJsModern = fn(['ThemeSetup', 'revision_files'], 'js/main.modern.js') %}
-{% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %}
-{% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %}
+{# {% set criticalCss = fn(['ThemeSetup', 'revision_files'], 'critical.css') %} #}
+{% set criticalCssProd = '/critical.css' %}
+{% set mainCss = fn(['ThemeSetup', 'revision_files'], 'main.css') %}
+{# {% set criticalJs = '/critical.js' %} #}
+{# {% set criticalJsModern = fn(['ThemeSetup', 'revision_files'], 'js/critical.modern.js') %} #}
+{% set mainJs = fn(['ThemeSetup', 'revision_files'], 'main.js') %}
+{# {% set mainJsModern = fn(['ThemeSetup', 'revision_files'], 'js/main.modern.js') %} #}
+{# {% set lazysizesModern = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.modern.js') %} #}
+{# {% set lazysizes = fn(['ThemeSetup', 'revision_files'], '/js/independent/lazysizes.js') %} #}
 <!DOCTYPE html>
 <html lang="{{ fn('lb_get_current_lang') }}"{{ fn('is_admin_bar_showing') ? ' class="lb-is-admin-bar"' : '' }}>
 	<head>
@@ -25,7 +25,7 @@
         <!-- / WP Head -->
 
 		<link rel="preload" as="style" href="{{ mainCss }}">
-		<link rel="preload" as="script" href="{{ mainJsModern }}" data-cookieconsent="ignore">
+		<link rel="preload" as="script" href="{{ mainJs }}" data-cookieconsent="ignore">
 
         <style>{{source('@bundle' ~ criticalCssProd)}}</style>
 		{# {% if production %}
@@ -34,7 +34,7 @@
 			<link rel="stylesheet" href="{{ criticalCss }}">
 		{% endif %} #}
 
-		<link rel="stylesheet" data-deferStart="true" data-href="{{ mainCss }}" media="all">
+		<link rel="stylesheet" href="{{ mainCss }}" media="all" defer>
 
         {% include 'various/tracking-head.twig' %}
         
@@ -82,16 +82,16 @@
 
         {% include 'components/symbols.twig' %}
 
-        <script data-deferStart="true" data-modernsrc="{{ mainJsModern }}" data-src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
+        <script type="module" src="{{ mainJs }}" data-cookieconsent="ignore"></script>
 
-        <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
+        {# <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script> #}
         {# {% if production %}
             <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script>
         {% else %}
             <script src="{{ criticalJsModern }}" data-cookieconsent="ignore"></script>
         {% endif %} #}
 
-        <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" data-cookieconsent="ignore" defer></script>
+        {# <script data-modernsrc="{{ lazysizesModern }}" data-src="{{ lazysizes }}" data-cookieconsent="ignore" defer></script> #}
 
         {{ fn('wp_footer') }}
 
