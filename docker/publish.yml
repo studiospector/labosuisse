@@ -9,14 +9,14 @@ services:
       ENABLE_ROBOTS: 1
     volumes:
       - '../frontend_static/client/app:/app'
-      - '../frontend_bundler/client/app/dist/public:/app/dist/bundle'
-  frontend_bundler:
+      - '../frontend_bundler_vite/client/app/dist:/app/dist'
+  frontend_bundler_vite:
     environment:
       NODE_ENV: production
     command:
       - build
     volumes:
-      - '../frontend_bundler/client/app:/app'
+      - '../frontend_bundler_vite/client/app:/app'
   frontend_storybook:
     command:
       - build
@@ -24,6 +24,6 @@ services:
       - '../frontend_storybook/storybook/app:/app'
       - '../frontend_static/client/app/views:/app/views'
       - '../frontend_static/client/app/fixtures:/app/fixtures'
-      - '../frontend_bundler/client/app/scripts:/app/scripts'
-      - '../frontend_bundler/client/app/styles:/app/styles'
-      - '../frontend_bundler/tommy/optimized:/app/public/assets'
+      - '../frontend_bundler_vite/client/app/src/scripts:/app/scripts'
+      - '../frontend_bundler_vite/client/app/src/styles:/app/styles'
+      - '../frontend_bundler_vite/tommy/optimized:/app/public/assets'

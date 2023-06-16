@@ -17,7 +17,7 @@ services:
     environment:
       WITH_WORDPRESS: 1
     depends_on:
-      - frontend_bundler
+      - frontend_bundler_vite
       - frontend_static
   admin_backend_wordpress:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backend_wordpress'
@@ -36,7 +36,7 @@ services:
     environment:
       WITH_WORDPRESS: 1
     depends_on:
-      - frontend_bundler
+      - frontend_bundler_vite
       - frontend_static
   backup_service:
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
@@ -45,13 +45,13 @@ services:
       cache_from:
         - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/backup_service'
       dockerfile: ./backup_service/docker/Dockerfile
-  frontend_bundler:
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+  frontend_bundler_vite:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
     build:
       context: ..
       cache_from:
-        - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
-      dockerfile: ./frontend_bundler/client/docker/Dockerfile
+        - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
+      dockerfile: ./frontend_bundler_vite/client/docker/Dockerfile
       args:
         LB_API_TOKEN: ${LB_API_TOKEN}
         LB_API_URL: ${LB_API_URL}
@@ -68,7 +68,7 @@ services:
         CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
         CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
     depends_on:
-      - frontend_bundler
+      - frontend_bundler_vite
   frontend_static_nginx:
     image: >-
       ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_static_nginx

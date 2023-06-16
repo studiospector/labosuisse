@@ -42,7 +42,7 @@ echo "---------- BUILDING ⚒"
 ./cmd/base.sh \
   -f ./docker/build.yml \
   -f ./docker/publish.yml \
-  run --rm frontend_bundler
+  run --rm frontend_bundler_vite
 
 ./cmd/base.sh \
   -f ./docker/build.yml \
@@ -99,9 +99,9 @@ cp -r $PUBLISH_STORYBOOK_SRC_DIR $PUBLISH_TMP_DIR/storybook
 fi
 
 echo "\n\n---------- EXTRA COMMAND FOR FRONTEND FOLDER.\n"
-if [ -d ./frontend_bundler/tommy/optimized ]; then
-  cp -r ./frontend_bundler/tommy/optimized $PUBLISH_TMP_DIR/assets
-  cp -r ./frontend_bundler/tommy/optimized $PUBLISH_TMP_DIR/storybook/assets
+if [ -d ./frontend_bundler_vite/tommy/optimized ]; then
+  cp -r ./frontend_bundler_vite/tommy/optimized $PUBLISH_TMP_DIR/assets
+  cp -r ./frontend_bundler_vite/tommy/optimized $PUBLISH_TMP_DIR/storybook/assets
 fi
 
 rm -rf $PUBLISH_TMP_DIR/_errors
