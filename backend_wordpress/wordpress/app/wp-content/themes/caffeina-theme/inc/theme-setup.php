@@ -293,7 +293,7 @@ class ThemeSetup extends Timber\Site
         $bundle_folder = 'static';
         $manifest_path = __DIR__ . "/../../$bundle_folder/" . $manifest_name;
 
-        $theme_path = get_template_directory_uri();
+        $theme_path = str_replace('cms.', 'www.', get_template_directory_uri());
 
         if (file_exists($manifest_path)) {
             // die($manifest_path);
