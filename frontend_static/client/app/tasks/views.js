@@ -71,8 +71,8 @@ function getTemplateData() {
       templateData.revisions = JSON.parse(fs.readFileSync(manifestPath, 'utf8'))
     }
 
-    const criticalJsPath = templateData.revisions['js/critical.js'] || 'js/critical.js'
-    const criticalCssPath = templateData.revisions['css/critical.css'] || 'css/critical.css'
+    const criticalJsPath = templateData.revisions['critical.js'] || 'critical.js'
+    const criticalCssPath = templateData.revisions['critical.css'] || 'critical.css'
 
     templateData.criticalScript = fs.readFileSync(`${bundlePath}/${criticalJsPath}`, 'utf8')
     templateData.criticalCss = fs.readFileSync(`${bundlePath}/${criticalCssPath}`, 'utf8')
