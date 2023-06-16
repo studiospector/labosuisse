@@ -1,0 +1,155 @@
+.lb-template-distributor {
+    &__map-wrapper {
+        position: relative;
+    }
+    
+    &__map {
+        min-height: 660px;
+
+        .gm-style {
+            .gm-style-iw {
+                max-width: 360px !important;
+                padding: 0;
+                border-radius: 0;
+                box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.15);
+    
+                .gm-ui-hover-effect {
+                    width: 20px !important;
+                    height: 20px !important;
+                    top: 20px !important;
+                    left: 20px !important;
+                    right: auto !important;
+                    border: 1px solid map-get($colors, "black") !important;
+                    border-radius: 100%;
+    
+                    span {
+                        margin: 0 auto !important;
+                    }
+                }
+            }
+
+            // .gm-style-iw-t::after {
+            //     content: none;
+            // }
+        }
+
+
+        &__infowindow {
+            &__header {
+                width: 100%;
+                position: fixed;
+                padding: 20px;
+                padding-left: 50px;
+                border-bottom: 1px solid map-get($colors, "grey-2");
+                background-color: map-get($colors, "white");
+
+                .infobox__subtitle {
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: 400;
+                    line-height: 19px;
+                }
+            }
+
+            &__content {
+                padding-top: 70px;
+                padding-left: 20px;
+
+                .infobox {                
+                    &__subtitle {
+                        margin-top: 10px;
+                        margin-bottom: 0;
+                        font-weight: 600;
+                        font-size: 26px;
+                        line-height: 34px;
+                        letter-spacing: 0.02em;
+                    }
+
+                    &__paragraph {
+                        height: 45px;
+                        overflow: hidden;
+                        margin-top: 30px;
+                        font-weight: 400;
+                        font-size: 14px;
+                        line-height: 19px;
+                        transition: all 0.5s ease-in-out;
+
+                        &--small {
+                            height: auto;
+                            overflow: auto;
+                            margin-top: 0;
+                            font-weight: 300;
+                            color: map-get($colors, "grey-4");
+
+                            a {
+                                text-decoration: none;
+                                color: map-get($colors, "grey-4");
+                            }
+                        }
+
+                        &.is-full {
+                            height: auto;
+                            transition: all 0.5s ease-in-out;
+
+                            & > p:first-child {
+                                -webkit-line-clamp: unset;
+                            }
+                        }
+                        
+                        & > p:first-child {
+                            display: -webkit-box;
+                            max-width: 100%;
+                            -webkit-line-clamp: 2;
+                            /* autoprefixer: off */
+                            -webkit-box-orient: vertical;
+                            /* autoprefixer: on */
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+
+                .links-list {
+                    &__item {
+                        margin-top: 30px;
+
+                        &:last-child {
+                            margin-bottom: 20px;
+                        }
+
+                        .button {
+                            @include mq($until: md) {
+                                width: 100%;
+                                justify-content: center;
+                                text-align: center;
+                                margin-right: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &__brands {
+                .button {
+                    padding: 5px;
+                    margin: 5px 5px 0 0;
+                    border: 1px solid map-get($colors, "grey-2");
+                    cursor: default;
+
+                    &__label {
+                        font-size: 14px;
+                        font-weight: 300;
+                    }
+                }
+            }
+
+            &__more-text {
+                &.button {
+                    padding: 0;
+                    margin-top: 5px;
+                    color: map-get($colors, "secondary");
+                }
+            }
+        }
+    }
+}

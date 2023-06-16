@@ -1,0 +1,24 @@
+.checklist {
+    &__item {
+        display: flex;
+        align-items: center;
+        margin: 15px 0;
+
+        .lb-icon {
+            width: 18px;
+            height: 18px;
+
+            svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        &__title {
+            width: 100%;
+            font-size: rem(16);
+            font-weight: 300;
+            margin-left: 10px;
+        }
+    }
+}

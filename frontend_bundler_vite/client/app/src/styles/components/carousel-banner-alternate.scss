@@ -1,0 +1,39 @@
+// $banner-alternate-carousel-height-desk: 400px;
+// $banner-alternate-carousel-height-mobile: auto;
+
+.carousel-banner-alternate {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    padding-bottom: 33px;
+
+    @include mq($until: md) {
+        margin-bottom: 55px;
+        padding-bottom: 0;
+        overflow: unset !important;
+    }
+
+    &__slide {
+        @include mq($until: md){
+            overflow: hidden;
+        }
+
+        .banner-alternate {
+            // min-height: $banner-alternate-carousel-height-desk;
+        
+            // &__img {
+            //     @include mq($until: md) {
+            //         min-height: $banner-alternate-carousel-height-mobile;
+            //     }
+            // }
+
+            &__infobox {
+                padding-left: rem(15);
+
+                @include mq($until: md) {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,9 @@
+.lb-filters {
+    &__item {
+        @include mq($until: md) {
+            &:not(:last-child) {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}

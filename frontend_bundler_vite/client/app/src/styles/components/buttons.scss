@@ -1,0 +1,264 @@
+$border-radius: rem(5px);
+$button-padding: rem(16px 24px);
+$button-small-padding: rem(8px 16px);
+$button-big-padding: rem(24px 32px);
+
+// UI KIT VARIABLES
+$buttonsVariablesToCSSClasses: (
+  "btn-primary-default": ".button-primary",
+  "btn-primary-hover": ".button-primary:hover",
+  "btn-primary-disabled": ".button-primary:disabled, .button-primary-disabled",
+
+  "btn-secondary-default": ".button-secondary",
+  "btn-secondary-hover": ".button-secondary:hover",
+  "btn-secondary-disabled": ".button-secondary:disabled, .button-secondary-disabled",
+
+  "btn-tertiary-default": ".button-tertiary",
+  "btn-tertiary-hover": ".button-tertiary:hover",
+  "btn-tertiary-disabled": ".button-tertiary:disabled, .button-tertiary-disabled",
+
+  "btn-quaternary-default": ".button-quaternary",
+  "btn-quaternary-hover": ".button-quaternary:hover",
+  "btn-quaternary-disabled": ".button-quaternary:disabled, .button-quaternary-disabled",
+);
+$buttonsPropertyList: (
+  "background-color",
+  "border-radius",
+  "border",
+  "color",
+  // "padding",
+  // "opacity"
+  "text-transform"
+);
+
+// END UI KIT VARIABLES
+
+.button,
+.button-small,
+.button-big {
+  @include reset-button();
+
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:disabled,
+  &.button-primary-disabled,
+  &.button-secondary-disabled,
+  &.button-tertiary-disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .lb-icon {
+    &:first-of-type {
+       margin-right: 10px;
+    }
+
+    &:last-of-type {
+       margin-left: 10px;
+    }
+  }
+}
+
+.button {
+  padding: $button-padding;
+}
+
+.button-small {
+  padding: $button-small-padding;
+}
+
+.button-big {
+  padding: $button-big-padding;
+}
+
+.button-quaternary {
+    padding-left: 0;
+    padding-right: 0;
+    
+    .button__label {
+        font-weight: 600;
+    }
+    
+    .lb-icon {
+        color: map-get($colors, "secondary");
+        transition: all 0.2s;
+
+        svg {
+            height: 10px;
+        }
+    }
+
+    &.button-active,
+    &:hover {
+        .lb-icon {
+            transition: all 0.2s;
+
+            &:first-of-type {
+                transform: translateX(-5px);
+            }
+
+            &:last-of-type {
+                transform: translateX(5px);
+            }
+        }
+    }
+}
+
+// .button-link {}
+
+.button-thin {
+    .button__label {
+        font-weight: 300;
+        font-size: rem(13);
+    }
+}
+
+
+
+.button-primary,
+.button-secondary,
+.button-tertiary {
+    overflow: hidden;
+
+    .button__label {
+        position: relative;
+        overflow: hidden;
+        white-space: nowrap;
+        pointer-events: none;
+
+        & > span {
+            display: block;
+            transition: opacity .5s cubic-bezier(0.4, 0, 0, 1),transform .8s cubic-bezier(0.4, 0, 0, 1);
+
+            &:nth-of-type(2) {
+                opacity: 0;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                transform: translate3d(0, 100%, 0);
+            }
+        }
+
+    }
+
+    &.button-active,
+    &:hover {
+        .button__label {
+            & > span {
+                &:nth-of-type(1) {
+                    opacity: 0;
+                    transform: translate3d(0, -100%, 0);
+                }
+
+                &:nth-of-type(2) {
+                    opacity: 1;
+                    transform: translate3d(0, 0, 0);
+                }
+            }
+        }
+    }
+}
+
+.button-tertiary {
+    &.button-active,
+    &:hover {
+        background-color: map-get($colors, "secondary");
+        border: 1px solid map-get($colors, "secondary");
+        color: map-get($colors, "white");
+
+        .lb-icon {
+            svg {
+                color: map-get($colors, "white");
+            }
+        }
+    }
+}
+
+.lb-button-group {
+    display: flex;
+    align-items: center;
+
+    @include mq($until: lg) {
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .button {
+        &:nth-child(odd) {
+            margin-right: 30px;
+
+            @include mq($until: lg) {
+                margin-right: 0;
+            }
+        }
+
+        &:not(:last-child) {
+            @include mq($until: lg) {
+                margin-bottom: 20px;
+            }
+        }
+
+        &.button-primary {
+            flex: 1;
+            justify-content: center;
+        }
+    }
+
+    &--vertical {
+        flex-direction: column;
+        justify-content: center;
+
+        .button {
+            width: 100%;
+            justify-content: center;
+            
+            &:nth-child(odd) {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.button {
+    &.button-loading {
+        position: relative;
+
+        .button {
+            &__label {
+                visibility: hidden;
+            }
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            width: 25px;
+            height: 25px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            border-radius: 100%;
+            animation: lb-button-loading-spinner 1s linear infinite;
+        }
+    }
+}
+
+@keyframes lb-button-loading-spinner {
+    from {
+        transform: rotate(0turn);
+    }
+  
+    to {
+        transform: rotate(1turn);
+    }
+}
+
+@include generate-rules($buttonsVariablesToCSSClasses, $buttonsPropertyList, $componentsVariables);

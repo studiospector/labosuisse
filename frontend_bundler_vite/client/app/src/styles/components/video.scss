@@ -1,0 +1,21 @@
+.lb-video {
+  .plyr {
+    margin: 0 auto;
+    border-radius: 7px;
+
+    --plyr-color-main: #b52a2d;
+
+    @include mq($from: md) {
+      max-width: 754px;
+    }
+  }
+  
+  &__native-video {
+    width: 100%;
+
+    @include mq($until: md) {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}

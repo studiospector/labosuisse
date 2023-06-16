@@ -1,0 +1,36 @@
+// MIXINS
+@import "mixins/index";
+
+// VARIABLES
+@import "variables/critical";
+
+// VENDORS
+@import "node_modules/sass-mq/mq";
+@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import 'node_modules/swiper/swiper-bundle';
+@import 'node_modules/photoswipe/dist/photoswipe';
+
+// BASE STYLE
+@import "base/index";
+
+// TYPOGRAPHY
+@include generate-font-face();
+@include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+
+// CRITICAL GRID
+@include generate-grid();
+
+// CRITICAL COMPONENTS
+@import "components/loader";
+@import "components/infobox";
+@import "components/separator";
+@import "components/buttons";
+@import "components/hero";
+@import "components/carousel-hero";
+@import "components/swiper";
+
+// CRITICAL LAYOUT
+@import "layout/base";
+// @import "layout/base/menu-desktop";
+// @import "layout/base/menu-mobile";
+@import "layout/woo/index";

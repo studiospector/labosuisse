@@ -1,0 +1,36 @@
+.banner-video {
+  &__video {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    .lb-video {
+      position: relative;
+      padding: 0;
+      top: 50%;
+      transform: translateY(-50%);
+
+      @include mq($until: md) {
+        height: 100%;
+      }
+
+      .plyr {
+        border-radius: 0;
+
+        @include mq($from: md) {
+          max-width: 100%;
+        }
+
+        @include mq($until: md) {
+          height: 100%;
+        }
+
+        &__poster {
+          background-size: cover;
+        }
+      }
+    }    
+  }
+}

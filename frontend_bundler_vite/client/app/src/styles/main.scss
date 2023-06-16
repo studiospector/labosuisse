@@ -1,0 +1,24 @@
+// MIXINS
+@import "mixins/index";
+
+// VARIABLES
+@import "variables/main";
+
+// VENDORS AND MIXINS
+@import "../node_modules/plyr/dist/plyr";
+@import "../node_modules/sass-mq/mq";
+@import "vendors/custom-input";
+@import "vendors/custom-radio";
+@import "vendors/custom-checkbox";
+@import "vendors/custom-select";
+
+// FULL GRID
+// @include generate-grid();
+
+// LAYOUT
+// @import "layout/base/index";
+// @import "layout/woo/index";
+@import "layout/pages/index";
+
+// COMPONENTS
+@import "components/index";

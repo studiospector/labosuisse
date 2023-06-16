@@ -1,0 +1,142 @@
+.lb-header-sticky-product {
+    position: fixed;
+    top: -100%;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    background-color: map-get($colors, "white");
+    border-bottom: 1px solid map-get($colors, "grey-2");
+    z-index: 98;
+    transition: $transition__base-1;
+
+    @include mq($until: md) {
+        top: auto;
+        bottom: -100%;
+        padding: 20px 0;
+        background-color: rgba(map-get($colors, "white"), 0.9);
+    }
+
+    &--desktop {
+        @include mq($until: md) {
+            display: none;
+        }
+    }
+
+    &--mobile {
+        @include mq($from: md) {
+            display: none;
+        }
+
+        .button {
+            width: 100%;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    }
+
+    &__left {
+        display: flex;
+        align-items: center;
+    }
+
+    &__right {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+
+        @include mq($until: md) {
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+    }
+
+    &__info {
+        margin-left: 20px;
+
+        @include mq($until: md) {
+            margin-left: 0;
+        }
+
+        &__title {
+            font-size: rem(16);
+            font-weight: 500;
+            line-height: rem(19);
+            text-transform: uppercase;
+            letter-spacing: 0.02em;
+            margin-bottom: 0;
+
+            @include mq($until: md) {
+                font-size: rem(13);
+                text-transform: none;
+                margin-right: 20px;
+            }
+        }
+
+        &__variants {
+            margin-top: 10px;
+            margin-bottom: 0;
+
+            &:empty {
+                display: none;
+            }
+        }
+    }
+
+    &__img {
+        @include mq($until: md) {
+            display: none;
+        }
+
+        img {
+            max-width: 100px;
+            max-height: 80px;
+        }
+    }
+
+    &__price {
+        margin-right: 40px;
+
+        @include mq($until: lg) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        @include mq($until: md) {
+            align-items: flex-end;
+            justify-content: center;
+            margin-right: 0;
+            line-height: 1;
+        }
+
+        .lb-wc-price {
+            &__desc {
+                font-size: rem(12);
+            }
+
+            del {
+                font-size: rem(14);
+            }
+
+            ins {
+                font-size: rem(16);
+                font-weight: 500;
+            }
+        }
+    }
+
+    &--adjust {
+        transform: translateY(-100%);
+
+        @include mq($until: md) {
+            transform: translateY(0);
+        }
+    }
+
+    &--offsetnav-open {
+        transform: translateY(-100%);
+
+        @include mq($until: md) {
+            transform: translateY(100%);
+        }
+    }
+}

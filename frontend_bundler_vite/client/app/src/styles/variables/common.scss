@@ -1,0 +1,28 @@
+// ASSETS BASE PATH
+$assetsBasePath: '/wp-content/themes/caffeina-theme/assets';
+
+// UI-KIT DEFAULT
+$default-size: 8px;
+$sketchVariablesBreakpoint: (
+  default: "mobile",
+  md:      "desktop"
+);
+$typographyVariables: ()!default;
+$componentsVariables: ()!default;
+$typographyPropertyList: ()!default;
+$typographyVariablesToCSSClasses: ()!default;
+$typographyVariablesToCSSClasses: ()!default;
+
+// FONT DEFAULTS
+$fonts: ()!default;
+$font-size-default: 16px;
+
+// TRANSITIONS
+$transition__base-1: all .2s ease;
+$transition__bezier-1: all .5s cubic-bezier(.25,1.7,.35,.8);
+$transition__base: .2s ease-out 0s;
+
+@import "./uikit";
+@import "./layout";
+@import "./colors";
+@import "./typography";
