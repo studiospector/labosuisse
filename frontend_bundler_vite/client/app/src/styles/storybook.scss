@@ -5,9 +5,9 @@
 @import "variables/critical";
 
 // VENDORS
-@import "../node_modules/plyr/dist/plyr";
-@import "../node_modules/sass-mq/mq";
-@import '../node_modules/swiper/swiper-bundle';
+@import "plyr/dist/plyr";
+@import "sass-mq/mq";
+@import 'node_modules/swiper/swiper-bundle';
 @import "vendors/custom-input";
 @import "vendors/custom-radio";
 @import "vendors/custom-checkbox";
@@ -17,7 +17,7 @@
 @import "base/index";
 
 // ASSETS BASE PATH STORYBOOK
-$assetsBasePath: '/assets';
+$assetsBasePath: 'http://storybook.labo-website-2021.localhost/';
 
 // TYPOGRAPHY
 @include generate-font-face();
