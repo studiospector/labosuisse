@@ -1,7 +1,7 @@
 {
-  "name": "app",
+  "name": "frontend_storybook_new_storybook-labo-website-2021",
   "version": "1.0.0",
-  "description": "",
+  "description": "An awesome caffeina project",
   "main": "index.js",
   "scripts": {
     "dev": "storybook dev -p 6006",
@@ -9,6 +9,9 @@
   },
   "keywords": [],
   "author": "",
+  "contributors": [
+    "Stefano Iachetta <stefano.iachetta@caffeina.com>"
+  ],
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.22.5",
