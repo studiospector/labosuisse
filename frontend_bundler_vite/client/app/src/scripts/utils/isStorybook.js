@@ -1,5 +1,5 @@
 const isStorybook = () => {
-    return window.STORYBOOK_ENV ? true : false
+    return window.STORIES ? true : false
 }
 
 export default isStorybook
