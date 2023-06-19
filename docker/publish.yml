@@ -17,11 +17,11 @@ services:
       - build
     volumes:
       - '../frontend_bundler_vite/client/app:/app'
-  frontend_storybook:
+  frontend_storybook_new:
     command:
       - build
     volumes:
-      - '../frontend_storybook/storybook/app:/app'
+      - '../frontend_storybook_new/storybook/app:/app'
       - '../frontend_static/client/app/views:/app/views'
       - '../frontend_static/client/app/fixtures:/app/fixtures'
       - '../frontend_bundler_vite/client/app/src/scripts:/app/scripts'

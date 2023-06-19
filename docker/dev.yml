@@ -221,15 +221,15 @@ services:
       VIRTUAL_HOST: 'frontend_nginx.${VIRTUAL_HOST}.localhost'
       VIRTUAL_PORT: 80
     restart: unless-stopped
-  frontend_storybook:
+  frontend_storybook_new:
     command:
       - dev
     volumes:
-      - '../frontend_storybook/storybook/app:/app'
+      - '../frontend_storybook_new/storybook/app:/app'
       - '../frontend_static/client/app/views:/app/views'
       - '../frontend_static/client/app/fixtures:/app/fixtures'
-      - '../frontend_bundler_vite/client/app/scripts:/app/scripts'
-      - '../frontend_bundler_vite/client/app/styles:/app/styles'
+      - '../frontend_bundler_vite/client/app/src/scripts:/app/scripts'
+      - '../frontend_bundler_vite/client/app/src/styles:/app/styles'
       - '../frontend_bundler_vite/tommy/optimized:/app/public/assets'
     networks:
       - labo-website-2021

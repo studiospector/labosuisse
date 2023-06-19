@@ -49,11 +49,11 @@ echo "---------- BUILDING ⚒"
   -f ./docker/publish.yml \
   run --rm frontend_static
 
-if [ -d ./frontend_storybook ]; then
+if [ -d ./frontend_storybook_new ]; then
 ./cmd/base.sh \
   -f ./docker/build.yml \
   -f ./docker/publish.yml \
-  run --rm frontend_storybook
+  run --rm frontend_storybook_new
 fi
 
 if [ $? != 0 ]; then
@@ -94,7 +94,7 @@ echo "\n\n---------- COPYING PUBLIC FILES IN RELEASE REPO.\n"
 cp -r $PUBLISH_STATIC_SRC_DIR/* $PUBLISH_TMP_DIR
 cp -r $PUBLISH_BUNDLE_SRC_DIR/* $PUBLISH_TMP_DIR
 
-if [ -d ./frontend_storybook ]; then
+if [ -d ./frontend_storybook_new ]; then
 cp -r $PUBLISH_STORYBOOK_SRC_DIR $PUBLISH_TMP_DIR/storybook
 fi
 

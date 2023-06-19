@@ -10,7 +10,7 @@
         "backup_service",
         "frontend_bundler_vite",
         "frontend_static",
-        "frontend_storybook",
+        "frontend_storybook_new",
         "storage_mysql",
         "storage_redis",
         "storage_memcached"

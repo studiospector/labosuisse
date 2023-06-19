@@ -245,7 +245,7 @@ export default class Application extends Component {
 }
 ```
 
-5. **Storybook** - Creazione story del componente in `frontend_storybook/storybook/app/stories/components/{component-name}.stories.js`
+5. **Storybook** - Creazione story del componente in `frontend_storybook_new/storybook/app/stories/components/{component-name}.stories.js`
 ```js
 // Storybook API
 import { storiesOf } from '@storybook/html'

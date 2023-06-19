@@ -84,30 +84,30 @@ services:
         CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
     depends_on:
       - frontend_static
-  frontend_storybook_nginx:
+  frontend_storybook_new_nginx:
     image: >-
-      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_new_nginx
     build:
       context: ..
       cache_from:
-        - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx'
-      dockerfile: ./frontend_storybook/Dockerfile
-      target: frontend_storybook_nginx
+        - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_new_nginx'
+      dockerfile: ./frontend_storybook_new/Dockerfile
+      target: frontend_storybook_new_nginx
       args:
         CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
         CI_REGISTRY: '${CI_REGISTRY}'
         CI_PROJECT_PATH: '${CI_PROJECT_PATH}'
         CI_REGISTRY_IMAGE: '${CI_REGISTRY_IMAGE}'
     depends_on:
-      - frontend_storybook
-  frontend_storybook:
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook'
+      - frontend_storybook_new
+  frontend_storybook_new:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_new'
     build:
       context: ..
       cache_from:
-        - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook'
-      dockerfile: ./frontend_storybook/Dockerfile
-      target: frontend_storybook
+        - '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_new'
+      dockerfile: ./frontend_storybook_new/Dockerfile
+      target: frontend_storybook_new
       args:
         CI_COMMIT_REF_NAME: '${CI_COMMIT_REF_NAME}'
         CI_REGISTRY: '${CI_REGISTRY}'
