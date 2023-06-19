@@ -17,7 +17,7 @@
 @import "base/index";
 
 // ASSETS BASE PATH STORYBOOK
-$assetsBasePath: 'http://storybook.labo-website-2021.localhost/';
+$assetsBasePath: 'https://storybook.develop.labo-website-2021.n3.caffeina.host/';
 
 // TYPOGRAPHY
 @include generate-font-face();
