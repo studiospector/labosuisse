@@ -2,7 +2,7 @@
 /*
 	Plugin Name: Pixel Cat Lite - ATTENZIONE! Plugin modificato. Leggere descrizione.
 	Plugin URI: https://fatcatapps.com/pixel-cat
-	Description: Modifica fatta nel file "includes/integrations/woo-feed.php". Aggiunte righe da 49 a 57 nella funzione fca_pc_do_feed_body. Per filtrare i feed tra lingua italiana e inglese con WPML.
+	Description: Modifica fatta nel file "includes/integrations/woo-feed.php". Aggiunte righe da 49 a 57 nella funzione fca_pc_do_feed_body. Per filtrare i feed tra lingua italiana e inglese con WPML. Altra modifica fatta nel file "video.js". Aggiunto l'if statement sulla riga 436 nella funzione onYouTubeIframeAPIReady. Per prevenire l'errore ReferenceError delle API YouTube sulla variabile "fcaPcVideos".
 	Text Domain: facebook-conversion-pixel
 	Domain Path: /languages
 	Author: Fatcat Apps
