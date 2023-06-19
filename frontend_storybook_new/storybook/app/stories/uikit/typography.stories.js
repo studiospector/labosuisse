@@ -1,4 +1,8 @@
-import { appendChildren } from "../utils";
+const appendChildren = (htmlString, parent) => {
+  const div = document.createElement('div')
+  div.innerHTML = htmlString
+  Array.from(div.children).forEach(c => parent.appendChild(c))
+}
 
 export default {
   title: "UIKIT/Typography",
