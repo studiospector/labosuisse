@@ -1,4 +1,4 @@
-FROM node:16.17.1-alpine AS frontend_storybook_new
+FROM node:18.16.0-alpine AS frontend_storybook_new
 WORKDIR /app
 
 RUN apk add --no-cache git --update
