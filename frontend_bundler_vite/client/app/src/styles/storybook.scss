@@ -37,7 +37,3 @@ $assetsBasePath: 'https://storybook.develop.labo-website-2021.n3.caffeina.host/'
 @import "components/hero";
 @import "components/carousel-hero";
 @import "components/swiper";
-
-body {
-    overflow-y: auto!important;
-}
