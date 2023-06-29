@@ -12,6 +12,8 @@ COPY ./frontend_bundler_vite/client/app/src/styles ./styles
 COPY ./frontend_bundler_vite/client/app/src/scripts ./scripts
 COPY ./frontend_static/client/app/views ./views
 COPY ./frontend_static/client/app/fixtures ./fixtures
+COPY ./frontend_bundler_vite/tommy/optimized ./public/assets
+
 RUN npm run build
 
 EXPOSE 6006
