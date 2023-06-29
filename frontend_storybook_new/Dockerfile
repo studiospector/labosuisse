@@ -24,6 +24,6 @@ FROM nginx:alpine AS frontend_storybook_new_nginx
 COPY ./frontend_storybook_new/nginx/config /etc/config
 COPY ./frontend_storybook_new/nginx/docker/entrypoint.sh /usr/bin/entrypoint
 COPY ./frontend_bundler_vite/tommy/optimized /var/assets
-# COPY --from=frontend_storybook_new /app/dist /var/static
+COPY --from=frontend_storybook_new /app/storybook-static /var/static
 
 ENTRYPOINT entrypoint
