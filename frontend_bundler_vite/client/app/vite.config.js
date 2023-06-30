@@ -15,11 +15,11 @@ export default defineConfig({
     }
   },
   build: {
-    target: ['es2020', 'edge88', 'firefox78', 'chrome87', 'safari14'],
+    target: ['es2015'],
     outDir: 'dist',
     emptyOutDir: true,
     cssCodeSplit: true,
-    sourcemap: true,
+    sourcemap: process.env.NODE_ENV == 'development' ? true : false,
     lib: {
       entry: [
         resolve(__dirname, 'src/scripts/main.js'),
