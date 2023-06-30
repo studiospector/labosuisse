@@ -126,6 +126,7 @@ class Assets
         // Woocommerce multilingual plugin
         wp_dequeue_style('wcml-dropdown-0');
         wp_dequeue_style('wpml-legacy-horizontal-list-0');
+        wp_dequeue_style('wpml-blocks');
 
         if (!is_admin() && !is_user_logged_in()) {
             wp_deregister_style('dashicons');
