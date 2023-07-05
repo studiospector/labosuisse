@@ -20,9 +20,9 @@ class Multicountry extends Component {
         this.ui.button.classList.remove('button-primary-disabled')
 
         if (ev.target.value == 'IT') {
-            this.ui.button.setAttribute('href', import.meta.env.VITE_LB_API_URL)
+            this.ui.button.setAttribute('href', import.meta.env.LB_API_URL)
         } else if (ev.target.value == 'EN') {
-            this.ui.button.setAttribute('href', `${import.meta.env.VITE_LB_API_URL}/en/`)
+            this.ui.button.setAttribute('href', `${import.meta.env.LB_API_URL}/en/`)
         }
     }
 }

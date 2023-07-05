@@ -69,7 +69,7 @@ class AsyncCart extends Component {
 
                 $.ajax({
                     type: 'POST',
-                    url: import.meta.env.VITE_LB_API_URL + cartEndpoint,
+                    url: import.meta.env.LB_API_URL + cartEndpoint,
                     data: data,
                     beforeSend: function (response) {
                         $thisbutton.removeClass('added').addClass('button-loading');
