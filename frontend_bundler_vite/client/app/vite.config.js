@@ -83,5 +83,8 @@ export default defineConfig({
       },
     },
   },
+  define: {
+    'import.meta.env.LB_API_URL': JSON.stringify(process.env.LB_API_URL)
+  },  
   plugins: [minifyBundles()],
 })
