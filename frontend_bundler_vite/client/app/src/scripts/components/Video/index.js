@@ -1,4 +1,5 @@
 import Component from "@okiba/component";
+import { on, qs } from "@okiba/dom";
 import Plyr from "plyr";
 
 const ui = {
@@ -22,16 +23,25 @@ class Video extends Component {
     )
 
     if (this.ui.video) {
-      const player = new Plyr(this.ui.video, plyrProps);
+      this.player = new Plyr(this.ui.video, plyrProps);
+
+      this.nav = qs('#lb-offsetnav-banner-video')
+      if (this.nav) {
+        on(this.nav, 'closeOffsetNav', this.close)
+      }
 
       if (!this.loop) {
-        player.on("ended", (event) => {
+        this.player.on("ended", (event) => {
           const instance = event.detail.plyr;
           instance.restart();
           setTimeout(() => instance.pause(), 100);
         });
       }
     }
+  }
+
+  close = () => {
+    this.player.pause()
   }
 }
 
