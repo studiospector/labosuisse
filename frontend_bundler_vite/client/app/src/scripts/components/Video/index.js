@@ -10,11 +10,16 @@ class Video extends Component {
   constructor({ options, ...props }) {
     super({ ...props, ui });
 
+    this.player = null
+
+    this.asyncInit = this.el.dataset?.asyncInit
+    this.isFirstInit = true
+
     this.noControls = this.el.dataset?.noControls
     this.autoplay = this.el.dataset?.autoplay
     this.loop = this.el.dataset?.loop
 
-    const plyrProps = Object.assign(
+    this.plyrProps = Object.assign(
       {},
       !!this.noControls ? { controls: [] } : null,
       !!this.autoplay ? { autoplay: true } : null,
@@ -23,20 +28,36 @@ class Video extends Component {
     )
 
     if (this.ui.video) {
-      this.player = new Plyr(this.ui.video, plyrProps);
-
       this.nav = qs('#lb-offsetnav-banner-video')
-      if (this.nav) {
+      
+      if (this.nav && this.nav.contains(this.el)) {
         on(this.nav, 'closeOffsetNav', this.close)
-      }
 
-      if (!this.loop) {
-        this.player.on("ended", (event) => {
-          const instance = event.detail.plyr;
-          instance.restart();
-          setTimeout(() => instance.pause(), 100);
-        });
+        if (!!this.asyncInit) {
+          on(this.nav, 'openOffsetNav', this.handleAsyncInit)
+        }
+      } else {
+        this.init()
       }
+    }
+  }
+
+  init = () => {
+    this.player = new Plyr(this.ui.video, this.plyrProps);
+
+    if (!this.loop) {
+      this.player.on("ended", (event) => {
+        const instance = event.detail.plyr;
+        instance.restart();
+        setTimeout(() => instance.pause(), 100);
+      });
+    }
+  }
+
+  handleAsyncInit = () => {
+    if (this.isFirstInit) {
+      this.init()
+      this.isFirstInit = false
     }
   }
 
