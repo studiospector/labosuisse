@@ -31,6 +31,7 @@ class OffsetNav extends Component {
 
         this.headerStickyProduct = qs('.lb-header-sticky-product')
 
+        this.openEvent = new Event("openOffsetNav");
         this.closeEvent = new Event("closeOffsetNav");
         this.ui.closeTriggers.forEach(trigger => on(trigger, 'click', this.close))
     }
@@ -56,6 +57,8 @@ class OffsetNav extends Component {
         }
         setTimeout(() => this.adjustContent(), 450);
         setTimeout(() => this.el.classList.add('is-open'), 500);
+
+        this.el.dispatchEvent(this.openEvent)
     }
 
     close = () => {
