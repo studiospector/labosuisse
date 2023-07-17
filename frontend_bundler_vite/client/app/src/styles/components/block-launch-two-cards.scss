@@ -1,0 +1,59 @@
+.block-two-cards {
+    &__cards {
+        margin-top: 40px;
+        
+        .card {
+            width: 100%;
+
+            .card-img,
+            .lb-picture {
+                min-height: 310px;
+    
+                @include mq($until: md) {
+                    min-height: 250px;
+                }
+            }
+    
+            .infobox {
+                &__subtitle {
+                    @include mq($until: md) {
+                        font-size: rem(18);
+                    }
+                }
+
+                &__cta {
+                    margin-top: 0;
+                }
+            }
+        }
+    }
+
+    &__card-item {
+        &:not(:last-child) {
+            margin-bottom: 60px;
+        }
+    }
+
+
+
+    &--vertical {
+        .block-two-cards__cards {
+            margin-top: 60px;
+            
+            .card {
+                .card-img,
+                .lb-picture {
+                    min-height: 460px;
+        
+                    @include mq($until: md) {
+                        min-height: 300px;
+                    }
+                }
+    
+                .card-img-wrapper {
+                    order: 1;
+                }
+            }
+        }
+    }
+}

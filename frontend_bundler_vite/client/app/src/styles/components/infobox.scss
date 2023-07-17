@@ -1,0 +1,93 @@
+.infobox {
+
+    img {
+        width: auto;
+        margin-bottom: 20px;
+    }
+
+    &__date {
+        font-size: rem(16);
+        font-weight: 300;
+        color: map-get($colors, "primary-dark-1");
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    &__tagline {
+        font-size: rem(16);
+        font-weight: 400;
+        color: map-get($colors, "secondary");
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+
+    &__title {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    &__subtitle {
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+    }
+
+    &__paragraph {
+        letter-spacing: 0.02em;
+
+        &--small {
+            margin-top: 20px;
+            font-size: rem(14);
+            line-height: rem(19);
+            color: map-get($colors, "primary-dark-1");
+        }
+    }
+
+    &__location {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+
+        &__label {
+            margin-left: 8px;
+        }
+    }
+
+    &__scope {
+        display: flex;
+        font-size: rem(14);
+        letter-spacing: 0.02em;
+        margin-bottom: 20px;
+
+        @include mq($until: md) {
+            flex-direction: column;
+            margin-bottom: 20px;
+        }
+
+        &__label {
+            margin-right: 5px;
+            text-transform: uppercase;
+            color: map-get($colors, "secondary");
+            white-space: nowrap;
+
+            @include mq($until: md) {
+                margin-right: 0;
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    &__location,
+    &__scope {
+        font-size: rem(14);
+        line-height: 1;
+    }
+    
+    &__cta {
+        margin-top: 40px;
+
+        @include mq($until: md) {
+            margin-top: 20px;
+        }
+    }
+}

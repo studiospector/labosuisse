@@ -42,18 +42,18 @@ echo "---------- BUILDING ⚒"
 ./cmd/base.sh \
   -f ./docker/build.yml \
   -f ./docker/publish.yml \
-  run --rm frontend_bundler
+  run --rm frontend_bundler_vite
 
 ./cmd/base.sh \
   -f ./docker/build.yml \
   -f ./docker/publish.yml \
   run --rm frontend_static
 
-if [ -d ./frontend_storybook ]; then
+if [ -d ./frontend_storybook_new ]; then
 ./cmd/base.sh \
   -f ./docker/build.yml \
   -f ./docker/publish.yml \
-  run --rm frontend_storybook
+  run --rm frontend_storybook_new
 fi
 
 if [ $? != 0 ]; then
@@ -94,14 +94,14 @@ echo "\n\n---------- COPYING PUBLIC FILES IN RELEASE REPO.\n"
 cp -r $PUBLISH_STATIC_SRC_DIR/* $PUBLISH_TMP_DIR
 cp -r $PUBLISH_BUNDLE_SRC_DIR/* $PUBLISH_TMP_DIR
 
-if [ -d ./frontend_storybook ]; then
+if [ -d ./frontend_storybook_new ]; then
 cp -r $PUBLISH_STORYBOOK_SRC_DIR $PUBLISH_TMP_DIR/storybook
 fi
 
 echo "\n\n---------- EXTRA COMMAND FOR FRONTEND FOLDER.\n"
-if [ -d ./frontend_bundler/tommy/optimized ]; then
-  cp -r ./frontend_bundler/tommy/optimized $PUBLISH_TMP_DIR/assets
-  cp -r ./frontend_bundler/tommy/optimized $PUBLISH_TMP_DIR/storybook/assets
+if [ -d ./frontend_bundler_vite/tommy/optimized ]; then
+  cp -r ./frontend_bundler_vite/tommy/optimized $PUBLISH_TMP_DIR/assets
+  cp -r ./frontend_bundler_vite/tommy/optimized $PUBLISH_TMP_DIR/storybook/assets
 fi
 
 rm -rf $PUBLISH_TMP_DIR/_errors

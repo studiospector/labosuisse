@@ -1,0 +1,277 @@
+.lb-wc-myaccount {
+    @include mq($until: lg) {
+        margin-top: 30px;
+    }
+
+    &__navigation {
+        &__title {
+            margin-bottom: 40px;
+            font-size: rem(14);
+            font-weight: 700;
+        }
+
+        ul {
+            li {
+                white-space: nowrap;
+                
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+
+                    a {
+                        font-size: rem(13);
+                        font-weight: 300;
+                        color: map-get($colors, "black");
+                        text-decoration: none;
+                    }
+                }
+
+                .button {
+                    width: 100%;
+                    justify-content: center;
+                    margin-top: 30px;
+                }
+
+                &.is-active {
+                    a {
+                        font-weight: 700;
+                        border-bottom: 4px solid map-get($colors, "black");
+                        padding-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__content {
+        margin-left: 50px;
+
+        @include mq($until: lg) {
+            margin-left: 0;
+            margin-top: 40px;
+        }
+
+        &--no-margin {
+            margin-left: 0;
+        }
+
+        // Dashboard
+        .banner {
+            .infobox {
+                @include mq($from: md) {
+                    width: 100%;
+                    max-width: 430px;
+                }
+
+                &__paragraph {
+                    a {
+                        font-weight: 500;
+                        text-decoration: none;
+                        color: map-get($colors, "black");
+                    }
+                }
+            }
+        }
+
+
+        // Orders
+        &__table {
+            @include mq($until: md) {
+                overflow-x: auto;
+            }
+        }
+
+        .woocommerce-orders-table {
+            width: 100%;
+            margin-top: 50px;
+            border-spacing: 0;
+            border-collapse: collapse;
+
+            thead {
+                background-color: map-get($colors, "primary-light-1");
+                margin-bottom: 20px;
+                padding: 0 20px;
+            }
+
+            &__header {
+                padding: 8px 0;
+                padding-left: 20px;
+                border: 0;
+                font-size: rem(12);
+                font-weight: 700;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            &__header-order-number {
+                span {
+                    &::before {
+                        content: '# ';
+                    }
+                }
+            }
+
+            &__row {
+                border-bottom: 1px solid map-get($colors, "grey-3");
+
+                &:first-child {
+                    .woocommerce-orders-table__cell {
+                        padding-top: 50px;
+                    }
+                }
+            }
+            
+            &__cell {
+                padding: 30px 20px;
+                font-weight: 300;
+
+                .button {
+                    padding: 0;
+                }
+            }
+        }
+
+
+        // Order single info
+        .lb-wc-order-single {
+            &__info {
+                margin-bottom: 50px;
+            }
+
+            > .button {
+                padding-top: 0;
+
+                .lb-icon {
+                    svg {
+                        width: 5px;
+                    }
+                }
+            }
+
+            &__title {
+                font-size: rem(30);
+                border: 0;
+                padding: 0;
+                margin-top: 20px;
+                margin-bottom: 0;
+                text-transform: uppercase;
+            }
+
+            .woocommerce-order-details {
+                &__title {
+                    display: none;
+                }
+
+                .lb-wc-total-price-table {
+                    tbody {
+                        tr {
+                            &:last-child {
+                                margin-bottom: 0;
+                            }
+
+                            td {
+                                &:first-child {
+                                    padding-left: 20px;
+                                }
+    
+                                &:last-child {
+                                    padding-right: 20px;
+                                }
+                            }
+                        }
+                    }
+
+                    tfoot {
+                        tr {
+                            background-color: map-get($colors, "primary-light-1");
+                            border-bottom: 1px solid map-get($colors, "grey-2");
+
+                            th, td {
+                                padding: 20px;
+                            }
+
+                            th {
+                                color: map-get($colors, "primary-dark-1");
+                            }
+
+                            &:not(:last-child) {
+                                margin-bottom: 0;
+                            }
+
+                            &:last-child {
+                                padding-top: 0;
+                                border-top: 0;
+                                border-bottom: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .woocommerce-customer-details {
+                .woocommerce-columns {
+                    display: flex;
+
+                    .woocommerce-column {
+                        flex: 1;
+
+                        &__title {
+                            border: 0;
+                            padding: 0;
+                            margin-bottom: 10px;
+                        }
+
+                        address {
+                            color: map-get($colors, "primary-dark-1");
+                        }
+                    }
+                }
+            }
+        }
+
+
+        // Address
+        .woocommerce-Address {
+            font-weight: 300;
+
+            .infobox__subtitle {
+                margin-top: 40px;
+            }
+
+            a {
+                display: block;
+                font-weight: 500;
+                color: map-get($colors, "black");
+                margin-bottom: 10px;
+                text-decoration: none;
+            }
+
+            address {
+                font-style: normal;
+            }
+        }
+
+
+        // Address edit
+        .lb-wc-edit-address-form {
+            .infobox__subtitle {
+                margin-bottom: 40px;
+            }
+
+            .button {
+                margin-top: 20px;
+            }
+        }
+
+
+        // Account edit
+        .lb-wc-edit-account {
+            &__password {
+                margin-top: 20px;
+            }
+
+            .button {
+                margin-top: 20px;
+            }
+        }
+    }
+}

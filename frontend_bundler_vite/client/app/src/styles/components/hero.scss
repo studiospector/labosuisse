@@ -1,0 +1,144 @@
+.hero {
+    height: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+
+    @include mq($until: md) {
+        flex-direction: column;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        @include mq($until: md) {
+            position: absolute;
+        }
+    }
+
+    &__infobox {
+        width: 100%;
+        display: flex;
+        z-index: 1;
+
+        @include mq($until: md) {
+            height: 100%;
+            flex: 1 1 100%;
+            padding: 20px 0;
+
+            .infobox {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                text-align: center;
+                padding: 0 rem(15);
+
+                // &__text-wrap {
+                    // margin-bottom: 100%;
+                    // flex: 1 1 100%;
+                // }
+
+                &__cta {
+                    height: 100%;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: center;
+                    margin-bottom: 40px;
+                }
+
+                &__tagline {
+                    font-size: rem(12);
+                }
+            
+                &__title {
+                    font-size: rem(24);
+                }
+            
+                &__paragraph {
+                    font-size: rem(13);
+                }
+            }
+        }
+    }
+
+    &--large {
+        min-height: 700px;
+        max-height: 700px;
+
+        @include mq($until: md) {
+            min-height: 460px;
+            max-height: 460px;
+        }
+    }
+
+    &--medium {
+        min-height: 520px;
+        max-height: 520px;
+
+        @include mq($until: md) {
+            min-height: 460px;
+            max-height: 460px;
+        }
+    }
+
+    &--small {
+        min-height: 420px;
+        max-height: 420px;
+    }
+
+    &--large,
+    &--medium {
+        .hero {
+            &__infobox {
+                .infobox {
+                    @include mq($until: md) {
+                        min-height: 460px;
+                        max-height: 460px;
+                    }
+                }
+            }
+        }
+    }
+
+    &--infobox-bottom {
+        align-items: flex-end;
+
+        .infobox {
+            margin-bottom: 80px;
+
+            @include mq($until: md) {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &--containerized {
+        .hero {
+            &__infobox {
+                @include mq($from: md) {
+                    padding: 0 70px;
+                }
+            }
+        }
+    }
+
+    &--white-text {
+        .infobox {
+            &__title,
+            &__subtitle,
+            &__paragraph {
+                color: map-get($colors, "white");
+
+                @include mq($until: md) {
+                    color: map-get($colors, "black");
+                }
+            }
+        }
+    }
+}

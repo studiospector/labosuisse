@@ -1,0 +1,306 @@
+/**
+ * Theme Options Menu link style
+ */
+#adminmenu {
+    #toplevel_page_lb-theme-general-settings {
+        &.opensub,
+        &:hover {
+            .wp-menu-image::before {
+                color: #fff;
+            }
+        }
+
+        &.opensub > a,
+        > a {
+            background-color: #b52a2d;
+            color: #fff;
+
+            &:hover {
+                color: #fff;
+            }
+        }
+    }
+}
+
+
+/**
+ * Labels for Product Category
+ */
+.edit-tags-php {
+    #posts-filter {
+        .wp-list-table {
+            .level-0 {
+                // position: relative;
+    
+                // &::after {
+                //     content: '';
+                //     width: 100%;
+                //     height: 1px;
+                //     position: absolute;
+                //     top: 0;
+                //     left: 0;
+                //     border-top: 5px solid #1d2327;
+                // }
+    
+                th, td {
+                    border-top: 3px solid #1d2327;
+                }
+            }
+        }
+    }
+}
+
+.post-type-product.taxonomy-product_cat {
+    .wp-list-table {
+        .thumb {
+            img {
+                display: none;
+            }
+        }
+
+        .level-0 {
+            .thumb {
+                &::before {
+                    content: 'Macro';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+
+        .level-1 {
+            .thumb {
+                &::before {
+                    content: 'Zona';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+
+        .level-2 {
+            .thumb {
+                &::before {
+                    content: 'Esigenza';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+
+        .level-3 {
+            .thumb {
+                &::before {
+                    content: 'Tipologia';
+                    width: 100%;
+                    display: block;
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
+
+
+/**
+ * Footer text
+ */
+#wpfooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    #footer-left,
+    .clear {
+        display: none;
+    }
+
+    .credits {
+        font-size: 0.9rem;
+        display: block;
+        text-align: right;
+        color: #212121;
+        margin: 0;
+
+        a {
+            background-position: left center;
+            background-repeat: no-repeat;
+            background-size: 15px;
+            color: #212121;
+            text-decoration: none;
+            text-transform: none;
+        }
+    }
+}
+
+
+/**
+ * Admin bar
+ */
+#wpadminbar #wp-admin-bar-site-name > .ab-item::before {
+    background-repeat: no-repeat;
+    background-size: contain;
+    color: rgba(0, 0, 0, 0);
+    margin-top: 4px;
+}
+#wpadminbar #wp-admin-bar-site-name.hover > .ab-item {
+    background-position: 0 0;
+}
+
+
+/**
+ * Welcome panel
+ */
+#welcome-panel {
+    padding: 40px;
+    background: #fff;
+
+    &::before {
+        content: none;
+    }
+
+    .welcome-panel-close {
+        display: none !important;
+    }
+
+    .welcome-panel-content {
+        &:not(.lb-welcome-panel-content) {
+            display: none;
+        }
+    }
+    
+    .lb-welcome-panel-content {
+        min-height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+    
+        &__logo {
+            display: flex;
+            align-items: center;
+        }
+    
+        &__text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin-left: 40px;
+            padding-left: 40px;
+            border-left: 1px solid #c3c4c7;
+    
+            h1, p {
+                margin: 0;
+                padding: 0;
+                line-height: 1;
+            }
+    
+            h1 {
+                margin-bottom: 20px;
+            }
+        }
+    }
+}
+
+
+/**
+ * Admin login page
+ */
+body.login {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f1f1f1;
+
+    div#login {
+        padding: 0;
+
+        h1 {
+            a {
+                width: 100%;
+                height: 80px;
+                margin: 0;
+                margin-bottom: 26px;
+                background-size: contain;
+                font-size: inherit;
+                font-weight: unset;
+                line-height: inherit;
+            }
+        }
+
+        form#loginform {
+            // p {
+            //     label {
+            //     }
+            // }
+
+            input {
+                &:focus {
+                    border-color: #b52a2d;
+                    box-shadow: 0 0 0 1px #b52a2d;
+                }
+            }
+
+            // input#user_login {
+            // }
+
+            // input#user_pass {
+            // }
+
+            // p.forgetmenot {
+            //     input#rememberme {
+            //     }
+            // }
+
+            p.submit {
+                input#wp-submit {
+                    background-color: #b52a2d;
+                    border-color: #b52a2d;
+                }
+            }
+        }
+
+        // p#nav {
+        //     a {
+        //     }
+        // }
+
+        // p#backtoblog {
+        //     a {
+        //     }
+        // }
+    }
+
+    .dashicons {
+        color: #212121;
+    }
+
+    #login_error {
+        border-left: 4px solid #b52a2d;
+    }
+
+    .message,
+    .success {
+        border-left: 4px solid #97C939;
+    }
+}
+
+
+
+body.login-action-login #loginform,
+body.login-action-lostpassword #lostpasswordform,
+body.login-action-register #registerform {
+    width: auto !important;
+}
+
+
+
+/**
+ * General
+ */
+.wp-admin .wp-list-table.fixed .column-icl_translations {
+    width: 3%;
+}

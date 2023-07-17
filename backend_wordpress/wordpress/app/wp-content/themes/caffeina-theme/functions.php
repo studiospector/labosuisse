@@ -23,11 +23,11 @@ if (!defined('LB_BUILD_PATH')) {
 }
 
 if (!defined('LB_BUILD_JS_URI')) {
-	define('LB_BUILD_JS_URI', untrailingslashit(get_template_directory_uri()) . '/static/js');
+	define('LB_BUILD_JS_URI', untrailingslashit(get_template_directory_uri()) . '/static');
 }
 
 if (!defined('LB_BUILD_JS_DIR_PATH')) {
-	define('LB_BUILD_JS_DIR_PATH', untrailingslashit(get_template_directory()) . '/static/js');
+	define('LB_BUILD_JS_DIR_PATH', untrailingslashit(get_template_directory()) . '/static');
 }
 
 if (!defined('LB_BUILD_IMG_URI')) {
@@ -35,11 +35,11 @@ if (!defined('LB_BUILD_IMG_URI')) {
 }
 
 if (!defined('LB_BUILD_CSS_URI')) {
-	define('LB_BUILD_CSS_URI', untrailingslashit(get_template_directory_uri()) . '/static/css');
+	define('LB_BUILD_CSS_URI', untrailingslashit(get_template_directory_uri()) . '/static');
 }
 
 if (!defined('LB_BUILD_CSS_DIR_PATH')) {
-	define('LB_BUILD_CSS_DIR_PATH', untrailingslashit(get_template_directory()) . '/static/css');
+	define('LB_BUILD_CSS_DIR_PATH', untrailingslashit(get_template_directory()) . '/static');
 }
 
 if (!defined('LB_BUILD_LIB_URI')) {

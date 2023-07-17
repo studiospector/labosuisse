@@ -6,5 +6,5 @@ BUILD=${1:-scripts}
 
 ./cmd/base.sh \
   -f ./docker/analyze.yml \
-  run --rm frontend_bundler \
-  && npx webpack-bundle-analyzer ./frontend_bundler/client/app/dist/public/js/stat.$BUILD.json
+  run --rm frontend_bundler_vite \
+  && npx webpack-bundle-analyzer ./frontend_bundler_vite/client/app/dist/stat.$BUILD.json

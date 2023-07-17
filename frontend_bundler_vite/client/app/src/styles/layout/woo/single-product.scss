@@ -1,0 +1,266 @@
+.single-product-details {
+    @include mq($until: md) {
+        margin-top: 20px;
+    }
+
+    &__wrapper {
+        flex-wrap: nowrap;
+        column-gap: 60px;
+
+        @include mq($until: md) {
+            flex-wrap: wrap;
+            column-gap: 0;
+        }
+    }
+
+    &__images {
+        flex-shrink: 1;
+
+        @include mq($until: md) {
+            display: none;
+            flex-shrink: 0;
+        }
+    }
+
+    .lb-product-gallery {
+        position: relative;
+        overflow: hidden;
+
+        @include mq($until: md) {
+            padding-bottom: 60px;
+        }
+
+        &__desktop {
+            @include mq($until: md) {
+                display: none;
+            }
+        }
+
+        &__mobile {
+            position: relative;
+
+            @include mq($from: md) {
+                display: none;
+            }
+
+            .swiper-pagination.swiper-pagination-bullets {
+                display: block;
+                bottom: 0;
+            }
+        }
+
+        a {
+            display: block;
+            margin-bottom: 30px;
+        }
+
+        &__image {
+            overflow: hidden;
+        }
+    }
+
+    &__summary {
+        flex-shrink: 1;
+
+        @include mq($until: md) {
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .lb-product-gallery {
+            @include mq($from: md) {
+                display: none;
+            }
+        }
+
+        &__brand,
+        &__patent {
+            margin-bottom: 20px;
+
+            img {
+                width: auto;
+                height: 27px;
+
+                @include mq($until: md) {
+                    height: 20px;
+                }
+            }
+        }
+
+        &__patent {
+            img {
+                height: 40px;
+
+                @include mq($until: md) {
+                    height: 20px;
+                }
+            }
+        }
+
+        &__product-title {
+            margin-bottom: 40px;
+            font-size: rem(30);
+            font-weight: 600;
+            text-transform: uppercase;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+                font-size: rem(24);
+                text-align: center;
+            }
+        }
+
+        &__benefits {
+            margin-bottom: 60px;
+
+            @include mq($until: md) {
+                display: inline-block;
+                margin-bottom: 30px;
+            }
+
+            &__item {
+                display: flex;
+                align-items: center;
+                font-weight: 300;
+                text-align: left;
+
+                @include mq($until: md) {
+                    font-size: rem(13);
+                }
+
+                &:not(:last-child) {
+                    margin-bottom: 20px;
+                }
+
+                .lb-icon {
+                    flex: 0 0 18px;
+                    margin-right: 10px;
+                }
+            }
+        }
+
+        &__short-description {
+            margin-bottom: 40px;
+            letter-spacing: 0.02em;
+
+            @include mq($until: md) {
+                margin-bottom: 30px;
+
+                p {
+                    font-size: rem(13);
+                }
+            }
+        }
+
+        .price {
+            margin-bottom: 40px;
+            
+            @include mq($until: md) {
+                margin-bottom: 30px;
+                text-align: left;
+            }
+
+            .lb-wc-price {
+                display: flex;
+                align-items: center;
+                letter-spacing: 0.02em;
+
+                &__desc {
+                    font-size: rem(14);
+                    font-weight: 300;
+                }
+    
+                del {
+                    font-size: rem(26);
+                    font-weight: 300;
+                    margin-right: 16px;
+                }
+        
+                ins {
+                    font-size: rem(26);
+                    font-weight: 600;
+                }
+            }
+
+            &:empty {
+                display: none;
+            }
+
+            /* In case of variation management in JS */
+            .price {
+                margin: 0;
+            }
+        }
+
+        .onsale {
+            display: none;
+        }
+
+        .cart {
+            .quantity {
+                height: 0;
+                width: 0;
+                margin: 0;
+                visibility: hidden;
+                // margin-bottom: 40px;
+
+                // @include mq($until: md) {
+                //     margin-bottom: 30px;
+                // }
+
+                .screen-reader-text {
+                    display: none;
+                }
+            }
+
+            .added_to_cart {
+                display: none;
+            }
+
+            .lb-button-group {
+                a, button {
+                    @include mq($until: lg) {
+                        width: 100%;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        &__variations {
+            .lb-product-variations {
+                margin-bottom: 60px;
+    
+                @include mq($until: md) {
+                    margin-bottom: 40px;
+                    text-align: left;
+                }
+
+                &--link-help {
+                    margin-bottom: 0;
+                }
+            }
+
+            .woocommerce-variation {
+                // margin-bottom: 60px;
+
+                .woocommerce-variation-price {
+                    display: none;
+                }
+            }
+
+            @include mq($until: md) {
+                .button {
+                    width: 100%;
+                    justify-content: center;
+                }
+            }
+        }
+
+        .lb-product-variation-help {
+            margin-bottom: 45px;
+        }
+
+        // &__product-meta { }
+    }
+}

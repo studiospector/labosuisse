@@ -1,0 +1,326 @@
+// PALETTE 
+$colors: (
+"black": #000000,
+"grey-1": #f5f5f5,
+"grey-2": #e0e0e0,
+"grey-3": #9e9e9e,
+"grey-4": #616161,
+"grey-5": #212121,
+"primary": #000000,
+"primary-dark-1": #474747,
+"primary-dark-2": #7BBD00,
+"primary-dark-3": #0083cf,
+"primary-light-1": #f5f5f5,
+"primary-light-2": #27c6f1,
+"primary-light-3": #6dd1f5,
+"secondary": #b52a2d,
+"secondary-dark-1": #7a2525,
+"secondary-dark-2": #ffa802,
+"secondary-dark-3": #ffc102,
+"secondary-light-1": rgba(164, 53, 52, 0.6),
+"secondary-light-2": #caaf3b,
+"secondary-light-3": #fff695,
+"status": #6cd232,
+"status-warning": #f5dc28,
+"tertiary": #ffffff,
+"tertiary-dark-1": rgba(255, 255, 255, 0.8),
+"tertiary-dark-2": rgba(255, 255, 255, 0.9),
+"tertiary-dark-3": #00a276,
+"tertiary-light-1": rgba(255, 255, 255, 0.6),
+"tertiary-light-2": #13ddbd,
+"tertiary-light-3": #73e6cd,
+"white": #ffffff
+);
+
+
+
+// TYPOS 
+$typographyVariables: (
+"btn-label-big-mobile-color": map-get($colors, "black"),
+"btn-label-big-mobile-font-family": 'Suisse Intl',
+"btn-label-big-mobile-font-size": rem(18px),
+"btn-label-big-mobile-font-style": normal,
+"btn-label-big-mobile-font-weight": 400,
+"btn-label-big-mobile-letter-spacing": 0.02em,
+"btn-label-big-mobile-line-height": 1.2,
+"btn-label-big-mobile-text-transform": none,
+
+"btn-label-medium-mobile-color": map-get($colors, "black"),
+"btn-label-medium-mobile-font-family": 'Suisse Intl',
+"btn-label-medium-mobile-font-size": rem(15px),
+"btn-label-medium-mobile-font-style": normal,
+"btn-label-medium-mobile-font-weight": 400,
+"btn-label-medium-mobile-letter-spacing": 0.02em,
+"btn-label-medium-mobile-line-height": 1.2,
+"btn-label-medium-mobile-text-transform": none,
+
+"btn-label-small-mobile-color": map-get($colors, "black"),
+"btn-label-small-mobile-font-family": 'Suisse Intl',
+"btn-label-small-mobile-font-size": rem(14px),
+"btn-label-small-mobile-font-style": normal,
+"btn-label-small-mobile-font-weight": 300,
+"btn-label-small-mobile-letter-spacing": 0em,
+"btn-label-small-mobile-line-height": 1.2,
+"btn-label-small-mobile-text-transform": none,
+
+
+
+"h1-mobile-color": map-get($colors, "black"),
+"h1-mobile-font-family": 'Suisse Intl',
+"h1-mobile-font-size": rem(48px),
+"h1-mobile-font-style": normal,
+"h1-mobile-font-weight": 700,
+"h1-mobile-letter-spacing": 0em,
+"h1-mobile-line-height": 1.2,
+"h1-mobile-text-transform": uppercase,
+
+
+
+"h2-desktop-font-size": rem(40px),
+"h2-desktop-letter-spacing": 0.02em,
+"h2-desktop-line-height": rem(44px),
+
+"h2-mobile-color": map-get($colors, "black"),
+"h2-mobile-font-family": 'Suisse Intl',
+"h2-mobile-font-size": rem(38px),
+"h2-mobile-font-style": normal,
+"h2-mobile-font-weight": 600,
+"h2-mobile-letter-spacing": 0em,
+"h2-mobile-line-height": 1.2,
+"h2-mobile-text-transform": uppercase,
+
+
+
+"h3-desktop-font-size": rem(32px),
+"h3-desktop-letter-spacing": 0.02em,
+"h3-desktop-line-height": rem(38px),
+
+"h3-mobile-color": map-get($colors, "black"),
+"h3-mobile-font-family": 'Suisse Intl',
+"h3-mobile-font-size": rem(30px),
+"h3-mobile-font-style": normal,
+"h3-mobile-font-weight": 600,
+"h3-mobile-letter-spacing": 0em,
+"h3-mobile-line-height": 1.2,
+"h3-mobile-text-transform": uppercase,
+
+
+
+"h4-desktop-font-size": rem(26px),
+"h4-desktop-line-height": rem(34px),
+
+"h4-mobile-color": map-get($colors, "black"),
+"h4-mobile-font-family": 'Suisse Intl',
+"h4-mobile-font-size": rem(24px),
+"h4-mobile-font-style": normal,
+"h4-mobile-font-weight": 600,
+"h4-mobile-letter-spacing": 0.02em,
+"h4-mobile-line-height": rem(30px),
+"h4-mobile-text-transform": uppercase,
+
+
+
+"h5-desktop-font-size": rem(20px),
+"h5-desktop-line-height": rem(31.200000762939453px),
+
+"h5-mobile-color": map-get($colors, "black"),
+"h5-mobile-font-family": 'Suisse Intl',
+"h5-mobile-font-size": rem(18px),
+"h5-mobile-font-style": normal,
+"h5-mobile-font-weight": 600,
+"h5-mobile-letter-spacing": 0.02em,
+"h5-mobile-line-height": rem(24px),
+"h5-mobile-text-transform": uppercase,
+
+
+
+"h6-desktop-font-size": rem(18px),
+"h6-desktop-letter-spacing": 0em,
+"h6-desktop-line-height": 1.2,
+"h6-desktop-text-transform": none,
+
+"h6-mobile-color": map-get($colors, "black"),
+"h6-mobile-font-family": 'Suisse Intl',
+"h6-mobile-font-size": rem(12px),
+"h6-mobile-font-style": normal,
+"h6-mobile-font-weight": 700,
+"h6-mobile-letter-spacing": 0.02em,
+"h6-mobile-line-height": rem(26px),
+"h6-mobile-text-transform": uppercase,
+
+
+
+"input-big-default-mobile-color": map-get($colors, "black"),
+"input-big-default-mobile-font-family": 'Suisse Intl',
+"input-big-default-mobile-font-size": rem(16px),
+"input-big-default-mobile-font-style": normal,
+"input-big-default-mobile-font-weight": 400,
+"input-big-default-mobile-letter-spacing": 0em,
+"input-big-default-mobile-line-height": 1.2,
+"input-big-default-mobile-text-transform": none,
+"input-big-disabled-mobile-color": rgba(0,0,0,0.3),
+"input-big-disabled-mobile-font-weight": 700,
+"input-big-value-mobile-font-weight": 700,
+"input-small-default-mobile-color": map-get($colors, "black"),
+"input-small-default-mobile-font-family": 'Suisse Intl',
+"input-small-default-mobile-font-size": rem(12px),
+"input-small-default-mobile-font-style": normal,
+"input-small-default-mobile-font-weight": 400,
+"input-small-default-mobile-letter-spacing": 0em,
+"input-small-default-mobile-line-height": 1.2,
+"input-small-default-mobile-text-transform": none,
+"input-small-disabled-mobile-color": rgba(0,0,0,0.3),
+"input-small-value-mobile-font-weight": 700,
+"link-big-color": #00bff2,
+"link-big-font-family": 'Suisse Intl',
+"link-big-font-size": rem(18px),
+"link-big-font-style": normal,
+"link-big-font-weight": 400,
+"link-big-letter-spacing": 0em,
+"link-big-line-height": 1.2,
+"link-big-text-transform": none,
+"link-regular-color": #00bff2,
+"link-regular-font-family": 'Suisse Intl',
+"link-regular-font-size": rem(16px),
+"link-regular-font-style": normal,
+"link-regular-font-weight": 700,
+"link-regular-letter-spacing": 0em,
+"link-regular-line-height": 1.2,
+"link-regular-text-transform": none,
+"link-small-color": #00bff2,
+"link-small-font-family": 'Suisse Intl',
+"link-small-font-size": rem(14px),
+"link-small-font-style": normal,
+"link-small-font-weight": 400,
+"link-small-letter-spacing": 0em,
+"link-small-line-height": 1.2,
+"link-small-text-transform": none,
+"p-big-mobile-color": map-get($colors, "black"),
+"p-big-mobile-font-family": 'Suisse Intl',
+"p-big-mobile-font-size": rem(18px),
+"p-big-mobile-font-style": normal,
+"p-big-mobile-font-weight": 400,
+"p-big-mobile-letter-spacing": 0em,
+"p-big-mobile-line-height": 1.2,
+"p-big-mobile-text-transform": none,
+"p-regular-desktop-font-family": 'Suisse Intl',
+"p-regular-desktop-font-weight": 300,
+"p-regular-desktop-letter-spacing": 0.02em,
+"p-regular-desktop-line-height": rem(24px),
+"p-regular-mobile-color": map-get($colors, "black"),
+"p-regular-mobile-font-family": 'Suisse Intl',
+"p-regular-mobile-font-size": rem(16px),
+"p-regular-mobile-font-style": normal,
+"p-regular-mobile-font-weight": 300,
+"p-regular-mobile-letter-spacing": 0em,
+"p-regular-mobile-line-height": 1.2,
+"p-regular-mobile-text-transform": none,
+"p-small-mobile-color": map-get($colors, "black"),
+"p-small-mobile-font-family": 'Suisse Intl',
+"p-small-mobile-font-size": rem(14px),
+"p-small-mobile-font-style": normal,
+"p-small-mobile-letter-spacing": 0em,
+"p-small-mobile-line-height": 1.2,
+"p-small-mobile-text-transform": none
+);
+
+
+
+// COMPONENTS 
+$componentsVariables: (
+"btn-primary-default-mobile-background-color": map-get($colors, "secondary"),
+"btn-primary-default-mobile-border": 1px solid map-get($colors, "secondary"),
+"btn-primary-default-mobile-border-radius": rem(50px),
+"btn-primary-default-mobile-color": map-get($colors, "white"),
+"btn-primary-default-mobile-opacity": 1,
+"btn-primary-default-mobile-padding": rem(16px),
+"btn-primary-default-mobile-text-transform": uppercase,
+
+"btn-primary-disabled-mobile-color": rgba(255, 255, 255, 0.7),
+"btn-primary-disabled-mobile-background-color": rgba(164, 53, 52, 0.6),
+"btn-primary-disabled-mobile-border": 1px solid transparent,
+
+"btn-primary-hover-mobile-color": map-get($colors, "secondary"),
+"btn-primary-hover-mobile-background-color": map-get($colors, "white"),
+"btn-primary-hover-mobile-border": rem(1px) solid #a43534,
+
+
+
+"btn-secondary-default-mobile-background-color": map-get($colors, "white"),
+"btn-secondary-default-mobile-border": none,
+"btn-secondary-default-mobile-border-radius": rem(50px),
+"btn-secondary-default-mobile-color": map-get($colors, "secondary"),
+"btn-secondary-default-mobile-opacity": 1,
+"btn-secondary-default-mobile-padding": rem(16px),
+"btn-secondary-default-mobile-text-transform": uppercase,
+
+"btn-secondary-disabled-mobile-color": map-get($colors, "secondary-light-1"),
+"btn-secondary-disabled-mobile-background-color": map-get($colors, "white"),
+"btn-secondary-disabled-mobile-border": 1px solid transparent,
+
+"btn-secondary-hover-mobile-background-color": rgba(164, 53, 52, 0.6),
+
+
+
+"btn-tertiary-default-mobile-background-color": map-get($colors, "white"),
+"btn-tertiary-default-mobile-border": 1px solid map-get($colors, "secondary"),
+"btn-tertiary-default-mobile-border-radius": rem(50px),
+"btn-tertiary-default-mobile-color": map-get($colors, "secondary"),
+"btn-tertiary-default-mobile-opacity": 1,
+"btn-tertiary-default-mobile-padding": rem(16px),
+"btn-tertiary-default-mobile-text-transform": uppercase,
+
+"btn-tertiary-disabled-mobile-border": 1px solid transparent,
+"btn-tertiary-disabled-mobile-color": map-get($colors, "secondary-light-1"),
+
+"btn-tertiary-hover-mobile-background-color": map-get($colors, "secondary"),
+"btn-tertiary-hover-mobile-color": map-get($colors, "white"),
+"btn-tertiary-hover-mobile-border": 1px solid map-get($colors, "secondary"),
+
+
+
+"btn-quaternary-default-mobile-background-color": transparent,
+"btn-quaternary-default-mobile-border": none,
+"btn-quaternary-default-mobile-border-radius": rem(50px),
+"btn-quaternary-default-mobile-color": map-get($colors, "secondary"),
+"btn-quaternary-default-mobile-opacity": 1,
+"btn-quaternary-default-mobile-padding": rem(16px),
+"btn-quaternary-default-mobile-text-transform": none,
+
+"btn-quaternary-disabled-mobile-color": map-get($colors, "secondary-light-1"),
+"btn-quaternary-disabled-mobile-background-color": transparent,
+"btn-quaternary-disabled-mobile-border": transparent,
+
+"btn-quaternary-hover-mobile-background-color": transparent,
+
+
+
+"btn-small-primary-disabled-mobile-background-color": rgba(0.6431372761726379,0.2078431397676468,0.20392157137393951,0.6),
+"btn-small-primary-disabled-mobile-border": none,
+"btn-small-primary-disabled-mobile-border-radius": rem(50px),
+"btn-small-primary-disabled-mobile-color": map-get($colors, "white"),
+"btn-small-primary-disabled-mobile-opacity": 1,
+"btn-small-primary-disabled-mobile-padding": rem(16px),
+
+
+
+"form-default-mobile-background-color": inherit,
+"form-default-mobile-border": rem(1px) solid map-get($colors, "grey-3"),
+"form-default-mobile-border-radius": rem(4px),
+"form-default-mobile-color": map-get($colors, "white"),
+"form-default-mobile-opacity": 1,
+"form-default-mobile-padding": rem(0px),
+"form-disabled-mobile-border": rem(1px) solid map-get($colors, "black"),
+"form-disabled-mobile-opacity": 0.6,
+"form-error-mobile-border": rem(1px) solid #db0045,
+"form-error-mobile-color": #db0045,
+"form-focus-mobile-border": rem(1px) solid map-get($colors, "grey-1"),
+"form-success-mobile-border": rem(1px) solid map-get($colors, "status"),
+"form-success-mobile-color": map-get($colors, "status"),
+"form-filled-mobile-background-color": inherit,
+"form-filled-mobile-border": rem(1px) solid map-get($colors, "black"),
+"form-filled-mobile-border-radius": rem(4px),
+"form-filled-mobile-color": map-get($colors, "white"),
+"form-filled-mobile-opacity": 1,
+"form-filled-mobile-padding": rem(0px)
+);

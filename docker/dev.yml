@@ -46,7 +46,7 @@ services:
       DISABLE_WP_CRON: '${DISABLE_WP_CRON}'
     depends_on:
       - storage_mysql
-      - frontend_bundler
+      - frontend_bundler_vite
       - frontend_static
     volumes:
       - 'backend_media:/uploads'
@@ -61,9 +61,9 @@ services:
       - >-
         ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
       - >-
-        ../frontend_bundler/client/app/dist/public:/var/www/html/wp-content-custom/themes/caffeina-theme/static
+        ../frontend_bundler_vite/client/app/dist:/var/www/html/wp-content-custom/themes/caffeina-theme/static
       - >-
-        ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
+        ../frontend_bundler_vite/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
         ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
       - >-
@@ -113,7 +113,7 @@ services:
       DISABLE_WP_CRON: '${DISABLE_WP_CRON}'
     depends_on:
       - storage_mysql
-      - frontend_bundler
+      - frontend_bundler_vite
       - frontend_static
     volumes:
       - 'backend_media:/uploads'
@@ -128,9 +128,9 @@ services:
       - >-
         ../backend_wordpress/wordpress/app/wp-config-custom:/var/www/html/wp-config-custom
       - >-
-        ../frontend_bundler/client/app/dist/public:/var/www/html/wp-content-custom/themes/caffeina-theme/static
+        ../frontend_bundler_vite/client/app/dist:/var/www/html/wp-content-custom/themes/caffeina-theme/static
       - >-
-        ../frontend_bundler/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
+        ../frontend_bundler_vite/tommy/optimized:/var/www/html/wp-content-custom/themes/caffeina-theme/assets
       - >-
         ../frontend_static/client/app/views:/var/www/html/wp-content-custom/themes/caffeina-theme/views
       - >-
@@ -152,17 +152,9 @@ services:
     networks:
       - labo-website-2021
     restart: on-failure
-  frontend_browser-sync:
     restart: always
-    image: >-
-      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_browser-sync
-    build:
-      context: ..
-      dockerfile: ./frontend_bundler/browser-sync/docker/Dockerfile
     volumes:
-      - '../frontend_bundler/client/app:/source'
-      - >-
-        ../frontend_bundler/browser-sync/docker/entrypoint.sh:/usr/bin/entrypoint
+      - '../frontend_bundler_vite/client/app:/source'
     networks:
       - labo-website-2021
       - front-tier
@@ -172,12 +164,12 @@ services:
       LB_API_TOKEN: ${LB_API_TOKEN}
       LB_API_URL: ${LB_API_URL}
       PROXY: frontend_static_nginx
-  frontend_bundler:
+  frontend_bundler_vite:
     tty: true
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
     volumes:
-      - '../frontend_bundler/client/app:/app'
-      - '../frontend_bundler/client/docker/entrypoint.sh:/usr/bin/entrypoint'
+      - '../frontend_bundler_vite/client/app:/app'
+      - '../frontend_bundler_vite/client/docker/entrypoint.sh:/usr/bin/entrypoint'
     command:
       - dev
     environment:
@@ -190,9 +182,9 @@ services:
   frontend_tommy:
     image: 'kopiro/tommy:latest'
     volumes:
-      - '../frontend_bundler/tommy/original:/src'
-      - '../frontend_bundler/tommy/optimized:/dst'
-      - '../frontend_bundler/tommy/config.json:/root/config.json'
+      - '../frontend_bundler_vite/tommy/original:/src'
+      - '../frontend_bundler_vite/tommy/optimized:/dst'
+      - '../frontend_bundler_vite/tommy/config.json:/root/config.json'
     command:
       - '--src'
       - /src
@@ -213,15 +205,15 @@ services:
       NODE_ENV: development
     volumes:
       - '../frontend_static/client/app:/app'
-      - '../frontend_bundler/client/app/dist/public:/app/dist/bundle'
+      - '../frontend_bundler_vite/client/app/dist:/app/dist/bundle'
       - '../frontend_static/client/docker/entrypoint.sh:/usr/bin/entrypoint'
     networks:
       - labo-website-2021
   frontend_static_nginx:
     volumes:
       - '../frontend_static/client/app/dist/public:/var/static'
-      - '../frontend_bundler/client/app/dist/public:/var/bundle'
-      - '../frontend_bundler/tommy/optimized:/var/assets'
+      - '../frontend_bundler_vite/client/app/dist:/var/bundle'
+      - '../frontend_bundler_vite/tommy/optimized:/var/assets'
     networks:
       - labo-website-2021
       - front-tier
@@ -229,16 +221,16 @@ services:
       VIRTUAL_HOST: 'frontend_nginx.${VIRTUAL_HOST}.localhost'
       VIRTUAL_PORT: 80
     restart: unless-stopped
-  frontend_storybook:
+  frontend_storybook_new:
     command:
       - dev
     volumes:
-      - '../frontend_storybook/storybook/app:/app'
+      - '../frontend_storybook_new/storybook/app:/app'
       - '../frontend_static/client/app/views:/app/views'
       - '../frontend_static/client/app/fixtures:/app/fixtures'
-      - '../frontend_bundler/client/app/scripts:/app/scripts'
-      - '../frontend_bundler/client/app/styles:/app/styles'
-      - '../frontend_bundler/tommy/optimized:/app/public/assets'
+      - '../frontend_bundler_vite/client/app/src/scripts:/app/scripts'
+      - '../frontend_bundler_vite/client/app/src/styles:/app/styles'
+      - '../frontend_bundler_vite/tommy/optimized:/app/public/assets'
     networks:
       - labo-website-2021
       - front-tier

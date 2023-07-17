@@ -1,0 +1,15 @@
+version: '3.8'
+networks:
+  nador: null
+services:
+  frontend_tommy:
+    image: 'kopiro/tommy:latest'
+    volumes:
+      - '../frontend_bundler_vite/tommy/original:/src'
+      - '../frontend_bundler_vite/tommy/optimized:/dst'
+      - '../frontend_bundler_vite/tommy/config.json:/root/config.json'
+    command: ['--src', '/src', '--dst', '/dst', '--config', '/root/config.json', '--watch']
+    networks:
+      - nador
+    logging:
+      driver: none

@@ -1,0 +1,95 @@
+.focus-numbers {
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    img {
+        width: auto;
+    }
+
+    p.p-small {
+        line-height: rem(24);
+        letter-spacing: 0.02em;
+    }
+
+    &__shield {
+        height: 94px;
+        margin-bottom: 40px;
+    }
+
+    &__image {
+        height: 48px;
+        margin-bottom: 20px;
+
+        @include mq($until: md) {
+            height: 32px;
+        }
+    }
+
+    &__items {
+        display: flex;
+        column-gap: 90px;
+        margin-top: 40px;
+
+        @include mq($until: md) {
+            flex-direction: column;
+        }
+    }
+
+    &__focus {
+        flex: 0 1 33%;
+        text-align: left;
+
+        &:not(:last-child) {
+            margin-bottom: 40px;
+        }
+
+        @include mq($until: md) {
+            text-align: center;
+        }
+
+        @include mq($until: md) {
+            flex: 1;
+        }
+
+        &__top {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+
+            @include mq($until: md) {
+                flex-direction: column;
+                margin-bottom: 10px;
+            }
+        }
+
+        &__number {
+            font-size: rem(56);
+            font-weight: 400;
+            line-height: 1;
+            color: map-get($colors, "secondary");
+
+            @include mq($until: md) {
+                margin-bottom: 10px;
+            }
+        }
+
+        &__title {
+            font-size: rem(18);
+            font-weight: 600;
+            color: map-get($colors, "black");
+            text-transform: uppercase;
+            margin-left: 10px;
+        }
+
+        &__text {
+            font-size: rem(14);
+            font-weight: 300;
+            line-height: 19px;
+        }
+    }
+}

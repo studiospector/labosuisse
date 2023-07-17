@@ -1,9 +1,9 @@
 version: '3'
 services:
-  frontend_bundler:
-    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler'
+  frontend_bundler_vite:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
     volumes:
-      - '../frontend_bundler/client/app:/app'
+      - '../frontend_bundler_vite/client/app:/app'
     command:
       - build
     environment:

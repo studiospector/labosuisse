@@ -1,0 +1,81 @@
+.archive-lb-beauty-specialist {
+    &__search {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        .custom-field {
+            width: 100%;
+        }
+    }
+
+    .lb-posts-count {
+        margin-top: 20px;
+    }
+
+    // &__list-block {        
+    // }
+
+    &__list {
+        margin-top: 40px;
+
+        &__date {
+            display: flex;
+            align-items: center;
+            font-size: rem(16);
+            font-weight: 400;
+            text-transform: uppercase;
+            border-top: 1px solid map-get($colors, "black");
+            border-bottom: 1px solid map-get($colors, "black");
+            padding: 12px 0;
+            margin-bottom: 12px;
+
+            .lb-icon {
+                margin-right: 10px;
+            }
+        }
+
+        &__item {
+            margin-bottom: 40px;
+            padding-bottom: 25px;
+
+            &:not(:last-of-type) {
+                border-bottom: 1px solid map-get($colors, "grey-2");
+            }
+
+            &:last-of-type {
+                margin-bottom: 0;
+            }
+
+            .card {
+                .card-infobox {
+                    padding-top: 0;
+                }
+
+                .infobox {
+                    &__title {
+                        font-size: rem(18);
+                    }
+
+                    &__subtitle {
+                        margin-bottom: 12px;
+                    }
+
+                    &__paragraph {
+                        margin-bottom: 0;
+                        font-size: rem(14);
+                    }
+
+                    &__cta {
+                        margin-top: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    .lb-no-results {
+        margin-top: 60px;
+    }
+}

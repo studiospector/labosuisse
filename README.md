@@ -189,14 +189,14 @@ Il workflow da seguire per aggiungere un Componente o un Blocco è il seguente.
 </section>
 ```
 
-2. **SCSS** - Creazione file in `frontend_bundler/client/app/styles/components/{component-name}.scss`
+2. **SCSS** - Creazione file in `frontend_bundler_vite/client/app/styles/components/{component-name}.scss`
 ```scss
 .lb-component-name {
     position: relative;
 }
 ```
 
-3. **JS** - Creazione file in `frontend_bundler/client/app/scripts/components/{ComponentName}/{ComponentName}.js`
+3. **JS** - Creazione file in `frontend_bundler_vite/client/app/scripts/components/{ComponentName}/{ComponentName}.js`
 ```js
 import Component from '@okiba/component'
 import { qs, qsa, on, off } from '@okiba/dom'
@@ -222,7 +222,7 @@ class ComponentName extends Component {
 export default ComponentName
 ```
 
-4. **Okiba Component Init** - Inizializzare il componente tramite Okiba in `frontend_bundler/client/app/scripts/components/app.js`
+4. **Okiba Component Init** - Inizializzare il componente tramite Okiba in `frontend_bundler_vite/client/app/scripts/components/app.js`
 ```js
 import Component from '@okiba/component'
 
@@ -245,7 +245,7 @@ export default class Application extends Component {
 }
 ```
 
-5. **Storybook** - Creazione story del componente in `frontend_storybook/storybook/app/stories/components/{component-name}.stories.js`
+5. **Storybook** - Creazione story del componente in `frontend_storybook_new/storybook/app/stories/components/{component-name}.stories.js`
 ```js
 // Storybook API
 import { storiesOf } from '@storybook/html'

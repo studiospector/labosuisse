@@ -1,0 +1,39 @@
+// MIXINS
+@import "mixins/index";
+
+// VARIABLES
+@import "variables/critical";
+
+// VENDORS
+@import "plyr/dist/plyr";
+@import "sass-mq/mq";
+@import 'node_modules/swiper/swiper-bundle';
+@import "vendors/custom-input";
+@import "vendors/custom-radio";
+@import "vendors/custom-checkbox";
+@import "vendors/custom-select";
+
+// BASE STYLE
+@import "base/index";
+
+// ASSETS BASE PATH STORYBOOK
+$assetsBasePath: 'https://storybook.develop.labo-website-2021.n3.caffeina.host/';
+
+// TYPOGRAPHY
+@include generate-font-face();
+@include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+
+// GRID
+@include generate-grid();
+
+// LAYOUT
+@import "layout/base/index";
+
+// COMPONENTS
+@import "components/index";
+@import "components/infobox";
+@import "components/separator";
+@import "components/buttons";
+@import "components/hero";
+@import "components/carousel-hero";
+@import "components/swiper";

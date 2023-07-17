@@ -1,0 +1,19 @@
+{
+  "tester.image": {
+    "enabled": false
+  },
+  "processor.svg": {
+    "enabled": true
+  },
+  "tester.font": {
+    "enabled": false
+  },
+  "processor.resize": {
+    "enabled": false,
+    "suffix": "-${i}.${ext}",
+    "dimensions": [10, 300]
+  },
+  "processor.lazyLoadBlurried": {
+    "enabled": false
+  }
+}

@@ -1,0 +1,46 @@
+.lb-pagination {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .screen-reader-text {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        align-items: center;
+
+        .page-numbers {
+            display: inline-block;
+            text-decoration: none;
+            
+            &:not(:last-child) {
+                margin-right: 10px;
+            }
+
+            .button {
+                border-radius: 3px;
+
+                @include mq($until: md) {
+                    padding: rem(12px) rem(16px);
+                }
+        
+                .lb-icon {
+                    margin: 0;
+                }
+            }
+
+            &.current {
+                .button,
+                .button:hover {
+                    background-color: map-get($colors, "secondary");
+                    border: 1px solid map-get($colors, "secondary");
+                    color: map-get($colors, "white");
+                    cursor: default;
+                }
+            }
+        }
+    }
+}

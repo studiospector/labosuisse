@@ -1,0 +1,441 @@
+/**
+ * Core elements
+ */
+html.has-scroll-smooth {
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+html.has-scroll-smooth body {
+    overflow: hidden;
+}
+
+html.has-scroll-smooth [data-scroll-container] {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+html.has-scroll-smooth #content {
+    will-change: transform;
+}
+
+body.ready {
+    overflow-y: auto;
+}
+
+#content {
+    padding-top: 217px;
+    overflow-y: initial!important;
+    z-index: 2;
+
+    @include mq($until: lg) {
+        padding-top: 176px;
+    }
+}
+
+.c-scrollbar {
+    z-index: 999;
+}
+
+.grecaptcha-badge { 
+    visibility: hidden !important;
+}
+
+
+/**
+ * Logo and shield
+ */
+.lb-logo {
+    svg {
+        width: 182px;
+        height: 58px;
+
+        @include mq($until: lg) {
+            width: 94px;
+            height: 30px;
+        }
+    }
+}
+
+.lb-shield {
+    svg {
+        width: 165px;
+        height: 54px;
+
+        @include mq($until: lg) {
+            width: 86px;
+            height: 30px;
+        }
+    }
+}
+
+
+/**
+ * Ordered lists
+ */
+ol:not(.flex-control-nav) {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: lbListCounter;
+
+    li {
+        counter-increment: lbListCounter;
+
+        &::before {
+            content: counter(lbListCounter) ".";
+            min-width: 65px;
+            margin-right: 15px;
+            font-size: rem(56);
+            font-weight: 600;
+            line-height: 1;
+            color: map-get($colors, "secondary");
+
+            @include mq($until: md) {
+                margin-right: 0;
+                font-size: rem(40);
+            }
+        }
+    }
+}
+
+
+/**
+ * Unordered lists
+ */
+ul.lb-arrow-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
+        }
+
+        .lb-icon {
+            margin-top: 4px;
+
+            svg {
+                width: 6px;
+                height: 8px;
+            }
+        }
+
+        .lb-arrow-list__text {
+            margin-left: 10px;
+            font-size: rem(14);
+            font-weight: 300;
+            line-height: 19px;
+        }
+    }
+}
+
+
+/**
+ * Photoswipe
+ */
+.pswp {
+    &__bg {
+        background-color: #f6f5f3;
+    }
+
+    &__counter {
+        height: auto;
+        padding: 20px;
+        margin: 0;
+        line-height: 1.4;
+        text-shadow: none;
+        color: map-get($colors, "black");
+        background-color: map-get($colors, "white");
+        box-shadow: 1px 1px #eae8e4;
+        opacity: 1;
+    }
+
+    &__button {
+        &--zoom,
+        &--close {
+            width: auto;
+            height: auto;
+            margin: 0;
+            padding: 20px;
+            background-color: map-get($colors, "white");
+            box-shadow: -1px 1px #eae8e4;
+            opacity: 1;
+
+            &:hover {
+                padding: 20px;
+                background-color: map-get($colors, "white");
+                box-shadow: -1px 1px #eae8e4;
+                opacity: 1;
+            }
+        }
+
+        &--zoom {
+            svg {
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
+
+
+/**
+ * Lazyloading
+ */
+.lazyload,
+.lazyloading {
+	opacity: 0;
+}
+.lazyloaded {
+	opacity: 1;
+	transition: opacity 300ms;
+}
+
+
+/**
+ * Base component loader
+ */
+.caffeina-base-loader {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: map-get($colors, "white");
+    opacity: 1;
+    visibility: hidden;
+    z-index: 10;
+
+    &--loading {
+        opacity: 0.5;
+        visibility: visible;
+    }
+}
+
+
+/**
+ * Geolocation
+ */
+.lb-geolocation {
+    display: flex;
+    margin-left: 20px;
+    padding: 15px 17px;
+    border: 1px solid map-get($colors, "grey-2");
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+
+/**
+ * No results element
+ */
+.lb-no-results {
+    text-align: center;
+    color: map-get($colors, "grey-3");
+}
+
+
+/**
+ * Load more element
+ */
+.lb-load-more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &--hide {
+        display: none;
+    }
+}
+
+
+/**
+ * Post content wrapper
+ */
+.lb-post-content {
+    width: 100%;
+    max-width: 755px !important;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0.9375rem;
+    padding-left: 0.9375rem;
+
+    @include mq($until: md) {
+        max-width: 100%;
+    }
+
+    &.wp-block-image {
+        margin-bottom: 40px;
+        
+        figure {
+            margin: 0;
+        }
+    }
+
+    &.wp-block-file {
+        a {
+            margin-top: 10px;
+            font-size: rem(16);
+            color: map-get($colors, "black");
+        }
+    }
+}
+
+.wp-block-embed {
+    iframe {
+        width: 100%;
+    }
+}
+
+
+/**
+ * Text animation
+ */
+.lb-split-parent-line {
+    overflow: hidden;
+}
+
+.lb-split-child-line {
+    display: inline-block;
+    will-change: transform;
+}
+
+
+/**
+ * Custom table element
+ */
+.lb-custom-table {
+    overflow-x: auto;
+
+    @include mq($until: md) {
+        &::before{
+            content: "Scroll ->";
+            display: block;
+            text-align: right;
+            font-size: 11px;
+            color: map-get($colors, "black");
+            padding: 0 0 10px;
+        }
+    }
+    
+    table {
+        font-size: 14px;
+        font-weight: normal;
+        border: none;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        // white-space: nowrap;
+        background-color: map-get($colors, "white");
+
+        @include mq($until: md) {
+            display: block;
+            width: 100%;
+        }
+
+        thead {
+            border: 1px solid map-get($colors, "grey-2");
+
+            @include mq($until: md)  {
+                display: block;
+                float: left;
+            }
+
+            th {
+                font-weight: 700;
+                text-align: center;
+                color: map-get($colors, "black");
+                background: map-get($colors, "grey-1");
+
+                @include mq($until: md)  {
+                    width: 120px;
+                    display: block;
+                    text-align: left;
+                    border-bottom: 1px solid #f7f7f9;
+
+                    &:last-child{
+                        border-bottom: none;
+                    }
+                }
+            }
+        }
+
+        tbody {
+            border: 1px solid map-get($colors, "grey-2");
+
+            @include mq($until: md)  {
+                width: auto;
+                display: block;
+                position: relative;
+                overflow-x: auto;
+
+                tr {
+                    display: table-cell;
+
+                    &:nth-child(odd) {
+                        background: none;
+                    }
+                }
+
+                td {
+                    display: block;
+                    text-align: left;
+                }
+            }
+
+            tr:not(:last-child) {
+                border-bottom: 1px solid map-get($colors, "grey-2");
+            }
+        }
+
+        tr {
+            @include mq($until: md) {
+                &:nth-child(even) {
+                    background: transparent;
+                }
+
+                td:nth-child(odd) {
+                    background: #F8F8F8;
+                    border-right: 1px solid #E6E4E4;
+                }
+
+                td:nth-child(even) {
+                    border-right: 1px solid #E6E4E4;
+                }
+            }
+        }
+        
+        td,
+        th {
+            padding: 8px;
+
+            @include mq($until: md) {
+                width: auto;
+                height: 200px;
+                font-size: 13px;
+                vertical-align: middle;
+                box-sizing: border-box;
+                // text-overflow: ellipsis;
+                overflow-x: hidden;
+                overflow-y: auto;
+            }
+        }
+
+        td {
+            border-right: 1px solid map-get($colors, "grey-2");
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
+}

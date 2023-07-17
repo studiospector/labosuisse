@@ -18,6 +18,7 @@ class BannerVideo extends BaseBlock
                     'data' => Timber::compile('@PathViews/components/video.twig', [
                         'provider' => 'youtube',
                         'video_id' => get_field('lb_block_banner_video_yt_id'),
+                        'attributes' => 'data-async-init="true"',
                     ]),
                 ]
             ],

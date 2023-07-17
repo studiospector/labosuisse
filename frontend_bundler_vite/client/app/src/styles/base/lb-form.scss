@@ -1,0 +1,92 @@
+.lb-form {
+    font-weight: 300;
+    
+    fieldset {
+        margin-bottom: 40px;
+
+        legend {
+            font-size: rem(16);
+            font-weight: 400;
+            line-height: rem(19);
+            color: map-get($colors, "black");
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+    }
+
+    .wpcf7-form {
+        .custom-select {
+            .custom-select-label {
+                font-weight: 300;
+            }
+
+            .custom-select-container {
+                border: 1px solid map-get($colors, "black");
+            }
+        }
+
+        .wpcf7-spinner {
+            display: none;
+        }
+
+        &.submitting {
+            .wpcf7-spinner {
+                display: block;
+            }
+        }
+    }
+
+    .wpcf7-list-item {
+        margin-left: 0;
+    }
+}
+
+
+.mc4wp-form {
+    position: relative;
+
+    .mc4wp-form-fields {
+        .custom-input {
+            margin-bottom: 20px;
+
+            .custom-input-label {
+                color: map-get($colors, "grey-3");
+            }
+
+            input {
+                border: 1px solid map-get($colors, "grey-2");
+            }
+        }
+
+        .custom-checkbox {
+            margin-top: 20px;
+
+            &__options {
+                label {
+                    display: flex;
+                    justify-content: center;
+                    font-size: rem(13);
+                    font-weight: 300;
+                }
+            }
+        }
+
+        .button {
+            margin-top: 20px;
+            text-align: center;
+        }
+    }
+
+    .mc4wp-response {
+        margin-top: 20px;
+
+        .mc4wp-alert {
+            p {
+                margin: 0;
+            }
+
+            // &.mc4wp-success {
+            // }
+        }
+    }
+}

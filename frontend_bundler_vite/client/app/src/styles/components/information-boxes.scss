@@ -1,0 +1,18 @@
+.lb-information-boxes {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: map-get($colors, "primary-light-1");
+
+    @include mq($until: md) {
+        padding-top: 30px;
+        padding-bottom: 30px;
+    }
+
+    &__item {
+        &:not(:last-child) {
+            @include mq($until: md) {
+                margin-bottom: 60px;
+            }
+        }
+    }
+}

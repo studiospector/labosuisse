@@ -1,0 +1,180 @@
+// MIXINS
+@import "mixins/index";
+
+// VARIABLES
+@import "variables/blocks";
+
+// VENDORS
+@import "../node_modules/plyr/dist/plyr";
+@import "../node_modules/sass-mq/mq";
+@import '../node_modules/swiper/swiper-bundle';
+@import "vendors/custom-input";
+@import "vendors/custom-radio";
+@import "vendors/custom-checkbox";
+@import "vendors/custom-select";
+
+// BASE STYLE
+@import "base/helpers";
+@import "base/lb-symbols";
+@import "base/lb-icon";
+@import "base/lb-picture";
+
+// TYPOGRAPHY
+@include generate-font-face();
+
+// CRITICAL GRID
+@include generate-grid();
+
+
+
+#editor {
+
+    .edit-post-layout {
+
+        // Styling content elements
+        .interface-interface-skeleton__content {
+            padding-bottom: 10px;
+            background: #f3f4f5;
+
+            // Content
+            .editor-styles-wrapper {
+                // TYPOGRAPHY
+                @include generate-rules($typographyVariablesToCSSClasses, $typographyPropertyList, $typographyVariables);
+
+                // COMPONENTS
+                @import "components/index";
+                @import "components/infobox";
+                @import "components/separator";
+                @import "components/buttons";
+                @import "components/hero";
+                @import "components/carousel-hero";
+                @import "components/swiper";
+
+                // LAYOUT
+                @import "layout/base/main-content";
+
+                // Title
+                .edit-post-visual-editor__post-title-wrapper {
+                    margin: 0;
+                    padding: 1rem;
+                    background-color: #f3f4f5;
+
+                    .editor-post-title {
+                        margin-top: 0;
+    
+                        &__input {
+                            margin: 0;
+                            // font-family: 'Lato', 'sans-serif';
+                            font-size: 2.3rem;
+                            font-weight: 800;
+                            text-rendering: optimizelegibility;
+                        }
+                    }
+                }
+
+                // Separator
+                .wp-block-separator {
+                    display: none;
+                }
+
+                .lb-separator {
+                    background-color: #f3f4f5;
+                    min-height: 1px;
+                    margin: 0 !important;
+                    border: 0 !important;
+                }
+
+                // ACF Blocks
+                // .acf-block-component {
+                // }
+
+                .wp-block {
+                    max-width: 1200px;
+                }
+
+                .block-editor__container img {
+                    max-width: none !important;
+                }
+            }
+
+            // Style metaboxes container down the content
+            .edit-post-layout__metaboxes {
+
+                &:not(:empty) {
+                    background: #f3f4f5;
+                    padding: 10px 10px 0 10px !important;
+                    border-top: 5px solid #ddd !important;
+                }
+
+                // Style metaboxes down the content
+                #poststuff {
+
+                    .postbox-container {
+                        border: 0;
+
+                        .postbox {
+                            border: 1px solid #ddd;
+        
+                            &:not(:last-child) {
+                                margin-bottom: 10px;
+                            }
+                        }
+                    }
+            
+                    .postbox-header {
+                        background-color: #eaeaea;
+                    }
+                }
+            }
+        }
+
+        // Styling sidebar elements
+        .interface-interface-skeleton__sidebar {
+
+            .components-panel {
+
+                &__body {
+                    margin: 10px 0;
+                    border-color: #ddd;
+                    border-bottom: 0;
+                }
+
+                &__body-toggle {
+
+                    &.components-button {
+                        background-color: #eaeaea;
+                    }
+                }
+
+                .postbox-header {
+                    background-color: #eaeaea;
+                    border-top: 1px solid #ddd;
+                    border-bottom: 0;
+                }
+
+                .abbrivio-field {
+                    margin-top: 10px;
+                }
+            }
+		}
+    }
+}
+
+
+
+@media (min-width: 782px) {
+
+    #editor {
+
+        .interface-interface-skeleton__sidebar {
+            // border-left: 5px solid #ddd;
+
+            .interface-complementary-area {
+                width: auto;
+                min-width: 360px;
+                max-width: 540px;
+            }
+        }
+    }
+
+}

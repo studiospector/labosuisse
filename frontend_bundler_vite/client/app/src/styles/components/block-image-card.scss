@@ -1,0 +1,53 @@
+.block-image-card {
+    display: flex;
+    column-gap: 100px;
+
+    @include mq($until: md) {
+        flex-direction: column;
+        column-gap: 0;
+    }
+
+    &__img {
+        min-height: 500px;
+        position: relative;
+        flex: 1 1 50%;
+        
+        @include mq($until: md) {
+            min-height: 335px;
+            flex: 1;
+            margin-bottom: 40px;
+            
+            .lb-picture-wrapper {
+                position: initial;
+            }
+        }
+    }
+
+    &__card {
+        flex: 1 1 50%;
+
+        .card {
+            .infobox {
+                &__subtitle {
+                    font-weight: 600;
+                    font-size: rem(26);
+                }
+    
+                &__paragraph {
+                    opacity: 1;
+                }
+            }
+    
+            @include mq($until: md) {
+                flex: 1;
+                text-align: center;
+                
+                .card-img {
+                    order: 1;
+                    margin-top: 20px;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

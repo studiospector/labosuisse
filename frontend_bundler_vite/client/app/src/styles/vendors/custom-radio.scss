@@ -1,0 +1,175 @@
+.custom-radio {
+    &__title {
+        margin-bottom: 15px;
+        margin-left: 17px;
+        font-size: rem(11);
+        color: map-get($colors, "grey-3");
+    }
+
+    &__options {
+        display: flex;
+
+        label {
+            display: block;
+            position: relative;
+            cursor: pointer;
+    
+            input {
+                position: absolute;
+                top: 0;
+                left: 0;
+                opacity: 0;
+                margin: 0;
+            }
+    
+            > span {
+                display: block;
+                position: relative;
+                padding-left: rem(30px);
+                line-height: rem(20px);
+                pointer-events: none;
+    
+                &:before,
+                &:after {
+                    content: "";
+                    position: absolute;
+                    color: map-get($colors, "grey");
+                    border-radius: 50%;
+                }
+    
+                &:before {
+                    width: rem(18px);
+                    height: rem(18px);
+                    top: 0;
+                    left: 0;
+                    border: solid 1px currentColor;
+                    transition: border-color 0.2s;
+                }
+    
+                &:after {
+                    width: rem(10px);
+                    height: rem(10px);
+                    top: rem(4px);
+                    left: rem(4px);
+                    background-color: currentColor;
+                    transition-duration: 0.2s;
+                    transition-property: transform, background-color;
+                    transform: scale(0);
+                }
+            }
+    
+            input:checked~span {
+                &:before,
+                &:after {
+                    color: map-get($colors, "primary");
+                }
+    
+                &:after {
+                    transform: scale(1);
+                }
+            }
+
+            input:disabled {
+                pointer-events: none;
+                cursor: not-allowed;
+
+                &~span, &:before, &:after {
+                    pointer-events: none;
+                    opacity: 0.5;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
+        // CF7 WP Plugin Support
+        .wpcf7-form-control-wrap {
+            width: 100%;
+
+            .wpcf7-radio {
+                display: flex;
+
+                .wpcf7-list-item {
+                    display: block;
+                    margin: 0;
+                }
+            }
+        }
+    }
+
+
+
+    &--vertical {
+        .custom-radio {
+            &__options {
+                flex-direction: column;
+
+                label {
+                    &:not(:first-child) {
+                        margin-top: 15px;
+                    }
+                }
+
+                // CF7 WP Plugin Support
+                .wpcf7-radio {
+                    flex-direction: column;
+
+                    .wpcf7-list-item {
+                        &:not(:first-child) {
+                            margin-top: 15px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    &--horizontal {
+        .custom-radio {
+            &__options {
+                flex-direction: row;
+                flex-wrap: wrap;
+
+                label {
+                    @include radioVariantVertical;
+                }
+
+                // CF7 WP Plugin Support
+                .wpcf7-radio {
+                    flex-direction: row;
+                    flex-wrap: wrap;
+
+                    .wpcf7-list-item {
+                        @include radioVariantVertical;
+
+                        label {
+                            flex: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+
+    &--wc-support {
+        .custom-radio {
+            &__options {
+                label {
+                    > span {
+                        span {
+                            display: inline-block;
+                            padding-left: 0;
+                            
+                            &::after,
+                            &::before {
+                                content: none;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

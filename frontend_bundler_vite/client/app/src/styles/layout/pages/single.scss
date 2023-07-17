@@ -1,0 +1,29 @@
+.lb-single-post {
+    &__featured-image {
+        min-height: 420px;
+    }
+
+    &__info {
+        .infobox {
+            &__tagline {
+                color: map-get($colors, "primary-dark-1");
+
+                &:not(:last-child) {
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
+
+    &__content {
+        h1, h2, h3, h4, h5, h6 {
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        p {
+            margin-bottom: 40px;
+            letter-spacing: 0.02em;
+        }
+    }
+}

@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  frontend_bundler_vite:
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
+    build:
+      context: ..
+      dockerfile: ./frontend_bundler_vite/client/docker/Dockerfile

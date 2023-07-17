@@ -1,0 +1,20 @@
+version: '3.8'
+networks:
+  nador: null
+  front-tier:
+    external:
+      name: front-tier
+services:
+  frontend_bundler_vite:
+    tty: true
+    image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
+    volumes:
+      - '../frontend_bundler_vite/client/app:/app'
+      - '../frontend_bundler_vite/client/docker/entrypoint.sh:/usr/bin/entrypoint'
+    command:
+      - dev
+    environment:
+      NODE_ENV: development
+    networks:
+      - nador
+      - front-tier

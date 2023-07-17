@@ -1,0 +1,126 @@
+body > .select2-container {
+    transform: translateY(-32px);
+    z-index: 2;
+}
+
+.form-row {
+    margin: 0;
+    padding-bottom: 25px;
+
+    textarea {
+        width: 100%;
+        font-style: normal;
+        font-family: inherit;
+
+        &::-webkit-input-placeholder {
+            font-style: italic;
+            color: map-get($colors, "grey-3") !important;
+        }
+        &:-moz-placeholder {
+            font-style: italic;
+            color: map-get($colors, "grey-3") !important;
+        }
+        &::-moz-placeholder {
+            font-style: italic;
+            color: map-get($colors, "grey-3") !important;
+        }
+        &:-ms-input-placeholder {
+            font-style: italic;
+            color: map-get($colors, "grey-3") !important;
+        }
+    }
+}
+
+label.lb-wc-label {
+    position: relative;
+    top: auto;
+    margin-bottom: 5px;
+    margin-left: 16.5px;
+    font-size: rem(11);
+    line-height: 1;
+    color: map-get($colors, "grey-3");
+    cursor: auto;
+    user-select: none;
+    z-index: 1;
+    transform: translateY(0);
+}
+
+.address-field {
+    display: flex;
+    flex-direction: column;
+
+    .select2 {
+        .select2-selection {
+            height: auto;
+            margin: 0;
+            padding: 16.5px;
+            background-color: map-get($colors, "white");
+            border: 1px solid map-get($colors, "grey-3");
+            border-radius: 4px;
+
+            &__arrow {
+                top: 12px;
+            }
+            
+            &__rendered {
+                padding: 0;
+                font-size: rem(13);
+                font-weight: 400;
+                line-height: 1.2;
+                color: map-get($colors, "black");
+            }
+        }
+    }
+}
+
+
+
+.lb-wc-custom-fields {
+    .form-row {
+        label {
+            display: block;
+            margin-bottom: 5px;
+            margin-left: 16.5px;
+            font-size: rem(11);
+            line-height: 1;
+            user-select: none;
+            cursor: auto;
+            color: map-get($colors, "grey-3");
+            z-index: 1;
+            transition: all .2s ease;
+        }
+
+        .woocommerce-input-wrapper {
+            display: block;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            position: relative;
+            padding: 16.5px;
+            background-color: map-get($colors, "white");
+            border: 1px solid map-get($colors, "grey-3");
+            border-radius: 4px;
+            font-size: rem(13);
+            font-weight: 400;
+
+            &::-webkit-input-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+            &:-moz-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+            &::-moz-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+            &:-ms-input-placeholder {
+                font-style: italic;
+                color: map-get($colors, "primary-dark-1");
+            }
+        }
+    }
+}

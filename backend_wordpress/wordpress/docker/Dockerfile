@@ -1,6 +1,6 @@
 # Frontend stage
 
-FROM node:16.17.1-alpine as frontend_bundler
+FROM node:18.16.0-alpine as frontend_bundler_vite
 
 ARG LB_API_TOKEN
 ARG LB_API_URL
@@ -9,12 +9,12 @@ WORKDIR /app
 RUN apk add --no-cache git --update
 
 # Install dependencies
-COPY ./frontend_bundler/client/app/package.json ./
-COPY ./frontend_bundler/client/app/package-lock.json ./
-COPY ./frontend_bundler/client/app/.npmrc ./
+COPY ./frontend_bundler_vite/client/app/package.json ./
+COPY ./frontend_bundler_vite/client/app/package-lock.json ./
+COPY ./frontend_bundler_vite/client/app/.npmrc ./
 RUN npm install
 
-COPY ./frontend_bundler/client/app/ ./
+COPY ./frontend_bundler_vite/client/app/ ./
 
 ENV NODE_ENV=production
 ENV LB_API_TOKEN=$LB_API_TOKEN
@@ -50,8 +50,8 @@ COPY --chown=nobody ./backend_wordpress/wordpress/app/test_call.php ${WP_CORE_DI
 
 COPY --chown=nobody ./backend_wordpress/wordpress/app/wp-config-custom ${WP_CORE_DIR}/wp-config-custom
 COPY --chown=nobody ./backend_wordpress/wordpress/app/wp-config.php ${WP_CORE_DIR}/wp-config.php
-COPY --chown=nobody --from=frontend_bundler /app/dist/public ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/static
-COPY --chown=nobody ./frontend_bundler/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/assets
+COPY --chown=nobody --from=frontend_bundler_vite /app/dist ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/static
+COPY --chown=nobody ./frontend_bundler_vite/tommy/optimized ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/assets
 COPY --chown=nobody ./frontend_static/client/app/views ${WP_CONTENT_CUSTOM_DIR}/themes/caffeina-theme/views
 COPY --chown=nobody ./backend_wordpress/wordpress/app/robots.txt ${WP_CORE_DIR}/
 

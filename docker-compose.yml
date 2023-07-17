@@ -115,9 +115,9 @@ services:
       VIRTUAL_PORT: 80
       LETSENCRYPT_HOST: '${VIRTUAL_HOST}'
       LETSENCRYPT_EMAIL: '${LETSENCRYPT_EMAIL}'
-  frontend_storybook_nginx:
+  frontend_storybook_new_nginx:
     image: >-
-      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_nginx
+      ${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_storybook_new_nginx
     restart: unless-stopped
     networks:
       - front-tier
