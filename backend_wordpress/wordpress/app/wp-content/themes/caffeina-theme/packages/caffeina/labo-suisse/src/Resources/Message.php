@@ -3,6 +3,7 @@
 namespace Caffeina\LaboSuisse\Resources;
 
 use Caffeina\LaboSuisse\Option\Option;
+use Carbon\Carbon;
 use Timber\Timber;
 
 class Message
@@ -44,8 +45,8 @@ class Message
         });
 
         return array_filter($messages, function ($item) {
-            $from = strtotime($item['lb_messages_item_date_from']);
-            $to = strtotime($item['lb_messages_item_date_to']);
+            $from = Carbon::createFromFormat('Y-m-d H:i:s',$item['lb_messages_item_date_from'],'Europe/Rome')->getTimestamp();
+            $to = Carbon::createFromFormat('Y-m-d H:i:s',$item['lb_messages_item_date_to'],'Europe/Rome')->getTimestamp();
 
             if ($this->isValidData($from, $to)) {
                 return $item;
@@ -60,7 +61,7 @@ class Message
      */
     private function isValidData($from, $to): bool
     {
-        $today = strtotime(date('Y-m-d h:i'));
+        $today = Carbon::now('Europe/Rome')->getTimestamp();
 
         return (!$from and !$to)
             or ($today >= $from and $today <= $to)
