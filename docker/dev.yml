@@ -151,19 +151,7 @@ services:
       AWS_S3_BUCKET: '${BACKUP_AWS_S3_BUCKET}'
     networks:
       - labo-website-2021
-    restart: on-failure
     restart: always
-    volumes:
-      - '../frontend_bundler_vite/client/app:/source'
-    networks:
-      - labo-website-2021
-      - front-tier
-    environment:
-      VIRTUAL_HOST: 'fe.${VIRTUAL_HOST}.localhost'
-      VIRTUAL_PORT: 80
-      LB_API_TOKEN: ${LB_API_TOKEN}
-      LB_API_URL: ${LB_API_URL}
-      PROXY: frontend_static_nginx
   frontend_bundler_vite:
     tty: true
     image: '${CI_REGISTRY}/${CI_PROJECT_PATH}/${CI_COMMIT_REF_NAME}/frontend_bundler_vite'
