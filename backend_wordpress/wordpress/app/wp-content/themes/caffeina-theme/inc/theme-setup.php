@@ -78,6 +78,9 @@ class ThemeSetup extends Timber\Site
 
         add_filter('woocommerce_enqueue_styles', '__return_empty_array', 999);
 
+        add_filter('preview_post_link', [$this, 'lb_update_preview_post_link'], 999);
+        add_filter('preview_page_link', [$this, 'lb_update_preview_post_link'], 999);
+
         parent::__construct();
     }
 
@@ -511,6 +514,14 @@ class ThemeSetup extends Timber\Site
             });
         }
         return $tag;
+    }
+
+    /**
+     * Replace preview url from 'www.' to 'cms.'
+     */
+    public function lb_update_preview_post_link($link) {
+        $link = preg_replace('/www/', 'cms', $link);
+        return $link;
     }
 
     /**
