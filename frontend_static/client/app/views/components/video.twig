@@ -8,7 +8,7 @@
 
 <section class="lb-video container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-video" {{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
 	{% if provider == 'html5' %}
-		<video playsinline autoplay muted loop class="lb-video__native-video lazyload">
+		<video playsinline data-autoplay muted loop class="lb-video__native-video lazyload" preload="none">
 			<source src="{{ video_id.url }}" type="{{video_id.mime_type}}">
 		</video>
 	{% else %}
