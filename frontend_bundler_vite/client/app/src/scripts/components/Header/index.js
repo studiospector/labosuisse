@@ -30,7 +30,7 @@ class Header extends Component {
             this.toggleSearch()
         }
 
-        // On scroll trigger with Locomotive
+        // On scroll trigger with Lenis
         window.getCustomScrollbar.on('scroll', this.handleScroll)
     }
 
@@ -40,14 +40,14 @@ class Header extends Component {
         }
 
         this.timeout = setTimeout(() => {
-            let scrollTop = instance.scroll.y
+            let scrollTop = instance.targetScroll
 
-            if (scrollTop > this.lastScrollTop && instance.scroll.y > 100 && instance.direction == 'down') {
+            if (scrollTop > this.lastScrollTop && instance.targetScroll > 100 && instance.direction == 1) {
                 this.el.classList.add('lb-header--hide')
                 if (this.headerProduct) {
                     this.headerProduct.classList.remove('lb-header-sticky-product--adjust')
                 }
-            } else if (scrollTop < this.lastScrollTop && instance.direction == 'up') {
+            } else if (scrollTop < this.lastScrollTop && instance.direction == -1) {
                 this.el.classList.remove('lb-header--hide')
                 if (this.headerProduct) {
                     this.headerProduct.classList.add('lb-header-sticky-product--adjust')

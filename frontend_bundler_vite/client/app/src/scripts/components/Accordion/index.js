@@ -99,7 +99,6 @@ class Accordion extends Component {
             onComplete: () => {
                 target.wrapper.classList.remove('is-opening')
                 target.wrapper.classList.add('is-open')
-                window.getCustomScrollbar.update()
             }
         })
     }
@@ -114,7 +113,6 @@ class Accordion extends Component {
                 duration: this.options.duration,
                 onComplete: () => {
                     target.wrapper.classList.remove('is-open')
-                    window.getCustomScrollbar.update()
                 }
             })
         } else {

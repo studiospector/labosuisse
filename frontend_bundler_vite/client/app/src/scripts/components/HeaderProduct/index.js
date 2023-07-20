@@ -33,7 +33,7 @@ class HeaderProduct extends Component {
         gsap.timeline({
             scrollTrigger: {
                 trigger: ".js-single-product-details",
-                scroller: matchMedia.matches ? "body" : ".js-scrollbar",
+                // scroller: matchMedia.matches ? "body" : ".js-scrollbar",
                 start: "top top",
                 onEnter: () => {
                     this.el.classList.remove('lb-header-sticky-product--adjust')
@@ -78,7 +78,7 @@ class HeaderProduct extends Component {
         const addToCartButton = qs('.single_add_to_cart_button')
         this.customScrollbar.scrollTo(scrollToSection, {
             offset: -this.fullHeaderHeight,
-            callback: () => {
+            onComplete: () => {
                 const timeline = gsap.timeline()
                 timeline.to(addToCartButton, {
                     scale: 1.2,

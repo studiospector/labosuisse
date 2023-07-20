@@ -81,7 +81,7 @@ class AnimationImage extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: (isStorybook() || isScrollbarDisabled()) ? 'body' : '.js-scrollbar',
+                // scroller: (isStorybook() || isScrollbarDisabled()) ? 'body' : '.js-scrollbar',
                 trigger: this.ui.picture,
                 start: "30% 80%",
             }

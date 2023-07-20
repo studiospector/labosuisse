@@ -30,20 +30,17 @@ class LBCustomSelect extends Component {
         this.customField = this.el.closest('.custom-select')
         this.customFieldOptions = qs('.custom-select-items', this.customField)
 
-        on(this.customFieldOptions, 'mouseenter', this.disableLocomotive)
-        on(this.customFieldOptions, 'mouseleave', this.enableLocomotive)
+        on(this.customFieldOptions, 'mouseenter', this.disableScroll)
+        on(this.customFieldOptions, 'mouseleave', this.enableScroll)
     }
 
-    disableLocomotive = (ev) => {
-        if (window.getCustomScrollbar) {
-            window.getCustomScrollbar.stop()
-        }
+    disableScroll = (ev) => {
+        ev.target.setAttribute('data-lenis-prevent', true)
     }
 
-    enableLocomotive = (ev) => {
-        if (window.getCustomScrollbar) {
-            window.getCustomScrollbar.start()
-        }
+    enableScroll = (ev) => {
+        ev.target.removeAttribute('data-lenis-prevent')
+        off(document, 'wheel', this.enableScroll)
     }
 }
 

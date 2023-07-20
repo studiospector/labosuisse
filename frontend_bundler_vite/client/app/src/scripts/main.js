@@ -13,9 +13,9 @@ function loadScripts() {
   lazySizes.cfg.expFactor = 0.001
   lazySizes.cfg.hFac = 0.001
 
-  device()
-
   lazySizes.init()
+
+  device()
   
   new Application()
 }

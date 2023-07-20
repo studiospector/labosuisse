@@ -44,23 +44,22 @@
 
         {% set page_loader = fn('get_field', 'lb_page_loader_status', 'option') ? ' is-loading' : false %}
     </head>
-    <body {{ fn('body_class', bodyClass ~ page_loader) }}{{ disableScrollbar ? ' data-disable-scrollbar="true"' : '' }}>
+    <body {{ fn('body_class', bodyClass ~ page_loader) }}>
 
-        <div class="js-scrollbar js-gtm-tracking" data-ga-event-type="global" data-scroll-container>
+        <div class="js-scrollbar js-gtm-tracking" data-ga-event-type="global">
             <!-- Header -->
             {% block header %}
                 {% set header = fn('lb_header') %}
                 {% include 'layout/header.twig' with {header: header} only %}
             {% endblock %}
             <!-- Main content -->
-            <main id="content"{{ mainClass ? ' class="' ~ mainClass ~ '" ' : ' ' }}data-scroll-section>
+            <main id="content"{{ mainClass ? ' class="' ~ mainClass ~ '" ' : ' ' }}>
                 {% block main %}{% endblock %}
             </main>
             <!-- Footer -->
             {% block footer %}
                 {% set footer = fn('lb_footer') %}
                 {% include 'layout/footer.twig' with {
-                    scrollbarDisabled: disableScrollbar,
                     data: footer,
                     prefooterConfig: prefooterConfig|default({show: false, line: false})
                 } only %}

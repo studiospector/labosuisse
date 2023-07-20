@@ -28,8 +28,7 @@ if ( is_user_logged_in() || 'no' === get_option( 'woocommerce_enable_checkout_lo
         $btn_notice = Timber::compile('@PathViews/components/button.twig', [
             'title' => esc_html__( 'Accedi', 'labo-suisse-theme' ),
             'url' => '#',
-            'class' => 'showlogin js-scrollbar-management',
-            'attributes' => 'data-management-type="click" data-management-delay="2000"',
+            'class' => 'showlogin',
             'variants' => ['quaternary', 'small'],
         ]);
 

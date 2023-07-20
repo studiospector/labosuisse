@@ -99,7 +99,6 @@ class Filters extends Component {
             const htmlCardsGridProductOrdered = this.cardsGridLoaderTemplate.render({withRow: this.filterType == 'product' ? true : false, num: 3, col: 4})
             this.cardsGrid.insertAdjacentHTML( 'beforeend', DOMPurify.sanitize(htmlCardsGridProductOrdered, { ADD_TAGS: ['use'] } ))
 
-            window.getCustomScrollbar.update()
 
             this.getData().then((res) => {
                 this.cardsGrid.innerHTML = ''
@@ -108,7 +107,6 @@ class Filters extends Component {
                 }
                 this.renderTypeGrid(res).then(() => {
                     this.removeLoader()
-                    window.getCustomScrollbar.update()
                 })
             })
         // Render for Filter type Map
@@ -130,7 +128,6 @@ class Filters extends Component {
         }).then(() => {
             this.loadMoreBtn.disabled = false
             this.removeLoader()
-            window.getCustomScrollbar.update()
         })
     }
 

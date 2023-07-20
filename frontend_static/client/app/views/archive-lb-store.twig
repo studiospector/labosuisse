@@ -1,7 +1,6 @@
 {% extends '@PathViews/templates/_default.twig' %}
 
 {% set bodyClass = 'archive-lb-store' %}
-{% set disableScrollbar = true %}
 
 {% block main %}
 
@@ -28,7 +27,7 @@
                 </div>
                 <div class="lb-store-locator__list-wrapper caffeina-sl__list-wrapper">
                     <div class="caffeina-sl__notfound js-caffeina-sl-notfound">{{ store_locator.not_found }}</div>
-                    <div class="lb-store-locator__list caffeina-sl__list js-caffeina-sl-list js-scrollbar-management" data-management-type="mouseover"></div>
+                    <div class="lb-store-locator__list caffeina-sl__list js-caffeina-sl-list" data-lenis-prevent></div>
                     <div class="caffeina-sl__infowindows js-caffeina-sl-infowindows"></div>
                 </div>
                 <div class="lb-store-locator__card">
@@ -37,7 +36,7 @@
             </div>
             <div class="lb-store-locator__right-wrapper col-12 col-lg-8">
                 <div class="lb-store-locator__map-wrapper">
-                    <div class="lb-store-locator__map js-caffeina-sl-map js-scrollbar-management" data-management-type="mouseover" data-map-country="{{ store_locator.map_country }}" data-map-lang="{{ store_locator.map_lang }}"></div>
+                    <div class="lb-store-locator__map js-caffeina-sl-map" data-lenis-prevent data-map-country="{{ store_locator.map_country }}" data-map-lang="{{ store_locator.map_lang }}"></div>
                     <div class="lb-store-locator__card">
                         {% include '@PathViews/components/card.twig' with card only %}
                     </div>
