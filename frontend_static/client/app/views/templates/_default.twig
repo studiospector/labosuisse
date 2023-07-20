@@ -24,7 +24,7 @@
 		{{ fn('wp_head') }}
         <!-- / WP Head -->
 
-		<link rel="preload" as="style" href="{{ mainCss }}">
+		{# <link rel="preload" as="style" href="{{ mainCss }}"> #}
 		{# <link rel="preload" as="script" href="{{ mainJs }}"> #}
 
         <style>{{source('@bundle' ~ criticalCssProd)}}</style>
@@ -82,7 +82,7 @@
 
         {% include 'components/symbols.twig' %}
 
-        <script type="module" src="{{ mainJs }}" data-cookieconsent="ignore"></script>
+        <script type="module" src="{{ mainJs }}" data-cookieconsent="ignore" defer></script>
 
         {# <script type="text/javascript" data-cookieconsent="ignore">{{ source('@bundle' ~ criticalJs) }}</script> #}
         {# {% if production %}
