@@ -1,6 +1,7 @@
 import "../styles/blocks.scss"
 
 import 'lazysizes'
+import 'lazysizes/plugins/unveilhooks/ls.unveilhooks'
 
 import Application from './components/app'
 

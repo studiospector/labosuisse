@@ -1,10 +1,10 @@
 import '../styles/main.scss'
 
 import lazysizes from 'lazysizes'
+import 'lazysizes/plugins/unveilhooks/ls.unveilhooks'
+
 import Application from './components/app'
 import device from './utils/device'
-
-console.log(import.meta.env)
 
 function loadScripts() {
   lazySizes.cfg.init = false

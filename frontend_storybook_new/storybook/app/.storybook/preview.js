@@ -3,6 +3,7 @@ import '../styles/storybook.scss'
 
 // Lazysizes
 import lazySizes from 'lazysizes'
+import 'lazysizes/plugins/unveilhooks/ls.unveilhooks'
 
 // Theme Symbols
 import renderSymbols from '../views/components/symbols.twig'
