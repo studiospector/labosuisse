@@ -19,18 +19,14 @@ class Menu extends Component {
 
     constructor({ el }) {
         super({ el, ui, components })
+        
         if (this.ui.hamburger) {
             on(this.ui.hamburger, 'click', this.toggleMenuMobile);
         }
+
         if (this.ui.search) {
             on(this.ui.search, 'click', this.toggleSearch);
         }
-        // if (this.ui.logo) {
-            // this.tl = stickyHeaderScroll(this.el, this.ui.logo);
-        // }
-        // if (this.ui.statusbar && this.ui.statusbar.querySelector('.lb-statusbar__end:first-child')) {
-        //     this.el.classList.add('lb-header--scrolled-mobile');
-        // }
     }
 
     toggleMenuMobile = () => {

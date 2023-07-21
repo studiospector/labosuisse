@@ -31,23 +31,14 @@ class MenuMobile extends Component {
     } }) {
         super({ el, ui })
 
-        let menuRoot = document.querySelector('.lb-menu--mobile');
-        on(menuRoot, 'click', (ev) => {
-            console.log('menuRoot target', ev.target);
-            console.log('');
-        });
-
-        on(this.ui.main, 'click', (ev) => {
-            console.log('');
-            console.log('this.ui.main target', ev.target);
-        });
-
         on(this.ui.buttons, 'click', this.next);
         on(this.ui.back, 'click', this.back);
+
         gsap.set(this.el, { xPercent: -100, display: 'block' })
         this.tl = openMenu({ menuElement: this.el, items: this.ui.items, ...options });
         this.slider = gsap.timeline();
         this.master = gsap.timeline();
+
         this.stack = [];
         this.isOpen = false;
         this.opt = options
@@ -74,14 +65,9 @@ class MenuMobile extends Component {
     }
 
     next = (event) => {
-        console.log('next');
         const item = event.target.closest('.lb-menu__item');
         const menu = item && item.querySelector('.lb-menu__submenu');
         const parent = item.parentElement;
-        console.log('event', event.target, event);
-        console.log('menu', menu);
-        console.log('item', item);
-        console.log('parent', parent);
         if (!parent || !parent.classList.contains('lb-menu__main--active')) {
             this.activate(
                 menu,
@@ -99,7 +85,6 @@ class MenuMobile extends Component {
     }
 
     activate = (menu, parent) => {
-        console.log('activate');
         this.stack.push([menu, parent]);
         menu.classList.add('lb-menu__submenu--active');
         this.slide(() => null, menu == this.submenu);
@@ -135,8 +120,7 @@ class MenuMobile extends Component {
         this.master.clear();
         this.master.to(this.tl, { progress: 1, duration: this.tl.duration() });
         disableBodyScroll(this.ui.main, { allowTouchMove });
-        window.getCustomScrollbar.stop()
-        document.body.style.overflow = 'hidden';
+        // window.getCustomScrollbar.stop()
     }
 
     close = () => {
@@ -144,8 +128,7 @@ class MenuMobile extends Component {
         qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
         this.isOpen = false;
         enableBodyScroll(this.ui.main);
-        window.getCustomScrollbar.start()
-        document.body.style.overflow = 'auto';
+        // window.getCustomScrollbar.start()
         this.master.to(this.tl, {
             progress: 0, duration: this.tl.duration(), onComplete: () => {
                 // this.ui.submenus.forEach(menu => this.deactivate(menu, menu.closest('.lb-menu__main')));
@@ -159,13 +142,6 @@ class MenuMobile extends Component {
 
     toggle = (burger) => {
         this.isOpen ? this.close(burger) : this.open(burger);
-    }
-
-    onResize = () => {
-        if (window.innerWidth >= breakpoints.md && this.reset) {
-            this.reset();
-            this.reset = null;
-        }
     }
 }
 
