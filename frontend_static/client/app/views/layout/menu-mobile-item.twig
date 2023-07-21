@@ -43,7 +43,7 @@
 				</button>
 			</div>
 			<div class="lb-menu-scroller">
-				<div body-scroll-lock-ignore data-lenis-prevent class="lb-menu__main">
+				<div data-lenis-prevent class="lb-menu__main">
                     {%- if subLabel -%}
                         <div class="lb-menu__item lb-menu__item--sublabel">
                             <div class="lb-menu__link">
@@ -80,7 +80,7 @@
 				</button>
 			</div>
 			<div class="lb-menu-scroller">
-				<div body-scroll-lock-ignore data-lenis-prevent class="lb-menu__main">
+				<div data-lenis-prevent class="lb-menu__main">
 					{%- for subitem in children -%}
 						{%- include "@PathViews/layout/menu-mobile-item.twig" with subitem only -%}
 					{%- endfor -%}

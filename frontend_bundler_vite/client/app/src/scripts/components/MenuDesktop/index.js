@@ -3,8 +3,6 @@ import { on, qsa, qs } from '@okiba/dom';
 
 import { gsap } from "gsap"
 
-import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
-
 import { openBackgroundTimeline, openSubmenuTimeline } from './animations';
 // import { stickyHeader } from "../MenuMobile/animations";
 
@@ -59,7 +57,6 @@ class MenuDesktop extends Component {
 
     // onHoverLeave = (event) => {
     //   if (!this.isOpen) {
-    //     clearAllBodyScrollLocks();
     //     gsap.globalTimeline.clear();
     //     gsap.to(this.hoverTL, { progress: 0, duration: this.hoverTL.duration() })
     //   }
@@ -75,9 +72,6 @@ class MenuDesktop extends Component {
             const wrapper = submenu.querySelector('.lb-menu__wrapper');
 
             if (this.mainLink !== mainLink) {
-                disableBodyScroll(this.el, {
-                    reserveScrollBarGap: true,
-                });
                 window.getCustomScrollbar.stop()
                 // if (scrollBarGap > 0 && this.header && !this.mainLink && !this.previousHeaderPaddingRight) {
                 //     const computedHeaderPaddingRight = parseInt(window.getComputedStyle(this.header).getPropertyValue('padding-right'), 10);
@@ -114,7 +108,6 @@ class MenuDesktop extends Component {
         this.masterTL
             .to(this.activeMenuTL, { progress: 0, duration: this.activeMenuTL.duration() })
             .to(this.commonTimeline, { progress: 0, duration: this.commonTimeline.duration() }, "-=0.1")
-            .call(() => enableBodyScroll(this.el))
             .call(() => window.getCustomScrollbar.start())
             .call(() => {
                 if (this.previousHeaderPaddingRight) {
