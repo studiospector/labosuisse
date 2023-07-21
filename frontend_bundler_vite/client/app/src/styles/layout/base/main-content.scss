@@ -1,28 +1,6 @@
 /**
  * Core elements
  */
-html.has-scroll-smooth {
-    overflow: hidden;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-
-html.has-scroll-smooth body {
-    overflow: hidden;
-}
-
-html.has-scroll-smooth [data-scroll-container] {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-html.has-scroll-smooth #content {
-    will-change: transform;
-}
 
 // body.ready {
 //     overflow-y: auto;
@@ -36,10 +14,6 @@ html.has-scroll-smooth #content {
     @include mq($until: lg) {
         padding-top: 176px;
     }
-}
-
-.c-scrollbar {
-    z-index: 999;
 }
 
 .grecaptcha-badge { 

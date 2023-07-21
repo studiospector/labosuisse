@@ -119,16 +119,16 @@ class MenuMobile extends Component {
         this.isOpen = true;
         this.master.clear();
         this.master.to(this.tl, { progress: 1, duration: this.tl.duration() });
-        disableBodyScroll(this.ui.main, { allowTouchMove });
-        // window.getCustomScrollbar.stop()
+        // disableBodyScroll(this.ui.main, { allowTouchMove });
+        window.getCustomScrollbar.stop()
     }
 
     close = () => {
         qs(this.opt.headerElement).classList.remove('lb-header--hide')
         qs(this.opt.hamburgerElement).classList.remove('lb-header__hamburger--is-open')
         this.isOpen = false;
-        enableBodyScroll(this.ui.main);
-        // window.getCustomScrollbar.start()
+        // enableBodyScroll(this.ui.main);
+        window.getCustomScrollbar.start()
         this.master.to(this.tl, {
             progress: 0, duration: this.tl.duration(), onComplete: () => {
                 // this.ui.submenus.forEach(menu => this.deactivate(menu, menu.closest('.lb-menu__main')));
