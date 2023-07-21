@@ -34,6 +34,13 @@ class CarouselHero extends Component {
                     this.swiper.params.autoplay.delay = 8000
                     this.swiper.params.autoplay.disableOnInteraction = false
                     this.swiper.autoplay.start()
+
+                    const slides = swiperObj.$el.find(".swiper-slide")
+                    slides.forEach(el => {
+                        const texts = el.querySelectorAll(".infobox__tagline, .infobox__title, .infobox__subtitle, .infobox__paragraph")
+                        new SplitText(texts, { type: "lines", linesClass: "lb-split-child-line" })
+                        new SplitText(texts, { type: "lines", linesClass: "lb-split-parent-line" })
+                    })
                 }, 1000),
                 slideChangeTransitionStart: (swiperObj) => {
                     this.transitionStart(swiperObj)
@@ -51,9 +58,7 @@ class CarouselHero extends Component {
         // Active Slide Image
         const slideImage = slideActive.find("img")
         // Active Slide Texts
-        const slideText = slideActive.find(".infobox__tagline, .infobox__title, .infobox__subtitle, .infobox__paragraph")
-        const childSplit = new SplitText(slideText, { type: "lines", linesClass: "lb-split-child-line" })
-        const parentSplit = new SplitText(slideText, { type: "lines", linesClass: "lb-split-parent-line" })
+        const slideTexts = slideActive.find(".lb-split-child-line")
         // Active Slide CTA
         const slideCTA = slideActive.find(".infobox__cta")
 
@@ -76,16 +81,16 @@ class CarouselHero extends Component {
         }, '<')
         
         // Texts animation
-        tl.set(slideText, { autoAlpha: 1 }, '<')
-        tl.from(childSplit.lines, {
+        tl.set(slideTexts, { autoAlpha: 1 }, '<')
+        tl.from(slideTexts, {
             duration: 1.5,
             yPercent: 100,
             ease: "power4",
             stagger: 0.1,
             delay: 0.8,
-            onComplete: () => {
-                childSplit.revert()
-            }
+            // onComplete: () => {
+            //     slideTexts.revert()
+            // }
         }, '<')
 
         // CTA animation
