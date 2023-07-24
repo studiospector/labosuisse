@@ -39,6 +39,10 @@ class CustomInput extends BasicElement {
             this.mainContainer = this.createDOMElement('LABEL', ['custom-field', 'custom-input', `custom-input--${this.currInputType}`], null, null, {pos: 'beforebegin', elem: this.cs[i]})
             this.mainContainer.setAttribute('for', this.cs[i].getAttribute('id'))
 
+            // HIDE MAIN ELEMENTS
+            // this.currInputElem.style.display = 'none'
+            // this.mainContainer.style.display = 'none'
+
             // DISABLED <input>
             if (this.currInputElem.disabled) {
                 this.mainContainer.classList.add('custom-input--disabled')
@@ -194,6 +198,10 @@ class CustomInput extends BasicElement {
                     this.cs[i].addEventListener('blur', (el) => this.onFocus(el.target.value.length))
                 }
             }
+
+            // HIDE MAIN ELEMENTS
+            // this.currInputElem.style.display = 'block'
+            // this.mainContainer.style.display = 'flex'
         }
     }
 
