@@ -1,8 +1,6 @@
 import Component from '@okiba/component'
 import { on, off, qs } from '@okiba/dom'
 
-import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
-
 import OffsetNav from './OffsetNav'
 
 class OffsetNavSystem extends Component {
@@ -22,7 +20,6 @@ class OffsetNavSystem extends Component {
 
         if (!offsetNav) return
         
-        disableBodyScroll(offsetNav)
         window.getCustomScrollbar.stop()
 
         if (!this.offsetNavs.hasOwnProperty(id)) {
@@ -48,7 +45,6 @@ class OffsetNavSystem extends Component {
         }
 
         if (!this.openOffsetNavs.length && id) {
-            enableBodyScroll(this.offsetNavs[id].el)
             window.getCustomScrollbar.start()
         }
     }

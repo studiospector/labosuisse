@@ -6,7 +6,7 @@
 
 	{%- if isParallax -%}
         {% set parallaxVariant = 'parallax' %}
-        {% set classes = classes|merge(['js-parallax']) %}
+        {% set classes = classes|merge(['js-parallax-image']) %}
     {%- endif -%}
 
     {%- if reveal -%}
@@ -24,7 +24,7 @@
 	{%- endif -%}
 
     {%- if isParallax or reveal -%}<div class="lb-picture-wrapper{{ reveal ? ' js-image-reveal' : '' }}">{%- endif -%}
-	    <picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}"{{ (isParallax) ? ' data-scroll data-scroll-speed="1" data-scroll-delay="0.1"' : '' }}>
+	    <picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
             <source media="(min-width: 801px) and (max-width: 1200px)" data-srcset="{{images.lg}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             <source media="(min-width: 401px) and (max-width: 800px)" data-srcset="{{images.md}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             <source media="(max-width: 400px)" data-srcset="{{images.sm}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">

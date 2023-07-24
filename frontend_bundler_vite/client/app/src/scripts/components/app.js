@@ -39,6 +39,7 @@ import Multicountry from './Multicountry'
 import MulticountryGeolocation from './MulticountryGeolocation'
 import Video from './Video'
 import BannerVideo from './BannerVideo'
+import ParallaxImage from './ParallaxImage';
 
 const components = {
     scrollbar: {
@@ -216,52 +217,27 @@ const components = {
         type: BannerVideo,
         optional: true
     },
+    parallaxImage: {
+        selector: '.js-parallax-image',
+        type: ParallaxImage,
+        optional: true
+    },
 }
 
 export default class Application extends Component {
     constructor() {
         super({ el: document.body, components })
 
-        this.disableScrollbar = this.el.dataset.disableScrollbar
-
         this.components.offsetNavs = OffsetNavSystem.get()
 
         if (!document.querySelector('body').classList.contains('wp-admin')) {
-            this.scrollbarUpdate()
+            this.el.classList.add('ready')
             this.cardsProductHover()
         }
     }
 
     /**
-     * Locomotive scroll calculates page height on initialization.
-     * Some content may have not finished to load and change page height afterwards (for example image loading).
-     * So we update scroll also after first initialization to prevent hidden sections.
-     * N.B. This is only for Front-end and not for admin WP area.
-     */
-    scrollbarUpdate = () => {
-        window.getCustomScrollbar.update()
-
-        // Each time the window updates, we should refresh ScrollTrigger and then update LocomotiveScroll. 
-        ScrollTrigger.addEventListener("refresh", () => window.getCustomScrollbar.update())
-
-        // After everything is set up, refresh() ScrollTrigger and update LocomotiveScroll because padding may have been added for pinning, etc.
-        ScrollTrigger.refresh()
-
-        // Trigger 'resize' event to correct and prevent layout shifting
-        window.dispatchEvent(new Event('resize'))
-
-        // Enable Scroll of page
-        if (this.disableScrollbar) {
-            window.getCustomScrollbar.destroy()
-        } else {
-            window.getCustomScrollbar.start()
-        }
-
-        this.el.classList.add('ready')
-    }
-
-    /**
-     * Add/Remove class 'button-active' on product card status button
+     * Add/Remove class 'button-active' on Product card status button
      */
     cardsProductHover = () => {
         const cardsProduct = qsa('.lb-product-card')

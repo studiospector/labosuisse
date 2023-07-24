@@ -27,8 +27,7 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
     $btn_notice = Timber::compile('@PathViews/components/button.twig', [
         'title' => esc_html__( 'Inserisci codice', 'labo-suisse-theme' ),
         'url' => '#',
-        'class' => 'showcoupon js-scrollbar-management',
-        'attributes' => 'data-management-type="click" data-management-delay="2000"',
+        'class' => 'showcoupon',
         'variants' => ['quaternary', 'small'],
     ]);
 

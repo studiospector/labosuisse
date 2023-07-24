@@ -12,13 +12,9 @@
 @import "vendors/custom-checkbox";
 @import "vendors/custom-select";
 
-// FULL GRID
-// @include generate-grid();
-
 // LAYOUT
-// @import "layout/base/index";
-// @import "layout/woo/index";
 @import "layout/pages/index";
+@import "layout/woo/index";
 
 // COMPONENTS
 @import "components/index";

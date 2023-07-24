@@ -7,7 +7,7 @@ import { getHeaderFullHeight } from '../../utils/headerHeight';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import LocomotiveScroll from 'locomotive-scroll'
+import Lenis from '@studio-freight/lenis'
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -16,45 +16,27 @@ class Scrollbar extends Component {
     constructor({ options, ...props }) {
         super({ ...props })
 
-        this.defaultOptions = {
-            el: this.el,
-            smooth: true,
-            // getSpeed: true,
-            getDirection: true,
-            reloadOnContextChange: true
-        }
-
         this.init()
     }
 
     init = () => {
-        // Init Locomotive Scroll
-        const scrollbar = new LocomotiveScroll(this.defaultOptions)
+        const lenis = new Lenis()
 
-        // each time Locomotive Scroll updates, tell ScrollTrigger to update too (sync positioning)
-        scrollbar.on("scroll", ScrollTrigger.update);
+        lenis.on('scroll', ScrollTrigger.update)
 
-        // tell ScrollTrigger to use these proxy methods for the ".js-scrollbar" element since Locomotive Scroll is hijacking things
-        ScrollTrigger.scrollerProxy(this.el, {
-            scrollTop(value) {
-                return arguments.length ? scrollbar.scrollTo(value, 0, 0) : scrollbar.scroll.instance.scroll.y;
-            }, // we don't have to define a scrollLeft because we're only scrolling vertically.
-            getBoundingClientRect() {
-                return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
-            },
-            // LocomotiveScroll handles things completely differently on mobile devices - it doesn't even transform the container at all! So to get the correct behavior and avoid jitters, we should pin things with position: fixed on mobile. We sense it by checking to see if there's a transform applied to the container (the LocomotiveScroll-controlled element).
-            pinType: document.querySelector(".js-scrollbar").style.transform ? "transform" : "fixed"
-        });
+        gsap.ticker.add((time)=>{
+            lenis.raf(time * 1000)
+        })
 
-        scrollbar.stop()
+        gsap.ticker.lagSmoothing(0)
 
-        // Add Locomotive Scroll to window for global access
-        window.getCustomScrollbar = scrollbar
+        // Add Lenis to window for global access
+        window.getCustomScrollbar = lenis
 
-        setTimeout(() => this.scrollToWithAnchorLink(scrollbar), 3000);
+        setTimeout(() => this.scrollToWithAnchorLink(lenis), 3000);
     }
 
-    scrollToWithAnchorLink = (scrollbar) => {
+    scrollToWithAnchorLink = (lenis) => {
         const fullHeaderHeight = getHeaderFullHeight()
 
         const hash = window.location.hash
@@ -62,7 +44,7 @@ class Scrollbar extends Component {
         if (hash) {
             const el = qs(hash)
             
-            scrollbar.scrollTo(el, {
+            lenis.scrollTo(el, {
                 offset: -fullHeaderHeight
             })
         }

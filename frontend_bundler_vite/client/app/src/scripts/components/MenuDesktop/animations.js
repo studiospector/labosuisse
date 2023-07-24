@@ -1,18 +1,11 @@
 import { qs } from '@okiba/dom';
 import { gsap } from 'gsap';
-// import breakpoints from '../../utils/breakpoints';
-
 
 const wrapperTimeline = (el) => {
     const tl = gsap.timeline()
         .fromTo(el, { opacity: 0, y: -10 }, { opacity: 1, y: 0 });
     return tl;
 }
-
-// const backgroundHeight = () => {
-//     // return window.innerWidth > breakpoints.xl ? '522px' : '395px';
-//     return window.innerWidth > breakpoints.xl ? '100%' : '100%';
-// }
 
 const backgroundTimeline = (el) => {
     const tl = gsap.timeline()

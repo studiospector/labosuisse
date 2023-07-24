@@ -126,8 +126,8 @@ class SearchAutocomplete extends Component {
         })
 
         autoCompleteJS.input.addEventListener("navigate", (event) => {
-            this.disableLocomotive()
-            on(document, 'wheel', this.enableLocomotive)
+            this.disableScroll()
+            on(document, 'wheel', this.enableScroll)
         })
 
         on(this.ui.input, 'init', this.manageScrollbar)
@@ -135,17 +135,17 @@ class SearchAutocomplete extends Component {
 
     manageScrollbar = () => {
         const elementsToDisable = qs('.lb-search-autocomplete__selection', this.el)
-        on(elementsToDisable, 'mouseenter', this.disableLocomotive)
-        on(elementsToDisable, 'mouseleave', this.enableLocomotive)
+        on(elementsToDisable, 'mouseenter', this.disableScroll)
+        on(elementsToDisable, 'mouseleave', this.enableScroll)
     }
 
-    disableLocomotive = (ev) => {
-        window.getCustomScrollbar.stop()
+    disableScroll = (ev) => {
+        ev.target.setAttribute('data-lenis-prevent', true)
     }
 
-    enableLocomotive = (ev) => {
-        window.getCustomScrollbar.start()
-        off(document, 'wheel', this.enableLocomotive)
+    enableScroll = (ev) => {
+        ev.target.removeAttribute('data-lenis-prevent')
+        off(document, 'wheel', this.enableScroll)
     }
 }
 

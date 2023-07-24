@@ -1,4 +1,4 @@
-<div class="lb-menu__item lb-menu__item--subitem"{{ (type == 'submenu' and trigger) ? ' data-submenu-trigger="' ~ trigger ~ '"' : '' }}>
+<div class="lb-menu__item lb-menu__item--subitem"{{ (type == 'submenu' and trigger) ? ' data-submenu-trigger="' ~ trigger ~ '"' : '' }} data-lenis-prevent>
 	{%- if type == 'link' -%}
 		<a class="lb-menu__link" href="{{href}}" title="{{ label }}" tabindex="0" target="{{ target ? target : '_self' }}">{{label}}</a>
 	{%- endif -%}

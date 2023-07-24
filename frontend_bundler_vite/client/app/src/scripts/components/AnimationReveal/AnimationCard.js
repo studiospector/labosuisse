@@ -75,7 +75,7 @@ class AnimationCard extends Component {
 
         this.tl = gsap.timeline({
             scrollTrigger: {
-                scroller: (isStorybook() || isScrollbarDisabled()) ? 'body' : '.js-scrollbar',
+                // scroller: (isStorybook() || isScrollbarDisabled()) ? 'body' : '.js-scrollbar',
                 trigger: this.el,
                 start: "30% 80%",
             }

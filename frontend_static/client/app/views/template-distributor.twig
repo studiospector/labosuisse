@@ -1,7 +1,6 @@
 {% extends '@PathViews/templates/_default.twig' %}
 
 {% set bodyClass = 'lb-template-distributor' %}
-{% set disableScrollbar = true %}
 
 {% block main %}
 
@@ -21,7 +20,7 @@
     {% endif %}
 
     {# Map #}
-    <div class="lb-template-distributor__map-wrapper js-distributor-map-wrapper js-scrollbar-management" data-management-type="mouseover">
+    <div class="lb-template-distributor__map-wrapper js-distributor-map-wrapper" data-lenis-prevent>
         <div class="lb-template-distributor__map js-distributor-map" data-map-country="{{ map.map_country }}" data-map-lang="{{ map.map_lang }}"></div>
         <div class="caffeina-sl__loader caffeina-sl__loader--loading js-distributor-loader"></div>
     </div>

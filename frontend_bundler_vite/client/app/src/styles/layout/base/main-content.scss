@@ -1,32 +1,10 @@
 /**
  * Core elements
  */
-html.has-scroll-smooth {
-    overflow: hidden;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
 
-html.has-scroll-smooth body {
-    overflow: hidden;
-}
-
-html.has-scroll-smooth [data-scroll-container] {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-html.has-scroll-smooth #content {
-    will-change: transform;
-}
-
-body.ready {
-    overflow-y: auto;
-}
+// body.ready {
+//     overflow-y: auto;
+// }
 
 #content {
     padding-top: 217px;
@@ -38,12 +16,32 @@ body.ready {
     }
 }
 
-.c-scrollbar {
-    z-index: 999;
-}
-
 .grecaptcha-badge { 
     visibility: hidden !important;
+}
+
+
+/**
+ * Lenis
+ */
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
 }
 
 
