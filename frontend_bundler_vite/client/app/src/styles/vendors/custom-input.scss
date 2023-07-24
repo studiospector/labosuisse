@@ -1,3 +1,7 @@
+.js-custom-input {
+    display: none;
+}
+
 .custom-input {
     display: flex;
     flex-direction: column;
@@ -6,6 +10,7 @@
 
     input,
     textarea {
+        display: block;
         position: relative;
         padding: 16.5px;
         background-color: map-get($colors, "white");
