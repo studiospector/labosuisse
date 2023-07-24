@@ -23,18 +23,27 @@ class MulticountryGeolocation extends Component {
         this.cookie = getCookie('lb_multicountry_geolocation')
 
         if (!Boolean(this.cookie)) {
-            this.getGeolocationData().then((res) => {
-                console.log(res);
-                if (res) {
-                    this.render(res).then(() => {
-                        window.openOffsetNav('lb-offsetnav-multicountry-geolocation')
-            
-                        const buttons = qsa('#lb-multicountry-geolocation-content .button')
-                        on(buttons, 'click', this.setCookieOnClick)
-                    })
-                }
-            })
+            setTimeout(() => {
+                this.init()
+            }, 10000);
         }
+    }
+
+    /**
+     * Geolocate
+     */
+    init = () => {
+        this.getGeolocationData().then((res) => {
+            console.log(res);
+            if (res) {
+                this.render(res).then(() => {
+                    window.openOffsetNav('lb-offsetnav-multicountry-geolocation')
+        
+                    const buttons = qsa('#lb-multicountry-geolocation-content .button')
+                    on(buttons, 'click', this.setCookieOnClick)
+                })
+            }
+        })
     }
 
     /**
