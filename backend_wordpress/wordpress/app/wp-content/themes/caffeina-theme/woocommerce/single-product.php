@@ -26,6 +26,12 @@ use Caffeina\LaboSuisse\Blocks\OffsetNavs;
 use Caffeina\LaboSuisse\Blocks\Routine;
 use Caffeina\LaboSuisse\Blocks\InformationBoxes;
 
+$toRedirect = toRedirect();
+
+if(toRedirect()) {
+    wp_redirect($toRedirect, 301);
+}
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
