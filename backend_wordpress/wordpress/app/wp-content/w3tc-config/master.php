@@ -598,7 +598,7 @@
         ""
     ],
     "browsercache.configuration_overloaded": false,
-    "browsercache.enabled": true,
+    "browsercache.enabled": false,
     "browsercache.rewrite": false,
     "browsercache.no404wp": false,
     "browsercache.no404wp.exceptions": [
