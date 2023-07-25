@@ -541,3 +541,60 @@ function isCli()
 {
     return (defined('WP_CLI') or defined('DOING_CRON'));
 }
+
+function getIpAddress()
+{
+    if (wp_get_environment_type() == 'local') {
+        return WC_Geolocation::get_external_ip_address();
+    }
+
+    return WC_Geolocation::get_ip_address();
+}
+
+function getLocationInfo($ip)
+{
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_URL => "http://ip-api.com/json/{$ip}",
+        CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
+        CURLOPT_RETURNTRANSFER => true
+    ));
+
+    $response = json_decode(curl_exec($curl));
+
+    curl_close($curl);
+
+    setcookie('country', $response->countryCode, time()+31556926);
+
+    return $response->countryCode;
+}
+
+function toRedirect(): bool|string
+{
+    $redirectionMap = [
+        'brand-page/brand-crescina-en' => '/test',
+        'product/crescina-transdermic-hfsc-re-growth' => '/test',
+        'product/crescina-hair-follicular-islands' => '/test',
+        'product/crescina-transdermic-hfsc-complete-treatment' => '/test',
+        'product/crescina-hair-follicular-islands-complete-treatment' => '/test',
+        'product/crescina-transdermic-hfsc-re-growth-shampoo' => '/test'
+    ];
+
+    $ip = getIpAddress();
+    $country = getLocationInfo($ip);
+
+    global $wp;
+    $current_slug = add_query_arg(array(), $wp->request);
+
+    if (
+        $country === 'SA' and
+        wpml_get_current_language() === 'en' and
+        in_array($current_slug, array_keys($redirectionMap))
+    ) {
+        return $redirectionMap[$current_slug];
+    }
+
+    return false;
+}
