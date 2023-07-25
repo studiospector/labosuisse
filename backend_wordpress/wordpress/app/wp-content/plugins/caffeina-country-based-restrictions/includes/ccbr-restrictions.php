@@ -145,32 +145,8 @@ class CCBR_Restrictions
 			return $_COOKIE['country'];
 		}
 
-        if (wp_get_environment_type() == 'local') {
-            $ip = \WC_Geolocation::get_external_ip_address();
-        } else {
-            $ip = \WC_Geolocation::get_ip_address();
-        }
+        $ip = getIpAddress();
 
-        return $this->getLocationInfo($ip);
-    }
-
-    private function getLocationInfo($ip)
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_URL => "http://ip-api.com/json/{$ip}",
-            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
-            CURLOPT_RETURNTRANSFER => true
-        ));
-
-        $response = json_decode(curl_exec($curl));
-
-        curl_close($curl);
-
-		setcookie('country', $response->countryCode, time()+31556926);
-
-        return $response->countryCode;
+        return getLocationInfo($ip);
     }
 }
