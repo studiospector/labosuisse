@@ -574,12 +574,12 @@ function getLocationInfo($ip)
 function toRedirect(): bool|string
 {
     $redirectionMap = [
-        'brand-page/brand-crescina-en' => '/test',
-        'product/crescina-transdermic-hfsc-re-growth' => '/test',
-        'product/crescina-hair-follicular-islands' => '/test',
-        'product/crescina-transdermic-hfsc-complete-treatment' => '/test',
-        'product/crescina-hair-follicular-islands-complete-treatment' => '/test',
-        'product/crescina-transdermic-hfsc-re-growth-shampoo' => '/test'
+        'brand-page/brand-crescina-en' => '/en/maintenance',
+        'product/crescina-transdermic-hfsc-re-growth' => '/en/maintenance',
+        'product/crescina-hair-follicular-islands' => '/en/maintenance',
+        'product/crescina-transdermic-hfsc-complete-treatment' => '/en/maintenance',
+        'product/crescina-hair-follicular-islands-complete-treatment' => '/en/maintenance',
+        'product/crescina-transdermic-hfsc-re-growth-shampoo' => '/en/maintenance',
     ];
 
     $ip = getIpAddress();
