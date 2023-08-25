@@ -77,9 +77,10 @@ class Archive
 
     public function addFilters($filters)
     {
+        $filters = json_decode($filters);
         if (!is_null($filters)) {
             foreach ($filters as $filter) {
-                $filter = json_decode($filter);
+                // $filter = json_decode($filter);
 
                 if (property_exists($filter, 'taxonomy')) {
                     $this->filterByTaxonomy($filter->taxonomy, $filter->values);
