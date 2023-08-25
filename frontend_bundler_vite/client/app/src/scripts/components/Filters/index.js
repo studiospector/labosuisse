@@ -90,7 +90,7 @@ class Filters extends Component {
             }
         })
 
-        this.payload.data = args
+        this.payload.data = JSON.stringify(args)
         this.payload.page = 1
 
         // Render for Filter type Grid
