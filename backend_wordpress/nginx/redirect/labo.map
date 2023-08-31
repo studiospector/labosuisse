@@ -57,13 +57,13 @@ map $request_uri $new_uri {
     /it/prodotti/ho-bisogno-di/Innovativi%20trattamenti%20make-up /categoria-prodotto/make-up;
 
     # Redirect Crescina Mito
-    /prodotto/crescina-transdermic-ri-crescita-hb-177/ /prodotto/crescina-transdermic-ri-crescita-mito;
-    /prodotto/crescina-transdermic-ri-crescita-hb-177-e-anti-caduta-trattamento-completo/ /prodotto/crescina-transdermic-ri-crescita-mito-e-anti-caduta-mito-trattamento-completo;
-    /prodotto/crescina-transdermic-isole-follicolari-hb-177/ /prodotto/crescina-transdermic-isole-follicolari-mito;
-    /prodotto/crescina-transdermic-isole-follicolari-hb-177-e-anti-caduta-trattamento-completo/ /prodotto/crescina-transdermic-isole-follicolari-mito-e-anti-caduta-mito;
+    ~^/prodotto/crescina-transdermic-ri-crescita-hb-177/? /prodotto/crescina-transdermic-ri-crescita-mito;
+    ~^/prodotto/crescina-transdermic-ri-crescita-hb-177-e-anti-caduta-trattamento-completo/? /prodotto/crescina-transdermic-ri-crescita-mito-e-anti-caduta-mito-trattamento-completo;
+    ~^/prodotto/crescina-transdermic-isole-follicolari-hb-177/? /prodotto/crescina-transdermic-isole-follicolari-mito;
+    ~^/prodotto/crescina-transdermic-isole-follicolari-hb-177-e-anti-caduta-trattamento-completo/? /prodotto/crescina-transdermic-isole-follicolari-mito-e-anti-caduta-mito;
 
-    /brands/crescina/crescina-hb-177/ /brands/crescina/crescina-ri-crescita;
-    /brands/crescina/crescina-isole-follicolari-hb-177/ /brands/crescina/crescina-isole-follicolari;
+    ~^/brands/crescina/crescina-hb-177/? /brands/crescina/crescina-ri-crescita;
+    ~^/brands/crescina/crescina-isole-follicolari-hb-177/? /brands/crescina/crescina-isole-follicolari;
 
     /en/content/who-we-are /en/the-company;
     /en/content/fillerina-world /en/fillerina-in-the-world;
