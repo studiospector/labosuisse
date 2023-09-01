@@ -21,6 +21,9 @@ class Assets
             add_filter('wpcf7_load_js', '__return_false');
             add_filter('wpcf7_load_css', '__return_false');
         }
+
+        // Add custom attributes on script tags
+        add_filter('script_loader_tag', [$this, 'lb_add_scripts_attribute'], 10, 3);
     }
 
 
@@ -210,5 +213,20 @@ class Assets
                 'all'
             );
         }
+    }
+
+    /**
+     * Add custom attributes on script tags
+     */
+    public function lb_add_scripts_attribute($tag, $handle, $src) {
+        // If not your script, do nothing and return original $tag
+        if ( 'lb-blocks-js' !== $handle ) {
+            return $tag;
+        }
+
+        // Change the script tag by adding type="module" and return it.
+        $tag = '<script type="module" src="' . esc_url( $src ) . '"></script>';
+
+        return $tag;
     }
 }
