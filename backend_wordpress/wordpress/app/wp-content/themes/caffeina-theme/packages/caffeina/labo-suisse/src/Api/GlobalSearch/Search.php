@@ -137,12 +137,19 @@ class Search
         $products = $this->getArchive('product', [
             'orderby' => 'menu_order',
             'order' => 'ASC',
-            'tax_query' => [[
-                'taxonomy' => 'product_visibility',
-                'terms' => ['exclude-from-catalog'],
-                'field' => 'name',
-                'operator' => 'NOT IN',
-            ]]
+            'tax_query' => [
+                [
+                    'taxonomy' => 'product_visibility',
+                    'terms' => ['exclude-from-catalog'],
+                    'field' => 'name',
+                    'operator' => 'NOT IN',
+                ],
+                [
+                    'taxonomy' => 'product_visibility',
+                    'terms' => ['exclude-from-search'],
+                    'field' => 'name',
+                    'operator' => 'NOT IN',
+                ]]
         ]);
 
         foreach ($products as $item) {
