@@ -40,12 +40,19 @@ class Autocomplete
             'posts_per_page' => -1,
             'post_type' => $this->postType,
             's' => $this->search,
-            'tax_query' => [[
-                'taxonomy' => 'product_visibility',
-                'terms' => ['exclude-from-catalog'],
-                'field' => 'name',
-                'operator' => 'NOT IN',
-            ]]
+            'tax_query' => [
+                [
+                    'taxonomy' => 'product_visibility',
+                    'terms' => ['exclude-from-catalog'],
+                    'field' => 'name',
+                    'operator' => 'NOT IN',
+                ],
+                [
+                    'taxonomy' => 'product_visibility',
+                    'terms' => ['exclude-from-search'],
+                    'field' => 'name',
+                    'operator' => 'NOT IN',
+                ]]
         ]);
 
         $posts = $query->get_posts();
