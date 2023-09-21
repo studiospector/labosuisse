@@ -65,6 +65,8 @@ map $request_uri $new_uri {
     ~^/brands/crescina/crescina-hb-177/? /brands/crescina/crescina-ri-crescita;
     ~^/brands/crescina/crescina-isole-follicolari-hb-177/? /brands/crescina/crescina-isole-follicolari;
 
+    ~^/spedizioni-e-resi/? /spedzioni;
+
     /en/content/who-we-are /en/the-company;
     /en/content/fillerina-world /en/fillerina-in-the-world;
     /en/content/crescina-world /en/crescina-in-the-world;
