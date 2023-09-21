@@ -575,11 +575,11 @@ function toRedirect(): bool|string
 {
     $redirectionMap = [
         'brand-page/brand-crescina-en' => '/en/maintenance',
-        'product/crescina-transdermic-hfsc-re-growth' => '/en/maintenance',
+        'product/crescina-transdermic-hfsc-re-growth' => '/en/product/crescina-transdermic-hfsc-ksa',
         'product/crescina-hair-follicular-islands' => '/en/maintenance',
-        'product/crescina-transdermic-hfsc-complete-treatment' => '/en/maintenance',
+        'product/crescina-transdermic-hfsc-complete-treatment' => '/en/product/crescina-transdermic-hfsc-hssc-complete-care-ksa',
         'product/crescina-hair-follicular-islands-complete-treatment' => '/en/maintenance',
-        'product/crescina-transdermic-hfsc-re-growth-shampoo' => '/en/maintenance',
+        'product/crescina-transdermic-hfsc-re-growth-shampoo' => '/en/product/crescina-transdermic-hfsc-shampoo-ksa',
     ];
 
     $ip = getIpAddress();
