@@ -4,19 +4,19 @@ namespace Caffeina\LaboSuisse\Services\MC4WP;
 
 class SettingsMC4WP
 {
-    private $IDlistIT = null;
-    private $IDlistEN = null;
+    // private $IDlistIT = null;
+    // private $IDlistEN = null;
 
     public function __construct()
     {
-        $this->IDlistIT = wp_get_environment_type() == 'production' ? 'a154247d71' : '4c7a6d16ad';
-        $this->IDlistEN = wp_get_environment_type() == 'production' ? 'b2ae793ca5' : 'e11ac615ab';
+        // $this->IDlistIT = wp_get_environment_type() == 'production' ? 'a154247d71' : '4c7a6d16ad';
+        // $this->IDlistEN = wp_get_environment_type() == 'production' ? 'b2ae793ca5' : 'e11ac615ab';
 
         add_filter('mc4wp_subscriber_data', [$this, 'lb_set_mc4wp_subscriber_lang']);
-        add_filter('mc4wp_lists', [$this, 'lb_filter_mc4wp_lists']);
-        add_filter('mc4wp_integration_woocommerce_subscriber_data', [$this, 'lb_set_mc4wp_tag_on_checkout']);
-        add_action('mc4wp_integration_before_checkbox_wrapper', [$this, 'lb_add_custom_html_before_checkbox_mc4wp']);
-        add_action('mc4wp_integration_after_checkbox_wrapper', [$this, 'lb_add_custom_html_after_checkbox_mc4wp']);
+        // add_filter('mc4wp_lists', [$this, 'lb_filter_mc4wp_lists']);
+        // add_filter('mc4wp_integration_woocommerce_subscriber_data', [$this, 'lb_set_mc4wp_tag_on_checkout']);
+        // add_action('mc4wp_integration_before_checkbox_wrapper', [$this, 'lb_add_custom_html_before_checkbox_mc4wp']);
+        // add_action('mc4wp_integration_after_checkbox_wrapper', [$this, 'lb_add_custom_html_after_checkbox_mc4wp']);
     }
 
     /**
