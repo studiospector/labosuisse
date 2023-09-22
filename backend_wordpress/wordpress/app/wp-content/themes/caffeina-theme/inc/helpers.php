@@ -574,7 +574,7 @@ function getLocationInfo($ip)
 function toRedirect(): bool|string
 {
     $redirectionMap = [
-        'brand-page/brand-crescina-en' => '/en/maintenance',
+        'brand-page/brand-crescina-en' => '/en/brand-page/brand-crescina-ksa',
         'product/crescina-transdermic-hfsc-re-growth' => '/en/product/crescina-transdermic-hfsc-ksa',
         'product/crescina-hair-follicular-islands' => '/en/maintenance',
         'product/crescina-transdermic-hfsc-complete-treatment' => '/en/product/crescina-transdermic-hfsc-hssc-complete-care-ksa',
