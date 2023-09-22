@@ -20,16 +20,25 @@ class SettingsMC4WP
     }
 
     /**
+     * Get site lang
+     */
+    public function lb_wpml_get_current_language_code() {
+        return (string) apply_filters( 'wpml_current_language', null );
+    }
+
+    /**
      * Set site lang on all subscribers
      */
     public function lb_set_mc4wp_subscriber_lang(\MC4WP_MailChimp_Subscriber $subscriber)
     {
+        $lang_code = $this->lb_wpml_get_current_language_code();
+
         // do nothing if WPML is not activated
-        if (!defined('ICL_LANGUAGE_CODE')) {
+        if (!$lang_code) {
             return $subscriber;
         }
 
-        $subscriber->language = substr(ICL_LANGUAGE_CODE, 0, 2);
+        $subscriber->language = substr($lang_code, 0, 2);
 
         return $subscriber;
     }
