@@ -12,7 +12,7 @@ class SettingsMC4WP
         // $this->IDlistIT = wp_get_environment_type() == 'production' ? 'a154247d71' : '4c7a6d16ad';
         // $this->IDlistEN = wp_get_environment_type() == 'production' ? 'b2ae793ca5' : 'e11ac615ab';
 
-        add_filter('mc4wp_subscriber_data', [$this, 'lb_set_mc4wp_subscriber_lang'], 10, 1);
+        add_filter('mc4wp_subscriber_data', [$this, 'lb_set_mc4wp_subscriber_lang']);
         // add_filter('mc4wp_lists', [$this, 'lb_filter_mc4wp_lists']);
         // add_filter('mc4wp_integration_woocommerce_subscriber_data', [$this, 'lb_set_mc4wp_tag_on_checkout']);
         // add_action('mc4wp_integration_before_checkbox_wrapper', [$this, 'lb_add_custom_html_before_checkbox_mc4wp']);
@@ -20,25 +20,16 @@ class SettingsMC4WP
     }
 
     /**
-     * Get site lang
-     */
-    public function lb_wpml_get_current_language_code() {
-        return (string) apply_filters( 'wpml_current_language', null );
-    }
-
-    /**
      * Set site lang on all subscribers
      */
     public function lb_set_mc4wp_subscriber_lang(\MC4WP_MailChimp_Subscriber $subscriber)
     {
-        $lang_code = $this->lb_wpml_get_current_language_code();
-
         // do nothing if WPML is not activated
-        if (!$lang_code) {
+        if (!defined('ICL_LANGUAGE_CODE')) {
             return $subscriber;
         }
 
-        $subscriber->language = substr($lang_code, 0, 2);
+        $subscriber->language = substr(ICL_LANGUAGE_CODE, 0, 2);
 
         return $subscriber;
     }
