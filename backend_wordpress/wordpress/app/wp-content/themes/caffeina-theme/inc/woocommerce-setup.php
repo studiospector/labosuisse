@@ -165,10 +165,10 @@ function lb_product_price_html($price, $product)
     if ($product->is_type('variable')) {
         $regular_price = $product->get_variation_regular_price('min');
         $sale_price = $product->get_variation_sale_price('min');
-    
+
         $wc_regular_price = $regular_price ? wc_price($regular_price) : null;
         $wc_sale_price = $sale_price && $sale_price != $regular_price ? wc_price($sale_price) : null;
-    
+
         $custom_price = sprintf(
             __('%1$s %2$sa partire da%3$s%4$s %5$s %6$s', 'labo-suisse-theme'),
             '<span class="lb-wc-price">',
@@ -181,10 +181,10 @@ function lb_product_price_html($price, $product)
     } else {
         $regular_price = $product->get_regular_price();
         $sale_price = $product->get_sale_price();
-    
+
         $wc_regular_price = $regular_price ? wc_price($regular_price) : null;
         $wc_sale_price = $sale_price && $sale_price != $regular_price ? wc_price($sale_price) : null;
-    
+
         $custom_price = sprintf(
             '%1$s %2$s %3$s %4$s',
             '<span class="lb-wc-price">',
@@ -488,6 +488,18 @@ function lb_filter_wp_get_attachment_image_attributes($attr, $attachment, $size)
 
     return $attr;
 }
+
+add_action('woocommerce_new_order', function($orderId) {
+    global $sitepress;
+    // Current site lang
+    $currentLang = $sitepress->get_current_language();
+
+    $currentUser = wp_get_current_user();
+
+    if(property_exists($currentUser->data,'ID')) {
+        update_user_meta($currentUser->data->ID, 'lb_user_language', $currentLang);
+    }
+});
 
 //
 //add_action('woocommerce_dropdown_variation_attribute_options_args', function($args) {
