@@ -226,7 +226,9 @@
         "\/prodotto*",
         "\/en\/product*",
         "\/brands*",
-        "\/en\/brands*"
+        "\/en\/brands*",
+        "\/wp-json\/v1\/multicountry-geolocation",
+        "\/wp-json\/v1\/archives"
     ],
     "pgcache.reject.categories": [
         ""
@@ -277,7 +279,7 @@
     "pgcache.prime.limit": 10,
     "pgcache.prime.sitemap": "",
     "pgcache.prime.post.enabled": false,
-    "pgcache.rest": "",
+    "pgcache.rest": "cache",
     "pgcache.cookiegroups.enabled": false,
     "pgcache.cookiegroups.groups": {
         "mobile": {
