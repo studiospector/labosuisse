@@ -47,6 +47,10 @@
                 display: block;
                 bottom: 0;
             }
+
+            .swiper-slide {
+                min-height: 400px;
+            }
         }
 
         a {
