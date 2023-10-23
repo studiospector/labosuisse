@@ -229,7 +229,7 @@
         "\/en\/brands*",
         "\/wp-json\/v1\/multicountry-geolocation",
         "\/wp-json\/v1\/archives",
-        "\/wp-json\/v1\/global-search"
+        "\/wp-json\/v1\/global-search$"
     ],
     "pgcache.reject.categories": [
         ""
