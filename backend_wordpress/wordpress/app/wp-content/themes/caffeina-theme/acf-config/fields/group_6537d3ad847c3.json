@@ -142,7 +142,7 @@
         },
         {
             "key": "field_6537d489125c0",
-            "label": "Url Video",
+            "label": "Video ID",
             "name": "lb_block_video_text_url",
             "aria-label": "",
             "type": "text",
@@ -188,5 +188,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1698158112
+    "modified": 1698325707
 }
