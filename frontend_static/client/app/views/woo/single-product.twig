@@ -51,6 +51,11 @@
 
     {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
 
+    {% if video_text %}
+        {% include '@PathViews/components/video-text.twig' with video_text only %}
+        {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
+    {% endif %}
+
     {% if hero %}
         {% include '@PathViews/components/hero.twig' with hero only %}
         {% include '@PathViews/components/separator.twig' with {variants: ['big']} only %}
