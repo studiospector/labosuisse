@@ -16,6 +16,7 @@
  * @version     1.6.4
  */
 
+use Caffeina\LaboSuisse\Blocks\VideoText;
 use Caffeina\LaboSuisse\Blocks\Hero;
 use Caffeina\LaboSuisse\Blocks\ImageCard;
 use Caffeina\LaboSuisse\Blocks\LaunchTwoCards;
@@ -67,6 +68,10 @@ $context['product_classes'] = ob_get_clean();
 // $related_limit = wc_get_loop_prop('columns');
 // $related_ids = wc_get_related_products($context['post']->id, $related_limit);
 // $context['related_products'] = Timber::get_posts($related_ids);
+
+// Video with Text
+$block_hero = new VideoText(null, 'video-text', 'lb-block-video-text');
+$context['video_text'] = $block_hero->getPayload();
 
 // Hero
 $block_hero = new Hero(null, 'hero', 'lb-block-hero');

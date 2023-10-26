@@ -40,6 +40,7 @@ import MulticountryGeolocation from './MulticountryGeolocation'
 import Video from './Video'
 import BannerVideo from './BannerVideo'
 import ParallaxImage from './ParallaxImage';
+import VideoText from './VideoText';
 
 const components = {
     scrollbar: {
@@ -220,6 +221,11 @@ const components = {
     parallaxImage: {
         selector: '.js-parallax-image',
         type: ParallaxImage,
+        optional: true
+    },
+    videoText: {
+        selector: '.js-video-text',
+        type: VideoText,
         optional: true
     },
 }
