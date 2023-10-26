@@ -1,5 +1,17 @@
-<pre>visibility: {{ visibility }}</pre>
-<pre>tagline: {{ tagline }}</pre>
-<pre>title: {{ title }}</pre>
-<pre>paragraph: {{ paragraph }}</pre>
-<pre>url: {{ videoUrl }}</pre>
+{% set classes = [] %}
+{% for variant in variants|default([]) %}
+	{% set classes = classes|merge(['lb-video-text--' ~ variant]) %}
+{% endfor %}
+{% if class %}
+	{% set classes = classes|merge([class]) %}
+{% endif %}
+
+<section class="lb-video-text container{{ classes|length ? ' ' ~ classes|join(' ') : '' }} js-video-text js-animation-reveal" {{ attributes ? ' ' ~ attributes|join(' ') : '' }}>
+  {% include '@PathViews/components/infobox.twig' with {
+    tagline: tagline,
+    subtitle: title,
+    paragraph: paragraph,
+    reveal: true
+  } only %}
+  <div class="lb-video-text__player" data-video data-plyr-provider="youtube" data-plyr-embed-id="{{ videoUrl }}"></div>
+</section>

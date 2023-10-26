@@ -1,0 +1,33 @@
+.lb-video-text {
+  .infobox {
+    text-align: center;
+    margin-bottom: 40px;
+
+    &__subtitle {
+      font-size: rem(30);
+
+      @include mq($until: md) {
+        font-size: rem(24);
+      }
+    }
+  }
+
+  .plyr {
+    margin: 0 auto;
+    border-radius: 7px;
+
+    --plyr-color-main: #b52a2d;
+
+    @include mq($from: md) {
+      max-width: 754px;
+    }
+
+    &--stopped {
+      .plyr {
+        &__controls {
+          display: none;
+        }
+      }
+    }
+  }
+}
