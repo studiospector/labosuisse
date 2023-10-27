@@ -16,6 +16,7 @@ class LaunchTwoCards extends BaseBlock
         ];
 
         $payload = [
+            'visibility' => get_field('lb_block_launch_two_cards_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'cards' => [
                 [
@@ -60,7 +61,7 @@ class LaunchTwoCards extends BaseBlock
                 $payload['cards'][$key] = null;
             }
         }
-        
+
         if (get_field('lb_block_launch_two_cards_variants') != "") {
             $payload['variants'] = [get_field('lb_block_launch_two_cards_variants')];
         }

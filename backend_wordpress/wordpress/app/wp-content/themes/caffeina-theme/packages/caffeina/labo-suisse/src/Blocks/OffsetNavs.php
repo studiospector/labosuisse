@@ -9,6 +9,7 @@ class OffsetNavs extends BaseBlock
         parent::__construct($block, $name, $sectionID);
 
         $payload = [
+            'visibility' => get_field('lb_block_offset_navs_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'title' =>  get_field('lb_block_offsetnav_title'),
             'subtitle' => get_field('lb_block_offsetnav_subtitle'),

@@ -18,6 +18,7 @@ class BannerAlternate extends BaseBlock
         $disable_animation = get_field('lb_block_banner_alternate_disable_animation');
 
         $payload = [
+            'visibility' => get_field('lb_block_banner_alternate_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_banner_alternate_img'), $sizes),
             'imageBig' => get_field('lb_block_banner_alternate_img_big'),

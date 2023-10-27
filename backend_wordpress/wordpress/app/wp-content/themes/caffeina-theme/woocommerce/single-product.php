@@ -70,8 +70,8 @@ $context['product_classes'] = ob_get_clean();
 // $context['related_products'] = Timber::get_posts($related_ids);
 
 // Video with Text
-$block_hero = new VideoText(null, 'video-text', 'lb-block-video-text');
-$context['video_text'] = $block_hero->getPayload();
+$block_video_text = new VideoText(null, 'video-text', 'lb-block-video-text');
+$context['video_text'] = $block_video_text->getPayload();
 
 // Hero
 $block_hero = new Hero(null, 'hero', 'lb-block-hero');

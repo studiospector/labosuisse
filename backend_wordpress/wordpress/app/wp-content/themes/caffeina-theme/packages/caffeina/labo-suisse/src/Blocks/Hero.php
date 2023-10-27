@@ -30,6 +30,7 @@ class Hero extends BaseBlock
         }
 
         $payload = [
+            'visibility' => get_field('lb_block_hero_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'images' => $images_arr,
             'infoboxPosX' => get_field('lb_block_hero_infoboxposx'),
@@ -47,11 +48,11 @@ class Hero extends BaseBlock
     }
 
     public function linkToPreload($image) {
-        
+
         if (!empty($image)) {
 
             $preload_image = $image['original'];
-    
+
             add_action('wp_head', function() use ($preload_image)  {
                 ?>
                 <link rel="preload" as="image" href="<?php echo $preload_image; ?>">

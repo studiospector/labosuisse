@@ -23,6 +23,7 @@ class Routine extends BaseBlock
         }
 
         $payload = [
+            'visibility' => get_field('lb_block_routine_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'title' =>  get_field('lb_block_routine_title'),
             'cta' => (get_field('lb_block_routine_btn')) ? array_merge((array)get_field('lb_block_routine_btn'), ['variants' => [get_field('lb_block_routine_btn_variants')]]) : null,
