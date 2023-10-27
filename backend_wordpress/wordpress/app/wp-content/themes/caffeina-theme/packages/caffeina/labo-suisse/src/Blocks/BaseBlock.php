@@ -119,7 +119,7 @@ class BaseBlock
         $contextRet = $this->context;
 
         if (!$active) {
-            $contextRet['data'] = [];
+            $contextRet['data'] = null;
         }
 
         \Timber::render('@PathViews/components/base/gutenberg-block-switcher.twig', $contextRet);
