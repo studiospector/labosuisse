@@ -12,7 +12,7 @@ class VideoText extends BaseBlock
             'tagline' => get_field('lb_block_video_text_tagline'),
             'title' => get_field('lb_block_video_text_title'),
             'paragraph' => get_field('lb_block_video_text_paragraph'),
-            'visibility' => get_field('lb_block_video_text_visibility'),
+            'visibility' => get_field('lb_block_video_text_visibility') == true,
             'videoUrl' => get_field('lb_block_video_text_url')
         ];
 

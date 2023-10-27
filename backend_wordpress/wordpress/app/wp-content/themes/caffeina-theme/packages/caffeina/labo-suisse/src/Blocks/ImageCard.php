@@ -16,6 +16,7 @@ class ImageCard extends BaseBlock
         ];
 
         $payload = [
+            'visibility' => get_field('lb_block_image_card_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_image_card_image_left'), $sizes),
             'card' => [

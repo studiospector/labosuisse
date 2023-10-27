@@ -20,7 +20,7 @@ class BaseBlock
 
             $this->name = is_null($name) ? str_replace("acf/lb-", "", $this->block['name']) : $name;
             $this->id = $this->name . $block['id'];
-            
+
             if (!empty($this->block['anchor'])) {
                 $id = $this->block['anchor'];
             }
@@ -91,20 +91,20 @@ class BaseBlock
 
     public function getPayload()
     {
-        $active = is_null(get_field($this->acfName . '_visibility')) ? true : get_field($this->acfName . '_visibility');
+        $active = !isset($this->payload['visibility']) || $this->payload['visibility'];
 
         $retPayload = [];
 
         if ($active) {
             $retPayload = $this->payload;
         }
-        
+
         return $retPayload;
     }
 
     public function render()
     {
-        $active = is_null(get_field($this->acfName . '_visibility')) ? true : get_field($this->acfName . '_visibility');
+        $active = !isset($this->payload['visibility']) || $this->payload['visibility'];
 
         if (isset($this->block['data']['is_preview']) && $this->block['data']['is_preview'] == true) {
             \Timber::render('@PathViews/gutenberg-preview.twig', [

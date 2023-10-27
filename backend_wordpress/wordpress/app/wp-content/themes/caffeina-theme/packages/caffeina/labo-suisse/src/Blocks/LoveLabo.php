@@ -18,6 +18,7 @@ class LoveLabo extends BaseBlock
         }
 
         $payload = [
+            'visibility' => get_field('lb_block_love_labo_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'items' => $items,
             'variants' => [get_field('lb_block_love_labo_variants')]

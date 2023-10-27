@@ -30,6 +30,7 @@ class NumberListImage extends BaseBlock
         }
 
         $payload = [
+            'visibility' => get_field('lb_block_number_list_with_image_visibility') == true,
             'sectionID' => $sectionID ?? null,
             'images' => lb_get_images(get_field('lb_block_numbers_image'), $sizes),
             'numbersList' => [
