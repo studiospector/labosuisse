@@ -1,5 +1,7 @@
 {% embed '@PathViews/components/base/gutenberg-block.twig' %}
   {% block blockContent %}
-    {% include '@PathViews/components/' ~ block ~ '.twig' with data only %}
+    {% if data %}
+      {% include '@PathViews/components/' ~ block ~ '.twig' with data only %}
+    {% endif %}
   {% endblock %}
 {% endembed %}
