@@ -38,6 +38,8 @@ class SettingsMC4WP
             return $subscriber;
         }
 
+        $subscriber->merge_fields['LANG'] = substr($lang_code, 0, 2);
+        $subscriber->lang = substr($lang_code, 0, 2);
         $subscriber->language = substr($lang_code, 0, 2);
 
         return $subscriber;
