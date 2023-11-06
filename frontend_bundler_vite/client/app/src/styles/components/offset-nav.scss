@@ -51,21 +51,17 @@
             transition-delay: 0.15s;
         }
     
-        // &.lb-offset-nav__dialog-small {
-        //     max-width: rem(780px);
+        &.lb-offset-nav__dialog-small {
+            max-width: rem(360px);
+        }
     
-        //     align-self: center;
-        // }
+        &.lb-offset-nav__dialog-medium {
+            max-width: rem(820px);
+        }
     
-        // &.lb-offset-nav__dialog-medium {
-        //     max-width: rem(920px);
-        // }
-    
-        // &.lb-offset-nav__dialog-big {
-        //     @include mq(lg) {
-        //         max-width: rem(1180px);
-        //     }
-        // }
+        &.lb-offset-nav__dialog-big {
+            max-width: rem(1030px);
+        }
     }
 
 
@@ -230,7 +226,7 @@
             }
 
             &__dialog {
-                max-width: 360px;
+                // max-width: 360px;
                 min-height: auto;
                 transform: translate3d(0, #{rem(40px)}, 0);
             }
@@ -241,16 +237,6 @@
                 @include mq($until: md) {
                     padding: rem(16);
                 }
-            }
-        }
-    }
-
-
-
-    &--popup-wide {
-        .lb-offset-nav {
-            &__dialog {
-                max-width: 820px;
             }
         }
     }
