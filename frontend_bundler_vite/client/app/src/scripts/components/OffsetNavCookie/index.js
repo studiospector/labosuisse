@@ -17,14 +17,22 @@ class OffsetNavCookieManagement extends Component {
         this.delay = Number(this.el.dataset?.delay)
         this.cookieExpire = Number(this.el.dataset?.cookieExpire)
 
-        this.cookie = getCookie(`${this.el.id}-closed`)
+        this.cookieClosed = getCookie(`${this.el.id}-closed`)
+        this.cookieSubscribed = getCookie(`${this.el.id}-subscribed`)
 
-        if (!Boolean(this.cookie)) {
+        if (!Boolean(this.cookieClosed) && !Boolean(this.cookieSubscribed)) {
             setTimeout(() => window.openOffsetNav(this.el.id), this.delay);
         }
 
         on(this.el, 'closeOffsetNav', () => {
-            setCookie(`${this.el.id}-closed`, true, this.cookieExpire)
+            if (!Boolean(this.cookieSubscribed)) {
+                setCookie(`${this.el.id}-closed`, true, this.cookieExpire)
+            }
+        })
+
+        mc4wp.forms.on('subscribed', (form) => {
+            setCookie(`${this.el.id}-subscribed`, true, 365)
+            this.cookieSubscribed = true
         })
 
         mc4wp.forms.on('submitted', (form) => {
