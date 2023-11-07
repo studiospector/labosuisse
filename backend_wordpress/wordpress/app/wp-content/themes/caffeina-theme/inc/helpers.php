@@ -486,7 +486,7 @@ function lb_custom_offset_navs() {
         'noClose' => false,
         'size' => 'big',
         'class' => 'js-offset-nav-cookie-management',
-        'attributes' => ['data-delay="2000"', 'data-cookie-expire="1"'], // for 3/4 minutes expire insert "0.0022" as value
+        'attributes' => ['data-delay="15000"', 'data-cookie-expire="1"'], // for 3/4 minutes expire insert "0.0022" as value
         'variants' => ['popup']
     ];
 
