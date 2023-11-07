@@ -67,7 +67,9 @@
             <!-- Offset Navs -->
             {% set custom_offset_navs = fn('lb_custom_offset_navs') %} 
             {% for offset_nav in custom_offset_navs %}
-                {% include '@PathViews/components/offset-nav/default.twig' with offset_nav only %}
+                {% if offset_nav %}
+                    {% include '@PathViews/components/offset-nav/default.twig' with offset_nav only %}
+                {% endif %}    
             {% endfor %}
             {% block offsetNavs %}{% endblock %}
 
