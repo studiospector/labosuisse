@@ -992,6 +992,27 @@
             "endpoint": 0
         },
         {
+            "key": "field_654a75070b96a",
+            "label": "Stato",
+            "name": "lb_popup_newsletter_status",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "Attivo",
+            "ui_off_text": "Disattivo",
+            "ui": 1
+        },
+        {
             "key": "field_654a1fa841030",
             "label": "Titolo Popup",
             "name": "lb_popup_newsletter_title_popup",
@@ -999,7 +1020,15 @@
             "type": "text",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1020,7 +1049,15 @@
             "type": "textarea",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1041,7 +1078,15 @@
             "type": "textarea",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1062,7 +1107,15 @@
             "type": "text",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1083,7 +1136,15 @@
             "type": "image",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1109,7 +1170,15 @@
             "type": "image",
             "instructions": "",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -1303,5 +1372,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1699371917
+    "modified": 1699378631
 }

@@ -486,7 +486,7 @@ function lb_custom_offset_navs() {
         'noClose' => false,
         'size' => 'big',
         'class' => 'js-offset-nav-cookie-management',
-        'attributes' => ['data-delay="15000"', 'data-cookie-expire="1"'], // for 3/4 minutes expire insert "0.0022" as value
+        'attributes' => ['data-delay="2000"', 'data-cookie-expire="1"'], // for 3/4 minutes expire insert "0.0022" as value
         'variants' => ['popup']
     ];
 
@@ -495,7 +495,7 @@ function lb_custom_offset_navs() {
         $cart_async_nav,
         $multicountry_geolocation_nav,
         $multicountry_nav,
-        (is_front_page() || is_product() || is_product_category() || is_tax('lb-brand')) ? $newsletter_subscription : null
+        (is_front_page() || is_product() || is_product_category() || is_tax('lb-brand')) && get_field('lb_popup_newsletter_status', 'option') ? $newsletter_subscription : null
     ];
 }
 
