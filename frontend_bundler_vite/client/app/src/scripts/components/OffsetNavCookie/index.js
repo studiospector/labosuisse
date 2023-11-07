@@ -3,7 +3,11 @@ import { qs, qsa, on, off } from '@okiba/dom'
 
 import { setCookie, getCookie } from "../../utils/cookie";
 
-const ui = {}
+const ui = {
+    textWrapper: {
+        selector: '.lb-offset-nav__content__item--image-text__text-wrapper'
+    }
+}
 
 class OffsetNavCookieManagement extends Component {
 
@@ -21,6 +25,12 @@ class OffsetNavCookieManagement extends Component {
 
         on(this.el, 'closeOffsetNav', () => {
             setCookie(`${this.el.id}-closed`, true, this.cookieExpire)
+        })
+
+        mc4wp.forms.on('submitted', (form) => {
+            if (this.ui.textWrapper) {
+                this.ui.textWrapper.classList.add('lb-offset-nav__content__item--image-text__text-wrapper--hide')
+            }
         })
     }
 }

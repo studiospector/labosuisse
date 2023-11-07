@@ -56,6 +56,8 @@
                         {% include '@PathViews/components/button.twig' with item.data.cta only %}
                     {%- elseif item.type == 'image' -%}
                         {{ lbPicture(item.data.image) }}
+                    {%- elseif item.type == 'image-text' -%}
+                        {%- include '@PathViews/components/offset-nav/templates/image-text.twig' with item.data only -%}
                     {%- elseif item.type == 'html' -%}
                         {{ item.data|raw }}
                     {%- endif -%}

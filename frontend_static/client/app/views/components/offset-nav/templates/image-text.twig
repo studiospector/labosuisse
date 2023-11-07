@@ -1,0 +1,18 @@
+{% from '@PathViews/macro/lb-picture.twig' import lbPicture %}
+
+<div class="lb-offset-nav__content__item--image-text__wrapper">
+  <div class="lb-offset-nav__content__item--image-text__img-desktop">
+    {{ lbPicture(images_desktop) }}
+  </div>
+  <div class="lb-offset-nav__content__item--image-text__img-mobile">
+    {{ lbPicture(images_mobile) }}
+  </div>
+  <div class="lb-offset-nav__content__item--image-text__text-form-wrapper">
+    <div class="lb-offset-nav__content__item--image-text__text-wrapper">
+      {% include '@PathViews/components/infobox.twig' with infobox only %}
+    </div>
+    {% if mc4wp_form_shortcode %}
+      {{ mc4wp_form_shortcode|raw }}
+    {% endif %}
+  </div>
+</div>

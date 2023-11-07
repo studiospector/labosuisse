@@ -20,7 +20,7 @@
                 </div>
             </div>
         {% endif %}
-		<div class="lb-offset-nav__content">
+		<div class="lb-offset-nav__content{{ noPaddingContent ? ' lb-offset-nav__content--no-padding' : '' }}">
             {% block offsetNavContent %}{% endblock %}
         </div>
     </div>
