@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@googlemaps/js-api-loader": "^1.16.2",
-    "@googlemaps/markerclusterer": "^2.2.3",
+    "@googlemaps/markerclusterer": "^2.5.1",
     "@okiba/component": "^2.0.7",
     "@okiba/dom": "^1.0.26",
     "@okiba/event-manager": "^2.1.1",
