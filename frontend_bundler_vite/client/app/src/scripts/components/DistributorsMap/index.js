@@ -4,7 +4,7 @@ import { on, qsa, qs } from '@okiba/dom';
 import axiosClient from '../HTTPClient'
 
 import { Loader } from '@googlemaps/js-api-loader';
-import { MarkerClusterer } from '@googlemaps/markerclusterer';
+import { MarkerClusterer, MarkerUtils } from '@googlemaps/markerclusterer';
 
 import templateLoader from '../../utils/templateLoader';
 
@@ -238,6 +238,8 @@ class DistributorsMap extends Component {
             language: this.mapLang,
         });
 
+        this.addLoader()
+
         this.loader
             .load()
             .then((google) => {
@@ -276,20 +278,43 @@ class DistributorsMap extends Component {
 
         // Custom Marker Clusterer render 
         this.customMarkerClustererRender = {
-            
-            render: ({ count, position }, stats) => {
-
-                const svg = window.btoa(`
+            render: ({ count, position }, stats, map) => {
+                const title = `Cluster of ${count} markers`
+                const zIndex = Number(this.google.maps.Marker.MAX_ZINDEX) + count
+                const svg = `
                     <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="22" cy="22" r="22" fill="#B52A2D" opacity=".8" />
                     </svg>
-                `)
+                `
 
-                const marker = new this.google.maps.Marker({
+                if (MarkerUtils.isAdvancedMarkerAvailable(map)) {
+                    // create cluster SVG element
+                    const parser = new DOMParser();
+                    const svgEl = parser.parseFromString(svg, "image/svg+xml").documentElement;
+                    svgEl.setAttribute("transform", "translate(0 25)");
+                    const clusterOptions = {
+                        map,
+                        position,
+                        zIndex,
+                        title,
+                        label: {
+                            text: String(count),
+                            color: "#FFFFFF",
+                            fontSize: "12px",
+                            fontWeight: "700",
+                        },
+                        content: svgEl,
+                    };
+                    return new this.google.maps.marker.AdvancedMarkerElement(clusterOptions);
+                }
+
+                const clusterOptions = {
                     position,
+                    zIndex,
+                    title,
                     icon: {
-                        url: `data:image/svg+xml;base64,${svg}`,
-                        scaledSize: new this.google.maps.Size(44, 44),
+                        url: `data:image/svg+xml;base64,${btoa(svg)}`,
+                        anchor: new this.google.maps.Point(25, 25),
                     },
                     label: {
                         text: String(count),
@@ -297,16 +322,14 @@ class DistributorsMap extends Component {
                         fontSize: "12px",
                         fontWeight: "700",
                     },
-                    // adjust zIndex to be above other markers
-                    zIndex: Number(this.google.maps.Marker.MAX_ZINDEX) + count,
-                })
-                
-                return (count > 0) ? marker : null
-            },
+                };
+
+                return (count > 0) ? new this.google.maps.Marker(clusterOptions) : null
+            }
         }
 
         // Add a marker clusterer to manage the markers
-        new MarkerClusterer({
+        this.markerClusterer = new MarkerClusterer({
             map: this.map,
             markers: this.map.markers,
             renderer: this.customMarkerClustererRender,
@@ -318,11 +341,20 @@ class DistributorsMap extends Component {
         // Remove loader
         this.removeLoader()
 
-        // Add Center map function as method, to handle filters
+        // Add Google loader instance
         window.lbGMapLoaderDistributors = this.google
 
         // Add Map to window object, to handle filters
         window.lbMapDistributors = this.map
+
+        // Update MarkerClusterer
+        window.lbMapDistributorsUpdateClusterer = (markers) => {
+            this.addLoader()
+            const filteredMarkers = markers.filter(item => item.visible)
+            this.markerClusterer.clearMarkers()
+            this.markerClusterer.addMarkers(filteredMarkers)
+            this.removeLoader()
+        }
     }
 
 
