@@ -598,3 +598,29 @@ function toRedirect(): bool|string
 
     return false;
 }
+
+function getFreeProductIds()
+{
+    $query = new WP_Query([
+        'post_status' => 'publish',
+        'posts_per_page' => -1,
+        'post_type' => 'product',
+        'fields' => 'ids',
+        'tax_query' => [
+            [
+                'taxonomy' => 'product_visibility',
+                'terms' => ['exclude-from-catalog'],
+                'field' => 'name',
+                'operator' => 'IN',
+            ],
+            [
+                'taxonomy' => 'product_visibility',
+                'terms' => ['exclude-from-search'],
+                'field' => 'name',
+                'operator' => 'IN',
+            ]
+        ]
+    ]);
+
+    return $query->get_posts();
+}
