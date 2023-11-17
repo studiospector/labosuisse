@@ -85,8 +85,29 @@
                 margin: 0;
             }
 
-            // &.mc4wp-success {
-            // }
+            &.mc4wp-notice {
+                
+                width: fit-content;
+                margin: 0 auto;
+                padding: rem(3) rem(16);
+                border: 1px solid #cbcbcb;
+                background-color: #ececec;
+                border-radius: rem(3);
+                font-size: rem(14);
+                text-align: center;
+            }
+
+            &.mc4wp-error {
+                
+                width: fit-content;
+                margin: 0 auto;
+                padding: rem(3) rem(16);
+                border: 1px solid #f08080;
+                background-color: #ffc5c5;
+                border-radius: rem(3);
+                font-size: rem(14);
+                text-align: center;
+            }
         }
     }
 }
