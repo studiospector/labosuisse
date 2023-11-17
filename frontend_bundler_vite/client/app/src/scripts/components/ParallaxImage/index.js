@@ -21,15 +21,17 @@ class ParallaxImage extends Component {
 
     init = () => {
       gsap.to(this.ui.image, {
-        y: -50,
+        y: -30,
         ease: "none",
+        duration: 2,
+        scale: 1.08,
         scrollTrigger: {
           trigger: this.ui.picture,
-          start: "top bottom",
-          end: "bottom 10%",
-          scrub: true,
+          start: "top 80%",
+          end: "80% 118px",
+          scrub: 3,
           pin: false,
-          markers: false,
+          markers: true,
           invalidateOnRefresh: true,
         },
       })
