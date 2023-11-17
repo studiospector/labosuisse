@@ -25,11 +25,13 @@ class GTMTracking extends Component {
 
         Object.assign(data, this.eventValue && { value: this.eventValue })
 
-        dataLayer.push(data)
+        if (dataLayer) {
+            dataLayer.push(data)
+        }
     }
 
     traceGlobalEvents = () => {
-        if (typeof mc4wp !== 'undefined') {
+        if (typeof mc4wp !== 'undefined' && typeof dataLayer !== 'undefined') {
             mc4wp.forms.on('subscribed', (form) => {
                 dataLayer.push({
                     event: 'form-newsletter',
