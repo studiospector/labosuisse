@@ -225,23 +225,71 @@
 
                     @include mq($until: md) {
                         flex: 1 1 100%;
-                        padding: rem(16);
+                        padding: rem(8) rem(16);
                     }
 
                     .mc4wp-form {
                         .mc4wp-form-fields {
-                            .button-link {
-                                padding-left: rem(32);
+                            .custom-input {
+                                @include mq($until: md) {
+                                    margin-bottom: rem(12);
+                                }
                             }
 
-                            .custom-checkbox__options {
-                                align-items: flex-start;
+                            .button-link {
+                                padding-left: rem(32);
+
+                                @include mq($until: md) {
+                                    padding-top: 0;
+                                }
+                                
+                                .button__label {
+                                    font-size: rem(12);
+                                }
+                            }
+
+                            .custom-checkbox {
+                                @include mq($until: md) {
+                                    margin-top: rem(0);
+                                }
+
+                                &__options {
+                                    align-items: flex-start;
+                                    
+                                    label {
+                                        &:not(:first-child) {
+                                            @include mq($until: md) {
+                                                margin-top: rem(4);
+                                            }
+                                        }
+
+                                        span {
+                                            @include mq($until: md) {
+                                                font-size: rem(12);
+                                                line-height: rem(16);
+                                            }
+                                        }
+                                    }
+                                }
                             }
 
                             &__button-submit {
                                 width: 100%;
                                 display: flex;
                                 justify-content: center;
+
+                                .button {
+                                    @include mq($until: md) {
+                                        margin-top: rem(4);
+                                        padding: rem(10) rem(24);
+                                    }
+
+                                    &__label {
+                                        @include mq($until: md) {
+                                            font-size: rem(12);
+                                        }
+                                    }
+                                }
                             }
                         }
 
@@ -282,6 +330,10 @@
                 &__text-wrapper {
                     margin-bottom: rem(24);
 
+                    @include mq($until: md) {
+                        margin-bottom: rem(10);
+                    }
+
                     &--hide {
                         display: none;
                     }
@@ -292,6 +344,7 @@
 
                             @include mq($until: md) {
                                 font-size: rem(18);
+                                margin-bottom: 0;
                             }
                         }
 
