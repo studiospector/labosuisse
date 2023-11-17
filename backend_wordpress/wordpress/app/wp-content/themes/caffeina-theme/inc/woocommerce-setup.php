@@ -389,6 +389,18 @@ add_filter('woocommerce_cart_contents_count', function () {
 
 add_filter('woocommerce_adjust_non_base_location_prices', '__return_false');
 
+add_filter('woocommerce_add_to_cart', function() {
+    $cart = WC()->cart->get_cart();
+
+    $freeProductIds = getFreeProductIds();
+
+    foreach ($cart as $key => $cart_item) {
+        if (in_array($cart_item['product_id'], $freeProductIds) and !isset($cart_item['wdr_free_product'])) {
+            WC()->cart->remove_cart_item($key);
+        }
+    }
+},100);
+
 /**
  * Enforce Password Strength
  */

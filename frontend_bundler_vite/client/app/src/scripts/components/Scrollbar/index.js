@@ -20,23 +20,23 @@ class Scrollbar extends Component {
     }
 
     init = () => {
-        const lenis = new Lenis()
+        this.lenis = new Lenis()
 
-        lenis.on('scroll', ScrollTrigger.update)
+        this.lenis.on('scroll', ScrollTrigger.update)
 
         gsap.ticker.add((time)=>{
-            lenis.raf(time * 1000)
+            this.lenis.raf(time * 1000)
         })
 
         gsap.ticker.lagSmoothing(0)
 
         // Add Lenis to window for global access
-        window.getCustomScrollbar = lenis
+        window.getCustomScrollbar = this.lenis
 
-        setTimeout(() => this.scrollToWithAnchorLink(lenis), 3000);
+        setTimeout(() => this.scrollToWithAnchorLink(), 3000);
     }
 
-    scrollToWithAnchorLink = (lenis) => {
+    scrollToWithAnchorLink = () => {
         const fullHeaderHeight = getHeaderFullHeight()
 
         const hash = window.location.hash
@@ -44,7 +44,7 @@ class Scrollbar extends Component {
         if (hash) {
             const el = qs(hash)
             
-            lenis.scrollTo(el, {
+            this.lenis.scrollTo(el, {
                 offset: -fullHeaderHeight
             })
         }
