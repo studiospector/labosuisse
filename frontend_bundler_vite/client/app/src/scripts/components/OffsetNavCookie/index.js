@@ -30,14 +30,18 @@ class OffsetNavCookieManagement extends Component {
             }
         })
 
-        mc4wp.forms.on('subscribed', (form) => {
-            setCookie(`${this.el.id}-subscribed`, true, 365)
-            this.cookieSubscribed = true
-
-            if (this.ui.textWrapper) {
-                this.ui.textWrapper.classList.add('lb-offset-nav__content__item--image-text__text-wrapper--hide')
-            }
+        mc4wp.forms.on('success', () => {
+            this.handleSubmit()
         })
+    }
+
+    handleSubmit = (form, data) => {
+        setCookie(`${this.el.id}-subscribed`, true, 365)
+        this.cookieSubscribed = true
+
+        if (this.ui.textWrapper) {
+            this.ui.textWrapper.classList.add('lb-offset-nav__content__item--image-text__text-wrapper--hide')
+        }
     }
 }
 
