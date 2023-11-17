@@ -31,7 +31,7 @@ class ParallaxImage extends Component {
           end: "80% 118px",
           scrub: 3,
           pin: false,
-          markers: true,
+          markers: false,
           invalidateOnRefresh: true,
         },
       })
