@@ -11,7 +11,7 @@ class BannerVideo extends Component {
   constructor({ options, ...props }) {
     super({ ...props, ui });
 
-    this.scrollbarElem = qs(".js-scrollbar");
+    this.scrollbarElem = qs("body");
 
     this.scrollbarElem.append(this.ui.nav);
   }

@@ -44,9 +44,8 @@ import VideoText from './VideoText';
 
 const components = {
     scrollbar: {
-        selector: '.js-scrollbar',
-        type: Scrollbar,
-        optional: true
+        ghost: true,
+        type: Scrollbar
     },
     menu: {
         selector: '.js-menu',
