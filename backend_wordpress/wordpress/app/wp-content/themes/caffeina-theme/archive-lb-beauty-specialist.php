@@ -12,7 +12,7 @@ $items = (new \Caffeina\LaboSuisse\Resources\BeautySpecialist($city))
     ->all();
 
 $context = [
-    'content' => apply_filters('the_content', $page_archive->post_content),
+    'content' => $page_archive ? apply_filters('the_content', $page_archive->post_content) : '',
     'search' => [
         'type' => 'search',
         'name' => 'city',
