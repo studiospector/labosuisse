@@ -784,7 +784,7 @@
             "aria-label": "",
             "type": "post_object",
             "instructions": "",
-            "required": 1,
+            "required": 0,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
@@ -795,10 +795,11 @@
             "post_type": [
                 "page"
             ],
+            "post_status": "",
             "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 0,
             "return_format": "object",
+            "multiple": 0,
+            "allow_null": 1,
             "ui": 1
         },
         {
@@ -1372,5 +1373,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1699378631
+    "modified": 1700483401
 }
