@@ -974,6 +974,229 @@
             "ui": 1
         },
         {
+            "key": "field_654a118822014",
+            "label": "Popup Newsletter",
+            "name": "",
+            "aria-label": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 0,
+            "placement": "left",
+            "endpoint": 0
+        },
+        {
+            "key": "field_654a75070b96a",
+            "label": "Stato",
+            "name": "lb_popup_newsletter_status",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "Attivo",
+            "ui_off_text": "Disattivo",
+            "ui": 1
+        },
+        {
+            "key": "field_654a1fa841030",
+            "label": "Titolo Popup",
+            "name": "lb_popup_newsletter_title_popup",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_654a119d22015",
+            "label": "Titolo",
+            "name": "lb_popup_newsletter_title",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "rows": 5,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_654a136922016",
+            "label": "Testo",
+            "name": "lb_popup_newsletter_text",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "rows": 5,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_654a16f6d0c93",
+            "label": "Shortcode Form Mailchimp",
+            "name": "lb_popup_newsletter_shortcode",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_654a139022017",
+            "label": "Immagine Desktop",
+            "name": "lb_popup_newsletter_image_desktop",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "id",
+            "library": "all",
+            "min_width": 530,
+            "min_height": 530,
+            "min_size": "",
+            "max_width": 550,
+            "max_height": 550,
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_654a166aa4796",
+            "label": "Immagine Mobile",
+            "name": "lb_popup_newsletter_image_mobile",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_654a75070b96a",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "wpml_cf_preferences": 2,
+            "return_format": "id",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": 550,
+            "max_height": 550,
+            "max_size": "",
+            "mime_types": "",
+            "preview_size": "medium"
+        },
+        {
             "key": "field_622741428fdca",
             "label": "Google Map",
             "name": "",
@@ -1148,7 +1371,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1686125021,
-    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_620e5171446b7.json",
-    "acfml_field_group_mode": "advanced"
+    "acfml_field_group_mode": "advanced",
+    "modified": 1699378631
 }

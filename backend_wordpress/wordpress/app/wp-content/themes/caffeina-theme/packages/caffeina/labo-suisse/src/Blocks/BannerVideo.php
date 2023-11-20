@@ -23,7 +23,8 @@ class BannerVideo extends BaseBlock
                 ]
             ],
             'noClose' => false,
-            'variants' => ['popup', 'popup-wide']
+            'size' => 'medium',
+            'variants' => ['popup']
         ];
 
         $payload = [

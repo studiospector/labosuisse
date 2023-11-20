@@ -214,6 +214,7 @@ class Filters extends Component {
                 // Categories don't match 
                 } else {
                     marker.setVisible(false)
+                    marker.setClickable(false)
                 }
             } else {
                 bounds.extend(marker.getPosition())
@@ -221,6 +222,8 @@ class Filters extends Component {
                 countRes++
             }
         }
+
+        window.lbMapDistributorsUpdateClusterer(map.markers)
 
         // Center map
         map.fitBounds(bounds)

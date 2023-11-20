@@ -55,7 +55,9 @@ class OffsetNav extends Component {
         if (this.headerStickyProduct) {
             qs('.lb-header-sticky-product').classList.add('lb-header-sticky-product--offsetnav-open')
         }
-        setTimeout(() => this.adjustContent(), 450);
+        if (!this.isPopup) {
+            setTimeout(() => this.adjustContent(), 450);
+        }
         setTimeout(() => this.el.classList.add('is-open'), 500);
 
         this.el.dispatchEvent(this.openEvent)

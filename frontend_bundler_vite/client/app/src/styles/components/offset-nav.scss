@@ -36,7 +36,6 @@
     &__dialog {
         width: 100%;
         height: auto;
-        max-width: 705px;
         min-height: 100%;
         position: relative;
         opacity: 0;
@@ -51,21 +50,29 @@
             transition-delay: 0.15s;
         }
     
-        // &.lb-offset-nav__dialog-small {
-        //     max-width: rem(780px);
+        &.lb-offset-nav__dialog-small {
+            max-width: rem(360px);
+        }
+
+        &.lb-offset-nav__dialog-large {
+            max-width: rem(705px);
+        }
     
-        //     align-self: center;
-        // }
+        &.lb-offset-nav__dialog-medium {
+            max-width: rem(820px);
+
+            @include mq($until: lg) {
+                width: calc(100% - 32px);
+            }
+        }
     
-        // &.lb-offset-nav__dialog-medium {
-        //     max-width: rem(920px);
-        // }
-    
-        // &.lb-offset-nav__dialog-big {
-        //     @include mq(lg) {
-        //         max-width: rem(1180px);
-        //     }
-        // }
+        &.lb-offset-nav__dialog-big {
+            max-width: rem(1030px);
+
+            @include mq($until: xl) {
+                width: calc(100% - 32px);
+            }
+        }
     }
 
 
@@ -122,6 +129,10 @@
             padding-bottom: 80px;
             -webkit-overflow-scrolling: touch;
         }
+
+        &--no-padding {
+            padding: 0;
+        }
     
         &__item {
             margin-bottom: 40px;
@@ -156,6 +167,197 @@
                     }
                 }
             }
+
+            &--image-text {
+                padding: 0;
+
+                &__wrapper {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    // flex-wrap: wrap;
+    
+                    @include mq($until: md) {
+                        flex-direction: column;
+                    }
+                }
+
+                &__img-desktop {
+                    flex: 1 1 50%;
+                    align-self: stretch;
+
+                    @include mq($until: sm) {
+                        display: none;
+                    }
+
+                    @include mq($until: md) {
+                        flex: 1 1 100%;
+                    }
+                    
+                    .lb-picture {
+                        aspect-ratio: 4 / 4;
+
+                        @include mq($until: md) {
+                            aspect-ratio: 4 / 2;
+                        }
+                    }
+                }
+
+                &__img-mobile {
+                    align-self: stretch;
+
+                    @include mq($from: sm) {
+                        display: none;
+                    }
+
+                    .lb-picture {
+                        aspect-ratio: 4 / 2;
+                    }
+                }
+
+                .lb-picture {
+                    position: relative;
+                }
+
+                &__text-form-wrapper {
+                    flex: 1 1 50%;
+                    padding: rem(40);
+
+                    @include mq($until: md) {
+                        flex: 1 1 100%;
+                        padding: rem(8) rem(16);
+                    }
+
+                    .mc4wp-form {
+                        .mc4wp-form-fields {
+                            .custom-input {
+                                @include mq($until: md) {
+                                    margin-bottom: rem(12);
+                                }
+                            }
+
+                            .button-link {
+                                padding-left: rem(32);
+
+                                @include mq($until: md) {
+                                    padding-top: 0;
+                                }
+                                
+                                .button__label {
+                                    font-size: rem(12);
+                                }
+                            }
+
+                            .custom-checkbox {
+                                @include mq($until: md) {
+                                    margin-top: rem(0);
+                                }
+
+                                &__options {
+                                    align-items: flex-start;
+                                    
+                                    label {
+                                        &:not(:first-child) {
+                                            @include mq($until: md) {
+                                                margin-top: rem(4);
+                                            }
+                                        }
+
+                                        span {
+                                            @include mq($until: md) {
+                                                font-size: rem(12);
+                                                line-height: rem(16);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
+                            &__button-submit {
+                                width: 100%;
+                                display: flex;
+                                justify-content: center;
+
+                                .button {
+                                    @include mq($until: md) {
+                                        margin-top: rem(4);
+                                        padding: rem(10) rem(24);
+                                    }
+
+                                    &__label {
+                                        @include mq($until: md) {
+                                            font-size: rem(12);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        .mc4wp-response {
+                            margin: rem(24) 0;
+
+                            &:empty {
+                                display: none;
+                            }
+
+                            > .mc4wp-alert {
+                                text-align: center;
+
+                                .infobox {
+                                    &__subtitle {
+                                        display: inline-block;
+                                        margin-bottom: rem(8);
+                                        font-size: rem(20);
+            
+                                        @include mq($until: md) {
+                                            font-size: rem(18);
+                                        }
+                                    }
+            
+                                    &__paragraph {
+                                        font-size: rem(16);
+            
+                                        @include mq($until: md) {
+                                            font-size: rem(14);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &__text-wrapper {
+                    margin-bottom: rem(24);
+
+                    @include mq($until: md) {
+                        margin-bottom: rem(10);
+                    }
+
+                    &--hide {
+                        display: none;
+                    }
+
+                    .infobox {
+                        &__subtitle {
+                            font-size: rem(20);
+
+                            @include mq($until: md) {
+                                font-size: rem(18);
+                                margin-bottom: 0;
+                            }
+                        }
+
+                        &__paragraph {
+                            font-size: rem(16);
+
+                            @include mq($until: md) {
+                                font-size: rem(14);
+                            }
+                        }
+                    }
+                }
+            }
     
             &--html {
                 .mc4wp-form {
@@ -163,6 +365,12 @@
     
                     .custom-checkbox__options {
                         text-align: left;
+                    }
+                }
+
+                .lb-video {
+                    @include mq($until: md) {
+                        padding: 0;
                     }
                 }
             }
@@ -230,7 +438,6 @@
             }
 
             &__dialog {
-                max-width: 360px;
                 min-height: auto;
                 transform: translate3d(0, #{rem(40px)}, 0);
             }
@@ -241,16 +448,10 @@
                 @include mq($until: md) {
                     padding: rem(16);
                 }
-            }
-        }
-    }
 
-
-
-    &--popup-wide {
-        .lb-offset-nav {
-            &__dialog {
-                max-width: 820px;
+                &--no-padding {
+                    padding: 0;
+                }
             }
         }
     }

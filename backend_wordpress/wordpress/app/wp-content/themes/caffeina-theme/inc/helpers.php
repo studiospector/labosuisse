@@ -358,6 +358,7 @@ function lb_custom_offset_navs() {
     $newsletter_nav = [
         'id' => 'lb-newsletter-nav',
         'title' => __('Newsletter', 'labo-suisse-theme'),
+        'size' => 'large',
         'data' => [
             [
                 'type' => 'text',
@@ -379,6 +380,7 @@ function lb_custom_offset_navs() {
     $cart_async_nav = [
         'id' => 'lb-offsetnav-async-cart',
         'title' => __('Carrello', 'labo-suisse-theme'),
+        'size' => 'large',
         'data' => [
             [
                 'type' => 'html',
@@ -452,11 +454,48 @@ function lb_custom_offset_navs() {
         'variants' => ['popup']
     ];
 
+    // Newsletter subscription
+    $newsletter_subscription = [
+        'id' => 'lb-offsetnav-newsletter-subscription',
+        'title' => get_field('lb_popup_newsletter_title_popup', 'option'),
+        'data' => [
+            [
+                'type' => 'image-text',
+                'data' => [
+                    'infobox' => [
+                        'subtitle' => get_field('lb_popup_newsletter_title', 'option'),
+                        'paragraph' => get_field('lb_popup_newsletter_text', 'option'),
+                    ],
+                    'images_desktop' => lb_get_images(get_field('lb_popup_newsletter_image_desktop', 'option'), [
+                        'lg' => 'lg',
+                        'md' => 'lg',
+                        'sm' => 'lg',
+                        'xs' => 'lg'
+                    ]),
+                    'images_mobile' => lb_get_images(get_field('lb_popup_newsletter_image_mobile', 'option'), [
+                        'lg' => 'lg',
+                        'md' => 'lg',
+                        'sm' => 'lg',
+                        'xs' => 'lg'
+                    ]),
+                    'mc4wp_form_shortcode' => do_shortcode(get_field('lb_popup_newsletter_shortcode', 'option')),
+                ],
+            ]
+        ],
+        'noPaddingContent' => true,
+        'noClose' => false,
+        'size' => 'big',
+        'class' => 'js-offset-nav-cookie-management',
+        'attributes' => ['data-delay="15000"', 'data-cookie-expire="1"'], // for 3/4 minutes expire insert "0.0022" as value
+        'variants' => ['popup']
+    ];
+
     return [
         $newsletter_nav,
         $cart_async_nav,
         $multicountry_geolocation_nav,
-        $multicountry_nav
+        $multicountry_nav,
+        (is_front_page() || is_product() || is_product_category() || is_tax('lb-brand')) && get_field('lb_popup_newsletter_status', 'option') ? $newsletter_subscription : null
     ];
 }
 

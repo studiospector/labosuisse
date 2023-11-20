@@ -41,12 +41,12 @@ import Video from './Video'
 import BannerVideo from './BannerVideo'
 import ParallaxImage from './ParallaxImage';
 import VideoText from './VideoText';
+import OffsetNavCookieManagement from './OffsetNavCookie';
 
 const components = {
     scrollbar: {
-        selector: '.js-scrollbar',
-        type: Scrollbar,
-        optional: true
+        ghost: true,
+        type: Scrollbar
     },
     menu: {
         selector: '.js-menu',
@@ -226,6 +226,11 @@ const components = {
     videoText: {
         selector: '.js-video-text',
         type: VideoText,
+        optional: true
+    },
+    offsetNavCookieManagement: {
+        selector: '.js-offset-nav-cookie-management',
+        type: OffsetNavCookieManagement,
         optional: true
     },
 }

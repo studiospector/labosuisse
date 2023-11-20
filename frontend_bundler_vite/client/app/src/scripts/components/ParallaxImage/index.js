@@ -6,7 +6,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-const ui = {}
+const ui = {
+  picture: '.lb-picture',
+  image: 'img',
+}
 
 class ParallaxImage extends Component {
 
@@ -17,16 +20,16 @@ class ParallaxImage extends Component {
     }
 
     init = () => {
-      const image = this.el.querySelector("img")
-    
-      gsap.to(image, {
-        y: () => 0,
+      gsap.to(this.ui.image, {
+        y: -30,
         ease: "none",
+        duration: 2,
+        scale: 1.08,
         scrollTrigger: {
-          trigger: this.el,
-          start: "top bottom",
-          end: "bottom 10%",
-          scrub: true,
+          trigger: this.ui.picture,
+          start: "top 80%",
+          end: "80% 118px",
+          scrub: 3,
           pin: false,
           markers: false,
           invalidateOnRefresh: true,

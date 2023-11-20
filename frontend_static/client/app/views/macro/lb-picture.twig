@@ -1,4 +1,4 @@
-{%- macro lbPicture(images, isParallax, position, reveal) -%}
+{%- macro lbPicture(images, isParallax = false, position, reveal = false) -%}
 
     {%- set position = position|default('center') -%}
 
@@ -6,7 +6,7 @@
 
 	{%- if isParallax -%}
         {% set parallaxVariant = 'parallax' %}
-        {% set classes = classes|merge(['js-parallax-image']) %}
+        {# {% set classes = classes|merge(['js-parallax-image']) %} #}
     {%- endif -%}
 
     {%- if reveal -%}
@@ -14,7 +14,9 @@
     {%- endif -%}
 
 	{%- for variant in images.variants|default([parallaxVariant, revealVariant]) -%}
-		{% set classes = classes|merge(['lb-picture--' ~ variant]) %}
+        {% if variant %}
+		    {% set classes = classes|merge(['lb-picture--' ~ variant]) %}
+        {% endif %}
 	{%- endfor -%}
 
     {%- set classes = classes|merge(['lb-picture--infobox-' ~ position]) -%}
@@ -23,7 +25,7 @@
 		{% set classes = classes|merge([class]) %}
 	{%- endif -%}
 
-    {%- if isParallax or reveal -%}<div class="lb-picture-wrapper{{ reveal ? ' js-image-reveal' : '' }}">{%- endif -%}
+    {%- if isParallax or reveal -%}<div class="lb-picture-wrapper{{ reveal ? ' js-image-reveal' : '' }}{{ isParallax ? ' js-parallax-image' : '' }}">{%- endif -%}
 	    <picture class="lb-picture{{ classes|length ? ' ' ~ classes|join(' ') : '' }}">
             <source media="(min-width: 801px) and (max-width: 1200px)" data-srcset="{{images.lg}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">
             <source media="(min-width: 401px) and (max-width: 800px)" data-srcset="{{images.md}}" srcset="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==">

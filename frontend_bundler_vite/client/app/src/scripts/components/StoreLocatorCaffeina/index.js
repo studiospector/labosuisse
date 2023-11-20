@@ -286,8 +286,8 @@ class StoreLocatorCaffeina extends Component {
                         <circle cx="22" cy="22" r="22" fill="#B52A2D" opacity=".8" />
                     </svg>
                 `)
-                
-                return new this.google.maps.Marker({
+
+                const marker = new this.google.maps.Marker({
                     position,
                     icon: {
                         url: `data:image/svg+xml;base64,${svg}`,
@@ -302,6 +302,8 @@ class StoreLocatorCaffeina extends Component {
                     // adjust zIndex to be above other markers
                     zIndex: Number(this.google.maps.Marker.MAX_ZINDEX) + count,
                 })
+                
+                return (count > 0) ? marker : null
             },
         }
 
