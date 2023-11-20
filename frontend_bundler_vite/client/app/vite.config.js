@@ -56,7 +56,7 @@ export default defineConfig({
     outDir: 'dist',
     emptyOutDir: true,
     cssCodeSplit: true,
-    sourcemap: process.env.NODE_ENV == 'development',
+    sourcemap: false,
     lib: {
       formats: ['es'],
       entry: [
