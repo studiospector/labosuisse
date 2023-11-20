@@ -309,9 +309,7 @@ class ThemeSetup extends Timber\Site
             return "$theme_path/$bundle_folder/$manifest[$file]";
         }
 
-        $build_path = LB_BUILD_PATH;
-
-        $file_date = strval(filemtime("$build_path/$file"));
+        $file_date = strval(filemtime(LB_BUILD_PATH . "/$file"));
 
         return "$theme_path/$bundle_folder/$file?v=$file_date";
     }
