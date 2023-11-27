@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Caffeina Theme\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 10:18+0000\n"
+"POT-Creation-Date: 2023-11-27 15:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,9 +16,9 @@ msgstr ""
 "X-Loco-Version: 2.5.8; wp-5.8\n"
 "X-Domain: labo-suisse-theme"
 
-#: inc/woocommerce-setup.php:172
+#: inc/woocommerce-setup.php:173
 #, php-format
-msgid "%1$sa partire da%2$s %3$s"
+msgid "%1$s %2$sa partire da%3$s%4$s %5$s %6$s"
 msgstr ""
 
 #: woocommerce/checkout/form-login.php:29
@@ -31,7 +31,7 @@ msgstr ""
 msgid "Accedi con la nuova password"
 msgstr ""
 
-#: woocommerce/single-product.php:53
+#: woocommerce/single-product.php:60
 msgid "Aggiungi al carrello"
 msgstr ""
 
@@ -39,18 +39,18 @@ msgstr ""
 msgid "Aggiungi il tuo ID Cookiebot per mostrare le dichiarazioni sui cookie."
 msgstr ""
 
-#: woocommerce/cart/cart.php:177
+#: woocommerce/cart/cart.php:181
 msgid "Aggiungi un codice promozionale"
 msgstr ""
 
 #: archive-lb-job.php:25
-#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:172
+#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:173
 msgid "Ambito:"
 msgstr ""
 
 #: archive-lb-job.php:63 archive-lb-job.php:75 home.php:59 home.php:71
 #: template-distributor.php:33 template-lb-brand-archive.php:65
-#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:146
+#: template-lb-brand-archive.php:77 woocommerce/cart/cart.php:150
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:44
 #: packages/caffeina/labo-suisse/src/Resources/ArchiveProduct.php:56
 #: packages/caffeina/labo-suisse/src/WCProductCategoryPages/Esigenza.php:131
@@ -58,12 +58,12 @@ msgstr ""
 msgid "Applica"
 msgstr ""
 
-#: inc/woocommerce-setup.php:230
+#: inc/woocommerce-setup.php:249
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:48
 msgid "Articoli"
 msgstr ""
 
-#: inc/woocommerce-setup.php:248
+#: inc/woocommerce-setup.php:267
 msgid "articoli"
 msgstr ""
 
@@ -71,7 +71,7 @@ msgstr ""
 msgid "Articolo"
 msgstr ""
 
-#: inc/woocommerce-setup.php:246
+#: inc/woocommerce-setup.php:265
 msgid "articolo"
 msgstr ""
 
@@ -82,7 +82,7 @@ msgstr ""
 msgid "Brand"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:44
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:45
 msgid "Brevetti"
 msgstr ""
 
@@ -98,11 +98,11 @@ msgstr ""
 msgid "Carica altro"
 msgstr ""
 
-#: inc/helpers.php:381
+#: inc/helpers.php:382
 msgid "Carrello"
 msgstr ""
 
-#: inc/helpers.php:420
+#: inc/helpers.php:422
 msgid "Catalogo"
 msgstr ""
 
@@ -142,7 +142,7 @@ msgstr ""
 msgid "Ciao %1$s!"
 msgstr ""
 
-#: woocommerce/cart/cart.php:145
+#: woocommerce/cart/cart.php:149
 msgid "Codice coupon"
 msgstr ""
 
@@ -160,6 +160,11 @@ msgstr ""
 
 #: woocommerce/myaccount/orders.php:28
 msgid "Controlla lo stato dei tuoi ordini e lo storico degli ordini passati."
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:109
+#, php-format
+msgid "Crescina in %s"
 msgstr ""
 
 #. Description of the theme
@@ -189,7 +194,7 @@ msgstr ""
 msgid "Descrizione del ruolo:"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:20
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:21
 msgid "Descrizione e ingredienti"
 msgstr ""
 
@@ -205,11 +210,11 @@ msgstr ""
 msgid "Disponibile online"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:50
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:51
 msgid "Domande frequenti"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:32
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:33
 msgid "Efficacia"
 msgstr ""
 
@@ -227,6 +232,11 @@ msgstr ""
 
 #: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:77
 msgid "FAQ"
+msgstr ""
+
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:96
+#, php-format
+msgid "Fillerina in %s"
 msgstr ""
 
 #: woocommerce/checkout/thankyou.php:46
@@ -297,7 +307,7 @@ msgstr ""
 msgid "Inserisci città, provincia, CAP"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/NewsletterSubscription.php:21
+#: packages/caffeina/labo-suisse/src/Blocks/NewsletterSubscription.php:22
 msgid "Inserisci città, provincia, CAP,..."
 msgstr ""
 
@@ -309,15 +319,15 @@ msgstr ""
 msgid "Inserisci provincia"
 msgstr ""
 
-#: inc/helpers.php:326 inc/helpers.php:434
+#: inc/helpers.php:326 inc/helpers.php:436
 msgid "Internazionale"
 msgstr ""
 
-#: inc/helpers.php:365
+#: inc/helpers.php:366
 msgid "Iscriviti alla newsletter"
 msgstr ""
 
-#: inc/helpers.php:326 inc/helpers.php:428
+#: inc/helpers.php:326 inc/helpers.php:430
 msgid "Italiano"
 msgstr ""
 
@@ -338,7 +348,7 @@ msgstr ""
 #: archive-lb-job.php:31
 #: packages/caffeina/labo-suisse/src/Resources/Distributor.php:43
 #: packages/caffeina/labo-suisse/src/Resources/Distributor.php:46
-#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:178
+#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:179
 msgid "Leggi di più"
 msgstr ""
 
@@ -368,7 +378,7 @@ msgstr ""
 msgid "min"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:38
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:39
 msgid "Modalità di utilizzo"
 msgstr ""
 
@@ -380,7 +390,7 @@ msgstr ""
 msgid "Nessun evento previsto<br>questo mese nella tua provincia."
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:226
+#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:227
 msgid "Nessun risultato trovato"
 msgstr ""
 
@@ -417,7 +427,7 @@ msgstr ""
 msgid "Nuova password (lascia vuoto per non modificare)"
 msgstr ""
 
-#: inc/woocommerce-setup.php:352
+#: inc/woocommerce-setup.php:371
 msgid "Omaggio"
 msgstr ""
 
@@ -486,7 +496,7 @@ msgstr ""
 msgid "Procedi con l'ordine"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:163
+#: packages/caffeina/labo-suisse/src/Api/GlobalSearch/Search.php:170
 msgid "Prodotti"
 msgstr ""
 
@@ -517,7 +527,7 @@ msgid ""
 "account e nelle recensioni"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:56
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:57
 msgid "Recensioni"
 msgstr ""
 
@@ -538,7 +548,7 @@ msgstr ""
 msgid "Riceverai un’email di conferma appena sarà spedito."
 msgstr ""
 
-#: inc/helpers.php:366
+#: inc/helpers.php:367
 msgid "Ricevi aggiornamenti e promozioni direttamente sulla tua mail."
 msgstr ""
 
@@ -568,7 +578,7 @@ msgstr ""
 msgid "risultato per"
 msgstr ""
 
-#: inc/helpers.php:441 woocommerce/myaccount/form-edit-account.php:151
+#: inc/helpers.php:443 woocommerce/myaccount/form-edit-account.php:151
 #: woocommerce/myaccount/form-edit-account.php:153
 msgid "Salva"
 msgstr ""
@@ -577,7 +587,7 @@ msgstr ""
 msgid "Scopri di più"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:113
+#: packages/caffeina/labo-suisse/src/Resources/Distributor.php:121
 msgid "Scopri i trattamenti distribuiti"
 msgstr ""
 
@@ -615,7 +625,7 @@ msgid ""
 "disposizione tutte le informazioni sui tuoi ordini."
 msgstr ""
 
-#: inc/helpers.php:415
+#: inc/helpers.php:417
 msgid ""
 "Seleziona il catalogo che vuoi visualizzare, in base alla tua Nazione di "
 "provenienza."
@@ -627,7 +637,7 @@ msgid ""
 "entità."
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:227
+#: packages/caffeina/labo-suisse/src/Api/Archive/Archive.php:228
 msgid ""
 "Siamo spiacenti! Non riusciamo a trovare nessun risultato che corrisponda "
 "alla tua ricerca."
@@ -641,7 +651,7 @@ msgstr ""
 msgid "Stefano Iachetta | Giuseppe Gatto | Matteo Meloni"
 msgstr ""
 
-#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:26
+#: packages/caffeina/labo-suisse/src/Blocks/OffsetNavs.php:27
 msgid "Tecnologia"
 msgstr ""
 

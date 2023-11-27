@@ -92,8 +92,12 @@ class Distributor
         $links = [];
 
         if(in_array('Fillerina', $brands)) {
+            $label_fillerina = sprintf(
+                __('Fillerina in %s', 'labo-suisse-theme'),
+                $this->geo_location['country'],
+            );
             $links[] = [
-                'title' => __("Filerina in {$this->geo_location['country']}", 'labo-suisse-theme'),
+                'title' => $label_fillerina,
                 'url' => "{$laboInTheWorldLinks['filerina']}#{$this->geo_location['country_short']}",
                 'target' => '_blank',
                 'variants' => ['primary'],
@@ -101,8 +105,12 @@ class Distributor
         }
 
         if(in_array('Crescina', $brands)) {
+            $label_crescina = sprintf(
+                __('Crescina in %s', 'labo-suisse-theme'),
+                $this->geo_location['country'],
+            );
             $links[] = [
-                'title' => __("Crescina in {$this->geo_location['country']}", 'labo-suisse-theme'),
+                'title' => $label_crescina,
                 'url' => "{$laboInTheWorldLinks['crescina']}#{$this->geo_location['country_short']}",
                 'target' => '_blank',
                 'variants' => ['primary'],
