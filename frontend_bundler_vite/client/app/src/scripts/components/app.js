@@ -45,8 +45,8 @@ import OffsetNavCookieManagement from './OffsetNavCookie';
 
 const components = {
     scrollbar: {
-        ghost: true,
-        type: Scrollbar
+        type: Scrollbar,
+        ghost: true
     },
     menu: {
         selector: '.js-menu',

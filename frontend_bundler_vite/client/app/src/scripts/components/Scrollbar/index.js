@@ -16,7 +16,9 @@ class Scrollbar extends Component {
     constructor({ options, ...props }) {
         super({ ...props })
 
-        this.init()
+        if (!this.el.classList.contains('wp-admin')) {
+            this.init()
+        }
     }
 
     init = () => {
