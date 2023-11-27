@@ -6,18 +6,14 @@ class Loader extends Component {
     constructor({ options, ...props }) {
         super({ ...props })
 
-        qs('body').classList.remove('is-loading')
-
         this.onLoad()
-        on(window, 'beforeunload', this.onLeave)
-    }
 
-    // onLoad = debounce(() => {
-    //     this.el.classList.remove('lb-loader--loading')
-    // }, 300)
+        // on(window, 'beforeunload', this.onLeave)
+    }
 
     onLoad = () => {
         this.el.classList.remove('lb-loader--loading')
+        qs('body').classList.remove('is-loading')
     }
 
     onLeave = () => {
