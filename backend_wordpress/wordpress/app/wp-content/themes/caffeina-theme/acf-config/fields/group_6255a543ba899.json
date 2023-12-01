@@ -86,13 +86,18 @@
                         "RO": "ROMANIA",
                         "RU": "RUSSIA",
                         "US": "STATI UNITI D'AMERICA",
-                        "SV": "SALVADOR",
+                        "SV": "EL SALVADOR",
                         "SK": "REPUBBLICA SLOVACCA",
                         "LK": "SRI LANKA",
                         "HU": "UNGHERIA",
                         "UY": "URUGUAY",
                         "VE": "VENEZUELA",
-                        "VN": "VIETNAM"
+                        "VN": "VIETNAM",
+                        "UA": "UCRAINA",
+                        "RS": "SERBIA",
+                        "JO": "GIORDANIA",
+                        "BO": "BOLIVIA",
+                        "YE": "YEMEN"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -171,7 +176,12 @@
                         "flag-ungheria": "Ungheria",
                         "flag-uruguay": "Uruguay",
                         "flag-venezuela": "Venezuela",
-                        "flag-vietnam": "Vietnam"
+                        "flag-vietnam": "Vietnam",
+                        "flag-ucraina": "Ucraina",
+                        "flag-serbia": "Serbia",
+                        "flag-giordania": "Giordania",
+                        "flag-bolivia": "Bolivia",
+                        "flag-yemen": "Yemen"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -348,7 +358,6 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1686125020,
-    "local_file": "\/var\/www\/html\/wp-content-custom\/themes\/caffeina-theme\/acf-config\/fields\/group_6255a543ba899.json",
-    "acfml_field_group_mode": "advanced"
+    "acfml_field_group_mode": "advanced",
+    "modified": 1701440153
 }
