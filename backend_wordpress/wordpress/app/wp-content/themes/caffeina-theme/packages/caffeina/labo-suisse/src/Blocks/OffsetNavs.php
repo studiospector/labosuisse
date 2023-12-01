@@ -18,42 +18,49 @@ class OffsetNavs extends BaseBlock
                 'description' => [
                     'active' => get_field('lb_block_offsetnav_state_description'), // true, false
                     'id' => 'lb-offsetnav-product-description',
+                    'size' => 'large',
                     'title' => __('Descrizione e ingredienti', 'labo-suisse-theme'),
                     'data' => $this->filldata('description')
                 ],
                 'technology' => [
                     'active' => get_field('lb_block_offsetnav_state_technology'), // true, false
                     'id' => 'lb-offsetnav-product-technology',
+                    'size' => 'large',
                     'title' => __('Tecnologia', 'labo-suisse-theme'),
                     'data' => $this->filldata('technology')
                 ],
                 'effectiveness' => [
                     'active' => get_field('lb_block_offsetnav_state_effectiveness'), // true, false
                     'id' => 'lb-offsetnav-product-effectiveness',
+                    'size' => 'large',
                     'title' => __('Efficacia', 'labo-suisse-theme'),
                     'data' => $this->filldata('effectiveness')
                 ],
                 'use_cases' => [
                     'active' => get_field('lb_block_offsetnav_state_usecases'), // true, false
                     'id' => 'lb-offsetnav-product-usecases',
+                    'size' => 'large',
                     'title' => __('Modalità di utilizzo', 'labo-suisse-theme'),
                     'data' => $this->filldata('usecases')
                 ],
                 'patents' => [
                     'active' => get_field('lb_block_offsetnav_state_patents'), // true, false
                     'id' => 'lb-offsetnav-product-patents',
+                    'size' => 'large',
                     'title' => __('Brevetti', 'labo-suisse-theme'),
                     'data' => $this->filldata('patents')
                 ],
                 'faq' => [
                     'active' => get_field('lb_block_offsetnav_state_faq'), // true, false
                     'id' => 'lb-offsetnav-product-faq',
+                    'size' => 'large',
                     'title' => __('Domande frequenti', 'labo-suisse-theme'),
                     'data' => $this->fillDataFAQ(get_field('lb_block_offsetnav_faq'))
                 ],
                 'reviews' => [
                     'active' => get_field('lb_block_offsetnav_state_reviews'), // true, false
                     'id' => 'lb-offsetnav-product-reviews',
+                    'size' => 'large',
                     'title' => __('Recensioni', 'labo-suisse-theme'),
                     'data' => $this->filldata('reviews')
                 ]
@@ -62,12 +69,14 @@ class OffsetNavs extends BaseBlock
                 'left' => [
                     'active' => get_field('lb_block_offsetnav_state_cardleft'), // true, false
                     'id' => 'lb-cardleft-product-offsetnav',
+                    'size' => 'large',
                     'title' => get_field('lb_block_offsetnav_cardleft_title'),
                     'data' => $this->filldata('cardleft')
                 ],
                 'right' => [
                     'active' => get_field('lb_block_offsetnav_state_cardright'), // true, false
                     'id' => 'lb-cardright-product-offsetnav',
+                    'size' => 'large',
                     'title' => get_field('lb_block_offsetnav_cardright_title'),
                     'data' => $this->filldata('cardright')
                 ],
