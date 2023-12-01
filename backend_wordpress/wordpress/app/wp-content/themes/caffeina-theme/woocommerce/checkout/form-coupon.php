@@ -28,6 +28,10 @@ if ( ! wc_coupons_enabled() ) { // @codingStandardsIgnoreLine.
         'title' => esc_html__( 'Inserisci codice', 'labo-suisse-theme' ),
         'url' => '#',
         'class' => 'showcoupon',
+        'iconEnd' => [
+            'name' => 'arrow-down',
+        ],
+        'animation' => 'none',
         'variants' => ['quaternary', 'small'],
     ]);
 
