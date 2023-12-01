@@ -50,6 +50,11 @@ label.lb-wc-label {
     flex-direction: column;
 
     .select2 {
+        .select2-selection__placeholder {
+            font-style: italic;
+            color: map-get($colors, "primary-dark-1");
+        }
+
         .select2-selection {
             height: auto;
             margin: 0;

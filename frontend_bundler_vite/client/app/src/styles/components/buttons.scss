@@ -106,6 +106,26 @@ $buttonsPropertyList: (
             }
         }
     }
+
+    &[data-animation="down"] {
+        &:hover {
+            .lb-icon {
+                &:last-of-type {
+                    transform: translateX(0) translateY(5px);
+                }
+            }
+        }
+    }
+
+    &[data-animation="none"] {
+        &:hover {
+            .lb-icon {
+                &:last-of-type {
+                    transform: translateX(0) translateY(0);
+                }
+            }
+        }
+    }
 }
 
 // .button-link {}

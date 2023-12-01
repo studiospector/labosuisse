@@ -51,6 +51,13 @@ function lb_set_wc_custom_body_classes($classes)
 
 
 /**
+ * Change the default state on the checkout page
+ */
+add_filter('default_checkout_billing_state', '__return_null');
+
+
+
+/**
  * Custom select for product variations
  */
 add_filter('woocommerce_dropdown_variation_attribute_options_html', 'lb_set_custom_data_attribute_product_variations', 10, 2);
