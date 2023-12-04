@@ -56,36 +56,36 @@ map $request_uri $new_uri {
     /it/prodotti/ho-bisogno-di/Trattamenti%20di%20bellezza%20sotto%20il%20sole /categoria-prodotto/solari/solari-solari;
     /it/prodotti/ho-bisogno-di/Innovativi%20trattamenti%20make-up /categoria-prodotto/make-up;
 
-    /prodotto/lifting-facciale-trattamento-intensivo /prodotto/lifting-facciale-palpebrale-nuovo-trattamento-completo/
-    /prodotto/lifting-facciale-crema-solida-di-proseguimento /prodotto/lifting-facciale-palpebrale-crema-solida-giorno/
-    /prodotto/lifting-palpebrale-trattamento-intensivo /prodotto/lifting-facciale-palpebrale-nuovo-trattamento-completo/
-    /prodotto/lifting-palpebrale-crema-solida-di-proseguimento /prodotto/crema-solida-effetto-lifting-zona-perioculare-e-palpebrale/
-    /prodotto/shampoo-crescina-ri-crescita-hb-177 /prodotto/shampoo-crescina-ri-crescita-mito/
-    /prodotto/shampoo-crescina-isole-follicolari-hb-177 /prodotto/shampoo-crescina-isole-follicolari-mito/
-    /prodotto/fillerina-12-double-filler-trattamento-intensivo-2/ /prodotto/fillerina-12-double-filler-mito-trattamento-intensivo/
-    /prodotto/fillerina-12-biorevitalizing-double-filler-trattamento-intensivo/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-trattamento-intensivo/
-    /prodotto/fillerina-12-double-filler-crema-giorno/ /prodotto/fillerina-12-double-filler-mito-crema-giorno/
-    /prodotto/fillerina-12-double-filler-crema-notte/ /prodotto/fillerina-12-double-filler-mito-crema-notte/
-    /prodotto/fillerina-12-double-filler-crema-contorno-occhi/ /prodotto/fillerina-12-double-filler-mito-crema-contorno-occhi/
-    /prodotto/fillerina-12-double-filler-crema-contorno-labbra/ /prodotto/fillerina-12-double-filler-mito-crema-contorno-labbra/
-    /prodotto/fillerina-12-biorevitalizing-double-filler-crema-giorno/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-crema-giorno/
-    /prodotto/fillerina-12-biorevitalizing-double-filler-crema-notte/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-crema-notte/
-    /prodotto/fillerina-12-biorevitalizing-double-filler-contorno-occhi/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-crema-contorno-occhi/
-    /prodotto/fillerina-12-biorevitalizing-double-filler-contorno-labbra/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-contorno-labbra/
-    /brands/fillerina/fillerina-12-double-filler /brands/fillerina/fillerina-12-double-filler-mito/
-    /brands/fillerina/fillerina-12-biorevitalizing-double-filler /brands/fillerina/fillerina-12-biorevitalizing-double-filler-mito/
-    /prodotto/cadu-crex-anticaduta-hair-root-benefit/ /prodotto/cadu-crex-anti-caduta-mito/
-    /prodotto/shampoo-cadu-crex-anticaduta-hair-root-benefit/ /prodotto/shampoo-cadu-crex-anti-caduta-mito/
-    /prodotto/labo-anti-caduta-5-brevetti/ /brands/cadu-crex/
-    /brands/labo-anti-caduta-5-brevetti/ /brands/cadu-crex/
-    /brands/fillerina-colour/ /brands/labo-filler-make-up/
-    /prodotto/fillerina-colour-12ha-bb-cream/ /brands/labo-filler-make-up/
-    /prodotto/fillerina-colour-12ha-fondatinta-mat/ /brands/labo-filler-make-up/
-    /prodotto/fillerina-colour-12ha-fondotinta-setoso/ /brands/labo-filler-make-up/
-    /prodotto/fillerina-colour-12ha-lucidalabbra-rimpolpante/ /brands/labo-filler-make-up/
-    /prodotto/fillerina-colour-12ha-rossetto-volumizzante/ /brands/labo-filler-make-up/
-    /brand-page/brand-labo-anticaduta-it/ /brand-page/brand-cadu-crex-it/
-    /brand-page/brand-fillerina-colour-it/ /brand-page/brand-linea-filler-make-up-it/
+    /prodotto/lifting-facciale-trattamento-intensivo /prodotto/lifting-facciale-palpebrale-nuovo-trattamento-completo/;
+    /prodotto/lifting-facciale-crema-solida-di-proseguimento /prodotto/lifting-facciale-palpebrale-crema-solida-giorno/;
+    /prodotto/lifting-palpebrale-trattamento-intensivo /prodotto/lifting-facciale-palpebrale-nuovo-trattamento-completo/;
+    /prodotto/lifting-palpebrale-crema-solida-di-proseguimento /prodotto/crema-solida-effetto-lifting-zona-perioculare-e-palpebrale/;
+    /prodotto/shampoo-crescina-ri-crescita-hb-177 /prodotto/shampoo-crescina-ri-crescita-mito/;
+    /prodotto/shampoo-crescina-isole-follicolari-hb-177 /prodotto/shampoo-crescina-isole-follicolari-mito/;
+    /prodotto/fillerina-12-double-filler-trattamento-intensivo-2/ /prodotto/fillerina-12-double-filler-mito-trattamento-intensivo/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-trattamento-intensivo/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-trattamento-intensivo/;
+    /prodotto/fillerina-12-double-filler-crema-giorno/ /prodotto/fillerina-12-double-filler-mito-crema-giorno/;
+    /prodotto/fillerina-12-double-filler-crema-notte/ /prodotto/fillerina-12-double-filler-mito-crema-notte/;
+    /prodotto/fillerina-12-double-filler-crema-contorno-occhi/ /prodotto/fillerina-12-double-filler-mito-crema-contorno-occhi/;
+    /prodotto/fillerina-12-double-filler-crema-contorno-labbra/ /prodotto/fillerina-12-double-filler-mito-crema-contorno-labbra/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-crema-giorno/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-crema-giorno/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-crema-notte/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-crema-notte/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-contorno-occhi/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-crema-contorno-occhi/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-contorno-labbra/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-contorno-labbra/;
+    /brands/fillerina/fillerina-12-double-filler /brands/fillerina/fillerina-12-double-filler-mito/;
+    /brands/fillerina/fillerina-12-biorevitalizing-double-filler /brands/fillerina/fillerina-12-biorevitalizing-double-filler-mito/;
+    /prodotto/cadu-crex-anticaduta-hair-root-benefit/ /prodotto/cadu-crex-anti-caduta-mito/;
+    /prodotto/shampoo-cadu-crex-anticaduta-hair-root-benefit/ /prodotto/shampoo-cadu-crex-anti-caduta-mito/;
+    /prodotto/labo-anti-caduta-5-brevetti/ /brands/cadu-crex/;
+    /brands/labo-anti-caduta-5-brevetti/ /brands/cadu-crex/;
+    /brands/fillerina-colour/ /brands/labo-filler-make-up/;
+    /prodotto/fillerina-colour-12ha-bb-cream/ /brands/labo-filler-make-up/;
+    /prodotto/fillerina-colour-12ha-fondatinta-mat/ /brands/labo-filler-make-up/;
+    /prodotto/fillerina-colour-12ha-fondotinta-setoso/ /brands/labo-filler-make-up/;
+    /prodotto/fillerina-colour-12ha-lucidalabbra-rimpolpante/ /brands/labo-filler-make-up/;
+    /prodotto/fillerina-colour-12ha-rossetto-volumizzante/ /brands/labo-filler-make-up/;
+    /brand-page/brand-labo-anticaduta-it/ /brand-page/brand-cadu-crex-it/;
+    /brand-page/brand-fillerina-colour-it/ /brand-page/brand-linea-filler-make-up-it/;
 
     # Redirect Crescina Mito
     ~^/prodotto/crescina-transdermic-ri-crescita-hb-177/? /prodotto/crescina-transdermic-ri-crescita-mito;
