@@ -55,11 +55,11 @@ export const RightInfobox = {
     slides: [
       {
         images: {
-          original: "https://via.placeholder.com/2500x700",
-          lg: "https://via.placeholder.com/2500x700",
-          md: "https://via.placeholder.com/2500x700",
-          sm: "https://via.placeholder.com/2500x700",
-          xs: "https://via.placeholder.com/2500x700",
+          original: "https://placehold.co/2500x700",
+          lg: "https://placehold.co/2500x700",
+          md: "https://placehold.co/2500x700",
+          sm: "https://placehold.co/2500x700",
+          xs: "https://placehold.co/2500x700",
         },
         infoboxPosX: "right",
         infoboxPosY: "center",
@@ -79,11 +79,11 @@ export const RightInfobox = {
       },
       {
         images: {
-          original: "https://via.placeholder.com/2500x700",
-          lg: "https://via.placeholder.com/2500x700",
-          md: "https://via.placeholder.com/2500x700",
-          sm: "https://via.placeholder.com/2500x700",
-          xs: "https://via.placeholder.com/2500x700",
+          original: "https://placehold.co/2500x700",
+          lg: "https://placehold.co/2500x700",
+          md: "https://placehold.co/2500x700",
+          sm: "https://placehold.co/2500x700",
+          xs: "https://placehold.co/2500x700",
         },
         infoboxPosX: "right",
         infoboxPosY: "center",
@@ -103,11 +103,11 @@ export const RightInfobox = {
       },
       {
         images: {
-          original: "https://via.placeholder.com/2500x700",
-          lg: "https://via.placeholder.com/2500x700",
-          md: "https://via.placeholder.com/2500x700",
-          sm: "https://via.placeholder.com/2500x700",
-          xs: "https://via.placeholder.com/2500x700",
+          original: "https://placehold.co/2500x700",
+          lg: "https://placehold.co/2500x700",
+          md: "https://placehold.co/2500x700",
+          sm: "https://placehold.co/2500x700",
+          xs: "https://placehold.co/2500x700",
         },
         infoboxPosX: "right",
         infoboxPosY: "center",
@@ -137,11 +137,11 @@ export const LeftInfobox = {
     slides: [
       {
         images: {
-          original: "https://via.placeholder.com/2500x700",
-          lg: "https://via.placeholder.com/2500x700",
-          md: "https://via.placeholder.com/2500x700",
-          sm: "https://via.placeholder.com/2500x700",
-          xs: "https://via.placeholder.com/2500x700",
+          original: "https://placehold.co/2500x700",
+          lg: "https://placehold.co/2500x700",
+          md: "https://placehold.co/2500x700",
+          sm: "https://placehold.co/2500x700",
+          xs: "https://placehold.co/2500x700",
         },
         infoboxPosX: "left",
         infoboxPosY: "center",
@@ -161,11 +161,11 @@ export const LeftInfobox = {
       },
       {
         images: {
-          original: "https://via.placeholder.com/2500x700",
-          lg: "https://via.placeholder.com/2500x700",
-          md: "https://via.placeholder.com/2500x700",
-          sm: "https://via.placeholder.com/2500x700",
-          xs: "https://via.placeholder.com/2500x700",
+          original: "https://placehold.co/2500x700",
+          lg: "https://placehold.co/2500x700",
+          md: "https://placehold.co/2500x700",
+          sm: "https://placehold.co/2500x700",
+          xs: "https://placehold.co/2500x700",
         },
         infoboxPosX: "left",
         infoboxPosY: "center",

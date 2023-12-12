@@ -56,11 +56,11 @@ export const RightInfobox = {
       {
         noContainer: true,
         images: {
-          original: "https://via.placeholder.com/570x400",
-          lg: "https://via.placeholder.com/570x400",
-          md: "https://via.placeholder.com/570x400",
-          sm: "https://via.placeholder.com/570x400",
-          xs: "https://via.placeholder.com/570x400",
+          original: "https://placehold.co/570x400",
+          lg: "https://placehold.co/570x400",
+          md: "https://placehold.co/570x400",
+          sm: "https://placehold.co/570x400",
+          xs: "https://placehold.co/570x400",
         },
         infobox: {
           date: "00/00/00",
@@ -79,11 +79,11 @@ export const RightInfobox = {
       {
         noContainer: true,
         images: {
-          original: "https://via.placeholder.com/570x400",
-          lg: "https://via.placeholder.com/570x400",
-          md: "https://via.placeholder.com/570x400",
-          sm: "https://via.placeholder.com/570x400",
-          xs: "https://via.placeholder.com/570x400",
+          original: "https://placehold.co/570x400",
+          lg: "https://placehold.co/570x400",
+          md: "https://placehold.co/570x400",
+          sm: "https://placehold.co/570x400",
+          xs: "https://placehold.co/570x400",
         },
         infobox: {
           date: "00/00/00",
@@ -112,11 +112,11 @@ export const LeftInfobox = {
       {
         noContainer: true,
         images: {
-          original: "https://via.placeholder.com/570x400",
-          lg: "https://via.placeholder.com/570x400",
-          md: "https://via.placeholder.com/570x400",
-          sm: "https://via.placeholder.com/570x400",
-          xs: "https://via.placeholder.com/570x400",
+          original: "https://placehold.co/570x400",
+          lg: "https://placehold.co/570x400",
+          md: "https://placehold.co/570x400",
+          sm: "https://placehold.co/570x400",
+          xs: "https://placehold.co/570x400",
         },
         infobox: {
           date: "00/00/00",
@@ -135,11 +135,11 @@ export const LeftInfobox = {
       {
         noContainer: true,
         images: {
-          original: "https://via.placeholder.com/570x400",
-          lg: "https://via.placeholder.com/570x400",
-          md: "https://via.placeholder.com/570x400",
-          sm: "https://via.placeholder.com/570x400",
-          xs: "https://via.placeholder.com/570x400",
+          original: "https://placehold.co/570x400",
+          lg: "https://placehold.co/570x400",
+          md: "https://placehold.co/570x400",
+          sm: "https://placehold.co/570x400",
+          xs: "https://placehold.co/570x400",
         },
         infobox: {
           date: "00/00/00",

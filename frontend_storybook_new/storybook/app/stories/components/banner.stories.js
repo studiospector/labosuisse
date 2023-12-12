@@ -40,11 +40,11 @@ export default {
 // Base Args
 const baseArgs = {
   images: {
-    original: "https://via.placeholder.com/1200x400",
-    lg: "https://via.placeholder.com/1200x400",
-    md: "https://via.placeholder.com/1200x400",
-    sm: "https://via.placeholder.com/1200x400",
-    xs: "https://via.placeholder.com/1200x400",
+    original: "https://placehold.co/1200x400",
+    lg: "https://placehold.co/1200x400",
+    md: "https://placehold.co/1200x400",
+    sm: "https://placehold.co/1200x400",
+    xs: "https://placehold.co/1200x400",
   },
   infoboxBgColorTransparent: false, // true, false
   infoboxTextAlignment: "left", // left, right, center
