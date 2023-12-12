@@ -6,7 +6,7 @@ export default {
   decorators: [
     (Story) => {
       return `
-        <div style="max-width: 700px;">
+        <div style="max-width: 570px;">
           ${Story().outerHTML || Story()}
         </div>
       `;
@@ -18,16 +18,23 @@ export default {
 };
 
 /**
+ * Image sizes:
+ * - grid a 2 -> width:570
+ * - grid a 3 -> width:370
+ * - grid a 4 -> width:270
+ */
+
+/**
  * Type 1 Lifting
  */
 export const Type1Lifting = {
   args: {
     images: {
-      original: "https://placehold.co/700x400",
-      lg: "https://placehold.co/700x400",
-      md: "https://placehold.co/700x400",
-      sm: "https://placehold.co/700x400",
-      xs: "https://placehold.co/700x400",
+      original: "https://placehold.co/570x350",
+      lg: "https://placehold.co/570x350",
+      md: "https://placehold.co/570x350",
+      sm: "https://placehold.co/570x350",
+      xs: "https://placehold.co/570x350",
     },
     infobox: {
       tagline: "TRATTAMENTO FACCIALE",
@@ -50,11 +57,11 @@ export const Type1Lifting = {
 export const Type1LiftingSecondary = {
   args: {
     images: {
-      original: "https://placehold.co/350x270",
-      lg: "https://placehold.co/350x270",
-      md: "https://placehold.co/350x270",
-      sm: "https://placehold.co/350x270",
-      xs: "https://placehold.co/350x270",
+      original: "https://placehold.co/570x350",
+      lg: "https://placehold.co/570x350",
+      md: "https://placehold.co/570x350",
+      sm: "https://placehold.co/570x350",
+      xs: "https://placehold.co/570x350",
     },
     infobox: {
       tagline: "TRATTAMENTO FACCIALE",
@@ -79,11 +86,11 @@ export const Type1LiftingSecondary = {
 export const Type2News = {
   args: {
     images: {
-      original: "https://placehold.co/700x270",
-      lg: "https://placehold.co/700x270",
-      md: "https://placehold.co/700x270",
-      sm: "https://placehold.co/700x270",
-      xs: "https://placehold.co/700x270",
+      original: "https://placehold.co/570x290",
+      lg: "https://placehold.co/570x290",
+      md: "https://placehold.co/570x290",
+      sm: "https://placehold.co/570x290",
+      xs: "https://placehold.co/570x290",
     },
     date: "00/00/00",
     infobox: {
@@ -108,11 +115,11 @@ export const Type2News = {
 export const Type3Trattamenti = {
   args: {
     images: {
-      original: "https://placehold.co/700x400",
-      lg: "https://placehold.co/700x400",
-      md: "https://placehold.co/700x400",
-      sm: "https://placehold.co/700x400",
-      xs: "https://placehold.co/700x400",
+      original: "https://placehold.co/570x430",
+      lg: "https://placehold.co/570x430",
+      md: "https://placehold.co/570x430",
+      sm: "https://placehold.co/570x430",
+      xs: "https://placehold.co/570x430",
     },
     infobox: {
       subtitle: "Magnetic Eyes",
@@ -136,11 +143,11 @@ export const Type3Trattamenti = {
 export const Type5About = {
   args: {
     images: {
-      original: "https://placehold.co/700x400",
-      lg: "https://placehold.co/700x400",
-      md: "https://placehold.co/700x400",
-      sm: "https://placehold.co/700x400",
-      xs: "https://placehold.co/700x400",
+      original: "https://placehold.co/570x430",
+      lg: "https://placehold.co/570x430",
+      md: "https://placehold.co/570x430",
+      sm: "https://placehold.co/570x430",
+      xs: "https://placehold.co/570x430",
     },
     infobox: {
       subtitle: "1989: il primo lancio",
@@ -158,11 +165,11 @@ export const Type5About = {
 export const Type6Magazine = {
   args: {
     images: {
-      original: "https://placehold.co/700x270",
-      lg: "https://placehold.co/700x270",
-      md: "https://placehold.co/700x270",
-      sm: "https://placehold.co/700x270",
-      xs: "https://placehold.co/700x270",
+      original: "https://placehold.co/570x290",
+      lg: "https://placehold.co/570x290",
+      md: "https://placehold.co/570x290",
+      sm: "https://placehold.co/570x290",
+      xs: "https://placehold.co/570x290",
     },
     date: "00/00/00",
     infobox: {
@@ -187,11 +194,11 @@ export const Type6Magazine = {
 export const Type7FAQ = {
   args: {
     images: {
-      original: "https://placehold.co/700x160",
-      lg: "https://placehold.co/700x160",
-      md: "https://placehold.co/700x160",
-      sm: "https://placehold.co/700x160",
-      xs: "https://placehold.co/700x160",
+      original: "https://placehold.co/570x190",
+      lg: "https://placehold.co/570x190",
+      md: "https://placehold.co/570x190",
+      sm: "https://placehold.co/570x190",
+      xs: "https://placehold.co/570x190",
     },
     infobox: {
       image: "/images/crescina-logo.png",
@@ -270,11 +277,11 @@ export const Type9Job = {
 export const Type10Brand = {
   args: {
     images: {
-      original: "https://placehold.co/700x400",
-      lg: "https://placehold.co/700x400",
-      md: "https://placehold.co/700x400",
-      sm: "https://placehold.co/700x400",
-      xs: "https://placehold.co/700x400",
+      original: "https://placehold.co/570x430",
+      lg: "https://placehold.co/570x430",
+      md: "https://placehold.co/570x430",
+      sm: "https://placehold.co/570x430",
+      xs: "https://placehold.co/570x430",
     },
     infobox: {
       subtitle: "Labo Transdermic",
