@@ -43,11 +43,11 @@ export default {
 export const Default = {
   args: {
     images: {
-      original: "https://via.placeholder.com/570x420",
-      lg: "https://via.placeholder.com/570x420",
-      md: "https://via.placeholder.com/570x420",
-      sm: "https://via.placeholder.com/570x420",
-      xs: "https://via.placeholder.com/570x420",
+      original: "https://placehold.co/570x420",
+      lg: "https://placehold.co/570x420",
+      md: "https://placehold.co/570x420",
+      sm: "https://placehold.co/570x420",
+      xs: "https://placehold.co/570x420",
     },
     numbersList: {
       title: "Tre consigli utili",

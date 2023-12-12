@@ -50,11 +50,11 @@ export const Horizontal = {
     cards: [
       {
         images: {
-          original: "https://via.placeholder.com/570x310",
-          lg: "https://via.placeholder.com/570x310",
-          md: "https://via.placeholder.com/570x310",
-          sm: "https://via.placeholder.com/570x310",
-          xs: "https://via.placeholder.com/570x310",
+          original: "https://placehold.co/570x310",
+          lg: "https://placehold.co/570x310",
+          md: "https://placehold.co/570x310",
+          sm: "https://placehold.co/570x310",
+          xs: "https://placehold.co/570x310",
         },
         infobox: {
           subtitle: "Scala di diradamento uomo",
@@ -69,11 +69,11 @@ export const Horizontal = {
       },
       {
         images: {
-          original: "https://via.placeholder.com/570x310",
-          lg: "https://via.placeholder.com/570x310",
-          md: "https://via.placeholder.com/570x310",
-          sm: "https://via.placeholder.com/570x310",
-          xs: "https://via.placeholder.com/570x310",
+          original: "https://placehold.co/570x310",
+          lg: "https://placehold.co/570x310",
+          md: "https://placehold.co/570x310",
+          sm: "https://placehold.co/570x310",
+          xs: "https://placehold.co/570x310",
         },
         infobox: {
           subtitle: "Scala di diradamento donna",
@@ -104,11 +104,11 @@ export const Vertical = {
     cards: [
       {
         images: {
-          original: "https://via.placeholder.com/1200x470",
-          lg: "https://via.placeholder.com/1200x470",
-          md: "https://via.placeholder.com/1200x470",
-          sm: "https://via.placeholder.com/1200x470",
-          xs: "https://via.placeholder.com/1200x470",
+          original: "https://placehold.co/1200x470",
+          lg: "https://placehold.co/1200x470",
+          md: "https://placehold.co/1200x470",
+          sm: "https://placehold.co/1200x470",
+          xs: "https://placehold.co/1200x470",
         },
         infobox: {
           subtitle: "Scala di diradamento uomo",
@@ -117,11 +117,11 @@ export const Vertical = {
       },
       {
         images: {
-          original: "https://via.placeholder.com/1200x470",
-          lg: "https://via.placeholder.com/1200x470",
-          md: "https://via.placeholder.com/1200x470",
-          sm: "https://via.placeholder.com/1200x470",
-          xs: "https://via.placeholder.com/1200x470",
+          original: "https://placehold.co/1200x470",
+          lg: "https://placehold.co/1200x470",
+          md: "https://placehold.co/1200x470",
+          sm: "https://placehold.co/1200x470",
+          xs: "https://placehold.co/1200x470",
         },
         infobox: {
           subtitle: "Scala di diradamento donna",

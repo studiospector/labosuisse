@@ -40,19 +40,19 @@ export default {
 export const Default = {
   args: {
     images: {
-      original: "https://via.placeholder.com/535x500",
-      lg: "https://via.placeholder.com/535x500",
-      md: "https://via.placeholder.com/535x500",
-      sm: "https://via.placeholder.com/535x500",
-      xs: "https://via.placeholder.com/535x500",
+      original: "https://placehold.co/535x500",
+      lg: "https://placehold.co/535x500",
+      md: "https://placehold.co/535x500",
+      sm: "https://placehold.co/535x500",
+      xs: "https://placehold.co/535x500",
     },
     card: {
       images: {
-        original: "https://via.placeholder.com/535x160",
-        lg: "https://via.placeholder.com/535x160",
-        md: "https://via.placeholder.com/535x160",
-        sm: "https://via.placeholder.com/535x160",
-        xs: "https://via.placeholder.com/535x160",
+        original: "https://placehold.co/535x160",
+        lg: "https://placehold.co/535x160",
+        md: "https://placehold.co/535x160",
+        sm: "https://placehold.co/535x160",
+        xs: "https://placehold.co/535x160",
       },
       infobox: {
         subtitle: "La tecnologia dietro l’efficacia",
