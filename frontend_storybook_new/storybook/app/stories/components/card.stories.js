@@ -23,11 +23,11 @@ export default {
 export const Type1Lifting = {
   args: {
     images: {
-      original: "/images/card-img-4.jpg",
-      lg: "/images/card-img-4.jpg",
-      md: "/images/card-img-4.jpg",
-      sm: "/images/card-img-4.jpg",
-      xs: "/images/card-img-4.jpg",
+      original: "https://placehold.co/700x400",
+      lg: "https://placehold.co/700x400",
+      md: "https://placehold.co/700x400",
+      sm: "https://placehold.co/700x400",
+      xs: "https://placehold.co/700x400",
     },
     infobox: {
       tagline: "TRATTAMENTO FACCIALE",
@@ -50,11 +50,11 @@ export const Type1Lifting = {
 export const Type1LiftingSecondary = {
   args: {
     images: {
-      original: "/images/card-img-4.jpg",
-      lg: "/images/card-img-4.jpg",
-      md: "/images/card-img-4.jpg",
-      sm: "/images/card-img-4.jpg",
-      xs: "/images/card-img-4.jpg",
+      original: "https://placehold.co/350x270",
+      lg: "https://placehold.co/350x270",
+      md: "https://placehold.co/350x270",
+      sm: "https://placehold.co/350x270",
+      xs: "https://placehold.co/350x270",
     },
     infobox: {
       tagline: "TRATTAMENTO FACCIALE",
@@ -79,11 +79,11 @@ export const Type1LiftingSecondary = {
 export const Type2News = {
   args: {
     images: {
-      original: "/images/card-img-6.jpg",
-      lg: "/images/card-img-6.jpg",
-      md: "/images/card-img-6.jpg",
-      sm: "/images/card-img-6.jpg",
-      xs: "/images/card-img-6.jpg",
+      original: "https://placehold.co/700x270",
+      lg: "https://placehold.co/700x270",
+      md: "https://placehold.co/700x270",
+      sm: "https://placehold.co/700x270",
+      xs: "https://placehold.co/700x270",
     },
     date: "00/00/00",
     infobox: {
@@ -108,11 +108,11 @@ export const Type2News = {
 export const Type3Trattamenti = {
   args: {
     images: {
-      original: "/images/card-img-5.jpg",
-      lg: "/images/card-img-5.jpg",
-      md: "/images/card-img-5.jpg",
-      sm: "/images/card-img-5.jpg",
-      xs: "/images/card-img-5.jpg",
+      original: "https://placehold.co/700x400",
+      lg: "https://placehold.co/700x400",
+      md: "https://placehold.co/700x400",
+      sm: "https://placehold.co/700x400",
+      xs: "https://placehold.co/700x400",
     },
     infobox: {
       subtitle: "Magnetic Eyes",
@@ -136,11 +136,11 @@ export const Type3Trattamenti = {
 export const Type5About = {
   args: {
     images: {
-      original: "/images/card-img-7.jpg",
-      lg: "/images/card-img-7.jpg",
-      md: "/images/card-img-7.jpg",
-      sm: "/images/card-img-7.jpg",
-      xs: "/images/card-img-7.jpg",
+      original: "https://placehold.co/700x400",
+      lg: "https://placehold.co/700x400",
+      md: "https://placehold.co/700x400",
+      sm: "https://placehold.co/700x400",
+      xs: "https://placehold.co/700x400",
     },
     infobox: {
       subtitle: "1989: il primo lancio",
@@ -158,11 +158,11 @@ export const Type5About = {
 export const Type6Magazine = {
   args: {
     images: {
-      original: "/images/card-img-6.jpg",
-      lg: "/images/card-img-6.jpg",
-      md: "/images/card-img-6.jpg",
-      sm: "/images/card-img-6.jpg",
-      xs: "/images/card-img-6.jpg",
+      original: "https://placehold.co/700x270",
+      lg: "https://placehold.co/700x270",
+      md: "https://placehold.co/700x270",
+      sm: "https://placehold.co/700x270",
+      xs: "https://placehold.co/700x270",
     },
     date: "00/00/00",
     infobox: {
@@ -187,11 +187,11 @@ export const Type6Magazine = {
 export const Type7FAQ = {
   args: {
     images: {
-      original: "/images/card-img-6.jpg",
-      lg: "/images/card-img-6.jpg",
-      md: "/images/card-img-6.jpg",
-      sm: "/images/card-img-6.jpg",
-      xs: "/images/card-img-6.jpg",
+      original: "https://placehold.co/700x160",
+      lg: "https://placehold.co/700x160",
+      md: "https://placehold.co/700x160",
+      sm: "https://placehold.co/700x160",
+      xs: "https://placehold.co/700x160",
     },
     infobox: {
       image: "/images/crescina-logo.png",
@@ -270,11 +270,11 @@ export const Type9Job = {
 export const Type10Brand = {
   args: {
     images: {
-      original: "/images/card-img-6.jpg",
-      lg: "/images/card-img-6.jpg",
-      md: "/images/card-img-6.jpg",
-      sm: "/images/card-img-6.jpg",
-      xs: "/images/card-img-6.jpg",
+      original: "https://placehold.co/700x400",
+      lg: "https://placehold.co/700x400",
+      md: "https://placehold.co/700x400",
+      sm: "https://placehold.co/700x400",
+      xs: "https://placehold.co/700x400",
     },
     infobox: {
       subtitle: "Labo Transdermic",

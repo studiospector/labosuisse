@@ -47,9 +47,9 @@ const baseArgs = {
   images: {
     original: "https://placehold.co/2500x520",
     lg: "https://placehold.co/2500x520",
-    md: "https://placehold.co/500x500",
-    sm: "https://placehold.co/500x500",
-    xs: "https://placehold.co/500x500",
+    md: "https://placehold.co/800x500",
+    sm: "https://placehold.co/800x500",
+    xs: "https://placehold.co/800x500",
   },
   infobox: {
     title: "Le linee viso",
