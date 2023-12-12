@@ -241,7 +241,7 @@
 
     &--type-5 {
         .card-img {
-            height: 410px;
+            height: 400px;
 
             @include mq($until: md) {
                 height: 300px;
@@ -403,10 +403,12 @@
 
 
     &--type-10 {
+        position: relative;
+        
         &:hover {
             .card-infobox-hover {
                 visibility: visible;
-                opacity: 0.9;
+                opacity: 0.8;
                 transition: $transition__base-1;
             }
         }
@@ -456,6 +458,7 @@
             position: absolute;
             top: 0;
             left: 0;
+            right: 0;
             background-color: map-get($colors, "white");
             opacity: 0;
             visibility: hidden;
