@@ -30,11 +30,11 @@ export default {
 export const Type1Lifting = {
   args: {
     images: {
-      original: "https://placehold.co/570x350",
-      lg: "https://placehold.co/570x350",
-      md: "https://placehold.co/570x350",
-      sm: "https://placehold.co/570x350",
-      xs: "https://placehold.co/570x350",
+      original: "https://placehold.co/570x570",
+      lg: "https://placehold.co/570x570",
+      md: "https://placehold.co/570x570",
+      sm: "https://placehold.co/570x570",
+      xs: "https://placehold.co/570x570",
     },
     infobox: {
       tagline: "TRATTAMENTO FACCIALE",
@@ -57,11 +57,11 @@ export const Type1Lifting = {
 export const Type1LiftingSecondary = {
   args: {
     images: {
-      original: "https://placehold.co/570x350",
-      lg: "https://placehold.co/570x350",
-      md: "https://placehold.co/570x350",
-      sm: "https://placehold.co/570x350",
-      xs: "https://placehold.co/570x350",
+      original: "https://placehold.co/570x570",
+      lg: "https://placehold.co/570x570",
+      md: "https://placehold.co/570x570",
+      sm: "https://placehold.co/570x570",
+      xs: "https://placehold.co/570x570",
     },
     infobox: {
       tagline: "TRATTAMENTO FACCIALE",
