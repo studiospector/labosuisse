@@ -9,6 +9,7 @@ import DOMPurify from 'dompurify'
 const ui = {
     searchForm: '.lb-filters__search-form',
     searchFormInput: '.lb-filters__search-form .js-custom-input',
+    baseCat: '.lb-filters__base-cat',
     selects: {
         selector: '.custom-field select',
         asArray: true
@@ -89,6 +90,13 @@ class Filters extends Component {
                 args.push(data)
             }
         })
+
+        if (this.ui.baseCat) {
+            args.push({
+                taxonomy: 'product_cat',
+                values: [Number(this.ui.baseCat.value)]
+            })
+        }
 
         this.payload.data = JSON.stringify(args)
         this.payload.page = 1

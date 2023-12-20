@@ -27,6 +27,19 @@ class ArchiveProduct
 
     public function render()
     {
+        $brands_select = $this->brands && (count($this->brands) > 1) ? [
+            'id' => 'lb-brand',
+            'label' => '',
+            'placeholder' => __('Brand', 'labo-suisse-theme'),
+            'multiple' => true,
+            'required' => false,
+            'disabled' => false,
+            'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
+            'options' => $this->brands,
+            'attributes' => ['data-taxonomy="lb-brand"'],
+            'variants' => ['primary']
+        ] : null;
+
         $context = [
             'filters' => [
                 'filter_type' => 'product',
@@ -34,18 +47,7 @@ class ArchiveProduct
                 'posts_per_page' => -1,
                 'containerized' => false,
                 'items' => [
-                    [
-                        'id' => 'lb-brand',
-                        'label' => '',
-                        'placeholder' => __('Brand', 'labo-suisse-theme'),
-                        'multiple' => true,
-                        'required' => false,
-                        'disabled' => false,
-                        'confirmBtnLabel' => __('Applica', 'labo-suisse-theme'),
-                        'options' => $this->brands,
-                        'attributes' => ['data-taxonomy="lb-brand"'],
-                        'variants' => ['primary']
-                    ],
+                    $brands_select,
                     [
                         'id' => 'lb-product-cat',
                         'label' => '',
@@ -58,6 +60,11 @@ class ArchiveProduct
                         'attributes' => ['data-taxonomy="product_cat"'],
                         'variants' => ['primary']
                     ]
+                ],
+                'base_cat' => [
+                    'id' => 'lb-product-cat-base',
+                    'name' => 'lb-product-cat-base',
+                    'value' => $this->term->term_id,
                 ],
                 'search' => [
                     'type' => 'search',
@@ -78,6 +85,8 @@ class ArchiveProduct
                 'description' => nl2br($this->term->description),
             ],
         ];
+
+        $context['filters']['items'] = array_filter($context['filters']['items'], fn($value) => !is_null($value) && $value !== '');
 
         Timber::render('@PathViews/woo/taxonomy-product-cat.twig', $context);
     }
