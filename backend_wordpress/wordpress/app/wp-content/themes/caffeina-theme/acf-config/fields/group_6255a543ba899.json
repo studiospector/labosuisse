@@ -97,7 +97,13 @@
                         "RS": "SERBIA",
                         "JO": "GIORDANIA",
                         "BO": "BOLIVIA",
-                        "YE": "YEMEN"
+                        "YE": "YEMEN",
+                        "KR": "COREA DEL SUD",
+                        "AU": "AUSTRALIA",
+                        "BG": "BULGARIA",
+                        "DZ": "ALGERIA",
+                        "IR": "IRAN",
+                        "HR": "CROAZIA"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -181,7 +187,13 @@
                         "flag-serbia": "Serbia",
                         "flag-giordania": "Giordania",
                         "flag-bolivia": "Bolivia",
-                        "flag-yemen": "Yemen"
+                        "flag-yemen": "Yemen",
+                        "flag-corea-del-sud": "Corea del Sud",
+                        "flag-australia": "Australia",
+                        "flag-bulgaria": "Bulgaria",
+                        "flag-algeria": "Algeria",
+                        "flag-iran": "Iran",
+                        "flag-croazia": "Croazia"
                     },
                     "default_value": false,
                     "return_format": "value",
@@ -359,5 +371,5 @@
     "description": "",
     "show_in_rest": 0,
     "acfml_field_group_mode": "advanced",
-    "modified": 1701440153
+    "modified": 1702395411
 }
