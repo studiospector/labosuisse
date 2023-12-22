@@ -42,6 +42,7 @@ class ArchiveProduct
 
         $context = [
             'filters' => [
+                'lang' => lb_get_current_lang(),
                 'filter_type' => 'product',
                 'post_type' => 'product',
                 'posts_per_page' => -1,

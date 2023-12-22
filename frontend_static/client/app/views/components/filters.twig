@@ -4,6 +4,7 @@
     {{ post_type ? ' data-post-type="' ~ post_type ~ '"' : '' }}
     {{ posts_per_page ? ' data-posts-per-page="' ~ posts_per_page ~ '"' : '' }}
     {{ filterType ? ' data-filter-type="' ~ filterType ~ '"' : '' }}
+    data-lang="{{ lang }}"
 >
     <div class="row">
         {% if items|length > 0 %}
