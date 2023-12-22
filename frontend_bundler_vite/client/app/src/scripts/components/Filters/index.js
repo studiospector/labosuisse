@@ -27,6 +27,8 @@ class Filters extends Component {
 
         this.filterType = this.el.dataset.filterType
 
+        this.lang = this.el.dataset.lang
+
         this.cardsGrid = qs('.js-lb-cards-grid')
         this.results = qs('.lb-posts-count')
         this.pagination = qs('.lb-pagination')
@@ -143,7 +145,7 @@ class Filters extends Component {
         let res = null
         
         try {
-            const { data } = await axiosClient.get(`/wp-json/v1/archives`, {
+            const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/archives`, {
                 params: this.payload
             })
             res = data
