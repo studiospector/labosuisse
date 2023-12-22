@@ -41,6 +41,10 @@
             margin-top: 60px;
             
             .card {
+                .card-img {
+                    aspect-ratio: unset;
+                }
+
                 .card-img,
                 .lb-picture {
                     min-height: 460px;
