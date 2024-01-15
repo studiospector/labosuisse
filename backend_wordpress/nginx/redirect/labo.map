@@ -84,6 +84,56 @@ map $request_uri $new_uri {
     /prodotto/fillerina-colour-12ha-fondotinta-setoso/ /brands/labo-filler-make-up/;
     /prodotto/fillerina-colour-12ha-lucidalabbra-rimpolpante/ /brands/labo-filler-make-up/;
     /prodotto/fillerina-colour-12ha-rossetto-volumizzante/ /brands/labo-filler-make-up/;
+
+    /prodotto/rinfoltina-trattamento-intensivo/ /prodotto/rinfoltina-plus-trattamento-intensivo/;
+    /prodotto/rinfoltina-shampoo/ /prodotto/rinfoltina-plus-shampoo/;
+    /prodotto/rinfoltina-condizionante/ /prodotto/rinfoltina-plus-condizionante/;
+    /prodotto/fillerina-12-double-filler-labbra-e-bocca/ /prodotto/fillerina-12-double-filler-mito-labbra-e-bocca/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-labbra-e-bocca/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-labbra-e-bocca/;
+    /prodotto/fillerina-12-double-filler-occhi-e-palpebre/ /prodotto/fillerina-12-double-filler-mito-occhi-e-palpebre/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-occhi-e-palpebre/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-occhi-e-palpebre/;
+    /prodotto/fillerina-12-double-filler-zigomi-e-arcate-zigomatiche/ /prodotto/fillerina-12-double-filler-mito-zigomi-e-arcate-zigomatiche/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-zigomi-e-arcate-zigomatiche/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-zigomi-e-arcate-zigomatiche/;
+    /prodotto/fillerina-12-double-filler-collo-e-decollete/ /prodotto/fillerina-12-double-filler-mito-collo-e-decollete/;
+    /prodotto/fillerina-12-biorevitalizing-double-filler-collo-e-decollete/ /prodotto/fillerina-12-biorevitalizing-double-filler-mito-collo-e-decollete/;
+    /prodotto/labo-transdermic-1-anti-age-serum-anti-eta-ridensificante-liftante/ /brands/labo-transdermic/labo-transdermic-1-anti-age/;
+    /prodotto/labo-transdermic-1-anti-age-crema-anti-eta-rinnovatrice-levigante/ /brands/labo-transdermic/labo-transdermic-1-anti-age/;
+    /prodotto/labo-transdermic-1-anti-age-crema-anti-eta-ridensificante-liftante/ /brands/labo-transdermic/labo-transdermic-1-anti-age/;
+    /prodotto/labo-transdermic-1-anti-age-serum-anti-eta-rinnovatrice-levigante/ /brands/labo-transdermic/labo-transdermic-1-anti-age/;
+    /prodotto/labo-transdermic-2-anti-wrinkle-serum-anti-rughe-rughe-profonde-e-solchi/ /brands/labo-transdermic/labo-transdermic-2-anti-wrinkle/;
+    /prodotto/labo-transdermic-2-anti-wrinkle-crema-anti-rughe-rughe-profonde-e-solchi/ /brands/labo-transdermic/labo-transdermic-2-anti-wrinkle/;
+    /prodotto/labo-transdermic-2-anti-wrinkle-crema-anti-rughe-collo-e-decollete/ /brands/labo-transdermic/labo-transdermic-2-anti-wrinkle/;
+    /prodotto/labo-transdermic-2-anti-wrinkle-crema-anti-rughe-speciale-contorno-labbra/ /brands/labo-transdermic/labo-transdermic-2-anti-wrinkle/;
+    /prodotto/labo-transdermic-3-hypersensitive-crema-iperdelicata-pelli-sensibili-e-reattive/ /brands/labo-transdermic/labo-transdermic-3-hypersensitive/;
+    /prodotto/labo-transdermic-3-hypersensitive-crema-protettiva-nutriente/ /brands/labo-transdermic/labo-transdermic-3-hypersensitive/;
+    /prodotto/labo-transdermic-3-hypersensitive-crema-calmante-pelli-arrossate-couperose/ /brands/labo-transdermic/labo-transdermic-3-hypersensitive/;
+    /prodotto/labo-transdermic-4-clarifying-serum-ultra-schiarente-illuminante/ /brands/labo-transdermic/labo-transdermic-4-clarifying/;
+    /prodotto/labo-transdermic-4-clarifying-crema-anti-macchia-uniformante/ /brands/labo-transdermic/labo-transdermic-4-clarifying/;
+    /prodotto/labo-transdermic-4-clarifying-crema-schiarente-illuminante/ /brands/labo-transdermic/labo-transdermic-4-clarifying/;
+    /prodotto/labo-transdermic-4-clarifying-serum-anti-macchia-macchie-cutanee/ /brands/labo-transdermic/labo-transdermic-4-clarifying/;
+    /prodotto/labo-transdermic-5-intensive-crema-idratante-intensiva/ /brands/labo-transdermic/;
+    /prodotto/labo-transdermic-5-intensive-crema-riequilibrante-intensiva/ /brands/labo-transdermic/;
+    /prodotto/labo-transdermic-5-intensive-olio-ultra-nutriente-intensivo/ /brands/labo-transdermic/;
+    /prodotto/labo-transdermic-5-intensive-serum-ultra-idratante-intensivo/ /brands/labo-transdermic/;
+    /prodotto/labo-transdermic-c-cleansing-acqua-micellare-pelli-sensibili-e-delicate/ /brands/fillerina-cleansing-collection/;
+    /prodotto/labo-transdermic-c-cleansing-latte-detergente-pulizia-quotidiana-viso/ /brands/fillerina-cleansing-collection/;
+    /prodotto/labo-transdermic-c-cleansing-maschera-purificante-illuminante/ /brands/fillerina-cleansing-collection/;
+    /prodotto/labo-transdermic-c-cleansing-detergente-delicato-a-risciacquo/ /brands/fillerina-cleansing-collection/;
+    /prodotto/labo-transdermic-c-cleansing-gommage-esfoliante-levigante/ /brands/fillerina-cleansing-collection/;
+    /prodotto/labo-transdermic-c-cleansing-struccante-occhi-micellare/ /brands/fillerina-cleansing-collection/;
+    /prodotto/labo-transdermic-e-total-eye-care-crema-anti-occhiaie/ /brands/labo-transdermic/;
+    /prodotto/labo-transdermic-e-total-eye-care-crema-contorno-occhi-anti-rughe/ /brands/labo-transdermic/;
+    /prodotto/labo-transdermic-e-total-eye-care-gel-decongestionante-borse-occhi/ /brands/labo-transdermic/;
+
+    /brands/fillerina/fillerina-12-double-filler-zone-specifiche/ /brands/fillerina/fillerina-12-double-filler-mito-zone-specifiche/;
+    /brands/fillerina/fillerina-12-biorevitalizing-double-filler-zone-specifiche/ /brands/fillerina/fillerina-12-biorevitalizing-double-filler-mito-zone-specifiche/;
+    /brands/labo-transdermic/labo-transdermic-5-intensive/ /brands/labo-transdermic/;
+    /brands/labo-transdermic/labo-transdermic-c-cleansing/ /brands/fillerina-cleansing-collection/;
+    /brands/labo-transdermic/labo-transdermic-e-total-eye-care/ /brands/labo-transdermic/;
+    /categoria-prodotto/viso/tutto-il-viso/trucco-effetto-filler/ /brands/labo-filler-make-up/;
+    /categoria-prodotto/viso/occhi/detersione-occhi/ /brands/fillerina-cleansing-collection/;
+    /categoria-prodotto/viso/labbra/trucco-effetto-filler-labbra/ /brands/labo-filler-make-up/;
+
     /brand-page/brand-labo-anticaduta-it/ /brand-page/brand-cadu-crex-it/;
     /brand-page/brand-fillerina-colour-it/ /brand-page/brand-linea-filler-make-up-it/;
 
@@ -114,7 +164,7 @@ map $request_uri $new_uri {
     # dynamic
 
     # prodotto e linea prodotto (brand)
-    ~^/it/content/(.*)?$	/ricerca/?lb-search-val=$1;
+    ~^/it/content/(.*)?$ /ricerca/?lb-search-val=$1;
 
 
     # Prodotto (en)
