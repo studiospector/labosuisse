@@ -75,6 +75,62 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     'id' => 'truck',
                     'name' => 'Truck',
                 ),
+                array(
+                    'id' => 'CRO',
+                    'name' => 'SDA - Crono',
+                ),
+                array(
+                    'id' => 'CEX',
+                    'name' => 'SDA - Crono Express',
+                ),
+                array(
+                    'id' => 'CEC',
+                    'name' => 'SDA - Crono Economy',
+                ),
+                array(
+                    'id' => 'P51',
+                    'name' => 'SDA - Crono Reverse',
+                ),
+                array(
+                    'id' => 'CPL',
+                    'name' => 'SDA - Crono PLUS',
+                ),
+                array(
+                    'id' => 'CIN',
+                    'name' => 'SDA - Crono Internazionale',
+                ),
+                array(
+                    'id' => 'standard',
+                    'name' => 'Standard',
+                ),
+                array(
+                    'id' => 'saver',
+                    'name' => 'Saver',
+                ),
+                array(
+                    'id' => 'extralarge',
+                    'name' => 'Extralarge',
+                ),
+                array(
+                    'id' => 'express_nazionale',
+                    'name' => 'Express Nazionale',
+                ),
+                array(
+                    'id' => 'economy_express_nazionale',
+                    'name' => 'Economy Express Nazionale',
+                ),
+                array(
+                    'id' => 'parcel_connect',
+                    'name' => 'Parcel Connect',
+                ),
+                array(
+                    'id' => 'nazionale',
+                    'name' => 'Nazionale',
+                ),
+                array(
+                    'id' => 'internazionale',
+                    'name' => 'Internazionale',
+                ),
             );
             private $ftp_primario_deliveries = '';
             private $ftp_primario_documentation = '';
@@ -197,7 +253,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              * Aggiunge il nuovo menù nell'admin
              */
             public function custom_page() {
-                add_submenu_page('woocommerce', 'Calicantus', 'Calicantus', 'lb_calicantus_management_cap', 'calicantus-setting-admin', array(&$this, 'custom_page_callback'));
+                add_submenu_page('woocommerce', 'Calicantus', 'Calicantus', 'manage_options', 'calicantus-setting-admin', array(&$this, 'custom_page_callback'));
             }
 
             /**
@@ -918,7 +974,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         foreach ($availabilities as $availability) {
                             $sku = (string) $availability->sku;
                             $product_id = wc_get_product_id_by_sku($sku);
-
+                            
                             if ($product_id > 0) {
                                 $status = 'outofstock';
                                 if ($availability->availability > 0)
@@ -988,15 +1044,39 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              * Avvia la procedura di esportazione per le deliveries
              */
             public function check_deliveries() {
+                
+                /*
+                 * Esporto tutti gli ordini in processing (pagati)
+                 */
+                
                 $query = new WC_Order_Query(array(
                     'limit' => -1,
                     'orderby' => 'date',
                     'order' => 'ASC',
                     'status' => 'processing',
+                    'type' => 'shop_order',
                     'date_created' => '>=' . $this->global_options['calicantus_export_from']
                 ));
-                $orders = $query->get_orders();
-                foreach ($orders as $order) {
+                
+                foreach ($query->get_orders() as $order) {
+                    if (!$order->get_meta('_calicantus_export')) {
+                        $this->exportDelivery($order->get_id());
+                    }
+                }
+                
+                /*
+                 * Esporto tutti gli ordini con bonifico (in attesa di pagamento)
+                 */
+                
+                $query = new WC_Order_Query(array(
+                    'limit' => -1,
+                    'orderby' => 'date',
+                    'order' => 'ASC',
+                    'payment_method' => 'bacs',
+                    'date_created' => '>=' . $this->global_options['calicantus_export_from']
+                ));
+                
+                foreach ($query->get_orders() as $order) {
                     if (!$order->get_meta('_calicantus_export')) {
                         $this->exportDelivery($order->get_id());
                     }
@@ -1026,21 +1106,13 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
                 $currency_code = $order->get_currency();
 
-                $lang = 'it';
-                if ($order_data['billing']['country'] != 'IT')
-                    $lang = 'en';
-                if (function_exists('icl_object_id')) {
-                    $lang = get_post_meta($id, 'wpml_language', true);
+                $lang = get_post_meta($id, 'wpml_language', true);
+                
+                if (empty($lang)) {
+                    $lang = $order_data['billing']['country'] == 'IT' ? 'it' : 'en'; 
                 }
-                /* echo get_post_meta( $order_data['id'], '_billing_calicantus_cf', true )." CF\n";
-                  echo get_post_meta( $order_data['id'], '_billing_calicantus_vat', true )." VAT\n";
-                  echo $order_data['id']; print_r($order_data);die(); */
-                if (
-                /* in_array($order_data['billing']['country'], $europa) &&
-                  ((get_post_meta( $order_data['id'], '_billing_calicantus_cf', true ) && get_post_meta( $order_data['id'], '_billing_calicantus_cf', true ) != '') || (get_post_meta( $order_data['id'], '_billing_calicantus_vat', true ) && get_post_meta( $order_data['id'], '_billing_calicantus_vat', true ) != '')) && */
-                        isset($order_data['billing']['company']) &&
-                        $order_data['billing']['company'] != ''
-                ) {
+                
+                if ((get_post_meta($id, 'vat_number', true) && get_post_meta($id, 'vat_number', true) != '') || (get_post_meta($id, '_billing_calicantus_sdi', true) && get_post_meta($id, '_billing_calicantus_sdi', true) != '') && (isset($order_data['billing']['company']) && $order_data['billing']['company'] != '')) {
                     $nome = $order_data['billing']['company'];
                     $cognome = '';
                 } else {
@@ -1069,6 +1141,42 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $xml_data = new SimpleXMLElement('<?xml version="1.0" encoding="UTF-8"?><pick_list></pick_list>');
 
                 $delivery_header = $xml_data->addChild('delivery_header');
+
+                if(self::isMultiWarehouseEnabled()){
+                    //Lista magazzini
+                    $warehouses = [];
+                    foreach ($order->get_items() as $item_key => $item_values) {
+                        $product = $item_values->get_product();
+
+                        if ($product !== false) {
+                            if ($product->get_sku())
+                                $product_sku = $product->get_sku();
+                            else
+                                $product_sku = $product->get_id();
+
+                        $warehouse = self::getWarehouseBySku($product_sku);
+                        $warehouses[$warehouse['id']] = $warehouse;   
+                        }
+                    }
+
+                    $warehouses_tag = $delivery_header->addChild('warehouses');
+                    foreach ($warehouses as $warehouse){
+                        $warehouse_tag = $warehouses_tag->addChild('warehouse');
+                        $warehouse_tag->addChild('id', $warehouse['id']);
+                        $warehouse_tag->addChild('first_name', $warehouse['first_name']);
+                        $warehouse_tag->addChild('last_name', $warehouse['last_name']);
+                        $warehouse_tag->addChild('email', $warehouse['email']);
+                        $warehouse_tag->addChild('address', $warehouse['address']);
+                        $warehouse_tag->addChild('city', $warehouse['city']);
+                        $warehouse_tag->addChild('zipcode', $warehouse['zipcode']);
+                        $warehouse_tag->addChild('province', $warehouse['province']);
+                        $warehouse_tag->addChild('isocountry', $warehouse['isocountry']);
+                        $warehouse_tag->addChild('telephone', $warehouse['telephone']);
+                    }
+                }
+                
+
+
                 $delivery_header->addChild('inventory_code', $settings['calicantus_inventory_code']);
                 $delivery_header->addChild('brand', $settings['calicantus_brand']);
                 $delivery_header->addChild('delivery_type', 0);
@@ -1110,12 +1218,12 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
 
                 $bill_to_info = $delivery_header->addChild('bill_to_info');
-                $bill_to_info->addChild('bill_to_cust_number', $order_data['billing']['email']);
-                $bill_to_info->addChild('bill_to_cust_first_name', $nome);
-                $bill_to_info->addChild('bill_to_cust_last_name', $cognome);
-                $bill_to_info->addChild('bill_to_address1', $order_data['billing']['address_1']);
-                $bill_to_info->addChild('bill_to_address2', $order_data['billing']['address_2']);
-                $bill_to_info->addChild('bill_to_city', $order_data['billing']['city']);
+                $bill_to_info->addChild('bill_to_cust_number', $this->addCDATA($order_data['billing']['email']));
+                $bill_to_info->addChild('bill_to_cust_first_name', $this->addCDATA($nome));
+                $bill_to_info->addChild('bill_to_cust_last_name', $this->addCDATA($cognome));
+                $bill_to_info->addChild('bill_to_address1', $this->addCDATA($order_data['billing']['address_1']));
+                $bill_to_info->addChild('bill_to_address2', $this->addCDATA($order_data['billing']['address_2']));
+                $bill_to_info->addChild('bill_to_city', $this->addCDATA($order_data['billing']['city']));
                 $bill_to_info->addChild('bill_to_zip_code', $order_data['billing']['postcode']);
                 $bill_to_info->addChild('bill_to_province', $order_data['billing']['state']);
                 $bill_to_info->addChild('bill_to_country', $order_data['billing']['country']);
@@ -1126,24 +1234,24 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 $bill_to_info->addChild('bill_to_isocountry', $order_data['billing']['country']);
                 $bill_to_info->addChild('bill_to_currency', $currency_code);
                 $bill_to_info->addChild('bill_to_telephone', $order_data['billing']['phone']);
-                $bill_to_info->addChild('bill_to_email', $order_data['billing']['email']);
+                $bill_to_info->addChild('bill_to_email', $this->addCDATA($order_data['billing']['email']));
                 if (get_post_meta($id, '_billing_calicantus_pec', true) && get_post_meta($id, '_billing_calicantus_pec', true) != '')
                     $bill_to_info->addChild('bill_to_pec', get_post_meta($id, '_billing_calicantus_pec', true));
                 if (get_post_meta($id, '_billing_calicantus_sdi', true) && get_post_meta($id, '_billing_calicantus_sdi', true) != '')
                     $bill_to_info->addChild('bill_to_cd', get_post_meta($id, '_billing_calicantus_sdi', true));
                 $ship_to_info = $delivery_header->addChild('ship_to_info');
-                $ship_to_info->addChild('ship_to_cust_number', $order_data['billing']['email']);
-                $ship_to_info->addChild('ship_to_cust_first_name', $snome);
-                $ship_to_info->addChild('ship_to_cust_last_name', $scognome);
-                $ship_to_info->addChild('ship_to_address1', $order_data['shipping']['address_1']);
-                $ship_to_info->addChild('ship_to_address2', $order_data['shipping']['address_2']);
-                $ship_to_info->addChild('ship_to_city', $order_data['shipping']['city']);
+                $ship_to_info->addChild('ship_to_cust_number', $this->addCDATA($order_data['billing']['email']));
+                $ship_to_info->addChild('ship_to_cust_first_name', $this->addCDATA($snome));
+                $ship_to_info->addChild('ship_to_cust_last_name', $this->addCDATA($scognome));
+                $ship_to_info->addChild('ship_to_address1', $this->addCDATA($order_data['shipping']['address_1']));
+                $ship_to_info->addChild('ship_to_address2', $this->addCDATA($order_data['shipping']['address_2']));
+                $ship_to_info->addChild('ship_to_city', $this->addCDATA($order_data['shipping']['city']));
                 $ship_to_info->addChild('ship_to_zip_code', $order_data['shipping']['postcode']);
                 $ship_to_info->addChild('ship_to_province', $order_data['shipping']['state']);
                 $ship_to_info->addChild('ship_to_country', $order_data['shipping']['country']);
                 $ship_to_info->addChild('ship_to_isocountry', $order_data['shipping']['country']);
                 $ship_to_info->addChild('ship_to_telephone', $order_data['billing']['phone']);
-                $ship_to_info->addChild('ship_to_email', $order_data['billing']['email']);
+                $ship_to_info->addChild('ship_to_email', $this->addCDATA($order_data['billing']['email']));
 
                 $cont = 1;
                 $coupon_tax_rate = 0;
@@ -1162,10 +1270,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                         $item_data = $item_values->get_data();
 
-                        $tax_r = '22.00';
+                        $tax_r = '0.00';
                         $taxes = $item_values->get_taxes();
                         foreach ($taxes['subtotal'] as $rate_id => $tax) {
-                            $tax_r = number_format($tax_items_class[$rate_id], 2, '.', ',');
+                            $tax_r = number_format($tax_items_class[$rate_id], 2, '.', '');
                         }
 
                         if ($product->get_sku())
@@ -1190,7 +1298,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                             $result = $wpdb->get_results($query);
 
                             if (is_array($result) && isset($result[0])) {
-                                $price = number_format($result[0]->product_net_revenue + $result[0]->coupon_amount, 2) / $item_data['quantity'];
+                                $price = number_format(($result[0]->product_net_revenue + $result[0]->coupon_amount) / $item_data['quantity'], 2, '.', '');
                             }
                         }
                         $price_discount = $price;
@@ -1200,7 +1308,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $delivery_line->addChild('delivery_line_type', 'A');
                         $delivery_line->addChild('sku', $product_sku);
                         $delivery_line->addChild('sku_parent', '');
-                        $sku_description = $delivery_line->addChild('sku_description', strip_tags($item_data['name']));
+                        $sku_description = $delivery_line->addChild('sku_description', $this->addCDATA(strip_tags($item_data['name'])));
                         $sku_description->addAttribute('lang', strtolower($lang));
                         $delivery_line->addChild('qty', $item_data['quantity']);
 
@@ -1232,6 +1340,14 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $delivery_line->addChild('vat_tax', ($price_discount / 100 * $tax_r) / $item_data['quantity']);
                         $cont++;
                         $coupon_tax_rate = $tax_r;
+
+                        if(self::isMultiWarehouseEnabled()){
+                            $warehouse = self::getWarehouseBySku($product_sku);
+                            $warehouses_tag = $delivery_line->addChild('warehouses');
+                            $warehouse_tag = $warehouses_tag->addChild('warehouse');
+                            $warehouse_tag->addChild('id', $warehouse['id']);
+                            $warehouse_tag->addChild('qty', $item_data['quantity']);
+                        }
                     } else {
                         error_log('Calicantus ordine '.$id.' - prodotto non trovato: '.print_r($item_values->get_data(), true));
                         return false;
@@ -1239,14 +1355,15 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
 
 
-                foreach ($order->get_used_coupons() as $coupon_code) {
+                foreach ($order->get_coupons()  as $coupon_item) {
+                    $coupon_code = $coupon_item->get_code();
                     $coupon_object = new WC_Coupon($coupon_code);
                     $coupon_type = 'oneoff';
                     if ($coupon_object->discount_type == 'percent')
                         $coupon_type = 'percentage';
                     $coupon_campaign = $coupon_object->get_description();
-                    $coupon_tax = $order->get_discount_tax() * -1;
-                    $coupon_price = $order->get_total_discount() * -1;
+                    $coupon_tax = $coupon_item->get_discount_tax() * -1;
+                    $coupon_price = $coupon_item->get_discount() * -1;
 
                     $delivery_line = $delivery_header->addChild('delivery_line');
                     $delivery_line->addChild('delivery_line_id', 0);
@@ -1298,7 +1415,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     $delivery_line->addChild('height', '');
                     $delivery_line->addChild('made_in', '');
                     $delivery_line->addChild('customs_code', '');
-                    $delivery_line->addChild('vat_cod', $tax_r);
+                    // Forzatura di vat_cod a 0 se spedizione 0 per sopperire a mancanza del dato nell'ordine
+                    $delivery_line->addChild('vat_cod', $order_data['shipping_total'] > 0 ? round(($order_data['shipping_tax'] / $order_data['shipping_total']) * 100) : 0);
                     $delivery_line->addChild('vat_tax', $order_data['shipping_tax']);
                 }
 
@@ -1311,17 +1429,19 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 /* echo $formattedXML;
                   print_r($order);
                   die(); */
+                
+                $deliveries_file = 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml';
 
                 if ($this->modalita == 'local') {
-                    $fp = fopen($this->ftp_primario_deliveries . DIRECTORY_SEPARATOR . 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml', 'w+');
+                    $fp = fopen($this->ftp_primario_deliveries . DIRECTORY_SEPARATOR . $deliveries_file, 'w+');
                     fwrite($fp, $formattedXML);
                     fclose($fp);
 
-                    $fp = fopen($this->ftp_secondario_deliveries . DIRECTORY_SEPARATOR . 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml', 'w+');
+                    $fp = fopen($this->ftp_secondario_deliveries . DIRECTORY_SEPARATOR . $deliveries_file, 'w+');
                     fwrite($fp, $formattedXML);
                     fclose($fp);
 
-                    $fp = fopen($this->ftp_backup_deliveries . DIRECTORY_SEPARATOR . 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml', 'w+');
+                    $fp = fopen($this->ftp_backup_deliveries . DIRECTORY_SEPARATOR . $deliveries_file, 'w+');
                     fwrite($fp, $formattedXML);
                     fclose($fp);
                 } else if ($this->modalita == 'ftps') {
@@ -1330,23 +1450,23 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $fp = fopen('php://temp', 'r+');
                         fwrite($fp, $formattedXML);
                         rewind($fp);
-                        $ftps->putFile($this->ftp_primario_deliveries . DIRECTORY_SEPARATOR . 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml', $fp);
+                        $ftps->putFile($this->ftp_primario_deliveries . DIRECTORY_SEPARATOR . $deliveries_file, $fp);
 
                         $fp = fopen('php://temp', 'r+');
                         fwrite($fp, $formattedXML);
                         rewind($fp);
-                        $ftps->putFile($this->ftp_secondario_deliveries . DIRECTORY_SEPARATOR . 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml', $fp);
+                        $ftps->putFile($this->ftp_secondario_deliveries . DIRECTORY_SEPARATOR . $deliveries_file, $fp);
 
                         $fp = fopen('php://temp', 'r+');
                         fwrite($fp, $formattedXML);
                         rewind($fp);
-                        $ftps->putFile($this->ftp_backup_deliveries . DIRECTORY_SEPARATOR . 'deliveries_' . $ts . '_' . mt_rand(1, 9999) . '.xml', $fp);
+                        $ftps->putFile($this->ftp_backup_deliveries . DIRECTORY_SEPARATOR . $deliveries_file, $fp);
                     }
                 }
 
                 update_post_meta($id, '_calicantus_export', 'yes');
 
-                $order->add_order_note('Ordine ' . $id . ' esportato XML delivery (' . date('Y-m-d H:i:s') . ')');
+                $order->add_order_note('Ordine ' . $id . ' esportato XML delivery (' . $deliveries_file . ')');
 
                 // utile se attiva qualche forma di cache aggressiva (es: Redis)
                 wc_delete_shop_order_transients($order);
@@ -1395,8 +1515,8 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                     }
                     if ($this->isXML($status_input)) {
                         $status_update = new SimpleXMLElement($status_input, NULL, TRUE);
-
-                        $order = wc_get_order((int) $this->getStatusId($status_update->rifnum));
+                        $rifnum = (string) $status_update->rifnum;
+                        $order = ($rifnum) ? wc_get_order((int) $this->getStatusId($rifnum)): null;
 
                         if (!empty($order)) {
                             $order_data = $order->get_data();
@@ -1415,7 +1535,10 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
 
                                 if ((int) $status_update->status == 17) {
                                     $tracking = $status_update->tracking_url;
-                                    $order->add_order_note('Tracking: <a href="' . $status_update->tracking_url . ">" . $status_update->tracking_url . "</a>", true);
+                                    $order->add_order_note('Tracking: ' . $tracking, true);
+                                    $order->save();
+                                } else {
+                                    $order->add_order_note('Status updated from ' . $old_os . ' to ' . $new_os . ' (' . $status_file . ')', false);
                                     $order->save();
                                 }
 
@@ -1494,7 +1617,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
                 $order = wc_get_order($order_id);
                 $user_id = $order->get_user_id();
-                if ($user_id == get_current_user_id() || current_user_can('administrator') || current_user_can('editor') ||  current_user_can('shop_manager')) {
+                if ($user_id == get_current_user_id() || current_user_can('administrator') || current_user_can('editor') || current_user_can('shop_manager')) {
                     if ($this->modalita == 'local') {
                         $fileurl = $directory . DIRECTORY_SEPARATOR . $file;
                         if (is_file($fileurl)) {
@@ -1532,6 +1655,9 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              */
             public function backend_documents($post) {
                 $order = wc_get_order($post->ID);
+                if(!$order){
+                    return;
+                }
                 $files = $this->getAllFilesDataById($this->getOrderId($order));
                 ?>
                 <ul class="calicantus-backend-documents">
@@ -1726,7 +1852,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                         $('form.checkout').on('checkout_place_order', function () {
                             var sdi = jQuery('#billing_calicantus_sdi').val();
                             var pec = jQuery('#billing_calicantus_pec').val();
-                            if ($('#billing_company').val() != '' && $('select#billing_country').val() == 'IT') {
+                            if ($('#billing_company').length && $('#billing_company').val() != '' && $('select#billing_country').val() == 'IT') {
                                 if (sdi.length == 7) {
                                     console.log('3');
                                     return true;
@@ -1913,9 +2039,209 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
                 }
             }
 
+            public function addCDATA($string) {
+                if (!empty($string)) {
+                    $string = str_replace('&', ' ', $string);
+                    return '<![CDATA[' . $string . ']]>';
+                } else {
+                    return $string;
+                }
+            }
+
+            /**
+             * Funzione per restituire tutti i Warehouses
+             */
+            public static function getWarehouses() {
+                $args = array(  
+                    'post_type' => 'warehouse',
+                    'post_status' => 'publish',
+                    'posts_per_page' => -1,
+                );
+
+                global $post;
+                $tmp_post = $post;
+                $loop = new WP_Query( $args ); 
+                $warehouses = [];
+                while ( $loop->have_posts() ) {
+                    $loop->the_post();
+                    $post_id = get_the_ID();
+                    $post_name = get_the_title($post_id);
+
+                    $warehouses[$post_name] = [
+                        'id' => $post_name,
+                        'first_name' => $post_name,
+                        'last_name' => '',
+                        'email' => get_post_meta( $post_id, '_warehouse_email', true ),
+                        'address' => get_post_meta( $post_id, '_warehouse_address', true ),
+                        'city' => get_post_meta( $post_id, '_warehouse_city', true ),
+                        'zipcode' => get_post_meta( $post_id, '_warehouse_zipcode', true ),
+                        'province' => get_post_meta( $post_id, '_warehouse_province', true ),
+                        'isocountry' => get_post_meta( $post_id, '_warehouse_isocountry', true ),
+                        'telephone' => get_post_meta( $post_id, '_warehouse_telephone', true ),
+                        'sku_prefix' => get_post_meta( $post_id, '_warehouse_sku_prefix', true ),
+                        'is_default' => get_post_meta( $post_id, '_warehouse_is_default', true ) == 'yes',
+                    ];
+                }
+
+                $post = $tmp_post;
+
+                return $warehouses;
+            }
+
+            /**
+             * Funzione per restituire il Warehouse in base allo sku del prodotto
+             */
+            public static function getWarehouseBySku($product_sku) {
+                $warehouses = self::getWarehouses();
+                foreach($warehouses as $warehouse){
+                    if(!empty($warehouse['sku_prefix']) && (substr($product_sku, 0, strlen($warehouse['sku_prefix'])) === $warehouse['sku_prefix'])){
+                        return $warehouse;
+                    }
+                }
+
+                return self::getDefaultWarehouse();
+            }
+
+            /**
+             * Funzione per restituire il Warehouse di default
+             */
+            public static function getDefaultWarehouse() {
+                $warehouses = self::getWarehouses();
+                foreach($warehouses as $warehouse){
+                    if($warehouse['is_default']){
+                        return $warehouse;
+                    }
+                }
+
+                return null;
+            }
+
+            /**
+             * Funzione per sapere se è attivo la funzionalità di MultiWarehouse
+             */
+            public static function isMultiWarehouseEnabled() {
+                return count(self::getWarehouses()) > 0;
+            }
+
         }
 
         $GLOBALS['wc_calicantus'] = new WC_Calicantus();
+
+        // Gestione Multimagazzino
+        function calicantus_register_cpt_warehouse() {
+
+            /**
+             * Post Type: Warehouses.
+             */
+        
+            $labels = [
+                "name" => esc_html__( "Warehouses", "custom-post-type-ui" ),
+                "singular_name" => esc_html__( "Warehouse", "custom-post-type-ui" ),
+            ];
+        
+            $args = [
+                "label" => esc_html__( "Warehouses", "custom-post-type-ui" ),
+                "labels" => $labels,
+                "description" => "",
+                "public" => true,
+                "publicly_queryable" => true,
+                "show_ui" => true,
+                "show_in_rest" => false,
+                "rest_base" => "",
+                "rest_controller_class" => "WP_REST_Posts_Controller",
+                "rest_namespace" => "wp/v2",
+                "has_archive" => false,
+                "show_in_menu" => true,
+                "show_in_nav_menus" => true,
+                "delete_with_user" => false,
+                "exclude_from_search" => true,
+                "capability_type" => "post",
+                "map_meta_cap" => true,
+                "hierarchical" => false,
+                "can_export" => false,
+                "rewrite" => [ "slug" => "warehouse", "with_front" => false ],
+                "query_var" => true,
+                "menu_icon" => "dashicons-store",
+                "supports" => [ "title", "custom-fields" ],
+                "show_in_graphql" => false,
+            ];
+        
+            register_post_type( "warehouse", $args );
+        }
+        
+        add_action( 'init', 'calicantus_register_cpt_warehouse' );
+
+        
+        function get_calicantus_custom_box_fields(){
+            $arr_feilds = [
+                'warehouse_email' => ['type' => 'email', 'label' => 'Email', 'placeholder' => 'warehouse@example.org'],
+                'warehouse_address' => ['type' => 'text', 'label' => 'Address', 'placeholder' => 'Via Roma, 1'],
+                'warehouse_city' => ['type' => 'text', 'label' => 'City', 'placeholder' => 'Roma'],
+                'warehouse_zipcode' => ['type' => 'text', 'label' => 'Zipcode', 'placeholder' => '00100'],
+                'warehouse_province' => ['type' => 'text', 'label' => 'Province (ISO)', 'placeholder' => 'RM'],
+                'warehouse_isocountry' => ['type' => 'text', 'label' => 'Country (ISO)', 'placeholder' => 'IT'],
+                'warehouse_telephone' => ['type' => 'text', 'label' => 'Telephone', 'placeholder' => '+390292854340'],
+                'warehouse_sku_prefix' => ['type' => 'text', 'label' => 'SKU prefix', 'placeholder' => 'WAR1-'],
+                'warehouse_is_default' => ['type' => 'radio', 'label' => 'Is default', 'values' => ['yes', 'no'] ]
+            ];
+
+            return $arr_feilds;
+        }
+
+        function warehouse_add_custom_box() {
+            add_meta_box(
+                'warehouse_box',                // Unique ID
+                'Informazioni Magazzino',       // Box title
+                'calicantus_custom_box_html',   // Content callback, must be of type callable
+                'warehouse'                     // Post type
+            );
+        }
+        add_action( 'add_meta_boxes', 'warehouse_add_custom_box' );
+
+        function calicantus_custom_box_html( $post ) {
+
+            foreach(get_calicantus_custom_box_fields() as $field_name => $field_info){
+                $value = get_post_meta( $post->ID, '_'.$field_name, true );
+                ?> 
+                <div class="field_input" style="position: relative; margin: 0; padding: 8px 16px;">
+                    <div class="label_input" style="margin: 0 0 10px;">
+                        <label for="warehouse_firstname" style="display: block; font-weight: 500; margin: 0 0 3px; padding: 0;"><?php echo $field_info['label']; ?></label>
+                    </div>
+                    <div class="input">
+                        <?php
+                        if($field_info['type'] == "radio"){ 
+                            foreach  ($field_info['values'] as $value_radio){ ?>
+                                <input type="<?php echo $field_info['type']; ?>" name="<?php echo $field_name; ?>" class="regular-text" value="<?php echo $value_radio; ?>" <?php if($value_radio == $value){?> checked <?php } ?>> <?php echo $value_radio; ?>
+                            <?php } ?>
+                        <?php } else { ?>
+                            <input type="<?php echo $field_info['type']; ?>" name="<?php echo $field_name; ?>" class="regular-text" placeholder="<?php echo $field_info['placeholder']; ?>" value="<?php echo $value ?? ''; ?>">
+                        <?php } ?>
+                    </div>
+                </div>
+                <?php
+            }
+        }
+
+        function warehouse_save_postdata( $post_id ) {
+            foreach(get_calicantus_custom_box_fields() as $field_name => $field_info){
+                if ( array_key_exists( $field_name, $_POST ) ) {
+                    update_post_meta(
+                        $post_id,
+                        '_'.$field_name,
+                        $_POST[$field_name]
+                    );
+                }
+            }
+        }
+        add_action( 'save_post', 'warehouse_save_postdata' );
+
+        function calicantus_notice_default_warehouse() {
+            if(WC_Calicantus::isMultiWarehouseEnabled() && WC_Calicantus::getDefaultWarehouse() == null){
+                echo '<div class="notice notice-error"><p><b>Woocommerce Calicantus</b>: Warehouse default non settato</p></div>';
+            }
+        }
+        add_action( 'admin_notices', 'calicantus_notice_default_warehouse' );
     }
+    
 }
 ?>
