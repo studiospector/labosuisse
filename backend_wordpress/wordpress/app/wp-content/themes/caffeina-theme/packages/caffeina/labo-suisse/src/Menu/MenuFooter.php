@@ -197,20 +197,20 @@ class MenuFooter
         ) {
             $payload = [
                 [
-                    'icon' => ['name' => 'car'],
+                    'icon' => ['url' => LB_BUILD_IMG_URI . '/pictograms/car.svg',],
                     'title' => __('Spedizione e resi gratuiti', 'labo-suisse-theme'),
                 ],
                 [
-                    'icon' => ['name' => 'samples'],
+                    'icon' => ['url' => LB_BUILD_IMG_URI . '/pictograms/samples.svg',],
                     'title' => __('Campioni omaggio', 'labo-suisse-theme'),
                 ],
                 [
-                    'icon' => ['name' => 'packaging'],
+                    'icon' => ['url' => LB_BUILD_IMG_URI . '/pictograms/packaging.svg',],
                     'title' => __('Confezione esclusiva', 'labo-suisse-theme'),
                 ],
                 [
-                    'icon' => ['name' => 'lock'],
-                    'title' => __('Pagamento sicuro', 'labo-suisse-theme'),
+                    'icon' => ['url' => LB_BUILD_IMG_URI . '/pictograms/payment.svg',],
+                    'title' => __('Pagamento in 3 rate', 'labo-suisse-theme'),
                 ],
             ];
         }

@@ -367,7 +367,8 @@ class DistributorsMap extends Component {
         let stores = []
 
         try {
-            const { data } = await axiosClient.get(`${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/distributors`);
+            const url = `${this.lang != 'it' ? `/${this.lang}` : ''}/wp-json/v1/distributors`
+            const { data } = await axiosClient.get(url)
             stores = data
         } catch (error) {
             console.error(error);

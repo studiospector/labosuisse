@@ -420,12 +420,12 @@
         }
 
         .card-img {
-            aspect-ratio: 4 / 3;
-            // height: 400px;
+            aspect-ratio: 4 / 4;
+            height: 400px;
 
-            // @include mq($until: md) {
-            //     height: 230px;
-            // }
+            @include mq($until: md) {
+                height: auto;
+            }
         }
     
         .card-infobox {

@@ -22,11 +22,11 @@
     }
 
     &__image {
-        height: 48px;
+        max-height: 48px;
         margin-bottom: 20px;
 
-        @include mq($until: md) {
-            height: 32px;
+        @include mq($until: lg) {
+            height: auto;
         }
     }
 
