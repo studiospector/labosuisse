@@ -1,5 +1,17 @@
 {% if geo_location %}
-    {% if geo_location.country == 'Portogallo' and lang == 'en' %}
+    {% if geo_location.country == 'Cile' and lang == 'en' %}
+        {% set country = 'Chile' %}
+    {% elseif geo_location.country == 'Corea del Sud' and lang == 'en' %}
+        {% set country = 'South Korea' %}
+    {% elseif geo_location.country == 'Giordania' and lang == 'en' %}
+        {% set country = 'Jordan' %}
+    {% elseif geo_location.country == 'Lituania' and lang == 'en' %}
+        {% set country = 'Lithuania' %}
+    {% elseif geo_location.country == 'Perù' and lang == 'en' %}
+        {% set country = 'Peru' %}
+    {% elseif geo_location.country == 'Repubblica Dominicana' and lang == 'en' %}
+        {% set country = 'Dominican Republic' %}
+    {% elseif geo_location.country == 'Portogallo' and lang == 'en' %}
         {% set country = 'Portugal' %}
     {% else %}
         {% set country = geo_location.country %}
