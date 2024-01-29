@@ -64,7 +64,8 @@
         <div class="lb-footer-pictograms">
             {%- for item in data.pictograms -%}
                 <div class="lb-footer-pictograms__item">
-                    {%- include '@PathViews/components/icon.twig' with item.icon only -%}
+                    {# {%- include '@PathViews/components/icon.twig' with item.icon only -%} #}
+                    <img src="{{ item.icon.url }}" alt="" class="lb-footer-pictograms__item__icon">
                     <h6 class="lb-footer-pictograms__item__title">{{ item.title }}</h6>
                 </div>
             {%- endfor -%}

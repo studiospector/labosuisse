@@ -112,6 +112,7 @@ footer {
         @include mq($until: md) {
             width: calc(100% - 80px);
             flex-direction: row;
+            align-items: center;
             margin: 0 40px 25px 40px;
             padding: 0 0 25px 0;
             border-right: 0;
@@ -129,14 +130,18 @@ footer {
             }
         }
 
-        .lb-icon > svg {
+        &__icon {
+            margin: 0 auto;
+            
             @include mq($from: md) {
-                width: 56px;
-                height: 40px;
+                width: auto;
+                height: 80px;
             }
             
             @include mq($until: md) {
-                margin-right: 20px;
+                width: 56px;
+                height: 40px;
+                margin: 0 20px 0 0;
             }
         }
 
