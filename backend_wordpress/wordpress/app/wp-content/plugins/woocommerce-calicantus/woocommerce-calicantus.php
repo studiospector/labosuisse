@@ -253,7 +253,7 @@ if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_
              * Aggiunge il nuovo menù nell'admin
              */
             public function custom_page() {
-                add_submenu_page('woocommerce', 'Calicantus', 'Calicantus', 'manage_options', 'calicantus-setting-admin', array(&$this, 'custom_page_callback'));
+                add_submenu_page('woocommerce', 'Calicantus', 'Calicantus', 'lb_calicantus_management_cap', 'calicantus-setting-admin', array(&$this, 'custom_page_callback'));
             }
 
             /**
